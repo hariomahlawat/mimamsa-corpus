@@ -52,7 +52,7 @@ class Paths:
 
 
 def connect(db: Path) -> sqlite3.Connection:
-    conn = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+    conn = sqlite3.connect(f"{db.absolute().as_uri()}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
     return conn
 

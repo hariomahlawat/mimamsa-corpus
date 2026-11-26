@@ -4,6 +4,7 @@ import json
 import sqlite3
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 import pymupdf
 
@@ -54,7 +55,7 @@ class CandidateWorkflowTests(unittest.TestCase):
         self.assertFalse(first['release_allowed'])
         self.assertFalse(first['research_eligible'])
         self.assertEqual((self.root/'data/raw/case.pdf').read_bytes(),self.raw)
-        with sqlite3.connect(self.db_path) as second:
+        with closing(sqlite3.connect(self.db_path)) as second:
             self.assertEqual(Journal(second).audit()['documents'],2)
 
     def test_explicit_revision(self):

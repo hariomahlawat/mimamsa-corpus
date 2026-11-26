@@ -1,9 +1,11 @@
 """C14 synthetic recovery planning controls. No corpus or network access."""
 import hashlib
 import json
+import shutil
 import sqlite3
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 from pipeline.common import Paths
 from pipeline.records import plan_indiacode
@@ -20,7 +22,7 @@ class RecoveryTests(unittest.TestCase):
         self.paths.text.mkdir()
         (self.paths.meta / 'old.json').write_text('{"source":"sci"}')
         (self.paths.text / 'old.txt').write_text('old evidence')
-        with sqlite3.connect(self.paths.db) as db:
+        with closing(sqlite3.connect(self.paths.db)) as db, db:
             db.executescript("""
                 CREATE TABLE urls (url TEXT PRIMARY KEY, source TEXT, doc_id_hint TEXT,
                   sha256 TEXT, fetched_at TEXT, meta TEXT, kind TEXT, status TEXT);
@@ -38,7 +40,7 @@ class RecoveryTests(unittest.TestCase):
             p.write_bytes(raw)
         meta = json.dumps({'dataset':'indian-supreme-court-judgments', 'year':2020,
                            'filename':suffix+'.pdf', 'index':{'title':'Synthetic case', 'path':suffix}})
-        with sqlite3.connect(self.paths.db) as db:
+        with closing(sqlite3.connect(self.paths.db)) as db, db:
             db.execute('INSERT INTO files VALUES (?,?,?)', (sha,path,'application/pdf'))
             for i in range(aliases):
                 url = 'https://example.invalid/' + suffix + '/' + str(i)
@@ -81,6 +83,17 @@ class RecoveryTests(unittest.TestCase):
         self.assertEqual(len(plan['source_integrity_holds']), 1)
         self.assertFalse(plan['documents'])
         self.assertEqual(before, self.snapshot())
+
+    def test_read_only_recovery_database_path_with_number_sign(self):
+        paths = Paths.default(self.root / 'isolated candidate #1')
+        paths.db.parent.mkdir(parents=True)
+        shutil.copyfile(self.paths.db, paths.db)
+        before = self.snapshot()
+
+        plan = plan_indiacode(paths)
+
+        self.assertEqual(plan['status'], 'PROPOSAL_NOT_ADOPTED')
+        self.assertEqual(self.snapshot(), before)
 
 
 if __name__ == '__main__':
