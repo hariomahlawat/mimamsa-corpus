@@ -13,6 +13,11 @@ SCHEMA_VERSION = "0.2.0"
 ROOT = Path(__file__).resolve().parent.parent
 
 
+def require_corpus_writes(stage: str) -> None:
+    """Enforce the C14 hold at legacy write entry points."""
+    raise RuntimeError(f"C14 corpus mutation hold: legacy {stage} writer is suspended")
+
+
 @dataclass
 class Paths:
     """Where a pipeline run reads and writes. `data` holds raw/ (input) and the outputs."""

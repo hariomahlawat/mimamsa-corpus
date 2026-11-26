@@ -15,7 +15,7 @@ def _validate_scope(source_sha256, page_sizes, regions, frame):
     """
     if not re.fullmatch(r'[0-9a-f]{64}', source_sha256):
         raise ValueError('source SHA-256 required')
-    if not page_sizes or not regions:
+    if not page_sizes or not isinstance(regions, (list, tuple)) or not regions:
         raise ValueError('page dimensions and explicit regions required')
     if len(page_sizes) != len(frame):
         raise ValueError('incomplete geometry')
@@ -25,19 +25,24 @@ def _validate_scope(source_sha256, page_sizes, regions, frame):
     by_page = {}
     canonical = []
     for region in regions:
-        page = region['physical_page']; box = region['bbox']; instrument = region['instrument_id']
+        if not isinstance(region, dict):
+            raise ValueError('invalid region')
+        page = region.get('physical_page')
+        box = region.get('bbox')
+        instrument = region.get('instrument_id')
         if type(page) is not int or not 1 <= page <= len(page_sizes) or not isinstance(instrument, str) or not instrument.strip():
             raise ValueError('invalid instrument or physical page')
-        if len(box) != 4 or any(type(v) not in (int, float) or not math.isfinite(v) for v in box):
+        if (not isinstance(box, (list, tuple)) or len(box) != 4
+                or any(type(v) not in (int, float) for v in box)):
             raise ValueError('invalid coordinates')
-        box = [float(v) if v != 0 else 0.0 for v in box]
         label = region.get('printed_page')
         if label is not None and (not isinstance(label, str) or not label.strip()):
             raise ValueError('printed page must be an immutable nonempty string or null')
         w, h = page_sizes[page - 1]
         x0, y0, x1, y1 = box
-        if not (math.isfinite(w) and math.isfinite(h) and 0 <= x0 < x1 <= w and 0 <= y0 < y1 <= h):
+        if not (0 <= x0 < x1 <= w and 0 <= y0 < y1 <= h):
             raise ValueError('region outside physical page')
+        box = [float(v) if v != 0 else 0.0 for v in box]
         for old in by_page.get(page, []):
             a, b, c, d = old
             if max(a, x0) < min(c, x1) and max(b, y0) < min(d, y1):

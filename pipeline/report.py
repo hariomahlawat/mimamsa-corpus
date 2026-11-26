@@ -5,7 +5,7 @@ import csv
 import json
 from collections import Counter, defaultdict
 
-from .common import Paths
+from .common import Paths, require_corpus_writes
 
 # Supersession cases the brief names, checkable from statute records alone.
 KNOWN_CASES = [
@@ -16,6 +16,7 @@ KNOWN_CASES = [
 
 
 def run(paths: Paths, extra: dict | None = None) -> dict:
+    require_corpus_writes("report")
     docs = [json.loads(p.read_text(encoding="utf-8")) for p in sorted(paths.meta.glob("*.json"))]
     secs = [json.loads(p.read_text(encoding="utf-8")) for p in sorted(paths.sections.glob("*/*.json"))]
     rel_path = paths.data / "relations.jsonl"

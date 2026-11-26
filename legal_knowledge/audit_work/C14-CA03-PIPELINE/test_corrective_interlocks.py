@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 import pymupdf
-from pipeline import extract, judgments, records
+from pipeline import correspondence, extract, judgments, ocr, records, report, split_pdf
 from pipeline.__main__ import main
 from pipeline.common import Paths
 from pipeline.shadow_assessment import assess
@@ -35,11 +35,14 @@ class CorrectiveInterlocks(unittest.TestCase):
 
     def test_direct_writers_hold(self):
         before = self.snapshot()
-        for fn in (judgments.run, records.build_indiacode, extract.run):
+        for fn in (judgments.run, records.build_indiacode, extract.run, ocr.run,
+                   split_pdf.run, correspondence.run, report.run):
             with self.assertRaisesRegex(RuntimeError, 'C14 corpus mutation hold'):
                 fn(self.paths)
         with self.assertRaisesRegex(RuntimeError, 'C14 corpus mutation hold'):
             extract.extract_document(self.paths, {'doc_id': 'fixture'})
+        with self.assertRaisesRegex(RuntimeError, 'C14 corpus mutation hold'):
+            ocr.ocr_page(self.raw, 0, self.root / 'cache.json', 'eng', 150)
         self.assertEqual(before, self.snapshot())
 
     def test_cli_mutating_stages_hold(self):
@@ -68,8 +71,8 @@ class CorrectiveInterlocks(unittest.TestCase):
         with pymupdf.open(self.raw) as doc:
             actual = doc[0].get_text('text')
         self.assertEqual(r['classifier_text_sha256'], hashlib.sha256(actual.encode()).hexdigest())
+        self.assertEqual(r['classifier_candidate_state'], 'INSUFFICIENT_TEXT')
         self.assertFalse(r['research_eligible'])
-        self.assertNotEqual(r['relevance'], 'IRRELEVANT')
 
     def test_default_classifier_cross_page(self):
         civil = 'the court heard the appeal and the parties gave their reasons. ' * 18

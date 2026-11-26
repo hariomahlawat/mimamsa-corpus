@@ -60,4 +60,28 @@ class ScopeTests(unittest.TestCase):
         self.regions[0]['bbox'] = [0, 0, float('nan'), 100]
         with self.assertRaises(ValueError): self.check()
 
+    def test_invalid_region_shape_has_controlled_error(self):
+        for region in ({}, {**self.regions[0], 'bbox': None},
+                       {**self.regions[0], 'bbox': [0, 0, 10**1000, 100]}):
+            with self.subTest(region=type(region.get('bbox'))):
+                with self.assertRaises(ValueError):
+                    validate_scope(self.sha, self.raw, [region])
+
+    def test_candidate_rectangle_matches_rotated_crop_render(self):
+        with pymupdf.open() as pdf:
+            page = pdf.new_page(width=600, height=800)
+            page.draw_rect(pymupdf.Rect(60, 90, 130, 160), fill=(1, 0, 0), width=0)
+            page.set_cropbox(pymupdf.Rect(20, 30, 520, 730))
+            page.set_rotation(90)
+            raw = pdf.tobytes()
+        output = validate_scope(hashlib.sha256(raw).hexdigest(), raw, [
+            {'physical_page': 1, 'instrument_id': 'A', 'bbox': [570, 40, 640, 110]},
+        ])
+        self.assertEqual(output['coordinate_system'], 'ROTATED_DISPLAY_POINTS_TOP_LEFT')
+        x0, y0, x1, y1 = map(int, output['regions'][0]['bbox'])
+        with pymupdf.open(stream=raw, filetype='pdf') as pdf:
+            pixels = pdf[0].get_pixmap(dpi=72, colorspace=pymupdf.csRGB, alpha=False)
+        self.assertEqual(pixels.pixel((x0 + x1) // 2, (y0 + y1) // 2), (255, 0, 0))
+        self.assertEqual(pixels.pixel(x0 - 5, y0 - 5), (255, 255, 255))
+
 if __name__ == '__main__': unittest.main()

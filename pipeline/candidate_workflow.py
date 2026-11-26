@@ -27,9 +27,8 @@ def run_candidates(root, manifest_bytes, *, expected_sha256, journal, restricted
 
     The manifest digest binds scope, not owner approval. Only synthetic or
     separately approved isolated inputs may be supplied. The restriction
-    predicate must come from the pinned project register. No unrestricted
-    fallback. A journal may persist completed events even if a later item
-    fails; the caller must audit it, not treat partial work as a complete run.
+    predicate must come from the pinned project register. All permitted
+    assessments from the run are committed together.
     """
     if not isinstance(manifest_bytes, bytes) or not 0 < len(manifest_bytes) <= 262144:
         raise ValueError('bounded manifest bytes required')
@@ -90,27 +89,23 @@ def run_candidates(root, manifest_bytes, *, expected_sha256, journal, restricted
 
     journal.audit()
     results = []
+    entries = []
     for row in permitted:
         m = row['metadata']
-        # The assessment rehashes the bytes it parses. Declared-size and page
-        # budgets are preflight checks, not process-level resource isolation.
-        from pathlib import Path
-        base = Path(root).resolve()
-        path = base / m['raw_path']
-        if path.resolve() != path:
-            raise ValueError('path containment failure')
-        if path.stat().st_size != row['declared_bytes']:
-            raise ValueError('declared size mismatch')
-        a = check_assessment(assess(base,m))
-        eid = journal.append(a,previous_event_id=row['previous_event_id'])
-        results.append({'doc_id':m['doc_id'],'source_sha256':m['sha256'],
-                        'assessment_id':a['assessment_id'],'event_id':eid,
-                        'recovery_state':row['recovery_state'],
-                        'relevance':a['relevance'],'research_eligible':False})
-    guard = preflight([{'kind':'report','record':x} for x in results],workstream='C14')
-    out = {'schema':'c14-candidate-run-v1','manifest_sha256':expected_sha256,
-           'status':'CANDIDATE_ONLY_NOT_RELEASED','documents':results,
-           'restricted_omitted_count':restricted_count,'journal':journal.audit(),
-           'release_allowed':guard['release_allowed'],'research_eligible':False}
+        a = check_assessment(assess(root, m, declared_bytes=row['declared_bytes']))
+        entries.append((a, row['previous_event_id']))
+        results.append({'doc_id': m['doc_id'], 'source_sha256': m['sha256'],
+                        'assessment_id': a['assessment_id'],
+                        'recovery_state': row['recovery_state'],
+                        'relevance': a['relevance'], 'research_eligible': False})
+    guard = preflight([{'kind': 'report', 'record': x} for x in results], workstream='C14')
+    for result, eid in zip(results, journal.append_batch(entries), strict=True):
+        result['event_id'] = eid
+    out = {'schema': 'c14-candidate-run-v2', 'manifest_sha256': expected_sha256,
+           'status': 'CANDIDATE_ONLY_NOT_RELEASED', 'documents': results,
+           'restricted_omitted_count': restricted_count,
+           'release_allowed': guard['release_allowed'], 'research_eligible': False}
     out['receipt_sha256'] = hashlib.sha256(canonical(out)).hexdigest()
+    # Live totals are informational. A replay of the same batch has the same receipt.
+    out['journal'] = journal.audit()
     return out

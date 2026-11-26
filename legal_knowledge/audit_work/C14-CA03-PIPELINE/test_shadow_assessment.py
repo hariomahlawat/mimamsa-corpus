@@ -85,6 +85,14 @@ class ShadowTests(unittest.TestCase):
         self.assertEqual(r['relevance'], 'EXTRACTION_FAILED')
         self.assertFalse(r['research_eligible'])
         self.assertTrue(r['assessment_id'])
+        self.assertEqual(r, assess(self.root, {}, decide_fn=irrelevant, quality_fn=quality))
+
+    def test_assessment_records_default_policy_and_pdf_runtime(self):
+        r = assess(self.root, self.meta)
+        self.assertEqual(r['version'], 'c14-shadow-v3')
+        self.assertEqual(r['renderer_version'], str(pymupdf.VersionBind))
+        self.assertEqual(r['classifier_version'], 'c13-relevance-v1')
+        self.assertEqual(r['quality_version'], 'c13-page-quality-v2')
 
     def test_marker_free_classifier_input(self):
         seen = []
@@ -113,7 +121,7 @@ class ShadowTests(unittest.TestCase):
             body = d.tobytes()
         self.raw.write_bytes(body)
         self.meta['sha256'] = hashlib.sha256(body).hexdigest()
-        r = self.run_assess(relevant)
+        r = assess(self.root, self.meta)
         self.assertIn('hidden_or_transparent_text', r['pages'][0]['flags'])
         self.assertFalse(r['complete_native_evidence'])
         self.assertFalse(r['eligible_for_documentary_review'])

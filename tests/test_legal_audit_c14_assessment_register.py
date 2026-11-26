@@ -70,6 +70,19 @@ class JournalTests(unittest.TestCase):
         a = fixture(pages=[dict(physical_page=2, text_sha256='c'*64, usable_for_negative_evidence=False)])
         with self.assertRaises(ValueError): self.journal.append(a)
 
+    def test_boolean_is_not_a_physical_page_number(self):
+        a = fixture(pages=[dict(physical_page=True, text_sha256='c'*64,
+                                usable_for_negative_evidence=False)])
+        with self.assertRaisesRegex(ValueError, 'candidate page evidence'):
+            self.journal.append(a)
+
+    def test_constructor_does_not_commit_existing_transactions(self):
+        self.db.execute('BEGIN')
+        with self.assertRaisesRegex(ValueError, 'transaction'):
+            Journal(self.db)
+        self.assertTrue(self.db.in_transaction)
+        self.db.rollback()
+
     def test_update_delete_replace_denied(self):
         eid = self.journal.append(fixture())
         row = self.db.execute('SELECT * FROM candidate_events').fetchone()

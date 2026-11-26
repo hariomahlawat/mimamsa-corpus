@@ -5,7 +5,9 @@ import json
 import re
 from pathlib import Path
 
-VERSION = 'c14-shadow-v2'
+from . import relevance_states, text_quality
+
+VERSION = 'c14-shadow-v3'
 MAX_BYTES = 50_000_000
 MAX_PAGES = 500
 
@@ -14,7 +16,7 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def bind_raw(root, relative, expected_sha):
+def bind_raw(root, relative, expected_sha, *, expected_bytes=None):
     root = Path(root).resolve()
     if not isinstance(relative, str) or not re.fullmatch(r'data/raw/[A-Za-z0-9_./-]+\.pdf', relative):
         raise ValueError('invalid raw path')
@@ -23,20 +25,35 @@ def bind_raw(root, relative, expected_sha):
     path = root / relative
     if path.resolve() != path or not path.resolve().is_relative_to(root / 'data' / 'raw'):
         raise ValueError('path containment failure')
+    limit = MAX_BYTES if expected_bytes is None else expected_bytes
+    if type(limit) is not int or not 0 < limit <= MAX_BYTES:
+        raise ValueError('invalid declared raw size')
     with path.open('rb') as stream:
-        raw = stream.read(MAX_BYTES + 1)
+        raw = stream.read(limit + 1)
+    if expected_bytes is not None and len(raw) != expected_bytes:
+        raise ValueError('declared size mismatch')
     if len(raw) > MAX_BYTES or sha(raw) != expected_sha:
         raise ValueError('raw size or hash mismatch')
     return raw
 
 
-def assess(root, meta, *, decide_fn=None, quality_fn=None):
+class _ScopeMismatch(ValueError):
+    """Observed source metadata conflicts with the declared batch scope."""
+
+
+def assess(root, meta, *, decide_fn=None, quality_fn=None, declared_bytes=None):
     """Derive an immutable candidate assessment from raw bytes, not stale text.
 
     Native extraction only. OCR results, verified blank-page exemptions and
     legal/research release eligibility are deliberately not adopted here.
+    A bounded batch also requires its declared byte size, digest, and page count
+    to match before examining individual pages.
     """
     result = {'version': VERSION, 'doc_id': None, 'source_sha256': None,
+              'classifier_mode': 'default_c13' if decide_fn is None else 'injected_test',
+              'quality_mode': 'default_c13' if quality_fn is None else 'injected_test',
+              'classifier_version': relevance_states.POLICY_VERSION if decide_fn is None else None,
+              'quality_version': text_quality.POLICY_VERSION if quality_fn is None else None,
               'metadata_sha256': None, 'eligible_for_documentary_review': False,
               'source_integrity': 'UNVERIFIED', 'pages': [], 'research_eligible': False,
               'relevance': 'EXTRACTION_FAILED', 'text_sha256': None, 'reasons': []}
@@ -47,23 +64,31 @@ def assess(root, meta, *, decide_fn=None, quality_fn=None):
             raise ValueError('invalid source hash')
         result.update(doc_id=meta['doc_id'], source_sha256=meta['sha256'],
                       metadata_sha256=sha(json.dumps(meta, sort_keys=True, ensure_ascii=False, allow_nan=False).encode('utf-8')))
-        raw = bind_raw(root, meta['raw_path'], meta['sha256'])
+        try:
+            raw = bind_raw(root, meta['raw_path'], meta['sha256'], expected_bytes=declared_bytes)
+        except (OSError, ValueError) as exc:
+            if declared_bytes is not None:
+                raise _ScopeMismatch(str(exc)) from exc
+            raise
         import pymupdf
         result['renderer_version'] = str(pymupdf.VersionBind)
         result['visual_concordance'] = 'NOT_INDEPENDENTLY_VALIDATED'
-        result['classifier_mode'] = 'default_c13' if decide_fn is None else 'injected_test'
-        result['quality_mode'] = 'default_c13' if quality_fn is None else 'injected_test'
         if decide_fn is None:
-            from .relevance_states import decide as decide_fn
+            decide_fn = relevance_states.decide
         if quality_fn is None:
-            from .text_quality import page_verdict as quality_fn
+            quality_fn = text_quality.page_verdict
         with pymupdf.open(stream=raw, filetype='pdf') as pdf:
-            if pdf.needs_pass or not pdf.is_pdf or not 0 < pdf.page_count <= MAX_PAGES:
+            if pdf.needs_pass or not pdf.is_pdf:
                 raise ValueError('unsupported PDF')
-            result['physical_page_count'] = pdf.page_count
+            page_count = pdf.page_count
+            count_ok = type(meta.get('page_count')) is int and meta['page_count'] == page_count
+            if declared_bytes is not None and not count_ok:
+                raise _ScopeMismatch('declared page count mismatch')
+            if not 0 < page_count <= MAX_PAGES:
+                raise ValueError('unsupported PDF')
+            result['physical_page_count'] = page_count
             truncated = not raw.rstrip().endswith(b'%%EOF') or bool(pdf.is_repaired)
             result['source_integrity'] = 'INCOMPLETE_OR_REPAIRED' if truncated else 'HASH_MATCH_PDF_OPENED'
-            count_ok = type(meta.get('page_count')) is int and meta['page_count'] == pdf.page_count
             texts = []
             for i, page in enumerate(pdf, 1):
                 txt = page.get_text('text')
@@ -115,6 +140,8 @@ def assess(root, meta, *, decide_fn=None, quality_fn=None):
                 result['reasons'].append('metadata page count missing or mismatched')
             if truncated:
                 result['reasons'].append('raw EOF or repair check failed')
+    except _ScopeMismatch:
+        raise
     except Exception as exc:
         result.update(relevance='EXTRACTION_FAILED', source_integrity='REVIEW_REQUIRED',
                       complete_native_evidence=False, native_heuristics_complete=False, eligible_for_documentary_review=False,

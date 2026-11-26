@@ -76,6 +76,36 @@ class CandidateWorkflowTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.run_rows([self.row])
         self.assertEqual(self.journal.audit()['events'],0)
 
+    def test_late_stale_predecessor_leaves_batch_unwritten(self):
+        other = json.loads(json.dumps(self.row))
+        other['metadata']['doc_id'] = 'case-b'
+        other['previous_event_id'] = 'f' * 64
+        with self.assertRaisesRegex(ValueError, 'explicit current predecessor'):
+            self.run_rows([self.row, other])
+        self.assertEqual(self.journal.audit()['events'], 0)
+
+    def test_receipt_identity_survives_unrelated_journal_growth(self):
+        first = self.run_rows([self.row])
+        other = json.loads(json.dumps(self.row))
+        other['metadata']['doc_id'] = 'case-b'
+        self.run_rows([other])
+        again = self.run_rows([self.row])
+        self.assertEqual(again['journal']['events'], 2)
+        self.assertEqual(again['documents'], first['documents'])
+        self.assertEqual(again['receipt_sha256'], first['receipt_sha256'])
+
+    def test_observed_page_count_must_match_bounded_manifest(self):
+        self.row['metadata']['page_count'] = 2
+        with self.assertRaisesRegex(ValueError, 'page count'):
+            self.run_rows([self.row])
+        self.assertEqual(self.journal.audit()['events'], 0)
+
+    def test_source_bytes_must_match_manifest_digest(self):
+        self.row['metadata']['sha256'] = 'f' * 64
+        with self.assertRaisesRegex(ValueError, 'raw size or hash mismatch'):
+            self.run_rows([self.row])
+        self.assertEqual(self.journal.audit()['events'], 0)
+
     def test_invalid_manifest_digest(self):
         with self.assertRaises(ValueError):
             run_candidates(self.root,b'{}',expected_sha256='0'*64,journal=self.journal,

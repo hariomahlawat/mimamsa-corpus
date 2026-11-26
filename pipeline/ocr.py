@@ -18,7 +18,7 @@ from pathlib import Path
 
 import pymupdf
 
-from .common import Paths, write_json
+from .common import Paths, require_corpus_writes, write_json
 from .extract import MARKING, devanagari_share
 
 LANGS = "hin+eng"
@@ -117,6 +117,7 @@ def merge_numbers(base: list[dict], alt: list[dict]) -> int:
 
 
 def ocr_page(pdf_path: Path, index: int, cache: Path, langs: str, dpi: int) -> dict:
+    require_corpus_writes("OCR")
     if cache.exists():
         return json.loads(cache.read_text(encoding="utf-8"))
     with pymupdf.open(pdf_path) as pdf:
@@ -145,6 +146,7 @@ def ocr_page(pdf_path: Path, index: int, cache: Path, langs: str, dpi: int) -> d
 
 def run(paths: Paths, only: list[str] | None = None, *, workers: int = 4, langs: str = LANGS, dpi: int = DPI,
         threshold: float = CONF_THRESHOLD, redo: bool = False) -> dict:
+    require_corpus_writes("OCR")
     version = tesseract_version()
     if not version:
         return {"error": "tesseract is not installed", "documents": 0}

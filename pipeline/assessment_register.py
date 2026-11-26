@@ -36,18 +36,24 @@ def check_assessment(value):
         raise ValueError('assessment object required')
     a = json.loads(canonical(value))
     identity = a.pop('assessment_id', None)
-    # Shadow v2 uses the default JSON separators for its existing identity.
+    # Shadow assessment identities use the default JSON separators.
     expected = hashlib.sha256(json.dumps(a, sort_keys=True, ensure_ascii=False,
                                         allow_nan=False).encode('utf-8')).hexdigest()
     if identity != expected:
         raise ValueError('assessment identity mismatch')
-    if (a.get('version') != 'c14-shadow-v2'
+    if (a.get('version') not in ('c14-shadow-v2', 'c14-shadow-v3')
             or not isinstance(a.get('doc_id'), str)
             or not a['doc_id'].strip() or len(a['doc_id']) > 120
             or not valid_hash(a.get('source_sha256'))
             or not valid_hash(a.get('metadata_sha256'))
-            or a.get('relevance') not in STATES):
+            or not isinstance(a.get('relevance'), str) or a['relevance'] not in STATES):
         raise ValueError('invalid or unbound assessment')
+    if a['version'] == 'c14-shadow-v3':
+        for component in ('classifier', 'quality'):
+            version = a.get(f'{component}_version')
+            if (a.get(f'{component}_mode') != 'default_c13'
+                    or not isinstance(version, str) or not version.strip()):
+                raise ValueError('versioned default assessment policies required')
     for flag in ('research_eligible', 'eligible_for_documentary_review',
                  'complete_native_evidence'):
         if a.get(flag) is not False:
@@ -55,7 +61,8 @@ def check_assessment(value):
     if not isinstance(a.get('pages'), list) or len(a['pages']) > 500:
         raise ValueError('invalid pages')
     for i, page in enumerate(a['pages'], 1):
-        if (not isinstance(page, dict) or page.get('physical_page') != i
+        if (not isinstance(page, dict) or type(page.get('physical_page')) is not int
+                or page['physical_page'] != i
                 or not valid_hash(page.get('text_sha256'))
                 or page.get('usable_for_negative_evidence') is not False):
             raise ValueError('invalid candidate page evidence')
@@ -65,6 +72,8 @@ def check_assessment(value):
 
 class Journal:
     def __init__(self, db: sqlite3.Connection):
+        if db.in_transaction:
+            raise ValueError('journal requires a connection outside a transaction')
         self.db = db
         # Dedicated database only; do not create tables in a preexisting corpus DB.
         names = {row[0] for row in db.execute(
@@ -92,40 +101,54 @@ class Journal:
         db.execute('PRAGMA recursive_triggers=ON')
 
     def append(self, assessment, *, previous_event_id=None):
+        return self.append_batch([(assessment, previous_event_id)])[0]
+
+    def append_batch(self, entries):
+        """Persist all assessments or roll back the entire batch."""
+        prepared = [self._prepare(assessment, previous) for assessment, previous in entries]
+        if self.db.in_transaction:
+            raise ValueError('journal requires a connection outside a transaction')
+        self.db.execute('BEGIN IMMEDIATE')
+        try:
+            ids = [self._append(*args) for args in prepared]
+            self.db.commit()
+            return ids
+        except BaseException:
+            self.db.rollback()
+            raise
+
+    @staticmethod
+    def _prepare(assessment, previous_event_id):
         a = check_assessment(assessment)
         if previous_event_id is not None and not valid_hash(previous_event_id):
             raise ValueError('invalid predecessor')
         event = {'schema': SCHEMA, 'assessment': a,
                  'previous_event_id': previous_event_id,
                  'disposition': 'CANDIDATE_NOT_RELEASED', 'research_eligible': False}
-        event_id = digest(event)
         body = canonical(event)
-        self.db.execute('BEGIN IMMEDIATE')
-        try:
-            # Exact reruns are idempotent; identical assessments with another
-            # predecessor cannot silently create an alternative history.
-            existing = self.db.execute(
-                'SELECT event_id,payload FROM candidate_events WHERE assessment_id=?',
-                (a['assessment_id'],)).fetchone()
-            if existing is not None:
-                if tuple(existing) != (event_id, body):
-                    raise ValueError('assessment already bound to another history')
-                self.db.commit()
-                return event_id
-            head = self.db.execute("""
-                SELECT e.event_id FROM candidate_events e
-                WHERE e.doc_id=? AND NOT EXISTS (
-                    SELECT 1 FROM candidate_events n WHERE n.previous_event_id=e.event_id)
-                """, (a['doc_id'],)).fetchall()
-            if len(head) > 1 or (head[0][0] if head else None) != previous_event_id:
-                raise ValueError('explicit current predecessor required')
-            self.db.execute('INSERT INTO candidate_events VALUES (?,?,?,?,?)',
-                            (event_id, a['assessment_id'], a['doc_id'], previous_event_id, body))
-            self.db.commit()
+        return a, previous_event_id, hashlib.sha256(body).hexdigest(), body
+
+    def _append(self, assessment, previous_event_id, event_id, body):
+        aid = assessment['assessment_id']
+        doc_id = assessment['doc_id']
+        # Exact reruns are idempotent; another predecessor would fork history.
+        existing = self.db.execute(
+            'SELECT event_id,payload FROM candidate_events WHERE assessment_id=?',
+            (aid,)).fetchone()
+        if existing is not None:
+            if tuple(existing) != (event_id, body):
+                raise ValueError('assessment already bound to another history')
             return event_id
-        except BaseException:
-            self.db.rollback()
-            raise
+        head = self.db.execute("""
+            SELECT e.event_id FROM candidate_events e
+            WHERE e.doc_id=? AND NOT EXISTS (
+                SELECT 1 FROM candidate_events n WHERE n.previous_event_id=e.event_id)
+            """, (doc_id,)).fetchall()
+        if len(head) > 1 or (head[0][0] if head else None) != previous_event_id:
+            raise ValueError('explicit current predecessor required')
+        self.db.execute('INSERT INTO candidate_events VALUES (?,?,?,?,?)',
+                        (event_id, aid, doc_id, previous_event_id, body))
+        return event_id
 
     def audit(self):
         """Verify identities and chain membership; do not produce retrieval records."""
