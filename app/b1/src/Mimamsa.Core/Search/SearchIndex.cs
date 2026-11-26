@@ -37,7 +37,9 @@ public sealed class SearchIndex
     {
         var ix = new SearchIndex();
         foreach (var a in g.Abbreviations) ix.Abbrev.TryAdd(a.Code, a);
-        foreach (var d in g.Documents.Values.Where(Indexable).OrderBy(d => d.DocId, StringComparer.Ordinal))
+        // C14 F07 hook (S3): extracted text flagged unreliable (legacy-font Hindi) is not indexed. Indexable() is left
+        // unchanged because Eligibility uses it: such documents stay openable, labelled, from Statutes and links.
+        foreach (var d in g.Documents.Values.Where(d => Indexable(d) && !d.TextExcludedFromSearch).OrderBy(d => d.DocId, StringComparer.Ordinal))
         {
             int di = ix._docs.Count;
             ix._docs.Add(d);
