@@ -64,6 +64,14 @@ jobs:
         run: python legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/check_registers.py
       - name: Reproduce frozen record hashes (PILOT-01 and R23-VERIFY-01 manifests; no private bytes)
         run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/hash_reproduction.py --out "$RUNNER_TEMP/hash_reproduction.json"
+      - name: C14 offline statutory runner and metadata fixtures (draft corpus branch only)
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.ref == 'corpus/c14-ca01-reconciliation-20261126' && github.event.pull_request.head.repo.full_name == github.repository
+        timeout-minutes: 4
+        run: |
+          python -m pip install --disable-pip-version-check "pymupdf==2.1" "cryptography==50.0.2" "huggingface_hub==2.4.0"
+          git rev-parse HEAD
+          python -B -m unittest discover -s legal_knowledge/audit_work/C14-CA01-STATUTORY/runner -p "test_*.py" -v
+          python -B -m unittest discover -s tests -p "test_legal_audit_c14_inventory_provider.py" -v
       - name: Relation graph integrity (no dangling KB/case/source/finding/review edges, no ID collisions)
         run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/relation_graph.py --no-write
       - name: Versioned statutory edges regenerate byte-identically (no unstated effective date without a flag)

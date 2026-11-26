@@ -3,6 +3,19 @@
   "scope": "CA-01A batch 01; documentary findings and candidate anchors only, no legal promotion",
   "source_inventory_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
   "render_receipt_commit": "e2610c3be5b2912a703ecd38d5062ddd6a5493ca",
+  "preserved_copy_rehash": {
+    "performer": "ChatGPT corpus coordinator",
+    "evidence_date": "2026-11-26",
+    "input": "Uploaded preserved-copy PDF bytes",
+    "comparison_source": "C13 A7 preservation inventory",
+    "preservation_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+    "compared_digests": [
+      "SHA-256",
+      "MD5"
+    ],
+    "independent_reviewer_rehash": false,
+    "original_carrier_pin_comparison": "See separate original integrity results; preserved-copy match never overrides a hold."
+  },
   "records": [
     {
       "target_id": "C13-G1-BSA-COMM-252352",
@@ -12,7 +25,7 @@
       "bytes": 922833,
       "hf_path": "legal_knowledge/preservation/c13_a7_acquired/fd/fde9e9722eb4c01375525c2a30442903371913f4199b8cef1d031535d88228e7/252352.pdf",
       "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
-      "original_bytes_rehashed_and_match": true,
+      "uploaded_preserved_copy_matches_inventory_digests": true,
       "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
       "eligible_for_exact_anchor": false,
       "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
@@ -73,7 +86,7 @@
       "bytes": 922134,
       "hf_path": "legal_knowledge/preservation/c13_a7_acquired/df/dfcd5df23fb711f2996959b13ee6ff6bd32ed38be1e1f2d1c820cbba86e2a8c9/252353.pdf",
       "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
-      "original_bytes_rehashed_and_match": true,
+      "uploaded_preserved_copy_matches_inventory_digests": true,
       "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
       "eligible_for_exact_anchor": false,
       "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
@@ -134,7 +147,7 @@
       "bytes": 924297,
       "hf_path": "legal_knowledge/preservation/c13_a7_acquired/0d/0db8a86a0cf41fbf5ee304ee84b8b145da0bd523af510baf351d79d051ef657d/252354.pdf",
       "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
-      "original_bytes_rehashed_and_match": true,
+      "uploaded_preserved_copy_matches_inventory_digests": true,
       "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
       "eligible_for_exact_anchor": false,
       "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
@@ -195,7 +208,7 @@
       "bytes": 6491633,
       "hf_path": "legal_knowledge/preservation/c13_a7_acquired/15/1519957a47352835942822b1b6da3ac4578c0aed1e74fbb847fb4c44e0a48fd4/E-2350-1950-0011-109089.pdf",
       "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
-      "original_bytes_rehashed_and_match": true,
+      "uploaded_preserved_copy_matches_inventory_digests": true,
       "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
       "eligible_for_exact_anchor": false,
       "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
@@ -286,7 +299,7 @@
     }
   ],
   "limits": [
-    "Four uploaded PDFs independently rehashed and compared to registered values; candidate image hashes refer to owner manifest, not independently matched render bytes.",
+    "The corpus coordinator reported matching preserved-copy digests for the four uploaded PDFs. Candidate image hashes refer to the owner manifest. Independent review has yet to recompute those image digests.",
     "No full access clearance of composite Gazette, full transcription, cryptographic signature validation, subsequent notification search or independent legal review completed.",
     "No changes to Authority Ledger, C5 active registers, staging, HF or application."
   ]

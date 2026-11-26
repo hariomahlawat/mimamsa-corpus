@@ -1,4 +1,4 @@
-"""C14 six-source acquisition prototype. No network by default; no HF writes."""
+"""C14 six-source dry run and uncommissioned quarantine transport helpers."""
 from __future__ import annotations
 import argparse
 import hashlib
@@ -8,7 +8,6 @@ from contextlib import contextmanager
 import json
 import socket
 import ssl
-import subprocess
 import time
 import urllib.request
 from transport_policy import Budget, robots_allows
@@ -43,18 +42,31 @@ def validate(plan):
     return rows
 
 
-class NoRedirect(urllib.request.HTTPRedirectHandler):
-    def redirect_request(self, req, fp, code, msg, headers, newurl):
-        return None
+def public_address(address):
+    ip = ipaddress.ip_address(address)
+    if (not ip.is_global or ip.is_multicast or ip.is_reserved
+            or (ip.version == 6 and (ip.scope_id is not None or ip.ipv4_mapped is not None))):
+        raise ValueError('disallowed numeric peer')
+    return ip
 
 
 def check_dns(host):
     addresses = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
-    if not addresses or any(a[0] not in (socket.AF_INET, socket.AF_INET6)
-                            or not ipaddress.ip_address(a[4][0]).is_global
-                            or a[4][1] != 443 for a in addresses):
+    if not addresses:
         raise ValueError('non-public or missing DNS answer')
+    for address in addresses:
+        checked_peer(address)
     return addresses
+
+
+def checked_peer(address):
+    family, kind, _, _, sockaddr = address
+    ip = public_address(sockaddr[0])
+    expected_family = socket.AF_INET if ip.version == 4 else socket.AF_INET6
+    if (family != expected_family or kind != socket.SOCK_STREAM or sockaddr[1] != 443
+            or (family == socket.AF_INET6 and sockaddr[3] != 0)):
+        raise ValueError('disallowed numeric peer')
+    return ip
 
 
 class PinnedHTTPSConnection(http.client.HTTPSConnection):
@@ -68,9 +80,7 @@ class PinnedHTTPSConnection(http.client.HTTPSConnection):
 
     def connect(self):
         family, kind, proto, _, sockaddr = self.address
-        expected = ipaddress.ip_address(sockaddr[0])
-        if family not in (socket.AF_INET, socket.AF_INET6) or not expected.is_global or sockaddr[1] != 443:
-            raise ValueError('disallowed numeric peer')
+        expected = checked_peer(self.address)
         raw = socket.socket(family, kind, proto)
         try:
             raw.settimeout(self.timeout)
@@ -83,6 +93,46 @@ class PinnedHTTPSConnection(http.client.HTTPSConnection):
         except BaseException:
             raw.close()
             raise
+
+
+def content_length(headers):
+    values = headers.get_all('Content-Length', [])
+    if not values:
+        return None
+    value = values[0]
+    if len(values) != 1 or not 1 <= len(value) <= 9 or not value.isascii() or not value.isdigit():
+        raise ValueError('invalid content length')
+    return int(value)
+
+
+class AttemptBody:
+    """Expose a counted body and only small, typed metadata in the receipt."""
+    def __init__(self, response, record, budget):
+        self.response = response
+        self.record = record
+        self.budget = budget
+        self.status = response.status
+        self.headers = response.headers
+
+    def read(self, size):
+        self.budget.remaining()
+        if self.response.isclosed():
+            return b''
+        available = self.budget.max_bytes - self.budget.bytes
+        if size <= 0 or available <= 0:
+            raise ValueError('aggregate byte budget exhausted')
+        try:
+            data = self.response.read(min(available, size))
+        except http.client.IncompleteRead as exc:
+            self.record['body_bytes'] += len(exc.partial)
+            self.budget.observe_bytes(len(exc.partial))
+            raise
+        self.record['body_bytes'] += len(data)
+        self.budget.observe_bytes(len(data))
+        return data
+
+    def isclosed(self):
+        return self.response.isclosed()
 
 
 class Transport:
@@ -109,64 +159,81 @@ class Transport:
         self.budget.start_attempt()
         self.last[p.hostname] = time.monotonic()
         # Resolution happens after pacing, and the selected sockaddr is used verbatim.
-        record = {'url': url, 'started_utc': datetime.now(timezone.utc).isoformat(), 'status': None}
+        record = {'url': url, 'started_utc': datetime.now(timezone.utc).isoformat(), 'status': None,
+                  'body_bytes': 0, 'peer': None, 'content_type': None, 'declared_bytes': None}
         self.attempts.append(record)
-        address = check_dns(p.hostname)[0]
-        conn = PinnedHTTPSConnection(p.hostname, address, context=self.context,
-                                    timeout=min(30, self.budget.remaining()))
+        conn = None
+        stage = 'DNS'
         try:
+            address = check_dns(p.hostname)[0]
+            stage = 'CONNECTION'
+            conn = PinnedHTTPSConnection(p.hostname, address, context=self.context,
+                                        timeout=min(30, self.budget.remaining()))
             path = p.path + ('?' + p.query if p.query else '')
             conn.request('GET', path, headers={'User-Agent': UA, 'Accept-Encoding': 'identity'})
+            record['peer'] = conn.peer
+            stage = 'HTTP'
             with conn.getresponse() as response:
-                record.update(status=response.status, peer=conn.peer,
-                              content_type=response.headers.get_content_type())
+                mime = response.headers.get_content_type()
+                safe_mime = mime if mime in ('application/pdf', 'application/octet-stream', 'text/plain') else 'OTHER'
+                record.update(status=response.status, content_type=safe_mime)
+                record['declared_bytes'] = content_length(response.headers)
                 self.budget.remaining()
                 # No automatic redirect, authentication or retry.
                 if response.status != 200:
                     raise ValueError('unexpected HTTP status; no redirect or challenge bypass')
-                yield response
+                stage = 'BODY_OR_POLICY'
+                yield AttemptBody(response, record, self.budget)
+                if not response.isclosed():
+                    raise ValueError('response body did not reach end of stream')
+            record['outcome'] = 'COMPLETE'
+        except TimeoutError:
+            record['outcome'] = 'DEADLINE_OR_TIMEOUT'
+            raise
+        except BaseException:
+            record['outcome'] = stage + '_FAILED'
+            raise
         finally:
-            conn.close()
             record['ended_utc'] = datetime.now(timezone.utc).isoformat()
+            if conn is not None:
+                conn.close()
 
     def robots(self, url):
         host = urlsplit(url).hostname
         origin = 'https://' + host + '/robots.txt'
         with self.request(origin) as response:
-            if response.status != 200:
-                raise ValueError('robots unavailable')
             raw = response.read(262145)
-        if len(raw) > 262144:
-            raise ValueError('robots oversized')
-        self.budget.observe_bytes(len(raw))
-        if not robots_allows(raw, url):
-            raise ValueError('robots disallowed or unsupported syntax')
+            declared = content_length(response.headers)
+            if (len(raw) > 262144 or not response.isclosed()
+                    or (declared is not None and len(raw) != declared)
+                    or response.headers.get('Content-Encoding', 'identity').lower() != 'identity'):
+                raise ValueError('robots body outside limits')
+            if not robots_allows(raw, url):
+                raise ValueError('robots disallowed or unsupported syntax')
         self.delay[host] = 2
 
 
 
-def receive(response, destination, row, known, budget=None):
+def receive(response, destination, row, known):
     if response.status != 200 or response.headers.get_content_type() not in ('application/pdf', 'application/octet-stream'):
         raise ValueError('unexpected HTTP status or content type')
     if response.headers.get('Content-Encoding', 'identity').lower() != 'identity':
         raise ValueError('unexpected content encoding')
-    declared = response.headers.get('Content-Length')
-    if declared is not None and not 0 < int(declared) <= CAP:
+    declared = content_length(response.headers)
+    if declared is not None and not 0 < declared <= CAP:
         raise ValueError('invalid content length')
     sha = hashlib.sha256(); sha1 = hashlib.sha1(usedforsecurity=False); md5 = hashlib.md5(usedforsecurity=False)
     n = 0; start = b''; tail = b''
     with destination.open('xb') as fh:
         while chunk := response.read(65536):
             n += len(chunk)
-            if budget is not None:
-                budget.observe_bytes(len(chunk))
             if n > CAP:
                 raise ValueError('size cap exceeded; partial retained')
             start = (start + chunk)[:8]; tail = (tail + chunk)[-2048:]
             fh.write(chunk); sha.update(chunk); sha1.update(chunk); md5.update(chunk)
     result = {'sha256': sha.hexdigest(), 'sha1': sha1.hexdigest(), 'md5': md5.hexdigest(), 'bytes': n}
     pin_ok = (row['expected_bytes'] is None or n == row['expected_bytes']) and (row['expected_sha1'] is None or result['sha1'] == row['expected_sha1'])
-    complete = start.startswith(b'%PDF-') and b'%%EOF' in tail and (declared is None or n == int(declared))
+    complete = start.startswith(b'%PDF-') and b'%%EOF' in tail and (declared is None or n == declared)
     result['status'] = ('HOLD_INTEGRITY' if not (pin_ok and complete) else 'DUPLICATE_BYTES_HOLD' if result['sha256'] in known else 'QUARANTINED_PENDING_REVIEW')
     return result
 
@@ -178,52 +245,14 @@ def main():
     p.add_argument('--output', type=Path)
     p.add_argument('--known-sha256', type=Path, help='one SHA-256 per line from revision-pinned corpus inventory')
     args = p.parse_args()
+    if args.execute_approved:
+        p.error('C14 acquisition interlock: live transport disabled pending independent authorization and security acceptance')
     here = Path(__file__).resolve().parent
     plan = json.loads((here.parent / 'LOCAL_ACQUISITION_BATCH_01.json').read_text(encoding='utf-8'))
     rows = validate(plan)
     print('Targets:', len(rows), 'Enabled:', sum(r['enabled'] for r in rows))
-    if not args.execute_approved:
-        print('Dry run: no network or writes.'); return 0
-    # Independent authorization key provisioning, egress policy, inventory coverage,
-    # bounded runtime and native filesystem tests are not accepted yet. A caller
-    # changing the JSON flags cannot activate network access.
-    p.error('C14 acquisition interlock: live transport disabled pending independent authorization and security acceptance')
-    if plan['scope_approval'] != 'APPROVED' or not all(r['enabled'] for r in rows):
-        p.error('scope disabled; independent review and approved plan required')
-    if not all((args.expected_commit, args.output, args.known_sha256)):
-        p.error('commit, output and known SHA inventory required')
-    repo = Path(subprocess.check_output(['git', '-C', str(here), 'rev-parse', '--show-toplevel'], text=True).strip()).resolve()
-    head = subprocess.check_output(['git', '-C', str(repo), 'rev-parse', 'HEAD'], text=True).strip()
-    dirty = subprocess.check_output(['git', '-C', str(repo), 'status', '--porcelain'], text=True).strip()
-    if head != args.expected_commit or dirty:
-        p.error('clean reviewed commit required')
-    output = args.output.resolve()
-    if output.parent != (repo.parent / 'jobs').resolve() or output.exists():
-        p.error('fresh sibling jobs directory required')
-    known_raw = args.known_sha256.read_bytes()
-    known = set(known_raw.decode('ascii').splitlines())
-    if not known or any(len(s) != 64 or any(c not in '0123456789abcdef' for c in s) for s in known):
-        p.error('invalid known-hash inventory')
-    transport = Transport()
-    output.mkdir(parents=True, exist_ok=False)
-    report = {'status': 'INCOMPLETE', 'commit': head, 'known_hash_inventory_sha256': hashlib.sha256(known_raw).hexdigest(), 'records': [], 'hf_writes': 0, 'legal_promotions': 0}
-    def save():
-        tmp = output / 'report.tmp'; tmp.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8'); tmp.replace(output / 'report.json')
-    save()
-    for row in rows:
-        rec = {'id': row['id'], 'url': row['url'], 'eligible_for_exact_anchor': False}
-        try:
-            transport.robots(row['url'])
-            with transport.request(row['url']) as response:
-                rec.update(receive(response, output / (row['id'] + '.pdf'), row, known, transport.budget))
-            if rec.get('sha256'): known.add(rec['sha256'])
-        except Exception as exc:
-            rec.update(status='REVIEW_REQUIRED', error_type=type(exc).__name__)
-        report['records'].append(rec)
-        report['attempts'] = transport.attempts
-        save()
-    report['status'] = 'QUARANTINE_REVIEW_REQUIRED'; save()
-    return 1  # no automatic acceptance, even on a clean fetch
+    print('Dry run: no network or writes.')
+    return 0
 
 
 if __name__ == '__main__':

@@ -24,7 +24,7 @@ def reconcile(expected, claims, *, revision, required_stores, enumerated_stores)
         raise ValueError('unapproved store enumerated')
     def key(row):
         store, path = row['store'], row['path']
-        if (store not in required or not isinstance(path, str) or not path.endswith('.pdf')
+        if (store not in required or not isinstance(path, str) or not path.lower().endswith('.pdf')
                 or path.startswith('/') or '\\' in path
                 or any(s in ('', '.', '..') for s in path.split('/'))):
             raise ValueError('invalid or unapproved inventory path')

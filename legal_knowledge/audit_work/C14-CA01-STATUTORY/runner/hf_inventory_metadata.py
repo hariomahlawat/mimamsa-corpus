@@ -18,6 +18,11 @@ HEX40 = re.compile(r'[0-9a-f]{40}\Z')
 MAX_ENTRIES = 30_000
 
 
+def path_in_store(path, store):
+    return (isinstance(path, str) and path.startswith(store + '/')
+            and '\\' not in path and all(p not in ('', '.', '..') for p in path.split('/')))
+
+
 def collect(tree, revision, restricted):
     """tree(store, revision) yields (path, size, lfs_sha256, lfs_size).
 
@@ -38,12 +43,10 @@ def collect(tree, revision, restricted):
                 total += 1
                 if total > MAX_ENTRIES:
                     raise ValueError('entry budget exceeded')
-                if (not isinstance(path, str) or not path.startswith(store+'/')
-                        or '\\' in path or any(p in ('', '.', '..') for p in path.split('/'))):
+                if not path_in_store(path, store):
                     raise ValueError('path outside approved root')
                 if not path.lower().endswith('.pdf'):
                     continue
-                # The existing reconcile contract accepts lowercase .pdf only.
                 if restricted(path=path, sha256=digest if isinstance(digest,str) else None):
                     excluded_count += 1
                     continue
@@ -52,7 +55,7 @@ def collect(tree, revision, restricted):
                     # hash; do not emit its path in a transferable receipt.
                     unhashed_excluded_count += 1
                     continue
-                if not path.endswith('.pdf') or type(size) is not int or size <= 0:
+                if type(size) is not int or size <= 0:
                     raise ValueError('unsupported metadata entry')
                 expected.append(dict(store=store,path=path,bytes=size))
                 if type(lfs_size) is int and lfs_size == size:

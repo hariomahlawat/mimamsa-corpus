@@ -16,7 +16,12 @@
       "government_locator": "https://egazette.nic.in/WriteReadData/2022/236757.pdf",
       "disposition": "NAVY_HOLD_PIN_MISMATCH",
       "enabled": false,
-      "eligible_for_exact_anchor": false
+      "eligible_for_exact_anchor": false,
+      "documentary_target_id": "C13-G1-AR-POST2022-236757",
+      "subject_domain": "NAVY",
+      "registration_state": "HOLD_PIN_MISMATCH",
+      "government_locator_status": "DISCOVERY_LEAD_ONLY",
+      "reviewed_source_url": "https://egazette.gov.in/WriteReadData/2022/236757.pdf"
     },
     {
       "candidate_id": "C5C-005",
@@ -26,7 +31,12 @@
       "government_locator": "https://egazette.nic.in/WriteReadData/2022/241268.pdf",
       "disposition": "NAVY_HOLD_PIN_MISMATCH",
       "enabled": false,
-      "eligible_for_exact_anchor": false
+      "eligible_for_exact_anchor": false,
+      "documentary_target_id": "C13-G1-AR-POST2022-241268",
+      "subject_domain": "NAVY",
+      "registration_state": "HOLD_PIN_MISMATCH",
+      "government_locator_status": "DISCOVERY_LEAD_ONLY",
+      "reviewed_source_url": "https://egazette.gov.in/WriteReadData/2022/241268.pdf"
     },
     {
       "candidate_id": "C5C-006",
@@ -36,7 +46,12 @@
       "government_locator": "https://egazette.gov.in/WriteReadData/2023/246170.pdf",
       "disposition": "UNRESOLVED_NOT_ACQUIRED",
       "enabled": false,
-      "eligible_for_exact_anchor": false
+      "eligible_for_exact_anchor": false,
+      "documentary_target_id": null,
+      "subject_domain": null,
+      "registration_state": null,
+      "government_locator_status": "DISCOVERY_LEAD_ONLY",
+      "reviewed_source_url": null
     },
     {
       "candidate_id": "C5C-007",
@@ -46,7 +61,12 @@
       "government_locator": "https://egazette.gov.in/WriteReadData/2023/246457.pdf",
       "disposition": "AIR_FORCE_NOT_ARMY_RULES",
       "enabled": false,
-      "eligible_for_exact_anchor": false
+      "eligible_for_exact_anchor": false,
+      "documentary_target_id": "C13-G1-AR-POST2022-246457",
+      "subject_domain": "AIR_FORCE",
+      "registration_state": "HOLD_SUBJECT_UNCONFIRMED",
+      "government_locator_status": "DISCOVERY_LEAD_ONLY",
+      "reviewed_source_url": "https://egazette.gov.in/WriteReadData/2023/246457.pdf"
     },
     {
       "candidate_id": "C5C-008",
@@ -56,7 +76,12 @@
       "government_locator": "https://egazette.gov.in/WriteReadData/2024/254308.pdf",
       "disposition": "NAVY_NOT_ARMY_RULES",
       "enabled": false,
-      "eligible_for_exact_anchor": false
+      "eligible_for_exact_anchor": false,
+      "documentary_target_id": "C13-G1-AR-POST2022-254308",
+      "subject_domain": "NAVY",
+      "registration_state": "HOLD_SUBJECT_UNCONFIRMED",
+      "government_locator_status": "DISCOVERY_LEAD_ONLY",
+      "reviewed_source_url": "https://egazette.gov.in/WriteReadData/2024/254308.pdf"
     },
     {
       "candidate_id": "C5C-009",
@@ -66,7 +91,12 @@
       "government_locator": "https://egazette.gov.in/WriteReadData/2024/256844.pdf",
       "disposition": "UNRESOLVED_NOT_ACQUIRED",
       "enabled": false,
-      "eligible_for_exact_anchor": false
+      "eligible_for_exact_anchor": false,
+      "documentary_target_id": null,
+      "subject_domain": null,
+      "registration_state": null,
+      "government_locator_status": "DISCOVERY_LEAD_ONLY",
+      "reviewed_source_url": null
     },
     {
       "candidate_id": "C5C-010",
@@ -76,7 +106,12 @@
       "government_locator": "https://egazette.gov.in/WriteReadData/2025/262667.pdf",
       "disposition": "UNRESOLVED_NOT_ACQUIRED",
       "enabled": false,
-      "eligible_for_exact_anchor": false
+      "eligible_for_exact_anchor": false,
+      "documentary_target_id": null,
+      "subject_domain": null,
+      "registration_state": null,
+      "government_locator_status": "DISCOVERY_LEAD_ONLY",
+      "reviewed_source_url": null
     },
     {
       "candidate_id": "C5C-011",
@@ -86,7 +121,12 @@
       "government_locator": "https://egazette.gov.in/WriteReadData/2025/262992.pdf",
       "disposition": "UNRESOLVED_NOT_ACQUIRED",
       "enabled": false,
-      "eligible_for_exact_anchor": false
+      "eligible_for_exact_anchor": false,
+      "documentary_target_id": null,
+      "subject_domain": null,
+      "registration_state": null,
+      "government_locator_status": "DISCOVERY_LEAD_ONLY",
+      "reviewed_source_url": null
     },
     {
       "candidate_id": "C5C-012",
@@ -96,7 +136,12 @@
       "government_locator": "https://egazette.gov.in/WriteReadData/2026/269859.pdf",
       "disposition": "UNRESOLVED_NOT_ACQUIRED",
       "enabled": false,
-      "eligible_for_exact_anchor": false
+      "eligible_for_exact_anchor": false,
+      "documentary_target_id": null,
+      "subject_domain": null,
+      "registration_state": null,
+      "government_locator_status": "DISCOVERY_LEAD_ONLY",
+      "reviewed_source_url": null
     },
     {
       "candidate_id": "C5C-013",
@@ -106,7 +151,12 @@
       "government_locator": "https://egazette.gov.in/WriteReadData/2026/273809.pdf",
       "disposition": "AIR_FORCE_NOT_ARMY_RULES",
       "enabled": false,
-      "eligible_for_exact_anchor": false
+      "eligible_for_exact_anchor": false,
+      "documentary_target_id": "C13-G1-AR-POST2022-273809",
+      "subject_domain": "AIR_FORCE",
+      "registration_state": "HOLD_SUBJECT_UNCONFIRMED",
+      "government_locator_status": "DISCOVERY_LEAD_ONLY",
+      "reviewed_source_url": "https://egazette.gov.in/WriteReadData/2026/273809.pdf"
     }
   ],
   "compound_request_033": {
@@ -121,8 +171,10 @@
         "instrument": "Repealing and Amending Act 1957",
         "status": "UNRESOLVED_NO_VERIFIED_LOCATOR"
       }
-    ]
+    ],
+    "request_id": "A4-ACQ-033"
   },
-  "provenance_clarification": "In documentary batches 01 and 02, original_bytes_rehashed_and_match means ChatGPT compared the uploaded preserved-copy bytes to C13 preservation inventory hashes on 2026-11-26. It does not mean upstream carrier pins matched or independent Codex PDF inspection occurred. Original mismatches remain held. The owner-run receipt is separate from that comparison.",
-  "limits": "No new acquisition, no change to original A4 or C5 records, no legal promotion. All five unresolved leads disabled."
+  "provenance_clarification": "The documentary batches report the corpus coordinator's dated rehash of uploaded preserved copies against the C13 A7 preservation inventory. Original carrier integrity results and owner-run receipt remain separate evidence.",
+  "limits": "No new acquisition, no change to original A4 or C5 records, no legal promotion. All five unresolved leads disabled.",
+  "reconciliation_blob": "428e8589b5c6b9200ecb86af394d74ee9a021f54"
 }

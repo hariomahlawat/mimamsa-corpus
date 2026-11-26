@@ -1,12 +1,10 @@
-"""C14 local corpus runner. Offline by default; only HF read operations are implemented."""
+"""C14 preservation inventory dry run and offline verification fixtures."""
 from __future__ import annotations
 import argparse
 import hashlib
 import json
 import os
 import re
-import shutil
-import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -83,10 +81,13 @@ def write_report(path, report):
 
 
 def execute(rows, inventory_sha, output, api, download):
+    """Exercise the verification flow with supplied fixtures; the CLI is held."""
     output.mkdir(parents=True, exist_ok=False)
     report_path = output / "verification.json"
     report = {"dataset": DATASET, "started_utc": utc(), "inventory_sha256": inventory_sha,
               "expected_previous_head": LAST_RECORDED_HEAD, "preservation_revision": PRESERVATION,
+              "observed_head_evidence": "PATH_PRESENCE_ONLY", "observed_head_bytes_verified": False,
+              "full_backup_verified": False,
               "records": [], "status": "INCOMPLETE", "legal_promotions": 0, "hf_writes": 0}
     write_report(report_path, report)
     try:
@@ -114,6 +115,7 @@ def execute(rows, inventory_sha, output, api, download):
                     raise RuntimeError("download outside job scope")
                 sha, md5, size = digest(path)
                 item.update(actual_sha256=sha, actual_md5=md5, actual_bytes=size,
+                            byte_check_revision=PRESERVATION,
                             matches_preservation=(sha, md5, size) == (row["sha256"], row["md5"], row["bytes"]))
                 item["status"] = "PRESERVATION_MATCH_NOT_AUTHENTICATED" if item["matches_preservation"] else "BYTE_MISMATCH_HOLD"
             except Exception as exc:
@@ -140,31 +142,12 @@ def main():
     p.add_argument("--output", type=Path)
     p.add_argument("--expected-commit")
     a = p.parse_args()
-    rows, inv = load_inventory(HERE.parent / "COPY_REGISTRATION_CANDIDATES.json")
+    if a.execute_read_only:
+        p.error("C14 preservation interlock: live execution is held pending independent commissioning")
+    rows, _ = load_inventory(HERE.parent / "COPY_REGISTRATION_CANDIDATES.json")
     print("Scope: CA-01A;", len(rows), "PDFs;", sum(r["bytes"] for r in rows), "bytes")
-    if not a.execute_read_only:
-        print("Dry run: no network or file writes.")
-        return 0
-    if not a.output or not re.fullmatch(r"[0-9a-f]{40}", a.expected_commit or ""):
-        p.error("execution requires --output and --expected-commit")
-    repo = Path(subprocess.check_output(["git", "-C", str(HERE), "rev-parse", "--show-toplevel"], text=True).strip()).resolve()
-    head = subprocess.check_output(["git", "-C", str(repo), "rev-parse", "HEAD"], text=True).strip()
-    status = subprocess.check_output(["git", "-C", str(repo), "status", "--porcelain"], text=True)
-    if head != a.expected_commit or status.strip():
-        p.error("worktree must be clean and at the reviewed commit")
-    out = a.output.resolve()
-    if out.exists() or out == repo or repo in out.parents or out in repo.parents:
-        p.error("fresh output directory outside worktree required")
-    parent = out.parent
-    while not parent.exists():
-        parent = parent.parent
-    if shutil.disk_usage(parent).free < max(250_000_000, 3 * sum(r["bytes"] for r in rows)):
-        p.error("insufficient free space")
-    try:
-        from huggingface_hub import HfApi, hf_hub_download
-    except ImportError:
-        p.error("huggingface_hub not installed in selected Python; no automatic installation")
-    return execute(rows, inv, out, HfApi(endpoint=ENDPOINT), hf_hub_download)
+    print("Dry run: no network or file writes.")
+    return 0
 
 
 if __name__ == "__main__":

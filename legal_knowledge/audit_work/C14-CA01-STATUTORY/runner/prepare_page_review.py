@@ -3,16 +3,23 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import shutil
+import math
+import os
+import re
+import subprocess
+import sys
+import time
 from pathlib import Path
 
 from corpus_runner import load_inventory, digest, PRESERVATION, HERE
 
 RECEIPT_SHA = "156d0dfde8fad89fbdad31e34fdd973ef65df4014de3000d971c2fce68c34b9f"
 HEAD = "f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc"
-DPI = 150
-MAX_PAGES_PER_PDF = 200
-MAX_PIXELS = 12_000_000
+from _page_review_worker import DPI, MAX_INPUT_BYTES
+
+
+MAX_JOB_DECODED_BYTES = 2_000_000_000
+MAX_JOB_WALL_SECONDS = 120
 FIRST = ("C13-G1-AA-ENACTED-1950", "C13-G1-BSA-COMM-252352",
          "C13-G1-BNS-COMM-252353", "C13-G1-BNSS-COMM-252354")
 
@@ -51,23 +58,39 @@ def verify_inputs(job):
 
 
 def prepare(job, execute=False):
-    job = job.resolve()
-    inputs = verify_inputs(job)
+    if execute:
+        print("Render held pending native process isolation and independent acceptance.")
+        return 2
+    inputs = verify_inputs(job.resolve())
     print("Verified local originals:", len(inputs))
-    if not execute:
-        print("Dry run: no writes, no network.")
-        return 0
-    import pymupdf
-    out = job / "page-review"
-    if out.exists():
-        raise ValueError("review directory already exists; preserve it")
-    if shutil.disk_usage(job).free < 2_000_000_000:
-        raise ValueError("at least 2 GB free space required")
+    print("Dry run: no writes, no network.")
+    return 0
+
+
+def render_candidate_images(inputs, out, *, wall_seconds=MAX_JOB_WALL_SECONDS,
+                            decoded_byte_limit=MAX_JOB_DECODED_BYTES):
+    """Exercise bounded rendering in a disposable fixture workspace."""
+    if (not math.isfinite(wall_seconds) or not 0 < wall_seconds <= MAX_JOB_WALL_SECONDS
+            or type(decoded_byte_limit) is not int
+            or not 0 < decoded_byte_limit <= MAX_JOB_DECODED_BYTES):
+        raise ValueError("invalid render budget")
+    hashes = [row["sha256"] for row, _ in inputs]
+    if len(hashes) != len(set(hashes)) or not 0 < len(hashes) <= 15:
+        raise ValueError("invalid fixture scope")
+    if any(not re.fullmatch(r"[0-9a-f]{64}", sha) for sha in hashes):
+        raise ValueError("invalid source hash")
+
+    deadline = time.monotonic() + wall_seconds
     out.mkdir()
-    report = {"status": "INCOMPLETE", "receipt_sha256": RECEIPT_SHA,
-              "dpi": DPI, "renderer_version": pymupdf.VersionBind,
-              "access_marking_review": "PENDING_VISUAL_REVIEW",
-              "eligible_for_exact_anchor": False, "records": []}
+    report = {
+        "status": "INCOMPLETE",
+        "scope": "DISPOSABLE_FIXTURE_ONLY",
+        "render": {"dpi": DPI, "colorspace": "RGB", "alpha": False, "annots": True},
+        "budget": {"wall_seconds": wall_seconds, "decoded_bytes": decoded_byte_limit},
+        "access_marking_review": "PENDING_VISUAL_REVIEW",
+        "eligible_for_exact_anchor": False,
+        "records": [],
+    }
     manifest = out / "page_manifest.json"
 
     def save():
@@ -76,49 +99,62 @@ def prepare(job, execute=False):
         tmp.replace(manifest)
 
     save()
+    consumed = 0
+    child_env = {"SYSTEMROOT": os.environ["SYSTEMROOT"]} if "SYSTEMROOT" in os.environ else {}
     for row, path in inputs:
-        rec = {"target_id": row["a7_target_id"], "source_sha256": row["sha256"],
-               "registration_state": row["registration_state"], "pages": [],
-               "access_marking_review": "PENDING_VISUAL_REVIEW",
-               "identity_review": "PENDING_VISUAL_REVIEW", "eligible_for_exact_anchor": False}
+        rec = {
+            "target_id": row["a7_target_id"],
+            "source_sha256": row["sha256"],
+            "registration_state": row["registration_state"],
+            "pages": [],
+            "access_marking_review": "PENDING_VISUAL_REVIEW",
+            "identity_review": "PENDING_VISUAL_REVIEW",
+            "eligible_for_exact_anchor": False,
+            "status": "INCOMPLETE",
+        }
         report["records"].append(rec)
+        save()
         try:
-            with pymupdf.open(path) as doc:
-                if doc.needs_pass or not doc.is_pdf or not 0 < doc.page_count <= MAX_PAGES_PER_PDF:
-                    raise ValueError("encrypted, invalid or oversized page count")
-                rec["physical_pages"] = doc.page_count
-                rec["renderer_repaired_pdf"] = bool(doc.is_repaired)
-                if doc.is_repaired:
-                    raise ValueError("PDF required repair")
-                folder = out / row["sha256"]
-                folder.mkdir()
-                for i, page in enumerate(doc):
-                    width = page.rect.width * DPI / 72
-                    height = page.rect.height * DPI / 72
-                    if width <= 0 or height <= 0 or (width + 2) * (height + 2) > MAX_PIXELS:
-                        raise ValueError("page exceeds render limit")
-                    pix = page.get_pixmap(dpi=DPI, colorspace=pymupdf.csRGB, alpha=False)
-                    target = folder / ("page-%04d.png" % (i + 1))
-                    pix.save(target)
-                    rec["pages"].append({"physical_page": i + 1,
-                        "image": target.relative_to(out).as_posix(),
-                        "image_sha256": hashlib.sha256(target.read_bytes()).hexdigest(),
-                        "access_marking_review": "PENDING",
-                        "printed_page": None, "identity_or_anchor": None})
-                    save()
-            if digest(path) != (row["sha256"], row["md5"], row["bytes"]):
-                raise ValueError("source changed during render")
+            if type(row["bytes"]) is not int or not 0 < row["bytes"] <= MAX_INPUT_BYTES:
+                raise ValueError("invalid source size")
+            with path.open("rb") as original:
+                raw = original.read(row["bytes"] + 1)
+            if (len(raw) != row["bytes"]
+                    or hashlib.sha256(raw).hexdigest() != row["sha256"]
+                    or hashlib.md5(raw, usedforsecurity=False).hexdigest() != row["md5"]):
+                raise ValueError("fixture bytes failed source verification")
+            folder = out / row["sha256"]
+            folder.mkdir()
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise subprocess.TimeoutExpired("page review worker", wall_seconds)
+            result = subprocess.run(
+                [sys.executable, "-I", "-B", str(HERE / "_page_review_worker.py"),
+                 str(decoded_byte_limit - consumed)],
+                input=raw, cwd=folder, env=child_env, stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL, check=True, timeout=remaining,
+            )
+            evidence = json.loads(result.stdout)
+            consumed += evidence["decoded_bytes"]
+            for page in evidence["pages"]:
+                original_image_name = page["image"]
+                page["image"] = (Path(row["sha256"]) / original_image_name).as_posix()
+            rec.update(evidence)
             rec["status"] = "RENDERED_NOT_REVIEWED"
-        except Exception as exc:
+        except (subprocess.SubprocessError, OSError, ValueError) as exc:
             rec["status"] = "REVIEW_REQUIRED"
             rec["error_type"] = type(exc).__name__
-        save()
-    good = all(x["status"] == "RENDERED_NOT_REVIEWED" for x in report["records"])
+            # A failed worker may have written some images. Hold the whole remaining job.
+            break
+        finally:
+            save()
+
+    good = len(report["records"]) == len(inputs) and all(
+        record["status"] == "RENDERED_NOT_REVIEWED" for record in report["records"]
+    )
+    report["decoded_bytes_for_completed_records"] = consumed
     report["status"] = "RENDERED_NOT_REVIEWED" if good else "REVIEW_REQUIRED"
     save()
-    print("Status:", report["status"])
-    print("Physical pages rendered:", sum(len(x["pages"]) for x in report["records"]))
-    print("Manifest:", manifest)
     return 0 if good else 1
 
 
