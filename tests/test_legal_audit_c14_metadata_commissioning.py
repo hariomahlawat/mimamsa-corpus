@@ -48,18 +48,20 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(r['source_downloads'],0)
         self.assertTrue(any('cursor=next%2Btoken' in u for u in calls))
         with tempfile.TemporaryDirectory() as tmp:
-            job=Path(tmp)
+            # Windows hosted TEMP may be expressed using an 8.3 alias.
+            # Supply the canonical fixture path; do not relax the writer's guard.
+            job=Path(tmp).resolve(strict=True)
             summary=save_candidate_receipt(r,revision=REV,restricted=lambda **kw:False,job_dir=job)
             self.assertFalse(summary['acquisition_eligible'])
             self.assertEqual(summary['receipt_sha256'],hashlib.sha256((job/'metadata_inventory.json').read_bytes()).hexdigest())
             with self.assertRaises(ValueError):save_candidate_receipt(r,revision=REV,restricted=lambda **kw:False,job_dir=job)
         with tempfile.TemporaryDirectory() as tmp:
             with self.assertRaises(ValueError):
-                save_candidate_receipt(r,revision=REV,restricted=lambda **kw:True,job_dir=tmp)
+                save_candidate_receipt(r,revision=REV,restricted=lambda **kw:True,job_dir=Path(tmp).resolve(strict=True))
             self.assertEqual(list(Path(tmp).iterdir()),[])
             altered=dict(r,coverage_of_supplied_scope=False)
             with self.assertRaises(ValueError):
-                save_candidate_receipt(altered,revision=REV,restricted=lambda **kw:False,job_dir=tmp)
+                save_candidate_receipt(altered,revision=REV,restricted=lambda **kw:False,job_dir=Path(tmp).resolve(strict=True))
 
 
     def tree(self,api):
