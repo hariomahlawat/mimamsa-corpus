@@ -898,3 +898,5 @@
 {"id": "AFT-GUW-946", "url": "https://aftrbghy.nic.in/judgement/OA_30_of_2019.pdf", "status": "eligible-local", "sha256": "be8b3dc7bab3459661322c142b5f4f10f11d72e29173c878119a58fb3b3abfde", "pages": 15, "ocr": 15}
 {"id": "AFT-GUW-947", "url": "https://aftrbghy.nic.in/judgement/OA_30_of_2024.pdf", "status": "marking-review", "page": 4}
 {"id": "AFT-GUW-948", "url": "https://aftrbghy.nic.in/judgement/OA_31_of_2022.pdf", "status": "eligible-local", "sha256": "6229a724538e36dafe4e98d765e68419150a1874737389835ed141e1b05e6c26", "pages": 20, "ocr": 20}
+{"id": "AFT-GUW-949", "url": "https://aftrbghy.nic.in/judgement/OA_31_of_2024.pdf", "status": "eligible-local", "sha256": "1e18247d42452320912455e55f8afd2227cc40705e984c465b4004751f48f46d", "pages": 8, "ocr": 8}
+{"id": "AFT-GUW-950", "url": "https://aftrbghy.nic.in/judgement/OA_36_of_2022.pdf", "status": "marking-review", "page": 20}
