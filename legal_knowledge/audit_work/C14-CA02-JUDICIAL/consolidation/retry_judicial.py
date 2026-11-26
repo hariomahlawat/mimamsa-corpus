@@ -71,13 +71,13 @@ def journal(record):
 def verify(item):
  path,digest=item
  import time
- for attempt in range(5):
+ for attempt in range(7):
   try:
    got=hf_hub_download(repo,path,repo_type='dataset',revision=parent,token=token,force_download=True,cache_dir='verify-cache')
    if hashlib.sha256(Path(got).read_bytes()).hexdigest()==digest:return
    raise RuntimeError('Digest mismatch')
   except Exception as exc:
-   if attempt==4:raise RuntimeError(f'Pinned read-back failed: {type(exc).__name__}') from None
+   if attempt==6:raise RuntimeError(f'Pinned read-back failed: {type(exc).__name__}') from None
    time.sleep(2**attempt)
 
 seen=set()
@@ -103,7 +103,16 @@ with concurrent.futures.ThreadPoolExecutor(8) as ex:
  for start in range(0,len(rows),15):
   if start+3 in seen:continue
   result=list(ex.map(safe,rows[start:start+15]))
+  for cooldown in (25,50):
+   if sum(r[1] in ('HTTP-429','HTTP-503') for r in result)<8:break
+   time.sleep(cooldown)
+   def retry_transient(job):
+    row, disposition=job
+    return safe(row) if disposition[1] in ('HTTP-429','HTTP-503') else disposition
+   result=list(ex.map(retry_transient,zip(rows[start:start+15],result,strict=True)))
   journal({'first_offset':start+3,'result':result})
+  if sum(r[1] in ('HTTP-429','HTTP-503') for r in result)>=8:
+   raise RuntimeError('Source outage persisted after bounded backoff; checkpoint retained')
   files={}
   for row in result:
    if row[1]!='verified-local':continue

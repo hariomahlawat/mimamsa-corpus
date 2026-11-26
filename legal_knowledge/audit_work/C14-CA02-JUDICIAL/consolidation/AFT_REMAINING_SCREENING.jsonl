@@ -210,3 +210,11 @@
 {"id": "AFT-GUW-258", "url": "https://aftrbghy.nic.in/judgement/Judgement_&_Order_dated_10_Sep_2026_OA_29_of_2023.pdf", "status": "eligible-local", "sha256": "52a7a2b509b3838379fb325a0bb0dee4be016c8feeb7f057b4680a9599c8a418", "pages": 2, "ocr": 2}
 {"id": "AFT-GUW-259", "url": "https://aftrbghy.nic.in/judgement/Judgement_&_Order_dated_18_Mar_2026.pdf", "status": "eligible-local", "sha256": "f14ad2b38476eb0a0a81d88163a8e054127fb3afc061db3e82a43fc4ef7ff64e", "pages": 40, "ocr": 40}
 {"id": "AFT-GUW-260", "url": "https://aftrbghy.nic.in/judgement/Judgement_&_Order_dated_19_Mar_2026.pdf", "status": "eligible-local", "sha256": "7e1a9bd80cb3ee131a8cfcc1e4f43c4f20edf1e114fbc82e4fb4825c2c41446f", "pages": 43, "ocr": 43}
+{"id": "AFT-GUW-261", "url": "https://aftrbghy.nic.in/judgement/Judgement_&_Order_dated_20_Mar_2026.pdf", "status": "eligible-local", "sha256": "398558a464bb681983edddeaf704d8c9aa7fc6e1ef9685234053fe2603df3a3a", "pages": 35, "ocr": 35}
+{"id": "AFT-GUW-262", "url": "https://aftrbghy.nic.in/judgement/Judgment &amp; Order dated 01 June 2022 OA-22 of 2018.pdf", "status": "HTTPError", "http_code": 404}
+{"id": "AFT-GUW-263", "url": "https://aftrbghy.nic.in/judgement/Judgment &amp; Order dated 05-09-2022 Cause list Ser No. 01 to 60.pdf", "status": "HTTPError", "http_code": 404}
+{"id": "AFT-GUW-264", "url": "https://aftrbghy.nic.in/judgement/Judgment &amp; Order dated 05-09-2022 Cause list Ser No. 61 to 117.pdf", "status": "HTTPError", "http_code": 404}
+{"id": "AFT-GUW-265", "url": "https://aftrbghy.nic.in/judgement/Judgment &amp; Order dated 21 Sep 2022.pdf", "status": "HTTPError", "http_code": 404}
+{"id": "AFT-GUW-266", "url": "https://aftrbghy.nic.in/judgement/Judgment &amp; Order dated 21-10-2022.pdf", "status": "HTTPError", "http_code": 404}
+{"id": "AFT-GUW-267", "url": "https://aftrbghy.nic.in/judgement/Judgment &amp; Order dated 30-05-2022.pdf", "status": "HTTPError", "http_code": 404}
+{"id": "AFT-GUW-268", "url": "https://aftrbghy.nic.in/judgement/Judgment &amp; Order dated 31-05-2022.pdf", "status": "HTTPError", "http_code": 404}
