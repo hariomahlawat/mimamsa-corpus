@@ -1,209 +1,442 @@
 {
- "audit": "C14 B1 independent application walkthrough",
- "baseline": {"git_commit": "ee17b0660511b66fdd5307833e11d1268de35b56", "release": "R13-b1-sample-20261126-4b31855f", "hf_revision": "3864faf3bb24edef4bfb18fa0916cc788eb68d79", "documents": 290, "passages": 38445},
- "severity_scale": {"P0": "Critical security, integrity or legal-safety failure", "P1": "Major functional or reliability deficiency", "P2": "Material usability or performance deficiency", "P3": "Minor improvement or cosmetic issue"},
- "p0_statement": "No P0 was observed. Every server route probed refused anonymous access (401), the User role was refused admin routes (403), admin POSTs without a CSRF token or with a foreign Origin were refused (403), and a withdrawn document was refused on search, document, text, pdf-meta and /cite for new requests. See J11-J13.",
- "basis_legend": {"observed": "seen in the running application and recorded in evidence", "code_confirmed": "root cause read in the source at the audited commit", "suspected": "inferred, not confirmed"},
- "findings": [
-  {
-   "id": "F01", "severity": "P1", "area": "search", "class": "retrieval_failure",
-   "title": "Common statute abbreviations (IPC, BNS, CrPC, BNSS, BSA) are not recognised as instrument names",
-   "reproduction": ["Sign in as a User", "Search: section 302 IPC", "Search: section 103 BNS"],
-   "expected": "Provision text of IPC s.302 / BNS s.103 pinned first, as for 'section 302 Indian Penal Code'.",
-   "actual": "Chip 'No instrument titled “IPC” in this library' (and “BNS”) although both instruments are held; the section is searched as plain text and BPRD comparison tables rank first.",
-   "evidence": ["SEARCH_EVALUATION.json Q28, Q29", "screenshots/J08-ipc-abbrev.jpg", "evidence/search_raw.json"],
-   "root_cause": {"basis": "code_confirmed", "text": "SearchService.cs:166 scopes an instrument only when every query word is a title term; there is no instrument alias table (the Army lexicon expands codes such as AFT but not instrument short names)."},
-   "remediation": "Add a reviewed instrument-alias table (IPC, CrPC, IEA/Evidence Act, BNS, BNSS, BSA, AA, AFA, NA, AFT Act, AR) resolved against held titles; show the expansion as a chip; regression tests for each alias.",
-   "work_package": "WP1"
+  "audit": "C14 B1 independent application walkthrough",
+  "baseline": {
+    "git_commit": "ee17b0660511b66fdd5307833e11d1268de35b56",
+    "release": "R13-b1-sample-20261126-4b31855f",
+    "hf_revision": "3864faf3bb24edef4bfb18fa0916cc788eb68d79",
+    "documents": 290,
+    "passages": 38445
   },
-  {
-   "id": "F02", "severity": "P1", "area": "search", "class": "retrieval_failure",
-   "title": "Searching a party name does not rank that party's judgment first",
-   "reproduction": ["Search: Dharamvir Singh"],
-   "expected": "DHARAMVIR SINGH versus UNION OF INDIA (2013 INSC 408) first; citing judgments after.",
-   "actual": "The judgment ranks 9th, behind an SC 2015 judgment and HC judgments that cite it. The spelling variant 'dharamveer singh' ranks it 35th.",
-   "evidence": ["SEARCH_EVALUATION.json Q18, Q25", "screenshots/J04-party-name-search.jpg"],
-   "root_cause": {"basis": "suspected", "text": "Party names (petitioner/respondent metadata) are not an identifier tier and are not boosted; BM25 favours documents that repeat the name in text."},
-   "remediation": "Add a case-name tier: exact or near-exact match on petitioner/respondent/title pins the judgment above citing documents, labelled 'Case name'.",
-   "work_package": "WP1"
+  "severity_scale": {
+    "P0": "Critical security, integrity or legal-safety failure",
+    "P1": "Major functional or reliability deficiency",
+    "P2": "Material usability or performance deficiency",
+    "P3": "Minor improvement or cosmetic issue"
   },
-  {
-   "id": "F03", "severity": "P1", "area": "legal_safety", "class": "incomplete_feature",
-   "title": "IPC to BNS supersession (1 July 2024) is not surfaced on IPC provisions",
-   "reproduction": ["Open Statutes, then /s/act-ipc-1860/302"],
-   "expected": "A labelled candidate notice that the IPC is replaced by the BNS for offences on or after 1 July 2024, and the corresponding BNS section (s.103) as a candidate equivalence with evidence.",
-   "actual": "'No A4 temporal version candidate is recorded for this provision'; nothing mentions the BNS. Corpus status reads as a crawler summary only. The BPRD correspondence tables are held but not linked.",
-   "evidence": ["screenshots/J06-ipc-302.jpg", "walkthrough_observations.json J06"],
-   "root_cause": {"basis": "observed", "text": "No relation or A4 record connects IPC/CrPC/IEA provisions to BNS/BNSS/BSA. This is one of the brief's named supersession acceptance cases."},
-   "remediation": "Derive candidate equivalence edges from the held BPRD tables (IPC-BNS, CrPC-BNSS, IEA-BSA); show them on both provisions as 'Candidate (automated, not verified)' with the table page as evidence, plus a commencement notice. Do not change legal approval states.",
-   "mitigation_in_place": "Every view carries 'Legal applicability: Not established' and the 'not legally verified' banner, which is why this is P1 and not P0.",
-   "work_package": "WP2"
+  "p0_statement": "No P0 was observed. Every server route probed refused anonymous access (401), the User role was refused admin routes (403), admin POSTs without a CSRF token or with a foreign Origin were refused (403), and a withdrawn document was refused on search, document, text, pdf-meta and /cite for new requests. See J11-J13.",
+  "basis_legend": {
+    "observed": "seen in the running application and recorded in evidence",
+    "code_confirmed": "root cause read in the source at the audited commit",
+    "suspected": "inferred, not confirmed"
   },
-  {
-   "id": "F04", "severity": "P1", "area": "corpus", "class": "corpus_deficiency",
-   "title": "The sample lacks AFT judgments and core service instruments, so commander and adjutant scenarios cannot be answered",
-   "reproduction": ["Inspect SAMPLE_MANIFEST.json document types and ids", "Search: AFT jurisdiction; absence without leave punishment"],
-   "expected": "Per the brief's priority-1 sources: AFT judgments/orders, Regulations for the Army 1987, Air Force and Navy Rules, Entitlement Rules and Army pension regulations.",
-   "actual": "0 AFT judgments (223 judgments are SC and four HCs only); no Regulations for the Army, no Air Force Rules, no Navy Rules (Navy Regulations only), no Entitlement Rules or Army pension regulations. Whether the 2023 SC ruling on HC writs against AFT orders is held was not established.",
-   "evidence": ["app/b1/sample/SAMPLE_MANIFEST.json", "SEARCH_EVALUATION.json Q22, Q35"],
-   "root_cause": {"basis": "observed", "text": "The B1 sample was selected for a vertical slice, not for scenario coverage."},
-   "remediation": "Extend the development sample with one AFT bench-year and the missing instruments from allow-listed sources (owner approval for the download run), then re-run this query set.",
-   "work_package": "WP3"
-  },
-  {
-   "id": "F05", "severity": "P2", "area": "withdrawal", "class": "usability",
-   "title": "After withdrawal, an open viewer keeps showing the document and a deep link fails silently",
-   "reproduction": ["Audit instance: User opens sc-1991-ex-havildar-rat-an-singh-1991insc300", "Admin withdraws it", "User stays on the open tab; then opens /d/<doc> again"],
-   "expected": "The open viewer is replaced by 'This document is not available in this installation' at the next interaction; the deep link shows the same notice.",
-   "actual": "The open tab keeps the rendered page and full metadata with no notice (the 5-page file had already been delivered, so no further range request was made). The deep link opens the empty research home with no notice or toast. The confirmation dialog says 'Open viewers are cut off'. New requests are refused correctly: search, document, text, pdf-meta (404) and /cite ('The cited copy is not available').",
-   "evidence": ["evidence/withdrawal_open_viewer.json", "screenshots/J13-open-viewer-after.jpg", "screenshots/J13b-open-viewer-page6-after-withdrawal.jpg", "screenshots/J13b-deep-link-after-withdrawal.jpg", "screenshots/J13-permalink.jpg"],
-   "root_cause": {"basis": "suspected", "text": "Enforcement is per request on the server; the client has no policy-epoch signal to clear an already-rendered document, and the /d/ route ignores the 404 notice."},
-   "remediation": "Return the policy epoch on every API response; the client clears and replaces any open tab whose document becomes unavailable; the /d/ route renders the standard notice. Reword the dialog: 'Further pages are refused; pages already on screen are cleared at the next action'.",
-   "not_tested": "Mid-transfer cut-off of a large PDF (the probe document was fully delivered before withdrawal).",
-   "work_package": "WP6"
-  },
-  {
-   "id": "F06", "severity": "P2", "area": "metadata", "class": "corpus_deficiency",
-   "title": "SCC reported citations are not captured, so citation look-ups by SCC fail",
-   "reproduction": ["Search: (2013) 7 SCC 316"],
-   "expected": "Dharamvir Singh (the judgment this citation refers to) pinned as an identifier match.",
-   "actual": "Lexical results only; the judgment is not in the 12 shown. Its metadata holds only '[2013] 8 S.C.R. 1119'.",
-   "evidence": ["SEARCH_EVALUATION.json Q19", "walkthrough_observations.json J04 (dochead 'Reported [2013] 8 S.C.R. 1119')"],
-   "root_cause": {"basis": "observed", "text": "The SC source (AWS open data) supplies SCR citations; parallel citations are not extracted."},
-   "remediation": "Capture parallel citations printed in judgments (cover and headnote) as candidate aliases; when a citation is not held, say so in a chip.",
-   "work_package": "WP1"
-  },
-  {
-   "id": "F07", "severity": "P2", "area": "corpus", "class": "corpus_deficiency",
-   "title": "Hindi derived text is garbled and Hindi copies are not identified in the document header",
-   "reproduction": ["Open /d/act-army-1950-hi?p=16 and switch to Text", "Search: s.69 Army Act (Hindi copy ranks 2nd)", "Search: सेना अधिनियम"],
-   "expected": "Readable Devanagari or a clear 'text unreliable' label; Hindi copies labelled as Hindi wherever shown.",
-   "actual": "Conjuncts and matras are broken (e.g. 'धसधिि अपराि' for 'civil offence'). The header reads 'The Army Act, 1950' with no language marker (the results list shows 'Hindi text'). The Hindi query ranks BNSS/BNS alternate copies first.",
-   "evidence": ["screenshots/J03-hindi-text.jpg", "screenshots/J03-results.jpg", "SEARCH_EVALUATION.json Q09, Q43"],
-   "root_cause": {"basis": "suspected", "text": "Legacy (non-Unicode) font encoding in the India Code Hindi PDFs; the text layer is extracted as-is."},
-   "remediation": "Flag Hindi derivatives as 'text unreliable' and exclude them from default ranking until re-extracted (OCR with the Hindi model); add a language marker to the document header.",
-   "work_package": "WP3"
-  },
-  {
-   "id": "F08", "severity": "P2", "area": "search", "class": "incomplete_feature",
-   "title": "No tolerance for misspellings and no 'did you mean' suggestion",
-   "reproduction": ["Search: court marshal", "Search: dharamveer singh", "Search: disabilty pension"],
-   "expected": "A suggestion ('Did you mean court martial?') from the index vocabulary, never a silent rewrite.",
-   "actual": "'court marshal' matches 'provost marshal' in Navy Regulations; the misspelt word is silently unmatched elsewhere; no suggestion.",
-   "evidence": ["SEARCH_EVALUATION.json Q25-Q27", "screenshots/J08-misspelling.jpg"],
-   "root_cause": {"basis": "observed", "text": "Lexical BM25 only; no spelling model."},
-   "remediation": "Deterministic edit-distance suggestions over the index vocabulary and party names, offered as a clickable chip.",
-   "work_package": "WP4"
-  },
-  {
-   "id": "F09", "severity": "P2", "area": "search", "class": "incomplete_feature",
-   "title": "Plain-language and procedural queries rank other services' instruments or criminal codes above the Army Act",
-   "reproduction": ["Search: punishments a commanding officer can award", "Search: arrest of a soldier for an offence", "Search: absence without leave punishment"],
-   "expected": "Army Act ss.80, 101-102 and 39 near the top for an Army user.",
-   "actual": "Navy Regulations Part II, Navy Act, BNS/IPC/CrPC rank first; the Army Act provision is absent from the top four in 3 of 8 commander queries.",
-   "evidence": ["SEARCH_EVALUATION.json Q01, Q03-Q07, Q13, Q23, Q24, Q35"],
-   "root_cause": {"basis": "observed", "text": "Lexical-only ranking with OR semantics and no service context; the semantic/hybrid layer is out of B1 scope (the 4 hybrid oracle cases fail by design)."},
-   "remediation": "Short term: an optional service preference (Army/Navy/Air Force) as a ranking prior and a facet. Longer term: the hybrid layer validated against the blind holdout.",
-   "work_package": "WP4, WP9"
-  },
-  {
-   "id": "F10", "severity": "P2", "area": "search", "class": "incomplete_feature",
-   "title": "Results stop at the first 200 passages with no pagination",
-   "reproduction": ["Search: court martial"],
-   "expected": "A way to reach every matching document (pagination or load more).",
-   "actual": "'255 documents · 13,497 passages showing the first 200 passages'; 28 document groups are reachable and the rest cannot be opened from the results (narrowing with filters is the only route).",
-   "evidence": ["walkthrough_observations.json J07", "screenshots/J07-results-end.jpg"],
-   "root_cause": {"basis": "observed", "text": "Fixed passage cap in the search response; no offset parameter on /api/search."},
-   "remediation": "Document-level pagination (e.g. 25 documents per page) with stable ordering and deep-linkable page numbers.",
-   "work_package": "WP4"
-  },
-  {
-   "id": "F11", "severity": "P2", "area": "ux", "class": "usability",
-   "title": "Editions and language versions appear as separate, near-identical entries",
-   "reproduction": ["Open Statutes", "Search: s.69 Army Act"],
-   "expected": "One entry per instrument with its editions and languages grouped and clearly labelled (e.g. 'BNS 2023 — Gazette text', 'alternate print', 'Hindi').",
-   "actual": "Statutes lists two 'The Army Act, 1950', three BNS entries, two CrPC ('The Code of Criminal Procedure 1973' and '..., 1973'), a bare 'Schedule' first and 'THE FIRST SCHEDULE' in capitals. Hindi copies take rank 2 in identifier results.",
-   "evidence": ["screenshots/J06-statutes-home.jpg", "screenshots/J03-results.jpg"],
-   "root_cause": {"basis": "observed", "text": "Each doc_id is listed as its own instrument; no instrument grouping key."},
-   "remediation": "Group by instrument key (act number and year); show editions and language as sub-items; title-case schedule names and attach schedules to their parent Act.",
-   "work_package": "WP4, WP5"
-  },
-  {
-   "id": "F12", "severity": "P2", "area": "viewer", "class": "usability",
-   "title": "The viewer opens at the top of the cited page, so the cited provision can be below the fold",
-   "reproduction": ["Search: s.69 Army Act", "Open the first hit (p.25)"],
-   "expected": "The page scrolls so the highlighted passage is in view.",
-   "actual": "Page 25 opens at its top showing ss.64-66; s.69 and its highlight are further down the page.",
-   "evidence": ["screenshots/J03-document.jpg"],
-   "root_cause": {"basis": "suspected", "text": "The viewer scrolls to the page, not to the highlight's bounding box."},
-   "remediation": "After the text layer renders, scroll the first mark into view with context above it.",
-   "work_package": "WP5"
-  },
-  {
-   "id": "F13", "severity": "P2", "area": "ux", "class": "usability",
-   "title": "Low information density for prolonged research, especially at 1366×768",
-   "reproduction": ["Viewport 1366×768", "Search: disability pension invalided"],
-   "expected": "Several results visible at once; the reading area maximised.",
-   "actual": "One result fully visible at 1366×768 (4 at 1920, 5 at 2560). Two permanent banners take ~52 px; before a document is opened about half the width is an empty 'No document open' pane; result cards repeat source, copy hash and retrieval date.",
-   "evidence": ["screenshots/J10-1366-results.jpg", "screenshots/J10-1920-results.jpg", "screenshots/J10-2560-results.jpg", "walkthrough_observations.json J10"],
-   "root_cause": {"basis": "observed", "text": "Design choice in B1 (provenance on every card, fixed panes)."},
-   "remediation": "Compact result density option; provenance details on hover/expand; merge the two banners into one line; let results use the document pane width until a document is open.",
-   "work_package": "WP5"
-  },
-  {
-   "id": "F14", "severity": "P2", "area": "performance", "class": "usability",
-   "title": "Service memory grows under load and is not returned; full-corpus fit on the 16 GB host is unproven",
-   "reproduction": ["Run scripts/perf.py with B1_PID set"],
-   "expected": "Bounded working set with headroom for the full corpus.",
-   "actual": "Working set 729 MB idle, 925 MB after sequential search, 1,060 MB after 10 readers, 1,335 MB after 25 readers, and still 1,338 MB at the end. The sample is 0.42 GB of originals and 38,445 passages; the full corpus is about 20 GB.",
-   "evidence": ["evidence/perf_raw.json", "PERFORMANCE_REPORT.md"],
-   "root_cause": {"basis": "suspected", "text": "Server GC retains its heap after load; the in-memory index scales with passages."},
-   "remediation": "Measure at full-corpus scale; consider workstation or DATAS GC settings and an index memory budget before the full import.",
-   "work_package": "WP8"
-  },
-  {
-   "id": "F15", "severity": "P2", "area": "security", "class": "usability",
-   "title": "Any sign-in attempt during a lockout, including the correct password, restarts the lock",
-   "reproduction": ["Audit instance: five wrong passwords for 'user'", "Sign in with the correct password within 5 minutes", "Inspect app_users.locked_until"],
-   "expected": "The lock ends 5 minutes after the fifth failure; attempts during the lock are refused without extending it, or only throttled.",
-   "actual": "failed_count reached 9 and locked_until moved forward on every attempt, including correct ones. With no unlock in B1, anyone who knows a username can keep the account locked.",
-   "evidence": ["walkthrough_observations.json J14", "WALKTHROUGH_REPORT.md §7 lockout expiry check"],
-   "root_cause": {"basis": "code_confirmed", "text": "Identity.cs:100 treats a locked account as a failed attempt; Identity.cs:107 resets locked_until to now()+5 min whenever failed_count+1 >= 5."},
-   "remediation": "Do not count attempts made while locked; add per-source throttling; Admin unlock (the owner deferred unlock to Cycle 14).",
-   "work_package": "WP7"
-  },
-  {
-   "id": "F16", "severity": "P3", "area": "ux", "class": "usability",
-   "title": "Facets show raw codes and the year inputs look like an applied filter",
-   "reproduction": ["Search: s.69 Army Act and look at the filter rail"],
-   "expected": "Readable labels ('In force (crawler)', 'Unknown'); empty year inputs with the range shown as a hint.",
-   "actual": "'in_force', 'unknown', 'amended'; year boxes pre-show '1950 – 2014' as placeholders that read like values.",
-   "evidence": ["screenshots/J03-results.jpg"],
-   "root_cause": {"basis": "observed", "text": "Labels are the stored codes."},
-   "remediation": "Label map for status codes; render the year range as hint text.",
-   "work_package": "WP5"
-  },
-  {
-   "id": "F17", "severity": "P3", "area": "admin", "class": "incomplete_feature",
-   "title": "Withdrawal cannot be reversed from the Administration screen",
-   "reproduction": ["Audit instance: withdraw a document; look for restore"],
-   "expected": "A recorded reinstatement action with reason, or a stated procedure.",
-   "actual": "No restore control; the Withdrawals table is read-only.",
-   "evidence": ["screenshots/J13-after-withdrawal.jpg"],
-   "root_cause": {"basis": "observed", "text": "B1 scope (exclusion channel is B2)."},
-   "remediation": "Owner decision: reinstatement in the UI, or a documented operator procedure.",
-   "work_package": "WP6"
-  },
-  {
-   "id": "F18", "severity": "P3", "area": "ux", "class": "usability",
-   "title": "Commander view differs little from Practitioner view",
-   "reproduction": ["Click Commander; search summary of evidence"],
-   "expected": "A distinct, task-oriented presentation for unit commanders.",
-   "actual": "Court and status facets and the context pane are hidden; results and documents are otherwise the same. The Commander assistant is closed (by design).",
-   "evidence": ["screenshots/J09-commander-results.jpg", "screenshots/J09-commander-document.jpg"],
-   "root_cause": {"basis": "observed", "text": "B1 scope."},
-   "remediation": "Define the Commander view with the owner (e.g. procedure-first summaries of held provisions, no judgments by default) before building.",
-   "work_package": "WP5"
-  }
- ]
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "P1",
+      "area": "search",
+      "class": "retrieval_failure",
+      "title": "Common statute abbreviations (IPC, BNS, CrPC, BNSS, BSA) are not recognised as instrument names",
+      "reproduction": [
+        "Sign in as a User",
+        "Search: section 302 IPC",
+        "Search: section 103 BNS"
+      ],
+      "expected": "Provision text of IPC s.302 / BNS s.103 pinned first, as for 'section 302 Indian Penal Code'.",
+      "actual": "Chip 'No instrument titled “IPC” in this library' (and “BNS”) although both instruments are held; the section is searched as plain text and BPRD comparison tables rank first.",
+      "evidence": [
+        "SEARCH_EVALUATION.json Q28, Q29",
+        "screenshots/J08-ipc-abbrev.jpg",
+        "evidence/search_raw.json"
+      ],
+      "root_cause": {
+        "basis": "code_confirmed",
+        "text": "SearchService.cs:166 scopes an instrument only when every query word is a title term; there is no instrument alias table (the Army lexicon expands codes such as AFT but not instrument short names)."
+      },
+      "remediation": "Add a reviewed instrument-alias table (IPC, CrPC, IEA/Evidence Act, BNS, BNSS, BSA, AA, AFA, NA, AFT Act, AR) resolved against held titles; show the expansion as a chip; regression tests for each alias.",
+      "work_package": "WP1"
+    },
+    {
+      "id": "F02",
+      "severity": "P1",
+      "area": "search",
+      "class": "retrieval_failure",
+      "title": "Searching a party name does not rank that party's judgment first",
+      "reproduction": [
+        "Search: Dharamvir Singh"
+      ],
+      "expected": "DHARAMVIR SINGH versus UNION OF INDIA (2013 INSC 408) first; citing judgments after.",
+      "actual": "The judgment ranks 9th, behind an SC 2015 judgment and HC judgments that cite it. The spelling variant 'dharamveer singh' ranks it 35th.",
+      "evidence": [
+        "SEARCH_EVALUATION.json Q18, Q25",
+        "screenshots/J04-party-name-search.jpg"
+      ],
+      "root_cause": {
+        "basis": "suspected",
+        "text": "Party names (petitioner/respondent metadata) are not an identifier tier and are not boosted; BM25 favours documents that repeat the name in text."
+      },
+      "remediation": "Add a case-name tier: exact or near-exact match on petitioner/respondent/title pins the judgment above citing documents, labelled 'Case name'.",
+      "work_package": "WP1"
+    },
+    {
+      "id": "F03",
+      "severity": "P1",
+      "area": "legal_safety",
+      "class": "incomplete_feature",
+      "title": "IPC to BNS supersession (1 July 2024) is not surfaced on IPC provisions",
+      "reproduction": [
+        "Open Statutes, then /s/act-ipc-1860/302"
+      ],
+      "expected": "A labelled candidate notice that the IPC is replaced by the BNS for offences on or after 1 July 2024, and the corresponding BNS section (s.103) as a candidate equivalence with evidence.",
+      "actual": "'No A4 temporal version candidate is recorded for this provision'; nothing mentions the BNS. Corpus status reads as a crawler summary only. The BPRD correspondence tables are held but not linked.",
+      "evidence": [
+        "screenshots/J06-ipc-302.jpg",
+        "walkthrough_observations.json J06"
+      ],
+      "root_cause": {
+        "basis": "observed",
+        "text": "No relation or A4 record connects IPC/CrPC/IEA provisions to BNS/BNSS/BSA. This is one of the brief's named supersession acceptance cases."
+      },
+      "remediation": "Derive candidate equivalence edges from the held BPRD tables (IPC-BNS, CrPC-BNSS, IEA-BSA); show them on both provisions as 'Candidate (automated, not verified)' with the table page as evidence, plus a commencement notice. Do not change legal approval states.",
+      "mitigation_in_place": "Every view carries 'Legal applicability: Not established' and the 'not legally verified' banner, which is why this is P1 and not P0.",
+      "work_package": "WP2"
+    },
+    {
+      "id": "F04",
+      "severity": "P1",
+      "area": "corpus",
+      "class": "corpus_deficiency",
+      "title": "The sample lacks AFT judgments and core service instruments, so commander and adjutant scenarios cannot be answered",
+      "reproduction": [
+        "Inspect SAMPLE_MANIFEST.json document types and ids",
+        "Search: AFT jurisdiction; absence without leave punishment"
+      ],
+      "expected": "Per the brief's priority-1 sources: AFT judgments/orders, Regulations for the Army 1987, Air Force and Navy Rules, Entitlement Rules and Army pension regulations.",
+      "actual": "0 AFT judgments (223 judgments are SC and four HCs only); no Regulations for the Army, no Air Force Rules, no Navy Rules (Navy Regulations only), no Entitlement Rules or Army pension regulations. Whether the 2023 SC ruling on HC writs against AFT orders is held was not established.",
+      "evidence": [
+        "app/b1/sample/SAMPLE_MANIFEST.json",
+        "SEARCH_EVALUATION.json Q22, Q35"
+      ],
+      "root_cause": {
+        "basis": "observed",
+        "text": "The B1 sample was selected for a vertical slice, not for scenario coverage."
+      },
+      "remediation": "Extend the development sample with one AFT bench-year and the missing instruments from allow-listed sources (owner approval for the download run), then re-run this query set.",
+      "work_package": "WP3"
+    },
+    {
+      "id": "F05",
+      "severity": "P2",
+      "area": "withdrawal",
+      "class": "usability",
+      "title": "After withdrawal, an already-open viewer keeps showing the document with no notice",
+      "reproduction": [
+        "Audit instance: User opens sc-1991-ex-havildar-rat-an-singh-1991insc300",
+        "Admin withdraws it",
+        "User stays on the open tab; then opens /d/<doc> again"
+      ],
+      "expected": "The open viewer is replaced by 'This document is not available in this installation' at the next interaction; the deep link shows the same notice.",
+      "actual": "The open tab keeps the rendered page and full metadata with no notice (the file had already been delivered, so no further range request was made). New requests are refused correctly: search, document, text, pdf-meta (404), /cite (unavailable) and the /d/ deep link (standard \"not available\" notice; corrected, see CORRECTIONS.md C3). The confirmation dialog says \"Open viewers are cut off\".",
+      "evidence": [
+        "evidence/withdrawal_open_viewer.json",
+        "screenshots/J13-open-viewer-after.jpg",
+        "screenshots/J13b-open-viewer-page6-after-withdrawal.jpg",
+        "screenshots/J13b-deep-link-after-withdrawal.jpg",
+        "screenshots/J13-permalink.jpg"
+      ],
+      "root_cause": {
+        "basis": "suspected",
+        "text": "Enforcement is per request on the server; the client has no policy-epoch signal to clear an already-rendered document, and the /d/ route ignores the 404 notice."
+      },
+      "remediation": "Return the policy epoch on every API response; the client clears and replaces any open tab whose document becomes unavailable; the /d/ route renders the standard notice. Reword the dialog: 'Further pages are refused; pages already on screen are cleared at the next action'.",
+      "not_tested": "Mid-transfer cut-off of a large PDF (the probe document was fully delivered before withdrawal).",
+      "work_package": "WP6",
+      "correction": "C3: the deep-link half of the original F05 was a probe error; see CORRECTIONS.md"
+    },
+    {
+      "id": "F06",
+      "severity": "P2",
+      "area": "metadata",
+      "class": "corpus_deficiency",
+      "title": "SCC reported citations are not captured, so citation look-ups by SCC fail",
+      "reproduction": [
+        "Search: (2013) 7 SCC 316"
+      ],
+      "expected": "Dharamvir Singh (the judgment this citation refers to) pinned as an identifier match.",
+      "actual": "Lexical results only; the judgment is not in the 12 shown. Its metadata holds only '[2013] 8 S.C.R. 1119'.",
+      "evidence": [
+        "SEARCH_EVALUATION.json Q19",
+        "walkthrough_observations.json J04 (dochead 'Reported [2013] 8 S.C.R. 1119')"
+      ],
+      "root_cause": {
+        "basis": "observed",
+        "text": "The SC source (AWS open data) supplies SCR citations; parallel citations are not extracted."
+      },
+      "remediation": "Capture parallel citations printed in judgments (cover and headnote) as candidate aliases; when a citation is not held, say so in a chip.",
+      "work_package": "WP1"
+    },
+    {
+      "id": "F07",
+      "severity": "P2",
+      "area": "corpus",
+      "class": "corpus_deficiency",
+      "title": "Hindi derived text is garbled and Hindi copies are not identified in the document header",
+      "reproduction": [
+        "Open /d/act-army-1950-hi?p=16 and switch to Text",
+        "Search: s.69 Army Act (Hindi copy ranks 2nd)",
+        "Search: सेना अधिनियम"
+      ],
+      "expected": "Readable Devanagari or a clear 'text unreliable' label; Hindi copies labelled as Hindi wherever shown.",
+      "actual": "Conjuncts and matras are broken (e.g. 'धसधिि अपराि' for 'civil offence'). The header reads 'The Army Act, 1950' with no language marker (the results list shows 'Hindi text'). The Hindi query ranks BNSS/BNS alternate copies first.",
+      "evidence": [
+        "screenshots/J03-hindi-text.jpg",
+        "screenshots/J03-results.jpg",
+        "SEARCH_EVALUATION.json Q09, Q43"
+      ],
+      "root_cause": {
+        "basis": "suspected",
+        "text": "Legacy (non-Unicode) font encoding in the India Code Hindi PDFs; the text layer is extracted as-is."
+      },
+      "remediation": "Flag Hindi derivatives as 'text unreliable' and exclude them from default ranking until re-extracted (OCR with the Hindi model); add a language marker to the document header.",
+      "work_package": "WP3"
+    },
+    {
+      "id": "F08",
+      "severity": "P2",
+      "area": "search",
+      "class": "incomplete_feature",
+      "title": "No tolerance for misspellings and no 'did you mean' suggestion",
+      "reproduction": [
+        "Search: court marshal",
+        "Search: dharamveer singh",
+        "Search: disabilty pension"
+      ],
+      "expected": "A suggestion ('Did you mean court martial?') from the index vocabulary, never a silent rewrite.",
+      "actual": "'court marshal' matches 'provost marshal' in Navy Regulations; the misspelt word is silently unmatched elsewhere; no suggestion.",
+      "evidence": [
+        "SEARCH_EVALUATION.json Q25-Q27",
+        "screenshots/J08-misspelling.jpg"
+      ],
+      "root_cause": {
+        "basis": "observed",
+        "text": "Lexical BM25 only; no spelling model."
+      },
+      "remediation": "Deterministic edit-distance suggestions over the index vocabulary and party names, offered as a clickable chip.",
+      "work_package": "WP4"
+    },
+    {
+      "id": "F09",
+      "severity": "P2",
+      "area": "search",
+      "class": "incomplete_feature",
+      "title": "Plain-language and procedural queries rank other services' instruments or criminal codes above the Army Act",
+      "reproduction": [
+        "Search: punishments a commanding officer can award",
+        "Search: arrest of a soldier for an offence",
+        "Search: absence without leave punishment"
+      ],
+      "expected": "Army Act ss.80, 101-102 and 39 near the top for an Army user.",
+      "actual": "Navy Regulations Part II, Navy Act, BNS/IPC/CrPC rank first; the Army Act provision is absent from the top four in 3 of 8 commander queries.",
+      "evidence": [
+        "SEARCH_EVALUATION.json Q01, Q03-Q07, Q13, Q23, Q24, Q35"
+      ],
+      "root_cause": {
+        "basis": "observed",
+        "text": "Lexical-only ranking with OR semantics and no service context; the semantic/hybrid layer is out of B1 scope (the 4 hybrid oracle cases fail by design)."
+      },
+      "remediation": "Short term: an optional service preference (Army/Navy/Air Force) as a ranking prior and a facet. Longer term: the hybrid layer validated against the blind holdout.",
+      "work_package": "WP4, WP9"
+    },
+    {
+      "id": "F10",
+      "severity": "P2",
+      "area": "search",
+      "class": "incomplete_feature",
+      "title": "Results stop at the first 200 passages with no pagination",
+      "reproduction": [
+        "Search: court martial"
+      ],
+      "expected": "A way to reach every matching document (pagination or load more).",
+      "actual": "'255 documents · 13,497 passages showing the first 200 passages'; 28 document groups are reachable and the rest cannot be opened from the results (narrowing with filters is the only route).",
+      "evidence": [
+        "walkthrough_observations.json J07",
+        "screenshots/J07-results-end.jpg"
+      ],
+      "root_cause": {
+        "basis": "observed",
+        "text": "Fixed passage cap in the search response; no offset parameter on /api/search."
+      },
+      "remediation": "Document-level pagination (e.g. 25 documents per page) with stable ordering and deep-linkable page numbers.",
+      "work_package": "WP4"
+    },
+    {
+      "id": "F11",
+      "severity": "P2",
+      "area": "ux",
+      "class": "usability",
+      "title": "Editions and language versions appear as separate, near-identical entries",
+      "reproduction": [
+        "Open Statutes",
+        "Search: s.69 Army Act"
+      ],
+      "expected": "One entry per instrument with its editions and languages grouped and clearly labelled (e.g. 'BNS 2023 — Gazette text', 'alternate print', 'Hindi').",
+      "actual": "Statutes lists two 'The Army Act, 1950', three BNS entries, two CrPC ('The Code of Criminal Procedure 1973' and '..., 1973'), a bare 'Schedule' first and 'THE FIRST SCHEDULE' in capitals. Hindi copies take rank 2 in identifier results.",
+      "evidence": [
+        "screenshots/J06-statutes-home.jpg",
+        "screenshots/J03-results.jpg"
+      ],
+      "root_cause": {
+        "basis": "observed",
+        "text": "Each doc_id is listed as its own instrument; no instrument grouping key."
+      },
+      "remediation": "Group by instrument key (act number and year); show editions and language as sub-items; title-case schedule names and attach schedules to their parent Act.",
+      "work_package": "WP4, WP5"
+    },
+    {
+      "id": "F12",
+      "severity": "P2",
+      "area": "viewer",
+      "class": "usability",
+      "title": "The viewer opens at the top of the cited page, so the cited provision can be below the fold",
+      "reproduction": [
+        "Search: s.69 Army Act",
+        "Open the first hit (p.25)"
+      ],
+      "expected": "The page scrolls so the highlighted passage is in view.",
+      "actual": "Page 25 opens at its top showing ss.64-66; s.69 and its highlight are further down the page.",
+      "evidence": [
+        "screenshots/J03-document.jpg"
+      ],
+      "root_cause": {
+        "basis": "suspected",
+        "text": "The viewer scrolls to the page, not to the highlight's bounding box."
+      },
+      "remediation": "After the text layer renders, scroll the first mark into view with context above it.",
+      "work_package": "WP5"
+    },
+    {
+      "id": "F13",
+      "severity": "P2",
+      "area": "ux",
+      "class": "usability",
+      "title": "Low information density for prolonged research, especially at 1366×768",
+      "reproduction": [
+        "Viewport 1366×768",
+        "Search: disability pension invalided"
+      ],
+      "expected": "Several results visible at once; the reading area maximised.",
+      "actual": "One result fully visible at 1366×768 (4 at 1920, 5 at 2560). Two permanent banners take ~52 px; before a document is opened about half the width is an empty 'No document open' pane; result cards repeat source, copy hash and retrieval date.",
+      "evidence": [
+        "screenshots/J10-1366-results.jpg",
+        "screenshots/J10-1920-results.jpg",
+        "screenshots/J10-2560-results.jpg",
+        "walkthrough_observations.json J10"
+      ],
+      "root_cause": {
+        "basis": "observed",
+        "text": "Design choice in B1 (provenance on every card, fixed panes)."
+      },
+      "remediation": "Compact result density option; provenance details on hover/expand; merge the two banners into one line; let results use the document pane width until a document is open.",
+      "work_package": "WP5"
+    },
+    {
+      "id": "F14",
+      "severity": "P2",
+      "area": "performance",
+      "class": "usability",
+      "title": "Service memory grows under load and is not returned; full-corpus fit on the 16 GB host is unproven",
+      "reproduction": [
+        "Run scripts/perf.py with B1_PID set"
+      ],
+      "expected": "Bounded working set with headroom for the full corpus.",
+      "actual": "Working set 729 MB idle, 925 MB after sequential search, 1,060 MB after 10 readers, 1,335 MB after 25 readers, and still 1,338 MB at the end. The sample is 0.42 GB of originals and 38,445 passages; the full corpus is about 20 GB.",
+      "evidence": [
+        "evidence/perf_raw.json",
+        "PERFORMANCE_REPORT.md"
+      ],
+      "root_cause": {
+        "basis": "suspected",
+        "text": "Server GC retains its heap after load; the in-memory index scales with passages."
+      },
+      "remediation": "Measure at full-corpus scale; consider workstation or DATAS GC settings and an index memory budget before the full import.",
+      "work_package": "WP8"
+    },
+    {
+      "id": "F15",
+      "severity": "P2",
+      "area": "security",
+      "class": "usability",
+      "title": "Any sign-in attempt during a lockout, including the correct password, restarts the lock",
+      "reproduction": [
+        "Audit instance: five wrong passwords for 'user'",
+        "Sign in with the correct password within 5 minutes",
+        "Inspect app_users.locked_until"
+      ],
+      "expected": "The lock ends 5 minutes after the fifth failure; attempts during the lock are refused without extending it, or only throttled.",
+      "actual": "failed_count reached 9 and locked_until moved forward on every attempt, including correct ones. With no unlock in B1, anyone who knows a username can keep the account locked.",
+      "evidence": [
+        "walkthrough_observations.json J14",
+        "WALKTHROUGH_REPORT.md §7 lockout expiry check"
+      ],
+      "root_cause": {
+        "basis": "code_confirmed",
+        "text": "Identity.cs:100 treats a locked account as a failed attempt; Identity.cs:107 resets locked_until to now()+5 min whenever failed_count+1 >= 5."
+      },
+      "remediation": "Do not count attempts made while locked; add per-source throttling; Admin unlock (the owner deferred unlock to Cycle 14).",
+      "work_package": "WP7"
+    },
+    {
+      "id": "F16",
+      "severity": "P3",
+      "area": "ux",
+      "class": "usability",
+      "title": "Facets show raw codes and the year inputs look like an applied filter",
+      "reproduction": [
+        "Search: s.69 Army Act and look at the filter rail"
+      ],
+      "expected": "Readable labels ('In force (crawler)', 'Unknown'); empty year inputs with the range shown as a hint.",
+      "actual": "'in_force', 'unknown', 'amended'; year boxes pre-show '1950 – 2014' as placeholders that read like values.",
+      "evidence": [
+        "screenshots/J03-results.jpg"
+      ],
+      "root_cause": {
+        "basis": "observed",
+        "text": "Labels are the stored codes."
+      },
+      "remediation": "Label map for status codes; render the year range as hint text.",
+      "work_package": "WP5"
+    },
+    {
+      "id": "F17",
+      "severity": "P3",
+      "area": "admin",
+      "class": "incomplete_feature",
+      "title": "Withdrawal cannot be reversed from the Administration screen",
+      "reproduction": [
+        "Audit instance: withdraw a document; look for restore"
+      ],
+      "expected": "A recorded reinstatement action with reason, or a stated procedure.",
+      "actual": "No restore control; the Withdrawals table is read-only.",
+      "evidence": [
+        "screenshots/J13-after-withdrawal.jpg"
+      ],
+      "root_cause": {
+        "basis": "observed",
+        "text": "B1 scope (exclusion channel is B2)."
+      },
+      "remediation": "Owner decision: reinstatement in the UI, or a documented operator procedure.",
+      "work_package": "WP6"
+    },
+    {
+      "id": "F18",
+      "severity": "P3",
+      "area": "ux",
+      "class": "usability",
+      "title": "Commander view differs little from Practitioner view",
+      "reproduction": [
+        "Click Commander; search summary of evidence"
+      ],
+      "expected": "A distinct, task-oriented presentation for unit commanders.",
+      "actual": "Court and status facets and the context pane are hidden; results and documents are otherwise the same. The Commander assistant is closed (by design).",
+      "evidence": [
+        "screenshots/J09-commander-results.jpg",
+        "screenshots/J09-commander-document.jpg"
+      ],
+      "root_cause": {
+        "basis": "observed",
+        "text": "B1 scope."
+      },
+      "remediation": "Define the Commander view with the owner (e.g. procedure-first summaries of held provisions, no judgments by default) before building.",
+      "work_package": "WP5"
+    }
+  ]
 }

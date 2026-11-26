@@ -36,3 +36,11 @@ The original evidence is preserved unchanged in `evidence/original/`:
 - `evidence/search_raw.json` and `SEARCH_EVALUATION.json` were regenerated.
 - **Top-five documents and totals are identical to v1 for all 43 queries** (0 differences), so every assessment and count stands: 24 pass, 8 partial, 10 fail, 1 not determinable.
 - Server time now ranges from 0.5 ms to 173 ms. The highest value is the first query after the service restart.
+
+## C3: F05 deep-link half was wrong (found by stream S2, verified by the auditor)
+
+**Defect in the audit.** J13 and J13b recorded the deep link to a withdrawn document as "empty research home, no notice". Both probes read only the first 300 characters of `main`. That text belongs to the left "Search the published library" pane.
+
+**Evidence.** The auditor's own screenshot `screenshots/J13b-deep-link-after-withdrawal.jpg` shows "Not available — This document is not available in this installation." in the document pane. The deep link therefore *does* give the standard notice.
+
+**Effect on F05.** F05 is narrowed to the open-viewer behaviour, which was correctly observed. Its severity (P2) is unchanged. The original wording is kept in `evidence/original/`.
