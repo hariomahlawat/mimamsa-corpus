@@ -10,13 +10,13 @@
     "verified": 986
   },
   "all_job_statuses": {
-    "marking-review": 36,
-    "verified-local": 243,
+    "marking-review": 40,
+    "verified-local": 269,
     "sparse-page-review": 1,
     "HTTPError": 5
   },
-  "extended_uploads": 244,
-  "pending_jobs": 945,
+  "extended_uploads": 270,
+  "pending_jobs": 915,
   "official_pilot": [
     {
       "id": "AFT-GUW-1",
@@ -89,6 +89,60 @@
       "pages": 3,
       "ocr": 0,
       "documentary_status": "Physical page 3 visually verified as running header and page number only; signed disposition ends on page 2"
+    },
+    {
+      "id": "AFT-GUW-7",
+      "url": "https://aftrbghy.nic.in/judgement/CA -05-2016.pdf",
+      "status": "text-review",
+      "page": 2
+    },
+    {
+      "id": "AFT-GUW-8",
+      "url": "https://aftrbghy.nic.in/judgement/CA 01 OF 17   23 Mar.pdf",
+      "status": "text-review",
+      "page": 3
+    },
+    {
+      "id": "AFT-GUW-9",
+      "url": "https://aftrbghy.nic.in/judgement/CA 01 of 2018.pdf",
+      "status": "text-review",
+      "page": 3
+    },
+    {
+      "id": "AFT-GUW-10",
+      "url": "https://aftrbghy.nic.in/judgement/CA 01-17 daily order dated 24-05-2017.pdf",
+      "status": "eligible-local",
+      "sha256": "7b155b2e8f7c243a789e050723eb593893313485976f55f3fe5da584fe6e0b7f",
+      "pages": 1,
+      "ocr": 0
+    },
+    {
+      "id": "AFT-GUW-11",
+      "url": "https://aftrbghy.nic.in/judgement/CA 02 of 17   23 Mar.pdf",
+      "status": "text-review",
+      "page": 3
+    },
+    {
+      "id": "AFT-GUW-12",
+      "url": "https://aftrbghy.nic.in/judgement/CA 02 of 2018.pdf",
+      "status": "text-review",
+      "page": 3
+    },
+    {
+      "id": "AFT-GUW-13",
+      "url": "https://aftrbghy.nic.in/judgement/CA 02-17 daily order dated 24-05-2017.pdf",
+      "status": "eligible-local",
+      "sha256": "1a5a16c25ae5c8aa01f3111a9a0c5d6a537ba3d3b455953d57f7034e5217e214",
+      "pages": 2,
+      "ocr": 0
+    },
+    {
+      "id": "AFT-GUW-14",
+      "url": "https://aftrbghy.nic.in/judgement/CA 03 of 19.pdf",
+      "status": "eligible-local",
+      "sha256": "6325315f02b4e2be07cf837a8e659a63713e3b927b12823e5ea6e3934b88fc57",
+      "pages": 1,
+      "ocr": 0
     }
   ],
   "official_probes": [
@@ -200,6 +254,48 @@
       "status": "200",
       "curl_exit": 0
     }
+  ],
+  "source_retry_local": [
+    [
+      "hc-delhi-2024-w-p-c-12783-2024-dlhc010602132024-1-2024-09-24",
+      "verified-local",
+      "ac80413512010b86a03b03c313a186d96c632e2ef876860c708ac2aa67c719ef",
+      19359,
+      1,
+      0
+    ],
+    [
+      "hc-delhi-2024-w-p-c-9613-2023-dlhc010276462023-1-2024-10-24",
+      "verified-local",
+      "7c5f7652b9558cece8d8ba0b626488045b6d062355eaef0a6fd57c2d40b90753",
+      24421,
+      1,
+      0
+    ],
+    [
+      "hc-jkl-2025-swp-659-2019-jkhc020024152019-1-2025-08-28",
+      "verified-local",
+      "fd96188fc5eedff593d2532ea08d665de81b5d682dda74eb7d8a92107616c2f7",
+      385272,
+      1,
+      0
+    ],
+    [
+      "hc-allahabad-2025-capl-3688-2025-uphc020899832025-1-2025-11-15",
+      "verified-local",
+      "4a01054bd7e1284d7df7675c69ec148b5c7214e26fe5c322d4eb7b2b68de7c79",
+      13461,
+      1,
+      0
+    ],
+    [
+      "hc-delhi-2025-w-p-c-10493-2017-dlhc015043962017-1-2025-12-01",
+      "verified-local",
+      "9992ed6f1109d862a0fed0a016f2da1174e8ef8fad1db1aab4c081eeb49a4f87",
+      138755,
+      11,
+      0
+    ]
   ],
   "aft_benches": [
     "New Delhi",
