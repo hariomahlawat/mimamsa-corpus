@@ -44,7 +44,7 @@ public sealed class ServiceFixture : IAsyncLifetime
         return (p.ExitCode, await outTask + await errTask);
     }
 
-    static string WebDir()
+    internal static string WebDir()
     {
         var d = new DirectoryInfo(AppContext.BaseDirectory);
         while (d is not null && !Directory.Exists(Path.Combine(d.FullName, "src", "Mimamsa.Web"))) d = d.Parent;
@@ -62,6 +62,10 @@ public sealed class ServiceFixture : IAsyncLifetime
             ["ASPNETCORE_URLS"] = Base, ["Mimamsa__Site"] = Syn.Site, ["Mimamsa__Db"] = db, ["Mimamsa__Test__Enabled"] = "true",
             ["Mimamsa__Test__ResetState"] = "true", ["Mimamsa__Test__ResetLedger"] = "true", ["Mimamsa__Test__Users__0"] = "admin:Admin:admin-password-1",
             ["Mimamsa__Test__Users__1"] = "reader:User:reader-password-1", ["Mimamsa__Test__Users__2"] = "locktest:User:locktest-password-1",
+            // C14 S2: short lock (test mode only) so expiry is testable; accounts reserved for the lockout and unlock
+            // tests; a high per-source throttle so the suite's own failed sign-ins from 127.0.0.1 never trip it.
+            ["Mimamsa__Test__LockSeconds"] = "3", ["Mimamsa__Login__ThrottlePerSource"] = "1000",
+            ["Mimamsa__Test__Users__3"] = "locktest2:User:locktest2-password-1", ["Mimamsa__Test__Users__4"] = "unlocktest:User:unlocktest-password-1",
             ["Mimamsa__RestrictedRegister"] = RegisterPath,
         }) psi.Environment[k] = v;
         _p = Process.Start(psi)!;

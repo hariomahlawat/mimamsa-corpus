@@ -49,7 +49,17 @@ var vault = new Vault(site);
 var generation = GenerationStore.Load(site, vault);
 var state = new ServingState();
 var policy = new PolicyStore(dataSource);
-var identity = new IdentityStore(dataSource);
+// C14 F15: the lock duration is fixed at 5 minutes except in test mode, where journeys may shorten it.
+var identity = new IdentityStore(dataSource)
+{
+    LockDuration = testMode && conf.GetValue<int?>("Mimamsa:Test:LockSeconds") is int ls ? TimeSpan.FromSeconds(ls) : TimeSpan.FromMinutes(5),
+    Throttle = new LoginThrottle
+    {
+        PerUsername = Math.Max(6, conf.GetValue("Mimamsa:Login:ThrottlePerUsername", 10)),
+        PerSource = Math.Max(6, conf.GetValue("Mimamsa:Login:ThrottlePerSource", 30)),
+        Window = TimeSpan.FromSeconds(Math.Max(10, conf.GetValue("Mimamsa:Login:ThrottleWindowSec", 300))),
+    },
+};
 var ledger = new CreditLedger(dataSource, credit);
 // Restricted-material register re-check (review F16): ON by default and fail closed. The service refuses to start
 // unless Mimamsa:RestrictedRegister names a readable register whose SHA-256 equals the one pinned by the active
@@ -173,6 +183,9 @@ app.Use(async (ctx, next) =>
     bool isStatic = path.StartsWith("/assets/") || path.StartsWith("/vendor/");
     if (!isStatic) { h.CacheControl = "no-store"; h.Pragma = "no-cache"; }
     else h.CacheControl = "no-cache";
+    // C14 F05: every API response names the serving-policy epoch at the moment it is sent, so the client notices a
+    // withdrawal on its next request and re-checks the documents it has open.
+    if (path.StartsWith("/api/")) ctx.Response.OnStarting(() => { ctx.Response.Headers["X-Mimamsa-Policy-Epoch"] = state.Epoch.ToString(System.Globalization.CultureInfo.InvariantCulture); return Task.CompletedTask; });
     await next();
     var ep = ctx.GetEndpoint() as RouteEndpoint;
     var route = ep?.RoutePattern.RawText ?? (isStatic ? "static" : "spa");

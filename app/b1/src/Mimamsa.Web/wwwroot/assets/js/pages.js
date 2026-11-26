@@ -152,26 +152,118 @@ export async function adminPage(main, nav) {
         h("span.hint", "The current copy of the document is withdrawn for every user at once.")),
       h("div.form-row", h("label", { for: "wd-reason" }, "Reason (required)"), h("textarea#wd-reason", { rows: "2", required: true, minlength: "3", maxlength: "500" })),
       h("button.btn", { type: "submit" }, "Withdraw…")),
-    h("h2", { style: "margin:24px 0 8px" }, "Withdrawals"),
-    o.withdrawals.length ? h("table.data", h("thead", h("tr", ["When", "Document", "Copy", "Reason", "Actor", "Epoch"].map((x) => h("th", { scope: "col" }, x)))),
-      h("tbody", o.withdrawals.map((w) => h("tr", h("td", fmtDate(w.at)), h("td.mono", w.doc_id), h("td.mono", short(w.copy)), h("td", w.reason), h("td.mono", w.actor), h("td", w.epoch)))))
+    h("h2", { style: "margin:24px 0 8px" }, "Withdrawals and reinstatements"),
+    o.withdrawals.length ? h("table.data", h("thead", h("tr", ["When", "Action", "Document", "Scope", "Copy", "Reason", "Actor", "Epoch", ""].map((x) => h("th", { scope: "col" }, x)))),
+      h("tbody", o.withdrawals.map((w, i) => {
+        // reinstatement is offered on the most recent row of a document that is currently withdrawn
+        const latest = o.withdrawals.findIndex((x) => x.doc_id === w.doc_id) === i;
+        return h("tr", h("td", fmtDate(w.at)), h("td", w.action === "reinstate" ? "Reinstated" : "Withdrawn"), h("td.mono", w.doc_id),
+          h("td", scopeLabel(w.scope)), h("td.mono", short(w.copy)), h("td", w.reason, w.verification ? h("div.hint", w.verification) : null), h("td.mono", w.actor), h("td", w.epoch),
+          h("td", latest && w.action !== "reinstate" && w.currently_withdrawn ? h("button.btn.btn-small", { type: "button", onclick: () => reinstateDialog(w.doc_id, main, nav) }, "Reinstate…") : null));
+      })))
       : h("p.muted", "No withdrawals."),
+    h("h2", { style: "margin:24px 0 8px" }, "Accounts"), h("div#admin-accounts", h("span.skeleton.w40")),
+    h("h2", { style: "margin:24px 0 8px" }, "Audit log"),
+    h("p.muted", "Sign-in, lockout, unlock, withdrawal and reinstatement events. The log records who and what, never passwords, search text or document text."),
+    h("div#admin-audit", h("span.skeleton.w40")),
     h("h2", { style: "margin:24px 0 8px" }, "Quarantined at import"),
-    o.quarantine.length ? h("table.data", h("thead", h("tr", ["Kind", "Item", "Reasons"].map((x) => h("th", { scope: "col" }, x)))),
+    o.quarantine.length ? h("table.adm", h("thead", h("tr", ["Kind", "Item", "Reasons"].map((x) => h("th", { scope: "col" }, x)))),
       h("tbody", o.quarantine.slice(0, 200).map((q) => h("tr", h("td", q.kind), h("td.mono", q.id), h("td", (q.reasons || []).join("; "))))))
       : h("p.muted", "Nothing was quarantined by the importer for this generation."));
   $("#withdraw-form").addEventListener("submit", (e) => {
     e.preventDefault();
     const doc = $("#wd-doc").value.trim(), reason = $("#wd-reason").value.trim();
     if (reason.length < 3) { toast("A reason is required"); return; }
-    const d = openDialog("Withdraw this document?", h("div", h("p", h("strong.mono", doc)),
-      h("p", "Every copy of this document, including earlier editions, disappears from search, document views, citation links and original delivery for every user, effective immediately. Open viewers are cut off."),
-      h("p", "Byte-identical copies held under another document id are separate documents and are not withdrawn by this action."),
-      h("p", "Withdrawal is recorded with your account and the reason. It is not legal approval or disapproval.")),
-      [h("button.btn", { onclick: () => d.close() }, "Cancel"), h("button.btn.btn-primary", { onclick: async () => {
-        try { const r = await api("/api/admin/withdraw", { method: "POST", body: { doc_id: doc, reason } }); d.close(); toast(r.status === "withdrawn" ? `Withdrawn (policy epoch ${r.epoch})` : "Already withdrawn"); adminPage(main, nav); }
-        catch (ex) { d.close(); toast(ex.message); }
-      } }, "Withdraw")]);
+    withdrawDialog(doc, reason, main, nav);
   });
+  renderAccounts(main, nav);
+  renderAudit(null);
+}
+
+function scopeLabel(s) {
+  if (!s || s === "document") return "This document (all its copies)";
+  if (s.startsWith("verified-duplicate-of:")) return `Verified duplicate of ${s.slice(22)}`;
+  return s;
+}
+
+// C14 owner policy: the dialog states what the withdrawal covers. Every copy of the document id is always included;
+// verified byte-identical copies under other ids only if ticked; distinct editions never.
+async function withdrawDialog(doc, reason, main, nav) {
+  let sc = null;
+  try { sc = await api(`/api/admin/withdraw-scope?doc_id=${encodeURIComponent(doc)}`); }
+  catch (ex) { toast(ex.status === 404 ? "No document with that id in the active release" : ex.message); return; }
+  const dupBoxes = sc.verified_duplicates.map((x) => h("input", { type: "checkbox", value: x.doc_id, id: `dup-${x.doc_id}`, disabled: x.withdrawn || null }));
+  const d = openDialog("Withdraw this document?", h("div", h("p", h("strong.mono", doc), sc.title ? ` · ${sc.title}` : ""),
+    h("p", `Every copy of this document, including earlier editions (${sc.own_copies.length} held), is refused for every user from now on: search, document views, citation links and original delivery. Transfers of the original in progress are cut off. Pages already on a reader's screen are cleared at their next action or within about 10 seconds.`),
+    sc.verified_duplicates.length
+      ? h("div", h("p", h("strong", "Verified byte-identical copies under other document ids"), " (same SHA-256, re-hashed at start). They are separate documents and are included only if you select them:"),
+          h("div.scope-list", sc.verified_duplicates.map((x, i) => h("label", { for: `dup-${x.doc_id}` }, dupBoxes[i], h("span.mono", x.doc_id), x.title ? ` · ${x.title}` : "", x.language ? ` · ${x.language}` : "", x.withdrawn ? " (already withdrawn)" : ""))))
+      : h("p", "No byte-identical copy of this document is held under another document id."),
+    sc.distinct_editions.length
+      ? h("div", h("p", h("strong", "Distinct editions not affected"), " (other prints, languages or editions with different bytes). Each needs its own decision:"),
+          h("ul.scope-list", sc.distinct_editions.map((x) => h("li", h("span.mono", x.doc_id), x.title ? ` · ${x.title}` : "", x.language ? ` · ${x.language}` : ""))))
+      : null,
+    h("p", "Withdrawal is recorded with your account and the reason. It is not legal approval or disapproval.")),
+    [h("button.btn", { onclick: () => d.close() }, "Cancel"), h("button.btn.btn-primary", { onclick: async () => {
+      const include = dupBoxes.filter((b) => b.checked).map((b) => b.value);
+      try {
+        const r = await api("/api/admin/withdraw", { method: "POST", body: { doc_id: doc, reason, include_duplicates: include } });
+        d.close(); toast(r.status === "withdrawn" ? `Withdrawn (policy epoch ${r.epoch})${include.length ? `, with ${include.length} verified duplicate(s)` : ""}` : "Already withdrawn");
+        adminPage(main, nav);
+      } catch (ex) { d.close(); toast(ex.message); }
+    } }, "Withdraw")]);
+}
+
+// C14 owner policy: reinstatement needs a reason and passes renewed eligibility verification on the server.
+function reinstateDialog(doc, main, nav) {
+  const reason = h("textarea#ri-reason", { rows: "2", required: true, minlength: "3", maxlength: "500", "aria-describedby": "ri-hint" });
+  const err = h("div.err", { role: "alert", hidden: true });
+  const d = openDialog("Reinstate this document?", h("div", h("p", h("strong.mono", doc)),
+    h("p", "Before reinstating, the service verifies again that the document is in the active release, published for all users, not on the restricted-material register, and that every copy re-hashes from the vault. If any check fails the document stays withdrawn."),
+    h("div.form-row", h("label", { for: "ri-reason" }, "Reason (required)"), reason, h("span.hint#ri-hint", "Recorded with your account. It is not legal approval.")), err),
+    [h("button.btn", { onclick: () => d.close() }, "Cancel"), h("button.btn.btn-primary", { onclick: async () => {
+      const why = reason.value.trim();
+      if (why.length < 3) { err.hidden = false; err.textContent = "A reason of at least 3 characters is required."; return; }
+      try { const r = await api("/api/admin/reinstate", { method: "POST", body: { doc_id: doc, reason: why } }); d.close(); toast(`Reinstated (policy epoch ${r.epoch})`); adminPage(main, nav); }
+      catch (ex) { err.hidden = false; err.textContent = ex.body?.problems ? `${ex.message} Problems: ${ex.body.problems.join(", ")}` : ex.message; }
+    } }, "Reinstate")]);
+}
+
+async function renderAccounts(main, nav) {
+  const box = $("#admin-accounts");
+  if (!box) return;
+  let rows;
+  try { rows = await api("/api/admin/accounts"); } catch (e) { box.replaceChildren(h("p.err", e.message)); return; }
+  box.replaceChildren(h("table.adm#accounts-table", h("thead", h("tr", ["Account", "Role", "Status", "Failed attempts", ""].map((x) => h("th", { scope: "col" }, x)))),
+    h("tbody", rows.map((a) => h("tr", h("td.mono", a.username), h("td", a.role),
+      h("td", a.disabled ? "Disabled" : a.locked ? `Locked until ${fmtDate(a.locked_until)}` : "Active"), h("td", a.failed_count),
+      h("td", a.locked || a.failed_count > 0 ? h("button.btn.btn-small", { type: "button", onclick: () => unlockDialog(a.username, main, nav) }, "Unlock…") : null))))));
+}
+
+function unlockDialog(username, main, nav) {
+  const reason = h("textarea#ul-reason", { rows: "2", required: true, minlength: "3", maxlength: "500" });
+  const err = h("div.err", { role: "alert", hidden: true });
+  const d = openDialog(`Unlock ${username}?`, h("div", h("p", "Clears the lock and the failed-attempt count. Recorded in the audit log with your account and the reason."),
+    h("div.form-row", h("label", { for: "ul-reason" }, "Reason (required)"), reason), err),
+    [h("button.btn", { onclick: () => d.close() }, "Cancel"), h("button.btn.btn-primary", { onclick: async () => {
+      const why = reason.value.trim();
+      if (why.length < 3) { err.hidden = false; err.textContent = "A reason of at least 3 characters is required."; return; }
+      try { await api("/api/admin/unlock", { method: "POST", body: { username, reason: why } }); d.close(); toast(`${username} unlocked`); adminPage(main, nav); }
+      catch (ex) { err.hidden = false; err.textContent = ex.message; }
+    } }, "Unlock")]);
+}
+
+async function renderAudit(before) {
+  const box = $("#admin-audit");
+  if (!box) return;
+  let r;
+  try { r = await api(`/api/admin/audit?limit=25${before ? `&before=${before}` : ""}`); } catch (e) { box.replaceChildren(h("p.err", e.message)); return; }
+  box.replaceChildren(
+    r.rows.length ? h("table.adm#audit-table", h("thead", h("tr", ["When", "Event", "By", "Object", "Detail"].map((x) => h("th", { scope: "col" }, x)))),
+      h("tbody", r.rows.map((x) => h("tr", h("td", fmtDate(x.at)), h("td.mono", x.action), h("td.mono", x.actor || "—"), h("td.mono", x.object || "—"), h("td", x.detail || "")))))
+      : h("p.muted", "No events."),
+    h("div", { style: "display:flex;gap:8px;margin-top:8px" },
+      before ? h("button.btn.btn-small", { type: "button", onclick: () => renderAudit(null) }, "Newest") : null,
+      r.rows.length === 25 && r.next_before ? h("button.btn.btn-small", { type: "button", onclick: () => renderAudit(r.next_before) }, "Older") : null));
 }
 void ApiError; void state; void R;

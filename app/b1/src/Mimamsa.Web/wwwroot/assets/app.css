@@ -274,9 +274,9 @@ mark { background: var(--highlight-search); color: var(--fg-primary); padding: 0
 .statute-list .sub { color: var(--fg-muted); font-size: var(--size-xs); }
 .page { flex: 1; overflow: auto; padding: var(--space-7) var(--space-8); }
 .page-inner { max-width: 1200px; }
-table.data { border-collapse: collapse; width: 100%; font-size: var(--size-sm); }
-table.data th, table.data td { text-align: left; padding: 6px var(--space-4); border-bottom: 1px solid var(--border-subtle); vertical-align: top; }
-table.data th { background: var(--bg-sunken); font-weight: 600; position: sticky; top: 0; }
+table.data, table.adm { border-collapse: collapse; width: 100%; font-size: var(--size-sm); }
+table.data th, table.data td, table.adm th, table.adm td { text-align: left; padding: 6px var(--space-4); border-bottom: 1px solid var(--border-subtle); vertical-align: top; }
+table.data th, table.adm th { background: var(--bg-sunken); font-weight: 600; position: sticky; top: 0; }
 .form-row { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-5); }
 .form-row label { font-weight: 600; font-size: var(--size-sm); }
 .form-row input, .form-row textarea, .form-row select { border: 1px solid var(--border-control); border-radius: var(--radius-control); padding: 6px var(--space-4); background: var(--bg-surface); }
@@ -354,3 +354,7 @@ dialog .actions { display: flex; justify-content: flex-end; gap: var(--space-4);
 .research.statute-mode { grid-template-columns: 0 0 0 minmax(var(--pane-min-document), 1fr) 6px var(--ctx-w, 320px); }
 .research.statute-mode .rail, .research.statute-mode .results, .research.statute-mode .d1 { display: none !important; }
 @media (max-width: 1599px) { .research.statute-mode { grid-template-columns: 0 0 0 minmax(0, 1fr) 0 0; } .research.statute-mode .docpane { display: flex; } }
+
+/* C14 S2: withdrawal scope list in the confirmation dialog */
+.scope-list { margin: var(--space-2) 0 var(--space-4); padding-left: var(--space-5); }
+.scope-list label { display: flex; gap: var(--space-3); align-items: baseline; min-height: 26px; }

@@ -30,6 +30,16 @@ window.addEventListener("mimamsa:unauthenticated", () => {
   renderShell(); loginPage(main, onLogin, "Your session has ended. Sign in again.");
 });
 
+// C14 F05: a change of serving-policy epoch (seen on any API response) re-checks the open documents at once; while
+// documents are open, the epoch is also polled so pages already on screen are cleared within about 10 seconds even
+// when the reader does nothing. The poll does not refresh the session.
+window.addEventListener("mimamsa:policy-changed", () => { if (S) research.revalidateOpenDocuments(); });
+const POLICY_POLL_MS = 10_000;
+setInterval(async () => {
+  if (!S || document.hidden || !research.openDocumentCount()) return;
+  try { await api("/api/policy"); } catch { /* offline or signed out: handled by the API client */ }
+}, POLICY_POLL_MS);
+
 // ------------------------------------------------------------------ shell
 function applyTheme() {
   const t = session.get("theme");

@@ -4,6 +4,7 @@
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using Mimamsa.Core.Citation;
+using Mimamsa.Core.Delivery;
 using Mimamsa.Core.Generation;
 using Mimamsa.Core.Identity;
 using Mimamsa.Core.Search;
@@ -37,7 +38,12 @@ public static partial class Api
             JsonObject? body;
             try { body = (await JsonNode.ParseAsync(ctx.Request.Body))?.AsObject(); } catch { body = null; }
             var u = body?["username"]?.GetValue<string>() ?? ""; var pw = body?["password"]?.GetValue<string>() ?? "";
-            var r = await s.Identity.LoginAsync(u.Trim(), pw);
+            var (outcome, r) = await s.Identity.LoginDetailedAsync(u.Trim(), pw, ctx.Connection.RemoteIpAddress?.ToString());
+            if (outcome == IdentityStore.LoginOutcome.Throttled)
+            {
+                ctx.Response.Headers.RetryAfter = "60";
+                return Json(new { error = "Too many sign-in attempts. Wait a few minutes and try again." }, 429);
+            }
             if (r is null) return Json(new { error = "The username or password is not correct, or the account is locked." }, 401);
             ctx.Response.Cookies.Append(AppServices.SessionCookie, r.Value.token, new CookieOptions
             { HttpOnly = true, SameSite = SameSiteMode.Strict, Secure = s.SecureCookies, Path = "/", IsEssential = true });
@@ -58,6 +64,14 @@ public static partial class Api
         {
             var p = await User(ctx, s);
             return p is null ? Json(new { authenticated = false, release = ReleaseDto(s) }, 401) : Json(SessionDto(p, s));
+        });
+
+        // C14 F05: the client polls the serving-policy epoch while documents are open, so a withdrawal clears pages that
+        // are already on screen. The poll does not refresh the session (an idle session still ends after 30 minutes).
+        app.MapGet("/api/policy", async (HttpContext ctx, AppServices s) =>
+        {
+            var p = await s.Identity.AuthenticateAsync(ctx.Request.Cookies[AppServices.SessionCookie], touch: false);
+            return p is null ? Json(new { error = "auth" }, 401) : Json(new { epoch = s.State.Epoch });
         });
 
         app.MapGet("/api/search", async (HttpContext ctx, AppServices s) =>
@@ -159,36 +173,141 @@ public static partial class Api
                 verified = new { documents = g.Documents.Count, derivatives = g.Documents.Values.Count(d => d.DerivativeId is not null),
                                  candidates = g.Documents.Values.Sum(d => d.Candidates.Count), originals_rehashed_ok = g.Documents.Values.Count(d => d.OriginalVerified) },
                 load_issues = g.LoadIssues, quarantine,
-                withdrawals = (await s.Policy.WithdrawalsAsync()).Select(w => new { doc_id = w.DocId, copy = w.Sha, reason = w.Reason, actor = w.Actor, at = w.At, epoch = w.Epoch }),
+                withdrawals = (await s.Policy.WithdrawalsAsync()).Select(w => new { doc_id = w.DocId, copy = w.Sha, reason = w.Reason, actor = w.Actor, at = w.At, epoch = w.Epoch,
+                                                                                    action = w.Action, scope = w.Scope, verification = w.Verification,
+                                                                                    currently_withdrawn = s.State.IsDocWithdrawn(w.DocId) }),
                 policy = new { epoch = s.State.Epoch, digest = s.State.Digest },
+            });
+        });
+
+        // C14 owner policy: what a withdrawal of this document would cover, before the Admin confirms.
+        app.MapGet("/api/admin/withdraw-scope", async (HttpContext ctx, AppServices s, string? doc_id) =>
+        {
+            var (p, err) = await Admin(ctx, s, post: false);
+            if (err is not null) return err;
+            var docId = doc_id ?? "";
+            if (!s.Generation.Documents.ContainsKey(docId)) return Json(new { error = "unknown_document" }, 404);
+            var sc = WithdrawalScope.Compute(s.Generation.Documents, s.Generation.HeldCopies.Values, docId);
+            object E(ScopeEntry e) => new { doc_id = e.DocId, title = e.Title, copy = e.Sha[..12], language = e.Language, verified = e.Verified,
+                                            withdrawn = s.State.IsDocWithdrawn(e.DocId) };
+            return Json(new
+            {
+                doc_id = docId, title = s.Generation.Documents[docId].Title, withdrawn = s.State.IsDocWithdrawn(docId),
+                own_copies = sc.OwnCopies.Select(x => x[..12]),
+                verified_duplicates = sc.VerifiedDuplicates.Select(E), distinct_editions = sc.DistinctEditions.Select(E),
+                rule = "Every copy of this document id is always included. Verified byte-identical copies under other document ids are included only if you select them. Distinct editions (other prints, languages or editions) are never included by this action.",
             });
         });
 
         app.MapPost("/api/admin/withdraw", async (HttpContext ctx, AppServices s, ActiveStreams active) =>
         {
-            var p = await User(ctx, s);
-            if (p is null) return Json(new { error = "auth" }, 401);
-            if (!p.IsAdmin) return Json(new { error = "This action is for Admins." }, 403);
-            if (!CsrfOk(ctx, p) || !SameOrigin(ctx)) return Json(new { error = "csrf" }, 403);
+            var (p, err) = await Admin(ctx, s, post: true);
+            if (err is not null) return err;
             JsonObject? body;
             try { body = (await JsonNode.ParseAsync(ctx.Request.Body))?.AsObject(); } catch { body = null; }
             var docId = body?["doc_id"]?.GetValue<string>() ?? ""; var reason = (body?["reason"]?.GetValue<string>() ?? "").Trim();
             if (reason.Length < 3 || reason.Length > 500) return Json(new { error = "A reason of 3 to 500 characters is required." }, 400);
             if (!s.Generation.Documents.TryGetValue(docId, out var d)) return Json(new { error = "unknown_document" }, 404);
-            var copies = (await s.Policy.CopiesOfAsync(docId)).Append(d.CopySha).Distinct().ToList();
-            if (s.State.IsDocWithdrawn(docId)) return Json(new { status = "already_withdrawn", changed = false });
-            var op = "withdraw-" + Guid.NewGuid().ToString("N")[..8];
-            int reset = 0;
-            var (epoch, digest, changed) = await s.State.WithdrawAsync(docId, copies,
-                () => s.Policy.WithdrawDocCasAsync(docId, d.CopySha, op, reason, p.UserId),
-                () => DeliveryTrace.Emit("admit", "policy_probe", new { operation = op, copy = d.CopySha, monotonic_ms = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() }),
-                (e, dg) => DeliveryTrace.Emit("fence", "witness", new { operation = op, copy = d.CopySha, epoch = e, digest = dg }),
-                () => { foreach (var c in copies) reset += active.ResetAll(Mimamsa.Core.Delivery.ServingState.Key(docId, c)); });
-            DeliveryTrace.Flush();
-            await s.Identity.AuditAsync(p.UserId, "withdraw", docId, $"epoch {epoch}");
-            return Json(new { status = "withdrawn", changed, epoch, reset_streams = reset, copies_withdrawn = copies.Count,
-                              effect = "Every copy of this document (current and earlier editions) is removed from search, documents, citations and original delivery for every user, effective now. Byte-identical copies held under another document id are separate documents and are not affected." });
+            var wanted = (body?["include_duplicates"] as JsonArray)?.Select(x => x?.GetValue<string>() ?? "").Where(x => x.Length > 0).Distinct().ToList() ?? new();
+            var scope = WithdrawalScope.Compute(s.Generation.Documents, s.Generation.HeldCopies.Values, docId);
+            var allowed = scope.VerifiedDuplicates.Select(x => x.DocId).ToHashSet();
+            var refused = wanted.Where(x => !allowed.Contains(x)).ToList();
+            if (refused.Count > 0)   // distinct editions and unknown ids are never withdrawn through another document
+                return Json(new { error = "Only verified byte-identical copies of this document can be included.", not_verified_duplicates = refused }, 400);
+            if (s.State.IsDocWithdrawn(docId) && wanted.All(s.State.IsDocWithdrawn)) return Json(new { status = "already_withdrawn", changed = false });
+            var results = new List<object>();
+            long epoch = s.State.Epoch; int reset = 0; bool anyChanged = false;
+            foreach (var (id, sc) in new[] { (docId, "document") }.Concat(wanted.Select(w => (w, "verified-duplicate-of:" + docId))))
+            {
+                if (s.State.IsDocWithdrawn(id)) { results.Add(new { doc_id = id, status = "already_withdrawn" }); continue; }
+                var (e, ch, rs, n) = await WithdrawOne(s, active, id, s.Generation.Documents[id], reason, p!, sc);
+                epoch = e; reset += rs; anyChanged |= ch;
+                results.Add(new { doc_id = id, status = "withdrawn", scope = sc, copies_withdrawn = n });
+            }
+            return Json(new { status = "withdrawn", changed = anyChanged, epoch, reset_streams = reset, results,
+                              copies_withdrawn = scope.OwnCopies.Count, distinct_editions_not_affected = scope.DistinctEditions.Select(x => x.DocId),
+                              effect = "Every copy of this document (current and earlier editions) is refused for every user from now on: search, document views, citations and original delivery. Transfers of the original in progress are cut off. Pages already on a reader's screen are cleared at their next action or within about 10 seconds. Distinct editions under other document ids are not affected." });
         });
+
+        // C14 owner policy: reinstatement needs an Admin, a recorded reason, and renewed eligibility verification.
+        app.MapPost("/api/admin/reinstate", async (HttpContext ctx, AppServices s) =>
+        {
+            var (p, err) = await Admin(ctx, s, post: true);
+            if (err is not null) return err;
+            JsonObject? body;
+            try { body = (await JsonNode.ParseAsync(ctx.Request.Body))?.AsObject(); } catch { body = null; }
+            var docId = body?["doc_id"]?.GetValue<string>() ?? ""; var reason = (body?["reason"]?.GetValue<string>() ?? "").Trim();
+            if (reason.Length < 3 || reason.Length > 500) return Json(new { error = "A reason of 3 to 500 characters is required." }, 400);
+            if (!s.State.IsDocWithdrawn(docId)) return Json(new { error = "This document is not withdrawn." }, 409);
+            var copies = await s.Policy.CopiesOfAsync(docId);
+            var problems = s.Eligible.ReinstatementProblems(docId, copies);
+            if (problems.Count > 0)
+            {
+                await s.Identity.AuditAsync(p!.UserId, "reinstate_refused", docId, string.Join(",", problems));
+                return Json(new { error = "Renewed eligibility verification failed; the document stays withdrawn.", problems }, 409);
+            }
+            var d = s.Generation.Documents[docId];
+            var verification = $"verified {DateTime.UtcNow:O}: active generation {s.Generation.GenerationId}, published, register clear, {copies.Append(d.CopySha).Distinct().Count()} copy/copies re-hashed";
+            var op = "reinstate-" + Guid.NewGuid().ToString("N")[..8];
+            var (epoch, _, changed) = await s.State.ReinstateAsync(docId, () => s.Policy.ReinstateDocCasAsync(docId, d.CopySha, op, reason, p!.UserId, verification));
+            await s.Identity.AuditAsync(p!.UserId, "reinstate", docId, $"epoch {epoch}");
+            return Json(new { status = changed ? "reinstated" : "not_changed", changed, epoch, verification });
+        });
+
+        // C14 F15: accounts, Admin unlock and the read-only audit log.
+        app.MapGet("/api/admin/accounts", async (HttpContext ctx, AppServices s) =>
+        {
+            var (_, err) = await Admin(ctx, s, post: false);
+            if (err is not null) return err;
+            return Json((await s.Identity.AccountsAsync()).Select(a => new { username = a.Username, role = a.Role, disabled = a.Disabled,
+                                                                             failed_count = a.FailedCount, locked = a.Locked, locked_until = a.Locked ? a.LockedUntil : null }));
+        });
+
+        app.MapPost("/api/admin/unlock", async (HttpContext ctx, AppServices s) =>
+        {
+            var (p, err) = await Admin(ctx, s, post: true);
+            if (err is not null) return err;
+            JsonObject? body;
+            try { body = (await JsonNode.ParseAsync(ctx.Request.Body))?.AsObject(); } catch { body = null; }
+            var user = body?["username"]?.GetValue<string>() ?? ""; var reason = (body?["reason"]?.GetValue<string>() ?? "").Trim();
+            if (reason.Length < 3 || reason.Length > 500) return Json(new { error = "A reason of 3 to 500 characters is required." }, 400);
+            return await s.Identity.UnlockAsync(user, p!.UserId, reason) ? Json(new { status = "unlocked" }) : Json(new { error = "unknown_account" }, 404);
+        });
+
+        app.MapGet("/api/admin/audit", async (HttpContext ctx, AppServices s, long? before, int? limit) =>
+        {
+            var (_, err) = await Admin(ctx, s, post: false);
+            if (err is not null) return err;
+            var rows = await s.Identity.AuditPageAsync(before, limit ?? 50);
+            return Json(new { rows = rows.Select(r => new { id = r.Id, at = r.At, actor = r.Actor, action = r.Action, @object = r.Object, detail = r.Detail }),
+                              next_before = rows.Count > 0 ? rows[^1].Id : (long?)null });
+        });
+    }
+
+    static async Task<(Principal? p, IResult? error)> Admin(HttpContext ctx, AppServices s, bool post)
+    {
+        var p = await User(ctx, s);
+        if (p is null) return (null, Json(new { error = "auth" }, 401));
+        if (!p.IsAdmin) return (p, Json(new { error = "This action is for Admins." }, 403));
+        if (post && (!CsrfOk(ctx, p) || !SameOrigin(ctx))) return (p, Json(new { error = "csrf" }, 403));
+        return (p, null);
+    }
+
+    /// One document-level withdrawal through the writer-priority fence (unchanged R2-N01 protocol).
+    static async Task<(long epoch, bool changed, int reset, int copies)> WithdrawOne(AppServices s, ActiveStreams active, string docId,
+        DocumentRecord d, string reason, Principal p, string scope)
+    {
+        var copies = (await s.Policy.CopiesOfAsync(docId)).Append(d.CopySha).Distinct().ToList();
+        var op = "withdraw-" + Guid.NewGuid().ToString("N")[..8];
+        int reset = 0;
+        var (epoch, _, changed) = await s.State.WithdrawAsync(docId, copies,
+            () => s.Policy.WithdrawDocCasAsync(docId, d.CopySha, op, reason, p.UserId, scope),
+            () => DeliveryTrace.Emit("admit", "policy_probe", new { operation = op, copy = d.CopySha, monotonic_ms = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() }),
+            (e, dg) => DeliveryTrace.Emit("fence", "witness", new { operation = op, copy = d.CopySha, epoch = e, digest = dg }),
+            () => { foreach (var c in copies) reset += active.ResetAll(Mimamsa.Core.Delivery.ServingState.Key(docId, c)); });
+        DeliveryTrace.Flush();
+        await s.Identity.AuditAsync(p.UserId, "withdraw", docId, $"epoch {epoch}; scope {scope}");
+        return (epoch, changed, reset, copies.Count);
     }
 
     // ---------------------------------------------------------------- helpers
