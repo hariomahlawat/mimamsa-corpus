@@ -438,3 +438,10 @@
 {"id": "AFT-GUW-486", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 02 of 2021 with M.A. No. 02 of 2021.pdf", "status": "eligible-local", "sha256": "1492481028feab8842e77cc71a07bccbd5d50e0465f1617448397b8f0001b7ec", "pages": 1, "ocr": 0}
 {"id": "AFT-GUW-487", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 03 of 2021 with M.A. No. 05 of 2021.pdf", "status": "eligible-local", "sha256": "1ad0c0dae81a86f1587b0559241dd05163d561843a6a9161ae87c62e3a89c1ed", "pages": 14, "ocr": 0}
 {"id": "AFT-GUW-488", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 03 of 2022 with M.A. No. 01 of 2022.pdf", "status": "identity-review"}
+{"id": "AFT-GUW-489", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 03 of 2023 with M.A. No. 02 of 2023.pdf", "status": "marking-review", "page": 1}
+{"id": "AFT-GUW-490", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 04 of 2022.pdf", "status": "eligible-local", "sha256": "12a43a80ae5b979a6cb347971d77e21c505a7b795226253b6b6cde1b412184b3", "pages": 2, "ocr": 0}
+{"id": "AFT-GUW-491", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 05 of 2021 with M.A. No. 06 of 2021.pdf", "status": "eligible-local", "sha256": "9b3fdc06542e8148936dc740114c185ab726949a0fc4bdc18ca7dd9c09f280d6", "pages": 13, "ocr": 0}
+{"id": "AFT-GUW-492", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 05 of 2022.pdf", "status": "identity-review"}
+{"id": "AFT-GUW-493", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 06 of 2019.pdf", "status": "eligible-local", "sha256": "4a4466bc9a303c25fc521ea5b4e23820d7ea45cc4389d786626e75ae164b311e", "pages": 11, "ocr": 0}
+{"id": "AFT-GUW-494", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 07 of 2020.pdf", "status": "eligible-local", "sha256": "4d5dede595915444918a3060f5ad7d50d4ddbe09428ec172b667cd35a490d76d", "pages": 9, "ocr": 0}
+{"id": "AFT-GUW-495", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 07 of 2022.pdf", "status": "identity-review"}
