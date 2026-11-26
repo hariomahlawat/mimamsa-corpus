@@ -130,14 +130,28 @@ def supervise(command, *, seconds=HARD_SECONDS):
     """
     if not 0<seconds<=HARD_SECONDS:
         raise ValueError('invalid child deadline')
-    child=subprocess.run(command,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,
-                         stderr=subprocess.PIPE,timeout=seconds,check=False)
+    try:
+        child=subprocess.run(command,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE,timeout=seconds,check=False)
+    except subprocess.TimeoutExpired:
+        raise TimeoutError('metadata worker deadline exceeded') from None
     if child.returncode!=0 or len(child.stdout)>MAX_RECEIPT or child.stderr:
         raise ValueError('worker failed or produced unexpected output')
     result=json.loads(child.stdout)
     if not isinstance(result,dict) or result.get('acquisition_eligible') is not False:
         raise ValueError('unexpected worker receipt')
     return result
+
+ 
+def candidate_worker(root,revision,token):
+    """Reviewed worker body, not an authorised entry point.
+
+    The parent must bind exact code/scope, owner approval, dataset-scoped
+    read-only token and a private output destination before activating it.
+    This callable is deliberately not exposed through a live CLI.
+    """
+    restricted=bind_restriction(root)
+    return collect_receipt(revision,DirectMetadataHTTPS(revision,token),restricted)
 
 
 def main():
