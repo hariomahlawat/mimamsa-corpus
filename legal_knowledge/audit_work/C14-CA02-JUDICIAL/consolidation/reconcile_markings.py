@@ -21,6 +21,7 @@ independent = {}
 for path in sorted(Path('.').glob('marking-assurance-*.json')):
     for row in json.loads(path.read_bytes()):
         independent[row['sha256']] = row
+HEADER_ONLY = {'188b006da52b048ebf06f2daebd9dabb22e479625da9924fa5d507ab9c8d4fb8': [29]}
 stage = Path('marking-cleared')
 stage.mkdir(exist_ok=True,mode=0o700)
 register_bytes = (ROOT/'register.json').read_bytes()
@@ -68,9 +69,11 @@ for raw in (ROOT/'C14_EXTENDED_JUDICIAL.jsonl').read_text().splitlines():
                         env={'PATH':os.environ['PATH'],'OMP_THREAD_LIMIT':'1'}).stdout.decode()
                     ocr_pages.append(physical.number+1)
                 pages.append(text)
-        if any(len(p.split())<10 for p in pages):
+        sparse_pages = [i for i,p in enumerate(pages,1) if len(p.split())<10]
+        verified_header_only = HEADER_ONLY.get(sha,[])
+        if set(sparse_pages)-set(verified_header_only):
             item.update(status='visual-false-positive-extraction-hold',visual_pages=visual_pages,context=context,
-                sparse_pages=[i for i,p in enumerate(pages,1) if len(p.split())<10],ocr_pages=ocr_pages)
+                sparse_pages=sparse_pages,ocr_pages=ocr_pages)
             out.append(item)
             continue
         text = '\n\f\n'.join(pages).encode()
@@ -83,7 +86,8 @@ for raw in (ROOT/'C14_EXTENDED_JUDICIAL.jsonl').read_text().splitlines():
             else:
                 path.write_bytes(content)
         item.update(status='visual-false-positive-cleared-local',visual_pages=visual_pages,context=context,
-                    derivative_sha256=derived,page_count=len(pages),ocr_pages=ocr_pages,hf_verified=False)
+                    derivative_sha256=derived,page_count=len(pages),ocr_pages=ocr_pages,
+                    verified_header_only_pages=verified_header_only,hf_verified=False)
     out.append(item)
 Path('marking-dispositions.json').write_text(json.dumps(out,indent=2)+'\n')
 print('Visual clearances',sum(x['status']=='visual-false-positive-cleared-local' for x in out),'of',len(out))
