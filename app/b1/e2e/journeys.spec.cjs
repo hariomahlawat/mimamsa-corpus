@@ -543,3 +543,30 @@ test("C14-INT-01 F05 a transient failure of the re-check is retried and the view
   expect(failed).toBe(1);
   await expect(user.locator(".pagewrap canvas")).toHaveCount(0);
 });
+
+// Codex review of PR #70: an older relationship refresh pass that finishes late (its answer superseded) must not clear
+// the retry left pending by a newer pass whose request failed (503). Exact timing is controlled in the page.
+test("C14-INT-02 an older relationship refresh finishing late keeps a newer pass's retry pending", async ({ page }) => {
+  await login(page);
+  const result = await page.evaluate(async () => {
+    const m = await import("/assets/js/relations.js");
+    const realFetch = window.fetch, calls = [];
+    window.fetch = (url, init) => String(url).includes("/c14-int-02/relations") ? new Promise((resolve) => calls.push(resolve)) : realFetch(url, init);
+    const ok = () => new Response(JSON.stringify({ doc_id: "x", instrument: null, correspondence: [], notices: [] }), { status: 200, headers: { "Content-Type": "application/json" } });
+    const box = document.createElement("div"); document.body.append(box);
+    try {
+      const first = m.bindRelations(box, "/api/documents/c14-int-02/relations", { nav: null, onOpen: () => {} });
+      calls[0](ok()); await first;
+      const passA = m.refreshRelations();          // older pass: its request stays open
+      const passB = m.refreshRelations();          // newer pass
+      await new Promise((r) => setTimeout(r, 0));
+      calls[2](new Response("{}", { status: 503 })); await passB;
+      const afterNewerFailed = m.relationsRefreshPending();
+      calls[1](ok()); await passA;                 // the older, superseded answer arrives last
+      return { calls: calls.length, afterNewerFailed, afterOlderFinished: m.relationsRefreshPending() };
+    } finally { window.fetch = realFetch; box.remove(); }
+  });
+  expect(result.calls).toBe(3);
+  expect(result.afterNewerFailed).toBe(true);
+  expect(result.afterOlderFinished).toBe(true);
+});
