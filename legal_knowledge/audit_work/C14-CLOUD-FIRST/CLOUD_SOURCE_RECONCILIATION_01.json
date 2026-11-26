@@ -46,7 +46,17 @@
       "eligible_for_exact_anchor": false,
       "enabled": false,
       "legal_status": "DISCOVERY_LEAD_NOT_VERIFIED",
-      "notes": "Separate constituent from S.O. 3912(E) reproduction. Do not close request or infer date or actual legal effect from indexed text alone. Check existing inventory before acquisition."
+      "notes": "Separate constituent from S.O. 3912(E) reproduction. Do not close request or infer date or actual legal effect from indexed text alone. Check existing inventory before acquisition.",
+      "bounded_holding_search": {
+        "pattern": "*A1957-36*",
+        "stores": [
+          "legal_knowledge/preservation/c5_working_store",
+          "legal_knowledge/preservation/c13_a7_acquired"
+        ],
+        "matches": 0,
+        "revision_attested": false,
+        "conclusion": "No exact filename matches returned. This is not a hash comparison or proof of absence."
+      }
     }
   ],
   "source_downloads": 0,
