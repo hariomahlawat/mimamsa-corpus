@@ -172,6 +172,42 @@ test("UX-12 citation across releases opens the cited copy and page; current edit
   await expect(page.locator("[data-cite-state]")).toHaveText("The cited copy is not available in this installation.");
 });
 
+test("ASR-E06 reload keeps the cited earlier edition: page navigation and reload never substitute the current copy", async ({ page }) => {
+  await login(page);
+  const map = require(process.env.B1_SYN_MAP || require("path").join(process.env.B1_SYN_SITE, "..", "fixture_map.json"));
+  const old = map.j_allow_r1_copy;
+  await page.goto(`/cite/R13-syn-fixture-20261125-00000001/syn-j-allow/${old.slice(0, 12)}/6`);
+  await expect(page.locator(".pdf-legend")).toContainText(`copy ${old.slice(0, 12)} · physical page 6 of 6`);
+  await page.locator("#pageinput").fill("5"); await page.locator("#pageinput").press("Enter");
+  await expect(page.locator(".pdf-legend")).toContainText(`copy ${old.slice(0, 12)} · physical page 5 of 6`);
+  expect(page.url()).toContain(`copy=${old.slice(0, 12)}`);
+  await page.reload();
+  await expect(page.locator(".pdf-legend")).toContainText(`copy ${old.slice(0, 12)} · physical page 5 of 6`);
+  await expect(page.locator(".dochead .notice")).toContainText("This copy is not the current edition in the library.");
+  await page.goto(`/d/syn-j-allow?p=2&copy=${"a".repeat(12)}`);
+  await expect(page.locator("[data-cite-state]")).toHaveText("The cited copy is not available in this installation.");
+  await expect(page.locator(".pagewrap")).toHaveCount(0);
+});
+
+test("Session expiry clears the previous user's research context before another user signs in", async ({ page, context }) => {
+  await login(page);
+  await search(page, "OA 411/2021");
+  await page.locator(".hit").first().click();
+  await expect(page.locator(".pagewrap canvas")).toBeVisible();
+  await context.clearCookies();                                   // the session is no longer valid
+  await page.fill("#q", "lanterns"); await page.press("#q", "Enter");
+  await expect(page.locator("form.login")).toBeVisible();
+  await expect(page.locator("form.login .err")).toContainText("session has ended");
+  await page.fill("#username", "admin"); await page.fill("#password", "admin-password-1");
+  await page.click("form.login button[type=submit]");
+  await expect(page.locator("#research")).toBeVisible();
+  await expect(page.locator("#q")).toHaveValue("");
+  await expect(page.locator(".tab")).toHaveCount(0);
+  await expect(page.locator(".hit")).toHaveCount(0);
+  await expect(page.locator(".pagewrap")).toHaveCount(0);
+  expect(await page.evaluate(() => [window.__mimamsaViewer, window.__mimamsaLastCopy])).toEqual([null, null]);
+});
+
 test("UX-13 impossible filters give a published-scope empty state with recovery; no-edge caveat", async ({ page }) => {
   await login(page);
   await search(page, "notice");

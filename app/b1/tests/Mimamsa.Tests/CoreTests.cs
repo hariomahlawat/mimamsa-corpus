@@ -181,3 +181,25 @@ public class LegalCitationTests
     [Fact] public void MarkerDroppedOnlyWhenChecked()
         => Assert.DoesNotContain("(metadata not verified)", LegalCitation.Format(Doc(fidelity: "DOCUMENTARY_CHECKED"), 1, null));
 }
+
+/// PR #57 review: reconciliation of a previous instance must not refund a charge because the socket was on IPv6 or a
+/// non-loopback interface. Only ports are recorded, so every socket with the port pair counts.
+public class DrainProbeTests
+{
+    static readonly System.Net.NetworkInformation.TcpState Est = System.Net.NetworkInformation.TcpState.Established,
+        Tw = System.Net.NetworkInformation.TcpState.TimeWait, Fw2 = System.Net.NetworkInformation.TcpState.FinWait2;
+
+    [Fact] public void AnyStillDeliveringSocketOnThePortPairKeepsTheCharge()
+    {
+        // e.g. the live connection is IPv6 or on a LAN address; a loopback-only lookup would have called it absent
+        var table = new[] { (5199, 50111, Tw), (5199, 50111, Est) };
+        Assert.False(Mimamsa.Web.DrainProbe.SocketSafeFrom(table, 5199, 50111).safe);
+    }
+
+    [Fact] public void ReleasedOnlyWhenEverySocketProvesAcknowledgementOrNoneExists()
+    {
+        Assert.True(Mimamsa.Web.DrainProbe.SocketSafeFrom(new[] { (5199, 50111, Tw), (5199, 50111, Fw2) }, 5199, 50111).safe);
+        Assert.True(Mimamsa.Web.DrainProbe.SocketSafeFrom(new[] { (5199, 60000, Est) }, 5199, 50111).safe);
+        Assert.False(Mimamsa.Web.DrainProbe.SocketSafeFrom(new[] { (5199, 50111, System.Net.NetworkInformation.TcpState.LastAck) }, 5199, 50111).safe);
+    }
+}

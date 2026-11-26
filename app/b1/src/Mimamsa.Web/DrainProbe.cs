@@ -60,12 +60,25 @@ public static class DrainProbe
             return tx == 0 ? (true, $"linux /proc/net/tcp: socket {localPort}->{remotePort} tx_queue=0")
                            : (false, $"linux /proc/net/tcp: socket {localPort}->{remotePort} still holds {tx} bytes");
         }
-        var st = TcpState(new IPEndPoint(IPAddress.Loopback, localPort), new IPEndPoint(IPAddress.Loopback, remotePort));
-        if (st is null) return (true, $"OS TCP table: socket {localPort}->{remotePort} gone");
-        return st is System.Net.NetworkInformation.TcpState.FinWait2 or System.Net.NetworkInformation.TcpState.TimeWait
-                   or System.Net.NetworkInformation.TcpState.Closed
-            ? (true, $"OS TCP table: socket {localPort}->{remotePort} in {st}")
-            : (false, $"OS TCP table: socket {localPort}->{remotePort} in {st} (may still deliver)");
+        var table = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections()
+            .Select(c => (c.LocalEndPoint.Port, c.RemoteEndPoint.Port, c.State));
+        return SocketSafeFrom(table, localPort, remotePort);
+    }
+
+    /// Reconciliation of a previous instance (review of PR #57): only ports were recorded with the reservation, so the
+    /// check is conservative over EVERY socket with that port pair on any address family or interface (IPv4, IPv6,
+    /// non-loopback). The charge is released only if no such socket exists, or every one is in a state that proves
+    /// all bytes were acknowledged (FIN_WAIT_2, TIME_WAIT, CLOSED). Any other state keeps the charge.
+    public static (bool safe, string evidence) SocketSafeFrom(IEnumerable<(int local, int remote, System.Net.NetworkInformation.TcpState state)> table,
+                                                              int localPort, int remotePort)
+    {
+        var matches = table.Where(t => t.local == localPort && t.remote == remotePort).Select(t => t.state).ToList();
+        if (matches.Count == 0) return (true, $"OS TCP table: no socket {localPort}->{remotePort} on any address");
+        var unsafeStates = matches.Where(st => st is not (System.Net.NetworkInformation.TcpState.FinWait2 or System.Net.NetworkInformation.TcpState.TimeWait
+                                                          or System.Net.NetworkInformation.TcpState.Closed)).ToList();
+        return unsafeStates.Count == 0
+            ? (true, $"OS TCP table: every socket {localPort}->{remotePort} in {string.Join("/", matches.Distinct())}")
+            : (false, $"OS TCP table: socket {localPort}->{remotePort} in {string.Join("/", unsafeStates.Distinct())} (may still deliver; charge kept)");
     }
 
     /// Wait until the kernel holds no unacknowledged bytes for this socket. Never gives up by releasing:
