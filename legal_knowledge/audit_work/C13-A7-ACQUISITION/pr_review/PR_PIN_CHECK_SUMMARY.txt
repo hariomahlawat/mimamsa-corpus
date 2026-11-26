@@ -1,0 +1,17 @@
+pinned documents: 72
+PR #17 archive_acq02: ALREADY_IN_CORPUS_BYTE_IDENTICAL = 16
+PR #23 archive_acq03: NOT_IN_CORPUS = 36
+PR #23 official_instruments_acq03: ALREADY_IN_CORPUS_SAME_SOURCE_URL (crawler copy; served bytes differ from listing pins by design) = 3
+PR #8 archive: ALREADY_IN_CORPUS_BYTE_IDENTICAL = 9
+PR #8 archive: NOT_IN_CORPUS = 2
+PR #8 archive: SAME_INSTRUMENT_HELD_DIFFERENT_CARRIER (manual identity; not byte identity) = 1
+PR #8 official_instruments: SAME_INSTRUMENT_HELD_DIFFERENT_CARRIER (manual identity; not byte identity) = 2
+PR #9 desw: ALREADY_IN_CORPUS_SHA256_PREFIX_ONLY = 1
+PR #9 desw: NO_INTEGRITY_PIN_NOT_IN_CORPUS_BY_HASH = 2
+TOTAL ALREADY_IN_CORPUS_BYTE_IDENTICAL = 25
+TOTAL ALREADY_IN_CORPUS_SAME_SOURCE_URL (crawler copy; served bytes differ from listing pins by design) = 3
+TOTAL ALREADY_IN_CORPUS_SHA256_PREFIX_ONLY = 1
+TOTAL NOT_IN_CORPUS = 38
+TOTAL NO_INTEGRITY_PIN_NOT_IN_CORPUS_BY_HASH = 2
+TOTAL SAME_INSTRUMENT_HELD_DIFFERENT_CARRIER (manual identity; not byte identity) = 3
+TOTAL archive.org live metadata: PIN_MATCHES_LIVE_METADATA = 39

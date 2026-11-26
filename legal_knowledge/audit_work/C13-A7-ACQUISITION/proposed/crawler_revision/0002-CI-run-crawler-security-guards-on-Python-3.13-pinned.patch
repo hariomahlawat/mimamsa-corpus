@@ -1,0 +1,31 @@
+From 653ff58ffba5b13db10a9ba543ee445ad9a226f8 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Sun, 22 Nov 2026 13:45:23 +0000
+Subject: [PATCH 2/3] CI: run crawler security guards on Python 3.13 (pinned
+ requirements need >=3.12, e.g. networkx==3.7)
+
+Run 45028067283 failed at dependency install on Python 3.11 before any test ran.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01U1on2TzucdKCNmpKvBZK7J
+(cherry picked from commit feec010375bc029d82569552651cb35124c78841)
+---
+ .github/workflows/crawler-security-ci.yml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/.github/workflows/crawler-security-ci.yml b/.github/workflows/crawler-security-ci.yml
+index 5f0b941d..5f89f04d 100644
+--- a/.github/workflows/crawler-security-ci.yml
++++ b/.github/workflows/crawler-security-ci.yml
+@@ -21,7 +21,7 @@ jobs:
+       - uses: actions/checkout@v4
+       - uses: actions/setup-python@v5
+         with:
+-          python-version: "3.11"
++          python-version: "3.13"
+       - name: Install pinned dependencies
+         run: pip install -r requirements.txt pytest
+       - name: Blocked host must not appear outside blocked_hosts
+-- 
+2.43.0
+

@@ -8,6 +8,16 @@ on:
       - "tests/test_crawler_security.py"
       - "tests/test_crawler_foundation.py"
       - ".github/workflows/crawler-security-ci.yml"
+  # C13 A7 review F14 (deferred to A9): also run on direct pushes to staging.
+  push:
+    branches:
+      - "legal-knowledge/v2.5-staging"
+    paths:
+      - "config/**"
+      - "crawler/**"
+      - "tests/test_crawler_security.py"
+      - "tests/test_crawler_foundation.py"
+      - ".github/workflows/crawler-security-ci.yml"
   workflow_dispatch:
 
 permissions:
@@ -23,7 +33,7 @@ jobs:
         with:
           python-version: "3.13"
       - name: Install pinned dependencies
-        run: pip install -r requirements.txt pytest
+        run: pip install -r requirements.txt pytest==9.2.0  # pinned; matches requirements.txt (A7 F14)
       - name: Blocked host must not appear outside blocked_hosts
         run: |
           python - <<'PY'

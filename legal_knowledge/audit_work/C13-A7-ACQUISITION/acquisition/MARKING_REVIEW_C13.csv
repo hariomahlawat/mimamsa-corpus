@@ -1,0 +1,4 @@
+target_id,terms_found,context_observed,decision,reviewer
+C13-G5-EXC-0624,confidential,"""Annual Confidential Report (ACR) for the year 2000"" in the order's body text (J&K HC LPASW 130/2017); no access marking printed on the document",PUBLIC_TERM_IS_BODY_TEXT_REFERENCE,C13 A7 agent context check (not a human check)
+C13-G5-EXC-1164,confidential;restricted,"""annual confidential report"" in the SCR headnote and judgment; ""cannot be restricted to two candidates"" in the headnote; no access marking",PUBLIC_TERM_IS_BODY_TEXT_REFERENCE,C13 A7 agent context check (not a human check)
+C13-G5-EXC-1417,confidential,"""Annual Confidential Reports (ACRs) earned in DGQA"" in the SCR text; no access marking",PUBLIC_TERM_IS_BODY_TEXT_REFERENCE,C13 A7 agent context check (not a human check)

@@ -1,0 +1,193 @@
+--- a/config/sources.yaml (staging a4c0c382)
++++ b/config/sources.yaml (C13 A7 proposal)
+@@ -190,7 +190,7 @@
+     priority: 1
+     heavy: true
+     verify: true
+-    allowed_hosts: [www.aftdelhi.nic.in, aftdelhi.nic.in, aftlko.up.nic.in, aftkolkata.nic.in, aftjabalpur.in]
++    allowed_hosts: [www.aftdelhi.nic.in, aftdelhi.nic.in, aftlko.up.nic.in, aftkolkata.nic.in]
+     base_url: https://www.aftdelhi.nic.in
+     discovery: "Per bench: read its judgment listing page(s) and queue every PDF link with what the row says about it."
+     benches:
+@@ -267,8 +267,18 @@
+     priority: 3
+     heavy: false
+     allowed_hosts: [egazette.gov.in]
++    require_https: true
++    # The server sends only its leaf certificate (issuer Let's Encrypt YR1). The two public intermediates below were
++    # fetched from the leaf's AIA chain (yr1.i.lencr.org, yr.i.lencr.org) and verified to chain to ISRG Root X1 in
++    # the trust store; partial-chain trust is disabled (crawler/http.py::tls_verify_for). If the site changes its
++    # issuing intermediate, the pins stop matching the served chain and requests fail closed. Re-verify then.
++    # Evidence: legal_knowledge/audit_work/C13-A7-ACQUISITION/allowlist/EGAZETTE_TLS_C13.md
++    ca_extra_pem: config/ca/egazette_intermediates.pem
++    ca_extra_sha256:
++      - 13949634d99cd6fd6aa80bc034fefacceb1969feef986586713ecdbb05758d3f   # C=US, O=Let's Encrypt, CN=YR1 (to 2028-09-02)
++      - 072639d0b140d5bffae16ad9c3f6cc6086040621f51ee61a6d46a8915c07cf76   # C=US, O=ISRG, CN=Root YR, cross-signed by ISRG Root X1 (to 2032-09-02)
+     verify: true
+-    discovery: "Notifications under the Army Act (active service declarations, s.12, etc.)."
++    discovery: "Notifications under the Army Act (active service declarations, s.12, etc.). Exact WriteReadData file URLs only; the interactive search pages are not used (their CAPTCHA status was not checked)."
+ 
+   archive:
+     phase: 6
+@@ -276,6 +286,97 @@
+     priority: 3
+     heavy: false
+     allowed_hosts: [archive.org]
++    # Item-scoped redirect destinations (C13 A7 proposal, replacing the "*.archive.org" wildcard of PRs #8/#17/#23).
++    # Each entry allows ONE storage-node host for ONE item directory. Every hop must still be HTTPS and pass robots.
++    # Redirects for one item were seen to go to nodes not named in its metadata, so the set can go stale; a
++    # redirect elsewhere fails closed and needs a new reviewed entry. Source: allowlist/ARCHIVE_REDIRECT_SCOPES.csv
++    require_https: true
++    redirect_scopes:
++      - { host: ia803104.us.archive.org, path_prefix: "/29/items/in.gazette.central.w.1978-02-25.48290/" }   # rules-adjustment-jurisdiction-1978-so-488
++      - { host: ia903104.us.archive.org, path_prefix: "/29/items/in.gazette.central.w.1978-02-25.48290/" }   # rules-adjustment-jurisdiction-1978-so-488
++      - { host: dn790002.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1986-12-06.32435/" }   # notif-adjustment-jurisdiction-amdt-so-4010-1986
++      - { host: ia802803.us.archive.org, path_prefix: "/22/items/in.gazette.central.w.1986-12-06.32435/" }   # notif-adjustment-jurisdiction-amdt-so-4010-1986
++      - { host: ia902803.us.archive.org, path_prefix: "/22/items/in.gazette.central.w.1986-12-06.32435/" }   # notif-adjustment-jurisdiction-amdt-so-4010-1986
++      - { host: dn790003.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1966-08-27.76274/" }   # acq03-001-b1
++      - { host: ia803102.us.archive.org, path_prefix: "/5/items/in.gazette.central.w.1966-08-27.76274/" }   # acq03-001-b1
++      - { host: ia903102.us.archive.org, path_prefix: "/5/items/in.gazette.central.w.1966-08-27.76274/" }   # acq03-001-b1
++      - { host: ia802807.us.archive.org, path_prefix: "/1/items/in.gazette.central.w.1967-01-07.73211/" }   # acq03-002-b1
++      - { host: ia902807.us.archive.org, path_prefix: "/1/items/in.gazette.central.w.1967-01-07.73211/" }   # acq03-002-b1
++      - { host: ia600503.us.archive.org, path_prefix: "/23/items/in.gazette.central.w.1967-12-16.75707/" }   # acq03-003-b1
++      - { host: ia800503.us.archive.org, path_prefix: "/23/items/in.gazette.central.w.1967-12-16.75707/" }   # acq03-003-b1
++      - { host: ia802807.us.archive.org, path_prefix: "/2/items/in.gazette.central.w.1968-11-16.72289/" }   # acq03-004-b1
++      - { host: ia902807.us.archive.org, path_prefix: "/2/items/in.gazette.central.w.1968-11-16.72289/" }   # acq03-004-b1
++      - { host: dn790009.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1969-03-01.68684/" }   # acq03-005-b1
++      - { host: ia803107.us.archive.org, path_prefix: "/5/items/in.gazette.central.w.1969-03-01.68684/" }   # acq03-005-b1
++      - { host: ia903107.us.archive.org, path_prefix: "/5/items/in.gazette.central.w.1969-03-01.68684/" }   # acq03-005-b1
++      - { host: ia803106.us.archive.org, path_prefix: "/27/items/in.gazette.central.w.1970-01-17.63332/" }   # acq03-006-b1
++      - { host: ia903106.us.archive.org, path_prefix: "/27/items/in.gazette.central.w.1970-01-17.63332/" }   # acq03-006-b1
++      - { host: dn790003.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1972-02-19.59085/" }   # acq03-007-b1
++      - { host: ia803104.us.archive.org, path_prefix: "/34/items/in.gazette.central.w.1972-02-19.59085/" }   # acq03-007-b1
++      - { host: ia903104.us.archive.org, path_prefix: "/34/items/in.gazette.central.w.1972-02-19.59085/" }   # acq03-007-b1
++      - { host: ia803107.us.archive.org, path_prefix: "/0/items/in.gazette.central.w.1974-08-17.55730/" }   # acq03-008-b1
++      - { host: ia903107.us.archive.org, path_prefix: "/0/items/in.gazette.central.w.1974-08-17.55730/" }   # acq03-008-b1
++      - { host: ia802801.us.archive.org, path_prefix: "/1/items/in.gazette.central.w.1974-11-16.55738/" }   # acq03-009-b1
++      - { host: ia902801.us.archive.org, path_prefix: "/1/items/in.gazette.central.w.1974-11-16.55738/" }   # acq03-009-b1
++      - { host: ia803102.us.archive.org, path_prefix: "/0/items/in.gazette.central.w.1960-10-08.88375/" }   # acq03-010-b2
++      - { host: ia903102.us.archive.org, path_prefix: "/0/items/in.gazette.central.w.1960-10-08.88375/" }   # acq03-010-b2
++      - { host: dn710807.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1960-10-15.88376/" }   # acq03-011-b2
++      - { host: ia803106.us.archive.org, path_prefix: "/14/items/in.gazette.central.w.1960-10-15.88376/" }   # acq03-011-b2
++      - { host: ia903106.us.archive.org, path_prefix: "/14/items/in.gazette.central.w.1960-10-15.88376/" }   # acq03-011-b2
++      - { host: dn710606.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1960-10-22.88377/" }   # acq03-012-b2
++      - { host: ia802806.us.archive.org, path_prefix: "/27/items/in.gazette.central.w.1960-10-22.88377/" }   # acq03-012-b2
++      - { host: ia902806.us.archive.org, path_prefix: "/27/items/in.gazette.central.w.1960-10-22.88377/" }   # acq03-012-b2
++      - { host: dn760103.eu.archive.org, path_prefix: "/0/items/in.gazette.central.w.1960-12-03.88383/" }   # acq03-013-b2
++      - { host: ia803105.us.archive.org, path_prefix: "/10/items/in.gazette.central.w.1960-12-03.88383/" }   # acq03-013-b2
++      - { host: ia903105.us.archive.org, path_prefix: "/10/items/in.gazette.central.w.1960-12-03.88383/" }   # acq03-013-b2
++      - { host: dn710102.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.2010-05-29.162/" }   # acq03-014-b2
++      - { host: ia802804.us.archive.org, path_prefix: "/29/items/in.gazette.central.w.2010-05-29.162/" }   # acq03-014-b2
++      - { host: ia902804.us.archive.org, path_prefix: "/29/items/in.gazette.central.w.2010-05-29.162/" }   # acq03-014-b2
++      - { host: dn790008.ca.archive.org, path_prefix: "/0/items/in.gazette.central.e.2001-09-03.113421/" }   # acq03-017-b3
++      - { host: ia802801.us.archive.org, path_prefix: "/32/items/in.gazette.central.e.2001-09-03.113421/" }   # acq03-017-b3
++      - { host: ia902801.us.archive.org, path_prefix: "/32/items/in.gazette.central.e.2001-09-03.113421/" }   # acq03-017-b3
++      - { host: dn710302.ca.archive.org, path_prefix: "/0/items/in.gazette.1950.318/" }   # acq03-019-b4
++      - { host: ia803105.us.archive.org, path_prefix: "/19/items/in.gazette.1950.318/" }   # acq03-019-b4
++      - { host: ia903105.us.archive.org, path_prefix: "/19/items/in.gazette.1950.318/" }   # acq03-019-b4
++      - { host: dn790002.ca.archive.org, path_prefix: "/0/items/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/" }   # acq03-022-b4
++      - { host: ia601903.us.archive.org, path_prefix: "/29/items/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/" }   # acq03-022-b4
++      - { host: ia801903.us.archive.org, path_prefix: "/29/items/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/" }   # acq03-022-b4
++      - { host: dn711001.ca.archive.org, path_prefix: "/0/items/in.gazette.central.e.2008-09-17.2326/" }   # acq03-030-b5
++      - { host: ia600809.us.archive.org, path_prefix: "/4/items/in.gazette.central.e.2008-09-17.2326/" }   # acq03-030-b5
++      - { host: ia800809.us.archive.org, path_prefix: "/4/items/in.gazette.central.e.2008-09-17.2326/" }   # acq03-030-b5
++      - { host: dn710706.ca.archive.org, path_prefix: "/0/items/in.gazette.central.e.2011-07-29.188/" }   # acq03-031-b5
++      - { host: ia802802.us.archive.org, path_prefix: "/8/items/in.gazette.central.e.2011-07-29.188/" }   # acq03-031-b5
++      - { host: ia902802.us.archive.org, path_prefix: "/8/items/in.gazette.central.e.2011-07-29.188/" }   # acq03-031-b5
++      - { host: dn711000.ca.archive.org, path_prefix: "/0/items/in.gazette.central.e.2009-05-13.5014/" }   # acq03-032-b5
++      - { host: ia803205.us.archive.org, path_prefix: "/21/items/in.gazette.central.e.2009-05-13.5014/" }   # acq03-032-b5
++      - { host: ia903205.us.archive.org, path_prefix: "/21/items/in.gazette.central.e.2009-05-13.5014/" }   # acq03-032-b5
++      - { host: dn710601.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1956-04-21.100216/" }   # acq03-036-c2
++      - { host: ia600804.us.archive.org, path_prefix: "/35/items/in.gazette.central.w.1956-04-21.100216/" }   # acq03-036-c2
++      - { host: ia800804.us.archive.org, path_prefix: "/35/items/in.gazette.central.w.1956-04-21.100216/" }   # acq03-036-c2
++      - { host: dn790006.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1958-12-13.95784/" }   # acq03-037-c2
++      - { host: ia803109.us.archive.org, path_prefix: "/19/items/in.gazette.central.w.1958-12-13.95784/" }   # acq03-037-c2
++      - { host: ia903109.us.archive.org, path_prefix: "/19/items/in.gazette.central.w.1958-12-13.95784/" }   # acq03-037-c2
++      - { host: dn720006.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1958-12-27.95984/" }   # acq03-038-c2
++      - { host: ia600401.us.archive.org, path_prefix: "/20/items/in.gazette.central.w.1958-12-27.95984/" }   # acq03-038-c2
++      - { host: ia800401.us.archive.org, path_prefix: "/20/items/in.gazette.central.w.1958-12-27.95984/" }   # acq03-038-c2
++      - { host: dn760109.eu.archive.org, path_prefix: "/0/items/in.gazette.central.w.1959-12-12.90633/" }   # acq03-039-c2
++      - { host: ia600904.us.archive.org, path_prefix: "/31/items/in.gazette.central.w.1959-12-12.90633/" }   # acq03-039-c2
++      - { host: ia800904.us.archive.org, path_prefix: "/31/items/in.gazette.central.w.1959-12-12.90633/" }   # acq03-039-c2
++      - { host: dn760100.eu.archive.org, path_prefix: "/0/items/in.gazette.central.w.1964-03-07.83271/" }   # acq03-040-c2
++      - { host: ia802803.us.archive.org, path_prefix: "/19/items/in.gazette.central.w.1964-03-07.83271/" }   # acq03-040-c2
++      - { host: ia902803.us.archive.org, path_prefix: "/19/items/in.gazette.central.w.1964-03-07.83271/" }   # acq03-040-c2
++      - { host: dn710805.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1964-03-14.83272/" }   # acq03-041-c2
++      - { host: ia803105.us.archive.org, path_prefix: "/35/items/in.gazette.central.w.1964-03-14.83272/" }   # acq03-041-c2
++      - { host: ia903105.us.archive.org, path_prefix: "/35/items/in.gazette.central.w.1964-03-14.83272/" }   # acq03-041-c2
++      - { host: dn721500.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1964-03-21.83273/" }   # acq03-042-c2
++      - { host: ia600704.us.archive.org, path_prefix: "/35/items/in.gazette.central.w.1964-03-21.83273/" }   # acq03-042-c2
++      - { host: ia800704.us.archive.org, path_prefix: "/35/items/in.gazette.central.w.1964-03-21.83273/" }   # acq03-042-c2
++      - { host: dn790002.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1964-03-30.83284/" }   # acq03-043-c2
++      - { host: ia803106.us.archive.org, path_prefix: "/12/items/in.gazette.central.w.1964-03-30.83284/" }   # acq03-043-c2
++      - { host: ia903106.us.archive.org, path_prefix: "/12/items/in.gazette.central.w.1964-03-30.83284/" }   # acq03-043-c2
++      - { host: dn760108.eu.archive.org, path_prefix: "/0/items/in.gazette.central.w.1964-04-04.83285/" }   # acq03-044-c2
++      - { host: ia803103.us.archive.org, path_prefix: "/4/items/in.gazette.central.w.1964-04-04.83285/" }   # acq03-044-c2
++      - { host: ia903103.us.archive.org, path_prefix: "/4/items/in.gazette.central.w.1964-04-04.83285/" }   # acq03-044-c2
+     verify: true
+     discovery: "Digital Library of India items; record the archive.org item identifier in metadata."
+     targets:
+@@ -292,8 +393,62 @@
+       - { identifier: in.ernet.dli.2015.279009, title: "Manual Of Military Law War Office 1907", year: null, note: "British manual; possibly a duplicate scan" }
+       - { identifier: dli.ernet.237370,         title: "Manual Of Military Law (1929)", year: 1929, note: "British manual" }
+ 
+-# Explicitly forbidden: never fetch, even if linked.
++  # ---------------------------------------------------------------- C13 A7 PROPOSAL (not applied; owner decision D-04)
++  # DESW (Department of Ex-Servicemen Welfare, MoD). Validated 2026-11-25: TLS chain OK (Sectigo DV R36), robots.txt
++  # answers 403 (= no robots file, RFC 9309), no CAPTCHA marker or password field on the landing page.
++  # Exact document URLs only; nothing is discovered by following links.
++  desw:
++    phase: 2
++    enabled: false
++    priority: 3
++    heavy: false
++    allowed_hosts: [desw.gov.in]
++    require_https: true
++    documents:
++      - doc_id: rules-entitlement-casualty-pensionary-awards-2023
++        url: "https://desw.gov.in/sites/default/files/Entitlement%20Rules%202023.pdf"
++        title: "Entitlement Rules for Casualty Pensionary Awards to the Armed Forces Personnel, 2023"
++        doc_type: rules
++        year: 2023
++        issuing_authority: "Ministry of Defence (Department of Ex-Servicemen Welfare)"
++        note: "PR #9; 49,925,674 bytes per HEAD of 2026-11-22; no hash pin yet (first fetch records it for review)"
++      - doc_id: rules-entitlement-casualty-pensionary-awards-2023-alt
++        url: "https://desw.gov.in/sites/default/files/2026-10/Entitlement%20Rules%202023.pdf"
++        title: "Entitlement Rules 2023 with MoD letter of 21-09-2023 (second official DESW copy)"
++        doc_type: rules
++        year: 2023
++        issuing_authority: "Ministry of Defence (Department of Ex-Servicemen Welfare)"
++        parent_doc_id: rules-entitlement-casualty-pensionary-awards-2023
++        expected_sha256: "29f6fa2cfcd961aadce490679a686b5a3b7b2e683a0eaceb42bc2cd2ebb70dad"
++        note: "PR #9; already preserved as C5-SRC-P1-ER-2023-HELD-13MB (HF 5524c3d9); a re-fetch must be byte-identical"
++      - doc_id: manual-guide-medical-officers-military-pensions-2023
++        url: "https://desw.gov.in/sites/default/files/2026-10/GMO%202023.pdf"
++        title: "Guide to Medical Officers (Military Pensions), 2023"
++        doc_type: manual
++        year: 2023
++        issuing_authority: "Ministry of Defence (Department of Ex-Servicemen Welfare)"
++        note: "PR #9; 36,908,350 bytes per HEAD of 2026-11-22; no hash pin yet"
++
++  # Supreme Court official document host. CONDITIONAL. sci.gov.in and www.sci.gov.in are EXCLUDED: the judgment search
++  # (www.sci.gov.in/judgements-judgement-date/) carries a CAPTCHA (probe 2026-11-25). api.sci.gov.in validated
++  # 2026-11-25: TLS chain OK (GlobalSign GCC R46 DV), robots.txt 200 with no rules, landing page 200 and empty.
++  # Use only for exact PDF URLs that a person has recorded after a manual search. The crawler never searches and
++  # never handles a CAPTCHA. Whether a file URL itself is CAPTCHA-free is not yet verified (no URL known).
++  sci_official:
++    phase: 4
++    enabled: false
++    priority: 2
++    heavy: false
++    allowed_hosts: [api.sci.gov.in]
++    require_https: true
++    documents: []
++
++# Explicitly forbidden: never fetch, even if linked. Subdomains of a blocked host are blocked too.
+ blocked_hosts:
++  # Formerly configured for AFT Regional Bench Jabalpur; serves unrelated (betting) content (2026-11-22).
++  # Not an official Tribunal host. Never visit (PR #7; C13 A7 re-targeted to staging).
++  - aftjabalpur.in
++  - www.aftjabalpur.in
+   - indiankanoon.org
+   - www.indiankanoon.org
+   - www.casemine.com
