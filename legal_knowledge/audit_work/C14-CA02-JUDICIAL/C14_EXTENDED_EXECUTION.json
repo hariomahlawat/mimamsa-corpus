@@ -10,12 +10,13 @@
     "verified": 986
   },
   "all_job_statuses": {
-    "marking-review": 30,
-    "verified-local": 44,
-    "sparse-page-review": 1
+    "marking-review": 33,
+    "verified-local": 201,
+    "sparse-page-review": 1,
+    "HTTPError": 5
   },
-  "extended_uploads": 44,
-  "pending_jobs": 1155,
+  "extended_uploads": 202,
+  "pending_jobs": 990,
   "official_pilot": [
     {
       "id": "AFT-GUW-1",
@@ -65,6 +66,29 @@
       "url": "https://cdnbbsr.s3waas.gov.in/s3ec0490f1f4972d133619a60c30f3559e/documents/aor_notice_circular/55.pdf",
       "status": "marking-review",
       "page": 24
+    },
+    {
+      "id": "CA01-ACT19-1955-CARRIER",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Acts_of_the_Parliament_of_India_1955.pdf",
+      "status": "eligible-local",
+      "sha256": "55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262",
+      "pages": 334,
+      "ocr": 2,
+      "derivative_physical_pages": [
+        110,
+        111
+      ],
+      "documentary_status": "Act title and Schedule visually matched; publication annotations and strike marks retained; legal authentication pending"
+    },
+    {
+      "id": "PHHC-HEADER-ONLY-PAGE",
+      "doc_id": "hc-ph-2011-cwp-70-2011-phhc010843742011-1-2011-01-04",
+      "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2011/court=3_22/bench=phhc/PHHC010843742011_1_2011-01-04.pdf",
+      "status": "eligible-local",
+      "sha256": "f96ec4e7b3307cd75b68d97f029e8ac43e69ffe165f2af4c04a86a319e8588ac",
+      "pages": 3,
+      "ocr": 0,
+      "documentary_status": "Physical page 3 visually verified as running header and page number only; signed disposition ends on page 2"
     }
   ],
   "official_probes": [
@@ -537,15 +561,19 @@
     {
       "doc_id": "hc-ph-2011-cwp-70-2011-phhc010843742011-1-2011-01-04",
       "sha256": "f96ec4e7b3307cd75b68d97f029e8ac43e69ffe165f2af4c04a86a319e8588ac",
-      "state": "sparse-page-review",
+      "state": "verified-header-only-page",
       "page_diagnostics": [
         [
           3,
           "sparse-text"
         ]
       ],
-      "preservation": null,
-      "pages_using_ocr": 1
+      "preservation": {
+        "revision": "99288bace264e0a6c78d5e7057404e7315de62cc",
+        "verified": true
+      },
+      "pages_using_ocr": 0,
+      "documentary_status": "Physical page 3 visually verified as running header and page number only; signed disposition ends on page 2"
     },
     {
       "doc_id": "hc-ph-2015-cwp-8338-2012-phhc010902392012-1-2015-03-17",
@@ -1610,52 +1638,174 @@
     "Preparation and preservation do not establish legal authentication or application release.",
     "Automated legal-context flags are used for triage only. Remaining ambiguous markings are not cleared."
   ],
-  "official_upload": {
-    "revision": "7aed711caf816d8ce3842021c422669aeac0de81",
-    "files": {
-      "legal_knowledge/preservation/c14_aft_guwahati/v2/fe/fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804/original.pdf": "fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804",
-      "legal_knowledge/preservation/c14_aft_guwahati/v2/fe/fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804/text.txt": "1b1154877b174ff3018c7453ab5107eb1af8c8843c83ca83368f0db12e8e98dc",
-      "legal_knowledge/preservation/c14_aft_guwahati/v2/3a/3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e/original.pdf": "3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e",
-      "legal_knowledge/preservation/c14_aft_guwahati/v2/3a/3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e/text.txt": "db201de6f28f80d006928cd971c46d5ab8007dd48f8aa7cb2d01b7013581f559",
-      "legal_knowledge/preservation/c14_aft_guwahati/v2/25/253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d/original.pdf": "253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d",
-      "legal_knowledge/preservation/c14_aft_guwahati/v2/25/253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d/text.txt": "ab1badced275a5b4f2ae7c445eeb591e39afb15646ca03c7a9510d86e35e44e8",
-      "legal_knowledge/preservation/c14_aft_guwahati/v2/f6/f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964/original.pdf": "f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964",
-      "legal_knowledge/preservation/c14_aft_guwahati/v2/f6/f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964/text.txt": "43ff2d08ea583164a71c5dbb6f1b01055158a6f4329706d48b4fe76e1785e925"
+  "official_uploads": [
+    {
+      "revision": "7aed711caf816d8ce3842021c422669aeac0de81",
+      "files": {
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/fe/fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804/original.pdf": "fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/fe/fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804/text.txt": "1b1154877b174ff3018c7453ab5107eb1af8c8843c83ca83368f0db12e8e98dc",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/3a/3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e/original.pdf": "3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/3a/3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e/text.txt": "db201de6f28f80d006928cd971c46d5ab8007dd48f8aa7cb2d01b7013581f559",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/25/253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d/original.pdf": "253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/25/253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d/text.txt": "ab1badced275a5b4f2ae7c445eeb591e39afb15646ca03c7a9510d86e35e44e8",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/f6/f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964/original.pdf": "f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/f6/f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964/text.txt": "43ff2d08ea583164a71c5dbb6f1b01055158a6f4329706d48b4fe76e1785e925"
+      },
+      "verified": true,
+      "entries": [
+        {
+          "id": "AFT-GUW-2",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-03 of 2018.pdf",
+          "status": "queued-for-upload",
+          "sha256": "fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804",
+          "pages": 2,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-3",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-06 of 2018.pdf",
+          "status": "queued-for-upload",
+          "sha256": "3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e",
+          "pages": 2,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-4",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 MA-28 of 2019.pdf",
+          "status": "queued-for-upload",
+          "sha256": "253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d",
+          "pages": 1,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-5",
+          "url": "https://aftrbghy.nic.in/judgement/C.A. No. 01 of 2020 in O.A. No 05 of 2017.pdf",
+          "status": "queued-for-upload",
+          "sha256": "f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964",
+          "pages": 1,
+          "ocr": 0
+        }
+      ]
     },
-    "verified": true,
-    "entries": [
-      {
-        "id": "AFT-GUW-2",
-        "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-03 of 2018.pdf",
-        "status": "queued-for-upload",
-        "sha256": "fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804",
-        "pages": 2,
-        "ocr": 0
+    {
+      "revision": "d24eb43e40ea2df3a28b0118781abb3cd97798b5",
+      "files": {
+        "legal_knowledge/preservation/c14_statutory/v2/55/55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262/original.pdf": "55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262",
+        "legal_knowledge/preservation/c14_statutory/v2/55/55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262/text.txt": "9a1f3db03e29eb212f7939b5600833baf0fd2ff062919b8be56f7f740f48ad18"
       },
-      {
-        "id": "AFT-GUW-3",
-        "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-06 of 2018.pdf",
-        "status": "queued-for-upload",
-        "sha256": "3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e",
-        "pages": 2,
-        "ocr": 0
+      "verified": true,
+      "entries": [
+        {
+          "id": "AFT-GUW-2",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-03 of 2018.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804",
+          "pages": 2,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-3",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-06 of 2018.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e",
+          "pages": 2,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-4",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 MA-28 of 2019.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d",
+          "pages": 1,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-5",
+          "url": "https://aftrbghy.nic.in/judgement/C.A. No. 01 of 2020 in O.A. No 05 of 2017.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964",
+          "pages": 1,
+          "ocr": 0
+        },
+        {
+          "id": "CA01-ACT19-1955-CARRIER",
+          "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Acts_of_the_Parliament_of_India_1955.pdf",
+          "status": "queued-for-upload",
+          "sha256": "55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262",
+          "pages": 334,
+          "ocr": 2,
+          "derivative_physical_pages": [
+            110,
+            111
+          ],
+          "documentary_status": "Act title and Schedule visually matched; publication annotations and strike marks retained; legal authentication pending"
+        }
+      ]
+    },
+    {
+      "revision": "99288bace264e0a6c78d5e7057404e7315de62cc",
+      "files": {
+        "legal_knowledge/preservation/c14_tier1_extension/v2/f9/f96ec4e7b3307cd75b68d97f029e8ac43e69ffe165f2af4c04a86a319e8588ac/original.pdf": "f96ec4e7b3307cd75b68d97f029e8ac43e69ffe165f2af4c04a86a319e8588ac",
+        "legal_knowledge/preservation/c14_tier1_extension/v2/f9/f96ec4e7b3307cd75b68d97f029e8ac43e69ffe165f2af4c04a86a319e8588ac/text.txt": "945e22ce42e61affee42ac83fd9a18da21877cb71863523caad76bea556c45d8"
       },
-      {
-        "id": "AFT-GUW-4",
-        "url": "https://aftrbghy.nic.in/judgement/6.8.2019 MA-28 of 2019.pdf",
-        "status": "queued-for-upload",
-        "sha256": "253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d",
-        "pages": 1,
-        "ocr": 0
-      },
-      {
-        "id": "AFT-GUW-5",
-        "url": "https://aftrbghy.nic.in/judgement/C.A. No. 01 of 2020 in O.A. No 05 of 2017.pdf",
-        "status": "queued-for-upload",
-        "sha256": "f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964",
-        "pages": 1,
-        "ocr": 0
-      }
-    ]
-  }
+      "verified": true,
+      "entries": [
+        {
+          "id": "AFT-GUW-2",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-03 of 2018.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804",
+          "pages": 2,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-3",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-06 of 2018.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e",
+          "pages": 2,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-4",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 MA-28 of 2019.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d",
+          "pages": 1,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-5",
+          "url": "https://aftrbghy.nic.in/judgement/C.A. No. 01 of 2020 in O.A. No 05 of 2017.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964",
+          "pages": 1,
+          "ocr": 0
+        },
+        {
+          "id": "CA01-ACT19-1955-CARRIER",
+          "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Acts_of_the_Parliament_of_India_1955.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262",
+          "pages": 334,
+          "ocr": 2,
+          "derivative_physical_pages": [
+            110,
+            111
+          ],
+          "documentary_status": "Act title and Schedule visually matched; publication annotations and strike marks retained; legal authentication pending"
+        },
+        {
+          "id": "PHHC-HEADER-ONLY-PAGE",
+          "doc_id": "hc-ph-2011-cwp-70-2011-phhc010843742011-1-2011-01-04",
+          "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2011/court=3_22/bench=phhc/PHHC010843742011_1_2011-01-04.pdf",
+          "status": "queued-for-upload",
+          "sha256": "f96ec4e7b3307cd75b68d97f029e8ac43e69ffe165f2af4c04a86a319e8588ac",
+          "pages": 3,
+          "ocr": 0,
+          "documentary_status": "Physical page 3 visually verified as running header and page number only; signed disposition ends on page 2"
+        }
+      ]
+    }
+  ]
 }
