@@ -31,6 +31,10 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--langs", default=ocr.LANGS, help="ocr: Tesseract languages, e.g. eng or hin+eng")
     p.add_argument("--redo", action="store_true", help="extract/ocr: process again even if already done")
     args = p.parse_args(argv)
+    # C14-10: temporary operational interlock until non-destructive adoption is accepted.
+    # Do not permit legacy mutating stages to touch a live or copied corpus.
+    if args.stage != "validate":
+        p.error("C14 corpus mutation hold: legacy stages disabled pending non-destructive adoption; use isolated read-only assessment")
     paths = Paths.default(args.root)
     extra: dict = {}
     rc = 0
