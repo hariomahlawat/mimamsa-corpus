@@ -50,6 +50,14 @@ jobs:
         run: python -I -B legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/TXN-DEMO/tools/synthetic_transaction_demo.py --check
       - name: Test fail-closed review checks
         run: python -m unittest discover -s tests -p "test_legal_audit_*.py" -v
+      - name: C14 synthetic PDF integration tests (draft corpus branch only)
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.ref == 'corpus/c14-ca03-adoption-gate' && github.event.pull_request.head.repo.full_name == github.repository
+        timeout-minutes: 4
+        run: |
+          python -m pip install --disable-pip-version-check "pymupdf==2.1" "pdfplumber==0.11.11" "PyYAML==6.0.4" "jsonschema==4.26.0"
+          git rev-parse HEAD
+          python -c "import sys,pymupdf; print(sys.version); print('PyMuPDF',pymupdf.VersionBind)"
+          python -B -m unittest discover -s legal_knowledge/audit_work/C14-CA03-PIPELINE -p "test_*.py" -v
       - name: Validate PILOT-01 audit batch (strict, frozen manifest, reviewer identities)
         run: python tools/legal_audit/validate.py --batch legal_knowledge/audit_work/PILOT-01 --manifest legal_knowledge/audit_work/PILOT-01/pilot-manifest.json --strict
       - name: Validate R23-VERIFY-01 batch (strict)
