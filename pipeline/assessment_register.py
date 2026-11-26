@@ -89,6 +89,7 @@ class Journal:
             BEGIN SELECT RAISE(ABORT, 'append only'); END;
         """)
         db.execute('PRAGMA foreign_keys=ON')
+        db.execute('PRAGMA recursive_triggers=ON')
 
     def append(self, assessment, *, previous_event_id=None):
         a = check_assessment(assessment)
