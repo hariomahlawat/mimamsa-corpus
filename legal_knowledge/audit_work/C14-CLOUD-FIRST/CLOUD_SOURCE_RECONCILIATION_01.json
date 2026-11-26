@@ -1,0 +1,56 @@
+{
+  "schema": "c14-cloud-source-reconciliation-v1",
+  "date": "2026-11-26",
+  "source_review_pin": "f1bbd15dc9a57531b0b061578fdceba94ff35753",
+  "operation": "connected metadata stat and public source discovery only",
+  "hf_revision_owner_reported": "f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc",
+  "connector_revision_attested": false,
+  "holdings": [
+    {
+      "id": "C14-D02",
+      "exists": true,
+      "size": 173255,
+      "lfs": true
+    },
+    {
+      "id": "C14-D05",
+      "exists": true,
+      "size": 1115210,
+      "lfs": true
+    },
+    {
+      "id": "C14-D06",
+      "exists": true,
+      "size": 642831,
+      "lfs": true
+    },
+    {
+      "id": "C14-D07",
+      "exists": true,
+      "size": 2872470,
+      "lfs": true
+    }
+  ],
+  "holding_reference": "PR58 LOCAL_ACQUISITION_BATCH_01.json known_holdings; no content bytes, no new hashes, no complete coverage assertion",
+  "source_leads": [
+    {
+      "request_id": "A4-ACQ-033",
+      "title": "Repealing and Amending Act, 1957 (36 of 1957)",
+      "url": "https://www.indiacode.nic.in/repealedfileopen?rfilename=A1957-36.pdf",
+      "carrier": "India Code government-hosted historical copy",
+      "observation": "Indexed section 2 and First Schedule row for Act 46 of 1950 identify section 194 and the Schedule as the extent of repeal. India Code consolidated Army Act corroborates this attribution.",
+      "cross_reference": "https://www.indiacode.nic.in/bitstream/123456789/1930/1/A1950-46.pdf",
+      "verification": "TEXT_LOCATED_PAGE_IMAGE_FETCH_TIMEOUT",
+      "raw_bytes_acquired": false,
+      "source_sha256": null,
+      "eligible_for_exact_anchor": false,
+      "enabled": false,
+      "legal_status": "DISCOVERY_LEAD_NOT_VERIFIED",
+      "notes": "Separate constituent from S.O. 3912(E) reproduction. Do not close request or infer date or actual legal effect from indexed text alone. Check existing inventory before acquisition."
+    }
+  ],
+  "source_downloads": 0,
+  "hf_writes": 0,
+  "legal_promotions": 0,
+  "acquisition_eligible": false
+}
