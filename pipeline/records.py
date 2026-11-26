@@ -10,6 +10,7 @@ null. The legacy writer is suspended in Cycle 14. plan_indiacode returns a read-
 from __future__ import annotations
 
 import json
+import hashlib
 import re
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -331,10 +332,12 @@ def plan_indiacode(paths: Paths) -> dict:
         docs[e["doc_id"]] = d
     # ---- judgments from the open-data buckets (crawler/opendata.py): fields from the index row
     from .judgments import build_doc, load_excluded
+    from .shadow_assessment import bind_raw
     excluded = load_excluded(paths)  # immutable historical events, not current eligibility
     historical_seen = set()
     recovered = []
     historical_absent = []
+    integrity_holds = []
     for r in conn.execute(
             """SELECT u.url, u.source, u.doc_id_hint, u.sha256, u.fetched_at, u.meta, f.raw_path, f.content_type
                FROM urls u JOIN files f ON f.sha256 = u.sha256
@@ -343,19 +346,28 @@ def plan_indiacode(paths: Paths) -> dict:
         handled_sources.add(r["source"])
         if r['sha256'] in excluded:
             historical_seen.add(r['sha256'])
-        if not paths.raw_file(r['raw_path']).exists():
+        try:
+            bind_raw(paths.root, r['raw_path'], r['sha256'])
+        except FileNotFoundError:
             if r['sha256'] in excluded:
                 historical_absent.append({'sha256': r['sha256'], 'source_url': r['url']})
             else:
-                problems.append(f"{r['url']}: raw file is missing and the judgment is not in the excluded list")
+                problems.append(f"{r['url']}: raw file missing")
+            continue
+        except (ValueError, OSError, TypeError) as exc:
+            integrity_holds.append({'sha256': r['sha256'], 'source_url': r['url'],
+                                    'reason': type(exc).__name__, 'state': 'SOURCE_INTEGRITY_HOLD'})
             continue
         d = build_doc(r, json.loads(r["meta"]), _base_doc(r, paths, aliases))
         if d["doc_id"] in docs:
-            d["doc_id"] = f"{d['doc_id'][:110]}-{r['sha256'][:8]}"
+            suffix = hashlib.sha256(r['url'].encode('utf-8')).hexdigest()[:16]
+            d["doc_id"] = f"{d['doc_id'][:103]}-{suffix}"
+            if d["doc_id"] in docs:
+                raise ValueError('candidate document identity collision')
         docs[d["doc_id"]] = d
         if r['sha256'] in excluded:
             recovered.append({'sha256': r['sha256'], 'doc_id': d['doc_id'], 'source_url': r['url'],
-                              'state': 'RECOVERED_PATH_PRESENT_BYTES_NOT_VERIFIED'})
+                              'state': 'RECOVERED_BYTES_MATCH_CRAWL_HASH_NOT_AUTHENTICATED'})
     conn.close()
     for d in list(docs.values()):            # a hand-listed copy takes its status from the Act it is a copy of
         target = d.get("provides_sections_for")
@@ -389,6 +401,7 @@ def plan_indiacode(paths: Paths) -> dict:
             'documents': docs, 'sections': sections, 'relations': edges,
             'problems': problems, 'recovered_path_candidates': recovered,
             'historical_absent': historical_absent,
+            'source_integrity_holds': integrity_holds,
             'historical_not_in_current_crawl': sorted(set(excluded) - historical_seen),
             'retained_stale_metadata_ids': stale_metadata}
 
