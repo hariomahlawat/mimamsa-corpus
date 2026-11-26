@@ -978,3 +978,4 @@
 {"id": "AFT-GUW-1026", "url": "https://aftrbghy.nic.in/judgement/Order dated-04-04-2024/OA(A)-54_2016.pdf", "status": "EmptyFileError", "http_code": null}
 {"id": "AFT-GUW-1027", "url": "https://aftrbghy.nic.in/judgement/Order dated-04-04-2024/OA-13 of 2019.pdf", "status": "EmptyFileError", "http_code": null}
 {"id": "AFT-GUW-1028", "url": "https://aftrbghy.nic.in/judgement/Order dated-04-04-2024/TA-01 of 2019.pdf", "status": "EmptyFileError", "http_code": null}
+{"id": "AFT-GUW-1029", "url": "https://aftrbghy.nic.in/judgement/Order_Dated_01_Oct_2024.pdf", "status": "eligible-local", "sha256": "250b4b4e14a2b6c8f4b6d6fadd436d90869572e3e5004f7c1aa9b62be4c67d1b", "pages": 36, "ocr": 36}
