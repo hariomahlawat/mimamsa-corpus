@@ -133,9 +133,8 @@ class TransportTests(unittest.TestCase):
 
 class SupervisorTests(unittest.TestCase):
     def test_timeout_and_error_output(self):
-        with self.assertRaises(Exception) as cm:
+        with self.assertRaisesRegex(TimeoutError,'metadata worker deadline exceeded'):
             supervise([sys.executable,'-c','import time; time.sleep(10)'],seconds=.05)
-        self.assertEqual(type(cm.exception).__name__,'TimeoutExpired')
         with self.assertRaisesRegex(ValueError,'unexpected output'):
             supervise([sys.executable,'-c','import sys; sys.stderr.write("synthetic secret")'])
     def test_valid_candidate_receipt(self):
