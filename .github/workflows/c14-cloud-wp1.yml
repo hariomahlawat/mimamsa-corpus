@@ -1,0 +1,28 @@
+name: C14 cloud WP1 metadata only
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Exact metadata-only operation
+        required: true
+        type: choice
+        options: [METADATA_GET_ONLY]
+      revision:
+        description: Exact approved HF dataset commit
+        required: true
+        type: string
+      code_commit:
+        description: Exact reviewed cloud branch commit
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  registration:
+    # Default branch registration only. No checkout, secrets, environment,
+    # source access or credentials. Dispatch against the reviewed cloud branch.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: echo "Registration only. Select the independently reviewed cloud branch for a permitted metadata operation."
