@@ -1,0 +1,293 @@
+{
+  "date": "2026-11-26",
+  "scope": "CA-01A batch 01; documentary findings and candidate anchors only, no legal promotion",
+  "source_inventory_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+  "render_receipt_commit": "e2610c3be5b2912a703ecd38d5062ddd6a5493ca",
+  "records": [
+    {
+      "target_id": "C13-G1-BSA-COMM-252352",
+      "request_id": "A4-ACQ-036",
+      "source_sha256": "fde9e9722eb4c01375525c2a30442903371913f4199b8cef1d031535d88228e7",
+      "source_md5": "6288ffbc08004bbe858e6c4450524dc2",
+      "bytes": 922833,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/fd/fde9e9722eb4c01375525c2a30442903371913f4199b8cef1d031535d88228e7/252352.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "original_bytes_rehashed_and_match": true,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+      "eligible_for_exact_anchor": false,
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "identity": {
+        "title": "Bharatiya Sakshya Adhiniyam, 2023",
+        "act_number": 47,
+        "act_year": 2023,
+        "notification": "S.O. 849(E)",
+        "issuing_authority": "Ministry of Home Affairs",
+        "notification_date": "2024-02-23",
+        "publication_date": "2024-02-24",
+        "gazette_part": "II",
+        "section": "3(ii)",
+        "issue_number": 810,
+        "empowering_section": "1(3)",
+        "signatory": "Shri Prakash, Joint Secretary",
+        "file_number": "1/3/2023-Judicial Cell-I"
+      },
+      "documentary_finding": {
+        "commencement_date": "2024-07-01",
+        "exception_as_notified": null,
+        "current_exception_status": "NOT_CHECKED_AGAINST_SUBSEQUENT_NOTIFICATIONS"
+      },
+      "physical_pages": 2,
+      "page_concordance": [
+        {
+          "physical": 1,
+          "printed": "1",
+          "language": "Hindi"
+        },
+        {
+          "physical": 2,
+          "printed": "2",
+          "language": "English"
+        }
+      ],
+      "visual_review": "Both pages examined; no apparent restrictive access marking; Gazette published by authority",
+      "anchor_candidate": {
+        "physical_page": 2,
+        "printed_page": "2",
+        "local_runner_reported_image_sha256": "f61460250ba4af770680d7718f2f07b3bfe7a09ac6e49407372e7f3bd4e19509",
+        "bbox_pdf_points_top_left": [
+          60,
+          116,
+          539,
+          154
+        ],
+        "quote": "as the date on which the provisions of the said Adhiniyam, shall come into force.",
+        "review": "English operative paragraph visually checked; bbox derived from PDF text blocks; local runner image bytes not independently rehashed"
+      },
+      "signature": "Visible digital signature appearance; cryptographic validity not tested"
+    },
+    {
+      "target_id": "C13-G1-BNS-COMM-252353",
+      "request_id": "A4-ACQ-036",
+      "source_sha256": "dfcd5df23fb711f2996959b13ee6ff6bd32ed38be1e1f2d1c820cbba86e2a8c9",
+      "source_md5": "393d0cd8277d823bfeb38113b0ae707d",
+      "bytes": 922134,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/df/dfcd5df23fb711f2996959b13ee6ff6bd32ed38be1e1f2d1c820cbba86e2a8c9/252353.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "original_bytes_rehashed_and_match": true,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+      "eligible_for_exact_anchor": false,
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "identity": {
+        "title": "Bharatiya Nyaya Sanhita, 2023",
+        "act_number": 45,
+        "act_year": 2023,
+        "notification": "S.O. 850(E)",
+        "issuing_authority": "Ministry of Home Affairs",
+        "notification_date": "2024-02-23",
+        "publication_date": "2024-02-24",
+        "gazette_part": "II",
+        "section": "3(ii)",
+        "issue_number": 811,
+        "empowering_section": "1(2)",
+        "signatory": "Shri Prakash, Joint Secretary",
+        "file_number": "1/3/2023-Judicial Cell-I"
+      },
+      "documentary_finding": {
+        "commencement_date": "2024-07-01",
+        "exception_as_notified": "Provision of sub-section (2) of section 106",
+        "current_exception_status": "NOT_CHECKED_AGAINST_SUBSEQUENT_NOTIFICATIONS"
+      },
+      "physical_pages": 2,
+      "page_concordance": [
+        {
+          "physical": 1,
+          "printed": "1",
+          "language": "Hindi"
+        },
+        {
+          "physical": 2,
+          "printed": "2",
+          "language": "English"
+        }
+      ],
+      "visual_review": "Both pages examined; no apparent restrictive access marking; Gazette published by authority",
+      "anchor_candidate": {
+        "physical_page": 2,
+        "printed_page": "2",
+        "local_runner_reported_image_sha256": "3f510d33fcf0b69d72922d9cc64107ecdc9c741070708bece57bb21505b830d9",
+        "bbox_pdf_points_top_left": [
+          60,
+          116,
+          539,
+          167
+        ],
+        "quote": "except the provision of sub-section (2) of section 106",
+        "review": "English operative paragraph visually checked; bbox derived from PDF text blocks; local runner image bytes not independently rehashed"
+      },
+      "signature": "Visible digital signature appearance; cryptographic validity not tested"
+    },
+    {
+      "target_id": "C13-G1-BNSS-COMM-252354",
+      "request_id": "A4-ACQ-036",
+      "source_sha256": "0db8a86a0cf41fbf5ee304ee84b8b145da0bd523af510baf351d79d051ef657d",
+      "source_md5": "af9e7e74b1f50f549ae6ab74e9747b58",
+      "bytes": 924297,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/0d/0db8a86a0cf41fbf5ee304ee84b8b145da0bd523af510baf351d79d051ef657d/252354.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "original_bytes_rehashed_and_match": true,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+      "eligible_for_exact_anchor": false,
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "identity": {
+        "title": "Bharatiya Nagarik Suraksha Sanhita, 2023",
+        "act_number": 46,
+        "act_year": 2023,
+        "notification": "S.O. 848(E)",
+        "issuing_authority": "Ministry of Home Affairs",
+        "notification_date": "2024-02-23",
+        "publication_date": "2024-02-24",
+        "gazette_part": "II",
+        "section": "3(ii)",
+        "issue_number": 809,
+        "empowering_section": "1(3)",
+        "signatory": "Shri Prakash, Joint Secretary",
+        "file_number": "1/3/2023-Judicial Cell-I"
+      },
+      "documentary_finding": {
+        "commencement_date": "2024-07-01",
+        "exception_as_notified": "Provisions of the entry relating to section 106(2) of the Bharatiya Nyaya Sanhita, 2023, in the First Schedule",
+        "current_exception_status": "NOT_CHECKED_AGAINST_SUBSEQUENT_NOTIFICATIONS"
+      },
+      "physical_pages": 2,
+      "page_concordance": [
+        {
+          "physical": 1,
+          "printed": "1",
+          "language": "Hindi"
+        },
+        {
+          "physical": 2,
+          "printed": "2",
+          "language": "English"
+        }
+      ],
+      "visual_review": "Both pages examined; no apparent restrictive access marking; Gazette published by authority",
+      "anchor_candidate": {
+        "physical_page": 2,
+        "printed_page": "2",
+        "local_runner_reported_image_sha256": "b67cff633c9809d1c8b2fab336cafabed8c7bc8b9d1436f9a98d0ef990151d07",
+        "bbox_pdf_points_top_left": [
+          60,
+          117,
+          539,
+          172
+        ],
+        "quote": "except the provisions of the entry relating to section 106(2) of the Bharatiya Nyaya Sanhita, 2023, in the First Schedule",
+        "review": "English operative paragraph visually checked; bbox derived from PDF text blocks; local runner image bytes not independently rehashed"
+      },
+      "signature": "Visible digital signature appearance; cryptographic validity not tested"
+    },
+    {
+      "target_id": "C13-G1-AA-ENACTED-1950",
+      "request_id": "A4-ACQ-023",
+      "source_sha256": "1519957a47352835942822b1b6da3ac4578c0aed1e74fbb847fb4c44e0a48fd4",
+      "source_md5": "68bcdd4e8db91eb83d1e6b92a393b2db",
+      "bytes": 6491633,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/15/1519957a47352835942822b1b6da3ac4578c0aed1e74fbb847fb4c44e0a48fd4/E-2350-1950-0011-109089.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "original_bytes_rehashed_and_match": true,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+      "eligible_for_exact_anchor": false,
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "identity": {
+        "title": "The Army Act, 1950",
+        "act_number": 46,
+        "act_year": 1950,
+        "act_number_as_printed": "XLVI",
+        "assent_date": "1950-05-20",
+        "publication_date": "1950-05-23",
+        "issuing_authority": "Ministry of Law",
+        "gazette_part": "II",
+        "section": "1",
+        "issue_number": 11
+      },
+      "physical_pages": 104,
+      "scope": {
+        "whole_gazette_preserved": true,
+        "instrument_physical_pages": [
+          1,
+          45
+        ],
+        "full_pages": [
+          1,
+          44
+        ],
+        "shared_page": 45,
+        "shared_page_printed": "192(43)",
+        "army_schedule_candidate_bbox_pdf_points_top_left": [
+          0,
+          50,
+          415,
+          270
+        ],
+        "exclude_after_y_pdf_points": 270,
+        "following_instrument": "The Insurance (Amendment) Act, 1950, No. XLVII of 1950",
+        "excluded_whole_pages": [
+          46,
+          104
+        ],
+        "boundary_review": "Visual confirmation of Schedule and next title on p45; y=270 chosen in whitespace between instruments, candidate region only"
+      },
+      "anchor_candidates": [
+        {
+          "physical_page": 1,
+          "printed_page": "191",
+          "local_runner_reported_image_sha256": "cab6bc5977f6731641eb987ca246fec7d8451f4dfd197d2c03723d7bc89961d9",
+          "subject": "Enactment identity and section 1(2); separate commencement notification required"
+        },
+        {
+          "physical_page": 44,
+          "printed_page": "192(42)",
+          "local_runner_reported_image_sha256": "e3ebe34add58130dbdc448c1201035d50abfc4ccd56686c715ab691fbb5b352f",
+          "subject": "Sections 192–196, including 193 publication and 194 repeals; left-edge clipping visible"
+        },
+        {
+          "physical_page": 45,
+          "printed_page": "192(43)",
+          "local_runner_reported_image_sha256": "971a16134d8e9d629c1349a4f19a3af1ab78aba85b9d40d4df993ce4d5e64b44",
+          "subject": "Schedule under section 194; next instrument begins same page"
+        }
+      ],
+      "access_marking_review": "PARTIAL_VISUAL_SCREEN_ONLY; full page-by-page access review pending",
+      "text_quality": "Historical OCR layer visibly corrupt; e.g. wrong year/section numerals, faint print on p8, left-edge clipping p44. No whole-act transcription approved.",
+      "commencement_date": null,
+      "commencement_note": "Section 1(2) delegates commencement to Gazette notification; publication/assent dates not commencement.",
+      "page_concordance": "Candidate pagination 191, 192, 192(1) onward; only sampled pages confirmed; full concordance pending"
+    }
+  ],
+  "findings": [
+    {
+      "id": "C14-CA01-F01",
+      "severity": "P1",
+      "subject": "Composite Gazette source boundaries",
+      "recommendation": "Index Army Act as sub-document, pages 1–44 and upper region of 45; do not index other Acts as Army Act. Preserve original PDF. Require sub-document region anchors in extraction and retrieval tests."
+    },
+    {
+      "id": "C14-CA01-F02",
+      "severity": "P1",
+      "subject": "Historical OCR layer fidelity",
+      "recommendation": "Use page image for exact text; OCR/reconcile against separate original if clipping or fading prevents reading. Never silently repair legal wording."
+    },
+    {
+      "id": "C14-CA01-F03",
+      "severity": "P1",
+      "subject": "Commencement exceptions",
+      "recommendation": "Record BNS 106(2) and corresponding BNSS First Schedule entry as explicit exclusions from these notifications, not permanent non-commencement. Check subsequent notifications before current-law conclusion."
+    }
+  ],
+  "limits": [
+    "Four uploaded PDFs independently rehashed and compared to registered values; candidate image hashes refer to owner manifest, not independently matched render bytes.",
+    "No full access clearance of composite Gazette, full transcription, cryptographic signature validation, subsequent notification search or independent legal review completed.",
+    "No changes to Authority Ledger, C5 active registers, staging, HF or application."
+  ]
+}
