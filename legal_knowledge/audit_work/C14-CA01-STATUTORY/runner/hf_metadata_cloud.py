@@ -4,6 +4,7 @@ from __future__ import annotations
 from contextlib import contextmanager
 from datetime import datetime, timezone
 import stat
+from types import SimpleNamespace
 import os
 from pathlib import Path
 import re
@@ -138,6 +139,38 @@ def publish(job, raw):
         os.unlink(pending, dir_fd=job)
 
 
+def worker_authority(args):
+    """Recheck the signed, host-bound scope before any network request."""
+    from cryptography.hazmat.primitives.serialization import load_pem_public_key
+
+    host = host_settings()
+    jobs, public, _ = host
+    approved = scope(SimpleNamespace(code_commit=args["code_commit"],
+                                     job_name=args["job_name"]), host)
+    if approved["runtime_sha256"] != args["runtime_sha256"]:
+        raise ValueError("runtime mismatch")
+    raw = bytes.fromhex(args["approval_hex"])
+    signature = bytes.fromhex(args["signature_hex"])
+    fingerprint = sha256(load_pem_public_key(public).public_bytes_raw())
+    verify_approval(raw, signature, public, fingerprint,
+                    expected=approved, now=datetime.now(timezone.utc))
+    flags = os.O_RDONLY | os.O_NOFOLLOW | os.O_DIRECTORY
+    root_fd = os.open(jobs, flags)
+    try:
+        root_stat = os.fstat(root_fd)
+        if root_stat.st_uid != os.geteuid() or stat.S_IMODE(root_stat.st_mode) != 0o700:
+            raise ValueError("private jobs root required")
+        job_fd = os.open(approved["job_name"], flags, dir_fd=root_fd)
+        try:
+            job_stat = os.fstat(job_fd)
+            if job_stat.st_uid != os.geteuid() or stat.S_IMODE(job_stat.st_mode) != 0o700:
+                raise ValueError("private claimed job required")
+        finally:
+            os.close(job_fd)
+    finally:
+        os.close(root_fd)
+
+
 def worker():
     stage = "WORKER_INPUT_REJECTED"
     try:
@@ -145,14 +178,15 @@ def worker():
         if len(raw) > MAX_WORKER_INPUT:
             raise ValueError("oversize worker input")
         args = strict_json(raw)
-        if set(args) != {"revision", "code_commit", "runtime_sha256", "token"}:
+        if set(args) != {"revision", "code_commit", "runtime_sha256", "token",
+                         "job_name", "approval_hex", "signature_hex"}:
             raise ValueError("unexpected input")
         if (args["revision"] != REVISION or not HEX40.fullmatch(args["code_commit"])
                 or not isinstance(args["token"], str) or not _valid_token(args["token"])):
             raise ValueError("invalid worker input")
+        stage = "WORKER_APPROVAL_REJECTED"
+        worker_authority(args)
         stage = "RUNTIME_OR_RESTRICTION_REJECTED"
-        if runtime(ROOT, args["code_commit"], verify_git=False) != args["runtime_sha256"]:
-            raise ValueError("runtime mismatch")
         restricted = bind_restriction(ROOT)
         stage = "TRANSPORT_SETUP_FAILED"
         exchange = DirectMetadataHTTPS(REVISION, args["token"])
@@ -181,14 +215,14 @@ def worker():
 
 
 FAILURES = {
-    "WORKER_INPUT_REJECTED", "RUNTIME_OR_RESTRICTION_REJECTED", "TRANSPORT_SETUP_FAILED",
+    "WORKER_INPUT_REJECTED", "WORKER_APPROVAL_REJECTED", "RUNTIME_OR_RESTRICTION_REJECTED", "TRANSPORT_SETUP_FAILED",
     "CREDENTIAL_REQUEST_FAILED", "REVISION_REQUEST_FAILED", "TREE_REQUEST_FAILED",
     "CREDENTIAL_RESPONSE_REJECTED", "REVISION_RESPONSE_REJECTED", "TREE_RESPONSE_REJECTED",
     "INVENTORY_VALIDATION_FAILED", "CREDENTIAL_SCOPE_UNVERIFIED", "METADATA_DEADLINE",
 }
 
 
-def run(approved, approval, job):
+def run(approved, approval, signature, job):
     fingerprint = approved["runtime_sha256"]
     restricted = bind_restriction(ROOT)
     result = None
@@ -199,7 +233,9 @@ def run(approved, approval, job):
             failure = "CREDENTIAL_MISSING_OR_INVALID"
         else:
             inputs = canonical({"revision": REVISION, "code_commit": approved["code_commit"],
-                                "runtime_sha256": fingerprint, "token": token})
+                                "runtime_sha256": fingerprint, "token": token,
+                                "job_name": approved["job_name"], "approval_hex": approval.hex(),
+                                "signature_hex": signature.hex()})
             boot = ("import runpy,sys; from pathlib import Path; "
                     "p=sys.argv.pop(1); sys.path.append(str(Path(p).parent)); runpy.run_path(p,run_name='__main__')")
             payload = supervise([sys.executable, "-I", "-B", "-c", boot, str(Path(__file__).resolve()), "--worker"],
@@ -258,10 +294,11 @@ def main(argv=None):
         jobs, public, _ = host
         fingerprint = sha256(load_pem_public_key(public).public_bytes_raw())
         raw = bounded(args.approval, MAX_APPROVAL_BYTES)
-        verify_approval(raw, bounded(args.signature, 64), public, fingerprint,
+        signature = bounded(args.signature, 64)
+        verify_approval(raw, signature, public, fingerprint,
                         expected=approved, now=now)
         with claim(jobs, approved["job_name"]) as job:
-            return run(approved, raw, job)
+            return run(approved, raw, signature, job)
     except (Exception, KeyboardInterrupt):
         print("Cloud WP1 refused: deployment, one-use approval or receipt could not be verified.")
         return 2

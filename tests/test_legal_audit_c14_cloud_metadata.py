@@ -26,7 +26,7 @@ class CloudTests(unittest.TestCase):
                  patch.object(cloud, "bind_restriction", return_value=lambda **kw: False), \
                  patch.object(cloud, "read_token", side_effect=EOFError), \
                  patch.object(cloud, "supervise") as sup, contextlib.redirect_stdout(io.StringIO()) as stdout:
-                self.assertEqual(cloud.run(APPROVED, b"fixture approval", job), 1)
+                self.assertEqual(cloud.run(APPROVED, b"fixture approval", b"fixture signature", job), 1)
                 sup.assert_not_called()
             out = jobs / APPROVED["job_name"] / cloud.RECEIPT
             receipt = json.loads(out.read_bytes())
@@ -39,13 +39,14 @@ class CloudTests(unittest.TestCase):
             self.assertEqual(json.loads(stdout.getvalue())["receipt_sha256"], cloud.sha256(out.read_bytes()))
 
     def test_stage_failure_is_sanitized(self):
-        inputs={"revision":cloud.REVISION,"code_commit":COMMIT,"runtime_sha256":"d"*64,"token":"hf_synthetic"}
+        inputs={"revision":cloud.REVISION,"code_commit":COMMIT,"runtime_sha256":"d"*64,"token":"hf_synthetic",
+                "job_name":"wp1-fixture","approval_hex":"00","signature_hex":"00"}
         stdin=type("Input",(),{"buffer":io.BytesIO(cloud.canonical(inputs))})()
         def transport(url,cap,remaining):
             raise OSError("synthetic secret detail")
         def collect(revision,exchange,restricted,verify_credential):
             exchange("https://huggingface.co/api/whoami-v2",100,1)
-        with patch.object(sys,"stdin",stdin),patch.object(cloud,"runtime",return_value="d"*64),\
+        with patch.object(sys,"stdin",stdin),patch.object(cloud,"worker_authority"),\
              patch.object(cloud,"bind_restriction",return_value=lambda **kw:False),\
              patch.object(cloud,"DirectMetadataHTTPS",return_value=transport),\
              patch.object(cloud,"collect_receipt",side_effect=collect),\
@@ -53,6 +54,47 @@ class CloudTests(unittest.TestCase):
             self.assertEqual(cloud.worker(),0)
         self.assertEqual(json.loads(stdout.getvalue()),{"acquisition_eligible":False,"failure":"CREDENTIAL_REQUEST_FAILED"})
         self.assertNotIn("secret",stdout.getvalue())
+
+    def test_unsigned_worker_input_never_enters_transport(self):
+        inputs = {"revision": cloud.REVISION, "code_commit": COMMIT,
+                  "runtime_sha256": "d"*64, "token": "hf_synthetic"}
+        stdin = type("Input", (), {"buffer": io.BytesIO(cloud.canonical(inputs))})()
+        with patch.object(sys, "stdin", stdin), patch.object(cloud, "DirectMetadataHTTPS") as transport, \
+                contextlib.redirect_stdout(io.StringIO()) as stdout:
+            self.assertEqual(cloud.worker(), 0)
+            transport.assert_not_called()
+        self.assertEqual(json.loads(stdout.getvalue())["failure"], "WORKER_INPUT_REJECTED")
+
+    def test_worker_rejects_wrong_signature_before_transport(self):
+        from datetime import datetime, timezone
+        from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+        from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
+        key = Ed25519PrivateKey.generate()
+        public = key.public_key().public_bytes(Encoding.PEM, PublicFormat.SubjectPublicKeyInfo)
+        expected = dict(revision=cloud.REVISION, code_commit=COMMIT, runtime_sha256="d"*64,
+                        plan_sha256="e"*64, register_blob="f"*40, guard_blob="a"*40,
+                        jobs_root_sha256="7"*64, job_name="wp1-fixture", deployment_sha256="8"*64)
+        raw = cloud.canonical(cloud.approval_payload(**expected, now=datetime.now(timezone.utc)))
+        with tempfile.TemporaryDirectory() as temporary:
+            jobs = Path(temporary).resolve()
+            inputs = {"revision": cloud.REVISION, "code_commit": COMMIT,
+                      "runtime_sha256": "d"*64, "token": "hf_synthetic",
+                      "job_name": "wp1-fixture", "approval_hex": raw.hex(),
+                      "signature_hex": (b"0"*64).hex()}
+            stdin = type("Input", (), {"buffer": io.BytesIO(cloud.canonical(inputs))})()
+            with patch.object(sys, "stdin", stdin), \
+                    patch.object(cloud, "host_settings", return_value=(jobs, public, "8"*64)), \
+                    patch.object(cloud, "scope", return_value=expected), \
+                    patch.object(cloud, "DirectMetadataHTTPS") as transport, \
+                    contextlib.redirect_stdout(io.StringIO()) as stdout:
+                self.assertEqual(cloud.worker(), 0)
+                transport.assert_not_called()
+            self.assertEqual(json.loads(stdout.getvalue())["failure"], "WORKER_APPROVAL_REJECTED")
+            inputs["signature_hex"] = key.sign(raw).hex()
+            with cloud.claim(jobs, "wp1-fixture"), \
+                    patch.object(cloud, "host_settings", return_value=(jobs, public, "8"*64)), \
+                    patch.object(cloud, "scope", return_value=expected):
+                cloud.worker_authority(inputs)
 
     def test_complete_worker_and_parent_round_trip(self):
         from types import SimpleNamespace
@@ -95,12 +137,12 @@ class CloudTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             jobs = Path(tmp).resolve()
             with cloud.claim(jobs, APPROVED["job_name"]) as job, \
-                 patch.object(cloud, "runtime", return_value="d"*64), \
+                 patch.object(cloud, "worker_authority"), \
                  patch.object(cloud, "bind_restriction", return_value=restricted), \
                  patch.object(cloud, "read_token", return_value="hf_synthetic"), \
                  patch.object(cloud, "supervise", side_effect=synthetic_supervisor), \
                  contextlib.redirect_stdout(io.StringIO()) as stdout:
-                self.assertEqual(cloud.run(APPROVED, b"fixture approval", job), 0)
+                self.assertEqual(cloud.run(APPROVED, b"fixture approval", b"fixture signature", job), 0)
             raw = (jobs / APPROVED["job_name"] / cloud.RECEIPT).read_bytes()
             receipt=json.loads(raw)
             report=json.loads(stdout.getvalue())
