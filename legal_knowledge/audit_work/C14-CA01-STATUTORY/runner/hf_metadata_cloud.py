@@ -25,6 +25,8 @@ from hf_metadata_credential import CredentialScopeError
 REVISION = "f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc"
 REF = "refs/heads/corpus/cloud-wp1-20261126"
 APPROVAL = "METADATA_GET_ONLY"
+OWNER = "hariomahlawat"
+WORKFLOW_REF = REPO + "/.github/workflows/c14-cloud-wp1.yml@" + REF
 SELF = "legal_knowledge/audit_work/C14-CA01-STATUTORY/runner/hf_metadata_cloud.py"
 
 
@@ -61,7 +63,11 @@ def scope(env, event):
         or env.get("GITHUB_REPOSITORY") != REPO
         or env.get("GITHUB_REF") != REF
         or env.get("RUNNER_OS") != "Linux"
-        or env.get("WP1_CLOUD_ENABLED") != "true"
+        or env.get("WP1_CLOUD_APPROVED_COMMIT") != commit
+        or env.get("GITHUB_WORKFLOW_SHA") != commit
+        or env.get("GITHUB_WORKFLOW_REF") != WORKFLOW_REF
+        or env.get("GITHUB_ACTOR") != OWNER
+        or env.get("GITHUB_TRIGGERING_ACTOR") != OWNER
         or not HEX40.fullmatch(commit)
         or not re.fullmatch(r"[0-9]+", env.get("GITHUB_RUN_ID", ""))
         or not re.fullmatch(r"[0-9]+", env.get("GITHUB_RUN_ATTEMPT", ""))
