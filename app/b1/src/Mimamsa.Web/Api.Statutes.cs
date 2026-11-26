@@ -21,7 +21,7 @@ public static partial class Api
                 TextQuality.NoText => "No extracted text",
                 _ => (string?)null,
             },
-            basis = a.Basis, excluded_from_search = d.TextExcludedFromSearch,
+            basis = (string?)a.Basis, excluded_from_search = d.TextExcludedFromSearch,
         };
 
     static string LanguageName(string? code) => code switch { "hi" => "Hindi", "en" => "English", "en+hi" => "English and Hindi", "none" => "No text", _ => code ?? "Not recorded" };
