@@ -66,6 +66,9 @@ class CloudTests(unittest.TestCase):
         self.assertEqual(json.loads(stdout.getvalue())["failure"], "WORKER_INPUT_REJECTED")
 
     def test_worker_rejects_wrong_signature_before_transport(self):
+        import importlib.util
+        if importlib.util.find_spec('cryptography') is None:
+            self.skipTest('requires reviewed Ed25519 runtime; dedicated cloud CI installs it')
         from datetime import datetime, timezone
         from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
         from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
