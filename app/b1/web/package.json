@@ -1,0 +1,13 @@
+{
+  "name": "mimamsa-b1-web",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Offline vendor assets for the B1 UI (PDF.js 6.5.438, Apache-2.0). Copied into wwwroot/vendor by vendor.mjs; never fetched at run time.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "vendor": "node vendor.mjs"
+  },
+  "dependencies": {
+    "pdfjs-dist": "6.5.438"
+  }
+}

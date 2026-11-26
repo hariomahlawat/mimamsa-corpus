@@ -264,6 +264,72 @@ def servable(site: Path, kind: str, item_id: str, *, exclusions) -> bool:
     return bool(owner) and not _excluded(exclusions, owner[0], owner[1])
 
 
+MATERIALIZED_FORMAT = 1
+RESEARCH_PREFIX = "research/"
+
+
+def _research_files(bundle: Path, manifest: dict, register) -> tuple[dict[str, bytes], list[tuple[str, str]]]:
+    """Signed, checksummed `report` files under research/ (JSONL research aids such as A4 provision versions).
+    They are not source evidence: the importer only re-checks the restricted register on every line (fail closed for
+    the whole file) and copies them verbatim; the application resolves any copy/page they name against the verified
+    copies of the active generation and labels them AUTOMATED_CANDIDATE_NOT_VERIFIED."""
+    from mimamsa_contract.restricted import load_register
+    reg = register or load_register()
+    keep, rejected = {}, []
+    for f in manifest.get("files", []):
+        rel = f.get("path", "")
+        if f.get("kind") != "report" or not rel.startswith(RESEARCH_PREFIX) or not rel.endswith(".jsonl"):
+            continue
+        data = (bundle / rel).read_bytes()
+        try:
+            lines = [json.loads(x) for x in data.decode("utf-8").splitlines() if x.strip()]
+        except (UnicodeDecodeError, ValueError):
+            rejected.append((rel, "research file is not valid UTF-8 JSONL"))
+            continue
+        if reg.match(path=rel) or any(reg.deep_match(x) for x in lines):
+            rejected.append((rel, "research file references restricted material"))
+            continue
+        keep[rel] = data
+    return keep, rejected
+
+
+def _materialize(gdir: Path, manifest: dict, docs, derived, cands, texts: dict, verified: dict, research: dict):
+    """Write the verified records and verified derivative text into the (temporary) generation directory, so that a
+    serving process reads only importer-verified evidence from the ACTIVE generation (plus vault originals). Items
+    that are UNRESOLVED are never written. Same fsync discipline as generation.json; the directory is renamed into
+    place as a whole, so a crash leaves either nothing or a complete generation."""
+    ok_docs = set(verified["documents"])
+    ok_der = set(verified["derived_text"])
+    ok_cand = set(verified["candidates"])
+
+    def did(t):
+        return f"{t['doc_id']}@{t['pipeline']['name']}/{t['pipeline']['version']}"
+
+    out = {
+        "records/documents.jsonl": [d for d in docs if d["doc_id"] in ok_docs],
+        "records/derived_text.jsonl": [t for t in derived if did(t) in ok_der],
+        "records/candidates.jsonl": [c for c in cands if c["candidate_id"] in ok_cand],
+    }
+    files = {rel: "".join(json.dumps(r, sort_keys=True, ensure_ascii=False) + "\n" for r in recs).encode("utf-8")
+             for rel, recs in out.items()}
+    for t in out["records/derived_text.jsonl"]:
+        files[f"derived/{t['text_sha256']}.txt"] = texts[t["text_path"]]
+    files["release/RELEASE.json"] = json.dumps({k: manifest.get(k) for k in (
+        "release_id", "release_sequence", "created_at", "pinned", "candidate_banner", "auth_ledger_version",
+        "restricted_material", "schema_versions")}, indent=1, sort_keys=True).encode()
+    for rel, data in research.items():
+        files[rel] = data
+    for rel, data in files.items():
+        p = gdir / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        with open(p, "wb") as fh:
+            fh.write(data)
+            fh.flush()
+            os.fsync(fh.fileno())
+    for sub in {p.parent for p in gdir.rglob("*") if p.is_file()}:
+        _fsync_dir(sub)
+
+
 def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_key=None, mode="production",
                    register=None, rollback=False, today=None) -> ImportResult:
     bundle, site = Path(bundle), Path(site)
@@ -480,15 +546,21 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
         except OSError as exc:
             raise ImporterError(f"vault write failed: {type(exc).__name__}") from exc
         _crashpoint("after_vault_object")
+    research, research_rejected = _research_files(bundle, manifest, register)
+    for rel, why in research_rejected:
+        res.unresolved.append({"kind": "research_file", "id": rel, "reasons": [why]})
     generation = {"release_id": res.release_id, "release_sequence": manifest.get("release_sequence"),
                   "sums_sha256": sums_digest, "servable": res.verified, "quarantine": res.unresolved,
                   "item_document": item_document, "candidate_evidence": evidence,
-                  "page_counts": copy_pages, "exclusion_channel": exclusion_mode}
+                  "page_counts": copy_pages, "exclusion_channel": exclusion_mode,
+                  "materialized": {"format": MATERIALIZED_FORMAT, "records": "records/",
+                                   "derived": "derived/<text_sha256>.txt", "research": sorted(research)}}
     try:
         gens = site / "generations"
         gens.mkdir(parents=True, exist_ok=True)
         tmpdir = gens / f".tmp-{res.release_id}"
         tmpdir.mkdir()
+        _materialize(tmpdir, manifest, docs, derived, cands, texts, res.verified, research)
         with open(tmpdir / "generation.json", "wb") as fh:
             fh.write(json.dumps(generation, indent=1, sort_keys=True).encode())
             fh.flush()

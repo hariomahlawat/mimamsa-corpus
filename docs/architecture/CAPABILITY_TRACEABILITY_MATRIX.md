@@ -1116,3 +1116,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 4. **Restricted material** (register `config/restricted_material.json`) never reaches any index, embedding, bundle, graph view or export.
 5. **The 5 deferred P2s** (C11 F05–F08, WSG-R04) keep their capabilities non-operational: CAP-JI-03 (F05, F08), CAP-JI-05 (F06, F07), CAP-DS-02 (WSG-R04).
 
+
+## B1 prototype status (claude/c13-b1, not independently reviewed)
+
+The CSV column `dependencies_limitations` carries a "B1 prototype" note for 24 capabilities. Evidence and exact shortfalls are in [b1/B1_PROTOTYPE.md](b1/B1_PROTOTYPE.md). The implemented rows are CAP-US-01, -02, -04, -05, -06 and -07; CAP-RW-01, -02, -04 and -05; and CAP-KA-03 and -08. These are partial: CAP-SE-01 and -02, CAP-JI-06, CAP-KA-01, -02 and -04. CAP-US-03 (semantic) is **not implemented**. Display-only early items are CAP-JI-03, CAP-KG-05 and CAP-CA-04, and the gate notices for CAP-CA-01 and CAP-SE-03.
