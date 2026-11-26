@@ -50,7 +50,7 @@ switch (a[0])
         var d = DenseIndex.Build(ix, gen.GenerationId, e, a[3], "multilingual-e5-small@614241f6");
         var svc = new SearchService(ix, _ => false);
         var rows = new JsonArray();
-        var p99s = new List<double>(); var lexTop = new List<double>();
+        var p99s = new List<double>(); var p999s = new List<double>(); var lexTop = new List<double>();
         foreach (var q in JsonNode.Parse(File.ReadAllText(a[4]))!.AsArray())
         {
             var text = q!["query"]!.GetValue<string>();
@@ -60,12 +60,15 @@ switch (a[0])
             var top = svc.Search(text, new SearchFilters()).Hits.FirstOrDefault(h => h.Tier == "lexical");
             double? lexSim = null;
             if (top is not null) lexSim = d.TopK(text, ix.N).First(x => x.Passage == top.PassageIndex).Score;
-            p99s.Add(P(0.99)); if (lexSim is { } l) lexTop.Add(l);
+            p99s.Add(P(0.99)); p999s.Add(P(0.999)); if (lexSim is { } l) lexTop.Add(l);
             rows.Add(new JsonObject { ["id"] = q["id"]!.GetValue<string>(), ["median"] = Math.Round(P(0.5), 4), ["p99"] = Math.Round(P(0.99), 4),
                 ["p999"] = Math.Round(P(0.999), 4), ["max"] = Math.Round(sorted[^1], 4), ["lexical_top1_similarity"] = lexSim is null ? null : Math.Round(lexSim.Value, 4) });
         }
         var summary = new JsonObject { ["queries"] = rows.Count, ["passages"] = ix.N, ["mean_p99"] = Math.Round(p99s.Average(), 4),
-            ["max_p99"] = Math.Round(p99s.Max(), 4), ["median_lexical_top1_similarity"] = Math.Round(lexTop.OrderBy(x => x).ElementAt(lexTop.Count / 2), 4) };
+            ["max_p99"] = Math.Round(p99s.Max(), 4),
+            // Similarity floor by the rule fixed before any calibration numbers were seen: median over the walkthrough
+            // queries of each query's 99.9th-percentile similarity across all passages.
+            ["floor_median_p999"] = Math.Round(p999s.OrderBy(x => x).ElementAt(p999s.Count / 2), 4), ["median_lexical_top1_similarity"] = Math.Round(lexTop.OrderBy(x => x).ElementAt(lexTop.Count / 2), 4) };
         File.WriteAllText(a[5], new JsonObject { ["summary"] = summary, ["per_query"] = rows }.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
         Console.WriteLine(summary.ToJsonString());
         break;

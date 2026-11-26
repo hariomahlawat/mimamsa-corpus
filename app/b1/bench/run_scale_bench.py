@@ -65,7 +65,7 @@ def main():
     a = ap.parse_args()
     base = f"http://127.0.0.1:{a.port}"
     app_pw = os.environ["MIMAMSA_APP_PW"]
-    dsn = f"Host=127.0.0.1;Port=55499;Username=mimamsa;Password={app_pw};Database=c14s4_bench;Maximum Pool Size=15"
+    dsn = f"Host=127.0.0.1;Port=55499;Username=mimamsa;Password={app_pw};Database=c14s4_bench;Maximum Pool Size=10"
     psql("DROP DATABASE IF EXISTS c14s4_bench;")
     psql("CREATE DATABASE c14s4_bench OWNER mimamsa;")
     user_pw = secrets.token_urlsafe(18)

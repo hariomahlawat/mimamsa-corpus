@@ -64,6 +64,32 @@ public class HybridTests
     }
 
     [Fact]
+    public void FloorAboveEveryScoreLeavesLexicalResultsUnchanged()
+    {
+        var b1 = new SearchService(Ix, _ => false);
+        // FixedScorer scores are 0.9, 0.89, ...: a floor of 0.95 admits none, so no dense hit may enter
+        var on = new SearchService(Ix, _ => false) { Semantic = new FixedScorer(Enumerable.Range(0, Ix.N).Reverse().ToArray()), Hybrid = new HybridOptions(MinSimilarity: 0.95) };
+        foreach (var q in new[] { "notice", "hearing written notice allegation" })
+        {
+            var a = b1.Search(q, new SearchFilters()); var b = on.Search(q, new SearchFilters());
+            Assert.Equal(a.Hits.Select(h => h.PassageIndex), b.Hits.Select(h => h.PassageIndex));
+            Assert.NotEqual("hybrid", b.Mode);
+            Assert.DoesNotContain(b.Hits, h => h.Tier == "semantic");
+        }
+    }
+
+    [Fact]
+    public void FloorAdmitsOnlyPassagesAtOrAboveIt()
+    {
+        int last = Ix.N - 1, prev = Ix.N - 2;
+        // last scores 0.90, prev 0.89; floor 0.895 keeps only `last` as a dense candidate
+        var on = new SearchService(Ix, _ => false) { Semantic = new FixedScorer(last, prev), Hybrid = new HybridOptions(MinSimilarity: 0.895) };
+        var r = on.Search("notice", new SearchFilters());
+        Assert.Contains(r.Hits, h => h.PassageIndex == last && h.Reasons.Any(s => s.Contains("embedding similarity")));
+        Assert.DoesNotContain(r.Hits, h => h.PassageIndex == prev && h.Reasons.Any(s => s.Contains("embedding similarity")));
+    }
+
+    [Fact]
     public void ExactAndOperatorQueriesStayLexical()
     {
         var on = new SearchService(Ix, _ => false) { Semantic = new FixedScorer(0, 1, 2) };

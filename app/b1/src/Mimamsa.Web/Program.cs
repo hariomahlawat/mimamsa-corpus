@@ -81,7 +81,10 @@ if (conf.GetValue("Mimamsa:Hybrid:Enabled", false))
 var search = new SearchService(index, docId => appRef!.VisibleDocument(docId) is null)
 {
     Semantic = semantic,
-    Hybrid = new HybridOptions(conf.GetValue("Mimamsa:Hybrid:LexicalDepth", 200), conf.GetValue("Mimamsa:Hybrid:DenseDepth", 100), conf.GetValue("Mimamsa:Hybrid:RrfK", 60)),
+    // MinSimilarity: a passage enters through the dense layer only at or above this cosine similarity. The value is
+    // calibrated on the C14 walkthrough queries over the real sample (HybridBench calibrate), never on oracle data.
+    Hybrid = new HybridOptions(conf.GetValue("Mimamsa:Hybrid:LexicalDepth", 200), conf.GetValue("Mimamsa:Hybrid:DenseDepth", 100), conf.GetValue("Mimamsa:Hybrid:RrfK", 60),
+                               conf.GetValue("Mimamsa:Hybrid:MinSimilarity", 0.0)),
 };
 var app0 = new AppServices
 {
