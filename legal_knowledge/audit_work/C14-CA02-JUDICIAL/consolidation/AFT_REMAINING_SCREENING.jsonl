@@ -261,3 +261,5 @@
 {"id": "AFT-GUW-309", "url": "https://aftrbghy.nic.in/judgement/Judgments &amp; Orders dated 27-07-2021 CA-02 of 2020 in OA-37 of 2018.pdf", "status": "HTTPError", "http_code": 404}
 {"id": "AFT-GUW-310", "url": "https://aftrbghy.nic.in/judgement/Judgments and Orders dated 27 Jul 2021.pdf", "status": "eligible-local", "sha256": "d75d20b4e0f3c108c41f37ce2b5567a71b682e500f47d56a136e984e70598560", "pages": 62, "ocr": 62}
 {"id": "AFT-GUW-311", "url": "https://aftrbghy.nic.in/judgement/Jugment_&_Order_dated_11_Mar_2025_OA_01_of_2024_with_MA_01_of_2024.pdf", "status": "eligible-local", "sha256": "7ff6457702711b88dca14bc13245b2f4cdbc3a5e1f0aca70730ec6bc55fa7f40", "pages": 14, "ocr": 14}
+{"id": "AFT-GUW-312", "url": "https://aftrbghy.nic.in/judgement/Kochi 03 Judgment/OA - 01_2022.pdf", "status": "eligible-local", "sha256": "34edcdbf1eec9a3e49262d36e348559f43247bcca46896c10a09fe7a7bbb1b96", "pages": 20, "ocr": 20}
+{"id": "AFT-GUW-313", "url": "https://aftrbghy.nic.in/judgement/Kochi 03 Judgment/OA - 16_2023.pdf", "status": "eligible-local", "sha256": "660e05e9991550696d66adcfe9d466e8525aaf1f4c352ad4852ca0c827af67a8", "pages": 10, "ocr": 10}
