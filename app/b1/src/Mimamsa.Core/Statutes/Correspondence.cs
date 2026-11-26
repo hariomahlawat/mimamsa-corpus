@@ -42,6 +42,9 @@ public static partial class Correspondence
     [GeneratedRegex(@"^(?<text>.*[A-Za-z.)”""'])\s+(?<old>\d{1,3}[A-Z]{0,2}(?:\(\w{1,4}\))*)$")] private static partial Regex OldEnd();
     [GeneratedRegex(@"^(?:New\b.*|Newly\b.*|[-–—]+)$")] private static partial Regex NewMark();
     [GeneratedRegex(@"\d{1,3}[A-Z]{0,2}")] private static partial Regex BaseTok();
+    // Codex review of PR #70: sub-section parts ("(1)", "( 2 )", "(a)") are removed before base sections are read, so
+    // "320(1)" yields 320 and "65B(2)" yields 65B, never a spurious section 1 or 2.
+    [GeneratedRegex(@"\(\s?[0-9a-zA-Z]{1,4}\s?\)")] private static partial Regex SubPart();
     [GeneratedRegex(@",\s*para\s*\d+")] private static partial Regex Para();
 
     static readonly string[] SummaryStarts = { "No change", "No ", "Section ", "IPC ", "CrPC ", "IEA ", "BNS ", "BNSS ", "BSA ", "Words ", "Word ",
@@ -119,7 +122,7 @@ public static partial class Correspondence
             }
             if (old is null && !isNew) continue;   // unreadable row: skipped, not guessed
             var bases = old is null ? new List<string>()
-                : BaseTok().Matches(Para().Replace(old, "")).Select(x => x.Value).Where(b => int.Parse(Regex.Match(b, @"^\d+").Value) > 0).Distinct().ToList();
+                : BaseTok().Matches(SubPart().Replace(Para().Replace(old, ""), "")).Select(x => x.Value).Where(b => int.Parse(Regex.Match(b, @"^\d+").Value) > 0).Distinct().ToList();
             var rowText = Regex.Replace(string.Join(" ", new[] { sec }.Concat(block.Take(12))), @"\s+", " ").Trim();
             if (rowText.Length > 420) rowText = rowText[..420] + "…";
             edges.Add(new CorrespondenceEdge(t.DocId, t.NewFamily, t.OldFamily, t.NewName, t.OldName, sec, Base(sec),

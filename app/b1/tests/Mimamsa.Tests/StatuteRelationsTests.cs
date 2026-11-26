@@ -101,6 +101,18 @@ public class StatuteRelationsTests
         Assert.Contains("Punishment for murder", e.Single(x => x.NewSection == "103").RowText);
     }
 
+    /// Codex review of PR #70: sub-section numbers in the old column are not base sections (no link to "s.1"/"s.2").
+    [Fact]
+    public void SubsectionNumbersInTheOldColumnAreNotBaseSections()
+    {
+        var input = System.Text.RegularExpressions.Regex.Replace(IpcStyle, @"(?m)^(\s*)302(\r?)$", "${1}302(1), 303(2)${2}");
+        Assert.NotEqual(IpcStyle, input);
+        var e = Parse(Ipc, input);
+        var row = e.Single(x => x.NewSection == "103");
+        Assert.Equal(new[] { "302", "303" }, row.OldBases);
+        Assert.Equal("304A", e.Single(x => x.NewSection == "106(1)").OldBases.Single());
+    }
+
     [Fact]
     public void BsaLayoutWithTheOldSectionNextToTheNewOne()
     {
