@@ -16,11 +16,13 @@ public sealed class E5Embedder : IDisposable
     readonly bool _tokenTypes;
     public string Device { get; }
     public string ModelSha256 { get; }
+    /// Pad every batch to maxTokens (constant tensor shape). Set for DirectML, which recompiles on every new shape.
+    public bool FixedLength { get; set; }
 
     // XLM-R (fairseq) vocabulary = SentencePiece ids shifted by one, with <s>=0, <pad>=1, </s>=2, <unk>=3.
     internal const long Bos = 0, Pad = 1, Eos = 2, Unk = 3;
 
-    public E5Embedder(string modelDir, int threads = 0, bool tryCuda = false, string? expectedModelSha256 = null)
+    public E5Embedder(string modelDir, int threads = 0, bool tryCuda = false, string? expectedModelSha256 = null, bool tryDirectMl = false)
     {
         var onnx = Path.Combine(modelDir, "onnx", "model.onnx");
         ModelSha256 = Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(onnx)));
@@ -35,6 +37,13 @@ public sealed class E5Embedder : IDisposable
         {
             try { so.AppendExecutionProvider_CUDA(0); Device = "CUDA"; }
             catch (Exception) { Device = "CPU (CUDA requested but unavailable)"; }
+        }
+        else if (tryDirectMl)
+        {
+            // DirectML (DX12 GPU, no CUDA toolkit). Needs the Microsoft.ML.OnnxRuntime.DirectML native package, used
+            // by app/b1/bench only; the service's CPU package has no DML provider and falls back to CPU.
+            try { so.EnableMemoryPattern = false; so.ExecutionMode = ExecutionMode.ORT_SEQUENTIAL; so.AppendExecutionProvider_DML(0); Device = "DirectML GPU"; FixedLength = true; }
+            catch (Exception) { Device = "CPU (DirectML requested but unavailable)"; }
         }
         _session = new InferenceSession(onnx, so);
         _tokenTypes = _session.InputMetadata.ContainsKey("token_type_ids");
@@ -60,7 +69,7 @@ public sealed class E5Embedder : IDisposable
     public float[][] Embed(IReadOnlyList<string> texts, int maxTokens)
     {
         var enc = texts.Select(t => Encode(t, maxTokens)).ToArray();
-        int b = enc.Length, len = enc.Max(e => e.Length);
+        int b = enc.Length, len = FixedLength ? maxTokens : enc.Max(e => e.Length);
         var ids = new DenseTensor<long>(new[] { b, len });
         var mask = new DenseTensor<long>(new[] { b, len });
         var types = new DenseTensor<long>(new[] { b, len });
