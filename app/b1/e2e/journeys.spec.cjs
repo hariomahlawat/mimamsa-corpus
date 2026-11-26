@@ -388,3 +388,100 @@ test("F01 withdrawal covers the earlier edition: cited copy and its byte ranges 
   const meta = await user.request.get(`/api/v2/documents/syn-j-allow/pdf-meta?copy=${old}`);
   expect(meta.status()).toBe(404);
 });
+
+// ------------------------------------------------------------------ C14 S2 safety journeys (run last, in this order)
+async function adminCsrf(page) { return (await (await page.request.get("/api/session")).json()).csrf; }
+
+test("C14-S2-01 F05 a withdrawal clears a viewer that is already open, without any reader action", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  await user.goto("/d/syn-h-manual?p=1");
+  await expect(user.locator(".pagewrap canvas").first()).toBeVisible();
+  await expect(user.locator(".dochead")).toBeVisible();
+  await login(page, "admin");
+  await page.getByRole("link", { name: "Administration" }).click();
+  await page.fill("#wd-doc", "syn-h-manual");
+  await page.fill("#wd-reason", "C14 S2 open-viewer invalidation");
+  await page.getByRole("button", { name: "Withdraw…" }).click();
+  await expect(page.locator("dialog")).toContainText("Pages already on a reader's screen are cleared");
+  await expect(page.locator("dialog")).toContainText("No byte-identical copy of this document is held under another document id.");
+  await page.locator("dialog").getByRole("button", { name: "Withdraw" }).click();
+  await expect(page.locator("table.data")).toContainText("C14 S2 open-viewer invalidation");
+  // the reader does nothing: the epoch poll (10 s) clears the page, the header and the evidence
+  await expect(user.locator(".docempty[data-invalidated]")).toContainText("This document is not available in this installation.", { timeout: 20_000 });
+  await expect(user.locator(".pagewrap canvas")).toHaveCount(0);
+  await expect(user.locator(".dochead")).toHaveCount(0);
+  await shot(user, "c14-s2-01-viewer-cleared.png");
+});
+
+test("C14-S2-02 F05 a deep link to a withdrawn document shows the notice", async ({ page }) => {
+  await login(page);
+  await page.goto("/d/syn-h-manual?p=1");
+  await expect(page.locator(".docempty")).toContainText("This document is not available in this installation.");
+  await expect(page.locator(".pagewrap canvas")).toHaveCount(0);
+});
+
+test("C14-S2-03 reinstatement needs a reason, re-verifies, and makes the document available again", async ({ page, browser }) => {
+  await login(page, "admin");
+  await page.getByRole("link", { name: "Administration" }).click();
+  const row = page.locator("table.data tr", { hasText: "syn-h-manual" }).first();
+  await row.getByRole("button", { name: "Reinstate…" }).click();
+  await expect(page.locator("dialog")).toContainText("verifies again");
+  await page.locator("dialog").getByRole("button", { name: "Reinstate" }).click();
+  await expect(page.locator("dialog .err")).toContainText("A reason");
+  await page.fill("#ri-reason", "C14 S2 reinstatement after review");
+  await page.locator("dialog").getByRole("button", { name: "Reinstate" }).click();
+  await expect(page.locator("table.data")).toContainText("Reinstated");
+  await expect(page.locator("table.data")).toContainText("re-hashed");
+  const user = await browser.newPage();
+  await login(user);
+  await user.goto("/d/syn-h-manual?p=1");
+  await expect(user.locator(".pagewrap canvas").first()).toBeVisible();
+});
+
+test("C14-S2-04 a protected transfer in progress when the document is withdrawn is refused at handoff", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  const meta = await (await user.request.get("/api/v2/documents/syn-j-reject/pdf-meta")).json();
+  const url = `/api/v2/documents/syn-j-reject/copies/${meta.copy_sha256}/range`;
+  const pull = () => user.evaluate(async (u) => {
+    const r = await fetch(u, { headers: { Range: "bytes=0-99", "X-Mimamsa-Test-Pause": "before-enter" }, cache: "no-store" });
+    return { status: r.status, bytes: (await r.arrayBuffer()).byteLength };
+  }, url);
+  expect(await pull()).toEqual({ status: 206, bytes: 100 });          // control: completes when nothing happens
+  await login(page, "admin");
+  const csrf = await adminCsrf(page);
+  const inFlight = pull();                                               // admitted, credit reserved, paused before handoff
+  await page.waitForTimeout(1200);
+  const w = await page.request.post("/api/admin/withdraw", { headers: { "X-CSRF-Token": csrf }, data: { doc_id: "syn-j-reject", reason: "C14 S2 in-flight transfer" } });
+  expect(w.status()).toBe(200);
+  expect(await inFlight).toEqual({ status: 404, bytes: 0 });            // no byte of the withdrawn original is handed over
+  const r = await page.request.post("/api/admin/reinstate", { headers: { "X-CSRF-Token": csrf }, data: { doc_id: "syn-j-reject", reason: "C14 S2 restore fixture state" } });
+  expect(r.status()).toBe(200);
+});
+
+test("C14-S2-05 F15 lockout, Admin unlock with a reason, and the audit log", async ({ page, browser }) => {
+  const anon = await browser.newContext({ baseURL: test.info().project.use.baseURL });
+  for (let i = 0; i < 5; i++) expect((await anon.request.post("/api/login", { data: { username: "locktest", password: "wrong-password-xx" } })).status()).toBe(401);
+  const user = await browser.newPage();
+  await user.goto("/");
+  await user.fill("#username", "locktest"); await user.fill("#password", "locktest-password-1");
+  await user.click("form.login button[type=submit]");
+  await expect(user.locator("form.login .err")).toContainText("not correct, or the account is locked");
+  await login(page, "admin");
+  await page.getByRole("link", { name: "Administration" }).click();
+  const row = page.locator("#accounts-table tr", { hasText: "locktest" });
+  await expect(row).toContainText("Locked until");
+  await row.getByRole("button", { name: "Unlock…" }).click();
+  await page.fill("#ul-reason", "C14 S2 identity confirmed by the owner");
+  await page.locator("dialog").getByRole("button", { name: "Unlock" }).click();
+  await expect(page.locator("#accounts-table tr", { hasText: "locktest" })).toContainText("Active");
+  await expect(page.locator("#audit-table")).toContainText("unlock");
+  await expect(page.locator("#audit-table")).toContainText("C14 S2 identity confirmed by the owner");
+  await expect(page.locator("#audit-table")).toContainText("lockout");
+  await expect(page.locator("#audit-table")).not.toContainText("wrong-password-xx");
+  await shot(page, "c14-s2-05-admin-accounts-audit.png");
+  await user.click("form.login button[type=submit]");
+  await expect(user.locator("#research")).toBeVisible();
+  await anon.close();
+});

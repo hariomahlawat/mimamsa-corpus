@@ -768,8 +768,24 @@ export function invalidateDocument(docId) {
 }
 
 /** Re-check every open tab against the server (after an epoch change or on the periodic poll). A tab naming an
- *  earlier copy is re-checked through the citation resolver; any other tab through the document route. */
+ *  earlier copy is re-checked through the citation resolver; any other tab through the document route.
+ *  Uses plain fetch, not api(): a background re-check must never change the connection state (the connection-lost
+ *  view is owned by the user's own requests), and a network failure means "cannot tell yet", not "unavailable". */
 let revalidating = null;
+async function stillAvailable(t) {
+  const url = t.copy
+    ? `/api/cite?doc=${encodeURIComponent(t.docId)}&sha=${encodeURIComponent(t.copy.slice(0, 12))}&page=${t.page || 1}`
+    : `/api/documents/${encodeURIComponent(t.docId)}`;
+  let r;
+  try { r = await fetch(url, { headers: { Accept: "application/json" }, credentials: "same-origin", cache: "no-store" }); }
+  catch { return null; }
+  if (r.status === 401) return null;                          // session handling stays with the API client
+  if (r.status === 404 || r.status === 403) return false;
+  if (!r.ok) return null;
+  if (!t.copy) return true;
+  let j = null; try { j = await r.json(); } catch { return null; }
+  return j?.state === "CITED_COPY_ELIGIBLE" || j?.state === "CITED_COPY_ELIGIBLE_NOT_CURRENT";
+}
 export function revalidateOpenDocuments() {
   if (revalidating) return revalidating;
   revalidating = (async () => {
@@ -778,16 +794,7 @@ export function revalidateOpenDocuments() {
       const key = t.docId + "|" + (t.copy || "");
       if (t.unavailable || seen.has(key)) continue;
       seen.add(key);
-      try {
-        if (t.copy) {
-          const r = await api(`/api/cite?doc=${encodeURIComponent(t.docId)}&sha=${encodeURIComponent(t.copy.slice(0, 12))}&page=${t.page || 1}`);
-          if (r.state !== "CITED_COPY_ELIGIBLE" && r.state !== "CITED_COPY_ELIGIBLE_NOT_CURRENT") invalidateDocument(t.docId);
-        } else {
-          await api(`/api/documents/${encodeURIComponent(t.docId)}`);
-        }
-      } catch (e) {
-        if (e instanceof ApiError && (e.status === 404 || e.status === 403)) invalidateDocument(t.docId);
-      }
+      if ((await stillAvailable(t)) === false) invalidateDocument(t.docId);
     }
   })().finally(() => { revalidating = null; });
   return revalidating;
