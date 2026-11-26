@@ -1,0 +1,94 @@
+{
+ "queries": 20,
+ "rounds": 7,
+ "sum_of_medians_ms": {
+  "a": 859.8,
+  "b": 822.6
+ },
+ "median_of_medians_ms": {
+  "a": 24.65,
+  "b": 27.6
+ },
+ "per_query": {
+  "s.69 Army Act": {
+   "a_median": 120.1,
+   "b_median": 142.4
+  },
+  "2013 INSC 408": {
+   "a_median": 0.3,
+   "b_median": 0.5
+  },
+  "disability pension": {
+   "a_median": 19.9,
+   "b_median": 18.8
+  },
+  "court martial": {
+   "a_median": 90.3,
+   "b_median": 89.9
+  },
+  "summary of evidence": {
+   "a_median": 14.4,
+   "b_median": 12.9
+  },
+  "AFT jurisdiction": {
+   "a_median": 15.7,
+   "b_median": 28.4
+  },
+  "invalided out of service": {
+   "a_median": 42.2,
+   "b_median": 34.9
+  },
+  "exact:\"Entitlement Rules\"": {
+   "a_median": 2.8,
+   "b_median": 2.3
+  },
+  "desertion AND NOT pension": {
+   "a_median": 2.1,
+   "b_median": 2.5
+  },
+  "Rule 22 Army Rules": {
+   "a_median": 108.9,
+   "b_median": 105
+  },
+  "release medical board": {
+   "a_median": 20.6,
+   "b_median": 21.7
+  },
+  "\"court martial\" NEAR/10 delay": {
+   "a_median": 7.4,
+   "b_median": 5.7
+  },
+  "Civil Appeal No. 4949 of 2013": {
+   "a_median": 28.7,
+   "b_median": 26.8
+  },
+  "writ petition armed forces tribunal": {
+   "a_median": 47.2,
+   "b_median": 41.9
+  },
+  "field punishment": {
+   "a_median": 10,
+   "b_median": 7.9
+  },
+  "attributable to military service": {
+   "a_median": 42.6,
+   "b_median": 32.6
+  },
+  "sentence of dismissal": {
+   "a_median": 9.6,
+   "b_median": 5.8
+  },
+  "section 302 Indian Penal Code": {
+   "a_median": 126.8,
+   "b_median": 122.9
+  },
+  "Navy Act": {
+   "a_median": 47.1,
+   "b_median": 40.1
+  },
+  "natural justice court of inquiry": {
+   "a_median": 103.1,
+   "b_median": 79.6
+  }
+ }
+}

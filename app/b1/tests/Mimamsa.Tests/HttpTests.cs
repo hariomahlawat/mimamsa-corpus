@@ -174,6 +174,31 @@ public class HttpTests(ServiceFixture f)
         Assert.DoesNotContain("syn-v-staged", s.ToJsonString());
     }
 
+    /// C14 F10: results are paged by document group; every group is reachable and passages keep relevance order.
+    [Fact] public async Task SearchIsPagedByDocumentGroup()
+    {
+        var (c, _) = await f.Login("reader");
+        var first = JsonNode.Parse(await c.GetStringAsync("/api/search?q=notice&page_size=1"))!;
+        int pages = first["page_count"]!.GetValue<int>(), groups = first["total_groups"]!.GetValue<int>();
+        Assert.True(pages >= 2);
+        Assert.Equal(groups, pages);
+        var seen = new HashSet<string>();
+        for (int p = 1; p <= pages; p++)
+        {
+            var r = JsonNode.Parse(await c.GetStringAsync($"/api/search?q=notice&page_size=1&page={p}"))!;
+            Assert.Equal(p, r["page"]!.GetValue<int>());
+            var g = Assert.Single(r["groups"]!.AsArray());
+            Assert.True(seen.Add(g!["doc_id"]!.GetValue<string>()));
+            Assert.All(r["passages"]!.AsArray(), x => Assert.Equal(g["doc_id"]!.GetValue<string>(), x!["doc_id"]!.GetValue<string>()));
+        }
+        var beyond = JsonNode.Parse(await c.GetStringAsync($"/api/search?q=notice&page_size=1&page={pages + 5}"))!;
+        Assert.Equal(pages, beyond["page"]!.GetValue<int>());      // clamped, never empty
+        var svc = JsonNode.Parse(await c.GetStringAsync("/api/search?q=notice&service=army"))!;
+        Assert.Equal("Army", svc["run"]!["service_label"]!.GetValue<string>());
+        var bad = JsonNode.Parse(await c.GetStringAsync("/api/search?q=notice&service=marines"))!;
+        Assert.Null(bad["run"]!["service"]);                          // unknown service ignored, not an error
+    }
+
     [Fact] public async Task UsersCannotReachAdministration()
     {
         var (c, csrf) = await f.Login("reader");

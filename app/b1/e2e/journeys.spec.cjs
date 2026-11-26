@@ -388,3 +388,38 @@ test("F01 withdrawal covers the earlier edition: cited copy and its byte ranges 
   const meta = await user.request.get(`/api/v2/documents/syn-j-allow/pdf-meta?copy=${old}`);
   expect(meta.status()).toBe(404);
 });
+
+// C14 S1: case-name tier, spelling suggestion offered (never applied), readable facets, collapsed provenance.
+test("C14-S1a case name pins the judgment; a suggestion runs only when clicked", async ({ page }) => {
+  await login(page);
+  await search(page, "Vale v Lark");
+  await expect(page.locator(".qchip[data-kind=case_name]")).toContainText("Case name");
+  await expect(page.locator(".hit").first().locator(".chip", { hasText: "Case name" })).toBeVisible();
+  await expect(page.locator(".rgroup").first()).toHaveAttribute("data-doc", /syn-j-(allow|lookalike)/);
+  await search(page, "hearnig");
+  await expect(page.locator("#results-head")).toContainText("No results");
+  const sug = page.locator(".qchip-suggest");
+  await expect(sug).toContainText("Did you mean: hearing");
+  await sug.click();
+  await expect(page.locator("#q")).toHaveValue("hearing");
+  await page.waitForFunction(() => !document.querySelector("#results-list.dim"));
+  await expect(page.locator(".rgroup").first()).toBeVisible();
+  expect(page.url()).toContain("q=hearing");
+});
+
+test("C14-S1b compact cards: provenance collapsed to one line, readable status labels, service preference in the run line", async ({ page }) => {
+  await login(page);
+  await search(page, "notice");
+  const prov = page.locator("details.rgroup-prov").first();
+  await expect(prov).toBeVisible();
+  expect(await prov.evaluate((d) => d.open)).toBe(false);
+  await expect(prov.locator("summary")).toContainText("copy ");
+  const status = await page.locator("#facets fieldset.facet", { hasText: "Corpus status" }).innerText();
+  expect(status).not.toMatch(/\b[a-z]+_[a-z_]+\b/);              // no raw codes such as in_force
+  expect(status).toMatch(/Status unknown|\(crawler\)/);
+  await page.selectOption("#service", "army");
+  await page.waitForFunction(() => !document.querySelector("#results-list.dim"));
+  await expect(page.getByTestId("runline")).toContainText("service preference Army");
+  expect(page.url()).toContain("service=army");
+  expect(await a11yBasics(page)).toEqual([]);
+});
