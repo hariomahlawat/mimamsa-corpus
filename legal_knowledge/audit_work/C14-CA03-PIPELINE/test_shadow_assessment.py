@@ -38,14 +38,15 @@ class ShadowTests(unittest.TestCase):
 
     def test_valid_native_negative_and_immutability(self):
         r = self.run_assess()
-        self.assertEqual(r['relevance'], 'IRRELEVANT')
+        self.assertEqual(r['relevance'], 'MANUAL_REVIEW_REQUIRED')
+        self.assertEqual(r['classifier_candidate_state'], 'IRRELEVANT')
         self.assertFalse(r['research_eligible'])
         self.assertEqual(self.raw.read_bytes(), self.original)
         self.assertEqual(r, self.run_assess())
 
     def test_positive_is_not_release(self):
         r = self.run_assess(relevant)
-        self.assertTrue(r['eligible_for_documentary_review'])
+        self.assertFalse(r['eligible_for_documentary_review'])
         self.assertFalse(r['research_eligible'])
 
     def test_page_count_mismatch(self):
@@ -78,6 +79,44 @@ class ShadowTests(unittest.TestCase):
         self.assertNotEqual(a['assessment_id'], b['assessment_id'])
         self.assertEqual(a['source_sha256'], b['source_sha256'])
         self.assertEqual(self.raw.read_bytes(), self.original)
+
+    def test_bad_metadata_controlled(self):
+        r = assess(self.root, {}, decide_fn=irrelevant, quality_fn=quality)
+        self.assertEqual(r['relevance'], 'EXTRACTION_FAILED')
+        self.assertFalse(r['research_eligible'])
+        self.assertTrue(r['assessment_id'])
+
+    def test_marker_free_classifier_input(self):
+        seen = []
+        def capture(**kwargs):
+            seen.append(kwargs['text'])
+            return irrelevant(**kwargs)
+        self.run_assess(capture)
+        self.assertNotIn('[[page', seen[0])
+
+    def test_vector_content_abstains(self):
+        with pymupdf.open() as d:
+            p = d.new_page()
+            p.insert_text((40, 50), 'The court heard the appeal and the parties submitted their arguments. ' * 4, fontsize=6)
+            p.draw_rect(pymupdf.Rect(20, 20, 100, 30))
+            body = d.tobytes()
+        self.raw.write_bytes(body)
+        self.meta['sha256'] = hashlib.sha256(body).hexdigest()
+        r = self.run_assess()
+        self.assertIn('vector_content_not_validated', r['pages'][0]['flags'])
+        self.assertEqual(r['relevance'], 'INSUFFICIENT_TEXT')
+
+    def test_invisible_content_abstains(self):
+        with pymupdf.open() as d:
+            p = d.new_page()
+            p.insert_text((40, 50), 'The court heard the appeal and the parties submitted their arguments. ' * 4, fontsize=6, render_mode=3)
+            body = d.tobytes()
+        self.raw.write_bytes(body)
+        self.meta['sha256'] = hashlib.sha256(body).hexdigest()
+        r = self.run_assess(relevant)
+        self.assertIn('hidden_or_transparent_text', r['pages'][0]['flags'])
+        self.assertFalse(r['complete_native_evidence'])
+        self.assertFalse(r['eligible_for_documentary_review'])
 
 
 if __name__ == '__main__':
