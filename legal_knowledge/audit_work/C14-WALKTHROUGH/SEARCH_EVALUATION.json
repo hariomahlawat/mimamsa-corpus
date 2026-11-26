@@ -1,0 +1,3577 @@
+{
+ "summary": {
+  "queries": 43,
+  "by_verdict": {
+   "partial": 8,
+   "pass": 24,
+   "fail": 10,
+   "not_determinable": 1
+  },
+  "by_class": {
+   "incomplete_feature": 6,
+   "ok": 23,
+   "retrieval_failure": 9,
+   "usability": 2,
+   "corpus_deficiency": 3
+  },
+  "by_persona": {
+   "adjutant": {
+    "pass": 7,
+    "fail": 1
+   },
+   "commander": {
+    "partial": 4,
+    "pass": 2,
+    "fail": 2
+   },
+   "edge": {
+    "pass": 7,
+    "fail": 1
+   },
+   "jag": {
+    "pass": 3,
+    "fail": 4,
+    "not_determinable": 1,
+    "partial": 3
+   },
+   "researcher": {
+    "fail": 2,
+    "pass": 5,
+    "partial": 1
+   }
+  },
+  "method": "Each query run once through /api/search as a User on the commissioned instance (290-document sample, release R13-b1-sample-20261126-4b31855f). The top five documents and top three passages were recorded (evidence/search_raw.json) and judged by the auditor against what a researcher would look for first. Judgements are not legal conclusions and not a retrieval-quality metric: there are no human relevance labels and the blind holdout was not used."
+ },
+ "queries": [
+  {
+   "id": "Q01",
+   "persona": "commander",
+   "kind": "natural",
+   "query": "how to hold a summary court martial",
+   "intent": "Procedure for an SCM: Army Act ss.116-120 and Army Rules ch. on SCM",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 258,
+    "total_passages": 14227,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 136.7,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 2,
+      "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+      "title": "EX SEPOY MADAN PRASAD versus UNION OF INDIA AND OTHERS"
+     },
+     {
+      "rank": 3,
+      "doc_id": "rules-army-rules-1954",
+      "title": "Army Rules,1954"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-1991-ex-havildar-rat-an-singh-1991insc300",
+      "title": "EX-HAVILDAR RAT AN SINGH versus UNION OF INDIA AND ORS."
+     },
+     {
+      "rank": 5,
+      "doc_id": "act-air-force-1950",
+      "title": "The Air Force Act, 1950"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-army-1950",
+      "page": 34,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'court' (6), 'martial' (4), 'hold' (3), 'summary' (3)"
+      ],
+      "snippet": "action and reference can without detriment to discipline be made to the officer empowered to convene a district court-martial or on active service a summary general court-martial for the trial of the alleged offender, an"
+     },
+     {
+      "rank": 2,
+      "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+      "page": 9,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'court' (7), 'martial' (6), 'summary' (5), 'hold' (2)"
+      ],
+      "snippet": "counsel for the appellant is also inapplicable to the facts of the instant case. Section 120 deals with the power of Summary Court Martial. Sub- sections (1), (2) and (4) of Section 120 reads as follows : “120. Powers of"
+     },
+     {
+      "rank": 3,
+      "doc_id": "rules-army-rules-1954",
+      "page": 174,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'court' (4), 'martial' (3), 'hold' (2), 'summary' (2)"
+      ],
+      "snippet": "147. Right of person tried to copies of proceedings. Every person tried by a court-martial (other than Summary Court Martial) shall, after the proceedings have been signed by the Presiding Officer and in the case of Summ"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "partial",
+    "class": "incomplete_feature",
+    "findings": [
+     "F09"
+    ],
+    "note": "Army Act and Army Rules surface, but no procedural provision is targeted; a how-to question needs passage-level semantic ranking."
+   }
+  },
+  {
+   "id": "Q02",
+   "persona": "commander",
+   "kind": "keyword",
+   "query": "summary of evidence",
+   "intent": "Army Rules r.23 (recording of summary of evidence) and judgments on it",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 98,
+    "total_passages": 2193,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 17.4,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "rules-army-rules-1954",
+      "title": "Army Rules,1954"
+     },
+     {
+      "rank": 2,
+      "doc_id": "sc-1983-lt-col-prithi-pal-singh-bedi-e-1982insc65",
+      "title": "LT. COL. PRITHI PAL SINGH BEDI ETC. versus UNION OF INDIA & OTHERS"
+     },
+     {
+      "rank": 3,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "title": "Regulations for the Navy Part II"
+     },
+     {
+      "rank": 4,
+      "doc_id": "hc-jkl-2014-lpaow-137-2001-jkhc020002482001-1-2014-04-09",
+      "title": "LPAOW/137/2001 of UNION OF INDIA AND ANR. Vs SURINDER KUMAR"
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+      "title": "EX SEPOY MADAN PRASAD versus UNION OF INDIA AND OTHERS"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "rules-army-rules-1954",
+      "page": 67,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'summary' (4), 'evidence' (4)"
+      ],
+      "snippet": "10. During the trial the presiding officer should compare the evidence given by each witness with his statement contained in the summary of evidence and, if there is any material variation, should question him thereon. 1"
+     },
+     {
+      "rank": 2,
+      "doc_id": "rules-army-rules-1954",
+      "page": 67,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'summary' (4), 'evidence' (4)"
+      ],
+      "snippet": "9. The summary or abstract of evidence must be read in court if the accused pleads guilty, and may be used for determining the sentence. (AR 54(3)). It may be used at the trial for the purpose of showing that a witness h"
+     },
+     {
+      "rank": 3,
+      "doc_id": "rules-army-rules-1954",
+      "page": 42,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'evidence' (9), 'summary' (6)"
+      ],
+      "snippet": "attendance of any witness cannot in the opinion of the officer taking the summary (to be certified by him in writing, be readily procured, a written statement of his evidence purporting to be signed by him may be read to"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Army Rules first, then judgments discussing the summary of evidence."
+   }
+  },
+  {
+   "id": "Q03",
+   "persona": "commander",
+   "kind": "abbreviation",
+   "query": "AWL",
+   "intent": "Absence without leave: Army Act s.39",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [
+     "AWL → Absent Without Leave"
+    ],
+    "total_documents": 6,
+    "total_passages": 14,
+    "shown_passages": 14,
+    "server_ms": null,
+    "client_ms": 7.2,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+      "title": "EX SEPOY MADAN PRASAD versus UNION OF INDIA AND OTHERS"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-air-force-1950",
+      "title": "The Air Force Act, 1950"
+     },
+     {
+      "rank": 3,
+      "doc_id": "rules-army-rules-1954",
+      "title": "Army Rules,1954"
+     },
+     {
+      "rank": 4,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 5,
+      "doc_id": "act-navy-1957",
+      "title": "The Navy Act, 1957"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+      "page": 6,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: “Absent Without Leave” (2)"
+      ],
+      "snippet": "9. It is also relevant to note that this was not the first occasion when the appellant had remained absent without leave. He had made a habit of remaining absent without leave even on earlier occasions. A"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-air-force-1950",
+      "page": 43,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: “Absent Without Leave” (2)"
+      ],
+      "snippet": "charged.—(1) A person charged before a court-martial with desertion may be found guilty of attempting to desert or of being absent without leave. (2) A person charged before a court-martial with attempting to desert may "
+     },
+     {
+      "rank": 3,
+      "doc_id": "rules-army-rules-1954",
+      "page": 209,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: “Absent Without Leave” (1)"
+      ],
+      "snippet": "(b) the commanding officer of any such person, other than an officer, who has been absent without leave for a period not exceeding five days may, unless the person is"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "partial",
+    "class": "retrieval_failure",
+    "findings": [
+     "F09"
+    ],
+    "note": "AWL expanded correctly (chip). Army Act s.39 is not pinned; a judgment ranks first and the Army Act is 4th."
+   }
+  },
+  {
+   "id": "Q04",
+   "persona": "commander",
+   "kind": "keyword",
+   "query": "desertion",
+   "intent": "Army Act s.38 and desertion judgments",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 21,
+    "total_passages": 108,
+    "shown_passages": 108,
+    "server_ms": null,
+    "client_ms": 6.6,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-air-force-1950",
+      "title": "The Air Force Act, 1950"
+     },
+     {
+      "rank": 2,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "title": "Regulations for the Navy Part II"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 4,
+      "doc_id": "rules-army-rules-1954",
+      "title": "Army Rules,1954"
+     },
+     {
+      "rank": 5,
+      "doc_id": "regs-regulations-for-the-navy-part-iii",
+      "title": "Regulations for the Navy Part III"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-air-force-1950",
+      "page": 4,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'desertion' (2)"
+      ],
+      "snippet": "36. Offences punishable more severely on active service than at other times. 37. Mutiny. 38. Desertion and aiding desertion. 39. Absence without leave. 40. Striking or threatening superior officer. 41. Disobedience to su"
+     },
+     {
+      "rank": 2,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "page": 56,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'desertion' (8)"
+      ],
+      "snippet": "the removal of the letter ‘R’ from his record:- (a) three years within 5 years of service after punishment for desertion; (b) four years within nine years of service after punishment for desertion; (c) six years within a"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-army-1950",
+      "page": 35,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'desertion' (3)"
+      ],
+      "snippet": "(2) The provisions of sub-section (1) shall not apply to a trial for an offence of desertion or fraudulent enrolment or for any of the offences mentioned in section 37. (3) In the computation of the period of time mentio"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "partial",
+    "class": "retrieval_failure",
+    "findings": [
+     "F09"
+    ],
+    "note": "Air Force Act and Navy Regulations rank above the Army Act; no service-context preference."
+   }
+  },
+  {
+   "id": "Q05",
+   "persona": "commander",
+   "kind": "natural",
+   "query": "punishments a commanding officer can award",
+   "intent": "Army Act s.80 (punishments by CO)",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 170,
+    "total_passages": 6873,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 33.9,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "title": "Regulations for the Navy Part II"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-air-force-1950",
+      "title": "The Air Force Act, 1950"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 4,
+      "doc_id": "rules-army-rules-1954",
+      "title": "Army Rules,1954"
+     },
+     {
+      "rank": 5,
+      "doc_id": "act-navy-1957",
+      "title": "The Navy Act, 1957"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "page": 61,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'officer' (9), 'punishments' (5), 'commanding' (5), 'award' (2)"
+      ],
+      "snippet": "CHAPTER IVA – SUMMARY PUNISHMENT OF OFFICERS BELOW THE RANK OF COMMANDER 147A. Award of summary punishment under section 94:- The Central Government or the Chief of the Naval Staff or the Flag Officer Commanding-in-Chief"
+     },
+     {
+      "rank": 2,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "page": 112,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'officer' (2), 'award' (2), 'punishments' (1), 'commanding' (1)"
+      ],
+      "snippet": "Punish ment award ed If not warded by Commanding Officer, Signature and rank of officer awarding the punishment 1 2 3 4 5 6 7 8 9"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-air-force-1950",
+      "page": 32,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'punishments' (3), 'commanding' (3), 'officer' (3), 'award' (2)"
+      ],
+      "snippet": "88. Review of proceedings.—If any punishment awarded under section 86 appears to a superior air force authority as defined in section 89 to be illegal, unjust or excessive, such authority may cancel, vary or remit the pu"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "fail",
+    "class": "retrieval_failure",
+    "findings": [
+     "F09"
+    ],
+    "note": "Navy Regulations Part II rank first; Army Act s.80 is not the lead result for an Army commander."
+   }
+  },
+  {
+   "id": "Q06",
+   "persona": "commander",
+   "kind": "keyword",
+   "query": "field punishment",
+   "intent": "Army Act ss.75-76, omitted 1992: must show omission",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 108,
+    "total_passages": 1770,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 68.6,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-air-force-1950",
+      "title": "The Air Force Act, 1950"
+     },
+     {
+      "rank": 2,
+      "doc_id": "rules-army-rules-1954",
+      "title": "Army Rules,1954"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-1973-captain-harish-uppal-1972insc286",
+      "title": "CAPTAIN HARISH UPPAL versus UNION OF INDIA AND OTHERS"
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-2019-union-of-india-ors-2019insc1030",
+      "title": "UNION OF INDIA & ORS. versus SANDEEP KUMAR ETC."
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-air-force-1950",
+      "page": 30,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'punishment' (7), 'field' (4)"
+      ],
+      "snippet": "(2) Field punishment shall be of the character of personal restraint or of hard labour but shall not be of a nature to cause injury to life or limb and shall not include flogging. 78. Position of field punishment in scal"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-air-force-1950",
+      "page": 6,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'punishment' (8), 'field' (2)"
+      ],
+      "snippet": "6 SECTIONS 72. Civil offences not triable by court-martial. CHAPTER VII PUNISHMENTS 73. Punishments awardable by courts-martial. 74. Alternative punishments awardable by court-martial. 75. Combination of punishments. 76."
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-air-force-1950",
+      "page": 30,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'punishment' (8), 'field' (2)"
+      ],
+      "snippet": "75. Combination of punishments.—A sentence of a court-martial may award in addition to, or without any one other punishment, the punishment specified in clause (e) or clause (f) of section 73 and any one or more of the p"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "partial",
+    "class": "usability",
+    "findings": [
+     "F09"
+    ],
+    "note": "Results list Air Force Act first. The Statutes view of Army Act s.75 correctly prints 'Omitted by Act 37 of 1992' (J06)."
+   }
+  },
+  {
+   "id": "Q07",
+   "persona": "commander",
+   "kind": "natural",
+   "query": "arrest of a soldier for an offence",
+   "intent": "Army Act ss.101-102 (custody/arrest)",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 101,
+    "total_passages": 3431,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 17.7,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-bns-2023",
+      "title": "The Bharatiya Nyaya Sanhita, 2023"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-ipc-1860",
+      "title": "The Indian Penal Code"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-crpc-1973",
+      "title": "The Code of Criminal Procedure 1973"
+     },
+     {
+      "rank": 4,
+      "doc_id": "act-navy-1957",
+      "title": "The Navy Act, 1957"
+     },
+     {
+      "rank": 5,
+      "doc_id": "act-crpc-1973-consolidated",
+      "title": "The Code of Criminal Procedure, 1973"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-bns-2023",
+      "page": 24,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'offence' (3), 'arrest' (2), 'soldier' (1)"
+      ],
+      "snippet": "EXCEPTIONS 14. Act done by a person bound, or by mistake of fact believing himself bound, by law.— Nothing is an offence which is done by a person who is, or who by reason of a mistake of fact and not by reason of a mist"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-ipc-1860",
+      "page": 24,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'offence' (3), 'arrest' (2), 'soldier' (1)"
+      ],
+      "snippet": "EXCEPTIONS 76. Act done by a person bound, or by mistake of fact believing himself bound, by law.— Nothing is an offence which is done by a person who is, or who by reason of a mistake of fact and not by reason of a mist"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-bns-2023",
+      "page": 8,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'soldier' (3), 'offence' (1)"
+      ],
+      "snippet": "162. Abetment of such assault, if assault committed. 163. Abetment of desertion of soldier, sailor or airman. 164. Harbouring deserter. 165. Deserter concealed on board merchant vessel through negligence of master. 166. "
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "fail",
+    "class": "retrieval_failure",
+    "findings": [
+     "F09"
+    ],
+    "note": "BNS, IPC and CrPC rank first; Army Act ss.101-102 (custody) absent from the top four."
+   }
+  },
+  {
+   "id": "Q08",
+   "persona": "commander",
+   "kind": "abbreviation",
+   "query": "SCM",
+   "intent": "Summary court-martial provisions",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [
+     "SCM → Summary Court Martial"
+    ],
+    "total_documents": 13,
+    "total_passages": 93,
+    "shown_passages": 93,
+    "server_ms": null,
+    "client_ms": 12.4,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "rules-army-rules-1954",
+      "title": "Army Rules,1954"
+     },
+     {
+      "rank": 2,
+      "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+      "title": "EX SEPOY MADAN PRASAD versus UNION OF INDIA AND OTHERS"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-1991-ex-havildar-rat-an-singh-1991insc300",
+      "title": "EX-HAVILDAR RAT AN SINGH versus UNION OF INDIA AND ORS."
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-1983-lt-col-prithi-pal-singh-bedi-e-1982insc65",
+      "title": "LT. COL. PRITHI PAL SINGH BEDI ETC. versus UNION OF INDIA & OTHERS"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "rules-army-rules-1954",
+      "page": 167,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'scm' (1), “Summary Court Martial” (1)"
+      ],
+      "snippet": "(c) If it is a summary court-martial, adjourn to enable the witness to attend, or adopt such other course as appears to the officer holding the trial best calculated to do justice. NOTES 1. See AA.ss. 137 and 138. Only t"
+     },
+     {
+      "rank": 2,
+      "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+      "page": 10,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'scm' (5)"
+      ],
+      "snippet": "16. Regulation 448 of the DSR cited by learned counsel contemplated the scale of punishments awardable by the SCM. The said Regulation states in so many words that these are general instructions issued for the guidance o"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-army-1950",
+      "page": 34,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: “Summary Court Martial” (2)"
+      ],
+      "snippet": "(4) A summary court-martial may pass any sentence which may be passed under this Act, except a sentence of death or transportation, or of imprisonment for a term exceeding the limit specified in sub-section (5). (5) The "
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "SCM expanded; Army Rules first."
+   }
+  },
+  {
+   "id": "Q09",
+   "persona": "adjutant",
+   "kind": "identifier",
+   "query": "s.69 Army Act",
+   "intent": "Army Act s.69 civil offences, provision text first",
+   "observed": {
+    "state": "results",
+    "mode": "identifier",
+    "error": null,
+    "chips": [
+     "Section 69 · The Army Act, 1950"
+    ],
+    "total_documents": 6,
+    "total_passages": 17,
+    "shown_passages": 17,
+    "server_ms": null,
+    "client_ms": 113.9,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950-hi",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 3,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "title": "Regulations for the Navy Part II"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-1962-major-e-g-barsy-1961insc177",
+      "title": "MAJOR E. G. BARSY versus THE STATE OF BOMBAY"
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-1996-major-r-s-budhwar-1996insc648",
+      "title": "MAJOR R.S. BUDHWAR versus UNION OF INDIA AND ORS."
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-army-1950",
+      "page": 25,
+      "tier": "identifier",
+      "reasons": [
+       "Section 69: provision text in The Army Act, 1950"
+      ],
+      "snippet": "69. Civil offences.—Subject to the provisions of section 70, any person subject to this Act who at any place in or beyond India commits any civil offence shall be deemed to be guilty of an offence against this Act and, i"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950-hi",
+      "page": 16,
+      "tier": "identifier",
+      "reasons": [
+       "Section 69: provision text in The Army Act, 1950"
+      ],
+      "snippet": "69. धसधिि अपराि—िारा 70 के उपबधिों के अध्यिीन यह है फक इस अधिधनयम के अध्यिीन का कोई व्यध‍ त, जो िारत में या िारत से परे फकसी स्र्ान में धसधिि अपराि करेगा इस अधिधनयम के धिरुद्ध अपराि का दोषी समझा जाएगा और यफद िह अपराि इस "
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-army-1950",
+      "page": 5,
+      "tier": "identifier",
+      "reasons": [
+       "Section 69: heading in The Army Act, 1950"
+      ],
+      "snippet": "68. Abetment of offences punishable with imprisonment and not committed. 69. Civil offences. 70. Civil offence not triable by court-martial. CHAPTER VII PUNISHMENTS 71. Punishments awardable by courts-martial. 72. Altern"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [
+     "F11"
+    ],
+    "note": "Provision text pinned first. The Hindi copy (garbled text) takes rank 2."
+   }
+  },
+  {
+   "id": "Q10",
+   "persona": "adjutant",
+   "kind": "identifier",
+   "query": "section 63 Army Act",
+   "intent": "Army Act s.63 violation of good order and discipline",
+   "observed": {
+    "state": "results",
+    "mode": "identifier",
+    "error": null,
+    "chips": [
+     "Section 63 · The Army Act, 1950"
+    ],
+    "total_documents": 6,
+    "total_passages": 12,
+    "shown_passages": 12,
+    "server_ms": null,
+    "client_ms": 95.7,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950-hi",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-allahabad-2023-wria-5566-1993-uphc010195031993-1-2023-05-23",
+      "title": "WRIA/5566/1993 of R.N.PANDEY Vs UNION OF INDIA and OTHERS"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-1989-union-of-india-and-ors-1989insc332",
+      "title": "UNION OF INDIA AND ORS. versus NAIK SUBEDAR CLK(S) BALESHWAR RAM AND ORS."
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-1991-ex-naik-sardar-singh-1991insc128",
+      "title": "EX. NAIK SARDAR SINGH  versus UNION OF INDIA AND OTHERS"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-army-1950",
+      "page": 24,
+      "tier": "identifier",
+      "reasons": [
+       "Section 63: provision text in The Army Act, 1950"
+      ],
+      "snippet": "63. Violation of good order and discipline.—Any person subject to this Act who is guilty of any act or omission which, though not specified in this Act, is prejudicial to good order and military discipline shall, on conv"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950-hi",
+      "page": 15,
+      "tier": "identifier",
+      "reasons": [
+       "Section 63: provision text in The Army Act, 1950"
+      ],
+      "snippet": "63. अच्छी व्यिस्र्ा और अनुशासन का अधतिमण—इस अधिधनयम के अध्यिीन का कोई व्यध‍ त, जो फकसी ऐसे काया या िोप का दोषी है जो, यद्यधप इस अधिधनयम में धिधनर्दाष् ट नहीं है तर्ाधप अच्छी व्यिस्र्ा और सैधनक अनुशासन पर प्रधतकूि प्रिाि "
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-army-1950",
+      "page": 5,
+      "tier": "identifier",
+      "reasons": [
+       "Section 63: heading in The Army Act, 1950"
+      ],
+      "snippet": "5 SECTIONS 54. Making away with equipment. 55. Injury to property. 56. False accusations. 57. Falsifying official documents and false declaration. 58. Signing in blank and failure to report. 59. Offences relating to cour"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Provision text first."
+   }
+  },
+  {
+   "id": "Q11",
+   "persona": "adjutant",
+   "kind": "identifier",
+   "query": "Rule 22 Army Rules",
+   "intent": "Army Rules r.22 hearing of charge",
+   "observed": {
+    "state": "results",
+    "mode": "identifier",
+    "error": null,
+    "chips": [
+     "Rule 22 · Army Rules,1954"
+    ],
+    "total_documents": 7,
+    "total_passages": 18,
+    "shown_passages": 18,
+    "server_ms": null,
+    "client_ms": 115.3,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "rules-army-rules-1954",
+      "title": "Army Rules,1954"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-jkl-2014-lpaow-137-2001-jkhc020002482001-1-2014-04-09",
+      "title": "LPAOW/137/2001 of UNION OF INDIA AND ANR. Vs SURINDER KUMAR"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-1983-lt-col-prithi-pal-singh-bedi-e-1982insc65",
+      "title": "LT. COL. PRITHI PAL SINGH BEDI ETC. versus UNION OF INDIA & OTHERS"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-1989-union-of-india-and-ors-1989insc332",
+      "title": "UNION OF INDIA AND ORS. versus NAIK SUBEDAR CLK(S) BALESHWAR RAM AND ORS."
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-1990-major-suresh-chand-mehra-1990insc347",
+      "title": "MAJOR SURESH CHAND MEHRA versus DEFENCE SECRETARY (U.0.1.) AND OTHERS"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "rules-army-rules-1954",
+      "page": 37,
+      "tier": "identifier",
+      "reasons": [
+       "Rule 22: heading in Army Rules,1954"
+      ],
+      "snippet": "NOTES See notes to AA. s. 21 and AR 19. CHAPTER V INVESTIGATION OF CHARGES AND TRIAL BY COURT-MARTIAL SECTION I – INVESTIGATION OF CHARGES AND REMAND FOR TRIAL 22. Hearing of charge. (1) Every charge against a person sub"
+     },
+     {
+      "rank": 2,
+      "doc_id": "rules-army-rules-1954",
+      "page": 8,
+      "tier": "identifier",
+      "reasons": [
+       "Rule 22: reference in Army Rules,1954"
+      ],
+      "snippet": "1. See notes 2 and 3 to AA. s. 22. For the prescribed authorities competent to authorize discharge see AR 13 and table annexed thereto. 2. The discharge of a person who is under the conditions of his enrolment entitled t"
+     },
+     {
+      "rank": 3,
+      "doc_id": "rules-army-rules-1954",
+      "page": 88,
+      "tier": "identifier",
+      "reasons": [
+       "Rule 22: reference in Army Rules,1954"
+      ],
+      "snippet": "be, for the offence, or that a charge in respect of the offence has been dismissed as provided in sub-rule (2) of rule 22; or"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Instrument scoped to Army Rules, 1954; provision first."
+   }
+  },
+  {
+   "id": "Q12",
+   "persona": "adjutant",
+   "kind": "identifier",
+   "query": "Rule 180 Army Rules",
+   "intent": "Army Rules r.180 court of inquiry: character at stake",
+   "observed": {
+    "state": "results",
+    "mode": "identifier",
+    "error": null,
+    "chips": [
+     "Rule 180 · Army Rules,1954"
+    ],
+    "total_documents": 2,
+    "total_passages": 3,
+    "shown_passages": 3,
+    "server_ms": null,
+    "client_ms": 82.4,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "rules-army-rules-1954",
+      "title": "Army Rules,1954"
+     },
+     {
+      "rank": 2,
+      "doc_id": "sc-2019-union-of-india-ors-2019insc1290",
+      "title": "UNION OF INDIA & ORS. versus P. S. GILL"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "rules-army-rules-1954",
+      "page": 196,
+      "tier": "identifier",
+      "reasons": [
+       "Rule 180: provision text in Army Rules,1954"
+      ],
+      "snippet": "2. For form of oath and affirmation see AR 140. 180. Procedure when character of a person subject to the Act is involved. Save in the case of a prisoner of war who is still absent whenever any inquiry affects the charact"
+     },
+     {
+      "rank": 2,
+      "doc_id": "rules-army-rules-1954",
+      "page": 37,
+      "tier": "identifier",
+      "reasons": [
+       "Rule 180: reference in Army Rules,1954"
+      ],
+      "snippet": "charge against the accused arises as a result of investigation by a court of inquiry, wherein the provisions of rule 180 have been complied with in respect of that accused, the commanding officer may dispense with the pr"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-2019-union-of-india-ors-2019insc1290",
+      "page": 4,
+      "tier": "mention",
+      "reasons": [
+       "refers to Rule 180 of army rules"
+      ],
+      "snippet": "High Court of Delhi. By an order dated 11.01.2007, the High Court quashed the Court of Inquiry on the ground that Rule 180 of the Army Rules, 1954 (hereinafter, ‘the Army Rules’) was violated. However, an option was give"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Army Rules r.180 first, then a 2019 SC judgment."
+   }
+  },
+  {
+   "id": "Q13",
+   "persona": "adjutant",
+   "kind": "natural",
+   "query": "absence without leave punishment",
+   "intent": "Army Act s.39",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 165,
+    "total_passages": 4781,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 19.7,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+      "title": "EX SEPOY MADAN PRASAD versus UNION OF INDIA AND OTHERS"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-navy-1957",
+      "title": "The Navy Act, 1957"
+     },
+     {
+      "rank": 3,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "title": "Regulations for the Navy Part II"
+     },
+     {
+      "rank": 4,
+      "doc_id": "regs-the-navy-pension-regulations-1964",
+      "title": "THE NAVY (PENSION) REGULATIONS, 1964"
+     },
+     {
+      "rank": 5,
+      "doc_id": "act-air-force-1950",
+      "title": "The Air Force Act, 1950"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+      "page": 7,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'without' (3), 'leave' (3), 'absence' (1), 'punishment' (1)"
+      ],
+      "snippet": "that the charge under Section 39(b) is not maintainable or that the provisions of Section 120 provide for a maximum punishment of imprisonment for one year, the same is found to be misconceived. Section 39 falling under "
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-navy-1957",
+      "page": 25,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'without' (3), 'leave' (3), 'punishment' (3), 'absence' (1)"
+      ],
+      "snippet": "51. Breaking out of ship and absence without leave.—Every person subject to naval law who without being guilty of desertion improperly leaves his ship or place of duty 1[or any place where he is required to be] or is abs"
+     },
+     {
+      "rank": 3,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "page": 25,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'leave' (12), 'absence' (7), 'punishment' (3), 'without' (1)"
+      ],
+      "snippet": "“Did remain absent over leave_________________ hours_______ minutes, namely, from___________to__________” 45. Application of regulations 41 to 44: - (1) The provisions of regulations 41 to 44 shall apply to breaking out "
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "fail",
+    "class": "retrieval_failure",
+    "findings": [
+     "F09"
+    ],
+    "note": "Navy Act and Navy Regulations outrank the Army Act; s.39 not in the top four."
+   }
+  },
+  {
+   "id": "Q14",
+   "persona": "adjutant",
+   "kind": "identifier",
+   "query": "section 82 Air Force Act",
+   "intent": "Air Force Act s.82 (punishment by CO)",
+   "observed": {
+    "state": "results",
+    "mode": "identifier",
+    "error": null,
+    "chips": [
+     "Section 82 · The Air Force Act, 1950"
+    ],
+    "total_documents": 2,
+    "total_passages": 14,
+    "shown_passages": 14,
+    "server_ms": null,
+    "client_ms": 52.4,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-air-force-1950",
+      "title": "The Air Force Act, 1950"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-air-force-1950-hi",
+      "title": "The Air Force Act, 1950"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-air-force-1950",
+      "page": 31,
+      "tier": "identifier",
+      "reasons": [
+       "Section 82: provision text in The Air Force Act, 1950"
+      ],
+      "snippet": "31 82. Punishment of persons other than officers and warrant officers.—Subject to the provisions of section 84, a commanding officer or such other officer as is, with the consent of the Central Government, specified by 1"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-air-force-1950-hi",
+      "page": 19,
+      "tier": "identifier",
+      "reasons": [
+       "Section 82: provision text in The Air Force Act, 1950"
+      ],
+      "snippet": "81. सेना-‍ यायािय द्वारा दंधडत फकए जाने से अ‍ यर्ा दधण् डत फकया जानाइस अधिधनयम के अध् यिीन के व् यध‍ तयों द्वारा फकए गए अपरािों के बारे में दंड सेना-‍ यायािय के मध् यिेप के धबना और िाराओं 82 और 86 में कधर्त रीधत से िी फ"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-air-force-1950",
+      "page": 6,
+      "tier": "identifier",
+      "reasons": [
+       "Section 82: heading in The Air Force Act, 1950"
+      ],
+      "snippet": "than officers and warrant officers. 83. Requirement of sanction in certain cases. 84. Limit of punishments under section 82. 85. Punishments in addition to those specified in section 82. 86. Punishment of officers and wa"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Air Force Act s.82 first."
+   }
+  },
+  {
+   "id": "Q15",
+   "persona": "adjutant",
+   "kind": "identifier",
+   "query": "section 80 Army Act",
+   "intent": "Army Act s.80",
+   "observed": {
+    "state": "results",
+    "mode": "identifier",
+    "error": null,
+    "chips": [
+     "Section 80 · The Army Act, 1950"
+    ],
+    "total_documents": 5,
+    "total_passages": 17,
+    "shown_passages": 17,
+    "server_ms": null,
+    "client_ms": 72.1,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950-hi",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-allahabad-2023-wria-5566-1993-uphc010195031993-1-2023-05-23",
+      "title": "WRIA/5566/1993 of R.N.PANDEY Vs UNION OF INDIA and OTHERS"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-1990-chief-of-army-staff-and-ors-1990insc399",
+      "title": "CHIEF OF ARMY STAFF AND ORS. versus MAJOR S.P. CHADHA"
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-1990-major-suresh-chand-mehra-1990insc347",
+      "title": "MAJOR SURESH CHAND MEHRA versus DEFENCE SECRETARY (U.0.1.) AND OTHERS"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-army-1950",
+      "page": 5,
+      "tier": "identifier",
+      "reasons": [
+       "Section 80: provision text in The Army Act, 1950"
+      ],
+      "snippet": "persons other than officers, junior commissioned officers and warrant officers. 81. Limit of punishments under section 80. 82. Punishments in addition to those specified in section 80. 83. Punishment of officers, junior "
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950-hi",
+      "page": 18,
+      "tier": "identifier",
+      "reasons": [
+       "Section 80: provision text in The Army Act, 1950"
+      ],
+      "snippet": "79. सेना-धयायािय द्वारा दधण्डत फकए जाने से अधयर्ा दधण्डत फकया जाना—इस अधिधनयम के अध्यिीन के व्यध‍ तयों द्वारा फकए गए अपरािों के बारे में दण्ड, सेना-धयायािय के मध्यिेप के धबना और िाराओं 80, 83, 84 और 85 में कधर्त रीधत से "
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-army-1950",
+      "page": 27,
+      "tier": "identifier",
+      "reasons": [
+       "Section 80: heading in The Army Act, 1950"
+      ],
+      "snippet": "80. Punishment of persons other than officers, junior commissioned officers and warrant officers.—Subject to the provisions of section 81, a commanding officer or such other officer as is, with the consent of the Central"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Army Act s.80 first."
+   }
+  },
+  {
+   "id": "Q16",
+   "persona": "adjutant",
+   "kind": "identifier",
+   "query": "s.127 Army Act",
+   "intent": "s.127 omitted 1992: must show omission",
+   "observed": {
+    "state": "results",
+    "mode": "identifier",
+    "error": null,
+    "chips": [
+     "Section 127 · The Army Act, 1950"
+    ],
+    "total_documents": 6,
+    "total_passages": 8,
+    "shown_passages": 8,
+    "server_ms": null,
+    "client_ms": 87.1,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950-hi",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-1962-major-e-g-barsy-1961insc177",
+      "title": "MAJOR E. G. BARSY versus THE STATE OF BOMBAY"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-1972-delhi-special-police-establish-1972insc187",
+      "title": "DELHI SPECIAL POLICE ESTABLISHMENT, NEW DELHI versus LT. COL. S. K. LORAIYA"
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-1990-chief-of-army-staff-and-ors-1990insc399",
+      "title": "CHIEF OF ARMY STAFF AND ORS. versus MAJOR S.P. CHADHA"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-army-1950",
+      "page": 7,
+      "tier": "identifier",
+      "reasons": [
+       "Section 127: provision text in The Army Act, 1950"
+      ],
+      "snippet": "127. [Omitted.] CHAPTER XI PROCEDURE OF COURTS-MARTIAL 128. Presiding officer. 129. Judge advocate. 130. Challenges. 131. Oaths of member, judge advocate and witness. 132. Voting by members. 133. General rule as to evide"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950",
+      "page": 36,
+      "tier": "identifier",
+      "reasons": [
+       "Section 127: provision text in The Army Act, 1950"
+      ],
+      "snippet": "127. [Successive trials by a criminal court and court-martial.] Omitted by the Army (Amendment) Act, 1992 (37 of 1992), s. 11 (w.e.f. 6-9-1992) CHAPTER XI PROCEDURE OF COURTS-MARTIAL 128. Presiding officer.—At every gene"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-army-1950-hi",
+      "page": 26,
+      "tier": "identifier",
+      "reasons": [
+       "Section 127: provision text in The Army Act, 1950"
+      ],
+      "snippet": "127. [दण्ड धयायािय और सेना धयायािय द्वारा िमिती धिचारण ।]—1992 के अधिधनयम सं० 37 की िारा 11 द्वारा धनरधसत । अध्याय 11 सेना-धयायाियों की प्रफिया 128. पीठासीन आफिसर—हर जनरि, धडधस्ट्र‍ट या सम्मरी जनरि सेना-धयायािय में ज्येष"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "s.127 found; the statute view prints it as omitted (1992)."
+   }
+  },
+  {
+   "id": "Q17",
+   "persona": "jag",
+   "kind": "citation",
+   "query": "2013 INSC 408",
+   "intent": "Dharamvir Singh v Union of India",
+   "observed": {
+    "state": "results",
+    "mode": "identifier",
+    "error": null,
+    "chips": [
+     "Neutral citation · 2013 INSC 408"
+    ],
+    "total_documents": 1,
+    "total_passages": 1,
+    "shown_passages": 1,
+    "server_ms": null,
+    "client_ms": 9.0,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2013-dharamvir-singh-2013insc408",
+      "title": "DHARAMVIR SINGH versus UNION OF INDIA & ORS."
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2013-dharamvir-singh-2013insc408",
+      "page": 1,
+      "tier": "document",
+      "reasons": [
+       "Neutral citation 2013 INSC 408 in document metadata; this passage is the document's first passage and does not itself contain the identifier"
+      ],
+      "snippet": "[2013] 8 S.C.R. 1119 DHARAMVIR SINGH v. UNION OF INDIA & ORS. (Civil Appeal No. 4949 of 2013) JULY 2, 2013 [A.K. PATNAIK AND SUDHANSU JYOTI MUKHOPADHAYA, JJ.] A B Armed Forces - Disability pension c... Entitlement to - P"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Neutral citation resolves to the single judgment."
+   }
+  },
+  {
+   "id": "Q18",
+   "persona": "jag",
+   "kind": "party",
+   "query": "Dharamvir Singh",
+   "intent": "Same judgment by party name",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 170,
+    "total_passages": 1905,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 13.9,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2015-union-of-india-anr-2015insc114",
+      "title": "UNION OF INDIA & ANR. versus RAJBIR SINGH"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-jkl-2025-wp-c-1095-2024-jkhc020024492024-1-2025-11-03",
+      "title": "WP(C)/1095/2024 of UNION OF INDIA TH SECRETARY MINISTRY OF DEFENCE NEW DELHI AND OTHERS Vs RAM SAROOP"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-jkl-2025-wp-c-301-2024-jkhc020006242024-1-2025-11-03",
+      "title": "WP(C)/301/2024 of UNION OF INDIA TH SECRETARY GOI MINISTRY OF DEFENCE NEW DELHI AND OTHERS Vs DASS RAM"
+     },
+     {
+      "rank": 4,
+      "doc_id": "hc-ph-2025-cwp-12146-2020-phhc010625902020-1-2025-04-28",
+      "title": "CWP/12146/2020 of RAJ BALA DEVI Vs UNION OF INDIA AND ORS"
+     },
+     {
+      "rank": 5,
+      "doc_id": "hc-delhi-2025-w-p-c-12792-2024-dlhc010603922024-1-2025-07-01",
+      "title": "W.P.(C)/12792/2024 of  UNION OF INDIA & ORS. Vs EX SGT PRAVAT RAVI"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2015-union-of-india-anr-2015insc114",
+      "page": 17,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'dharamvir' (1), 'singh' (1)"
+      ],
+      "snippet": "D E F G 15. The legal position as stated in Dharamvir Singh's H"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-jkl-2025-wp-c-1095-2024-jkhc020024492024-1-2025-11-03",
+      "page": 46,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'dharamvir' (2), 'singh' (2)"
+      ],
+      "snippet": "46 WP(C) No.3173/2023 along with connected matters Dharamvir Singh was found suffering from 8epilepsy9 when he was boarded out of service w.e.f. 01.04.1994. He was not granted disability pension on the basis of the opini"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-jkl-2025-wp-c-301-2024-jkhc020006242024-1-2025-11-03",
+      "page": 46,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'dharamvir' (2), 'singh' (2)"
+      ],
+      "snippet": "46 WP(C) No.3173/2023 along with connected matters Dharamvir Singh was found suffering from 8epilepsy9 when he was boarded out of service w.e.f. 01.04.1994. He was not granted disability pension on the basis of the opini"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "fail",
+    "class": "retrieval_failure",
+    "findings": [
+     "F02"
+    ],
+    "note": "The named judgment ranks 9th behind judgments that cite it; party names are not an identifier tier or boosted field."
+   }
+  },
+  {
+   "id": "Q19",
+   "persona": "jag",
+   "kind": "citation",
+   "query": "(2013) 7 SCC 316",
+   "intent": "Reported citation of Dharamvir Singh",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 12,
+    "total_passages": 13,
+    "shown_passages": 13,
+    "server_ms": null,
+    "client_ms": 9.9,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "hc-delhi-2025-w-p-c-17880-2024-dlhc010987072024-1-2025-07-17",
+      "title": "W.P.(C)/17880/2024 of UNION OF INDIA & ORS. Vs EX SGT NIRAJ KUMAR"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-delhi-2025-w-p-c-2942-2025-dlhc010121362025-1-2025-07-17",
+      "title": "W.P.(C)/2942/2025 of UNION OF INDIA & ORS. Vs SGT SURENDRA PAL (RETD)"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-2015-union-of-india-anr-2015insc114",
+      "title": "UNION OF INDIA & ANR. versus RAJBIR SINGH"
+     },
+     {
+      "rank": 4,
+      "doc_id": "hc-delhi-2025-w-p-c-10025-2025-dlhc010445962025-1-2025-07-16",
+      "title": "W.P.(C)/10025/2025 of UNION OF INDIA  & ORS. Vs EX SGT KUNAL PALIT"
+     },
+     {
+      "rank": 5,
+      "doc_id": "hc-delhi-2025-w-p-c-12792-2024-dlhc010603922024-1-2025-07-01",
+      "title": "W.P.(C)/12792/2024 of  UNION OF INDIA & ORS. Vs EX SGT PRAVAT RAVI"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "hc-delhi-2025-w-p-c-17880-2024-dlhc010987072024-1-2025-07-17",
+      "page": 20,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'scc' (2), '2013' (1), '7' (1), '316' (1)"
+      ],
+      "snippet": "the Supreme Court in Vijender Singh v UOI2. 1 (2013) 7 SCC 316 22025 SCC OnLIne SC 895 Digitally Signed By:AJIT KUMAR Signing Date:23.07.2025 18:03:20 Signature Not Verified"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-delhi-2025-w-p-c-2942-2025-dlhc010121362025-1-2025-07-17",
+      "page": 20,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'scc' (2), '2013' (1), '7' (1), '316' (1)"
+      ],
+      "snippet": "the Supreme Court in Vijender Singh v UOI2. 1 (2013) 7 SCC 316 22025 SCC OnLIne SC 895 Digitally Signed By:AJIT KUMAR Signing Date:23.07.2025 18:03:20 Signature Not Verified"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-2015-union-of-india-anr-2015insc114",
+      "page": 3,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: '7' (2), 'scc' (2), '2013' (1), '316' (1)"
+      ],
+      "snippet": "repudiated by the appellants. [Paras 15, 16] [200-E-H; 201- G A-F] Union of India v. Ram Prakash (2010) 11 SCC 220: 2010 (7) SCR 506; Dharamvir Singh v. Union of India and Ors. (2013) 7 SCC 316- referred to. H"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "fail",
+    "class": "corpus_deficiency",
+    "findings": [
+     "F06"
+    ],
+    "note": "Metadata holds only [2013] 8 S.C.R. 1119 for Dharamvir Singh; the SCC citation is not captured, so the identifier layer cannot match it."
+   }
+  },
+  {
+   "id": "Q20",
+   "persona": "jag",
+   "kind": "case_number",
+   "query": "Civil Appeal No. 4949 of 2013",
+   "intent": "Case number of Dharamvir Singh",
+   "observed": {
+    "state": "results",
+    "mode": "identifier",
+    "error": null,
+    "chips": [
+     "Case number · Civil Appeal No. 4949 of 2013"
+    ],
+    "total_documents": 1,
+    "total_passages": 2,
+    "shown_passages": 2,
+    "server_ms": null,
+    "client_ms": 32.7,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2013-dharamvir-singh-2013insc408",
+      "title": "DHARAMVIR SINGH versus UNION OF INDIA & ORS."
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2013-dharamvir-singh-2013insc408",
+      "page": 1,
+      "tier": "identifier",
+      "reasons": [
+       "Case number Civil Appeal No. 4949 of 2013 printed at the top of p.1 (extracted, not verified)",
+       "the identifier appears in this passage"
+      ],
+      "snippet": "[2013] 8 S.C.R. 1119 DHARAMVIR SINGH v. UNION OF INDIA & ORS. (Civil Appeal No. 4949 of 2013) JULY 2, 2013 [A.K. PATNAIK AND SUDHANSU JYOTI MUKHOPADHAYA, JJ.] A B Armed Forces - Disability pension c... Entitlement to - P"
+     },
+     {
+      "rank": 2,
+      "doc_id": "sc-2013-dharamvir-singh-2013insc408",
+      "page": 6,
+      "tier": "identifier",
+      "reasons": [
+       "Case number Civil Appeal No. 4949 of 2013 printed at the top of p.1 (extracted, not verified)",
+       "the identifier appears in this passage"
+      ],
+      "snippet": "2009 (13) SCR 416 distinguished Para 27 2010 (7) SCR 506 distinguished Para 27 CIVIL APPELLATE JURISDICTION : Civil Appeal No. 4949 of 2013."
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Case number from the page-1 cover resolves to the judgment (labelled candidate)."
+   }
+  },
+  {
+   "id": "Q21",
+   "persona": "jag",
+   "kind": "natural",
+   "query": "disability pension attributable to military service",
+   "intent": "SC/HC disability pension judgments",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 215,
+    "total_passages": 7100,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 58.2,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2015-union-of-india-anr-2015insc114",
+      "title": "UNION OF INDIA & ANR. versus RAJBIR SINGH"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-jkl-2025-wp-c-1095-2024-jkhc020024492024-1-2025-11-03",
+      "title": "WP(C)/1095/2024 of UNION OF INDIA TH SECRETARY MINISTRY OF DEFENCE NEW DELHI AND OTHERS Vs RAM SAROOP"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-jkl-2025-wp-c-301-2024-jkhc020006242024-1-2025-11-03",
+      "title": "WP(C)/301/2024 of UNION OF INDIA TH SECRETARY GOI MINISTRY OF DEFENCE NEW DELHI AND OTHERS Vs DASS RAM"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-2013-dharamvir-singh-2013insc408",
+      "title": "DHARAMVIR SINGH versus UNION OF INDIA & ORS."
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-2012-union-of-india-anr-2012insc179",
+      "title": "UNION OF INDIA & ANR. versus TALWINDER SINGH"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2015-union-of-india-anr-2015insc114",
+      "page": 9,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'disability' (5), 'service' (4), 'attributable' (3), 'pension' (2)"
+      ],
+      "snippet": "of service on account of a disability which is attributable to or aggravated by military service in non-battle casualty and is assessed at 20% or above. The regulation reads: \"173. Primary conditions for the grant of dis"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-jkl-2025-wp-c-1095-2024-jkhc020024492024-1-2025-11-03",
+      "page": 6,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'disability' (5), 'service' (4), 'pension' (3), 'attributable' (2)"
+      ],
+      "snippet": "matter would be of utmost necessity. The Pension Regulations for the Army, 1961. Primary conditions for grant of disability pension 173. Unless otherwise specifically provided a disability pension consisting of service e"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-jkl-2025-wp-c-301-2024-jkhc020006242024-1-2025-11-03",
+      "page": 6,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'disability' (5), 'service' (4), 'pension' (3), 'attributable' (2)"
+      ],
+      "snippet": "matter would be of utmost necessity. The Pension Regulations for the Army, 1961. Primary conditions for grant of disability pension 173. Unless otherwise specifically provided a disability pension consisting of service e"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "SC and HC disability-pension judgments; Dharamvir Singh at rank 4."
+   }
+  },
+  {
+   "id": "Q22",
+   "persona": "jag",
+   "kind": "natural",
+   "query": "can high court entertain writ against armed forces tribunal order",
+   "intent": "L. Chandra Kumar line / 2023 SC ruling on HC writs v AFT",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 279,
+    "total_passages": 19747,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 76.2,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "hc-allahabad-2023-wria-14357-2023-uphc011896732023-1-2023-09-12",
+      "title": "WRIA/14357/2023 of SRI KRISHNA SINGH YADAV Vs UNION OF INDIA AND 5 OTHERS"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-jkl-2019-swp-121-2004-jkhc020002452004-1-2019-09-04",
+      "title": "SWP/121/2004 of KRISHANI DEVI Vs U.O.I.TH.MINISTRY OF DEFENCE AND ORS"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-2018-maj-amod-kumar-2018insc795",
+      "title": "MAJ. AMOD KUMAR versus UNION OF INDIA & ANR."
+     },
+     {
+      "rank": 4,
+      "doc_id": "hc-jkl-2019-swp-75-2017-jkhc020066942017-1-2019-09-04",
+      "title": "SWP/75/2017 of ASHWANI KUMAR Vs U.O.I.TH.MIN.OF DEFENCE AND ORS."
+     },
+     {
+      "rank": 5,
+      "doc_id": "hc-allahabad-2023-wria-9563-2023-uphc020875162023-1-2023-12-15",
+      "title": "WRIA/9563/2023 of NO15236032-K SEPOY(GUN.)RAJ KARAN SINGH(DISMIS.)THRU.HIS WIFE AND REPRES./PAROKAR SMT.RUKSAT SINGH Vs ARMED FORCES TRIBUNA"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "hc-allahabad-2023-wria-14357-2023-uphc011896732023-1-2023-09-12",
+      "page": 1,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'armed' (4), 'forces' (4), 'tribunal' (3), 'high' (2)"
+      ],
+      "snippet": "The matters relating to the members of Armed Forces including those retired are cognizable by Armed Forces Tribunal constituted under the Armed Forces Tribunal Act, 2007. In view of the above, while I decline to entertai"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-jkl-2019-swp-121-2004-jkhc020002452004-1-2019-09-04",
+      "page": 1,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'armed' (2), 'high' (1), 'court' (1), 'entertain' (1)"
+      ],
+      "snippet": "Sr. No. 141 HIGH COURT OF JAMMU AND KASHMIR AT JAMMU SWP No. 121/2004 Krishani Devi …Petitioner(s) Through :- None v/s Union of India and another …Respondent(s) Through :- Mr. Vishal Sharma, ASGI HON’BLE MR. JUSTICE RAJE"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-2018-maj-amod-kumar-2018insc795",
+      "page": 8,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'writ' (2), 'court' (1), 'entertain' (1), 'armed' (1)"
+      ],
+      "snippet": "35 violated. Postings and transfers are a necessary incident of service. Hence, the grievance, if any, cannot be entertained under Article 32. 6.3. The Petitioners cannot assail posting/transfer orders directly before th"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "not_determinable",
+    "class": "corpus_deficiency",
+    "findings": [
+     "F04",
+     "F09"
+    ],
+    "note": "HC writs from service matters surface. Whether the controlling 2023 SC ruling on HC writs against AFT orders is held in the sample was not established; no result identified it."
+   }
+  },
+  {
+   "id": "Q23",
+   "persona": "jag",
+   "kind": "natural",
+   "query": "court martial set aside violation of natural justice",
+   "intent": "Judgments quashing CM proceedings",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 257,
+    "total_passages": 15493,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 59.0,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2019-union-of-india-thr-secretary-o-2019insc1271",
+      "title": "UNION OF INDIA THR. SECRETARY & ORS. versus UDAI BHAN SINGH"
+     },
+     {
+      "rank": 2,
+      "doc_id": "sc-1989-union-of-india-and-ors-1989insc332",
+      "title": "UNION OF INDIA AND ORS. versus NAIK SUBEDAR CLK(S) BALESHWAR RAM AND ORS."
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-1973-captain-harish-uppal-1972insc286",
+      "title": "CAPTAIN HARISH UPPAL versus UNION OF INDIA AND OTHERS"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-2011-union-of-india-ors-2011insc672",
+      "title": "UNION OF INDIA & ORS.  versus BODUPALLI GOPALASWAMI"
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-1997-the-general-court-martial-and-1997insc816",
+      "title": "THE GENERAL COURT MARTIAL AND ORS. versus COL. ANILTEJ SINGH DHALIWAL"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2019-union-of-india-thr-secretary-o-2019insc1271",
+      "page": 7,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'court' (5), 'violation' (2), 'set' (1), 'aside' (1)"
+      ],
+      "snippet": "dismissed OA No.151 of 2009 instituted by the respondent. That led to the institution of proceedings before the High Court of Judicature at Allahabad. By its impugned judgment and order, the Division Bench of the High Co"
+     },
+     {
+      "rank": 2,
+      "doc_id": "sc-1989-union-of-india-and-ors-1989insc332",
+      "page": 3,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'court' (7), 'martial' (2), 'set' (1), 'aside' (1)"
+      ],
+      "snippet": "The decision of the Court Martial and the order of dismissal were challenged before the Guwahati High Court in a writ petition. The High Court found that as against respondents 2 and 3 there was no inquiry under Rule 22."
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-1973-captain-harish-uppal-1972insc286",
+      "page": 2,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'court' (2), 'martial' (1), 'violation' (1), 'natural' (1)"
+      ],
+      "snippet": "1026 SUPREME COURT REPORTS [1973] 2 S.C.R. pletely followed in this case. The circumstanc~ requiring the reconsidera- A tion pointed out by the Officer Commanding were unexceptionable and there was no violation of the pr"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "partial",
+    "class": "incomplete_feature",
+    "findings": [
+     "F09"
+    ],
+    "note": "Relevant SC court-martial judgments appear; no ranking by legal issue."
+   }
+  },
+  {
+   "id": "Q24",
+   "persona": "jag",
+   "kind": "natural",
+   "query": "burden of proof on medical board disability not noted at entry",
+   "intent": "Dharamvir Singh presumption",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 235,
+    "total_passages": 18046,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 75.0,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "hc-delhi-2025-w-p-c-17424-2025-dlhc011298302024-1-2025-11-17",
+      "title": "W.P.(C)/17424/2025 of UNION OF INDIA  & ORS. Vs SGT RANVIR (RETD)"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-delhi-2025-w-p-c-11510-2025-dlhc010529472025-1-2025-08-04",
+      "title": "W.P.(C)/11510/2025 of UNION OF INDIA AND ORS Vs EX NB SUB JOGA SINGH"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-delhi-2025-w-p-c-14574-2025-dlhc010698872025-1-2025-09-19",
+      "title": "W.P.(C)/14574/2025 of UNION OF INDIA THROUGH SECRETARY, MINISTRY OF DEFENCE & ORS. Vs EX 770906 SGT PK RAJESH"
+     },
+     {
+      "rank": 4,
+      "doc_id": "hc-delhi-2025-w-p-c-9470-2025-dlhc011199172024-1-2025-07-10",
+      "title": "W.P.(C)/9470/2025 of UNION OF INDIA & ORS. Vs SERVICE NO  785407 EX SGT RAJESH KUMAR (EX SM)"
+     },
+     {
+      "rank": 5,
+      "doc_id": "hc-delhi-2025-w-p-c-10025-2025-dlhc010445962025-1-2025-07-16",
+      "title": "W.P.(C)/10025/2025 of UNION OF INDIA  & ORS. Vs EX SGT KUNAL PALIT"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "hc-delhi-2025-w-p-c-17424-2025-dlhc011298302024-1-2025-11-17",
+      "page": 7,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'disability' (7), 'medical' (6), 'board' (6), 'noted' (4)"
+      ],
+      "snippet": "back to the impugned order dated 26.02.2016, we find that the Tribunal simply went by the remarks of the Invaliding Medical Board and Re-Survey Medical Boards to hold that since the disability of the appellant was less t"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-delhi-2025-w-p-c-11510-2025-dlhc010529472025-1-2025-08-04",
+      "page": 7,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'medical' (8), 'board' (7), 'disability' (7), 'entry' (5)"
+      ],
+      "snippet": "is that a member of the armed forces is presumed to be in sound physical and mental condition at the time of his entry into the service if there is no note or record to the contrary made at the time of such entry. In the"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-delhi-2025-w-p-c-14574-2025-dlhc010698872025-1-2025-09-19",
+      "page": 7,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'medical' (8), 'board' (7), 'disability' (7), 'entry' (5)"
+      ],
+      "snippet": "is that a member of the armed forces is presumed to be in sound physical and mental condition at the time of his entry into the service if there is no note or record to the contrary made at the time of such entry. In the"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "partial",
+    "class": "incomplete_feature",
+    "findings": [
+     "F09"
+    ],
+    "note": "Delhi HC disability judgments that apply the presumption appear; the source authority (Dharamvir Singh) is not in the top four."
+   }
+  },
+  {
+   "id": "Q25",
+   "persona": "jag",
+   "kind": "misspelling",
+   "query": "dharamveer singh",
+   "intent": "Spelling variant should still find Dharamvir Singh",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 170,
+    "total_passages": 1898,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 24.3,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2023-dr-jaya-thakur-2023insc616",
+      "title": "DR. JAYA THAKUR versus UNION OF INDIA & ORS"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-ph-2011-lpa-705-2011-phhc010978742011-1-2011-06-01",
+      "title": "LPA/705/2011 of UNION OF INDIA & ORS. Vs SURINDER SINGH"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-2015-supreme-court-advocates-on-rec-2015insc285",
+      "title": "SUPREME COURT ADVOCATES-ON-RECORD  ASSOCIATION AND ANOTHER versus UNION OF INDIA"
+     },
+     {
+      "rank": 4,
+      "doc_id": "hc-jkl-2014-lpaow-137-2001-jkhc020002482001-1-2014-04-09",
+      "title": "LPAOW/137/2001 of UNION OF INDIA AND ANR. Vs SURINDER KUMAR"
+     },
+     {
+      "rank": 5,
+      "doc_id": "hc-ph-2025-cwp-33219-2024-phhc011696092024-1-2025-09-23",
+      "title": "CWP/33219/2024 of UNION OF INDIA AND ORS Vs EX SUB MAJ MOHINDER SINGH AND ANR"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2023-dr-jaya-thakur-2023insc616",
+      "page": 9,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'singh' (7)"
+      ],
+      "snippet": "Sankarnayaranan submits that this Court in the cases of Vineet Narain and others v. Union of India and another3, Prakash Singh and others v. Union of India and others (Prakash Singh-1)4, Prakash Singh and others v. Union"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-ph-2011-lpa-705-2011-phhc010978742011-1-2011-06-01",
+      "page": 3,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'singh' (4)"
+      ],
+      "snippet": "(M.M. KUMAR) (M.M. KUMAR) (M.M. KUMAR) (M.M. KUMAR) JUDGE JUDGE JUDGE JUDGE (GURDEV SINGH GURDEV SINGH GURDEV SINGH GURDEV SINGH) June 1 June 1 June 1 June 1, 2011 , 2011 , 2011 , 2011 JUDGE JUDGE JUDGE JUDGE Pkapoor"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-2015-supreme-court-advocates-on-rec-2015insc285",
+      "page": 92,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'singh' (8)"
+      ],
+      "snippet": "92 SUPREME COURT REPORT'-_ [2015] 13 S.C.R. A Choudhury, Anitha·Shenoy, V. N. Raghupathy, Tapesh Kumar Singh, Mohd. Waquas, Anurag Singh, Aswarya K. Sinha, Rachana Srivastava, Shashi Juneja, A. P. Mayee, Ramesh Babu M. R"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "fail",
+    "class": "incomplete_feature",
+    "findings": [
+     "F08"
+    ],
+    "note": "Spelling variant: the judgment falls to rank 35; no suggestion is offered."
+   }
+  },
+  {
+   "id": "Q26",
+   "persona": "jag",
+   "kind": "misspelling",
+   "query": "court marshal",
+   "intent": "Common misspelling of court martial",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 255,
+    "total_passages": 13521,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 52.2,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "title": "Regulations for the Navy Part II"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-2011-union-of-india-ors-2011insc672",
+      "title": "UNION OF INDIA & ORS.  versus BODUPALLI GOPALASWAMI"
+     },
+     {
+      "rank": 4,
+      "doc_id": "act-air-force-1950",
+      "title": "The Air Force Act, 1950"
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-2006-union-of-india-and-ors-2006insc163",
+      "title": "UNION OF INDIA AND ORS. versus RANBIR SINGH RATHAUR AND ORS."
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "page": 166,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'marshal' (4), 'court' (1)"
+      ],
+      "snippet": "(b) The provost marshal shall carry a drawn sword while escorting the accused in and out of the court. He shall, however, “return” the sword when the accused takes his seat. If the accused himself gives evidence, the Pro"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950",
+      "page": 33,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'marshal' (4), 'court' (1)"
+      ],
+      "snippet": "107. Provost-marshals.—(1) Provost-marshals may be appointed by 1[the Chief of the Army Staff] or by any prescribed officer. (2) The duties of a provost-marshal are to take charge of persons confined for any offence, to "
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-2011-union-of-india-ors-2011insc672",
+      "page": 23,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'court' (2), 'marshal' (2)"
+      ],
+      "snippet": "company, or other commander, who made preliminary inquiry into the case, or was a member of a previous court- martial which tried the accused in respect of the same offence; or (d) ls the commanding officer of the accuse"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "fail",
+    "class": "incomplete_feature",
+    "findings": [
+     "F08"
+    ],
+    "note": "'court marshal' matches 'provost marshal' in Navy Regulations; no 'did you mean court martial'."
+   }
+  },
+  {
+   "id": "Q27",
+   "persona": "jag",
+   "kind": "misspelling",
+   "query": "disabilty pension",
+   "intent": "Typo should still find disability pension",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 117,
+    "total_passages": 2170,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 103.3,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "hc-jkl-2025-wp-c-1095-2024-jkhc020024492024-1-2025-11-03",
+      "title": "WP(C)/1095/2024 of UNION OF INDIA TH SECRETARY MINISTRY OF DEFENCE NEW DELHI AND OTHERS Vs RAM SAROOP"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-jkl-2025-wp-c-301-2024-jkhc020006242024-1-2025-11-03",
+      "title": "WP(C)/301/2024 of UNION OF INDIA TH SECRETARY GOI MINISTRY OF DEFENCE NEW DELHI AND OTHERS Vs DASS RAM"
+     },
+     {
+      "rank": 3,
+      "doc_id": "regs-the-navy-pension-regulations-1964",
+      "title": "THE NAVY (PENSION) REGULATIONS, 1964"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-2018-lok-prahari-through-its-genera-2018insc348",
+      "title": "LOK PRAHARI, THROUGH ITS GENERAL SECRETARY S. N. SHUKLA & ANOTHER versus UNION OF INDIA THROUGH ITS SECRETARY & OTHERS"
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-2018-n-n-godfred-ors-2018insc599",
+      "title": "N.N. GODFRED & ORS. versus UNION OF INDIA & ORS."
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "hc-jkl-2025-wp-c-1095-2024-jkhc020024492024-1-2025-11-03",
+      "page": 19,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'disabilty' (1), 'pension' (1)"
+      ],
+      "snippet": "addition to the retiring pension admissible, a disability element from the date of retirement if the degree of disability is accepted at 20% or more. (b) The disability element for 100% disability shall be at the rate la"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-jkl-2025-wp-c-301-2024-jkhc020006242024-1-2025-11-03",
+      "page": 19,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'disabilty' (1), 'pension' (1)"
+      ],
+      "snippet": "addition to the retiring pension admissible, a disability element from the date of retirement if the degree of disability is accepted at 20% or more. (b) The disability element for 100% disability shall be at the rate la"
+     },
+     {
+      "rank": 3,
+      "doc_id": "regs-the-navy-pension-regulations-1964",
+      "page": 64,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'pension' (11)"
+      ],
+      "snippet": "SECTION SAILORS AND THEIR FAMILIES Sub-section 1 – Advance of pension 168. Advances of service [invalid/special pensions. – An advance of service or invalid or special pension not exceeding six month‟s pension (exclusive"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "partial",
+    "class": "incomplete_feature",
+    "findings": [
+     "F08"
+    ],
+    "note": "Matches on 'pension' only; the typo is silently dropped."
+   }
+  },
+  {
+   "id": "Q28",
+   "persona": "researcher",
+   "kind": "identifier",
+   "query": "section 302 IPC",
+   "intent": "IPC s.302 (historical); ideally note BNS s.103",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [
+     "No instrument titled “IPC” in this library"
+    ],
+    "total_documents": 13,
+    "total_passages": 146,
+    "shown_passages": 146,
+    "server_ms": null,
+    "client_ms": 7.3,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "ref-bprd-comparison-bns-ipc",
+      "title": "Correspondence Table and Comparison Summary of the BNS, 2023 and the IPC, 1860"
+     },
+     {
+      "rank": 2,
+      "doc_id": "ref-bprd-comparison-bnss-crpc",
+      "title": "Correspondence Table and Comparison Summary of the BNSS, 2023 and the CrPC, 1973"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-delhi-2026-w-p-c-14518-2024-dlhc010705162024-1-2026-04-17",
+      "title": "W.P.(C)/14518/2024 of MANPREET SINGH CHADHA Vs UNION OF INDIA & ORS."
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-2023-supriyo-supriya-chakraborty-an-2023insc920",
+      "title": "SUPRIYO @ SUPRIYA CHAKRABORTY & ANR versus UNION OF INDIA"
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-2019-union-of-india-and-others-2019insc818",
+      "title": "UNION OF INDIA AND OTHERS versus JUNU GAYARY"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "ref-bprd-comparison-bns-ipc",
+      "page": 1,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'ipc' (5)"
+      ],
+      "snippet": "CORRESPONDENCE TABLE and COMPARISON SUMMARY OF THE BHARTATIYA NYAYA SANHITA, 2023 (BNS) to THE INDIAN PENAL CODE, 1860 (IPC) BNS Sections/ Subsecti ons Subject IPC Sections Summary of comparison 1(1) Short title, commenc"
+     },
+     {
+      "rank": 2,
+      "doc_id": "ref-bprd-comparison-bns-ipc",
+      "page": 15,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'ipc' (4)"
+      ],
+      "snippet": "345 IPC section is included as a sub-section in BNS sans heading. Fine is added. 127 (6) Wrongful confinement in secret. 346 IPC section is included as a sub-section in BNS sans heading. Imprisonment is increased from tw"
+     },
+     {
+      "rank": 3,
+      "doc_id": "ref-bprd-comparison-bns-ipc",
+      "page": 35,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'ipc' (3)"
+      ],
+      "snippet": "450 IPC section is included as a sub-section sans heading. 332 (c) House-trespass in order to commit offence punishable with imprisonment. 451 IPC section is included as a sub-section sans heading. 333 House-trespass aft"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "fail",
+    "class": "retrieval_failure",
+    "findings": [
+     "F01"
+    ],
+    "note": "'No instrument titled “IPC” in this library' although the IPC is held; the full title works."
+   }
+  },
+  {
+   "id": "Q29",
+   "persona": "researcher",
+   "kind": "identifier",
+   "query": "section 103 BNS",
+   "intent": "BNS s.103 murder",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [
+     "No instrument titled “BNS” in this library"
+    ],
+    "total_documents": 3,
+    "total_passages": 91,
+    "shown_passages": 91,
+    "server_ms": null,
+    "client_ms": 5.3,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "ref-bprd-comparison-bns-ipc",
+      "title": "Correspondence Table and Comparison Summary of the BNS, 2023 and the IPC, 1860"
+     },
+     {
+      "rank": 2,
+      "doc_id": "ref-bprd-comparison-bnss-crpc",
+      "title": "Correspondence Table and Comparison Summary of the BNSS, 2023 and the CrPC, 1973"
+     },
+     {
+      "rank": 3,
+      "doc_id": "ref-bprd-comparison-bsa-iea",
+      "title": "Correspondence Table and Comparison Summary of the BSA, 2023 and the Indian Evidence Act, 1872"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "ref-bprd-comparison-bns-ipc",
+      "page": 1,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'bns' (5)"
+      ],
+      "snippet": "IPS, Director, CAPT Bhopal CORRESPONDENCE TABLE and COMPARISON SUMMARY OF THE BHARTATIYA NYAYA SANHITA, 2023 (BNS) to THE INDIAN PENAL CODE, 1860 (IPC) BNS Sections/ Subsecti ons Subject IPC Sections Summary of compariso"
+     },
+     {
+      "rank": 2,
+      "doc_id": "ref-bprd-comparison-bns-ipc",
+      "page": 14,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'bns' (2)"
+      ],
+      "snippet": "326A The IPC section is included as a subsection in BNS. Words “causes a person to be in a permanent vegetative state\" are added in Section 124(1) of the BNS."
+     },
+     {
+      "rank": 3,
+      "doc_id": "ref-bprd-comparison-bns-ipc",
+      "page": 15,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'bns' (4)"
+      ],
+      "snippet": "345 IPC section is included as a sub-section in BNS sans heading. Fine is added. 127 (6) Wrongful confinement in secret. 346 IPC section is included as a sub-section in BNS sans heading. Imprisonment is increased from tw"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "fail",
+    "class": "retrieval_failure",
+    "findings": [
+     "F01"
+    ],
+    "note": "'No instrument titled “BNS”' although BNS is held (three copies)."
+   }
+  },
+  {
+   "id": "Q30",
+   "persona": "researcher",
+   "kind": "natural",
+   "query": "IPC to BNS comparison table",
+   "intent": "BPRD comparison IPC-BNS",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 48,
+    "total_passages": 341,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 8.8,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "ref-bprd-comparison-bns-ipc",
+      "title": "Correspondence Table and Comparison Summary of the BNS, 2023 and the IPC, 1860"
+     },
+     {
+      "rank": 2,
+      "doc_id": "ref-bprd-comparison-bnss-crpc",
+      "title": "Correspondence Table and Comparison Summary of the BNSS, 2023 and the CrPC, 1973"
+     },
+     {
+      "rank": 3,
+      "doc_id": "ref-bprd-comparison-bsa-iea",
+      "title": "Correspondence Table and Comparison Summary of the BSA, 2023 and the Indian Evidence Act, 1872"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-2018-justice-k-s-puttaswamy-retd-2018insc880",
+      "title": "JUSTICE K. S. PUTTASWAMY (RETD.) versus UNION OF INDIA & ORS."
+     },
+     {
+      "rank": 5,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "title": "Regulations for the Navy Part II"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "ref-bprd-comparison-bns-ipc",
+      "page": 1,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'ipc' (5), 'bns' (5), 'comparison' (2), 'table' (1)"
+      ],
+      "snippet": "© Anil Kishore Yadav, IPS, Director, CAPT Bhopal CORRESPONDENCE TABLE and COMPARISON SUMMARY OF THE BHARTATIYA NYAYA SANHITA, 2023 (BNS) to THE INDIAN PENAL CODE, 1860 (IPC) BNS Sections/ Subsecti ons Subject IPC Section"
+     },
+     {
+      "rank": 2,
+      "doc_id": "ref-bprd-comparison-bnss-crpc",
+      "page": 27,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'ipc' (2), 'bns' (2), 'table' (1)"
+      ],
+      "snippet": "against other persons appearing to be guilty of offence. 319 No change. 359 Compounding of offences. 320 In the table of compoundable offences, the corresponding IPC sections are replaced by BNS sections. Section 497 IPC"
+     },
+     {
+      "rank": 3,
+      "doc_id": "ref-bprd-comparison-bns-ipc",
+      "page": 1,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'bns' (2), 'ipc' (1), 'table' (1)"
+      ],
+      "snippet": "2 No change except \"Code\" is replaced with \"Sanhita\". Wherever the word “Code” is used in IPC, the word “Sanhita” is used in BNS; therefore, this fact will not be specifically mentioned in this table hereinafter. 1(4) Pu"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "BPRD comparison tables first."
+   }
+  },
+  {
+   "id": "Q31",
+   "persona": "researcher",
+   "kind": "identifier",
+   "query": "section 65B Evidence Act",
+   "intent": "Evidence Act s.65B (electronic records)",
+   "observed": {
+    "state": "results",
+    "mode": "identifier",
+    "error": null,
+    "chips": [
+     "Section 65B · The Indian Evidence Act, 1872"
+    ],
+    "total_documents": 1,
+    "total_passages": 2,
+    "shown_passages": 2,
+    "server_ms": null,
+    "client_ms": 43.0,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-evidence-1872",
+      "title": "The Indian Evidence Act, 1872"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-evidence-1872",
+      "page": 34,
+      "tier": "identifier",
+      "reasons": [
+       "Section 65B: provision text in The Indian Evidence Act, 1872"
+      ],
+      "snippet": "relating to electronic record.––The contents of electronic records may be proved in accordance with the provisions of section 65B. 65B. Admissibility of electronic records.––(1) Notwithstanding anything contained in this"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-evidence-1872",
+      "page": 4,
+      "tier": "identifier",
+      "reasons": [
+       "Section 65B: heading in The Indian Evidence Act, 1872"
+      ],
+      "snippet": "65B. Admissibility of electronic records. 66. Rules as to notice to produce. 67. Proof of signature and handwriting of person alleged to have signed or written document produced. 67A. Proof as to electronic signature. 68"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Evidence Act s.65B pinned (full short title used)."
+   }
+  },
+  {
+   "id": "Q32",
+   "persona": "researcher",
+   "kind": "phrase",
+   "query": "omitted by Act 37 of 1992",
+   "intent": "1992 amendment footprint in the Army Act",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 199,
+    "total_passages": 7945,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 27.2,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-the-tribunals-reforms-act-2021",
+      "title": "The Tribunals Reforms Act, 2021"
+     },
+     {
+      "rank": 3,
+      "doc_id": "notif-tribunal-reforms",
+      "title": "Tribunal Reforms"
+     },
+     {
+      "rank": 4,
+      "doc_id": "act-army-1950-hi",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-2001-union-of-india-and-ors-2001insc202",
+      "title": "UNION OF INDIA AND ORS. versus HARJEET SINGH SANDHU"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-army-1950",
+      "page": 48,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'act' (4), '1992' (4), 'omitted' (2), '37' (2)"
+      ],
+      "snippet": "194. [Repeals.] Rep. by the Repealing and Amending Act, 1957 (36 of 1957), s. 2 and the First Schedule. 195-196. [Chapter XVI.] Omitted by the Army (Amendment) Act, 1992 (37 of 1992), s. 19 (w.e.f. 6-9-1992). 1. Cl. (c) "
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950",
+      "page": 27,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'act' (3), 'omitted' (2), '37' (2), '1992' (2)"
+      ],
+      "snippet": "(i) penal deductions under clause (g) of section 91; 3* * * * * 1. The words “field punishment” omitted by Act 37 of 1992, s. 3. 2. Subs. by Act 19 of 1955. s. 2 and the Schedule, for “the Commander-in-Chief”. 3. Cl. (j)"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-army-1950",
+      "page": 28,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'act' (3), '37' (2), '1992' (2), 'omitted' (1)"
+      ],
+      "snippet": "1. Sub-section (1) omitted by Act 37 of 1992, s. 5. 2. Subs. by s. 5, ibid., for “(a), (b), (c) and (j)”. 3. Subs. by Act 19 of 1955, s. 2 and the Schedule, for “the Commander-in-Chief” 4. Subs. by Act 37 of 1992, s. 6, "
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Army Act first; 1992 amendment footnotes found."
+   }
+  },
+  {
+   "id": "Q33",
+   "persona": "researcher",
+   "kind": "keyword",
+   "query": "Tribunals Reforms Act 2021",
+   "intent": "The Act and judgments on it",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 260,
+    "total_passages": 8701,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 29.6,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-the-tribunals-reforms-act-2021",
+      "title": "The Tribunals Reforms Act, 2021"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-the-tribunals-reforms-act-2026",
+      "title": "The Tribunals Reforms Act, 2026"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-armed-forces-tribunal-2007",
+      "title": "The Armed Forces Tribunal Act, 2007"
+     },
+     {
+      "rank": 4,
+      "doc_id": "notif-tribunal-reforms",
+      "title": "Tribunal Reforms"
+     },
+     {
+      "rank": 5,
+      "doc_id": "hc-allahabad-2021-wria-14408-2021-uphc011633492021-1-2021-10-22",
+      "title": "WRIA/14408/2021 of GOVIND SINGH Vs UNION OF INDIA AND ANOTHER"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-the-tribunals-reforms-act-2021",
+      "page": 1,
+      "tier": "title",
+      "reasons": [
+       "title match: The Tribunals Reforms Act, 2021"
+      ],
+      "snippet": "THE TRIBUNALS REFORMS ACT, 2021 NO. 33 OF 2021 [13th August, 2021.] An Act further to amend the Cinematograph Act, 1952, the Customs Act, 1962, the Airports Authority of India Act, 1994, the Trade Marks Act, 1999 and the"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-the-tribunals-reforms-act-2026",
+      "page": 1,
+      "tier": "title",
+      "reasons": [
+       "title match: The Tribunals Reforms Act, 2026"
+      ],
+      "snippet": "REGISTERED NO. DL—(N)04/0007/2003—26 jftLVªh lañ Mhñ ,yñ—¼,u½04@0007@2003—26 xxxGIDHxxx xxxGIDExxx vlk/kkj.k EXTRAORDINARY Hkkx II — [k.M 1 PART II — Section 1 izkf/kdkj ls izdkf'kr PUBLISHED BY AUTHORITY lañ 31] ubZ fnY"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-armed-forces-tribunal-2007",
+      "page": 2,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'act' (4), 'tribunals' (2), 'reforms' (2), '2021' (2)"
+      ],
+      "snippet": "2 LIST OF AMENDING ACTS 1. The Finance Act, 2017 (7 of 2017). 2. The Tribunals Reforms Act, 2021 (33 of 2021). 3. The Tribunals Reforms Act, 2026 (17 of 2026). LIST OF ABBREVIATIONS USED Cl.,cls. . . . . . for Clause, cl"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Both Tribunals Reforms Acts and the AFT Act first."
+   }
+  },
+  {
+   "id": "Q34",
+   "persona": "researcher",
+   "kind": "identifier",
+   "query": "section 30 Armed Forces Tribunal Act",
+   "intent": "AFT Act s.30 appeal to Supreme Court",
+   "observed": {
+    "state": "results",
+    "mode": "identifier",
+    "error": null,
+    "chips": [
+     "Section 30 · The Armed Forces Tribunal Act, 2007"
+    ],
+    "total_documents": 6,
+    "total_passages": 13,
+    "shown_passages": 13,
+    "server_ms": null,
+    "client_ms": 27.5,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-armed-forces-tribunal-2007",
+      "title": "The Armed Forces Tribunal Act, 2007"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-armed-forces-tribunal-2007-hi",
+      "title": "The Armed Forces Tribunal Act, 2007"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-2012-union-of-india-and-ors-2012insc146",
+      "title": "UNION OF INDIA AND ORS. versus BRIGADIER P.S. GILL"
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-2018-n-n-godfred-ors-2018insc599",
+      "title": "N.N. GODFRED & ORS. versus UNION OF INDIA & ORS."
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-2019-union-of-india-ors-2019insc1030",
+      "title": "UNION OF INDIA & ORS. versus SANDEEP KUMAR ETC."
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-armed-forces-tribunal-2007",
+      "page": 13,
+      "tier": "identifier",
+      "reasons": [
+       "Section 30: provision text in The Armed Forces Tribunal Act, 2007"
+      ],
+      "snippet": "29. Execution of order of Tribunal.—Subject to the other provisions of this Act and the rules made thereunder, the order of the Tribunal disposing of an application shall be final and shall not be called in question in a"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-armed-forces-tribunal-2007-hi",
+      "page": 11,
+      "tier": "identifier",
+      "reasons": [
+       "Section 30: provision text in The Armed Forces Tribunal Act, 2007"
+      ],
+      "snippet": "29. अधिकरण्के्आदेश्का्धिष््पादि––इस्अधिधियम्के्अन््य्उपबंिों्और्उसके्अिीि्बिाए्गए्धियमों्के्अिीि्रहते् हुए,्अधिकरण्का्आवेदि्का्धिपटारा्करिे्वाला्आदेश्अंधतम्होगा्और्उसे्दकसी्न््यायालय्में्प्रश््िगत्िहीं्दकया्जाएगा्और् ऐसा"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-armed-forces-tribunal-2007",
+      "page": 4,
+      "tier": "identifier",
+      "reasons": [
+       "Section 30: heading in The Armed Forces Tribunal Act, 2007"
+      ],
+      "snippet": "4 SECTIONS 27. Power of Chairperson to transfer cases from one Bench to another. 28. Decision to be by majority. 29. Execution of order of Tribunal. CHAPTER V APPEAL 30. Appeal to Supreme Court. 31. Leave to appeal. 32. "
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "AFT Act s.30 pinned."
+   }
+  },
+  {
+   "id": "Q35",
+   "persona": "researcher",
+   "kind": "abbreviation",
+   "query": "AFT jurisdiction",
+   "intent": "AFT Act s.14/15 jurisdiction, abbreviation expanded",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [
+     "AFT → Armed Forces Tribunal"
+    ],
+    "total_documents": 243,
+    "total_passages": 1793,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 15.2,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "notif-aft-kolkata",
+      "title": "AFT-Kolkata"
+     },
+     {
+      "rank": 2,
+      "doc_id": "notif-aft-jaipur",
+      "title": "AFT-Jaipur"
+     },
+     {
+      "rank": 3,
+      "doc_id": "rules-aft-group-b-rrs",
+      "title": "AFT-Group-B RRs"
+     },
+     {
+      "rank": 4,
+      "doc_id": "hc-ph-2012-rsa-50-1999-phhc010484421999-1-2012-12-17",
+      "title": "RSA/50/1999 of LT.COL.S.K.KAUSHAL Vs UNION OF INDIA"
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-2017-union-of-india-and-ors-2017insc49",
+      "title": "UNION OF INDIA AND ORS. versus K.P. SINGH AND ANR."
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "notif-aft-kolkata",
+      "page": 1,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: “Armed Forces Tribunal” (2), 'aft' (1), 'jurisdiction' (1)"
+      ],
+      "snippet": "18th November, 2009 S.R.0. ls(E)z\\—In exercise of the powers conferred by sub-section (4) of Section 5 of the Armed Forces Tribunal Act, 2007 (55 of 2007), the Central Government hereby notifies the Bench of the Armed Fo"
+     },
+     {
+      "rank": 2,
+      "doc_id": "notif-aft-jaipur",
+      "page": 1,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'aft' (1), “Armed Forces Tribunal” (1), 'jurisdiction' (1)"
+      ],
+      "snippet": "F1 WA FW EE, 3 TOER, 2009 § AR Act, 2007 (55 of 2007), the Central Government hereby notifies the Bench of the Armed Forces Tribunal at Jaipur o T ww Y w s sifge w %l with effect from 3rd day of November, 2009, which sha"
+     },
+     {
+      "rank": 3,
+      "doc_id": "rules-aft-group-b-rrs",
+      "page": 13,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'aft' (2), “Armed Forces Tribunal” (2)"
+      ],
+      "snippet": "Departmental Promotion Committee (for considering promotion) consisting of: - (i) Judicial / Administrative Member, Armed Forces Tribunal - Chairperson; (ii) Principal Registrar (PB) AFT/ Registrar AFT- Member; (iii) Und"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "partial",
+    "class": "retrieval_failure",
+    "findings": [
+     "F09"
+    ],
+    "note": "AFT expanded, but bench notifications and recruitment rules outrank the AFT Act jurisdiction provisions (ss.14-15)."
+   }
+  },
+  {
+   "id": "Q36",
+   "persona": "edge",
+   "kind": "zero_result",
+   "query": "quantum entanglement",
+   "intent": "Clear empty state",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 20,
+    "total_passages": 43,
+    "shown_passages": 43,
+    "server_ms": null,
+    "client_ms": 3.8,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "hc-ph-2010-cwp-1828-2009-phhc010664672009-1-2010-05-04",
+      "title": "CWP/1828/2009 of DARSHAN LAL Vs UNION OF INDIA AND ORS."
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-ph-2025-cwp-12146-2020-phhc010625902020-1-2025-04-28",
+      "title": "CWP/12146/2020 of RAJ BALA DEVI Vs UNION OF INDIA AND ORS"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-allahabad-2019-spla-869-2009-uphc011990182009-1-2019-03-11",
+      "title": "SPLA/869/2009 of DARSHAN SINGH Vs COMMANDING OFFICER TRG. BN. THE SIKH LIGHT INFATRY and ORS."
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-1987-ranjit-thakur-1987insc285",
+      "title": "RANJIT THAKUR versus UNION OF INDIA AND ORS."
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-1980-maharao-sahib-sri-bhim-singhji-1980insc219",
+      "title": "MAHARAO SAHIB SRI BHIM SINGHJI ETC. ETC versus UNION OF INDIA AND ORS. ETC. ETC."
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "hc-ph-2010-cwp-1828-2009-phhc010664672009-1-2010-05-04",
+      "page": 6,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'quantum' (2)"
+      ],
+      "snippet": "disablement, the quantum of disability pension for cent per cent disability shall be as specified in Schedule II hereto annexed. The quantum of disability pension for lower percentage of disability shall be, “proportiona"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-ph-2025-cwp-12146-2020-phhc010625902020-1-2025-04-28",
+      "page": 5,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'quantum' (2)"
+      ],
+      "snippet": "Categories ‘B’ & ‘C’ (1) Distinction between widows without children or those with children, for determination of the quantum of extraordinary family pension shall stand abolished. The quantum of monthly extraordinary fa"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-allahabad-2019-spla-869-2009-uphc011990182009-1-2019-03-11",
+      "page": 3,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'quantum' (4)"
+      ],
+      "snippet": "and State of Rajasthan and another Vs. Mohammad Ayub Naz JT 2006(1) SC 162, Court said that interference with the quantum of punishment should not be done in a routine manner. 11. In Administrator, Union Territory of Dad"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "usability",
+    "findings": [],
+    "note": "No document contains both words; 20 documents match 'quantum' (of punishment/pension). Per-hit 'Matched:' lines show this, but the head does not say 'not all words matched'."
+   }
+  },
+  {
+   "id": "Q37",
+   "persona": "edge",
+   "kind": "parser_error",
+   "query": "\"court martial NEAR/5",
+   "intent": "Parser error with position, words-only offered",
+   "observed": {
+    "state": "parser_error",
+    "mode": "parser_error",
+    "error": "Quotation mark is not closed.",
+    "chips": [],
+    "total_documents": 0,
+    "total_passages": 0,
+    "shown_passages": 0,
+    "server_ms": null,
+    "client_ms": 2.2,
+    "top_documents": [],
+    "top_passages": [],
+    "notes": []
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Parser error with position; nothing searched; explicit 'words only' action."
+   }
+  },
+  {
+   "id": "Q38",
+   "persona": "edge",
+   "kind": "ambiguous",
+   "query": "Rule 22 Rules",
+   "intent": "Which-instrument chip, nothing pinned",
+   "observed": {
+    "state": "empty",
+    "mode": "lexical",
+    "error": null,
+    "chips": [
+     "Rule 22: which instrument?"
+    ],
+    "total_documents": 0,
+    "total_passages": 0,
+    "shown_passages": 0,
+    "server_ms": null,
+    "client_ms": 5.7,
+    "top_documents": [],
+    "top_passages": [],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Which-instrument chip lists 11 candidates; nothing pinned."
+   }
+  },
+  {
+   "id": "Q39",
+   "persona": "edge",
+   "kind": "syntax",
+   "query": "exact:\"summary of evidence\"",
+   "intent": "Exact phrase only",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [
+     "Exact: lexical only, no abbreviation expansion",
+     "“summary of evidence”"
+    ],
+    "total_documents": 14,
+    "total_passages": 82,
+    "shown_passages": 82,
+    "server_ms": null,
+    "client_ms": 16.6,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "rules-army-rules-1954",
+      "title": "Army Rules,1954"
+     },
+     {
+      "rank": 2,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "title": "Regulations for the Navy Part II"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-1983-lt-col-prithi-pal-singh-bedi-e-1982insc65",
+      "title": "LT. COL. PRITHI PAL SINGH BEDI ETC. versus UNION OF INDIA & OTHERS"
+     },
+     {
+      "rank": 4,
+      "doc_id": "hc-jkl-2014-lpaow-137-2001-jkhc020002482001-1-2014-04-09",
+      "title": "LPAOW/137/2001 of UNION OF INDIA AND ANR. Vs SURINDER KUMAR"
+     },
+     {
+      "rank": 5,
+      "doc_id": "sc-2022-ic-56663x-col-anil-kumar-gupta-2022insc1182",
+      "title": "IC-56663X COL ANIL KUMAR GUPTA versus UNION OF INDIA & ORS."
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "rules-army-rules-1954",
+      "page": 44,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: “summary of evidence” (2)"
+      ],
+      "snippet": "power to dispense with sub-rules (1) to (5) see AR 36. 14. For memoranda for the guidance of officers taking down a summary of evidence, see pages 436 to 439. 24. Remand of accused. (1) The evidence and statement (if any"
+     },
+     {
+      "rank": 2,
+      "doc_id": "rules-army-rules-1954",
+      "page": 155,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: “summary of evidence” (2)"
+      ],
+      "snippet": "(3) After such evidence has been taken, or the summary of evidence has been read, as the case may be, the accused may address the court in reference to the charge and in mitigation of punishment and may call witnesses as"
+     },
+     {
+      "rank": 3,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "page": 150,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: “summary of evidence” (2)"
+      ],
+      "snippet": "FORM No. 24 SUMMONS FOR WITNESSES REQUIRED TO GIVE EVIDENCE BEFORE OFFICER PREPARING A SUMMARY OF EVIDENCE. [See section 134(2) and Regulation 233] To ……………………………………. Whereas a charge of having committed an offence triab"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Exact phrase only; expansion disabled and stated."
+   }
+  },
+  {
+   "id": "Q40",
+   "persona": "edge",
+   "kind": "syntax",
+   "query": "desertion AND NOT pension",
+   "intent": "Boolean exclusion",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [
+     "NOT pension"
+    ],
+    "total_documents": 21,
+    "total_passages": 101,
+    "shown_passages": 101,
+    "server_ms": null,
+    "client_ms": 6.7,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-air-force-1950",
+      "title": "The Air Force Act, 1950"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 3,
+      "doc_id": "rules-army-rules-1954",
+      "title": "Army Rules,1954"
+     },
+     {
+      "rank": 4,
+      "doc_id": "regs-regulations-for-the-navy-part-ii",
+      "title": "Regulations for the Navy Part II"
+     },
+     {
+      "rank": 5,
+      "doc_id": "regs-regulations-for-the-navy-part-iii",
+      "title": "Regulations for the Navy Part III"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-air-force-1950",
+      "page": 4,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'desertion' (2)"
+      ],
+      "snippet": "36. Offences punishable more severely on active service than at other times. 37. Mutiny. 38. Desertion and aiding desertion. 39. Absence without leave. 40. Striking or threatening superior officer. 41. Disobedience to su"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-army-1950",
+      "page": 35,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'desertion' (3)"
+      ],
+      "snippet": "(2) The provisions of sub-section (1) shall not apply to a trial for an offence of desertion or fraudulent enrolment or for any of the offences mentioned in section 37. (3) In the computation of the period of time mentio"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-air-force-1950",
+      "page": 39,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'desertion' (3)"
+      ],
+      "snippet": "39 (2) The provisions of sub-section (1) shall not apply to a trial for an offence of desertion or fraudulent enrolment or for any of the offences mentioned in section 37. (3) In the computation of the period of time men"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Boolean exclusion chip shown."
+   }
+  },
+  {
+   "id": "Q41",
+   "persona": "edge",
+   "kind": "field",
+   "query": "court:delhi disability pension",
+   "intent": "Field filter to Delhi HC",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [
+     "Court = delhi"
+    ],
+    "total_documents": 12,
+    "total_passages": 138,
+    "shown_passages": 138,
+    "server_ms": null,
+    "client_ms": 10.4,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "hc-delhi-2025-w-p-c-12792-2024-dlhc010603922024-1-2025-07-01",
+      "title": "W.P.(C)/12792/2024 of  UNION OF INDIA & ORS. Vs EX SGT PRAVAT RAVI"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-delhi-2025-w-p-c-334-2025-dlhc010004582025-1-2025-07-01",
+      "title": "W.P.(C)/334/2025 of UNION OF INDIA THROUGH SECRETARY & ORS. Vs EX WO BHAWANI DATT 678992 L"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-delhi-2025-w-p-c-5641-2024-dlhc010215082024-1-2025-07-01",
+      "title": "W.P.(C)/5641/2024 of UNION OF INDIA & ORS. Vs EX SEPOY ANTONY PRAKASH M"
+     },
+     {
+      "rank": 4,
+      "doc_id": "hc-delhi-2026-w-p-c-4187-2026-dlhc011102572025-1-2026-04-01",
+      "title": "W.P.(C)/4187/2026 of UNION OF INDIA AND ORS.  Vs 684783 EX HFO BRIJ KISHOR TRIPATHI"
+     },
+     {
+      "rank": 5,
+      "doc_id": "hc-delhi-2025-w-p-c-17880-2024-dlhc010987072024-1-2025-07-17",
+      "title": "W.P.(C)/17880/2024 of UNION OF INDIA & ORS. Vs EX SGT NIRAJ KUMAR"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "hc-delhi-2025-w-p-c-12792-2024-dlhc010603922024-1-2025-07-01",
+      "page": 54,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'disability' (5), 'pension' (3)"
+      ],
+      "snippet": "suffering from such disease/disability, there shall be a presumption that such disease/disability is attributable to or aggravated by service condition and that such personnel is entitled to receive Disability Pension. 3"
+     },
+     {
+      "rank": 2,
+      "doc_id": "hc-delhi-2025-w-p-c-334-2025-dlhc010004582025-1-2025-07-01",
+      "page": 54,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'disability' (5), 'pension' (3)"
+      ],
+      "snippet": "suffering from such disease/disability, there shall be a presumption that such disease/disability is attributable to or aggravated by service condition and that such personnel is entitled to receive Disability Pension. 3"
+     },
+     {
+      "rank": 3,
+      "doc_id": "hc-delhi-2025-w-p-c-5641-2024-dlhc010215082024-1-2025-07-01",
+      "page": 54,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'disability' (5), 'pension' (3)"
+      ],
+      "snippet": "suffering from such disease/disability, there shall be a presumption that such disease/disability is attributable to or aggravated by service condition and that such personnel is entitled to receive Disability Pension. 3"
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Field filter to Delhi HC."
+   }
+  },
+  {
+   "id": "Q42",
+   "persona": "edge",
+   "kind": "filter",
+   "query": "court martial",
+   "params": {
+    "type": "judgment",
+    "year_from": "2020"
+   },
+   "intent": "Type and year filters applied",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 109,
+    "total_passages": 2031,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 42.3,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+      "title": "EX SEPOY MADAN PRASAD versus UNION OF INDIA AND OTHERS"
+     },
+     {
+      "rank": 2,
+      "doc_id": "sc-2024-union-of-india-ors-2024insc672",
+      "title": "UNION OF INDIA & ORS. versus LT. COL. RAHUL ARORA"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-2020-union-of-india-ors-2020insc300",
+      "title": "UNION OF INDIA & ORS. versus LT. CDR. ANNIE NAGARAJA & ORS."
+     },
+     {
+      "rank": 4,
+      "doc_id": "sc-2022-ic-56663x-col-anil-kumar-gupta-2022insc1182",
+      "title": "IC-56663X COL ANIL KUMAR GUPTA versus UNION OF INDIA & ORS."
+     },
+     {
+      "rank": 5,
+      "doc_id": "hc-delhi-2026-w-p-c-9522-2026-dlhc010303562026-1-2026-07-16",
+      "title": "W.P.(C)/9522/2026 of LIEUTENANT COMMANDER PRAHLAD KUMAR VARSHNEY Vs UNION OF INDIA AND OTHERS"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+      "page": 9,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'court' (7), 'martial' (6)"
+      ],
+      "snippet": "the appellant is also inapplicable to the facts of the instant case. Section 120 deals with the power of Summary Court Martial. Sub- sections (1), (2) and (4) of Section 120 reads as follows : “120. Powers of summary cou"
+     },
+     {
+      "rank": 2,
+      "doc_id": "sc-2024-union-of-india-ors-2024insc672",
+      "page": 7,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'court' (8), 'martial' (6)"
+      ],
+      "snippet": "192\b [2024] 9 S.C.R. Digital Supreme Court Reports We cannot agree with this general proposition made on behalf of the appellant inasmuch as sub-rule (2) of Rule 40 specifically provides that Members of a Court Martial f"
+     },
+     {
+      "rank": 3,
+      "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+      "page": 10,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'court' (5), 'martial' (4)"
+      ],
+      "snippet": "A B C D E F G H 1208 SUPREME COURT REPORTS [2023] 9 S.C.R. mutiny and Section 69 i.e., Civil Offences. Sub-section (2) of Section 120 places an embargo on an officer holding a SCM to try any of the offences mentioned in "
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "pass",
+    "class": "ok",
+    "findings": [],
+    "note": "Type and year filters applied; counts reduce accordingly."
+   }
+  },
+  {
+   "id": "Q43",
+   "persona": "edge",
+   "kind": "hindi",
+   "query": "सेना अधिनियम",
+   "intent": "Hindi query for Army Act (Hindi text held)",
+   "observed": {
+    "state": "results",
+    "mode": "lexical",
+    "error": null,
+    "chips": [],
+    "total_documents": 12,
+    "total_passages": 496,
+    "shown_passages": 200,
+    "server_ms": null,
+    "client_ms": 16.1,
+    "top_documents": [
+     {
+      "rank": 1,
+      "doc_id": "act-bnss-2023-alt-60d145",
+      "title": "The Bharatiya Nagarik Suraksha Sanhita, 2023"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-bns-2023-alt-d163e7",
+      "title": "The Bharatiya Nyaya Sanhita, 2023"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-bsa-2023-alt-72fc9a",
+      "title": "The Bharatiya Sakshya Adhiniyam, 2023"
+     },
+     {
+      "rank": 4,
+      "doc_id": "act-army-1950-hi",
+      "title": "The Army Act, 1950"
+     },
+     {
+      "rank": 5,
+      "doc_id": "act-air-force-1950-hi",
+      "title": "The Air Force Act, 1950"
+     }
+    ],
+    "top_passages": [
+     {
+      "rank": 1,
+      "doc_id": "act-bnss-2023-alt-60d145",
+      "page": 218,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'सेना' (3), 'अधिनियम' (3)"
+      ],
+      "snippet": "अनुपालन करता यदि उसके FART उस मामल्रे का विचारण किया जाता | 527. (1) केन्द्रीय सरकार, इस संहिता से और वायुसेना अधिनियम, 1950, सेना अधिनियम, 1950 और नौसेना अधिनियम, 1957 और संघ के सशस्त्र बलों से संबंधित तत्समय प्रवृत्त क"
+     },
+     {
+      "rank": 2,
+      "doc_id": "act-bns-2023-alt-d163e7",
+      "page": 70,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'अधिनियम' (3), 'सेना' (2)"
+      ],
+      "snippet": "167. वायुसेना अधिनियम, 1950, सेना अधिनियम, 1950 या नौसेना अधिनियम, 1957 के अध्यधीन कोई व्यक्ति, इस अध्याय में परिभाषित अपराधों में से किसी के लिए, इस संहिता के अधीन दंडनीय नहीं होगा | 168. जो कोई, भारत सरकार की सेना, नौस"
+     },
+     {
+      "rank": 3,
+      "doc_id": "act-bsa-2023-alt-72fc9a",
+      "page": 1,
+      "tier": "lexical",
+      "reasons": [
+       "Matched: 'अधिनियम' (5)"
+      ],
+      "snippet": "अनुभाग 4] भारत का राजपत्र असाधारण 475 भारतीय साक्ष्य अधिनियम, 2023 (2023 का अधिनियम संख्यांक 47) [25 दिसम्बर, 2023] निष्पक्ष विचारण के लिए साक्ष्य के साधारण नियमों और सिद्धांतों को समेकित करने तथा उनका उपबंध करने के लिए "
+     }
+    ],
+    "notes": [
+     "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1."
+    ]
+   },
+   "assessment": {
+    "verdict": "fail",
+    "class": "corpus_deficiency",
+    "findings": [
+     "F07"
+    ],
+    "note": "Hindi query ranks BNSS/BNS/BSA alternate copies first; the Hindi Army Act text is garbled (legacy font mapping), so Hindi search is unreliable."
+   }
+  }
+ ]
+}
