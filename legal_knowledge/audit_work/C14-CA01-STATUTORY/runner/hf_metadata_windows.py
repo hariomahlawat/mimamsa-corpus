@@ -26,6 +26,7 @@ _READ_CONTROL = 0x00020000
 _DELETE = 0x00010000
 _GENERIC_WRITE = 0x40000000
 _FILE_SHARE_READ = 0x01
+_FILE_SHARE_WRITE = 0x02
 _CREATE_NEW = 1
 _OPEN_EXISTING = 3
 _FILE_ATTRIBUTE_DIRECTORY = 0x10
@@ -51,21 +52,6 @@ class _AclSizeInformation(ct.Structure):
 
 class _AceHeader(ct.Structure):
     _fields_ = [('kind', ct.c_ubyte), ('flags', ct.c_ubyte), ('size', wt.WORD), ('mask', wt.DWORD)]
-
-
-class _RenameInfo(ct.Structure):
-    _fields_ = [('flags', wt.DWORD), ('directory', wt.HANDLE),
-                ('length', wt.DWORD), ('name', wt.WCHAR)]
-
-
-def _rename_info(target):
-    """FILE_RENAME_INFO expects a full Windows path and a null RootDirectory."""
-    name = str(target).encode('utf-16-le')
-    storage = ct.create_string_buffer(max(ct.sizeof(_RenameInfo), _RenameInfo.name.offset + len(name) + 2))
-    header = _RenameInfo.from_buffer(storage)
-    header.length = len(name)
-    ct.memmove(ct.addressof(storage) + _RenameInfo.name.offset, name, len(name))
-    return storage
 
 
 def _location(jobs_root, job_name):
@@ -240,13 +226,18 @@ class _Windows:
         if filesystem.value != 'NTFS' or not flags.value & 0x08:  # FILE_PERSISTENT_ACLS
             raise PermissionError('local NTFS with persistent ACLs required')
 
-    def pin_directory(self, stack, path, *, private=False):
+    def pin_directory(self, stack, path, *, private=False, receiving=False):
         # FILE_TRAVERSE makes the handle participate in read sharing. An
         # attributes-only open does not establish the write/delete share lock.
         access = _FILE_READ_ATTRIBUTES | _FILE_TRAVERSE
         if private:
             access |= _READ_CONTROL | _FILE_LIST_DIRECTORY
-        handle = self.open_file(str(path), access, _FILE_SHARE_READ, None, _OPEN_EXISTING,
+        share = _FILE_SHARE_READ
+        if receiving:
+            # The private child must admit the rename's destination write.
+            # No directory permits delete sharing while it is pinned.
+            share |= _FILE_SHARE_WRITE
+        handle = self.open_file(str(path), access, share, None, _OPEN_EXISTING,
                                 _FILE_FLAG_BACKUP_SEMANTICS | _FILE_FLAG_OPEN_REPARSE_POINT, None)
         if handle == _INVALID_HANDLE:
             _fail('could not pin Windows directory')
@@ -270,7 +261,7 @@ class _Windows:
                                     _FILE_ATTRIBUTE_NORMAL | _FILE_FLAG_OPEN_REPARSE_POINT, None)
             if handle == _INVALID_HANDLE:
                 _fail('could not create exclusive Windows receipt staging file')
-        published = False
+        staged = False
         try:
             self.verify_type(handle, directory=False)
             self.verify_location(handle, pending)
@@ -282,17 +273,20 @@ class _Windows:
                 raise OSError('incomplete Windows receipt write')
             if not self.flush(handle):
                 _fail('could not flush Windows receipt')
-            # The private destination and its ancestors remain pinned for the
-            # full-path Win32 rename. The zeroed buffer forbids replacement.
-            rename = _rename_info(directory / RECEIPT_NAME)
-            if not self.set_file_info(handle, 3, rename, ct.sizeof(rename)):  # FileRenameInfo
-                _fail('could not atomically publish Windows receipt')
-            published = True
+            staged = True
         finally:
-            if not published:
+            if not staged:
                 delete_on_close = ct.c_ubyte(1)
                 self.set_file_info(handle, 4, ct.byref(delete_on_close), ct.sizeof(delete_on_close))
             self.close(handle)
+        try:
+            # Windows os.rename is same-volume and fails if the destination
+            # exists. Only the owning account and SYSTEM can access either
+            # name inside the private, still-pinned child.
+            os.rename(pending, directory / RECEIPT_NAME)
+        except OSError:
+            pending.unlink(missing_ok=True)
+            raise
 
 
 class _ReceiptJob:
@@ -320,14 +314,14 @@ def private_receipt_job(jobs_root, job_name):
     native = _Windows()
     with ExitStack() as stack:
         # Walk from the drive down so each next open traverses already pinned
-        # directories. Exclude write and delete sharing throughout publication.
+        # directories. The private child alone permits destination write sharing.
         for parent in reversed(root.parents):
             native.pin_directory(stack, parent)
         root_handle = native.pin_directory(stack, root, private=True)
         native.verify_volume(root, root_handle)
         path = root / name
         native.create_private_directory(path)
-        child = native.pin_directory(stack, path, private=True)
+        child = native.pin_directory(stack, path, private=True, receiving=True)
         job = _ReceiptJob(native, path, child)
         try:
             yield job
