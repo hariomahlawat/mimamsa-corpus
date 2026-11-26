@@ -11,12 +11,12 @@
   },
   "all_job_statuses": {
     "marking-review": 45,
-    "verified-local": 474,
+    "verified-local": 534,
     "sparse-page-review": 1,
     "HTTPError": 5
   },
-  "extended_uploads": 475,
-  "pending_jobs": 705,
+  "extended_uploads": 535,
+  "pending_jobs": 645,
   "official_pilot": [
     {
       "id": "AFT-GUW-1",
@@ -695,6 +695,1088 @@
       "tier": "T5",
       "status": "no-specific-signal-in-native-text",
       "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    }
+  ],
+  "tier2_5_stratified_native_text_sample": [
+    {
+      "doc_id": "hc-jkl-2026-ccp-s-350-2024-jkhc020051062024-1-2026-02-18",
+      "sha256": "f8e20e11416023a62ceb0c8bf5213374a82f48f39da86c3915243663a55d4a4e",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-owp-623-2018-jkhc020027412018-1-2025-05-01",
+      "sha256": "7334f61a20a56451cadc2ddf341a7a79cdd3a95bb47e64814305b4bad87d77ba",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2019-cocp-2173-2018-phhc010017352018-1-2019-05-02",
+      "sha256": "41112ce04293ff37abd453b14bbdef665c2bd4afe555d62221db0d26e1ee25a6",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2019-reslp-1-2019-jkhc020013362019-1-2019-03-08",
+      "sha256": "426fc90077d7032036fec134a837a015a59de801bff412bfa0d94da3e0eea82b",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-wp-c-2241-2024-jkhc010049592024-1-2025-07-18",
+      "sha256": "bfd8014f03872f35a6c5ffa73b7288742038f36cc14ce685321bc476f1ef89e2",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2023-wp-c-1681-2020-jkhc020033622020-1-2023-02-07",
+      "sha256": "f450025d6802d851e7f8ac28a1c515c1f1e0fec691ca0221c447d00ac12d9c09",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-wp-c-500-2025-jkhc020010492025-1-2025-03-03",
+      "sha256": "8df472b665eb2119fc06663188a821bb77a65415c0a19001400e4bd6bae9db75",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2022-untitled-uphc020124222022-1-2022-03-22",
+      "sha256": "94c205fe84e86feaf2e7ea31a64cf37daf5fe2cfad438cab5b3af427010105a3",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2019-wria-22651-2003-uphc011035282003-1-2019-03-07",
+      "sha256": "f70d5c1f66ecd0dbbba14c4335f195be798dd08fbe277e330a44c413c8de7707",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2025-wpil-803-2025-uphc020595252025-1-2025-09-16",
+      "sha256": "a5b9b76ba39fad880777fefddbbd752361eef05290db27cd972bbc7c36fc44a6",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2019-swp-1733-2017-jkhc020047062017-1-2019-12-23",
+      "sha256": "f030545cf562b96135988a40593e65eca5cad5551c84915e2ea4ad6082e8d8d4",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-owp-814-2010-jkhc020008132010-1-2025-07-23",
+      "sha256": "aea59d232b3abb780fe63d8157148bc23978ee8d35efb8e63bca3d5c14ab631e",
+      "tier": "T2",
+      "status": "marking-review"
+    },
+    {
+      "doc_id": "hc-jkl-2020-conc-96-2018-jkhc020035852018-1-2020-07-15",
+      "sha256": "51f339629aa897119ad05b499a2eed6d25d6804d4d7527191a2c9035804cb8f7",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2023-swp-1401-2011-jkhc020008302011-1-2023-09-05",
+      "sha256": "5df53a3ad1a81cf5709c9d36f7bbc61bdfae686e49433e22c406194e2079a869",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 11,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc020104532023-1-2023-02-08",
+      "sha256": "581c9842b3afdb385c6d75bf953dea4f07aa10560e03a492647f03e6668b2352",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2019-wria-18293-2019-uphc012154492019-1-2019-11-18",
+      "sha256": "35dc4404384edb192a7456af66dca4cfaa5acf680190839da6190e8876777e8b",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2020-owp-1680-2016-jkhc020019162016-1-2020-09-22",
+      "sha256": "3f57730725c1997c292b3a061a23f5f5c1dc549ba06db41767b560c6d0c9208d",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2021-aa-9-2008-jkhc020034722008-1-2021-03-22",
+      "sha256": "c276ec98f552481ed2654ae02faed9a80454cc06560fc39168f8360a099f2ed7",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2025-wria-507-2025-uphc020020122025-1-2025-01-17",
+      "sha256": "f38f9b6c4a8cb6178436fe47c6971cb3d4343277091037a02c862c3ae032de1e",
+      "tier": "T2",
+      "status": "marking-review"
+    },
+    {
+      "doc_id": "hc-jkl-2025-wp-c-381-2024-jkhc010007592024-1-2025-12-22",
+      "sha256": "2cbfa7fc8e6f995d64438f3361b5f9a00f5b7af342f3e98a8ca3563847be5db8",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2017-cr-8-2013-jkhc020093192013-1-2017-11-10",
+      "sha256": "cd79c16bb6029111f4d93ffcc0c054fb9783b37db7de7d724e06b756b75b76a0",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2019-wric-24178-2005-uphc011261592005-1-2019-07-18",
+      "sha256": "3ea9757d43098f06540007afb861c00cec8f87456757968e293ab0a0049bc76a",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2018-wric-9285-2018-uphc010472852018-1-2018-03-13",
+      "sha256": "e9858dc89c82df10a70030f00b6f93849457273a40e87dc63467b73015a2f794",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-9966-2015-dlhc015506312015-1-2015-10-28",
+      "sha256": "ab413ff1e7e048ee84be0cbb21d61966bd3f6c73db964fb3c9c368f9fbb56426",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-10565-2018-dlhc013397512018-1-2018-10-05",
+      "sha256": "7b749649520fa7448cad256c29b23df8b2a4f4eee558e74cbe1d3c5e7641d088",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "sc-1963-the-cantonment-board-ambala-ca-1962insc120",
+      "sha256": "6a055a79362f3ebd561759381b21b183acb5a6ca64e08b078014b00b6c1a3bd1",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 9,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2023-ma-182-2003-jkhc020063092003-1-2023-05-11",
+      "sha256": "334049624e1cc0aabccba6ace09b8487bbce430ad7d5af48ecfcbc4d42ad53e7",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 13,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2022-arco-65-2020-uphc010916262020-1-2022-09-30",
+      "sha256": "1a22d692cbad69a94a41814fc656c4326e082bca149d81e54a41d85e79d33e11",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "sc-2007-union-of-india-and-anr-2007insc1120",
+      "sha256": "63f0d4a37d77c59a81ffc0397a3f9563a64992646de11b441263efadc03c55b0",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 6,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2024-wric-54448-2016-uphc011918162016-1-2018-01-24",
+      "sha256": "2bfdd3432b274d03e795f260f7a3dc6ac0d9908874422d5a03d67c6f7e3d7b33",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2014-w-p-c-7139-2014-dlhc011945792014-1-2014-11-19",
+      "sha256": "e94aab821e28b5807060bde4be9d3b720551153bdbd78a1a579872d0d9e9f8b3",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 27,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2024-wp-c-514-2022-jkhc010009292022-1-2026-04-17",
+      "sha256": "7d219731660a2dbc7524a93840e6760a309261cdc56cd318754cb0b64ec79e72",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2022-wric-31648-2022-uphc011959752022-1-2022-11-02",
+      "sha256": "613c5552970d187278b91a0e2d15817bc67aae3010579bbc96809c61ac762475",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2021-conc-289-2012-jkhc020012272012-1-2021-02-25",
+      "sha256": "67116bbb21f41e01d42d6a553d61917f0cdec6569e39167d1203b09ad3460e9d",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2016-cm-m-174-2016-dlhc010477752016-1-2016-02-19",
+      "sha256": "affadb2379625fe1ca996edeacd206304e7f249c4f2f45d3fa8f082c65121478",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2016-cm-m-1050-2015-dlhc015366782015-1-2016-07-29",
+      "sha256": "775dd8497ea80fbd4463679b458793ba003f2e4e5bad2d808c58f07330ad6f5c",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2019-rfa-3220-2006-phhc010781862006-1-2019-07-24",
+      "sha256": "b3603a702aeb09ecee08917375947de8f32f2786ae4ca72a216319c8d1a4b85e",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 13,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2021-cpc-4-2013-jkhc020047192013-1-2021-07-09",
+      "sha256": "6e6b3ef81bc1567cf0521ae4a06071a877cfe382cbd1b3033dfcb3d11e8c9e2f",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2018-cr-3938-2015-phhc010071572015-1-2018-01-11",
+      "sha256": "cbc3f22768db8845670be71edf8e7d1e46ee71ecd620c73f7d2200b6238350a9",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2019-cwp-18346-2019-phhc010820442019-1-2019-07-10",
+      "sha256": "7938cdca6660383dddc207aeed985df21dd734344109a05c511dbb20ec237a96",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2013-w-p-c-4268-2012-dlhc011123362012-1-2013-07-08",
+      "sha256": "3bc03389d527d7286115290815f1b0b2e30fba2e99a33ab601ee33a4cb28fa88",
+      "tier": "T4",
+      "status": "marking-review"
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-6662-2017-dlhc013318362017-1-2017-08-21",
+      "sha256": "023590ad71678416c760f0354833348ccaa25d3f1faa384752f16d93e00538cb",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2016-rfa-590-2003-phhc010155612003-1-2016-01-25",
+      "sha256": "d57e18e804bc95b32ac71e30506a7c806de37d644a5163aa0ca7499ac70decff",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2016-rfa-582-2003-phhc010337372003-1-2016-01-25",
+      "sha256": "6e10e3a004d3d47a2cdd2a5a3135d31b753d44d5bbca5f47edd5ff7c7bbfcb61",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2021-o-m-p-comm-21-2021-dlhc010021632020-1-2021-02-24",
+      "sha256": "b11f04a248e80bc9501e8a2aab852c1248c891c77c34e0cbb605bc294fc05090",
+      "tier": "T4",
+      "status": "marking-review"
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-11051-2017-dlhc015257962017-1-2019-03-12",
+      "sha256": "5c11521dae33b028bc100cfe16fbda33952a18356f827401bc170b2f4c5ea337",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 15,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-4438-2021-dlhc010153182021-1-2021-04-09",
+      "sha256": "730e434e3aa4d98781e2bd0ec273fa1aee0ba9583abfded0024fe8b06ae68eae",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 7,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "sc-1989-assam-rifles-multi-purpose-co-1989insc162",
+      "sha256": "425d4788026ef003767c4320bf519841693f9886409e9b1a5ff28f55ecdbb403",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 5,
+      "sparse_pages": 1,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2011-rfa-4138-2006-phhc010854132006-1-2011-02-07",
+      "sha256": "372e98f206dd8734311cfcb74451066c47aaabc3778bdc2a5a2a43fd1a39ebc8",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2023-swp-255-2018-jkhc020012122018-1-2023-11-29",
+      "sha256": "aa9a47d9865d092c0ace9324ad24553c5923c2d9930e0006b0e2667674495bd7",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-11248-2023-dlhc010332742023-1-2023-12-14",
+      "sha256": "1352084f9ed22862bf9fb57319451925419200b6bfd30819be289c41a5b1820d",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 18,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-4683-2024-dlhc010171012024-1-2026-02-12",
+      "sha256": "8f35bf1a9984295a932ca95300b4bad15cc6fa2cb0b1cb6c3ef3e40f570e4143",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 11,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-9765-2018-dlhc012957922018-1-2018-09-24",
+      "sha256": "d4dad503851917f0a6ccbc98e4eb2cb43255ba06e6a521b22a04c79c57f30fb9",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2011-rfa-4047-2006-phhc010791022006-1-2011-02-07",
+      "sha256": "26e191f9d74277d10c0befc8eb8752ed6c7da69dfa45aa88125b080cdb41c1c4",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2016-rfa-605-2003-phhc010270612003-1-2016-01-25",
+      "sha256": "f14c7bd1f46ee74a2b1695b86dcf13863880c94374ef1abad71c4d891017eccc",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2024-wp-c-2871-2023-jkhc010056622023-1-2024-11-22",
+      "sha256": "87f592058ffe770b55cfe68d04c24023eea5d3631f3df8a06a0c37cb3885296a",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc020104422023-1-2023-02-17",
+      "sha256": "47fd89be242eb651df8bc84025d12958db4dcbb64e5d65eb30dc116d6a044977",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-lpa-21-2025-jkhc010003932025-1-2025-02-19",
+      "sha256": "e6e348b473f05f1a5e423d4762d60b3988f7050e6939d25e0353c5a7d614532e",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-13306-2023-dlhc010404742023-1-2023-12-07",
+      "sha256": "dc4584f87259e9bfb52ef4d65c32c93269ddced8e56ebd04cd5889713a5331d6",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 5,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-5951-2014-dlhc011524432014-1-2019-03-19",
+      "sha256": "79ad0837bdf01dff2b90a85e9541f49e597972d280077aff7e119e81a03aa2f9",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 10,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2010-rfa-72-2005-dlhc010633772005-1-2010-08-27",
+      "sha256": "c48be698437cb19ab1e278ca5b7aea04f6a8cf3ccd8c2beb311278556e62913b",
+      "tier": "T5",
+      "status": "marking-review"
+    },
+    {
+      "doc_id": "hc-allahabad-2019-fafo-506-1989-uphc010131441989-1-2019-03-06",
+      "sha256": "cdbc37c5ec5da429b7bc9a634150ef01f149532975075894f1f6138f05352173",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2022-untitled-jkhc020015112014-1-2022-03-23",
+      "sha256": "e76809bd26da9455c94ba032b4a70d6f246f4b29e6801f27c36a9931558ece26",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2022-untitled-uphc010192012022-1-2022-02-21",
+      "sha256": "6b8b14060dce350ec9768dd384ec2e7698a030c9aeda9766e62e74385c6b56d4",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2024-tr-p-crl-68-2024-dlhc010394042024-1-2024-07-10",
+      "sha256": "6a88846c9fb1026f8b2a8ad3d306c38f200db928ad3d9f20ccba605a871f27c4",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2022-wp-c-3942-2019-jkhc020073932019-1-2022-07-06",
+      "sha256": "38afd6be614813d7882dacebf44951ec6d9950eebee845008e99950382e89711",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2024-wp-c-2400-2024-jkhc010052852024-1-2024-11-19",
+      "sha256": "87ff49cd9064335d0f5c450b22f8d7be347c8483328f34e222f5f32dd1b4fa91",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2020-cpsw-716-2018-jkhc010097772018-1-2020-09-21",
+      "sha256": "29343419bd347fb6fcee15532ee8bb617473a94779f428c485686e5d86cd7d33",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-878-2017-dlhc012308952016-1-2024-09-20",
+      "sha256": "518b1176f98e163275c86f7af7b5971b936bcad769e31c1d76058a18220ccead",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 5,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-4870-2016-dlhc011494682016-1-2016-10-26",
+      "sha256": "f94fd0861d17c1944030bc64085cdb7c34236667e49e0c5ff8271a5074363906",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2016-cs-os-2092-2015-dlhc012773412015-1-2016-01-13",
+      "sha256": "34ff208a8d302d4833ec854140f95f523b3b08d977e98f810ea963f52b671ef1",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2023-owp-445-2018-jkhc020018662018-1-2023-09-06",
+      "sha256": "75bf31878c37eff1c14c4e480b351a67cecd59038f1dcff350ca29ec98db670a",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2019-untitled-uphc010819922002-1-2019-07-15",
+      "sha256": "13de4c3c7bd5703778fcb4c827b88cdf9fe60adcf3c4280eebac63b2821fe628",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2021-owp-1363-2012-jkhc010022772012-1-2021-03-26",
+      "sha256": "f7221c467e51fccc39fb31b5549451144f657e9b06012a84c4890b6c29a7a500",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2018-cwp-13145-2016-phhc010775412016-1-2018-07-04",
+      "sha256": "2916725dcbafc6380e2058507711f1a6998e8bc9c67f1ea5d15f091d89cfc929",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-19406-2025-phhc011060882025-1-2025-08-06",
+      "sha256": "b80b710c49352b560b9ea47cd578df19fce3185a9a6e060b37f360a9d1b9b724",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2022-owp-337-2008-jkhc020002092008-1-2022-12-06",
+      "sha256": "ba51073f9826df34b94b8b7f2bc42dd1b9ae24c6917165f0fec1dda5c5ff46ae",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-29830-2018-phhc011018402018-1-2025-11-26",
+      "sha256": "19a350e00149b607d6f5551a94423d2d6bcd3a5c8454fbba790b1b6b0fbb28ee",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-ma-172-2018-jkhc020071972018-1-2025-08-07",
+      "sha256": "da7953ba4b7022c5bf7c860974c3c121e484152aedaf355ed00a69112e1cf08f",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2022-untitled-uphc010067642022-1-2022-02-04",
+      "sha256": "4285fa7bf283ac7f676617a1f9940622cc32847404d7921ee2dd2b69672444a4",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
       "sparse_pages": 0,
       "signals": {
         "court_martial": [],
