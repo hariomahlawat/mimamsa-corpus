@@ -341,6 +341,7 @@ export async function openDocument({ docId, page, passage, copy, notice, citeSta
   } else {
     const tab = R.tabs[t];
     tab.page = page || tab.page; tab.passage = passage || null; tab.notice = notice ?? tab.notice; tab.hits = hitsFor(docId);
+    tab.unavailable = false;   // an explicit re-open asks the server again (C14: the document may have been reinstated)
   }
   R.active = t;
   R.el?.classList.add("doc-open");
@@ -379,6 +380,7 @@ async function renderDocPane() {
       h("span.tab-title", `${t.preview ? "Preview · " : ""}${(t.doc?.title || t.docId).slice(0, 40)}`),
       h("button.tab-close", { type: "button", "aria-label": `Close ${t.doc?.title || t.docId} (X)`, onclick: () => closeTab(i) }, "×")))));
   const tab = R.tabs[R.active];
+  if (tab?.unavailable) { renderUnavailable(pane, ctx); return; }
   if (!tab) {
     add(pane, h("div.docempty", h("h2", "No document open"), h("p", "Open a result to read the original at the cited page. ", h("kbd", "Enter"), " opens the selected result, ", h("kbd", "O"), " opens it in a new tab and ", h("kbd", "Space"), " previews it."),
       h("p", "Originals are delivered in bounded, authenticated byte ranges and are never stored in the browser.")));
@@ -543,14 +545,13 @@ async function showView(tab) {
 }
 
 function viewerState(tab, s, info) {
+  // C14 F05: an unavailable original clears the header, text and evidence too, in background tabs as well
+  if (s === "unavailable") { tab.viewer = null; invalidateDocument(tab.docId); return; }
   if (R.tabs[R.active] !== tab) return;
   const vw = $("#viewer");
-  if (s === "unavailable") {
+  if (s === "failed") {
     tab.viewer = null;
-    clear(vw); add(vw, h("div.docempty", { role: "alert" }, h("h2", "Not available"), h("p", "This document is not available in this installation."),
-      h("p.muted", "Anything already displayed has been cleared.")));
-  } else if (s === "failed") {
-    tab.viewer = null;
+    revalidateOpenDocuments();   // a transfer cut off by a withdrawal surfaces as a network failure: ask the server
     clear(vw); add(vw, h("div.error-state", { role: "alert", style: "margin:24px" }, h("h2", "The original could not be displayed in the browser"),
       h("p", "No derived or substitute file is shown in its place. You can read the extracted text (labelled as such) or check the provenance, and retry the same copy and page."),
       h("p.mono", `Reference: VIEW-${Date.now().toString(36)} · copy ${short(tab.doc.copy.sha256)} · p.${tab.page}`),
@@ -772,4 +773,63 @@ export function showDocNotice(notice, state) {
   add(pane, h("div.docempty", { role: "alert" }, h("h2", "Not available"), h("p.notice", { "data-cite-state": state }, notice)));
 }
 export function hasResults() { return !!R.result; }
+
+// ------------------------------------------------------------------ C14 F05: policy-aware invalidation
+// A withdrawal is enforced on the server for every new request. These functions make the client match: an open tab
+// whose document is no longer available loses its viewer, header, text and evidence, and shows the one generic notice.
+
+function renderUnavailable(pane, ctx) {
+  add(pane, h("div.docempty", { role: "alert", "data-invalidated": "true" }, h("h2", "Not available"),
+    h("p", "This document is not available in this installation."),
+    h("p.muted", "Anything already displayed has been cleared.")));
+  if (ctx) { clear(ctx); add(ctx, h("div.ctx-body", h("p.muted", "Nothing is shown for a document that is not available."))); }
+}
+
+/** Clear every open tab of `docId` and show the generic notice in its place. Safe to call repeatedly. */
+export function invalidateDocument(docId) {
+  let hit = false;
+  for (const t of R.tabs) {
+    if (t.docId !== docId) continue;
+    hit = true;
+    try { t.viewer && t.viewer.destroy(); } catch { /* ignore */ }
+    Object.assign(t, { viewer: null, doc: null, hits: [], hitIndex: -1, unavailable: true });
+  }
+  if (window.__mimamsaViewer && window.__mimamsaViewer.docId === docId) window.__mimamsaViewer = null;
+  if (hit && R.tabs[R.active]?.docId === docId) renderDocPane();
+  return hit;
+}
+
+/** Re-check every open tab against the server (after an epoch change or on the periodic poll). A tab naming an
+ *  earlier copy is re-checked through the citation resolver; any other tab through the document route.
+ *  Uses plain fetch, not api(): a background re-check must never change the connection state (the connection-lost
+ *  view is owned by the user's own requests), and a network failure means "cannot tell yet", not "unavailable". */
+let revalidating = null;
+async function stillAvailable(t) {
+  const url = t.copy
+    ? `/api/cite?doc=${encodeURIComponent(t.docId)}&sha=${encodeURIComponent(t.copy.slice(0, 12))}&page=${t.page || 1}`
+    : `/api/documents/${encodeURIComponent(t.docId)}`;
+  let r;
+  try { r = await fetch(url, { headers: { Accept: "application/json" }, credentials: "same-origin", cache: "no-store" }); }
+  catch { return null; }
+  if (r.status === 401) return null;                          // session handling stays with the API client
+  if (r.status === 404 || r.status === 403) return false;
+  if (!r.ok) return null;
+  if (!t.copy) return true;
+  let j = null; try { j = await r.json(); } catch { return null; }
+  return j?.state === "CITED_COPY_ELIGIBLE" || j?.state === "CITED_COPY_ELIGIBLE_NOT_CURRENT";
+}
+export function revalidateOpenDocuments() {
+  if (revalidating) return revalidating;
+  revalidating = (async () => {
+    const seen = new Set();
+    for (const t of [...R.tabs]) {
+      const key = t.docId + "|" + (t.copy || "");
+      if (t.unavailable || seen.has(key)) continue;
+      seen.add(key);
+      if ((await stillAvailable(t)) === false) invalidateDocument(t.docId);
+    }
+  })().finally(() => { revalidating = null; });
+  return revalidating;
+}
+export function openDocumentCount() { return R.tabs.filter((t) => !t.unavailable).length; }
 void apiState;

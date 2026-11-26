@@ -122,6 +122,25 @@ public sealed class ServingState
         onFenced?.Invoke();
         return (e, d, changed);
     }
+
+    /// Reinstatement (C14, owner policy). The reverse order of WithdrawAsync: the durable CAS commits FIRST (copy rows
+    /// eligible, epoch+1) and only then is the in-memory mirror relaxed under the write lock, so a failed commit leaves
+    /// the document withdrawn (fail closed). Renewed eligibility verification is the caller's precondition.
+    public async Task<(long epoch, string digest, bool changed)> ReinstateAsync(string docId,
+        Func<Task<(long epoch, string digest, bool changed, List<string> shas)>> durableCas)
+    {
+        var (e, d, changed, shas) = await durableCas();
+        if (!changed) return (e, d, false);
+        _guard.EnterWriteLock();
+        try
+        {
+            foreach (var sha in shas) _withdrawn.Remove(Key(docId, sha));
+            if (!_withdrawn.Any(k => k.StartsWith(docId + "|", StringComparison.Ordinal))) _withdrawnDocs.Remove(docId);
+            Epoch = e; Digest = d;
+        }
+        finally { _guard.ExitWriteLock(); }
+        return (e, d, true);
+    }
 }
 
 public enum RangeParse { Ok, Missing, Malformed, MultiRange, TooLarge, Unsatisfiable }

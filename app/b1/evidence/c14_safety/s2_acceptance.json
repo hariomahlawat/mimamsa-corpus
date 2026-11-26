@@ -1,0 +1,149 @@
+{
+ "base": "http://127.0.0.1:5423",
+ "started": "2026-11-26T15:35:24.984Z",
+ "checks": [
+  {
+   "id": "J13-C+",
+   "what": "/api/cite with the real copy hash before withdrawal is ELIGIBLE",
+   "pass": true,
+   "observed": {
+    "status": 200,
+    "state": "CITED_COPY_ELIGIBLE"
+   }
+  },
+  {
+   "id": "J13-C-",
+   "what": "/api/cite with a malformed hash is UNAVAILABLE even before withdrawal (negative control)",
+   "pass": true,
+   "observed": {
+    "status": 200,
+    "state": "CITED_COPY_UNAVAILABLE"
+   }
+  },
+  {
+   "id": "J13-D",
+   "what": "dialog states what is covered and how open viewers are treated",
+   "pass": true,
+   "observed": "Withdraw this document? sc-1987-ranjit-thakur-1987insc285 · RANJIT THAKUR versus UNION OF INDIA AND ORS. Every copy of this document, including earlier editions (1 held), is refused for every user from now on: search, document views, citation links and original delivery. Transfers of the original in progress are cut off. Pages already on a reader's screen are cleared at their next action or within"
+  },
+  {
+   "id": "J13b-V",
+   "what": "an open viewer is cleared without reader action (page, header and evidence gone)",
+   "pass": true,
+   "observed": {
+    "clearedWithinMs": 8651
+   }
+  },
+  {
+   "id": "J13-CITE",
+   "what": "/api/cite with the same real hash after withdrawal is UNAVAILABLE",
+   "pass": true,
+   "observed": {
+    "status": 200,
+    "state": "CITED_COPY_UNAVAILABLE"
+   }
+  },
+  {
+   "id": "J13-API",
+   "what": "document, text and pdf-meta refuse the withdrawn document",
+   "pass": true,
+   "observed": {
+    "/api/documents/sc-1987-ranjit-thakur-1987insc285": 404,
+    "/api/documents/sc-1987-ranjit-thakur-1987insc285/text": 404,
+    "/api/v2/documents/sc-1987-ranjit-thakur-1987insc285/pdf-meta": 404
+   }
+  },
+  {
+   "id": "J13-S",
+   "what": "search no longer lists it",
+   "pass": true,
+   "observed": null
+  },
+  {
+   "id": "J13b-DL",
+   "what": "a deep link shows the notice",
+   "pass": true,
+   "observed": null
+  },
+  {
+   "id": "J13b-ACT",
+   "what": "the reader's next action clears the withdrawn document",
+   "pass": true,
+   "observed": {
+    "clearedWithinMs": 8681
+   }
+  },
+  {
+   "id": "RI",
+   "what": "reinstatement re-verifies and restores the document",
+   "pass": true,
+   "observed": {
+    "status": "reinstated",
+    "changed": true,
+    "epoch": 4,
+    "verification": "verified 2026-11-26T15:35:51.2846643Z: active generation R13-b1-sample-20261126-4b31855f, published, register clear, 1 copy/copies re-hashed"
+   }
+  },
+  {
+   "id": "J14-EXP",
+   "what": "the lock ends 20 s after the 5th failure despite attempts during the lock",
+   "pass": true,
+   "observed": {
+    "wrong": [
+     401,
+     401,
+     401,
+     401,
+     401
+    ],
+    "during": [
+     {
+      "atMs": 3000,
+      "correct": 401,
+      "wrong": 401
+     },
+     {
+      "atMs": 10000,
+      "correct": 401,
+      "wrong": 401
+     },
+     {
+      "atMs": 17000,
+      "correct": 401,
+      "wrong": 401
+     }
+    ],
+    "afterLockMs": 20914,
+    "afterLock": 200
+   }
+  },
+  {
+   "id": "J14-UNL",
+   "what": "Admin unlock with a reason ends a lock at once",
+   "pass": true,
+   "observed": {
+    "lockedAgain": 401,
+    "unlock": 200
+   }
+  },
+  {
+   "id": "AUD",
+   "what": "audit log records the events and no password text",
+   "pass": true,
+   "observed": [
+    "lockout",
+    "login",
+    "login_failed",
+    "login_refused_locked",
+    "reinstate",
+    "unlock",
+    "withdraw"
+   ]
+  }
+ ],
+ "finished": "2026-11-26T15:36:15.396Z",
+ "summary": {
+  "pass": 13,
+  "fail": 0
+ }
+}

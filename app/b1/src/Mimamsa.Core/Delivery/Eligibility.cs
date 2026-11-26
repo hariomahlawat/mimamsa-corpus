@@ -81,4 +81,22 @@ public sealed class Eligibility(GenerationStore g, ServingState state, Restricte
     }
 
     public string? CurrentVisibleCopy(string docId) => Visible(docId)?.CopySha;
+
+    /// Renewed eligibility verification before a reinstatement (C14, owner policy). Ignores the withdrawal itself and
+    /// re-checks everything else NOW: the document is in the ACTIVE generation, PUBLISHED and eligible for all users,
+    /// its original verified at load, no copy on the restricted-material register, and every copy re-hashes from the
+    /// vault at this moment (not the load-time cache). Returns an empty list when reinstatement may proceed.
+    public List<string> ReinstatementProblems(string docId, IEnumerable<string> copyShas)
+    {
+        var problems = new List<string>();
+        if (!g.Documents.TryGetValue(docId, out var d)) { problems.Add("not_in_active_generation"); return problems; }
+        if (!SearchIndex.Indexable(d)) problems.Add("not_published_for_all_users");
+        if (register.IsRestricted(docId, null)) problems.Add("restricted_register_document");
+        foreach (var sha in copyShas.Append(d.CopySha).Distinct())
+        {
+            if (register.IsRestricted(docId, sha)) problems.Add($"restricted_register_copy:{sha[..12]}");
+            if (!vault.Verify(sha, out _)) problems.Add($"rehash_failed:{sha[..12]}");
+        }
+        return problems;
+    }
 }

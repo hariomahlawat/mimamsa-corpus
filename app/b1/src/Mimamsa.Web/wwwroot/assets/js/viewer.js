@@ -4,6 +4,7 @@
 // is retried with backoff; 401/404 (withdrawn or not authorised) destroys the document and reports "unavailable".
 // PDF.js is bundled offline (/vendor/pdfjs, pdfjs-dist 6.5.438); eval and scripting are off; no URL is given to PDF.js.
 import * as pdfjs from "/vendor/pdfjs/pdf.min.mjs";
+import { noteEpoch } from "./api.js";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.mjs";
 
@@ -18,6 +19,7 @@ export class ProtectedViewer {
   async open() {
     const q = this.copy ? `?copy=${encodeURIComponent(this.copy)}` : "";
     const r = await fetch(`/api/v2/documents/${encodeURIComponent(this.docId)}/pdf-meta${q}`, { cache: "no-store", credentials: "same-origin" });
+    noteEpoch(r);
     if (r.status === 404 || r.status === 401) { this.metrics.withdrawn = true; this.onState("unavailable"); return false; }
     if (!r.ok) throw new Error(`meta ${r.status}`);
     const meta = await r.json();
@@ -35,6 +37,7 @@ export class ProtectedViewer {
         const resp = await fetch(`/api/v2/documents/${encodeURIComponent(this.docId)}/copies/${meta.copy_sha256}/range`,
           { headers: { Range: `bytes=${a}-${b}`, ...(window.__mimamsaTestFail ? { "X-Mimamsa-Test-Fail": window.__mimamsaTestFail } : {}) }, cache: "no-store", credentials: "same-origin" });
         this.metrics.ranges.push({ a, b, status: resp.status, ms: Math.round(performance.now() - t) });
+        noteEpoch(resp);
         if (resp.status === 206) {
           const buf = new Uint8Array(await resp.arrayBuffer());
           if (buf.length !== b - a + 1 || resp.headers.get("content-range") !== `bytes ${a}-${b}/${meta.length}`) throw new Error("bad 206");
@@ -84,7 +87,7 @@ export class ProtectedViewer {
     const host = this.host;
     const width = Math.max(320, host.clientWidth - 48);
     let page;
-    try { page = await this.doc.getPage(this.page); } catch (e) { if (!this.destroyed) this.onState("failed", String(e.message || e)); return; }
+    try { page = await this.doc.getPage(this.page); } catch (e) { if (!this.destroyed) this.onState(this.metrics.withdrawn ? "unavailable" : "failed", String(e.message || e)); return; }
     if (seq !== this.renderSeq || !host.isConnected) return;
     host.replaceChildren();
     const legend = document.createElement("div");

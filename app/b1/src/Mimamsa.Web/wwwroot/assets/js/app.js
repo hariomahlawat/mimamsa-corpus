@@ -1,6 +1,6 @@
 // Shell, router and keymap (app/design/02 §2-4, 05 §2, keymap.json). Client policy: no localStorage/IndexedDB/
 // service worker; sessionStorage only for pane_widths, rail_collapsed, view_mode, theme; no query text stored.
-import { api, probe, state as apiState } from "./api.js";
+import { api, probe, noteEpoch, state as apiState } from "./api.js";
 import { h, append, clear, $, toast, announce, openDialog, session, fmtDate } from "./ui.js";
 import * as research from "./research.js";
 import { loginPage, gatePage, laterPage, statutesPage, citePage, adminPage } from "./pages.js";
@@ -29,6 +29,17 @@ window.addEventListener("mimamsa:unauthenticated", () => {
   history.replaceState({}, "", "/r");
   renderShell(); loginPage(main, onLogin, "Your session has ended. Sign in again.");
 });
+
+// C14 F05: a change of serving-policy epoch (seen on any API response) re-checks the open documents at once; while
+// documents are open, the epoch is also polled so pages already on screen are cleared within about 10 seconds even
+// when the reader does nothing. The poll does not refresh the session.
+window.addEventListener("mimamsa:policy-changed", () => { if (S) research.revalidateOpenDocuments(); });
+const POLICY_POLL_MS = 10_000;
+setInterval(async () => {
+  if (!S || document.hidden || !research.openDocumentCount()) return;
+  // plain fetch: the poll only reads the epoch; it never changes the connection or session state shown to the user
+  try { noteEpoch(await fetch("/api/policy", { credentials: "same-origin", cache: "no-store" })); } catch { /* next tick */ }
+}, POLICY_POLL_MS);
 
 // ------------------------------------------------------------------ shell
 function applyTheme() {
