@@ -1,21 +1,35 @@
-# Cloud WP1 execution proposal — 26 November 2026
+# Cloud WP1 execution on an isolated Linux host
 
-Owner direction: cloud-first corpus processing; routine technical decisions delegated. This branch is stacked on the reviewed WP1 Windows draft, not staging. Existing reviewed code and local receipt are historical evidence. No Windows commands, signing key or Windows approval are required by the proposed cloud operation. The cloud authority is a dedicated protected GitHub environment, an immutable reviewed code commit and exact dispatch scope. Do not interpret local approval as cloud approval.
+GitHub Actions runs synthetic tests for WP1. The repository’s environment admits a branch name, and the plan in use does not provide an independently enforced approval boundary for the branch. The corpus credential belongs only on the dedicated execution host. The default-branch stub is optional and displays a notice. It grants no execution authority.
 
-## Existing infrastructure and limits
+## Owner prerequisites
 
-GitHub repository is private; default branch is main. Existing sync workflow declares HF Trusted Publisher / OIDC but has write functions, so do not reuse it for WP1. The proposed dedicated workflow runs on GitHub-hosted Linux, 8-minute maximum, with contents: read and no OIDC permission. No separate billed HF job has been created. GitHub hosted allowance must be checked at account level before any live run. Connector can read checks/logs but does not provide workflow registration, environment provisioning, secret management or new dispatch. The new workflow is not registered on main; workflow_dispatch is not yet available merely by creating this draft branch. Do not merge or circumvent that boundary to make it available.
+- Remove the temporary WP1 Hugging Face secret from GitHub and revoke that credential if it was provisioned. Remove the former activation variable. The workflow changes do not alter repository settings.
+- Provision a dedicated, non-root Linux service account on an isolated cloud host with a persistent local filesystem. GitHub contributors and Actions have no access to this host, its account, or its provisioning. Restrict outbound traffic to the infrastructure required for verified TLS to Hugging Face. Use a dedicated byte-preserving checkout reviewed by full Git SHA. Do not auto-update it from a moving branch.
+- Install the owner Ed25519 public PEM as root-owned `/etc/mimamsa/wp1-owner.pem`. Create root-owned `/etc/mimamsa/wp1-deployment` containing one deployment-unique 64-character lowercase hex value. Neither file nor their parent directories may be group- or world-writable. The private signing key stays with the owner. Provision root-controlled `/var/lib/mimamsa-wp1` and a persistent `jobs` child owned by the service account with mode `0700`. Preserve claimed job directories even when the run fails.
+- Prepare a new temporary token with one exact fine-grained read grant for the private dataset. The application verifies the grant before listing any tree. Use a trusted local console on the host. Keep the detailed receipt under the private job directory.
 
-## Proposed one-time activation requirements
+## Prepare and execute one operation
 
-- Independent delta review of cloud adapter, workflow and tests at exact head. Synthetic CI first; never supply credentials to pull request jobs.
-- Account owner establishes protected environment hf-corpus-metadata-read with approved deployment branch, required approval/review protection where supported, and dedicated fine-grained HF dataset read-only token in environment secret HF_WP1_READ_TOKEN. Owner screenshot confirms one permitted branch, zero tags, and the secret name, not the full truncated branch rule or actual provider grant. No token in chat, logs, repository, commands, or artifacts. The runner validates the actual grant before tree access. Existing upload credentials are unsuitable without scope proof.
-- Establish GitHub-hosted allowance and explicitly confirm private artifact access/retention. Detailed restriction-filtered receipt is proposed for private Actions artifact, one day retention; only fixed status, counts and digests appear in logs. No HF writes or external transfer.
-- Register the workflow through the normal reviewed repository change process. The live job remains unavailable until workflow registration and protected environment configuration are verified. Set the environment variable WP1_CLOUD_APPROVED_COMMIT to the full final independently reviewed cloud head SHA only after acceptance. A simple boolean activation is no longer accepted. The pin alone is not proof of protection against a malicious writer who can change the workflow itself. Restrict branch write access or freeze the reviewed head during the one-time owner dispatch; remove the temporary token after receipt retrieval. Required-reviewer protection is not visible in the supplied owner screenshot; do not claim it is configured.
-- Manual dispatch is restricted to the repository owner login, checks both triggering actor and workflow SHA/ref, and selects corpus/cloud-wp1-20261126, operation METADATA_GET_ONLY, revision f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc, exact final reviewed branch commit. No automatic run on push, PR, scheduled trigger or retry. Any new revision requires updated reviewed scope. This is a dedicated read-only operation, not a source acquisition authorization.
+From the reviewed checkout on that host, using reviewed Python 3.12 with `cryptography==50.0.2` installed, set the accepted Git commit SHA and a fresh job name. The command's expected HF revision is `f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc`. The owner must confirm it against the approved dataset history before signing. Do not open or download source documents.
 
-## Reused reviewed controls
+```bash
+umask 077
+runner="$PWD/legal_knowledge/audit_work/C14-CA01-STATUTORY/runner/hf_metadata_cloud.py"
+boot="import runpy,sys; from pathlib import Path; p=sys.argv.pop(1); sys.path.append(str(Path(p).parent)); runpy.run_path(p,run_name='__main__')"
+commit='<full independently accepted Git SHA>'
+job='wp1-<fresh-lowercase-job-id>'
+python -I -B -c "$boot" "$runner" --prepare-approval \
+  --code-commit "$commit" --job-name "$job" > approval.json
+```
 
-Pinned byte-exact runtime, restriction register and predicate; exact private dataset and seven roots; verified TLS and canonical metadata routes; request/response/time bounds; supervised worker; no raw exception or token logging; validated inventory digest; exclusive scratch receipt; incomplete/negative outcomes never eligible for acquisition. Cloud wrapper adds fixed stage codes for the prior generic worker failure. The hosted environment boundary is not proven by the synthetic tests. Third-party Actions are pinned to the observed full commit SHAs for checkout v4, setup-python v5 and upload-artifact v4.
+Review the exact approval JSON, including the deployment, HF revision, seven roots, code and runtime digests, job name and expiry. On the trusted signing system, sign the exact bytes with `openssl pkeyutl -sign -rawin -inkey "$owner_private_key" -in approval.json -out approval.sig`. Transfer the approval and detached signature to the dedicated host. Run only after separate owner authorization.
 
-No corpus source downloads, HF writes, acquisition, judicial recovery, releases, legal promotions, restricted source access, or ledger changes. Local preservation-store coverage is still unverified. No legal conclusions follow from inventory metadata.
+```bash
+python -I -B -c "$boot" "$runner" --execute \
+  --code-commit "$commit" --job-name "$job" --approval approval.json --signature approval.sig
+```
+
+The launcher verifies the host-installed key and signed scope, then atomically claims the job before asking for a hidden interactive token. Each claimed name is permanently consumed in that deployment. A failed job requires a fresh name and a new approval. The worker takes the token through a local pipe and uses only bounded HTTPS metadata requests. No source downloads, HF writes, or legal promotions are authorized.
+
+The private `metadata_inventory.json` is published atomically without replacement. A failed write leaves no partial receipt at that name. Exit 0 signals complete scoped reconciliation, exit 1 signals a finalized incomplete receipt, and exit 2 signals refusal or failed publication. The console reports aggregate status, counts and the receipt SHA-256. Independently compare that digest before accepting a receipt. Share only safe aggregates, and revoke the token after completion or failure. Never use a partial inventory or this metadata-only receipt as acquisition approval.

@@ -1,32 +1,34 @@
-"""Cloud WP1 entry point. No source download, HF write, or legal promotion.
-
-The protected GitHub environment is the cloud authority boundary. This
-module does not accept the Windows approval as cloud approval. The live
-workflow remains a proposal until the environment and credential are
-provisioned by the account owner.
-"""
+"""Owner-approved WP1 metadata execution on a dedicated Linux cloud host."""
 from __future__ import annotations
 
-import json
+from contextlib import contextmanager
+from datetime import datetime, timezone
+import stat
 import os
 from pathlib import Path
 import re
 import subprocess
 import sys
 
-from hf_metadata_approval import bounded, canonical, sha256, snapshot_runtime, strict_json
+from hf_metadata_approval import (
+    GIT_PATH, MAX_APPROVAL_BYTES, PLAN_NAME, approval_payload, bounded, canonical,
+    sha256, snapshot_runtime, strict_json, verify_approval,
+)
 from hf_metadata_job import (
     ROOT, DirectMetadataHTTPS, bind_restriction, collect_receipt, git_blob,
     supervise, validate_inventory, MAX_RECEIPT, MAX_WORKER_INPUT, _valid_token,
+    REGISTER_BLOB, GUARD_BLOB, read_token,
 )
 from hf_inventory_metadata import REPO, HEX40, STORES
 from hf_metadata_credential import CredentialScopeError
 
 REVISION = "f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc"
-REF = "refs/heads/corpus/cloud-wp1-20261126"
 APPROVAL = "METADATA_GET_ONLY"
-OWNER = "hariomahlawat"
-WORKFLOW_REF = REPO + "/.github/workflows/c14-cloud-wp1.yml@" + REF
+TRUST = Path("/etc/mimamsa/wp1-owner.pem")
+DEPLOYMENT = Path("/etc/mimamsa/wp1-deployment")
+JOBS = Path("/var/lib/mimamsa-wp1/jobs")
+RECEIPT = "metadata_inventory.json"
+JOB_NAME = re.compile(r"wp1-[a-z0-9-]{1,48}\Z")
 SELF = "legal_knowledge/audit_work/C14-CA01-STATUTORY/runner/hf_metadata_cloud.py"
 
 
@@ -52,40 +54,88 @@ def runtime(root, commit, *, verify_git):
                 observed[name.decode("utf-8")] = digest
         if observed != {name: git_blob(raw) for name, raw in files.items()}:
             raise ValueError("runtime byte mismatch")
+    if (git_blob(files["config/restricted_material.json"]) != REGISTER_BLOB
+            or git_blob(files["scripts/restricted_material.py"]) != GUARD_BLOB):
+        raise ValueError("restriction input pin mismatch")
     return sha256(canonical({name: sha256(raw) for name, raw in files.items()}))
 
 
-def scope(env, event):
-    commit = env.get("GITHUB_SHA", "")
-    if (
-        env.get("GITHUB_ACTIONS") != "true"
-        or env.get("GITHUB_EVENT_NAME") != "workflow_dispatch"
-        or env.get("GITHUB_REPOSITORY") != REPO
-        or env.get("GITHUB_REF") != REF
-        or env.get("RUNNER_OS") != "Linux"
-        or env.get("WP1_CLOUD_APPROVED_COMMIT") != commit
-        or env.get("GITHUB_WORKFLOW_SHA") != commit
-        or env.get("GITHUB_WORKFLOW_REF") != WORKFLOW_REF
-        or env.get("GITHUB_ACTOR") != OWNER
-        or env.get("GITHUB_TRIGGERING_ACTOR") != OWNER
-        or not HEX40.fullmatch(commit)
-        or not re.fullmatch(r"[0-9]+", env.get("GITHUB_RUN_ID", ""))
-        or not re.fullmatch(r"[0-9]+", env.get("GITHUB_RUN_ATTEMPT", ""))
-        or env.get("GITHUB_RUN_ATTEMPT") != "1"
-        or not isinstance(event, dict)
-        or not isinstance(event.get("repository"), dict)
-        or event["repository"].get("private") is not True
-        or event["repository"].get("full_name") != REPO
-    ):
-        raise ValueError("cloud execution boundary not established")
-    expected = {"operation": APPROVAL, "revision": REVISION, "code_commit": commit}
-    if event.get("inputs") != expected:
-        raise ValueError("dispatch scope mismatch")
+def _root_controlled(path, *, file=False):
+    if path.resolve(strict=True) != path:
+        raise ValueError("noncanonical deployment path")
+    for part in (path, *path.parents):
+        info = part.stat()
+        expected = stat.S_ISREG if part == path and file else stat.S_ISDIR
+        if info.st_uid != 0 or info.st_mode & 0o022 or not expected(info.st_mode):
+            raise ValueError("deployment policy must be root-controlled")
+
+
+def host_settings():
+    # GitHub writers have no access to this host, account or provisioning.
+    if sys.platform != "linux" or os.geteuid() == 0 or os.environ.get("GITHUB_ACTIONS"):
+        raise ValueError("dedicated non-root Linux host required")
+    _root_controlled(TRUST, file=True)
+    _root_controlled(DEPLOYMENT, file=True)
+    _root_controlled(JOBS.parent)
+    if JOBS.resolve(strict=True) != JOBS:
+        raise ValueError("noncanonical jobs root")
+    public = bounded(TRUST, 4096)
+    deployment = bounded(DEPLOYMENT, 128).strip()
+    if not re.fullmatch(rb"[a-f0-9]{64}", deployment):
+        raise ValueError("invalid deployment identity")
+    return JOBS, public, sha256(deployment)
+
+
+def scope(args, host):
+    jobs, _, deployment = host
+    if not HEX40.fullmatch(args.code_commit or "") or not JOB_NAME.fullmatch(args.job_name or ""):
+        raise ValueError("exact code commit and fresh job name required")
     return {
-        "repository": REPO, "revision": REVISION, "code_commit": commit,
-        "operation": APPROVAL, "roots": list(STORES),
-        "run_id": env["GITHUB_RUN_ID"], "run_attempt": env["GITHUB_RUN_ATTEMPT"],
+        "revision": REVISION, "code_commit": args.code_commit,
+        "runtime_sha256": runtime(ROOT, args.code_commit, verify_git=True),
+        "plan_sha256": sha256(bounded(ROOT / GIT_PATH / PLAN_NAME, 1_000_000)),
+        "register_blob": REGISTER_BLOB, "guard_blob": GUARD_BLOB,
+        "jobs_root_sha256": sha256(str(jobs).encode()), "job_name": args.job_name,
+        "deployment_sha256": deployment,
     }
+
+
+@contextmanager
+def claim(jobs, job_name):
+    """Durably consume the signed job name before prompting for a token."""
+    if not JOB_NAME.fullmatch(job_name):
+        raise ValueError("invalid job name")
+    flags = os.O_RDONLY | os.O_NOFOLLOW | os.O_DIRECTORY
+    root_fd = os.open(jobs, flags)
+    try:
+        info = os.fstat(root_fd)
+        if info.st_uid != os.geteuid() or stat.S_IMODE(info.st_mode) != 0o700:
+            raise ValueError("private jobs root required")
+        os.mkdir(job_name, mode=0o700, dir_fd=root_fd)
+        os.fsync(root_fd)
+        job_fd = os.open(job_name, flags, dir_fd=root_fd)
+        try:
+            yield job_fd
+        finally:
+            os.close(job_fd)
+    finally:
+        os.close(root_fd)
+
+
+def publish(job, raw):
+    """Expose only a complete, flushed receipt and preserve any prior file."""
+    pending = ".receipt.pending"
+    fd = os.open(pending, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=job)
+    try:
+        with os.fdopen(fd, "wb") as stream:
+            if stream.write(raw) != len(raw):
+                raise OSError("short receipt write")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.link(pending, RECEIPT, src_dir_fd=job, dst_dir_fd=job, follow_symlinks=False)
+        os.fsync(job)
+    finally:
+        os.unlink(pending, dir_fd=job)
 
 
 def worker():
@@ -138,20 +188,13 @@ FAILURES = {
 }
 
 
-def run():
-    token = os.environ.pop("HF_WP1_READ_TOKEN", "")
-    event = strict_json(bounded(Path(os.environ["GITHUB_EVENT_PATH"]), 128_000))
-    approved = scope(os.environ, event)
-    fingerprint = runtime(ROOT, approved["code_commit"], verify_git=True)
+def run(approved, approval, job):
+    fingerprint = approved["runtime_sha256"]
     restricted = bind_restriction(ROOT)
-    temp = Path(os.environ["RUNNER_TEMP"])
-    if not temp.is_absolute() or temp.resolve(strict=True) != temp or not temp.is_dir():
-        raise ValueError("invalid scratch directory")
-    out = temp / "wp1-cloud"
-    out.mkdir(mode=0o700)
     result = None
     failure = None
     try:
+        token = read_token()
         if not _valid_token(token):
             failure = "CREDENTIAL_MISSING_OR_INVALID"
         else:
@@ -170,10 +213,11 @@ def run():
                     failure = "INCOMPLETE_SCOPE"
     except TimeoutError:
         failure = "HARD_WORKER_DEADLINE"
-    except Exception:
+    except (Exception, KeyboardInterrupt):
         failure = "LOCAL_OR_WORKER_FAILURE"
-    receipt = {"schema": "c14-wp1-cloud-receipt-v1", **approved,
-               "runtime_sha256": fingerprint,
+    receipt = {"schema": "c14-wp1-isolated-cloud-receipt-v1", **approved,
+               "operation": APPROVAL, "repository": REPO, "roots": list(STORES),
+               "approval_sha256": sha256(approval),
                "status": "METADATA_SCOPE_COMPLETE" if not failure else "METADATA_INCOMPLETE",
                "failure": failure, "inventory": result, "acquisition_eligible": False,
                "source_downloads": 0, "hf_writes": 0}
@@ -181,11 +225,7 @@ def run():
     if len(raw) > MAX_RECEIPT:
         receipt.update(status="METADATA_INCOMPLETE", failure="RECEIPT_LIMIT", inventory=None)
         raw = canonical(receipt) + b"\n"
-    fd = os.open(out / "metadata_inventory.json", os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
-    with os.fdopen(fd, "wb") as stream:
-        stream.write(raw)
-        stream.flush()
-        os.fsync(stream.fileno())
+    publish(job, raw)
     print(canonical({"status": receipt["status"], "failure": receipt["failure"],
                      "revision": REVISION, "receipt_sha256": sha256(raw),
                      "acquisition_eligible": False,
@@ -193,16 +233,37 @@ def run():
     return 0 if receipt["status"] == "METADATA_SCOPE_COMPLETE" else 1
 
 
-def main():
-    if sys.argv[1:] == ["--worker"]:
+def main(argv=None):
+    import argparse
+
+    argv = sys.argv[1:] if argv is None else argv
+    if argv == ["--worker"]:
         return worker()
-    if sys.argv[1:] != ["--execute"]:
-        print("Cloud WP1: no execution without exact protected workflow dispatch.")
-        return 2
+    parser = argparse.ArgumentParser(description=__doc__)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--prepare-approval", action="store_true")
+    mode.add_argument("--execute", action="store_true")
+    for flag in ("code-commit", "job-name", "approval", "signature"):
+        parser.add_argument("--" + flag)
+    args = parser.parse_args(argv)
     try:
-        return run()
-    except Exception:
-        print("Cloud WP1 refused: execution boundary or immutable inputs not verified.")
+        host = host_settings()
+        approved = scope(args, host)
+        now = datetime.now(timezone.utc)
+        if args.prepare_approval:
+            print(canonical(approval_payload(**approved, now=now)).decode())
+            return 0
+        from cryptography.hazmat.primitives.serialization import load_pem_public_key
+
+        jobs, public, _ = host
+        fingerprint = sha256(load_pem_public_key(public).public_bytes_raw())
+        raw = bounded(args.approval, MAX_APPROVAL_BYTES)
+        verify_approval(raw, bounded(args.signature, 64), public, fingerprint,
+                        expected=approved, now=now)
+        with claim(jobs, approved["job_name"]) as job:
+            return run(approved, raw, job)
+    except (Exception, KeyboardInterrupt):
+        print("Cloud WP1 refused: deployment, one-use approval or receipt could not be verified.")
         return 2
 
 
