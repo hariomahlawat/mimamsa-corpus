@@ -3,6 +3,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import ipaddress
+import http.client
+from contextlib import contextmanager
 import json
 import socket
 import ssl
@@ -47,28 +49,71 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 
 def check_dns(host):
     addresses = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
-    if not addresses or any(not ipaddress.ip_address(a[4][0]).is_global for a in addresses):
+    if not addresses or any(a[0] not in (socket.AF_INET, socket.AF_INET6)
+                            or not ipaddress.ip_address(a[4][0]).is_global
+                            or a[4][1] != 443 for a in addresses):
         raise ValueError('non-public or missing DNS answer')
+    return addresses
+
+
+class PinnedHTTPSConnection(http.client.HTTPSConnection):
+    """Use only the checked numeric peer; preserve hostname verification/SNI."""
+    def __init__(self, host, address, *, context, timeout=30):
+        if not context.check_hostname or context.verify_mode != ssl.CERT_REQUIRED:
+            raise ValueError('verifying TLS context required')
+        super().__init__(host, port=443, context=context, timeout=timeout)
+        self.address = address
+        self.peer = None
+
+    def connect(self):
+        family, kind, proto, _, sockaddr = self.address
+        expected = ipaddress.ip_address(sockaddr[0])
+        if family not in (socket.AF_INET, socket.AF_INET6) or not expected.is_global or sockaddr[1] != 443:
+            raise ValueError('disallowed numeric peer')
+        raw = socket.socket(family, kind, proto)
+        try:
+            raw.settimeout(self.timeout)
+            raw.connect(sockaddr)  # numeric address from policy-checked resolution; no hostname lookup
+            actual = raw.getpeername()
+            if ipaddress.ip_address(actual[0]) != expected or actual[1] != 443:
+                raise ValueError('connected peer mismatch')
+            self.sock = self._context.wrap_socket(raw, server_hostname=self.host)
+            self.peer = str(expected)
+        except BaseException:
+            raw.close()
+            raise
 
 
 class Transport:
     def __init__(self):
         if urllib.request.getproxies():
             raise ValueError('proxy configuration requires separate review')
-        self.opener = urllib.request.build_opener(NoRedirect(), urllib.request.HTTPSHandler(context=ssl.create_default_context()))
+        self.context = ssl.create_default_context()
         self.last = {}
         self.delay = {}
 
+    @contextmanager
     def request(self, url):
         p = urlsplit(url)
         origins = {urlsplit(u).netloc for u in URLS.values()}
         if url not in URLS.values() and url not in {'https://' + h + '/robots.txt' for h in origins}:
             raise ValueError('unlisted URL')
-        check_dns(p.hostname)
         elapsed = time.monotonic() - self.last.get(p.hostname, -1000)
         time.sleep(max(0, self.delay.get(p.hostname, 2) - elapsed))
         self.last[p.hostname] = time.monotonic()
-        return self.opener.open(urllib.request.Request(url, headers={'User-Agent': UA, 'Accept-Encoding': 'identity'}), timeout=30)
+        # Resolution happens after pacing, and the selected sockaddr is used verbatim.
+        address = check_dns(p.hostname)[0]
+        conn = PinnedHTTPSConnection(p.hostname, address, context=self.context)
+        try:
+            path = p.path + ('?' + p.query if p.query else '')
+            conn.request('GET', path, headers={'User-Agent': UA, 'Accept-Encoding': 'identity'})
+            with conn.getresponse() as response:
+                # No automatic redirect, authentication or retry.
+                if response.status != 200:
+                    raise ValueError('unexpected HTTP status; no redirect or challenge bypass')
+                yield response
+        finally:
+            conn.close()
 
     def robots(self, url):
         host = urlsplit(url).hostname
@@ -129,6 +174,10 @@ def main():
     print('Targets:', len(rows), 'Enabled:', sum(r['enabled'] for r in rows))
     if not args.execute_approved:
         print('Dry run: no network or writes.'); return 0
+    # Independent authorization key provisioning, egress policy, inventory coverage,
+    # bounded runtime and native filesystem tests are not accepted yet. A caller
+    # changing the JSON flags cannot activate network access.
+    p.error('C14 acquisition interlock: live transport disabled pending independent authorization and security acceptance')
     if plan['scope_approval'] != 'APPROVED' or not all(r['enabled'] for r in rows):
         p.error('scope disabled; independent review and approved plan required')
     if not all((args.expected_commit, args.output, args.known_sha256)):
