@@ -877,3 +877,4 @@
 {"id": "AFT-GUW-925", "url": "https://aftrbghy.nic.in/judgement/OA-A- 43 of 2017 and MA 35 of 2017 dated 24-10-2017.pdf", "status": "eligible-local", "sha256": "81767a81e99805dfb26135b342d4c549cd1d02a371f3c12f9850f676475cc4a9", "pages": 7, "ocr": 1}
 {"id": "AFT-GUW-926", "url": "https://aftrbghy.nic.in/judgement/OA26-2015.pdf", "status": "marking-review", "page": 2}
 {"id": "AFT-GUW-927", "url": "https://aftrbghy.nic.in/judgement/OA_01_2024 with MA_01_2024.pdf", "status": "eligible-local", "sha256": "4d156eaea59aa6c0f16daa9c12e481b54819917f5c1052cd11aec4f892c77476", "pages": 1, "ocr": 1}
+{"id": "AFT-GUW-928", "url": "https://aftrbghy.nic.in/judgement/OA_04_of_2024.pdf", "status": "eligible-local", "sha256": "267bd0dc328ddea19d733749e7369b3a7a47bbf7f30027968b65ca842d8b54cd", "pages": 11, "ocr": 11}
