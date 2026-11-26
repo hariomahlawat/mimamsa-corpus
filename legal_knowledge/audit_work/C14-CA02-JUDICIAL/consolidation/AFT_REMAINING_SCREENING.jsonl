@@ -980,3 +980,7 @@
 {"id": "AFT-GUW-1028", "url": "https://aftrbghy.nic.in/judgement/Order dated-04-04-2024/TA-01 of 2019.pdf", "status": "EmptyFileError", "http_code": null}
 {"id": "AFT-GUW-1029", "url": "https://aftrbghy.nic.in/judgement/Order_Dated_01_Oct_2024.pdf", "status": "eligible-local", "sha256": "250b4b4e14a2b6c8f4b6d6fadd436d90869572e3e5004f7c1aa9b62be4c67d1b", "pages": 36, "ocr": 36}
 {"id": "AFT-GUW-1030", "url": "https://aftrbghy.nic.in/judgement/Order_Dated_03_Oct_2024.pdf", "status": "eligible-local", "sha256": "c789d590e831479b091d660db3c14efb3ef55335bb936058d868a017d1e62d05", "pages": 41, "ocr": 41}
+{"id": "AFT-GUW-1031", "url": "https://aftrbghy.nic.in/judgement/Order_Dated_04_Oct_2024.pdf", "status": "eligible-local", "sha256": "34e16f967d1a52755812f8da24dd3be6d8a40d3f17fe14ae187a475595c4a742", "pages": 24, "ocr": 24}
+{"id": "AFT-GUW-1032", "url": "https://aftrbghy.nic.in/judgement/Order_dated_01_10_2024_OA_19_of_2024.pdf", "status": "eligible-local", "sha256": "bcd78437c933959ddf79021a2dc05854fb910fffab406a4a02f77b3e47f38d98", "pages": 1, "ocr": 1}
+{"id": "AFT-GUW-1033", "url": "https://aftrbghy.nic.in/judgement/Order_dated_03_10_2024_OA_01_of_2023.pdf", "status": "eligible-local", "sha256": "ef1e0497e9b7d7b038ddd71368a1dd5236fa1472c7649daad7155af7791a216d", "pages": 6, "ocr": 6}
+{"id": "AFT-GUW-1034", "url": "https://aftrbghy.nic.in/judgement/Order_dated_03_10_2024_OA_02_of_2024.pdf", "status": "eligible-local", "sha256": "bbfc4fe8ec0746a7a63a6a6e3ea31154fcf5aefcaf0478d3fbeea08ef0e8aadf", "pages": 8, "ocr": 0}
