@@ -1,5 +1,6 @@
 """WP1 synthetic protocol and supervisor tests; no live metadata or credentials."""
 import json
+import hashlib
 import sys
 import tempfile
 import unittest
@@ -10,7 +11,7 @@ from unittest.mock import patch
 from urllib.parse import urlsplit,parse_qs
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'legal_knowledge/audit_work/C14-CA01-STATUTORY/runner'))
 from hf_metadata_transport import MetadataAPI, ENDPOINT, REPO, STORES
-from hf_metadata_job import DirectMetadataHTTPS, collect_receipt, supervise, bind_restriction, git_blob
+from hf_metadata_job import DirectMetadataHTTPS, collect_receipt, supervise, bind_restriction, git_blob, save_candidate_receipt
 
 REV='a'*40
 BASE=f'{ENDPOINT}/api/datasets/{REPO}'
@@ -46,6 +47,20 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(r['acquisition_eligible'])
         self.assertEqual(r['source_downloads'],0)
         self.assertTrue(any('cursor=next%2Btoken' in u for u in calls))
+        with tempfile.TemporaryDirectory() as tmp:
+            job=Path(tmp)
+            summary=save_candidate_receipt(r,revision=REV,restricted=lambda **kw:False,job_dir=job)
+            self.assertFalse(summary['acquisition_eligible'])
+            self.assertEqual(summary['receipt_sha256'],hashlib.sha256((job/'metadata_inventory.json').read_bytes()).hexdigest())
+            with self.assertRaises(ValueError):save_candidate_receipt(r,revision=REV,restricted=lambda **kw:False,job_dir=job)
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaises(ValueError):
+                save_candidate_receipt(r,revision=REV,restricted=lambda **kw:True,job_dir=tmp)
+            self.assertEqual(list(Path(tmp).iterdir()),[])
+            altered=dict(r,coverage_of_supplied_scope=False)
+            with self.assertRaises(ValueError):
+                save_candidate_receipt(altered,revision=REV,restricted=lambda **kw:False,job_dir=tmp)
+
 
     def tree(self,api):
         return list(api.list_repo_tree(REPO,path_in_repo=STORES[0],recursive=True,
