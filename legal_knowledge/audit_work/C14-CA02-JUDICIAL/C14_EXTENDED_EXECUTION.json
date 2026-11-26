@@ -10,13 +10,13 @@
     "verified": 986
   },
   "all_job_statuses": {
-    "marking-review": 40,
-    "verified-local": 269,
+    "marking-review": 41,
+    "verified-local": 298,
     "sparse-page-review": 1,
     "HTTPError": 5
   },
-  "extended_uploads": 270,
-  "pending_jobs": 915,
+  "extended_uploads": 299,
+  "pending_jobs": 885,
   "official_pilot": [
     {
       "id": "AFT-GUW-1",
@@ -143,6 +143,100 @@
       "sha256": "6325315f02b4e2be07cf837a8e659a63713e3b927b12823e5ea6e3934b88fc57",
       "pages": 1,
       "ocr": 0
+    },
+    {
+      "id": "AFT-GUW-15",
+      "url": "https://aftrbghy.nic.in/judgement/CA 03 of 2018   6 June Monica.pdf",
+      "status": "eligible-local",
+      "sha256": "e3d87f84c48a517f59824289bd03c17bf0720912160df771239e1cee94b11bcc",
+      "pages": 1,
+      "ocr": 0
+    },
+    {
+      "id": "AFT-GUW-16",
+      "url": "https://aftrbghy.nic.in/judgement/CA 03 of 2018 _in 40 of 2017_.pdf",
+      "status": "text-review",
+      "page": 2
+    },
+    {
+      "id": "AFT-GUW-17",
+      "url": "https://aftrbghy.nic.in/judgement/CA 04 OF 16    24 Mar.pdf",
+      "status": "text-review",
+      "page": 3
+    },
+    {
+      "id": "AFT-GUW-18",
+      "url": "https://aftrbghy.nic.in/judgement/CA 04 of 2018 _in OA-12 of 2017_.pdf",
+      "status": "text-review",
+      "page": 2
+    },
+    {
+      "id": "AFT-GUW-7",
+      "url": "https://aftrbghy.nic.in/judgement/CA -05-2016.pdf",
+      "status": "eligible-local",
+      "sha256": "7adb85e2a9e64ccff0d613c658872fc19ab39cf05015ca8fef44a039bafbdbf4",
+      "pages": 2,
+      "ocr": 1,
+      "certified_blank_pages": [
+        2
+      ]
+    },
+    {
+      "id": "AFT-GUW-8",
+      "url": "https://aftrbghy.nic.in/judgement/CA 01 OF 17   23 Mar.pdf",
+      "status": "eligible-local",
+      "sha256": "dca0560149345c93fc68517908c3d01e62aa347df4d6c8ee4d0a5da494317f78",
+      "pages": 3,
+      "ocr": 2,
+      "certified_blank_pages": [
+        3
+      ]
+    },
+    {
+      "id": "AFT-GUW-9",
+      "url": "https://aftrbghy.nic.in/judgement/CA 01 of 2018.pdf",
+      "status": "text-review",
+      "page": 3,
+      "visible_pixels_below_gray_210": 7555
+    },
+    {
+      "id": "AFT-GUW-11",
+      "url": "https://aftrbghy.nic.in/judgement/CA 02 of 17   23 Mar.pdf",
+      "status": "text-review",
+      "page": 3,
+      "visible_pixels_below_gray_210": 9462
+    },
+    {
+      "id": "AFT-GUW-12",
+      "url": "https://aftrbghy.nic.in/judgement/CA 02 of 2018.pdf",
+      "status": "text-review",
+      "page": 3,
+      "visible_pixels_below_gray_210": 7392
+    },
+    {
+      "id": "AFT-GUW-16",
+      "url": "https://aftrbghy.nic.in/judgement/CA 03 of 2018 _in 40 of 2017_.pdf",
+      "status": "text-review",
+      "page": 2,
+      "visible_pixels_below_gray_210": 5091
+    },
+    {
+      "id": "AFT-GUW-17",
+      "url": "https://aftrbghy.nic.in/judgement/CA 04 OF 16    24 Mar.pdf",
+      "status": "eligible-local",
+      "sha256": "822341b14105717c116b8285bf7c380d87bcfd358a52bb1ed795f2978548b400",
+      "pages": 3,
+      "ocr": 1,
+      "certified_blank_pages": [
+        3
+      ]
+    },
+    {
+      "id": "AFT-GUW-18",
+      "url": "https://aftrbghy.nic.in/judgement/CA 04 of 2018 _in OA-12 of 2017_.pdf",
+      "status": "text-review",
+      "page": 2,
+      "visible_pixels_below_gray_210": 5091
     }
   ],
   "official_probes": [
@@ -253,6 +347,30 @@
       "url": "https://www.sci.gov.in/aor-examination/",
       "status": "200",
       "curl_exit": 0
+    },
+    {
+      "name": "CGDA official pensioners corner",
+      "url": "https://cgda.nic.in/index.php?page=pensionerscol",
+      "status": "503",
+      "disposition": "Source unavailable to the runner"
+    },
+    {
+      "name": "CGDA robots policy",
+      "url": "https://cgda.nic.in/robots.txt",
+      "status": "503",
+      "disposition": "Source unavailable to the runner"
+    },
+    {
+      "name": "India Code replacement portal 1960 endpoint",
+      "url": "https://indiacode.gov.in/repealedfileopen?rfilename=A1960-58.pdf",
+      "status": "200",
+      "disposition": "Endpoint response alone does not establish a permissible matching original"
+    },
+    {
+      "name": "India Code replacement portal robots policy",
+      "url": "https://indiacode.gov.in/robots.txt",
+      "status": "500",
+      "disposition": "Source unavailable to the runner"
     }
   ],
   "source_retry_local": [
