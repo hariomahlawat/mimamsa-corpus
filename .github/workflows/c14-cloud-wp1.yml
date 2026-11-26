@@ -1,0 +1,10 @@
+name: C14 cloud WP1 registration notice
+on: workflow_dispatch
+permissions: {}
+jobs:
+  registration:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: echo "Notice only. The owner-approved WP1 operation runs on a dedicated Linux host."
