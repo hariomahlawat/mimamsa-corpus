@@ -12,10 +12,10 @@ import ssl
 import subprocess
 import sys
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit,parse_qsl
 from hf_inventory_metadata import REPO, STORES, HEX40
 from hf_inventory_provider import inventory, ENDPOINT
-from hf_metadata_transport import MetadataAPI, MAX_SECONDS
+from hf_metadata_transport import MetadataAPI, MAX_SECONDS, MAX_CURSOR
 
 REGISTER_BLOB = 'ca1096f11feb6f1cdffb69aca48ca016ac7d4a0b'
 GUARD_BLOB = 'd2d11b77dc4fb7df0acbaa250004f44439f5a21e'
@@ -30,19 +30,24 @@ def git_blob(raw):
 
 def bind_restriction(root):
     """Verify exact local register and existing predicate before any request."""
-    import importlib.util
+    from types import ModuleType,SimpleNamespace
     root=Path(root).resolve()
     config=root/'config/restricted_material.json'
     script=root/'scripts/restricted_material.py'
+    snapshots=[]
     for path,digest in ((config,REGISTER_BLOB),(script,GUARD_BLOB)):
-        if path.resolve()!=path or git_blob(path.read_bytes())!=digest:
+        if path.resolve()!=path:
+            raise ValueError('restriction input path mismatch')
+        raw=path.read_bytes()
+        if git_blob(raw)!=digest:
             raise ValueError('restriction input pin mismatch')
-    spec=importlib.util.spec_from_file_location('c14_pinned_restriction',script)
-    module=importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+        snapshots.append(raw)
+    # Use the exact verified guard source and freeze its config input in memory.
+    module=ModuleType('c14_pinned_restriction')
+    module.__file__=str(script)
+    exec(compile(snapshots[1],str(script),'exec'),module.__dict__)
+    module.CONFIG=SimpleNamespace(read_text=lambda **kw:snapshots[0].decode('utf-8'))
     module._load()
-    if git_blob(config.read_bytes())!=REGISTER_BLOB:
-        raise ValueError('restriction register changed')
     return module.is_restricted
 
 
@@ -67,6 +72,18 @@ class DirectMetadataHTTPS:
                 or (u.path!=info and u.path not in routes)
                 or (u.path==info and u.query) or not 0<cap<=4_000_000 or remaining<=0):
             raise ValueError('metadata route or budget denied')
+        if u.path in routes:
+            pairs=parse_qsl(u.query,keep_blank_values=True,strict_parsing=True,max_num_fields=4)
+            q=dict(pairs)
+            scope=u.path.split('/tree/'+self.revision+'/',1)[1]
+            recursive='true' if scope in STORES else 'false'
+            if (len(q)!=len(pairs) or set(q)-{'recursive','expand','limit','cursor'}
+                    or q.get('recursive')!=recursive or q.get('expand')!='false'
+                    or q.get('limit')!='1000'):
+                raise ValueError('metadata query outside scope')
+            if 'cursor' in q and (not 0<len(q['cursor'])<=MAX_CURSOR
+                    or not q['cursor'].isascii() or any(ord(c)<33 for c in q['cursor'])):
+                raise ValueError('invalid metadata cursor')
         conn=self.connect('huggingface.co',443,timeout=min(15,remaining),context=self.context)
         try:
             conn.request('GET',u.path+('?' + u.query if u.query else ''),
