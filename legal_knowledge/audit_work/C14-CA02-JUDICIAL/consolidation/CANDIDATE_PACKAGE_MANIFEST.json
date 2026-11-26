@@ -2,12 +2,12 @@
   "schema": "mimamsa-c14-candidate-package-v1",
   "active_import_allowed": false,
   "counts": {
-    "candidate_records": 989,
-    "physical_pages": 3777,
-    "citation_mentions": 100,
-    "unbound_or_partial_page_map": 63,
+    "candidate_records": 1083,
+    "physical_pages": 4310,
+    "citation_mentions": 139,
+    "unbound_or_partial_page_map": 58,
     "local_pair_missing": 3,
-    "search_hits_for_court": 1956
+    "search_hits_for_court": 2353
   },
   "restriction_register_sha256": "fc7ea07e62e7e41f348639973f19187540593e7b3237933758f64e865b95b2b6",
   "skips": [
@@ -40,22 +40,10 @@
       "segments": 4
     },
     {
-      "doc_id": "hc-ph-2016-cwp-12306-2016-phhc010766132016-1-2016-06-10",
-      "status": "unbound_or_partial_page_map",
-      "physical_pages": 1,
-      "segments": 2
-    },
-    {
       "doc_id": "hc-ph-2017-cr-4329-2016-phhc010076002016-1-2017-04-06",
       "status": "unbound_or_partial_page_map",
       "physical_pages": 6,
       "segments": 11
-    },
-    {
-      "doc_id": "hc-ph-2017-cwp-12715-2017-phhc010810112017-1-2017-06-01",
-      "status": "unbound_or_partial_page_map",
-      "physical_pages": 1,
-      "segments": 2
     },
     {
       "doc_id": "hc-ph-2017-cwp-18468-2014-phhc010815952014-1-2017-05-09",
@@ -108,12 +96,6 @@
       "status": "unbound_or_partial_page_map",
       "physical_pages": 2,
       "segments": 3
-    },
-    {
-      "doc_id": "hc-ph-2023-cwp-244-2019-phhc010017672019-1-2023-12-12",
-      "status": "unbound_or_partial_page_map",
-      "physical_pages": 1,
-      "segments": 16
     },
     {
       "doc_id": "hc-ph-2023-cwp-357-2023-phhc010006122023-1-2023-10-17",
@@ -200,12 +182,6 @@
       "segments": 22
     },
     {
-      "doc_id": "hc-ph-2024-cwp-20104-2024-phhc011052312024-1-2024-11-13",
-      "status": "unbound_or_partial_page_map",
-      "physical_pages": 1,
-      "segments": 2
-    },
-    {
       "doc_id": "hc-ph-2024-cwp-20795-2024-phhc011101542024-1-2024-11-06",
       "status": "unbound_or_partial_page_map",
       "physical_pages": 11,
@@ -234,12 +210,6 @@
       "status": "unbound_or_partial_page_map",
       "physical_pages": 6,
       "segments": 89
-    },
-    {
-      "doc_id": "hc-ph-2024-lpa-98-2024-phhc010039852024-1-2024-01-12",
-      "status": "unbound_or_partial_page_map",
-      "physical_pages": 1,
-      "segments": 2
     },
     {
       "doc_id": "hc-ph-2025-cocp-4796-2025-phhc011500752025-1-2025-12-04",
@@ -403,7 +373,7 @@
     }
   ],
   "files": {
-    "records.jsonl": "ed956300484a455fb27c78f2756af1fe90c19be836beb1a17df6515fd6f78276",
-    "search.sqlite": "67df257f864d8cb62cba8b1a8217b48e71773057066a1413a21fbe3807efede4"
+    "records.jsonl": "d30edb26c204a389e7d926495f7c8658bc482978fbdf0ba473680ac82b4b2369",
+    "search.sqlite": "2ea09de8c238dc7f7f3de236754a8d9ee4119a527d7a75348785eae9db990f3d"
   }
 }

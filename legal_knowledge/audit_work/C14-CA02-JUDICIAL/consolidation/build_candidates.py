@@ -35,6 +35,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('checkpoint', type=Path)
     parser.add_argument('output', type=Path)
+    parser.add_argument('--consolidation', type=Path)
     args = parser.parse_args()
     root = args.checkpoint.resolve()
     dest = args.output.resolve()
@@ -57,8 +58,27 @@ def main():
         if r['status'] == 'uploaded-verified' and r['hf']['verified']:
             inputs.append((r['doc_id'], r['expected_sha256'], r['derived_sha256'], r['hf']['revision']))
     summary = json.loads((root/'C14_EXTENDED_EXECUTION.json').read_bytes())
+    extra_folders = []
     official = {}
-    for receipt in summary['official_uploads']:
+    receipts = list(summary['official_uploads'])
+    if args.consolidation:
+        live = args.consolidation.resolve()
+        retry = live/'judicial-retry'
+        extra_folders = [retry/'extended-files', live/'staged-upload'/'official-files']
+        receipts.append(json.loads((live/'staged-upload'/'official-upload.json').read_bytes()))
+        journal = rows(retry/'extended.jsonl')
+        verified = {r['revision'] for r in journal if r.get('verified')}
+        attempted = {r[2]:r[0] for batch in journal for r in batch.get('result',[])
+                     if r[1]=='verified-local'}
+        for batch in journal:
+            if batch.get('revision') not in verified or 'files' not in batch:
+                continue
+            for path,digest in batch['files'].items():
+                kind = path.rsplit('/',1)[-1]
+                original = path.split('/')[-2]
+                if kind == 'text.txt':
+                    inputs.append((attempted[original],original,digest,batch['revision']))
+    for receipt in receipts:
         if not receipt['verified']:
             continue
         for r in receipt['entries']:
@@ -88,8 +108,10 @@ def main():
             if blocked.intersection(x.casefold() for x in (doc,pdf_hash,text_hash) if x):
                 counts['restricted_excluded'] += 1
                 continue
-            pdf = next((root/folder/(pdf_hash+'.pdf') for folder in ('extended-files','batch-files','official-files')
-                        if (root/folder/(pdf_hash+'.pdf')).is_file()),None)
+            folders = [root/folder for folder in ('extended-files','batch-files','official-files')] + extra_folders
+            pdf = next((folder/(pdf_hash+'.pdf') for folder in folders
+                        if (folder/(pdf_hash+'.pdf')).is_file() and (folder/(pdf_hash+'.txt')).is_file()
+                        and sha((folder/(pdf_hash+'.txt')).read_bytes()) == text_hash),None)
             txt = pdf.with_suffix('.txt') if pdf else None
             if not txt or not txt.is_file():
                 counts['local_pair_missing'] += 1
@@ -105,7 +127,8 @@ def main():
                 if source.is_repaired or source.needs_pass or not raw.rstrip().endswith(b'%%EOF'):
                     counts['source_integrity_hold'] += 1
                     continue
-            pages = derivative.decode('utf-8').split('\n\f\n')
+            decoded = derivative.decode('utf-8')
+            pages = [decoded] if physical_pages == 1 else decoded.split('\n\f\n')
             if len(pages) != physical_pages:
                 counts['unbound_or_partial_page_map'] += 1
                 skips.append(dict(doc_id=doc,status='unbound_or_partial_page_map',physical_pages=physical_pages,segments=len(pages)))
