@@ -58,7 +58,10 @@ def inventory(api, revision, restricted):
             lfs=getattr(item,'lfs',None)
             yield (item.path,item.size,getattr(lfs,'sha256',None),getattr(lfs,'size',None))
     result=collect(tree,revision,restricted)
-    info()
+    # A failed response may have consumed its entire allowance. Preserve the
+    # incomplete receipt and terminate requests instead of rechecking identity.
+    if not result['enumeration_failures']:
+        info()
     result.pop('inventory_sha256',None)
     result.update(provider='HF_SDK_METADATA_ONLY',source_downloads=0,hf_writes=0,
                   tree_entries_seen=tree_entries_seen,

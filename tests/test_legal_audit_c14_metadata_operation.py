@@ -75,6 +75,31 @@ class MetadataOperationTests(unittest.TestCase):
             collect_receipt('a'*40, exchange, lambda **_: False, verify_credential=True)
         self.assertEqual(requests, ['https://huggingface.co/api/whoami-v2'])
 
+    def test_interrupted_store_does_not_request_final_identity_or_claim_coverage(self):
+        from urllib.parse import unquote, urlsplit
+        from hf_inventory_metadata import REPO, STORES
+        from hf_metadata_job import collect_receipt
+
+        calls = []
+        revision = 'a'*40
+
+        def exchange(url, cap, remaining):
+            path = unquote(urlsplit(url).path)
+            calls.append(path)
+            if '/revision/' in path:
+                return json.dumps({'id': REPO, 'sha': revision, 'private': True}).encode(), None
+            store = path.split('/tree/' + revision + '/', 1)[1]
+            if store in STORES:
+                raise OSError('synthetic enumeration interruption')
+            rows = [{'path': name, 'type': 'directory'}
+                    for name in STORES if name.rsplit('/', 1)[0] == store]
+            return json.dumps(rows).encode(), None
+
+        result = collect_receipt(revision, exchange, lambda **_: False)
+        self.assertFalse(result['coverage_of_supplied_scope'])
+        self.assertEqual(sum('/revision/' in path for path in calls), 1)
+        self.assertEqual(result['enumeration_failures'][0]['error_type'], 'OSError')
+
     def test_approved_entry_writes_sanitized_incomplete_receipt(self):
         from contextlib import contextmanager
         from types import SimpleNamespace

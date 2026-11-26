@@ -93,10 +93,11 @@ class DirectMetadataHTTPS:
                 if len(lengths)>1 or (lengths and (not lengths[0].isascii() or not lengths[0].isdigit()
                                                    or int(lengths[0])>cap)):
                     raise ValueError('invalid metadata length')
-                data=response.read(cap+1)
+                data = response.read(cap)
                 if time.monotonic() >= deadline:
                     raise TimeoutError('metadata response exceeded deadline')
-                if len(data)>cap or (lengths and len(data)!=int(lengths[0])):
+                if (len(data) > cap or (lengths and len(data) != int(lengths[0]))
+                        or (len(data) == cap and not lengths and not response.isclosed())):
                     raise ValueError('metadata body outside budget')
                 links=response.headers.get_all('Link',[])
                 if len(links)>1:

@@ -106,7 +106,7 @@ class ProtocolTests(unittest.TestCase):
             MetadataAPI(REV,lambda *a:(b'{"id":"x","id":"y"}',None)).dataset_info(REPO,revision=REV)
 
 class TransportTests(unittest.TestCase):
-    def make(self,status=200,body=b'[]',header=None):
+    def make(self,status=200,body=b'[]',header=None,reads=None):
         h=Message()
         h['Content-Type']='application/json'
         if header:h[header[0]]=header[1]
@@ -114,7 +114,12 @@ class TransportTests(unittest.TestCase):
             headers=h
             def __enter__(self):return self
             def __exit__(self,*args):pass
-            def read(self,n):return body[:n]
+            def read(self,n):
+                if reads is not None:
+                    reads.append(n)
+                self.closed = len(body) <= n
+                return body[:n]
+            def isclosed(self):return self.closed
         response=Response()
         response.status=status
         calls=[]
@@ -147,6 +152,13 @@ class TransportTests(unittest.TestCase):
                             (('Content-Encoding','gzip'),b'[]'),(None,b'x'*101)):
             ex,calls=self.make(body=body,header=header)
             with self.assertRaises(ValueError):ex(f'{BASE}/revision/{REV}',100,1)
+
+    def test_response_never_requests_more_than_remaining_budget(self):
+        reads = []
+        ex, _ = self.make(body=b'x'*101, reads=reads)
+        with self.assertRaises(ValueError):
+            ex(f'{BASE}/revision/{REV}',100,1)
+        self.assertEqual(reads,[100])
 
 class SupervisorTests(unittest.TestCase):
     def test_timeout_and_error_output(self):
