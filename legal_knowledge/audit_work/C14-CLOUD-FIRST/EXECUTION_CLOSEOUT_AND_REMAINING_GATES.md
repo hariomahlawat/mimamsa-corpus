@@ -1,0 +1,24 @@
+# C14 execution closeout and remaining gates — 26 November 2026
+
+This closeout records the completed non-mutating reconciliation increment, not completion of Cycle 14 or an authoritative legal corpus.
+
+## Completed with existing access
+- CLOUD_RECONCILIATION_BATCH_04.json (commit 063f05bd8b24736db6c6500018476e2cbd824553): parsed the complete frozen recovery CSV (8174 rows; 8077 flagged + 97 in-corpus risks), validated 534 distinct unheld P&H T1 entries and reconciled their logged SHA256 and URLs against all 168 held rows. Zero overlaps in that frozen register. This is not a complete current HF inventory.
+- Rechecked 15 preserved statutory copies by exact HF path and size, 17,565,129 bytes total. Two are non-LFS; the current metadata collector deliberately excludes unhashable PDFs. Do not mark WP1 complete or treat path/size as current-byte proof. Obtain independent exact-revision byte proof for non-LFS candidates via an explicitly bounded future operation.
+- New public-source observations for A4-ACQ-001, 002 and 012: official compilation attribution of SRO 258 to Rule 22 Explanation; potential Rule 13A/Rule 15 conflation, judicial reproduction of HC Chandel and secondary SRO 235/1991 attribution; official compilation attribution of E-7 to Rule 147A, including cited Gazette issue date. Original source and legal closure remain pending.
+- No active HF Jobs observed via read-only ps. No new paid job or cloud host started. No source acquisitions, HF writes, active corpus modifications, staging merges, or legal promotions.
+
+## Correction of earlier documentary claim
+The screenshot_sha256 in PR58 WINDOWS_SYNTHETIC_ACCEPTANCE_RECEIPT.json and the statement "Screenshot digest independently rechecked against supplied image" in INTEGRATION_TRANCHE_RECEIPT.md are not supported by an independently reproducible hash computation in the present evidence. Withdraw reliance on the asserted screenshot hash and recheck claim; the screenshot-reported 32/32 result remains owner-reported, not an exact-head receipt. Do not edit the frozen reviewed branches or retrospectively manufacture a digest. Rely on separately verified native hosted CI for its own synthetic evidence only. This correction does not establish actual Windows commissioning.
+
+## Remaining gates and execution options
+The current cloud PR #62 head f5a84a21d4db15c5953bd30f52c132a0748faf43 requires an isolated persistent Linux host. GitHub Actions live credential path has been withdrawn; PR #63 is informational only. No host or account-level access to that host has been established. Do not reactivate old workflows, bypass signed approvals or forward a broad token.
+
+Hugging Face managed CPU Jobs are a possible alternative for bounded isolated execution, not an accepted substitute for the current host-specific authorization/receipt model. Official pricing https://huggingface.co/docs/hub/en/jobs-pricing lists CPU Basic USD 0.01/hr and CPU Upgrade USD 0.03/hr; positive credit balance required; starting/running billed by minute. The account's balance, eligibility, credential provisioning and persistent private evidence destination are unverified. Obtain a single explicit compute budget authorization before paid execution, and targeted acceptance of the adapted execution boundary before private corpus access. A USD 5 ceiling is a proposed first-phase compute budget, not a quote or a guarantee of full corpus completion; no automatic top-up, GPU, bulk acquisition, or new persistent service.
+
+1. WP1 inventory: approved cloud runtime and exact revision; verified dataset-scoped credential, restricted register, safe private receipt, independent treatment of non-LFS hashes.
+2. WP2 statutory originals: deduplicate, acquire bounded candidates after separate source/transport approval, preserve exact bytes and visual anchors.
+3. WP3/WP4 judicial recovery: freeze current crawl DB and history, verify exclusion provenance and live holdings; pilot 12-15 exact, restriction-screened candidates before 534-file tranche. C13 baseline 534 are unique in the frozen register, not proven missing now. Apply current host policy, robots, rate bounds and exact expected hashes; preserve failures rather than delete. OCR only where needed; measure quality and obtain human review before promotion.
+4. WP5 adoption: candidate-only evidence until importer/retrieval policy enforced and verified with Claude; formal legal validation by competent authority is separate from technical acceptance.
+
+No remaining operation is claimed complete. No additional routine owner approval is requested for public research or dry-run reconciliation, but a credentialed cloud runtime, cost authorization where needed, and existing operation-specific safety/authority gates are genuine prerequisites to further acquisition and processing. Do not infer that a generic "proceed" authorizes destructive or bulk operations, legal promotion or unspecified expenditure.
