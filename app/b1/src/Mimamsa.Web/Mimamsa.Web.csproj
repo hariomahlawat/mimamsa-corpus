@@ -11,6 +11,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mimamsa.Core\Mimamsa.Core.csproj" />
+    <ProjectReference Include="..\Mimamsa.Hybrid\Mimamsa.Hybrid.csproj" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Mimamsa.Tests" />

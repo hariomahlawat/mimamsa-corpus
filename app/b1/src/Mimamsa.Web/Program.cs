@@ -46,7 +46,9 @@ int listenSndBuf = conf.GetValue("Mimamsa:Transport:ListenSendBufferBytes", 32 *
 
 var dataSource = new NpgsqlDataSourceBuilder(cs).Build();
 var vault = new Vault(site);
+var loadSw = System.Diagnostics.Stopwatch.StartNew();
 var generation = GenerationStore.Load(site, vault);
+var generationLoadMs = loadSw.ElapsedMilliseconds;
 var state = new ServingState();
 var policy = new PolicyStore(dataSource);
 // C14 F15: the lock duration is fixed at 5 minutes except in test mode, where journeys may shorten it.
@@ -68,9 +70,32 @@ RestrictedRegister register;
 if (testMode && conf.GetValue("Mimamsa:Test:AllowNoRegister", false)) register = RestrictedRegister.Empty;
 else register = RestrictedRegister.LoadRequired(conf["Mimamsa:RestrictedRegister"], generation.Release.RegisterSha256);
 var eligibility = new Eligibility(generation, state, register, vault);
+var phase = System.Diagnostics.Stopwatch.StartNew();
 var index = SearchIndex.Build(generation);
+var indexBuildMs = phase.ElapsedMilliseconds;
 AppServices? appRef = null;
-var search = new SearchService(index, docId => appRef!.VisibleDocument(docId) is null);
+// C14 S4 hybrid-retrieval PoC: off unless Mimamsa:Hybrid:Enabled=true. The model directory and its pinned SHA-256
+// are required when enabled; a mismatch stops start-up. No network access at run time.
+ISemanticScorer? semantic = null;
+long hybridMs = 0;
+if (conf.GetValue("Mimamsa:Hybrid:Enabled", false))
+{
+    phase.Restart();
+    var emb = new Mimamsa.Hybrid.E5Embedder(conf["Mimamsa:Hybrid:ModelDir"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelDir is required when hybrid is enabled"),
+        conf.GetValue("Mimamsa:Hybrid:Threads", 0), conf.GetValue("Mimamsa:Hybrid:Cuda", false),
+        conf["Mimamsa:Hybrid:ModelSha256"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelSha256 is required when hybrid is enabled"));
+    semantic = Mimamsa.Hybrid.DenseIndex.Build(index, generation.GenerationId, emb, conf["Mimamsa:Hybrid:CacheDir"], "multilingual-e5-small@614241f6",
+        conf.GetValue("Mimamsa:Hybrid:PassageTokens", 256), log: Console.WriteLine);
+    hybridMs = phase.ElapsedMilliseconds;
+}
+var search = new SearchService(index, docId => appRef!.VisibleDocument(docId) is null)
+{
+    Semantic = semantic,
+    // MinSimilarity: a passage enters through the dense layer only at or above this cosine similarity. The value is
+    // calibrated on the C14 walkthrough queries over the real sample (HybridBench calibrate), never on oracle data.
+    Hybrid = new HybridOptions(conf.GetValue("Mimamsa:Hybrid:LexicalDepth", 200), conf.GetValue("Mimamsa:Hybrid:DenseDepth", 100), conf.GetValue("Mimamsa:Hybrid:RrfK", 60),
+                               conf.GetValue("Mimamsa:Hybrid:MinSimilarity", 0.0)),
+};
 var app0 = new AppServices
 {
     Generation = generation, Search = search, State = state, Policy = policy, Identity = identity, Ledger = ledger, Vault = vault,
@@ -157,6 +182,37 @@ else if (await identity.UserCountAsync() == 0)
     log.LogWarning("no accounts exist; create one with: Mimamsa.Web --add-user <name> Admin (password on stdin)");
 log.LogInformation("generation {Gen} loaded: {Docs} documents, {Passages} passages indexed, load issues {Issues}",
     generation.GenerationId, generation.Documents.Count, index.N, generation.LoadIssues.Count == 0 ? "none" : string.Join(",", generation.LoadIssues.Select(kv => kv.Key + "=" + kv.Value)));
+log.LogInformation("start-up phases: generation load and re-hash {LoadMs} ms, index build {IndexMs} ms, hybrid {HybridMs} ms, process {ProcMs} ms",
+    generationLoadMs, indexBuildMs, hybridMs, (long)(DateTime.Now - System.Diagnostics.Process.GetCurrentProcess().StartTime).TotalMilliseconds);
+// C14 S4: numbers-only process diagnostics for benchmarks. Off unless Mimamsa:Diagnostics:Enabled=true; returns no
+// content, ids or queries. ?gc=1 forces a full blocking compacting GC first (to separate retention from leaks).
+// Integration hardening: unauthenticated, so answered only to loopback callers (a LAN caller could otherwise force
+// blocking full GCs with ?gc=1); a warning is logged whenever it is enabled.
+if (conf.GetValue("Mimamsa:Diagnostics:Enabled", false))
+{
+    app.Logger.LogWarning("diagnostics endpoint /api/diag/memory is enabled (loopback callers only; benchmarks only)");
+    app.MapGet("/api/diag/memory", (HttpContext ctx) =>
+    {
+        if (ctx.Connection.RemoteIpAddress is not { } ip || !System.Net.IPAddress.IsLoopback(ip)) return Results.NotFound();
+        if (ctx.Request.Query["gc"] == "1")
+        {
+            System.Runtime.GCSettings.LargeObjectHeapCompactionMode = System.Runtime.GCLargeObjectHeapCompactionMode.CompactOnce;
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
+            GC.WaitForPendingFinalizers();
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
+        }
+        var gi = GC.GetGCMemoryInfo();
+        var p = System.Diagnostics.Process.GetCurrentProcess();
+        return Results.Json(new
+        {
+            working_set_mb = Math.Round(p.WorkingSet64 / 1048576.0, 1), private_mb = Math.Round(p.PrivateMemorySize64 / 1048576.0, 1),
+            managed_heap_mb = Math.Round(GC.GetTotalMemory(false) / 1048576.0, 1), gc_heap_size_mb = Math.Round(gi.HeapSizeBytes / 1048576.0, 1),
+            gc_committed_mb = Math.Round(gi.TotalCommittedBytes / 1048576.0, 1), gc_fragmented_mb = Math.Round(gi.FragmentedBytes / 1048576.0, 1),
+            gc_server = System.Runtime.GCSettings.IsServerGC, gc_count_gen2 = GC.CollectionCount(2), cpu_s = Math.Round(p.TotalProcessorTime.TotalSeconds, 2),
+            threads = p.Threads.Count,
+        });
+    });
+}
 _ = Task.Run(async () => { while (true) { try { await ledger.HeartbeatAsync(); } catch { } await Task.Delay(2000); } });
 _ = Task.Run(async () =>
 {

@@ -1,0 +1,139 @@
+{
+ "label": "4000",
+ "gc_mode": "workstation",
+ "site": "E:\\Mimamsa-Data\\bench\\4000\\site",
+ "startup_to_healthy_s": 20.46,
+ "startup_phases_ms": {
+  "load_and_rehash": 10009,
+  "index_build": 8890,
+  "hybrid": 0
+ },
+ "documents": 4000,
+ "passages": 99113,
+ "memory_after_start": {
+  "working_set_mb": 786.3,
+  "private_mb": 753.5,
+  "managed_heap_mb": 701.9,
+  "gc_heap_size_mb": 715.4,
+  "gc_committed_mb": 726.3,
+  "gc_fragmented_mb": 17.7,
+  "gc_server": false,
+  "gc_count_gen2": 8,
+  "cpu_s": 17.55,
+  "threads": 19
+ },
+ "pg_memory_before_start": {
+  "pg_working_set_mb": 352.2,
+  "pg_private_mb": 78.7
+ },
+ "pg_memory_after_start": {
+  "pg_working_set_mb": 397.4,
+  "pg_private_mb": 91.2
+ },
+ "first_search_ms": 469.5,
+ "search_1": {
+  "n": 60,
+  "p50": 43.9,
+  "p95": 215.0,
+  "max": 591.5,
+  "mean": 86.0
+ },
+ "search_10": {
+  "n": 200,
+  "p50": 283.4,
+  "p95": 1017.4,
+  "max": 1851.4,
+  "mean": 380.8,
+  "throughput_rps": 25.8
+ },
+ "search_25": {
+  "n": 200,
+  "p50": 870.4,
+  "p95": 2302.5,
+  "max": 3541.7,
+  "mean": 965.1,
+  "throughput_rps": 23.7
+ },
+ "memory_after_load": {
+  "working_set_mb": 2388.6,
+  "private_mb": 2343.6,
+  "managed_heap_mb": 851.5,
+  "gc_heap_size_mb": 2114.3,
+  "gc_committed_mb": 2289.4,
+  "gc_fragmented_mb": 1261.7,
+  "gc_server": false,
+  "gc_count_gen2": 13,
+  "cpu_s": 93.03,
+  "threads": 43
+ },
+ "pg_memory_after_load": {
+  "pg_working_set_mb": 634.5,
+  "pg_private_mb": 159.4
+ },
+ "pdf_range_64k": {
+  "n": 30,
+  "p50": 6.4,
+  "p95": 15.3,
+  "max": 115.8,
+  "mean": 11.6
+ },
+ "leak_cycles": [
+  {
+   "cycle": 1,
+   "working_set_mb": 2475.6,
+   "gc_heap_mb": 2320.1,
+   "committed_mb": 2383,
+   "after_forced_gc_managed_mb": 644.5,
+   "after_forced_gc_working_set_mb": 2322.5,
+   "after_forced_gc_committed_mb": 2230.2
+  },
+  {
+   "cycle": 2,
+   "working_set_mb": 2762,
+   "gc_heap_mb": 2451.2,
+   "committed_mb": 2691.6,
+   "after_forced_gc_managed_mb": 647.5,
+   "after_forced_gc_working_set_mb": 2667.1,
+   "after_forced_gc_committed_mb": 2594.2
+  },
+  {
+   "cycle": 3,
+   "working_set_mb": 2258.8,
+   "gc_heap_mb": 1765.4,
+   "committed_mb": 2151,
+   "after_forced_gc_managed_mb": 647,
+   "after_forced_gc_working_set_mb": 2176.7,
+   "after_forced_gc_committed_mb": 2069.2
+  },
+  {
+   "cycle": 4,
+   "working_set_mb": 1844,
+   "gc_heap_mb": 1635.2,
+   "committed_mb": 1751.4,
+   "after_forced_gc_managed_mb": 647.1,
+   "after_forced_gc_working_set_mb": 1740.5,
+   "after_forced_gc_committed_mb": 1647.4
+  },
+  {
+   "cycle": 5,
+   "working_set_mb": 2583.5,
+   "gc_heap_mb": 845.8,
+   "committed_mb": 2524.3,
+   "after_forced_gc_managed_mb": 647.1,
+   "after_forced_gc_working_set_mb": 2513.6,
+   "after_forced_gc_committed_mb": 2453.6
+  }
+ ],
+ "memory_end": {
+  "working_set_mb": 2513.8,
+  "private_mb": 2509.3,
+  "managed_heap_mb": 649.4,
+  "gc_heap_size_mb": 650.2,
+  "gc_committed_mb": 2453.6,
+  "gc_fragmented_mb": 3.2,
+  "gc_server": false,
+  "gc_count_gen2": 31,
+  "cpu_s": 241.17,
+  "threads": 51
+ }
+}

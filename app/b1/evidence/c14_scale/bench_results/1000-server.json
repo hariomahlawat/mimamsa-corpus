@@ -1,0 +1,139 @@
+{
+ "label": "1000",
+ "gc_mode": "server",
+ "site": "E:\\Mimamsa-Data\\bench\\1000\\site",
+ "startup_to_healthy_s": 17.5,
+ "startup_phases_ms": {
+  "load_and_rehash": 13626,
+  "index_build": 2538,
+  "hybrid": 0
+ },
+ "documents": 1000,
+ "passages": 24195,
+ "memory_after_start": {
+  "working_set_mb": 373.2,
+  "private_mb": 344.3,
+  "managed_heap_mb": 263.2,
+  "gc_heap_size_mb": 150.5,
+  "gc_committed_mb": 282.8,
+  "gc_fragmented_mb": 4.4,
+  "gc_server": true,
+  "gc_count_gen2": 6,
+  "cpu_s": 7.16,
+  "threads": 35
+ },
+ "pg_memory_before_start": {
+  "pg_working_set_mb": 381.8,
+  "pg_private_mb": 84.9
+ },
+ "pg_memory_after_start": {
+  "pg_working_set_mb": 444.5,
+  "pg_private_mb": 103.4
+ },
+ "first_search_ms": 184.5,
+ "search_1": {
+  "n": 60,
+  "p50": 17.5,
+  "p95": 87.4,
+  "max": 125.7,
+  "mean": 25.4
+ },
+ "search_10": {
+  "n": 200,
+  "p50": 52.0,
+  "p95": 175.4,
+  "max": 299.0,
+  "mean": 63.3,
+  "throughput_rps": 151.9
+ },
+ "search_25": {
+  "n": 200,
+  "p50": 136.5,
+  "p95": 221.8,
+  "max": 301.3,
+  "mean": 129.5,
+  "throughput_rps": 173.1
+ },
+ "memory_after_load": {
+  "working_set_mb": 759.4,
+  "private_mb": 719,
+  "managed_heap_mb": 379.1,
+  "gc_heap_size_mb": 355.6,
+  "gc_committed_mb": 642.4,
+  "gc_fragmented_mb": 111.4,
+  "gc_server": true,
+  "gc_count_gen2": 13,
+  "cpu_s": 46.89,
+  "threads": 62
+ },
+ "pg_memory_after_load": {
+  "pg_working_set_mb": 604.0,
+  "pg_private_mb": 148.8
+ },
+ "pdf_range_64k": {
+  "n": 30,
+  "p50": 6.2,
+  "p95": 11.0,
+  "max": 82.2,
+  "mean": 9.4
+ },
+ "leak_cycles": [
+  {
+   "cycle": 1,
+   "working_set_mb": 757.1,
+   "gc_heap_mb": 326.7,
+   "committed_mb": 641.4,
+   "after_forced_gc_managed_mb": 165.9,
+   "after_forced_gc_working_set_mb": 645.2,
+   "after_forced_gc_committed_mb": 528.7
+  },
+  {
+   "cycle": 2,
+   "working_set_mb": 740,
+   "gc_heap_mb": 334.7,
+   "committed_mb": 624.7,
+   "after_forced_gc_managed_mb": 165.8,
+   "after_forced_gc_working_set_mb": 621.8,
+   "after_forced_gc_committed_mb": 502.9
+  },
+  {
+   "cycle": 3,
+   "working_set_mb": 753.4,
+   "gc_heap_mb": 334.1,
+   "committed_mb": 641.4,
+   "after_forced_gc_managed_mb": 169.2,
+   "after_forced_gc_working_set_mb": 629.3,
+   "after_forced_gc_committed_mb": 513.9
+  },
+  {
+   "cycle": 4,
+   "working_set_mb": 767.3,
+   "gc_heap_mb": 347.1,
+   "committed_mb": 653.6,
+   "after_forced_gc_managed_mb": 168.8,
+   "after_forced_gc_working_set_mb": 630.2,
+   "after_forced_gc_committed_mb": 516
+  },
+  {
+   "cycle": 5,
+   "working_set_mb": 741,
+   "gc_heap_mb": 355.5,
+   "committed_mb": 629.2,
+   "after_forced_gc_managed_mb": 167.6,
+   "after_forced_gc_working_set_mb": 629.7,
+   "after_forced_gc_committed_mb": 511.7
+  }
+ ],
+ "memory_end": {
+  "working_set_mb": 629.1,
+  "private_mb": 606.9,
+  "managed_heap_mb": 187.4,
+  "gc_heap_size_mb": 168.9,
+  "gc_committed_mb": 511.7,
+  "gc_fragmented_mb": 1.6,
+  "gc_server": true,
+  "gc_count_gen2": 30,
+  "cpu_s": 116.03,
+  "threads": 72
+ }
+}
