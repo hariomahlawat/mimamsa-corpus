@@ -2,41 +2,27 @@
 
 This is an isolated Windows-compatible deterministic runner, not an agent, service, scheduler or general downloader. Scope: retrieve and verify 15 existing public-source preservation objects from the private HF dataset, at the exact Cycle 13 preservation revision; report current main revision/file count and presence of each path. No HF writes, external source crawling, ingestion, OCR, rendering, automatic approval or modification of existing originals. The two historic source-pin mismatches and three subject-identity holds remain in force even if HF bytes match.
 
-## Isolation
+## Isolation and supported Windows checkout
 
-Use a detached Git worktree at E:\Mimamsa-Corpus-Runner\checkout, distinct from the primary Mimamsa checkout and Claude worktrees. Use E:\Mimamsa-Corpus-Runner\jobs for fresh outputs. No changes to PRISM, MAVI, PostgreSQL, .NET, Windows services, Git credentials or global settings. Do not run on the air-gapped deployment LAN. No automatic package installation. Python 3.13 with the already configured huggingface_hub package and HF credentials is required; a dataset-scoped read token or existing secure HF login is sufficient. Never paste credentials into commands, reports or chats.
+The commissioned runner uses the **standalone independent clone** at E:\Mimamsa-Corpus-Runner\checkout, not a linked worktree. Job outputs are under E:\Mimamsa-Corpus-Runner\jobs and PDF-review dependencies under E:\Mimamsa-Corpus-Runner\.venv. The initial linked-worktree attempt failed Git ownership validation; no safe.directory exception or ownership change is required. Do not use Claude's checkout, PRISM, MAVI or an air-gapped deployment network. Do not change global network settings. No automatic dependency installation.
 
-## Launch
+For a new installation only, clone with GIT_LFS_SKIP_SMUDGE=1, --no-checkout, --single-branch and --filter=blob:none. Check out the exact independently reviewed full commit using git checkout --detach. Never overwrite the commissioned clone. For the existing runner, fetch the corpus branch, verify a clean checkout, and detach to the approved commit. The original successful read-only commissioning ran at 11aee06cf3b4fb1d141f5e5fe36ff1e7834286b8; newer commits are not automatically commissioned.
 
-Obtain the full reviewed commit from PR #58; use the exact immutable commit, not an unreviewed branch tip. In a fresh PowerShell window:
+## Read-only preservation command
 
-    $Repo = 'E:\Dot Net Web Development\Mimamsa'
-    $Root = 'E:\Mimamsa-Corpus-Runner'
-    $Checkout = Join-Path $Root 'checkout'
-    $Commit = '<full reviewed PR #58 commit>'
-    if (Test-Path $Checkout) { throw 'Checkout exists; inspect, never delete or overwrite.' }
-    New-Item -ItemType Directory -Force -Path $Root | Out-Null
-    git -C $Repo fetch origin corpus/c14-ca01-reconciliation-20261126
-    if ($LASTEXITCODE -ne 0) { throw 'Fetch failed' }
-    $env:GIT_LFS_SKIP_SMUDGE = '1'
-    git -C $Repo worktree add --detach $Checkout $Commit
-    if ($LASTEXITCODE -ne 0) { throw 'Worktree setup failed' }
-    Set-Location $Checkout
-    $Runner = 'legal_knowledge/audit_work/C14-CA01-STATUTORY/runner/corpus_runner.py'
-    python $Runner
-    if ($LASTEXITCODE -ne 0) { throw 'Dry run failed' }
+    Set-Location 'E:\Mimamsa-Corpus-Runner\checkout'
+    $Runner = 'legal_knowledge/audit_work/C14-CA01-STATUTORY/runner/launch_ipv4.py'
+    python -B $Runner
 
-Expected dry-run scope: 15 PDFs, 17,565,129 bytes, no network or writes from the runner. The fetch/worktree setup itself is a normal Git operation. If Python cannot import huggingface_hub, stop and report; do not install into an existing project environment.
+Expected dry-run scope: 15 PDFs, 17,565,129 bytes. The optional IPv4 launcher confines the resolver override and Xet disabling to the process; certificate verification remains enabled. Its inline predecessor was commissioned successfully; the wrapper has offline tests but no live Windows run yet. Use the existing HF-enabled Python, not the PDF-only virtual environment unless separately configured.
 
-After successful dry run and review of the pinned commit:
+An actual run requires a separately reviewed commit, read-only credential, fresh job directory and explicit authorization. Do not rerun merely to validate this README. Exact command format after approval:
 
-    $Job = Join-Path $Root ('jobs\ca01a-' + (Get-Date -Format 'yyyyMMdd-HHmmss'))
-    python $Runner --execute-read-only --expected-commit $Commit --output $Job
-    $Result = $LASTEXITCODE
-    Write-Host "Runner exit code: $Result"
-    Write-Host "Report: $Job\verification.json"
+    python -B $Runner --execute-read-only --expected-commit $Commit --output $Job
 
-Exit 0 means all historical preservation hashes match, all paths exist at the observed current head, and main revision stayed unchanged during the job. It does NOT establish primary-source authenticity, current law or page fidelity. Exit 1 means review required. A partial report survives ordinary per-file failures; preserve its directory even when unsuccessful. An initial infrastructure error may occur before a report is available. Do not delete failed runs; use a fresh directory after review. Send only verification.json to the coordinator, not original PDFs or secrets; the report has no token field. The source files stay local in the dedicated job directory.
+The primary runner canonicalizes CRLF to LF only to check the pinned Git inventory blob; successful receipt and source byte hashes are exact raw digests and must not be newline-normalized. Historical preservation hashes are not current-HF byte checks. Only report current-head existence as presence. The older verify_preserved_copies.py is historical/noncommissioned; do not use it as an alternate live runner. No upload or legal promotion.
+
+The six-source acquisition utility is explicitly interlocked and cannot execute even if JSON enable flags are changed. Its approval verifier is not a deployed trust configuration. The 23 archive proposals also remain disabled. Native Windows ACL, reparse-point, SDK log and current-head verification requirements remain outstanding.
 
 ## Validation performed
 
