@@ -265,3 +265,5 @@
 {"id": "AFT-GUW-313", "url": "https://aftrbghy.nic.in/judgement/Kochi 03 Judgment/OA - 16_2023.pdf", "status": "eligible-local", "sha256": "660e05e9991550696d66adcfe9d466e8525aaf1f4c352ad4852ca0c827af67a8", "pages": 10, "ocr": 10}
 {"id": "AFT-GUW-314", "url": "https://aftrbghy.nic.in/judgement/Kochi 03 Judgment/TA - 03_2019.pdf", "status": "eligible-local", "sha256": "1072117c000a073d086a85a9516971452bbcdd0e9b8cc5ca07e9f13e31afcade", "pages": 14, "ocr": 14}
 {"id": "AFT-GUW-315", "url": "https://aftrbghy.nic.in/judgement/Kochi Judgment 05/OA - 05  of 2023.pdf", "status": "marking-review", "page": 19}
+{"id": "AFT-GUW-316", "url": "https://aftrbghy.nic.in/judgement/Kochi Judgment 05/OA - 24 of 2016.pdf", "status": "eligible-local", "sha256": "bdd0cb6c05663ded42258d1849a5a5af242b2abec830a03b688b526234f8cec2", "pages": 25, "ocr": 25}
+{"id": "AFT-GUW-317", "url": "https://aftrbghy.nic.in/judgement/Kochi Judgment 05/OA - 24 of 2021.pdf", "status": "eligible-local", "sha256": "058c42dc241496b742ff0a96a8bb0636fb6fa6c8533b2bbc1f363913a7f0ad3c", "pages": 12, "ocr": 12}
