@@ -3,6 +3,8 @@ import hashlib
 import json
 import sqlite3
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from pipeline.assessment_register import Journal
 
@@ -82,6 +84,32 @@ class JournalTests(unittest.TestCase):
             Journal(self.db)
         self.assertTrue(self.db.in_transaction)
         self.db.rollback()
+
+    @unittest.skipUnless(hasattr(sqlite3, 'LEGACY_TRANSACTION_CONTROL'), 'Python 3.12 SQLite API')
+    def test_explicit_sqlite_autocommit_persists_batch_before_close(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / 'journal.sqlite'
+            db = sqlite3.connect(path, autocommit=True)
+            reader = sqlite3.connect(path)
+            try:
+                journal = Journal(db)
+                journal.append(fixture())
+                self.assertFalse(db.in_transaction)
+                self.assertEqual(Journal(reader).audit()['events'], 1)
+            finally:
+                reader.close()
+                db.close()
+
+    @unittest.skipUnless(hasattr(sqlite3, 'LEGACY_TRANSACTION_CONTROL'), 'Python 3.12 SQLite API')
+    def test_explicit_sqlite_autocommit_rolls_back_whole_batch(self):
+        db = sqlite3.connect(':memory:', autocommit=True)
+        self.addCleanup(db.close)
+        journal = Journal(db)
+        journal.append(fixture())
+        with self.assertRaisesRegex(ValueError, 'current predecessor'):
+            journal.append_batch([(fixture(doc='fixture-b'), None), (fixture(metadata='d'), None)])
+        self.assertFalse(db.in_transaction)
+        self.assertEqual(journal.audit()['events'], 1)
 
     def test_update_delete_replace_denied(self):
         eid = self.journal.append(fixture())

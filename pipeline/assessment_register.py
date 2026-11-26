@@ -111,10 +111,13 @@ class Journal:
         self.db.execute('BEGIN IMMEDIATE')
         try:
             ids = [self._append(*args) for args in prepared]
-            self.db.commit()
+            # Pair the explicit SQL BEGIN with SQL transaction control.
+            # Connection.commit() is a no-op in Python's autocommit mode.
+            self.db.execute('COMMIT')
             return ids
         except BaseException:
-            self.db.rollback()
+            if self.db.in_transaction:
+                self.db.execute('ROLLBACK')
             raise
 
     @staticmethod
