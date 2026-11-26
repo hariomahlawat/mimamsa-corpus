@@ -445,3 +445,18 @@
 {"id": "AFT-GUW-493", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 06 of 2019.pdf", "status": "eligible-local", "sha256": "4a4466bc9a303c25fc521ea5b4e23820d7ea45cc4389d786626e75ae164b311e", "pages": 11, "ocr": 0}
 {"id": "AFT-GUW-494", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 07 of 2020.pdf", "status": "eligible-local", "sha256": "4d5dede595915444918a3060f5ad7d50d4ddbe09428ec172b667cd35a490d76d", "pages": 9, "ocr": 0}
 {"id": "AFT-GUW-495", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 07 of 2022.pdf", "status": "identity-review"}
+{"id": "AFT-GUW-496", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 08 of 2019 with M.A. No. 05 of 2019.pdf", "status": "identity-review"}
+{"id": "AFT-GUW-497", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 08 of 2022 with M.A. No. 02 of 2022.pdf", "status": "eligible-local", "sha256": "4fa7e0db3ff53a390e9cc25f58b8426fac88931e7f3a7d54e042223e9e9a285b", "pages": 8, "ocr": 0}
+{"id": "AFT-GUW-498", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 08 of 2023 with M.A. No. 06 of 2023.pdf", "status": "eligible-local", "sha256": "2de4abd4e3fe51d7cc0a71e546e7910026dc583809e2058b0438f3d3284577fb", "pages": 8, "ocr": 0}
+{"id": "AFT-GUW-499", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 09 of 2022.pdf", "status": "eligible-local", "sha256": "dddfa69dda40cfef9fb36a1c000dc18f2101fa90daea3ed525fa27b1251076ef", "pages": 1, "ocr": 0}
+{"id": "AFT-GUW-500", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 10 of 2022.pdf", "status": "marking-review", "page": 8}
+{"id": "AFT-GUW-501", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 12 of 2020.pdf", "status": "marking-review", "page": 2}
+{"id": "AFT-GUW-502", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 15 of 2021.pdf", "status": "eligible-local", "sha256": "2dc3a952cb94fefbb4eec2ecc8229a093d5909d9c59306ce83d7f9c822ae47f0", "pages": 17, "ocr": 0}
+{"id": "AFT-GUW-503", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 17 of 2020 with M.A. No. 10 of 2020.pdf", "status": "eligible-local", "sha256": "6b195bfce61d1e584aa13a20637ca1f44d352789b2e7205afdf18324a102413b", "pages": 12, "ocr": 0}
+{"id": "AFT-GUW-504", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 17 of 2021.pdf", "status": "marking-review", "page": 13}
+{"id": "AFT-GUW-505", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 19 of 2020.pdf", "status": "eligible-local", "sha256": "aae30c28f8f7e63a384af9e9ac8db3b8c7fd15c2f857efb06c569aaafe5397fe", "pages": 2, "ocr": 0}
+{"id": "AFT-GUW-506", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 20 of 2021.pdf", "status": "identity-review"}
+{"id": "AFT-GUW-507", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 21 of 2019.pdf", "status": "eligible-local", "sha256": "bc961915583cffaa5f41d732e70ebaade34ba4a8189ef938c2afa8022a71ac13", "pages": 9, "ocr": 0}
+{"id": "AFT-GUW-508", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 22 of 2019.pdf", "status": "eligible-local", "sha256": "f413da8f22972a88f08dd01a7dafd45ac001010b1eca444de3047e95285c4b1c", "pages": 13, "ocr": 0}
+{"id": "AFT-GUW-509", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 22 of 2020 with M.A. No. 14 of 2020.pdf", "status": "eligible-local", "sha256": "3a8a7656e43d15d9a7fab050a7089413e902fc1b99720608ce80635fb983a263", "pages": 2, "ocr": 0}
+{"id": "AFT-GUW-510", "url": "https://aftrbghy.nic.in/judgement/O.A. No. 22 of 2021.pdf", "status": "eligible-local", "sha256": "44446921d62cbfff9eddfc5cfc433d14ec5d6d73a929aa236cb5c790f864316b", "pages": 2, "ocr": 0}
