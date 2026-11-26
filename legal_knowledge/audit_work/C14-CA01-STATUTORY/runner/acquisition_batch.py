@@ -11,7 +11,8 @@ import ssl
 import subprocess
 import time
 import urllib.request
-import urllib.robotparser
+from transport_policy import Budget, robots_allows
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -85,7 +86,9 @@ class PinnedHTTPSConnection(http.client.HTTPSConnection):
 
 
 class Transport:
-    def __init__(self):
+    def __init__(self, budget=None):
+        self.budget = budget or Budget()
+        self.attempts = []
         if urllib.request.getproxies():
             raise ValueError('proxy configuration requires separate review')
         self.context = ssl.create_default_context()
@@ -99,21 +102,32 @@ class Transport:
         if url not in URLS.values() and url not in {'https://' + h + '/robots.txt' for h in origins}:
             raise ValueError('unlisted URL')
         elapsed = time.monotonic() - self.last.get(p.hostname, -1000)
-        time.sleep(max(0, self.delay.get(p.hostname, 2) - elapsed))
+        wait = max(0, self.delay.get(p.hostname, 2) - elapsed)
+        if wait >= self.budget.remaining():
+            raise TimeoutError('pacing exceeds remaining deadline')
+        time.sleep(wait)
+        self.budget.start_attempt()
         self.last[p.hostname] = time.monotonic()
         # Resolution happens after pacing, and the selected sockaddr is used verbatim.
+        record = {'url': url, 'started_utc': datetime.now(timezone.utc).isoformat(), 'status': None}
+        self.attempts.append(record)
         address = check_dns(p.hostname)[0]
-        conn = PinnedHTTPSConnection(p.hostname, address, context=self.context)
+        conn = PinnedHTTPSConnection(p.hostname, address, context=self.context,
+                                    timeout=min(30, self.budget.remaining()))
         try:
             path = p.path + ('?' + p.query if p.query else '')
             conn.request('GET', path, headers={'User-Agent': UA, 'Accept-Encoding': 'identity'})
             with conn.getresponse() as response:
+                record.update(status=response.status, peer=conn.peer,
+                              content_type=response.headers.get_content_type())
+                self.budget.remaining()
                 # No automatic redirect, authentication or retry.
                 if response.status != 200:
                     raise ValueError('unexpected HTTP status; no redirect or challenge bypass')
                 yield response
         finally:
             conn.close()
+            record['ended_utc'] = datetime.now(timezone.utc).isoformat()
 
     def robots(self, url):
         host = urlsplit(url).hostname
@@ -124,20 +138,14 @@ class Transport:
             raw = response.read(262145)
         if len(raw) > 262144:
             raise ValueError('robots oversized')
-        body = raw.decode('utf-8', errors='strict')
-        if '<html' in body.lower() or '<!doctype' in body.lower():
-            raise ValueError('robots not plain text')
-        rp = urllib.robotparser.RobotFileParser()
-        rp.parse(body.splitlines())
-        if not rp.can_fetch(UA, url):
-            raise ValueError('robots disallowed')
-        rate = rp.request_rate(UA)
-        self.delay[host] = max(2, rp.crawl_delay(UA) or 0, rate.seconds / rate.requests if rate and rate.requests else 0)
-        if self.delay[host] > 60:
-            raise ValueError('robots delay exceeds job limit')
+        self.budget.observe_bytes(len(raw))
+        if not robots_allows(raw, url):
+            raise ValueError('robots disallowed or unsupported syntax')
+        self.delay[host] = 2
 
 
-def receive(response, destination, row, known):
+
+def receive(response, destination, row, known, budget=None):
     if response.status != 200 or response.headers.get_content_type() not in ('application/pdf', 'application/octet-stream'):
         raise ValueError('unexpected HTTP status or content type')
     if response.headers.get('Content-Encoding', 'identity').lower() != 'identity':
@@ -150,6 +158,8 @@ def receive(response, destination, row, known):
     with destination.open('xb') as fh:
         while chunk := response.read(65536):
             n += len(chunk)
+            if budget is not None:
+                budget.observe_bytes(len(chunk))
             if n > CAP:
                 raise ValueError('size cap exceeded; partial retained')
             start = (start + chunk)[:8]; tail = (tail + chunk)[-2048:]
@@ -205,11 +215,13 @@ def main():
         try:
             transport.robots(row['url'])
             with transport.request(row['url']) as response:
-                rec.update(receive(response, output / (row['id'] + '.pdf'), row, known))
+                rec.update(receive(response, output / (row['id'] + '.pdf'), row, known, transport.budget))
             if rec.get('sha256'): known.add(rec['sha256'])
         except Exception as exc:
             rec.update(status='REVIEW_REQUIRED', error_type=type(exc).__name__)
-        report['records'].append(rec); save()
+        report['records'].append(rec)
+        report['attempts'] = transport.attempts
+        save()
     report['status'] = 'QUARANTINE_REVIEW_REQUIRED'; save()
     return 1  # no automatic acceptance, even on a clean fetch
 
