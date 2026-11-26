@@ -243,3 +243,5 @@
 {"id": "AFT-GUW-291", "url": "https://aftrbghy.nic.in/judgement/Judgment dated 13-06-2024/MA - 19 of 2024 WITH MA - 20 of 2024.pdf", "status": "eligible-local", "sha256": "c0233122d02acf7ca2f1af830a55ccad93c89c8702ae404f6c8d108f67eaa0e1", "pages": 2, "ocr": 2}
 {"id": "AFT-GUW-292", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_11_Mar_2025_OA_32_of_2022.pdf", "status": "eligible-local", "sha256": "935e016e8ddaa8ac4ed7e29f63093b1fcb210c077a35eebb099b9243ce8ceae9", "pages": 19, "ocr": 19}
 {"id": "AFT-GUW-293", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_16-07-2025_OA_18_of_2023.pdf", "status": "identity-review"}
+{"id": "AFT-GUW-294", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_17_Aug_2026.pdf", "status": "eligible-local", "sha256": "e4e457dcc097fdcfaaeb6bc9c3648ad8e79b2f33d4651c9d618d2edd2d40e0d1", "pages": 38, "ocr": 38}
+{"id": "AFT-GUW-295", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_18_Aug_2026.pdf", "status": "eligible-local", "sha256": "c2594fdbac44fabaad5a5b064d500d2f418b02f9fabbdfd6320262e9b6715b2a", "pages": 31, "ocr": 31}
