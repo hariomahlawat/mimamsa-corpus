@@ -1,0 +1,74 @@
+name: C14 cloud WP1 metadata only
+on:
+  pull_request:
+    paths:
+      - 'legal_knowledge/audit_work/C14-CA01-STATUTORY/runner/hf_metadata_cloud.py'
+      - 'tests/test_legal_audit_c14_cloud_metadata.py'
+      - '.github/workflows/c14-cloud-wp1.yml'
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Exact metadata-only operation
+        required: true
+        type: choice
+        options: [METADATA_GET_ONLY]
+      revision:
+        description: Exact approved HF dataset commit
+        required: true
+        type: string
+      code_commit:
+        description: Exact reviewed cloud branch commit
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  synthetic:
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'corpus/cloud-wp1-20261126'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -B -m unittest discover -s tests -p 'test_legal_audit_c14_cloud_metadata.py' -v
+  metadata:
+    # No live job on push, PR, scheduled event or rerun.
+    # Provision this dedicated protected environment before enabling.
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/corpus/cloud-wp1-20261126' && github.run_attempt == 1 && inputs.code_commit == github.sha && inputs.operation == 'METADATA_GET_ONLY' && inputs.revision == 'f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc'
+    environment: hf-corpus-metadata-read
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    concurrency:
+      group: c14-cloud-wp1-metadata
+      cancel-in-progress: false
+    steps:
+      - name: Verify environment activation
+        env:
+          WP1_CLOUD_ENABLED: ${{ vars.WP1_CLOUD_ENABLED }}
+        run: test "$WP1_CLOUD_ENABLED" = true
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Enumerate approved metadata only
+        env:
+          WP1_CLOUD_ENABLED: ${{ vars.WP1_CLOUD_ENABLED }}
+          HF_WP1_READ_TOKEN: ${{ secrets.HF_WP1_READ_TOKEN }}
+        run: |
+          python -I -B -c "import runpy,sys; from pathlib import Path; p=sys.argv.pop(1); sys.path.append(str(Path(p).parent)); runpy.run_path(p,run_name='__main__')" "$GITHUB_WORKSPACE/legal_knowledge/audit_work/C14-CA01-STATUTORY/runner/hf_metadata_cloud.py" --execute
+      - name: Retain filtered receipt in private repository only
+        if: always() && github.event.repository.private == true
+        uses: actions/upload-artifact@v4
+        with:
+          name: wp1-filtered-metadata-receipt
+          path: ${{ runner.temp }}/wp1-cloud/metadata_inventory.json
+          retention-days: 1
+          if-no-files-found: ignore
