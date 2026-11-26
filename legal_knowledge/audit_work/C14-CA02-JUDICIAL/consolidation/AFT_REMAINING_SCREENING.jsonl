@@ -882,3 +882,6 @@
 {"id": "AFT-GUW-930", "url": "https://aftrbghy.nic.in/judgement/OA_07_of_2024.pdf", "status": "marking-review", "page": 6}
 {"id": "AFT-GUW-931", "url": "https://aftrbghy.nic.in/judgement/OA_09_of_2024.pdf", "status": "eligible-local", "sha256": "deeeb9ddfaaea48fe880037bdb5bd05c22a157f98d74dae09bb794f5d5cab046", "pages": 14, "ocr": 14}
 {"id": "AFT-GUW-932", "url": "https://aftrbghy.nic.in/judgement/OA_09_of_2025.pdf", "status": "marking-review", "page": 5}
+{"id": "AFT-GUW-933", "url": "https://aftrbghy.nic.in/judgement/OA_10_of_2025.pdf", "status": "eligible-local", "sha256": "02c275ea26abfc10e59a3cf66c4e26308b4ef9d41f5bdd1a29e6202a53c1cdaf", "pages": 11, "ocr": 11}
+{"id": "AFT-GUW-934", "url": "https://aftrbghy.nic.in/judgement/OA_12-2021.pdf", "status": "eligible-local", "sha256": "13a6fbf30ecd4206d61ff16ec4c5a1a26fde257bc6cc3fa165597831868f90cf", "pages": 1, "ocr": 1}
+{"id": "AFT-GUW-935", "url": "https://aftrbghy.nic.in/judgement/OA_13_of_2022.pdf", "status": "eligible-local", "sha256": "402d3ea636ae7a597c8b2c8f80ceba9c5175eb15c963362a92bbdfce44646af7", "pages": 8, "ocr": 8}
