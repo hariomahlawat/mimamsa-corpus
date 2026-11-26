@@ -28,6 +28,7 @@
     "derivative_sha256": "4609360b1b9959c3df3657e257e19a7c31f875f5c3e3300420cebe8395bc2ffa",
     "page_count": 10,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -51,17 +52,20 @@
         ]
       ]
     ],
-    "status": "visual-false-positive-extraction-hold",
+    "status": "visual-false-positive-cleared-local",
     "visual_pages": [
       11
     ],
     "context": "Classification of educational institutions in cited reasoning",
-    "sparse_pages": [
-      29
-    ],
+    "derivative_sha256": "3431dbf96e9a88f473de0473c1053a98ee5e2c48b4718dc5e0a0882b5d01e89b",
+    "page_count": 29,
     "ocr_pages": [
       29
-    ]
+    ],
+    "verified_header_only_pages": [
+      29
+    ],
+    "hf_verified": false
   },
   {
     "doc_id": "hc-ph-2015-cwp-8338-2012-phhc010902392012-1-2015-03-17",
@@ -84,6 +88,7 @@
     "derivative_sha256": "a0badbb47d87ab094d9ab51f93ec31f16e230573df35f3447a639750ac51d1d3",
     "page_count": 2,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -107,6 +112,7 @@
     "derivative_sha256": "a4d2c345e56b3bac02e0da0659174bea9369c5a63f6438ed48c9542684b5c0c5",
     "page_count": 11,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -138,6 +144,7 @@
     "derivative_sha256": "cd2893cc2e189bd585c725ee447e31c583b88b56c5f337e5e9ba3d18a7af9dd1",
     "page_count": 5,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -219,6 +226,7 @@
     "derivative_sha256": "915a21b60cd787beeb2b0c762943000aef654aa86f3d630961c6220691c54d9a",
     "page_count": 9,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -242,6 +250,7 @@
     "derivative_sha256": "0a17ebc63599e5832a96a93df066b7d59a5df5c4d7e7284012a1e2fec73e1fdb",
     "page_count": 3,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -292,6 +301,7 @@
     "derivative_sha256": "55338990ee528e31cab7f5a4494c81d533b978f89412080fbdea5a469656337b",
     "page_count": 10,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -333,6 +343,7 @@
     "derivative_sha256": "f0760cd0b2594b30ac4fb55b7fd6c8e708215a9755550b6c33da71a254cf66d1",
     "page_count": 10,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -383,6 +394,7 @@
     "derivative_sha256": "2a4bd09194f60bb6550bc9d14481d036d739c5f0d04662ed5494e5c0bb9f7dd9",
     "page_count": 10,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -424,6 +436,7 @@
     "derivative_sha256": "9987f25d99e9f424c36abef530ccbbf77d3205d0bcd4d80dcca6c487cefdac02",
     "page_count": 10,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -474,6 +487,7 @@
     "derivative_sha256": "fbb9038a6b3cd83090e4a8a1bea4b8d1aa16ce0c48e703bdad8c0b8917b2782e",
     "page_count": 9,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -524,6 +538,7 @@
     "derivative_sha256": "06b91535c17dd92b5963d4ce8e91ae776add00e28b98e1bb171d3be820b5cae9",
     "page_count": 9,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -547,6 +562,7 @@
     "derivative_sha256": "db52d8bd0b616bdc2125e3b8b9c98fbed0fcd90570145a5c166ca30cd4c2fc08",
     "page_count": 4,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -579,6 +595,7 @@
     "derivative_sha256": "f149711ce3cd02c7625b47969753c8498bf61072803a76e0ca0f4f37b361d8d9",
     "page_count": 8,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -611,6 +628,7 @@
     "derivative_sha256": "0aa4ba615e5aa2bd868737ffdf24e3fb0b760e6f74f34e9d83f00043598fca35",
     "page_count": 8,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -643,6 +661,7 @@
     "derivative_sha256": "b8a746d3ffe14c9ca360e209b05ac1a1dad5c24ab714df0b7dd0c34204799b94",
     "page_count": 8,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -675,6 +694,7 @@
     "derivative_sha256": "57a8b3404bc90e84ba4b6f02ac62429bb01a1587fd6cd85f275fc69133ae6b54",
     "page_count": 9,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -707,6 +727,7 @@
     "derivative_sha256": "a8dc9052e19c94e9c48622d5cd905a3c00917067ad0afcd9e684fd78db9241d3",
     "page_count": 8,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -739,6 +760,7 @@
     "derivative_sha256": "93b6efbe36bbf12c9981f57f99080deedbad893a07c5e7397b6479115f7ebffd",
     "page_count": 9,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -771,6 +793,7 @@
     "derivative_sha256": "544c66f5d93caf243b8f776df6091fc33a39d0d5da8cc2179acc63f4e337f868",
     "page_count": 8,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -839,6 +862,7 @@
     "derivative_sha256": "3a66927e75a4f59962437037c49bd99bf9dc4d852b957147251e56fd5ce554bb",
     "page_count": 8,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -871,6 +895,7 @@
     "derivative_sha256": "01538085ab93dde981b0c247dd1ee441237859ae6cae475eb9d9b10121a5fc0b",
     "page_count": 8,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -903,6 +928,7 @@
     "derivative_sha256": "dd5325a7b7ff85d3ce89f8d5b23b45edc45886928e971980e0ad72e8a842fa36",
     "page_count": 8,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -935,6 +961,7 @@
     "derivative_sha256": "d8334f791a7b25dea9aa5249dbd6a8992edf6149eba1b813e03f6cb41b8b88f7",
     "page_count": 8,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -966,6 +993,7 @@
     "derivative_sha256": "349523f749efb0f7b8f29d67a96e24c00f6e9eceecf4ed0c6f8c6a5565f11de5",
     "page_count": 8,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -997,6 +1025,7 @@
     "derivative_sha256": "bae5b09942acb6fa355c847823373072674175ea0ca8b63fb94dc46b57c20131",
     "page_count": 5,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1028,6 +1057,7 @@
     "derivative_sha256": "20830bff49c123b310a7e71a844b8f065267e9b2702de4206853c1091a84b3de",
     "page_count": 4,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1051,6 +1081,7 @@
     "derivative_sha256": "3ef12cc0577fd61d32ef5a44082fdc51a35e1cf5716da70554613628907763a7",
     "page_count": 7,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1082,6 +1113,7 @@
     "derivative_sha256": "44e5a89f61eed1c7e975d403085d82c406e8a2f49032b7d41b0da07c449b6584",
     "page_count": 22,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1131,6 +1163,7 @@
     "derivative_sha256": "60fc6e1e69827c50587ca754f92af7925c261a1903b14a51798174a9f7156bf2",
     "page_count": 27,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1162,6 +1195,7 @@
     "derivative_sha256": "a51b850eff17f0cd9a250d4e2cc291492a350faeedd512990169b05eb21cc3ca",
     "page_count": 29,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1193,6 +1227,7 @@
     "derivative_sha256": "116839efcbcfd3a61e46e60c49c7c36cffcd22834a03372504d494b428fa7261",
     "page_count": 2,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1224,6 +1259,7 @@
     "derivative_sha256": "c016e1df048e0f21262cca0952616b8a3b88bea43e39c53565fb132dd88e3cf4",
     "page_count": 17,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1300,6 +1336,7 @@
     "derivative_sha256": "90c9c91573acd669c087f30bc842e656380c3c10c49b43f48794e68316ab9595",
     "page_count": 32,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1332,6 +1369,7 @@
     "derivative_sha256": "a7da308e1c4b265e22c67e925921062ba104d73c16d7e22ad3ace7b2746d5e28",
     "page_count": 8,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1364,6 +1402,7 @@
     "derivative_sha256": "26714a704976d8d43adab232ae9c787a07176619bcfabae95206ac88e75c68c7",
     "page_count": 35,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1387,6 +1426,7 @@
     "derivative_sha256": "cbe30f50eb7c0e23a89e96972e3801d7304fbd7343f413e693adb68a61103669",
     "page_count": 24,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1427,6 +1467,7 @@
     "derivative_sha256": "a731a0e9d8455c683946adec2316738cffe8864a8c29990d0beadc8426789c56",
     "page_count": 40,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1498,6 +1539,7 @@
     "derivative_sha256": "21533befc80cd5243fe0f4db53426e2099da1f7f9e0dbc8bde3edb9f2fb36dec",
     "page_count": 20,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1529,6 +1571,7 @@
     "derivative_sha256": "979e3c35df7ea932be1935ede3e8a5d0b2f852bf358ad12420eb629d58bed7ba",
     "page_count": 10,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1607,6 +1650,7 @@
       27,
       28
     ],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1654,6 +1698,7 @@
     "derivative_sha256": "db8b687d9324ff3adbc7a84919161a477e530a223d98dca6a80a40383e222af8",
     "page_count": 23,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   },
   {
@@ -1685,6 +1730,7 @@
     "derivative_sha256": "a1101a139c7bd9e29de9645423c900f79133021760a816cd343145ef8d89a71f",
     "page_count": 3,
     "ocr_pages": [],
+    "verified_header_only_pages": [],
     "hf_verified": false
   }
 ]
