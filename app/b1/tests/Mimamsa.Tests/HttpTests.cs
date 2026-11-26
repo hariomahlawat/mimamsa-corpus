@@ -17,11 +17,22 @@ public sealed class ServiceFixture : IAsyncLifetime
 
     public static string RegisterPath => Path.GetFullPath(Path.Combine(WebDir(), "..", "..", "..", "..", "config", "restricted_material.json"));
 
+    /// `dotnet <dll>` for the service under test. The DLL path goes through ArgumentList, which quotes it, so a
+    /// checkout under a path containing spaces works (a single argument string was split at the first space).
+    public static ProcessStartInfo ServiceStartInfo(string dll, string workingDirectory)
+    {
+        var psi = new ProcessStartInfo(Environment.GetEnvironmentVariable("DOTNET_HOST_PATH") ?? "dotnet")
+        { WorkingDirectory = workingDirectory, RedirectStandardOutput = true, RedirectStandardError = true, UseShellExecute = false };
+        psi.ArgumentList.Add(dll);
+        return psi;
+    }
+
+    static ProcessStartInfo ServiceStartInfo() => ServiceStartInfo(Path.Combine(AppContext.BaseDirectory, "Mimamsa.Web.dll"), WebDir());
+
     /// Start the service with the given extra settings and return (exit code, output) once it exits (or -1 if healthy).
     public static async Task<(int code, string output)> StartExpectingExit(Dictionary<string, string> env)
     {
-        var psi = new ProcessStartInfo(Environment.GetEnvironmentVariable("DOTNET_HOST_PATH") ?? "dotnet", Path.Combine(AppContext.BaseDirectory, "Mimamsa.Web.dll"))
-        { WorkingDirectory = WebDir(), RedirectStandardOutput = true, RedirectStandardError = true, UseShellExecute = false };
+        var psi = ServiceStartInfo();
         var l = new System.Net.Sockets.TcpListener(IPAddress.Loopback, 0); l.Start(); int port = ((IPEndPoint)l.LocalEndpoint).Port; l.Stop();
         psi.Environment["ASPNETCORE_URLS"] = $"http://127.0.0.1:{port}";
         psi.Environment["Mimamsa__Site"] = Syn.Site;
@@ -45,8 +56,7 @@ public sealed class ServiceFixture : IAsyncLifetime
         var db = Environment.GetEnvironmentVariable("MIMAMSA_TEST_DB") ?? throw new InvalidOperationException("MIMAMSA_TEST_DB (Npgsql DSN of a disposable database) is required");
         var l = new System.Net.Sockets.TcpListener(IPAddress.Loopback, 0); l.Start(); int port = ((IPEndPoint)l.LocalEndpoint).Port; l.Stop();
         Base = $"http://127.0.0.1:{port}";
-        var psi = new ProcessStartInfo(Environment.GetEnvironmentVariable("DOTNET_HOST_PATH") ?? "dotnet", Path.Combine(AppContext.BaseDirectory, "Mimamsa.Web.dll"))
-        { WorkingDirectory = WebDir(), RedirectStandardOutput = true, RedirectStandardError = true, UseShellExecute = false };
+        var psi = ServiceStartInfo();
         foreach (var (k, v) in new Dictionary<string, string>
         {
             ["ASPNETCORE_URLS"] = Base, ["Mimamsa__Site"] = Syn.Site, ["Mimamsa__Db"] = db, ["Mimamsa__Test__Enabled"] = "true",
