@@ -85,3 +85,25 @@ jobs:
           echo "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1  legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl" > /tmp/originals.sha256
           echo "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a  legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl" >> /tmp/originals.sha256
           sha256sum -c /tmp/originals.sha256
+  c14-pipeline-windows-synthetic:
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.ref == 'corpus/c14-ca03-adoption-gate' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify candidate workflow on disposable Windows fixtures
+        run: |
+          python -m pip install --disable-pip-version-check "pymupdf==2.1" "pdfplumber==0.11.11" "PyYAML==6.0.4" "jsonschema==4.26.0"
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          git rev-parse HEAD
+          python -c "import sys,platform,sqlite3,pymupdf; print(sys.version); print(platform.platform()); print(pymupdf.VersionBind, sqlite3.sqlite_version)"
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python -B -m unittest discover -s legal_knowledge/audit_work/C14-CA03-PIPELINE -p "test_*.py" -v
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python -B -m unittest discover -s tests -p "test_legal_audit_c14_*.py" -v
