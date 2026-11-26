@@ -10,13 +10,13 @@
     "verified": 986
   },
   "all_job_statuses": {
-    "marking-review": 41,
-    "verified-local": 298,
+    "marking-review": 42,
+    "verified-local": 357,
     "sparse-page-review": 1,
     "HTTPError": 5
   },
-  "extended_uploads": 299,
-  "pending_jobs": 885,
+  "extended_uploads": 358,
+  "pending_jobs": 825,
   "official_pilot": [
     {
       "id": "AFT-GUW-1",
