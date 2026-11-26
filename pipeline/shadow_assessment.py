@@ -5,7 +5,7 @@ import json
 import re
 from pathlib import Path
 
-VERSION = 'c14-shadow-v1'
+VERSION = 'c14-shadow-v2'
 MAX_BYTES = 50_000_000
 MAX_PAGES = 500
 
@@ -36,13 +36,23 @@ def assess(root, meta, *, decide_fn=None, quality_fn=None):
     Native extraction only. OCR results, verified blank-page exemptions and
     legal/research release eligibility are deliberately not adopted here.
     """
-    result = {'version': VERSION, 'doc_id': meta['doc_id'], 'source_sha256': meta['sha256'],
-              'metadata_sha256': sha(json.dumps(meta, sort_keys=True, ensure_ascii=False).encode('utf-8')),
+    result = {'version': VERSION, 'doc_id': None, 'source_sha256': None,
+              'metadata_sha256': None, 'eligible_for_documentary_review': False,
               'source_integrity': 'UNVERIFIED', 'pages': [], 'research_eligible': False,
               'relevance': 'EXTRACTION_FAILED', 'text_sha256': None, 'reasons': []}
     try:
+        if not isinstance(meta, dict) or not isinstance(meta.get('doc_id'), str) or not meta['doc_id'].strip():
+            raise ValueError('invalid metadata identity')
+        if not isinstance(meta.get('sha256'), str) or not re.fullmatch(r'[0-9a-f]{64}', meta['sha256']):
+            raise ValueError('invalid source hash')
+        result.update(doc_id=meta['doc_id'], source_sha256=meta['sha256'],
+                      metadata_sha256=sha(json.dumps(meta, sort_keys=True, ensure_ascii=False, allow_nan=False).encode('utf-8')))
         raw = bind_raw(root, meta['raw_path'], meta['sha256'])
         import pymupdf
+        result['renderer_version'] = str(pymupdf.VersionBind)
+        result['visual_concordance'] = 'NOT_INDEPENDENTLY_VALIDATED'
+        result['classifier_mode'] = 'default_c13' if decide_fn is None else 'injected_test'
+        result['quality_mode'] = 'default_c13' if quality_fn is None else 'injected_test'
         if decide_fn is None:
             from .relevance_states import decide as decide_fn
         if quality_fn is None:
@@ -63,6 +73,13 @@ def assess(root, meta, *, decide_fn=None, quality_fn=None):
                 letters = [c for c in txt if c.isalpha()]
                 if not letters or sum(c.isascii() for c in letters) / len(letters) < 0.95:
                     flags.append('language_or_script_not_validated')
+                # Conservative candidate checks: drawings can carry unextracted text;
+                # invisible or transparent text can pass lexical checks while not rendering.
+                if page.get_drawings():
+                    flags.append('vector_content_not_validated')
+                for span in page.get_texttrace():
+                    if span.get('type') == 3 or span.get('opacity', 1) < 1:
+                        flags.append('hidden_or_transparent_text')
                 if page.get_image_info():
                     flags.append('image_content_not_validated')
                 if not txt.strip():
@@ -77,15 +94,21 @@ def assess(root, meta, *, decide_fn=None, quality_fn=None):
             quality = {'verdict': 'TEXT_OK' if complete else 'OCR_REQUIRED', 'unusable_pages': bad,
                        'usable_share': (len(texts) - len(bad)) / len(texts)}
             # Count mismatch is independent of classifier evidence and blocks negative conclusions.
-            decision = decide_fn(text=full, quality=quality, truncated=truncated, ocr_done=False,
+            classifier_text = '\n'.join(texts)
+            result['classifier_text_sha256'] = sha(classifier_text.encode('utf-8'))
+            decision = decide_fn(text=classifier_text, quality=quality, truncated=truncated, ocr_done=False,
                                  ocr_quality_ok=complete, title=meta.get('title'))
             state = decision['state']
-            if state == 'IRRELEVANT' and not complete:
-                state = 'INSUFFICIENT_TEXT'
+            # No native-text heuristic proves visual concordance. Until a separate
+            # source-bound visual adjudication exists, never issue a negative finding.
+            if state == 'IRRELEVANT':
+                state = 'INSUFFICIENT_TEXT' if not complete else 'MANUAL_REVIEW_REQUIRED'
+            result['classifier_candidate_state'] = decision['state']
             result.update(relevance=state, complete_native_evidence=complete,
                           metadata_page_count_matches=count_ok,
                           reasons=list(decision.get('reasons', [])),
-                          eligible_for_documentary_review=complete and state == 'RELEVANT')
+                          eligible_for_documentary_review=False)
+            result['reasons'].append('visual concordance not independently validated; no negative or documentary eligibility')
             if not count_ok:
                 result['reasons'].append('metadata page count missing or mismatched')
             if truncated:
