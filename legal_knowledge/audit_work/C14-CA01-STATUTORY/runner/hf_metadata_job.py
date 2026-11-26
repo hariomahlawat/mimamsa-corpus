@@ -8,12 +8,13 @@ from __future__ import annotations
 import hashlib
 import http.client
 import json
+import os
 import ssl
 import subprocess
 import sys
 from pathlib import Path
 from urllib.parse import urlsplit,parse_qsl
-from hf_inventory_metadata import REPO, STORES, HEX40
+from hf_inventory_metadata import REPO, STORES, HEX40, HEX64, path_in_store
 from hf_inventory_provider import inventory, ENDPOINT
 from hf_metadata_transport import MetadataAPI, MAX_SECONDS, MAX_CURSOR
 
@@ -143,6 +144,62 @@ def supervise(command, *, seconds=HARD_SECONDS):
     return result
 
  
+def save_candidate_receipt(result,*,revision,restricted,job_dir):
+    """Write only a verified, non-promotable metadata receipt.
+
+    job_dir must already be a new privately ACL-protected owner directory.
+    Path and exclusive-create checks here do not prove native ACL isolation.
+    No replacement, upload or console dump.
+    """
+    if not isinstance(result,dict) or result.get('revision')!=revision or not HEX40.fullmatch(revision):
+        raise ValueError('receipt revision mismatch')
+    fields={'revision','coverage_of_supplied_scope','scope_independently_attested',
+            'acquisition_eligible','required_stores','unlisted_stores','counts','missing',
+            'invalid','claims','known_sha256','limits','inventory_sha256',
+            'provider_entries_seen','restricted_excluded_count','unhashed_unclassified_pdf_count',
+            'enumeration_failures','local_store_coverage','provider','source_downloads',
+            'hf_writes','tree_entries_seen','root_scope_matches','register_git_blob','guard_git_blob',
+            'metadata_requests','metadata_response_bytes'}
+    if set(result)!=fields or any(result[k] is not False for k in ('scope_independently_attested','acquisition_eligible')):
+        raise ValueError('receipt contract mismatch')
+    if (result['register_git_blob']!=REGISTER_BLOB or result['guard_git_blob']!=GUARD_BLOB
+            or result['provider']!='BOUNDED_HF_METADATA_PROTOCOL'
+            or result['required_stores']!=sorted(STORES)
+            or result['local_store_coverage']!='NOT_ATTESTED'
+            or type(result['hf_writes']) is not int or result['hf_writes']!=0
+            or type(result['source_downloads']) is not int or result['source_downloads']!=0):
+        raise ValueError('receipt provenance mismatch')
+    body=dict(result)
+    digest=body.pop('inventory_sha256')
+    if digest!=hashlib.sha256(json.dumps(body,sort_keys=True,ensure_ascii=False).encode()).hexdigest():
+        raise ValueError('receipt digest mismatch')
+    for kind in ('claims','missing','invalid'):
+        for row in result[kind]:
+            store,path=row['store'],row['path']
+            if store not in STORES or not path_in_store(path,store) or restricted(path=path,sha256=row.get('sha256')):
+                raise ValueError('receipt contains unapproved identity')
+    for digest in result['known_sha256']:
+        if not isinstance(digest,str) or not HEX64.fullmatch(digest) or restricted(sha256=digest):
+            raise ValueError('unapproved digest in receipt')
+    if result['known_sha256']!=sorted(set(row['sha256'] for row in result['claims'])):
+        raise ValueError('receipt digest index mismatch')
+    raw=json.dumps(result,sort_keys=True,ensure_ascii=False,allow_nan=False).encode('utf-8')+b'\n'
+    if len(raw)>MAX_RECEIPT:
+        raise ValueError('receipt exceeds output budget')
+    job=Path(job_dir).absolute()
+    if job.resolve()!=job or not job.is_dir() or any(job.iterdir()):
+        raise ValueError('fresh protected job directory required')
+    path=job/'metadata_inventory.json'
+    with path.open('xb') as out:
+        out.write(raw)
+        out.flush()
+        os.fsync(out.fileno())
+    return {'receipt_sha256':hashlib.sha256(raw).hexdigest(),
+            'inventory_sha256':result['inventory_sha256'],
+            'coverage_of_supplied_scope':result['coverage_of_supplied_scope'],
+            'acquisition_eligible':False}
+
+
 def candidate_worker(root,revision,token):
     """Reviewed worker body, not an authorised entry point.
 
