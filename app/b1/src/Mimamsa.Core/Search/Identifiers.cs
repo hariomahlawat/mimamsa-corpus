@@ -21,6 +21,23 @@ public static partial class Identifiers
     private static partial Regex ReportedRx();
     [GeneratedRegex(@"(?<t>\b[A-Z][A-Za-z]{0,14}\.?(?:\s?\(?[A-Za-z]{1,6}\)?\.?){0,3})\s*(?:No\.?\s*)?(?<n>\d{1,6})\s*(?:/|\s+of\s+)\s*(?<y>(?:19|20)\d{2})\b")]
     private static partial Regex CaseRx();
+    // C14 WP1: AIR ("AIR 1987 SC 2386") and SCALE ("2013 (7) SCALE 123") reports.
+    [GeneratedRegex(@"\bAIR\s*(?<y>(?:19|20)\d{2})\s*(?<c>S\.?\s?C\.?|[A-Z][A-Za-z&]{1,14})\s*(?<p>\d{1,5})\b")]
+    private static partial Regex AirRx();
+    [GeneratedRegex(@"\b(?<y>(?:19|20)\d{2})\s*\(\s*(?<v>\d{1,2})\s*\)\s*SCALE\s*(?<p>\d{1,5})\b", RegexOptions.IgnoreCase)]
+    private static partial Regex ScaleRx();
+
+    static IEnumerable<Match> ReportedMatches(string q) =>
+        ReportedRx().Matches(q).Concat(AirRx().Matches(q)).Concat(ScaleRx().Matches(q)).OrderBy(m => m.Index);
+
+    /// Reported citations printed in the masthead of page 1 (the first 600 characters: report name, volume, page).
+    /// Captured as candidate parallel citations of the judgment itself; later text on page 1 may cite other cases,
+    /// so it is not read. Extracted, not verified.
+    public static IEnumerable<string> MastheadCitations(string page1)
+    {
+        var head = page1.Length > 600 ? page1[..600] : page1;
+        foreach (var m in ReportedMatches(head)) yield return NormCitation(m.Value);
+    }
 
     static readonly Dictionary<string, string> CaseTypes = new()
     {
@@ -60,12 +77,13 @@ public static partial class Identifiers
     {
         var ids = new List<QueryIdentifier>();
         bool Overlaps(int s, int e) => ids.Any(x => s < x.End && e > x.Start);
-        foreach (Match m in NeutralRx().Matches(q))
-            if (m.Groups["r"].Value is not ("AND" or "OR" or "NOT" or "NEAR"))
-                ids.Add(new QueryIdentifier(IdKind.NeutralCitation, m.Value, NormCitation(m.Value), m.Index, m.Index + m.Length));
-        foreach (Match m in ReportedRx().Matches(q))
+        // Reported citations first, so "AIR 1987 SC 2386" is not read as the neutral citation "1987 SC 2386".
+        foreach (Match m in ReportedMatches(q))
             if (!Overlaps(m.Index, m.Index + m.Length))
                 ids.Add(new QueryIdentifier(IdKind.ReportedCitation, m.Value, NormCitation(m.Value), m.Index, m.Index + m.Length));
+        foreach (Match m in NeutralRx().Matches(q))
+            if (m.Groups["r"].Value is not ("AND" or "OR" or "NOT" or "NEAR") && !Overlaps(m.Index, m.Index + m.Length))
+                ids.Add(new QueryIdentifier(IdKind.NeutralCitation, m.Value, NormCitation(m.Value), m.Index, m.Index + m.Length));
         foreach (Match m in CaseRx().Matches(q))
         {
             if (Overlaps(m.Index, m.Index + m.Length)) continue;
