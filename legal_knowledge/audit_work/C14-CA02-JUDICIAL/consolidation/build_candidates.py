@@ -64,8 +64,9 @@ def main():
     if args.consolidation:
         live = args.consolidation.resolve()
         retry = live/'judicial-retry'
-        extra_folders = [retry/'extended-files', live/'staged-upload'/'official-files']
-        receipts.append(json.loads((live/'staged-upload'/'official-upload.json').read_bytes()))
+        staging_receipts = sorted(live.glob('staged-upload*/official-upload.json'))
+        extra_folders = [retry/'extended-files']+[p.parent/'official-files' for p in staging_receipts]
+        receipts.extend(json.loads(p.read_bytes()) for p in staging_receipts)
         journal = rows(retry/'extended.jsonl')
         verified = {r['revision'] for r in journal if r.get('verified')}
         attempted = {r[2]:r[0] for batch in journal for r in batch.get('result',[])

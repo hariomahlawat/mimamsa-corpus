@@ -2,12 +2,12 @@
   "schema": "mimamsa-c14-candidate-package-v1",
   "active_import_allowed": false,
   "counts": {
-    "candidate_records": 1083,
-    "physical_pages": 4310,
-    "citation_mentions": 139,
+    "candidate_records": 1278,
+    "physical_pages": 5632,
+    "citation_mentions": 206,
     "unbound_or_partial_page_map": 58,
     "local_pair_missing": 3,
-    "search_hits_for_court": 2353
+    "search_hits_for_court": 3108
   },
   "restriction_register_sha256": "fc7ea07e62e7e41f348639973f19187540593e7b3237933758f64e865b95b2b6",
   "skips": [
@@ -373,7 +373,7 @@
     }
   ],
   "files": {
-    "records.jsonl": "d30edb26c204a389e7d926495f7c8658bc482978fbdf0ba473680ac82b4b2369",
-    "search.sqlite": "2ea09de8c238dc7f7f3de236754a8d9ee4119a527d7a75348785eae9db990f3d"
+    "records.jsonl": "768f6434cfd32d10dc994bd6484b5b1b3a28129b4ae1a935d0f3636723baf188",
+    "search.sqlite": "294cc59ade55e5545ab4a934b69fe3aab405363cd548220edda4b6a847f88c91"
   }
 }

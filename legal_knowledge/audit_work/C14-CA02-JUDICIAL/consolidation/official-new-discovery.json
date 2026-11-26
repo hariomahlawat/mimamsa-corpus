@@ -1,0 +1,121 @@
+{
+  "schema": "c14-official-new-discovery-v1",
+  "checked_utc_date": "2026-11-26",
+  "scope": "Official source discovery only. Methods limited to robots GET, small public index GET and document HEAD when the robots check permitted it. No credentials, form submissions, PDF bodies, or acquisitions.",
+  "policy": "An explicit origin 404 for robots.txt is treated as the absent policy response used in the Guwahati AFT rollout. A 403, 5xx, transport failure or ambiguous non-robots HTML response holds subsequent automated access. HTTP observations identify only the response received by the runner and do not establish reuse rights or document identity.",
+  "sources": [
+    {
+      "name": "Armed Forces Tribunal Regional Bench Chandigarh daily orders",
+      "priority": "P1",
+      "official_provenance": "https://aftjaipur.gov.in/pages/benches-of-aft lists www.aftchd.in as the Chandigarh bench website. The bench site itself links the order-search service.",
+      "url": "https://aftchd.in/Daily_orders.html",
+      "policy_url": "https://aftchd.in/robots.txt",
+      "policy_status": "404 text/html, explicit IIS file or directory not found",
+      "http_observables": [
+        {"url": "https://aftchd.in/", "method": "GET", "status": 200, "content_type": "text/html", "bytes": 38331},
+        {"url": "https://aftchd.in/RBenches.html", "method": "GET", "status": 200, "content_type": "text/html", "bytes": 19741},
+        {"url": "https://aftchd.in/Daily_orders.html", "method": "GET", "status": 200, "content_type": "text/html", "bytes": 15396},
+        {"url": "http://202.164.35.189:324/robots.txt", "method": "GET", "status": 404, "content_type": "text/html", "bytes": 1245, "note": "Explicit IIS file or directory not found on independently checked official order service origin"},
+        {"url": "http://202.164.35.189:324/ordersearchlist.html", "method": "GET", "status": 200, "content_type": "text/html", "bytes": 14320},
+        {"url": "http://202.164.35.189:324/searchorderonline.aspx", "method": "GET", "status": 200, "content_type": "text/html; charset=utf-8", "bytes": 6993, "note": "Public Daily Orders form with court selector including Larger Bench. Title says online Registration. No login, form submission or target PDF retrieval."}
+      ],
+      "disposition": "Reachable new public official judgment/order discovery route. Search results and document integrity unverified. Backend is HTTP, so subsequent evidence needs independent identity and integrity checks."
+    },
+    {
+      "name": "Controller of Defence Accounts Guwahati Army pension regulations Part I",
+      "priority": "P1",
+      "url": "https://www.cdaguwahati.gov.in/pages/books/Pension%20Regulation%20army%20Pt-I.pdf",
+      "policy_url": "https://www.cdaguwahati.gov.in/robots.txt",
+      "policy_status": "404 text/html, explicit IIS file or directory not found",
+      "http_observables": [
+        {"method": "HEAD", "status": null, "proxy_connect_status": 403, "curl_exit": 56},
+        {"method": "HEAD", "status": 200, "content_type": "application/pdf", "content_length": 750383, "last_modified": "Mon, 06 Apr 2026 07:16:55 GMT", "etag": "\"80cd1a5995c5dc1:0\""},
+        {"method": "HEAD", "status": 200, "content_type": "application/pdf", "content_length": 750383},
+        {"url": "https://www.cdaguwahati.gov.in/", "method": "GET", "status": 403, "content_type": "text/plain", "bytes": 33},
+        {"url": "https://www.cdaguwahati.gov.in/pages/books/", "method": "GET", "status": 403, "content_type": "text/plain", "bytes": 33}
+      ],
+      "official_provenance": "Official CDA government host. Its indexed syllabus https://www.cdaguwahati.gov.in/pages/docs/syllabus.pdf refers to the Part I and Part II regulations but was not established as the PDF's direct parent index.",
+      "disposition": "Reachable direct official PDF candidate. Exact edition, contents, rights/reuse context, and a working parent index remain unverified."
+    },
+    {
+      "name": "Controller General of Defence Accounts Army pension regulations Part II",
+      "priority": "P2",
+      "url": "https://cgda.gov.in/audit/Part-II.pdf",
+      "policy_url": "https://cgda.gov.in/robots.txt",
+      "policy_status": "503 text/plain, upstream connection timeout. www.cgda.gov.in also returned 503.",
+      "http_observables": [],
+      "disposition": "Hold automated access pending policy recovery."
+    },
+    {
+      "name": "Army Rules consolidated official AFT editions and 2010 Rule 13 amendment locator",
+      "priority": "P2",
+      "url": "https://aft.gov.in/public/upload_act_rule_document/1743584005.pdf",
+      "policy_url": "https://aft.gov.in/robots.txt",
+      "policy_status": "503 text/plain, upstream connection timeout",
+      "alternate_endpoints": [
+        {"url": "https://www.aftdelhi.nic.in/assets/Act%20and%20Rules/Army%20Rules%201954.pdf", "policy_url": "https://www.aftdelhi.nic.in/robots.txt", "policy_status": "503 text/plain"},
+        {"url": "https://www.aftdelhi.nic.in/benches/chandigarh_bench/judgments/court_1/march2013/OA%201461%20of%202011.pdf", "policy_url": "https://www.aftdelhi.nic.in/robots.txt", "policy_status": "503 text/plain", "note": "Official judgment search metadata locates the Rule 13 amendment as S.R.O. 22 dated 13 May 2010. Use as a Gazette lookup key."}
+      ],
+      "http_observables": [],
+      "disposition": "Official indexed locators. Hold document requests. The original Gazette source for Rule 13 remains unresolved."
+    },
+    {
+      "name": "Historical Gazette of India Central Secretariat Library and National Archives",
+      "priority": "P2",
+      "url": "https://www.csl.nic.in/page/innerpage/gazette-of-india.php",
+      "policy_url": "https://www.csl.nic.in/robots.txt",
+      "policy_status": "503 text/plain. csl.nic.in also returned 503.",
+      "alternate_endpoints": [
+        {"url": "https://www.nationalarchives.nic.in/en/online-portal-abhilekh-patal", "policy_url": "https://www.nationalarchives.nic.in/robots.txt", "policy_status": "503 text/plain. nationalarchives.nic.in also returned 503."},
+        {"url": "https://www.abhilekh-patal.in/jspui/", "policy_url": "https://www.abhilekh-patal.in/robots.txt", "policy_status": "202 text/html with no recognizable directives"},
+        {"url": "https://egazette.gov.in/", "policy_url": "https://egazette.gov.in/robots.txt", "policy_status": "503 text/plain. Legacy NIC hostname returned proxy CONNECT 403 and curl exit 56."}
+      ],
+      "http_observables": [],
+      "disposition": "Official archive metadata says CSL digitized the 1950–2002 Gazette and supplied it to the Department of Publication. National Archives lists India Gazette holdings from 1864. No reachable matching historical amendment Gazette or authenticated portal used."
+    },
+    {
+      "name": "Guide to Medical Officers 2023",
+      "priority": "P2",
+      "url": "https://desw.gov.in/sites/default/files/2026-10/GMO%202023.pdf",
+      "policy_url": "https://desw.gov.in/robots.txt",
+      "policy_status": "403 text/html, explicit Forbidden",
+      "alternate_endpoints": [
+        {"url": "https://www.pib.gov.in/Pressreleaseshare.aspx?PRID=1965125&lang=2&reg=48", "policy_url": "https://www.pib.gov.in/robots.txt", "policy_status": "200 text/html with title Untitled Page and no recognizable directives", "note": "Official Ministry of Defence press brief identifies the Guide and issuance context only."}
+      ],
+      "http_observables": [],
+      "disposition": "Hold DESW automated access. No independently reachable official Guide text surfaced."
+    },
+    {
+      "name": "AFT Jabalpur legacy link",
+      "priority": "Exclude",
+      "url": "https://aftjabalpur.in/",
+      "policy_url": "https://aftjabalpur.in/robots.txt",
+      "policy_status": "200 text/plain, wildcard disallows wp-admin and permits wp-admin/admin-ajax.php",
+      "http_observables": [{"method": "GET", "status": 200, "content_type": "text/html; charset=UTF-8", "size_limit": 196608, "curl_exit": 63, "note": "Homepage title and links show an unrelated online sportsbook/casino."}],
+      "disposition": "Exclude this hostname despite the legacy link on the Chandigarh bench directory."
+    },
+    {
+      "name": "Other official AFT regional bench routes",
+      "priority": "P3",
+      "url": "https://aft.gov.in/reg-benches",
+      "policy_url": "https://aft.gov.in/robots.txt",
+      "policy_status": "503 text/plain",
+      "alternate_endpoints": [
+        {"url": "https://aftjaipur.gov.in/pages/benches-of-aft", "policy_url": "https://aftjaipur.gov.in/robots.txt", "policy_status": "503 text/plain"},
+        {"url": "https://www.aftkolkata.nic.in/", "policy_url": "https://www.aftkolkata.nic.in/robots.txt", "policy_status": "503 text/plain"},
+        {"url": "https://aftlko.up.nic.in/", "policy_url": "https://aftlko.up.nic.in/robots.txt", "policy_status": "503 text/plain"}
+      ],
+      "http_observables": [],
+      "disposition": "Listed official endpoints held on robots. No official independent regional origin confirmed for Chennai, Kochi or Mumbai."
+    },
+    {
+      "name": "Ministry of Defence acts and rules public website",
+      "priority": "P3",
+      "url": "https://www.mod.gov.in/dod/acts-rules",
+      "policy_url": "https://www.mod.gov.in/robots.txt",
+      "policy_status": "200 text/plain, User-agent * Allow /",
+      "http_observables": [{"method": "GET", "status": 200, "content_type": "text/html; charset=utf-8", "bytes": 9003}],
+      "disposition": "Reachable client-rendered page shell without any matched rule, Gazette, pension or Guide link in the bounded index response."
+    }
+  ]
+}
