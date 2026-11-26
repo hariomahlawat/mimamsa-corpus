@@ -252,3 +252,8 @@
 {"id": "AFT-GUW-300", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_20_Aug_2026.pdf", "status": "eligible-local", "sha256": "f51963a5e7da3c5b4000b83f6fdfa414b9028843d14ad14e71ff8809a654d71d", "pages": 13, "ocr": 13}
 {"id": "AFT-GUW-301", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_21_02_2025.pdf", "status": "marking-review", "page": 19}
 {"id": "AFT-GUW-302", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_21_02_2025_S.pdf", "status": "eligible-local", "sha256": "3e1a81d184b4a8cf4408f57fbed2ac75d2c3510f086cd7ba5b6d7758b98281e0", "pages": 5, "ocr": 5}
+{"id": "AFT-GUW-303", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_28_Sep_2026_OA_11_of_2020.pdf", "status": "marking-review", "page": 2}
+{"id": "AFT-GUW-304", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_30_Mar_2026_OA_13_of_2025.pdf", "status": "marking-review", "page": 7}
+{"id": "AFT-GUW-305", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_Sup_Cause_list_dated_19_Aug_2026.pdf", "status": "eligible-local", "sha256": "4518b55a51fd668209ff35a5ecb172726d44d1d917771e9542134f5651943e26", "pages": 9, "ocr": 9}
+{"id": "AFT-GUW-306", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_Sup_Cause_list_dated_20_Aug_2026.pdf", "status": "eligible-local", "sha256": "1f7cb84ba807740c085ec7ec037ca56d41e6770e0dcce650fa42657265dd1f4b", "pages": 3, "ocr": 3}
+{"id": "AFT-GUW-307", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_Sup_Cause_list_dated_20_Aug_2026_OA_20_of_2025.pdf", "status": "eligible-local", "sha256": "2fce1822af9702d65c271d963d68252020a5db79c655abf2314e3bdc67e76c7d", "pages": 2, "ocr": 2}
