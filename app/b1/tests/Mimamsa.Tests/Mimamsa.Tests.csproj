@@ -13,8 +13,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Mimamsa.Core\Mimamsa.Core.csproj" />
     <ProjectReference Include="..\..\src\Mimamsa.Web\Mimamsa.Web.csproj" />
+    <ProjectReference Include="..\..\src\Mimamsa.Hybrid\Mimamsa.Hybrid.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Using Include="Xunit" />
+    <None Include="hybrid_tokenizer_vectors.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

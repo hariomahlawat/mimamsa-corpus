@@ -27,6 +27,9 @@ public sealed class SearchService
 
     public SearchService(SearchIndex ix, Func<string, bool> docHidden) { _ix = ix; _docHidden = docHidden; }
     public SearchIndex Index => _ix;
+    /// C14 S4 hybrid PoC. Null (the default) = B1 lexical behaviour, unchanged.
+    public ISemanticScorer? Semantic { get; init; }
+    public HybridOptions Hybrid { get; init; } = new();
 
     sealed class Ctx
     {
@@ -69,6 +72,27 @@ public sealed class SearchService
                         if (_ix.Docs[d].IsStatute && NormTitle(_ix.Docs[d].Title).Split(' ').ToHashSet().SetEquals(words) && seen.Add(_ix.DocPassages[d][0]))
                             ordered.Add(new Hit(_ix.DocPassages[d][0], "title", 5e8, new[] { $"title match: {_ix.Docs[d].Title}" }));
                 var scores = PlainScores(rest, ctx);
+                // ---- C14 S4 hybrid hook (begin). Only plain, non-exact queries; identifier and title tiers above are
+                // already placed and are never re-ranked. With Semantic == null this block is skipped entirely.
+                if (Semantic is not null && !q.Exact)
+                {
+                    var lex = scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key).Select(kv => kv.Key).ToList();
+                    var dense = Semantic.TopK(string.Join(" ", rest), Hybrid.DenseDepth).Where(x => x.Score >= Hybrid.MinSimilarity).ToList();
+                    var sim = dense.ToDictionary(x => x.Passage, x => x.Score);
+                    foreach (var f in HybridFusion.Rrf(lex, dense.Select(x => x.Passage).ToList(), Hybrid))
+                    {
+                        if (!seen.Add(f.Passage)) continue;
+                        var why = new List<string>(f.LexRank is null ? Array.Empty<string>() : Reasons(f.Passage, ctx));
+                        if (f.DenseRank is { } dr) why.Add($"Similar wording (embedding similarity {sim[f.Passage]:0.00}, rank {dr}); similarity is not legal relevance");
+                        ordered.Add(new Hit(f.Passage, f.LexRank is null ? "semantic" : "lexical", f.Fused, why));
+                    }
+                    foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))   // lexical tail beyond fusion depth
+                        if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx)));
+                    if (mode == "lexical" && dense.Count > 0) mode = "hybrid";
+                    notes[0] = $"Hybrid search (BM25 fused with embedding similarity: {Semantic.Description}). Identifier matches are placed first and are never re-ranked.";
+                }
+                else
+                // ---- C14 S4 hybrid hook (end)
                 foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))
                     if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx)));
             }
