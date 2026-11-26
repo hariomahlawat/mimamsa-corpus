@@ -1,0 +1,128 @@
+{
+  "date": "2026-11-26",
+  "source_blob": "6aa86177d4402ed9ff3eafe1efd9f2953590e43a",
+  "review_finding_ids": [
+    "C14-09",
+    "C14-15"
+  ],
+  "request_id": "A4-ACQ-013",
+  "status": "OPEN",
+  "constituents": [
+    {
+      "candidate_id": "C5C-004",
+      "filename": "236757.pdf",
+      "archive_metadata_md5": "ee43c55c6320319bb80d8b578d7f675f",
+      "archive_metadata_bytes": 150261,
+      "government_locator": "https://egazette.nic.in/WriteReadData/2022/236757.pdf",
+      "disposition": "NAVY_HOLD_PIN_MISMATCH",
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-005",
+      "filename": "241268.pdf",
+      "archive_metadata_md5": "9466ea59e40ba9a003748bd54bd387c7",
+      "archive_metadata_bytes": 76155,
+      "government_locator": "https://egazette.nic.in/WriteReadData/2022/241268.pdf",
+      "disposition": "NAVY_HOLD_PIN_MISMATCH",
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-006",
+      "filename": "246170.pdf",
+      "archive_metadata_md5": "97a251766af5d33c414225b241f8ece3",
+      "archive_metadata_bytes": 1108400,
+      "government_locator": "https://egazette.gov.in/WriteReadData/2023/246170.pdf",
+      "disposition": "UNRESOLVED_NOT_ACQUIRED",
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-007",
+      "filename": "246457.pdf",
+      "archive_metadata_md5": "b20748000f2d0a664ea776c9ae06f4b4",
+      "archive_metadata_bytes": 775443,
+      "government_locator": "https://egazette.gov.in/WriteReadData/2023/246457.pdf",
+      "disposition": "AIR_FORCE_NOT_ARMY_RULES",
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-008",
+      "filename": "254308.pdf",
+      "archive_metadata_md5": "99876ecc132a218702e10a74118d1067",
+      "archive_metadata_bytes": 723410,
+      "government_locator": "https://egazette.gov.in/WriteReadData/2024/254308.pdf",
+      "disposition": "NAVY_NOT_ARMY_RULES",
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-009",
+      "filename": "256844.pdf",
+      "archive_metadata_md5": "462dc4e76df22d821fe6c3be1abb12e7",
+      "archive_metadata_bytes": 1565068,
+      "government_locator": "https://egazette.gov.in/WriteReadData/2024/256844.pdf",
+      "disposition": "UNRESOLVED_NOT_ACQUIRED",
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-010",
+      "filename": "262667.pdf",
+      "archive_metadata_md5": "ce44474d6ca0cbd8c4eb82958d9bcb88",
+      "archive_metadata_bytes": 1655432,
+      "government_locator": "https://egazette.gov.in/WriteReadData/2025/262667.pdf",
+      "disposition": "UNRESOLVED_NOT_ACQUIRED",
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-011",
+      "filename": "262992.pdf",
+      "archive_metadata_md5": "85aa82fbdc5b734fbe7e02e68642f9c1",
+      "archive_metadata_bytes": 1784884,
+      "government_locator": "https://egazette.gov.in/WriteReadData/2025/262992.pdf",
+      "disposition": "UNRESOLVED_NOT_ACQUIRED",
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-012",
+      "filename": "269859.pdf",
+      "archive_metadata_md5": "c7f41dcd38cd453c6850e5e3786eb06e",
+      "archive_metadata_bytes": 8945243,
+      "government_locator": "https://egazette.gov.in/WriteReadData/2026/269859.pdf",
+      "disposition": "UNRESOLVED_NOT_ACQUIRED",
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-013",
+      "filename": "273809.pdf",
+      "archive_metadata_md5": "5b6c2f639a1c12be508ceb546a9e8676",
+      "archive_metadata_bytes": 361235,
+      "government_locator": "https://egazette.gov.in/WriteReadData/2026/273809.pdf",
+      "disposition": "AIR_FORCE_NOT_ARMY_RULES",
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    }
+  ],
+  "compound_request_033": {
+    "status": "PARTIAL_LOCATOR_ONLY",
+    "components": [
+      {
+        "instrument": "S.O. 3912(E), 30 Oct 2019",
+        "status": "GOVERNMENT_REPRODUCTION_LEAD_NOT_ACQUIRED",
+        "url": "https://www.mha.gov.in/files/documents/AnnexureC16022026.pdf"
+      },
+      {
+        "instrument": "Repealing and Amending Act 1957",
+        "status": "UNRESOLVED_NO_VERIFIED_LOCATOR"
+      }
+    ]
+  },
+  "provenance_clarification": "In documentary batches 01 and 02, original_bytes_rehashed_and_match means ChatGPT compared the uploaded preserved-copy bytes to C13 preservation inventory hashes on 2026-11-26. It does not mean upstream carrier pins matched or independent Codex PDF inspection occurred. Original mismatches remain held. The owner-run receipt is separate from that comparison.",
+  "limits": "No new acquisition, no change to original A4 or C5 records, no legal promotion. All five unresolved leads disabled."
+}
