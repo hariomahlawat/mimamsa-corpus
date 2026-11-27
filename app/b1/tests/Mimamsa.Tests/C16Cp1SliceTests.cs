@@ -117,7 +117,7 @@ public class C16Cp1SliceTests
         if (string.IsNullOrEmpty(ctxPath)) return;   // only the slice driver runs this journey
         var ctx = Obj(ctxPath);
         string S(string k) => (string)ctx[k]!;
-        string site = S("site"), work = S("work"), g1 = S("g1"), g2 = S("g2"), model = S("model");
+        string site = S("site"), work = S("work"), g1 = S("g1"), g2 = S("g2");
         string docA = S("admitted_doc"), docB = S("held_doc"), docE = S("c16_only_doc"), legacy = S("legacy_doc");
         var seq = ctx["release_sequence"]!.AsObject().ToDictionary(kv => kv.Key, kv => (long)kv.Value!, StringComparer.Ordinal);
         var checks = new JsonObject();
@@ -180,7 +180,8 @@ public class C16Cp1SliceTests
             var reader = ActivationCli.Reader(layout, production: false);
             var snap = reader.Read();
             Check("b06_exclusion_reader_healthy_development_trust", snap.Healthy, snap.Health + " " + snap.Detail);
-            layout.Initialise(g1, model, snap.Sequence!.Value);
+            layout.Initialise(g1, null, snap.Sequence!.Value);   // 2.1 K2: a lexical-only site has NO model
+            Check("b06_no_model_installed", layout.ReadPointer("MODELS") is null && !Directory.Exists(layout.ModelsDir) && cat.IsLexicalOnly(g1) && cat.IsLexicalOnly(g2));
             Directory.CreateDirectory(Path.GetDirectoryName(layout.ChannelKeyPath)!);
             File.WriteAllBytes(layout.ChannelKeyPath, RandomNumberGenerator.GetBytes(32));
             var pipe = "mimamsa-cp1-" + r;

@@ -17,7 +17,11 @@ using Mimamsa.Core.Knowledge;
 namespace Mimamsa.Core.Activation;
 
 public sealed record StagingReport(string Generation, long ReleaseSequence, bool Ok, IReadOnlyList<string> Issues,
-    IReadOnlyDictionary<string, string> Components, IReadOnlyList<string> LoadedTables, string? TextStoreOrigin, string? DeclaredServiceLevel);
+    IReadOnlyDictionary<string, string> Components, IReadOnlyList<string> LoadedTables, string? TextStoreOrigin, string? DeclaredServiceLevel)
+{
+    /// B06 2.1 classification recorded in the catalogue marker (K2: activates with no model).
+    public bool LexicalOnly { get; init; }
+}
 
 public static class GenerationStaging
 {
@@ -93,13 +97,15 @@ public static class GenerationStaging
         comps["VECTOR_PACK"] = components.Any(c => (string)c["kind"]! == "VECTOR_PACK") ? "NOT_VERIFIED_HERE" : "MISSING";
         Microsoft.Data.Sqlite.SqliteConnection.ClearAllPools();
 
+        bool lexicalOnly = false;
         bool pass = issues.Count == 0 && comps.Values.All(v => v is "VERIFIED" or "REBUILT_LOCALLY" or "MISSING") && comps["KNOWLEDGE_ROWS"] == "VERIFIED";
         if (pass)
         {
             long bytes = Directory.EnumerateFiles(gdir, "*", SearchOption.AllDirectories).Sum(f => new FileInfo(f).Length);
-            new GenerationCatalog(site).StageGeneration(generation, bytes);
-            log?.Invoke($"staging: {generation} verified and staged ({GenerationCatalog.Marker})");
+            // B06 2.1 classification (K1/K2) recorded with the marker, from the verified knowledge release manifest
+            lexicalOnly = new GenerationCatalog(site).StageGeneration(generation, File.ReadAllBytes(kmPath), bytes);
+            log?.Invoke($"staging: {generation} verified and staged ({GenerationCatalog.Marker}, lexical_only={lexicalOnly})");
         }
-        return new(generation, seq, pass, issues, comps, tables, origin, level);
+        return new(generation, seq, pass, issues, comps, tables, origin, level) { LexicalOnly = lexicalOnly };
     }
 }

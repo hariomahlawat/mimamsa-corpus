@@ -177,7 +177,7 @@ public sealed class ControlChannelServer : IAsyncDisposable
                             reply = new JsonObject { ["txn_id"] = ack.TxnId, ["admitted_stopped"] = ack.AdmittedStopped, ["pinned"] = ack.Pinned };
                             break;
                         case "OPEN":
-                            var serving = _p.Open((string)body["txn_id"]!, (string)body["knowledge"]!, (string)body["models"]!, (long)body["exclusion_seq"]!, epoch);
+                            var serving = _p.Open((string)body["txn_id"]!, (string)body["knowledge"]!, (string?)body["models"], (long)body["exclusion_seq"]!, epoch);
                             switchingHere = false;
                             type = "ACK_OPEN";
                             reply = new JsonObject { ["txn_id"] = (string)body["txn_id"]!, ["serving"] = serving };
@@ -282,7 +282,7 @@ public sealed class PipeParticipantLink : IParticipantLink, IDisposable
         return new SwitchAck((string)b["txn_id"]!, (bool)b["admitted_stopped"]!, (int)(long)b["pinned"]!);
     }
 
-    public void Open(string txnId, string knowledge, string models, long exclusionSeq, long lockEpoch) =>
+    public void Open(string txnId, string knowledge, string? models, long exclusionSeq, long lockEpoch) =>
         Call("OPEN", new JsonObject { ["txn_id"] = txnId, ["knowledge"] = knowledge, ["models"] = models, ["exclusion_seq"] = exclusionSeq }, lockEpoch, "ACK_OPEN");
 
     public IReadOnlySet<string>? PinnedGenerations(long lockEpoch)

@@ -26,13 +26,24 @@
    "release_id": "R16-cp1-fixture-20261127-00000001",
    "release_sequence": 1,
    "spec": "cp1-fixture.spec.json",
-   "stages_ran": [],
+   "stages_ran": [
+    "S0",
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9"
+   ],
    "trust": "E:\\Mimamsa-Data\\c16cp1\\slice\\out-G1\\build\\B-20261127-cp1-fixture\\S8\\dev-trust\\trust_list.json"
   },
   "G2": {
    "build_outcome": "BUILT",
    "bundle": "E:\\Mimamsa-Data\\c16cp1\\slice\\out-G2\\build\\B-20261128-cp1-slice\\S8\\bundle",
-   "bundle_sha256sums": "e164a82fddb6169ebf419c27abd9e060192039501bfe9012df9c28f407b62658",
+   "bundle_sha256sums": "732af9be43c971868d284adfa2ecac1b99375c4d5176a5f2fe75a8d725a818ec",
    "expected_activation": {
     "reasons": [
      "vectors missing or failed: lexical-only service, no site embedding",
@@ -45,7 +56,18 @@
    "release_id": "R16-cp1-slice-20261128-00000002",
    "release_sequence": 2,
    "spec": "cp1-slice.spec.json",
-   "stages_ran": [],
+   "stages_ran": [
+    "S0",
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8",
+    "S9"
+   ],
    "trust": "E:\\Mimamsa-Data\\c16cp1\\slice\\out-G2\\build\\B-20261128-cp1-slice\\S8\\dev-trust\\trust_list.json"
   }
  },
@@ -85,8 +107,8 @@
   },
   "G2": {
    "accounting": {
-    "declared_sha256": "fbc2b67d36730a0a58aa292e2ef2480e3a8f1dbe878a5ba2764eb9697ec7789b",
-    "site_sha256": "dda5c0f70961191371bd6b7a3da76e0fd482503962175dec3bbd00194250a6b5"
+    "declared_sha256": "2f4e3ad0b872177a17b7f3ca553d656d0587a79d1e3dedba77fc6447d722b478",
+    "site_sha256": "b43d740960d0a11c34c0b44c9c6805576b47888f5798916b7fae17fff6cc03d3"
    },
    "activated": false,
    "c16_codes": {
@@ -122,16 +144,8 @@
  "journey": {
   "acceptance_level": "FIXTURE (SG-5) CP-1 slice; closes no FG-* gate on real data",
   "checks": {
-   "b03_graph_rows_through_typed_loader_R16-cp1-fixture-20261127-00000001": true,
-   "b03_graph_rows_through_typed_loader_R16-cp1-slice-20261128-00000002": true,
-   "b03_loader_R16-cp1-fixture-20261127-00000001": {
-    "detail": "",
-    "ok": true
-   },
-   "b03_loader_R16-cp1-slice-20261128-00000002": {
-    "detail": "",
-    "ok": true
-   },
+   "b03_loader_rows_and_graph_R16-cp1-fixture-20261127-00000001": true,
+   "b03_loader_rows_and_graph_R16-cp1-slice-20261128-00000002": true,
    "b03_migration_applied_on_clone": {
     "detail": "13 tables copied and verified",
     "ok": true
@@ -141,15 +155,13 @@
    "b04_lexical_index_sha_and_quick_check_R16-cp1-fixture-20261127-00000001": true,
    "b04_lexical_index_sha_and_quick_check_R16-cp1-slice-20261128-00000002": true,
    "b04_text_store_adopted_R16-cp1-fixture-20261127-00000001": {
-    "detail": "text store: adopted shipped store for R16-cp1-fixture-20261127-00000001 (no rebuild) | text store: opened E:\\Mimamsa-Data\\c16cp1\\slice\\verify-text-3fdd8b11-R16-cp1-fixture-20261127-00000001\\R16-cp1-fixture-20261127-00000001 (bound 12 documents to the generation's records in 19 ms)",
+    "detail": "text store: adopted shipped store for R16-cp1-fixture-20261127-00000001 (no rebuild) | text store: opened E:\\Mimamsa-Data\\c16cp1\\slice\\verify-text-efcd33ee-R16-cp1-fixture-20261127-00000001\\R16-cp1-fixture-20261127-00000001 (bound 12 documents to the generation's records in 11 ms) | staging: R16-cp1-fixture-20261127-00000001 verified and staged (C16_VERIFIED.json, lexical_only=True)",
     "ok": true
    },
    "b04_text_store_adopted_R16-cp1-slice-20261128-00000002": {
-    "detail": "text store: adopted shipped store for R16-cp1-slice-20261128-00000002 (no rebuild) | text store: opened E:\\Mimamsa-Data\\c16cp1\\slice\\verify-text-3fdd8b11-R16-cp1-slice-20261128-00000002\\R16-cp1-slice-20261128-00000002 (bound 13 documents to the generation's records in 4 ms)",
+    "detail": "text store: adopted shipped store for R16-cp1-slice-20261128-00000002 (no rebuild) | text store: opened E:\\Mimamsa-Data\\c16cp1\\slice\\verify-text-efcd33ee-R16-cp1-slice-20261128-00000002\\R16-cp1-slice-20261128-00000002 (bound 13 documents to the generation's records in 2 ms) | staging: R16-cp1-slice-20261128-00000002 verified and staged (C16_VERIFIED.json, lexical_only=True)",
     "ok": true
    },
-   "b04_text_store_equals_memory_R16-cp1-fixture-20261127-00000001": true,
-   "b04_text_store_equals_memory_R16-cp1-slice-20261128-00000002": true,
    "b04_web_process_adopted_shipped_text_store": true,
    "b06_activated_g2": {
     "detail": "TX-00000001-cf1b84ae925f",
@@ -168,6 +180,7 @@
     "detail": "kr_1",
     "ok": true
    },
+   "b06_no_model_installed": true,
    "b06_rollback_to_g1": {
     "detail": "TX-00000002-08c32377e5d4",
     "ok": true
@@ -184,6 +197,16 @@
    },
    "no_vector_pack_R16-cp1-fixture-20261127-00000001": true,
    "no_vector_pack_R16-cp1-slice-20261128-00000002": true,
+   "not_installed_before_staging_R16-cp1-fixture-20261127-00000001": true,
+   "not_installed_before_staging_R16-cp1-slice-20261128-00000002": true,
+   "staging_verified_and_marked_R16-cp1-fixture-20261127-00000001": {
+    "detail": "",
+    "ok": true
+   },
+   "staging_verified_and_marked_R16-cp1-slice-20261128-00000002": {
+    "detail": "",
+    "ok": true
+   },
    "web_after_rollback_serves_g1": true,
    "web_g1_does_not_have_admitted_copy": true,
    "web_g1_serves_legacy": true,
@@ -223,7 +246,6 @@
   ],
   "loads": {
    "R16-cp1-fixture-20261127-00000001": {
-    "staging": "kr_1_staging",
     "tables": [
      "document_identities:10",
      "evidence_anchors:8",
@@ -235,7 +257,6 @@
     ]
    },
    "R16-cp1-slice-20261128-00000002": {
-    "staging": "kr_2_staging",
     "tables": [
      "document_identities:3",
      "evidence_anchors:1",
@@ -259,8 +280,8 @@
   ],
   "web_logs_text_store": [
    "text store: adopted shipped store for R16-cp1-slice-20261128-00000002 (no rebuild)",
-   "text store: opened E:\\Mimamsa-Data\\c16cp1\\slice\\web-text-3fdd8b11-2\\R16-cp1-slice-20261128-00000002 (bound 13 documents to the generation's records in 52 ms)",
-   "2026-11-28T00:51:52.7164092+05:30info: mimamsa[0] text store: disk at E:\\Mimamsa-Data\\c16cp1\\slice\\web-text-3fdd8b11-2\\R16-cp1-slice-20261128-00000002"
+   "text store: opened E:\\Mimamsa-Data\\c16cp1\\slice\\web-text-efcd33ee-2\\R16-cp1-slice-20261128-00000002 (bound 13 documents to the generation's records in 27 ms)",
+   "2026-11-28T01:35:22.2777501+05:30info: mimamsa[0] text store: disk at E:\\Mimamsa-Data\\c16cp1\\slice\\web-text-efcd33ee-2\\R16-cp1-slice-20261128-00000002"
   ]
  },
  "oracle_default_mode": {

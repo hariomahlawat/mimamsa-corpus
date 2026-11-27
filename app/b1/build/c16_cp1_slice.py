@@ -201,7 +201,7 @@ def cmd_run(a) -> int:
         "g1": imported["G1"]["release_id"], "g2": g2["release_id"],
         "release_sequence": {builds[k]["release_id"]: builds[k]["release_sequence"] for k in ("G1", "G2")},
         "admitted_doc": cc.DOC_A, "held_doc": cc.DOC_B, "c16_only_doc": adapters.local_doc_id(cc.h(cc.Corpus().e)),
-        "legacy_doc": legacy, "admitted_query": "appellant relied on section 69", "model": "cp1-lexical-only",
+        "legacy_doc": legacy, "admitted_query": "appellant relied on section 69",
     }
     journey = run_journey(work, context, a.configuration)
     o = outcome(journey)
