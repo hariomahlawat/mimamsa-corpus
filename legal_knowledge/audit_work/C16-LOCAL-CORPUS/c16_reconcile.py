@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import io
 import json
 import os
 import re
@@ -14,11 +15,13 @@ import time
 import unicodedata
 import zipfile
 from collections import Counter, defaultdict
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 from xml.etree import ElementTree
 
 import pymupdf
+from PIL import Image
 
 DISPOSITIONS = (
     "EXACT_DUPLICATE", "VERIFIED_ALTERNATE_COPY", "PROBABLE_DUPLICATE",
@@ -32,8 +35,30 @@ HEX64 = re.compile(r"(?i)(?<![0-9a-f])[0-9a-f]{64}(?![0-9a-f])")
 CASE_NUMBER = re.compile(r"(?i)\b(?:CWP|CRWP|CRM-M|RSA|LPA|FAO|CRR|CRA|OA|TA|MA|CA|WP(?:\(C\))?|SLP)[\s./-]*\d+[\s./-]+\d{4}\b")
 CITATION = re.compile(r"(?i)\b(?:20\d{2}\s+(?:INSC|PHHC|DHC|AHC|KHC|BHC|KAR)\s+\d+|\(\d{4}\)\s*\d+\s+SCC\s+\d+)\b")
 DATE = re.compile(r"\b(?:0?[1-9]|[12]\d|3[01])[./-](?:0?[1-9]|1[0-2])[./-](?:19|20)\d{2}\b")
+PROVISION_FILENAME = re.compile(r"(?i)^\s*([A-Z][A-Z.]{1,7})\s+(.+?)\s+(?:[\u2013\u2014]|-)\s+(.+?)\s*$")
 MILITARY = re.compile(r"(?i)\b(army|air force|navy|armed forces|court[ -]?martial|military|aft|pension|service|discipline|evidence|criminal|ipc|crpc|bns|bnss|human rights)\b")
 RESTRICTED_MARKERS = re.compile(r"(?im)\b(?:for official use only|rm-001)\b|^\s*(?:security classification\s*:\s*)?restricted\s*$")
+REL_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+PKG_REL_NS = "http://schemas.openxmlformats.org/package/2006/relationships"
+
+
+@dataclass(frozen=True)
+class EmbeddedImage:
+    sequence: int
+    occurrence_id: str
+    relationship_id: str
+    archive_path: str
+    sha256: str
+    size_bytes: int
+    data: bytes
+
+
+@dataclass(frozen=True)
+class DocxExtraction:
+    native_text: str
+    images: tuple[EmbeddedImage, ...]
+
+
 MANDATORY = [
     "LOCAL_INVENTORY.jsonl", "LOCAL_DUPLICATES.csv", "CANONICAL_DUPLICATES.csv",
     "ALTERNATE_COPIES.csv", "NEW_DOCUMENTS.csv", "IMPROVED_SOURCE_COPIES.csv",
@@ -44,6 +69,7 @@ MANDATORY = [
     "VALIDATION_REPORT.md", "RECONCILIATION_REPORT.md",
     "C16_LOCAL_CORPUS_COMPLETION_REPORT.md",
 ]
+EXTRACTION_METHODOLOGY_VERSION = 3
 
 
 def utcnow() -> str:
@@ -101,7 +127,7 @@ def choose_disposition(*, restricted: bool, integrity_failure: bool,
     if canonical_exact:
         return "EXACT_DUPLICATE"
     if text_match:
-        return "VERIFIED_ALTERNATE_COPY"
+        return "IDENTITY_UNRESOLVED"
     if relevant is False:
         return "NON_RELEVANT"
     if relevant is None:
@@ -163,14 +189,74 @@ def extract_pdf(path: Path) -> tuple[list[str], bool]:
     return pages, False
 
 
-def extract_docx(path: Path) -> tuple[list[str], bool]:
+def extract_docx(path: Path) -> DocxExtraction:
     with zipfile.ZipFile(path) as archive:
         bad = next((name for name in archive.namelist() if not safe_archive_member(name)), None)
         if bad:
             raise ValueError("unsafe archive member")
         root = ElementTree.fromstring(archive.read("word/document.xml"))
         chunks = [node.text or "" for node in root.iter() if node.tag.endswith("}t")]
-        return [" ".join(chunks)], False
+        relationships = {}
+        rel_path = "word/_rels/document.xml.rels"
+        if rel_path in archive.namelist():
+            rel_root = ElementTree.fromstring(archive.read(rel_path))
+            for rel in rel_root.findall(f"{{{PKG_REL_NS}}}Relationship"):
+                target = rel.attrib.get("Target", "").replace("\\", "/")
+                if rel.attrib.get("Id") and safe_archive_member(target):
+                    relationships[rel.attrib["Id"]] = str(PurePosixPath("word") / target)
+        images = []
+        for node in root.iter():
+            rel_id = node.attrib.get(f"{{{REL_NS}}}embed")
+            archive_path = relationships.get(rel_id or "")
+            if not archive_path or archive_path not in archive.namelist():
+                continue
+            payload = archive.read(archive_path)
+            sequence = len(images) + 1
+            images.append(EmbeddedImage(sequence, f"body:{rel_id}:{sequence}", rel_id,
+                                        archive_path, hashlib.sha256(payload).hexdigest(),
+                                        len(payload), payload))
+        return DocxExtraction(" ".join(chunks), tuple(images))
+
+
+def document_content_hash(native_text: str, images: tuple[EmbeddedImage, ...] | list[EmbeddedImage]) -> str | None:
+    normalized = normalize_text(native_text)
+    image_hashes = [image.sha256 for image in images]
+    if not normalized and not image_hashes:
+        return None
+    return hashlib.sha256(jdump({"native_text": normalized, "ordered_images": image_hashes}).encode("utf-8")).hexdigest()
+
+
+def image_metadata(payload: bytes) -> dict:
+    with Image.open(io.BytesIO(payload)) as image:
+        grey = image.convert("L").resize((9, 8))
+        pixels = list(grey.get_flattened_data())
+        bits = [pixels[row * 9 + column] > pixels[row * 9 + column + 1]
+                for row in range(8) for column in range(8)]
+        dhash = sum(int(bit) << index for index, bit in enumerate(bits))
+        return {"width": image.width, "height": image.height, "format": image.format or "UNKNOWN",
+                "perceptual_dhash": f"{dhash:016x}"}
+
+
+def parse_filename_legal_metadata(filename: str) -> dict:
+    stem = Path(filename).stem
+    result = {"source_label": stem, "instrument_abbreviation": None, "provisions": [],
+              "case_name_candidate": None, "ambiguity": None,
+              "classification_rule": "C16-FN-PROVLIST/1.0", "verification": "CANDIDATE"}
+    match = PROVISION_FILENAME.match(stem)
+    if not match:
+        return result
+    abbreviation, provision_label, case_name = match.groups()
+    result["instrument_abbreviation"] = abbreviation.upper().replace(".", "")
+    result["case_name_candidate"] = case_name.strip()
+    if re.search(r"\d\s*(?:-|\u2013|\u2014|\bto\b)\s*\d", provision_label, re.I):
+        result["ambiguity"] = "PROVISION_RANGE_NOT_EXPANDED"
+        return result
+    tokens = [token.strip() for token in provision_label.split(",")]
+    if tokens and all(re.fullmatch(r"\d+[A-Za-z]?", token) for token in tokens):
+        result["provisions"] = tokens
+    else:
+        result["ambiguity"] = "UNPARSED_PROVISION_LABEL"
+    return result
 
 
 def extract_text(path: Path) -> tuple[list[str], bool, str]:
@@ -179,8 +265,8 @@ def extract_text(path: Path) -> tuple[list[str], bool, str]:
         pages, encrypted = extract_pdf(path)
         return pages, encrypted, "pymupdf-native"
     if suffix == ".docx":
-        pages, encrypted = extract_docx(path)
-        return pages, encrypted, "docx-xml"
+        result = extract_docx(path)
+        return [result.native_text], False, "docx-xml+embedded-image-inventory"
     if suffix == ".txt":
         return [path.read_text(encoding="utf-8", errors="replace")], False, "utf8-replace"
     return [], False, "not-extracted"
@@ -204,14 +290,18 @@ def language_for(text: str) -> str:
     return "hi" if devanagari > latin else "en"
 
 
-def ocr_required_pages(extension: str, pages: list[str]) -> list[int]:
+def ocr_required_pages(extension: str, pages: list[str], embedded_image_count: int = 0) -> list[int]:
     if extension not in {".pdf", ".jpg", ".jpeg", ".png", ".tif", ".tiff"}:
         return []
     return [i for i, value in enumerate(pages, 1) if len(normalize_text(value)) < 80]
 
 
+def ocr_required_images(extension: str, embedded_image_count: int) -> list[int]:
+    return list(range(1, embedded_image_count + 1)) if extension == ".docx" else []
+
+
 def has_restriction_marking(text: str) -> bool:
-    return bool(RESTRICTED_MARKERS.search(text[:5000]))
+    return bool(RESTRICTED_MARKERS.search(text))
 
 
 def metadata_signals(text: str) -> dict:
@@ -326,30 +416,43 @@ def inventory(source: Path, output: Path, repo: Path, limit: int | None = None) 
         relative = path.relative_to(source).as_posix()
         stat = path.stat()
         cached = previous.get(relative)
-        if cached and cached.get("size_bytes") == stat.st_size and cached.get("mtime_ns") == stat.st_mtime_ns:
-            if cached.get("classification_version") != 2:
-                derivative = cached.get("derivative_relative_path")
-                cached_text = (output / derivative).read_text(encoding="utf-8", errors="ignore") if derivative and (output / derivative).exists() else ""
-                cached["restricted"] = cached.get("sha256", "").casefold() in restricted_hashes or has_restriction_marking(cached_text)
-                cached["classification_version"] = 2
+        if (cached and cached.get("size_bytes") == stat.st_size and cached.get("mtime_ns") == stat.st_mtime_ns
+                and cached.get("extraction_methodology_version") == EXTRACTION_METHODOLOGY_VERSION):
             rows.append(cached)
             continue
         digest, pages, encrypted, error, method = "", [], False, None, "not-extracted"
+        embedded_images = []
         try:
             digest = file_sha256(path)
-            if path.suffix.lower() in TEXT_EXTENSIONS:
+            if path.suffix.lower() == ".docx":
+                docx = extract_docx(path)
+                pages, method = [docx.native_text], "docx-xml+embedded-image-inventory"
+                for image in docx.images:
+                    suffix = PurePosixPath(image.archive_path).suffix.lower()
+                    try:
+                        visual = image_metadata(image.data)
+                    except Exception as exc:
+                        visual = {"width": None, "height": None, "format": suffix.lstrip(".").upper() or "UNKNOWN",
+                                  "perceptual_dhash": None, "inspection_error": f"{type(exc).__name__}: {exc}"[:300]}
+                    embedded_images.append({"sequence": image.sequence, "occurrence_id": image.occurrence_id,
+                                            "relationship_id": image.relationship_id, "placement": "document_body",
+                                            "archive_path": image.archive_path, "image_sha256": image.sha256,
+                                            "size_bytes": image.size_bytes, **visual,
+                                            "ocr_state": "REQUIRED", "processing_disposition": "HASHED_IN_MEMORY_PENDING_SCREENING"})
+            elif path.suffix.lower() in TEXT_EXTENSIONS:
                 pages, encrypted, method = extract_text(path)
         except Exception as exc:  # evidence record, never silent
             error = f"{type(exc).__name__}: {exc}"[:500]
         text = "\n\n".join(pages)
         text_hash = normalized_text_hash(text)
+        content_hash = hashlib.sha256(jdump({"native_text": normalize_text(text),
+                                             "ordered_image_hashes": [i["image_sha256"] for i in embedded_images]}).encode("utf-8")).hexdigest() if text or embedded_images else None
+        # Do not materialise text derivatives until page/image access-marking
+        # screening completes. Hashing in memory is sufficient for this
+        # corrective inventory generation.
         derivative_path = None
         derivative_hash = None
-        if text:
-            derivative_path = derivatives / f"{digest}.txt"
-            derivative_path.write_text("".join(f"\n\n--- PHYSICAL PAGE {i} ---\n{text}" for i, text in enumerate(pages, 1)), encoding="utf-8")
-            derivative_hash = file_sha256(derivative_path)
-        sparse = ocr_required_pages(path.suffix.lower(), pages)
+        sparse = ocr_required_pages(path.suffix.lower(), pages, len(embedded_images))
         relevant = bool(MILITARY.search(" ".join(subjects_for(relative)) + " " + text[:20000])) if text else None
         supported = path.suffix.lower() in SUPPORTED
         restricted = digest.casefold() in restricted_hashes or has_restriction_marking(text)
@@ -359,12 +462,19 @@ def inventory(source: Path, output: Path, repo: Path, limit: int | None = None) 
             "size_bytes": stat.st_size, "mtime_ns": stat.st_mtime_ns, "sha256": digest,
             "page_count": len(pages) or None, "language": language_for(text),
             "text_available": bool(text.strip()), "normalized_text_sha256": text_hash,
+            "content_identity_sha256": content_hash, "embedded_images": embedded_images,
+            "embedded_image_count": len(embedded_images),
             "derivative_relative_path": str(derivative_path.relative_to(output)).replace("\\", "/") if derivative_path else None,
             "derivative_sha256": derivative_hash, "extraction_method": method,
+            "derivative_withheld_reason": "ACCESS_MARKING_SCREENING_INCOMPLETE" if text else None,
             "encrypted": encrypted, "parsing_error": error, "candidate_document_type": candidate_type(path, text),
             "original_folder_classification": subjects_for(relative), "processing_status": "ERROR" if error else "INVENTORIED",
-            "ocr_required_pages": sparse, "relevance": relevant, "restricted": restricted,
-            "historical_recovery_hash_match": digest.casefold() in recovery_hashes, "classification_version": 2,
+            "ocr_required_pages": sparse, "ocr_required_images": ocr_required_images(path.suffix.lower(), len(embedded_images)),
+            "pagination_basis": "PHYSICAL_PAGES" if path.suffix.lower() == ".pdf" else "NONE_FLOW_DOCUMENT",
+            "relevance": relevant, "restricted": restricted,
+            "historical_recovery_hash_match": digest.casefold() in recovery_hashes, "classification_version": 3,
+            "extraction_methodology_version": EXTRACTION_METHODOLOGY_VERSION,
+            "filename_legal_metadata": parse_filename_legal_metadata(path.name),
             "metadata_candidate": metadata_signals(text), "source_provenance": "owner local collection; external source unverified",
         }
         rows.append(row)
@@ -375,21 +485,23 @@ def inventory(source: Path, output: Path, repo: Path, limit: int | None = None) 
 
 
 def reconcile(rows: list[dict], canonical: dict, output: Path, source: Path) -> list[dict]:
-    canonical_hashes = set(canonical.get("sha256", []))
-    by_binary, by_text = defaultdict(list), defaultdict(list)
+    canonical_hashes = set(canonical.get("original_source_sha256", canonical.get("sha256", [])))
+    by_binary, by_text, by_content = defaultdict(list), defaultdict(list), defaultdict(list)
     for row in rows:
         if row["sha256"]:
             by_binary[row["sha256"]].append(row)
         if row["normalized_text_sha256"]:
             by_text[row["normalized_text_sha256"]].append(row)
+        if row.get("content_identity_sha256"):
+            by_content[row["content_identity_sha256"]].append(row)
     canonical_text = set(canonical.get("normalized_text_sha256", []))
-    text_primaries = {digest: text_primary(group)["inventory_id"] for digest, group in by_text.items() if len(group) > 1}
     for row in rows:
         internal_text_match = len(by_text.get(row["normalized_text_sha256"], [])) > 1 if row["normalized_text_sha256"] else False
         row["canonical_exact"] = row["sha256"].casefold() in canonical_hashes
         row["canonical_text_match"] = row["normalized_text_sha256"] in canonical_text
         row["internal_binary_group_size"] = len(by_binary.get(row["sha256"], []))
         row["internal_text_group_size"] = len(by_text.get(row["normalized_text_sha256"], [])) if row["normalized_text_sha256"] else 0
+        row["internal_content_group_size"] = len(by_content.get(row.get("content_identity_sha256"), [])) if row.get("content_identity_sha256") else 0
         row["disposition"] = choose_disposition(
             restricted=row["restricted"], integrity_failure=bool(row["parsing_error"] or row["encrypted"]),
             canonical_exact=row["canonical_exact"], text_match=row["canonical_text_match"],
@@ -399,10 +511,11 @@ def reconcile(rows: list[dict], canonical: dict, output: Path, source: Path) -> 
         else:
             row["secondary_flags"] = []
         if internal_text_match and row["internal_binary_group_size"] == 1:
-            row["secondary_flags"].append("INTERNAL_NORMALIZED_TEXT_IDENTITY")
-            if (row["disposition"] == "NEW_DOCUMENT" and
-                    text_primaries.get(row["normalized_text_sha256"]) != row["inventory_id"]):
-                row["disposition"] = "VERIFIED_ALTERNATE_COPY"
+            row["secondary_flags"].append("INTERNAL_NORMALIZED_TEXT_SIMILARITY_REQUIRES_REVIEW")
+        if row["internal_content_group_size"] > 1 and row["internal_binary_group_size"] == 1:
+            row["secondary_flags"].append("INTERNAL_CONTENT_IDENTITY_CANDIDATE")
+            if row["disposition"] == "NEW_DOCUMENT":
+                row["disposition"] = "IDENTITY_UNRESOLVED"
     return rows
 
 
@@ -413,6 +526,16 @@ def package_and_reports(rows: list[dict], output: Path, source: Path, canonical:
     write_jsonl(reports / "LOCAL_INVENTORY.jsonl", rows)
     write_jsonl(reports / "PROCESSING_STATE_REGISTER.jsonl", ({"inventory_id": r["inventory_id"], "status": r["processing_status"], "disposition": r["disposition"]} for r in rows))
     write_jsonl(reports / "SUBJECT_CLASSIFICATION.jsonl", ({"inventory_id": r["inventory_id"], "subjects": r["original_folder_classification"], "basis": "source folder provenance; not an established legal fact"} for r in rows))
+    write_jsonl(reports / "DOCUMENT_CONTENT_INVENTORY.jsonl", ({key: r.get(key) for key in
+        ("inventory_id", "relative_path", "sha256", "detected_format", "page_count", "pagination_basis",
+         "extraction_method", "normalized_text_sha256", "content_identity_sha256", "embedded_image_count",
+         "ocr_required_pages", "ocr_required_images", "extraction_methodology_version")} for r in rows))
+    write_jsonl(reports / "EMBEDDED_IMAGE_INVENTORY.jsonl", (
+        {"inventory_id": r["inventory_id"], "original_sha256": r["sha256"], **image}
+        for r in rows for image in r.get("embedded_images", [])))
+    write_jsonl(reports / "FILENAME_LEGAL_METADATA.jsonl", (
+        {"inventory_id": r["inventory_id"], "relative_path": r["relative_path"], **r.get("filename_legal_metadata", {})}
+        for r in rows))
     common = ["inventory_id", "relative_path", "sha256", "normalized_text_sha256", "disposition", "secondary_flags"]
     def emit(name, predicate):
         selected = []
@@ -428,15 +551,13 @@ def package_and_reports(rows: list[dict], output: Path, source: Path, canonical:
     emit("NEW_DOCUMENTS.csv", lambda r: r["disposition"] == "NEW_DOCUMENT")
     emit("IMPROVED_SOURCE_COPIES.csv", lambda r: r["disposition"] == "IMPROVED_SOURCE_COPY")
     emit("HISTORICAL_RECOVERY_MATCHES.csv", lambda r: r["historical_recovery_hash_match"])
-    emit("OCR_REQUIREMENTS.csv", lambda r: bool(r["ocr_required_pages"]))
+    emit("OCR_REQUIREMENTS.csv", lambda r: bool(r["ocr_required_pages"] or r.get("ocr_required_images")))
     emit("UNRESOLVED_DOCUMENTS.csv", lambda r: r["disposition"] in {"IDENTITY_UNRESOLVED", "RELEVANCE_UNRESOLVED", "PROBABLE_DUPLICATE"})
     emit("RESTRICTED_AND_QUARANTINED.csv", lambda r: r["disposition"] in {"ACCESS_RESTRICTED", "INTEGRITY_FAILURE", "UNSUPPORTED_FORMAT"})
+    # Candidate bytes are deliberately not copied until image/page OCR restriction
+    # screening is complete.  This generation is an evidence inventory, not an
+    # exportable source package.
     unique_candidates = {}
-    for row in rows:
-        if row["disposition"] in {"NEW_DOCUMENT", "IMPROVED_SOURCE_COPY"} and row["sha256"] not in unique_candidates:
-            candidate = copy_candidate(source / Path(row["relative_path"]), package, row["sha256"])
-            unique_candidates[row["sha256"]] = str(candidate.relative_to(package)).replace("\\", "/")
-    prune_candidate_originals(package, set(unique_candidates.values()))
     counts = Counter(r["disposition"] for r in rows)
     duplicate_savings = sum(r["size_bytes"] for r in rows if r["disposition"] == "VERIFIED_ALTERNATE_COPY" and "INTERNAL_NORMALIZED_TEXT_IDENTITY" in r["secondary_flags"])
     coverage = {"generated_at": utcnow(), "canonical_repository": canonical.get("repository"),
@@ -447,7 +568,8 @@ def package_and_reports(rows: list[dict], output: Path, source: Path, canonical:
                 "limitations": canonical.get("limitations", []) + ["Canonical text derivatives were not downloaded; normalized-text matches are limited to locally available overlays.", "Legal-document and near-duplicate identity remain review candidates unless exact evidence is present.", "Legacy paths without trusted SHA-256 cannot support exact binary absence claims."]}
     (reports / "CANONICAL_INVENTORY_COVERAGE.json").write_text(json.dumps(coverage, indent=2), encoding="utf-8")
     manifest = {"package_version": "c16-local-candidate-v1", "generated_at": utcnow(), "application_eligible": False,
-                "active_ingestion_authorized": False, "source_root": str(source), "source_files": len(rows),
+                "active_ingestion_authorized": False, "source_collection": "local:judgements", "source_files": len(rows),
+                "candidate_bytes_withheld_reason": "ACCESS_MARKING_SCREENING_INCOMPLETE",
                 "unique_candidate_originals": len(unique_candidates), "candidate_originals": unique_candidates,
                 "disposition_counts": dict(sorted(counts.items())), "canonical_revisions": canonical.get("revisions")}
     (reports / "CANDIDATE_PACKAGE_MANIFEST.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")

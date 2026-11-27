@@ -1,14 +1,37 @@
 import hashlib
+import io
 import sys
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
+
+from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import c16_reconcile as c16
 
 
 class PrimitiveTests(unittest.TestCase):
+    def _docx(self, path: Path, *, image_payloads: list[bytes]) -> None:
+        document = ['<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" '
+                    'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+                    'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><w:body>',
+                    '<w:p><w:r><w:t>Shared heading</w:t></w:r></w:p>']
+        rels = []
+        for index, _ in enumerate(image_payloads, 1):
+            document.append(f'<w:p><w:r><w:drawing><a:blip r:embed="rId{index}"/></w:drawing></w:r></w:p>')
+            rels.append(f'<Relationship Id="rId{index}" Target="media/image{index}.png" '
+                        'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"/>')
+        document.append('</w:body></w:document>')
+        with zipfile.ZipFile(path, "w") as archive:
+            archive.writestr("word/document.xml", "".join(document))
+            archive.writestr("word/_rels/document.xml.rels",
+                             '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                             + "".join(rels) + '</Relationships>')
+            for index, payload in enumerate(image_payloads, 1):
+                archive.writestr(f"word/media/image{index}.png", payload)
+
     def test_inventory_id_is_stable_and_path_sensitive(self):
         self.assertEqual(c16.inventory_id("Army Act/a.pdf"), c16.inventory_id("Army Act/a.pdf"))
         self.assertNotEqual(c16.inventory_id("Army Act/a.pdf"), c16.inventory_id("CrPC/a.pdf"))
@@ -33,7 +56,7 @@ class PrimitiveTests(unittest.TestCase):
         self.assertEqual(c16.choose_disposition(restricted=False, integrity_failure=False,
                                                canonical_exact=True, text_match=False), "EXACT_DUPLICATE")
         self.assertEqual(c16.choose_disposition(restricted=False, integrity_failure=False,
-                                               canonical_exact=False, text_match=True), "VERIFIED_ALTERNATE_COPY")
+                                               canonical_exact=False, text_match=True), "IDENTITY_UNRESOLVED")
         self.assertEqual(c16.choose_disposition(restricted=False, integrity_failure=False,
                                                canonical_exact=False, text_match=False), "NEW_DOCUMENT")
 
@@ -63,14 +86,61 @@ class PrimitiveTests(unittest.TestCase):
                     type("S", (), {"rfilename": "short/deadbeef.pdf"})()]
         self.assertEqual(c16.hashes_from_repository_paths(siblings), {"a" * 64})
 
-    def test_ocr_pages_are_only_assigned_to_page_image_formats(self):
-        self.assertEqual(c16.ocr_required_pages(".docx", ["short"]), [])
+    def test_docx_with_embedded_images_requires_image_ocr_not_fake_page_ocr(self):
+        self.assertEqual(c16.ocr_required_pages(".docx", ["short"], embedded_image_count=2), [])
+        self.assertEqual(c16.ocr_required_images(".docx", 2), [1, 2])
         self.assertEqual(c16.ocr_required_pages(".pdf", ["short", "x" * 100]), [1])
+
+    def test_docx_image_inventory_resolves_relationships_and_preserves_order(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "screenshots.docx"
+            self._docx(path, image_payloads=[b"first-image", b"second-image"])
+            result = c16.extract_docx(path)
+            self.assertEqual(result.native_text, "Shared heading")
+            self.assertEqual([image.sequence for image in result.images], [1, 2])
+            self.assertEqual([image.occurrence_id for image in result.images], ["body:rId1:1", "body:rId2:2"])
+            self.assertEqual(result.images[0].sha256, hashlib.sha256(b"first-image").hexdigest())
+            self.assertNotEqual(result.images[0].sha256, result.images[1].sha256)
+
+    def test_identical_native_headings_with_different_screenshots_are_not_text_duplicates(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            first, second = root / "a.docx", root / "b.docx"
+            self._docx(first, image_payloads=[b"judgment-a"])
+            self._docx(second, image_payloads=[b"judgment-b"])
+            a, b = c16.extract_docx(first), c16.extract_docx(second)
+            self.assertEqual(a.native_text, b.native_text)
+            self.assertNotEqual(c16.document_content_hash(a.native_text, a.images),
+                                c16.document_content_hash(b.native_text, b.images))
+
+    def test_image_metadata_records_dimensions_format_and_perceptual_nomination_hash(self):
+        stream = io.BytesIO()
+        Image.new("RGB", (16, 9), "white").save(stream, format="PNG")
+        metadata = c16.image_metadata(stream.getvalue())
+        self.assertEqual((metadata["width"], metadata["height"], metadata["format"]), (16, 9, "PNG"))
+        self.assertEqual(len(metadata["perceptual_dhash"]), 16)
+
+    def test_filename_provision_list_creates_candidates_but_range_stays_unresolved(self):
+        parsed = c16.parse_filename_legal_metadata("AR 22, 23, 30 - Lt Col PPS Bedi v UOI.docx")
+        self.assertEqual(parsed["instrument_abbreviation"], "AR")
+        self.assertEqual(parsed["provisions"], ["22", "23", "30"])
+        self.assertEqual(parsed["case_name_candidate"], "Lt Col PPS Bedi v UOI")
+        ranged = c16.parse_filename_legal_metadata("AR 22-30 - Chapter notes.docx")
+        self.assertEqual(ranged["provisions"], [])
+        self.assertEqual(ranged["ambiguity"], "PROVISION_RANGE_NOT_EXPANDED")
 
     def test_restriction_marking_does_not_quarantine_ordinary_legal_words(self):
         self.assertFalse(c16.has_restriction_marking("The confidential witness gave secret evidence."))
         self.assertTrue(c16.has_restriction_marking("FOR OFFICIAL USE ONLY\nArmy document"))
         self.assertTrue(c16.has_restriction_marking("RM-001"))
+
+    def test_restriction_screening_scans_beyond_first_5000_characters(self):
+        self.assertTrue(c16.has_restriction_marking("x" * 6000 + "\nFOR OFFICIAL USE ONLY"))
+
+    def test_normalized_text_identity_is_candidate_not_verified_alternate(self):
+        self.assertEqual(c16.choose_disposition(restricted=False, integrity_failure=False,
+                                               canonical_exact=False, text_match=True),
+                         "IDENTITY_UNRESOLVED")
 
     def test_text_identity_selects_one_deterministic_primary(self):
         rows = [{"relative_path": "B/copy.docx"}, {"relative_path": "A/original.docx"}]
