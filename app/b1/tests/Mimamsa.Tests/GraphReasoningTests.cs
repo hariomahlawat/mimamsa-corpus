@@ -183,6 +183,23 @@ public class GraphStoreTests
             Assert.NotNull(node);
             Assert.Contains(edges, e => e.Edge.Type == EdgeType.CitesJudgment && e.Edge.From == jud);
 
+            // Codex review of PR #75: at depth 2, first-level edges returned again must not consume the limit; a limit
+            // equal to the full neighbourhood returns all of it and reports no truncation
+            // a node whose depth-2 neighbourhood is larger than its depth-1 one
+            string? hub = null; IReadOnlyList<EdgeView> full = Array.Empty<EdgeView>();
+            foreach (var cand in graph.Nodes.Where(n => n.DocId != "syn-j-allow").Select(n => n.Id))
+            {
+                var one = (await store.NeighbourhoodAsync(gen, cand, 1, none, GraphStore.MaxEdges)).edges;
+                var (_, two, t2) = await store.NeighbourhoodAsync(gen, cand, 2, none, GraphStore.MaxEdges);
+                if (!t2 && two.Count > one.Count) { hub = cand; full = two; break; }
+            }
+            Assert.NotNull(hub);
+            var (_, exact, exactTrunc) = await store.NeighbourhoodAsync(gen, hub!, 2, none, full.Count);
+            Assert.False(exactTrunc);
+            Assert.Equal(full.Select(e => e.Edge.Id).Order(), exact.Select(e => e.Edge.Id).Order());
+            var (_, cut, cutTrunc) = await store.NeighbourhoodAsync(gen, hub!, 2, none, full.Count - 1);
+            Assert.True(cutTrunc); Assert.Equal(full.Count - 1, cut.Count);
+
             // withdrawal: the document's node, its edges and the statistics drop at once; reinstatement restores them
             var hidden = new[] { "syn-j-allow" };
             Assert.Null((await store.NeighbourhoodAsync(gen, jud, 2, hidden)).node);

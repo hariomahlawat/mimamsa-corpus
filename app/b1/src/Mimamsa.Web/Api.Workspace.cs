@@ -77,8 +77,13 @@ public static partial class Api
         var d = available ? s.Generation.Documents.GetValueOrDefault(doc) : null;
         if (!available || d is null)
         {
-            // nothing derived from the source is returned: no title, citation text or quotation
-            return new JsonObject { ["type"] = type, ["origin"] = "corpus", ["doc_id"] = doc, ["copy"] = copy, ["page"] = page, ["available"] = false, ["notice"] = SourceUnavailable };
+            // nothing derived from the source is returned: no title, citation text or quotation. The author's own stored
+            // reference fields (passage id, paragraph label) are kept so the document can still be saved and restored
+            // with the unavailable reference in place (Codex review of PR #75).
+            var na = new JsonObject { ["type"] = type, ["origin"] = "corpus", ["doc_id"] = doc, ["copy"] = copy, ["page"] = page, ["available"] = false, ["notice"] = SourceUnavailable };
+            if (b["passage_id"]?.GetValue<string>() is { } spid) na["passage_id"] = spid;
+            if (para is not null) na["para"] = para;
+            return na;
         }
         var rel = s.Generation.Release.ReleaseId;
         b["available"] = true;

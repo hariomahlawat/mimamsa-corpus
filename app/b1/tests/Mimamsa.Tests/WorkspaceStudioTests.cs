@@ -144,10 +144,13 @@ public class WorkspaceStudioTests(ServiceFixture f)
         var (user, csrf) = await f.Login("reader");
         var meta = JsonNode.Parse(await user.GetStringAsync($"/api/v2/documents/{doc}/pdf-meta"))!;
         var copy = meta["copy_sha256"]!.GetValue<string>()[..12];
+        var qp = JsonNode.Parse(await user.GetStringAsync($"/api/documents/{doc}/text"))!["pages"]!.AsArray().First(pg => pg!["passages"]!.AsArray().Count > 0)!;
+        var pid = qp["passages"]![0]!["id"]!.GetValue<string>(); var qpage = qp["page"]!.GetValue<int>();
         var id = (await J(await Post(user, csrf, "/api/studio/documents", new { title = "Cites the manual", template = "blank" })))["id"]!.GetValue<string>();
         var app = await Post(user, csrf, $"/api/studio/documents/{id}/append", new { blocks = new object[] {
             new { type = "text", origin = "user", text = "My own analysis <script>alert(1)</script>" },
-            new { type = "citation", doc_id = doc, copy, page = 1, citation = "FAKE CITATION TEXT" } } });
+            new { type = "citation", doc_id = doc, copy, page = 1, citation = "FAKE CITATION TEXT" },
+            new { type = "quote", doc_id = doc, copy, page = qpage, passage_id = pid } } });
         Assert.Equal(HttpStatusCode.OK, app.StatusCode);
         var d = await J(app);
         var cite = d["blocks"]!.AsArray().Single(b => b!["type"]!.GetValue<string>() == "citation")!;
@@ -164,6 +167,16 @@ public class WorkspaceStudioTests(ServiceFixture f)
             Assert.False(c2["available"]!.GetValue<bool>());
             Assert.Equal("Source no longer available in this installation.", c2["notice"]!.GetValue<string>());
             Assert.False(c2.ContainsKey("title")); Assert.False(c2.ContainsKey("citation"));
+            // Codex review of PR #75: the unavailable quote keeps the author's stored reference, so saving the rendered
+            // document back (as the editor does) succeeds and the reference survives without any source text
+            var q2 = after["blocks"]!.AsArray().Single(b => b!["type"]!.GetValue<string>() == "quote")!.AsObject();
+            Assert.Equal(pid, q2["passage_id"]!.GetValue<string>()); Assert.False(q2.ContainsKey("quote"));
+            var wire = after["blocks"]!.AsArray().Select(b => b!["type"]!.GetValue<string>() is "citation" or "quote"
+                ? (JsonNode)new JsonObject { ["type"] = b["type"]!.GetValue<string>(), ["doc_id"] = b["doc_id"]!.GetValue<string>(), ["copy"] = b["copy"]!.GetValue<string>(),
+                                             ["page"] = b["page"]!.GetValue<int>(), ["passage_id"] = b["passage_id"]?.GetValue<string>(), ["para"] = b["para"]?.GetValue<string>() }
+                : new JsonObject { ["type"] = b["type"]!.GetValue<string>(), ["origin"] = b["origin"]?.GetValue<string>(), ["text"] = b["text"]?.GetValue<string>() }).ToArray();
+            var saved = await Post(user, csrf, $"/api/studio/documents/{id}/save", new { blocks = new JsonArray(wire), base_version = after["version"]!.GetValue<int>(), title = "Cites the manual", state = "draft" });
+            Assert.Equal(HttpStatusCode.OK, saved.StatusCode);
             Assert.Contains("My own analysis", after.ToJsonString());               // the author's text is kept
             var html = await user.GetStringAsync($"/api/studio/documents/{id}/export?format=html");
             Assert.DoesNotContain(title, html);

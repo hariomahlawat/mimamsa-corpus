@@ -158,7 +158,7 @@ public sealed class GraphStore(NpgsqlDataSource db)
     }
 
     /// Visible edges incident to any node of the frontier (one indexed lookup per level).
-    async Task<List<EdgeView>> ExpandAsync(NpgsqlConnection c, string gen, string[] frontier, string[] hidden, int limit)
+    async Task<List<EdgeView>> ExpandAsync(NpgsqlConnection c, string gen, string[] frontier, string[] hidden, int limit, string[]? exclude = null)
     {
         await using var q = new NpgsqlCommand($"""
             SELECT e.edge_id,e.type,e.from_node,e.to_node,e.origin,e.source_doc_id,e.source_copy_sha,e.page,e.quote,e.temporal_from,e.temporal_from_status,
@@ -171,10 +171,12 @@ public sealed class GraphStore(NpgsqlDataSource db)
             WHERE e.generation_id=$1 AND (e.from_node = ANY($3) OR e.to_node = ANY($3))
               AND (e.source_doc_id IS NULL OR NOT e.source_doc_id = ANY($2))
               AND (a.doc_id IS NULL OR NOT a.doc_id = ANY($2)) AND (b.doc_id IS NULL OR NOT b.doc_id = ANY($2))
+              AND NOT e.edge_id = ANY($5)
             ORDER BY e.type, e.edge_id
             LIMIT $4
             """, c);
         q.Parameters.AddWithValue(gen); q.Parameters.AddWithValue(hidden); q.Parameters.AddWithValue(frontier); q.Parameters.AddWithValue(limit);
+        q.Parameters.AddWithValue(exclude ?? Array.Empty<string>());
         var list = new List<EdgeView>();
         await using var r = await q.ExecuteReaderAsync();
         while (await r.ReadAsync())
@@ -202,7 +204,9 @@ public sealed class GraphStore(NpgsqlDataSource db)
         bool truncated = false;
         for (int d = 0; d < depth && frontier.Length > 0; d++)
         {
-            var got = await ExpandAsync(c, gen, frontier, hidden, limit - result.Count + 1);
+            // edges already collected are excluded before the limit applies (Codex review of PR #75): a deeper level's
+            // re-returned first-level edges must not crowd out new ones or report truncation that did not happen
+            var got = await ExpandAsync(c, gen, frontier, hidden, limit - result.Count + 1, result.Keys.ToArray());
             if (result.Count + got.Count > limit) { truncated = true; got = got.Take(limit - result.Count).ToList(); }
             foreach (var e in got) result.TryAdd(e.Edge.Id, e);
             frontier = got.SelectMany(e => new[] { e.Edge.From, e.Edge.To }).Where(seen.Add).Take(MaxFrontier).ToArray();
