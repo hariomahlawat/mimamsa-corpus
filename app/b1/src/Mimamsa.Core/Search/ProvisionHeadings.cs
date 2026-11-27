@@ -28,6 +28,10 @@ public sealed partial class ProvisionHeadings
         "sentence", "trial", "try", "tried", "charge", "hearing",
     };
     public const double MinCoverage = 0.6;
+    /// Added after observing the C14 walkthrough queries (development data, not the oracle; see DECLARATIONS.md):
+    /// the matched heading stems must also cover at least half of the query's content stems, so two generic words
+    /// ("high court") cannot pull statute provisions above the case law a question is really about.
+    public const double MinQueryCoverage = 0.5;
     public const int MinMatched = 2, MaxBoosted = 5;
 
     sealed record Entry(int Passage, string DocTitle, string Number, string Heading, HashSet<string> Stems);
@@ -72,7 +76,7 @@ public sealed partial class ProvisionHeadings
         var q = Stems(string.Join(" ", words));
         if (q.Count < MinMatched) return scores;
         var picks = _entries.Select(e => (e, m: e.Stems.Count(q.Contains)))
-            .Where(x => x.m >= MinMatched && (double)x.m / x.e.Stems.Count >= MinCoverage)
+            .Where(x => x.m >= MinMatched && (double)x.m / x.e.Stems.Count >= MinCoverage && (double)x.m / q.Count >= MinQueryCoverage)
             .Select(x => (x.e, x.m, c: (double)x.m / x.e.Stems.Count, own: scores.GetValueOrDefault(x.e.Passage)))
             .GroupBy(x => x.e.Passage).Select(g => g.OrderByDescending(x => x.c).First())
             .OrderByDescending(x => x.c).ThenByDescending(x => x.m).ThenByDescending(x => x.own).ThenBy(x => x.e.Passage)

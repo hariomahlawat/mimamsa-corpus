@@ -169,5 +169,10 @@ public class C15HybridTests
         var c = ph.Boost(new() { [1] = 3 }, "how to hold a summary court martial".Split(' '), reasons);
         Assert.True(c[8] > c[9]);                                                                          // full coverage before 0.75
         Assert.True(c[9] > c[1]);
+
+        // two generic heading words in a long, case-law question do not reach the query-coverage threshold
+        ph.Add(11, "The Bharatiya Nagarik Suraksha Sanhita, 2023", "9", "Powers of High Court");
+        var d = ph.Boost(new() { [1] = 3 }, "can high court entertain writ against armed forces tribunal order".Split(' '), reasons);
+        Assert.False(d.ContainsKey(11));
     }
 }
