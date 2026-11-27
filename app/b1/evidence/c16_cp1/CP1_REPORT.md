@@ -5,7 +5,10 @@ development sites, disposable `c16cp1_*` databases and development keys. It is *
 full-corpus acceptance. **No FG-\* or CG-\* gate is closed on real data.** The outcome is explicitly
 **ACTIVE_DEGRADED / DEGRADED_LEXICAL_ONLY**, never ACTIVE_FULL.
 
-- Branch `claude/c16-cp1`, built on `claude/c16-b-interfaces` at `767734d8` (contract 2.1 additive; 2.0 frozen).
+- Branch `claude/c16-cp1`, built on `claude/c16-b-interfaces` at `767734d8`, then re-merged at `9af665e7` (PR #82
+  comment 7226917820: candidate sets CS1–CS5 and lexical-only activation M1/M2/K1/K2), contract 2.1 additive; 2.0 frozen.
+- **Follow-up (§8) closes the CP-1 interface gaps:** reference candidate-set check in B01 and B02, lexical-only activation
+  with NO model, `stage_only` mandatory on journal-managed sites, catalogue marker written by its owner.
 - Plan: PR #81 §7 (CP-1). The plan names the evidence path `app/b1/evidence/c16_tranche_b/`; this report is at the
   path the integration brief asked for.
 - Not authorised and not done: production activation, operational DB migration, trust-key or trust-list change,
@@ -16,7 +19,8 @@ full-corpus acceptance. **No FG-\* or CG-\* gate is closed on real data.** The o
 | Stream | PR | Merged head | Merge commit |
 | --- | --- | --- | --- |
 | B03 knowledge rows | #83 | `1107e404`, then `423e4754` (Windows CI admin DSN) | merge commits on `claude/c16-cp1` |
-| B06 activation journal | #86 | `61302ca8`, then `f761b4ca` (Linux pin-test fix) | ″ |
+| B06 activation journal | #86 | `61302ca8`, then `f761b4ca` (Linux pin-test fix), `7906efbe` (channel-test races, merged by the B06 author as `d91f5cd2`), `81b9253f` (lexical-only M1/M2/K1/K2, null MODELS; also merged by the B06 author as `4d54108b`) | ″ |
+| Interfaces | #82 | `767734d8`, then `9af665e7` | ″ |
 | B01 site importer | #85 | `cd6bbfb9`, then `c006d300` (Linux reproducibility) | ″ |
 | B02 build skeleton | #84 | `9b082d13` | ″ |
 
@@ -135,14 +139,16 @@ Checks (all pass; 45 in the journey, list in `slice-evidence-local-windows.json`
 
 | Job | Workflow | Platform | Run id | Result |
 | --- | --- | --- | --- | --- |
-| `cp1-slice` | App contract and design checks (`app-ci.yml`) | ubuntu-latest | 46056708789 (push), 46056764745 (pull_request) | success |
-| `cp1-slice-windows` | App Windows PoC (`app-windows-poc.yml`) | windows-latest | 46056708810 (push), 46056764683 (pull_request) | success |
+| `cp1-slice` | App contract and design checks (`app-ci.yml`) | ubuntu-latest | 46061338630 (push), 46061344250 (pull_request) | success |
+| `cp1-slice-windows` | App Windows PoC (`app-windows-poc.yml`) | windows-latest | 46061338674 (push), 46061344291 (pull_request) | success |
 
-All on head `4452eb21`. In the same runs every existing job is green: contract (3.11, 3.12, 3.13), importer, kbuild,
-design-tokens, b1 (including the disk-config leg), b1-windows and windows-services. The load-flaky
+Follow-up head `b7d6071a` (lexical-only with NO model, reference candidate sets, mandatory stage-only). In the same runs
+every existing job is green: contract (3.11, 3.12, 3.13), importer, kbuild, design-tokens, b1 (including the disk-config
+leg), b1-windows and windows-services. First CP-1 head `4452eb21`: 46056708789 / 46056764745 (Linux) and
+46056708810 / 46056764683 (Windows), all green. The load-flaky
 `PersistentIndexTests.DiskEngineReturnsExactlyWhatTheMemoryEngineReturns` did not fail in CI. Earlier runs on this
 branch were cancelled by newer pushes (concurrency), or failed only because the slice journey lacked
-`MIMAMSA_TEST_SITE` (fixed in 4452eb21).
+`MIMAMSA_TEST_SITE` (fixed in 4452eb21). Later report-only commits re-run the same jobs.
 
 Existing jobs are unchanged. On windows-latest the app role is not a superuser, so the slice's
 `c16cp1_*` databases and loader role are created through `MIMAMSA_TEST_PG_ADMIN` (the runner's superuser), as B03's
@@ -153,13 +159,20 @@ lock-holder pid check on Windows and a `CurrentUserOnly` Unix socket on Linux (B
 
 | Suite | Result |
 | --- | --- |
-| Contract (`app/contract/tests`) | 477 passed, 8 failed: the pre-existing Windows-host `test_bundle` cases (symlink privilege, 6 path hazards, case collision). The ninth usual one (short-name alias) passed this run. Unrelated to CP-1 |
-| Importer (`app/importer/tests`) | 237 passed |
-| kbuild (`app/kbuild/tests`) | 39 passed |
-| B1 C#, default mode | 378 passed |
-| B1 C#, disk mode (`MIMAMSA_TEST_TEXT_STORE=disk`, `Mimamsa__Text__Store=disk`, `Mimamsa__Search__Engine=disk`, dirs outside the repo) | 378 passed (fourth run). Earlier runs each had one load-dependent failure that passed in isolation (see §7) |
+Follow-up head (`b7d6071a`):
+
+| Suite | Result |
+| --- | --- |
+| Contract (`app/contract/tests`) | 497 passed, 10 failed: 8 are the pre-existing Windows-host `test_bundle` cases; 2 (`test_2_1_fixtures_are_byte_identical_to_builder_output`, `test_candidate_set_positive_binds_to_declared_digest`) fail only on a `core.autocrlf=true` checkout because the new PR #82 fixture `accounting/registers/candidate_sets/candidates-2026.txt` is not covered by the fixtures' `-text` rule (§7 item 12). Linux CI passes them |
+| Importer (`app/importer/tests`) | 238 passed |
+| kbuild (`app/kbuild/tests`) | 40 passed |
+| B1 C#, default mode | 386 passed |
+| B1 C#, disk mode (`MIMAMSA_TEST_TEXT_STORE=disk`, `Mimamsa__Text__Store=disk`, `Mimamsa__Search__Engine=disk`, dirs outside the repo) | 386 passed (second run). The first run had one load-dependent failure, `TextStoreTests.ADerivativeRemovedOrCorruptedAfterTheBuildIsNotServedAfterReopen(corrupt, True)`, which passed 3/3 in isolation and in the full rerun |
 | Playwright, default config, `--workers=1`, ports 6360/6361 | 81 passed (regenerated screenshots restored) |
-| CP-1 slice (driver + journey + default-mode oracle) | pass |
+| CP-1 slice (driver + journey + default-mode oracle) | pass; oracle identical to the hybrid-off baseline |
+
+First CP-1 head (`4452eb21`): contract 477 passed and 8 failed (pre-existing), importer 237, kbuild 39, B1 C# 378 in both
+modes, Playwright 81, slice pass.
 
 ## 6. Gates exercised (on fixtures only)
 
@@ -174,15 +187,11 @@ lock-holder pid check on Windows and a `CurrentUserOnly` Unix socket on Linux (B
 
 ## 7. Remaining gaps and flags for review
 
-1. **Proposed 2.1 addition (flagged):** a declared `V7_REFERENCE` source carries only `candidate_set_sha256`, but the site's
-   relabel check needs the hashes. B01 now requires `registers/candidate_sets/<name>.txt` (the exact preimage of the digest).
-   This needs the 2.1 review; the interface does not say how the hashes travel.
-2. **B06 requires a model "with vectors for" the target** before a KNOWLEDGE switch. A lexical-only release has none. The
-   slice stages a placeholder model marked **not verified** to meet that precondition. The interface should define how a
-   DEGRADED_LEXICAL_ONLY activation satisfies the MODELS pin.
-3. **The importer wrote ACTIVE itself and treated a staged generation as residue**, bypassing the journal. CP-1 adds
-   `stage_only`; making the importer stage-only on every journal-managed site, and writing the `C16_VERIFIED.json`
-   catalogue marker after verification (the journey writes it), is B01/B06-integrated work.
+1. ~~v7 candidate hashes~~ **Resolved (§8):** PR #82 `9af665e7` specified CS1–CS5; B01 and B02 use the reference check.
+2. ~~B06 needed a model "with vectors for" a lexical-only target~~ **Resolved (§8):** M1/M2/K1/K2 with null MODELS; the
+   slice activates with NO model; the placeholder model is gone.
+3. ~~The importer wrote ACTIVE itself; the journey wrote the catalogue marker~~ **Resolved (§8):** `stage_only` is
+   mandatory on journal-managed sites; `GenerationStaging` (Core, activation tool) writes the marker.
 4. **No in-process generation swap**: after OPEN the web process fails closed until restarted (B06's design for CP-1).
 5. **B04 .NET verifiers** (graph structural recheck, sampled rebuild parity, postings and query parity) are not built;
    GRAPH and KNOWLEDGE_ROWS are verified by the loader's full re-derivation; LEXICAL_INDEX only by file hash and
@@ -191,13 +200,12 @@ lock-holder pid check on Windows and a `CurrentUserOnly` Unix socket on Linux (B
 7. **Graph surface, Studio and PDF delivery** are not yet behind the response-boundary filter (CP-1 scope was search,
    document text, citation and permalink).
 8. **Load-dependent test flakes seen locally** (each passed in isolation and in a later full run):
-   - B06 `ControlChannelTests.Connection_from_a_process_that_is_not_the_lock_holder_is_refused_on_windows`: root cause
-     is a race in the test, not the product. The client's channel timeout can fire before the server has run
-     `Reject(...)`, and the test reads `LastRejectReason` immediately after the client throws. Under load it reads null.
-     Fix belongs in B06: wait for the server's reject (or poll `Rejected`) before asserting. Reported to the stream; not
-     patched here.
-   - B06 `ControlChannelTests.Activation_switches_the_participant_through_the_authenticated_pipe`: one failure under
-     full-suite load (5 s channel timeout); same class of issue.
+   - B06 `ControlChannelTests` (the not-lock-holder rejection and the authenticated-pipe switch): a race in the tests
+     (the client's channel timeout could fire before the server recorded the rejection). **Fixed by the B06 author**
+     (`7906efbe`, merged); not seen again.
+   - `TextStoreTests.ADerivativeRemovedOrCorruptedAfterTheBuildIsNotServedAfterReopen(corrupt, True)`: one failure in a
+     disk-mode full run on the follow-up head; passed 3/3 in isolation and in the full rerun. The 2.1 digest change does
+     not alter this case's path (a corrupted derivative file never changes the records, before or after).
    - `PersistentIndexTests.ARebuildReusesCachedTokensAndGivesIdenticalResults`: one failure in the disk-mode full suite;
      not reproduced in 3 isolated runs and 1 further full run. The known `DiskEngineReturnsExactlyWhatTheMemoryEngineReturns`
      did not fail in any run here.
@@ -207,3 +215,38 @@ lock-holder pid check on Windows and a `CurrentUserOnly` Unix socket on Linux (B
     stream them).
 11. `mimamsa_contract.devbundle` (v1) still sorts `Path` objects when writing SHA256SUMS (B01's c006d300 finding). The CP-1
     path does not use it (B02 writes its own ordinal inventories), so it is left unchanged and reported.
+12. **For PR #82 (interfaces):** `app/contract/fixtures/c16/v2_1/.gitattributes` marks only `*.json` and `*.jsonl` as
+    `-text`. The new `.txt` candidate-set fixture is therefore converted to CRLF on `core.autocrlf=true` checkouts
+    (Windows), so two interface tests fail there (CS2 digest, fixture byte-identity). Linux CI is unaffected. Fix: add
+    `*.txt -text` in the interface branch. Not changed here.
+13. **v7 in a real build:** B02 reads v7 candidate sets from the pinned revision at `v7/candidate_sets/<name>.txt` (canonical
+    bytes, refused otherwise). The real layout of `legal_knowledge/candidates/cycle15/v7` still needs converting into that
+    form in Stage 3 (like the v1 canonical layout).
+
+## 8. CP-1 follow-up (PR #82 `9af665e7`: CP-1 gaps specified as additive 2.1 rules)
+
+- **Merges:** interfaces `9af665e7`; B06 `7906efbe` (channel-test races) and `81b9253f` (lexical-only releases), the latter
+  also merged by the B06 author (`4d54108b`); both resolutions of the one `Program.cs` conflict keep both the B06
+  per-pin semantic gate and the CP-1 response boundary (identical content).
+- **B01 candidate sets:** the private check is removed. `accounting.candidate_set_issues(declared, files,
+  admission_inventory)` (CS1–CS5) runs on the signed declaration against the ADMISSION_REGISTER inventory (the signed
+  RELEASE.json inventory when the bundle has no knowledge release manifest); the verified union feeds
+  `legacy.legacy_issues` as `candidate_shas`. Tests: missing file (CS1), digest (CS2), orphan (CS5). The B01 test harness
+  ships a candidate set only when its declaration declares the V7 source, as CS5 requires.
+- **B02 candidate sets:** every declared `V7_REFERENCE` source (read from `v7/candidate_sets/<name>.txt` at the pinned
+  revision) ships `registers/candidate_sets/<name>.txt` (sorted lower-case hex, LF-joined, no final LF, ASCII; sha256 =
+  `provenance.candidate_set_sha256`; lines = `input`) in the ADMISSION_REGISTER files, SHA256SUMS and the signature. S2's
+  SG-1 relabel check uses the hashes, and S9 runs the reference check against the signed inventory. The cp1 mirror carries
+  `v7:cycle15`, so the slice imports a V7_REFERENCE source end to end.
+- **Lexical-only activation with NO model:** `GenerationStaging` records B06's lexical-only classification (from the
+  verified `KNOWLEDGE_RELEASE.json`) with the catalogue marker; the journal is initialised with `models = null`; G2 is
+  activated and G1 rolled back to under K2 with no model installed (`b06_no_model_installed`). Search runs lexical-only.
+  The outcome is still ACTIVE_DEGRADED / DEGRADED_LEXICAL_ONLY with `site_embedding: NEVER`.
+- **`stage_only` mandatory on journal-managed sites:** once `journal/journal.jsonl` or `activation-state/SITE_INIT.json`
+  exists, a non-stage import is refused before anything is written (`ACTIVATION_JOURNAL_MANAGED`); tested with the site
+  byte-identical.
+- **Catalogue marker owner:** `Mimamsa.Core.Activation.GenerationStaging.VerifyAndStageAsync` (the activation tool's
+  staging step) runs the B03 restricted loader (knowledge and graph rows), the B04 text-store adoption and lexical-index
+  checks, and writes `C16_VERIFIED.json` last and only when all pass. The journey calls it and asserts the generation is
+  not installed before it. Wiring it into the `Mimamsa.Activation` CLI (a `stage` command with the loader's credentials)
+  is B07 installer work.
