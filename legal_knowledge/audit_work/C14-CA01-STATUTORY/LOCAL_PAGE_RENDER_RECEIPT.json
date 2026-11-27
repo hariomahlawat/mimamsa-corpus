@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-26",
+  "record_type": "OWNER_LOCAL_RENDER_MANIFEST_RECONCILIATION",
+  "render_commit": "f60744cce9f9b7d426597ea673eb2dbddfa523ce",
+  "uploaded_manifest_sha256": "153255ac19a5df37b615bec5de2a97f305933ebf4facee8fc56ee606d949fa36",
+  "bound_verification_receipt_sha256": "156d0dfde8fad89fbdad31e34fdd973ef65df4014de3000d971c2fce68c34b9f",
+  "renderer": "PyMuPDF 2.1",
+  "dpi": 150,
+  "pdf_count": 15,
+  "physical_pages": 193,
+  "unique_image_paths": 193,
+  "distinct_reported_image_sha256": 193,
+  "all_page_sequences_and_path_formats_valid": true,
+  "all_source_ids_hashes_counts_and_registration_states_match_prior_inventory_and_A7_metadata": true,
+  "reported_repaired_pdfs": 0,
+  "access_marking_review": "PENDING_VISUAL_REVIEW",
+  "identity_review": "PENDING_VISUAL_REVIEW",
+  "exact_anchors": 0,
+  "records": [
+    {
+      "target_id": "C13-G1-AR-POST2022-236757",
+      "source_sha256": "c785b4d7d98b5329f785779008b786dea75b24aabcfa8633859fc340c8ecdefd",
+      "registration_state": "HOLD_PIN_MISMATCH",
+      "physical_pages": 3,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G1-AR-POST2022-241268",
+      "source_sha256": "7bb4c7a3ee9149ed30683b174654a5c99d78a4bd660afc81b207643222855f1a",
+      "registration_state": "HOLD_PIN_MISMATCH",
+      "physical_pages": 2,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G1-AR-POST2022-246457",
+      "source_sha256": "7a6c1b75700a461498bd669ca6db600aa7d03772cf9fff8e2495c6e8f02307bf",
+      "registration_state": "HOLD_SUBJECT_UNCONFIRMED",
+      "physical_pages": 2,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G1-AR-POST2022-254308",
+      "source_sha256": "1a4c2cb12442d250aa19c70d3a959c382f0706e15d984452f59cc827d1295591",
+      "registration_state": "HOLD_SUBJECT_UNCONFIRMED",
+      "physical_pages": 3,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G1-AR-POST2022-273809",
+      "source_sha256": "cc4f9d84515223c153769d5cb7e3cffa52955abac99a852048623aaa6f65d5ed",
+      "registration_state": "HOLD_SUBJECT_UNCONFIRMED",
+      "physical_pages": 2,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G1-AA-ENACTED-1950",
+      "source_sha256": "1519957a47352835942822b1b6da3ac4578c0aed1e74fbb847fb4c44e0a48fd4",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "physical_pages": 104,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G2-acq03-020-b4",
+      "source_sha256": "48532ed5d8a9d9449932afba79de6bfa139eb4c8f6a2bde03f116c423f24e206",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "physical_pages": 2,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G2-acq03-021-b4",
+      "source_sha256": "45b2c73069e6b62db59c79519bd590937af86cb24d36b84d7addb063a6149505",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "physical_pages": 24,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G2-acq03-015-b3",
+      "source_sha256": "dae0be5332c89d2f31111d0308836359ac822e3a8bb6b0aa17608c37d1cad68e",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "physical_pages": 16,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G2-acq03-023-b4",
+      "source_sha256": "66bb0254a0e07d500f6272f82fc6c7d872f9afd0839afa6c54aa9cd3cc302697",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "physical_pages": 20,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G2-acq03-024-b4",
+      "source_sha256": "3e4fca3e7d71e6b1b52ca4c6dd6c022bce3ae2fdb65ae2ff7a310a5fd48290a4",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "physical_pages": 2,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G2-acq03-025-b4",
+      "source_sha256": "0909643766770ae3d331af3bb5088e8e6e8083ac417be137606076b6d79a77fb",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "physical_pages": 7,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G1-BSA-COMM-252352",
+      "source_sha256": "fde9e9722eb4c01375525c2a30442903371913f4199b8cef1d031535d88228e7",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "physical_pages": 2,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G1-BNS-COMM-252353",
+      "source_sha256": "dfcd5df23fb711f2996959b13ee6ff6bd32ed38be1e1f2d1c820cbba86e2a8c9",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "physical_pages": 2,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "target_id": "C13-G1-BNSS-COMM-252354",
+      "source_sha256": "0db8a86a0cf41fbf5ee304ee84b8b145da0bd523af510baf351d79d051ef657d",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "physical_pages": 2,
+      "status": "RENDERED_NOT_REVIEWED",
+      "eligible_for_exact_anchor": false
+    }
+  ],
+  "limitations": [
+    "Only the owner-provided manifest was inspected; original PDFs and PNG bytes remain on the local runner. Image hash values checked for syntax and uniqueness only, not independently recomputed.",
+    "Rendering is not evidence of access clearance, documentary identity, pagination concordance, legal authenticity or operative law. All existing holds remain.",
+    "No HF writes, ingestion, legal promotion or staging merge."
+  ]
+}

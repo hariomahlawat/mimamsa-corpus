@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-26",
+  "record_type": "OWNER_LOCAL_EXECUTION_RECEIPT_RECONCILIATION",
+  "runner_commit": "11aee06cf3b4fb1d141f5e5fe36ff1e7834286b8",
+  "candidate_inventory_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+  "uploaded_report_sha256": "156d0dfde8fad89fbdad31e34fdd973ef65df4014de3000d971c2fce68c34b9f",
+  "inventory_sha256": "26870fcc30612de19f5a5886f4c96a6112fbb335dac00861e7b7a2e24a7ff279",
+  "started_utc": "2026-11-26T02:21:23.573730+00:00",
+  "finished_utc": "2026-11-26T02:21:58.567491+00:00",
+  "observed_head": "f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc",
+  "final_observed_head": "f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc",
+  "observed_file_count": 16255,
+  "preservation_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+  "pdf_count": 15,
+  "bytes": 17565129,
+  "all_reported_sha256_md5_bytes_match_candidate_inventory": true,
+  "all_paths_listed_at_observed_head": true,
+  "head_unchanged": true,
+  "registration_counts": {
+    "HOLD_PIN_MISMATCH": 2,
+    "HOLD_SUBJECT_UNCONFIRMED": 3,
+    "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK": 10
+  },
+  "legal_promotions": 0,
+  "hf_writes": 0,
+  "status": "BYTE_CHECK_COMPLETE_NOT_LEGALLY_VERIFIED",
+  "transport": "Process-local AF_UNSPEC -> AF_INET resolver override; HF_HUB_DISABLE_XET=1; TLS verification unchanged. Two earlier runs returned ConnectError before metadata. Owner screenshots show IPv4 Python TLS succeeds, IPv6 Python TLS reset; cURL IPv6 succeeds.",
+  "limitations": [
+    "Report supplied by owner from local runner; coordinator compared its 15 reported SHA-256/MD5/size values with live Git candidate inventory, not original bytes independently.",
+    "Current HF HEAD path presence is not current-HEAD byte verification; bytes retrieved at preservation revision only.",
+    "No source authenticity, access markings, exact page anchors, amendment chains or legal applicability established.",
+    "Independent Codex assurance remains pending. No active register change, staging merge, HF write or bulk acquisition."
+  ]
+}

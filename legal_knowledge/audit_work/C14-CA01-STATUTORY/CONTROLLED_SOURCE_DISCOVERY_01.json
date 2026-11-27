@@ -1,0 +1,247 @@
+{
+  "date": "2026-11-26",
+  "baseline": "c1e4d461e208bf961fd6bc51584dad01df220e61",
+  "prior_review_commit": "496a797b086f5031081f3af4e9865d9e0ebd62e5",
+  "input_reconciliation_blob": "428e8589b5c6b9200ecb86af394d74ee9a021f54",
+  "scope": "Controlled public-source discovery only; no raw downloads, no HF writes, no promotion, no active configuration change",
+  "leads": [
+    {
+      "lead_id": "C14-D01",
+      "request_id": "A4-ACQ-025",
+      "title": "Acts of the Parliament of India 1955, Act 19 including Schedule",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Acts_of_the_Parliament_of_India_1955.pdf",
+      "carrier": "THIRD_PARTY_REPRODUCTION_OF_GOVERNMENT_COMPILATION",
+      "observation": "Indexed text at printed pp100–101 shows section 2 and Schedule; Army Act entry substitutes s3(iv) and designation throughout subject to express exceptions. Commons metadata cites Legislative Department original; no direct government original retrieved.",
+      "verification": "TEXT_LOCATED_IMAGE_FETCH_SIZE_LIMIT; physical pages unconfirmed",
+      "expected_bytes": 17513943,
+      "expected_sha1": "d6dba48f111834d37bd1d32b839c089aa76aa638",
+      "expected_sha256": null,
+      "expected_md5": null,
+      "raw_bytes_acquired": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false,
+      "legal_status": "DISCOVERY_LEAD_NOT_VERIFIED",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 161
+    },
+    {
+      "lead_id": "C14-D02",
+      "request_id": "A4-ACQ-025",
+      "title": "Act 19 of 1955 later India Code copy",
+      "url": "https://www.indiacode.nic.in/repealedfileopen?rfilename=A1955-19.pdf",
+      "carrier": "GOVERNMENT_HOSTED_COMPILATION",
+      "observation": "Printed page 1 states s2 and Schedule repealed by Act 58/1960; footnote corroborates 7 May 1955 commencement. Cannot supply original Schedule.",
+      "verification": "FIRST_PAGE_VISUALLY_CONFIRMED",
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "expected_md5": null,
+      "raw_bytes_acquired": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false,
+      "legal_status": "DISCOVERY_LEAD_NOT_VERIFIED",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 161
+    },
+    {
+      "lead_id": "C14-D03",
+      "request_id": "A4-ACQ-025",
+      "title": "Repealing and Amending Act 1960 (58 of 1960)",
+      "url": "https://www.indiacode.nic.in/repealedfileopen?rfilename=A1960-58.pdf",
+      "carrier": "GOVERNMENT_HOSTED_HISTORICAL_COPY",
+      "observation": "Supporting repeal history; sections 2 and 4–5 readable in web text. First Schedule page 658 rendered but specific 1955 row not visually confirmed; next screenshot timed out. Printed marginal repeal annotations inconsistent with extracted first line; preserve discrepancy for review.",
+      "verification": "PARTIAL_VISUAL_AND_TEXT_CHECK",
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "expected_md5": null,
+      "raw_bytes_acquired": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false,
+      "legal_status": "DISCOVERY_LEAD_NOT_VERIFIED",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 161
+    },
+    {
+      "lead_id": "C14-D04",
+      "request_id": "A4-ACQ-013",
+      "title": "Army Act section 12 notification No. 12(5)/2025-DMA(AG-II)",
+      "url": "https://egazette.gov.in/WriteReadData/2026/276593.pdf",
+      "carrier": "OFFICIAL_PUBLISHER_LOCATOR_FROM_THIRD_PARTY_INDEX",
+      "observation": "Gazette Tracker transcribes notification dated 31 Aug 2026, issue dated 17 Sep 2026 and eGazette publication 29 Sep 2026, adding AMC and AEC to 1992 notification as amended 2019. Section 12 instrument, NOT amendment of Army Rules. Official PDF timeout; legal effective date unresolved.",
+      "verification": "INDEX_TEXT_ONLY_OFFICIAL_PDF_TIMEOUT",
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "expected_md5": null,
+      "raw_bytes_acquired": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false,
+      "legal_status": "DISCOVERY_LEAD_NOT_VERIFIED",
+      "dependent_citation_items": 204,
+      "dependent_version_records": 209
+    },
+    {
+      "lead_id": "C14-D05",
+      "request_id": "A4-ACQ-037",
+      "title": "Bharatiya Nyaya Sanhita 2023, Act 45, Gazette 250883",
+      "url": "https://www.mha.gov.in/files/documents/250883_english01042024.pdf",
+      "carrier": "GOVERNMENT_HOSTED_GAZETTE_REPRODUCTION",
+      "observation": "MHA Judicial Division listing links this exact URL. Cover visually shows Part II Section 1 No53, 25 Dec 2023; web PDF 102 pages. Match to existing raw-store copies before new acquisition.",
+      "verification": "COVER_VISUALLY_CONFIRMED",
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "expected_md5": null,
+      "raw_bytes_acquired": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false,
+      "legal_status": "DISCOVERY_LEAD_NOT_VERIFIED",
+      "dependent_citation_items": 126,
+      "dependent_version_records": 3
+    },
+    {
+      "lead_id": "C14-D06",
+      "request_id": "A4-ACQ-037",
+      "title": "Bharatiya Sakshya Adhiniyam 2023, Act 47, Gazette 250882",
+      "url": "https://www.mha.gov.in/files/documents/250882_english_01042024_0.pdf",
+      "carrier": "GOVERNMENT_HOSTED_GAZETTE_REPRODUCTION",
+      "observation": "MHA Judicial Division listing links this exact URL. Cover visually shows Part II Section 1 No55, 25 Dec 2023; web PDF 47 pages. Match existing raw-store copies.",
+      "verification": "COVER_VISUALLY_CONFIRMED",
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "expected_md5": null,
+      "raw_bytes_acquired": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false,
+      "legal_status": "DISCOVERY_LEAD_NOT_VERIFIED",
+      "dependent_citation_items": 126,
+      "dependent_version_records": 3
+    },
+    {
+      "lead_id": "C14-D07",
+      "request_id": "A4-ACQ-037",
+      "title": "Bharatiya Nagarik Suraksha Sanhita 2023, Act 46, Gazette 250884",
+      "url": "https://www.mha.gov.in/files/documents/250884_2english_01042024.pdf",
+      "carrier": "GOVERNMENT_HOSTED_GAZETTE_REPRODUCTION",
+      "observation": "MHA Judicial Division listing links this exact URL. Cover visually shows Part II Section 1 No54, 25 Dec 2023; web PDF 249 pages. Match existing raw-store copies.",
+      "verification": "COVER_VISUALLY_CONFIRMED",
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "expected_md5": null,
+      "raw_bytes_acquired": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false,
+      "legal_status": "DISCOVERY_LEAD_NOT_VERIFIED",
+      "dependent_citation_items": 126,
+      "dependent_version_records": 3
+    },
+    {
+      "lead_id": "C14-D08",
+      "request_id": "A4-ACQ-001",
+      "title": "Army Rule 22 Explanation attribution to SRO 258 of 27 Nov 2002",
+      "url": "https://indiacode.ecourtsindia.com/rules/army-rules-1954-059789cd/",
+      "carrier": "DERIVATIVE_TEXT_REFERENCE_NOT_ORIGINAL",
+      "observation": "Derivative page explicitly places the attribution at Rule 22 Explanation relating to proceedings under s80. Locate Gazette original and compare existing C5 official compilation; not an acquisition of original notification.",
+      "verification": "TEXT_ATTRIBUTION_ONLY",
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "expected_md5": null,
+      "raw_bytes_acquired": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false,
+      "legal_status": "DISCOVERY_LEAD_NOT_VERIFIED",
+      "dependent_citation_items": 29,
+      "dependent_version_records": 2
+    },
+    {
+      "lead_id": "C14-D09",
+      "request_id": "A4-ACQ-034",
+      "title": "AFT Jaipur official history of commencement",
+      "url": "https://aftjaipur.gov.in/",
+      "carrier": "OFFICIAL_INSTITUTIONAL_REFERENCE_NOT_GAZETTE",
+      "observation": "Official institutional page cites 15 June 2008 commencement and SRO 14(E), 13 June 2008; original register labels S.O. 14(E), so preserve nomenclature conflict and seek Gazette.",
+      "verification": "REFERENCE_ONLY",
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "expected_md5": null,
+      "raw_bytes_acquired": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false,
+      "legal_status": "DISCOVERY_LEAD_NOT_VERIFIED",
+      "dependent_citation_items": 89,
+      "dependent_version_records": 24
+    }
+  ],
+  "source_metadata": {
+    "historical_compilation_metadata": "https://commons.wikimedia.org/wiki/File:Acts_of_the_Parliament_of_India_1955.pdf",
+    "historical_compilation_reported_original": "http://www.legislative.gov.in/sites/default/files/legislative_references/1955.pdf",
+    "historical_compilation_note": "Historical original URL from Commons metadata, not current validated URL; no HTTP download authorised.",
+    "section12_index": "https://gazettetracker.com/g/CG-DL-E-29092026-276593",
+    "mha_listing": "https://www.mha.gov.in/index.php/judicial-wing-division"
+  },
+  "search_log": [
+    {
+      "target": "A4-ACQ-013",
+      "queries": [
+        "Army Rules 1954 amendment 2023 2024 2025 2026 Gazette section 191",
+        "exact Army (Amendment) Rules year phrases",
+        "Gazette Tracker Army Rules and section 191",
+        "parliament papers laid with Army (Amendment) Rules and year"
+      ],
+      "result": "No post-6 June 2022 amendment to Army Rules 1954 identified by these indexed searches. Not proof of no amendment; no exhaustive Gazette issue inventory or custodian certification."
+    },
+    {
+      "target": "A4-ACQ-002 and 012",
+      "queries": [
+        "Army Rules Military Secretary rule 15 amendment SRO",
+        "Army Rules 17 June 1960 amendment SRO"
+      ],
+      "result": "No primary original located in returned results."
+    },
+    {
+      "target": "A4-ACQ-025",
+      "queries": [
+        "Commanders-in-Chief Change in Designation Act 1955 Schedule",
+        "1955 original Gazette May 3 archive",
+        "Acts of Parliament India 1955 annual volume"
+      ],
+      "result": "Historical compilation and government later copy found; original Gazette locator not established."
+    }
+  ],
+  "acquisition_preparation": {
+    "proposed_first_batch": [
+      "C14-D01",
+      "C14-D02",
+      "C14-D03",
+      "C14-D04",
+      "C14-D05",
+      "C14-D06",
+      "C14-D07"
+    ],
+    "reference_only": [
+      "C14-D08",
+      "C14-D09"
+    ],
+    "max_new_documents": 7,
+    "all_disabled": true,
+    "host_scope": "MHA, Wikimedia and reference hosts not enabled by existing source configuration for these targets; require review of exact scope before automated retrieval. India Code old host migration policy must be respected. eGazette source timeout must not be bypassed.",
+    "required_gates": [
+      "Cross-check all 7 candidates against raw-store and preservation inventory by title, source URL, known hash/size and identity; record duplicates, do not redownload known bytes.",
+      "Approve exact source URLs, robots/TLS and redirect scope before local fetch; no wildcard, no login or CAPTCHA bypass.",
+      "Record HTTP response, exact bytes and SHA256; pin Commons published SHA1 and size as carrier integrity only. Full access-marking review before sharing or ingestion.",
+      "Check full pages and instrument boundaries; keep official compilation, original Gazette and third-party reproduction distinct.",
+      "No closure of A4-ACQ-013, 025 or 037 on discovery alone. Independent Codex review before any merge."
+    ]
+  },
+  "blockers": [
+    "Container DNS resolution failed for egazette.gov.in, www.indiacode.nic.in, www.mha.gov.in and upload.wikimedia.org. Web browsing supplied text/cover evidence, not downloaded original bytes.",
+    "Historical compilation screenshot request failed at 17,513,943-byte size limit; exact printed page image pending.",
+    "Existing 23 archive document proposal remains disabled; no new host activated.",
+    "No exhaustive search of Gazette or parliamentary records; no negative legal-currency certification."
+  ]
+}

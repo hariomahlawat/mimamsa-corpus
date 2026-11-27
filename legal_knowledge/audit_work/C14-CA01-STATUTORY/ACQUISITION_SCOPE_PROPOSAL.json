@@ -1,0 +1,930 @@
+{
+  "date": "2026-11-26",
+  "baseline": "c1e4d461e208bf961fd6bc51584dad01df220e61",
+  "scope": "CA-01B proposal only; no changes to crawler configuration; no network permission granted by this file",
+  "input_blobs": [
+    "428e8589b5c6b9200ecb86af394d74ee9a021f54",
+    "5b260ca748b980db4b3dee16f62cf4ba115555ad",
+    "e22caee1bd39d05b1ea25be3a51d2b3c01320f5f",
+    "5dcc6729c1d8181833ffecf76b9cc6c64f90cef1"
+  ],
+  "archive_target_count": 23,
+  "archive_exact_redirect_candidates": 61,
+  "unprobed_target_hosts": [
+    "dn710102.ca.archive.org",
+    "dn710302.ca.archive.org",
+    "dn710601.ca.archive.org",
+    "dn710606.ca.archive.org",
+    "dn710807.ca.archive.org",
+    "dn720006.ca.archive.org",
+    "dn760103.eu.archive.org",
+    "dn760109.eu.archive.org",
+    "dn790002.ca.archive.org",
+    "dn790003.ca.archive.org",
+    "dn790006.ca.archive.org",
+    "dn790008.ca.archive.org",
+    "dn790009.ca.archive.org"
+  ],
+  "policy": [
+    "Exact HTTPS URL per target; require default port, no userinfo, query, fragment, backslash, percent escapes or dot segments for numeric archive paths. Validate raw redirect Location before URL resolution and resolved URL before connection.",
+    "Redirect candidates may not be used for another target; reject unlisted host/path, even if on same archive domain. Robots requests separately restricted to exact approved origin /robots.txt.",
+    "Re-probe TLS/robots and permitted paths; deny login/CAPTCHA/401/403/429 and network errors; enforce 2 seconds per host, bounded file size and hops, no From unless explicit environment opt-in.",
+    "Strict expected MD5 and bytes at fetch; SHA-256 dedup across all manifests before preservation; mismatched files stay quarantined outside active corpus; no overwrite.",
+    "Do not apply patch 0003 or accept certificate material until independent review and owner approval; no TLS disable or wildcard host.",
+    "Government locators are leads only: recheck current host, exact file, access marks, and duplicates before any approved run. No crawler access to RM-001."
+  ],
+  "archive_targets": [
+    {
+      "target_id": "C13-G2-acq03-001-b1",
+      "request_ids": [
+        "A4-ACQ-003"
+      ],
+      "description": "PR #23 archive_acq03: Army (First Amendment) Rules, 1966 (OCR: Part 1 of Appendix IV)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1966-08-27.76274/76274.pdf",
+      "expected_md5": "db421593aff8a9d834387d16288f2c99",
+      "expected_bytes": 216518,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn790003.ca.archive.org/0/items/in.gazette.central.w.1966-08-27.76274/76274.pdf",
+          "host": "dn790003.ca.archive.org",
+          "path": "/0/items/in.gazette.central.w.1966-08-27.76274/76274.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia803102.us.archive.org/5/items/in.gazette.central.w.1966-08-27.76274/76274.pdf",
+          "host": "ia803102.us.archive.org",
+          "path": "/5/items/in.gazette.central.w.1966-08-27.76274/76274.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia903102.us.archive.org/5/items/in.gazette.central.w.1966-08-27.76274/76274.pdf",
+          "host": "ia903102.us.archive.org",
+          "path": "/5/items/in.gazette.central.w.1966-08-27.76274/76274.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-002-b1",
+      "request_ids": [
+        "A4-ACQ-004"
+      ],
+      "description": "PR #23 archive_acq03: unknown Army Rules amendment (OCR: further to amend the Army Rules, 1954)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1967-01-07.73211/73211.pdf",
+      "expected_md5": "b563f24104b7db4f7460a28d8eac78df",
+      "expected_bytes": 270581,
+      "redirect_url_candidates": [
+        {
+          "url": "https://ia802807.us.archive.org/1/items/in.gazette.central.w.1967-01-07.73211/73211.pdf",
+          "host": "ia802807.us.archive.org",
+          "path": "/1/items/in.gazette.central.w.1967-01-07.73211/73211.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia902807.us.archive.org/1/items/in.gazette.central.w.1967-01-07.73211/73211.pdf",
+          "host": "ia902807.us.archive.org",
+          "path": "/1/items/in.gazette.central.w.1967-01-07.73211/73211.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-003-b1",
+      "request_ids": [
+        "A4-ACQ-005"
+      ],
+      "description": "PR #23 archive_acq03: unknown Army Rules amendment (OCR)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1967-12-16.75707/75707.pdf",
+      "expected_md5": "fa551a7f1e5fb34697954af3b046172c",
+      "expected_bytes": 217120,
+      "redirect_url_candidates": [
+        {
+          "url": "https://ia600503.us.archive.org/23/items/in.gazette.central.w.1967-12-16.75707/75707.pdf",
+          "host": "ia600503.us.archive.org",
+          "path": "/23/items/in.gazette.central.w.1967-12-16.75707/75707.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia800503.us.archive.org/23/items/in.gazette.central.w.1967-12-16.75707/75707.pdf",
+          "host": "ia800503.us.archive.org",
+          "path": "/23/items/in.gazette.central.w.1967-12-16.75707/75707.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-004-b1",
+      "request_ids": [
+        "A4-ACQ-006"
+      ],
+      "description": "PR #23 archive_acq03: Army Amendment Rules, 1968 (OCR: Appendix I)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1968-11-16.72289/72289.pdf",
+      "expected_md5": "d890fc7f2c663eeb103e5623d9a89a75",
+      "expected_bytes": 419587,
+      "redirect_url_candidates": [
+        {
+          "url": "https://ia802807.us.archive.org/2/items/in.gazette.central.w.1968-11-16.72289/72289.pdf",
+          "host": "ia802807.us.archive.org",
+          "path": "/2/items/in.gazette.central.w.1968-11-16.72289/72289.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia902807.us.archive.org/2/items/in.gazette.central.w.1968-11-16.72289/72289.pdf",
+          "host": "ia902807.us.archive.org",
+          "path": "/2/items/in.gazette.central.w.1968-11-16.72289/72289.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-005-b1",
+      "request_ids": [
+        "A4-ACQ-007"
+      ],
+      "description": "PR #23 archive_acq03: S.R.O. 66 dated 14-02-1969, Army Amendment Rules, 1969 (OCR: App. I Form No. II)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1969-03-01.68684/68684.pdf",
+      "expected_md5": "55514cdfc31328a5a096d6d73a4d906e",
+      "expected_bytes": 119819,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn790009.ca.archive.org/0/items/in.gazette.central.w.1969-03-01.68684/68684.pdf",
+          "host": "dn790009.ca.archive.org",
+          "path": "/0/items/in.gazette.central.w.1969-03-01.68684/68684.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia803107.us.archive.org/5/items/in.gazette.central.w.1969-03-01.68684/68684.pdf",
+          "host": "ia803107.us.archive.org",
+          "path": "/5/items/in.gazette.central.w.1969-03-01.68684/68684.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia903107.us.archive.org/5/items/in.gazette.central.w.1969-03-01.68684/68684.pdf",
+          "host": "ia903107.us.archive.org",
+          "path": "/5/items/in.gazette.central.w.1969-03-01.68684/68684.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-006-b1",
+      "request_ids": [
+        "A4-ACQ-008"
+      ],
+      "description": "PR #23 archive_acq03: unknown Army Rules amendment (OCR)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1970-01-17.63332/63332.pdf",
+      "expected_md5": "65222929bec3231ad4e4dda0c9965b40",
+      "expected_bytes": 199340,
+      "redirect_url_candidates": [
+        {
+          "url": "https://ia803106.us.archive.org/27/items/in.gazette.central.w.1970-01-17.63332/63332.pdf",
+          "host": "ia803106.us.archive.org",
+          "path": "/27/items/in.gazette.central.w.1970-01-17.63332/63332.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia903106.us.archive.org/27/items/in.gazette.central.w.1970-01-17.63332/63332.pdf",
+          "host": "ia903106.us.archive.org",
+          "path": "/27/items/in.gazette.central.w.1970-01-17.63332/63332.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-007-b1",
+      "request_ids": [
+        "A4-ACQ-009"
+      ],
+      "description": "PR #23 archive_acq03: Army (First Amendment) Rules, 1972 (OCR: Appendix)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1972-02-19.59085/59085.pdf",
+      "expected_md5": "02d1de61bf35abe65426114ecf55824b",
+      "expected_bytes": 1278060,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn790003.ca.archive.org/0/items/in.gazette.central.w.1972-02-19.59085/59085.pdf",
+          "host": "dn790003.ca.archive.org",
+          "path": "/0/items/in.gazette.central.w.1972-02-19.59085/59085.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia803104.us.archive.org/34/items/in.gazette.central.w.1972-02-19.59085/59085.pdf",
+          "host": "ia803104.us.archive.org",
+          "path": "/34/items/in.gazette.central.w.1972-02-19.59085/59085.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia903104.us.archive.org/34/items/in.gazette.central.w.1972-02-19.59085/59085.pdf",
+          "host": "ia903104.us.archive.org",
+          "path": "/34/items/in.gazette.central.w.1972-02-19.59085/59085.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-008-b1",
+      "request_ids": [
+        "A4-ACQ-010"
+      ],
+      "description": "PR #23 archive_acq03: Army (Amendment) Rules, 1974 (OCR; commencement clause)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1974-08-17.55730/55730.pdf",
+      "expected_md5": "c2685d66ecf87a6d4e4b6b5e73bfbb21",
+      "expected_bytes": 881772,
+      "redirect_url_candidates": [
+        {
+          "url": "https://ia803107.us.archive.org/0/items/in.gazette.central.w.1974-08-17.55730/55730.pdf",
+          "host": "ia803107.us.archive.org",
+          "path": "/0/items/in.gazette.central.w.1974-08-17.55730/55730.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia903107.us.archive.org/0/items/in.gazette.central.w.1974-08-17.55730/55730.pdf",
+          "host": "ia903107.us.archive.org",
+          "path": "/0/items/in.gazette.central.w.1974-08-17.55730/55730.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-009-b1",
+      "request_ids": [
+        "A4-ACQ-011"
+      ],
+      "description": "PR #23 archive_acq03: Army (Second Amendment) Rules, 1974 (OCR: App. 1 Form No.1)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1974-11-16.55738/55738.pdf",
+      "expected_md5": "fcd50df7fd3a6bb11c2b8af7cbb2f8cc",
+      "expected_bytes": 963606,
+      "redirect_url_candidates": [
+        {
+          "url": "https://ia802801.us.archive.org/1/items/in.gazette.central.w.1974-11-16.55738/55738.pdf",
+          "host": "ia802801.us.archive.org",
+          "path": "/1/items/in.gazette.central.w.1974-11-16.55738/55738.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia902801.us.archive.org/1/items/in.gazette.central.w.1974-11-16.55738/55738.pdf",
+          "host": "ia902801.us.archive.org",
+          "path": "/1/items/in.gazette.central.w.1974-11-16.55738/55738.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-010-b2",
+      "request_ids": [
+        "A4-ACQ-014"
+      ],
+      "description": "PR #23 archive_acq03: S.R.O. 331 dated 23-09-1960, Army (Second Amendment) Rules, 1960 (r.168(2))",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1960-10-08.88375/88375.pdf",
+      "expected_md5": "55ae76e704c63890433eb09113733d53",
+      "expected_bytes": 485922,
+      "redirect_url_candidates": [
+        {
+          "url": "https://ia803102.us.archive.org/0/items/in.gazette.central.w.1960-10-08.88375/88375.pdf",
+          "host": "ia803102.us.archive.org",
+          "path": "/0/items/in.gazette.central.w.1960-10-08.88375/88375.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia903102.us.archive.org/0/items/in.gazette.central.w.1960-10-08.88375/88375.pdf",
+          "host": "ia903102.us.archive.org",
+          "path": "/0/items/in.gazette.central.w.1960-10-08.88375/88375.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-011-b2",
+      "request_ids": [
+        "A4-ACQ-015"
+      ],
+      "description": "PR #23 archive_acq03: S.R.O. 348 dated 03-10-1960, Army (Amendment) Rules, 1960 (App. I Forms I, II)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1960-10-15.88376/88376.pdf",
+      "expected_md5": "ed9ca1f86e2f8da64945b942cdb8405a",
+      "expected_bytes": 214636,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn710807.ca.archive.org/0/items/in.gazette.central.w.1960-10-15.88376/88376.pdf",
+          "host": "dn710807.ca.archive.org",
+          "path": "/0/items/in.gazette.central.w.1960-10-15.88376/88376.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia803106.us.archive.org/14/items/in.gazette.central.w.1960-10-15.88376/88376.pdf",
+          "host": "ia803106.us.archive.org",
+          "path": "/14/items/in.gazette.central.w.1960-10-15.88376/88376.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia903106.us.archive.org/14/items/in.gazette.central.w.1960-10-15.88376/88376.pdf",
+          "host": "ia903106.us.archive.org",
+          "path": "/14/items/in.gazette.central.w.1960-10-15.88376/88376.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-012-b2",
+      "request_ids": [
+        "A4-ACQ-016"
+      ],
+      "description": "PR #23 archive_acq03: S.R.O. 351 dated 07-10-1960, Army (Third Amendment) Rules, 1960 (Table below r.13)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1960-10-22.88377/88377.pdf",
+      "expected_md5": "83928ad246754eaa82ef38e2dfb01c47",
+      "expected_bytes": 491131,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn710606.ca.archive.org/0/items/in.gazette.central.w.1960-10-22.88377/88377.pdf",
+          "host": "dn710606.ca.archive.org",
+          "path": "/0/items/in.gazette.central.w.1960-10-22.88377/88377.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia802806.us.archive.org/27/items/in.gazette.central.w.1960-10-22.88377/88377.pdf",
+          "host": "ia802806.us.archive.org",
+          "path": "/27/items/in.gazette.central.w.1960-10-22.88377/88377.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia902806.us.archive.org/27/items/in.gazette.central.w.1960-10-22.88377/88377.pdf",
+          "host": "ia902806.us.archive.org",
+          "path": "/27/items/in.gazette.central.w.1960-10-22.88377/88377.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-013-b2",
+      "request_ids": [
+        "A4-ACQ-017"
+      ],
+      "description": "PR #23 archive_acq03: S.R.O. 404 dated 21-11-1960, Army (Fourth Amendment) Rules, 1960 (r.168(3), App. IV, V)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1960-12-03.88383/88383.pdf",
+      "expected_md5": "d17443252551a276c5288e154e625c71",
+      "expected_bytes": 205584,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn760103.eu.archive.org/0/items/in.gazette.central.w.1960-12-03.88383/88383.pdf",
+          "host": "dn760103.eu.archive.org",
+          "path": "/0/items/in.gazette.central.w.1960-12-03.88383/88383.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia803105.us.archive.org/10/items/in.gazette.central.w.1960-12-03.88383/88383.pdf",
+          "host": "ia803105.us.archive.org",
+          "path": "/10/items/in.gazette.central.w.1960-12-03.88383/88383.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia903105.us.archive.org/10/items/in.gazette.central.w.1960-12-03.88383/88383.pdf",
+          "host": "ia903105.us.archive.org",
+          "path": "/10/items/in.gazette.central.w.1960-12-03.88383/88383.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-014-b2",
+      "request_ids": [
+        "A4-ACQ-018"
+      ],
+      "description": "PR #23 archive_acq03: S.R.O. 22 dated 13-05-2010, Army (Amendment) Rules, 2010 (Table r.13)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.2010-05-29.162/162.pdf",
+      "expected_md5": "23fa6e9e7fc4e1fcf0bde0edc54171e5",
+      "expected_bytes": 59988,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn710102.ca.archive.org/0/items/in.gazette.central.w.2010-05-29.162/162.pdf",
+          "host": "dn710102.ca.archive.org",
+          "path": "/0/items/in.gazette.central.w.2010-05-29.162/162.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia802804.us.archive.org/29/items/in.gazette.central.w.2010-05-29.162/162.pdf",
+          "host": "ia802804.us.archive.org",
+          "path": "/29/items/in.gazette.central.w.2010-05-29.162/162.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia902804.us.archive.org/29/items/in.gazette.central.w.2010-05-29.162/162.pdf",
+          "host": "ia902804.us.archive.org",
+          "path": "/29/items/in.gazette.central.w.2010-05-29.162/162.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-017-b3",
+      "request_ids": [
+        "A4-ACQ-031"
+      ],
+      "description": "PR #23 archive_acq03: Repealing and Amending Act, 2001 (30 of 2001)",
+      "initial_url": "https://archive.org/download/in.gazette.central.e.2001-09-03.113421/113421.pdf",
+      "expected_md5": "ad667445cb12ee87f17f5fc1583434b8",
+      "expected_bytes": 654416,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn790008.ca.archive.org/0/items/in.gazette.central.e.2001-09-03.113421/113421.pdf",
+          "host": "dn790008.ca.archive.org",
+          "path": "/0/items/in.gazette.central.e.2001-09-03.113421/113421.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia802801.us.archive.org/32/items/in.gazette.central.e.2001-09-03.113421/113421.pdf",
+          "host": "ia802801.us.archive.org",
+          "path": "/32/items/in.gazette.central.e.2001-09-03.113421/113421.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia902801.us.archive.org/32/items/in.gazette.central.e.2001-09-03.113421/113421.pdf",
+          "host": "ia902801.us.archive.org",
+          "path": "/32/items/in.gazette.central.e.2001-09-03.113421/113421.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-019-b4",
+      "request_ids": [
+        "A4-ACQ-024"
+      ],
+      "description": "PR #23 archive_acq03: probable notification of 22-07-1950 under s.1 of the Army Act, 1950 (commencement; S.R.O. 120?) (OCR)",
+      "initial_url": "https://archive.org/download/in.gazette.1950.318/O-2345-1950-0013-108766.pdf",
+      "expected_md5": "c99cf4895e8f7d565cd739d2f411cd0e",
+      "expected_bytes": 130078,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn710302.ca.archive.org/0/items/in.gazette.1950.318/O-2345-1950-0013-108766.pdf",
+          "host": "dn710302.ca.archive.org",
+          "path": "/0/items/in.gazette.1950.318/O-2345-1950-0013-108766.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia803105.us.archive.org/19/items/in.gazette.1950.318/O-2345-1950-0013-108766.pdf",
+          "host": "ia803105.us.archive.org",
+          "path": "/19/items/in.gazette.1950.318/O-2345-1950-0013-108766.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia903105.us.archive.org/19/items/in.gazette.1950.318/O-2345-1950-0013-108766.pdf",
+          "host": "ia903105.us.archive.org",
+          "path": "/19/items/in.gazette.1950.318/O-2345-1950-0013-108766.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-022-b4",
+      "request_ids": [
+        "A4-ACQ-028"
+      ],
+      "description": "PR #23 archive_acq03: Air Force and Army Laws (Amendment) Ordinance, 1975 (Ord. 3 of 1975)",
+      "initial_url": "https://archive.org/download/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/E-1236-1975-0004-54581.pdf",
+      "expected_md5": "5d1011da90899da51a9c292580f1b391",
+      "expected_bytes": 95670,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn790002.ca.archive.org/0/items/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/E-1236-1975-0004-54581.pdf",
+          "host": "dn790002.ca.archive.org",
+          "path": "/0/items/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/E-1236-1975-0004-54581.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia601903.us.archive.org/29/items/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/E-1236-1975-0004-54581.pdf",
+          "host": "ia601903.us.archive.org",
+          "path": "/29/items/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/E-1236-1975-0004-54581.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia801903.us.archive.org/29/items/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/E-1236-1975-0004-54581.pdf",
+          "host": "ia801903.us.archive.org",
+          "path": "/29/items/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/E-1236-1975-0004-54581.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-036-c2",
+      "request_ids": [
+        "A4-ACQ-019"
+      ],
+      "description": "PR #23 archive_acq03: Army Rules amendment (App. I), 1956 (OCR)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1956-04-21.100216/100216.pdf",
+      "expected_md5": "e7beb1e93861fa1675082279d642c2fe",
+      "expected_bytes": 301028,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn710601.ca.archive.org/0/items/in.gazette.central.w.1956-04-21.100216/100216.pdf",
+          "host": "dn710601.ca.archive.org",
+          "path": "/0/items/in.gazette.central.w.1956-04-21.100216/100216.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia600804.us.archive.org/35/items/in.gazette.central.w.1956-04-21.100216/100216.pdf",
+          "host": "ia600804.us.archive.org",
+          "path": "/35/items/in.gazette.central.w.1956-04-21.100216/100216.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia800804.us.archive.org/35/items/in.gazette.central.w.1956-04-21.100216/100216.pdf",
+          "host": "ia800804.us.archive.org",
+          "path": "/35/items/in.gazette.central.w.1956-04-21.100216/100216.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-037-c2",
+      "request_ids": [
+        "A4-ACQ-020"
+      ],
+      "description": "PR #23 archive_acq03: Army Rules amendment of r.187(1) item (r), dated 28-11-1958 (OCR)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1958-12-13.95784/95784.pdf",
+      "expected_md5": "e7bc7dffabd2462806c58548ee8c68bb",
+      "expected_bytes": 34281,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn790006.ca.archive.org/0/items/in.gazette.central.w.1958-12-13.95784/95784.pdf",
+          "host": "dn790006.ca.archive.org",
+          "path": "/0/items/in.gazette.central.w.1958-12-13.95784/95784.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia803109.us.archive.org/19/items/in.gazette.central.w.1958-12-13.95784/95784.pdf",
+          "host": "ia803109.us.archive.org",
+          "path": "/19/items/in.gazette.central.w.1958-12-13.95784/95784.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia903109.us.archive.org/19/items/in.gazette.central.w.1958-12-13.95784/95784.pdf",
+          "host": "ia903109.us.archive.org",
+          "path": "/19/items/in.gazette.central.w.1958-12-13.95784/95784.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-038-c2",
+      "request_ids": [
+        "A4-ACQ-021"
+      ],
+      "description": "PR #23 archive_acq03: Army Rules amendments of r.95, dated 12-12-1958 (OCR)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1958-12-27.95984/95984.pdf",
+      "expected_md5": "149cc60e8fd1ef4a99a8f5b6d9b48bc1",
+      "expected_bytes": 273444,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn720006.ca.archive.org/0/items/in.gazette.central.w.1958-12-27.95984/95984.pdf",
+          "host": "dn720006.ca.archive.org",
+          "path": "/0/items/in.gazette.central.w.1958-12-27.95984/95984.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia600401.us.archive.org/20/items/in.gazette.central.w.1958-12-27.95984/95984.pdf",
+          "host": "ia600401.us.archive.org",
+          "path": "/20/items/in.gazette.central.w.1958-12-27.95984/95984.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia800401.us.archive.org/20/items/in.gazette.central.w.1958-12-27.95984/95984.pdf",
+          "host": "ia800401.us.archive.org",
+          "path": "/20/items/in.gazette.central.w.1958-12-27.95984/95984.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-acq03-039-c2",
+      "request_ids": [
+        "A4-ACQ-022"
+      ],
+      "description": "PR #23 archive_acq03: Army Rules amendments, 1959 (OCR)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1959-12-12.90633/90633.pdf",
+      "expected_md5": "46a839209f80079fadcf27bfa742e596",
+      "expected_bytes": 469276,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn760109.eu.archive.org/0/items/in.gazette.central.w.1959-12-12.90633/90633.pdf",
+          "host": "dn760109.eu.archive.org",
+          "path": "/0/items/in.gazette.central.w.1959-12-12.90633/90633.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia600904.us.archive.org/31/items/in.gazette.central.w.1959-12-12.90633/90633.pdf",
+          "host": "ia600904.us.archive.org",
+          "path": "/31/items/in.gazette.central.w.1959-12-12.90633/90633.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia800904.us.archive.org/31/items/in.gazette.central.w.1959-12-12.90633/90633.pdf",
+          "host": "ia800904.us.archive.org",
+          "path": "/31/items/in.gazette.central.w.1959-12-12.90633/90633.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-notif-adjustment-jurisdiction-amdt-so-4010-1986",
+      "request_ids": [
+        "A4-ACQ-044"
+      ],
+      "description": "PR #8 archive: Adjustment of Jurisdiction (Amendment) Rules, S.O. 4010 dated 24-11-1986",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1986-12-06.32435/32435.pdf",
+      "expected_md5": "c5eaada91e55121d0e048542f4a0e68b",
+      "expected_bytes": 5891276,
+      "redirect_url_candidates": [
+        {
+          "url": "https://dn790002.ca.archive.org/0/items/in.gazette.central.w.1986-12-06.32435/32435.pdf",
+          "host": "dn790002.ca.archive.org",
+          "path": "/0/items/in.gazette.central.w.1986-12-06.32435/32435.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": false,
+          "c13_host_tls_ok": false
+        },
+        {
+          "url": "https://ia802803.us.archive.org/22/items/in.gazette.central.w.1986-12-06.32435/32435.pdf",
+          "host": "ia802803.us.archive.org",
+          "path": "/22/items/in.gazette.central.w.1986-12-06.32435/32435.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia902803.us.archive.org/22/items/in.gazette.central.w.1986-12-06.32435/32435.pdf",
+          "host": "ia902803.us.archive.org",
+          "path": "/22/items/in.gazette.central.w.1986-12-06.32435/32435.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    },
+    {
+      "target_id": "C13-G2-rules-adjustment-jurisdiction-1978-so-488",
+      "request_ids": [
+        "A4-ACQ-044"
+      ],
+      "description": "PR #8 archive: Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules, 1978 (S.O. 488, MHA, 09-02-1978)",
+      "initial_url": "https://archive.org/download/in.gazette.central.w.1978-02-25.48290/48290.pdf",
+      "expected_md5": "91b0dd7aab747fe5260b1ffe61fd4d1d",
+      "expected_bytes": 5923089,
+      "redirect_url_candidates": [
+        {
+          "url": "https://ia803104.us.archive.org/29/items/in.gazette.central.w.1978-02-25.48290/48290.pdf",
+          "host": "ia803104.us.archive.org",
+          "path": "/29/items/in.gazette.central.w.1978-02-25.48290/48290.pdf",
+          "scope_basis": "item metadata API (d1/d2/server) 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        },
+        {
+          "url": "https://ia903104.us.archive.org/29/items/in.gazette.central.w.1978-02-25.48290/48290.pdf",
+          "host": "ia903104.us.archive.org",
+          "path": "/29/items/in.gazette.central.w.1978-02-25.48290/48290.pdf",
+          "scope_basis": "observed redirect 2026-11-25",
+          "c13_host_probe_recorded": true,
+          "c13_host_tls_ok": true
+        }
+      ],
+      "enabled": false,
+      "status": "PROPOSED_NOT_APPROVED"
+    }
+  ],
+  "government_candidates": [
+    {
+      "request_id": "A4-ACQ-035",
+      "title": "S.O. 4713(E), 25 Aug 2026",
+      "url": "https://egazette.gov.in/WriteReadData/2026/275749.pdf",
+      "enabled": false,
+      "status": "DISCOVERY_LEAD_ONLY_RECHECK_AND_DEDUP",
+      "note": "inferred URL from Gazette identifier; direct fetch 502; corroboration https://www.legalaffairs.gov.in/static/uploads/2026/11/0679768caf7ab8afc7c22004ae7aa5e8.pdf"
+    },
+    {
+      "request_id": "A4-ACQ-043",
+      "title": "PRA I 2008",
+      "url": "https://desw.gov.in/sites/default/files/PRA-Pt-I(2008).pdf",
+      "enabled": false,
+      "status": "DISCOVERY_LEAD_ONLY_RECHECK_AND_DEDUP",
+      "note": "official listing; web-readable, 145 pages; host not enabled"
+    },
+    {
+      "request_id": "A4-ACQ-043",
+      "title": "PRA II 2008",
+      "url": "https://desw.gov.in/sites/default/files/PRA-Pt-II(2008).pdf",
+      "enabled": false,
+      "status": "DISCOVERY_LEAD_ONLY_RECHECK_AND_DEDUP",
+      "note": "official listing; web-readable, 183 pages; host not enabled"
+    },
+    {
+      "request_id": "A4-ACQ-043",
+      "title": "ER 2008",
+      "url": "https://www.desw.gov.in/sites/default/files/ER-2008.pdf",
+      "enabled": false,
+      "status": "DISCOVERY_LEAD_ONLY_RECHECK_AND_DEDUP",
+      "note": "official search result; host not enabled"
+    },
+    {
+      "request_id": "A4-ACQ-043",
+      "title": "ER/GMO 2023 combined",
+      "url": "https://desw.gov.in/sites/default/files/Entitlement%20Rules%202023.pdf",
+      "enabled": false,
+      "status": "DISCOVERY_LEAD_ONLY_RECHECK_AND_DEDUP",
+      "note": "official listing; web reader size limit; host not enabled"
+    },
+    {
+      "request_id": "A4-ACQ-045",
+      "title": "ISO Act original",
+      "url": "https://egazette.gov.in/WriteReadData/2023/248104.pdf",
+      "enabled": false,
+      "status": "DISCOVERY_LEAD_ONLY_RECHECK_AND_DEDUP",
+      "note": "official Gazette web-readable; CG-DL-E-15082023-248104"
+    },
+    {
+      "request_id": "A4-ACQ-045",
+      "title": "ISO commencement SRO 13(E)",
+      "url": "https://egazette.gov.in/WriteReadData/2024/254112.pdf",
+      "enabled": false,
+      "status": "DISCOVERY_LEAD_ONLY_RECHECK_AND_DEDUP",
+      "note": "official Gazette text readable; image retrieval failed; 10 May 2024 appointed"
+    },
+    {
+      "request_id": "A4-ACQ-045",
+      "title": "ISO Rules SRO 10(E)",
+      "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/may/doc2025528559401.pdf",
+      "enabled": false,
+      "status": "DISCOVERY_LEAD_ONLY_RECHECK_AND_DEDUP",
+      "note": "official PIB Gazette copy; English page 3 visually inspected; host not enabled"
+    },
+    {
+      "request_id": "A4-ACQ-045",
+      "title": "ISO Rules Gazette direct candidate",
+      "url": "https://egazette.gov.in/WriteReadData/2025/263405.pdf",
+      "enabled": false,
+      "status": "DISCOVERY_LEAD_ONLY_RECHECK_AND_DEDUP",
+      "note": "inferred from printed identifier CG-DL-E-27052025-263405; direct fetch timeout"
+    },
+    {
+      "request_id": "A4-ACQ-045",
+      "title": "ISO Act compilation",
+      "url": "https://www.indiacode.nic.in/bitstream/123456789/19976/1/a2023-28.pdf",
+      "enabled": false,
+      "status": "DISCOVERY_LEAD_ONLY_RECHECK_AND_DEDUP",
+      "note": "official indexed compilation, not enacted original"
+    }
+  ]
+}

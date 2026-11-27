@@ -1,0 +1,504 @@
+{
+  "date": "2026-11-26",
+  "scope": "CA-01A Batch 02: documentary identity and candidate amendment/commencement/repeal relationships only",
+  "inventory_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+  "files": 11,
+  "physical_pages": 83,
+  "preserved_copy_rehash": {
+    "performer": "ChatGPT corpus coordinator",
+    "evidence_date": "2026-11-26",
+    "input": "Uploaded preserved-copy PDF bytes",
+    "comparison_source": "C13 A7 preservation inventory",
+    "preservation_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+    "compared_digests": [
+      "SHA-256",
+      "MD5"
+    ],
+    "independent_reviewer_rehash": false,
+    "original_carrier_pin_comparison": "See separate original integrity results; preserved-copy match never overrides a hold."
+  },
+  "records": [
+    {
+      "filename": "236757.pdf",
+      "target_id": "C13-G1-AR-POST2022-236757",
+      "request_id": "A4-ACQ-013",
+      "source_sha256": "c785b4d7d98b5329f785779008b786dea75b24aabcfa8633859fc340c8ecdefd",
+      "source_md5": "8cab9425f2e8ed5a4524240a3d53a0fa",
+      "bytes": 1275820,
+      "physical_pages": 3,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/c7/c785b4d7d98b5329f785779008b786dea75b24aabcfa8633859fc340c8ecdefd/236757.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "source_url": "https://egazette.gov.in/WriteReadData/2022/236757.pdf",
+      "uploaded_preserved_copy_matches_inventory_digests": true,
+      "prior_integrity_result": "PIN_MISMATCH: md5,bytes",
+      "registration_state": "HOLD_PIN_MISMATCH",
+      "proposed_documentary_disposition": "HOLD_PIN_MISMATCH",
+      "identity": {
+        "title": "S.R.O. 9(E)",
+        "notification_or_assent_date": "2022-06-23",
+        "publication_date": "2022-06-23",
+        "gazette_part_section": "II / 4",
+        "issue_number": "09",
+        "legal_basis": "Navy Act, 1957, s.9(2)",
+        "subject_domain": "NAVY"
+      },
+      "documentary_finding": "Eligibility of women for enrolment as sailors in 29 listed branches, subject to service requirements and specialisations.",
+      "commencement_date_candidate": null,
+      "anchor_candidates": [
+        {
+          "physical_page": 2,
+          "printed_page": "2",
+          "eligible_for_exact_anchor": false
+        },
+        {
+          "physical_page": 3,
+          "printed_page": "3",
+          "eligible_for_exact_anchor": false
+        }
+      ],
+      "visual_scope": "All modern notification pages visually available and inspected; no apparent restrictive marking; cryptographic signatures not validated",
+      "eligible_for_exact_anchor": false,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+    },
+    {
+      "filename": "241268.pdf",
+      "target_id": "C13-G1-AR-POST2022-241268",
+      "request_id": "A4-ACQ-013",
+      "source_sha256": "7bb4c7a3ee9149ed30683b174654a5c99d78a4bd660afc81b207643222855f1a",
+      "source_md5": "e21255be0fa5c74c2d37d0aad9646926",
+      "bytes": 870464,
+      "physical_pages": 2,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/7b/7bb4c7a3ee9149ed30683b174654a5c99d78a4bd660afc81b207643222855f1a/241268.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "source_url": "https://egazette.gov.in/WriteReadData/2022/241268.pdf",
+      "uploaded_preserved_copy_matches_inventory_digests": true,
+      "prior_integrity_result": "PIN_MISMATCH: md5,bytes",
+      "registration_state": "HOLD_PIN_MISMATCH",
+      "proposed_documentary_disposition": "HOLD_PIN_MISMATCH",
+      "identity": {
+        "title": "S.R.O. 24(E)",
+        "notification_or_assent_date": "2022-12-21",
+        "publication_date": "2022-12-21",
+        "gazette_part_section": "II / 4",
+        "issue_number": "22",
+        "legal_basis": "Navy Act, 1957; English text says section 184 read with sub-section 11; preserve source wording, do not silently repair.",
+        "subject_domain": "NAVY"
+      },
+      "documentary_finding": "Navy Agniveers form a distinct and junior-most rank.",
+      "commencement_date_candidate": null,
+      "anchor_candidates": [
+        {
+          "physical_page": 2,
+          "printed_page": "2",
+          "eligible_for_exact_anchor": false
+        }
+      ],
+      "visual_scope": "All modern notification pages visually available and inspected; no apparent restrictive marking; cryptographic signatures not validated",
+      "eligible_for_exact_anchor": false,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+    },
+    {
+      "filename": "246457.pdf",
+      "target_id": "C13-G1-AR-POST2022-246457",
+      "request_id": "A4-ACQ-013",
+      "source_sha256": "7a6c1b75700a461498bd669ca6db600aa7d03772cf9fff8e2495c6e8f02307bf",
+      "source_md5": "b20748000f2d0a664ea776c9ae06f4b4",
+      "bytes": 775443,
+      "physical_pages": 2,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/7a/7a6c1b75700a461498bd669ca6db600aa7d03772cf9fff8e2495c6e8f02307bf/246457.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "source_url": "https://egazette.gov.in/WriteReadData/2023/246457.pdf",
+      "uploaded_preserved_copy_matches_inventory_digests": true,
+      "prior_integrity_result": "PIN_VERIFIED: md5,bytes",
+      "registration_state": "HOLD_SUBJECT_UNCONFIRMED",
+      "proposed_documentary_disposition": "SUBJECT_IDENTIFIED_NOT_ARMY_RULES",
+      "identity": {
+        "title": "S.R.O. 19(E)",
+        "notification_or_assent_date": "2023-06-12",
+        "publication_date": "2023-06-12",
+        "gazette_part_section": "II / 4",
+        "issue_number": "19",
+        "legal_basis": "Air Force Act, 1950, s.12",
+        "subject_domain": "AIR_FORCE"
+      },
+      "documentary_finding": "Eligibility of women for Agniveervayu enrolment and subsequent selection under stated conditions.",
+      "commencement_date_candidate": null,
+      "anchor_candidates": [
+        {
+          "physical_page": 2,
+          "printed_page": "2",
+          "eligible_for_exact_anchor": false
+        }
+      ],
+      "visual_scope": "All modern notification pages visually available and inspected; no apparent restrictive marking; cryptographic signatures not validated",
+      "eligible_for_exact_anchor": false,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+    },
+    {
+      "filename": "254308.pdf",
+      "target_id": "C13-G1-AR-POST2022-254308",
+      "request_id": "A4-ACQ-013",
+      "source_sha256": "1a4c2cb12442d250aa19c70d3a959c382f0706e15d984452f59cc827d1295591",
+      "source_md5": "99876ecc132a218702e10a74118d1067",
+      "bytes": 723410,
+      "physical_pages": 3,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/1a/1a4c2cb12442d250aa19c70d3a959c382f0706e15d984452f59cc827d1295591/254308.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "source_url": "https://egazette.gov.in/WriteReadData/2024/254308.pdf",
+      "uploaded_preserved_copy_matches_inventory_digests": true,
+      "prior_integrity_result": "PIN_VERIFIED: md5,bytes",
+      "registration_state": "HOLD_SUBJECT_UNCONFIRMED",
+      "proposed_documentary_disposition": "SUBJECT_IDENTIFIED_NOT_ARMY_RULES",
+      "identity": {
+        "title": "S.R.O. 15(E)",
+        "notification_or_assent_date": "2024-05-17",
+        "publication_date": "2024-05-22",
+        "gazette_part_section": "II / 4",
+        "issue_number": "15",
+        "legal_basis": "Navy Act, 1957, s.184",
+        "subject_domain": "NAVY"
+      },
+      "documentary_finding": "Naval Ceremonial, Conditions of Service and Miscellaneous (Amendment) Regulations, 2024; regulation 1(2) commences on publication.",
+      "commencement_date_candidate": "2024-05-22",
+      "anchor_candidates": [
+        {
+          "physical_page": 3,
+          "printed_page": "3",
+          "eligible_for_exact_anchor": false
+        }
+      ],
+      "visual_scope": "All modern notification pages visually available and inspected; no apparent restrictive marking; cryptographic signatures not validated",
+      "eligible_for_exact_anchor": false,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+    },
+    {
+      "filename": "273809.pdf",
+      "target_id": "C13-G1-AR-POST2022-273809",
+      "request_id": "A4-ACQ-013",
+      "source_sha256": "cc4f9d84515223c153769d5cb7e3cffa52955abac99a852048623aaa6f65d5ed",
+      "source_md5": "5b6c2f639a1c12be508ceb546a9e8676",
+      "bytes": 361235,
+      "physical_pages": 2,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/cc/cc4f9d84515223c153769d5cb7e3cffa52955abac99a852048623aaa6f65d5ed/273809.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "source_url": "https://egazette.gov.in/WriteReadData/2026/273809.pdf",
+      "uploaded_preserved_copy_matches_inventory_digests": true,
+      "prior_integrity_result": "PIN_VERIFIED: md5,bytes",
+      "registration_state": "HOLD_SUBJECT_UNCONFIRMED",
+      "proposed_documentary_disposition": "SUBJECT_IDENTIFIED_NOT_ARMY_RULES",
+      "identity": {
+        "title": "S.R.O. 10(E)",
+        "notification_or_assent_date": "2026-06-24",
+        "publication_date": "2026-06-24",
+        "gazette_part_section": "II / 4",
+        "issue_number": "10",
+        "legal_basis": "Jan Vishwas (Amendment of Provisions) Act, 2026 (8 of 2026), s.1(2)",
+        "subject_domain": "AIR_FORCE"
+      },
+      "documentary_finding": "Partial commencement only for Schedule serial 16 and related entries concerning Reserve and Auxiliary Air Forces Act, 1952 (62 of 1952).",
+      "commencement_date_candidate": "2026-06-24",
+      "anchor_candidates": [
+        {
+          "physical_page": 2,
+          "printed_page": "2",
+          "eligible_for_exact_anchor": false
+        }
+      ],
+      "visual_scope": "All modern notification pages visually available and inspected; no apparent restrictive marking; cryptographic signatures not validated",
+      "eligible_for_exact_anchor": false,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+    },
+    {
+      "filename": "E-2210-1955-0002-101603.pdf",
+      "target_id": "C13-G2-acq03-020-b4",
+      "request_id": "A4-ACQ-025",
+      "source_sha256": "48532ed5d8a9d9449932afba79de6bfa139eb4c8f6a2bde03f116c423f24e206",
+      "source_md5": "00dfb70630574c20c8a7e94be4502b57",
+      "bytes": 21902,
+      "physical_pages": 2,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/48/48532ed5d8a9d9449932afba79de6bfa139eb4c8f6a2bde03f116c423f24e206/E-2210-1955-0002-101603.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "source_url": "https://egazette.gov.in/WriteReadData/1955/E-2210-1955-0002-101603.pdf",
+      "uploaded_preserved_copy_matches_inventory_digests": true,
+      "prior_integrity_result": "PIN_VERIFIED: md5,bytes",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "proposed_documentary_disposition": "COMMENCEMENT_CANDIDATE_ONLY",
+      "identity": {
+        "title": "S.R.O. 2/E (as printed)",
+        "notification_or_assent_date": "1955-05-07",
+        "publication_date": "1955-05-07",
+        "gazette_part_section": "II / 4",
+        "issue_number": "2",
+        "legal_basis": "Commanders-in-Chief (Change in Designation) Act, 1955 (19 of 1955), s.1(2)",
+        "subject_domain": "ARMY_ACT_HISTORY"
+      },
+      "documentary_finding": "Appoints 7 May 1955 as commencement. Second physical page appears blank; missing text layer there is not evidence of missing operative text. Act and Schedule not supplied by this PDF.",
+      "commencement_date_candidate": "1955-05-07",
+      "anchor_candidates": [
+        {
+          "physical_page": 1,
+          "printed_page": "3",
+          "eligible_for_exact_anchor": false
+        }
+      ],
+      "visual_scope": "Targeted operative page and available masthead images; not full-page clearance or full transcription",
+      "eligible_for_exact_anchor": false,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+    },
+    {
+      "filename": "E-2189-1956-0415-100172.pdf",
+      "target_id": "C13-G2-acq03-021-b4",
+      "request_id": "A4-ACQ-026",
+      "source_sha256": "45b2c73069e6b62db59c79519bd590937af86cb24d36b84d7addb063a6149505",
+      "source_md5": "cfc5cb5cf1cdeac4cb34784b705d7639",
+      "bytes": 1058089,
+      "physical_pages": 24,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/45/45b2c73069e6b62db59c79519bd590937af86cb24d36b84d7addb063a6149505/E-2189-1956-0415-100172.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "source_url": "https://egazette.gov.in/WriteReadData/1956/E-2189-1956-0415-100172.pdf",
+      "uploaded_preserved_copy_matches_inventory_digests": true,
+      "prior_integrity_result": "PIN_VERIFIED: md5,bytes",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "proposed_documentary_disposition": "DIRECT_AMENDMENT_CANDIDATE",
+      "identity": {
+        "title": "S.R.O. 3191; Adaptation of Laws (No. 3) Order, 1956",
+        "notification_or_assent_date": "1956-12-31",
+        "publication_date": "1956-12-31",
+        "gazette_part_section": "II / 3",
+        "issue_number": "415",
+        "legal_basis": "Constitution art.372A(1); States Reorganisation Act 1956 s.120; Bihar and West Bengal (Transfer of Territories) Act 1956 s.44",
+        "subject_domain": "ARMY_ACT_HISTORY"
+      },
+      "documentary_finding": "Order 1(2) deems effective 1 Nov 1956. Army Act Schedule entry: s.2(1)(h) omit, s.2(2) substitute (g) for (h); s.3(xii), (xv), (xviii)(e), (xxiv) omissions; s.4(1) omission; s.5 omit; ss.137,151,174 substitute State of Jammu and Kashmir for a Part B State. Historical only.",
+      "commencement_date_candidate": "1956-11-01",
+      "anchor_candidates": [
+        {
+          "physical_page": 1,
+          "printed_page": "2775",
+          "eligible_for_exact_anchor": false
+        },
+        {
+          "physical_page": 20,
+          "printed_page": "2794",
+          "eligible_for_exact_anchor": false
+        }
+      ],
+      "visual_scope": "Targeted operative page and available masthead images; not full-page clearance or full transcription",
+      "eligible_for_exact_anchor": false,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+    },
+    {
+      "filename": "E-1272-1974-0084-56281.pdf",
+      "target_id": "C13-G2-acq03-015-b3",
+      "request_id": "A4-ACQ-027",
+      "source_sha256": "dae0be5332c89d2f31111d0308836359ac822e3a8bb6b0aa17608c37d1cad68e",
+      "source_md5": "7b057ed27bc13f8413777322f229e9f8",
+      "bytes": 609985,
+      "physical_pages": 16,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/da/dae0be5332c89d2f31111d0308836359ac822e3a8bb6b0aa17608c37d1cad68e/E-1272-1974-0084-56281.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "source_url": "https://egazette.gov.in/WriteReadData/1974/E-1272-1974-0084-56281.pdf",
+      "uploaded_preserved_copy_matches_inventory_digests": true,
+      "prior_integrity_result": "PIN_VERIFIED: md5,bytes",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "proposed_documentary_disposition": "DIRECT_AMENDMENT_CANDIDATE",
+      "identity": {
+        "title": "Repealing and Amending Act, 1974 (56 of 1974)",
+        "notification_or_assent_date": "1974-12-20",
+        "publication_date": "1974-12-20",
+        "gazette_part_section": "II / 1",
+        "issue_number": "84",
+        "legal_basis": "Section 3, Second Schedule, Army Act 1950 (46 of 1950) entry",
+        "subject_domain": "ARMY_ACT_HISTORY"
+      },
+      "documentary_finding": "Sections 4(3), 6(1), 7(1) and 7(2): substitute clause (i) of sub-section (1) of section 2 for clause (i) of section 2. Image confirms 7(2), not OCR 7(3); printed p817 not OCR 617. No express separate commencement date on reviewed opening page.",
+      "commencement_date_candidate": null,
+      "anchor_candidates": [
+        {
+          "physical_page": 1,
+          "printed_page": "803",
+          "eligible_for_exact_anchor": false
+        },
+        {
+          "physical_page": 15,
+          "printed_page": "817",
+          "eligible_for_exact_anchor": false
+        }
+      ],
+      "visual_scope": "Targeted operative page and available masthead images; not full-page clearance or full transcription",
+      "eligible_for_exact_anchor": false,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+    },
+    {
+      "filename": "E-0913-1983-0023-39490.pdf",
+      "target_id": "C13-G2-acq03-023-b4",
+      "request_id": "A4-ACQ-029",
+      "source_sha256": "66bb0254a0e07d500f6272f82fc6c7d872f9afd0839afa6c54aa9cd3cc302697",
+      "source_md5": "0f040ff6e5774797881ce86d2e46f050",
+      "bytes": 1076879,
+      "physical_pages": 20,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/66/66bb0254a0e07d500f6272f82fc6c7d872f9afd0839afa6c54aa9cd3cc302697/E-0913-1983-0023-39490.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "source_url": "https://egazette.gov.in/WriteReadData/1983/E-0913-1983-0023-39490.pdf",
+      "uploaded_preserved_copy_matches_inventory_digests": true,
+      "prior_integrity_result": "PIN_VERIFIED: md5,bytes",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "proposed_documentary_disposition": "DIRECT_AMENDMENT_CANDIDATE",
+      "identity": {
+        "title": "Delegated Legislation Provisions (Amendment) Act, 1983 (20 of 1983)",
+        "notification_or_assent_date": "1983-08-30",
+        "publication_date": "1983-09-01",
+        "gazette_part_section": "II / 1",
+        "issue_number": "23",
+        "legal_basis": "Section 2, Schedule serial 27",
+        "subject_domain": "ARMY_ACT_HISTORY"
+      },
+      "documentary_finding": "Inserts Army Act s.193A after s.193: parliamentary laying of rules and regulations for thirty days; modification or annulment mechanism with savings for earlier acts. Commencement supported by separate 1984 notification.",
+      "commencement_date_candidate": "1984-03-15",
+      "anchor_candidates": [
+        {
+          "physical_page": 1,
+          "printed_page": "1",
+          "eligible_for_exact_anchor": false
+        },
+        {
+          "physical_page": 12,
+          "printed_page": "12",
+          "eligible_for_exact_anchor": false
+        }
+      ],
+      "visual_scope": "Targeted operative page and available masthead images; not full-page clearance or full transcription",
+      "eligible_for_exact_anchor": false,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+    },
+    {
+      "filename": "E-0871-1984-0057-37466.pdf",
+      "target_id": "C13-G2-acq03-024-b4",
+      "request_id": "A4-ACQ-030",
+      "source_sha256": "3e4fca3e7d71e6b1b52ca4c6dd6c022bce3ae2fdb65ae2ff7a310a5fd48290a4",
+      "source_md5": "6280672cd4f711d5cfc76edd381fd9ca",
+      "bytes": 41367,
+      "physical_pages": 2,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/3e/3e4fca3e7d71e6b1b52ca4c6dd6c022bce3ae2fdb65ae2ff7a310a5fd48290a4/E-0871-1984-0057-37466.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "source_url": "https://egazette.gov.in/WriteReadData/1984/E-0871-1984-0057-37466.pdf",
+      "uploaded_preserved_copy_matches_inventory_digests": true,
+      "prior_integrity_result": "PIN_VERIFIED: md5,bytes",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "proposed_documentary_disposition": "COMMENCEMENT_CANDIDATE",
+      "identity": {
+        "title": "G.S.R. 85(E)",
+        "notification_or_assent_date": "1984-02-29",
+        "publication_date": "1984-02-29",
+        "gazette_part_section": "II / 3(i)",
+        "issue_number": "57",
+        "legal_basis": "Delegated Legislation Provisions (Amendment) Act, 1983 (20 of 1983), s.1(2)",
+        "subject_domain": "ARMY_ACT_HISTORY"
+      },
+      "documentary_finding": "Appoints 15 March 1984 for all provisions of Act 20/1983, including its Army Act s.193A insertion.",
+      "commencement_date_candidate": "1984-03-15",
+      "anchor_candidates": [
+        {
+          "physical_page": 1,
+          "printed_page": "1",
+          "eligible_for_exact_anchor": false
+        },
+        {
+          "physical_page": 2,
+          "printed_page": "2",
+          "eligible_for_exact_anchor": false
+        }
+      ],
+      "visual_scope": "Targeted operative page and available masthead images; not full-page clearance or full transcription",
+      "eligible_for_exact_anchor": false,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+    },
+    {
+      "filename": "181639.pdf",
+      "target_id": "C13-G2-acq03-025-b4",
+      "request_id": "A4-ACQ-032",
+      "source_sha256": "0909643766770ae3d331af3bb5088e8e6e8083ac417be137606076b6d79a77fb",
+      "source_md5": "d8e102cd6a3f83fcf16b84cfd01ee2b5",
+      "bytes": 1489638,
+      "physical_pages": 7,
+      "hf_path": "legal_knowledge/preservation/c13_a7_acquired/09/0909643766770ae3d331af3bb5088e8e6e8083ac417be137606076b6d79a77fb/181639.pdf",
+      "hf_revision": "9e3cf9868a5d553cd6218ed5ac51c383560bbf0b",
+      "source_url": "https://egazette.gov.in/WriteReadData/2018/181639.pdf",
+      "uploaded_preserved_copy_matches_inventory_digests": true,
+      "prior_integrity_result": "PIN_VERIFIED: md5,bytes",
+      "registration_state": "PROPOSED_COPY_REGISTRATION_PENDING_IMAGE_CHECK",
+      "proposed_documentary_disposition": "REPEAL_AND_SAVINGS_CANDIDATE",
+      "identity": {
+        "title": "Repealing and Amending (Second) Act, 2017 (4 of 2018)",
+        "notification_or_assent_date": "2018-01-05",
+        "publication_date": "2018-01-08",
+        "gazette_part_section": "II / 1",
+        "issue_number": "4",
+        "legal_basis": "Section 2, First Schedule; section 4 savings",
+        "subject_domain": "ARMY_ACT_HISTORY"
+      },
+      "documentary_finding": "Repeals Act 19/1955, listed on physical p4. Section 4 savings expressly protects other enactments in which repealed enactment was applied, incorporated or referred to; no automatic restoration of former designation. Need underlying 1955 Act Schedule and independent legal review.",
+      "commencement_date_candidate": null,
+      "anchor_candidates": [
+        {
+          "physical_page": 1,
+          "printed_page": "1",
+          "eligible_for_exact_anchor": false
+        },
+        {
+          "physical_page": 2,
+          "printed_page": "2",
+          "eligible_for_exact_anchor": false
+        },
+        {
+          "physical_page": 4,
+          "printed_page": "4",
+          "eligible_for_exact_anchor": false
+        }
+      ],
+      "visual_scope": "Targeted operative page and available masthead images; not full-page clearance or full transcription",
+      "eligible_for_exact_anchor": false,
+      "legal_status": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+    }
+  ],
+  "request_disposition_proposals": {
+    "A4-ACQ-013": "OPEN: five held candidates identified as Navy or Air Force; five additional C5 leads remain unresolved and disabled in COMPOUND_REQUEST_COVERAGE.json. No closure. The original register lists 204 dependent citation items and 209 dependent version records.",
+    "A4-ACQ-025": "PARTIAL: commencement notification identified; Act 19/1955 Schedule remains missing",
+    "A4-ACQ-026": "DOCUMENTARY_CANDIDATE_PENDING_INDEPENDENT_REVIEW",
+    "A4-ACQ-027": "DOCUMENTARY_CANDIDATE_PENDING_INDEPENDENT_REVIEW",
+    "A4-ACQ-029": "DOCUMENTARY_CANDIDATE_PENDING_INDEPENDENT_REVIEW",
+    "A4-ACQ-030": "DOCUMENTARY_CANDIDATE_PENDING_INDEPENDENT_REVIEW",
+    "A4-ACQ-032": "DOCUMENTARY_CANDIDATE_PENDING_INDEPENDENT_REVIEW"
+  },
+  "findings": [
+    {
+      "id": "C14-CA01-F04",
+      "severity": "P1",
+      "subject": "False-positive service-law candidates",
+      "action": "Do not treat Part II Section 4 or Ministry of Defence metadata alone as Army Rules identity; require enabling statute and operative text. Preserve two original pin holds."
+    },
+    {
+      "id": "C14-CA01-F05",
+      "severity": "P1",
+      "subject": "OCR legal cross-reference error",
+      "action": "1974 Act p15 printed 817: image reads s.7(2), embedded text reads s.7(3); record image-grounded correction separately without modifying raw or OCR layer."
+    },
+    {
+      "id": "C14-CA01-F06",
+      "severity": "P1",
+      "subject": "Legal temporal events",
+      "action": "Separate 1956 deemed effect, 1983 enactment vs 1984 commencement, and 2018 repeal with savings; no inferred current consolidated text."
+    },
+    {
+      "id": "C14-CA01-F07",
+      "severity": "P2",
+      "subject": "Blank physical page",
+      "action": "1955 notice p2 blank on visual review; record blank page rather than assume failed OCR. Keep original intact."
+    }
+  ],
+  "limitations": [
+    "Targeted document identity and relevant page review, not exhaustive visual access-marking screening of multi-page historical omnibus Acts.",
+    "No independent legal review, current-law verification, cryptographic signature checks, full transcription or exact-anchor promotion.",
+    "No current registration state overwritten; all new dispositions are proposals. No HF writes or staging merge."
+  ]
+}

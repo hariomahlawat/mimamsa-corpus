@@ -1,0 +1,61 @@
+{
+  "schema": "c14-wp1-metadata-commissioning-proposal-v1",
+  "status": "PROPOSED_NOT_AUTHORIZED",
+  "historical_candidate_pin": "9740c07904b79af3dc310fc9bde8301b04f2745f",
+  "repository": "hariomahlawat/mimamsa-corpus",
+  "endpoint": "https://huggingface.co",
+  "repo_type": "dataset",
+  "last_owner_observed_revision": "f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc",
+  "approved_revision": null,
+  "revision_note": "Historical last observed revision only, not independently established as the current head. Owner approval of exact immutable revision required.",
+  "operation": "METADATA_GET_ONLY",
+  "approval": "Detached Ed25519 signature over the exact job approval. The independently provisioned owner key, reviewed code commit, runtime SHA-256, plan SHA-256, restriction inputs, HF revision, roots, private job root and fresh job name are bound. Approval expires within four hours.",
+  "authorized_request_kinds": [
+    "GET /api/whoami-v2 for the operation credential",
+    "GET the fixed private dataset's immutable revision identity",
+    "GET bounded tree pages for the two approved parent directories and seven exact stores"
+  ],
+  "roots": [
+    "data/raw/hc",
+    "data/raw/indiacode",
+    "data/raw/official_copies",
+    "data/raw/sci",
+    "legal_knowledge/preservation/c12_acquired_not_ingested",
+    "legal_knowledge/preservation/c13_a7_acquired",
+    "legal_knowledge/preservation/c5_working_store"
+  ],
+  "restriction_register_blob": "ca1096f11feb6f1cdffb69aca48ca016ac7d4a0b",
+  "restriction_guard_blob": "d2d11b77dc4fb7df0acbaa250004f44439f5a21e",
+  "limits": {
+    "requests": 160,
+    "tree_entries": 30000,
+    "page_response_bytes": 4000000,
+    "total_response_bytes": 48000000,
+    "metadata_seconds": 180,
+    "hard_child_seconds": 195,
+    "receipt_bytes": 24000000
+  },
+  "output": {
+    "location": "Fresh child of a dedicated private local NTFS jobs root",
+    "filename": "metadata_inventory.json",
+    "receipt_schema": "c14-wp1-metadata-operation-receipt-v1",
+    "share": "aggregate counts, exact revision and receipt digests only; keep path/hash inventory local for controlled review"
+  },
+  "required_owner_and_reviewer_gates": [
+    "Approve immutable HF revision and seven-root scope; separately attest relevant local preservation store coverage and omissions.",
+    "Confirm the issued fine-grained token in owner HF settings. The worker checks the response from HF before requesting any tree metadata and fails closed if exact scope is unprovable.",
+    "Confirm actual direct access to huggingface.co over verified TLS from the dedicated Windows workstation. Record the first approved metadata-only operation with its private receipt.",
+    "Provision the protected local jobs root and independently establish the owner signing-key fingerprint before signing the exact operation. Keep acquisition and preservation interlocks in effect."
+  ],
+  "prohibitions": {
+    "source_downloads": true,
+    "hf_writes": true,
+    "restricted_source_access": true,
+    "acquisition": true,
+    "judicial_recovery": true,
+    "legal_promotion": true,
+    "release_export": true
+  },
+  "acquisition_eligible": false,
+  "local_store_coverage": "NOT_ATTESTED"
+}
