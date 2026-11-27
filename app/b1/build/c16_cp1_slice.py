@@ -105,7 +105,7 @@ def build_releases(work: Path) -> dict:
         verify = json.loads((root / "S9" / "VERIFY.json").read_text(encoding="utf-8"))
         out[name] = {"spec": spec_file, "release_id": spec["release"]["release_id"], "release_sequence": spec["release"]["release_sequence"],
                      "bundle": str(root / "S8" / "bundle"), "trust": str(root / "S8" / "dev-trust" / "trust_list.json"),
-                     "build_outcome": res["outcome"], "stages_ran": res["ran"], "expected_activation": verify["expected_activation"],
+                     "build_outcome": json.loads((root / "BUILD_RECORD.json").read_text(encoding="utf-8"))["outcome"], "stages_ran": res["ran"], "expected_activation": verify["expected_activation"],
                      "bundle_sha256sums": _sha(root / "S8" / "bundle" / "SHA256SUMS")}
     return out
 
@@ -116,7 +116,10 @@ def import_site(work: Path, builds: dict) -> dict:
     from mimamsa_importer import configure_site, import_release
     site = work / "site"
     if site.exists():
-        shutil.rmtree(site)
+        def _writable(fn, path, _exc):   # vault objects are written read-only
+            os.chmod(path, 0o644)
+            fn(path)
+        shutil.rmtree(site, onexc=_writable) if sys.version_info >= (3, 12) else shutil.rmtree(site, onerror=_writable)
     configure_site(site, exclusion_channel="signed")
     (site / "trust").mkdir(parents=True)
     (site / "trust" / "TRUST_LIST.json").write_text(json.dumps(register_trust_list(), sort_keys=True), encoding="utf-8")
