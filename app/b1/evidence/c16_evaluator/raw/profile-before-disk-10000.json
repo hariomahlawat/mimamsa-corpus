@@ -1,0 +1,411 @@
+[
+  {
+    "q": "s.69 Army Act",
+    "hits": 225,
+    "total_ms": 15.6,
+    "alloc_mb": 1,
+    "phases_ms": {
+      "identifier_tiers": 15.1,
+      "facets": 0.1,
+      "page": 0.2
+    }
+  },
+  {
+    "q": "2013 INSC 408",
+    "hits": 0,
+    "total_ms": 0.1,
+    "alloc_mb": 0,
+    "phases_ms": {
+      "identifier_tiers": 0.1
+    }
+  },
+  {
+    "q": "disability pension",
+    "hits": 27615,
+    "total_ms": 71.3,
+    "alloc_mb": 26.2,
+    "phases_ms": {
+      "case_name_title_speller": 3.1,
+      "scores_eval": 10.1,
+      "order_hits": 20,
+      "hidden_filter": 3.6,
+      "facets": 21,
+      "filter_distinct": 5.2,
+      "page": 6.3,
+      "clause_eval": 7.1,
+      "tf_accumulate": 1,
+      "score_note": 6
+    }
+  },
+  {
+    "q": "court martial",
+    "hits": 95907,
+    "total_ms": 123.6,
+    "alloc_mb": 85.9,
+    "phases_ms": {
+      "case_name_title_speller": 6.5,
+      "scores_eval": 22.7,
+      "order_hits": 44,
+      "hidden_filter": 6.2,
+      "facets": 14.9,
+      "filter_distinct": 10.3,
+      "page": 18.9,
+      "clause_eval": 16.8,
+      "tf_accumulate": 6.5,
+      "score_note": 10.3
+    }
+  },
+  {
+    "q": "summary of evidence",
+    "hits": 15405,
+    "total_ms": 27.6,
+    "alloc_mb": 15.3,
+    "phases_ms": {
+      "case_name_title_speller": 3.4,
+      "scores_eval": 3.1,
+      "order_hits": 9.5,
+      "hidden_filter": 1.3,
+      "facets": 2.8,
+      "filter_distinct": 1.5,
+      "page": 5.7,
+      "clause_eval": 2.2,
+      "tf_accumulate": 0.6,
+      "score_note": 1.6
+    }
+  },
+  {
+    "q": "AFT jurisdiction",
+    "hits": 27442,
+    "total_ms": 50.4,
+    "alloc_mb": 31,
+    "phases_ms": {
+      "case_name_title_speller": 2.9,
+      "scores_eval": 12.5,
+      "order_hits": 8.3,
+      "hidden_filter": 2.8,
+      "facets": 10.1,
+      "filter_distinct": 4.1,
+      "page": 9.7,
+      "clause_eval": 7.9,
+      "tf_accumulate": 0.5,
+      "score_note": 1.5
+    }
+  },
+  {
+    "q": "invalided out of service",
+    "hits": 52720,
+    "total_ms": 70.9,
+    "alloc_mb": 44.8,
+    "phases_ms": {
+      "case_name_title_speller": 2.5,
+      "scores_eval": 6.8,
+      "order_hits": 37.8,
+      "hidden_filter": 3.4,
+      "facets": 7.8,
+      "filter_distinct": 5.2,
+      "page": 7.3,
+      "clause_eval": 4.7,
+      "tf_accumulate": 1.2,
+      "score_note": 3.4
+    }
+  },
+  {
+    "q": "exact:\u0022Entitlement Rules\u0022",
+    "hits": 1306,
+    "total_ms": 1.5,
+    "alloc_mb": 1.3,
+    "phases_ms": {
+      "scores_eval": 0.3,
+      "order_hits": 0.4,
+      "hidden_filter": 0.1,
+      "facets": 0.3,
+      "filter_distinct": 0.1,
+      "page": 0.3
+    }
+  },
+  {
+    "q": "desertion AND NOT pension",
+    "hits": 779,
+    "total_ms": 3.2,
+    "alloc_mb": 5.4,
+    "phases_ms": {
+      "scores_eval": 2.3,
+      "order_hits": 0.2,
+      "hidden_filter": 0.1,
+      "facets": 0.1,
+      "page": 0.2,
+      "tf_accumulate": 0.5,
+      "score_note": 1.6
+    }
+  },
+  {
+    "q": "Rule 22 Army Rules",
+    "hits": 541,
+    "total_ms": 16.7,
+    "alloc_mb": 0.9,
+    "phases_ms": {
+      "identifier_tiers": 13.4,
+      "hidden_filter": 0.1,
+      "facets": 0.2,
+      "page": 3
+    }
+  },
+  {
+    "q": "release medical board",
+    "hits": 21990,
+    "total_ms": 23.8,
+    "alloc_mb": 22.5,
+    "phases_ms": {
+      "case_name_title_speller": 2.5,
+      "scores_eval": 4.4,
+      "order_hits": 6.2,
+      "hidden_filter": 1.6,
+      "facets": 4.1,
+      "filter_distinct": 1.3,
+      "page": 3.5,
+      "clause_eval": 3,
+      "tf_accumulate": 0.8,
+      "score_note": 2.2
+    }
+  },
+  {
+    "q": "\u0022court martial\u0022 NEAR/10 delay",
+    "hits": 0,
+    "total_ms": 6.8,
+    "alloc_mb": 7.1,
+    "phases_ms": {
+      "scores_eval": 6.8,
+      "tf_accumulate": 0.1,
+      "score_note": 0.4
+    }
+  },
+  {
+    "q": "Civil Appeal No. 4949 of 2013",
+    "hits": 0,
+    "total_ms": 0,
+    "alloc_mb": 0,
+    "phases_ms": {}
+  },
+  {
+    "q": "writ petition armed forces tribunal",
+    "hits": 81988,
+    "total_ms": 97.8,
+    "alloc_mb": 81.2,
+    "phases_ms": {
+      "case_name_title_speller": 6.1,
+      "scores_eval": 25.2,
+      "order_hits": 26.4,
+      "hidden_filter": 5.3,
+      "facets": 12.5,
+      "filter_distinct": 6.5,
+      "page": 15.6,
+      "clause_eval": 18.9,
+      "tf_accumulate": 3.8,
+      "score_note": 15.1
+    }
+  },
+  {
+    "q": "field punishment",
+    "hits": 13453,
+    "total_ms": 13.3,
+    "alloc_mb": 14.5,
+    "phases_ms": {
+      "case_name_title_speller": 2.3,
+      "scores_eval": 1.9,
+      "order_hits": 3.1,
+      "hidden_filter": 0.8,
+      "facets": 2.4,
+      "filter_distinct": 0.5,
+      "page": 2.1,
+      "clause_eval": 1.3,
+      "tf_accumulate": 0.3,
+      "score_note": 1
+    }
+  },
+  {
+    "q": "attributable to military service",
+    "hits": 55621,
+    "total_ms": 70.9,
+    "alloc_mb": 48.6,
+    "phases_ms": {
+      "case_name_title_speller": 2.4,
+      "scores_eval": 8.5,
+      "order_hits": 37.4,
+      "hidden_filter": 3.4,
+      "facets": 7.4,
+      "filter_distinct": 4,
+      "page": 7.8,
+      "clause_eval": 5.9,
+      "tf_accumulate": 1.5,
+      "score_note": 4.4
+    }
+  },
+  {
+    "q": "sentence of dismissal",
+    "hits": 14870,
+    "total_ms": 13.3,
+    "alloc_mb": 14.8,
+    "phases_ms": {
+      "case_name_title_speller": 2.3,
+      "scores_eval": 2.3,
+      "order_hits": 3.6,
+      "hidden_filter": 0.9,
+      "facets": 1.9,
+      "filter_distinct": 0.6,
+      "page": 1.7,
+      "clause_eval": 1.5,
+      "tf_accumulate": 0.4,
+      "score_note": 1.1
+    }
+  },
+  {
+    "q": "section 302 Indian Penal Code",
+    "hits": 15566,
+    "total_ms": 27.7,
+    "alloc_mb": 17.2,
+    "phases_ms": {
+      "identifier_tiers": 1,
+      "case_name_title_speller": 2.5,
+      "scores_eval": 7.3,
+      "order_hits": 7.8,
+      "hidden_filter": 1.3,
+      "facets": 3.6,
+      "filter_distinct": 0.9,
+      "page": 3.3,
+      "clause_eval": 6.3,
+      "tf_accumulate": 4.5,
+      "score_note": 1.8
+    }
+  },
+  {
+    "q": "Navy Act",
+    "hits": 54146,
+    "total_ms": 42.8,
+    "alloc_mb": 45.5,
+    "phases_ms": {
+      "case_name_title_speller": 2.2,
+      "scores_eval": 6.3,
+      "order_hits": 14.7,
+      "hidden_filter": 3.2,
+      "facets": 6.5,
+      "filter_distinct": 3.4,
+      "page": 6.2,
+      "clause_eval": 4.4,
+      "tf_accumulate": 1.2,
+      "score_note": 3.2
+    }
+  },
+  {
+    "q": "natural justice court of inquiry",
+    "hits": 100504,
+    "total_ms": 158.8,
+    "alloc_mb": 86.5,
+    "phases_ms": {
+      "case_name_title_speller": 5.6,
+      "scores_eval": 21.5,
+      "order_hits": 70.5,
+      "hidden_filter": 10.5,
+      "facets": 16.7,
+      "filter_distinct": 13.6,
+      "page": 20.3,
+      "clause_eval": 14.9,
+      "tf_accumulate": 3.9,
+      "score_note": 11
+    }
+  },
+  {
+    "q": "Dharamvir Singh",
+    "hits": 23369,
+    "total_ms": 42.9,
+    "alloc_mb": 25.6,
+    "phases_ms": {
+      "case_name_title_speller": 3.7,
+      "scores_eval": 4.3,
+      "order_hits": 9.7,
+      "hidden_filter": 2.7,
+      "facets": 9,
+      "filter_distinct": 3.8,
+      "page": 9.5,
+      "clause_eval": 2.9,
+      "tf_accumulate": 0.7,
+      "score_note": 2.1
+    }
+  },
+  {
+    "q": "section 302 IPC",
+    "hits": 1585,
+    "total_ms": 2.8,
+    "alloc_mb": 1.7,
+    "phases_ms": {
+      "identifier_tiers": 1.3,
+      "scores_eval": 0.3,
+      "order_hits": 0.4,
+      "hidden_filter": 0.1,
+      "facets": 0.2,
+      "filter_distinct": 0.1,
+      "page": 0.3,
+      "clause_eval": 0.2,
+      "score_note": 0.1
+    }
+  },
+  {
+    "q": "court marshal",
+    "hits": 96045,
+    "total_ms": 87.4,
+    "alloc_mb": 81.4,
+    "phases_ms": {
+      "case_name_title_speller": 2.4,
+      "scores_eval": 13.3,
+      "order_hits": 33.6,
+      "hidden_filter": 5.8,
+      "facets": 11.4,
+      "filter_distinct": 7.1,
+      "page": 13.7,
+      "clause_eval": 8.8,
+      "tf_accumulate": 2.3,
+      "score_note": 6.5
+    }
+  },
+  {
+    "q": "\u0022summary of evidence\u0022",
+    "hits": 723,
+    "total_ms": 1.4,
+    "alloc_mb": 0.9,
+    "phases_ms": {
+      "scores_eval": 0.8,
+      "order_hits": 0.1,
+      "facets": 0.2,
+      "page": 0.2
+    }
+  },
+  {
+    "q": "pension*",
+    "hits": 24574,
+    "total_ms": 57.3,
+    "alloc_mb": 18.6,
+    "phases_ms": {
+      "scores_eval": 3.2,
+      "order_hits": 43,
+      "hidden_filter": 1.8,
+      "facets": 4.1,
+      "filter_distinct": 1.6,
+      "page": 3.6,
+      "tf_accumulate": 0.7,
+      "score_note": 2.3
+    }
+  },
+  {
+    "q": "title:army",
+    "hits": 4043,
+    "total_ms": 25.8,
+    "alloc_mb": 27.9,
+    "phases_ms": {
+      "scores_eval": 24.5,
+      "order_hits": 0.6,
+      "hidden_filter": 0.2,
+      "facets": 0.2,
+      "filter_distinct": 0.1,
+      "page": 0.2
+    }
+  }
+]
