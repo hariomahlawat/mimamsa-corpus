@@ -1,0 +1,1 @@
+{"contract_version": "1.0.0", "issued_at": "2026-11-27T00:00:00Z", "keys": [{"holder": "DEVELOPMENT", "key_id": "dev-250bda8787b54aad4afcd95fa143fd7bc87f23a89606a73696119b4efb48e634", "public_key_hex": "55d2825a35f45d60b25d2690d1b5b7d42ae6fff826189200580d12ea07b5e3f6", "purposes": ["register"], "revoked": false}], "record_kind": "trust_list", "sequence": 1}
