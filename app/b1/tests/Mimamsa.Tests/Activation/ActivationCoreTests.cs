@@ -354,9 +354,15 @@ public class ActivationPinTests
         eng.AcquireLock();
         var valid = new HashSet<(string, string)> { ("R1", "M1"), ("R2", "M1"), ("R2", "M2"), ("R3", "M2"), ("R1", "M2") };
         var seen = new System.Collections.Concurrent.ConcurrentBag<(string, string)>();
-        int refused = 0;
+        var reasons = new System.Collections.Concurrent.ConcurrentDictionary<string, int>();
+        const int Readers = 3;
+        // Handshakes instead of fixed delays: pinsSinceMark[r] counts reader r's successful pins since the main thread
+        // last reset it, so every reader is proven to have pinned before the first switch, between every pair of
+        // switches and after the last one, however the runner schedules threads (2-4 cores on CI).
+        var pinsSinceMark = new int[Readers];
+        var lastPair = new string?[Readers];   // "K|M": a reference write is atomic
         using var stop = new CancellationTokenSource();
-        var readers = Enumerable.Range(0, 3).Select(_ => Task.Run(() =>
+        var readers = Enumerable.Range(0, Readers).Select(r => Task.Factory.StartNew(() =>
         {
             while (!stop.IsCancellationRequested)
             {
@@ -366,20 +372,40 @@ public class ActivationPinTests
                     seen.Add((pin.Knowledge, pin.Models));
                     Assert.Equal(pin.Knowledge, p.Respond(pin, [pin.Knowledge]).Single());
                     p.Unpin(pin);
+                    Volatile.Write(ref lastPair[r], pin.Knowledge + "|" + pin.Models);
+                    Interlocked.Increment(ref pinsSinceMark[r]);
                 }
-                catch (ActivationRefused) { Interlocked.Increment(ref refused); }
-                Thread.Sleep(1);
+                catch (ActivationRefused e) { reasons.AddOrUpdate(e.Message, 1, (_, n) => n + 1); }
+                Thread.Yield();
             }
-        })).ToArray();
+        }, TaskCreationOptions.LongRunning)).ToArray();
+
+        void EveryReaderPinsOn((string, string) head, string phase)
+        {
+            for (int r = 0; r < Readers; r++) Interlocked.Exchange(ref pinsSinceMark[r], 0);
+            var deadline = DateTime.UtcNow.AddSeconds(30);
+            while (Enumerable.Range(0, Readers).Any(r => Volatile.Read(ref pinsSinceMark[r]) == 0 || Volatile.Read(ref lastPair[r]) != head.Item1 + "|" + head.Item2))
+            {
+                if (readers.FirstOrDefault(t => t.IsFaulted) is { } f) throw f.Exception!;
+                if (DateTime.UtcNow > deadline)
+                    throw new Xunit.Sdk.XunitException($"{phase}: not every reader pinned {head} within 30 s; refusals: " +
+                        string.Join("; ", reasons.Select(kv => kv.Key + " x" + kv.Value)));
+                Thread.Sleep(2);
+            }
+        }
+
+        EveryReaderPinsOn(("R1", "M1"), "before the switches");
         eng.Transition("KNOWLEDGE", "R2");
+        EveryReaderPinsOn(("R2", "M1"), "after R2");
         eng.Transition("MODELS", "M2");
+        EveryReaderPinsOn(("R2", "M2"), "after M2");
         eng.Transition("KNOWLEDGE", "R3");
+        EveryReaderPinsOn(("R3", "M2"), "after R3");
         eng.Transition("KNOWLEDGE", "R1", "ROLLBACK");
-        Thread.Sleep(100);
+        EveryReaderPinsOn(("R1", "M2"), "after the rollback");
         stop.Cancel();
         Task.WaitAll(readers);
-        Assert.NotEmpty(seen);
-        Assert.All(seen, pair => Assert.Contains(pair, valid));
+        Assert.All(seen, pair => Assert.Contains(pair, valid));   // never a mixed generation
         Assert.Equal(0, p.PinCount);
     }
 
