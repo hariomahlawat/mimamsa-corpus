@@ -35,7 +35,8 @@ HEX64 = re.compile(r"(?i)(?<![0-9a-f])[0-9a-f]{64}(?![0-9a-f])")
 CASE_NUMBER = re.compile(r"(?i)\b(?:CWP|CRWP|CRM-M|RSA|LPA|FAO|CRR|CRA|OA|TA|MA|CA|WP(?:\(C\))?|SLP)[\s./-]*\d+[\s./-]+\d{4}\b")
 CITATION = re.compile(r"(?i)\b(?:20\d{2}\s+(?:INSC|PHHC|DHC|AHC|KHC|BHC|KAR)\s+\d+|\(\d{4}\)\s*\d+\s+SCC\s+\d+)\b")
 DATE = re.compile(r"\b(?:0?[1-9]|[12]\d|3[01])[./-](?:0?[1-9]|1[0-2])[./-](?:19|20)\d{2}\b")
-PROVISION_FILENAME = re.compile(r"(?i)^\s*([A-Z][A-Z.]{1,7})\s+(.+?)\s+(?:[\u2013\u2014]|-)\s+(.+?)\s*$")
+PROVISION_TOKEN = r"\d+(?:\([A-Za-z0-9]+\))*"
+PROVISION_FILENAME = re.compile(rf"(?i)^\s*(AA|AR|AFA|NA|AFT)\s+(?:(?:sec(?:tion)?|rule|r|s)\.?\s*)?({PROVISION_TOKEN}(?:\s*,\s*{PROVISION_TOKEN})*)\s*(?:[\u2013\u2014-]\s*)?(.+?)\s*$")
 MILITARY = re.compile(r"(?i)\b(army|air force|navy|armed forces|court[ -]?martial|military|aft|pension|service|discipline|evidence|criminal|ipc|crpc|bns|bnss|human rights)\b")
 RESTRICTED_MARKERS = re.compile(r"(?im)\b(?:for official use only|rm-001)\b|^\s*(?:security classification\s*:\s*)?restricted\s*$")
 REL_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
@@ -51,12 +52,15 @@ class EmbeddedImage:
     sha256: str
     size_bytes: int
     data: bytes
+    part: str = "word/document.xml"
 
 
 @dataclass(frozen=True)
 class DocxExtraction:
     native_text: str
     images: tuple[EmbeddedImage, ...]
+    unresolved_image_references: tuple[dict, ...] = ()
+    unreferenced_media: tuple[dict, ...] = ()
 
 
 MANDATORY = [
@@ -69,7 +73,9 @@ MANDATORY = [
     "VALIDATION_REPORT.md", "RECONCILIATION_REPORT.md",
     "C16_LOCAL_CORPUS_COMPLETION_REPORT.md",
 ]
-EXTRACTION_METHODOLOGY_VERSION = 3
+EXTRACTION_METHODOLOGY_VERSION = 4
+CLASSIFICATION_RULES_VERSION = "C16-CLASSIFICATION/2.0"
+EXCHANGE_CONTRACT_REVISION = "8052792186b822881508e0e4b95f586df6772a25"
 
 
 def utcnow() -> str:
@@ -188,34 +194,45 @@ def extract_pdf(path: Path) -> tuple[list[str], bool]:
     document.close()
     return pages, False
 
+def inspect_pdf(path: Path) -> list[dict]:
+    document=pymupdf.open(path);out=[]
+    try:
+        for number,page in enumerate(document,1):
+            text=page.get_text("text",sort=True);chars=len(normalize_text(text));area=max(page.rect.get_area(),1.0);image_area=0.0;xrefs=[]
+            for image in page.get_images(full=True):
+                xref=image[0];xrefs.append(xref)
+                for rect in page.get_image_rects(xref):image_area+=(rect&page.rect).get_area()
+            coverage=min(image_area/area,1.0);replacement=text.count("\ufffd")/max(len(text),1);required=chars<80 or coverage>=.20 or replacement>.02
+            classification="MIXED_NATIVE_AND_IMAGE" if coverage>=.20 and chars else "IMAGE_DOMINANT" if coverage>=.20 else "NATIVE_TEXT" if chars else "EMPTY_OR_VECTOR_ONLY"
+            out.append({"physical_page":number,"native_character_count":chars,"image_count":len(xrefs),"image_xrefs":xrefs,"image_coverage_ratio":round(coverage,6),"replacement_character_ratio":round(replacement,6),"classification":classification,"ocr_required":required})
+    finally:document.close()
+    return out
+
 
 def extract_docx(path: Path) -> DocxExtraction:
     with zipfile.ZipFile(path) as archive:
         bad = next((name for name in archive.namelist() if not safe_archive_member(name)), None)
         if bad:
             raise ValueError("unsafe archive member")
-        root = ElementTree.fromstring(archive.read("word/document.xml"))
-        chunks = [node.text or "" for node in root.iter() if node.tag.endswith("}t")]
-        relationships = {}
-        rel_path = "word/_rels/document.xml.rels"
-        if rel_path in archive.namelist():
-            rel_root = ElementTree.fromstring(archive.read(rel_path))
-            for rel in rel_root.findall(f"{{{PKG_REL_NS}}}Relationship"):
-                target = rel.attrib.get("Target", "").replace("\\", "/")
-                if rel.attrib.get("Id") and safe_archive_member(target):
-                    relationships[rel.attrib["Id"]] = str(PurePosixPath("word") / target)
-        images = []
-        for node in root.iter():
-            rel_id = node.attrib.get(f"{{{REL_NS}}}embed")
-            archive_path = relationships.get(rel_id or "")
-            if not archive_path or archive_path not in archive.namelist():
-                continue
-            payload = archive.read(archive_path)
-            sequence = len(images) + 1
-            images.append(EmbeddedImage(sequence, f"body:{rel_id}:{sequence}", rel_id,
-                                        archive_path, hashlib.sha256(payload).hexdigest(),
-                                        len(payload), payload))
-        return DocxExtraction(" ".join(chunks), tuple(images))
+        names=set(archive.namelist());parts=sorted([n for n in names if re.fullmatch(r"word/(?:document|header\d+|footer\d+|footnotes|endnotes|comments)\.xml",n)],key=lambda x:(x!="word/document.xml",x));chunks=[];images=[];unresolved=[];referenced=set()
+        for part in parts:
+            root=ElementTree.fromstring(archive.read(part));chunks.extend(n.text or "" for n in root.iter() if n.tag.endswith("}t"));relpath=str(PurePosixPath(part).parent/"_rels"/(PurePosixPath(part).name+".rels"));rels={}
+            if relpath in names:
+                rr=ElementTree.fromstring(archive.read(relpath))
+                for rel in rr.findall(f"{{{PKG_REL_NS}}}Relationship"):
+                    rid,target=rel.attrib.get("Id"),rel.attrib.get("Target","").replace("\\","/")
+                    if rid and safe_archive_member(target):rels[rid]=(str(PurePosixPath(part).parent/target),rel.attrib.get("Type","").lower())
+            for node in root.iter():
+                local=node.tag.rsplit("}",1)[-1]
+                if local not in {"blip","imagedata"}:continue
+                rid=node.attrib.get(f"{{{REL_NS}}}embed") or node.attrib.get(f"{{{REL_NS}}}id");resolved=rels.get(rid or "");rtype=resolved[1] if resolved else ""
+                if not resolved or not(rtype=="image" or rtype.endswith("/image")) or resolved[0] not in names:unresolved.append({"part":part,"relationship_id":rid,"element":local,"reason":"MISSING_OR_UNRESOLVED_IMAGE_RELATIONSHIP"});continue
+                ap=resolved[0];referenced.add(ap);payload=archive.read(ap);seq=len(images)+1;placement="body" if part=="word/document.xml" else PurePosixPath(part).stem;images.append(EmbeddedImage(seq,f"{placement}:{rid}:{seq}",rid,ap,hashlib.sha256(payload).hexdigest(),len(payload),payload,part))
+        orphan=[]
+        for ap in sorted(n for n in names if n.startswith("word/media/") and not n.endswith("/")):
+            if ap not in referenced:
+                payload=archive.read(ap);orphan.append({"archive_path":ap,"image_sha256":hashlib.sha256(payload).hexdigest(),"size_bytes":len(payload),"disposition":"UNREFERENCED_MEDIA_REQUIRES_REVIEW"})
+        return DocxExtraction(" ".join(chunks),tuple(images),tuple(unresolved),tuple(orphan))
 
 
 def document_content_hash(native_text: str, images: tuple[EmbeddedImage, ...] | list[EmbeddedImage]) -> str | None:
@@ -242,17 +259,17 @@ def parse_filename_legal_metadata(filename: str) -> dict:
     result = {"source_label": stem, "instrument_abbreviation": None, "provisions": [],
               "case_name_candidate": None, "ambiguity": None,
               "classification_rule": "C16-FN-PROVLIST/1.0", "verification": "CANDIDATE"}
+    abbr = re.match(r"(?i)^\s*(AA|AR|AFA|NA|AFT)\b", stem)
+    if abbr and re.search(r"\d\s*(?:-|\u2013|\u2014|\bto\b)\s*\d",stem,re.I):
+        result["instrument_abbreviation"]=abbr.group(1).upper();result["ambiguity"]="PROVISION_RANGE_NOT_EXPANDED";return result
     match = PROVISION_FILENAME.match(stem)
     if not match:
         return result
     abbreviation, provision_label, case_name = match.groups()
     result["instrument_abbreviation"] = abbreviation.upper().replace(".", "")
     result["case_name_candidate"] = case_name.strip()
-    if re.search(r"\d\s*(?:-|\u2013|\u2014|\bto\b)\s*\d", provision_label, re.I):
-        result["ambiguity"] = "PROVISION_RANGE_NOT_EXPANDED"
-        return result
     tokens = [token.strip() for token in provision_label.split(",")]
-    if tokens and all(re.fullmatch(r"\d+[A-Za-z]?", token) for token in tokens):
+    if tokens and all(re.fullmatch(PROVISION_TOKEN, token) for token in tokens):
         result["provisions"] = tokens
     else:
         result["ambiguity"] = "UNPARSED_PROVISION_LABEL"
@@ -298,6 +315,8 @@ def ocr_required_pages(extension: str, pages: list[str], embedded_image_count: i
 
 def ocr_required_images(extension: str, embedded_image_count: int) -> list[int]:
     return list(range(1, embedded_image_count + 1)) if extension == ".docx" else []
+
+def physical_page_count(extension: str,pages: list[str]) -> int|None:return len(pages) if extension==".pdf" else None
 
 
 def has_restriction_marking(text: str) -> bool:
