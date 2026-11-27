@@ -36,6 +36,9 @@ public sealed record SearchIndexOptions
     public bool UseForwardCache { get; init; } = true;
     /// TEST ONLY: throw after writing this many vocabulary rows, simulating a crash during a build.
     public int? FailAfterTerms { get; init; }
+    /// C16 B02: a pinned build time written as built_utc instead of the wall clock, so that a central build produces
+    /// byte-identical indexes from the same inputs. Null (the default) keeps the existing behaviour.
+    public DateTimeOffset? BuildTimeUtc { get; init; }
 }
 
 public sealed class IndexIntegrityException(string message) : Exception(message);
@@ -47,6 +50,8 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
     public const string FormatVersion = "mimamsa-search-index/1";
 
     void Log(string m) => log?.Invoke(m);
+
+    string BuiltUtc => options.BuildTimeUtc is { } t ? t.UtcDateTime.ToString("O") : DateTime.UtcNow.ToString("O");
 
     static string Safe(string generation) => string.Concat(generation.Select(c => char.IsLetterOrDigit(c) || c is '-' or '_' or '.' ? c : '_'));
 
@@ -267,7 +272,7 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
             using (var t = c.BeginTransaction())
             {
                 foreach (var (k, v) in new Dictionary<string, string> { ["format"] = FormatVersion, ["generation"] = g.GenerationId, ["source_digest"] = digest,
-                                                                         ["passages"] = ix.N.ToString(), ["built_utc"] = DateTime.UtcNow.ToString("O") })
+                                                                         ["passages"] = ix.N.ToString(), ["built_utc"] = BuiltUtc })
                     Insert(c, t, "INSERT INTO meta VALUES($a,$b)", k, v);
                 for (int d = 0; d < ix.Docs.Count; d++)
                     Insert(c, t, "INSERT INTO docs VALUES($a,$b,$c,$d,$e)", d, ix.Docs[d].DocId, ix.Docs[d].DerivativeId, ix.Service[d],
@@ -328,7 +333,7 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
             ["format"] = FormatVersion, ["generation"] = g.GenerationId, ["source_digest"] = digest,
             ["documents"] = ix.Docs.Count, ["passages"] = ix.N, ["terms"] = terms.Count,
             ["file_bytes"] = new FileInfo(db).Length, ["file_sha256"] = FileSha(db),
-            ["built_utc"] = DateTime.UtcNow.ToString("O"),
+            ["built_utc"] = BuiltUtc,
         };
         var mtmp = Path.Combine(tmp, ManifestFile + ".tmp");
         using (var f = new FileStream(mtmp, FileMode.CreateNew, FileAccess.Write))
