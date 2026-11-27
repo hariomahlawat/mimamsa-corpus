@@ -21,7 +21,7 @@ from pathlib import Path
 import pymupdf
 
 from .amendments import parse_note
-from .common import SCHEMA_VERSION, Paths, write_json
+from .common import SCHEMA_VERSION, Paths, require_corpus_writes, write_json
 from .records import _edge, section_key
 
 MIN_COVERAGE = 0.98
@@ -288,6 +288,7 @@ def split_pdf(pdf_path: Path, parent: str, act_repeal_note: str | None = None) -
 
 def run(paths: Paths, only: list[str] | None = None) -> dict:
     """Split every Act that has a text layer and no section records from its source."""
+    require_corpus_writes("split")
     results: dict = {}
     rel_path = paths.data / "relations.jsonl"
     rels = [json.loads(l) for l in rel_path.read_text(encoding="utf-8").splitlines() if l.strip()] \

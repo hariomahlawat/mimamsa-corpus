@@ -14,7 +14,7 @@ import re
 import pdfplumber
 import yaml
 
-from .common import SCHEMA_VERSION, Paths
+from .common import SCHEMA_VERSION, Paths, require_corpus_writes
 from .records import section_key
 
 HEADER_WORDS = re.compile(r"^(sections?|subsections?|sections?/|subject|summary of compar\w+|bnss?|bsa|ipc|crpc|iea|ons)$", re.I)
@@ -69,6 +69,7 @@ def read_table(pdf_path, columns: list[str]) -> list[dict]:
 
 
 def run(paths: Paths, config_path=None) -> dict:
+    require_corpus_writes("correspondence")
     config_path = config_path or paths.root / "config" / "sources.yaml"
     if not config_path.exists():
         return {}

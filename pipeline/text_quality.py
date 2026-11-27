@@ -34,6 +34,7 @@ from __future__ import annotations
 import re
 import unicodedata
 
+POLICY_VERSION = "c13-page-quality-v2"
 MIN_CHARS = 80
 LETTER_SHARE = 0.5
 DICT_RATIO = 0.15

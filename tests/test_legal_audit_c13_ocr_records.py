@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import unittest
+import tempfile
+import hashlib
 
 import csv
 import json
@@ -78,10 +80,32 @@ class C13OcrRecordsTests(unittest.TestCase):
         assert tool.lev("a b c".split(), "a c".split()) == 1
         assert tool.norm("‘Unfit’  – x") == "'Unfit' - x"
 
-    def test_old_rule_untouched_new_rule_documented(self):
-        # the C13 module supersedes, but does not edit, the deleting stage
-        src = (ROOT / "pipeline" / "judgments.py").read_text(encoding="utf-8")
-        assert "path.unlink()" in src
+    def test_legacy_relevance_mutation_suspended(self):
+        # C13 baseline behavior is preserved in its reviewed commit. C14 changes
+        # the contract: neither relevance nor historical exclusion can delete.
+        from pipeline.common import Paths
+        from pipeline import judgments, records, extract
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            paths = Paths.default(root)
+            files = {
+                "data/raw/fixture.pdf": b"%PDF synthetic fixture",
+                "data/meta/fixture.json": b'{"doc_id":"fixture","doc_type":"judgment"}',
+                "data/text/fixture.txt": b"unrelated or garbled text",
+                "data/excluded_judgments.jsonl": b'{"sha256":"historical"}\n',
+            }
+            for relative, body in files.items():
+                p = root / relative
+                p.parent.mkdir(parents=True, exist_ok=True)
+                p.write_bytes(body)
+            def snapshot():
+                return {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+                        for p in root.rglob("*") if p.is_file()}
+            before = snapshot()
+            for stage in (judgments.run, records.build_indiacode, extract.run):
+                with self.assertRaisesRegex(RuntimeError, "C14 corpus mutation hold"):
+                    stage(paths)
+                self.assertEqual(before, snapshot())
         new = (ROOT / "pipeline" / "relevance_states.py").read_text(encoding="utf-8")
         assert "Supersedes the deletion rule" in new
 
