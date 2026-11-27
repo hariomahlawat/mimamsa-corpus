@@ -194,6 +194,35 @@ test("W-05c typing during an in-flight policy refresh is not discarded", async (
   }
 });
 
+// Codex review of PR #75: a policy refresh that fails with an HTTP error withholds library content (the author's text and
+// references stay) and is retried on later polls until it succeeds.
+test("W-05d a failed Studio policy refresh withholds library content and is retried", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  const meta = await (await user.request.get("/api/v2/documents/act-navy-1957/pdf-meta")).json();
+  const created = await (await apiPost(user, "/api/studio/documents", { title: "W-05d failed refresh", template: "blank" })).json();
+  expect((await apiPost(user, `/api/studio/documents/${created.id}/append`, { blocks: [
+    { type: "text", origin: "user", text: "Saved text." },
+    { type: "citation", doc_id: "act-navy-1957", copy: meta.copy_sha256.slice(0, 12), page: 3 }] })).status()).toBe(200);
+  await user.goto(`/studio/${created.id}`);
+  await expect(user.locator(".ws-block.corpus .ws-cite")).toContainText("Navy Act");
+  await user.locator(".ws-block textarea").first().fill("Unsaved text kept through a failed refresh.");
+  const doc = (u) => u.pathname === `/api/studio/documents/${created.id}`;
+  await user.route(doc, (route) => route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ error: "transient" }) }));
+  await login(page, "admin");
+  expect((await apiPost(page, "/api/admin/withdraw", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C15 W-05d policy change" })).status()).toBe(200);
+  try {
+    await expect(user.locator(".ws-block.corpus [data-unavailable]")).toHaveText("Checking whether this source is still available…", { timeout: 25_000 });
+    await expect(user.locator(".ws-block.corpus")).not.toContainText("Navy Act");
+    await expect(user.locator(".ws-block textarea").first()).toHaveValue("Unsaved text kept through a failed refresh.");
+    await user.unroute(doc);
+    await expect(user.locator(".ws-block.corpus .ws-cite")).toContainText("Navy Act", { timeout: 25_000 });   // retried on a later poll
+    await expect(user.locator(".ws-block textarea").first()).toHaveValue("Unsaved text kept through a failed refresh.");
+  } finally {
+    expect((await apiPost(page, "/api/admin/reinstate", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C15 W-05d restore after test" })).status()).toBe(200);
+  }
+});
+
 test("W-06 Commander questions go into a Studio document as automated suggestions", async ({ page }) => {
   await login(page);
   await page.goto("/c/court-of-inquiry");

@@ -17,6 +17,8 @@ const STATE = { draft: "Draft", in_review: "In review (your label)", final_draft
 let current = null;   // { kind: "commander"|"studio", render: () => void }
 export function refreshWorkspace() { if (current && document.querySelector("[data-workspace]")) current.render(); }
 export const workspaceShown = () => !!document.querySelector("[data-workspace]");
+/** Codex review of PR #75: a Studio refresh that failed is retried on every epoch poll until it succeeds. */
+export const workspaceRefreshPending = () => !!(current?.pending && workspaceShown());
 
 // ------------------------------------------------------------------ Commander
 export async function commanderPage(main, nav, id) {
@@ -218,19 +220,33 @@ async function studioEditor(page, nav, id, version, preloaded = null) {
   const key = (b) => [b.type, b.doc_id, b.copy, b.page, b.passage_id || "", b.para || ""].join("|");   // para: two paragraphs on one page are distinct (Codex review of PR #75)
   // Codex review of PR #75: the dirty state is checked only AFTER the fetch, and a clean editor is rebuilt from the data
   // already fetched (no further await), so typing that starts while the refresh is in flight is never discarded.
-  const me = { kind: "studio" };
+  // If the refresh fails, library content is withheld until eligibility can be re-checked (each block keeps only the
+  // author's reference, so saving still works), the author's text is kept, and the refresh is retried on every poll.
+  const me = { kind: "studio", pending: false, busy: false };
+  const withhold = () => {
+    ed.blocks = ed.blocks.map((b) => !isCorpus(b) ? b
+      : { type: b.type, origin: "corpus", doc_id: b.doc_id, copy: b.copy, page: b.page, passage_id: b.passage_id, para: b.para, available: false, notice: "Checking whether this source is still available…" });
+    draw();
+  };
   me.render = async () => {
+    if (me.busy) { me.again = true; return; }                             // a change during a refresh runs once more after it
+    me.busy = true;
+    try { do { me.again = false; await refreshOnce(); } while (me.again && current === me); } finally { me.busy = false; }
+  };
+  const refreshOnce = async () => {
     let loaded;
-    try { loaded = await loadStudioDoc(id, viewingOld ? d.version : undefined); } catch { return; /* the next policy change or reload re-checks */ }
+    try { loaded = await loadStudioDoc(id, viewingOld ? d.version : undefined); }
+    catch { if (current === me && page.isConnected) { me.pending = true; withhold(); } return; }
     if (current !== me || !page.isConnected) return;                       // navigated away meanwhile
+    me.pending = false;
     if (!ed.changed) return studioEditor(page, nav, id, viewingOld ? d.version : undefined, loaded);
-    try {
+    {
       const fresh = loaded[0];
       const m = new Map(fresh.blocks.filter(isCorpus).map((b) => [key(b), b]));
       ed.blocks = ed.blocks.map((b) => !isCorpus(b) ? b
         : m.get(key(b)) || { type: b.type, origin: "corpus", doc_id: b.doc_id, copy: b.copy, page: b.page, passage_id: b.passage_id, para: b.para, available: false, notice: "Source no longer available in this installation." });
       draw();
-    } catch { /* the next policy change or reload re-checks */ }
+    }
   };
   current = me;
 }

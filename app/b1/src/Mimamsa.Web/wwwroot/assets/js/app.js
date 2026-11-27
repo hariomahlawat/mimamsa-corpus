@@ -6,7 +6,7 @@ import * as research from "./research.js";
 import { loginPage, gatePage, laterPage, statutesPage, citePage, adminPage } from "./pages.js";
 import { graphPage, refreshGraph, graphShown } from "./graph.js";
 import { noteRecentSearch, invalidateLibrary } from "./home.js";
-import { commanderPage, studioPage, refreshWorkspace, workspaceShown } from "./workspace.js";
+import { commanderPage, studioPage, refreshWorkspace, workspaceShown, workspaceRefreshPending } from "./workspace.js";
 import { refreshRelations, liveRelationViews, relationsRefreshPending } from "./relations.js";
 const add = (el, ...k) => append(el, k);
 
@@ -52,6 +52,7 @@ setInterval(async () => {
   // a re-check that could not decide after an earlier epoch change is retried on every tick until it resolves
   if (research.hasPendingRecheck()) research.revalidateOpenDocuments();
   if (relationsRefreshPending()) refreshRelations();
+  if (workspaceRefreshPending()) refreshWorkspace();
 }, POLICY_POLL_MS);
 
 // ------------------------------------------------------------------ shell
