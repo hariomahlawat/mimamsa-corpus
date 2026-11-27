@@ -1,0 +1,20 @@
+{
+  "baseline_sha256": "9d1bce075d15acbb2bfc0e5a94555a78aa563e7c58c9f2f99a15d83327a7ad3f",
+  "supplement_sha256": "b8bd449749ac4e25d7aafdb7ed3256d3fec2bbf47c33e3ee5d2a7195b5c3f7c0",
+  "local_pair_receipts_sha256": "d4d4093bafa62c86b49fa74b66bc42f5e2d80ee68f6d4f6fea999ee0d5bb89d0",
+  "new_records": 52,
+  "exact_anchor_replay": 147,
+  "counts": {
+    "pension": 11,
+    "service": 10,
+    "disciplinary": 17,
+    "interpretation": 14
+  },
+  "merged_context_reviews": {
+    "disciplinary": 20,
+    "service": 20,
+    "pension": 20,
+    "aft": 20,
+    "interpretation": 20
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "revision": "58a9a07b37aca18a83031db36aed52bbe0d12a5f",
+  "private": true,
+  "distinct_content_addressed_preservation_originals": 1477,
+  "originals_with_text_paths": 1477,
+  "without_text_paths": 0,
+  "distinct_legacy_lfs_pdf_hashes": 2416,
+  "distinct_original_or_legacy_lfs_pdf_hashes": 3893,
+  "other_pdf_paths_without_sha256": 1631,
+  "preservation_paths_by_group": {
+    "c14_aft_guwahati": {
+      "original_paths": 49,
+      "derivative_paths": 49
+    },
+    "c14_curated_sc": {
+      "original_paths": 2,
+      "derivative_paths": 2
+    },
+    "c14_phhc_recovery": {
+      "original_paths": 489,
+      "derivative_paths": 489
+    },
+    "c14_statutory": {
+      "original_paths": 5,
+      "derivative_paths": 5
+    },
+    "c14_tier1_extension": {
+      "original_paths": 932,
+      "derivative_paths": 932
+    }
+  },
+  "byte_verification": "LFS metadata compared where available; full pin read-back is tracked in per-batch receipts",
+  "active_application_promotion": false
+}

@@ -1,0 +1,47 @@
+{
+  "retrieval_date_utc": "2026-11-27",
+  "cda_2008_part_i": {
+    "local_evidence": "cda-part-i-local-evidence.json",
+    "current_pdf_head": "https://www.cdaguwahati.gov.in/pages/books/Pension%20Regulation%20army%20Pt-I.pdf",
+    "official_secondary_catalog": "https://desw.gov.in/en/pension-regulations",
+    "official_secondary_2008_catalog": "https://desw.gov.in/en/PensionRegulations2008",
+    "official_secondary_edition_locator": "https://www.desw.gov.in/sites/default/files/PRA-Pt-I%282008%29.pdf",
+    "comparison": "The official DESW search index independently identifies Part I as 30 June 2008, 733 KB. The indexed PDF cover and preface agree with the local CDA copy on title and effective date. DESW byte equivalence is unverified. A distinct corrected Part I locator has indexed printed pages beyond the CDA file pagination and must retain its own version identity.",
+    "corrected_part_i_locator": "https://www.desw.gov.in/sites/default/files/PRA-I-2008-corrected.pdf",
+    "cda_copyright_policy": "https://www.cdaguwahati.gov.in/pages/copyrightpolicy.html",
+    "policy_summary": "CDA policy permits download without prior permission and conditions reproduction on accuracy, nonmisleading presentation, and prominent attribution. It excludes identified third-party copyrights and refers other uses to CDA approval. Application of the policy to this Ministry of Defence PDF and any derivative repository publication is unresolved.",
+    "desw_copyright_policy_locator": "https://desw.gov.in/en/node/19",
+    "desw_policy_summary": "The indexed DESW website policy requires permission by email for reproduction of its featured material. No permissions were requested or inferred."
+  },
+  "army_pension_part_ii": {
+    "official_pdf_locator": "https://cgda.gov.in/audit/Part-II.pdf",
+    "official_catalog_locator": "https://desw.gov.in/en/PensionRegulations2008",
+    "official_index_evidence": "CGDA indexed cover identifies Ministry of Defence Pension Regulations for the Army Part II (2008), incorporating orders through 30 June 2008. DESW indexes Part II as 849 KB.",
+    "disposition": "Hold automated document acquisition. The CGDA policy recheck received an HTTP 503 at the www origin and a proxy CONNECT 403 at the bare origin, which previously returned 503. Both DESW policy hosts returned HTTP 403. No current original bytes or derivative verified."
+  },
+  "rule_13_2010": {
+    "notification": "S.R.O. 22, 13 May 2010",
+    "official_judgment_locators": [
+      "https://www.aftdelhi.nic.in/benches/chandigarh_bench/judgments/court_1/march2013/OA%201461%20of%202011.pdf",
+      "https://www.aftdelhi.nic.in/benches/chandigarh_bench/judgments/court_3/february2014/OA_2000_of_2012.pdf"
+    ],
+    "disposition": "Two indexed official Chandigarh judgments corroborate the notification number and date. The original Gazette publication and its effective date remain unresolved. Gazette and AFT Delhi policy requests are held."
+  },
+  "gmo_2023": {
+    "official_catalog_locator": "https://desw.gov.in/en/pension-regulations",
+    "official_document_locator": "https://desw.gov.in/sites/default/files/2026-10/GMO%202023.pdf",
+    "official_index_evidence": "DESW indexes a 47,610 KB collection for the 2023 Entitlement Rules and Guide to Medical Officers.",
+    "disposition": "Hold automated acquisition while both DESW robots endpoints return 403."
+  },
+  "aft_guwahati_source_context": {
+    "official_origin_statement_url": "https://aftrbghy.nic.in/disclaimer.asp",
+    "official_origin_statement_get": {
+      "status": 200,
+      "body_bytes": 4837,
+      "body_sha256": "dfea950563c77e17604d73fd3b65452622e382efd82521edbbdf013e5c38adbd"
+    },
+    "official_judgment_index_url": "https://aftrbghy.nic.in/judgements.asp",
+    "copyright_act_locator": "https://www.indiacode.nic.in/bitstream/123456789/15356/1/the_copyright_act%2C_1957.pdf",
+    "release_relevance": "Section 52(1)(q)(iv) covers reproduction or publication of a court or tribunal judgment or order subject to a prohibition by the issuing judicial authority. The access review is document-specific. This receipt makes no release or reuse decision."
+  }
+}

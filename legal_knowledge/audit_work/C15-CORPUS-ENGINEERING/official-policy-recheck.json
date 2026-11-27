@@ -1,0 +1,610 @@
+[
+  {
+    "origin": "https://aftchd.in",
+    "policy": {
+      "url": "https://aftchd.in/robots.txt",
+      "method": "GET",
+      "status": 404,
+      "content_type": "text/html",
+      "content_length": "1245",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 1245,
+      "oversize": false,
+      "body_sha256": "dc1d54dab6ec8c00f70137927504e4f222c8395f10760b6beecfcfa94e08249f",
+      "decision": "explicit-404-absent"
+    },
+    "observations": [
+      {
+        "url": "https://aftchd.in/Daily_orders.html",
+        "method": "GET",
+        "status": 200,
+        "content_type": "text/html",
+        "content_length": "15396",
+        "location": null,
+        "etag": "\"11a7ac5abb2bdc1:0\"",
+        "last_modified": "Mon, 22 Sep 2025 12:20:59 GMT",
+        "body_bytes": 15396,
+        "oversize": false,
+        "body_sha256": "b19a3e0ff19975e0ed8d73f33f38deec3cd49ceb667251694dc677e648624a3f",
+        "forms": [],
+        "selects": [],
+        "matching_links": [
+          "http://202.164.35.189:324/log.aspx",
+          "http://202.164.35.189:324/ordersearchlist.html",
+          "http://202.164.35.189:324/websearchlist.html",
+          "https://aftchd.in/Case-status.html",
+          "https://aftchd.in/Cause-List.html",
+          "https://aftchd.in/Daily_orders.html",
+          "https://aftchd.in/contact-us.html",
+          "https://aftchd.in/index.html",
+          "https://aftchd.in/members.html"
+        ]
+      },
+      {
+        "url": "https://aftchd.in/RBenches.html",
+        "method": "GET",
+        "status": 200,
+        "content_type": "text/html",
+        "content_length": "19741",
+        "location": null,
+        "etag": "\"d9e12666bb2bdc1:0\"",
+        "last_modified": "Mon, 22 Sep 2025 12:21:18 GMT",
+        "body_bytes": 19741,
+        "oversize": false,
+        "body_sha256": "2b0511a930e232f34d5ef5edaa82a97e3a37735532888f16e302db4521efb8f0",
+        "forms": [],
+        "selects": [],
+        "matching_links": [
+          "http://202.164.35.189:324/log.aspx",
+          "http://202.164.35.189:324/ordersearchlist.html",
+          "http://202.164.35.189:324/websearchlist.html",
+          "https://aftchd.in/Case-status.html",
+          "https://aftchd.in/Cause-List.html",
+          "https://aftchd.in/Daily_orders.html",
+          "https://aftchd.in/RBenches.html",
+          "https://aftchd.in/contact-us.html",
+          "https://aftchd.in/index.html",
+          "https://aftchd.in/members.html",
+          "https://aftchd.in/notification.html",
+          "https://www.aftchd.in/"
+        ]
+      }
+    ]
+  },
+  {
+    "origin": "http://202.164.35.189:324",
+    "policy": {
+      "url": "http://202.164.35.189:324/robots.txt",
+      "method": "GET",
+      "status": 404,
+      "content_type": "text/html",
+      "content_length": "1245",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 1245,
+      "oversize": false,
+      "body_sha256": "dc1d54dab6ec8c00f70137927504e4f222c8395f10760b6beecfcfa94e08249f",
+      "decision": "explicit-404-absent"
+    },
+    "observations": [
+      {
+        "url": "http://202.164.35.189:324/ordersearchlist.html",
+        "method": "GET",
+        "status": 200,
+        "content_type": "text/html",
+        "content_length": "14320",
+        "location": null,
+        "etag": "\"1ee83acabf2bdc1:0\"",
+        "last_modified": "Mon, 22 Sep 2025 12:52:44 GMT",
+        "body_bytes": 14320,
+        "oversize": false,
+        "body_sha256": "1a3e8642df5f5cebde892d73b1a0fbe1c6666cc73923d43401a7e5d737c53d69",
+        "forms": [],
+        "selects": [],
+        "matching_links": [
+          "http://202.164.35.189:324/Case-status.html",
+          "http://202.164.35.189:324/Cause-List.html",
+          "http://202.164.35.189:324/Daily_orders.html",
+          "http://202.164.35.189:324/contact-us.html",
+          "http://202.164.35.189:324/index.html",
+          "http://202.164.35.189:324/members.html",
+          "http://202.164.35.189:324/notification.html",
+          "http://202.164.35.189:324/ordersearchlist.html",
+          "http://202.164.35.189:324/websearchlist.html"
+        ]
+      },
+      {
+        "url": "http://202.164.35.189:324/searchorderonline.aspx",
+        "method": "GET",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "content_length": "6993",
+        "location": null,
+        "etag": null,
+        "last_modified": null,
+        "body_bytes": 6993,
+        "oversize": false,
+        "body_sha256": "20909c94d36276cdebcf22717a1bc7b25f18e71bcbe428ce973f59a551e3a137",
+        "forms": [
+          {
+            "method": "POST",
+            "action": "http://202.164.35.189:324/searchorderonline.aspx"
+          }
+        ],
+        "selects": [
+          "ctl00$ContentPlaceHolder1$DD_court",
+          "ctl00$ContentPlaceHolder1$DDJudge"
+        ],
+        "matching_links": []
+      }
+    ]
+  },
+  {
+    "origin": "https://www.cdaguwahati.gov.in",
+    "policy": {
+      "url": "https://www.cdaguwahati.gov.in/robots.txt",
+      "method": "GET",
+      "status": 404,
+      "content_type": "text/html",
+      "content_length": "1245",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 1245,
+      "oversize": false,
+      "body_sha256": "dc1d54dab6ec8c00f70137927504e4f222c8395f10760b6beecfcfa94e08249f",
+      "decision": "explicit-404-absent"
+    },
+    "observations": [
+      {
+        "url": "https://www.cdaguwahati.gov.in/pages/books/Pension%20Regulation%20army%20Pt-I.pdf",
+        "method": "HEAD",
+        "status": 200,
+        "content_type": "application/pdf",
+        "content_length": "750383",
+        "location": null,
+        "etag": "\"80cd1a5995c5dc1:0\"",
+        "last_modified": "Mon, 06 Apr 2026 07:16:55 GMT",
+        "body_bytes": 0,
+        "oversize": false,
+        "body_sha256": null
+      },
+      {
+        "url": "https://www.cdaguwahati.gov.in/pages/copyrightpolicy.html",
+        "method": "GET",
+        "status": 200,
+        "content_type": "text/html",
+        "content_length": "10241",
+        "location": null,
+        "etag": "\"8073b85695c5dc1:0\"",
+        "last_modified": "Mon, 06 Apr 2026 07:16:51 GMT",
+        "body_bytes": 10241,
+        "oversize": false,
+        "body_sha256": "f8c51c1cef74dbcc9e62cbbccd7fafb4f28ebb1a4cc0a761987af286d8279485",
+        "forms": [],
+        "selects": [],
+        "matching_links": []
+      }
+    ]
+  },
+  {
+    "origin": "https://cdaguwahati.gov.in",
+    "policy": {
+      "url": "https://cdaguwahati.gov.in/robots.txt",
+      "method": "GET",
+      "status": 404,
+      "content_type": "text/html",
+      "content_length": "1245",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 1245,
+      "oversize": false,
+      "body_sha256": "dc1d54dab6ec8c00f70137927504e4f222c8395f10760b6beecfcfa94e08249f",
+      "decision": "explicit-404-absent"
+    },
+    "observations": [
+      {
+        "url": "https://cdaguwahati.gov.in/pages/copyrightpolicy.html",
+        "method": "GET",
+        "status": 403,
+        "content_type": "text/plain",
+        "content_length": "33",
+        "location": null,
+        "etag": null,
+        "last_modified": null,
+        "body_bytes": 33,
+        "oversize": false,
+        "body_sha256": "beb861eaa39f786b701fafe0c93827f91c26b4fd7bda29668712515b031e2569"
+      }
+    ]
+  },
+  {
+    "origin": "https://cgda.gov.in",
+    "policy": {
+      "url": "https://cgda.gov.in/robots.txt",
+      "method": "GET",
+      "error_type": "URLError",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "decision": "automated-access-held"
+    },
+    "observations": [
+      {
+        "url": "https://cgda.gov.in/audit/Part-II.pdf",
+        "method": "HEAD",
+        "status": "held-on-source-policy"
+      }
+    ]
+  },
+  {
+    "origin": "https://www.cgda.gov.in",
+    "policy": {
+      "url": "https://www.cgda.gov.in/robots.txt",
+      "method": "GET",
+      "status": 503,
+      "content_type": "text/plain",
+      "content_length": "91",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 91,
+      "oversize": false,
+      "body_sha256": "2f85832e31ca57711e6107af6b142363351ae516adb71c69afc643fac26be7f6",
+      "decision": "automated-access-held"
+    },
+    "observations": [
+      {
+        "url": "https://www.cgda.gov.in/audit/Part-II.pdf",
+        "method": "HEAD",
+        "status": "held-on-source-policy"
+      }
+    ]
+  },
+  {
+    "origin": "https://aft.gov.in",
+    "policy": {
+      "url": "https://aft.gov.in/robots.txt",
+      "method": "GET",
+      "status": 503,
+      "content_type": "text/plain",
+      "content_length": "98",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 98,
+      "oversize": false,
+      "body_sha256": "33fbc61ad080ef68dd7a6479f8c53f1bf864dba2930567dbbc4ceb47490a1909",
+      "decision": "automated-access-held"
+    },
+    "observations": [
+      {
+        "url": "https://aft.gov.in/public/upload_act_rule_document/1743584005.pdf",
+        "method": "HEAD",
+        "status": "held-on-source-policy"
+      },
+      {
+        "url": "https://aft.gov.in/reg-benches",
+        "method": "GET",
+        "status": "held-on-source-policy"
+      }
+    ]
+  },
+  {
+    "origin": "https://www.aftdelhi.nic.in",
+    "policy": {
+      "url": "https://www.aftdelhi.nic.in/robots.txt",
+      "method": "GET",
+      "status": 503,
+      "content_type": "text/plain",
+      "content_length": "91",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 91,
+      "oversize": false,
+      "body_sha256": "2f85832e31ca57711e6107af6b142363351ae516adb71c69afc643fac26be7f6",
+      "decision": "automated-access-held"
+    },
+    "observations": [
+      {
+        "url": "https://www.aftdelhi.nic.in/assets/Act%20and%20Rules/Army%20Rules%201954.pdf",
+        "method": "HEAD",
+        "status": "held-on-source-policy"
+      }
+    ]
+  },
+  {
+    "origin": "https://upload.indiacode.nic.in",
+    "policy": {
+      "url": "https://upload.indiacode.nic.in/robots.txt",
+      "method": "GET",
+      "status": 503,
+      "content_type": "text/plain",
+      "content_length": "91",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 91,
+      "oversize": false,
+      "body_sha256": "2f85832e31ca57711e6107af6b142363351ae516adb71c69afc643fac26be7f6",
+      "decision": "automated-access-held"
+    },
+    "observations": [
+      {
+        "url": "https://upload.indiacode.nic.in/showfile?actid=AC_CEN_28_38_00012_195046_1517807323368&filename=armyrules1954.pdf&type=rule",
+        "method": "HEAD",
+        "status": "held-on-source-policy"
+      }
+    ]
+  },
+  {
+    "origin": "https://www.csl.nic.in",
+    "policy": {
+      "url": "https://www.csl.nic.in/robots.txt",
+      "method": "GET",
+      "status": 503,
+      "content_type": "text/plain",
+      "content_length": "98",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 98,
+      "oversize": false,
+      "body_sha256": "33fbc61ad080ef68dd7a6479f8c53f1bf864dba2930567dbbc4ceb47490a1909",
+      "decision": "automated-access-held"
+    },
+    "observations": [
+      {
+        "url": "https://www.csl.nic.in/page/innerpage/gazette-of-india.php",
+        "method": "GET",
+        "status": "held-on-source-policy"
+      }
+    ]
+  },
+  {
+    "origin": "https://www.nationalarchives.nic.in",
+    "policy": {
+      "url": "https://www.nationalarchives.nic.in/robots.txt",
+      "method": "GET",
+      "status": 503,
+      "content_type": "text/plain",
+      "content_length": "91",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 91,
+      "oversize": false,
+      "body_sha256": "2f85832e31ca57711e6107af6b142363351ae516adb71c69afc643fac26be7f6",
+      "decision": "automated-access-held"
+    },
+    "observations": [
+      {
+        "url": "https://www.nationalarchives.nic.in/en/online-portal-abhilekh-patal",
+        "method": "GET",
+        "status": "held-on-source-policy"
+      }
+    ]
+  },
+  {
+    "origin": "https://www.abhilekh-patal.in",
+    "policy": {
+      "url": "https://www.abhilekh-patal.in/robots.txt",
+      "method": "GET",
+      "status": 202,
+      "content_type": "text/html; charset=UTF-8",
+      "content_length": "0",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 0,
+      "oversize": false,
+      "body_sha256": null,
+      "decision": "automated-access-held"
+    },
+    "observations": [
+      {
+        "url": "https://www.abhilekh-patal.in/jspui/",
+        "method": "GET",
+        "status": "held-on-source-policy"
+      }
+    ]
+  },
+  {
+    "origin": "https://egazette.gov.in",
+    "policy": {
+      "url": "https://egazette.gov.in/robots.txt",
+      "method": "GET",
+      "status": 503,
+      "content_type": "text/plain",
+      "content_length": "98",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 98,
+      "oversize": false,
+      "body_sha256": "33fbc61ad080ef68dd7a6479f8c53f1bf864dba2930567dbbc4ceb47490a1909",
+      "decision": "automated-access-held"
+    },
+    "observations": []
+  },
+  {
+    "origin": "https://desw.gov.in",
+    "policy": {
+      "url": "https://desw.gov.in/robots.txt",
+      "method": "GET",
+      "status": 403,
+      "content_type": "text/html; charset=iso-8859-1",
+      "content_length": "199",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 199,
+      "oversize": false,
+      "body_sha256": "5b13fb5957b84ef7bb9d0b6cd509c947ff6a37d67efdac2b896ddd3b908aad10",
+      "decision": "automated-access-held"
+    },
+    "observations": [
+      {
+        "url": "https://desw.gov.in/sites/default/files/2026-10/GMO%202023.pdf",
+        "method": "HEAD",
+        "status": "held-on-source-policy"
+      },
+      {
+        "url": "https://desw.gov.in/en/pension-regulations",
+        "method": "GET",
+        "status": "held-on-source-policy"
+      },
+      {
+        "url": "https://desw.gov.in/en/node/19",
+        "method": "GET",
+        "status": "held-on-source-policy"
+      }
+    ]
+  },
+  {
+    "origin": "https://www.desw.gov.in",
+    "policy": {
+      "url": "https://www.desw.gov.in/robots.txt",
+      "method": "GET",
+      "status": 403,
+      "content_type": "text/html; charset=iso-8859-1",
+      "content_length": "199",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 199,
+      "oversize": false,
+      "body_sha256": "5b13fb5957b84ef7bb9d0b6cd509c947ff6a37d67efdac2b896ddd3b908aad10",
+      "decision": "automated-access-held"
+    },
+    "observations": [
+      {
+        "url": "https://www.desw.gov.in/en/node/91410",
+        "method": "GET",
+        "status": "held-on-source-policy"
+      }
+    ]
+  },
+  {
+    "origin": "https://www.pib.gov.in",
+    "policy": {
+      "url": "https://www.pib.gov.in/robots.txt",
+      "method": "GET",
+      "status": 200,
+      "content_type": "text/html",
+      "content_length": "945",
+      "location": null,
+      "etag": null,
+      "last_modified": "Fri, 13 Nov 2020 05:23:10 GMT",
+      "body_bytes": 945,
+      "oversize": false,
+      "body_sha256": "365d41e6568278c413a04552779187863f06e312281b559394b89d12b7c04c90",
+      "decision": "automated-access-held"
+    },
+    "observations": [
+      {
+        "url": "https://www.pib.gov.in/Pressreleaseshare.aspx?PRID=1965125&lang=2&reg=48",
+        "method": "GET",
+        "status": "held-on-source-policy"
+      }
+    ]
+  },
+  {
+    "origin": "https://aftjaipur.gov.in",
+    "policy": {
+      "url": "https://aftjaipur.gov.in/robots.txt",
+      "method": "GET",
+      "status": 503,
+      "content_type": "text/plain",
+      "content_length": "91",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 91,
+      "oversize": false,
+      "body_sha256": "2f85832e31ca57711e6107af6b142363351ae516adb71c69afc643fac26be7f6",
+      "decision": "automated-access-held"
+    },
+    "observations": [
+      {
+        "url": "https://aftjaipur.gov.in/pages/benches-of-aft",
+        "method": "GET",
+        "status": "held-on-source-policy"
+      }
+    ]
+  },
+  {
+    "origin": "https://www.aftkolkata.nic.in",
+    "policy": {
+      "url": "https://www.aftkolkata.nic.in/robots.txt",
+      "method": "GET",
+      "status": 503,
+      "content_type": "text/plain",
+      "content_length": "91",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 91,
+      "oversize": false,
+      "body_sha256": "2f85832e31ca57711e6107af6b142363351ae516adb71c69afc643fac26be7f6",
+      "decision": "automated-access-held"
+    },
+    "observations": []
+  },
+  {
+    "origin": "https://aftlko.up.nic.in",
+    "policy": {
+      "url": "https://aftlko.up.nic.in/robots.txt",
+      "method": "GET",
+      "status": 503,
+      "content_type": "text/plain",
+      "content_length": "91",
+      "location": null,
+      "etag": null,
+      "last_modified": null,
+      "body_bytes": 91,
+      "oversize": false,
+      "body_sha256": "2f85832e31ca57711e6107af6b142363351ae516adb71c69afc643fac26be7f6",
+      "decision": "automated-access-held"
+    },
+    "observations": []
+  },
+  {
+    "origin": "https://www.mod.gov.in",
+    "policy": {
+      "url": "https://www.mod.gov.in/robots.txt",
+      "method": "GET",
+      "status": 200,
+      "content_type": "text/plain; charset=UTF-8",
+      "content_length": "23",
+      "location": null,
+      "etag": "W/\"17-19f74240af8\"",
+      "last_modified": "Sat, 18 Jul 2026 07:32:27 GMT",
+      "body_bytes": 23,
+      "oversize": false,
+      "body_sha256": "16ceb5ee3e0dc13aa9adf31a3ebbe45a1d965b8c2b9f72eaf84e5911e140ed95",
+      "decision": "parsed-directives"
+    },
+    "observations": [
+      {
+        "url": "https://www.mod.gov.in/dod/acts-rules",
+        "method": "GET",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "content_length": "9001",
+        "location": null,
+        "etag": "\"11owbfr0r4n3nq\"",
+        "last_modified": null,
+        "body_bytes": 9001,
+        "oversize": false,
+        "body_sha256": "b9a9ac1750da941ac0b2662cd1fdf0270bc14c167bf468f9b02109d2ea2123c9",
+        "forms": [],
+        "selects": [],
+        "matching_links": []
+      }
+    ]
+  }
+]

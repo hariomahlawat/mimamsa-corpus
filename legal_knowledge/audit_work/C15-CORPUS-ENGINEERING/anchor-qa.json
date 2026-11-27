@@ -1,0 +1,30 @@
+{
+  "source_artifact_sha256": {
+    "search.sqlite": "294cc59ade55e5545ab4a934b69fe3aab405363cd548220edda4b6a847f88c91",
+    "records.jsonl": "768f6434cfd32d10dc994bd6484b5b1b3a28129b4ae1a935d0f3636723baf188"
+  },
+  "selected_records": 49,
+  "category_and_state_counts": {
+    "aft:context-reviewed-selected-findings": 20,
+    "disciplinary:context-reviewed-selected-findings": 3,
+    "interpretation:context-reviewed-selected-findings": 6,
+    "pension:context-reviewed-selected-findings": 9,
+    "pension:quarantined-extraction": 1,
+    "service:context-reviewed-selected-findings": 10
+  },
+  "exact_anchor_replay": 152,
+  "field_counts": {
+    "direction": 31,
+    "disposition": 36,
+    "fact": 14,
+    "issue": 8,
+    "observations": 7,
+    "provision": 3,
+    "ratio_candidate": 18,
+    "reasoning": 15,
+    "relationship": 3,
+    "statutory_time": 7,
+    "treatment": 10
+  },
+  "review_jsonl_sha256": "9d1bce075d15acbb2bfc0e5a94555a78aa563e7c58c9f2f99a15d83327a7ad3f"
+}

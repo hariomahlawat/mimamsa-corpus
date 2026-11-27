@@ -1,0 +1,95 @@
+{
+  "top_20_document_hits": 8,
+  "top_20_evidence_page_hits": 8,
+  "probes": [
+    {
+      "label": "AFT delay condonation",
+      "query": "\"condonation of delay\" AND \"18 days\"",
+      "expected_doc_id": "AFT-GUW-4",
+      "expected_field": "disposition",
+      "first_document_rank": 1,
+      "matching_evidence_pages_in_top_20": [
+        1
+      ]
+    },
+    {
+      "label": "Army court-martial withdrawal",
+      "query": "\"summary court martial\"",
+      "expected_doc_id": "AFT-GUW-82",
+      "expected_field": "disposition",
+      "first_document_rank": 1,
+      "matching_evidence_pages_in_top_20": [
+        2
+      ]
+    },
+    {
+      "label": "Military selection review",
+      "query": "\"review selection board\" AND \"impugned ICR\"",
+      "expected_doc_id": "hc-delhi-2008-w-p-c-5805-2007-dlhc011011982007-1-2008-09-26",
+      "expected_field": "direction",
+      "first_document_rank": 1,
+      "matching_evidence_pages_in_top_20": [
+        18
+      ]
+    },
+    {
+      "label": "OROP refixation",
+      "query": "\"re-fixation exercise\"",
+      "expected_doc_id": "sc-2022-indian-ex-servicemen-movement-2022insc315",
+      "expected_field": "direction",
+      "first_document_rank": 1,
+      "matching_evidence_pages_in_top_20": [
+        59
+      ]
+    },
+    {
+      "label": "Civilian naval pay",
+      "query": "\"equal work of equal value\"",
+      "expected_doc_id": "sc-2023-union-of-india-2023insc152",
+      "expected_field": "ratio_candidate",
+      "first_document_rank": 1,
+      "matching_evidence_pages_in_top_20": [
+        13
+      ]
+    },
+    {
+      "label": "Distinct grounds for DSC pension",
+      "query": "\"Shama Kaur\" AND \"Chinna Vediyappan\"",
+      "expected_doc_id": "hc-ph-2025-cwp-35315-2024-phhc011819492024-1-2025-09-17",
+      "expected_field": "treatment",
+      "first_document_rank": 2,
+      "matching_evidence_pages_in_top_20": [
+        2,
+        4
+      ]
+    },
+    {
+      "label": "Stay reported by counsel",
+      "query": "\"27660 of 2022\"",
+      "expected_doc_id": "AFT-GUW-38",
+      "expected_field": "relationship",
+      "first_document_rank": 1,
+      "matching_evidence_pages_in_top_20": [
+        1
+      ]
+    },
+    {
+      "label": "Article 12 and insurance society",
+      "query": "\"Ravi Khokhar\" AND \"self-funded\"",
+      "expected_doc_id": "hc-delhi-2023-w-p-c-8804-2021-dlhc010256872021-1-2023-08-24",
+      "expected_field": "treatment",
+      "first_document_rank": 1,
+      "matching_evidence_pages_in_top_20": [
+        10
+      ]
+    }
+  ],
+  "admission_checks": {
+    "application_eligible_rows": 0,
+    "quarantined_document": "quarantined-extraction",
+    "court_martial_merits_ratio_count": 0,
+    "reported_stay_not_current": "not independently verified",
+    "statutory_version_assertions": 0,
+    "automatic_adverse_or_binding_treatment_labels": 0
+  }
+}

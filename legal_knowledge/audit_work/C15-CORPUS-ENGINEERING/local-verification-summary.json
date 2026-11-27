@@ -1,0 +1,33 @@
+{
+  "expansion_journal_status": {
+    "text-review": 262,
+    "eligible-local": 617,
+    "marking-review": 123,
+    "HTTPError": 53,
+    "identity-review": 33,
+    "EmptyFileError": 15
+  },
+  "eligible_pair_outcomes": {
+    "local-pair-verified": 617
+  },
+  "eligible_unique_originals": 616,
+  "eligible_pairs_with_blank_derivative_pages": 0,
+  "cda": {
+    "id": "CA01-CDA-ARMY-PENSION-PART-I",
+    "url": "https://www.cdaguwahati.gov.in/pages/books/Pension%20Regulation%20army%20Pt-I.pdf",
+    "outcome": "local-pair-verified",
+    "original_sha256": "82717d4e0f5137efdb6a3ff6ddea82a2afdbb14ca0fb61b9c3bd64f2a7a1cf76",
+    "derivative_sha256": "cb8e4e03cc405c9dfcf216d8826ba41240d1faa4f9fe87eba34f951f428fbcfa",
+    "pages": 145,
+    "cover_title_matched": true,
+    "cover_orders_cutoff_matched": true,
+    "preface_effective_date_matched": true,
+    "preface_issuing_authority_matched": true,
+    "footer_only_derivative_pages": [
+      2,
+      4
+    ],
+    "full_reuse_context": "unresolved",
+    "local_original_bytes": 750383
+  }
+}
