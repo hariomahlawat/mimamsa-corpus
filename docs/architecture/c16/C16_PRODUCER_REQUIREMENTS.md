@@ -13,7 +13,8 @@
 | `relationships.jsonl` | `corpus_relationship` | Folder and file-name classifications (one per path and label); text-evidenced citations and treatments |
 | `taxonomy.jsonl` | `taxonomy_node` | Every subject, statute, chapter and provision node a relationship targets, with all its parents |
 | `admissions.jsonl` | `corpus_admission` | One decision per identity, listing all ten gates |
-| `GENERATION.json` | (manifest) | `corpus_generation_id`; pinned inputs (HF repo and 40-hex revision, git commit of the tools, register sha256); tool versions; per-file sha256 and record counts; counts per admission decision |
+| `reviewed_records.jsonl` | contract-v1 `reviewed_record` | Every review a `review_binding` names (subject `{kind: candidate, id}` or `{kind: document, id}`, axis evidence_fidelity) |
+| `GENERATION.json` | `corpus_generation_manifest` | `corpus_generation_id`; pinned inputs (every HF revision with its purpose, full git commits, local collections with inventory hash and count, register sha256, tools); every file with kind, sha256 and record count; registries (`instrument_codes`, `external_judgments`). Shards are `<stem>.<nnnn>.jsonl` and must be declared |
 
 ## 2. Content rules
 
@@ -32,10 +33,16 @@
 | R11 | Run the restricted-material register (`config/restricted_material.json`) on hashes, doc_ids, paths and every record string (G03). A matched item is EXCLUDED_RESTRICTED, with its RM id, and nothing else about it is emitted. A detected printed marking without a register entry is HELD_ACCESS_MARKING_REVIEW |
 | R12 | Keep UNRESOLVED distinct from `null`. Never guess a judgment id, instrument code, date, page count or provision |
 | R13 | Do not copy document text into records except in an anchor's `quote`, and only when `quoting_permitted` is true (native, reliable text) |
+| R14 | **No gate passes without evidence.** G01 PASS only for BYTE_VERIFIED copies (re-downloaded at a pinned revision and re-hashed); a declared hash is NOT_RUN. G09 PASS only after duplicates are resolved. G08 PASS only for an assessed relevance, not an automated signal. Every PASS carries an `evidence_ref`. NOT_APPLICABLE only for G06 (no derivative by design) and G07 (inventoried, empty image list) |
+| R15 | **Admissions are append-only revisions.** A changed decision or gate result is revision n+1 superseding revision n; never rewrite or fork. Every identity has exactly one effective decision per generation |
+| R16 | **Restricted items leave the exportable exchange entirely**: keep only a local exclusion receipt (hash prefix, reason, `exportable: false`) outside the exchange |
+| R17 | **Never fabricate a format.** Unknown bytes are UNRECOGNISED_FORMAT / `application/octet-stream` |
+| R18 | **Bind every raised verification to an independent reviewed_record** (`review_binding`: exact id, canonical sha256, commit, reviewer distinct from author). Bind anchors to identities: page within the copy, image occurrence in the inventory, derivative of the measured representation |
+| R19 | Merge observations of the same binary into one identity, but keep one classification per path and label (full folder hierarchy; contract section 8.3) |
 
 ## 3. Validation gates (the producer must pass these before handing over a generation)
 
-1. `rules.exchange_issues(files, auth_ledger_version=0, register=load_register())` returns no errors (schema, canonical form, ids, cross-references, taxonomy DAG, restricted register).
+1. `rules.exchange_issues(files, mode="strict", auth_ledger_version=0, register=load_register())` returns no errors: manifest counts and hashes, canonical names, global uniqueness, one generation, schema, ids, admission binding and gates, anchor and review binding, registries, taxonomy DAG and restricted register. `mode="partial"` is for work in progress only and is never a hand-over.
 2. Every `admission` lists G01–G10. `application_eligible=true` only with all gates PASS or NOT_APPLICABLE.
 3. Coverage report:
    - counts per representation kind, decision and gate result;

@@ -11,11 +11,14 @@
 | # | Requirement |
 | --- | --- |
 | I1 | C16 files arrive in a signed v1 bundle as `other` files under `corpus-v2/` (contract section 13). They are verified by signature and SHA256SUMS **before** parsing, exactly as v1 |
-| I2 | Validate the whole exchange with `mimamsa_contract.c16.rules.exchange_issues(files, auth_ledger_version=<manifest>, register=<site register>)`. Any error refuses the **whole bundle** (v1 rule), and nothing is written. The site's exclusion store is applied after activation as today |
+| I2 | Validate the whole exchange **strictly** with `mimamsa_contract.c16.rules.exchange_issues(files, mode="strict", auth_ledger_version=<manifest>, register=<site register>)`; a partial exchange is never imported. Any error refuses the **whole bundle** (v1 rule), and nothing is written. The site's exclusion store is applied after activation as today |
 | I3 | Cross-check against the bundle's v1 records. Every identity's (`doc_id`, `sha256`) must equal a v1 document's, or be a declared C16-only item (contract section 12). `RV-` and `AP-` refs must resolve under v1 rules. Every anchor's `original_sha256` must be a verified copy in the generation |
 | I4 | Byte checks the importer can do, it does. An embedded image's `image_sha256` must be present in the container when the original is a DOCX (open the zip safely, with the PR #76 `safe_archive_member` rules). Page counts must match. Hashes of reconstructed-page mappings must match where page images are bundled. A failed item is UNRESOLVED (quarantined), never served |
 | I5 | Materialise the verified C16 records to `generations/<id>/corpus-v2/*.jsonl`, written into the temporary generation before the atomic rename (existing discipline). Record them in `generation.json` `materialized.corpus_v2` |
 | I6 | An item not in `servable` (v1) has its C16 records ignored, and the reason is counted (`C16_SUBJECT_NOT_SERVABLE`) |
+| I7 | **A C16 copy is served only when its effective admission (the head of its revision chain) in the active generation is `application_eligible`.** Held, rejected, quarantined or missing decisions mean not served, whatever the v1 record says |
+| I8 | **Byte-check every anchor before use** (`evidence.verify_anchor_bytes` against the verified derivative bytes). Only anchors that pass `usable_for_citation` / `usable_as_graph_evidence` may produce a page citation, a SpanKey, a quote or an edge location; the others are shown page-free as "location not verified" |
+| I9 | Resolve every `review_binding` against the bundle's reviewed_records (exact record, canonical hash, commit, reviewer distinct from author) before writing any `graph_edge_reviews` row; AUTH-LEDGER v0 keeps `legally_validated` refused |
 
 ## 2. GenerationStore, the text store and eligibility
 

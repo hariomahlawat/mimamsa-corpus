@@ -18,7 +18,7 @@ Companion to [C16_CORPUS_INTEGRATION_CONTRACT.md](C16_CORPUS_INTEGRATION_CONTRAC
 | C13 A4 statutory | `C13-A4-STATUTORY/schema/provision_version.schema.json`, `records/PROVISION_VERSIONS_C13.jsonl` | unchanged as signed research aids (`research/a4_provision_versions.jsonl`); provision ids feed `taxonomy_node` (GRAPH_PROVISION) | mapping rule (section 4); no record conversion | none |
 | AUTH-LEDGER | `legal_knowledge/audit_work/AUTH-LEDGER/schema/ledger_entry.schema.json` | **not mapped.** `legally_validated` needs an `AP-` approval and is refused at ledger v0 | none (deliberately) | none |
 | Root corpus schemas (data/meta 0.2.0) | `schema/document.schema.json`, `relation.schema.json`, `section.schema.json`, `correspondence.schema.json`; HF `data/meta/<doc_id>.json` | via the existing v1 mapping (contract README §7, `app/b1/build/build_sample.py`) then `identity_from_v1_document`; `topics` → `classified_under_subject` (AUTOMATED_CLASSIFIER) | composition of existing mapping + **implemented** adapter; topics adapter **not implemented** (small) | none |
-| PR #76 local reconciliation | `codex/c16-local-corpus-reconciliation:legal_knowledge/audit_work/C16-LOCAL-CORPUS/c16_reconcile.py` (outputs outside git) | identity + admission + folder/file-name classifications | **implemented** `from_pr76_inventory_row`, `classify_path` | none; outputs conservative (see section 6) |
+| PR #76 local reconciliation | `codex/c16-local-corpus-reconciliation` head `7ba91ec4` (methodology v3; read with `git show` only), outputs outside git | identities (one per binary), admissions, folder/file-name classifications, local subject taxonomy, local exclusion receipts | **implemented** `from_pr76_inventory`, `classify_path`, `local_subject_nodes` | none; output is a PARTIAL exchange, never importable as is (section 6) |
 | Cycle 15 candidate package v7 | HF dataset branch `cycle15-candidates`, namespace `legal_knowledge/candidates/cycle15/v7`, revision `217020db…`; receipt in git (section 7) | anchors + unresolved citation/provision relationships; identity via HF meta | **implemented** `from_v7_record` | none |
 | HF dataset metadata | `hariomahlawat/mimamsa-corpus` (private), `data/meta/*.json`, `data/raw/<source>/<yyyy>/<sha>.<ext>`, `data/text/<doc_id>.txt` | `provenance.acquisition.hf` (repo, revision, path); identities via v1 | v1 path (above) | none |
 
@@ -90,54 +90,54 @@ Companion to [C16_CORPUS_INTEGRATION_CONTRACT.md](C16_CORPUS_INTEGRATION_CONTRAC
 
 HF is read only through pinned revisions, and no token is printed. This checkpoint read nothing from HF: the matrix rests on committed receipts, manifests and code.
 
-## 6. PR #76 local reconciliation (read-only via `git show`)
+## 6. PR #76 local reconciliation (read-only; current head `7ba91ec4`, methodology v3)
 
-**Output files** (outside git, at `E:\Mimamsa-Data\local-corpus-reconciliation`):
-- `LOCAL_INVENTORY.jsonl` (one row per file);
-- `SUBJECT_CLASSIFICATION.jsonl`;
-- dispositions and CSV reports;
-- `CANDIDATE_PACKAGE_MANIFEST.json` (`application_eligible=false`).
+PR #76's corrective commit `7ba91ec4` ("correct Cycle 16 image-aware reconciliation") changed the inventory:
+- DOCX image occurrences are inventoried in reading order (`embedded_images[]`: sequence, `occurrence_id` `body:<rel id>:<seq>`, relationship id, archive path, image sha256, size, dimensions, format, perceptual hash as a signal only, `ocr_state: REQUIRED`);
+- an ordered content hash includes the image hashes;
+- normalised-text equality no longer creates `VERIFIED_ALTERNATE_COPY` (it becomes IDENTITY_UNRESOLVED);
+- restriction markers are scanned over the full native text;
+- derivatives are **withheld** until page and image access-marking screening completes (`derivative_withheld_reason`);
+- filename provision lists are parsed as candidates, and ranges are not expanded (`filename_legal_metadata`);
+- the manifest names a collection, not an absolute path.
 
-**Field mapping:**
+Final counts: 1,965 files (732 PDF, 1,233 DOCX), 517 DOCX with images, 6,735 image occurrences, 579 documents needing OCR, 1 restricted hit. Nothing is application-eligible. Codex is still running OCR; this adapter neither waits for nor interferes with it.
+
+`adapters.from_pr76_inventory(rows, collection=..., corpus_generation_id=...)` returns `{identities, admissions, relationships, taxonomy, receipts}`:
 
 | Row field | C16 |
 | --- | --- |
-| `sha256`, `size_bytes`, `detected_format` | `source_copy` (format from magic bytes; `.doc` and `.rtf` need Q1) |
-| `page_count` | PDFs: physical count. **DOCX: ignored**; PR #76 sets 1 for a DOCX, which is not a physical page |
-| `relative_path`, `inventory_id` | `provenance.observations[]` (NFC, POSIX, collection `local:<name>`, never the drive root) |
-| `original_folder_classification` | one `classified_under_subject` per folder component (C16-FOLDER-SUBJECT) |
-| file name `AR 22, 23, 30 – …` | `associated_with_provision` per number (C16-FN-PROVLIST, CANDIDATE, abbreviation reading recorded) |
-| `derivative_sha256`, `extraction_method` | `text_derivatives[]`: `pymupdf-native` → NATIVE_TEXT_LAYER, `docx-xml` → DOCX_XML; reliability `not_assessed`, quoting false |
-| `ocr_required_pages` | PDF kind SCANNED_PDF / MIXED_PDF; admission HELD_OCR_REQUIRED |
-| `candidate_document_type` | `work_kind` (identity_basis METADATA_CANDIDATE, CANDIDATE) |
-| `metadata_candidate.case_numbers` | `proceeding_numbers_as_printed` (candidate) |
-| `restricted` (marker text found) | admission HELD_ACCESS_MARKING_REVIEW, gate G04 FAIL. A detected marking is not an RM register entry; EXCLUDED_RESTRICTED needs an RM id |
-| `normalized_text_sha256` groups | `alternate_copies` NORMALIZED_TEXT_IDENTICAL (CANDIDATE); never a merge |
-| `source_provenance` "owner local collection; external source unverified" | `origin_status` ACQUIRED_COPY_ORIGIN_UNDETERMINED, carrier USER_SUPPLIED, integrity DECLARED_HASH_ONLY |
+| `sha256` | **one identity and one admission per binary**; every row with that hash adds an `observation` (path, inventory id) |
+| `detected_format` | PDF, DOCX, DOC, RTF or TXT as detected; **anything else is UNKNOWN / `application/octet-stream` / UNRECOGNISED_FORMAT / UNSUPPORTED_FORMAT, never PDF** |
+| `page_count` | PDFs: the physical count; DOCX: `null` (a flow document; never page 1) |
+| `embedded_images[]` (v3) | `embedded_images[]` with `image_sequence_id IMG:<sha>:<seq>`, `location.occurrence_ref` = PR #76 `occurrence_id`, relationship id, archive path, size, dimensions, mime from the format (unknown → `application/octet-stream`); `ocr_state REQUIRED` → QUEUED; DONE only with an OCR derivative hash; representation WORD_WITH_EMBEDDED_IMAGES (images present) or WORD_NATIVE_TEXT (inventoried, none) |
+| v2 rows (no image inventory), DOC, RTF | WORD_IMAGES_NOT_INVENTORIED, images UNRESOLVED |
+| `derivative_withheld_reason` | no text derivative; decision HELD_ACCESS_MARKING_REVIEW |
+| `ocr_required_pages`, `ocr_required_images`, queued images | HELD_OCR_REQUIRED; when OCR is done, the caller passes the pinned `ocr_config` (engine, version, languages, DPI, PSM, preprocessing, config hash) and the derivative carries it |
+| `filename_legal_metadata` / file name and folders | rules 1.1 (contract section 8.3): leaf-folder subject with the full hierarchy; provision folders; one candidate per listed number; ranges and ambiguous abbreviations kept as unresolved candidates; case-number prefixes ignored |
+| `restricted` or `ACCESS_RESTRICTED` | **a local exclusion receipt only** (`{record_kind: local_exclusion_receipt, sha256_prefix, reason, exportable: false}`): no identity, path, file name, admission or classification is exported |
+| integrity | DECLARED_HASH_ONLY, so **G01 NOT_RUN** (a PR #76 hash is not re-verified) |
+| NEW_DOCUMENT | provisional: **G09 NOT_RUN** and decision HELD_INTEGRITY_UNVERIFIED (or a more specific hold); never ADMITTED |
+| relevance `true` | **G08 NOT_RUN** (an automated signal is not an assessment); `false` → FAIL and REJECTED_NON_RELEVANT |
 
-**Disposition to admission decision:**
+**Disposition to decision:**
 
-| PR #76 disposition | C16 admission decision |
+| PR #76 disposition | Decision |
 | --- | --- |
-| EXACT_DUPLICATE | REJECTED_EXACT_DUPLICATE |
-| VERIFIED_ALTERNATE_COPY | ADMITTED_AS_ALTERNATE_COPY (NORMALIZED_TEXT_IDENTICAL; needs the primary's sha, else HELD_IDENTITY_UNRESOLVED) |
-| PROBABLE_DUPLICATE, IMPROVED_SOURCE_COPY, HISTORICAL_RECOVERY_MATCH, IDENTITY_UNRESOLVED | HELD_IDENTITY_UNRESOLVED |
-| NEW_DOCUMENT | ADMITTED_AS_PRIMARY, but HELD_EXTRACTION_INCOMPLETE for Word files and HELD_OCR_REQUIRED where OCR is pending |
+| EXACT_DUPLICATE | REJECTED_EXACT_DUPLICATE (G09 PASS with the canonical match as evidence) |
+| VERIFIED_ALTERNATE_COPY (v2 only), PROBABLE_DUPLICATE, IMPROVED_SOURCE_COPY, HISTORICAL_RECOVERY_MATCH, IDENTITY_UNRESOLVED | HELD_IDENTITY_UNRESOLVED |
+| NEW_DOCUMENT | HELD_ACCESS_MARKING_REVIEW, HELD_OCR_REQUIRED or HELD_EXTRACTION_INCOMPLETE as the row's evidence dictates, else HELD_INTEGRITY_UNVERIFIED |
 | RELEVANCE_UNRESOLVED | HELD_RELEVANCE_UNRESOLVED |
 | NON_RELEVANT | REJECTED_NON_RELEVANT |
-| ACCESS_RESTRICTED | HELD_ACCESS_MARKING_REVIEW |
+| ACCESS_RESTRICTED | local exclusion receipt only |
 | INTEGRITY_FAILURE | QUARANTINED_INTEGRITY |
-| UNSUPPORTED_FORMAT | UNSUPPORTED_FORMAT |
+| UNSUPPORTED_FORMAT, unknown format | UNSUPPORTED_FORMAT |
 
-Every PR #76 row maps to `application_eligible=false`. G03 (register), G05, G06 and G10 are NOT_RUN until the producer runs them.
-
-**Known gap.** The independent review found that PR #76 never extracted or OCR'd Word documents with embedded screenshots. C16 represents this directly:
-- every PR #76 Word file becomes `WORD_IMAGES_NOT_INVENTORIED`;
-- its `embedded_images` is UNRESOLVED;
-- gate G07 is NOT_RUN;
-- the admission is HELD_EXTRACTION_INCOMPLETE.
-
-Codex's separate fix should emit the image inventory (`embedded_images[]` with `image_sha256`, `IMG:` ids, OCR state) and OCR anchors. That turns these items into `WORD_WITH_EMBEDDED_IMAGES` or `WORD_NATIVE_TEXT`. No work is duplicated here.
+The adapter output validates as a **partial** exchange (`exchange_issues(..., mode="partial")`). To become a strict, importable generation the producer must:
+1. add `GENERATION.json` with pinned inputs, counts and hashes;
+2. merge the provision taxonomy;
+3. run the gates with evidence (re-download hash verification for G01, register, marking screening including image OCR, relevance, duplicate resolution);
+4. issue new admission revisions.
 
 ## 7. Cycle 15 candidate package v7: found
 

@@ -1,6 +1,6 @@
 # C16 corpus integration contract (`mimamsa-corpus-contract/2.0`)
 
-- **Status:** proposed, Cycle 16 Tranche A checkpoint (WP01–WP03). For ChatGPT review. Not adopted, not merged.
+- **Status:** proposed, Cycle 16 Tranche A checkpoint (WP01–WP03), **revised after the independent review of `4d476fab`** (findings C01–C07; disposition in section 15). For re-review. Not adopted, not frozen, not merged.
 - **Base:** `legal-knowledge/v2.5-staging` at `c8fa5290`.
 - **Scope:** the corpus-to-application exchange of document identity, evidence anchors, taxonomy, provision and judgment relationships, and admission decisions.
 - **Not changed:** contract v1 (`app/contract/schemas/v1`), its validator, AUTH-LEDGER, acceptance oracles, corpus bytes, the B1 application.
@@ -220,11 +220,11 @@ Each anchor holds:
 
 ### 6.4 Projection to v1 PageKey and SpanKey
 
-`adapters.anchor_to_v1_page_anchor` gives:
-- `PageKey = (original_sha256, physical_page)` when, and only when, `citable_as_source_page`;
-- the SpanKey fields (`pipeline_name`, `pipeline_version`, `derivative_text_sha256`, offsets, `passage_id`, `text_sha256`) only when the span was measured on the original.
+`adapters.anchor_to_v1_page_anchor(anchor, identity, span_verified=...)` gives:
+- `PageKey = (original_sha256, physical_page)` only when the anchor is bound to its identity (same `doc_id` and copy), the locator is a citable source page within the copy's page count, the copy permits page citation, and the anchor is not INCORRECT;
+- the SpanKey fields (`pipeline_name`, `pipeline_version`, `derivative_text_sha256`, offsets, `passage_id`, `text_sha256`) and any quote only when the span was **byte-verified** against the derivative (section 6.6) and was measured on the original.
 
-Anchors with no source page (generated segments, image sequences, text flow, unmapped reconstructions) **do not project**: v1 has no way to hold them, and inventing page 1 is prohibited. The consumer serves them through the C16 sidecar (consumer requirements C4).
+Without an identity it returns nothing. Anchors with no source page (generated segments, image sequences, text flow, unmapped reconstructions) **do not project**: v1 has no way to hold them, and inventing page 1 is prohibited. The consumer serves them through the C16 sidecar (consumer requirements C4).
 
 ### 6.5 Quoting and eligibility gates
 
@@ -239,6 +239,26 @@ Constraints:
 - `NOT_ASSESSED` or `NOT_ELIGIBLE` ⇒ no quoting and no graph evidence.
 
 The consumer must AND the C16 permissions with its own gates and never OR them.
+
+### 6.6 Evidence binding (review finding C02)
+
+A shape-valid anchor is not evidence. Two layers of checks apply before an anchor can locate a citation or a graph edge.
+
+**Cross-record binding** (`rules.exchange_issues`, every mode):
+
+| Check | Code |
+| --- | --- |
+| `(doc_id, original_sha256)` is a document identity in the exchange | `C16_DANGLING_SUBJECT` |
+| `representation_sha256` is the original, or a held identity that is `LOCALLY_RECONSTRUCTED` from it | `C16_ANCHOR_REPRESENTATION` |
+| `derivative_text_sha256` is a derivative of that representation (or the OCR derivative of one of its images), with the same pipeline name and version | `C16_ANCHOR_DERIVATIVE` |
+| `image_sequence_id` is an occurrence in the identity's image inventory and `image_sha256` equals that occurrence's hash | `C16_ANCHOR_IMAGE` |
+| a source page lies within the copy's physical pages; a reconstructed page within the reconstruction; a segment within the derivative | `C16_ANCHOR_PAGE_RANGE` |
+| a reconstructed page uses the reconstruction's own `page_mapping` basis, and is citable only through `ONE_TO_ONE_PAGE_HASH_CHECKED` with `physical_page = reconstructed_page + offset` | `C16_ANCHOR_MAPPING` |
+| every anchor of a relationship is on the subject's own copy; none is INCORRECT; in a compilation the anchor lies within the member's pages | `C16_ANCHOR_SUBJECT`, `C16_ANCHOR_INCORRECT`, `C16_COMPILATION_MEMBER` |
+| the relationship's subject node equals the identity's `graph_node_ref` (or the member's `work_ref` when `compilation_member_seq` is given); evidence in a compilation must name its member | `C16_SUBJECT_NODE_MISMATCH`, `C16_COMPILATION_MEMBER` |
+| a DOCUMENTARY_CHECKED relationship rests on at least one DOCUMENTARY_CHECKED, bound, non-low-confidence anchor | `C16_FINDING_ON_WEAK_ANCHOR` |
+
+**Byte binding** (`evidence.verify_anchor_bytes`, consumer side): the derivative bytes must hash to `derivative_text_sha256`, the unit (page, reconstructed page or segment) must exist in the `[[page N]]` text, the code-point offsets must lie inside it, and the slice must hash to `text_sha256`. `evidence.usable_for_citation` and `evidence.usable_as_graph_evidence` accept an anchor only if it is not INCORRECT, its copy permits the use, and its span (if any) has been byte-verified. `adapters.graph_projection(rel, anchors, usable)` shows a page on an edge only for anchors in the consumer-verified `usable` set. Low-confidence OCR may locate a candidate; it never supports a raised verification. Nothing in these checks promotes an anchor.
 
 ## 7. Provision and judgment relationships, and the C15 graph mapping (WP02)
 
@@ -296,6 +316,8 @@ No parallel graph is created. C16 relationships become edges in the same `graph_
 | C16 `legally_validated` (LEGAL_REVIEWED, with `AP-`) | edge unchanged | row `LEGAL_REVIEWED` with approval_ref; **refused at AUTH-LEDGER v0** |
 | v1 REJECTED_ON_REVIEW / anchor INCORRECT | not built | |
 
+**Review binding.** A raised value (relationship or anchor DOCUMENTARY_CHECKED, identity `identity_verification` DOCUMENTARY_CHECKED) needs a `review_binding`: the exact contract-v1 `reviewed_record` id, the sha256 of its canonical bytes, the reviewed commit, the reviewer id and kind, and the author id. The reviewed_record must be in the exchange (`reviewed_records.jsonl`), unchanged (hash), about exactly this subject (`{kind: candidate, id: <relationship or anchor id>}`, or `{kind: document, id: <doc_id>}`), on axis `evidence_fidelity` with `to_value` DOCUMENTARY_CHECKED, with the same reviewer, author and commit, and the reviewer must not be the author (and, for relationships, the author and commit must be the relationship's own `source.author_id` and producer commit). Codes `C16_REVIEW_UNRESOLVED`, `C16_REVIEW_BINDING`, `C16_REVIEW_NOT_INDEPENDENT`. Classification relationships can never carry DOCUMENT_TEXT_REVIEWED, DOCUMENTARY_CHECKED, LEGAL_REVIEWED or `is_finding=true` (schema). AUTH-LEDGER v0 stays closed: `legally_validated` is refused (`LEDGER_V0_NO_APPROVAL`).
+
 This keeps the ADR-0006 invariant: `GraphStore.PublishAsync` refuses any edge value other than the three builder values, and reviews live only in the review table. A5's `REVIEWED_AI_DOCUMENTARY_NOT_LEGAL_VALIDATION` maps to a DOCUMENTARY_CHECKED review row only where the v1 `reviewed_record` rules hold: an independent reviewer and a matching commit. Otherwise it stays CANDIDATE.
 
 ### 7.4 Edge ids
@@ -332,21 +354,31 @@ That is four distinct provision associations on one `source_copy_sha256`.
 
 ### 8.3 Filename and folder classification rules
 
-| Rule | Version | Input | Output |
+Rules version 1.1 (`adapters.classify_path`, `adapters.local_subject_nodes`):
+
+| Rule | Input | Output |
+| --- | --- | --- |
+| `C16-FOLDER-SUBJECT` | the full folder path of the file | one `classified_under_subject` to the **leaf** folder node `SUBJ:local:<slug of every folder from the root, joined by '__'>` (CURATED_NAVIGATION); one taxonomy SUBJECT node per folder prefix, each parented by the folder above. `A/Rules` and `B/Rules` are different nodes |
+| `C16-FOLDER-PROVLIST` | a folder named like a provision list (`AR 22`) | candidate `associated_with_provision`, basis FOLDER_PATH (decision Q4) |
+| `C16-FN-PROVLIST` | a file name beginning `<ABBR> <n>[, <n>…] –` | one candidate `associated_with_provision` per number, basis FILENAME_PATTERN |
+
+**Signals are preserved, never expanded or guessed.**
+- A range (`AR 22-25`) or an unparsed label yields one **unresolved** association with the label as `raw_reference` and the note `PROVISION_RANGE_NOT_EXPANDED` or `UNPARSED_PROVISION_LABEL`.
+- An abbreviation with more than one reading yields an unresolved association listing the alternatives.
+- A prefix with no repository-recorded statutory reading (OA, WP, CA … are case-number prefixes) yields no association.
+- The same binary seen at several paths is one identity with several `observations`; every path keeps its own classifications.
+
+**Abbreviation readings 1.1** (decision Q3): only readings already recorded in this repository, from `Mimamsa.Core/Identifiers/LegalIdentifierResolver.cs` (Aliases) and the B1/P2 supplement in `app/b1/build/build_sample.py`. Owner confirmation remains open.
+
+| Abbreviation | Reading | Target | Alternatives |
 | --- | --- | --- | --- |
-| `C16-FOLDER-SUBJECT` | 1.0 | each folder component of the relative path | `classified_under_subject` → `SUBJ:local:<slug>`, basis FOLDER_PATH, CURATED_NAVIGATION |
-| `C16-FN-PROVLIST` | 1.0 | a file name beginning `<ABBR> <n>[, <n>…] –` | one `associated_with_provision` per number, basis FILENAME_PATTERN, CANDIDATE, with `abbreviation_expansion` |
+| AA | Army Act | `PROV:AA-1950:s.<n>` | none recorded |
+| AR | Army Rules | `PROV:AR-1954:r.<n>` | none recorded |
+| AFA | Air Force Act | `PROV:AFA-1950:s.<n>` | none recorded |
+| NA | Navy Act | `PROV:NA-1957:s.<n>` | none recorded |
+| AFT | Armed Forces Tribunal (the forum) | **unresolved** | "Armed Forces Tribunal Act, 2007, section <n>"; "the forum; the number is not a provision". The tribunal is kept distinct from the Act |
 
-**C16-FN-PROVLIST abbreviation table, version 1.0.** These are deliberately minimal. An unknown abbreviation yields no relationship.
-
-| Abbreviation | Reading used | Target | Alternatives left open |
-| --- | --- | --- | --- |
-| AR | Army Rules, 1954 | `PROV:AR-1954:r.<n>` | "Regulations for the Army" if the owner used AR for those (open question Q3) |
-| AA | Army Act, 1950 | `PROV:AA-1950:s.<n>` | none recorded |
-
-**Paths.** Relative to a registered collection (`local:<name>`), NFC, with POSIX separators. The drive root (for example `E:\Judgements`) is never written.
-
-**Folder components.** A component that looks like a provision ("AR 22") but sits in the folder position is still only a subject classification under rule 1.0. Promoting folder provisions is open question Q4.
+**Paths.** Relative to a registered collection (`local:<name>`), NFC, with POSIX separators. The drive root is never written.
 
 ## 9. Exchange formats and determinism
 
@@ -394,28 +426,54 @@ That is four distinct provision associations on one `source_copy_sha256`.
 | --- | --- |
 | `REL-` | category, subject doc_id, subject sha256, compilation member, target (`node_id`, or `["raw", raw_reference]`), evidentiary basis, rule id, discriminator. The discriminator is `["path", collection, relative_path, path_component, matched_text]` for label bases, `["anchors", sorted anchor ids]` for text bases, or `["validates", validated id, approval ref]` for `legally_validated` |
 | `ANC-` | doc_id, original sha256, representation sha256, derivative sha256, image sha256, locator (kind, physical page, reconstructed page, generated segment, image sequence id, paragraph index), span (start, end, text hash), bbox |
-| `ADM-` | corpus generation id, doc_id, sha256, rule-set id and version |
+| `ADM-` | corpus generation id, doc_id, sha256, **revision, superseded admission id**, rule-set id and version, **decision and sorted gate results**. A changed decision is therefore a new id and must be a new revision |
 
 Verification, quality, wording, rule version and timestamps are excluded, so a re-review or a new pipeline run that finds the same item keeps the id. This is the v1 `candidate_id` stability rule. A different item gets a new id. Rule C16_ID_MISMATCH rejects an id that does not recompute.
 
-## 10. Admission gates
+### 9.3 Validation levels and the generation manifest (review finding C05)
 
-Every `corpus_admission` lists all ten gates, each PASS, FAIL, NOT_RUN or NOT_APPLICABLE:
+| Level | Call | Requires | Use |
+| --- | --- | --- | --- |
+| Record | `rules.record_issues(rec)` | one JSON object (anything else is `JSONL_NOT_OBJECT`, never an exception) | review tooling, adapters |
+| **Partial** exchange | `rules.exchange_issues(files, mode="partial")` | canonical file names; every present record valid; references resolved **among the populations present** | adapter output, work in progress. **Never importable** |
+| **Strict** exchange (default) | `rules.exchange_issues(files, mode="strict")` | `GENERATION.json`; every declared file present with matching sha256 and record count, no undeclared file; all five populations (identities, anchors, relationships, taxonomy, admissions; `reviewed_records` when any binding exists); one generation; registries | producer hand-over |
+| Signed import | importer | a signed v1 bundle **and** a strict exchange inside it | site |
 
-| Gate | Passes when |
-| --- | --- |
-| G01_HASH_VERIFIED | sha256 recomputed from the bytes by the producer |
-| G02_FORMAT_DETECTED | the format is detected from the bytes and agrees with the declared MIME type |
-| G03_RESTRICTED_REGISTER | `config/restricted_material.json` checked against the hash, doc_id, path and every record string; no match |
-| G04_ACCESS_MARKING_REVIEWED | printed access markings looked for and, where found, decided |
-| G05_IDENTITY_RECORD_VALID | the identity record validates (schema and rules) |
-| G06_TEXT_DERIVATIVE_VERIFIED | every derivative re-hashes, covers its units and keeps the page format |
-| G07_EMBEDDED_IMAGES_ACCOUNTED | every embedded image is inventoried, and has been OCR'd or marked decorative (NOT_APPLICABLE for PDFs and text files) |
-| G08_RELEVANCE_ASSESSED | the relevance decision is recorded (owner corpus: as the owner directs) |
-| G09_DUPLICATE_RESOLVED | byte and text duplicates resolved to a primary or an alternate |
-| G10_SCHEMA_VALID | the whole exchange validates (C16 rules included) |
+In every mode:
+- **File names** are canonical (`identities.jsonl`, `anchors.jsonl`, `relationships.jsonl`, `taxonomy.jsonl`, `admissions.jsonl`, `reviewed_records.jsonl`) or declared shards `<stem>.<nnnn>.jsonl`; a record of another kind in a file is `C16_KIND_MISMATCH`.
+- **Keys are globally unique across files and shards** (`C16_DUPLICATE_KEY`): identity `doc_id` and (doc_id, sha256), anchor, relationship, taxonomy, admission and review ids.
+- **Schema-invalid records are excluded** from every cross-record map, so a malformed record can never satisfy or crash a reference check.
+- **One generation**: every identity and admission carries the manifest's `corpus_generation_id` (`C16_GENERATION_MISMATCH`).
+- **There is no implicit bypass**: an empty or missing population is an error in strict mode; partial mode skips only checks whose population is absent, and says so in its name.
 
-`application_eligible=true` requires an ADMITTED decision and every gate PASS or NOT_APPLICABLE. Admission never publishes (`publication_effect=NONE`) and never approves (`legal_effect=NONE`). The PR #76 disposition is kept verbatim in `source_disposition`, and the mapping is in the compatibility matrix.
+`GENERATION.json` (`CORPUS_GENERATION_MANIFEST_SCHEMA.json`) pins the inputs (any number of immutable HF revisions, each with its purpose: decision Q8; full git commits; local collections with their inventory hash and file count; the restricted-register sha256; tools), lists every file with kind, sha256 and record count, and declares the **registries** against which identifiers resolve: `instrument_codes` (the C15 code list plus declared `DOC-` codes; the test checks the C15 list against `GraphModel.cs`) and `external_judgments` (`JUD:JG-…` targets that are not held). In strict mode every `PROV:`, `CHAP:` and `SUBJ:` target must be a taxonomy node, every `JUD:<doc_id>` target a held identity, and every `JUD:JG-` target a declared external judgment (`C16_TARGET_UNREGISTERED`).
+
+## 10. Admission gates (review finding C01)
+
+**Shape (schema).** Exactly ten gate results, one per gate id (ten items, each of the ten ids present: hence each exactly once). Every PASS carries an `evidence_ref`. NOT_APPLICABLE is allowed only for G06 and G07. An eligible admission (`application_eligible=true`) must be ADMITTED, with G01–G05 and G08–G10 PASS, and G06/G07 PASS or NOT_APPLICABLE.
+
+| Gate | PASS means | NOT_APPLICABLE only when |
+| --- | --- | --- |
+| G01_HASH_VERIFIED | the identity's integrity is **BYTE_VERIFIED** (re-hashed against an independently held manifest at a pinned revision); a declared hash is NOT_RUN | never |
+| G02_FORMAT_DETECTED | the format is detected from the bytes (never UNKNOWN) | never |
+| G03_RESTRICTED_REGISTER | the register was checked against hash, doc_id, path and every record string; no match | never |
+| G04_ACCESS_MARKING_REVIEWED | printed and image markings looked for; restriction eligibility decided (not NOT_ASSESSED) | never |
+| G05_IDENTITY_RECORD_VALID | the identity validates (schema and rules) | never |
+| G06_TEXT_DERIVATIVE_VERIFIED | at least one derivative, re-hashed, covering its units, in the page format | the copy has no derivative by design |
+| G07_EMBEDDED_IMAGES_ACCOUNTED | every image inventoried, and read (DONE) or decorative | the image list is inventoried and **empty** |
+| G08_RELEVANCE_ASSESSED | relevance decided as the owner directs (an automated signal alone is NOT_RUN) | never |
+| G09_DUPLICATE_RESOLVED | byte and text duplicates resolved to a primary or an alternate | never |
+| G10_SCHEMA_VALID | the whole strict exchange validates | never |
+
+**Cross-record rules** (`rules.exchange_issues`):
+- **Binding:** every admission names an identity in the same exchange (`C16_ADMISSION_ORPHAN`) and generation (`C16_GENERATION_MISMATCH`); every identity has a decision (`C16_ADMISSION_MISSING`).
+- **Append-only revisions:** revision 1 supersedes nothing; revision n supersedes revision n−1 of the same (generation, doc_id, sha256). Superseding an unknown, foreign or own admission is `C16_ADMISSION_SUPERSESSION`; two revisions superseding the same one, or anything other than one linear chain, is `C16_ADMISSION_FORK`. The **effective decision** is the single chain head.
+- **Gate evidence** (`C16_GATE_EVIDENCE`): each PASS and NOT_APPLICABLE above is checked against the bound identity.
+- **Eligibility** (`C16_ELIGIBLE_IDENTITY_NOT_READY`): an eligible effective admission needs an identity with restriction ELIGIBLE_ALL_USERS, integrity BYTE_VERIFIED, research state ELIGIBLE_FULL or SEARCH_ONLY, an inventoried and fully read image list, and a representation other than WORD_IMAGES_NOT_INVENTORIED or UNRECOGNISED_FORMAT.
+- **Duplicates** (`C16_DUPLICATE_UNRESOLVED`): ADMITTED_AS_ALTERNATE_COPY only as RECONSTRUCTION_OF an original held in the exchange and named in `reconstructed_from_sha256` (normalised-text equality never admits: PR #76 v3); REJECTED_EXACT_DUPLICATE names its own bytes and where they are already held.
+- **Restricted items never appear in an exportable exchange** (`C16_RESTRICTED_IN_EXCHANGE`). They exist only as minimal local exclusion receipts (`{sha256_prefix, reason, exportable: false}`), with no identity, path, file name or classification.
+
+**Consumer rule.** The application serves a C16 copy only when its **effective admission in the active generation is eligible** (consumer requirement I7). Admission never publishes (`publication_effect=NONE`) and never approves (`legal_effect=NONE`).
 
 ## 11. Rule codes (in addition to the v1 codes)
 
@@ -431,6 +489,13 @@ Every `corpus_admission` lists all ten gates, each PASS, FAIL, NOT_RUN or NOT_AP
 | `C16_TAXONOMY_ID`, `C16_TAXONOMY_PARENT`, `C16_TAXONOMY_CYCLE`, `C16_DANGLING_TAXONOMY`, `C16_DANGLING_SUBJECT` | taxonomy and cross-record integrity |
 | `C16_GRAPH_PROJECTION_MISMATCH` | the producer's echoed graph projection differs from section 7 |
 | `LEDGER_V0_NO_APPROVAL` | `legally_validated` while AUTH-LEDGER is v0 |
+| `C16_ADMISSION_ORPHAN`, `C16_ADMISSION_MISSING`, `C16_ADMISSION_SUPERSESSION`, `C16_ADMISSION_FORK`, `C16_GATE_EVIDENCE`, `C16_ELIGIBLE_IDENTITY_NOT_READY`, `C16_DUPLICATE_UNRESOLVED`, `C16_RESTRICTED_IN_EXCHANGE` | admission binding and gates (section 10) |
+| `C16_ANCHOR_DERIVATIVE`, `C16_ANCHOR_IMAGE`, `C16_ANCHOR_PAGE_RANGE`, `C16_ANCHOR_MAPPING`, `C16_ANCHOR_INCORRECT`, `C16_SUBJECT_NODE_MISMATCH`, `C16_COMPILATION_MEMBER`, `C16_FINDING_ON_WEAK_ANCHOR` | evidence binding (section 6.6) |
+| `C16_REVIEW_BINDING`, `C16_REVIEW_UNRESOLVED`, `C16_REVIEW_NOT_INDEPENDENT` | review binding (section 7.3) |
+| `C16_MANIFEST`, `C16_MANIFEST_MISMATCH`, `C16_FILE_MISSING`, `C16_FILE_NAME`, `C16_KIND_MISMATCH`, `C16_DUPLICATE_KEY`, `C16_GENERATION_MISMATCH`, `C16_TARGET_UNREGISTERED`, `JSONL_NOT_OBJECT` | exchange validation (section 9.3) |
+| `C16_ELIGIBILITY_UNSUPPORTED` | full research eligibility with images not inventoried or not read |
+| `C16_SPAN_UNBOUND`, `C16_DERIVATIVE_BYTES_MISMATCH`, `C16_DERIVATIVE_MARKERS_MALFORMED`, `C16_SPAN_UNIT_MISSING`, `C16_SPAN_OUT_OF_RANGE`, `C16_SPAN_MISMATCH` | consumer byte checks (`evidence.verify_anchor_bytes`) |
+| `KR_*` | knowledge release manifests (architecture section 4a) |
 | `DANGLING_ANCHOR`, `DANGLING_VALIDATION`, `EDGE_TARGET`, `ANCHOR_RANGE`, `OCR_QUOTING`, `RESTRICTED_MATERIAL`, `JSONL_MALFORMED` | as in v1 |
 
 ## 12. Versioning and backward compatibility
@@ -455,15 +520,32 @@ The v1 validator accepts them unchanged: paths and hashes are still checked agai
 
 Contract 2.0 proper adds explicit file kinds (`identities_jsonl` and the others) to `release_manifest`. That is a v1 minor version, deferred to review.
 
-## 14. Open questions for review
+## 14. Adopted working decisions (owner-overridable)
 
-| # | Question |
+The reviewer's proposed decisions are adopted as **working defaults**. Each can be overridden by the owner; none is a legal approval.
+
+| # | Decision |
 | --- | --- |
-| Q1 | Extend v1 `mime_type` with `application/msword` and `application/rtf` (v1 minor), or require a reconstructed PDF before any v1 record exists? |
-| Q2 | Should C15 adopt `subject` and `chapter` node kinds plus five edge types (three classification types, INTERPRETS_PROVISION, DISTINGUISHES_PROPOSITION), or should classification stay outside the graph tables in a facet table? This contract assumes the former; the mapping is mechanical either way |
-| Q3 | Owner confirmation of abbreviation readings (AR = Army Rules 1954, not Regulations for the Army) and of further abbreviations (AFA, NA, AFT, DSR, RA) before C16-FN-PROVLIST 1.1 |
-| Q4 | Should folder components that name provisions ("AR 22") become `associated_with_provision` (FOLDER_PATH, CANDIDATE)? Rule 1.0 treats every folder as a subject |
-| Q5 | Is CURATED_NAVIGATION right for owner folders (the owner curated them), or should every owner-label classification be CANDIDATE? The schema allows both; the adapter uses CURATED_NAVIGATION for folders and CANDIDATE for file-name readings |
-| Q6 | Who may raise `representation.completeness` to COMPLETE, and on what evidence (printed page sequence, carrier metadata, human check)? |
-| Q7 | Is OCR text ever quotable after a documentary page-image check? This contract says never (as v1); the user is sent to the original page |
-| Q8 | `corpus_generation_id` versus HF revision: should the producer pin one HF commit per corpus generation, and record it in every identity (`provenance.acquisition.hf.revision`) before admission? |
+| Q1 | DOC, DOCX and RTF originals are preserved as evidence (hashed, never executed; no macro execution, no guessed MIME). v1 serving uses a safe, locally reconstructed PDF admitted beside the original (`ADMITTED_AS_ALTERNATE_COPY`, RECONSTRUCTION_OF). Unknown formats are UNRECOGNISED_FORMAT / `application/octet-stream` |
+| Q2 | The graph gets `subject` and `chapter` nodes; facets are derived from the same taxonomy (no second classification store) |
+| Q3 | AA, AR, AFA, NA and AFT readings come only from the repository (section 8.3). The AFT tribunal is distinct from the AFT Act; ambiguous signals stay candidates with alternatives. Owner confirmation pending |
+| Q4 | Provision-named folders generate candidate associations only (rule C16-FOLDER-PROVLIST) |
+| Q5 | Owner filing labels are CURATED_NAVIGATION; parsed provision claims are CANDIDATE; never findings |
+| Q6 | COMPLETE needs copy- and work-specific evidence and an independent documentary check; it implies no legal approval |
+| Q7 | Raw OCR is never quotable. A separately verified transcription may become a future explicit policy; it is never an automatic override |
+| Q8 | A corpus generation may pin several immutable HF inputs, each with per-source provenance, in one composite `GENERATION.json` |
+
+Knowledge release decisions O1–O6 are recorded in the architecture (section 12).
+
+## 15. Review disposition (independent review of `4d476fab`)
+
+| Finding | Resolution | Where | Regression tests |
+| --- | --- | --- | --- |
+| C01 admission binding and gates | exactly ten unique gates, evidence-specific N/A, mandatory PASS for eligibility, PASS evidence refs, append-only revision chain, cross-record binding, consumer rule I7 | `CORPUS_ADMISSION_SCHEMA.json`, `rules._admission_exchange`, `canonical.admission_identity`, section 10 | N08, N20, N29–N32; X01–X08, X18 |
+| C02 evidence binding and finding promotion | cross-record anchor binding, byte/span checks, conservative projections, subject/member binding, reviewed-record binding, classification never a finding | `rules._anchor_exchange`, `_relationship_exchange`, `_resolve_review`, `evidence.py`, `adapters.anchor_to_v1_page_anchor`, `graph_projection`, sections 6.6 and 7.3 | N01, N13, N22, N33–N35; X09–X16, X19; byte-check and projection tests |
+| C03 crash-consistent activation | activation journal state machine (architecture section 8) with an executable reference model | `activation.py`, architecture section 8 | crash at every boundary, mid-switch exclusion, pinned readers, retention, rollback, model switch, restore |
+| C04 PostgreSQL restore boundary | no archive restore: allowlisted KNOWLEDGE_ROWS loaded by application code | `KNOWLEDGE_RELEASE_MANIFEST_SCHEMA.json`, architecture section 7 | N38, N39 |
+| C05 exchange robustness | strict / partial / signed levels, manifest with counts and hashes, canonical names, global uniqueness, one generation, registries, structured rejection | `rules.exchange_issues`, `CORPUS_GENERATION_MANIFEST_SCHEMA.json`, section 9.3 | X17, X20–X26; strict/partial tests |
+| C06 producer adapters | no fabricated format or gate passes, PR #76 v3 images and holds, restricted receipts, merged observations, hierarchical folders, provision folders, ranges and ambiguity preserved | `adapters.from_pr76_inventory`, `classify_path`, section 8.3, compatibility matrix section 6 | N36; PR #76 adapter tests |
+| C07 release completeness | TEXT_STORE component, capability accounting, signed file inventory, namespaces and overlaps, kind-specific correctness checks, distinct degraded and rebuilt outcomes | `KNOWLEDGE_RELEASE_MANIFEST_SCHEMA.json`, `KNOWLEDGE_ACTIVATION_RECORD_SCHEMA.json`, `rules._release_manifest`, architecture sections 3–4a | N23–N28, N37, N40–N45; inventory, capability and rule-pack tests |
+
