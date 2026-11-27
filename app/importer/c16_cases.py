@@ -22,6 +22,7 @@ import io
 import json
 import sys
 import zipfile
+from collections import Counter
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -334,20 +335,113 @@ def v1_derived(doc_id, sha, text: bytes, path, pages_text: list[str]):
 DOC_C, DOC_D, DOC_F, DOC_G = "aft-2020-b01-legacy-oa0103", "aft-2020-b01-noprov-oa0104", "aft-2020-b01-v7relabel-oa0105", "aft-2020-b01-later-held-oa0106"
 
 
-def accounting(release_id, copies: dict, v1: dict, v7: list[str] | None = None):
-    srcs = [{"source": f"c16:{CG}", "path": "C16", **copies}] if copies else []
-    for src, counts in v1.items():
-        srcs.append({"source": src, "path": "V1", **counts})
+V7_SOURCE = "v7:cycle15"
+GEN_PIN_PLACEHOLDER = "0" * 64     # a well-formed pin for registers whose refusal must come from elsewhere
+
+
+def _prov(gen=None, repo=None, rev=None, cset=None):
+    return {"generation_manifest_sha256": gen, "hf_repo": repo, "hf_revision": rev, "candidate_set_sha256": cset}
+
+
+def accounting(release_id, copies: dict | None, v1: dict, v7: list[str] | None = None, *, generation_sha256=GEN_PIN_PLACEHOLDER):
+    """The contract 2.1 declared register (`SOURCE_ADMISSION_ACCOUNTING_SCHEMA`, scope DECLARED_BY_BUILD) as a
+    producer writes it: `accounting.register_bytes`. copies / v1 values come from `counts()`."""
+    from mimamsa_contract.c16 import accounting as acct
+    srcs = []
+    if copies:
+        c = dict(copies)
+        if not c["by_decision"] and c["input"]:
+            c["by_decision"], c["effective_admissions"] = {"ADMITTED_AS_PRIMARY": c["input"]}, c["input"]
+        srcs.append({"source": f"c16:{CG}", "path": "C16", "provenance": _prov(generation_sha256, "owner/b01-synthetic", HF_REV), **c})
+    for src, cnt in v1.items():
+        pinned = src.startswith("v1:hf:")
+        srcs.append({"source": src, "path": "V1", "provenance": _prov(None, "owner/b01-synthetic" if pinned else None,
+                                                                         HF_REV if pinned else None), **cnt})
     if v7 is not None:
-        srcs.append({"source": "v7:cycle15", "path": "V7_REFERENCE", "input": len(v7), "identities": len(v7), "held": len(v7),
-                     "rejected": 0, "quarantined": 0, "eligible": 0, "served": 0, "candidate_sha256": sorted(v7)})
-    return json.dumps({"record_kind": "source_admission_accounting", "contract": C21, "release_id": release_id,
-                       "sources": sorted(srcs, key=lambda s: s["source"])}, indent=1, sort_keys=True).encode()
+        cset = hashlib.sha256(candidate_set_bytes(v7)).hexdigest()
+        srcs.append({"source": V7_SOURCE, "path": "V7_REFERENCE", "provenance": _prov(cset=cset),
+                     **counts(input=len(set(v7)), held=len(set(v7)), reasons={"V7_REFERENCE_ONLY": len(set(v7))})})
+    return acct.register_bytes({"contract": C21, "record_kind": "source_admission_accounting", "release_id": release_id,
+                                "scope": "DECLARED_BY_BUILD", "sources": sorted(srcs, key=lambda s: s["source"])})
 
 
-def counts(input=0, held=0, rejected=0, quarantined=0, eligible=0, served=0):
+def candidate_set_bytes(hashes) -> bytes:
+    from mimamsa_importer.c16 import candidate_set_bytes as csb
+    return csb(hashes)
+
+
+def counts(input=0, held=0, rejected=0, quarantined=0, eligible=0, served=0, *, by_decision=None, reasons=None):
+    if reasons is None:
+        reasons = {"NOT_SERVED": input - served} if input - served > 0 else {}
     return {"input": input, "identities": input, "held": held, "rejected": rejected, "quarantined": quarantined,
-            "eligible": eligible, "served": served}
+            "eligible": eligible, "served": served, "effective_admissions": sum((by_decision or {}).values()),
+            "by_decision": dict(sorted((by_decision or {}).items())), "not_served_reasons": dict(sorted(reasons.items()))}
+
+
+def declared_c16_counts(exchange_files: dict, v1_keys: set) -> dict | None:
+    """The producer's honest C16 declaration for an exchange, counted per identity with its effective admission
+    exactly as the site buckets it (HELD*, REJECTED*, eligible, otherwise quarantined); served = eligible with a v1
+    record. The site may only narrow it."""
+    idents, adms = [], []
+    for name, b in (exchange_files or {}).items():
+        recs = [json.loads(x) for x in b.decode("utf-8").split("\n") if x] if name.endswith(".jsonl") else []
+        idents += [r for r in recs if r.get("record_kind") == "document_identity"]
+        adms += [r for r in recs if r.get("record_kind") == "corpus_admission"]
+    if not idents:
+        return None
+    superseded = {a.get("supersedes_admission_id") for a in adms}
+    eff = {(a["subject"]["doc_id"], a["subject"]["source_copy_sha256"]): a for a in adms if a["admission_id"] not in superseded}
+    c = counts(by_decision={})
+    c["effective_admissions"] = len(eff)
+    c["by_decision"] = dict(sorted(Counter(a["decision"] for a in eff.values()).items()))
+    reasons = Counter()
+    for d in idents:
+        key = (d["doc_id"], d["source_copy"]["sha256"])
+        a = eff.get(key)
+        c["input"] += 1
+        c["identities"] += 1
+        if a is None:
+            c["quarantined"] += 1
+            reasons["NO_EFFECTIVE_ADMISSION"] += 1
+        elif a["decision"].startswith("HELD"):
+            c["held"] += 1
+            reasons["HELD"] += 1
+        elif a["decision"].startswith("REJECTED"):
+            c["rejected"] += 1
+            reasons["REJECTED"] += 1
+        elif a["application_eligible"]:
+            c["eligible"] += 1
+            if key in v1_keys:
+                c["served"] += 1
+            else:
+                reasons["C16_ONLY_NOT_SERVABLE"] += 1
+        else:
+            c["quarantined"] += 1
+            reasons["NOT_ELIGIBLE"] += 1
+    c["not_served_reasons"] = dict(sorted(reasons.items()))
+    return c
+
+
+def declared_accounting(release_id, exchange_files: dict | None, docs: list[dict], v7: list[str] | None = None) -> bytes:
+    """Declared register for a bundle carrying `exchange_files` and v1 `docs` (documents without a C16 identity are
+    counted on their v1 source, declared eligible and served; the site may lower both)."""
+    v1_keys = {(d["doc_id"], d["source_copy"]["sha256"]) for d in docs}
+    copies = declared_c16_counts(exchange_files or {}, v1_keys)
+    keys = set()
+    for name, b in (exchange_files or {}).items():
+        if name.endswith(".jsonl"):
+            keys |= {(r["doc_id"], r["source_copy"]["sha256"]) for r in (json.loads(x) for x in b.decode("utf-8").split("\n") if x)
+                     if r.get("record_kind") == "document_identity"}
+    v1 = {}
+    for d in docs:
+        if (d["doc_id"], d["source_copy"]["sha256"]) in keys:
+            continue
+        src = V1_SRC if (d["provenance"].get("hf") or {}).get("revision") else f"v1:{d['provenance']['acquisition_channel']}"
+        c = v1.setdefault(src, counts())
+        for f in ("input", "identities", "eligible", "served"):
+            c[f] += 1
+    gen = (exchange_files or {}).get("GENERATION.json")
+    return accounting(release_id, copies, v1, v7, generation_sha256=h(gen) if gen is not None else GEN_PIN_PLACEHOLDER)
 
 
 V1_SRC = f"v1:hf:owner/b01-synthetic@{HF_REV}"
@@ -412,6 +506,8 @@ class C16Harness:
             accounting_bytes = self.default_accounting(m["release_id"], docs, exchange_files if c16 else None, v7=v7)
         if accounting_bytes is not False:
             files["registers/source_accounting.json"] = (accounting_bytes, "other")
+            if v7:   # the v7 candidate hash set the declared V7_REFERENCE source digests (proposed 2.1 addition)
+                files["registers/candidate_sets/cycle15.txt"] = (candidate_set_bytes([h(cp.f)]), "other")
         files.update(extra or {})
         for p in drop:
             files.pop(p, None)
@@ -426,36 +522,9 @@ class C16Harness:
         return path
 
     def default_accounting(self, release_id, docs, exchange_files=None, *, v7=True):
-        """The producer's honest declaration for this bundle: C16 counts from the effective admissions, v1 counts
-        for documents without a sidecar (declared eligible and served; the site may lower both)."""
-        idents, adms = [], []
-        for name, b in (exchange_files or {}).items():
-            recs = [json.loads(x) for x in b.decode("utf-8").split("\n") if x] if name.endswith(".jsonl") else []
-            idents += [r for r in recs if r.get("record_kind") == "document_identity"]
-            adms += [r for r in recs if r.get("record_kind") == "corpus_admission"]
-        keys = {(d["doc_id"], d["source_copy"]["sha256"]) for d in idents}
-        v1docs = {(d["doc_id"], d["source_copy"]["sha256"]) for d in docs}
-        superseded = {a.get("supersedes_admission_id") for a in adms}
-        copies = counts() if idents else None
-        for a in adms:
-            if a["admission_id"] in superseded:
-                continue
-            copies["input"] += 1
-            copies["identities"] += 1
-            k = "held" if a["decision"].startswith("HELD") else "rejected" if a["decision"].startswith("REJECTED") else \
-                "eligible" if a["application_eligible"] else "quarantined"
-            copies[k] += 1
-            if a["application_eligible"] and (a["subject"]["doc_id"], a["subject"]["source_copy_sha256"]) in v1docs:
-                copies["served"] += 1
-        v1 = {}
-        for d in docs:
-            if (d["doc_id"], d["source_copy"]["sha256"]) in keys:
-                continue
-            src = V1_SRC if (d["provenance"].get("hf") or {}).get("revision") else f"v1:{d['provenance']['acquisition_channel']}"
-            c = v1.setdefault(src, counts())
-            for f in ("input", "identities", "eligible", "served"):
-                c[f] += 1
-        return accounting(release_id, copies, v1, [h(self.cp.f)] if v7 else None)
+        """The producer's honest declaration for this bundle (contract 2.1 register, DECLARED_BY_BUILD)."""
+        return declared_accounting(release_id, exchange_files, docs, [h(self.cp.f)] if v7 else None)
+
     def run(self, bundle_path, site, *, exclusions=None, channel="none"):
         from mimamsa_importer import configure_site, import_release
         if channel and not (Path(site) / "SITE_CONFIG.json").exists():

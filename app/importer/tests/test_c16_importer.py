@@ -97,10 +97,17 @@ def fixture_artefacts() -> dict[str, bytes]:
     return {f"registers/receipts/{p.name}": p.read_bytes() for p in sorted((V21 / "registers" / "receipts").iterdir())}
 
 
-def fixture_accounting(release_id="R-fixture"):
-    return json.dumps({"record_kind": "source_admission_accounting", "contract": cc.C21, "release_id": release_id, "sources": [
-        {"source": "c16:CG-20261127-fixtures-0a1b2c3d", "path": "C16", "input": 10, "identities": 10, "held": 7, "rejected": 1,
-         "quarantined": 1, "eligible": 1, "served": 0}]}).encode()
+STAGE_RELEASE = "R16-fixture-20261127-00000001"
+
+
+def fixture_accounting(exchange: dict[str, bytes], release_id=STAGE_RELEASE):
+    """The 2.1 declared register for a contract fixture exchange (no v1 records in a stage-only run)."""
+    from mimamsa_contract.c16 import accounting
+    decl = json.loads(cc.declared_accounting(release_id, exchange, []))
+    gen = json.loads(exchange["GENERATION.json"])["corpus_generation_id"]
+    for s in decl["sources"]:   # the contract fixture generation, not the synthetic one
+        s["source"] = f"c16:{gen}"
+    return accounting.register_bytes(decl)
 
 
 def run_stage(tmp: Path, exchange: dict[str, bytes], artefacts: dict[str, bytes], *, unlisted=(), facts=None, accounting=None):
@@ -108,7 +115,7 @@ def run_stage(tmp: Path, exchange: dict[str, bytes], artefacts: dict[str, bytes]
     b = tmp / "bundle"
     files = []
     payload = {**{"corpus-v2/" + n: x for n, x in exchange.items()}, **artefacts,
-               "registers/source_accounting.json": accounting or fixture_accounting()}
+               "registers/source_accounting.json": accounting or fixture_accounting(exchange)}
     for rel, data in payload.items():
         (b / rel).parent.mkdir(parents=True, exist_ok=True)
         (b / rel).write_bytes(data)
@@ -116,7 +123,7 @@ def run_stage(tmp: Path, exchange: dict[str, bytes], artefacts: dict[str, bytes]
             files.append({"path": rel, "kind": "other"})
     site = tmp / "site"
     site.mkdir(exist_ok=True)
-    return c16.run(bundle=b, manifest={"files": files, "release_id": "R-fixture"}, sums={}, site=site, docs=[], verified_docs={},
+    return c16.run(bundle=b, manifest={"files": files, "release_id": STAGE_RELEASE}, sums={}, site=site, docs=[], verified_docs={},
                    originals={}, copy_pages={}, register=FixtureRegister(), site_facts_override=facts if facts is not None else fixture_facts())
 
 
@@ -140,7 +147,7 @@ def test_fixture_2_0_exchange_imports_but_nothing_is_eligible(tmp_path):
     """Contract 2.0 carries no artefacts: its eligible admission fails closed (C16_RECEIPTS_REQUIRE_2_1); held,
     rejected and ineligible items stay importable and unserved."""
     ex = {p.name: p.read_bytes() for p in sorted((FIX / "positive" / "exchange").iterdir())}
-    res = run_stage(tmp_path, ex, {}, accounting=fixture_accounting())
+    res = run_stage(tmp_path, ex, {}, accounting=fixture_accounting(ex))
     assert res.refusals == []
     c = official(res)
     assert c["outcome"] == "QUARANTINED" and "C16_RECEIPTS_REQUIRE_2_1" in c["codes"] and not c["gates"]
@@ -209,10 +216,22 @@ def test_e2e_only_admitted_or_established_copies_are_served(hn, tmp_path):
         assert hashlib.sha256(p.read_bytes()).hexdigest() == x["receipt_sha256"]
     e = next(c for c in r.c16["copies"] if c["doc_id"] == DOC_E)
     assert e["outcome"] == "ELIGIBLE" and e["gates"]["G07_EMBEDDED_IMAGES_ACCOUNTED"] == "SITE_VERIFIED" and not e["served"]
-    # per-source accounting kept in the generation, with the signed declaration beside it
-    acct = json.loads((gdir / "registers" / "source_accounting.json").read_text())
-    assert acct["declared_register_sha256"] == hashlib.sha256((gdir / "registers" / "source_accounting.declared.json").read_bytes()).hexdigest()
+    # per-source accounting (2.1): the signed declaration verbatim, the site's recomputation beside it, both digests
+    # in the generation record and the import report; the site's register passes R1-R7 and only narrows
+    from mimamsa_contract.c16 import accounting
+    decl_b = (gdir / "registers" / "source_accounting.json").read_bytes()
+    site_b = (gdir / "registers" / "source_accounting.site.json").read_bytes()
+    decl, acct = json.loads(decl_b), json.loads(site_b)
+    assert decl["scope"] == "DECLARED_BY_BUILD" and acct["scope"] == "RECOMPUTED_BY_SITE"
+    assert site_b == accounting.register_bytes(acct) and accounting.accounting_issues(acct) == []
+    assert accounting.compare_declared(decl, acct) == []
+    assert gen["c16"]["accounting"] == {"declared_sha256": hashlib.sha256(decl_b).hexdigest(),
+                                        "site_sha256": hashlib.sha256(site_b).hexdigest()}
+    assert r.c16["accounting_digests"] == gen["c16"]["accounting"]
     assert {s["source"]: s["served"] for s in acct["sources"]} == {f"c16:{cc.CG}": 1, "v1:RELEASE_IMPORT": 0, cc.V1_SRC: 1, "v7:cycle15": 0}
+    c16src = next(s for s in acct["sources"] if s["path"] == "C16")
+    assert c16src["provenance"]["generation_manifest_sha256"] == gen["materialized"]["corpus_v2"]["files"]["GENERATION.json"]
+    assert c16src["not_served_reasons"] == {"C16_ONLY_NOT_SERVABLE": 1, "HELD": 1}
     # anchors: byte-verified span on the served copy
     ver = json.loads((gdir / "c16" / "verdicts.json").read_text())
     assert [a["span_verified"] for a in ver["anchors"]] == [True]
@@ -567,7 +586,15 @@ def test_c16_bundle_without_accounting_refused(hn, tmp_path):
     lambda s: s.append({"source": "v1:hf:other@" + "c" * 40, "path": "V1", **cc.counts(input=1, eligible=1, served=1)}),
     lambda s: next(x for x in s if x["path"] == "V7_REFERENCE").update(served=1, eligible=1, held=0),
     lambda s: s[0].update(served=s[0]["eligible"] + 1),
-], ids=["input", "decision", "missing-source", "extra-source", "v7-served", "served-over-eligible"])
+    # 2.1 (PR #82): the site may only narrow; decisions and generation pins must match the bundled exchange
+    lambda s: s[0].update(eligible=s[0]["eligible"] - 1, quarantined=s[0]["quarantined"] + 1,
+                          served=0, not_served_reasons={**s[0]["not_served_reasons"], "NOT_ELIGIBLE": 1}),
+    lambda s: s[0].update(by_decision={**{k: v for k, v in s[0]["by_decision"].items() if k != "HELD_RELEVANCE_UNRESOLVED"},
+                                       "REJECTED_NOT_MILITARY_LAW": 1}),
+    lambda s: s[0]["provenance"].update(generation_manifest_sha256="1" * 64),
+    lambda s: next(x for x in s if x["path"] == "V7_REFERENCE")["provenance"].update(candidate_set_sha256="2" * 64),
+], ids=["input", "decision", "missing-source", "extra-source", "v7-served", "served-over-eligible", "site-widens-eligible",
+        "by-decision", "generation-pin", "v7-candidate-set-digest"])
 def test_accounting_that_does_not_reconcile_refuses(hn, seeded, edit):
     files, arts, _, _ = cc.exchange(CP)
     decl = json.loads(hn.default_accounting("x", hn.default_docs(), files))
@@ -577,6 +604,24 @@ def test_accounting_that_does_not_reconcile_refuses(hn, seeded, edit):
     r = refused_untouched(hn, seeded, hn.bundle(exchange_files=files, artefacts=arts, release=release,
                                                 accounting_bytes=json.dumps(decl).encode()))
     assert "C16_SOURCE_ACCOUNTING" in r.contract_errors
+
+
+def test_accounting_scope_and_candidate_set_are_checked(hn, seeded):
+    """The shipped register must be the build's declaration (a site recomputation is never accepted as one), and a
+    declared V7_REFERENCE source needs its candidate hash set in the bundle (the relabel check uses the hashes)."""
+    files, arts, _, _ = cc.exchange(CP)
+    release = f"R16-b01-synthetic-20261128-{hn.n + 1:08x}"
+    decl = json.loads(hn.default_accounting(release, hn.default_docs(), files))
+    decl["scope"] = "RECOMPUTED_BY_SITE"
+    from mimamsa_contract.c16 import accounting
+    r = refused_untouched(hn, seeded, hn.bundle(exchange_files=files, artefacts=arts, release=release,
+                                                accounting_bytes=accounting.register_bytes(decl)))
+    assert r.contract_errors == ["C16_SOURCE_ACCOUNTING"]
+    release = f"R16-b01-synthetic-20261128-{hn.n + 1:08x}"
+    r = refused_untouched(hn, seeded, hn.bundle(exchange_files=files, artefacts=arts, release=release,
+                                                accounting_bytes=hn.default_accounting(release, hn.default_docs(), files),
+                                                drop=("registers/candidate_sets/cycle15.txt",)))
+    assert r.contract_errors == ["C16_SOURCE_ACCOUNTING"]
 
 
 def test_accounting_for_another_release_refused(hn, seeded):

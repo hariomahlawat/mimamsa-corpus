@@ -1,6 +1,9 @@
 {
  "c16": {
-  "accounting_sha256": "9076b3a858e354e8875df02d92d1119b756de084fdfc4a316abffa3e04239cca",
+  "accounting": {
+   "declared_sha256": "2516b4041a96ef6aa54cc7d4b18b95db9c4205b268eda559b8cdf26dbe65dfc0",
+   "site_sha256": "01c8ec3c553222fb50a8572807df226ad3d2cecb5dc661e0090707a88457b975"
+  },
   "codes": {
    "C16_LEGACY_NOT_ESTABLISHED": 2,
    "C16_ONLY_NOT_SERVABLE": 1,
@@ -44,8 +47,8 @@
    "registers/receipts/dc472b21dc3a85957432e3140a22c4d8accb6ad05d03b4635c4452f4e165cc84.json": "dc472b21dc3a85957432e3140a22c4d8accb6ad05d03b4635c4452f4e165cc84",
    "registers/receipts/e71010d39f4634883ac05b9fb1db1e654cee67a2a78ac253c8e010480cea6229.json": "e71010d39f4634883ac05b9fb1db1e654cee67a2a78ac253c8e010480cea6229",
    "registers/receipts/ed960a7a07b6d83aef81ff1fadec96888110d6d8d92754ec3043b596a77f4a02.json": "ed960a7a07b6d83aef81ff1fadec96888110d6d8d92754ec3043b596a77f4a02",
-   "registers/source_accounting.declared.json": "0c94f46ddfbf613fbbffdb9ffd38af6d1f3cf28c8e70200d7a888fc552190bb9",
-   "registers/source_accounting.json": "9076b3a858e354e8875df02d92d1119b756de084fdfc4a316abffa3e04239cca"
+   "registers/source_accounting.json": "2516b4041a96ef6aa54cc7d4b18b95db9c4205b268eda559b8cdf26dbe65dfc0",
+   "registers/source_accounting.site.json": "01c8ec3c553222fb50a8572807df226ad3d2cecb5dc661e0090707a88457b975"
   },
   "governed": [
    [
@@ -137,5 +140,5 @@
    "aft-2020-b01-later-held-oa0106"
   ]
  },
- "sums_sha256": "df5c8b8d57db96eefb0458d0a809ccfdd3cfa0899cc0c30ab5334a2c2faaaf79"
+ "sums_sha256": "4f5cde48ef362659ab780f76d799e588e5035915b4438ae9fd3765758d26df2c"
 }

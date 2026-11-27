@@ -41,7 +41,7 @@ from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from mimamsa_contract.c16 import adapters, canonical, evidence, legacy, receipts
+from mimamsa_contract.c16 import accounting, adapters, canonical, evidence, legacy, receipts
 from mimamsa_contract.c16.rules import component_inventory_issues, exchange_issues, record_issues
 from mimamsa_contract.issues import Issue
 
@@ -49,14 +49,14 @@ from . import safe_archive
 
 C16_PREFIX = "corpus-v2/"
 REGISTERS_PREFIX = "registers/"
-ACCOUNTING_PATH = "registers/source_accounting.json"
+ACCOUNTING_PATH = accounting.FILE                                   # registers/source_accounting.json (declared, signed)
+SITE_ACCOUNTING_PATH = "registers/source_accounting.site.json"     # the site's recomputation (never shipped)
+CANDIDATE_SET_PREFIX = "registers/candidate_sets/"                  # v7 candidate hash sets (proposed 2.1 addition)
 KNOWLEDGE_MANIFEST = "KNOWLEDGE_RELEASE.json"
 DECISION_INDEX = "C16_DECISION_INDEX.json"
 SUPPORTED_CONTRACTS = ("mimamsa-corpus-contract/2.0", "mimamsa-corpus-contract/2.1")
+C21 = "mimamsa-corpus-contract/2.1"
 LABEL_BASES = ("FOLDER_PATH", "FILENAME_PATTERN")
-ACCOUNTING_KIND = "source_admission_accounting"
-ACCOUNTING_PATHS = ("V1", "C16", "V7_REFERENCE")
-COUNT_FIELDS = ("input", "identities", "held", "rejected", "quarantined", "eligible", "served")
 MIME_FORMAT = {"application/pdf": "PDF", "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "DOCX",
                "image/png": "PNG", "image/jpeg": "JPEG"}
 RECOMPUTABLE_FORMATS = ("PDF", "DOCX", "PNG", "JPEG")
@@ -88,8 +88,9 @@ class C16Result:
     search_docs: set = field(default_factory=set)           # allowed docs whose text may be indexed
     denied: list = field(default_factory=list)              # (doc_id, sha256) governed or checked and not served
     restricted_shas: set = field(default_factory=set)       # never written anywhere (vault, page counts, reports)
-    accounting: list = field(default_factory=list)
-    declared_accounting: bytes | None = None
+    accounting: list = field(default_factory=list)          # the site's recomputed sources (RECOMPUTED_BY_SITE)
+    declared_accounting: bytes | None = None                # the signed declaration, verbatim
+    site_accounting: bytes | None = None                    # register_bytes of the site's recomputation
     resolved_receipts: list = field(default_factory=list)
     receipt_files: dict = field(default_factory=dict)       # path -> bytes of artefacts resolved for served copies
     index_entries: list = field(default_factory=list)
@@ -99,7 +100,9 @@ class C16Result:
         """Import report section (numbers, ids and hashes only; no paths, no text)."""
         return {"active": self.active, "contract": self.contract, "corpus_generation_id": self.corpus_generation_id,
                 "refusal_codes": sorted({i.code for i in self.refusals}), "codes": dict(sorted(self.codes.items())),
-                "copies": self.copies, "legacy": self.legacy, "accounting": self.accounting}
+                "copies": self.copies, "legacy": self.legacy, "accounting": self.accounting,
+                "accounting_digests": {"declared_sha256": _sha(self.declared_accounting) if self.declared_accounting else None,
+                                       "site_sha256": _sha(self.site_accounting) if self.site_accounting else None}}
 
 
 # ----------------------------------------------------------------------------------------------- site decision index
@@ -329,46 +332,83 @@ def _v1_source(doc: dict) -> str:
     return f"v1:{prov.get('acquisition_channel') or 'UNKNOWN'}"
 
 
+def _v1_provenance(doc: dict) -> dict:
+    hf = (doc.get("provenance") or {}).get("hf") or {}
+    pinned = bool(hf.get("repo") and hf.get("revision"))
+    return {"generation_manifest_sha256": None, "hf_repo": hf.get("repo") if pinned else None,
+            "hf_revision": hf.get("revision") if pinned else None, "candidate_set_sha256": None}
+
+
+def _as_accounting(issues: list[Issue]) -> list[Issue]:
+    """Schema problems in an accounting register are accounting refusals (one code for the register)."""
+    return [i if i.code == "C16_SOURCE_ACCOUNTING" else _e("C16_SOURCE_ACCOUNTING", f"{i.code}: {i.message}", i.where or ACCOUNTING_PATH)
+            for i in issues]
+
+
 def declared_accounting_issues(decl, release_id: str | None) -> list[Issue]:
-    if not isinstance(decl, dict) or decl.get("record_kind") != ACCOUNTING_KIND or decl.get("contract") not in SUPPORTED_CONTRACTS[1:]:
-        return [_e("C16_SOURCE_ACCOUNTING", "accounting register is not a contract 2.1 source_admission_accounting record", ACCOUNTING_PATH)]
-    if decl.get("release_id") != release_id:
-        return [_e("C16_SOURCE_ACCOUNTING", "accounting register belongs to another release", ACCOUNTING_PATH)]
-    srcs = decl.get("sources")
-    if not isinstance(srcs, list):
-        return [_e("C16_SOURCE_ACCOUNTING", "accounting register has no source list", ACCOUNTING_PATH)]
-    out, seen = [], set()
-    for s in srcs:
-        if not (isinstance(s, dict) and isinstance(s.get("source"), str) and s.get("path") in ACCOUNTING_PATHS
-                and all(isinstance(s.get(f), int) and not isinstance(s.get(f), bool) and s[f] >= 0 for f in COUNT_FIELDS)):
-            out.append(_e("C16_SOURCE_ACCOUNTING", "malformed accounting source entry", ACCOUNTING_PATH))
+    """The signed declaration: schema and R1-R7 (`mimamsa_contract.c16.accounting.accounting_issues`), scope
+    DECLARED_BY_BUILD, this release."""
+    if not isinstance(decl, dict):
+        return [_e("C16_SOURCE_ACCOUNTING", "accounting register is not a JSON object", ACCOUNTING_PATH)]
+    out = _as_accounting(accounting.accounting_issues(decl))
+    if out:
+        return out
+    if decl["scope"] != "DECLARED_BY_BUILD":
+        out.append(_e("C16_SOURCE_ACCOUNTING", "the shipped accounting register must be the build's declaration", ACCOUNTING_PATH))
+    if decl["release_id"] != release_id:
+        out.append(_e("C16_SOURCE_ACCOUNTING", "accounting register belongs to another release", ACCOUNTING_PATH))
+    return out
+
+
+def candidate_set_path(source: str) -> str:
+    return f"{CANDIDATE_SET_PREFIX}{source.split(':', 1)[1]}.txt"
+
+
+def candidate_set_bytes(hashes) -> bytes:
+    """The preimage of `provenance.candidate_set_sha256`: sorted, unique, LF-joined hashes, no final LF."""
+    return "\n".join(sorted(set(hashes))).encode("ascii")
+
+
+def candidate_sets(decl: dict, data: dict[str, bytes]) -> tuple[set[str], list[Issue]]:
+    """V7_REFERENCE sources: the relabel check needs the candidate hashes themselves, not only their digest. Each
+    declared candidate set travels as `registers/candidate_sets/<name>.txt` in the ADMISSION_REGISTER: exactly the
+    preimage of `provenance.candidate_set_sha256`, with as many hashes as the source's `input`.
+    (Proposed contract 2.1 additive item; flagged in the CP-1 report; the 2.1 register carries only the digest.)"""
+    shas, out = set(), []
+    for s in decl["sources"]:
+        if s["path"] != "V7_REFERENCE":
             continue
-        if s["source"] in seen:
-            out.append(_e("C16_SOURCE_ACCOUNTING", "source accounted twice", s["source"]))
-        seen.add(s["source"])
-        if s["path"] == "V7_REFERENCE":
-            c = s.get("candidate_sha256")
-            if not (isinstance(c, list) and all(isinstance(x, str) and len(x) == 64 for x in c) and len(c) == s["input"]) \
-                    or s["eligible"] or s["served"]:
-                out.append(_e("C16_SOURCE_ACCOUNTING", "v7 reference source must list its candidate hashes and is never eligible or served", s["source"]))
-    out += legacy.accounting_issues([s for s in srcs if isinstance(s, dict) and all(isinstance(s.get(f), int) for f in COUNT_FIELDS)
-                                     and isinstance(s.get("source"), str)])
-    return out
+        p = candidate_set_path(s["source"])
+        b = data.get(p)
+        if b is None or _sha(b) != s["provenance"]["candidate_set_sha256"]:
+            out.append(_e("C16_SOURCE_ACCOUNTING", "v7 candidate set missing or not the declared candidate_set_sha256", p))
+            continue
+        hs = b.decode("ascii", "replace").split("\n") if b else []
+        if (hs != sorted(set(hs)) or len(hs) != s["input"]
+                or not all(len(x) == 64 and all(c in "0123456789abcdef" for c in x) for x in hs)):
+            out.append(_e("C16_SOURCE_ACCOUNTING", "v7 candidate set malformed or does not match the declared input", p))
+            continue
+        shas |= set(hs)
+    return shas, out
 
 
-def reconcile_accounting(declared: list[dict], computed: list[dict]) -> list[Issue]:
-    """The producer's signed counts must match what the importer counted itself on every fact the producer can know
-    (inputs and decisions); the site may only lower eligibility and service (site checks, exclusions)."""
-    out = []
-    d = {s["source"]: s for s in declared}
-    c = {s["source"]: s for s in computed}
-    if set(d) != set(c):
-        out.append(_e("C16_SOURCE_ACCOUNTING", "accounted sources differ from the sources in the bundle"))
-    for k in sorted(set(d) & set(c)):
-        a, b = d[k], c[k]
-        if any(a[f] != b[f] for f in ("input", "identities", "held", "rejected")) or b["eligible"] > a["eligible"] or a["path"] != b["path"]:
-            out.append(_e("C16_SOURCE_ACCOUNTING", "per-source counts do not reconcile with the signed accounting register", k))
-    return out
+def _source_row(src: str, path: str, provenance: dict | None) -> dict:
+    return {"source": src, "path": path, "provenance": provenance, "input": 0, "identities": 0, "effective_admissions": 0,
+            "by_decision": {}, "held": 0, "rejected": 0, "quarantined": 0, "eligible": 0, "served": 0, "not_served_reasons": {}}
+
+
+def _count_reason(row: dict, reason: str) -> None:
+    row["not_served_reasons"][reason] = row["not_served_reasons"].get(reason, 0) + 1
+
+
+def _c16_not_served_reason(c: dict) -> str:
+    by_outcome = {"HELD": "HELD", "REJECTED": "REJECTED", "NOT_ELIGIBLE": "NOT_ELIGIBLE", "MISSING": "NO_EFFECTIVE_ADMISSION",
+                  "QUARANTINED": "SITE_QUARANTINED"}
+    if c["outcome"] in by_outcome:
+        return by_outcome[c["outcome"]]
+    if "C16_EXCLUDED" in c["codes"]:
+        return "SITE_EXCLUDED"
+    return "C16_ONLY_NOT_SERVABLE" if not c["has_v1_record"] else "NOT_SERVED"
 
 
 # ----------------------------------------------------------------------------------------------- the stage
@@ -451,6 +491,7 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
 
     # per-source accounting register: required on a C16-aware import
     decl = None
+    v7_shas: set[str] = set()
     if ACCOUNTING_PATH in data:
         res.declared_accounting = data[ACCOUNTING_PATH]
         try:
@@ -458,6 +499,8 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
         except (UnicodeDecodeError, ValueError):
             decl = None
         ai = declared_accounting_issues(decl, manifest.get("release_id"))
+        if not ai:
+            v7_shas, ai = candidate_sets(decl, data)
         if ai:
             res.refusals += ai
             return res
@@ -504,8 +547,10 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
             res.refusals += ci
             return res
 
-    # receipt artefacts: everything under registers/ except the accounting register is a candidate artefact
-    artefacts = {p: b for p, b in data.items() if p.startswith(REGISTERS_PREFIX) and p != ACCOUNTING_PATH}
+    # receipt artefacts: everything under registers/ except the accounting register and the candidate sets is a
+    # candidate artefact
+    artefacts = {p: b for p, b in data.items() if p.startswith(REGISTERS_PREFIX) and p != ACCOUNTING_PATH
+                 and not p.startswith(CANDIDATE_SET_PREFIX)}
     eff = _effective(adms)
     eligible_ids = {a["admission_id"] for a in eff.values() if a["application_eligible"]}
     texts = {}
@@ -620,10 +665,6 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
     # I-5 legacy: v1 documents without a sidecar
     governed = {(e["doc_id"], e["sha256"]) for e in governed_before} | c16_keys
     eligible_c16 = {(c["doc_id"], c["sha256"]) for c in res.copies if c["outcome"] == "ELIGIBLE"}
-    v7_shas = set()
-    for s in (decl or {}).get("sources", []):
-        if s["path"] == "V7_REFERENCE":
-            v7_shas |= set(s["candidate_sha256"])
     candidate_shas = v7_shas | {k[1] for k in governed}
     excl = set()
     if exclusions is not None:
@@ -654,37 +695,65 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
     served_keys |= {(lg["doc_id"], lg["sha256"]) for lg in res.legacy if lg["established"]}
     res.denied = sorted((governed | {(lg["doc_id"], lg["sha256"]) for lg in res.legacy}) - served_keys)
 
-    # per-source accounting, reconciled with the signed register
+    # per-source accounting (contract 2.1 register, scope RECOMPUTED_BY_SITE), compared with the signed declaration
+    declared_by_source = {s["source"]: s for s in decl["sources"]}
     comp: dict[str, dict] = {}
 
-    def row(src, path):
-        return comp.setdefault(src, {"source": src, "path": path, **{f: 0 for f in COUNT_FIELDS}})
-    for c in res.copies:
-        r = row(f"c16:{res.corpus_generation_id}", "C16")
-        r["input"] += 1
-        r["identities"] += 1
-        bucket = {"HELD": "held", "REJECTED": "rejected", "ELIGIBLE": "eligible"}.get(c["outcome"], "quarantined")
-        r[bucket] += 1
-        r["served"] += 1 if c["served"] else 0
+    def row(src, path, provenance):
+        return comp.setdefault(src, _source_row(src, path, provenance))
+    if res.copies or by_key:
+        src = f"c16:{res.corpus_generation_id}"
+        d = declared_by_source.get(src) or {}
+        # the site recomputes the generation pin from the bundled bytes; HF pins are the producer's (not recomputable)
+        prov = {"generation_manifest_sha256": _sha(files["GENERATION.json"]),
+                "hf_repo": (d.get("provenance") or {}).get("hf_repo"), "hf_revision": (d.get("provenance") or {}).get("hf_revision"),
+                "candidate_set_sha256": None}
+        if d and d["provenance"]["generation_manifest_sha256"] != prov["generation_manifest_sha256"]:
+            res.refusals.append(_e("C16_SOURCE_ACCOUNTING", "declared generation_manifest_sha256 is not the bundled GENERATION.json", src))
+        r = row(src, "C16", prov)
+        r["effective_admissions"] = len(eff)
+        r["by_decision"] = dict(sorted(Counter(a["decision"] for a in eff.values()).items()))
+        for c in res.copies:
+            r["input"] += 1
+            r["identities"] += 1
+            r[{"HELD": "held", "REJECTED": "rejected", "ELIGIBLE": "eligible"}.get(c["outcome"], "quarantined")] += 1
+            if c["served"]:
+                r["served"] += 1
+            else:
+                _count_reason(r, _c16_not_served_reason(c))
+    v1_docs_by_source = {}
+    for doc_id in sorted(verified_docs):
+        v1_docs_by_source.setdefault(_v1_source(verified_docs[doc_id]), verified_docs[doc_id])
     for lg in res.legacy:
-        r = row(lg["source"], "V1")
+        r = row(lg["source"], "V1", _v1_provenance(v1_docs_by_source[lg["source"]]))
         r["input"] += 1
         r["identities"] += 1
         r["eligible" if lg["established"] else "quarantined"] += 1
-        r["served"] += 1 if lg["established"] else 0
+        if lg["established"]:
+            r["served"] += 1
+        else:
+            _count_reason(r, "LEGACY_NOT_ESTABLISHED")
     for src, n in comp_restricted.items():
-        r = row(src, "V1")
+        r = row(src, "V1", _v1_provenance(v1_docs_by_source[src]))
         r["input"] += n
         r["identities"] += n
         r["quarantined"] += n
-    for s in (decl or {}).get("sources", []):
-        if s["path"] == "V7_REFERENCE":
-            comp[s["source"]] = {f: s[f] for f in ("source", "path", *COUNT_FIELDS)}
+        r["not_served_reasons"]["SITE_RESTRICTED"] = r["not_served_reasons"].get("SITE_RESTRICTED", 0) + n
+    for s in decl["sources"]:
+        if s["path"] == "V7_REFERENCE":   # reference only: the site checked the candidate set (count and digest) above
+            comp[s["source"]] = json.loads(json.dumps(s))
+    for r in comp.values():
+        r["not_served_reasons"] = dict(sorted(r["not_served_reasons"].items()))
     res.accounting = [comp[k] for k in sorted(comp)]
-    acc = legacy.accounting_issues(res.accounting) + reconcile_accounting(decl["sources"], res.accounting)
-    if acc:
+    site_reg = {"contract": C21, "record_kind": "source_admission_accounting", "release_id": manifest.get("release_id"),
+                "scope": "RECOMPUTED_BY_SITE", "sources": res.accounting}
+    acc = _as_accounting(accounting.accounting_issues(site_reg))
+    if not acc:
+        acc = accounting.compare_declared(decl, site_reg)
+    if acc or res.refusals:
         res.refusals += acc
         return res
+    res.site_accounting = accounting.register_bytes(site_reg)
 
     release_id = manifest.get("release_id")
     for c in res.copies:
@@ -704,17 +773,17 @@ def materialize(res: C16Result) -> dict:
     files["c16/resolved_receipts.json"] = json.dumps(sorted(res.resolved_receipts, key=lambda r: (r["doc_id"], r["gate_id"])),
                                                      indent=1, sort_keys=True).encode()
     files.update(res.receipt_files)
-    acct = {"record_kind": "site_source_admission_accounting", "corpus_generation_id": res.corpus_generation_id,
-            "declared_register_sha256": _sha(res.declared_accounting) if res.declared_accounting else None,
-            "sources": res.accounting}
-    files["registers/source_accounting.json"] = json.dumps(acct, indent=1, sort_keys=True).encode()
+    # the signed declaration verbatim, and the site's own recomputation beside it (never shipped, never signed)
     if res.declared_accounting is not None:
-        files["registers/source_accounting.declared.json"] = res.declared_accounting
+        files[ACCOUNTING_PATH] = res.declared_accounting
+    if res.site_accounting is not None:
+        files[SITE_ACCOUNTING_PATH] = res.site_accounting
     section = {"contract": res.contract, "corpus_generation_id": res.corpus_generation_id,
                "served_copies": sorted([c["doc_id"], c["sha256"]] for c in res.copies if c["served"]),
                "governed": sorted([c["doc_id"], c["sha256"]] for c in res.copies),
                "denied": [list(k) for k in res.denied], "codes": dict(sorted(res.codes.items())),
-               "accounting_sha256": _sha(files["registers/source_accounting.json"]),
+               "accounting": {"declared_sha256": _sha(res.declared_accounting) if res.declared_accounting is not None else None,
+                              "site_sha256": _sha(res.site_accounting) if res.site_accounting is not None else None},
                "files": {p: _sha(b) for p, b in sorted(files.items())}}
     return {"files": files, "section": section,
             "materialized": {"dir": C16_PREFIX, "files": {n: _sha(b) for n, b in sorted(res.exchange_files.items())}}}
