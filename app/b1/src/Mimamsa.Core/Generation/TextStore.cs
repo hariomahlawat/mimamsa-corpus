@@ -46,6 +46,9 @@ public sealed record TextStoreOptions
     public TimeSpan LockTimeout { get; init; } = TimeSpan.FromMinutes(30);
     /// TEST ONLY: throw after writing this many documents, simulating a crash during a build.
     public int? FailAfterDocuments { get; init; }
+    /// C16 B02: a pinned build time written as built_utc instead of the wall clock, so that a central build produces
+    /// byte-identical stores from the same inputs. Null (the default) keeps the existing behaviour.
+    public DateTimeOffset? BuildTimeUtc { get; init; }
 
     public static TextStoreOptions Memory { get; } = new();
 }
@@ -581,6 +584,8 @@ public sealed class DiskTextStore : ITextStore, IDisposable
         return null;
     }
 
+    static string BuiltUtc(TextStoreOptions o) => o.BuildTimeUtc is { } t ? t.UtcDateTime.ToString("O") : DateTime.UtcNow.ToString("O");
+
     static TextAssessment Assess(DerivedText t) => TextQuality.Assess(t.Pages.Select(p => p.Page).OrderBy(p => p.Page).Select(p => p.Text));
 
     // ------------------------------------------------------------------ build and publish
@@ -643,7 +648,7 @@ public sealed class DiskTextStore : ITextStore, IDisposable
                 }
             }
             foreach (var (k, v) in new Dictionary<string, string> { ["format"] = FormatVersion, ["generation"] = generation, ["source_digest"] = digest,
-                                                                     ["issues"] = issues.ToJsonString(), ["built_utc"] = DateTime.UtcNow.ToString("O") })
+                                                                     ["issues"] = issues.ToJsonString(), ["built_utc"] = BuiltUtc(o) })
                 Run(Cmd("INSERT INTO meta VALUES($a,$b)", "$a", "$b"), k, v);
             tx.Commit(); tx.Dispose();
             foreach (var cmd in new[] { insDoc, insText, insPage, insPass }) cmd.Dispose();
@@ -654,7 +659,7 @@ public sealed class DiskTextStore : ITextStore, IDisposable
         {
             ["format"] = FormatVersion, ["generation"] = generation, ["source_digest"] = digest,
             ["documents"] = nDocs, ["pages"] = nPages, ["passages"] = nPassages, ["text_bytes"] = textBytes,
-            ["file_bytes"] = new FileInfo(db).Length, ["file_sha256"] = FileSha(db), ["built_utc"] = DateTime.UtcNow.ToString("O"),
+            ["file_bytes"] = new FileInfo(db).Length, ["file_sha256"] = FileSha(db), ["built_utc"] = BuiltUtc(o),
         };
         var mtmp = Path.Combine(tmp, ManifestFile + ".tmp");
         using (var f = new FileStream(mtmp, FileMode.CreateNew, FileAccess.Write))
