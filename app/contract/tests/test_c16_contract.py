@@ -705,3 +705,49 @@ def test_measured_disk_preflight_refuses_activation():
     ok = _site(sizes={"R1": 40, "R2": 60}, free_bytes=100)
     ok.transition("KNOWLEDGE", "R2")
     assert ok.pointers["KNOWLEDGE"] == "R2"
+
+
+# ---------------------------------------------------------------- C02-R2 (final re-review): shared OCR of identical images
+
+def _shared_image_exchange(fourth_state="DONE", fourth_image=None):
+    """The Word fixture with a 4th occurrence of the SAME image as occurrence 2 (PR #76 dedup: one verified OCR
+    derivative shared by identical images) and a distinct anchor on that 4th occurrence."""
+    idents, anchors = _pop("identities"), _pop("anchors")
+    w = next(d for d in idents if d["representation"]["representation_kind"] == "WORD_WITH_EMBEDDED_IMAGES")
+    sha = w["source_copy"]["sha256"]
+    img2 = next(i for i in w["embedded_images"] if i["sequence"] == 2)
+    img4 = copy.deepcopy(img2)
+    img4.update(sequence=4, image_sequence_id=f"IMG:{sha}:4", ocr_state=fourth_state,
+                image_sha256=fourth_image or img2["image_sha256"])
+    img4["location"].update(body_order=4, container_part="word/media/image2.png")
+    w["embedded_images"].append(img4)
+    cov = w["text_derivatives"][0]["coverage"]
+    cov["images_total"] = 4
+    cov["images_text_extracted"] = sum(1 for i in w["embedded_images"] if i["ocr_state"] == "DONE")
+    a2 = next(a for a in anchors if a["locator"]["kind"] == "IMAGE_SEQUENCE")
+    a4 = copy.deepcopy(a2)
+    a4["locator"]["image_sequence_id"] = img4["image_sequence_id"]
+    a4["anchor_id"] = canonical.anchor_id(a4)
+    anchors.append(a4)
+    files = {"identities.jsonl": canonical.dumps_jsonl(idents), "anchors.jsonl": canonical.dumps_jsonl(anchors)}
+    return files, a2, a4
+
+
+def test_identical_images_sharing_one_ocr_derivative_are_each_accepted():
+    files, a2, a4 = _shared_image_exchange()
+    assert a2["derivative_text_sha256"] == a4["derivative_text_sha256"]
+    assert a2["locator"]["image_sequence_id"] != a4["locator"]["image_sequence_id"] and a2["anchor_id"] != a4["anchor_id"]
+    issues = exchange_issues(files, mode="partial")
+    assert [str(i) for i in issues] == []
+
+
+def test_occurrence_whose_own_ocr_is_not_done_is_rejected_even_if_a_twin_is_done():
+    files, _, a4 = _shared_image_exchange(fourth_state="QUEUED")
+    issues = [i for i in exchange_issues(files, mode="partial") if i.where == a4["anchor_id"]]
+    assert "C16_ANCHOR_IMAGE" in _codes(issues)
+
+
+def test_different_image_with_anothers_ocr_derivative_is_rejected():
+    files, _, a4 = _shared_image_exchange(fourth_image="9" * 64)   # a different image cannot borrow image 2's OCR
+    issues = [i for i in exchange_issues(files, mode="partial") if i.where == a4["anchor_id"]]
+    assert "C16_ANCHOR_IMAGE" in _codes(issues)

@@ -73,7 +73,9 @@ def verify_anchor_bytes(anchor: dict, derivative_bytes: bytes) -> list[str]:
 
 
 def _derivative_entry(anchor: dict, identity: dict) -> dict | None:
-    return next((d for d in identity["text_derivatives"] if d["derivative_text_sha256"] == anchor.get("derivative_text_sha256")), None)
+    # hash AND pipeline (C02-R2: never the first derivative that merely shares the hash)
+    return next((d for d in identity["text_derivatives"] if d["derivative_text_sha256"] == anchor.get("derivative_text_sha256")
+                 and (d["pipeline_name"], d["pipeline_version"]) == (anchor["extraction"]["pipeline_name"], anchor["extraction"]["pipeline_version"])), None)
 
 
 def verified_quote(anchor: dict, identity: dict, derivative_bytes: bytes, *, page_quotable: bool = True) -> str | None:

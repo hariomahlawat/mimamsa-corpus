@@ -664,27 +664,42 @@ def _anchor_exchange(anchors, id_by_key, id_by_sha, check_idents):
         if seq_id and (occ is None or (a.get("image_sha256") and occ["image_sha256"] != a["image_sha256"])):
             out.append(_e("C16_ANCHOR_IMAGE", "image occurrence not in the identity or image hash differs", aid))
         if dsha is not None:
-            der = next((d for d in rep["text_derivatives"] if d["derivative_text_sha256"] == dsha), None)
-            owner = next((i for i in imgs if i.get("ocr_derivative_sha256") == dsha), None)
-            if der is None and owner is None:
-                out.append(_e("C16_ANCHOR_DERIVATIVE", "derivative is not a derivative of the anchored representation", aid))
+            # C02-R2: no "first match by hash". A text derivative is matched on hash AND pipeline; an image OCR
+            # derivative is validated against the occurrence the locator SELECTS (its own OCR hash, DONE state and
+            # image identity), so identical images that share one verified OCR derivative are each accepted, while
+            # image A pointing at image B's unrelated OCR text is still rejected.
+            same_hash = [d for d in rep["text_derivatives"] if d["derivative_text_sha256"] == dsha]
+            der = next((d for d in same_hash if (d["pipeline_name"], d["pipeline_version"])
+                        == (a["extraction"]["pipeline_name"], a["extraction"]["pipeline_version"])), None)
+            image_ocr = any(i.get("ocr_derivative_sha256") == dsha for i in imgs)
+            if der is None and same_hash:
+                out.append(_e("C16_ANCHOR_DERIVATIVE", "anchor pipeline differs from the derivative's pipeline", aid))
             elif der is not None:
-                if (der["pipeline_name"], der["pipeline_version"]) != (a["extraction"]["pipeline_name"], a["extraction"]["pipeline_version"]):
-                    out.append(_e("C16_ANCHOR_DERIVATIVE", "anchor pipeline differs from the derivative's pipeline", aid))
                 if method not in der["methods"]:
                     out.append(_e("C16_ANCHOR_DERIVATIVE", "anchor extraction method is not a method of the derivative", aid))
+            elif not image_ocr:
+                out.append(_e("C16_ANCHOR_DERIVATIVE", "derivative is not a derivative of the anchored representation", aid))
             else:
-                # an image OCR derivative belongs to exactly one occurrence: the one the locator names
-                if occ is None or owner["image_sequence_id"] != occ["image_sequence_id"]:
-                    out.append(_e("C16_ANCHOR_IMAGE", "image OCR derivative belongs to another image occurrence", aid))
+                if occ is None or occ.get("ocr_derivative_sha256") != dsha:
+                    out.append(_e("C16_ANCHOR_IMAGE", "image OCR derivative is not the selected occurrence's own OCR derivative", aid))
+                elif occ.get("ocr_state") != "DONE":
+                    out.append(_e("C16_ANCHOR_IMAGE", "the selected occurrence's OCR is not DONE", aid))
+                elif a.get("image_sha256") is not None and occ["image_sha256"] != a["image_sha256"]:
+                    out.append(_e("C16_ANCHOR_IMAGE", "image identity differs from the selected occurrence", aid))
                 if method != "OCR_EMBEDDED_IMAGE":
                     out.append(_e("C16_ANCHOR_DERIVATIVE", "an image OCR derivative needs extraction method OCR_EMBEDDED_IMAGE", aid))
+                configs = {d["ocr_config"]["config_sha256"] for d in rep["text_derivatives"]
+                           if "OCR_EMBEDDED_IMAGE" in d["methods"] and d.get("ocr_config")}
+                cfg = (a["extraction"].get("ocr_config") or {}).get("config_sha256")
+                if configs and cfg not in configs:
+                    out.append(_e("C16_ANCHOR_DERIVATIVE", "anchor OCR configuration differs from the image OCR configuration of the copy", aid))
         if loc["kind"] == "IMAGE_SEQUENCE" and a.get("text_span"):
             # offsets on an image anchor count into that occurrence's own OCR text only
             if occ is None or occ.get("ocr_state") != "DONE" or dsha is None or dsha != occ.get("ocr_derivative_sha256"):
                 out.append(_e("C16_ANCHOR_SPAN_NOT_PERMITTED", "a span on an image anchor must count into that occurrence's OCR derivative", aid))
         if a["quoting_permitted"]:
-            der_q = next((d for d in rep["text_derivatives"] if d["derivative_text_sha256"] == dsha), None)
+            der_q = next((d for d in rep["text_derivatives"] if d["derivative_text_sha256"] == dsha
+                          and (d["pipeline_name"], d["pipeline_version"]) == (a["extraction"]["pipeline_name"], a["extraction"]["pipeline_version"])), None)
             if not ident["research_eligibility"]["quoting_permitted"] or der_q is None or not der_q["quoting_permitted"] \
                     or a["quality"]["low_confidence"] or a["verification"]["state"] == "INCORRECT":
                 out.append(_e("C16_QUOTE_NOT_PERMITTED", "anchor permits quoting but the identity, derivative or anchor quality denies it", aid))
@@ -704,7 +719,8 @@ def _anchor_exchange(anchors, id_by_key, id_by_sha, check_idents):
                         or not isinstance(pc, int) or loc["physical_page"] > pc:
                     out.append(_e("C16_ANCHOR_MAPPING", "citable reconstructed page without a checked, in-range mapping", aid))
         if loc["kind"] == "GENERATED_SEGMENT" and dsha is not None:
-            der = next((d for d in rep["text_derivatives"] if d["derivative_text_sha256"] == dsha), None)
+            der = next((d for d in rep["text_derivatives"] if d["derivative_text_sha256"] == dsha
+                        and (d["pipeline_name"], d["pipeline_version"]) == (a["extraction"]["pipeline_name"], a["extraction"]["pipeline_version"])), None)
             if der is not None and loc["generated_segment"] > der["coverage"]["units_total"]:
                 out.append(_e("C16_ANCHOR_PAGE_RANGE", "generated segment outside the derivative", aid))
     return out
