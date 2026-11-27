@@ -147,6 +147,8 @@ def run_journey(work: Path, context: dict, configuration: str) -> dict:
     ctx_path = work / "context.json"
     ctx_path.write_text(json.dumps(context, indent=1, sort_keys=True), encoding="utf-8")
     env = dict(os.environ, MIMAMSA_CP1_CONTEXT=str(ctx_path))
+    if not env.get("MIMAMSA_TEST_SITE"):
+        raise SystemExit("MIMAMSA_TEST_SITE (a SYN site from build_fixture_site.py) is required: the journey seeds its source DB with it")
     cmd = ["dotnet", "test", str(REPO / "app" / "b1" / "tests" / "Mimamsa.Tests"), "-c", configuration, "--no-build", "-nologo",
            "--filter", "FullyQualifiedName~C16Cp1SliceTests", "--logger", "console;verbosity=normal"]
     p = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=1800)

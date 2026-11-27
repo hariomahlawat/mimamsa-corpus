@@ -407,6 +407,7 @@ jobs:
         run: |
           $env:MIMAMSA_TEST_DB = "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=c16cp1_base;Maximum Pool Size=10"
           $env:MIMAMSA_TEST_PG_ADMIN = "Host=127.0.0.1;Port=5432;Username=postgres;Password=root;Database=postgres;Maximum Pool Size=4"
+          $env:MIMAMSA_TEST_SITE = "$env:RUNNER_TEMP\syn\site"
           python -I app/b1/build/c16_cp1_slice.py run --work "$env:RUNNER_TEMP\cp1" --configuration Release `
             --evidence out\cp1\slice-evidence-windows.json `
             --oracle-site "$env:RUNNER_TEMP\syn\site" --oracle-map "$env:RUNNER_TEMP\syn\fixture_map.json" `

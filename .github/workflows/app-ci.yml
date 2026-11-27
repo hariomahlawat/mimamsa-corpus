@@ -148,6 +148,8 @@ jobs:
         env:
           # the container's mimamsa user is a superuser: it also creates/drops the c16cp1_* databases and loader role
           MIMAMSA_TEST_DB: Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_test;Maximum Pool Size=10
+          # the journey seeds its source database through the app's stores, as the B03 migration tests do (SYN graph)
+          MIMAMSA_TEST_SITE: ${{ runner.temp }}/syn/site
         run: |
           python -I app/b1/build/c16_cp1_slice.py run --work "$RUNNER_TEMP/cp1" --configuration Release \
             --evidence out/cp1/slice-evidence-linux.json \
