@@ -519,7 +519,7 @@ def test_candidate_set_negatives_fail_closed(name):
 
 # gap 2: lexical-only knowledge releases and model compatibility
 
-LEX_SCENARIOS = ["SC26", "SC27", "SC28", "SC29", "SC30"]
+LEX_SCENARIOS = ["SC26", "SC27", "SC28", "SC29", "SC30", "SC31"]
 
 
 def test_lexical_only_scenarios_and_rules():
@@ -553,6 +553,11 @@ def test_model_gate_rules_directly():
     with pytest.raises(activation.Refused):
         s.transition("KNOWLEDGE", "R2")
     assert s.semantic_search_enabled()
+    # K1 also requires the ACTIVE model to be verified, even when it has vectors for the target (SC31)
+    s = activation.Site(installed=["R1", "R2"], active="R1", staged_models={"M1": {"verified": False, "vectors_for": {"R1", "R2"}}})
+    with pytest.raises(activation.Refused):
+        s.transition("KNOWLEDGE", "R2")
+    assert not s.semantic_search_enabled()
     # M1 and M2: an unverified placeholder model is never activated; a verified one over lexical-only knowledge is
     s = activation.Site(installed=["L1"], active="L1", models=None, lexical_only={"L1"},
                         staged_models={"MX": {"verified": False, "vectors_for": set()}, "M2": {"verified": True, "vectors_for": set()}})

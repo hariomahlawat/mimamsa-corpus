@@ -95,7 +95,7 @@ This is a read-only .NET reader of the Python ExclusionStore's latest effective 
 | SC23 | rollback with distinct retention and a protected recovery target |
 | SC24 | restore follows the journal head |
 | SC25 | measured disk preflight refusal |
-| SC26–SC30 (2.1, CP-1 gap 2) | lexical-only releases and model compatibility (section below) |
+| SC26–SC31 (2.1, CP-1 gap 2) | lexical-only releases and model compatibility (section below) |
 
 ## Model compatibility for lexical-only knowledge releases (2.1 addition, CP-1 gap 2)
 
@@ -123,12 +123,15 @@ This is a read-only .NET reader of the Python ExclusionStore's latest effective 
 | SC28 | a release with vectors is still refused when the active model has no vectors for it |
 | SC29 | no model installed: a release that is not lexical-only is refused |
 | SC30 | over lexical-only knowledge, an unverified placeholder model is refused and a verified model without vectors is accepted; semantic off |
+| SC31 | K1: an active model **with** vectors for the target but **not verified** refuses a release with vectors; a lexical-only release beside it activates (K2 does not consult the model) |
+
+The reference `model_gate` checks K1's "verified" explicitly from 2.1 (fix to match this table). The 2.0 model only checked vectors. That gap was unobservable in SC01–SC25, which never have an unverified active model, so their traces are unchanged.
 
 **What B06 (.NET) must change:**
 1. Allow the MODELS pointer (`MODELS_ACTIVE`, the journal `models` field, pins and `OPEN {…, models}`) to be **null** when no model is installed. Never synthesise or stage a placeholder model.
 2. Classify the target release as lexical-only from its verified `KNOWLEDGE_RELEASE.json` (no VECTOR_PACK component, VECTOR_PACK accounted `OMITTED_DEGRADED`, `declared_service_level` `DEGRADED_LEXICAL_ONLY`) or from its B04 ACTIVE_DEGRADED vector outcome, and record the classification in the staged generation.
 3. Replace the "active model has vectors for the target" check with K1 and K2, and the MODELS check with M1 and M2 as above.
 4. Derive semantic-search availability per pin from `semantic_search_enabled`, and disable the semantic path, including query embedding, when it is false.
-5. Run SC26–SC30 with the extended runner: read `initial.lexical_only`, accept `models: null`, and emit `semantic_search` in the trace only when `lexical_only` is declared.
+5. Run SC26–SC31 with the extended runner: read `initial.lexical_only`, accept `models: null`, and emit `semantic_search` in the trace only when `lexical_only` is declared.
 
 **What the model does not prove.** It proves the protocol. Real fsync, PostgreSQL transactions, process kills and concurrent requests remain FG-JOURNAL-DURABILITY for the .NET implementation (B06), which runs these same files.

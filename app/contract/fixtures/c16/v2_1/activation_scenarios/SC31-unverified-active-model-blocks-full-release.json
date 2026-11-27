@@ -1,0 +1,74 @@
+{
+ "assert_final": {
+  "knowledge": "L4",
+  "models": "M1",
+  "semantic_search": false,
+  "serving": true
+ },
+ "contract": "mimamsa-corpus-contract/2.1",
+ "covers": [
+  "LEXICAL_ONLY_ACTIVATION",
+  "MODEL_SWITCH"
+ ],
+ "description": "K1: an active model that has vectors for the target but is not verified refuses a release with vectors; a lexical-only release (K2) does not consult the model.",
+ "initial": {
+  "active": "R1",
+  "free_bytes": 1000000000000,
+  "installed": [
+   "R1",
+   "R2",
+   "L4"
+  ],
+  "keep_previous": 2,
+  "lexical_only": [
+   "L4"
+  ],
+  "lock_stale_after_seconds": 30,
+  "models": "M1",
+  "recovery_target": null,
+  "sizes": {},
+  "staged_models": {
+   "M1": {
+    "vectors_for": [
+     "R1",
+     "R2"
+    ],
+    "verified": false
+   }
+  }
+ },
+ "record_kind": "activation_scenario",
+ "scenario_id": "SC31-unverified-active-model-blocks-full-release",
+ "steps": [
+  {
+   "args": {
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "lock_acquire"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "R2",
+    "writer": "activator-1"
+   },
+   "expect_error": "Refused",
+   "op": "transition"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "L4",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "transition"
+  },
+  {
+   "args": {},
+   "expect_error": null,
+   "op": "pin"
+  }
+ ]
+}

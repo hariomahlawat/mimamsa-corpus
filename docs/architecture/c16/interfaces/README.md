@@ -27,7 +27,7 @@ Every interface here is an **additive contract 2.1** item:
 | 7. Per-source accounting register (B01, B02; PR #82 clarification 1) | [B01 §5a](B01_PRODUCER_CONSUMER_INTERFACE.md) | `SOURCE_ADMISSION_ACCOUNTING_SCHEMA.json` | `accounting.py` | `accounting/declared.json`, `recomputed.json`, `negative/NA01–NA10`, `NC01–NC04` |
 | 8. Exact component digests and the text-store source digest (PR #82 clarifications 2, 5) | [B04 §4–5](B04_COMPONENT_VERIFICATION.md) | none | `digests.py` | `digests/golden.json` |
 | 9. v7 candidate-set files (CP-1 gap 1) | [B01 §5a](B01_PRODUCER_CONSUMER_INTERFACE.md) | none (plain-text file; bound by `candidate_set_sha256`) | `accounting.candidate_set_issues` | `accounting/registers/candidate_sets/`, `accounting/candidate_set_negative/CS01–CS13` |
-| 10. Lexical-only releases and model compatibility (CP-1 gap 2) | [B06](B06_ACTIVATION_JOURNAL.md), [B04 §2](B04_COMPONENT_VERIFICATION.md) | `ACTIVATION_SCENARIO_SCHEMA.json`, `ACTIVATION_SCENARIO_OUTCOMES_SCHEMA.json` (both widened additively) | `activation.Site.model_gate`, `semantic_search_enabled`; `scenarios.py` | `activation_scenarios/SC26–SC30` |
+| 10. Lexical-only releases and model compatibility (CP-1 gap 2) | [B06](B06_ACTIVATION_JOURNAL.md), [B04 §2](B04_COMPONENT_VERIFICATION.md) | `ACTIVATION_SCENARIO_SCHEMA.json`, `ACTIVATION_SCENARIO_OUTCOMES_SCHEMA.json` (both widened additively) | `activation.Site.model_gate`, `semantic_search_enabled`; `scenarios.py` | `activation_scenarios/SC26–SC31` |
 
 ## Where 2.1 governs over frozen 2.0 prose (PR #82)
 
