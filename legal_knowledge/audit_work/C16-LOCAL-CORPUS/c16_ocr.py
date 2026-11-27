@@ -99,6 +99,43 @@ def pdf_page_jobs(inventory,source):
                          "page_key":processing_key(doc["sha256"],f"pdf-page-{page}")})
     return jobs
 
+def _effective_access(records):
+    if any(r.get("access_disposition")=="HELD_ACCESS_MARKING_REVIEW" for r in records):
+        return "HELD_ACCESS_MARKING_REVIEW"
+    if any(r.get("state")=="COMPLETE" and not r.get("unreadable") and
+           r.get("access_disposition")=="SCREENED_NO_MARKING_DETECTED" for r in records):
+        return "SCREENED_NO_MARKING_DETECTED"
+    return "HELD_UNREADABLE_OR_PROCESSING_ERROR"
+
+def propagate_access_holds(inventory,image_records,pdf_records):
+    images={}
+    for record in image_records: images.setdefault(record.get("image_sha256"),[]).append(record)
+    pages={(r.get("source_sha256"),r.get("physical_page")):r for r in pdf_records}
+    rows=[]
+    for doc in inventory:
+        reasons=[]
+        if doc.get("restricted"):
+            reasons.append({"kind":"DOCUMENT_NATIVE_OR_REGISTER","access_disposition":"HELD_ACCESS_MARKING_REVIEW"})
+        for image in doc.get("embedded_images",[]):
+            digest=image["image_sha256"];disposition=_effective_access(images.get(digest,[]))
+            if disposition!="SCREENED_NO_MARKING_DETECTED":
+                reasons.append({"kind":"EMBEDDED_IMAGE","image_sha256":digest,
+                                "occurrence_id":image.get("occurrence_id"),"access_disposition":disposition})
+        for page in doc.get("ocr_required_pages",[]):
+            record=pages.get((doc["sha256"],page));disposition=_effective_access([record] if record else [])
+            if disposition!="SCREENED_NO_MARKING_DETECTED":
+                reasons.append({"kind":"PDF_PAGE","physical_page":page,"page_key":record.get("page_key") if record else None,
+                                "access_disposition":disposition})
+        if any(x["access_disposition"]=="HELD_ACCESS_MARKING_REVIEW" for x in reasons):
+            document_disposition="HELD_ACCESS_MARKING_REVIEW"
+        elif reasons: document_disposition="HELD_UNREADABLE_OR_PROCESSING_ERROR"
+        else: document_disposition="SCREENED_NO_MARKING_DETECTED"
+        rows.append({"inventory_id":doc["inventory_id"],"source_sha256":doc["sha256"],
+                     "relative_path":doc["relative_path"],"document_access_disposition":document_disposition,
+                     "derivative_access_disposition":"WITHHOLD_ALL_DERIVATIVES" if reasons else "ELIGIBLE_AFTER_OTHER_GATES",
+                     "hold_reasons":reasons})
+    return rows
+
 def render_pdf_page(job,dpi=300):
     document=core.pymupdf.open(job["source_path"])
     try:
@@ -222,8 +259,23 @@ def run_pdf_pages(args):
     worker=lambda job:process_pdf_page_job(job,tess,tdata,output,cfg)
     return run_restartable_batch(jobs,output,cfg,worker,args.workers,args.limit)
 
+def run_access_register(args):
+    image_rows=load_jsonl(args.primary_register)
+    if args.secondary_register:image_rows+=load_jsonl(args.secondary_register)
+    pdf_rows=load_jsonl(args.pdf_register) if args.pdf_register else []
+    rows=propagate_access_holds(load_jsonl(args.inventory),image_rows,pdf_rows)
+    output=Path(args.output);output.mkdir(parents=True,exist_ok=True)
+    write_jsonl_atomic(output/"DOCUMENT_ACCESS_REGISTER.jsonl",rows)
+    summary={"documents":len(rows),"screened":sum(r["document_access_disposition"]=="SCREENED_NO_MARKING_DETECTED" for r in rows),
+             "access_marking_holds":sum(r["document_access_disposition"]=="HELD_ACCESS_MARKING_REVIEW" for r in rows),
+             "unreadable_or_incomplete_holds":sum(r["document_access_disposition"]=="HELD_UNREADABLE_OR_PROCESSING_ERROR" for r in rows),
+             "derivatives_withheld":sum(r["derivative_access_disposition"]=="WITHHOLD_ALL_DERIVATIVES" for r in rows)}
+    (output/"DOCUMENT_ACCESS_SUMMARY.json").write_text(json.dumps(summary,indent=2),encoding="utf-8")
+    return 0
+
 def main(argv=None):
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument("--mode",choices=("primary","second-pass","pdf-pages"),default="primary");p.add_argument("--source",required=True);p.add_argument("--inventory",required=True);p.add_argument("--output",required=True);p.add_argument("--tesseract",default=r"C:\Program Files\Tesseract-OCR\tesseract.exe");p.add_argument("--tessdata",required=True);p.add_argument("--primary-register");p.add_argument("--workers",type=int,default=2);p.add_argument("--limit",type=int);args=p.parse_args(argv)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument("--mode",choices=("primary","second-pass","pdf-pages","access-register"),default="primary");p.add_argument("--source");p.add_argument("--inventory",required=True);p.add_argument("--output",required=True);p.add_argument("--tesseract",default=r"C:\Program Files\Tesseract-OCR\tesseract.exe");p.add_argument("--tessdata");p.add_argument("--primary-register");p.add_argument("--secondary-register");p.add_argument("--pdf-register");p.add_argument("--workers",type=int,default=2);p.add_argument("--limit",type=int);args=p.parse_args(argv)
+    if args.mode=="access-register":return run_access_register(args)
     if args.mode=="second-pass":
         if not args.primary_register:p.error("--primary-register is required for second-pass")
         return run_second_pass(args)

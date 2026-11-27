@@ -38,4 +38,19 @@ class Tests(unittest.TestCase):
   self.assertEqual([x["physical_page"] for x in jobs],[1,3])
   self.assertEqual(jobs[0]["page_classification"],"MIXED_NATIVE_AND_IMAGE")
   self.assertEqual(jobs[0]["page_key"],o.processing_key("a"*64,"pdf-page-1"))
+ def test_unreadable_image_propagates_hold_to_document_and_derivatives(self):
+  inventory=[{"inventory_id":"d1","sha256":"a"*64,"relative_path":"x.docx","restricted":False,
+              "embedded_images":[{"image_sha256":"b"*64}],"ocr_required_pages":[]}]
+  image=[{"image_sha256":"b"*64,"state":"COMPLETE","unreadable":True,
+          "access_disposition":"HELD_UNREADABLE_OR_PROCESSING_ERROR"}]
+  row=o.propagate_access_holds(inventory,image,[])[0]
+  self.assertEqual(row["document_access_disposition"],"HELD_UNREADABLE_OR_PROCESSING_ERROR")
+  self.assertEqual(row["derivative_access_disposition"],"WITHHOLD_ALL_DERIVATIVES")
+  self.assertEqual(row["hold_reasons"][0]["image_sha256"],"b"*64)
+ def test_missing_pdf_page_result_remains_held(self):
+  inventory=[{"inventory_id":"d1","sha256":"a"*64,"relative_path":"x.pdf","restricted":False,
+              "embedded_images":[],"ocr_required_pages":[2]}]
+  row=o.propagate_access_holds(inventory,[],[])[0]
+  self.assertEqual(row["document_access_disposition"],"HELD_UNREADABLE_OR_PROCESSING_ERROR")
+  self.assertEqual(row["hold_reasons"][0]["physical_page"],2)
 if __name__=="__main__":unittest.main()
