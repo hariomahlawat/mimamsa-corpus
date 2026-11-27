@@ -334,6 +334,11 @@ public sealed partial class GenerationStore
     {
         var held = new Dictionary<string, HeldCopy>();
         long activeSeq = active["release_sequence"]?.GetValue<long>() ?? 0;
+        // C16 (SG-1, consumer I7): a copy the ACTIVE generation governs and does not serve (held, withdrawn, quarantined,
+        // or a v1 copy not independently established) is never held from an earlier generation either.
+        var denied = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var k in active["c16"]?["denied"] as JsonArray ?? new JsonArray())
+            if (k is JsonArray pair && pair.Count == 2) denied.Add(S(pair[1]) + "|" + S(pair[0]));
         var gens = new List<(long seq, string id, JsonObject g)>();
         foreach (var dir in Directory.EnumerateDirectories(Path.Combine(siteRoot, "generations")))
         {
@@ -355,7 +360,7 @@ public sealed partial class GenerationStore
             {
                 var docId = S(v![0])!; var sha = S(v[1])!;
                 var key = sha + "|" + docId;
-                if (held.ContainsKey(key)) continue;
+                if (held.ContainsKey(key) || denied.Contains(key)) continue;
                 int pc = g["page_counts"]?[sha]?.GetValue<int>() ?? 0;
                 long len = File.Exists(vault.PathFor(sha)) ? new FileInfo(vault.PathFor(sha)).Length : 0;
                 held[key] = new HeldCopy(sha, docId, pc, S(g["release_id"]) ?? id, id, len, published.Contains(key));

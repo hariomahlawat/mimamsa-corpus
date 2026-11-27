@@ -1,0 +1,51 @@
+{
+ "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
+ "declared_register_sha256": "aabb18345f9156d819ae6bde36ac60f9a26a967fdba2337e687e9d22c7a88ccc",
+ "record_kind": "site_source_admission_accounting",
+ "sources": [
+  {
+   "eligible": 2,
+   "held": 2,
+   "identities": 4,
+   "input": 4,
+   "path": "C16",
+   "quarantined": 0,
+   "rejected": 0,
+   "served": 1,
+   "source": "c16:CG-20261128-b01site-0a1b2c3d"
+  },
+  {
+   "eligible": 0,
+   "held": 0,
+   "identities": 1,
+   "input": 1,
+   "path": "V1",
+   "quarantined": 1,
+   "rejected": 0,
+   "served": 0,
+   "source": "v1:RELEASE_IMPORT"
+  },
+  {
+   "eligible": 1,
+   "held": 0,
+   "identities": 2,
+   "input": 2,
+   "path": "V1",
+   "quarantined": 1,
+   "rejected": 0,
+   "served": 1,
+   "source": "v1:hf:owner/b01-synthetic@bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+   "eligible": 0,
+   "held": 1,
+   "identities": 1,
+   "input": 1,
+   "path": "V7_REFERENCE",
+   "quarantined": 0,
+   "rejected": 0,
+   "served": 0,
+   "source": "v7:cycle15"
+  }
+ ]
+}

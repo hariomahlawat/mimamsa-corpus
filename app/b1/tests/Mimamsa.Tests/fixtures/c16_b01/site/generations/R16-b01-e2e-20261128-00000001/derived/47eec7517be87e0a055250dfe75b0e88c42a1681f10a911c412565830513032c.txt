@@ -1,0 +1,2 @@
+[[page 1]]
+Synthetic legacy order. Established through a pinned canonical revision.

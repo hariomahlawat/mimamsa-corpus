@@ -1,0 +1,74 @@
+[
+ {
+  "admission_id": "ADM-25eb7757c00a6167dfd56bce",
+  "doc_id": "sc-2020-b01-eligible-ca0101",
+  "gate_id": "G01_HASH_VERIFIED",
+  "receipt_sha256": "ed960a7a07b6d83aef81ff1fadec96888110d6d8d92754ec3043b596a77f4a02",
+  "sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a",
+  "verification": "SITE_VERIFIED"
+ },
+ {
+  "admission_id": "ADM-25eb7757c00a6167dfd56bce",
+  "doc_id": "sc-2020-b01-eligible-ca0101",
+  "gate_id": "G02_FORMAT_DETECTED",
+  "receipt_sha256": "985b00f7d342b097496b7794b3becf0619d353604523b398482c6b831d3d830c",
+  "sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a",
+  "verification": "SITE_VERIFIED"
+ },
+ {
+  "admission_id": "ADM-25eb7757c00a6167dfd56bce",
+  "doc_id": "sc-2020-b01-eligible-ca0101",
+  "gate_id": "G03_RESTRICTED_REGISTER",
+  "receipt_sha256": "631fe88293b8f4c9994f43abc25d2a444f0f3ec288dc77c8402d7e6042fe420b",
+  "sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a",
+  "verification": "SITE_VERIFIED"
+ },
+ {
+  "admission_id": "ADM-25eb7757c00a6167dfd56bce",
+  "doc_id": "sc-2020-b01-eligible-ca0101",
+  "gate_id": "G04_ACCESS_MARKING_REVIEWED",
+  "receipt_sha256": "3855d06a71b9f30fac67cde5d460e38d3d8e32c54a809d4da97c15f9e1fb8ca1",
+  "sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a",
+  "verification": "ASSERTED_BOUND"
+ },
+ {
+  "admission_id": "ADM-25eb7757c00a6167dfd56bce",
+  "doc_id": "sc-2020-b01-eligible-ca0101",
+  "gate_id": "G05_IDENTITY_RECORD_VALID",
+  "receipt_sha256": "da14224114a4307ebdafe69d1549b08f7ea0f837fb60193e9ee16fbfedd641b5",
+  "sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a",
+  "verification": "SITE_VERIFIED"
+ },
+ {
+  "admission_id": "ADM-25eb7757c00a6167dfd56bce",
+  "doc_id": "sc-2020-b01-eligible-ca0101",
+  "gate_id": "G06_TEXT_DERIVATIVE_VERIFIED",
+  "receipt_sha256": "39624572d3e63835a4ce03a23fc61b35b44a369a26a1e6d626a1dbc9b8cb372c",
+  "sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a",
+  "verification": "SITE_VERIFIED"
+ },
+ {
+  "admission_id": "ADM-25eb7757c00a6167dfd56bce",
+  "doc_id": "sc-2020-b01-eligible-ca0101",
+  "gate_id": "G08_RELEVANCE_ASSESSED",
+  "receipt_sha256": "3b44737f350a6a80a8dbb7c210f68c313433ee1ad6f82c9e478ae36276f1f2e4",
+  "sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a",
+  "verification": "ASSERTED_BOUND"
+ },
+ {
+  "admission_id": "ADM-25eb7757c00a6167dfd56bce",
+  "doc_id": "sc-2020-b01-eligible-ca0101",
+  "gate_id": "G09_DUPLICATE_RESOLVED",
+  "receipt_sha256": "dc472b21dc3a85957432e3140a22c4d8accb6ad05d03b4635c4452f4e165cc84",
+  "sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a",
+  "verification": "ASSERTED_BOUND"
+ },
+ {
+  "admission_id": "ADM-25eb7757c00a6167dfd56bce",
+  "doc_id": "sc-2020-b01-eligible-ca0101",
+  "gate_id": "G10_SCHEMA_VALID",
+  "receipt_sha256": "e71010d39f4634883ac05b9fb1db1e654cee67a2a78ac253c8e010480cea6229",
+  "sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a",
+  "verification": "SITE_VERIFIED"
+ }
+]
