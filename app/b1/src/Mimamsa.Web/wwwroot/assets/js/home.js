@@ -6,7 +6,12 @@ import { h, append, clear, chip, fmtDate, typeLabel } from "./ui.js";
 
 const add = (el, ...k) => append(el, k);
 const recent = { searches: [], docs: [] };
-let library = null;
+let library = null, libGen = 0;
+
+/** Codex review of PR #70: after a policy change the cached library payload (statute shortcuts, Commander task
+ *  provisions) may name withdrawn content, so it is dropped; a load that was in flight when it was dropped is
+ *  discarded instead of being cached, and the caller re-renders the home with a fresh payload. */
+export function invalidateLibrary() { library = null; libGen++; }
 
 export function noteRecentSearch(q) {
   q = (q || "").trim();
@@ -32,8 +37,12 @@ function runQuery(q) {
 export async function renderHome(pane, { nav, commander, openDoc }) {
   const root = h("section.home", { "aria-label": commander ? "Commander workspace" : "Library home" }, h("span.skeleton.w60"), h("span.skeleton.w40"));
   add(pane, root);
-  try { library = library || await api("/api/library"); }
+  const gen = libGen;
+  let L0;
+  try { L0 = library || await api("/api/library"); }
   catch { clear(root); add(root, keyHint()); return; }
+  if (gen !== libGen) return;          // superseded by a policy change: the refresh renders the home again
+  library = L0;
   if (!root.isConnected) return;
   clear(root);
   if (commander) return commanderHome(root, library, nav);

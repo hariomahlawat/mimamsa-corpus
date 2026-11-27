@@ -220,3 +220,29 @@ test("R-11 flat passages keep the date-newest order", async ({ page }) => {
     else if (keys[i] !== "") expect(keys[i] <= keys[i - 1]).toBe(true);
   }
 });
+
+// Codex review of PR #70: the library/Commander home must follow a withdrawal of a source it shows (here the Army Act),
+// without navigation, and /api/library must carry no source-derived field for an unavailable source.
+test("R-12 Commander home and /api/library drop a withdrawn source", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  await user.click("#view-commander");
+  const task = user.locator('.task[data-task="Absence and desertion"]');
+  await expect(task.locator("a", { hasText: "Section 39" })).toBeVisible();
+  await login(page, "admin");
+  const origin = new URL(page.url()).origin;
+  const csrf = (await (await page.request.get("/api/session")).json()).csrf;
+  const post = (url, data) => page.request.post(url, { headers: { "X-CSRF-Token": csrf, Origin: origin }, data });
+  expect((await post("/api/admin/withdraw", { doc_id: "act-army-1950", reason: "C14 R-12 home refresh" })).status()).toBe(200);
+  try {
+    await expect(task.locator("a", { hasText: "Section 39" })).toHaveCount(0, { timeout: 30_000 });
+    const lib = await (await user.request.get("/api/library")).json();
+    const items = lib.commander_tasks.flatMap((t) => t.items).filter((i) => !i.found);
+    expect(items.length).toBeGreaterThan(0);
+    for (const i of items) { expect(i.heading).toBeNull(); expect(i.page).toBeNull(); expect(i.instrument).toBeNull(); expect(i.doc_id).toBeNull(); }
+    expect(JSON.stringify(lib.commander_tasks)).not.toContain("Absence without leave");
+  } finally {
+    expect((await post("/api/admin/reinstate", { doc_id: "act-army-1950", reason: "C14 R-12 restore after test" })).status()).toBe(200);
+    await user.click("#view-practitioner");
+  }
+});

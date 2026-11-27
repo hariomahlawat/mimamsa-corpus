@@ -4,7 +4,7 @@ import { api, probe, noteEpoch, state as apiState } from "./api.js";
 import { h, append, clear, $, toast, announce, openDialog, session, fmtDate } from "./ui.js";
 import * as research from "./research.js";
 import { loginPage, gatePage, laterPage, statutesPage, citePage, adminPage } from "./pages.js";
-import { noteRecentSearch } from "./home.js";
+import { noteRecentSearch, invalidateLibrary } from "./home.js";
 import { refreshRelations, liveRelationViews, relationsRefreshPending } from "./relations.js";
 const add = (el, ...k) => append(el, k);
 
@@ -37,10 +37,12 @@ window.addEventListener("mimamsa:unauthenticated", () => {
 // when the reader does nothing. The poll does not refresh the session.
 // Relationship evidence on screen (Statutes section view, instrument overview, context pane) is refreshed too, and the
 // poll also runs while such evidence is displayed (Codex review of PR #70).
-window.addEventListener("mimamsa:policy-changed", () => { if (S) { research.revalidateOpenDocuments(); refreshRelations(); } });
+// The library home (statute shortcuts, Commander task provisions) is re-fetched too, and the poll also runs while the
+// home is displayed (Codex review of PR #70).
+window.addEventListener("mimamsa:policy-changed", () => { if (S) { research.revalidateOpenDocuments(); refreshRelations(); invalidateLibrary(); research.refreshHome(); } });
 const POLICY_POLL_MS = 10_000;
 setInterval(async () => {
-  if (!S || document.hidden || !(research.openDocumentCount() || liveRelationViews())) return;
+  if (!S || document.hidden || !(research.openDocumentCount() || liveRelationViews() || document.querySelector("section.home"))) return;
   // plain fetch: the poll only reads the epoch; it never changes the connection or session state shown to the user
   try { noteEpoch(await fetch("/api/policy", { credentials: "same-origin", cache: "no-store" })); } catch { /* next tick */ }
   // a re-check that could not decide after an earlier epoch change is retried on every tick until it resolves

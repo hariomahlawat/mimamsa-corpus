@@ -122,16 +122,24 @@ public static partial class Api
             var shortcuts = rel.Instruments.Where(i => i.DocType == "act" || i.Key == "doc:rules-army-rules-1954")
                 .Where(i => i.Category != InstrumentCatalog.CategoryOrder[6])
                 .Select(i => InstrumentDto(i, s)).Where(x => x is not null).Take(16);
+            // Codex review of PR #70: an item whose source is not available (withdrawn, ineligible) carries NO
+            // source-derived field (instrument title, heading, page, omission marker); only the fixed task label stays.
             var tasks = rel.CommanderTasks.Select(t => new
             {
                 task = t.Task, purpose = t.Purpose,
-                items = t.Items.Select(it => new
+                items = t.Items.Select(it =>
                 {
-                    kind = it.Kind, number = it.Number,
-                    instrument = it.DocId is null ? null : g.Documents.GetValueOrDefault(it.DocId)?.Title,
-                    doc_id = it.DocId is not null && s.VisibleDocument(it.DocId) is not null ? it.DocId : null,
-                    heading = it.Heading, page = it.Page, omitted_as_printed = it.Omitted,
-                    found = it.Found && it.DocId is not null && s.VisibleDocument(it.DocId) is not null,
+                    bool available = it.Found && it.DocId is not null && s.VisibleDocument(it.DocId) is not null;
+                    return new
+                    {
+                        kind = it.Kind, number = it.Number,
+                        instrument = available ? g.Documents.GetValueOrDefault(it.DocId!)?.Title : null,
+                        doc_id = available ? it.DocId : null,
+                        heading = available ? it.Heading : null,
+                        page = available ? it.Page : null,
+                        omitted_as_printed = available && it.Omitted,
+                        found = available,
+                    };
                 }),
             });
             return Json(new
