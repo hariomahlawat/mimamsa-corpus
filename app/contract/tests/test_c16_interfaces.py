@@ -465,3 +465,101 @@ def test_cp1_graph_tables_are_graph_component_tables():
     moved = next(c for c in bad["components"] if c["kind"] == "GRAPH")["tables"][0]
     next(c for c in bad["components"] if c["kind"] == "KNOWLEDGE_ROWS")["tables"].append(moved)
     assert "KR_ROWS_ALLOWLIST" in _codes(knowledge_rows.manifest_table_owner_issues(bad))
+
+
+# ---------------------------------------------------------------- CP-1 gaps (contract 2.1, additive)
+# gap 1: v7 candidate-set files
+
+def _cs_positive():
+    from mimamsa_contract.c16 import accounting
+    d = _j(V21 / "accounting" / "declared.json")
+    p = "registers/candidate_sets/candidates-2026.txt"
+    return accounting, d, {p: (V21 / "accounting" / p).read_bytes()}, {accounting.FILE, p}
+
+
+def test_candidate_set_positive_binds_to_declared_digest():
+    from mimamsa_contract.c16 import digests
+    accounting, d, files, inv = _cs_positive()
+    shas, issues = accounting.candidate_set_issues(d, files, inv)
+    assert issues == []
+    v7 = next(s for s in d["sources"] if s["path"] == "V7_REFERENCE")
+    data = next(iter(files.values()))
+    assert len(shas) == v7["input"] and not data.endswith(b"\n") and b"\r" not in data
+    assert v7["provenance"]["candidate_set_sha256"] == digests.hashset_digest(sorted(shas))
+    assert accounting.candidate_set_path(v7["source"]) in files
+    man = _j(V21 / "cp1" / "KNOWLEDGE_RELEASE.json")
+    adm = next(c for c in man["components"] if c["kind"] == "ADMISSION_REGISTER")
+    assert set(files) <= {f["path"] for f in adm["files"]}
+    # the hashes feed the I-5 relabel check: a v1 record whose copy is a v7 candidate is not established
+    from mimamsa_contract.c16 import legacy
+    doc = {"doc_id": "doc-x", "source_copy": {"sha256": sorted(shas)[0]}}
+    assert "C16_LEGACY_NOT_ESTABLISHED" in _codes(legacy.legacy_issues(doc, c16_governed=set(), eligible_c16=set(),
+                                                                         candidate_shas=shas, excluded=set()))
+
+
+def test_candidate_set_empty_source_is_the_empty_file():
+    accounting, d, _, _ = _cs_positive()
+    d = copy.deepcopy(d)
+    v7 = next(s for s in d["sources"] if s["path"] == "V7_REFERENCE")
+    import hashlib
+    v7.update(input=0, identities=0, held=0, not_served_reasons={})
+    v7["provenance"]["candidate_set_sha256"] = hashlib.sha256(b"").hexdigest()
+    p = accounting.candidate_set_path(v7["source"])
+    assert accounting.candidate_set_issues(d, {p: b""}, {accounting.FILE, p}) == (set(), [])
+
+
+@pytest.mark.parametrize("name", sorted(p.stem for p in (V21 / "accounting" / "candidate_set_negative").glob("*.json")))
+def test_candidate_set_negatives_fail_closed(name):
+    from mimamsa_contract.c16 import accounting
+    case = _j(V21 / "accounting" / "candidate_set_negative" / f"{name}.json")
+    files = {k: bytes.fromhex(v) for k, v in case["files_hex"].items()}
+    shas, issues = accounting.candidate_set_issues(case["declared"], files, set(case["admission_inventory"]))
+    assert case["expected_code"] in _codes(issues) and shas == set()
+
+
+# gap 2: lexical-only knowledge releases and model compatibility
+
+LEX_SCENARIOS = ["SC26", "SC27", "SC28", "SC29", "SC30"]
+
+
+def test_lexical_only_scenarios_and_rules():
+    seen = set()
+    for p in sorted((V21 / "activation_scenarios").glob("SC*.json")):
+        if p.name.endswith(".expected.json"):
+            continue
+        s = _j(p)
+        sid = s["scenario_id"][:4]
+        exp = _j(p.with_name(p.stem + ".expected.json"))
+        has = all("semantic_search" in t for t in exp["trace"])
+        assert has == ("lexical_only" in s["initial"]) == (sid in LEX_SCENARIOS)   # SC01-SC25 traces unchanged
+        if sid in LEX_SCENARIOS:
+            seen.add(sid)
+            assert "LEXICAL_ONLY_ACTIVATION" in s["covers"]
+            assert scenarios.final_assertion_failures(s, scenarios.run_scenario(s)) == []
+    assert seen == set(LEX_SCENARIOS)
+
+
+def test_model_gate_rules_directly():
+    from mimamsa_contract.c16 import activation
+    # K2: lexical-only target with no model, and with a verified model without vectors for it
+    s = activation.Site(installed=["L1", "L2"], active="L1", models=None, lexical_only={"L1", "L2"})
+    s.transition("KNOWLEDGE", "L2")
+    assert s.pointers == {"KNOWLEDGE": "L2", "MODELS": None} and not s.semantic_search_enabled()
+    # K1: a release with vectors still needs a verified model with verified vectors
+    s = activation.Site(installed=["L1", "R2"], active="L1", models=None, lexical_only={"L1"})
+    with pytest.raises(activation.Refused):
+        s.transition("KNOWLEDGE", "R2")
+    s = activation.Site(installed=["R1", "R2"], active="R1", staged_models={"M1": {"verified": True, "vectors_for": {"R1"}}})
+    with pytest.raises(activation.Refused):
+        s.transition("KNOWLEDGE", "R2")
+    assert s.semantic_search_enabled()
+    # M1 and M2: an unverified placeholder model is never activated; a verified one over lexical-only knowledge is
+    s = activation.Site(installed=["L1"], active="L1", models=None, lexical_only={"L1"},
+                        staged_models={"MX": {"verified": False, "vectors_for": set()}, "M2": {"verified": True, "vectors_for": set()}})
+    with pytest.raises(activation.Refused):
+        s.transition("MODELS", "MX")
+    s.transition("MODELS", "M2")
+    assert s.pointers["MODELS"] == "M2" and not s.semantic_search_enabled()
+    # defaults reproduce the 2.0 behaviour (no lexical-only generations)
+    s = activation.Site(installed=["R1", "R2"], active="R1")
+    assert s.lexical_only == frozenset() and s.staged_models["M1"]["vectors_for"] == {"R1", "R2"}

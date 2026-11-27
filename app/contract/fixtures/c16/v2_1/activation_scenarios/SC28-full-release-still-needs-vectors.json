@@ -1,0 +1,67 @@
+{
+ "assert_final": {
+  "knowledge": "L4",
+  "models": "M1",
+  "semantic_search": false
+ },
+ "contract": "mimamsa-corpus-contract/2.1",
+ "covers": [
+  "LEXICAL_ONLY_ACTIVATION",
+  "MODEL_SWITCH"
+ ],
+ "description": "A release with vectors still needs a verified model with verified vectors for it, also beside lexical-only releases.",
+ "initial": {
+  "active": "R1",
+  "free_bytes": 1000000000000,
+  "installed": [
+   "R1",
+   "R4",
+   "L4"
+  ],
+  "keep_previous": 2,
+  "lexical_only": [
+   "L4"
+  ],
+  "lock_stale_after_seconds": 30,
+  "models": "M1",
+  "recovery_target": null,
+  "sizes": {},
+  "staged_models": {
+   "M1": {
+    "vectors_for": [
+     "R1"
+    ],
+    "verified": true
+   }
+  }
+ },
+ "record_kind": "activation_scenario",
+ "scenario_id": "SC28-full-release-still-needs-vectors",
+ "steps": [
+  {
+   "args": {
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "lock_acquire"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "R4",
+    "writer": "activator-1"
+   },
+   "expect_error": "Refused",
+   "op": "transition"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "L4",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "transition"
+  }
+ ]
+}
