@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- C15 WP1 in-process search benchmark (not part of the service or the solution): loads a site's ACTIVE generation,
+       builds the selected index engine, times the query set sequentially and with N concurrent readers, records
+       memory, and writes per-query result signatures so engines can be compared for exact equivalence. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Mimamsa.Core\Mimamsa.Core.csproj" />
+  </ItemGroup>
+</Project>
