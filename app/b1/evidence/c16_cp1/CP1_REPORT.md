@@ -135,11 +135,16 @@ Checks (all pass; 45 in the journey, list in `slice-evidence-local-windows.json`
 
 | Job | Workflow | Platform | Run id | Result |
 | --- | --- | --- | --- | --- |
-| `cp1-slice` | App contract and design checks (`app-ci.yml`) | ubuntu-latest | RUN_LINUX | RESULT_LINUX |
-| `cp1-slice-windows` | App Windows PoC (`app-windows-poc.yml`) | windows-latest | RUN_WINDOWS | RESULT_WINDOWS |
+| `cp1-slice` | App contract and design checks (`app-ci.yml`) | ubuntu-latest | 46056708789 (push), 46056764745 (pull_request) | success |
+| `cp1-slice-windows` | App Windows PoC (`app-windows-poc.yml`) | windows-latest | 46056708810 (push), 46056764683 (pull_request) | success |
 
-Existing jobs (contract matrix, importer, kbuild, b1 incl. the disk-config leg, b1-windows, windows-services) are
-unchanged and run in the same workflow runs. On windows-latest the app role is not a superuser, so the slice's
+All on head `4452eb21`. In the same runs every existing job is green: contract (3.11, 3.12, 3.13), importer, kbuild,
+design-tokens, b1 (including the disk-config leg), b1-windows and windows-services. The load-flaky
+`PersistentIndexTests.DiskEngineReturnsExactlyWhatTheMemoryEngineReturns` did not fail in CI. Earlier runs on this
+branch were cancelled by newer pushes (concurrency), or failed only because the slice journey lacked
+`MIMAMSA_TEST_SITE` (fixed in 4452eb21).
+
+Existing jobs are unchanged. On windows-latest the app role is not a superuser, so the slice's
 `c16cp1_*` databases and loader role are created through `MIMAMSA_TEST_PG_ADMIN` (the runner's superuser), as B03's
 Windows fix does. Nothing is skipped on either platform in the slice: the B06 channel is a named pipe with the ACL and
 lock-holder pid check on Windows and a `CurrentUserOnly` Unix socket on Linux (B06's own platform split).
