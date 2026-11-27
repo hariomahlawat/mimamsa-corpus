@@ -65,7 +65,8 @@ public sealed class VectorStore
     {
         var list = keys.Distinct().Where(_map.ContainsKey).ToList();
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(path))!);
-        var tmp = path + ".tmp";
+        // unique per writer: two processes publishing at once never share a temporary file (last complete file wins)
+        var tmp = $"{path}.{Environment.ProcessId}.{Guid.NewGuid():N}.tmp";
         using (var fs = new FileStream(tmp, FileMode.Create, FileAccess.Write, FileShare.None))
         using (var sha = IncrementalHash.CreateHash(HashAlgorithmName.SHA256))
         {
@@ -83,6 +84,7 @@ public sealed class VectorStore
             fs.Write(sha.GetHashAndReset());
             fs.Flush(true);
         }
-        File.Move(tmp, path, true);
+        try { File.Move(tmp, path, true); }
+        catch { try { File.Delete(tmp); } catch { /* best effort */ } throw; }
     }
 }

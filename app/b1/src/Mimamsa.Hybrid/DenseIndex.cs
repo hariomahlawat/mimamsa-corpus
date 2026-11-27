@@ -60,17 +60,22 @@ public sealed class DenseIndex : ISemanticScorer, IDisposable
             sinceCheckpoint += idx.Count;
             if (path is not null && sinceCheckpoint >= checkpointEvery)
             {
-                store.Save(path, keys.Where(k => store.TryGet(k, out _)));
+                try { store.Save(path, keys.Where(k => store.TryGet(k, out _))); }
+                catch (IOException ex) { log?.Invoke($"hybrid: checkpoint not saved ({ex.GetType().Name}); continuing"); }
                 sinceCheckpoint = 0;
                 log?.Invoke($"hybrid: embedded {s + idx.Count}/{missing.Count} new passages (checkpoint saved)");
             }
         }
         var vec = new float[(long)n * d <= int.MaxValue ? n * d : throw new InvalidOperationException("vector set too large for one array")];
         for (int i = 0; i < n; i++) { store.TryGet(keys[i], out var v); Array.Copy(v, 0, vec, i * d, d); }
-        if (path is not null && (missing.Count > 0 || issue is not null || previous != n))
+        // Persist only when something changed: new vectors, a store that failed its check, or old entries to prune.
+        // (Passages with identical text share one key, so the store's count is compared with the DISTINCT key count.)
+        bool prune = previous > 2 * keep.Count;
+        if (path is not null && (missing.Count > 0 || issue is not null || prune))
         {
-            var retained = previous <= 2 * n ? keys.Concat(StoreKeysNotIn(store, keep)) : keys;
-            store.Save(path, retained);
+            var retained = prune ? keep.AsEnumerable() : keys.Concat(StoreKeysNotIn(store, keep));
+            try { store.Save(path, retained); }
+            catch (IOException ex) { log?.Invoke($"hybrid: vector store not saved ({ex.GetType().Name}); vectors are in memory and will be re-saved later"); }
         }
         log?.Invoke($"hybrid: {n} passages ready in {sw.Elapsed.TotalSeconds:0.0} s ({emb.Device}); embedded {missing.Count}, reused {reused}");
         return new DenseIndex(emb, vec, n, sw.Elapsed, modelLabel, reused, missing.Count, issue);

@@ -52,6 +52,32 @@ public class C15HybridTests
         finally { Directory.Delete(dir, true); }
     }
 
+    /// Two services starting at once must not collide on the store's temporary file (found when two instances started
+    /// together: the second crashed at start-up). The last complete file wins and always verifies.
+    [Fact]
+    public async Task ConcurrentSavesNeitherThrowNorCorrupt()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), "mimamsa-vs-" + Guid.NewGuid().ToString("N")[..8]);
+        Directory.CreateDirectory(dir);
+        try
+        {
+            var path = Path.Combine(dir, "m.mvs");
+            var keys = Enumerable.Range(0, 500).Select(i => VectorStore.Key("sha", 256, "p" + i)).ToArray();
+            await Task.WhenAll(Enumerable.Range(0, 6).Select(_ => Task.Run(() =>
+            {
+                var s = new VectorStore(8);
+                foreach (var k in keys) s.Put(k, Enumerable.Repeat(1f, 8).ToArray());
+                for (int i = 0; i < 5; i++)
+                    try { s.Save(path, keys); } catch (IOException) { /* a concurrent replace may be refused; callers log and continue */ }
+            })));
+            var r = VectorStore.Load(path, 8);
+            Assert.Null(r.LoadIssue);
+            Assert.Equal(500, r.Count);
+            Assert.Empty(Directory.GetFiles(dir, "*.tmp"));
+        }
+        finally { Directory.Delete(dir, true); }
+    }
+
     [Fact]
     public void DenseIndexIsIncrementalAndFiltersInsideTheScan()
     {
@@ -61,11 +87,13 @@ public class C15HybridTests
         {
             using var e1 = new E5Embedder(model);
             var a = DenseIndex.Build(Ix, "g1", e1, dir, "test");
-            Assert.Equal(Ix.N, a.Embedded);
+            Assert.True(a.Embedded > 0 && a.Embedded <= Ix.N);           // identical passage texts share one vector
+            var written = File.GetLastWriteTimeUtc(DenseIndex.StorePath(dir, e1));
             using var e2 = new E5Embedder(model);
             var b = DenseIndex.Build(Ix, "g2", e2, dir, "test");    // a new generation with the same texts: nothing re-embedded
             Assert.Equal(0, b.Embedded);
             Assert.Equal(Ix.N, b.Reused);
+            Assert.Equal(written, File.GetLastWriteTimeUtc(DenseIndex.StorePath(dir, e2)));   // nothing changed: not rewritten
             Assert.Equal(a.TopK("written notice before the hearing", 5), b.TopK("written notice before the hearing", 5));
             var top = b.TopK("written notice before the hearing", 3);
             var filtered = b.TopK("written notice before the hearing", 3, p => p != top[0].Passage);
@@ -133,6 +161,22 @@ public class C15HybridTests
         var hiddenDoc = Ix.Passages[last].DocId;
         var s = new SearchService(Ix, d => d == hiddenDoc) { Semantic = new FixedScorer(last), Reranker = new FakeReranker("notice", Ix.Passages[last].Text, 9f) };
         Assert.DoesNotContain(s.Search("notice", new SearchFilters()).Hits, h => Ix.Passages[h.PassageIndex].DocId == hiddenDoc);
+    }
+
+    /// Hybrid fusion must not dilute a provision-heading match: matched provisions precede fused hits.
+    [Fact]
+    public void HeadingMatchedProvisionsPrecedeFusedHitsInHybridMode()
+    {
+        int target = Ix.N - 2, last = Ix.N - 1;
+        var ph = ProvisionHeadings.Empty();
+        ph.Add(target, "Test Act", "39", "Absence without leave");
+        var on = new SearchService(Ix, _ => false) { Semantic = new FixedScorer(last), Headings = ph };
+        var r = on.Search("absence without leave punishment notice", new SearchFilters());
+        Assert.Contains(r.Hits, h => h.PassageIndex == target);
+        Assert.Equal(target, r.Hits.First(h => h.Tier is not ("identifier" or "case_name" or "title")).PassageIndex);
+        var plain = new SearchService(Ix, _ => false) { Semantic = new FixedScorer(last) };
+        Assert.Equal(plain.Search("notice", new SearchFilters()).Hits.Select(h => h.PassageIndex),
+                     on.Search("notice", new SearchFilters()).Hits.Select(h => h.PassageIndex));          // no cue: identical
     }
 
     [Fact]

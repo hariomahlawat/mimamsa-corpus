@@ -105,6 +105,12 @@ public sealed class SearchService
                 // C15 WP2/WP7: provision-heading boost for procedural plain-language queries (see ProvisionHeadings).
                 if (!q.Exact && Headings is not null)
                     scores = Headings.Boost(scores, rest, ctx.HeadingReasons);
+                // In hybrid and rerank modes the matched provisions are placed before fused/reranked results (after the
+                // identifier, case-name and title tiers): rank fusion would otherwise dilute the boost. Added after the
+                // C14 walkthrough queries showed no effect in hybrid mode (development data; DECLARATIONS.md item 3).
+                if (ctx.HeadingReasons.Count > 0 && (Semantic is not null || Reranker is not null) && !q.Exact)
+                    foreach (var p in ctx.HeadingReasons.Keys.Where(scores.ContainsKey).OrderByDescending(p => scores[p]).ThenBy(p => p))
+                        if (!_docHidden(_ix.Passages[p].DocId) && seen.Add(p)) ordered.Add(new Hit(p, "lexical", scores[p], Reasons(p, ctx)));
                 // ---- C15 WP2 rerank stage (begin). Only when a reranker is configured; pinned tiers above are untouched.
                 if (Reranker is not null && !q.Exact)
                 {
