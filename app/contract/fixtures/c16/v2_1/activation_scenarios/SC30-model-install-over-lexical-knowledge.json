@@ -1,0 +1,75 @@
+{
+ "assert_final": {
+  "knowledge": "L1",
+  "models": "M2",
+  "semantic_search": false,
+  "serving": true
+ },
+ "contract": "mimamsa-corpus-contract/2.1",
+ "covers": [
+  "LEXICAL_ONLY_ACTIVATION",
+  "MODEL_SWITCH"
+ ],
+ "description": "Over lexical-only knowledge an unverified placeholder model is refused, a verified model without vectors for it is accepted, and semantic search stays off.",
+ "initial": {
+  "active": "L1",
+  "free_bytes": 1000000000000,
+  "installed": [
+   "L1"
+  ],
+  "keep_previous": 2,
+  "lexical_only": [
+   "L1"
+  ],
+  "lock_stale_after_seconds": 30,
+  "models": null,
+  "recovery_target": null,
+  "sizes": {},
+  "staged_models": {
+   "M2": {
+    "vectors_for": [
+     "R9"
+    ],
+    "verified": true
+   },
+   "MX": {
+    "vectors_for": [],
+    "verified": false
+   }
+  }
+ },
+ "record_kind": "activation_scenario",
+ "scenario_id": "SC30-model-install-over-lexical-knowledge",
+ "steps": [
+  {
+   "args": {
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "lock_acquire"
+  },
+  {
+   "args": {
+    "target": "MODELS",
+    "to": "MX",
+    "writer": "activator-1"
+   },
+   "expect_error": "Refused",
+   "op": "transition"
+  },
+  {
+   "args": {
+    "target": "MODELS",
+    "to": "M2",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "transition"
+  },
+  {
+   "args": {},
+   "expect_error": null,
+   "op": "pin"
+  }
+ ]
+}

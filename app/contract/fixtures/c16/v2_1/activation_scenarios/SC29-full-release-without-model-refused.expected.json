@@ -1,0 +1,104 @@
+{
+ "contract": "mimamsa-corpus-contract/2.1",
+ "record_kind": "activation_scenario_outcomes",
+ "scenario_id": "SC29-full-release-without-model-refused",
+ "scenario_sha256": "57cbd35ce2266c7b5f0b61359a28b928468c017fe465ff25df1b5219710047d2",
+ "trace": [
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1",
+    "R2"
+   ],
+   "journal_steps": [],
+   "knowledge": "L1",
+   "lock_epoch": 0,
+   "log_length": 0,
+   "models": null,
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 0,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1",
+    "R2"
+   ],
+   "journal_steps": [],
+   "knowledge": "L1",
+   "lock_epoch": 1,
+   "log_length": 0,
+   "models": null,
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 1,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": "Refused",
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1",
+    "R2"
+   ],
+   "journal_steps": [],
+   "knowledge": "L1",
+   "lock_epoch": 1,
+   "log_length": 0,
+   "models": null,
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 2,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1",
+    "R2"
+   ],
+   "journal_steps": [],
+   "knowledge": "L1",
+   "lock_epoch": 1,
+   "log_length": 0,
+   "models": null,
+   "pins": 1,
+   "publication_rows": 0,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 3,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L1"
+  }
+ ]
+}

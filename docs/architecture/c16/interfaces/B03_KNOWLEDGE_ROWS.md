@@ -30,7 +30,9 @@ Row files are **canonical JSONL**:
 - sorted by primary key;
 - LF line endings and a final LF.
 
-They are never SQL. `rows_sha256` is the sha256 of the file bytes, and the component digest is as in arch §5.
+They are never SQL. `rows_sha256` is the sha256 of the file bytes. The component digest's exact bytes are fixed in B04 §4 (`digests.table_rows_digest`: one `<table>|<row_count>|<rows_sha256>` line per table, name order, **every line LF-terminated**).
+
+**Manifest placement (I-2).** In a release manifest, `graph_nodes` and `graph_edges` appear only in the GRAPH component's `tables` (files under `accelerators/graph/`), every other table only in KNOWLEDGE_ROWS (`accelerators/rows/`). `knowledge_rows.manifest_table_owner_issues` checks it (`KR_ROWS_ALLOWLIST`); the CP-1 fixture follows it.
 
 `row_file_issues` checks, **before COPY**, rejecting the whole component on any issue:
 
@@ -73,6 +75,22 @@ The schema fixes the loader contract, so no allowlist can widen it.
 
 **Staging schema.** `kr_<n>_staging` (pattern `^kr_[0-9]{1,9}_staging$`) is created by **application DDL** under the activator role. Its tables have no triggers and no rules.
 
+**Which rule applies: 2.1 is authoritative over frozen arch §7.3 (PR #82 clarification 3).** Frozen arch §7.3 says the staging schema is "owned by" `mimamsa_kr_loader` with "CREATE on that schema only, plus INSERT on its tables". For contract 2.1 and later, this section and the schema constant `loader.grants` govern instead:
+1. The **activator** role creates `kr_<n>_staging` and its allowlisted tables (application DDL) and owns them.
+2. Only then does it grant `mimamsa_kr_loader` exactly `USAGE ON SCHEMA kr_<n>_staging` and `INSERT ON ALL TABLES IN SCHEMA kr_<n>_staging`.
+3. The loader has **no CREATE anywhere and owns nothing**: no DDL at all.
+
+Why: CREATE on the staging schema would let the loader create its own tables, views, functions or triggers there (owner-defined objects that run when the activator later reads or renames the schema). Without CREATE, the loader can only insert typed rows into tables the application defined. That is strictly narrower than §7.3 and removes nothing §7.3 needs, so it is an additive tightening and not a change of 2.0 meaning: a site obeying 2.1 also satisfies every prohibition in §7.3. B03 (PR #83) already implements this.
+
+**Site database hardening (2.1, applied by the installer B07, once per database and re-asserted on upgrade):**
+```sql
+REVOKE CREATE ON SCHEMA public FROM PUBLIC;
+REVOKE TEMPORARY ON DATABASE <db> FROM PUBLIC;
+REVOKE CREATE ON DATABASE <db> FROM PUBLIC;
+REVOKE ALL ON SCHEMA site, knowledge FROM PUBLIC;
+```
+The first two are the required minimum: REVOKE TEMPORARY and REVOKE CREATE ON SCHEMA public FROM PUBLIC. Then neither the loader nor any other role reaches objects through `public` or temporary schemas (search-path shadowing). The loader is never granted TEMPORARY. Because these are revoked from PUBLIC, **B07 grants the application role explicitly whatever it needs as a result**, and nothing more: CONNECT, USAGE on `site` and `knowledge`, its table privileges, and TEMPORARY only if a measured application need exists (none is known). The B07 installer test asserts that `has_schema_privilege('mimamsa_kr_loader','public','CREATE')`, `has_database_privilege('mimamsa_kr_loader',<db>,'TEMPORARY')` and `has_schema_privilege('mimamsa_kr_loader','kr_<n>_staging','CREATE')` are all false.
+
 **Load.** Parameterised `COPY … FROM STDIN` into named allowlisted tables only.
 
 **Failure.** Any failure drops the staging schema, and `site` and the active `kr_` schema stay byte-identical (proved by ordered dumps).
@@ -99,4 +117,4 @@ The schema fixes the loader contract, so no allowlist can widen it.
   - SQL text in a value (rejected as non-canonical order here, and inert in any case);
   - a row that is well-formed but not derivable;
   - a widened loader grant (schema);
-  - graph tables moved to KNOWLEDGE_ROWS.
+  - graph tables moved to KNOWLEDGE_ROWS (allowlist, and in a release manifest: `manifest_table_owner_issues`).

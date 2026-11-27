@@ -344,3 +344,222 @@ def test_per_source_accounting_reconciles():
     bad[0]["held"] = 1
     bad[1]["served"] = 1
     assert len(legacy.accounting_issues(bad)) == 3
+
+
+# ---------------------------------------------------------------- PR #82 clarifications (contract 2.1, additive)
+# 1. one per-source admission accounting register
+
+def test_accounting_register_positive_and_compare():
+    from mimamsa_contract.c16 import accounting
+    d, r = _j(V21 / "accounting" / "declared.json"), _j(V21 / "accounting" / "recomputed.json")
+    assert accounting.FILE == "registers/source_accounting.json" and d["record_kind"] == "source_admission_accounting"
+    assert accounting.accounting_issues(d) == [] and accounting.accounting_issues(r) == []
+    assert accounting.compare_declared(d, r) == []
+    assert (V21 / "accounting" / "declared.json").read_bytes() == accounting.register_bytes(d)   # canonical + LF
+
+
+@pytest.mark.parametrize("name", sorted(p.stem for p in (V21 / "accounting" / "negative").glob("*.json")))
+def test_accounting_negatives_fail_closed(name):
+    from mimamsa_contract.c16 import accounting
+    case = _j(V21 / "accounting" / "negative" / f"{name}.json")
+    if case["check"] == "compare_declared":
+        issues = accounting.compare_declared(case["declared"], case["register"])
+    else:
+        issues = accounting.accounting_issues(case["register"])
+    assert case["expected_code"] in _codes(issues)
+
+
+def test_cp1_admission_register_ships_the_accounting_register():
+    from mimamsa_contract.c16 import accounting
+    man = _j(V21 / "cp1" / "KNOWLEDGE_RELEASE.json")
+    adm = next(c for c in man["components"] if c["kind"] == "ADMISSION_REGISTER")
+    assert accounting.FILE in {f["path"] for f in adm["files"]}
+
+
+# 2 and 5. exact component digests and the bundle-independent text-store source digest
+
+def test_component_digest_golden_vectors():
+    from mimamsa_contract.c16 import digests
+    G = _j(V21 / "digests" / "golden.json")
+    kr = G["KNOWLEDGE_ROWS"]
+    tables = [(t["table"], t["row_count"], t["rows_sha256"]) for t in kr["tables"]]
+    assert kr["preimage"].endswith("\n") and kr["preimage"].count("\n") == len(tables)
+    assert digests.table_rows_digest(tables) == kr["digest"] == digests._h(kr["preimage"].encode())
+    assert digests.table_rows_digest(list(reversed(tables))) == kr["digest"]          # tables sorted by name
+    assert kr["wrong_no_final_lf"] != kr["digest"]                                     # the no-final-LF form is not it
+    for t, n, s in tables:                                                             # bound to the real fixture row files
+        data = (V21 / "knowledge_rows" / "rows" / f"{t}.jsonl").read_bytes()
+        assert (n, s) == (data.count(b"\n"), knowledge_rows.rows_sha256(data))
+    g = G["GRAPH"]
+    assert digests.graph_digest(g["builder_version"], g["node_ids"], g["edge_ids"]) == g["digest"] == digests._h(g["preimage"].encode())
+    for k in ("LEXICAL_INDEX", "TEXT_STORE"):
+        assert digests.file_digest(bytes.fromhex(G[k]["file_hex"])) == G[k]["digest"]
+    e = [(bytes.fromhex(x["key_hex"]), bytes.fromhex(x["vector_hex"])) for x in G["VECTOR_PACK"]["entries"]]
+    assert digests.vector_pack_digest(e) == digests.vector_pack_digest(e[::-1]) == G["VECTOR_PACK"]["digest"]
+    with pytest.raises(ValueError):
+        digests.vector_pack_digest([(b"short", b"")])
+    assert digests.hashset_digest(G["HASHSET"]["hashes"]) == G["HASHSET"]["digest"]
+    assert digests.concat_digest({k: v.encode() for k, v in G["CONCAT"]["files"].items()}) == G["CONCAT"]["digest"]
+
+
+def _ts_mutations():
+    def gen(g, d, x):
+        return g.replace("fixtures", "fixturez"), d, x
+
+    def field(where, **kw):
+        def m(g, d, x):
+            where(d, x).update(kw)
+            return g, d, x
+        return m
+    return [gen,
+            field(lambda d, x: d[0], copy_sha256="0" * 64),
+            field(lambda d, x: x[0], text_sha256="1" * 64),
+            field(lambda d, x: x[0], source_copy_sha256="2" * 64),
+            field(lambda d, x: x[0], quoting_permitted=False),
+            field(lambda d, x: x[0]["pipeline"], version="1.3"),
+            field(lambda d, x: x[0]["pages"][0], char_count=41),
+            field(lambda d, x: x[1]["pages"][0], low_confidence=False),
+            field(lambda d, x: x[0]["passages"][0], char_end=49),
+            field(lambda d, x: x[0]["passages"][1], paragraph_label=None)]
+
+
+def test_text_store_source_digest_is_bundle_independent_and_bound_to_derivatives():
+    import inspect
+    from mimamsa_contract.c16 import digests
+    t = _j(V21 / "digests" / "golden.json")["TEXT_STORE_SOURCE"]
+    gid, docs, der = t["generation_id"], t["documents"], t["derived"]
+    base = digests.text_store_source_digest(gid, docs, der)
+    assert base == t["digest"]
+    assert digests.text_store_source_digest(gid, docs[::-1], der[::-1]) == base      # input order does not matter
+    # no bundle checksum or generation.json bytes are inputs, so the central build can compute it before the bundle exists
+    assert list(inspect.signature(digests.text_store_source_digest).parameters) == ["generation_id", "documents", "derived"]
+    for mutate in _ts_mutations():
+        g2, d2, x2 = mutate(gid, copy.deepcopy(docs), copy.deepcopy(der))
+        assert digests.text_store_source_digest(g2, d2, x2) != base
+
+
+# 3. loader grants: 2.1 is authoritative (no DDL for the loader) and the site DB is hardened
+
+def test_loader_has_no_ddl_and_docs_state_2_1_is_authoritative():
+    loader = _j(V21 / "knowledge_rows" / "allowlist.json")["loader"]
+    assert loader["grants"] == ["USAGE ON SCHEMA kr_<n>_staging", "INSERT ON ALL TABLES IN SCHEMA kr_<n>_staging"]
+    assert not any("CREATE" in g for g in loader["grants"])
+    doc = (CONTRACT.parents[1] / "docs" / "architecture" / "c16" / "interfaces" / "B03_KNOWLEDGE_ROWS.md").read_text(encoding="utf-8")
+    for needle in ("REVOKE TEMPORARY", "REVOKE CREATE ON SCHEMA public FROM PUBLIC", "2.1 is authoritative", "B07"):
+        assert needle in doc
+
+
+# 4. CP-1 follows I-2
+
+def test_cp1_graph_tables_are_graph_component_tables():
+    from mimamsa_contract.c16 import digests
+    man = _j(V21 / "cp1" / "KNOWLEDGE_RELEASE.json")
+    assert knowledge_rows.manifest_table_owner_issues(man) == []
+    by_kind = {c["kind"]: c for c in man["components"]}
+    assert {t["table"] for t in by_kind["GRAPH"]["tables"]} == {"graph_nodes", "graph_edges"}
+    assert all(t["file"].startswith("accelerators/graph/") for t in by_kind["GRAPH"]["tables"])
+    kr = by_kind["KNOWLEDGE_ROWS"]
+    assert not {t["table"] for t in kr["tables"]} & {"graph_nodes", "graph_edges"}
+    assert kr["result_digest"] == digests.table_rows_digest([(t["table"], t["row_count"], t["rows_sha256"]) for t in kr["tables"]])
+    bad = copy.deepcopy(man)
+    moved = next(c for c in bad["components"] if c["kind"] == "GRAPH")["tables"][0]
+    next(c for c in bad["components"] if c["kind"] == "KNOWLEDGE_ROWS")["tables"].append(moved)
+    assert "KR_ROWS_ALLOWLIST" in _codes(knowledge_rows.manifest_table_owner_issues(bad))
+
+
+# ---------------------------------------------------------------- CP-1 gaps (contract 2.1, additive)
+# gap 1: v7 candidate-set files
+
+def _cs_positive():
+    from mimamsa_contract.c16 import accounting
+    d = _j(V21 / "accounting" / "declared.json")
+    p = "registers/candidate_sets/candidates-2026.txt"
+    return accounting, d, {p: (V21 / "accounting" / p).read_bytes()}, {accounting.FILE, p}
+
+
+def test_candidate_set_positive_binds_to_declared_digest():
+    from mimamsa_contract.c16 import digests
+    accounting, d, files, inv = _cs_positive()
+    shas, issues = accounting.candidate_set_issues(d, files, inv)
+    assert issues == []
+    v7 = next(s for s in d["sources"] if s["path"] == "V7_REFERENCE")
+    data = next(iter(files.values()))
+    assert len(shas) == v7["input"] and not data.endswith(b"\n") and b"\r" not in data
+    assert v7["provenance"]["candidate_set_sha256"] == digests.hashset_digest(sorted(shas))
+    assert accounting.candidate_set_path(v7["source"]) in files
+    man = _j(V21 / "cp1" / "KNOWLEDGE_RELEASE.json")
+    adm = next(c for c in man["components"] if c["kind"] == "ADMISSION_REGISTER")
+    assert set(files) <= {f["path"] for f in adm["files"]}
+    # the hashes feed the I-5 relabel check: a v1 record whose copy is a v7 candidate is not established
+    from mimamsa_contract.c16 import legacy
+    doc = {"doc_id": "doc-x", "source_copy": {"sha256": sorted(shas)[0]}}
+    assert "C16_LEGACY_NOT_ESTABLISHED" in _codes(legacy.legacy_issues(doc, c16_governed=set(), eligible_c16=set(),
+                                                                         candidate_shas=shas, excluded=set()))
+
+
+def test_candidate_set_empty_source_is_the_empty_file():
+    accounting, d, _, _ = _cs_positive()
+    d = copy.deepcopy(d)
+    v7 = next(s for s in d["sources"] if s["path"] == "V7_REFERENCE")
+    import hashlib
+    v7.update(input=0, identities=0, held=0, not_served_reasons={})
+    v7["provenance"]["candidate_set_sha256"] = hashlib.sha256(b"").hexdigest()
+    p = accounting.candidate_set_path(v7["source"])
+    assert accounting.candidate_set_issues(d, {p: b""}, {accounting.FILE, p}) == (set(), [])
+
+
+@pytest.mark.parametrize("name", sorted(p.stem for p in (V21 / "accounting" / "candidate_set_negative").glob("*.json")))
+def test_candidate_set_negatives_fail_closed(name):
+    from mimamsa_contract.c16 import accounting
+    case = _j(V21 / "accounting" / "candidate_set_negative" / f"{name}.json")
+    files = {k: bytes.fromhex(v) for k, v in case["files_hex"].items()}
+    shas, issues = accounting.candidate_set_issues(case["declared"], files, set(case["admission_inventory"]))
+    assert case["expected_code"] in _codes(issues) and shas == set()
+
+
+# gap 2: lexical-only knowledge releases and model compatibility
+
+LEX_SCENARIOS = ["SC26", "SC27", "SC28", "SC29", "SC30"]
+
+
+def test_lexical_only_scenarios_and_rules():
+    seen = set()
+    for p in sorted((V21 / "activation_scenarios").glob("SC*.json")):
+        if p.name.endswith(".expected.json"):
+            continue
+        s = _j(p)
+        sid = s["scenario_id"][:4]
+        exp = _j(p.with_name(p.stem + ".expected.json"))
+        has = all("semantic_search" in t for t in exp["trace"])
+        assert has == ("lexical_only" in s["initial"]) == (sid in LEX_SCENARIOS)   # SC01-SC25 traces unchanged
+        if sid in LEX_SCENARIOS:
+            seen.add(sid)
+            assert "LEXICAL_ONLY_ACTIVATION" in s["covers"]
+            assert scenarios.final_assertion_failures(s, scenarios.run_scenario(s)) == []
+    assert seen == set(LEX_SCENARIOS)
+
+
+def test_model_gate_rules_directly():
+    from mimamsa_contract.c16 import activation
+    # K2: lexical-only target with no model, and with a verified model without vectors for it
+    s = activation.Site(installed=["L1", "L2"], active="L1", models=None, lexical_only={"L1", "L2"})
+    s.transition("KNOWLEDGE", "L2")
+    assert s.pointers == {"KNOWLEDGE": "L2", "MODELS": None} and not s.semantic_search_enabled()
+    # K1: a release with vectors still needs a verified model with verified vectors
+    s = activation.Site(installed=["L1", "R2"], active="L1", models=None, lexical_only={"L1"})
+    with pytest.raises(activation.Refused):
+        s.transition("KNOWLEDGE", "R2")
+    s = activation.Site(installed=["R1", "R2"], active="R1", staged_models={"M1": {"verified": True, "vectors_for": {"R1"}}})
+    with pytest.raises(activation.Refused):
+        s.transition("KNOWLEDGE", "R2")
+    assert s.semantic_search_enabled()
+    # M1 and M2: an unverified placeholder model is never activated; a verified one over lexical-only knowledge is
+    s = activation.Site(installed=["L1"], active="L1", models=None, lexical_only={"L1"},
+                        staged_models={"MX": {"verified": False, "vectors_for": set()}, "M2": {"verified": True, "vectors_for": set()}})
+    with pytest.raises(activation.Refused):
+        s.transition("MODELS", "MX")
+    s.transition("MODELS", "M2")
+    assert s.pointers["MODELS"] == "M2" and not s.semantic_search_enabled()
+    # defaults reproduce the 2.0 behaviour (no lexical-only generations)
+    s = activation.Site(installed=["R1", "R2"], active="R1")
+    assert s.lexical_only == frozenset() and s.staged_models["M1"]["vectors_for"] == {"R1", "R2"}

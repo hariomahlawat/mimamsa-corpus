@@ -42,13 +42,13 @@
   },
   {
    "check_id": "SOURCE_DIGEST_EQUALS_SITE",
-   "method": "ADR-0008 source digest recomputed",
+   "method": "digests.text_store_source_digest recomputed (bundle-independent, 2.1); Bind still re-derives on every open",
    "sample": {
     "selection": "FULL",
     "size": "ALL",
     "tolerance": "EXACT"
    },
-   "verifies": "built from the same generation"
+   "verifies": "built from the same generation's derivative records"
   }
  ],
  "contract": "mimamsa-corpus-contract/2.1",
