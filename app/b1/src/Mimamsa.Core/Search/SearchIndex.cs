@@ -17,7 +17,12 @@ public sealed class SearchIndex
     readonly List<DocumentRecord> _docs = new();
     readonly List<int> _passageDoc = new();
     readonly List<int> _passageLen = new();
-    internal readonly Dictionary<string, List<Posting>> Postings = new(StringComparer.Ordinal);
+    /// C15 WP1: memory or SQLite engine (PostingTable); identical vocabulary order and posting lists either way.
+    internal PostingTable Postings { get; private set; } = null!;
+    /// "memory" or "disk" (for the run line and diagnostics).
+    public string Engine { get; private set; } = "memory";
+    /// Disk engine only: the published index directory in use (null for memory).
+    public string? IndexPath { get; private set; }
     internal readonly Dictionary<string, HashSet<string>> StemGroups = new(StringComparer.Ordinal);
     internal readonly Dictionary<string, List<int>> MetaIds = new(StringComparer.Ordinal);
     internal readonly Dictionary<string, List<int>> CoverIds = new(StringComparer.Ordinal);
@@ -37,20 +42,33 @@ public sealed class SearchIndex
     public static bool Indexable(DocumentRecord d) =>
         d.Publication == "PUBLISHED" && d.OriginalVerified && d.DerivativeId is not null && d.Passages.Count > 0;
 
+    /// Documents the index covers, in index order. C14 F07 hook (S3): extracted text flagged unreliable (legacy-font
+    /// Hindi) is not indexed. Indexable() is left unchanged because Eligibility uses it: such documents stay openable.
+    internal static List<DocumentRecord> IndexedDocuments(GenerationStore g) =>
+        g.Documents.Values.Where(d => Indexable(d) && !d.TextExcludedFromSearch).OrderBy(d => d.DocId, StringComparer.Ordinal).ToList();
+
+    internal static IEnumerable<Passage> OrderedPassages(DocumentRecord d) => d.Passages.OrderBy(p => p.Page).ThenBy(p => p.CharStart);
+
+    /// In-memory engine (B1 behaviour).
     public static SearchIndex Build(GenerationStore g)
     {
         var ix = new SearchIndex();
+        ix.Postings = new MemoryPostingTable(BuildPostings(g, ix));
+        ix.Finish();
+        return ix;
+    }
+
+    /// Tokenises every indexed passage: fills passages, lengths, document metadata and returns the postings map.
+    internal static Dictionary<string, List<Posting>> BuildPostings(GenerationStore g, SearchIndex ix)
+    {
+        var postings = new Dictionary<string, List<Posting>>(StringComparer.Ordinal);
         foreach (var a in g.Abbreviations) ix.Abbrev.TryAdd(a.Code, a);
-        // C14 F07 hook (S3): extracted text flagged unreliable (legacy-font Hindi) is not indexed. Indexable() is left
-        // unchanged because Eligibility uses it: such documents stay openable, labelled, from Statutes and links.
-        foreach (var d in g.Documents.Values.Where(d => Indexable(d) && !d.TextExcludedFromSearch).OrderBy(d => d.DocId, StringComparer.Ordinal))
+        foreach (var d in IndexedDocuments(g))
         {
             int di = ix._docs.Count;
-            ix._docs.Add(d);
-            ix.TitleTerms.Add(Text.Tokenize(d.Title ?? "").Select(t => t.Term).ToHashSet());
-            var ps = new List<int>();
             int army = 0, navy = 0, air = 0;
-            foreach (var p in d.Passages.OrderBy(p => p.Page).ThenBy(p => p.CharStart))
+            var ps = new List<int>();
+            foreach (var p in OrderedPassages(d))
             {
                 int pi = ix._passages.Count;
                 ix._passages.Add(p); ix._passageDoc.Add(di); ps.Add(pi);
@@ -65,33 +83,63 @@ public sealed class SearchIndex
                     }
                 foreach (var grp in toks.GroupBy(t => t.Term))
                 {
-                    if (!ix.Postings.TryGetValue(grp.Key, out var list)) ix.Postings[grp.Key] = list = new();
+                    if (!postings.TryGetValue(grp.Key, out var list)) postings[grp.Key] = list = new();
                     list.Add(new Posting(pi, grp.Select(t => t.Position).ToArray()));
                 }
             }
-            ix.DocPassages.Add(ps.ToArray());
-            ix.GroupKey.Add(Legal.LegalIdentifierResolver.GroupKey(d));
-            ix.Service.Add(Legal.LegalIdentifierResolver.ServiceOf(d, army, navy, air));
-            void AddId(Dictionary<string, List<int>> table, string? norm) { if (!string.IsNullOrEmpty(norm)) (table.TryGetValue(norm, out var l) ? l : table[norm] = new()).Add(di); }
-            if (d.Judicial is { } j)
-            {
-                foreach (var c in j.CaseNumbers) AddId(ix.MetaIds, Identifiers.NormCase(c) ?? Identifiers.NormCitation(c));
-                AddId(ix.MetaIds, j.NeutralCitation is null ? null : Identifiers.NormCitation(j.NeutralCitation));
-                foreach (var r in j.ReportedCitations) AddId(ix.MetaIds, Identifiers.NormCitation(r));
-            }
-            if (d.DocType is "judgment" or "order" && d.Pages.TryGetValue(1, out var p1))
-                foreach (var id in Identifiers.CoverCaseNumbers(p1.Text).Concat(Identifiers.MastheadCitations(p1.Text)).Distinct()) AddId(ix.CoverIds, id);
+            ix.AddDocument(d, ps.ToArray(), Legal.LegalIdentifierResolver.ServiceOf(d, army, navy, air));
         }
-        ix.Resolver = new Legal.LegalIdentifierResolver(ix._docs, ix.TitleTerms);
-        foreach (var t in ix.Postings.Keys)
+        return postings;
+    }
+
+    /// Per-document metadata that needs no tokenisation of passage text (titles, identifiers, cover numbers).
+    internal void AddDocument(DocumentRecord d, int[] passageIndexes, string? service)
+    {
+        int di = _docs.Count;
+        _docs.Add(d);
+        TitleTerms.Add(Text.Tokenize(d.Title ?? "").Select(t => t.Term).ToHashSet());
+        DocPassages.Add(passageIndexes);
+        GroupKey.Add(Legal.LegalIdentifierResolver.GroupKey(d));
+        Service.Add(service);
+        void AddId(Dictionary<string, List<int>> table, string? norm) { if (!string.IsNullOrEmpty(norm)) (table.TryGetValue(norm, out var l) ? l : table[norm] = new()).Add(di); }
+        if (d.Judicial is { } j)
+        {
+            foreach (var c in j.CaseNumbers) AddId(MetaIds, Identifiers.NormCase(c) ?? Identifiers.NormCitation(c));
+            AddId(MetaIds, j.NeutralCitation is null ? null : Identifiers.NormCitation(j.NeutralCitation));
+            foreach (var r in j.ReportedCitations) AddId(MetaIds, Identifiers.NormCitation(r));
+        }
+        if (d.DocType is "judgment" or "order" && d.Pages.TryGetValue(1, out var p1))
+            foreach (var id in Identifiers.CoverCaseNumbers(p1.Text).Concat(Identifiers.MastheadCitations(p1.Text)).Distinct()) AddId(CoverIds, id);
+    }
+
+    internal void AddPassage(Passage p, int doc, int len) { _passages.Add(p); _passageDoc.Add(doc); _passageLen.Add(len); }
+
+    void Finish()
+    {
+        Resolver = new Legal.LegalIdentifierResolver(_docs, TitleTerms);
+        foreach (var t in Postings.Keys)
         {
             var s = Text.Stem(t);
-            if (!ix.StemGroups.TryGetValue(s, out var set)) ix.StemGroups[s] = set = new(StringComparer.Ordinal);
+            if (!StemGroups.TryGetValue(s, out var set)) StemGroups[s] = set = new(StringComparer.Ordinal);
             set.Add(t);
         }
-        ix.AvgLen = ix._passageLen.Count == 0 ? 1 : ix._passageLen.Average();
+        AvgLen = _passageLen.Count == 0 ? 1 : _passageLen.Average();
+    }
+
+    /// Disk engine (C15 WP1, ADR-0008): opens the verified published index of this generation under `root`, or builds,
+    /// verifies and atomically publishes one first. Postings are then read on demand; nothing is served from an index
+    /// that failed verification.
+    public static SearchIndex Open(GenerationStore g, string root, SearchIndexOptions options, Action<string>? log = null)
+    {
+        var store = new IndexStore(root, options, log);
+        var ix = new SearchIndex { Engine = "disk" };
+        var path = store.OpenOrBuild(g, ix);
+        ix.IndexPath = path;
+        ix.Postings = SqlitePostingTable.Open(Path.Combine(path, IndexStore.DbFile), options.CacheBytes);
+        ix.Finish();
         return ix;
     }
+
 
     public double Idf(int df) => Math.Log(1 + (N - df + 0.5) / (df + 0.5));
 

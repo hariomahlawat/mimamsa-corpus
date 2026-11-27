@@ -34,7 +34,7 @@ sw.Restart();
 SearchIndex ix = engine switch
 {
     "memory" => SearchIndex.Build(gen),
-    "disk" => throw new NotImplementedException(), // DISK-ENGINE
+    "disk" => SearchIndex.Open(gen, Arg("--index-dir") ?? throw new ArgumentException("--index-dir is required for disk"), new SearchIndexOptions { CacheBytes = long.Parse(Arg("--cache-mb") ?? "128") << 20 }, Console.Error.WriteLine),
     _ => throw new ArgumentException("engine"),
 };
 long buildMs = sw.ElapsedMilliseconds;
@@ -48,7 +48,10 @@ foreach (var q in Q)
 {
     var r = svc.Search(q, f);
     sigs[q] = new { r.State, r.Mode, r.TotalDocuments, r.TotalPassages,
-        hits = r.Hits.Select(h => $"{h.PassageIndex}:{h.Tier}:{Math.Round(h.Score, 6)}").ToArray() };
+        chips = r.Chips.Select(c => $"{c.Kind}|{c.Text}|{c.Source}").ToArray(),
+        facets = r.Facets.ToDictionary(kv => kv.Key, kv => kv.Value.Select(v => $"{v.Value}={v.Count}").ToArray()),
+        highlight = r.HighlightTerms.OrderBy(x => x, StringComparer.Ordinal).ToArray(),
+        hits = r.Hits.Select((h, i) => $"{h.PassageIndex}:{h.Tier}:{Math.Round(h.Score, 6)}" + (i < 100 ? ":" + string.Join("|", h.Reasons) : "")).ToArray() };
 }
 if (Arg("--signatures") is { } sp) File.WriteAllText(sp, JsonSerializer.Serialize(sigs));
 
