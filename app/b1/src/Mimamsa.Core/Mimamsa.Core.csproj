@@ -8,5 +8,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Npgsql" Version="10.0.4" />
+    <!-- C15 WP1 persistent search index (ADR-0008). MIT; bundles SQLitePCLRaw e_sqlite3 natives (Apache-2.0 / SQLite public domain). -->
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.15" />
   </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@ import { h, append, clear, $, $$, chip, candidateChip, axisChip, fmtDate, short,
 import { ProtectedViewer } from "./viewer.js";
 import { renderHome, noteRecentDoc, resetRecent } from "./home.js";
 import { bindRelations } from "./relations.js";
+import { openAddToStudio } from "./workspace.js";
 const STATUTE_TYPES = new Set(["act", "rules", "regulations", "notification", "order"]);
 
 const add = (el, ...k) => append(el, k);
@@ -532,6 +533,7 @@ function renderToolbar() {
     h("span", { style: "flex:1" }),
     h("button.btn.btn-small", { type: "button", onclick: () => copyCitation(false), title: "Copy legal citation (C)" }, icon("cite"), "Copy citation"),
     h("button.btn.btn-small", { type: "button", onclick: () => copyCitation(true), title: "Copy internal reference and permalink (Shift+C)" }, icon("copy"), "Internal ref"),
+    h("button.btn.btn-small#add-to-studio", { type: "button", onclick: () => addCurrentToStudio(), title: "Add a copy-pinned citation of this page to a private Studio document" }, icon("page"), "Studio"),
     h("button.btn.btn-small.drawer-toggle", { type: "button", onclick: () => toggleCtx(), title: "Evidence and provenance (Shift+B)" }, icon("panel"), "Evidence"),
     h("button.btn.btn-small.drawer-toggle", { type: "button", onclick: () => R.el.classList.toggle("results-open"), title: "Results" }, icon("list"), "Results"));
 }
@@ -676,6 +678,16 @@ function zoom(dir) {
   if (dir === "page") { tab.viewer.setScale("page"); return; }
   const cur = typeof tab.viewer.scale === "number" ? tab.viewer.scale : (tab.viewer.lastScale || 1.2);
   tab.viewer.setScale(dir === 0 ? null : Math.max(0.5, Math.min(3, cur + dir * 0.2)));
+}
+
+// C15 WP6: copy-pinned citation (and, when a passage is selected on the current edition, a quotation) to the Studio.
+function addCurrentToStudio() {
+  const tab = R.tabs[R.active];
+  if (!tab?.doc) return;
+  const hit = (tab.hits || [])[tab.hitIndex];
+  const para = hit && hit.page === tab.page ? hit.paragraph_label : null;
+  openAddToStudio({ doc_id: tab.docId, copy: (tab.copy || tab.doc.copy?.sha256 || "").slice(0, 12), page: tab.page, passage_id: tab.copy || !tab.doc.quoting_permitted ? null : tab.passage, para,   // OCR text is never offered as a quotation
+    label: `${tab.doc.title || tab.docId}, p.${tab.page}` });
 }
 
 export async function copyCitation(internal) {

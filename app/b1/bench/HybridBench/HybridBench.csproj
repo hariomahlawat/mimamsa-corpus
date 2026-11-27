@@ -14,6 +14,8 @@
   <ItemGroup>
     <Compile Include="..\..\src\Mimamsa.Hybrid\E5Embedder.cs" Link="E5Embedder.cs" />
     <Compile Include="..\..\src\Mimamsa.Hybrid\DenseIndex.cs" Link="DenseIndex.cs" />
+    <Compile Include="..\..\src\Mimamsa.Hybrid\VectorStore.cs" Link="VectorStore.cs" />
+    <Compile Include="..\..\src\Mimamsa.Hybrid\CrossEncoder.cs" Link="CrossEncoder.cs" />
     <ProjectReference Include="..\..\src\Mimamsa.Core\Mimamsa.Core.csproj" />
   </ItemGroup>
 </Project>

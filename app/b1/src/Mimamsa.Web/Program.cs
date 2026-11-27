@@ -71,7 +71,23 @@ if (testMode && conf.GetValue("Mimamsa:Test:AllowNoRegister", false)) register =
 else register = RestrictedRegister.LoadRequired(conf["Mimamsa:RestrictedRegister"], generation.Release.RegisterSha256);
 var eligibility = new Eligibility(generation, state, register, vault);
 var phase = System.Diagnostics.Stopwatch.StartNew();
-var index = SearchIndex.Build(generation);
+// C15 WP1 (ADR-0007): Mimamsa:Search:Engine = memory (B1 in-process index) | disk (persistent SQLite index under
+// Mimamsa:Search:IndexDir, default <site>/search-index: built, verified and published atomically on first start of a
+// generation, verified and reopened afterwards). Results are identical; only memory, start-up and persistence differ.
+var searchEngine = conf["Mimamsa:Search:Engine"] ?? "memory";
+var index = searchEngine switch
+{
+    "memory" => SearchIndex.Build(generation),
+    "disk" => SearchIndex.Open(generation, conf["Mimamsa:Search:IndexDir"] is { Length: > 0 } idir ? idir : Path.Combine(site, "search-index"),
+        new SearchIndexOptions
+        {
+            CacheBytes = conf.GetValue("Mimamsa:Search:CacheMb", 128L) << 20,
+            VerifyOnOpen = conf.GetValue("Mimamsa:Search:VerifyOnOpen", true),
+            RebuildOnFailure = conf.GetValue("Mimamsa:Search:RebuildOnFailure", true),
+            KeepPrevious = conf.GetValue("Mimamsa:Search:KeepPrevious", 2),
+        }, Console.WriteLine),
+    _ => throw new InvalidOperationException("Mimamsa:Search:Engine must be 'memory' or 'disk'"),
+};
 var indexBuildMs = phase.ElapsedMilliseconds;
 AppServices? appRef = null;
 // C14 S4 hybrid-retrieval PoC: off unless Mimamsa:Hybrid:Enabled=true. The model directory and its pinned SHA-256
@@ -84,22 +100,34 @@ if (conf.GetValue("Mimamsa:Hybrid:Enabled", false))
     var emb = new Mimamsa.Hybrid.E5Embedder(conf["Mimamsa:Hybrid:ModelDir"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelDir is required when hybrid is enabled"),
         conf.GetValue("Mimamsa:Hybrid:Threads", 0), conf.GetValue("Mimamsa:Hybrid:Cuda", false),
         conf["Mimamsa:Hybrid:ModelSha256"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelSha256 is required when hybrid is enabled"));
-    semantic = Mimamsa.Hybrid.DenseIndex.Build(index, generation.GenerationId, emb, conf["Mimamsa:Hybrid:CacheDir"], "multilingual-e5-small@614241f6",
+    semantic = Mimamsa.Hybrid.DenseIndex.Build(index, generation.GenerationId, emb, conf["Mimamsa:Hybrid:CacheDir"], conf["Mimamsa:Hybrid:ModelLabel"] ?? "multilingual-e5-small@614241f6",
         conf.GetValue("Mimamsa:Hybrid:PassageTokens", 256), log: Console.WriteLine);
     hybridMs = phase.ElapsedMilliseconds;
 }
+// C15 WP2: optional cross-encoder rerank stage (off unless Mimamsa:Hybrid:Reranker:Enabled=true; pinned SHA-256 required).
+IReranker? reranker = null;
+if (conf.GetValue("Mimamsa:Hybrid:Reranker:Enabled", false))
+    reranker = new Mimamsa.Hybrid.CrossEncoder(
+        conf["Mimamsa:Hybrid:Reranker:ModelDir"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:Reranker:ModelDir is required when the reranker is enabled"),
+        conf["Mimamsa:Hybrid:Reranker:OnnxFile"] ?? "onnx/model.onnx",
+        conf["Mimamsa:Hybrid:Reranker:Sha256"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:Reranker:Sha256 is required when the reranker is enabled"),
+        conf.GetValue("Mimamsa:Hybrid:Threads", 0)) { MaxTokens = conf.GetValue("Mimamsa:Hybrid:Reranker:MaxTokens", 256) };
 var search = new SearchService(index, docId => appRef!.VisibleDocument(docId) is null)
 {
     Semantic = semantic,
+    Reranker = reranker,
+    // C15 WP2/WP7: provision-heading boost for procedural plain-language queries (see ProvisionHeadings).
+    Headings = conf.GetValue("Mimamsa:Search:ProvisionHeadings", true) ? ProvisionHeadings.Build(index) : null,
     // MinSimilarity: a passage enters through the dense layer only at or above this cosine similarity. The value is
     // calibrated on the C14 walkthrough queries over the real sample (HybridBench calibrate), never on oracle data.
     Hybrid = new HybridOptions(conf.GetValue("Mimamsa:Hybrid:LexicalDepth", 200), conf.GetValue("Mimamsa:Hybrid:DenseDepth", 100), conf.GetValue("Mimamsa:Hybrid:RrfK", 60),
-                               conf.GetValue("Mimamsa:Hybrid:MinSimilarity", 0.0)),
+                               conf.GetValue("Mimamsa:Hybrid:MinSimilarity", 0.0), conf.GetValue("Mimamsa:Hybrid:Reranker:Pool", 30), conf.GetValue("Mimamsa:Hybrid:Reranker:Admit", 0.0)),
 };
 var app0 = new AppServices
 {
     Generation = generation, Search = search, State = state, Policy = policy, Identity = identity, Ledger = ledger, Vault = vault,
     Eligible = eligibility, TestMode = testMode, SecureCookies = conf.GetValue("Mimamsa:SecureCookies", false),
+    Studio = new Mimamsa.Core.Studio.StudioStore(dataSource), Commander = new Mimamsa.Core.Commander.TocCommanderSource(generation),
 };
 appRef = app0;
 var active = new ActiveStreams();
@@ -150,6 +178,7 @@ var log = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("mimams
 // ---- start-up: schemas, single serving instance, policy mirror, bootstrap accounts (test mode only)
 await identity.EnsureSchemaAsync();
 await policy.EnsureSchemaAsync();
+await app0.Studio.EnsureSchemaAsync();
 var instanceLockConn = await dataSource.OpenConnectionAsync();
 await using (var lk = new NpgsqlCommand("SELECT pg_try_advisory_lock(hashtext('mimamsa-b1-serving-instance'))", instanceLockConn))
 {
@@ -161,7 +190,7 @@ if (testMode && conf.GetValue("Mimamsa:Test:ResetState", false))
 {
     // TEST ONLY: disposable database state for repeatable journeys (accounts, sessions, withdrawals, policy witness)
     await using var c = await dataSource.OpenConnectionAsync();
-    await using var cmd = new NpgsqlCommand("TRUNCATE app_sessions, app_users, audit_log, withdrawals, vault_copies; UPDATE serving_policy SET epoch = 1, digest = 'state-1'", c);
+    await using var cmd = new NpgsqlCommand("TRUNCATE app_sessions, app_users, audit_log, withdrawals, vault_copies, studio_versions, studio_documents, studio_notes; UPDATE serving_policy SET epoch = 1, digest = 'state-1'", c);
     await cmd.ExecuteNonQueryAsync();
 }
 await ledger.InitAsync(resetForTest: testMode && conf.GetValue("Mimamsa:Test:ResetLedger", false));
@@ -170,6 +199,21 @@ await policy.SyncCopiesAsync(generation.Documents.Values.Select(d => (d.DocId, d
                                         .Select(h => (h.DocId, h.Sha, h.Bytes))));
 var (withdrawn, epoch, digest) = await policy.LoadAsync();
 state.Load(withdrawn, epoch, digest);
+// C15 WP3: derive the generation's legal knowledge graph, publish it atomically (skipped when the identical graph is
+// already published) and verify it. A failure leaves the graph routes unavailable (503); the rest of the service is
+// unaffected. Eligibility is applied per request, never baked into the stored graph.
+try
+{
+    phase.Restart();
+    var graph = Mimamsa.Core.Graph.GraphBuilder.Build(generation);
+    var graphDb = new Mimamsa.Core.Graph.GraphStore(dataSource);
+    await graphDb.EnsureSchemaAsync();
+    var published = await graphDb.PublishAsync(graph);
+    var (ok, detail) = await graphDb.VerifyAsync(graph);
+    if (ok) { app0.Graph = graph; app0.GraphDb = graphDb; }
+    log.LogInformation("legal knowledge graph {State}: {Detail} ({Ms} ms)", ok ? (published ? "published" : "already published") : "FAILED VERIFICATION", detail, phase.ElapsedMilliseconds);
+}
+catch (Exception ex) { log.LogWarning("legal knowledge graph not available: {Error}", ex.GetType().Name); }
 DeliveryTrace.Start(testMode ? conf["Mimamsa:Trace:Path"] : null);
 DeliveryTrace.Emit("boot", "witness", new { epoch = state.Epoch, digest = state.Digest, instance = ledger.InstanceId });
 if (testMode)

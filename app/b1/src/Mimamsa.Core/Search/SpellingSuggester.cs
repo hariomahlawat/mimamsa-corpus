@@ -16,8 +16,8 @@ public sealed class SpellingSuggester
     {
         _ix = ix;
         var vocab = new Dictionary<string, int>(StringComparer.Ordinal);
-        foreach (var (t, post) in ix.Postings)
-            if (post.Count >= MinDf && t.Length >= 3 && t.All(c => c is >= 'a' and <= 'z')) vocab[t] = post.Count;
+        foreach (var (t, df) in ix.Postings.Terms)   // C15: (term, df) without loading postings (disk engine)
+            if (df >= MinDf && t.Length >= 3 && t.All(c => c is >= 'a' and <= 'z')) vocab[t] = df;
         foreach (var (t, n) in ix.Resolver.PartyTerms)
             if (t.Length >= 3 && t.All(c => c is >= 'a' and <= 'z')) vocab[t] = Math.Max(vocab.GetValueOrDefault(t), Math.Max(MinDf, n));
         foreach (var (t, df) in vocab)
@@ -30,7 +30,7 @@ public sealed class SpellingSuggester
 
     static int MaxDistance(int len) => len >= 7 ? 2 : len >= 4 ? 1 : 0;
 
-    int Df(string t) => _ix.Postings.TryGetValue(t, out var l) ? l.Count : 0;
+    int Df(string t) => _ix.Postings.Df(t);
 
     IEnumerable<(string term, int df)> Near(string t)
     {

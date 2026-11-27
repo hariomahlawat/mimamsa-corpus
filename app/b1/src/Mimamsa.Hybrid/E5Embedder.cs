@@ -10,7 +10,11 @@ namespace Mimamsa.Hybrid;
 
 public sealed class E5Embedder : IDisposable
 {
-    public const int Dim = 384;
+    /// Output width read from the model (384 for multilingual-e5-small, 768 for -base). C15: no longer fixed.
+    public int Dim { get; }
+    /// E5 family convention; configurable for models of the same tokenizer family with other prefixes.
+    public string QueryPrefix { get; init; } = "query: ";
+    public string PassagePrefix { get; init; } = "passage: ";
     readonly InferenceSession _session;
     readonly SentencePieceTokenizer _tok;
     readonly bool _tokenTypes;
@@ -47,6 +51,7 @@ public sealed class E5Embedder : IDisposable
         }
         _session = new InferenceSession(onnx, so);
         _tokenTypes = _session.InputMetadata.ContainsKey("token_type_ids");
+        Dim = _session.OutputMetadata.First().Value.Dimensions.Last();
     }
 
     /// Token ids in the model's vocabulary: [&lt;s&gt;] + pieces + [&lt;/s&gt;], truncated to maxTokens.
@@ -64,7 +69,7 @@ public sealed class E5Embedder : IDisposable
         return r;
     }
 
-    public float[] EmbedQuery(string q) => Embed(new[] { "query: " + q }, 128)[0];
+    public float[] EmbedQuery(string q) => Embed(new[] { QueryPrefix + q }, 128)[0];
 
     public float[][] Embed(IReadOnlyList<string> texts, int maxTokens)
     {
