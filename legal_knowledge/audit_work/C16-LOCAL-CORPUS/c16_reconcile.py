@@ -354,22 +354,49 @@ def write_csv(path: Path, rows: list[dict], fields: list[str]) -> None:
         writer.writerows(rows)
 
 
-def local_control_values(repo: Path) -> tuple[set[str], set[str]]:
-    restricted, recovery = set(), set()
+def restricted_register(repo: Path) -> tuple[set[str], str]:
+    path = repo / "config" / "restricted_material.json"
+    payload = path.read_bytes()
+    register = json.loads(payload)
+    restricted = set()
+    for item in register.get("items", []):
+        for value in [item.get("source_sha256"), *(item.get("derived_sha256") or [])]:
+            if value and HEX64.fullmatch(value):
+                restricted.add(value.casefold())
+    return restricted, hashlib.sha256(payload).hexdigest()
+
+
+def historical_recovery_values(repo: Path) -> set[str]:
+    recovery = set()
     roots = list((repo / "legal_knowledge" / "audit_work").rglob("*"))
     for path in roots:
         if not path.is_file() or path.suffix.lower() not in {".json", ".jsonl", ".csv", ".md", ".txt"}:
             continue
         lower = str(path).casefold()
-        if not any(word in lower for word in ("restrict", "marking", "hold", "recovery", "reacquisition")):
+        if not any(word in lower for word in ("recovery", "reacquisition")):
             continue
         try:
             content = path.read_text(encoding="utf-8", errors="ignore")
         except OSError:
             continue
         values = {match.casefold() for match in HEX64.findall(content)}
-        (recovery if any(word in lower for word in ("recovery", "reacquisition")) else restricted).update(values)
-    return restricted, recovery
+        recovery.update(values)
+    return recovery
+
+
+def processing_configuration_identity(repo: Path, canonical: dict) -> tuple[dict, set[str], set[str]]:
+    restricted, register_sha256 = restricted_register(repo)
+    recovery = historical_recovery_values(repo)
+    config = {"extraction_methodology_version": EXTRACTION_METHODOLOGY_VERSION,
+              "classification_rules_version": CLASSIFICATION_RULES_VERSION,
+              "restriction_register_sha256": register_sha256,
+              "canonical_revisions": canonical.get("revisions", {}),
+              "exchange_contract_revision": EXCHANGE_CONTRACT_REVISION,
+              "exchange_adapter": "MODULAR_ADDITIVE_RECEIPTS_2_1_READY",
+              "ocr": {"engine": "tesseract", "languages": ["eng", "hin"],
+                      "configuration_state": "EXTERNAL_GENERATION_BOUND"}}
+    config["processing_configuration_sha256"] = hashlib.sha256(jdump(config).encode("utf-8")).hexdigest()
+    return config, restricted, recovery
 
 
 def hashes_from_repository_paths(siblings) -> set[str]:
@@ -419,59 +446,71 @@ def canonical_index(output: Path, repo: Path) -> dict:
     from huggingface_hub import HfApi
     api = HfApi()
     revisions = {}
-    hashes, paths = set(), 0
+    typed = {key: set() for key in ("original_source_sha256", "derivative_sha256",
+                                     "lfs_object_sha256", "configuration_sha256",
+                                     "audit_sha256", "unclassified_path_sha256")}
+    paths = 0
     remote_error = None
     try:
         for label, revision in (("canonical", "main"), ("cycle15", "cycle15-candidates")):
             info = retry_call(lambda revision=revision: api.repo_info(
-                "hariomahlawat/mimamsa-corpus", repo_type="dataset", revision=revision))
+                "hariomahlawat/mimamsa-corpus", repo_type="dataset", revision=revision,
+                files_metadata=True))
             revisions[label] = info.sha
             paths += len(info.siblings or [])
-            hashes.update(hashes_from_repository_paths(info.siblings))
+            revision_hashes = typed_hashes_from_repository_siblings(info.siblings)
+            for key, values in revision_hashes.items():
+                typed[key].update(values)
     except Exception as exc:
         remote_error = f"{type(exc).__name__}: {exc}"
         revisions = {"canonical": "f8a46dfaec55a13f2aaac2fde4139ca0acd5cff9",
                      "cycle15": "217020dbd969e14c2373697f4094fa00557962a6"}
-    hashes.update(repository_manifest_hashes(repo))
+    untyped_local = repository_manifest_hashes(repo)
     record = {"generated_at": utcnow(), "repository": "hariomahlawat/mimamsa-corpus",
               "revisions": revisions, "metadata_paths_examined": paths,
-              "distinct_sha256_values": len(hashes), "sha256": sorted(hashes),
-              "method": ("Hugging Face repository paths containing full SHA-256 identifiers plus Git-tracked manifests; no document bodies downloaded"
-                         if paths else "Git-tracked canonical manifests and audit records; live Hugging Face revisions pinned but path enumeration unavailable"),
+              **{key: sorted(values) for key, values in typed.items()},
+              "typed_sha256_counts": {key: len(values) for key, values in typed.items()},
+              "untyped_local_manifest_sha256_count": len(untyped_local),
+              "method": ("Revision-pinned Hugging Face path classes and files_metadata LFS SHA-256 values; untyped local manifest hashes excluded from identity decisions"
+                         if paths else "Live Hugging Face typed enumeration unavailable; no untyped local hash is eligible for canonical identity"),
               "remote_error": remote_error,
-              "limitations": ["LFS object hashes not embedded in repository paths are not represented in this bounded index.",
-                              "Git-tracked corpus manifests and audit records supplement the path index; a hash match proves byte knowledge but not legal identity."]}
+              "limitations": ["Path-derived hash classes depend on canonical repository layout and require identity review.",
+                              "An LFS object hash is a storage-object identity, not automatically the original legal source hash.",
+                              "Untyped Git audit/configuration hashes are counted for coverage but excluded from document identity."]}
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(record, indent=2), encoding="utf-8")
     return record
 
 
-def inventory(source: Path, output: Path, repo: Path, limit: int | None = None) -> list[dict]:
+def inventory(source: Path, output: Path, repo: Path, canonical: dict, limit: int | None = None) -> list[dict]:
     output.mkdir(parents=True, exist_ok=True)
     derivatives = output / "derivatives"
     derivatives.mkdir(exist_ok=True)
     checkpoint_path = output / "inventory-checkpoint.jsonl"
     previous = {row["relative_path"]: row for row in load_jsonl(checkpoint_path)}
-    restricted_hashes, recovery_hashes = local_control_values(repo)
+    configuration, restricted_hashes, recovery_hashes = processing_configuration_identity(repo, canonical)
+    (output / "PROCESSING_CONFIGURATION.json").write_text(json.dumps(configuration, indent=2), encoding="utf-8")
     paths = sorted((path for path in source.rglob("*") if path.is_file()), key=lambda p: str(p).casefold())
     if limit:
         paths = paths[:limit]
     rows = []
     for number, path in enumerate(paths, 1):
         relative = path.relative_to(source).as_posix()
-        stat = path.stat()
         cached = previous.get(relative)
-        if (cached and cached.get("size_bytes") == stat.st_size and cached.get("mtime_ns") == stat.st_mtime_ns
-                and cached.get("extraction_methodology_version") == EXTRACTION_METHODOLOGY_VERSION):
+        stat = path.stat()
+        digest = file_sha256(path)
+        if (cached and cached.get("sha256") == digest
+                and cached.get("processing_configuration_sha256") == configuration["processing_configuration_sha256"]):
             rows.append(cached)
             continue
-        digest, pages, encrypted, error, method = "", [], False, None, "not-extracted"
-        embedded_images = []
+        pages, encrypted, error, method = [], False, None, "not-extracted"
+        embedded_images, unresolved_images, unreferenced_media, pdf_page_inspection = [], [], [], []
         try:
-            digest = file_sha256(path)
             if path.suffix.lower() == ".docx":
                 docx = extract_docx(path)
-                pages, method = [docx.native_text], "docx-xml+embedded-image-inventory"
+                pages, method = [docx.native_text], "docx-xml+complete-image-relationship-inventory"
+                unresolved_images = list(docx.unresolved_image_references)
+                unreferenced_media = list(docx.unreferenced_media)
                 for image in docx.images:
                     suffix = PurePosixPath(image.archive_path).suffix.lower()
                     try:
@@ -480,12 +519,14 @@ def inventory(source: Path, output: Path, repo: Path, limit: int | None = None) 
                         visual = {"width": None, "height": None, "format": suffix.lstrip(".").upper() or "UNKNOWN",
                                   "perceptual_dhash": None, "inspection_error": f"{type(exc).__name__}: {exc}"[:300]}
                     embedded_images.append({"sequence": image.sequence, "occurrence_id": image.occurrence_id,
-                                            "relationship_id": image.relationship_id, "placement": "document_body",
+                                            "relationship_id": image.relationship_id, "placement": image.part,
                                             "archive_path": image.archive_path, "image_sha256": image.sha256,
                                             "size_bytes": image.size_bytes, **visual,
                                             "ocr_state": "REQUIRED", "processing_disposition": "HASHED_IN_MEMORY_PENDING_SCREENING"})
             elif path.suffix.lower() in TEXT_EXTENSIONS:
                 pages, encrypted, method = extract_text(path)
+                if path.suffix.lower() == ".pdf" and not encrypted:
+                    pdf_page_inspection = inspect_pdf(path)
         except Exception as exc:  # evidence record, never silent
             error = f"{type(exc).__name__}: {exc}"[:500]
         text = "\n\n".join(pages)
@@ -497,7 +538,8 @@ def inventory(source: Path, output: Path, repo: Path, limit: int | None = None) 
         # corrective inventory generation.
         derivative_path = None
         derivative_hash = None
-        sparse = ocr_required_pages(path.suffix.lower(), pages, len(embedded_images))
+        sparse = ([item["physical_page"] for item in pdf_page_inspection if item["ocr_required"]]
+                  if path.suffix.lower() == ".pdf" else [])
         relevant = bool(MILITARY.search(" ".join(subjects_for(relative)) + " " + text[:20000])) if text else None
         supported = path.suffix.lower() in SUPPORTED
         restricted = digest.casefold() in restricted_hashes or has_restriction_marking(text)
@@ -505,10 +547,12 @@ def inventory(source: Path, output: Path, repo: Path, limit: int | None = None) 
             "inventory_id": inventory_id(relative), "relative_path": relative, "filename": path.name,
             "extension": path.suffix.lower(), "detected_format": detect_format(path),
             "size_bytes": stat.st_size, "mtime_ns": stat.st_mtime_ns, "sha256": digest,
-            "page_count": len(pages) or None, "language": language_for(text),
+            "page_count": physical_page_count(path.suffix.lower(), pages), "language": language_for(text),
             "text_available": bool(text.strip()), "normalized_text_sha256": text_hash,
             "content_identity_sha256": content_hash, "embedded_images": embedded_images,
             "embedded_image_count": len(embedded_images),
+            "unresolved_image_references": unresolved_images, "unreferenced_media": unreferenced_media,
+            "pdf_page_inspection": pdf_page_inspection,
             "derivative_relative_path": str(derivative_path.relative_to(output)).replace("\\", "/") if derivative_path else None,
             "derivative_sha256": derivative_hash, "extraction_method": method,
             "derivative_withheld_reason": "ACCESS_MARKING_SCREENING_INCOMPLETE" if text else None,
@@ -517,8 +561,10 @@ def inventory(source: Path, output: Path, repo: Path, limit: int | None = None) 
             "ocr_required_pages": sparse, "ocr_required_images": ocr_required_images(path.suffix.lower(), len(embedded_images)),
             "pagination_basis": "PHYSICAL_PAGES" if path.suffix.lower() == ".pdf" else "NONE_FLOW_DOCUMENT",
             "relevance": relevant, "restricted": restricted,
-            "historical_recovery_hash_match": digest.casefold() in recovery_hashes, "classification_version": 3,
+            "historical_recovery_hash_match": digest.casefold() in recovery_hashes,
+            "classification_version": CLASSIFICATION_RULES_VERSION,
             "extraction_methodology_version": EXTRACTION_METHODOLOGY_VERSION,
+            "processing_configuration_sha256": configuration["processing_configuration_sha256"],
             "filename_legal_metadata": parse_filename_legal_metadata(path.name),
             "metadata_candidate": metadata_signals(text), "source_provenance": "owner local collection; external source unverified",
         }
@@ -670,7 +716,7 @@ def run(args) -> int:
         canonical = canonical_index(canonical_path, repo)
     else:
         canonical = json.loads(canonical_path.read_text(encoding="utf-8"))
-    rows = inventory(source, output, repo, args.limit)
+    rows = inventory(source, output, repo, canonical, args.limit)
     rows = reconcile(rows, canonical, output, source)
     package_and_reports(rows, output, source, canonical)
     errors = validate(output)
