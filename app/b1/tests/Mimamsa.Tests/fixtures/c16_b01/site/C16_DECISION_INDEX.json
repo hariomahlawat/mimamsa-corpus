@@ -1,0 +1,68 @@
+{
+ "entries": [
+  {
+   "admission_id": "ADM-3735d9d7423d8df66bfb3b01",
+   "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
+   "decision": "HELD_RELEVANCE_UNRESOLVED",
+   "doc_id": "aft-2020-b01-later-held-oa0106",
+   "release_id": "R16-b01-e2e-20261128-00000002",
+   "sha256": "dff242b3c8ae175e69ffc812bcbf4d905cb6a5613e4cce2c51479eb7d3d9c768",
+   "site_outcome": "HELD"
+  },
+  {
+   "admission_id": "ADM-4b601d7b34080826cace65a5",
+   "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
+   "decision": "HELD_RELEVANCE_UNRESOLVED",
+   "doc_id": "hc-2020-b01-held-wp0102",
+   "release_id": "R16-b01-e2e-20261128-00000001",
+   "sha256": "c02fb446e205581878ebe9c6f063680e8b0241c2293ed315b6e7568f12899241",
+   "site_outcome": "HELD"
+  },
+  {
+   "admission_id": "ADM-4b601d7b34080826cace65a5",
+   "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
+   "decision": "HELD_RELEVANCE_UNRESOLVED",
+   "doc_id": "hc-2020-b01-held-wp0102",
+   "release_id": "R16-b01-e2e-20261128-00000002",
+   "sha256": "c02fb446e205581878ebe9c6f063680e8b0241c2293ed315b6e7568f12899241",
+   "site_outcome": "HELD"
+  },
+  {
+   "admission_id": "ADM-168a90025d4415eaa96b73e9",
+   "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
+   "decision": "ADMITTED_AS_PRIMARY",
+   "doc_id": "local-2d87e6cc7207779f",
+   "release_id": "R16-b01-e2e-20261128-00000001",
+   "sha256": "2d87e6cc7207779f1752ebf2f2a1165bbc54b1b23d589f9a650f5b1fab9c4eb2",
+   "site_outcome": "ELIGIBLE"
+  },
+  {
+   "admission_id": "ADM-168a90025d4415eaa96b73e9",
+   "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
+   "decision": "ADMITTED_AS_PRIMARY",
+   "doc_id": "local-2d87e6cc7207779f",
+   "release_id": "R16-b01-e2e-20261128-00000002",
+   "sha256": "2d87e6cc7207779f1752ebf2f2a1165bbc54b1b23d589f9a650f5b1fab9c4eb2",
+   "site_outcome": "ELIGIBLE"
+  },
+  {
+   "admission_id": "ADM-25eb7757c00a6167dfd56bce",
+   "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
+   "decision": "ADMITTED_AS_PRIMARY",
+   "doc_id": "sc-2020-b01-eligible-ca0101",
+   "release_id": "R16-b01-e2e-20261128-00000001",
+   "sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a",
+   "site_outcome": "ELIGIBLE"
+  },
+  {
+   "admission_id": "ADM-25eb7757c00a6167dfd56bce",
+   "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
+   "decision": "ADMITTED_AS_PRIMARY",
+   "doc_id": "sc-2020-b01-eligible-ca0101",
+   "release_id": "R16-b01-e2e-20261128-00000002",
+   "sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a",
+   "site_outcome": "ELIGIBLE"
+  }
+ ],
+ "format": 1
+}

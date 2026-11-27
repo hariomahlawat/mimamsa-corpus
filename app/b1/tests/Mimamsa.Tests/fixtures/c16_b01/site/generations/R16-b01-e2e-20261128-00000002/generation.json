@@ -1,0 +1,144 @@
+{
+ "c16": {
+  "accounting_sha256": "63cef23594d278af39c80b97e137f4b8490da4157ea4edfdff14416680ff37a8",
+  "codes": {
+   "C16_LEGACY_NOT_ESTABLISHED": 2,
+   "C16_ONLY_NOT_SERVABLE": 1,
+   "C16_SUBJECT_NOT_SERVABLE": 3
+  },
+  "contract": "mimamsa-corpus-contract/2.1",
+  "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
+  "denied": [
+   [
+    "aft-2020-b01-later-held-oa0106",
+    "dff242b3c8ae175e69ffc812bcbf4d905cb6a5613e4cce2c51479eb7d3d9c768"
+   ],
+   [
+    "aft-2020-b01-noprov-oa0104",
+    "7e2150c0541d23750763260855f5400422120d6a406e4f3811510b8d774e6fbb"
+   ],
+   [
+    "aft-2020-b01-v7relabel-oa0105",
+    "d6f719e273663f37aea6ff31e4428ce72e234e32316786b393e17b34b97953f7"
+   ],
+   [
+    "hc-2020-b01-held-wp0102",
+    "c02fb446e205581878ebe9c6f063680e8b0241c2293ed315b6e7568f12899241"
+   ],
+   [
+    "local-2d87e6cc7207779f",
+    "2d87e6cc7207779f1752ebf2f2a1165bbc54b1b23d589f9a650f5b1fab9c4eb2"
+   ]
+  ],
+  "files": {
+   "c16/resolved_receipts.json": "ac4c73a2c7a6109dcba01532bddb5b1619db7ad5d0847e5d98b39e9b1c1a2f40",
+   "c16/verdicts.json": "26f97bf11d6694abf8b798e49498a21d604918b0bb26fead6f0e975c4956c864",
+   "corpus-v2/GENERATION.json": "f2c27e21b809f38d61493917a03dc5eeb69ff97bab3ef2ddb5a5d36faa475c1e",
+   "corpus-v2/admissions.jsonl": "fd40085f8d04ac2f751b98d1dc79d61dfc40728a59a304ced41c985b8d067e7f",
+   "corpus-v2/anchors.jsonl": "896ce5ea49586ccf6b9194a06c4b692051596e6414ff67a8b6e8a2f985d46a33",
+   "corpus-v2/identities.jsonl": "41a36d523318267cc549067367ab983f228d099e7483a1d0ed01e661f530a792",
+   "corpus-v2/relationships.jsonl": "4ac41bdc2bd9764a14d64adaf876f50789bcc0825042f8ec0e7d1f5219c1f1b6",
+   "corpus-v2/taxonomy.jsonl": "c5dbedea492fa16aa399c48b43d927334771766a82e2026683074ca1f1673fc9",
+   "registers/receipts/3855d06a71b9f30fac67cde5d460e38d3d8e32c54a809d4da97c15f9e1fb8ca1.json": "3855d06a71b9f30fac67cde5d460e38d3d8e32c54a809d4da97c15f9e1fb8ca1",
+   "registers/receipts/39624572d3e63835a4ce03a23fc61b35b44a369a26a1e6d626a1dbc9b8cb372c.json": "39624572d3e63835a4ce03a23fc61b35b44a369a26a1e6d626a1dbc9b8cb372c",
+   "registers/receipts/3b44737f350a6a80a8dbb7c210f68c313433ee1ad6f82c9e478ae36276f1f2e4.json": "3b44737f350a6a80a8dbb7c210f68c313433ee1ad6f82c9e478ae36276f1f2e4",
+   "registers/receipts/631fe88293b8f4c9994f43abc25d2a444f0f3ec288dc77c8402d7e6042fe420b.json": "631fe88293b8f4c9994f43abc25d2a444f0f3ec288dc77c8402d7e6042fe420b",
+   "registers/receipts/985b00f7d342b097496b7794b3becf0619d353604523b398482c6b831d3d830c.json": "985b00f7d342b097496b7794b3becf0619d353604523b398482c6b831d3d830c",
+   "registers/receipts/da14224114a4307ebdafe69d1549b08f7ea0f837fb60193e9ee16fbfedd641b5.json": "da14224114a4307ebdafe69d1549b08f7ea0f837fb60193e9ee16fbfedd641b5",
+   "registers/receipts/dc472b21dc3a85957432e3140a22c4d8accb6ad05d03b4635c4452f4e165cc84.json": "dc472b21dc3a85957432e3140a22c4d8accb6ad05d03b4635c4452f4e165cc84",
+   "registers/receipts/e71010d39f4634883ac05b9fb1db1e654cee67a2a78ac253c8e010480cea6229.json": "e71010d39f4634883ac05b9fb1db1e654cee67a2a78ac253c8e010480cea6229",
+   "registers/receipts/ed960a7a07b6d83aef81ff1fadec96888110d6d8d92754ec3043b596a77f4a02.json": "ed960a7a07b6d83aef81ff1fadec96888110d6d8d92754ec3043b596a77f4a02",
+   "registers/source_accounting.declared.json": "aabb18345f9156d819ae6bde36ac60f9a26a967fdba2337e687e9d22c7a88ccc",
+   "registers/source_accounting.json": "63cef23594d278af39c80b97e137f4b8490da4157ea4edfdff14416680ff37a8"
+  },
+  "governed": [
+   [
+    "aft-2020-b01-later-held-oa0106",
+    "dff242b3c8ae175e69ffc812bcbf4d905cb6a5613e4cce2c51479eb7d3d9c768"
+   ],
+   [
+    "hc-2020-b01-held-wp0102",
+    "c02fb446e205581878ebe9c6f063680e8b0241c2293ed315b6e7568f12899241"
+   ],
+   [
+    "local-2d87e6cc7207779f",
+    "2d87e6cc7207779f1752ebf2f2a1165bbc54b1b23d589f9a650f5b1fab9c4eb2"
+   ],
+   [
+    "sc-2020-b01-eligible-ca0101",
+    "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a"
+   ]
+  ],
+  "served_copies": [
+   [
+    "sc-2020-b01-eligible-ca0101",
+    "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a"
+   ]
+  ]
+ },
+ "candidate_evidence": {},
+ "exclusion_channel": "none",
+ "item_document": {
+  "candidates": {},
+  "derived_text": {
+   "aft-2020-b01-legacy-oa0103@mimamsa-corpus-text/1.0.0": [
+    "aft-2020-b01-legacy-oa0103",
+    "f4c9ff4c0d3fca1ad4006bd4ecdf0b87e0cc3e262e5a33516554b11ed1c04e9d"
+   ],
+   "sc-2020-b01-eligible-ca0101@mimamsa-corpus-text/1.0.0": [
+    "sc-2020-b01-eligible-ca0101",
+    "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a"
+   ]
+  },
+  "documents": {
+   "aft-2020-b01-legacy-oa0103": [
+    "aft-2020-b01-legacy-oa0103",
+    "f4c9ff4c0d3fca1ad4006bd4ecdf0b87e0cc3e262e5a33516554b11ed1c04e9d"
+   ],
+   "sc-2020-b01-eligible-ca0101": [
+    "sc-2020-b01-eligible-ca0101",
+    "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a"
+   ]
+  }
+ },
+ "materialized": {
+  "corpus_v2": {
+   "dir": "corpus-v2/",
+   "files": {
+    "GENERATION.json": "f2c27e21b809f38d61493917a03dc5eeb69ff97bab3ef2ddb5a5d36faa475c1e",
+    "admissions.jsonl": "fd40085f8d04ac2f751b98d1dc79d61dfc40728a59a304ced41c985b8d067e7f",
+    "anchors.jsonl": "896ce5ea49586ccf6b9194a06c4b692051596e6414ff67a8b6e8a2f985d46a33",
+    "identities.jsonl": "41a36d523318267cc549067367ab983f228d099e7483a1d0ed01e661f530a792",
+    "relationships.jsonl": "4ac41bdc2bd9764a14d64adaf876f50789bcc0825042f8ec0e7d1f5219c1f1b6",
+    "taxonomy.jsonl": "c5dbedea492fa16aa399c48b43d927334771766a82e2026683074ca1f1673fc9"
+   }
+  },
+  "derived": "derived/<text_sha256>.txt",
+  "format": 1,
+  "records": "records/",
+  "research": []
+ },
+ "page_counts": {
+  "7e2150c0541d23750763260855f5400422120d6a406e4f3811510b8d774e6fbb": 1,
+  "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a": 2,
+  "c02fb446e205581878ebe9c6f063680e8b0241c2293ed315b6e7568f12899241": 1,
+  "d6f719e273663f37aea6ff31e4428ce72e234e32316786b393e17b34b97953f7": 1,
+  "dff242b3c8ae175e69ffc812bcbf4d905cb6a5613e4cce2c51479eb7d3d9c768": 1,
+  "f4c9ff4c0d3fca1ad4006bd4ecdf0b87e0cc3e262e5a33516554b11ed1c04e9d": 1
+ },
+ "quarantine": [],
+ "release_id": "R16-b01-e2e-20261128-00000002",
+ "release_sequence": 2,
+ "servable": {
+  "candidates": [],
+  "derived_text": [
+   "sc-2020-b01-eligible-ca0101@mimamsa-corpus-text/1.0.0",
+   "aft-2020-b01-legacy-oa0103@mimamsa-corpus-text/1.0.0"
+  ],
+  "documents": [
+   "sc-2020-b01-eligible-ca0101",
+   "aft-2020-b01-legacy-oa0103"
+  ]
+ },
+ "sums_sha256": "7eb23e41f4638b0cf96b3637ca534a06f623c3b4bef967f4e6a32c55c5e9bb71"
+}

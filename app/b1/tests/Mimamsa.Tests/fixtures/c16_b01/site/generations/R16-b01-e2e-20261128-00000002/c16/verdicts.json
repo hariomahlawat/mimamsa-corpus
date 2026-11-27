@@ -1,0 +1,116 @@
+{
+ "anchors": [
+  {
+   "anchor_id": "ANC-18f826be83d7b09b3e0d4008",
+   "codes": [],
+   "doc_id": "sc-2020-b01-eligible-ca0101",
+   "original_sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a",
+   "span_verified": true
+  }
+ ],
+ "copies": [
+  {
+   "admission_id": "ADM-3735d9d7423d8df66bfb3b01",
+   "codes": [
+    "C16_SUBJECT_NOT_SERVABLE"
+   ],
+   "decision": "HELD_RELEVANCE_UNRESOLVED",
+   "doc_id": "aft-2020-b01-later-held-oa0106",
+   "gates": {},
+   "has_v1_record": true,
+   "outcome": "HELD",
+   "served": false,
+   "service_scope": "NONE",
+   "sha256": "dff242b3c8ae175e69ffc812bcbf4d905cb6a5613e4cce2c51479eb7d3d9c768"
+  },
+  {
+   "admission_id": "ADM-4b601d7b34080826cace65a5",
+   "codes": [
+    "C16_SUBJECT_NOT_SERVABLE"
+   ],
+   "decision": "HELD_RELEVANCE_UNRESOLVED",
+   "doc_id": "hc-2020-b01-held-wp0102",
+   "gates": {},
+   "has_v1_record": true,
+   "outcome": "HELD",
+   "served": false,
+   "service_scope": "NONE",
+   "sha256": "c02fb446e205581878ebe9c6f063680e8b0241c2293ed315b6e7568f12899241"
+  },
+  {
+   "admission_id": "ADM-168a90025d4415eaa96b73e9",
+   "codes": [
+    "C16_ONLY_NOT_SERVABLE",
+    "C16_SUBJECT_NOT_SERVABLE"
+   ],
+   "decision": "ADMITTED_AS_PRIMARY",
+   "doc_id": "local-2d87e6cc7207779f",
+   "gates": {
+    "G01_HASH_VERIFIED": "SITE_VERIFIED",
+    "G02_FORMAT_DETECTED": "SITE_VERIFIED",
+    "G03_RESTRICTED_REGISTER": "SITE_VERIFIED",
+    "G04_ACCESS_MARKING_REVIEWED": "ASSERTED_BOUND",
+    "G05_IDENTITY_RECORD_VALID": "SITE_VERIFIED",
+    "G06_TEXT_DERIVATIVE_VERIFIED": "SITE_VERIFIED",
+    "G07_EMBEDDED_IMAGES_ACCOUNTED": "SITE_VERIFIED",
+    "G08_RELEVANCE_ASSESSED": "ASSERTED_BOUND",
+    "G09_DUPLICATE_RESOLVED": "ASSERTED_BOUND",
+    "G10_SCHEMA_VALID": "SITE_VERIFIED"
+   },
+   "has_v1_record": false,
+   "outcome": "ELIGIBLE",
+   "served": false,
+   "service_scope": "SEARCHABLE",
+   "sha256": "2d87e6cc7207779f1752ebf2f2a1165bbc54b1b23d589f9a650f5b1fab9c4eb2"
+  },
+  {
+   "admission_id": "ADM-25eb7757c00a6167dfd56bce",
+   "codes": [],
+   "decision": "ADMITTED_AS_PRIMARY",
+   "doc_id": "sc-2020-b01-eligible-ca0101",
+   "gates": {
+    "G01_HASH_VERIFIED": "SITE_VERIFIED",
+    "G02_FORMAT_DETECTED": "SITE_VERIFIED",
+    "G03_RESTRICTED_REGISTER": "SITE_VERIFIED",
+    "G04_ACCESS_MARKING_REVIEWED": "ASSERTED_BOUND",
+    "G05_IDENTITY_RECORD_VALID": "SITE_VERIFIED",
+    "G06_TEXT_DERIVATIVE_VERIFIED": "SITE_VERIFIED",
+    "G08_RELEVANCE_ASSESSED": "ASSERTED_BOUND",
+    "G09_DUPLICATE_RESOLVED": "ASSERTED_BOUND",
+    "G10_SCHEMA_VALID": "SITE_VERIFIED"
+   },
+   "has_v1_record": true,
+   "outcome": "ELIGIBLE",
+   "served": true,
+   "service_scope": "SEARCHABLE",
+   "sha256": "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a"
+  }
+ ],
+ "legacy": [
+  {
+   "doc_id": "aft-2020-b01-legacy-oa0103",
+   "established": true,
+   "reasons": [],
+   "sha256": "f4c9ff4c0d3fca1ad4006bd4ecdf0b87e0cc3e262e5a33516554b11ed1c04e9d",
+   "source": "v1:hf:owner/b01-synthetic@bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+   "doc_id": "aft-2020-b01-noprov-oa0104",
+   "established": false,
+   "reasons": [
+    "v1 provenance incomplete (no pinned HF revision or acquisition record)"
+   ],
+   "sha256": "7e2150c0541d23750763260855f5400422120d6a406e4f3811510b8d774e6fbb",
+   "source": "v1:RELEASE_IMPORT"
+  },
+  {
+   "doc_id": "aft-2020-b01-v7relabel-oa0105",
+   "established": false,
+   "reasons": [
+    "a candidate or unadmitted original cannot be relabelled as a v1 document"
+   ],
+   "sha256": "d6f719e273663f37aea6ff31e4428ce72e234e32316786b393e17b34b97953f7",
+   "source": "v1:hf:owner/b01-synthetic@bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  }
+ ]
+}

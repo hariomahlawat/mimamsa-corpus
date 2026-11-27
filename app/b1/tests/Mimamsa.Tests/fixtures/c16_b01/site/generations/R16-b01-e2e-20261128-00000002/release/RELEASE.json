@@ -1,0 +1,27 @@
+{
+ "auth_ledger_version": 0,
+ "candidate_banner": {
+  "required": true,
+  "text": "Research and candidate data. Not legally verified. AUTH-LEDGER version 0: no legal approval exists."
+ },
+ "created_at": "2026-11-25T00:00:00Z",
+ "pinned": {
+  "artefact_commits": {},
+  "hf_repo": "example-owner/example-dataset",
+  "hf_revision": "d1e75aca758154ee2147853c02ec6716f4a7ea04",
+  "model_bundles": [],
+  "tools_commit": "0000000"
+ },
+ "release_id": "R16-b01-e2e-20261128-00000002",
+ "release_sequence": 2,
+ "restricted_material": {
+  "config_path": "config/restricted_material.json",
+  "config_sha256": "b6558d739673c568a5d7252f239847bb1f27f0b849cbe88efc1c88806515583a",
+  "restriction_ids_applied": [
+   "RM-999"
+  ]
+ },
+ "schema_versions": {
+  "contract": "1.0.0"
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "active": {
+  "activated": true,
+  "release_id": "R16-b01-e2e-20261128-00000002",
+  "served": [
+   "aft-2020-b01-legacy-oa0103",
+   "sc-2020-b01-eligible-ca0101"
+  ]
+ },
+ "expected_documents": [
+  "aft-2020-b01-legacy-oa0103",
+  "sc-2020-b01-eligible-ca0101"
+ ],
+ "expected_held_copies": [
+  "b52e9f0436caf064192cc0a674a8697d3f4e2500e419229b30aadee15b72881a|sc-2020-b01-eligible-ca0101",
+  "f4c9ff4c0d3fca1ad4006bd4ecdf0b87e0cc3e262e5a33516554b11ed1c04e9d|aft-2020-b01-legacy-oa0103"
+ ],
+ "generation_1": {
+  "activated": true,
+  "release_id": "R16-b01-e2e-20261128-00000001",
+  "served": [
+   "aft-2020-b01-later-held-oa0106",
+   "aft-2020-b01-legacy-oa0103",
+   "sc-2020-b01-eligible-ca0101"
+  ]
+ },
+ "never_visible": [
+  "aft-2020-b01-later-held-oa0106",
+  "aft-2020-b01-noprov-oa0104",
+  "aft-2020-b01-v7relabel-oa0105",
+  "hc-2020-b01-held-wp0102",
+  "local-2d87e6cc7207779f"
+ ]
+}
