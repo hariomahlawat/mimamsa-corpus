@@ -303,6 +303,9 @@ jobs:
         run: |
           $env:MIMAMSA_TEST_SITE = "$env:B1_ROOT\syn\site"; $env:MIMAMSA_TEST_MAP = "$env:B1_ROOT\syn\fixture_map.json"
           $env:MIMAMSA_TEST_DB = "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_test;Maximum Pool Size=40"
+          # C16 B03: cloned-database and restricted-role tests create/drop disposable c16b03_* databases and roles; the
+          # runner's preinstalled superuser does that (the app role mimamsa is deliberately not a superuser here).
+          $env:MIMAMSA_TEST_PG_ADMIN = "Host=127.0.0.1;Port=5432;Username=postgres;Password=root;Database=postgres;Maximum Pool Size=4"
           New-Item -ItemType Directory -Force out\b1 | Out-Null
           dotnet test -c Release --no-build app/b1/Mimamsa.B1.slnx --logger "trx;LogFileName=b1-tests-windows.trx" --results-directory out\b1
           if ($LASTEXITCODE) { throw "B1 tests failed on Windows" }
