@@ -159,9 +159,11 @@ function blockView(b, i, ed) {
   return h("div.ws-block", { "data-type": b.type }, h("div.ws-block-head", origin, b.type === "question" ? chip("neutral", "Question for legal review") : null, tools), field);
 }
 
-async function studioEditor(page, nav, id, version) {
+const loadStudioDoc = (id, version) => Promise.all([api(`/api/studio/documents/${encodeURIComponent(id)}${version ? `?version=${version}` : ""}`), api(`/api/studio/documents/${encodeURIComponent(id)}/versions`)]);
+
+async function studioEditor(page, nav, id, version, preloaded = null) {
   let d, vers;
-  try { [d, vers] = await Promise.all([api(`/api/studio/documents/${encodeURIComponent(id)}${version ? `?version=${version}` : ""}`), api(`/api/studio/documents/${encodeURIComponent(id)}/versions`)]); }
+  try { [d, vers] = preloaded || await loadStudioDoc(id, version); }
   catch (e) { clear(page); add(page, h("div.error-state", { role: "alert" }, h("h2", e.status === 404 ? "No such document in your Studio" : "Could not load the document"), h("p", e.body?.notice || e.message),
     h("p", h("a", { href: "/studio", onclick: go(nav, "/studio") }, "Back to the Studio")))); return; }
   clear(page);
@@ -214,14 +216,21 @@ async function studioEditor(page, nav, id, version) {
   // library blocks in place (the server re-renders them from the current eligible copy), keeping the author's text.
   const isCorpus = (b) => b.type === "citation" || b.type === "quote";
   const key = (b) => [b.type, b.doc_id, b.copy, b.page, b.passage_id || "", b.para || ""].join("|");   // para: two paragraphs on one page are distinct (Codex review of PR #75)
-  current = { kind: "studio", render: async () => {
-    if (!ed.changed) return studioEditor(page, nav, id, viewingOld ? d.version : undefined);
+  // Codex review of PR #75: the dirty state is checked only AFTER the fetch, and a clean editor is rebuilt from the data
+  // already fetched (no further await), so typing that starts while the refresh is in flight is never discarded.
+  const me = { kind: "studio" };
+  me.render = async () => {
+    let loaded;
+    try { loaded = await loadStudioDoc(id, viewingOld ? d.version : undefined); } catch { return; /* the next policy change or reload re-checks */ }
+    if (current !== me || !page.isConnected) return;                       // navigated away meanwhile
+    if (!ed.changed) return studioEditor(page, nav, id, viewingOld ? d.version : undefined, loaded);
     try {
-      const fresh = await api(`/api/studio/documents/${encodeURIComponent(id)}${viewingOld ? `?version=${d.version}` : ""}`);
+      const fresh = loaded[0];
       const m = new Map(fresh.blocks.filter(isCorpus).map((b) => [key(b), b]));
       ed.blocks = ed.blocks.map((b) => !isCorpus(b) ? b
         : m.get(key(b)) || { type: b.type, origin: "corpus", doc_id: b.doc_id, copy: b.copy, page: b.page, passage_id: b.passage_id, para: b.para, available: false, notice: "Source no longer available in this installation." });
       draw();
     } catch { /* the next policy change or reload re-checks */ }
-  } };
+  };
+  current = me;
 }

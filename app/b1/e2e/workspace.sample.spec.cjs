@@ -167,6 +167,33 @@ test("W-05b citations to two paragraphs of one page survive an in-place refresh 
   }
 });
 
+// Codex review of PR #75: typing that starts while a policy refresh of a clean editor is in flight is kept (the dirty
+// state is checked after the fetch). The refresh's document request is held until the author has typed.
+test("W-05c typing during an in-flight policy refresh is not discarded", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  const created = await (await apiPost(user, "/api/studio/documents", { title: "W-05c in-flight refresh", template: "blank" })).json();
+  expect((await apiPost(user, `/api/studio/documents/${created.id}/append`, { blocks: [{ type: "text", origin: "user", text: "Saved text." }] })).status()).toBe(200);
+  await user.goto(`/studio/${created.id}`);
+  const box = user.locator(".ws-block textarea").first();
+  await expect(box).toHaveValue("Saved text.");
+  let release; const gate = new Promise((r) => { release = r; });
+  await user.route((u) => u.pathname === `/api/studio/documents/${created.id}`, async (route) => { await gate; await route.continue(); });
+  await login(page, "admin");
+  expect((await apiPost(page, "/api/admin/withdraw", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C15 W-05c policy change" })).status()).toBe(200);
+  try {
+    await user.waitForRequest((r) => new URL(r.url()).pathname === `/api/studio/documents/${created.id}`, { timeout: 25_000 });
+    await box.fill("Typed while the refresh was in flight.");
+    release();
+    await user.waitForTimeout(1500);
+    await expect(user.locator(".ws-block textarea").first()).toHaveValue("Typed while the refresh was in flight.");
+    await expect(user.locator("#studio-status")).toContainText("unsaved changes");
+  } finally {
+    release();
+    expect((await apiPost(page, "/api/admin/reinstate", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C15 W-05c restore after test" })).status()).toBe(200);
+  }
+});
+
 test("W-06 Commander questions go into a Studio document as automated suggestions", async ({ page }) => {
   await login(page);
   await page.goto("/c/court-of-inquiry");
