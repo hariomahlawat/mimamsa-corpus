@@ -101,7 +101,7 @@ internal sealed class ForwardCache : IDisposable
         for (int k = 0; k < ordered.Count; k++)
         {
             var p = ordered[k]; var x = t[k];
-            PutS(s, p.PassageId); PutU(s, (uint)p.Page); PutU(s, (uint)p.CharStart); PutU(s, (uint)p.CharEnd); PutU(s, (uint)p.Text.Length);
+            PutS(s, p.PassageId); PutU(s, (uint)p.Page); PutU(s, (uint)p.CharStart); PutU(s, (uint)p.CharEnd); PutU(s, (uint)p.Length);
             PutU(s, (uint)x.Len); PutU(s, (uint)x.Army); PutU(s, (uint)x.Navy); PutU(s, (uint)x.Air); PutU(s, (uint)x.Groups.Length);
             foreach (var (term, pos) in x.Groups)
             {
@@ -123,7 +123,7 @@ internal sealed class ForwardCache : IDisposable
             for (int k = 0; k < ordered.Count; k++)
             {
                 var p = ordered[k];
-                if (GetS(b, ref i) != p.PassageId || GetU(b, ref i) != p.Page || GetU(b, ref i) != p.CharStart || GetU(b, ref i) != p.CharEnd || GetU(b, ref i) != p.Text.Length) return null;
+                if (GetS(b, ref i) != p.PassageId || GetU(b, ref i) != p.Page || GetU(b, ref i) != p.CharStart || GetU(b, ref i) != p.CharEnd || GetU(b, ref i) != p.Length) return null;
                 int len = (int)GetU(b, ref i), army = (int)GetU(b, ref i), navy = (int)GetU(b, ref i), air = (int)GetU(b, ref i), ng = (int)GetU(b, ref i);
                 var groups = new (string, int[])[ng];
                 for (int gI = 0; gI < ng; gI++)

@@ -46,8 +46,21 @@ int listenSndBuf = conf.GetValue("Mimamsa:Transport:ListenSendBufferBytes", 32 *
 
 var dataSource = new NpgsqlDataSourceBuilder(cs).Build();
 var vault = new Vault(site);
+// C16 WP04 (ADR-0008): Mimamsa:Text:Store = memory (all page and passage text held; the reference) | disk (text read on
+// demand from a verified, generation-scoped SQLite store under Mimamsa:Text:Dir, default <site>/text-store, built and
+// published atomically on the first start of a generation). Output is identical; only memory, start-up and disk differ.
+var textOptions = new TextStoreOptions
+{
+    Store = conf["Mimamsa:Text:Store"] is { Length: > 0 } tstore ? tstore : "memory",
+    Dir = conf["Mimamsa:Text:Dir"] is { Length: > 0 } tdir ? tdir : null,
+    CacheBytes = conf.GetValue("Mimamsa:Text:CacheMb", 64L) << 20,
+    VerifyOnOpen = conf.GetValue("Mimamsa:Text:VerifyOnOpen", true),
+    RebuildOnFailure = conf.GetValue("Mimamsa:Text:RebuildOnFailure", true),
+    KeepPrevious = conf.GetValue("Mimamsa:Text:KeepPrevious", 2),
+};
+if (textOptions.Store is not ("memory" or "disk")) throw new InvalidOperationException("Mimamsa:Text:Store must be 'memory' or 'disk'");
 var loadSw = System.Diagnostics.Stopwatch.StartNew();
-var generation = GenerationStore.Load(site, vault);
+var generation = GenerationStore.Load(site, vault, textOptions, Console.WriteLine);
 var generationLoadMs = loadSw.ElapsedMilliseconds;
 var state = new ServingState();
 var policy = new PolicyStore(dataSource);
@@ -226,6 +239,7 @@ else if (await identity.UserCountAsync() == 0)
     log.LogWarning("no accounts exist; create one with: Mimamsa.Web --add-user <name> Admin (password on stdin)");
 log.LogInformation("generation {Gen} loaded: {Docs} documents, {Passages} passages indexed, load issues {Issues}",
     generation.GenerationId, generation.Documents.Count, index.N, generation.LoadIssues.Count == 0 ? "none" : string.Join(",", generation.LoadIssues.Select(kv => kv.Key + "=" + kv.Value)));
+log.LogInformation("text store: {Kind}{Path}", generation.Text.Kind, generation.Text.StorePath is { } tpath ? " at " + tpath : "");
 log.LogInformation("start-up phases: generation load and re-hash {LoadMs} ms, index build {IndexMs} ms, hybrid {HybridMs} ms, process {ProcMs} ms",
     generationLoadMs, indexBuildMs, hybridMs, (long)(DateTime.Now - System.Diagnostics.Process.GetCurrentProcess().StartTime).TotalMilliseconds);
 // C14 S4: numbers-only process diagnostics for benchmarks. Off unless Mimamsa:Diagnostics:Enabled=true; returns no
@@ -253,7 +267,7 @@ if (conf.GetValue("Mimamsa:Diagnostics:Enabled", false))
             managed_heap_mb = Math.Round(GC.GetTotalMemory(false) / 1048576.0, 1), gc_heap_size_mb = Math.Round(gi.HeapSizeBytes / 1048576.0, 1),
             gc_committed_mb = Math.Round(gi.TotalCommittedBytes / 1048576.0, 1), gc_fragmented_mb = Math.Round(gi.FragmentedBytes / 1048576.0, 1),
             gc_server = System.Runtime.GCSettings.IsServerGC, gc_count_gen2 = GC.CollectionCount(2), cpu_s = Math.Round(p.TotalProcessorTime.TotalSeconds, 2),
-            threads = p.Threads.Count,
+            threads = p.Threads.Count, text_store = generation.Text.Stats(),
         });
     });
 }

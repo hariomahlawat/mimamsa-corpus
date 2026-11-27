@@ -242,7 +242,7 @@ public class StatuteRelationsTests
     {
         var site = Environment.GetEnvironmentVariable("MIMAMSA_SAMPLE_SITE");
         if (string.IsNullOrEmpty(site) || !Directory.Exists(site)) return;
-        var g = GenerationStore.Load(site);
+        var g = TestText.Load(site);
         var r = g.Relations;
         bool Edge(string nf, string ns, string of, string os) => r.Edges.Any(e => e.NewFamily == nf && e.NewBase == ns && e.OldFamily == of && e.OldBases.Contains(os));
         Assert.True(Edge("no:45 of 2023", "103", "no:45 of 1860", "302"), "BNS 103 <- IPC 302");

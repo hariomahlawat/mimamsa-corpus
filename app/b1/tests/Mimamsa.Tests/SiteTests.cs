@@ -15,7 +15,7 @@ public static class Syn
     public static JsonObject Map => JsonNode.Parse(File.ReadAllText(Environment.GetEnvironmentVariable("MIMAMSA_TEST_MAP")
         ?? throw new InvalidOperationException("MIMAMSA_TEST_MAP must point to fixture_map.json")))!.AsObject();
     static GenerationStore? _g;
-    public static GenerationStore Gen => _g ??= GenerationStore.Load(Site);
+    public static GenerationStore Gen => _g ??= TestText.Load(Site);
 
     /// Copy of the site that a test may tamper with.
     public static string CopySite()
@@ -59,7 +59,7 @@ public class GenerationStoreTests
         var gid = File.ReadAllText(Path.Combine(site, "ACTIVE")).Trim();
         var f = Directory.EnumerateFiles(Path.Combine(site, "generations", gid, "derived")).First();
         File.AppendAllText(f, "tampered");
-        var g = GenerationStore.Load(site);
+        var g = TestText.Load(site);
         Assert.Equal(1, g.LoadIssues["DERIVATIVE_TEXT_HASH_MISMATCH"]);
         Assert.Single(g.Documents.Values, d => d.DerivativeId is null);
     }
@@ -70,7 +70,7 @@ public class GenerationStoreTests
         var sha = Syn.Gen.Documents["syn-s-act"].CopySha;
         var f = Path.Combine(site, "vault", "sha256", sha[..2], sha);
         File.AppendAllText(f, "x");
-        var g = GenerationStore.Load(site);
+        var g = TestText.Load(site);
         Assert.False(g.Documents["syn-s-act"].OriginalVerified);
         Assert.False(SearchIndex.Indexable(g.Documents["syn-s-act"]));
     }
@@ -83,7 +83,7 @@ public class GenerationStoreTests
         var j = JsonNode.Parse(File.ReadAllText(gp))!.AsObject();
         j.Remove("materialized");
         File.WriteAllText(gp, j.ToJsonString());
-        Assert.Equal("GENERATION_NOT_MATERIALIZED", Assert.Throws<GenerationLoadException>(() => GenerationStore.Load(site)).Code);
+        Assert.Equal("GENERATION_NOT_MATERIALIZED", Assert.Throws<GenerationLoadException>(() => TestText.Load(site)).Code);
     }
 }
 

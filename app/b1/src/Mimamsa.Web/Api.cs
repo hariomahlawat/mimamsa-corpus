@@ -503,7 +503,7 @@ public static partial class Api
                 pipeline = new { id = d.DerivativeId, name = d.PipelineName, version = d.PipelineVersion, text_sha256 = d.DerivativeTextSha },
                 access_marking = d.AccessMarking, publication_history = new[] { new { channel = "RELEASE_ACTIVATION", release_id = rel.ReleaseId, actor = p.IsAdmin ? "site import (B1 build)" : null } },
             },
-            pages = d.Pages.Values.OrderBy(x => x.Page).Select(x => new { page = x.Page, method = x.Method, low_confidence = x.LowConfidence, chars = x.Text.Length }),
+            pages = d.Pages.Values.OrderBy(x => x.Page).Select(x => new { page = x.Page, method = x.Method, low_confidence = x.LowConfidence, chars = x.Length }),
             outcomes = d.Candidates.Where(c => c.Type == "outcome").Select(c => CandidateDto(c, s)),
             edges_out = d.Candidates.Where(c => c.Type == "graph_edge").Take(400).Select(c => CandidateDto(c, s)),
             edges_out_total = d.Candidates.Count(c => c.Type == "graph_edge"),
