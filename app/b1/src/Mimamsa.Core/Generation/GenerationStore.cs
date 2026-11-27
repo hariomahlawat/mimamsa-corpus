@@ -93,12 +93,15 @@ public sealed partial class GenerationStore
 
     /// Loads the ACTIVE generation. `text` selects the text store (default memory, the reference); `log` receives
     /// text-store build, open and verification lines (no text).
-    public static GenerationStore Load(string siteRoot, Vault? vault = null, TextStoreOptions? text = null, Action<string>? log = null)
+    /// `generationId` (C16 CP-1, verification only): load that staged generation instead of the ACTIVE one, so the
+    /// site can verify a generation (rows, graph, text store) before the activation journal switches to it.
+    public static GenerationStore Load(string siteRoot, Vault? vault = null, TextStoreOptions? text = null, Action<string>? log = null,
+                                       string? generationId = null)
     {
         siteRoot = Path.GetFullPath(siteRoot);
         var activePath = Path.Combine(siteRoot, "ACTIVE");
-        if (!File.Exists(activePath)) throw new GenerationLoadException("NO_ACTIVE_GENERATION");
-        var gid = File.ReadAllText(activePath).Trim();
+        if (generationId is null && !File.Exists(activePath)) throw new GenerationLoadException("NO_ACTIVE_GENERATION");
+        var gid = generationId ?? File.ReadAllText(activePath).Trim();
         if (gid.Length == 0 || gid.Contains('/') || gid.Contains('\\') || gid.Contains("..")) throw new GenerationLoadException("ACTIVE_INVALID");
         var gdir = Path.Combine(siteRoot, "generations", gid);
         var gen = JsonNode.Parse(File.ReadAllText(Path.Combine(gdir, "generation.json")))!.AsObject();

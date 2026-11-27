@@ -337,6 +337,14 @@ if (conf.GetValue("Mimamsa:Activation:Enabled", false))
     channel.Start();
     app.Lifetime.ApplicationStopping.Register(() => channel.DisposeAsync().AsTask().Wait(2000));
     log.LogInformation("activation participant enabled (serving: {Serving})", participant.IsServing());
+    // Response boundary (CP-1 surfaces: search, document, document text, citation, permalink): filter by the CURRENT
+    // exclusion state for the request's pin; an unreadable store withholds (fail closed).
+    app0.ActivationExcluded = (ctx, docId, sha) =>
+    {
+        if (ctx.Items["mimamsa.activation.pin"] is not Mimamsa.Core.Activation.ReaderPin pin) return true;
+        try { return participant.Respond(pin, new[] { (docId, sha) }, x => x.docId, x => x.sha).Count == 0; }
+        catch (Mimamsa.Core.Activation.ActivationRefused) { return true; }
+    };
     app.Use(async (ctx, next) =>
     {
         if (!ctx.Request.Path.StartsWithSegments("/api")) { await next(); return; }

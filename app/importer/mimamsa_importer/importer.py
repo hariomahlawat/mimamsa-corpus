@@ -109,6 +109,7 @@ class ImportResult:
     unresolved: list = field(default_factory=list)   # [{kind, id, reasons}]
     contract_errors: list = field(default_factory=list)
     c16: dict = field(default_factory=dict)          # C16 stage report: codes, per-copy outcomes, accounting
+    staged: bool = False                             # stage_only: generation written, ACTIVE left to the journal (B06)
 
 
 def _sha(data: bytes) -> str:
@@ -270,6 +271,9 @@ def servable(site: Path, kind: str, item_id: str, *, exclusions) -> bool:
 
 
 MATERIALIZED_FORMAT = 1
+# C16 CP-1: a generation imported with stage_only=True is written completely but ACTIVE is not switched; the B06
+# activation journal switches it. Recovery neither resumes nor quarantines such a generation.
+ACTIVATION_JOURNAL = "JOURNAL"
 RESEARCH_PREFIX = "research/"
 
 
@@ -338,7 +342,7 @@ def _materialize(gdir: Path, manifest: dict, docs, derived, cands, texts: dict, 
 
 
 def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_key=None, mode="production",
-                   register=None, rollback=False, today=None, exclusions=None) -> ImportResult:
+                   register=None, rollback=False, today=None, exclusions=None, stage_only=False) -> ImportResult:
     """exclusions: the site's current ExclusionState (optional). The C16 stage uses it for I-5 legacy establishment
     and to keep withdrawn or restricted copies out of service; serving still applies the current state per request."""
     bundle, site = Path(bundle), Path(site)
@@ -368,6 +372,8 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
                 pending = g.name.startswith(".tmp-")
                 if not pending and (g / "generation.json").is_file():
                     meta = json.loads((g / "generation.json").read_text(encoding="utf-8"))
+                    if meta.get("activation") == ACTIVATION_JOURNAL:
+                        continue   # staged for the activation journal (B06): neither residue nor resumable here
                     if (meta.get("release_sequence") or 0) > ((active or {}).get("release_sequence") or 0):
                         if meta["release_id"] == res.release_id and meta.get("sums_sha256") == sums_digest:
                             # crash after the rename, before ACTIVE: resume activation of the identical bundle
@@ -594,6 +600,8 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
                   "page_counts": copy_pages, "exclusion_channel": exclusion_mode,
                   "materialized": {"format": MATERIALIZED_FORMAT, "records": "records/",
                                    "derived": "derived/<text_sha256>.txt", "research": sorted(research)}}
+    if stage_only:
+        generation["activation"] = ACTIVATION_JOURNAL
     c16files = None
     if c16res.active:
         c16out = c16mod.materialize(c16res)
@@ -619,6 +627,9 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
         _crashpoint("before_rename")
         os.replace(tmpdir, gdir)
         _fsync_dir(gens)
+        if stage_only:   # C16 CP-1: the activation journal (B06), not the importer, switches ACTIVE
+            res.staged = True
+            return res
         _crashpoint("before_active")
         _write_atomic(site / "ACTIVE", str(res.release_id).encode())
     except OSError as exc:

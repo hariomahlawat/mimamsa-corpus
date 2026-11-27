@@ -780,6 +780,21 @@ def test_byte_checks_pdf_page_count_and_coverage():
     assert "C16_BYTES_SIZE" in c16.byte_issues(a, CP.a, {})
 
 
+def test_stage_only_import_leaves_active_to_the_activation_journal(hn, seeded):
+    """CP-1 (B01 + B06): with stage_only the generation is written completely but ACTIVE is not switched; a later
+    import neither resumes nor quarantines it, so the activation journal can switch ACTIVE to it."""
+    from mimamsa_importer import import_release
+    before = (seeded / "ACTIVE").read_bytes()
+    r = import_release(hn.bundle(), seeded, trusted_public_key=hn.pub, mode="development", register=cc.REGISTER, stage_only=True)
+    assert r.staged and not r.activated
+    assert (seeded / "ACTIVE").read_bytes() == before
+    gdir = seeded / "generations" / r.release_id
+    assert json.loads((gdir / "generation.json").read_text())["activation"] == importer.ACTIVATION_JOURNAL
+    r2 = hn.run(hn.bundle(), seeded)
+    assert r2.activated and (gdir / "generation.json").is_file()
+    assert not list((seeded / "quarantine").glob(f"generations/{r.release_id}*"))
+
+
 def test_receipt_reference_matches_the_contract_reference():
     """The importer calls the reference resolver; it never re-implements it."""
     assert c16.receipts is receipts
