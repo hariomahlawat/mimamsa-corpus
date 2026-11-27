@@ -336,6 +336,13 @@ def scenario_list():
                  {"knowledge": "L1", "models": "M2", "serving": True, "semantic_search": False},
                  installed=["L1"], active="L1", models=None, lexical_only=["L1"],
                  staged_models={"MX": {"verified": False, "vectors_for": []}, "M2": {"verified": True, "vectors_for": ["R9"]}}))
+    S.append(scn("SC31-unverified-active-model-blocks-full-release", ["LEXICAL_ONLY_ACTIVATION", "MODEL_SWITCH"],
+                 "K1: an active model that has vectors for the target but is not verified refuses a release with vectors; a lexical-only release (K2) does not consult the model.",
+                 [("lock_acquire", W1, None), ("transition", dict(W1, target="KNOWLEDGE", to="R2"), "Refused"),
+                  ("transition", dict(W1, target="KNOWLEDGE", to="L4"), None), ("pin", {}, None)],
+                 {"knowledge": "L4", "models": "M1", "serving": True, "semantic_search": False},
+                 installed=["R1", "R2", "L4"], lexical_only=["L4"],
+                 staged_models={"M1": {"verified": False, "vectors_for": ["R1", "R2"]}}))
     return S
 
 

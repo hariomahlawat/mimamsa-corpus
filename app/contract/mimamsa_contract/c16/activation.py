@@ -109,8 +109,8 @@ class Site:
         M1 (2.0) a MODELS target must be staged and verified.
         M2 (2.0) ...and have verified vectors for the active knowledge generation, UNLESS (2.1) that generation is
            lexical-only, where vectors are not used.
-        K1 (2.0) a KNOWLEDGE target that is not lexical-only needs an active model with verified vectors for it
-           (no active model: refused).
+        K1 (2.0) a KNOWLEDGE target that is not lexical-only needs an active model that is VERIFIED and has verified
+           vectors for it (no active model: refused; the explicit verified check is a 2.1 fix, SC31).
         K2 (2.1) a lexical-only KNOWLEDGE target may be activated with no model or with a model without vectors for
            it; semantic search then stays disabled (semantic_search_enabled)."""
         lex = self.lexical_only
@@ -124,6 +124,8 @@ class Site:
             model = self.staged_models.get(self.pointers["MODELS"]) if self.pointers["MODELS"] is not None else None
             if model is None:
                 raise Refused("no active model: a release with vectors needs a verified model with verified vectors")
+            if not model.get("verified"):
+                raise Refused("active model is not verified")              # K1 (2.1 fix: documented rule)
             if to not in model.get("vectors_for", set()):
                 raise Refused("active model has no verified vectors for the target generation")
 

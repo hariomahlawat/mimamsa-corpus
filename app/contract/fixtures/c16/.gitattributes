@@ -1,3 +1,5 @@
 # Fixture bytes are hashed and compared byte for byte (canonical JSONL, LF only): never convert line ends.
 *.json -text
 *.jsonl -text
+# Byte-exact plain-text fixtures (e.g. v2_1/accounting/registers/candidate_sets/*.txt: LF-joined, no final LF).
+*.txt -text
