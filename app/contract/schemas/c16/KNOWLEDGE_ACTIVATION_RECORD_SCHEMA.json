@@ -1,0 +1,464 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/KNOWLEDGE_ACTIVATION_RECORD_SCHEMA.json",
+  "title": "Knowledge activation record (site-only, append-only, hash-chained)",
+  "description": "One closed activation journal transaction (architecture section 8): written for every activation, rollback, restore or refusal of a knowledge or intelligence release, idempotently keyed by txn_id. Site-only installation data, never placed in a release bundle. Each record names the previous record's sha256 (a chain an auditor can replay). The outcome distinguishes normal acceptance (ACTIVE_FULL) from acceptance after a cheap local rebuild of a rejected accelerator (ACTIVE_AFTER_LOCAL_REBUILD) and from degraded service (ACTIVE_DEGRADED, which needs an Admin acknowledgement). Activation is a site Admin act (ADR-0002 publication), never legal approval.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "record_kind",
+    "seq",
+    "previous_record_sha256",
+    "txn_id",
+    "action",
+    "target",
+    "release_id",
+    "release_class",
+    "release_sequence",
+    "previous_active_release_id",
+    "app_version",
+    "components",
+    "exclusion_state",
+    "result",
+    "service_level",
+    "actor",
+    "at",
+    "preflight"
+  ],
+  "properties": {
+    "contract": {
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"
+    },
+    "record_kind": {
+      "const": "knowledge_activation_record"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "previous_record_sha256": {
+      "anyOf": [
+        {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "txn_id": {
+      "description": "Activation journal transaction id; the record is written once per txn_id (idempotent reconciliation).",
+      "type": "string",
+      "pattern": "^TX-[0-9]{8}-[0-9a-f]{12}$"
+    },
+    "action": {
+      "enum": [
+        "ACTIVATE",
+        "ROLLBACK",
+        "RESTORE",
+        "REFUSE"
+      ]
+    },
+    "target": {
+      "description": "Which commit pointer the transaction moved.",
+      "enum": [
+        "KNOWLEDGE",
+        "MODELS"
+      ]
+    },
+    "release_id": {
+      "type": "string",
+      "pattern": "^R[0-9]{2,3}-[a-z0-9-]{1,40}-[0-9]{8}-[0-9a-f]{8}$"
+    },
+    "release_class": {
+      "enum": [
+        "KNOWLEDGE",
+        "INTELLIGENCE"
+      ]
+    },
+    "release_sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "previous_active_release_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^R[0-9]{2,3}-[a-z0-9-]{1,40}-[0-9]{8}-[0-9a-f]{8}$"
+    },
+    "app_version": {
+      "$ref": "../v1/common.schema.json#/$defs/semver"
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "component_id",
+          "result"
+        ],
+        "properties": {
+          "component_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{1,63}$"
+          },
+          "result": {
+            "enum": [
+              "VERIFIED_USED",
+              "VERIFIED_REUSED_FROM_RETAINED",
+              "ACCELERATOR_REBUILT_LOCALLY",
+              "ACCELERATOR_DEGRADED",
+              "FAILED"
+            ]
+          },
+          "failed_checks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 64
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "exclusion_state": {
+      "description": "The ExclusionStore effective state re-applied immediately before the journal reached OPEN (exposure). If the store advanced during the switch, the newer state is re-applied before OPEN.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "digest",
+        "items_suppressed"
+      ],
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "digest": {
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "items_suppressed": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "result": {
+      "enum": [
+        "ACTIVE_FULL",
+        "ACTIVE_AFTER_LOCAL_REBUILD",
+        "ACTIVE_DEGRADED",
+        "ROLLED_BACK",
+        "REFUSED"
+      ]
+    },
+    "service_level": {
+      "enum": [
+        "FULL",
+        "DEGRADED_LEXICAL_ONLY",
+        "DEGRADED_NO_RERANK",
+        "NOT_SERVING"
+      ]
+    },
+    "degradation_acknowledged_by": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 120
+    },
+    "reason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "id"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "ADMIN",
+            "SYSTEM_RECOVERY"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 120
+        }
+      }
+    },
+    "at": {
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/datetime"
+    },
+    "preflight": {
+      "description": "Measured disk preflight (owner decision 5): required bytes are measured from the staged components and vault additions plus the configured headroom and retained set; never a fixed number. Activation is refused when it fails.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "measured_required_bytes",
+        "free_bytes",
+        "headroom_fraction",
+        "retained_releases",
+        "result"
+      ],
+      "properties": {
+        "measured_required_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "free_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "headroom_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "retained_releases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "uniqueItems": true
+        },
+        "result": {
+          "enum": [
+            "PASS",
+            "FAIL"
+          ]
+        }
+      }
+    },
+    "active_models_release_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 80
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "seq": {
+            "const": 1
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "previous_record_sha256": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "previous_record_sha256": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "enum": [
+              "ACTIVE_FULL",
+              "ACTIVE_AFTER_LOCAL_REBUILD",
+              "ACTIVE_DEGRADED"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "action": {
+            "enum": [
+              "ACTIVATE",
+              "ROLLBACK",
+              "RESTORE"
+            ]
+          },
+          "components": {
+            "items": {
+              "properties": {
+                "result": {
+                  "not": {
+                    "const": "FAILED"
+                  }
+                }
+              }
+            }
+          },
+          "preflight": {
+            "properties": {
+              "result": {
+                "const": "PASS"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "const": "ACTIVE_FULL"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "service_level": {
+            "const": "FULL"
+          },
+          "components": {
+            "items": {
+              "properties": {
+                "result": {
+                  "enum": [
+                    "VERIFIED_USED",
+                    "VERIFIED_REUSED_FROM_RETAINED"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "const": "ACTIVE_AFTER_LOCAL_REBUILD"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "service_level": {
+            "const": "FULL"
+          },
+          "components": {
+            "contains": {
+              "properties": {
+                "result": {
+                  "const": "ACCELERATOR_REBUILT_LOCALLY"
+                }
+              }
+            },
+            "items": {
+              "properties": {
+                "result": {
+                  "not": {
+                    "const": "ACCELERATOR_DEGRADED"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "const": "ACTIVE_DEGRADED"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "degradation_acknowledged_by"
+        ],
+        "properties": {
+          "service_level": {
+            "enum": [
+              "DEGRADED_LEXICAL_ONLY",
+              "DEGRADED_NO_RERANK"
+            ]
+          },
+          "degradation_acknowledged_by": {
+            "type": "string",
+            "minLength": 3
+          },
+          "components": {
+            "contains": {
+              "properties": {
+                "result": {
+                  "const": "ACCELERATOR_DEGRADED"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "REFUSE"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "reason"
+        ],
+        "properties": {
+          "result": {
+            "const": "REFUSED"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 3
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "const": "REFUSED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "action": {
+            "const": "REFUSE"
+          }
+        }
+      }
+    }
+  ]
+}

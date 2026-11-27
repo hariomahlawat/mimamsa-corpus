@@ -1,0 +1,120 @@
+{
+ "alternate_copies": [
+  {
+   "basis": "page images re-hashed one to one (fixture)",
+   "relation": "THIS_RECONSTRUCTED_FROM",
+   "sha256": "6d01d5756880c765890a8987501b4e556e58f6d898766a8ba818e66644c8c62d",
+   "verification": "EXTRACTED_STRUCTURE"
+  }
+ ],
+ "contract": "mimamsa-corpus-contract/2.0",
+ "corpus_generation_id": "CG-20261127-fixtures-0a1b2c3d",
+ "doc_id": "aft-2004-example-scan-oa0002-reconstructed",
+ "embedded_images": [],
+ "integrity": {
+  "basis": "producer-computed SHA-256 (fixture)",
+  "source_integrity": "DECLARED_HASH_ONLY"
+ },
+ "provenance": {
+  "acquisition": {
+   "acquisition_channel": "MANUAL_OWNER",
+   "hf": null,
+   "original_filename": null,
+   "retrieved_at": null,
+   "source_url": null
+  },
+  "carrier_provenance": "USER_SUPPLIED",
+  "observations": [],
+  "processing_history": []
+ },
+ "record_kind": "document_identity",
+ "representation": {
+  "completeness": "NOT_CHECKED",
+  "content_scope": "WHOLE_WORK",
+  "origin_status": "LOCALLY_RECONSTRUCTED",
+  "page_mapping": {
+   "basis": "ONE_TO_ONE_PAGE_HASH_CHECKED",
+   "offset": 0,
+   "original_sha256": "6d01d5756880c765890a8987501b4e556e58f6d898766a8ba818e66644c8c62d"
+  },
+  "reconstructed_from_sha256": [
+   "6d01d5756880c765890a8987501b4e556e58f6d898766a8ba818e66644c8c62d"
+  ],
+  "reconstruction_method": "OCR_TEXT_LAYER_ADDED",
+  "representation_kind": "RECONSTRUCTED_SEARCHABLE_PDF"
+ },
+ "research_eligibility": {
+  "basis": [
+   "OCR_TEXT_SEARCH_ONLY",
+   "COMPLETENESS_NOT_CHECKED"
+  ],
+  "graph_evidence_permitted": true,
+  "quoting_permitted": false,
+  "source_page_citation_permitted": true,
+  "state": "SEARCH_ONLY",
+  "whole_work_claims_permitted": false
+ },
+ "restriction": {
+  "access_marking": null,
+  "basis": "synthetic fixture",
+  "decided_by": "fixture",
+  "eligibility": "ELIGIBLE_ALL_USERS",
+  "restriction_id": null
+ },
+ "source_copy": {
+  "bytes": 117000,
+  "detected_format": "PDF",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "physical_pagination": "PHYSICAL_PAGES",
+  "sha256": "c90e72770a1603647cdb77a1207b0b34ee217d6f8573feca1cce68df90970b01",
+  "vault_path": "vault/sha256/c9/c90e72770a1603647cdb77a1207b0b34ee217d6f8573feca1cce68df90970b01"
+ },
+ "text_derivatives": [
+  {
+   "coverage": {
+    "images_text_extracted": 0,
+    "images_total": 0,
+    "units_total": 6,
+    "units_with_text": 6
+   },
+   "derivative_id": "aft-2004-example-scan-oa0002-reconstructed@mimamsa-ocr/2.0.0",
+   "derivative_text_sha256": "e78a9d0f1f915a1b47d1cf6ba6502910a1ee853853eecdb1e9af4ea076a37a46",
+   "methods": [
+    "OCR_PAGE_IMAGE"
+   ],
+   "ocr_config": {
+    "config_sha256": "777e7afa591f1f35946ef23bb4d2354ab7f337e74841844ec6512f5d5dfac7f4",
+    "dpi": 300,
+    "engine": "tesseract",
+    "engine_version": "5.4.0",
+    "languages": [
+     "eng"
+    ],
+    "page_segmentation_mode": "3",
+    "preprocessing": [
+     "deskew"
+    ]
+   },
+   "pagination_basis": "RECONSTRUCTED_PDF",
+   "pipeline_name": "mimamsa-ocr",
+   "pipeline_version": "2.0.0",
+   "quoting_permitted": false,
+   "text_reliability": "partly_unreliable"
+  }
+ ],
+ "work_identity": {
+  "graph_node_ref": "JUD:aft-2004-example-scan-oa0002",
+  "identity_basis": "COVER_PAGE_EXTRACTED",
+  "identity_verification": "CANDIDATE",
+  "judgment_id": {
+   "unresolved": "NOT_DETERMINED"
+  },
+  "proceeding_numbers_as_printed": [],
+  "rendition": {
+   "language": "en",
+   "rendition_kind": "UNDETERMINED"
+  },
+  "work_kind": "JUDGMENT"
+ }
+}

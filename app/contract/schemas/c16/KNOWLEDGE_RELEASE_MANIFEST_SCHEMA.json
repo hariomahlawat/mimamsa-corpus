@@ -1,0 +1,1119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/KNOWLEDGE_RELEASE_MANIFEST_SCHEMA.json",
+  "title": "Knowledge or intelligence release manifest (KNOWLEDGE_RELEASE.json, MKR-1)",
+  "description": "Component manifest of a knowledge release or an intelligence (model) release, format MKR-1. It travels inside an ordinary signed contract-v1 bundle (RELEASE.json, SHA256SUMS, SHA256SUMS.sig unchanged) and is listed in SHA256SUMS, so the owner's release signature covers it and its file inventory. Every component lists every file it owns with sha256 and size (the signed component inventory; rule KR_INVENTORY_* checks them against SHA256SUMS, overlaps and namespaces). Every component declares the full state it produces (result_digest). A FULL knowledge release accounts for every MKR-1 component kind (capability.accounting) and declares the service level it supports; it never silently claims full capability. There is no PostgreSQL archive component: knowledge tables are loaded from allowlisted, validated rows (KNOWLEDGE_ROWS; architecture section 7, decision C04). Application releases and installation-specific data are never components. See docs/architecture/c16/C16_KNOWLEDGE_RELEASE_ARCHITECTURE.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "record_kind",
+    "manifest_format",
+    "release_class",
+    "release_id",
+    "release_sequence",
+    "base",
+    "corpus_generations",
+    "compatibility",
+    "components",
+    "capability",
+    "heavy_compute_on_site",
+    "signing_purpose"
+  ],
+  "properties": {
+    "contract": {
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"
+    },
+    "record_kind": {
+      "const": "knowledge_release_manifest"
+    },
+    "manifest_format": {
+      "const": "MKR-1"
+    },
+    "release_class": {
+      "enum": [
+        "KNOWLEDGE",
+        "INTELLIGENCE"
+      ]
+    },
+    "release_id": {
+      "description": "Equal to RELEASE.json release_id (v1 pattern).",
+      "type": "string",
+      "pattern": "^R[0-9]{2,3}-[a-z0-9-]{1,40}-[0-9]{8}-[0-9a-f]{8}$"
+    },
+    "release_sequence": {
+      "description": "Equal to RELEASE.json release_sequence (v1 replay protection, unchanged).",
+      "type": "integer",
+      "minimum": 1
+    },
+    "base": {
+      "description": "FULL: self-contained. DELTA: applies only on top of base_release_id, which must be the ACTIVE release at import.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "base_release_id"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "FULL",
+            "DELTA"
+          ]
+        },
+        "base_release_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^R[0-9]{2,3}-[a-z0-9-]{1,40}-[0-9]{8}-[0-9a-f]{8}$"
+        },
+        "base_manifest_sha256": {
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "DELTA"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "base_manifest_sha256"
+            ],
+            "properties": {
+              "base_release_id": {
+                "type": "string"
+              },
+              "base_manifest_sha256": {
+                "type": "string"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "base_release_id": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "corpus_generations": {
+      "description": "Producer corpus generations this release is built from: each with the sha256 of its GENERATION.json.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "corpus_generation_id",
+          "manifest_sha256"
+        ],
+        "properties": {
+          "corpus_generation_id": {
+            "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/corpus_generation_id"
+          },
+          "manifest_sha256": {
+            "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+          }
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "knowledge_format",
+        "min_app_version",
+        "max_app_version",
+        "contracts",
+        "knowledge_schema_version",
+        "graph_builder_version",
+        "index_format",
+        "text_store_format",
+        "vector_store_format",
+        "required_models"
+      ],
+      "properties": {
+        "knowledge_format": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*\\.[0-9]+$"
+        },
+        "min_app_version": {
+          "$ref": "../v1/common.schema.json#/$defs/semver"
+        },
+        "max_app_version": {
+          "anyOf": [
+            {
+              "$ref": "../v1/common.schema.json#/$defs/semver"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "contracts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "v1"
+          ],
+          "properties": {
+            "v1": {
+              "$ref": "../v1/common.schema.json#/$defs/semver"
+            },
+            "corpus": {
+              "anyOf": [
+                {
+                  "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "knowledge_schema_version": {
+          "description": "Version of the knowledge DDL and the KNOWLEDGE_ROWS table allowlist. The DDL ships with the application, never in a release.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "graph_builder_version": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "index_format": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "text_store_format": {
+          "const": "mimamsa-text-store/1"
+        },
+        "vector_store_format": {
+          "const": "MIMVEC01"
+        },
+        "required_models": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "role",
+              "model_id",
+              "sha256"
+            ],
+            "properties": {
+              "role": {
+                "enum": [
+                  "EMBEDDER",
+                  "RERANKER",
+                  "OCR",
+                  "TOKENIZER"
+                ]
+              },
+              "model_id": {
+                "type": "string",
+                "maxLength": 200
+              },
+              "sha256": {
+                "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/component"
+      }
+    },
+    "capability": {
+      "description": "Explicit accounting. Every MKR-1 component kind relevant to the release class appears exactly once with its status. declared_service_level FULL is allowed only when nothing is OMITTED_DEGRADED (rule KR_FULL_CAPABILITY_CLAIM); a degraded release says what is degraded.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "declared_service_level",
+        "accounting",
+        "semantic_search_promised",
+        "pending_future_gates"
+      ],
+      "properties": {
+        "declared_service_level": {
+          "enum": [
+            "FULL",
+            "DEGRADED_LEXICAL_ONLY",
+            "DEGRADED_NO_RERANK"
+          ],
+          "description": "FULL service (all capabilities: lexical and semantic search, graph, text) is independent of FULL transport (base.mode). FULL service needs every mandatory component present (SHIPPED, or UNCHANGED_FROM_BASE in a delta), semantic search promised, an EMBEDDER declared and its vectors present."
+        },
+        "accounting": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "status",
+              "reason"
+            ],
+            "properties": {
+              "kind": {
+                "$ref": "#/$defs/component_kind"
+              },
+              "status": {
+                "description": "SHIPPED: a component of that kind is present. UNCHANGED_FROM_BASE: DELTA only; the base's component remains valid (its result_digest is repeated in reason). SITE_BUILDS_CHEAP: deliberately not shipped; the site builds it without OCR, embedding or a model (graph, lexical index, text store, knowledge rows). OMITTED_DEGRADED: not shipped and not cheaply buildable; the stated capability is lost. NOT_APPLICABLE: not part of this release class.",
+                "enum": [
+                  "SHIPPED",
+                  "UNCHANGED_FROM_BASE",
+                  "SITE_BUILDS_CHEAP",
+                  "OMITTED_DEGRADED",
+                  "NOT_APPLICABLE"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 300
+              }
+            }
+          }
+        },
+        "semantic_search_promised": {
+          "type": "boolean"
+        },
+        "pending_future_gates": {
+          "description": "Acceptance work that is specified but not yet implemented or calibrated. A manifest validating against this contract is contract-valid, not site-accepted; these gates stay listed until evidenced.",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "FG-SITE-IMPORTER",
+              "FG-RECEIPTS",
+              "FG-ROW-LOADER",
+              "FG-JOURNAL-DURABILITY",
+              "FG-CALIBRATED-SAMPLES",
+              "FG-REAL-RESTORE-TEST",
+              "FG-MODEL-TRUST-PURPOSE",
+              "FG-DISK-PREFLIGHT"
+            ]
+          }
+        }
+      }
+    },
+    "heavy_compute_on_site": {
+      "description": "Expensive steps the site must run to activate. OCR and embedding are never required. graph_rebuild ONLY_IF_ACCELERATOR_REJECTED means the graph accelerator is used when it verifies; a rejected one is rebuilt (cheap, deterministic, no model) and the activation is recorded as ACTIVE_AFTER_LOCAL_REBUILD, not as normal acceptance.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ocr",
+        "embedding",
+        "graph_rebuild"
+      ],
+      "properties": {
+        "ocr": {
+          "const": "NONE"
+        },
+        "embedding": {
+          "const": "NONE"
+        },
+        "graph_rebuild": {
+          "enum": [
+            "NONE",
+            "ONLY_IF_ACCELERATOR_REJECTED",
+            "SITE_BUILDS_CHEAP"
+          ]
+        }
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 2000
+    },
+    "signing_purpose": {
+      "description": "Trust-list purpose of the key that must sign this release (owner decision 3): KNOWLEDGE releases 'release', INTELLIGENCE releases a separate 'model' purpose. The 'model' purpose needs an owner-authorised trust-list extension and keys; none is added by this contract, so until then intelligence releases fail closed in production.",
+      "enum": [
+        "release",
+        "model"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "release_class": {
+            "const": "KNOWLEDGE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "kind": {
+                  "not": {
+                    "enum": [
+                      "MODEL_FILE",
+                      "RULE_PACK"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "release_class": {
+            "const": "INTELLIGENCE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "MODEL_FILE",
+                    "RULE_PACK",
+                    "VECTOR_PACK",
+                    "INTEGRITY_REGISTER"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "base": {
+            "properties": {
+              "mode": {
+                "const": "FULL"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "components": {
+            "items": {
+              "properties": {
+                "transport": {
+                  "const": "FULL"
+                }
+              }
+            }
+          },
+          "capability": {
+            "properties": {
+              "accounting": {
+                "items": {
+                  "properties": {
+                    "status": {
+                      "not": {
+                        "const": "UNCHANGED_FROM_BASE"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "release_class": {
+            "const": "KNOWLEDGE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "signing_purpose": {
+            "const": "release"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "release_class": {
+            "const": "INTELLIGENCE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "signing_purpose": {
+            "const": "model"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "capability": {
+            "properties": {
+              "declared_service_level": {
+                "const": "FULL"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "capability": {
+            "properties": {
+              "semantic_search_promised": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "component_kind": {
+      "description": "ORIGINALS: vault objects (add-only). TEXT_DERIVATIVES: [[page N]] derived text. RECORDS: canonical JSONL (v1 and C16). RESEARCH_AIDS: signed research JSONL. INTEGRITY_REGISTER, ADMISSION_REGISTER: authoritative registers. KNOWLEDGE_ROWS: allowlisted table rows for the knowledge schema, loaded by application code (replaces any PostgreSQL archive). GRAPH: graph nodes/edges. LEXICAL_INDEX: ADR-0007 store. TEXT_STORE: ADR-0008 store (mimamsa-text-store/1). VECTOR_PACK: MIMVEC01 vectors for one model. MODEL_FILE, RULE_PACK: intelligence releases only.",
+      "enum": [
+        "ORIGINALS",
+        "TEXT_DERIVATIVES",
+        "RECORDS",
+        "RESEARCH_AIDS",
+        "INTEGRITY_REGISTER",
+        "ADMISSION_REGISTER",
+        "KNOWLEDGE_ROWS",
+        "GRAPH",
+        "LEXICAL_INDEX",
+        "TEXT_STORE",
+        "VECTOR_PACK",
+        "MODEL_FILE",
+        "RULE_PACK"
+      ]
+    },
+    "file_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "../v1/common.schema.json#/$defs/relative_path"
+        },
+        "sha256": {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "row_table": {
+      "description": "One allowlisted knowledge table: its rows travel as canonical JSONL (one object per row, exactly the allowlisted columns), never as SQL.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "table",
+        "file",
+        "row_count",
+        "rows_sha256"
+      ],
+      "properties": {
+        "table": {
+          "enum": [
+            "graph_nodes",
+            "graph_edges",
+            "taxonomy_nodes",
+            "corpus_relationships",
+            "evidence_anchors",
+            "document_identities",
+            "corpus_admissions",
+            "candidates",
+            "provision_versions"
+          ]
+        },
+        "file": {
+          "$ref": "../v1/common.schema.json#/$defs/relative_path"
+        },
+        "row_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rows_sha256": {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+        }
+      }
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "component_id",
+        "kind",
+        "format",
+        "authority",
+        "transport",
+        "files",
+        "result_digest",
+        "result_count",
+        "verify"
+      ],
+      "properties": {
+        "component_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{1,63}$"
+        },
+        "kind": {
+          "$ref": "#/$defs/component_kind"
+        },
+        "format": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "authority": {
+          "description": "AUTHORITATIVE: source of truth. ACCELERATOR: a deterministic, versioned derivation of authoritative components shipped to save site compute; verified by kind-specific correctness checks (a matching source digest alone is never enough) and replaced by a cheap local build or a declared degradation when it cannot be used.",
+          "enum": [
+            "AUTHORITATIVE",
+            "ACCELERATOR"
+          ]
+        },
+        "transport": {
+          "enum": [
+            "FULL",
+            "DELTA"
+          ]
+        },
+        "files": {
+          "description": "Signed component file inventory: every file the component owns. Paths lie under the kind's namespace and belong to exactly one component.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/file_entry"
+          }
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/row_table"
+          }
+        },
+        "result_digest": {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+        },
+        "result_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_digest": {
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "builder": {
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/tool"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "model_sha256": {
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "binding": {
+          "description": "TEXT_STORE: the store is bound to the generation's authoritative records on every open (DiskTextStore.Bind): each document's derivative id, text hash, pipeline, quoting flag, pages, passages, text assessment and load issues are re-derived from the records and source derivatives and must match exactly, else the store is quarantined and rebuilt or refused. The store can never grant quoting or alter evidence.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "BIND_EXACT_TO_GENERATION_RECORDS",
+            null
+          ]
+        },
+        "disk_budget_bytes": {
+          "description": "ACCELERATOR: bytes the site needs for the installed artefact (checked against free space before staging).",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "verify": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "SHA256_EACH_FILE",
+              "RESULT_DIGEST",
+              "ROW_COUNTS",
+              "ROWS_ALLOWLIST_AND_TYPES",
+              "ROWS_REDERIVE_COMPARE",
+              "SQLITE_QUICK_CHECK",
+              "SOURCE_DIGEST_EQUALS_SITE",
+              "SAMPLED_POSTINGS_REDERIVE",
+              "SAMPLED_QUERY_PARITY",
+              "TEXT_STORE_BIND_EXACT",
+              "PAGE_HASH_ON_READ",
+              "VECTOR_TRAILER",
+              "VECTOR_KEYS_RECOMPUTED",
+              "VECTOR_SPOT_REEMBED",
+              "GRAPH_DIGEST",
+              "GRAPH_STRUCTURAL_RECHECK",
+              "SAMPLED_REBUILD_PARITY",
+              "RESTRICTED_REGISTER",
+              "CONTRACT_VALIDATION",
+              "ONNX_LOAD_SELFTEST"
+            ]
+          }
+        },
+        "fallback": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "REBUILD_LOCALLY_CHEAP",
+            "SERVE_LEXICAL_ONLY",
+            "SERVE_WITHOUT_RERANK",
+            "REFUSE_RELEASE",
+            null
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "authority": {
+                "const": "ACCELERATOR"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "source_digest",
+              "builder",
+              "fallback",
+              "disk_budget_bytes"
+            ],
+            "properties": {
+              "source_digest": {
+                "type": "string"
+              },
+              "builder": {
+                "type": "object"
+              },
+              "fallback": {
+                "type": "string"
+              },
+              "disk_budget_bytes": {
+                "type": "integer"
+              },
+              "verify": {
+                "contains": {
+                  "const": "SOURCE_DIGEST_EQUALS_SITE"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "VECTOR_PACK",
+                  "MODEL_FILE"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "model_sha256"
+            ],
+            "properties": {
+              "model_sha256": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "VECTOR_PACK",
+                  "LEXICAL_INDEX",
+                  "GRAPH",
+                  "KNOWLEDGE_ROWS",
+                  "TEXT_STORE"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "authority": {
+                "const": "ACCELERATOR"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "LEXICAL_INDEX",
+                  "GRAPH",
+                  "KNOWLEDGE_ROWS",
+                  "TEXT_STORE"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "transport": {
+                "const": "FULL"
+              },
+              "fallback": {
+                "const": "REBUILD_LOCALLY_CHEAP"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "VECTOR_PACK"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "fallback": {
+                "enum": [
+                  "SERVE_LEXICAL_ONLY",
+                  "REFUSE_RELEASE"
+                ]
+              },
+              "verify": {
+                "allOf": [
+                  {
+                    "contains": {
+                      "const": "VECTOR_TRAILER"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "VECTOR_KEYS_RECOMPUTED"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "VECTOR_SPOT_REEMBED"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "LEXICAL_INDEX"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "verify": {
+                "allOf": [
+                  {
+                    "contains": {
+                      "const": "SQLITE_QUICK_CHECK"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "SAMPLED_POSTINGS_REDERIVE"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "SAMPLED_QUERY_PARITY"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "GRAPH"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "verify": {
+                "allOf": [
+                  {
+                    "contains": {
+                      "const": "GRAPH_DIGEST"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "GRAPH_STRUCTURAL_RECHECK"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "SAMPLED_REBUILD_PARITY"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "TEXT_STORE"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "binding"
+            ],
+            "properties": {
+              "format": {
+                "const": "mimamsa-text-store/1"
+              },
+              "binding": {
+                "const": "BIND_EXACT_TO_GENERATION_RECORDS"
+              },
+              "verify": {
+                "allOf": [
+                  {
+                    "contains": {
+                      "const": "SQLITE_QUICK_CHECK"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "TEXT_STORE_BIND_EXACT"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "PAGE_HASH_ON_READ"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "KNOWLEDGE_ROWS"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "tables"
+            ],
+            "properties": {
+              "format": {
+                "const": "mimamsa-knowledge-rows/1"
+              },
+              "tables": {
+                "minItems": 1
+              },
+              "verify": {
+                "allOf": [
+                  {
+                    "contains": {
+                      "const": "ROW_COUNTS"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "ROWS_ALLOWLIST_AND_TYPES"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "ROWS_REDERIVE_COMPARE"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "ORIGINALS",
+                  "TEXT_DERIVATIVES",
+                  "RECORDS",
+                  "RESEARCH_AIDS",
+                  "INTEGRITY_REGISTER",
+                  "ADMISSION_REGISTER"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "authority": {
+                "const": "AUTHORITATIVE"
+              },
+              "fallback": {
+                "type": "null"
+              },
+              "verify": {
+                "allOf": [
+                  {
+                    "contains": {
+                      "const": "SHA256_EACH_FILE"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "RESULT_DIGEST"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "RESTRICTED_REGISTER"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "RECORDS",
+                  "ADMISSION_REGISTER"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "verify": {
+                "contains": {
+                  "const": "CONTRACT_VALIDATION"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "MODEL_FILE"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "verify": {
+                "contains": {
+                  "const": "ONNX_LOAD_SELFTEST"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

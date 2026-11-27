@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/CORPUS_GENERATION_MANIFEST_SCHEMA.json",
+  "title": "Corpus generation manifest (GENERATION.json)",
+  "description": "Declares one producer corpus generation: its pinned inputs (possibly several immutable HF revisions, each with its purpose: decision Q8), every exchange file with its record kind, sha256 and record count (canonical file names, or declared shards of one kind), and the registries against which identifiers are resolved. Strict exchange validation requires this manifest and checks every count and hash against the files.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "record_kind", "corpus_generation_id", "pinned_inputs", "files", "registries"],
+  "properties": {
+    "contract": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"},
+    "record_kind": {"const": "corpus_generation_manifest"},
+    "corpus_generation_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/corpus_generation_id"},
+    "built_at": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/datetime"}, {"type": "null"}]},
+    "pinned_inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hf", "git", "restricted_register_sha256", "tools"],
+      "properties": {
+        "hf": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["repo", "revision", "purpose"], "properties": {"repo": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"}, "revision": {"$ref": "../v1/common.schema.json#/$defs/hf_revision"}, "purpose": {"type": "string", "minLength": 3, "maxLength": 200}}}},
+        "git": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["commit", "purpose"], "properties": {"commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"}, "purpose": {"type": "string", "minLength": 3, "maxLength": 200}}}},
+        "local_collections": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["collection", "inventory_sha256", "files"], "properties": {"collection": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/collection_ref"}, "inventory_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, "files": {"type": "integer", "minimum": 0}}}},
+        "restricted_register_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
+        "tools": {"type": "array", "minItems": 1, "items": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/tool"}}
+      }
+    },
+    "files": {
+      "description": "Every exchange file. Canonical names: identities.jsonl, anchors.jsonl, relationships.jsonl, taxonomy.jsonl, admissions.jsonl, reviewed_records.jsonl; or shards <canonical stem>.<4 digits>.jsonl of the same kind.",
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "record_kind", "sha256", "records"],
+        "properties": {
+          "path": {"type": "string", "pattern": "^(identities|anchors|relationships|taxonomy|admissions|reviewed_records)(\\.[0-9]{4})?\\.jsonl$"},
+          "record_kind": {"enum": ["document_identity", "evidence_anchor", "corpus_relationship", "taxonomy_node", "corpus_admission", "reviewed_record"]},
+          "sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
+          "records": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "registries": {
+      "description": "Identifier registries. instrument_codes: codes an INSTCODE:, PROV: or CHAP: id may use (the C15 code list plus declared DOC-<doc_id> codes). Judgment targets resolve to JUD:<doc_id> of an identity in the exchange, or to JUD:JG-<12 hex> (not held) only when listed in external_judgments.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instrument_codes", "external_judgments"],
+      "properties": {
+        "instrument_codes": {"type": "array", "items": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_code"}, "uniqueItems": true},
+        "external_judgments": {"type": "array", "items": {"type": "string", "pattern": "^JUD:JG-[0-9a-f]{12}$"}, "uniqueItems": true}
+      }
+    }
+  }
+}

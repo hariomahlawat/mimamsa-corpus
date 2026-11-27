@@ -1,0 +1,237 @@
+{
+ "contract": "mimamsa-corpus-contract/2.0",
+ "corpus_generation_id": "CG-20261127-fixtures-0a1b2c3d",
+ "doc_id": "local-d33bfb0313089bf8",
+ "embedded_images": [
+  {
+   "image_sequence_id": "IMG:d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502:1",
+   "image_sha256": "641b806176e5b7983c45f7a17e90b73396be96533b075419f12b046ad3810633",
+   "location": {
+    "body_order": 1,
+    "container_part": "word/media/image1.png",
+    "kind": "DOCX_PART",
+    "pdf_page": null
+   },
+   "mime_type": "image/png",
+   "ocr_derivative_sha256": "9cf44f8844d5b6935be3581df8961171c38b5277648a1b7a42012061d31a4b84",
+   "ocr_state": "DONE",
+   "pixel_height": 1754,
+   "pixel_width": 1240,
+   "sequence": 1
+  },
+  {
+   "image_sequence_id": "IMG:d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502:2",
+   "image_sha256": "72511d669ed4aa4da2ed15a8e28ecacf00ea4f1642190a3bc466fcbe73a36ba9",
+   "location": {
+    "body_order": 2,
+    "container_part": "word/media/image2.png",
+    "kind": "DOCX_PART",
+    "pdf_page": null
+   },
+   "mime_type": "image/png",
+   "ocr_derivative_sha256": "72df36391f94dde77f56d3faeaf0aab354365fbfc7110b72664881c1d7b9082a",
+   "ocr_state": "DONE",
+   "pixel_height": 1754,
+   "pixel_width": 1240,
+   "sequence": 2
+  },
+  {
+   "image_sequence_id": "IMG:d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502:3",
+   "image_sha256": "b3748ca940eabccb58efa251de48b32362b8b8374607bffe46b87fd0a99c58a5",
+   "location": {
+    "body_order": 3,
+    "container_part": "word/media/image3.png",
+    "kind": "DOCX_PART",
+    "pdf_page": null
+   },
+   "mime_type": "image/png",
+   "ocr_derivative_sha256": null,
+   "ocr_state": "QUEUED",
+   "pixel_height": 1754,
+   "pixel_width": 1240,
+   "sequence": 3
+  }
+ ],
+ "integrity": {
+  "basis": "producer-computed SHA-256 (fixture)",
+  "source_integrity": "DECLARED_HASH_ONLY"
+ },
+ "provenance": {
+  "acquisition": {
+   "acquisition_channel": "MANUAL_OWNER",
+   "hf": null,
+   "original_filename": null,
+   "retrieved_at": null,
+   "source_url": null
+  },
+  "carrier_provenance": "USER_SUPPLIED",
+  "observations": [
+   {
+    "collection": "local:owner-collection-fixture",
+    "inventory_id": "L-e81ca321acdd8f12c93c",
+    "observed_at": null,
+    "relative_path": "Army Rules/AR 22, 23, 30 - Lt Col A B Example v Union of India.docx"
+   },
+   {
+    "collection": "local:owner-collection-fixture",
+    "inventory_id": "L-c5b04cf417709aa4d97a",
+    "observed_at": null,
+    "relative_path": "Court Martial/AR 22 - Lt Col A B Example v Union of India.docx"
+   }
+  ],
+  "processing_history": [
+   {
+    "actor_kind": "AUTOMATED",
+    "inputs": [],
+    "operation": "HASH",
+    "outputs": [
+     "d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502"
+    ],
+    "result": "OK",
+    "seq": 1,
+    "tool": {
+     "commit": null,
+     "config_sha256": null,
+     "name": "c16-local-reconcile",
+     "version": "1.0.0"
+    }
+   },
+   {
+    "actor_kind": "AUTOMATED",
+    "inputs": [
+     "d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502"
+    ],
+    "operation": "EXTRACT_IMAGES",
+    "outputs": [
+     "641b806176e5b7983c45f7a17e90b73396be96533b075419f12b046ad3810633",
+     "72511d669ed4aa4da2ed15a8e28ecacf00ea4f1642190a3bc466fcbe73a36ba9",
+     "b3748ca940eabccb58efa251de48b32362b8b8374607bffe46b87fd0a99c58a5"
+    ],
+    "result": "OK",
+    "seq": 2,
+    "tool": {
+     "commit": null,
+     "config_sha256": null,
+     "name": "c16-docx",
+     "version": "1.0.0"
+    }
+   },
+   {
+    "actor_kind": "AUTOMATED",
+    "inputs": [
+     "641b806176e5b7983c45f7a17e90b73396be96533b075419f12b046ad3810633",
+     "72511d669ed4aa4da2ed15a8e28ecacf00ea4f1642190a3bc466fcbe73a36ba9"
+    ],
+    "operation": "OCR",
+    "outputs": [
+     "9cf44f8844d5b6935be3581df8961171c38b5277648a1b7a42012061d31a4b84",
+     "72df36391f94dde77f56d3faeaf0aab354365fbfc7110b72664881c1d7b9082a"
+    ],
+    "result": "OK",
+    "seq": 3,
+    "tool": {
+     "commit": null,
+     "config_sha256": null,
+     "name": "c16-docx",
+     "version": "1.0.0"
+    }
+   },
+   {
+    "actor_kind": "AUTOMATED",
+    "inputs": [
+     "b3748ca940eabccb58efa251de48b32362b8b8374607bffe46b87fd0a99c58a5"
+    ],
+    "operation": "OCR",
+    "outputs": [],
+    "result": "SKIPPED",
+    "seq": 4,
+    "tool": {
+     "commit": null,
+     "config_sha256": null,
+     "name": "c16-docx",
+     "version": "1.0.0"
+    }
+   }
+  ]
+ },
+ "record_kind": "document_identity",
+ "representation": {
+  "completeness": "NOT_CHECKED",
+  "content_scope": "UNDETERMINED",
+  "origin_status": "CARRIER_ISSUED_COPY_CLAIMED",
+  "representation_kind": "WORD_WITH_EMBEDDED_IMAGES"
+ },
+ "research_eligibility": {
+  "basis": [
+   "OCR_TEXT_SEARCH_ONLY",
+   "GENERATED_PAGINATION",
+   "EMBEDDED_IMAGES_NOT_EXTRACTED",
+   "COMPLETENESS_NOT_CHECKED"
+  ],
+  "graph_evidence_permitted": true,
+  "quoting_permitted": false,
+  "source_page_citation_permitted": false,
+  "state": "SEARCH_ONLY",
+  "whole_work_claims_permitted": false
+ },
+ "restriction": {
+  "access_marking": null,
+  "basis": "synthetic fixture",
+  "decided_by": "fixture",
+  "eligibility": "ELIGIBLE_ALL_USERS",
+  "restriction_id": null
+ },
+ "source_copy": {
+  "bytes": 116000,
+  "detected_format": "DOCX",
+  "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "page_count": null,
+  "physical_pagination": "NONE_FLOW_DOCUMENT",
+  "sha256": "d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502",
+  "vault_path": "vault/sha256/d3/d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502"
+ },
+ "text_derivatives": [
+  {
+   "coverage": {
+    "images_text_extracted": 2,
+    "images_total": 3,
+    "units_total": 4,
+    "units_with_text": 3
+   },
+   "derivative_id": "local-d33bfb0313089bf8@c16-docx/1.0.0",
+   "derivative_text_sha256": "79df4700271ef72aa2db822ee5b11ef0a046f0e81828b58de7842c6e6a07f492",
+   "methods": [
+    "DOCX_XML",
+    "OCR_EMBEDDED_IMAGE"
+   ],
+   "ocr_config": {
+    "config_sha256": "777e7afa591f1f35946ef23bb4d2354ab7f337e74841844ec6512f5d5dfac7f4",
+    "dpi": 300,
+    "engine": "tesseract",
+    "engine_version": "5.4.0",
+    "languages": [
+     "eng"
+    ],
+    "page_segmentation_mode": "3",
+    "preprocessing": [
+     "deskew"
+    ]
+   },
+   "pagination_basis": "GENERATED_SEGMENT",
+   "pipeline_name": "c16-docx",
+   "pipeline_version": "1.0.0",
+   "quoting_permitted": false,
+   "text_reliability": "partly_unreliable"
+  }
+ ],
+ "work_identity": {
+  "graph_node_ref": "JUD:local-d33bfb0313089bf8",
+  "identity_basis": "FOLDER_OR_FILENAME_LABEL",
+  "identity_verification": "CANDIDATE",
+  "judgment_id": {
+   "unresolved": "NOT_DETERMINED"
+  },
+  "proceeding_numbers_as_printed": [],
+  "work_kind": "JUDGMENT"
+ }
+}

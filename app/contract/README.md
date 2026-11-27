@@ -39,6 +39,7 @@
 | `mimamsa_contract/devbundle.py` | development-only bundle writer and test trust lists (disposable keys) |
 | `examples/` | synthetic records (no real source, citation or provision) |
 | `tests/` | contract tests run by `.github/workflows/app-ci.yml` |
+| `schemas/c16/`, `mimamsa_contract/c16/`, `fixtures/c16/`, `tests/test_c16_contract.py` | **Proposed** Cycle 16 extension `mimamsa-corpus-contract/2.0` (document identity, evidence anchors, taxonomy, provision and judgment relationships, admission). Additive: v1 schemas and rules unchanged. See `docs/architecture/c16/C16_CORPUS_INTEGRATION_CONTRACT.md` |
 
 ## 3. Data layers, bundles, trust and exclusions
 

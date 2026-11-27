@@ -1,0 +1,50 @@
+{
+ "anchors": [
+  "ANC-851e4d8431af7762dd528d95"
+ ],
+ "approval_ref": null,
+ "category": "cites_provision",
+ "classification_provenance": null,
+ "contract": "mimamsa-corpus-contract/2.0",
+ "evidentiary_basis": "DOCUMENT_TEXT_EXTRACTED",
+ "graph_projection": {
+  "edge_type": "CITES_PROVISION",
+  "origin": "C16_DOCUMENT_TEXT"
+ },
+ "has_legal_effect": false,
+ "is_finding": true,
+ "proposition_ref": null,
+ "record_kind": "corpus_relationship",
+ "relationship_id": "REL-3d7c2c9f62e5099537ed064b",
+ "review_binding": null,
+ "review_ref": null,
+ "source": {
+  "author_id": "fixture-extractor",
+  "producer": {
+   "commit": "c8fa5290",
+   "config_sha256": null,
+   "name": "c16-fixture-producer",
+   "version": "1.0.0"
+  },
+  "rule_id": "C16-FIXTURE-RULE",
+  "rule_version": "1.0"
+ },
+ "subject": {
+  "doc_id": "local-d33bfb0313089bf8",
+  "graph_node_ref": "JUD:local-d33bfb0313089bf8",
+  "source_copy_sha256": "d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502"
+ },
+ "target": {
+  "node_id": "PROV:AR-1954:r.22",
+  "resolved": true
+ },
+ "temporal_scope": {
+  "from": null,
+  "from_status": "NOT_RECORDED",
+  "to": null,
+  "to_status": "NOT_APPLICABLE"
+ },
+ "uncertainty": "OCR of an embedded screenshot; the citation is a candidate and the text may be misread.",
+ "validates_relationship_id": null,
+ "verification": "CANDIDATE"
+}

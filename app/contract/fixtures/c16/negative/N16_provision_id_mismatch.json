@@ -1,0 +1,27 @@
+{
+ "aliases": [
+  "AR 22"
+ ],
+ "contract": "mimamsa-corpus-contract/2.0",
+ "instrument_code": "AR-1954",
+ "label": "Rule 22 (fixture label)",
+ "level": "PROVISION",
+ "maps_to_subject": null,
+ "node_id": "PROV:AR-1954:r.22",
+ "parent_ids": [
+  "CHAP:AR-1954:V"
+ ],
+ "provision": {
+  "number": "23",
+  "prefix": "r",
+  "sub_provision": null
+ },
+ "record_kind": "taxonomy_node",
+ "source": {
+  "basis": "TABLE_OF_CONTENTS",
+  "doc_id": "rules-army-rules-1954",
+  "page": 4
+ },
+ "taxonomy_version": "c16-taxonomy-1.0",
+ "verification": "EXTRACTED_STRUCTURE"
+}

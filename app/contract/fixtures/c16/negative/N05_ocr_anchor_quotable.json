@@ -1,0 +1,59 @@
+{
+ "anchor_id": "ANC-1c2c1a98488669d7e6ae0256",
+ "bbox": {
+  "space": "SOURCE_PAGE",
+  "unit": "IMAGE_PIXEL",
+  "x0": 210,
+  "x1": 2210,
+  "y0": 640,
+  "y1": 720
+ },
+ "contract": "mimamsa-corpus-contract/2.0",
+ "derivative_text_sha256": "19d219ca9b549c80e1e9e710b9bfd4f921cb47bf6932a149e4ff4931b6eb34b8",
+ "doc_id": "aft-2004-example-scan-oa0002",
+ "extraction": {
+  "method": "OCR_PAGE_IMAGE",
+  "ocr_config": {
+   "config_sha256": "777e7afa591f1f35946ef23bb4d2354ab7f337e74841844ec6512f5d5dfac7f4",
+   "dpi": 300,
+   "engine": "tesseract",
+   "engine_version": "5.4.0",
+   "languages": [
+    "eng"
+   ],
+   "page_segmentation_mode": "3",
+   "preprocessing": [
+    "deskew"
+   ]
+  },
+  "pipeline_name": "mimamsa-ocr",
+  "pipeline_version": "2.0.0"
+ },
+ "image_sha256": "2f96a5a66c47a6bb039d86b92a0eacc741a11ab8549e35a23711fbe7d22b82dc",
+ "locator": {
+  "citable_as_source_page": true,
+  "kind": "SOURCE_PHYSICAL_PAGE",
+  "physical_page": 2,
+  "printed_page_label": null
+ },
+ "original_sha256": "6d01d5756880c765890a8987501b4e556e58f6d898766a8ba818e66644c8c62d",
+ "quality": {
+  "low_confidence": false,
+  "ocr_mean_confidence": 81.5,
+  "text_reliability": "partly_unreliable"
+ },
+ "quote": null,
+ "quoting_permitted": true,
+ "record_kind": "evidence_anchor",
+ "representation_sha256": "6d01d5756880c765890a8987501b4e556e58f6d898766a8ba818e66644c8c62d",
+ "text_span": {
+  "char_end": 52,
+  "char_start": 10,
+  "passage_id": null,
+  "text_sha256": "3f46b4cb3d91082019af37113e211de87a8343a3e7f07622de8d70993ebad400"
+ },
+ "verification": {
+  "review_ref": null,
+  "state": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+ }
+}

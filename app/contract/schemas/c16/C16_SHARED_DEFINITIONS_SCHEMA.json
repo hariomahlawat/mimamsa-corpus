@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/C16_SHARED_DEFINITIONS_SCHEMA.json",
+  "title": "Mimamsa corpus integration contract 2.0: shared definitions",
+  "description": "Definitions shared by the C16 corpus integration schemas (mimamsa-corpus-contract/2.0). Primitive identities (sha256, doc_id, date, relative path, page anchor) are reused from contract v1 (../v1/common.schema.json) so that v1 identities stay stable. The .invalid host is never resolved: the validator loads every schema from local files. Field status vocabulary used in the prose contract: MANDATORY (must be present and resolved), OPTIONAL (may be absent), UNRESOLVABLE (must be present; either a value or the 'unresolved' object below). JSON null means 'not applicable or not printed'; it never means 'unknown'.",
+  "$defs": {
+    "contract": {
+      "description": "Contract identifier and minor version. Major 2 for this schema set; a breaking change needs major 3.",
+      "type": "string",
+      "pattern": "^mimamsa-corpus-contract/2\\.(0|[1-9][0-9]*)$"
+    },
+    "sha256": {"$ref": "../v1/common.schema.json#/$defs/sha256"},
+    "doc_id": {"$ref": "../v1/common.schema.json#/$defs/doc_id"},
+    "date": {"$ref": "../v1/common.schema.json#/$defs/date"},
+    "datetime": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?Z$"},
+    "git_commit": {"$ref": "../v1/common.schema.json#/$defs/git_commit"},
+    "relative_path": {"$ref": "../v1/common.schema.json#/$defs/relative_path"},
+    "unresolved_reason": {
+      "description": "Why a value that should exist is not determined. NOT_DETERMINED: no rule or review has established it. CONFLICTING_EVIDENCE: sources disagree. SOURCE_UNAVAILABLE: the evidence needed is not held. NOT_YET_PROCESSED: a pipeline step has not run. AMBIGUOUS_REFERENCE: the text admits more than one reading.",
+      "enum": ["NOT_DETERMINED", "CONFLICTING_EVIDENCE", "SOURCE_UNAVAILABLE", "NOT_YET_PROCESSED", "AMBIGUOUS_REFERENCE"]
+    },
+    "unresolved": {
+      "description": "Explicit UNRESOLVED marker. Used instead of guessing. Never used for 'not applicable' (that is null).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unresolved"],
+      "properties": {
+        "unresolved": {"$ref": "#/$defs/unresolved_reason"},
+        "note": {"type": ["string", "null"], "maxLength": 500}
+      }
+    },
+    "stable_id": {
+      "description": "Deterministic record id: a fixed prefix and the first 24 hex digits of the SHA-256 of the canonical JSON of the record's identity tuple (see C16_CORPUS_INTEGRATION_CONTRACT section 9).",
+      "type": "string",
+      "pattern": "^(REL|ANC|ADM)-[0-9a-f]{24}$"
+    },
+    "corpus_generation_id": {
+      "description": "Producer-side corpus generation (a deterministic build of the corpus at pinned inputs). Not a site release generation.",
+      "type": "string",
+      "pattern": "^CG-[0-9]{8}-[a-z0-9-]{1,40}-[0-9a-f]{8}$"
+    },
+    "instrument_code": {
+      "description": "C15 graph instrument code (GraphIds.CodeByPrimaryDoc: AA-1950, AR-1954, AFA-1950, NA-1957, AFT-2007, AFT-PR-2008, IPC-1860, CRPC-1973, IEA-1872, BNS-2023, BNSS-2023, BSA-2023) or DOC-<primary doc_id> for other instruments.",
+      "type": "string",
+      "pattern": "^([A-Z][A-Z0-9]*(-[A-Z]+)*-[0-9]{4}|DOC-[a-z0-9][a-z0-9._-]{0,159})$"
+    },
+    "provision_node_id": {
+      "description": "C15 provision node id: PROV:<code>:<s|r|reg>.<base number> (GraphIds.BaseSection: 1-3 digits and up to two capital letters; sub-sections and clauses are not separate nodes) or PROV:<code>:part.<label>.",
+      "type": "string",
+      "pattern": "^PROV:([A-Z][A-Z0-9]*(-[A-Z]+)*-[0-9]{4}|DOC-[a-z0-9][a-z0-9._-]{0,159}):((s|r|reg)\\.[0-9]{1,3}[A-Z]{0,2}|part\\.[0-9A-Za-z][0-9A-Za-z.()-]{0,40})$"
+    },
+    "judgment_node_id": {
+      "description": "C15 judgment node id: JUD:<doc_id> when held, JUD:JG-<12 hex> when not held.",
+      "type": "string",
+      "pattern": "^JUD:([a-z0-9][a-z0-9._-]{0,159}|JG-[0-9a-f]{12})$"
+    },
+    "instrument_node_ref": {
+      "description": "Reference to a C15 instrument node by code. The INST:<family key> id is resolved by the consumer (GET /api/graph/resolve); producers never build INST ids by hand.",
+      "type": "string",
+      "pattern": "^INSTCODE:([A-Z][A-Z0-9]*(-[A-Z]+)*-[0-9]{4}|DOC-[a-z0-9][a-z0-9._-]{0,159})$"
+    },
+    "subject_node_id": {
+      "description": "Subject taxonomy node. SUBJ:<topic> for the controlled topic list (schema/document.schema.json topic enum); SUBJ:local:<path slug> for an owner-collection folder, where the path slug joins the slug of EVERY folder from the collection root with '__' (so the same leaf name under different parents gives different nodes); paths longer than the limit end in '~' and 12 hex of sha256(full relative folder path).",
+      "type": "string",
+      "pattern": "^SUBJ:(local:)?[a-z0-9][a-z0-9_~-]{0,159}$"
+    },
+    "review_binding": {
+      "description": "Binds a raised verification (DOCUMENTARY_CHECKED) to one exact, independent contract-v1 reviewed_record in the same exchange: its id, the sha256 of its canonical bytes, the reviewed commit, the reviewer and the author. The reviewed_record's subject is {kind: candidate, id: <relationship_id or anchor_id>}, axis evidence_fidelity, to_value DOCUMENTARY_CHECKED. reviewer_id must differ from author_id (rule C16_REVIEW_NOT_INDEPENDENT). A shape-valid review_ref alone is never enough.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["review_record_id", "review_record_sha256", "reviewed_commit", "reviewer_id", "reviewer_kind", "author_id"],
+      "properties": {
+        "review_record_id": {"$ref": "#/$defs/review_ref"},
+        "review_record_sha256": {"$ref": "#/$defs/sha256"},
+        "reviewed_commit": {"$ref": "#/$defs/git_commit"},
+        "reviewer_id": {"type": "string", "minLength": 3, "maxLength": 120},
+        "reviewer_kind": {"enum": ["HUMAN", "AI_AGENT"]},
+        "author_id": {"type": "string", "minLength": 3, "maxLength": 120}
+      }
+    },
+    "chapter_node_id": {
+      "description": "Chapter (or Part) node within an instrument: CHAP:<instrument code>:<chapter label, upper-case roman or arabic>.",
+      "type": "string",
+      "pattern": "^CHAP:([A-Z][A-Z0-9]*(-[A-Z]+)*-[0-9]{4}|DOC-[a-z0-9][a-z0-9._-]{0,159}):[0-9A-Z][0-9A-Z.-]{0,20}$"
+    },
+    "reference_node_id": {
+      "description": "C15 unresolved-reference node: REF:<16 hex of sha256(raw reference)>.",
+      "type": "string",
+      "pattern": "^REF:[0-9a-f]{16}$"
+    },
+    "graph_verification": {
+      "description": "C15 graph verification vocabulary (Mimamsa.Core.Graph.Verification). DOCUMENTARY_CHECKED and LEGAL_REVIEWED come only from an authorised review process.",
+      "enum": ["CANDIDATE", "EXTRACTED_STRUCTURE", "CURATED_NAVIGATION", "DOCUMENTARY_CHECKED", "LEGAL_REVIEWED"]
+    },
+    "producer_verification": {
+      "description": "Values an automated producer may emit (GraphBuilder.Verification.BuilderValues).",
+      "enum": ["CANDIDATE", "EXTRACTED_STRUCTURE", "CURATED_NAVIGATION"]
+    },
+    "review_ref": {"type": "string", "pattern": "^RV-[A-Za-z0-9._-]{3,80}$"},
+    "approval_ref": {"type": "string", "pattern": "^AP-[A-Za-z0-9._-]{3,80}$"},
+    "temporal_status": {
+      "description": "Status of one temporal bound, aligned with C15 GraphEdge TemporalFromStatus / TemporalToStatus.",
+      "enum": ["AS_OF_SOURCE_DATE", "EVIDENCED", "REPORTED_NOT_VERIFIED", "NOT_DETERMINED", "NOT_RECORDED", "NOT_APPLICABLE", "OPEN"]
+    },
+    "temporal_scope": {
+      "description": "Temporal scope of a relationship. Classification relationships are NOT_APPLICABLE (they are timeless navigation aids); a citation or treatment is AS_OF_SOURCE_DATE (the date of the citing document); legal-effect intervals need evidence for each bound.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "from_status", "to", "to_status"],
+      "properties": {
+        "from": {"anyOf": [{"$ref": "#/$defs/date"}, {"type": "null"}]},
+        "from_status": {"$ref": "#/$defs/temporal_status"},
+        "to": {"anyOf": [{"$ref": "#/$defs/date"}, {"type": "null"}]},
+        "to_status": {"$ref": "#/$defs/temporal_status"}
+      },
+      "allOf": [
+        {"if": {"properties": {"from_status": {"enum": ["AS_OF_SOURCE_DATE", "EVIDENCED", "REPORTED_NOT_VERIFIED"]}}}, "then": {"properties": {"from": {"$ref": "#/$defs/date"}}}},
+        {"if": {"properties": {"from_status": {"enum": ["NOT_DETERMINED", "NOT_RECORDED", "NOT_APPLICABLE", "OPEN"]}}}, "then": {"properties": {"from": {"type": "null"}}}}
+      ]
+    },
+    "local_relative_path": {
+      "description": "Path relative to a registered local collection root, POSIX separators, Unicode NFC. Never an absolute or drive path. Folder and file names are owner labels, not legal findings.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^(?![/\\\\])(?![A-Za-z]:)(?!.*(^|/)\\.\\.(/|$))[^\\\\\\x00-\\x1f]+$"
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1, "maxLength": 64},
+        "version": {"type": "string", "minLength": 1, "maxLength": 64},
+        "commit": {"anyOf": [{"$ref": "#/$defs/git_commit"}, {"type": "null"}]},
+        "config_sha256": {"anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]}
+      }
+    },
+    "processing_step": {
+      "description": "One entry of processing history. Inputs and outputs are byte hashes; the step is reproducible from the named tool and configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["seq", "operation", "tool", "inputs", "outputs", "actor_kind", "result"],
+      "properties": {
+        "seq": {"type": "integer", "minimum": 1},
+        "operation": {"enum": ["ACQUIRE", "HASH", "FORMAT_DETECT", "CONVERT", "EXTRACT_TEXT", "EXTRACT_IMAGES", "OCR", "RECONSTRUCT_PDF", "SEGMENT_PASSAGES", "CLASSIFY_FOLDER", "CLASSIFY_FILENAME", "CLASSIFY_TEXT", "DEDUPLICATE", "RESTRICTION_CHECK", "VALIDATE", "ADMIT"]},
+        "tool": {"$ref": "#/$defs/tool"},
+        "inputs": {"type": "array", "items": {"$ref": "#/$defs/sha256"}},
+        "outputs": {"type": "array", "items": {"$ref": "#/$defs/sha256"}},
+        "actor_kind": {"enum": ["AUTOMATED", "HUMAN"]},
+        "result": {"enum": ["OK", "PARTIAL", "FAILED", "SKIPPED"]},
+        "note": {"type": ["string", "null"], "maxLength": 500}
+      }
+    },
+    "page_range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_page", "to_page"],
+      "properties": {
+        "from_page": {"type": "integer", "minimum": 1},
+        "to_page": {"type": "integer", "minimum": 1}
+      }
+    },
+    "text_reliability": {
+      "description": "Aligned with Mimamsa.Core.Generation.TextQuality (reliable, partly_unreliable, unreliable, no_text) plus NOT_ASSESSED.",
+      "enum": ["reliable", "partly_unreliable", "unreliable", "no_text", "not_assessed"]
+    },
+    "pagination_basis": {
+      "description": "What a page number in a derivative or anchor counts. SOURCE_PHYSICAL: physical pages of the original copy (PDF page index). RECONSTRUCTED_PDF: pages of a locally reconstructed PDF (not source pagination). GENERATED_SEGMENT: segments generated for a flow document (DOCX, HTML, TXT) that has no physical pages; never displayed or cited as a page. IMAGE_SEQUENCE: order of images in a container.",
+      "enum": ["SOURCE_PHYSICAL", "RECONSTRUCTED_PDF", "GENERATED_SEGMENT", "IMAGE_SEQUENCE"]
+    },
+    "extraction_method": {
+      "enum": ["NATIVE_TEXT_LAYER", "OCR_PAGE_IMAGE", "OCR_EMBEDDED_IMAGE", "DOCX_XML", "HTML", "PLAIN_TEXT", "MANUAL_TRANSCRIPTION", "NONE"]
+    },
+    "ocr_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine", "engine_version", "languages", "config_sha256"],
+      "properties": {
+        "engine": {"type": "string", "maxLength": 64},
+        "engine_version": {"type": "string", "maxLength": 64},
+        "languages": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^[a-z]{3}(_[a-z]+)?$"}, "uniqueItems": true},
+        "dpi": {"type": ["integer", "null"], "minimum": 50, "maximum": 1200},
+        "page_segmentation_mode": {"type": ["string", "null"], "maxLength": 16},
+        "preprocessing": {"type": "array", "items": {"type": "string", "maxLength": 64}},
+        "config_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "collection_ref": {
+      "description": "A registered source collection. Local collections are named, never by drive path.",
+      "type": "string",
+      "pattern": "^(local|hf|crawler|admin):[a-z0-9][a-z0-9._-]{0,63}$"
+    }
+  }
+}
