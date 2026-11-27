@@ -1,0 +1,50 @@
+{
+  "site": "E:\\Mimamsa-Data\\bench\\4000\\site",
+  "engine": "memory",
+  "replicate": 1,
+  "documents": 4000,
+  "passages": 98486,
+  "vocabulary": 19477,
+  "load_ms": 84078,
+  "index_ms": 10947,
+  "index_file_mb": null,
+  "mem_after_load": {
+    "working_set_mb": 550.8,
+    "managed_heap_mb": 294.3
+  },
+  "mem_after_index": {
+    "working_set_mb": 1047.3,
+    "managed_heap_mb": 646.5
+  },
+  "mem_end": {
+    "working_set_mb": 2700.2,
+    "managed_heap_mb": 673.3
+  },
+  "sequential": {
+    "n": 78,
+    "p50": 20,
+    "p95": 94.5,
+    "max": 144.4
+  },
+  "concurrent": {
+    "readers_10": {
+      "stats": {
+        "n": 1560,
+        "p50": 23.3,
+        "p95": 307.8,
+        "max": 990.3
+      },
+      "throughput_qps": 123.9
+    },
+    "readers_25": {
+      "stats": {
+        "n": 3900,
+        "p50": 28.4,
+        "p95": 401.7,
+        "max": 1139.1
+      },
+      "throughput_qps": 130
+    }
+  },
+  "per_query_median_ms": null
+}
