@@ -9,10 +9,10 @@ python=/tmp/mim-c14-corrective-venv/bin/python
 work="build-$generation"
 portable="candidate-$generation"
 "$python" build_candidates_v6.py /workspace/c14-collection "$work" --consolidation /workspace/c14-consolidation --repair "$repair"
-PYTHONPATH=/workspace/mimamsa-c14-pr59/app/contract "$python" /workspace/c14-consolidation/verify_package.py "$work" >"$work/anchor-verification.json"
+PYTHONPATH=/workspace/mimamsa-c14-pr59/app/contract "$python" /workspace/c15-durable/verify_package_v6.py "$work" >"$work/anchor-verification.json"
 python portable_package.py export "$work" "$portable"
 cp portable_package.py build_candidates_v6.py candidate_coverage.py "$work/anchor-verification.json" "$portable/"
-cp /workspace/c14-consolidation/verify_package.py "$portable/"
+cp /workspace/c15-durable/verify_package_v6.py "$portable/"
 cp "$validation/context-reviews.jsonl" "$validation/anchor-qa.json" "$validation/retrieval-qa.json" "$portable/"
 for file in "$validation"/context-reviews-supplement.jsonl "$validation"/supplement-qa.json; do
  if test -f "$file"; then cp "$file" "$portable/"; fi
