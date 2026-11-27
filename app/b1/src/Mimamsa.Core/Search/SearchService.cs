@@ -37,7 +37,10 @@ public sealed class SearchService
         public bool Exact;
         public readonly HashSet<string> Highlight = new(StringComparer.Ordinal);
         public readonly List<IReadOnlyList<string>> Phrases = new();
-        public readonly Dictionary<int, Dictionary<string, int>> Matched = new();   // passage -> display term -> count
+        // C15 WP1: match counts per display term (display -> passage -> count), in first-noted order. Replaces one
+        // dictionary per matched passage; Reasons() rebuilds the per-passage view on demand for displayed hits only.
+        public readonly List<(string display, Dictionary<int, int> counts)> Matched = new();
+        public readonly Dictionary<string, int> MatchedIndex = new(StringComparer.Ordinal);
         public readonly List<Chip> Chips = new();
     }
 
@@ -129,7 +132,10 @@ public sealed class SearchService
             DescribeChips(q.Root!, ctx);
         }
 
-        ordered = ordered.Where(h => !_docHidden(_ix.Passages[h.PassageIndex].DocId)).ToList();
+        // eligibility is decided once per document within this query (C15 WP1), not once per passage hit
+        var hiddenByDoc = new Dictionary<int, bool>();
+        bool Hidden(int p) { int d = _ix.DocOf(p); if (!hiddenByDoc.TryGetValue(d, out var h)) hiddenByDoc[d] = h = _docHidden(_ix.Docs[d].DocId); return h; }
+        ordered = ordered.Where(h => !Hidden(h.PassageIndex)).ToList();
         if (service is not null && Legal.LegalIdentifierResolver.ServiceLabels.TryGetValue(service, out var svcLabel))
         {
             ordered = ServicePreference(ordered, service, hybrid: mode == "hybrid");
@@ -332,25 +338,50 @@ public sealed class SearchService
     static string NormTitle(string? t) => Legal.LegalIdentifierResolver.NormTitle(t);
 
 
+    /// C15 WP1: merge join over the passage-ordered posting lists with binary search on the ascending positions (same
+    /// result and insertion order as the B1 dictionary/HashSet version, without materialising every posting).
     Dictionary<int, int> PhraseOccurrences(IReadOnlyList<string> terms)
     {
         var res = new Dictionary<int, int>();
         if (terms.Count == 0 || terms.Any(t => !_ix.Postings.ContainsKey(t))) return res;
         var first = _ix.Postings[terms[0]];
-        var others = terms.Skip(1).Select(t => _ix.Postings[t].ToDictionary(x => x.P, x => x.Pos.ToHashSet())).ToList();
+        var others = terms.Skip(1).Select(t => _ix.Postings[t]).ToArray();
+        var at = new int[others.Length];
+        var cur = new int[]?[others.Length];
         foreach (var post in first)
         {
+            bool all = true;
+            for (int k = 0; k < others.Length; k++)
+            {
+                var l = others[k];
+                while (at[k] < l.Count && l[at[k]].P < post.P) at[k]++;
+                cur[k] = at[k] < l.Count && l[at[k]].P == post.P ? l[at[k]].Pos : null;
+                if (cur[k] is null) all = false;
+            }
+            if (!all) continue;
             int n = 0;
             foreach (var pos in post.Pos)
             {
                 bool ok = true;
-                for (int k = 0; k < others.Count && ok; k++)
-                    ok = others[k].TryGetValue(post.P, out var set) && set.Contains(pos + k + 1);
+                for (int k = 0; k < others.Length && ok; k++) ok = Array.BinarySearch(cur[k]!, pos + k + 1) >= 0;
                 if (ok) n++;
             }
             if (n > 0) res[post.P] = n;
         }
         return res;
+    }
+
+    /// Positions of `term` in passage p (binary search on the passage-ordered list), or null.
+    static int[]? PositionsIn(List<SearchIndex.Posting> post, int p)
+    {
+        int lo = 0, hi = post.Count - 1;
+        while (lo <= hi)
+        {
+            int mid = (lo + hi) >>> 1, c = post[mid].P.CompareTo(p);
+            if (c == 0) return post[mid].Pos;
+            if (c < 0) lo = mid + 1; else hi = mid - 1;
+        }
+        return null;
     }
 
     // ------------------------------------------------------------------ plain words (ranked any-word match)
@@ -398,8 +429,9 @@ public sealed class SearchService
 
     void Note(Ctx ctx, int p, string display, int n)
     {
-        if (!ctx.Matched.TryGetValue(p, out var m)) ctx.Matched[p] = m = new();
-        m[display] = m.GetValueOrDefault(display) + n;
+        if (!ctx.MatchedIndex.TryGetValue(display, out var i)) { i = ctx.Matched.Count; ctx.MatchedIndex[display] = i; ctx.Matched.Add((display, new Dictionary<int, int>())); }
+        var counts = ctx.Matched[i].counts;
+        counts[p] = counts.GetValueOrDefault(p) + n;
     }
 
     Dictionary<int, double> Eval(QNode node, Ctx ctx)
@@ -495,13 +527,12 @@ public sealed class SearchService
         {
             case QTerm t:
                 foreach (var v in Variants(t.Term, t.Prefix, ctx))
-                    if (_ix.Postings.TryGetValue(v, out var post))
-                        foreach (var x in post.Where(x => x.P == p)) res.AddRange(x.Pos.Select(i => (i, i)));
+                    if (_ix.Postings.TryGetValue(v, out var post) && PositionsIn(post, p) is { } xs) res.AddRange(xs.Select(i => (i, i)));
                 break;
             case QPhrase ph:
                 if (ph.Terms.All(_ix.Postings.ContainsKey))
                 {
-                    var sets = ph.Terms.Select(t => _ix.Postings[t].FirstOrDefault(x => x.P == p).Pos?.ToHashSet() ?? new()).ToList();
+                    var sets = ph.Terms.Select(t => PositionsIn(_ix.Postings[t], p)?.ToHashSet() ?? new()).ToList();
                     foreach (var st in sets[0])
                         if (Enumerable.Range(1, sets.Count - 1).All(k => sets[k].Contains(st + k))) res.Add((st, st + sets.Count - 1));
                 }
@@ -607,10 +638,20 @@ public sealed class SearchService
         QTerm t => t.Term, QPhrase p => "“" + p.Display + "”", QField f => f.Field + ":" + f.Value, _ => "(group)"
     };
 
-    List<string> Reasons(int p, Ctx ctx) =>
-        ctx.Matched.TryGetValue(p, out var m) && m.Count > 0
+    /// C15 WP1: built on first read (only displayed hits are ever read), from the same per-passage match counts.
+    IReadOnlyList<string> Reasons(int p, Ctx ctx) => new LazyReasons(() =>
+        ctx.Matched.Where(x => x.counts.ContainsKey(p)).Select(x => new KeyValuePair<string, int>(x.display, x.counts[p])).ToList() is { Count: > 0 } m
             ? new List<string> { "Matched: " + string.Join(", ", m.OrderByDescending(kv => kv.Value).Take(4).Select(kv => $"{(kv.Key.StartsWith('“') ? kv.Key : "'" + kv.Key + "'")} ({kv.Value})")) }
-            : new List<string> { "Matched the query filters" };
+            : new List<string> { "Matched the query filters" });
+
+    sealed class LazyReasons(Func<List<string>> make) : IReadOnlyList<string>
+    {
+        readonly Lazy<List<string>> _v = new(make, LazyThreadSafetyMode.ExecutionAndPublication);
+        public string this[int i] => _v.Value[i];
+        public int Count => _v.Value.Count;
+        public IEnumerator<string> GetEnumerator() => _v.Value.GetEnumerator();
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+    }
 
     // ------------------------------------------------------------------ filters and facets
     static bool Pass(DocumentRecord d, SearchFilters f, string? except)

@@ -1,0 +1,50 @@
+{
+  "site": "E:\\Mimamsa-Data\\sample\\site",
+  "engine": "disk",
+  "replicate": 1,
+  "documents": 290,
+  "passages": 37558,
+  "vocabulary": 66908,
+  "load_ms": 5009,
+  "index_ms": 6992,
+  "index_file_mb": 12.2,
+  "mem_after_load": {
+    "working_set_mb": 255.3,
+    "managed_heap_mb": 145.8
+  },
+  "mem_after_index": {
+    "working_set_mb": 561.3,
+    "managed_heap_mb": 164.9
+  },
+  "mem_end": {
+    "working_set_mb": 706.7,
+    "managed_heap_mb": 180.6
+  },
+  "sequential": {
+    "n": 78,
+    "p50": 3.8,
+    "p95": 35.3,
+    "max": 47.4
+  },
+  "concurrent": {
+    "readers_10": {
+      "stats": {
+        "n": 1560,
+        "p50": 5.4,
+        "p95": 76.7,
+        "max": 181.8
+      },
+      "throughput_qps": 516.5
+    },
+    "readers_25": {
+      "stats": {
+        "n": 3900,
+        "p50": 2.6,
+        "p95": 81.2,
+        "max": 324.5
+      },
+      "throughput_qps": 774.7
+    }
+  },
+  "per_query_median_ms": null
+}

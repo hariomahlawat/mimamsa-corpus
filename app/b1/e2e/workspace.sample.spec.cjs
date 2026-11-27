@@ -147,6 +147,7 @@ test("W-06 Commander questions go into a Studio document as automated suggestion
   await page.goto("/studio");
   await page.locator("#studio-docs a", { hasText: "W-06 CoI questions" }).click();
   const qs = page.locator('.ws-block[data-type="question"]');
+  await expect(qs.first()).toBeVisible();                                  // count() does not wait for the document to render
   expect(await qs.count()).toBeGreaterThan(2);
   await expect(qs.first().locator(".ws-origin")).toHaveText("Automated suggestion");
   await qs.first().locator("textarea").fill("Edited by the author.");
