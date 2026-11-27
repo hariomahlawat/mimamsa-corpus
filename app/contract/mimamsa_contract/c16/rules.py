@@ -44,7 +44,28 @@ def record_issues(rec: dict, *, auth_ledger_version: int = 0, register=None) -> 
     elif kind == "corpus_admission":
         if rec["admission_id"] != canonical.admission_id(rec):
             issues.append(_e("C16_ID_MISMATCH", "admission_id is not the deterministic id of its identity tuple", where))
+    elif kind == "knowledge_release_manifest":
+        issues += _release_manifest(rec)
     return issues
+
+
+def _release_manifest(m):
+    out = []
+    ids = [c["component_id"] for c in m["components"]]
+    if len(ids) != len(set(ids)):
+        out.append(_e("KR_DUPLICATE_COMPONENT", "component ids must be unique"))
+    models = {r["sha256"] for r in m["compatibility"]["required_models"]}
+    for c in m["components"]:
+        if c["kind"] == "VECTOR_PACK" and m["release_class"] == "KNOWLEDGE" and c["model_sha256"] not in models:
+            out.append(_e("KR_MODEL_NOT_REQUIRED", "a vector pack names a model the release does not require"))
+        if c["kind"] in ("ORIGINALS",) and c["transport"] == "DELTA" and any(f.endswith(".tombstones.jsonl") for f in c["files"]):
+            out.append(_e("KR_VAULT_ADD_ONLY", "originals are add-only; removal is the exclusion channel's job"))
+    if m["release_class"] == "KNOWLEDGE":
+        kinds = {c["kind"] for c in m["components"]}
+        for must in ("RECORDS", "INTEGRITY_REGISTER", "ADMISSION_REGISTER"):
+            if must not in kinds:
+                out.append(_e("KR_COMPONENT_MISSING", f"a knowledge release must carry a {must} component"))
+    return out
 
 
 def _identity(r):

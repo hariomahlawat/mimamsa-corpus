@@ -1,0 +1,112 @@
+{
+ "base": {
+  "base_manifest_sha256": null,
+  "base_release_id": null,
+  "mode": "FULL"
+ },
+ "compatibility": {
+  "contracts": {
+   "corpus": "mimamsa-corpus-contract/2.0",
+   "v1": "1.0.0"
+  },
+  "graph_builder_version": "c15-graph-1",
+  "index_format": "mimamsa-index-sqlite-1",
+  "knowledge_format": "1.0",
+  "max_app_version": null,
+  "min_app_version": "0.16.0",
+  "pg_knowledge_schema_version": 1,
+  "required_models": [
+   {
+    "model_id": "next embedder (fixture)",
+    "role": "EMBEDDER",
+    "sha256": "a6df3705aeb6a98d861b540985cb20a28f5e34fde1a2f2bed972059e89de67b5"
+   }
+  ],
+  "vector_store_format": "MIMVEC01"
+ },
+ "components": [
+  {
+   "authority": "AUTHORITATIVE",
+   "builder": null,
+   "component_id": "model-embedder",
+   "fallback": null,
+   "files": [
+    "models/embedder/model.onnx",
+    "models/embedder/tokenizer.json"
+   ],
+   "format": "onnx",
+   "kind": "MODEL_FILE",
+   "model_sha256": "a6df3705aeb6a98d861b540985cb20a28f5e34fde1a2f2bed972059e89de67b5",
+   "result_count": 1,
+   "result_digest": "3b363d80ddd189cd0144e81663b1f4f8e61b6ca9da69d42e7e82ef54d3a28494",
+   "source_digest": null,
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "ONNX_LOAD_SELFTEST"
+   ]
+  },
+  {
+   "authority": "ACCELERATOR",
+   "builder": {
+    "commit": "c8fa5290",
+    "config_sha256": null,
+    "name": "vectors-next-builder",
+    "version": "1.0.0"
+   },
+   "component_id": "vectors-next",
+   "fallback": "SERVE_LEXICAL_ONLY",
+   "files": [
+    "accelerators/vectors/next.mimvec"
+   ],
+   "format": "MIMVEC01",
+   "kind": "VECTOR_PACK",
+   "model_sha256": "a6df3705aeb6a98d861b540985cb20a28f5e34fde1a2f2bed972059e89de67b5",
+   "result_count": 310000,
+   "result_digest": "fd320cdf6a07e70ea71841797e1f72060fe12cf2c6e3ad6203c67d1f0a2077f7",
+   "source_digest": "2a914a0ab02c13267aa9739a02fab9fdea15d5773f09c68447feb2c9f72314d6",
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "VECTOR_TRAILER",
+    "VECTOR_SPOT_REEMBED",
+    "SOURCE_DIGEST_EQUALS_SITE"
+   ]
+  },
+  {
+   "authority": "AUTHORITATIVE",
+   "builder": null,
+   "component_id": "integrity",
+   "fallback": null,
+   "files": [
+    "registers/integrity.jsonl"
+   ],
+   "format": "canonical-jsonl",
+   "kind": "INTEGRITY_REGISTER",
+   "model_sha256": null,
+   "result_count": 3,
+   "result_digest": "328c6844b2c8c870340b4d9e7d579c8e2d89d3240a5baf5f91e4d41aa8a85a47",
+   "source_digest": null,
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "RESULT_DIGEST",
+    "RESTRICTED_REGISTER"
+   ]
+  }
+ ],
+ "contract": "mimamsa-corpus-contract/2.0",
+ "corpus_generations": [
+  "CG-20261127-fixtures-0a1b2c3d"
+ ],
+ "heavy_compute_on_site": {
+  "embedding": "NONE",
+  "graph_rebuild": "NONE",
+  "ocr": "NONE"
+ },
+ "notes": "synthetic fixture",
+ "record_kind": "knowledge_release_manifest",
+ "release_class": "INTELLIGENCE",
+ "release_id": "R18-intelligence-20261220-2a2b2c2d",
+ "release_sequence": 18
+}

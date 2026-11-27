@@ -26,6 +26,9 @@ KIND_TO_SCHEMA = {
     "corpus_relationship": "PROVISION_JUDGMENT_RELATIONSHIP_SCHEMA.json",
     "evidence_anchor": "OCR_EVIDENCE_ANCHOR_SCHEMA.json",
     "corpus_admission": "CORPUS_ADMISSION_SCHEMA.json",
+    # WP06 knowledge release architecture
+    "knowledge_release_manifest": "KNOWLEDGE_RELEASE_MANIFEST_SCHEMA.json",
+    "knowledge_activation_record": "KNOWLEDGE_ACTIVATION_RECORD_SCHEMA.json",
 }
 SHARED = "C16_SHARED_DEFINITIONS_SCHEMA.json"
 

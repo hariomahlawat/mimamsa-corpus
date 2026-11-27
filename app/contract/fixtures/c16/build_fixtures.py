@@ -523,6 +523,120 @@ def negatives(ids, A, R, T, ADM):
     return N
 
 
+E5 = H("model:e5-small-onnx")
+XENC = H("model:cross-encoder-onnx")
+REL_FULL = "R16-knowledge-20261201-0a0b0c0d"
+REL_DELTA = "R17-knowledge-20261215-1a1b1c1d"
+REL_MODEL = "R18-intelligence-20261220-2a2b2c2d"
+
+
+def component(cid, kind, fmt, files, *, transport="FULL", accel=False, model=None, count=1, verify=None, fallback=None):
+    c = {"component_id": cid, "kind": kind, "format": fmt, "authority": "ACCELERATOR" if accel else "AUTHORITATIVE",
+         "transport": transport, "files": files, "result_digest": H(f"result:{cid}:{transport}"), "result_count": count,
+         "source_digest": H(f"source:{cid}") if accel else None,
+         "builder": {"name": f"{cid}-builder", "version": "1.0.0", "commit": "c8fa5290", "config_sha256": None} if accel else None,
+         "model_sha256": model, "verify": verify or ["SHA256_EACH_FILE", "RESULT_DIGEST", "RESTRICTED_REGISTER"],
+         "fallback": fallback}
+    return c
+
+
+def knowledge_manifest(mode):
+    delta = mode == "DELTA"
+    t = "DELTA" if delta else "FULL"
+    comps = [
+        component("originals", "ORIGINALS", "vault-sha256", ["originals/"], transport=t, count=2383),
+        component("text", "TEXT_DERIVATIVES", "page-marker-v1", ["text/"], transport=t, count=2383),
+        component("records", "RECORDS", "canonical-jsonl", ["data/documents.jsonl", "data/derived_text.jsonl", "data/candidates.jsonl",
+                                                            "corpus-v2/identities.jsonl", "corpus-v2/relationships.jsonl",
+                                                            "corpus-v2/anchors.jsonl", "corpus-v2/taxonomy.jsonl"],
+                  transport=t, count=41000, verify=["SHA256_EACH_FILE", "RESULT_DIGEST", "RESTRICTED_REGISTER", "CONTRACT_VALIDATION"]),
+        component("research", "RESEARCH_AIDS", "jsonl", ["research/a4_provision_versions.jsonl"], count=488),
+        component("integrity", "INTEGRITY_REGISTER", "canonical-jsonl", ["registers/integrity.jsonl"], transport=t, count=2383),
+        component("admission", "ADMISSION_REGISTER", "canonical-jsonl", ["corpus-v2/admissions.jsonl"], transport=t, count=3500,
+                  verify=["SHA256_EACH_FILE", "RESULT_DIGEST", "RESTRICTED_REGISTER", "CONTRACT_VALIDATION"]),
+        component("pg-knowledge", "PG_KNOWLEDGE_DATA", "pg_dump-custom-data-only", ["accelerators/knowledge.pgdump"], accel=True,
+                  count=1, verify=["SHA256_EACH_FILE", "ROW_COUNTS", "RESULT_DIGEST", "SOURCE_DIGEST_EQUALS_SITE"],
+                  fallback="REBUILD_LOCALLY_CHEAP"),
+        component("graph", "GRAPH", "c15-graph-rows-v1", ["accelerators/graph_nodes.jsonl", "accelerators/graph_edges.jsonl"], accel=True,
+                  count=180000, verify=["SHA256_EACH_FILE", "GRAPH_DIGEST", "SOURCE_DIGEST_EQUALS_SITE"], fallback="REBUILD_LOCALLY_CHEAP"),
+        component("lexical-index", "LEXICAL_INDEX", "mimamsa-index-sqlite-1", ["accelerators/search-index/search.sqlite",
+                                                                               "accelerators/search-index/MANIFEST.json"],
+                  accel=True, verify=["SHA256_EACH_FILE", "SQLITE_QUICK_CHECK", "SOURCE_DIGEST_EQUALS_SITE"],
+                  fallback="REBUILD_LOCALLY_CHEAP"),
+        component("vectors-e5", "VECTOR_PACK", "MIMVEC01", ["accelerators/vectors/e5.mimvec"], transport=t, accel=True, model=E5,
+                  count=310000, verify=["SHA256_EACH_FILE", "VECTOR_TRAILER", "VECTOR_SPOT_REEMBED", "SOURCE_DIGEST_EQUALS_SITE"],
+                  fallback="SERVE_LEXICAL_ONLY"),
+    ]
+    return {"contract": CONTRACT_ID, "record_kind": "knowledge_release_manifest", "release_class": "KNOWLEDGE",
+            "release_id": REL_DELTA if delta else REL_FULL, "release_sequence": 17 if delta else 16,
+            "base": {"mode": mode, "base_release_id": REL_FULL if delta else None,
+                     "base_manifest_sha256": H("manifest:" + REL_FULL) if delta else None},
+            "corpus_generations": [CG],
+            "compatibility": {"knowledge_format": "1.0", "min_app_version": "0.16.0", "max_app_version": None,
+                              "contracts": {"v1": "1.0.0", "corpus": CONTRACT_ID}, "pg_knowledge_schema_version": 1,
+                              "graph_builder_version": "c15-graph-1", "index_format": "mimamsa-index-sqlite-1",
+                              "vector_store_format": "MIMVEC01",
+                              "required_models": [{"role": "EMBEDDER", "model_id": "multilingual-e5-small (fixture)", "sha256": E5},
+                                                  {"role": "RERANKER", "model_id": "cross-encoder (fixture)", "sha256": XENC}]},
+            "components": comps,
+            "heavy_compute_on_site": {"ocr": "NONE", "embedding": "NONE", "graph_rebuild": "ONLY_IF_BUILDER_VERSION_DIFFERS"},
+            "notes": "synthetic fixture"}
+
+
+def intelligence_manifest():
+    return {"contract": CONTRACT_ID, "record_kind": "knowledge_release_manifest", "release_class": "INTELLIGENCE",
+            "release_id": REL_MODEL, "release_sequence": 18,
+            "base": {"mode": "FULL", "base_release_id": None, "base_manifest_sha256": None}, "corpus_generations": [CG],
+            "compatibility": {"knowledge_format": "1.0", "min_app_version": "0.16.0", "max_app_version": None,
+                              "contracts": {"v1": "1.0.0", "corpus": CONTRACT_ID}, "pg_knowledge_schema_version": 1,
+                              "graph_builder_version": "c15-graph-1", "index_format": "mimamsa-index-sqlite-1",
+                              "vector_store_format": "MIMVEC01",
+                              "required_models": [{"role": "EMBEDDER", "model_id": "next embedder (fixture)", "sha256": H("model:next")}]},
+            "components": [
+                component("model-embedder", "MODEL_FILE", "onnx", ["models/embedder/model.onnx", "models/embedder/tokenizer.json"],
+                          model=H("model:next"), verify=["SHA256_EACH_FILE", "ONNX_LOAD_SELFTEST"]),
+                component("vectors-next", "VECTOR_PACK", "MIMVEC01", ["accelerators/vectors/next.mimvec"], accel=True,
+                          model=H("model:next"), count=310000,
+                          verify=["SHA256_EACH_FILE", "VECTOR_TRAILER", "VECTOR_SPOT_REEMBED", "SOURCE_DIGEST_EQUALS_SITE"],
+                          fallback="SERVE_LEXICAL_ONLY"),
+                component("integrity", "INTEGRITY_REGISTER", "canonical-jsonl", ["registers/integrity.jsonl"], count=3)],
+            "heavy_compute_on_site": {"ocr": "NONE", "embedding": "NONE", "graph_rebuild": "NONE"}, "notes": "synthetic fixture"}
+
+
+def activation_record():
+    return {"contract": CONTRACT_ID, "record_kind": "knowledge_activation_record", "seq": 2,
+            "previous_record_sha256": H("activation:1"), "action": "ACTIVATE", "release_id": REL_DELTA,
+            "release_class": "KNOWLEDGE", "release_sequence": 17, "previous_active_release_id": REL_FULL, "app_version": "0.16.0",
+            "components": [{"component_id": c["component_id"], "result": "VERIFIED_USED", "failed_checks": []}
+                           for c in knowledge_manifest("DELTA")["components"] if c["component_id"] != "graph"] +
+                          [{"component_id": "graph", "result": "ACCELERATOR_REBUILT_LOCALLY", "failed_checks": ["SOURCE_DIGEST_EQUALS_SITE"]}],
+            "exclusion_state": {"sequence": 4, "digest": H("exclusions:4"), "items_suppressed": 2}, "result": "ACTIVE",
+            "reason": None, "actor": {"role": "ADMIN", "id": "admin-fixture"}, "at": "2026-12-15T09:30:00Z"}
+
+
+def release_negatives():
+    N = {}
+    x = knowledge_manifest("DELTA")
+    x["base"]["base_manifest_sha256"] = None
+    N["N23_delta_release_without_base_manifest"] = (x, "SCHEMA", "base_manifest_sha256", 0)
+    x = knowledge_manifest("FULL")
+    x["components"].append(component("model", "MODEL_FILE", "onnx", ["models/x.onnx"], model=E5))
+    N["N24_knowledge_release_carries_model"] = (x, "SCHEMA", "kind", 0)
+    x = knowledge_manifest("FULL")
+    x["components"][-1]["fallback"] = None
+    N["N25_accelerator_without_fallback"] = (x, "SCHEMA", "fallback", 0)
+    x = knowledge_manifest("FULL")
+    x["heavy_compute_on_site"]["embedding"] = "FULL_CORPUS"
+    N["N26_release_requires_site_embedding"] = (x, "SCHEMA", "embedding", 0)
+    x = activation_record()
+    x["components"][0]["result"] = "FAILED"
+    N["N27_activation_active_with_failed_component"] = (x, "SCHEMA", "result", 0)
+    x = knowledge_manifest("FULL")
+    x["components"] = [c for c in x["components"] if c["kind"] != "ADMISSION_REGISTER"]
+    N["N28_knowledge_release_without_admission_register"] = (x, "KR_COMPONENT_MISSING", None, 0)
+    return N
+
+
 def outputs() -> dict[str, bytes]:
     ids = build_identities()
     A = build_anchors(ids)
@@ -541,6 +655,10 @@ def outputs() -> dict[str, bytes]:
         files[f"positive/identity_{key.replace('-', '_')}.json"] = json.dumps(ids[key], indent=1, sort_keys=True, ensure_ascii=False).encode() + b"\n"
     files["positive/relationships_ar_22_23_30.jsonl"] = canonical.dumps_jsonl(
         [r for r in R if r["subject"]["doc_id"] == DOC["word-screenshots"]])
+    release_fixtures = {"knowledge_release_full": knowledge_manifest("FULL"), "knowledge_release_delta": knowledge_manifest("DELTA"),
+                        "intelligence_release_model_change": intelligence_manifest(), "knowledge_activation_record": activation_record()}
+    for name, rec in release_fixtures.items():
+        files[f"positive/{name}.json"] = json.dumps(rec, indent=1, sort_keys=True, ensure_ascii=False).encode() + b"\n"
     manifest = {"description": "C16 fixture manifest. kind=record: one JSON record; kind=exchange: a set of JSONL files "
                                "validated together. expect=invalid lists the rule code that must be raised and, for SCHEMA, a "
                                "JSON path fragment showing the intended reason.",
@@ -550,9 +668,10 @@ def outputs() -> dict[str, bytes]:
                              {"file": "positive/legally_validated_ledger_v1.json", "kind": "record", "ledger": 1},
                              {"file": "positive/relationships_ar_22_23_30.jsonl", "kind": "jsonl", "ledger": 0}] +
                             [{"file": f"positive/identity_{k.replace('-', '_')}.json", "kind": "record", "ledger": 0}
-                             for k in ("word-screenshots", "reconstructed-pdf", "extract-pdf", "compilation-pdf")],
+                             for k in ("word-screenshots", "reconstructed-pdf", "extract-pdf", "compilation-pdf")] +
+                            [{"file": f"positive/{n}.json", "kind": "record", "ledger": 0} for n in sorted(release_fixtures)],
                 "negative": []}
-    for name, (rec, code, hint, ledger) in sorted(negatives(ids, A, R, T, ADM).items()):
+    for name, (rec, code, hint, ledger) in sorted({**negatives(ids, A, R, T, ADM), **release_negatives()}.items()):
         files[f"negative/{name}.json"] = json.dumps(rec, indent=1, sort_keys=True, ensure_ascii=False).encode() + b"\n"
         manifest["negative"].append({"file": f"negative/{name}.json", "kind": "record", "expect_code": code,
                                      "schema_path_contains": hint, "ledger": ledger})

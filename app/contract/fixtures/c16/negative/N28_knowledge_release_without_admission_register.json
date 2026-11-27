@@ -1,0 +1,268 @@
+{
+ "base": {
+  "base_manifest_sha256": null,
+  "base_release_id": null,
+  "mode": "FULL"
+ },
+ "compatibility": {
+  "contracts": {
+   "corpus": "mimamsa-corpus-contract/2.0",
+   "v1": "1.0.0"
+  },
+  "graph_builder_version": "c15-graph-1",
+  "index_format": "mimamsa-index-sqlite-1",
+  "knowledge_format": "1.0",
+  "max_app_version": null,
+  "min_app_version": "0.16.0",
+  "pg_knowledge_schema_version": 1,
+  "required_models": [
+   {
+    "model_id": "multilingual-e5-small (fixture)",
+    "role": "EMBEDDER",
+    "sha256": "9907ffc6f6673f17a74a21320921169a745535916420107a72b8aef922497040"
+   },
+   {
+    "model_id": "cross-encoder (fixture)",
+    "role": "RERANKER",
+    "sha256": "7e22133bf69d07bf919af6e540d0b4eb9fb99cf55529f0745c1a1e3bd99ee4b3"
+   }
+  ],
+  "vector_store_format": "MIMVEC01"
+ },
+ "components": [
+  {
+   "authority": "AUTHORITATIVE",
+   "builder": null,
+   "component_id": "originals",
+   "fallback": null,
+   "files": [
+    "originals/"
+   ],
+   "format": "vault-sha256",
+   "kind": "ORIGINALS",
+   "model_sha256": null,
+   "result_count": 2383,
+   "result_digest": "c6bbc91ece4c3517841ca78773ba965bbd36483445da388e83bbf5eb5dcfcdeb",
+   "source_digest": null,
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "RESULT_DIGEST",
+    "RESTRICTED_REGISTER"
+   ]
+  },
+  {
+   "authority": "AUTHORITATIVE",
+   "builder": null,
+   "component_id": "text",
+   "fallback": null,
+   "files": [
+    "text/"
+   ],
+   "format": "page-marker-v1",
+   "kind": "TEXT_DERIVATIVES",
+   "model_sha256": null,
+   "result_count": 2383,
+   "result_digest": "648f83a8f5dbc146a9a5e8e5dba1116e03c984473a005815e4fdda60db73d6c0",
+   "source_digest": null,
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "RESULT_DIGEST",
+    "RESTRICTED_REGISTER"
+   ]
+  },
+  {
+   "authority": "AUTHORITATIVE",
+   "builder": null,
+   "component_id": "records",
+   "fallback": null,
+   "files": [
+    "data/documents.jsonl",
+    "data/derived_text.jsonl",
+    "data/candidates.jsonl",
+    "corpus-v2/identities.jsonl",
+    "corpus-v2/relationships.jsonl",
+    "corpus-v2/anchors.jsonl",
+    "corpus-v2/taxonomy.jsonl"
+   ],
+   "format": "canonical-jsonl",
+   "kind": "RECORDS",
+   "model_sha256": null,
+   "result_count": 41000,
+   "result_digest": "0c7fd1ee89481737684d9d237578ae1985771f0c7edb3ec18c1d8b0d64338666",
+   "source_digest": null,
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "RESULT_DIGEST",
+    "RESTRICTED_REGISTER",
+    "CONTRACT_VALIDATION"
+   ]
+  },
+  {
+   "authority": "AUTHORITATIVE",
+   "builder": null,
+   "component_id": "research",
+   "fallback": null,
+   "files": [
+    "research/a4_provision_versions.jsonl"
+   ],
+   "format": "jsonl",
+   "kind": "RESEARCH_AIDS",
+   "model_sha256": null,
+   "result_count": 488,
+   "result_digest": "0f359d6d7f77841ebde0c5c73950f944bcda0efcb52c5ca2f5d9b184f43d457e",
+   "source_digest": null,
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "RESULT_DIGEST",
+    "RESTRICTED_REGISTER"
+   ]
+  },
+  {
+   "authority": "AUTHORITATIVE",
+   "builder": null,
+   "component_id": "integrity",
+   "fallback": null,
+   "files": [
+    "registers/integrity.jsonl"
+   ],
+   "format": "canonical-jsonl",
+   "kind": "INTEGRITY_REGISTER",
+   "model_sha256": null,
+   "result_count": 2383,
+   "result_digest": "328c6844b2c8c870340b4d9e7d579c8e2d89d3240a5baf5f91e4d41aa8a85a47",
+   "source_digest": null,
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "RESULT_DIGEST",
+    "RESTRICTED_REGISTER"
+   ]
+  },
+  {
+   "authority": "ACCELERATOR",
+   "builder": {
+    "commit": "c8fa5290",
+    "config_sha256": null,
+    "name": "pg-knowledge-builder",
+    "version": "1.0.0"
+   },
+   "component_id": "pg-knowledge",
+   "fallback": "REBUILD_LOCALLY_CHEAP",
+   "files": [
+    "accelerators/knowledge.pgdump"
+   ],
+   "format": "pg_dump-custom-data-only",
+   "kind": "PG_KNOWLEDGE_DATA",
+   "model_sha256": null,
+   "result_count": 1,
+   "result_digest": "7a4bc68bcf2fe07507a01150d5b15e5573fa165dec745940d6473d5b7edffd32",
+   "source_digest": "13d8286eb4423e352408e6ed4b8fc44f5117e0717b60f6fef398c491aed4949a",
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "ROW_COUNTS",
+    "RESULT_DIGEST",
+    "SOURCE_DIGEST_EQUALS_SITE"
+   ]
+  },
+  {
+   "authority": "ACCELERATOR",
+   "builder": {
+    "commit": "c8fa5290",
+    "config_sha256": null,
+    "name": "graph-builder",
+    "version": "1.0.0"
+   },
+   "component_id": "graph",
+   "fallback": "REBUILD_LOCALLY_CHEAP",
+   "files": [
+    "accelerators/graph_nodes.jsonl",
+    "accelerators/graph_edges.jsonl"
+   ],
+   "format": "c15-graph-rows-v1",
+   "kind": "GRAPH",
+   "model_sha256": null,
+   "result_count": 180000,
+   "result_digest": "7eb9e1c9285aa67085cf1267fbbf7ac3e9001c658a03ef1e277a55d2ee9b4bf4",
+   "source_digest": "b0fcb1533e0bf9eb9d1906b30f7a9f8eb3ed651c2089c07aa01889569322a366",
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "GRAPH_DIGEST",
+    "SOURCE_DIGEST_EQUALS_SITE"
+   ]
+  },
+  {
+   "authority": "ACCELERATOR",
+   "builder": {
+    "commit": "c8fa5290",
+    "config_sha256": null,
+    "name": "lexical-index-builder",
+    "version": "1.0.0"
+   },
+   "component_id": "lexical-index",
+   "fallback": "REBUILD_LOCALLY_CHEAP",
+   "files": [
+    "accelerators/search-index/search.sqlite",
+    "accelerators/search-index/MANIFEST.json"
+   ],
+   "format": "mimamsa-index-sqlite-1",
+   "kind": "LEXICAL_INDEX",
+   "model_sha256": null,
+   "result_count": 1,
+   "result_digest": "b594b241f877e6cff7cb688b5d1152d9b712008464722200dd1458f07dba916e",
+   "source_digest": "b90011b3a5840ce7f9244de075fc2f13c3baa2a0265b2acef86a52e86fa1976f",
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "SQLITE_QUICK_CHECK",
+    "SOURCE_DIGEST_EQUALS_SITE"
+   ]
+  },
+  {
+   "authority": "ACCELERATOR",
+   "builder": {
+    "commit": "c8fa5290",
+    "config_sha256": null,
+    "name": "vectors-e5-builder",
+    "version": "1.0.0"
+   },
+   "component_id": "vectors-e5",
+   "fallback": "SERVE_LEXICAL_ONLY",
+   "files": [
+    "accelerators/vectors/e5.mimvec"
+   ],
+   "format": "MIMVEC01",
+   "kind": "VECTOR_PACK",
+   "model_sha256": "9907ffc6f6673f17a74a21320921169a745535916420107a72b8aef922497040",
+   "result_count": 310000,
+   "result_digest": "51196e4f5ab81b5d2c618e7f079ffc12def3800109942d6b99679076447bb660",
+   "source_digest": "31dd079db08588d5045cb5e42a762c48c0555899260323542a53ef55839d9c47",
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "VECTOR_TRAILER",
+    "VECTOR_SPOT_REEMBED",
+    "SOURCE_DIGEST_EQUALS_SITE"
+   ]
+  }
+ ],
+ "contract": "mimamsa-corpus-contract/2.0",
+ "corpus_generations": [
+  "CG-20261127-fixtures-0a1b2c3d"
+ ],
+ "heavy_compute_on_site": {
+  "embedding": "NONE",
+  "graph_rebuild": "ONLY_IF_BUILDER_VERSION_DIFFERS",
+  "ocr": "NONE"
+ },
+ "notes": "synthetic fixture",
+ "record_kind": "knowledge_release_manifest",
+ "release_class": "KNOWLEDGE",
+ "release_id": "R16-knowledge-20261201-0a0b0c0d",
+ "release_sequence": 16
+}

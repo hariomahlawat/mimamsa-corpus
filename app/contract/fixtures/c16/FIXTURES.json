@@ -154,6 +154,48 @@
    "kind": "record",
    "ledger": 0,
    "schema_path_contains": "verification"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N23_delta_release_without_base_manifest.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "base_manifest_sha256"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N24_knowledge_release_carries_model.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "kind"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N25_accelerator_without_fallback.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "fallback"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N26_release_requires_site_embedding.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "embedding"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N27_activation_active_with_failed_component.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "result"
+  },
+  {
+   "expect_code": "KR_COMPONENT_MISSING",
+   "file": "negative/N28_knowledge_release_without_admission_register.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": null
   }
  ],
  "positive": [
@@ -195,6 +237,26 @@
   },
   {
    "file": "positive/identity_compilation_pdf.json",
+   "kind": "record",
+   "ledger": 0
+  },
+  {
+   "file": "positive/intelligence_release_model_change.json",
+   "kind": "record",
+   "ledger": 0
+  },
+  {
+   "file": "positive/knowledge_activation_record.json",
+   "kind": "record",
+   "ledger": 0
+  },
+  {
+   "file": "positive/knowledge_release_delta.json",
+   "kind": "record",
+   "ledger": 0
+  },
+  {
+   "file": "positive/knowledge_release_full.json",
    "kind": "record",
    "ledger": 0
   }

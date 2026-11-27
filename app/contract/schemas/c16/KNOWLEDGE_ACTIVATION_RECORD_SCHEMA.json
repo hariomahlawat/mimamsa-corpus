@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/KNOWLEDGE_ACTIVATION_RECORD_SCHEMA.json",
+  "title": "Knowledge activation record (site-only, append-only, hash-chained)",
+  "description": "Written by the site importer for every activation, rollback or restore of a knowledge or intelligence release. Site-only installation data: never placed in a release bundle (the importer refuses it there, like RELEASE_ACTIVATION publication records). Each record names the previous record's sha256, so the history is a chain an auditor can replay. Activation is a site Admin act (ADR-0002 publication); it is never legal approval.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "record_kind", "seq", "previous_record_sha256", "action", "release_id", "release_class", "release_sequence", "previous_active_release_id", "app_version", "components", "exclusion_state", "result", "actor", "at"],
+  "properties": {
+    "contract": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"},
+    "record_kind": {"const": "knowledge_activation_record"},
+    "seq": {"type": "integer", "minimum": 1},
+    "previous_record_sha256": {"description": "sha256 of the canonical bytes of record seq-1; null only for seq 1.", "anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
+    "action": {"enum": ["ACTIVATE", "ROLLBACK", "RESTORE", "REFUSE"]},
+    "release_id": {"type": "string", "pattern": "^R[0-9]{2,3}-[a-z0-9-]{1,40}-[0-9]{8}-[0-9a-f]{8}$"},
+    "release_class": {"enum": ["KNOWLEDGE", "INTELLIGENCE"]},
+    "release_sequence": {"type": "integer", "minimum": 1},
+    "previous_active_release_id": {"type": ["string", "null"], "pattern": "^R[0-9]{2,3}-[a-z0-9-]{1,40}-[0-9]{8}-[0-9a-f]{8}$"},
+    "app_version": {"$ref": "../v1/common.schema.json#/$defs/semver"},
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["component_id", "result"],
+        "properties": {
+          "component_id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{1,63}$"},
+          "result": {"enum": ["VERIFIED_USED", "VERIFIED_REUSED_FROM_RETAINED", "ACCELERATOR_REBUILT_LOCALLY", "ACCELERATOR_DEGRADED", "FAILED"]},
+          "failed_checks": {"type": "array", "items": {"type": "string", "maxLength": 64}, "uniqueItems": true}
+        }
+      }
+    },
+    "exclusion_state": {
+      "description": "The ExclusionStore effective state re-applied after this action, before the generation served any request.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sequence", "digest", "items_suppressed"],
+      "properties": {
+        "sequence": {"type": "integer", "minimum": 0},
+        "digest": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
+        "items_suppressed": {"type": "integer", "minimum": 0}
+      }
+    },
+    "result": {"enum": ["ACTIVE", "ROLLED_BACK", "REFUSED"]},
+    "reason": {"type": ["string", "null"], "maxLength": 500},
+    "actor": {"type": "object", "additionalProperties": false, "required": ["role", "id"], "properties": {"role": {"enum": ["ADMIN", "SYSTEM_RECOVERY"]}, "id": {"type": "string", "maxLength": 120}}},
+    "at": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/datetime"}
+  },
+  "allOf": [
+    {"if": {"properties": {"seq": {"const": 1}}}, "then": {"properties": {"previous_record_sha256": {"type": "null"}}}, "else": {"properties": {"previous_record_sha256": {"type": "string"}}}},
+    {"if": {"properties": {"result": {"const": "ACTIVE"}}}, "then": {"properties": {"action": {"enum": ["ACTIVATE", "ROLLBACK", "RESTORE"]}, "components": {"items": {"properties": {"result": {"not": {"const": "FAILED"}}}}}}}},
+    {"if": {"properties": {"action": {"const": "REFUSE"}}}, "then": {"required": ["reason"], "properties": {"result": {"const": "REFUSED"}, "reason": {"type": "string", "minLength": 3}}}}
+  ]
+}
