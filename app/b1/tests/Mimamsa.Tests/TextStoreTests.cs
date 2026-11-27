@@ -422,25 +422,30 @@ public class TextStoreTests : IDisposable
             blob.Position = start; var b = new byte[1]; blob.ReadExactly(b);
             blob.Position = start; blob.Write(new[] { (byte)(b[0] ^ 0x20) });
         }
-        int published = 0, servedAfter = 0, reads = 0;
-        using var stop = new CancellationTokenSource();
-        var readers = Enumerable.Range(0, 6).Select(k => Task.Run(() =>
+        // Dedicated threads with explicit handshakes (not timed sleeps): every reader has read page A before page B fails,
+        // and every reader keeps reading after the failure is published, however slowly the host schedules them.
+        const int Readers = 6, ReadsAfter = 50;
+        int published = 0, servedAfter = 0, readsBefore = 0, readsAfter = 0;
+        var stop = false;
+        var threads = Enumerable.Range(0, Readers).Select(k => new Thread(() =>
         {
-            while (!stop.IsCancellationRequested)
+            bool counted = false;
+            while (!Volatile.Read(ref stop))
             {
                 bool after = Volatile.Read(ref published) == 1;
                 try { _ = warm.Text; if (after) Interlocked.Increment(ref servedAfter); }
                 catch (TextIntegrityException) { }
-                Interlocked.Increment(ref reads);
+                if (after) Interlocked.Increment(ref readsAfter);
+                else if (!counted) { counted = true; Interlocked.Increment(ref readsBefore); }
             }
-        })).ToArray();
-        Thread.Sleep(50);
+        }) { IsBackground = true }).ToList();
+        threads.ForEach(t => t.Start());
+        Assert.True(SpinWait.SpinUntil(() => Volatile.Read(ref readsBefore) == Readers, TimeSpan.FromSeconds(30)), "readers did not start");
         Assert.Throws<TextIntegrityException>(() => cold.Text);
         Volatile.Write(ref published, 1);
-        Thread.Sleep(200);
-        stop.Cancel();
-        Task.WaitAll(readers);
-        Assert.True(reads > 0);
+        Assert.True(SpinWait.SpinUntil(() => Volatile.Read(ref readsAfter) >= Readers * ReadsAfter, TimeSpan.FromSeconds(30)), "readers stopped reading");
+        Volatile.Write(ref stop, true);
+        threads.ForEach(t => t.Join());
         Assert.Equal(0, servedAfter);
         Assert.Throws<TextIntegrityException>(() => warm.Text);
         Assert.Throws<TextIntegrityException>(() => d.Passages.First(p => p.Page == warm.Page).Text);
