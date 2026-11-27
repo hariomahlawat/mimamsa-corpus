@@ -34,7 +34,7 @@
   "producer_generations": [
    {
     "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
-    "generation_manifest_sha256": "dc2901d45b6125ccadb84306d5e8c011ed87136ee4698abed00c2fda1082b122",
+    "generation_manifest_sha256": "70ea18de2a2f209f59124aaf084512e1db18b2e498bd06c7f1b8cc83841332c5",
     "hf_repo": "owner/fixture-corpus",
     "hf_revision": "008d447011808d3d3f9095b0dbf14125002d1642",
     "path": "exchanges/fixture/GENERATION.json"

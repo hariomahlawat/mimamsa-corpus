@@ -151,6 +151,17 @@ def test_degraded_release_validates_under_the_contract_rules(built):
             assert listed.get(r) == "other", r
 
 
+def test_cp1_slice_exchange_is_reproducible_and_pinned(tmp_path):
+    """The CP-1 slice exchange (real bytes from the B01 producer harness) is byte-reproducible on every platform and
+    hashes to the cp1-slice spec pin; any drift in the harness is caught here, before S1 refuses a build."""
+    spec = json.loads((KBUILD / "specs" / "cp1-slice.spec.json").read_text(encoding="utf-8"))
+    g = spec["inputs"]["producer_generations"][0]
+    root = prepare(tmp_path / "m", exchange="cp1")
+    data = (root / g["path"]).read_bytes()
+    assert hashlib.sha256(data).hexdigest() == g["generation_manifest_sha256"] == GENERATION_SHA256["cp1"]
+    assert json.loads(data)["corpus_generation_id"] == g["corpus_generation_id"]
+
+
 def test_release_inventories_are_in_ordinal_path_order_on_mixed_case_paths(tmp_path):
     """Cross-platform hazard (B01 c006d300): Path objects compare case-insensitively on Windows and case-sensitively on
     Linux. SHA256SUMS, component file lists and concat digests must use the ordinal order of the '/'-separated path."""

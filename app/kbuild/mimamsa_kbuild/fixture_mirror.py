@@ -129,4 +129,5 @@ def prepare(mirror: Path, *, repo: str = CP1_REPO, revision: str = CP1_REVISION,
 
 
 GENERATION_SHA256 = {"positive": "3a24aacf1e99bbbcb0fcf314c5375e9ff50a75f0e0775c0c3b345dcabd2c7834",
-                     "v2_1": "8ce553cc69bdbebe7b8fea594318830bc104b4d095dbeed34d54cf408cbe79a3"}
+                     "v2_1": "8ce553cc69bdbebe7b8fea594318830bc104b4d095dbeed34d54cf408cbe79a3",
+                     "cp1": "70ea18de2a2f209f59124aaf084512e1db18b2e498bd06c7f1b8cc83841332c5"}
