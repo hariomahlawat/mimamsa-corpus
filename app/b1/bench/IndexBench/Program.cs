@@ -29,12 +29,38 @@ object Mem() { GC.Collect(2, GCCollectionMode.Forced, true, true); GC.WaitForPen
 var sw = Stopwatch.StartNew();
 var gen = GenerationStore.Load(site);
 long loadMs = sw.ElapsedMilliseconds;
+// --replicate R (stress): R copies of every document under synthetic ids. Passage text strings are SHARED with the
+// loaded generation, so this measures index scaling (postings, vocabulary, query cost) at R x the passages without
+// multiplying the generation's text memory; text memory is reported separately from the unreplicated load.
+if (int.TryParse(Arg("--replicate"), out var rep) && rep > 1)
+{
+    var docs = new Dictionary<string, DocumentRecord>(StringComparer.Ordinal);
+    foreach (var d in gen.Documents.Values)
+        for (int k = 0; k < rep; k++)
+        {
+            var c = new DocumentRecord
+            {
+                DocId = k == 0 ? d.DocId : $"{d.DocId}~r{k}", DocType = d.DocType, Title = d.Title, Number = d.Number, IssuingAuthority = d.IssuingAuthority,
+                IssueDate = d.IssueDate, Language = d.Language, CorpusStatus = d.CorpusStatus, CopySha = d.CopySha, CopyBytes = d.CopyBytes, PageCount = d.PageCount,
+                Publication = d.Publication, Judicial = d.Judicial, Provenance = d.Provenance, StatusAxes = d.StatusAxes, Restriction = d.Restriction, FieldOrigin = d.FieldOrigin,
+            };
+            c.DerivativeId = d.DerivativeId; c.OriginalVerified = d.OriginalVerified; c.TextAssessment = d.TextAssessment;
+            foreach (var (n, pg) in d.Pages) c.Pages[n] = pg;
+            foreach (var p in d.Passages) c.Passages.Add(p with { DocId = c.DocId });
+            docs[c.DocId] = c;
+        }
+    gen = new GenerationStore
+    {
+        SiteRoot = gen.SiteRoot, GenerationId = gen.GenerationId + $"-x{rep}", Release = gen.Release, Documents = docs, HeldCopies = gen.HeldCopies,
+        ProvisionVersions = gen.ProvisionVersions, Abbreviations = gen.Abbreviations, LoadIssues = gen.LoadIssues, Quarantine = gen.Quarantine,
+    };
+}
 var memAfterLoad = Mem();
 sw.Restart();
 SearchIndex ix = engine switch
 {
     "memory" => SearchIndex.Build(gen),
-    "disk" => SearchIndex.Open(gen, Arg("--index-dir") ?? throw new ArgumentException("--index-dir is required for disk"), new SearchIndexOptions { CacheBytes = long.Parse(Arg("--cache-mb") ?? "128") << 20 }, Console.Error.WriteLine),
+    "disk" => SearchIndex.Open(gen, Arg("--index-dir") ?? throw new ArgumentException("--index-dir is required for disk"), new SearchIndexOptions { CacheBytes = long.Parse(Arg("--cache-mb") ?? "128") << 20, UseForwardCache = !args.Contains("--no-forward-cache") }, Console.Error.WriteLine),
     _ => throw new ArgumentException("engine"),
 };
 long buildMs = sw.ElapsedMilliseconds;
@@ -80,7 +106,8 @@ foreach (var n in readers)
 }
 var result = new
 {
-    site, engine, documents = gen.Documents.Count, passages = ix.N, load_ms = loadMs, index_ms = buildMs,
+    site, engine, replicate = rep > 1 ? rep : 1, documents = gen.Documents.Count, passages = ix.N, vocabulary = ix.VocabularySize, load_ms = loadMs, index_ms = buildMs,
+    index_file_mb = ix.IndexPath is { } ip ? Mb(new FileInfo(Path.Combine(ip, "search.sqlite")).Length) : (double?)null,
     mem_after_load = memAfterLoad, mem_after_index = memAfterIndex, mem_end = Mem(),
     sequential = Stats(seq), concurrent = conc,
     per_query_median_ms = profile ? perQuery : null,

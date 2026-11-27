@@ -23,6 +23,8 @@ public sealed class SearchIndex
     public string Engine { get; private set; } = "memory";
     /// Disk engine only: the published index directory in use (null for memory).
     public string? IndexPath { get; private set; }
+    /// Distinct indexed terms.
+    public int VocabularySize => Postings.Count;
     internal readonly Dictionary<string, HashSet<string>> StemGroups = new(StringComparer.Ordinal);
     internal readonly Dictionary<string, List<int>> MetaIds = new(StringComparer.Ordinal);
     internal readonly Dictionary<string, List<int>> CoverIds = new(StringComparer.Ordinal);
