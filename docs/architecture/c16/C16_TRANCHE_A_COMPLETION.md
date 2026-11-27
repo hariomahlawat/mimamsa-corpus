@@ -28,7 +28,7 @@
 
 All acceptances were technical and static. They convey no production or legal acceptance.
 
-**Post-merge CI on `5bdc8e68`:** **pending** at the time of writing. Runs 46036177306 and 46036177419 (push) and 46036184727 and 46036184716 (pull request) were in progress; the crawler, HF-sync and audit-kit workflows had passed. *Result to be recorded here: ________.*
+**Post-merge CI on `5bdc8e68`:** **verified green**. All seven runs succeeded: push runs 46036177306 and 46036177419, and pull-request runs 46036184727, 46036184716, 46036184710, 46036184604 and 46036184595. These cover the app contract and design checks (including `b1`), the App Windows PoC, the crawler security guards, the HF sync safeguard tests and the legal database audit kit. In the Linux `b1` job, all three disk-configuration steps passed: the unit and integration tests, the unmodified retrieval oracle, and the Playwright journeys.
 
 ## 3. Gates that remain open
 
