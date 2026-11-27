@@ -194,7 +194,7 @@ public static partial class Api
                 groups = d.Groups.Select(g => new { label = g.Label, note = g.Note, items = g.Items.Select(i => ProvisionDto(src.Resolve(i), i, s)) }),
                 safeguards = d.Safeguards.Select(i => ProvisionDto(src.Resolve(i), i, s)),
                 forms = d.FormQueries.Select(q => FormHits(q, s)),
-                forms_note = "Search results in the held Acts and Rules, shown as candidates. No form in this library is verified, applicable or approved for issue.",
+                forms_note = "Search results in the held Acts, Rules and Regulations, shown as candidates: this is not a form registry. No form in this library is verified, applicable or approved for issue.",
                 review_questions = d.ReviewQuestions,
                 review_note = "Questions a competent legal adviser should answer before any action. They are prompts, not conclusions.",
             });
