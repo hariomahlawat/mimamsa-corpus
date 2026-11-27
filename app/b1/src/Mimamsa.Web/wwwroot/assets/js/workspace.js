@@ -51,7 +51,7 @@ export async function commanderPage(main, nav, id) {
           h("a.ws-graph", { href: `/g?doc=${encodeURIComponent(it.doc_id)}&section=${encodeURIComponent(it.number)}`,
             title: "Open this provision's relationships and research assessment in the shared legal knowledge graph",
             onclick: go(nav, `/g?doc=${encodeURIComponent(it.doc_id)}&section=${encodeURIComponent(it.number)}`) }, "Relationships in the graph")),
-        it.excerpt ? h("blockquote.ws-excerpt", it.excerpt) : null)
+        it.excerpt ? h("blockquote.ws-excerpt", it.excerpt) : it.excerpt_notice ? h("p.muted.ws-na", it.excerpt_notice) : null)
     : h("li.ws-prov.unavailable", { "data-provision": `${it.kind} ${it.number}` }, h("span.num", `${it.kind} ${it.number}`), h("span.muted", " not available in this library"));
   add(page,
     h("header.ws-head", h("h1", d.title), label, h("p", d.purpose), h("p.muted", d.disclaimer)), nav2,
@@ -164,10 +164,15 @@ function blockView(b, i, ed) {
 const loadStudioDoc = (id, version) => Promise.all([api(`/api/studio/documents/${encodeURIComponent(id)}${version ? `?version=${version}` : ""}`), api(`/api/studio/documents/${encodeURIComponent(id)}/versions`)]);
 
 async function studioEditor(page, nav, id, version, preloaded = null) {
+  // Codex review of PR #75: a load that finishes after the user has navigated elsewhere (this page detached) or after a
+  // newer load on this page started never renders or registers its refresh handler over the visible editor's.
+  const seq = page._edSeq = (page._edSeq || 0) + 1;
+  const stale = () => !page.isConnected || page._edSeq !== seq;
   let d, vers;
   try { [d, vers] = preloaded || await loadStudioDoc(id, version); }
-  catch (e) { clear(page); add(page, h("div.error-state", { role: "alert" }, h("h2", e.status === 404 ? "No such document in your Studio" : "Could not load the document"), h("p", e.body?.notice || e.message),
+  catch (e) { if (stale()) return; clear(page); add(page, h("div.error-state", { role: "alert" }, h("h2", e.status === 404 ? "No such document in your Studio" : "Could not load the document"), h("p", e.body?.notice || e.message),
     h("p", h("a", { href: "/studio", onclick: go(nav, "/studio") }, "Back to the Studio")))); return; }
+  if (stale()) return;
   clear(page);
   const latest = vers.versions[0].version, viewingOld = d.version !== latest;
   const ed = { blocks: d.blocks.map((b) => ({ ...b })), changed: false };

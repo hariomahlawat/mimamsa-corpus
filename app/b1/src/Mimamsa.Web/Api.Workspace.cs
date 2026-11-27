@@ -41,9 +41,13 @@ public static partial class Api
         var vd = r is { Found: true } ? s.VisibleDocument(r.DocId) : null;
         return vd is not null
             ? new { kind = pr.Kind, number = pr.Number, found = true, doc_id = (string?)r!.DocId, copy = (string?)vd.CopySha[..12], instrument = (string?)r.Instrument, heading = r.Heading, page = r.Page,
-                    passage_id = r.PassageId, omitted_as_printed = r.Omitted, excerpt = r.Excerpt, link = (string?)$"/s/{r.DocId}/{Uri.EscapeDataString(pr.Number)}" }
+                    passage_id = r.PassageId, omitted_as_printed = r.Omitted,
+                    // Codex review of PR #75: OCR text (QuotingPermitted=false) is never shown as a printed excerpt
+                    excerpt = vd.QuotingPermitted ? r.Excerpt : null,
+                    excerpt_notice = vd.QuotingPermitted || r.Excerpt is null ? null : "This text includes OCR: read the provision on the original page.",
+                    link = (string?)$"/s/{r.DocId}/{Uri.EscapeDataString(pr.Number)}" }
             : new { kind = pr.Kind, number = pr.Number, found = false, doc_id = (string?)null, copy = (string?)null, instrument = (string?)null, heading = (string?)null, page = (int?)null,
-                    passage_id = (string?)null, omitted_as_printed = false, excerpt = (string?)null, link = (string?)null };
+                    passage_id = (string?)null, omitted_as_printed = false, excerpt = (string?)null, excerpt_notice = (string?)null, link = (string?)null };
     }
 
     static object FormHits(string query, AppServices s)

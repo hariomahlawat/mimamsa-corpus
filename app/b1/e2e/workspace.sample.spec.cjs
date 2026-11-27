@@ -223,6 +223,35 @@ test("W-05d a failed Studio policy refresh withholds library content and is retr
   }
 });
 
+// Codex review of PR #75: an editor load that finishes after the user has moved on to another document never takes over
+// the refresh registration, so a later withdrawal still updates the visible editor.
+test("W-05e a late load of a previous document does not take over the visible editor's refresh", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  const meta = await (await user.request.get("/api/v2/documents/act-navy-1957/pdf-meta")).json();
+  const a = await (await apiPost(user, "/api/studio/documents", { title: "W-05e A (late)", template: "blank" })).json();
+  const b = await (await apiPost(user, "/api/studio/documents", { title: "W-05e B (visible)", template: "blank" })).json();
+  expect((await apiPost(user, `/api/studio/documents/${b.id}/append`, { blocks: [
+    { type: "citation", doc_id: "act-navy-1957", copy: meta.copy_sha256.slice(0, 12), page: 3 }] })).status()).toBe(200);
+  await user.goto("/studio");
+  let release; const gate = new Promise((r) => { release = r; });
+  await user.route((u) => u.pathname === `/api/studio/documents/${a.id}`, async (route) => { await gate; await route.continue(); });
+  await user.locator("#studio-docs a", { hasText: "W-05e A (late)" }).click();       // A's load is held
+  await user.goBack();
+  await user.locator("#studio-docs a", { hasText: "W-05e B (visible)" }).click();
+  await expect(user.locator(".ws-block.corpus .ws-cite")).toContainText("Navy Act");
+  release();
+  await user.waitForTimeout(1000);
+  await expect(user.locator("#studio-title")).toHaveValue("W-05e B (visible)");        // A never renders over B
+  await login(page, "admin");
+  expect((await apiPost(page, "/api/admin/withdraw", { doc_id: "act-navy-1957", reason: "C15 W-05e late load" })).status()).toBe(200);
+  try {
+    await expect(user.locator(".ws-block.corpus [data-unavailable]")).toHaveText("Source no longer available in this installation.", { timeout: 30_000 });
+  } finally {
+    expect((await apiPost(page, "/api/admin/reinstate", { doc_id: "act-navy-1957", reason: "C15 W-05e restore after test" })).status()).toBe(200);
+  }
+});
+
 test("W-06 Commander questions go into a Studio document as automated suggestions", async ({ page }) => {
   await login(page);
   await page.goto("/c/court-of-inquiry");
