@@ -379,6 +379,32 @@ def hashes_from_repository_paths(siblings) -> set[str]:
     return hashes
 
 
+def typed_hashes_from_repository_siblings(siblings) -> dict[str, set[str]]:
+    typed = {key: set() for key in ("original_source_sha256", "derivative_sha256",
+                                     "lfs_object_sha256", "configuration_sha256",
+                                     "audit_sha256", "unclassified_path_sha256")}
+    for sibling in siblings or []:
+        path = getattr(sibling, "rfilename", "")
+        lower = path.casefold().replace("\\", "/")
+        values = {match.casefold() for match in HEX64.findall(path)}
+        if any(token in lower for token in ("/originals/", "/raw/", "preservation/")):
+            bucket = "original_source_sha256"
+        elif any(token in lower for token in ("/text/", "/ocr/", "/derived/", "/derivatives/")):
+            bucket = "derivative_sha256"
+        elif any(token in lower for token in ("/config/", "configuration")):
+            bucket = "configuration_sha256"
+        elif any(token in lower for token in ("/audit", "/reports/", "receipt")):
+            bucket = "audit_sha256"
+        else:
+            bucket = "unclassified_path_sha256"
+        typed[bucket].update(values)
+        lfs = getattr(sibling, "lfs", None)
+        lfs_sha = lfs.get("sha256") if isinstance(lfs, dict) else getattr(lfs, "sha256", None)
+        if lfs_sha and HEX64.fullmatch(lfs_sha):
+            typed["lfs_object_sha256"].add(lfs_sha.casefold())
+    return typed
+
+
 def repository_manifest_hashes(repo: Path) -> set[str]:
     hashes = set()
     for path in (repo / "legal_knowledge").rglob("*"):

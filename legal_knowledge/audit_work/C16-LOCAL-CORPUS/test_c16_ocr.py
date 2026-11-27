@@ -10,6 +10,13 @@ class Tests(unittest.TestCase):
  def test_restricted_not_materialised(self):
   with tempfile.TemporaryDirectory() as td:
    r=o.persist_result(Path(td),"a"*64,{"raw_text":"FOR OFFICIAL USE ONLY","words":[]},True);self.assertIsNone(r["raw_text_path"]);self.assertEqual(list(Path(td).rglob("*.txt")),[])
+ def test_empty_ocr_is_held_and_not_materialised(self):
+  with tempfile.TemporaryDirectory() as td:
+   r=o.persist_result(Path(td),"a"*64,{"raw_text":"","normalised_text":"","words":[]},False)
+   self.assertEqual(r["access_disposition"],"HELD_UNREADABLE_OR_PROCESSING_ERROR")
+   self.assertTrue(r["unreadable"])
+   self.assertIsNone(r["raw_text_path"])
+   self.assertEqual(list(Path(td).rglob("*.txt")),[])
  def test_state(self):
   with tempfile.TemporaryDirectory() as td:
    row={"image_sha256":"a"*64,"configuration_sha256":"c"*64,"state":"COMPLETE"};o.write_state_record(td,row);self.assertEqual(o.load_state_records(td),[row])
@@ -17,4 +24,18 @@ class Tests(unittest.TestCase):
   self.assertTrue(o.likely_decorative({"width":100,"height":80,"size_bytes":4000}));self.assertFalse(o.likely_decorative({"width":800,"height":1000,"size_bytes":4000}))
  def test_best_attempt(self):
   self.assertEqual(o.best_attempt([{"configuration":"a","word_count":2,"mean_confidence":90},{"configuration":"b","word_count":5,"mean_confidence":50}])["configuration"],"b")
+ def test_second_pass_candidates_only_include_unreadable_primary_results(self):
+  jobs={"a"*64:{"image_sha256":"a"*64},"b"*64:{"image_sha256":"b"*64}}
+  primary=[{"image_sha256":"a"*64,"state":"COMPLETE","unreadable":True},
+           {"image_sha256":"b"*64,"state":"COMPLETE","unreadable":False}]
+  self.assertEqual([x["image_sha256"] for x in o.second_pass_candidates(jobs,primary)], ["a"*64])
+ def test_pdf_page_jobs_preserve_mixed_content_page_numbers(self):
+  rows=[{"inventory_id":"i1","sha256":"a"*64,"relative_path":"mixed.pdf","extension":".pdf",
+         "ocr_required_pages":[3,1],"pdf_page_inspection":[
+          {"physical_page":1,"classification":"MIXED_NATIVE_AND_IMAGE"},
+          {"physical_page":3,"classification":"IMAGE_DOMINANT"}]}]
+  jobs=o.pdf_page_jobs(rows,Path("S:/source"))
+  self.assertEqual([x["physical_page"] for x in jobs],[1,3])
+  self.assertEqual(jobs[0]["page_classification"],"MIXED_NATIVE_AND_IMAGE")
+  self.assertEqual(jobs[0]["page_key"],o.processing_key("a"*64,"pdf-page-1"))
 if __name__=="__main__":unittest.main()
