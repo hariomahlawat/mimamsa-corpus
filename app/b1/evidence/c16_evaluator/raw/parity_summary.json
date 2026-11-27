@@ -1,0 +1,158 @@
+[
+ {
+  "scale": "290",
+  "engine": "memory",
+  "cases": 2062,
+  "identical": 2062,
+  "different": 0,
+  "states": {
+   "results": 1755,
+   "empty": 235,
+   "parser_error": 72
+  },
+  "hits_compared": 5504083,
+  "base_sha256": "9cc23a4246c1b280e0dd1ffe6491e5e23eab7aca740fb3d10e525c06bf9df633",
+  "new_sha256": "9cc23a4246c1b280e0dd1ffe6491e5e23eab7aca740fb3d10e525c06bf9df633",
+  "byte_identical_files": true,
+  "first_differences": []
+ },
+ {
+  "scale": "290",
+  "engine": "disk",
+  "cases": 2062,
+  "identical": 2062,
+  "different": 0,
+  "states": {
+   "results": 1755,
+   "empty": 235,
+   "parser_error": 72
+  },
+  "hits_compared": 5504083,
+  "base_sha256": "9cc23a4246c1b280e0dd1ffe6491e5e23eab7aca740fb3d10e525c06bf9df633",
+  "new_sha256": "9cc23a4246c1b280e0dd1ffe6491e5e23eab7aca740fb3d10e525c06bf9df633",
+  "byte_identical_files": true,
+  "first_differences": []
+ },
+ {
+  "scale": "290",
+  "engines_compared": "new memory vs new disk",
+  "byte_identical_files": true
+ },
+ {
+  "scale": "1000",
+  "engine": "memory",
+  "cases": 2062,
+  "identical": 2062,
+  "different": 0,
+  "states": {
+   "results": 1613,
+   "empty": 377,
+   "parser_error": 72
+  },
+  "hits_compared": 4079116,
+  "base_sha256": "97628978e026916001b68b82342efe00dbb6c1c3b45321bc4274c0fbf212494b",
+  "new_sha256": "97628978e026916001b68b82342efe00dbb6c1c3b45321bc4274c0fbf212494b",
+  "byte_identical_files": true,
+  "first_differences": []
+ },
+ {
+  "scale": "1000",
+  "engine": "disk",
+  "cases": 2062,
+  "identical": 2062,
+  "different": 0,
+  "states": {
+   "results": 1613,
+   "empty": 377,
+   "parser_error": 72
+  },
+  "hits_compared": 4079116,
+  "base_sha256": "97628978e026916001b68b82342efe00dbb6c1c3b45321bc4274c0fbf212494b",
+  "new_sha256": "97628978e026916001b68b82342efe00dbb6c1c3b45321bc4274c0fbf212494b",
+  "byte_identical_files": true,
+  "first_differences": []
+ },
+ {
+  "scale": "1000",
+  "engines_compared": "new memory vs new disk",
+  "byte_identical_files": true
+ },
+ {
+  "scale": "4000",
+  "engine": "memory",
+  "cases": 2062,
+  "identical": 2062,
+  "different": 0,
+  "states": {
+   "results": 1613,
+   "empty": 377,
+   "parser_error": 72
+  },
+  "hits_compared": 16714605,
+  "base_sha256": "65ecfb051fa4a6fad9dbca0c9fe495863eb70ef2be8d6dad883e3b1b19a7e11a",
+  "new_sha256": "65ecfb051fa4a6fad9dbca0c9fe495863eb70ef2be8d6dad883e3b1b19a7e11a",
+  "byte_identical_files": true,
+  "first_differences": []
+ },
+ {
+  "scale": "4000",
+  "engine": "disk",
+  "cases": 2062,
+  "identical": 2062,
+  "different": 0,
+  "states": {
+   "results": 1613,
+   "empty": 377,
+   "parser_error": 72
+  },
+  "hits_compared": 16714605,
+  "base_sha256": "65ecfb051fa4a6fad9dbca0c9fe495863eb70ef2be8d6dad883e3b1b19a7e11a",
+  "new_sha256": "65ecfb051fa4a6fad9dbca0c9fe495863eb70ef2be8d6dad883e3b1b19a7e11a",
+  "byte_identical_files": true,
+  "first_differences": []
+ },
+ {
+  "scale": "4000",
+  "engines_compared": "new memory vs new disk",
+  "byte_identical_files": true
+ },
+ {
+  "scale": "10000",
+  "engine": "memory",
+  "cases": 2062,
+  "identical": 2062,
+  "different": 0,
+  "states": {
+   "results": 1613,
+   "empty": 377,
+   "parser_error": 72
+  },
+  "hits_compared": 41691988,
+  "base_sha256": "446bd51e3327a879c8c792a04ee232757871f2cbf4102533f003971ce74ee482",
+  "new_sha256": "446bd51e3327a879c8c792a04ee232757871f2cbf4102533f003971ce74ee482",
+  "byte_identical_files": true,
+  "first_differences": []
+ },
+ {
+  "scale": "10000",
+  "engine": "disk",
+  "cases": 2062,
+  "identical": 2062,
+  "different": 0,
+  "states": {
+   "results": 1613,
+   "empty": 377,
+   "parser_error": 72
+  },
+  "hits_compared": 41691988,
+  "base_sha256": "446bd51e3327a879c8c792a04ee232757871f2cbf4102533f003971ce74ee482",
+  "new_sha256": "446bd51e3327a879c8c792a04ee232757871f2cbf4102533f003971ce74ee482",
+  "byte_identical_files": true,
+  "first_differences": []
+ },
+ {
+  "scale": "10000",
+  "engines_compared": "new memory vs new disk",
+  "byte_identical_files": true
+ }
+]

@@ -1,7 +1,8 @@
 // C15 WP1 in-process search benchmark. Usage:
 //   IndexBench --site <site> [--engine memory|disk] [--index-dir <dir>] [--repeat 5] [--readers 10,25]
-//              [--signatures <out.json>] [--out <result.json>] [--profile]
+//              [--signatures <out.json>] [--out <result.json>] [--profile] [--with-page]
 //              [--text-store memory|disk --text-dir <dir> --text-cache-mb 64 --doc-sample 300]   (C16 WP04)
+//              [--parity <out.json> [--walkthrough <queries.json>] [--quick]]   (C16 WP05: full output signatures)
 // Numbers only; no document text is written except the query strings themselves.
 using System.Diagnostics;
 using System.Text.Json;
@@ -14,6 +15,7 @@ var engine = Arg("--engine") ?? "memory";
 int repeat = int.Parse(Arg("--repeat") ?? "5");
 var readers = (Arg("--readers") ?? "10,25").Split(',').Select(int.Parse).ToArray();
 bool profile = args.Contains("--profile");
+bool withPage = args.Contains("--with-page");   // C16: time Search + Page(1) as the HTTP endpoint does
 
 string[] Q = { "s.69 Army Act", "2013 INSC 408", "disability pension", "court martial", "summary of evidence", "AFT jurisdiction",
     "invalided out of service", "exact:\"Entitlement Rules\"", "desertion AND NOT pension", "Rule 22 Army Rules",
@@ -72,6 +74,7 @@ SearchIndex ix = engine switch
 };
 long buildMs = sw.ElapsedMilliseconds;
 var memAfterIndex = Mem();
+if (Arg("--parity") is { } parityOut) { Parity.Run(ix, parityOut, Arg("--walkthrough"), args.Contains("--quick")); return; }
 // C16 WP04: --build-only builds (or opens) the selected stores and reports start-up only.
 if (args.Contains("--build-only"))
 {
@@ -154,12 +157,16 @@ foreach (var q in Q)
 }
 if (Arg("--signatures") is { } sp) File.WriteAllText(sp, JsonSerializer.Serialize(sigs));
 
+void Run(string q) { var r = svc.Search(q, f); if (withPage) { var pg = svc.Page(r, 1, SearchService.DefaultPageSize, null); foreach (var h in pg.Hits) _ = h.Reasons.Count; } }
 var perQuery = new Dictionary<string, double>();
+var perQueryAlloc = new Dictionary<string, double>();   // C16: managed bytes allocated per query (MB, mean of the repeats)
 var seq = new List<double>();
 foreach (var q in Q)
 {
     var t = new List<double>();
-    for (int i = 0; i < repeat; i++) { var s = Stopwatch.StartNew(); svc.Search(q, f); t.Add(s.Elapsed.TotalMilliseconds); }
+    long a0 = GC.GetAllocatedBytesForCurrentThread();
+    for (int i = 0; i < repeat; i++) { var s = Stopwatch.StartNew(); Run(q); t.Add(s.Elapsed.TotalMilliseconds); }
+    perQueryAlloc[q] = Math.Round((GC.GetAllocatedBytesForCurrentThread() - a0) / (double)repeat / 1048576.0, 2);
     seq.AddRange(t); perQuery[q] = t.Order().ElementAt(t.Count / 2);
 }
 static object Stats(List<double> a) { a.Sort(); double P(double p) => Math.Round(a[Math.Max(0, (int)Math.Ceiling(p / 100 * a.Count) - 1)], 1);
@@ -173,14 +180,14 @@ foreach (var n in readers)
     {
         for (int i = 0; i < repeat * 2; i++)
             foreach (var q in Q.Skip(k % Q.Length).Concat(Q.Take(k % Q.Length)))
-            { var s = Stopwatch.StartNew(); svc.Search(q, f); lat.Add(s.Elapsed.TotalMilliseconds); }
+            { var s = Stopwatch.StartNew(); Run(q); lat.Add(s.Elapsed.TotalMilliseconds); }
     });
     conc[$"readers_{n}"] = new { stats = Stats(lat.ToList()), throughput_qps = Math.Round(lat.Count / w.Elapsed.TotalSeconds, 1) };
 }
 var sigHash = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(JsonSerializer.Serialize(sigs)))).ToLowerInvariant();
 var result = new
 {
-    site, engine, text_store = textStore, replicate = rep > 1 ? rep : 1, documents = gen.Documents.Count, passages = ix.N, vocabulary = ix.VocabularySize, load_ms = loadMs, index_ms = buildMs,
+    site, engine, text_store = textStore, with_page = withPage, replicate = rep > 1 ? rep : 1, documents = gen.Documents.Count, passages = ix.N, vocabulary = ix.VocabularySize, load_ms = loadMs, index_ms = buildMs,
     startup_ms = loadMs + buildMs,
     index_file_mb = ix.IndexPath is { } ip ? Mb(new FileInfo(Path.Combine(ip, "search.sqlite")).Length) : (double?)null,
     text_file_mb = gen.Text.StorePath is { } tp ? Mb(new FileInfo(Path.Combine(tp, DiskTextStore.DbFile)).Length) : (double?)null,
@@ -193,6 +200,8 @@ var result = new
     text_store_stats = gen.Text.Stats(),
     parity = new { search_signatures_sha256 = sigHash, doc_text_api_sha256 = docTextApiParity, snippets_sha256 = snippetParityHash },
     per_query_median_ms = profile ? perQuery : null,
+    per_query_alloc_mb = profile ? perQueryAlloc : null,
+    sequential_alloc_mb_per_query = Math.Round(perQueryAlloc.Values.Average(), 2),
 };
 var json = JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true });
 Console.WriteLine(json);
