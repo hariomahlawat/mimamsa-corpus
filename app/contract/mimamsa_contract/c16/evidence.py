@@ -67,7 +67,35 @@ def verify_anchor_bytes(anchor: dict, derivative_bytes: bytes) -> list[str]:
         return ["C16_SPAN_OUT_OF_RANGE"]
     if hashlib.sha256(body[s:e].encode("utf-8")).hexdigest() != span["text_sha256"]:
         return ["C16_SPAN_MISMATCH"]
+    if anchor.get("quote") is not None and anchor["quote"] != body[s:e]:
+        return ["C16_QUOTE_MISMATCH"]          # a producer quote must be exactly the verified span text
     return []
+
+
+def _derivative_entry(anchor: dict, identity: dict) -> dict | None:
+    return next((d for d in identity["text_derivatives"] if d["derivative_text_sha256"] == anchor.get("derivative_text_sha256")), None)
+
+
+def verified_quote(anchor: dict, identity: dict, derivative_bytes: bytes, *, page_quotable: bool = True) -> str | None:
+    """The only quotation the application may display: text DERIVED from the verified bytes (never the producer's
+    quote field), and only when every quotation gate agrees: the anchor (quoting_permitted, not OCR, not
+    low-confidence, not INCORRECT), the identity (research_eligibility.quoting_permitted), the derivative
+    (quoting_permitted), the page (page_quotable: e.g. the v1 page method is not OCR), the copy binding and the bytes.
+    Returns None otherwise."""
+    if identity["doc_id"] != anchor["doc_id"] or identity["source_copy"]["sha256"] != anchor["original_sha256"]:
+        return None
+    der = _derivative_entry(anchor, identity)
+    if not (anchor.get("quoting_permitted") and identity["research_eligibility"]["quoting_permitted"] and der
+            and der["quoting_permitted"] and page_quotable
+            and anchor["extraction"]["method"] not in ("OCR_PAGE_IMAGE", "OCR_EMBEDDED_IMAGE")
+            and not anchor["quality"]["low_confidence"] and anchor["verification"]["state"] != "INCORRECT"):
+        return None
+    if verify_anchor_bytes(anchor, derivative_bytes):
+        return None
+    text = derivative_bytes.decode("utf-8")
+    unit = _unit(anchor)
+    body = text if unit is None else split_pages(text)[unit]
+    return body[anchor["text_span"]["char_start"]:anchor["text_span"]["char_end"]]
 
 
 def usable_for_citation(anchor: dict, identity: dict, span_verified: bool) -> bool:

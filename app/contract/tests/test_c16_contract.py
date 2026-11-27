@@ -19,7 +19,8 @@ import pytest
 from jsonschema import Draft202012Validator
 
 from mimamsa_contract.c16 import activation, adapters, canonical, evidence
-from mimamsa_contract.c16.rules import C15_INSTRUMENT_CODES, component_inventory_issues, exchange_issues, record_issues
+from mimamsa_contract.c16.rules import (C15_INSTRUMENT_CODES, component_inventory_issues, exchange_issues, receipt_resolution_issues,
+                                        record_issues)
 from mimamsa_contract.c16.schemas import C16_DIR, KIND_TO_SCHEMA, SHARED, registry, schema, schema_errors
 
 CONTRACT = Path(__file__).resolve().parents[1]
@@ -326,7 +327,7 @@ def test_unbound_or_unverified_anchors_never_cite_a_span():
     page_only = adapters.anchor_to_v1_page_anchor(native, official)
     assert page_only == {"source_copy_sha256": official["source_copy"]["sha256"], "page": 3, "paragraph_label": "12"}
     full = adapters.anchor_to_v1_page_anchor(native, official, span_verified=True)
-    assert full["derivative_text_sha256"] == native["derivative_text_sha256"] and "quote" in full
+    assert full["derivative_text_sha256"] == native["derivative_text_sha256"] and "quote" not in full  # producer quote never copied
     incorrect = dict(copy.deepcopy(native), verification={"state": "INCORRECT", "review_ref": "RV-X-001"})
     assert adapters.anchor_to_v1_page_anchor(incorrect, official) is None
     for a in anchors.values():
@@ -480,8 +481,7 @@ def test_pr76_provision_folders_ranges_and_ambiguous_abbreviations_stay_signals(
     assert folder["evidentiary_basis"] == "FOLDER_PATH" and folder["target"]["node_id"] == "PROV:AR-1954:r.22"
     rng = by_sha["22" * 32][0]
     assert not rng["target"]["resolved"] and rng["target"]["unresolved"]["note"] == "PROVISION_RANGE_NOT_EXPANDED"
-    aft = by_sha["23" * 32][0]
-    assert not aft["target"]["resolved"] and len(aft["classification_provenance"]["abbreviation_expansion"]["alternatives"]) == 2
+    assert "23" * 32 not in by_sha                                                    # bare AFT is the forum: no provision
     assert "24" * 32 not in by_sha                                                    # a case-number prefix is not a provision
     assert all(r["verification"] == "CANDIDATE" and not r["is_finding"] for rs in by_sha.values() for r in rs)
     assert _partial_ok(out) == []
@@ -541,8 +541,9 @@ def test_rule_pack_refused_at_ledger_v0():
 
 # ---------------------------------------------------------------- C03 activation reference model
 
-def _site():
-    return activation.Site(installed=["R1", "R2", "R3"], active="R1")
+def _site(**kw):
+    return activation.Site(installed=["R1", "R2", "R3"], active="R1",
+                           staged_models={"M2": {"verified": True, "vectors_for": {"R1", "R2", "R3"}}}, **kw)
 
 
 @pytest.mark.parametrize("crash_at", activation.STEPS)
@@ -559,21 +560,22 @@ def test_crash_at_every_boundary_recovers_to_one_consistent_generation(crash_at)
     assert len(s.log) == len(decided) and len(s.db["publication"]) == len(decided)
     s.recover()                                                    # idempotent
     assert len(s.log) == len(decided) and len(s.db["publication"]) == len(decided)
-    g, seq = s.pin()
-    assert g == expect and seq == s.exclusions["seq"]
+    p = s.pin()
+    assert p["knowledge"] == expect and p["exclusion_seq"] == s.exclusions["seq"] and p["models"] == "M1"
+    assert s.temp == set()                                         # scratch state cleaned on every crash path
     assert s.db["site_rows"] == {"users": 1}                       # site data untouched
 
 
 def test_exclusion_arriving_mid_switch_is_applied_before_exposure():
     s = _site()
     s.transition("KNOWLEDGE", "R2", hook=lambda step: s.accept_exclusion({"doc-x"}) if step == "LOGGED" else None)
-    g, seq = s.pin()
-    assert g == "R2" and seq == 1 and s.applied["R2"] == 1
+    p = s.pin()
+    assert p["knowledge"] == "R2" and p["exclusion_seq"] == 1 and s.applied["R2"] == 1
 
 
 def test_readers_are_pinned_and_retention_never_removes_pinned_or_rollback_targets():
     s = activation.Site(installed=["R1", "R2", "R3", "R4"], active="R1", keep_previous=1)
-    g, _ = s.pin()
+    g = s.pin()
     for to in ("R2", "R3", "R4"):
         s.transition("KNOWLEDGE", to)
     assert s.pointers["KNOWLEDGE"] == "R4"
@@ -614,3 +616,92 @@ def test_transition_refused_while_recovering_and_to_unstaged_generation():
         s.transition("KNOWLEDGE", "R2", crash_after="POINTER_WRITTEN")
     with pytest.raises(activation.Refused):
         s.transition("KNOWLEDGE", "R3")
+
+
+# ---------------------------------------------------------------- residual corrections (review 6089492803)
+
+def test_quote_is_bound_to_the_verified_span_and_every_quotation_gate():
+    official = _ident("sc-2019-example-v-union-of-india-ca0001")
+    der = official["text_derivatives"][0]
+    pages = {1: "Cover", 2: "Section 69 of the Army Act applies here (synthetic)."}
+    data = _derived(pages)
+    native = copy.deepcopy(next(a for a in _pop("anchors") if a["doc_id"] == official["doc_id"] and a["locator"]["physical_page"] == 3))
+    official = copy.deepcopy(official)
+    official["text_derivatives"][0]["derivative_text_sha256"] = hashlib.sha256(data).hexdigest()
+    native.update(derivative_text_sha256=hashlib.sha256(data).hexdigest(), quote="Section 69")
+    native["locator"]["physical_page"] = 2
+    native["text_span"] = {"passage_id": None, "char_start": 0, "char_end": 10,
+                           "text_sha256": hashlib.sha256(pages[2][:10].encode()).hexdigest()}
+    assert evidence.verify_anchor_bytes(native, data) == []
+    q = evidence.verified_quote(native, official, data)
+    assert q == "Section 69"
+    assert adapters.anchor_to_v1_page_anchor(native, official, span_verified=True, quote=q)["quote"] == "Section 69"
+    wrong = dict(native, quote="Section 96")                                   # valid span, different quote
+    assert evidence.verify_anchor_bytes(wrong, data) == ["C16_QUOTE_MISMATCH"] and evidence.verified_quote(wrong, official, data) is None
+    denied = copy.deepcopy(official)
+    denied["research_eligibility"]["quoting_permitted"] = False               # the identity denies quotation
+    assert evidence.verified_quote(native, denied, data) is None
+    assert "quote" not in adapters.anchor_to_v1_page_anchor(native, denied, span_verified=True, quote=q)
+    no_der = copy.deepcopy(official)
+    no_der["text_derivatives"][0]["quoting_permitted"] = False                # the derivative denies quotation
+    assert evidence.verified_quote(native, no_der, data) is None
+    assert evidence.verified_quote(native, official, data, page_quotable=False) is None   # the page denies quotation
+    assert "quote" not in adapters.anchor_to_v1_page_anchor(native, official, span_verified=True, quote="Section 96")
+
+
+def test_receipts_resolve_only_against_bundled_artefacts_future_gate():
+    adm = next(a for a in _pop("admissions") if a["application_eligible"])
+    assert adm["service_scope"] == "SEARCHABLE"
+    arte = {g["receipt"]["receipt_sha256"]: b"x" for g in adm["gates"] if g.get("receipt")}
+    assert "C16_RECEIPT_UNRESOLVED" in _codes(receipt_resolution_issues(adm, arte))  # wrong bytes
+    assert "C16_RECEIPT_UNRESOLVED" in _codes(receipt_resolution_issues(adm, {}))    # missing artefacts
+
+
+def test_pr76_owner_decisions_ar_and_aft():
+    out = _pr76([_row("Misc/AFT Act 14 - X v Y.docx", "51" * 32), _row("Misc/AFT 14 - X v Y.docx", "52" * 32),
+                 _row("Misc/s. 15 of the AFT Act - X v Y.docx", "53" * 32), _row("Misc/AR 7 - X v Y.docx", "54" * 32)])
+    provs = {r["subject"]["source_copy_sha256"][:2]: r for r in out["relationships"] if r["category"] == "associated_with_provision"}
+    assert provs["51"]["target"]["node_id"] == "PROV:AFT-2007:s.14" and provs["53"]["target"]["node_id"] == "PROV:AFT-2007:s.15"
+    assert "52" not in provs                                                      # AFT alone is the forum
+    assert provs["54"]["target"]["node_id"] == "PROV:AR-1954:r.7" and provs["54"]["verification"] == "CANDIDATE"
+    assert all(not r["is_finding"] for r in provs.values())
+
+
+def test_model_transition_requires_verified_staged_model_with_vectors():
+    s = activation.Site(installed=["R1", "R2"], active="R1",
+                        staged_models={"M2": {"verified": False, "vectors_for": {"R1"}}, "M3": {"verified": True, "vectors_for": {"R2"}}})
+    with pytest.raises(activation.Refused):
+        s.transition("MODELS", "M9")                                             # not staged
+    with pytest.raises(activation.Refused):
+        s.transition("MODELS", "M2")                                             # not verified
+    with pytest.raises(activation.Refused):
+        s.transition("MODELS", "M3")                                             # no vectors for the active knowledge generation
+
+
+def test_reader_pinned_before_an_exclusion_never_bypasses_it():
+    s = _site()
+    p = s.pin()
+    s.accept_exclusion({"doc-x"})
+    assert s.respond(p, ["doc-x", "doc-y"]) == ["doc-y"]
+    s.unpin(p)
+
+
+def test_retention_selects_distinct_previous_releases_and_protects_the_recovery_target():
+    s = activation.Site(installed=["R0", "R1", "R2", "R3", "R4"], active="R1", recovery_target="R0",
+                        staged_models={"M1": {"verified": True, "vectors_for": {"R0", "R1", "R2", "R3", "R4"}}})
+    for to in ("R2", "R1", "R2", "R3"):
+        s.transition("KNOWLEDGE", to, action="ROLLBACK" if to in ("R1", "R2") else "ACTIVATE")
+    assert s.previous_distinct() == ["R2", "R1"]                                  # history R1,R2,R1,R2,R3: distinct
+    assert s.prune() == ["R4"] and set(s.installed) == {"R0", "R1", "R2", "R3"}  # R0 is the explicit recovery target
+
+
+def test_measured_disk_preflight_refuses_activation():
+    s = _site(sizes={"R1": 40, "R2": 60, "R3": 50}, free_bytes=10)
+    pf = s.preflight("KNOWLEDGE", "R2")
+    assert pf["result"] == "FAIL" and pf["measured_required_bytes"] == int(60 * 1.1) and "R1" in pf["retained_releases"]
+    with pytest.raises(activation.Refused):
+        s.transition("KNOWLEDGE", "R2")
+    assert s.pointers["KNOWLEDGE"] == "R1" and s.journal == []
+    ok = _site(sizes={"R1": 40, "R2": 60}, free_bytes=100)
+    ok.transition("KNOWLEDGE", "R2")
+    assert ok.pointers["KNOWLEDGE"] == "R2"

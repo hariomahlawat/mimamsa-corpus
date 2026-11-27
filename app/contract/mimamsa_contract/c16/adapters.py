@@ -230,7 +230,8 @@ def anchor_from_v1_page_anchor(pa: dict, *, doc_id: str, method: str = "NATIVE_T
     return a
 
 
-def anchor_to_v1_page_anchor(a: dict, identity: dict | None = None, *, span_verified: bool = False) -> dict | None:
+def anchor_to_v1_page_anchor(a: dict, identity: dict | None = None, *, span_verified: bool = False,
+                             quote: str | None = None) -> dict | None:
     """evidence_anchor -> v1 page_anchor. PageKey only when the anchor is a citable page of its bound identity (page
     within the copy, copy permits page citation, anchor not INCORRECT); SpanKey fields only when the span was
     byte-verified against the derivative (evidence.verify_anchor_bytes) and measured on the original. No identity,
@@ -249,8 +250,12 @@ def anchor_to_v1_page_anchor(a: dict, identity: dict | None = None, *, span_veri
         out.update(passage_id=span.get("passage_id"), char_start=span["char_start"], char_end=span["char_end"],
                    text_sha256=span["text_sha256"], pipeline_name=a["extraction"]["pipeline_name"],
                    pipeline_version=a["extraction"]["pipeline_version"], derivative_text_sha256=a["derivative_text_sha256"])
-        if a.get("quoting_permitted") and a.get("quote"):
-            out["quote"] = a["quote"]
+        # The producer's quote field is never copied. A quotation is shown only when the caller passes the text
+        # that evidence.verified_quote derived from the verified bytes after every quotation gate (anchor,
+        # identity, derivative, page) agreed; it must equal the span exactly.
+        if quote is not None and identity["research_eligibility"]["quoting_permitted"] and a.get("quoting_permitted") \
+                and hashlib.sha256(quote.encode("utf-8")).hexdigest() == span["text_sha256"]:
+            out["quote"] = quote
     return out
 
 
@@ -315,22 +320,26 @@ _PR76_FORMAT = {"PDF": ("PDF", "application/pdf"),
 _IMAGE_MIME = {"PNG": "image/png", "JPEG": "image/jpeg", "JPG": "image/jpeg", "GIF": "image/gif", "BMP": "image/bmp",
                "TIFF": "image/tiff", "EMF": "image/x-emf", "WMF": "image/x-wmf"}
 
-# Abbreviation readings, version 1.1: ONLY readings already recorded in this repository, never invented.
-# Sources: app/b1/src/Mimamsa.Core/Identifiers/LegalIdentifierResolver.cs (Aliases: aa, afa, na, aft, ar) and the
-# P2/B1 supplement (app/b1/build/build_sample.py SUPPLEMENT: AR "Army Rule(s)", AA "Army Act", AFT "Armed Forces
-# Tribunal"). AFT names the tribunal (a forum), which is distinct from the Armed Forces Tribunal Act, 2007: a number
-# after "AFT" stays an unresolved candidate with both readings. Owner confirmation pending (decision Q3).
-ABBREV_SOURCES = ("app/b1/src/Mimamsa.Core/Identifiers/LegalIdentifierResolver.cs#Aliases",
+# Abbreviation readings, version 1.2 (owner decisions of 2026-11-27, recorded in contract section 14):
+# - AR, in the owner's local classified collection, means Army Rules, 1954 (a CANDIDATE association, never a finding);
+#   elsewhere AR stays contextual and is not read by this adapter.
+# - AFT means the Armed Forces Tribunal (the forum). Only an explicit statutory reference ("AFT Act",
+#   "Armed Forces Tribunal Act, 2007", "s. N of the AFT Act") points to the Armed Forces Tribunal Act, 2007.
+# - AA, AFA, NA: repository readings (LegalIdentifierResolver.Aliases; build_sample.py SUPPLEMENT).
+ABBREV_SOURCES = ("owner decision 2026-11-27 (PR #77 residual corrections)",
+                  "app/b1/src/Mimamsa.Core/Identifiers/LegalIdentifierResolver.cs#Aliases",
                   "app/b1/build/build_sample.py#SUPPLEMENT")
 ABBREVIATIONS = {
     "AA": {"code": "AA-1950", "prefix": "s", "expansion": "Army Act (repository alias 'army act')", "alternatives": []},
-    "AR": {"code": "AR-1954", "prefix": "r", "expansion": "Army Rules (repository alias 'army rules')", "alternatives": []},
+    "AR": {"code": "AR-1954", "prefix": "r", "expansion": "Army Rules, 1954 (owner decision for the local classified collection)", "alternatives": []},
     "AFA": {"code": "AFA-1950", "prefix": "s", "expansion": "Air Force Act (repository alias 'air force act')", "alternatives": []},
     "NA": {"code": "NA-1957", "prefix": "s", "expansion": "Navy Act (repository alias 'navy act')", "alternatives": []},
-    "AFT": {"code": None, "prefix": "s", "expansion": "Armed Forces Tribunal (repository alias; the forum)",
-            "alternatives": ["Armed Forces Tribunal Act, 2007 (AFT-2007), section <n>",
-                             "Armed Forces Tribunal (the forum); the number is not a provision"]},
+    "AFT ACT": {"code": "AFT-2007", "prefix": "s", "expansion": "Armed Forces Tribunal Act, 2007 (explicit statutory reference; owner decision)", "alternatives": []},
 }
+# Bare "AFT" is the forum (owner decision): it is deliberately absent, so "AFT 14 - X v Y" yields no provision.
+_AFT_ACT = re.compile(r"^\s*(?:AFT\s+Act|Armed\s+Forces\s+Tribunal\s+Act)(?:,?\s*2007)?\s*,?\s*(?:s\.|sec\.?|section)?\s*"
+                      r"(?P<label>\d[\dA-Za-z ,&\u2013\u2014-]*?)\s*(?:[-\u2013\u2014]\s+(?P<rest>.*))?$", re.I)
+_AFT_ACT_OF = re.compile(r"^\s*(?:s\.|sec\.?|section)\s*(?P<label>\d[\dA-Za-z ,&]*?)\s+of\s+the\s+(?:AFT|Armed\s+Forces\s+Tribunal)\s+Act\b", re.I)
 ABBREV_LEXICON_REF = "; ".join(ABBREV_SOURCES)
 _PROV_LABEL = re.compile(r"^\s*(?P<abbr>[A-Z][A-Z.]{1,7})\s*(?:Rule|Rules|Sec|Section|s\.|r\.)?\s*"
                          r"(?P<label>\d[\dA-Za-z ,&–—-]*?)\s*(?:[-–—]\s+(?P<rest>.*))?$")
@@ -357,10 +366,14 @@ def local_doc_id(sha256: str) -> str:
 
 def parse_provision_label(label: str) -> dict:
     """'AR 22, 23, 30 - X v Y' -> {abbr, numbers, ambiguity}. Ranges are preserved, never expanded."""
-    m = _PROV_LABEL.match(label)
-    if not m:
-        return {"abbr": None, "numbers": [], "ambiguity": None, "raw": None}
-    abbr = m["abbr"].replace(".", "").upper()
+    m = _AFT_ACT.match(label) or _AFT_ACT_OF.match(label)
+    if m:
+        abbr = "AFT ACT"
+    else:
+        m = _PROV_LABEL.match(label)
+        if not m:
+            return {"abbr": None, "numbers": [], "ambiguity": None, "raw": None}
+        abbr = m["abbr"].replace(".", "").upper()
     raw = m["label"].strip(" ,")
     if _RANGE.search(raw):
         return {"abbr": abbr, "numbers": [], "ambiguity": "PROVISION_RANGE_NOT_EXPANDED", "raw": f"{abbr} {raw}"}
@@ -634,7 +647,7 @@ def _pr76_identity(row, group, sha, collection, gen, ocr_config):
            "corpus_generation_id": gen, "decision": decision,
            "source_disposition": {"system": "c16-local-reconcile", "value": disp,
                                   "secondary_flags": sorted({f for r in group for f in (r.get("secondary_flags") or [])})},
-           "duplicate_of": dup, "restriction_id": None, "gates": gates, "application_eligible": False,
+           "duplicate_of": dup, "restriction_id": None, "gates": gates, "application_eligible": False, "service_scope": "NONE",
            "publication_effect": "NONE", "legal_effect": "NONE",
            "decided_by": {"kind": "AUTOMATED_RULE", "id": "c16-admission-adapter"}, "decided_at": None,
            "rule_set": {"id": "c16-admission", "version": "1.1"},

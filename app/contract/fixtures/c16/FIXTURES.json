@@ -317,6 +317,69 @@
    "schema_path_contains": "degradation_acknowledged_by"
   },
   {
+   "expect_code": "SCHEMA",
+   "file": "negative/N46_eligible_admission_with_asserted_evidence_only.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "gates"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N47_searchable_admission_without_derivative_gate.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "result"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N48_decorative_image_without_basis.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "embedded_images"
+  },
+  {
+   "expect_code": "KR_MANDATORY_COMPONENT",
+   "file": "negative/N49_full_release_with_mandatory_payload_not_applicable.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "KR_FULL_CAPABILITY_CLAIM",
+   "file": "negative/N50_full_service_without_embedder_declaration.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N51_full_service_without_semantic_promise.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "semantic_search_promised"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N52_intelligence_release_not_model_signed.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "signing_purpose"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N53_activation_after_failed_disk_preflight.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "preflight"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N54_release_claims_no_pending_future_gates.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "pending_future_gates"
+  },
+  {
    "expect_code": "C16_ADMISSION_ORPHAN",
    "file": "negative/exchange/X01_orphan_admission.json",
    "kind": "exchange_case",
@@ -494,6 +557,69 @@
   {
    "expect_code": "SCHEMA",
    "file": "negative/exchange/X26_identity_missing_field_excluded_from_cross_checks.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_QUOTE_NOT_PERMITTED",
+   "file": "negative/exchange/X27_identity_denies_quotation.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ANCHOR_IMAGE",
+   "file": "negative/exchange/X28_image_locator_with_another_images_ocr.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ANCHOR_DERIVATIVE",
+   "file": "negative/exchange/X29_anchor_method_not_of_derivative.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ANCHOR_DERIVATIVE",
+   "file": "negative/exchange/X30_anchor_pipeline_mismatch.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ANCHOR_SPAN_NOT_PERMITTED",
+   "file": "negative/exchange/X31_image_span_counted_into_document_text.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_COMPILATION_MEMBER",
+   "file": "negative/exchange/X32_reviewed_compilation_evidence_unresolved_member.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_SEARCH_WITHOUT_COVERAGE",
+   "file": "negative/exchange/X33_searchable_identity_without_derivative_uses_na.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_RECEIPT_MISMATCH",
+   "file": "negative/exchange/X34_receipt_for_another_copy.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_RECEIPT_MISMATCH",
+   "file": "negative/exchange/X35_register_receipt_for_another_revision.json",
    "kind": "exchange_case",
    "ledger": 0,
    "schema_path_contains": null

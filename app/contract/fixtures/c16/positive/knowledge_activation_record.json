@@ -1,5 +1,6 @@
 {
  "action": "ACTIVATE",
+ "active_models_release_id": null,
  "actor": {
   "id": "admin-fixture",
   "role": "ADMIN"
@@ -71,6 +72,16 @@
   "digest": "e1c4d1b5594342fc688afa196d94fde33a922a0d22e7ffca3f661d76f767f04f",
   "items_suppressed": 2,
   "sequence": 4
+ },
+ "preflight": {
+  "free_bytes": 90000000000,
+  "headroom_fraction": 0.1,
+  "measured_required_bytes": 30000000000,
+  "result": "PASS",
+  "retained_releases": [
+   "R17-knowledge-20261215-1a1b1c1d",
+   "R16-knowledge-20261201-0a0b0c0d"
+  ]
  },
  "previous_active_release_id": "R16-knowledge-20261201-0a0b0c0d",
  "previous_record_sha256": "e914054d9e319588ee3fe1e9167c09f426e92d0abad9bdfe168fdf940d75bea7",

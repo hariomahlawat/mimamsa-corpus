@@ -1,6 +1,6 @@
 # C16 corpus integration contract (`mimamsa-corpus-contract/2.0`)
 
-- **Status:** proposed, Cycle 16 Tranche A checkpoint (WP01–WP03), **revised after the independent review of `4d476fab`** (findings C01–C07; disposition in section 15). For re-review. Not adopted, not frozen, not merged.
+- **Status:** proposed, Cycle 16 Tranche A checkpoint (WP01–WP03), **revised after the independent review of `4d476fab`** (findings C01–C07) **and the re-review of `7baf1b9f`** (residual corrections C01-R1, C02-R1, C03-R1, C07-R1; disposition in section 15). For acceptance review. Not adopted, not frozen, not merged.
 - **Base:** `legal-knowledge/v2.5-staging` at `c8fa5290`.
 - **Scope:** the corpus-to-application exchange of document identity, evidence anchors, taxonomy, provision and judgment relationships, and admission decisions.
 - **Not changed:** contract v1 (`app/contract/schemas/v1`), its validator, AUTH-LEDGER, acceptance oracles, corpus bytes, the B1 application.
@@ -260,6 +260,20 @@ A shape-valid anchor is not evidence. Two layers of checks apply before an ancho
 
 **Byte binding** (`evidence.verify_anchor_bytes`, consumer side): the derivative bytes must hash to `derivative_text_sha256`, the unit (page, reconstructed page or segment) must exist in the `[[page N]]` text, the code-point offsets must lie inside it, and the slice must hash to `text_sha256`. `evidence.usable_for_citation` and `evidence.usable_as_graph_evidence` accept an anchor only if it is not INCORRECT, its copy permits the use, and its span (if any) has been byte-verified. `adapters.graph_projection(rel, anchors, usable)` shows a page on an edge only for anchors in the consumer-verified `usable` set. Low-confidence OCR may locate a candidate; it never supports a raised verification. Nothing in these checks promotes an anchor.
 
+**Quotation (C02-R1).** A displayed quotation is **derived from the verified bytes**, never copied from the producer's `quote` field:
+- `evidence.verify_anchor_bytes` rejects a `quote` that differs from the verified span text (`C16_QUOTE_MISMATCH`);
+- `evidence.verified_quote(anchor, identity, bytes, page_quotable=...)` returns the span text only when every quotation gate agrees: the anchor (`quoting_permitted`, not OCR, not low-confidence, not INCORRECT), the identity (`research_eligibility.quoting_permitted`), the derivative (`quoting_permitted`), the page (for example, the v1 page method is not OCR), the copy binding and the bytes;
+- `anchor_to_v1_page_anchor` emits `quote` only when given that verified text, and only if the identity permits quoting and the text hashes to the span.
+
+The exchange rejects an anchor that permits quoting where the identity, derivative or anchor quality denies it (`C16_QUOTE_NOT_PERMITTED`).
+
+**Image OCR and method binding (C02-R1).**
+- An image OCR derivative belongs to exactly one occurrence: the one the locator names (`C16_ANCHOR_IMAGE`).
+- An anchor's extraction method must be one of its derivative's methods, or OCR_EMBEDDED_IMAGE for an image OCR derivative. Its pipeline must match the derivative's (`C16_ANCHOR_DERIVATIVE`).
+- A span on an IMAGE_SEQUENCE anchor counts only into that occurrence's own OCR derivative, and only when its OCR is DONE (`C16_ANCHOR_SPAN_NOT_PERMITTED`).
+
+**Reviewed compilation evidence (C02-R1).** A DOCUMENTARY_CHECKED relationship on a compilation member needs a resolved member page range **and** a page anchor inside it. An unresolved range or a page-less anchor never establishes membership by default (`C16_COMPILATION_MEMBER`).
+
 ## 7. Provision and judgment relationships, and the C15 graph mapping (WP02)
 
 ### 7.1 Categories, evidence and verification
@@ -354,7 +368,7 @@ That is four distinct provision associations on one `source_copy_sha256`.
 
 ### 8.3 Filename and folder classification rules
 
-Rules version 1.1 (`adapters.classify_path`, `adapters.local_subject_nodes`):
+Rules version 1.2 (`adapters.classify_path`, `adapters.local_subject_nodes`):
 
 | Rule | Input | Output |
 | --- | --- | --- |
@@ -364,19 +378,19 @@ Rules version 1.1 (`adapters.classify_path`, `adapters.local_subject_nodes`):
 
 **Signals are preserved, never expanded or guessed.**
 - A range (`AR 22-25`) or an unparsed label yields one **unresolved** association with the label as `raw_reference` and the note `PROVISION_RANGE_NOT_EXPANDED` or `UNPARSED_PROVISION_LABEL`.
-- An abbreviation with more than one reading yields an unresolved association listing the alternatives.
+- An abbreviation with more than one recorded reading yields an unresolved association listing the alternatives.
 - A prefix with no repository-recorded statutory reading (OA, WP, CA … are case-number prefixes) yields no association.
 - The same binary seen at several paths is one identity with several `observations`; every path keeps its own classifications.
 
-**Abbreviation readings 1.1** (decision Q3): only readings already recorded in this repository, from `Mimamsa.Core/Identifiers/LegalIdentifierResolver.cs` (Aliases) and the B1/P2 supplement in `app/b1/build/build_sample.py`. Owner confirmation remains open.
+**Abbreviation readings 1.2** (owner decisions of 2026-11-27, section 14; other readings from `LegalIdentifierResolver.cs` Aliases and `app/b1/build/build_sample.py`):
 
 | Abbreviation | Reading | Target | Alternatives |
 | --- | --- | --- | --- |
 | AA | Army Act | `PROV:AA-1950:s.<n>` | none recorded |
-| AR | Army Rules | `PROV:AR-1954:r.<n>` | none recorded |
+| AR | Army Rules, 1954 (owner decision, **in the local classified collection**; contextual elsewhere and not read by this adapter) | `PROV:AR-1954:r.<n>`, CANDIDATE, never a finding | none |
 | AFA | Air Force Act | `PROV:AFA-1950:s.<n>` | none recorded |
 | NA | Navy Act | `PROV:NA-1957:s.<n>` | none recorded |
-| AFT | Armed Forces Tribunal (the forum) | **unresolved** | "Armed Forces Tribunal Act, 2007, section <n>"; "the forum; the number is not a provision". The tribunal is kept distinct from the Act |
+| AFT | Armed Forces Tribunal, **the forum** (owner decision) | **no provision association** | Only an explicit statutory reference ("AFT Act <n>", "Armed Forces Tribunal Act, 2007 s. <n>", "s. <n> of the AFT Act") yields `PROV:AFT-2007:s.<n>` (CANDIDATE) |
 
 **Paths.** Relative to a registered collection (`local:<name>`), NFC, with POSIX separators. The drive root is never written.
 
@@ -473,7 +487,26 @@ In every mode:
 - **Duplicates** (`C16_DUPLICATE_UNRESOLVED`): ADMITTED_AS_ALTERNATE_COPY only as RECONSTRUCTION_OF an original held in the exchange and named in `reconstructed_from_sha256` (normalised-text equality never admits: PR #76 v3); REJECTED_EXACT_DUPLICATE names its own bytes and where they are already held.
 - **Restricted items never appear in an exportable exchange** (`C16_RESTRICTED_IN_EXCHANGE`). They exist only as minimal local exclusion receipts (`{sha256_prefix, reason, exportable: false}`), with no identity, path, file name or classification.
 
-**Consumer rule.** The application serves a C16 copy only when its **effective admission in the active generation is eligible** (consumer requirement I7). Admission never publishes (`publication_effect=NONE`) and never approves (`legal_effect=NONE`).
+**Asserted versus verified gate evidence (C01-R1).**
+- **Assertion.** `evidence_ref` is an assertion.
+- **Typed receipt.** A gate `receipt` binds the gate to:
+  - the exact copy (`subject_sha256`);
+  - the derivative (G06);
+  - the rule id and version and the configuration hash;
+  - the register revision (G03; it must equal the generation manifest's `restricted_register_sha256`);
+  - the outcome, which must equal the gate result;
+  - the receipt artefact's sha256.
+- **Eligibility needs receipts.** An eligible admission needs a receipt on every PASS gate (schema).
+- **Cross-record check.** The exchange checks receipt kind, copy, outcome, register revision and derivative (`C16_RECEIPT_MISMATCH`).
+- **Future gate FG-RECEIPTS.** Resolving each receipt against its artefact in the signed bundle is a **site-import gate that does not exist yet**. It is specified, and `rules.receipt_resolution_issues` is its reference (`C16_RECEIPT_UNRESOLVED`); it is not claimed as implemented.
+
+**Navigation-only versus searchable admission (C01-R1).** `service_scope` is NONE (not eligible), NAVIGATION_ONLY or SEARCHABLE:
+- **SEARCHABLE** needs G06 **PASS** with a receipt (never NOT_APPLICABLE), a non-empty derivative with text, a searchable identity, and every non-decorative image read.
+- **NAVIGATION_ONLY** needs an identity whose research state is NAVIGATION_ONLY.
+- **G06 NOT_APPLICABLE** on an identity whose research state is searchable is rejected in every case (`C16_SEARCH_WITHOUT_COVERAGE`, `C16_SERVICE_SCOPE`).
+- **Decorative images.** Accounting an image is not reading it: a NOT_REQUIRED_DECORATIVE image needs a `decorative_basis`, and only DONE images count as extracted text.
+
+**Consumer rule.** The application serves a C16 copy only when its **effective admission in the active generation is eligible**, and indexes its text only when the scope is SEARCHABLE (consumer requirement I7). Admission never publishes (`publication_effect=NONE`) and never approves (`legal_effect=NONE`).
 
 ## 11. Rule codes (in addition to the v1 codes)
 
@@ -520,22 +553,33 @@ The v1 validator accepts them unchanged: paths and hashes are still checked agai
 
 Contract 2.0 proper adds explicit file kinds (`identities_jsonl` and the others) to `release_manifest`. That is a v1 minor version, deferred to review.
 
-## 14. Adopted working decisions (owner-overridable)
+## 14. Decisions
 
-The reviewer's proposed decisions are adopted as **working defaults**. Each can be overridden by the owner; none is a legal approval.
+**Owner decisions (2026-11-27).** These replace the earlier working defaults where they differ.
+
+| # | Decision | Where applied |
+| --- | --- | --- |
+| D1 | **AR** means Army Rules, 1954 in the context of the local classified collection; contextual disambiguation elsewhere. A local-collection AR label resolves to an Army Rules 1954 **candidate**, never a finding | adapter readings 1.2 (section 8.3) |
+| D2 | **AFT** means the Armed Forces Tribunal (the forum). Only explicit statutory references ("AFT Act", "Armed Forces Tribunal Act, 2007", "s. N of the AFT Act") point to the Armed Forces Tribunal Act, 2007 | adapter readings 1.2 |
+| D3 | A **separate model-signing trust purpose** (`model`) for intelligence releases. Specified in the release manifest (`signing_purpose`) and the architecture. No operational trust key or trust-list entry is added or changed; key authorisation is separate (future gate FG-MODEL-TRUST-PURPOSE), so intelligence releases fail closed until then | `KNOWLEDGE_RELEASE_MANIFEST_SCHEMA.json`, architecture §2, §12 |
+| D4 | Retain the active knowledge release plus **two previous distinct** verified releases | `activation.Site.previous_distinct`, architecture §8.4 |
+| D5 | Retention storage limits are configurable. The disk budget comes from a **measured preflight** of actual corpus and release sizes, never a fixed number; activation is refused when it fails | `activation.Site.preflight`, activation record `preflight`, architecture §8.1 |
+| D6 | Never prune an active, pinned, in-flight or sole verified recovery generation | `activation.Site.protected`, `prune` |
+
+**Working defaults (owner-overridable).**
 
 | # | Decision |
 | --- | --- |
 | Q1 | DOC, DOCX and RTF originals are preserved as evidence (hashed, never executed; no macro execution, no guessed MIME). v1 serving uses a safe, locally reconstructed PDF admitted beside the original (`ADMITTED_AS_ALTERNATE_COPY`, RECONSTRUCTION_OF). Unknown formats are UNRECOGNISED_FORMAT / `application/octet-stream` |
-| Q2 | The graph gets `subject` and `chapter` nodes; facets are derived from the same taxonomy (no second classification store) |
-| Q3 | AA, AR, AFA, NA and AFT readings come only from the repository (section 8.3). The AFT tribunal is distinct from the AFT Act; ambiguous signals stay candidates with alternatives. Owner confirmation pending |
-| Q4 | Provision-named folders generate candidate associations only (rule C16-FOLDER-PROVLIST) |
+| Q2 | The graph gets `subject` and `chapter` nodes; facets are derived from the same taxonomy |
+| Q3 | Superseded by D1 and D2. AA, AFA and NA keep their repository readings |
+| Q4 | Provision-named folders generate candidate associations only |
 | Q5 | Owner filing labels are CURATED_NAVIGATION; parsed provision claims are CANDIDATE; never findings |
 | Q6 | COMPLETE needs copy- and work-specific evidence and an independent documentary check; it implies no legal approval |
-| Q7 | Raw OCR is never quotable. A separately verified transcription may become a future explicit policy; it is never an automatic override |
-| Q8 | A corpus generation may pin several immutable HF inputs, each with per-source provenance, in one composite `GENERATION.json` |
+| Q7 | Raw OCR is never quotable; a separately verified transcription may become a future explicit policy, never an automatic override |
+| Q8 | A corpus generation may pin several immutable HF inputs with per-source provenance in one composite `GENERATION.json` |
 
-Knowledge release decisions O1–O6 are recorded in the architecture (section 12).
+Knowledge release decisions are in the architecture (section 12).
 
 ## 15. Review disposition (independent review of `4d476fab`)
 
@@ -549,3 +593,11 @@ Knowledge release decisions O1–O6 are recorded in the architecture (section 12
 | C06 producer adapters | no fabricated format or gate passes, PR #76 v3 images and holds, restricted receipts, merged observations, hierarchical folders, provision folders, ranges and ambiguity preserved | `adapters.from_pr76_inventory`, `classify_path`, section 8.3, compatibility matrix section 6 | N36; PR #76 adapter tests |
 | C07 release completeness | TEXT_STORE component, capability accounting, signed file inventory, namespaces and overlaps, kind-specific correctness checks, distinct degraded and rebuilt outcomes | `KNOWLEDGE_RELEASE_MANIFEST_SCHEMA.json`, `KNOWLEDGE_ACTIVATION_RECORD_SCHEMA.json`, `rules._release_manifest`, architecture sections 3–4a | N23–N28, N37, N40–N45; inventory, capability and rule-pack tests |
 
+**Residual corrections (re-review of `7baf1b9f`):**
+
+| Finding | Resolution | Where | Regression tests |
+| --- | --- | --- | --- |
+| C02-R1 quote and image binding | quote derived from verified bytes (exact equality if supplied), all quotation gates ANDed, identity-denied quote rejected; image OCR derivative bound to its occurrence; method and pipeline binding; image spans only into the occurrence's OCR; reviewed compilation evidence needs a resolved member range | `evidence.verify_anchor_bytes`, `verified_quote`, `adapters.anchor_to_v1_page_anchor`, `rules._anchor_exchange`, `_relationship_exchange`, section 6.6 | `test_quote_is_bound_to_the_verified_span_and_every_quotation_gate`; X27–X32 |
+| C01-R1 asserted vs verified gate evidence | typed receipts (copy, derivative, rule, config, register revision, outcome, artefact hash) required for eligibility, checked cross-record; FG-RECEIPTS future site gate with reference resolver; `service_scope` NAVIGATION_ONLY vs SEARCHABLE; decorative images need a basis | `CORPUS_ADMISSION_SCHEMA.json`, `DOCUMENT_IDENTITY_SCHEMA.json`, `rules._admission_exchange`, `receipt_resolution_issues`, section 10 | N46–N48; X33–X35; `test_receipts_resolve_only_against_bundled_artefacts_future_gate` |
+| C03-R1 activation model | see architecture section 8 | `activation.py` | architecture disposition |
+| C07-R1 release accounting | see architecture section 4a | `rules._release_manifest`, manifest schema | architecture disposition |

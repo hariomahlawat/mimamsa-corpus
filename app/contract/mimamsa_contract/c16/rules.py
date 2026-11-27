@@ -240,6 +240,9 @@ KNOWLEDGE_KINDS = ("ORIGINALS", "TEXT_DERIVATIVES", "RECORDS", "RESEARCH_AIDS", 
                    "KNOWLEDGE_ROWS", "GRAPH", "LEXICAL_INDEX", "TEXT_STORE", "VECTOR_PACK")
 AUTHORITATIVE_KINDS = ("ORIGINALS", "TEXT_DERIVATIVES", "RECORDS", "RESEARCH_AIDS", "INTEGRITY_REGISTER", "ADMISSION_REGISTER")
 CHEAP_KINDS = ("KNOWLEDGE_ROWS", "GRAPH", "LEXICAL_INDEX", "TEXT_STORE")
+# C07-R1: mandatory payloads versus legitimately empty kinds
+MANDATORY_KINDS = ("ORIGINALS", "TEXT_DERIVATIVES", "RECORDS", "INTEGRITY_REGISTER", "ADMISSION_REGISTER")
+OPTIONAL_EMPTY_KINDS = ("RESEARCH_AIDS",)
 
 
 def _release_manifest(m, ledger=0):
@@ -291,13 +294,33 @@ def _release_manifest(m, ledger=0):
         if k == "RULE_PACK" and st == "SHIPPED" and ledger == 0:
             out.append(_e("KR_RULE_PACK_LEDGER_V0", "no rule pack may be released while AUTH-LEDGER is at version 0"))
     degraded = [a for a in acct if a["status"] == "OMITTED_DEGRADED"]
+    status = {a["kind"]: a["status"] for a in acct}
+    delta = m["base"]["mode"] == "DELTA"
+    semantic = m["capability"]["semantic_search_promised"]
+    if m["release_class"] == "KNOWLEDGE":
+        # mandatory payloads: always present (full transport) or unchanged from the verified base (delta)
+        for k in MANDATORY_KINDS:
+            if status.get(k) not in (("SHIPPED", "UNCHANGED_FROM_BASE") if delta else ("SHIPPED",)):
+                out.append(_e("KR_MANDATORY_COMPONENT", f"{k} is mandatory in every knowledge release"))
+        # legitimately empty kinds may be NOT_APPLICABLE; accelerators may not (they are shipped, built or degraded)
+        for k, st in status.items():
+            if st == "NOT_APPLICABLE" and k not in OPTIONAL_EMPTY_KINDS and not (k == "VECTOR_PACK" and not semantic):
+                out.append(_e("KR_ACCOUNTING", f"{k} cannot be NOT_APPLICABLE in a knowledge release"))
+        if delta is False and any(st == "UNCHANGED_FROM_BASE" for st in status.values()):
+            out.append(_e("KR_ACCOUNTING", "a full-transport release cannot rely on a base"))
+    if semantic and not models:
+        out.append(_e("KR_FULL_CAPABILITY_CLAIM", "semantic search promised without a declared embedder"))
     if m["capability"]["declared_service_level"] == "FULL":
         if degraded:
             out.append(_e("KR_FULL_CAPABILITY_CLAIM", "FULL service declared although a component is omitted with degradation"))
-        if m["release_class"] == "KNOWLEDGE" and m["base"]["mode"] == "FULL":
+        if m["release_class"] == "KNOWLEDGE":
+            if not models:
+                out.append(_e("KR_FULL_CAPABILITY_CLAIM", "FULL service declared without an embedder"))
             packs = {c["model_sha256"] for c in comps if c["kind"] == "VECTOR_PACK"}
-            if models - packs:
+            if models - packs and not (delta and status.get("VECTOR_PACK") == "UNCHANGED_FROM_BASE"):
                 out.append(_e("KR_FULL_CAPABILITY_CLAIM", "FULL service declared without vectors for every required embedder"))
+            if any(status.get(k) not in ("SHIPPED", "UNCHANGED_FROM_BASE") for k in MANDATORY_KINDS):
+                out.append(_e("KR_FULL_CAPABILITY_CLAIM", "FULL service declared with a mandatory payload missing"))
     elif not degraded:
         out.append(_e("KR_ACCOUNTING", "a degraded service level is declared but nothing is accounted as degraded"))
     for c in comps:
@@ -440,7 +463,8 @@ def exchange_issues(files: dict[str, bytes], *, mode: str = "strict", auth_ledge
     registry_codes = set(manifest["registries"]["instrument_codes"]) if manifest else set(C15_INSTRUMENT_CODES)
     external_jud = set(manifest["registries"]["external_judgments"]) if manifest else None
 
-    issues += _admission_exchange(adms, id_by_key, id_by_sha, strict, has, check_idents)
+    register_sha = manifest["pinned_inputs"]["restricted_register_sha256"] if manifest else None
+    issues += _admission_exchange(adms, id_by_key, id_by_sha, strict, has, check_idents, register_sha)
     issues += _anchor_exchange(anchors, id_by_key, id_by_sha, check_idents)
     issues += _relationship_exchange(rels, id_by_key, anc_by_id, rel_by_id, tax_by_id, rev_by_id, strict, has,
                                      check_idents, external_jud)
@@ -473,7 +497,29 @@ def exchange_issues(files: dict[str, bytes], *, mode: str = "strict", auth_ledge
     return issues
 
 
-def _admission_exchange(adms, id_by_key, id_by_sha, strict, has, check_idents):
+GATE_RECEIPT = {"G01_HASH_VERIFIED": "HASH_REDOWNLOAD", "G02_FORMAT_DETECTED": "FORMAT_DETECTION",
+                "G03_RESTRICTED_REGISTER": "REGISTER_CHECK", "G04_ACCESS_MARKING_REVIEWED": "MARKING_SCREEN",
+                "G05_IDENTITY_RECORD_VALID": "IDENTITY_VALIDATION", "G06_TEXT_DERIVATIVE_VERIFIED": "DERIVATIVE_VERIFICATION",
+                "G07_EMBEDDED_IMAGES_ACCOUNTED": "IMAGE_ACCOUNTING", "G08_RELEVANCE_ASSESSED": "RELEVANCE_DECISION",
+                "G09_DUPLICATE_RESOLVED": "DUPLICATE_RESOLUTION", "G10_SCHEMA_VALID": "SCHEMA_VALIDATION"}
+
+
+def receipt_resolution_issues(admission: dict, artefacts: dict[str, bytes]) -> list[Issue]:
+    """FUTURE SITE GATE FG-RECEIPTS (reference only; the site importer does not exist yet): every receipt of an
+    eligible admission must resolve to an artefact carried in the signed bundle whose bytes hash to receipt_sha256."""
+    import hashlib as _h
+    out = []
+    for g in admission["gates"]:
+        r = g.get("receipt")
+        if not r:
+            continue
+        data = artefacts.get(r["receipt_sha256"])
+        if data is None or _h.sha256(data).hexdigest() != r["receipt_sha256"]:
+            out.append(_e("C16_RECEIPT_UNRESOLVED", "gate receipt artefact missing from the bundle or altered", g["gate_id"]))
+    return out
+
+
+def _admission_exchange(adms, id_by_key, id_by_sha, strict, has, check_idents, register_sha=None):
     out = []
     groups: dict[tuple, list[dict]] = {}
     for a in adms:
@@ -533,8 +579,39 @@ def _admission_exchange(adms, id_by_key, id_by_sha, strict, has, check_idents):
             evid.append("G07 NOT_APPLICABLE needs an inventoried, empty image list")
         if gates["G07_EMBEDDED_IMAGES_ACCOUNTED"] == "PASS" and (imgs is None or any(i["ocr_state"] not in ACCOUNTED_IMAGE_STATES for i in imgs)):
             evid.append("G07 PASS with images not inventoried or not read")
+        if gates["G06_TEXT_DERIVATIVE_VERIFIED"] == "NOT_APPLICABLE" and ident["research_eligibility"]["state"] in ELIGIBLE_RESEARCH:
+            out.append(_e("C16_SEARCH_WITHOUT_COVERAGE", "a searchable identity cannot treat its text derivative gate as not applicable", a["admission_id"]))
         for msg in evid:
             out.append(_e("C16_GATE_EVIDENCE", msg, a["admission_id"]))
+        # typed receipts: asserted evidence_ref strings are not receipts; receipts must bind to this copy and outcome
+        for g in a["gates"]:
+            r = g.get("receipt")
+            if not r:
+                continue
+            bad = []
+            if r["receipt_kind"] != GATE_RECEIPT[g["gate_id"]]:
+                bad.append("receipt kind does not match the gate")
+            if r["subject_sha256"] != sha:
+                bad.append("receipt is about another copy")
+            if r["outcome"] != g["result"]:
+                bad.append("receipt outcome differs from the gate result")
+            if g["gate_id"] == "G03_RESTRICTED_REGISTER" and register_sha is not None and r["register_sha256"] != register_sha:
+                bad.append("register receipt names another register revision")
+            if g["gate_id"] == "G03_RESTRICTED_REGISTER" and r["register_sha256"] is None:
+                bad.append("register receipt names no register revision")
+            if g["gate_id"] == "G06_TEXT_DERIVATIVE_VERIFIED" and r["derivative_sha256"] not in {d["derivative_text_sha256"] for d in ident["text_derivatives"]}:
+                bad.append("derivative receipt names no derivative of this copy")
+            for b in bad:
+                out.append(_e("C16_RECEIPT_MISMATCH", b, f"{a['admission_id']}:{g['gate_id']}"))
+        scope = a.get("service_scope")
+        if scope == "SEARCHABLE":
+            ders = ident["text_derivatives"]
+            if not ders or not any(d["coverage"]["units_with_text"] > 0 for d in ders) or ident["research_eligibility"]["state"] not in ELIGIBLE_RESEARCH:
+                out.append(_e("C16_SEARCH_WITHOUT_COVERAGE", "searchable admission needs a verified, non-empty derivative and a searchable identity", a["admission_id"]))
+            if imgs and any(i["ocr_state"] != "DONE" and not (i["ocr_state"] == "NOT_REQUIRED_DECORATIVE" and i.get("decorative_basis")) for i in imgs):
+                out.append(_e("C16_SEARCH_WITHOUT_COVERAGE", "searchable admission with images neither read nor justified as decorative", a["admission_id"]))
+        if scope == "NAVIGATION_ONLY" and ident["research_eligibility"]["state"] != "NAVIGATION_ONLY":
+            out.append(_e("C16_SERVICE_SCOPE", "navigation-only admission for an identity whose research state is not NAVIGATION_ONLY", a["admission_id"]))
         dup = a.get("duplicate_of") or {}
         if a["decision"] == "ADMITTED_AS_ALTERNATE_COPY":
             if dup.get("sha256") not in id_by_sha or dup.get("sha256") not in ident["representation"].get("reconstructed_from_sha256", []):
@@ -547,7 +624,7 @@ def _admission_exchange(adms, id_by_key, id_by_sha, strict, has, check_idents):
                 why.append("restriction")
             if ident["integrity"]["source_integrity"] != "BYTE_VERIFIED":
                 why.append("integrity")
-            if ident["research_eligibility"]["state"] not in ELIGIBLE_RESEARCH:
+            if ident["research_eligibility"]["state"] not in ELIGIBLE_RESEARCH + ("NAVIGATION_ONLY",):
                 why.append("research eligibility")
             if ident["representation"]["representation_kind"] in ("WORD_IMAGES_NOT_INVENTORIED", "UNRECOGNISED_FORMAT"):
                 why.append("representation")
@@ -580,19 +657,37 @@ def _anchor_exchange(anchors, id_by_key, id_by_sha, check_idents):
                 continue
         imgs = ident["embedded_images"] if isinstance(ident["embedded_images"], list) else []
         dsha = a.get("derivative_text_sha256")
-        if dsha is not None:
-            der = next((d for d in rep["text_derivatives"] if d["derivative_text_sha256"] == dsha), None)
-            img_der = any(i.get("ocr_derivative_sha256") == dsha for i in imgs)
-            if der is None and not img_der:
-                out.append(_e("C16_ANCHOR_DERIVATIVE", "derivative is not a derivative of the anchored representation", aid))
-            elif der is not None and (der["pipeline_name"], der["pipeline_version"]) != (a["extraction"]["pipeline_name"], a["extraction"]["pipeline_version"]):
-                out.append(_e("C16_ANCHOR_DERIVATIVE", "anchor pipeline differs from the derivative's pipeline", aid))
         loc = a["locator"]
         seq_id = loc.get("image_sequence_id")
-        if seq_id:
-            occ = next((i for i in imgs if i["image_sequence_id"] == seq_id), None)
-            if occ is None or (a.get("image_sha256") and occ["image_sha256"] != a["image_sha256"]):
-                out.append(_e("C16_ANCHOR_IMAGE", "image occurrence not in the identity or image hash differs", aid))
+        occ = next((i for i in imgs if i["image_sequence_id"] == seq_id), None) if seq_id else None
+        method = a["extraction"]["method"]
+        if seq_id and (occ is None or (a.get("image_sha256") and occ["image_sha256"] != a["image_sha256"])):
+            out.append(_e("C16_ANCHOR_IMAGE", "image occurrence not in the identity or image hash differs", aid))
+        if dsha is not None:
+            der = next((d for d in rep["text_derivatives"] if d["derivative_text_sha256"] == dsha), None)
+            owner = next((i for i in imgs if i.get("ocr_derivative_sha256") == dsha), None)
+            if der is None and owner is None:
+                out.append(_e("C16_ANCHOR_DERIVATIVE", "derivative is not a derivative of the anchored representation", aid))
+            elif der is not None:
+                if (der["pipeline_name"], der["pipeline_version"]) != (a["extraction"]["pipeline_name"], a["extraction"]["pipeline_version"]):
+                    out.append(_e("C16_ANCHOR_DERIVATIVE", "anchor pipeline differs from the derivative's pipeline", aid))
+                if method not in der["methods"]:
+                    out.append(_e("C16_ANCHOR_DERIVATIVE", "anchor extraction method is not a method of the derivative", aid))
+            else:
+                # an image OCR derivative belongs to exactly one occurrence: the one the locator names
+                if occ is None or owner["image_sequence_id"] != occ["image_sequence_id"]:
+                    out.append(_e("C16_ANCHOR_IMAGE", "image OCR derivative belongs to another image occurrence", aid))
+                if method != "OCR_EMBEDDED_IMAGE":
+                    out.append(_e("C16_ANCHOR_DERIVATIVE", "an image OCR derivative needs extraction method OCR_EMBEDDED_IMAGE", aid))
+        if loc["kind"] == "IMAGE_SEQUENCE" and a.get("text_span"):
+            # offsets on an image anchor count into that occurrence's own OCR text only
+            if occ is None or occ.get("ocr_state") != "DONE" or dsha is None or dsha != occ.get("ocr_derivative_sha256"):
+                out.append(_e("C16_ANCHOR_SPAN_NOT_PERMITTED", "a span on an image anchor must count into that occurrence's OCR derivative", aid))
+        if a["quoting_permitted"]:
+            der_q = next((d for d in rep["text_derivatives"] if d["derivative_text_sha256"] == dsha), None)
+            if not ident["research_eligibility"]["quoting_permitted"] or der_q is None or not der_q["quoting_permitted"] \
+                    or a["quality"]["low_confidence"] or a["verification"]["state"] == "INCORRECT":
+                out.append(_e("C16_QUOTE_NOT_PERMITTED", "anchor permits quoting but the identity, derivative or anchor quality denies it", aid))
         pc = ident["source_copy"]["page_count"]
         if loc["kind"] == "SOURCE_PHYSICAL_PAGE":
             if ident["source_copy"]["physical_pagination"] != "PHYSICAL_PAGES" or not isinstance(pc, int) or loc["physical_page"] > pc:
@@ -650,9 +745,12 @@ def _relationship_exchange(rels, id_by_key, anc_by_id, rel_by_id, tax_by_id, rev
             if a["verification"]["state"] == "INCORRECT":
                 out.append(_e("C16_ANCHOR_INCORRECT", "an anchor judged INCORRECT cannot support a relationship", rid))
             pr = member.get("pages") if member else None
-            if isinstance(pr, dict) and "from_page" in pr and a["locator"].get("physical_page") and \
-                    not pr["from_page"] <= a["locator"]["physical_page"] <= pr["to_page"]:
+            pg = a["locator"].get("physical_page")
+            if isinstance(pr, dict) and "from_page" in pr and pg and not pr["from_page"] <= pg <= pr["to_page"]:
                 out.append(_e("C16_COMPILATION_MEMBER", "anchor page lies outside the member's pages", rid))
+            if member is not None and r["verification"] == "DOCUMENTARY_CHECKED" and not (isinstance(pr, dict) and "from_page" in pr and pg):
+                # an unresolved member range or a page-less anchor never establishes membership by default
+                out.append(_e("C16_COMPILATION_MEMBER", "reviewed compilation evidence needs a resolved member range and a page anchor", rid))
             if a["verification"]["state"] == "DOCUMENTARY_CHECKED" and not a["quality"]["low_confidence"] \
                     and a.get("derivative_text_sha256") and a.get("text_span"):
                 weak = False

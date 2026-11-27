@@ -62,7 +62,17 @@
     "status": "SHIPPED"
    }
   ],
-  "declared_service_level": "FULL"
+  "declared_service_level": "FULL",
+  "pending_future_gates": [
+   "FG-CALIBRATED-SAMPLES",
+   "FG-DISK-PREFLIGHT",
+   "FG-JOURNAL-DURABILITY",
+   "FG-REAL-RESTORE-TEST",
+   "FG-RECEIPTS",
+   "FG-ROW-LOADER",
+   "FG-SITE-IMPORTER"
+  ],
+  "semantic_search_promised": true
  },
  "compatibility": {
   "contracts": {
@@ -513,5 +523,6 @@
  "record_kind": "knowledge_release_manifest",
  "release_class": "KNOWLEDGE",
  "release_id": "R16-knowledge-20261201-0a0b0c0d",
- "release_sequence": 16
+ "release_sequence": 16,
+ "signing_purpose": "release"
 }

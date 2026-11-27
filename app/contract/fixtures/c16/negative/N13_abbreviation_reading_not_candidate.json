@@ -6,8 +6,8 @@
   "abbreviation_expansion": {
    "abbreviation": "AR",
    "alternatives": [],
-   "expansion": "Army Rules (repository alias 'army rules')",
-   "lexicon_ref": "app/b1/src/Mimamsa.Core/Identifiers/LegalIdentifierResolver.cs#Aliases; app/b1/build/build_sample.py#SUPPLEMENT"
+   "expansion": "Army Rules, 1954 (owner decision for the local classified collection)",
+   "lexicon_ref": "owner decision 2026-11-27 (PR #77 residual corrections); app/b1/src/Mimamsa.Core/Identifiers/LegalIdentifierResolver.cs#Aliases; app/b1/build/build_sample.py#SUPPLEMENT"
   },
   "collection": "local:owner-collection-fixture",
   "inventory_id": "L-e81ca321acdd8f12c93c",

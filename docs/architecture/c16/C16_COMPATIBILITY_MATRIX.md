@@ -114,7 +114,7 @@ Final counts: 1,965 files (732 PDF, 1,233 DOCX), 517 DOCX with images, 6,735 ima
 | v2 rows (no image inventory), DOC, RTF | WORD_IMAGES_NOT_INVENTORIED, images UNRESOLVED |
 | `derivative_withheld_reason` | no text derivative; decision HELD_ACCESS_MARKING_REVIEW |
 | `ocr_required_pages`, `ocr_required_images`, queued images | HELD_OCR_REQUIRED; when OCR is done, the caller passes the pinned `ocr_config` (engine, version, languages, DPI, PSM, preprocessing, config hash) and the derivative carries it |
-| `filename_legal_metadata` / file name and folders | rules 1.1 (contract section 8.3): leaf-folder subject with the full hierarchy; provision folders; one candidate per listed number; ranges and ambiguous abbreviations kept as unresolved candidates; case-number prefixes ignored |
+| `filename_legal_metadata` / file name and folders | rules 1.2 (contract section 8.3): leaf-folder subject with the full hierarchy; provision folders; one candidate per listed number; AR = Army Rules 1954 in this collection (owner decision D1); bare AFT = the forum, so no provision (D2), while an explicit AFT Act reference gives `PROV:AFT-2007`; ranges kept as unresolved candidates; case-number prefixes ignored |
 | `restricted` or `ACCESS_RESTRICTED` | **a local exclusion receipt only** (`{record_kind: local_exclusion_receipt, sha256_prefix, reason, exportable: false}`): no identity, path, file name, admission or classification is exported |
 | integrity | DECLARED_HASH_ONLY, so **G01 NOT_RUN** (a PR #76 hash is not re-verified) |
 | NEW_DOCUMENT | provisional: **G09 NOT_RUN** and decision HELD_INTEGRITY_UNVERIFIED (or a more specific hold); never ADMITTED |

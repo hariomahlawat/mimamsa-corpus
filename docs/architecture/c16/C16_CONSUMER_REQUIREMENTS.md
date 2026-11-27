@@ -17,7 +17,7 @@
 | I5 | Materialise the verified C16 records to `generations/<id>/corpus-v2/*.jsonl`, written into the temporary generation before the atomic rename (existing discipline). Record them in `generation.json` `materialized.corpus_v2` |
 | I6 | An item not in `servable` (v1) has its C16 records ignored, and the reason is counted (`C16_SUBJECT_NOT_SERVABLE`) |
 | I7 | **A C16 copy is served only when its effective admission (the head of its revision chain) in the active generation is `application_eligible`.** Held, rejected, quarantined or missing decisions mean not served, whatever the v1 record says |
-| I8 | **Byte-check every anchor before use** (`evidence.verify_anchor_bytes` against the verified derivative bytes). Only anchors that pass `usable_for_citation` / `usable_as_graph_evidence` may produce a page citation, a SpanKey, a quote or an edge location; the others are shown page-free as "location not verified" |
+| I8 | **Display only quotations derived from verified bytes** (`evidence.verified_quote`, every quotation gate ANDed; the producer's quote field is never shown). **Byte-check every anchor before use** (`evidence.verify_anchor_bytes` against the verified derivative bytes). Only anchors that pass `usable_for_citation` / `usable_as_graph_evidence` may produce a page citation, a SpanKey, a quote or an edge location; the others are shown page-free as "location not verified" |
 | I9 | Resolve every `review_binding` against the bundle's reviewed_records (exact record, canonical hash, commit, reviewer distinct from author) before writing any `graph_edge_reviews` row; AUTH-LEDGER v0 keeps `legally_validated` refused |
 
 ## 2. GenerationStore, the text store and eligibility

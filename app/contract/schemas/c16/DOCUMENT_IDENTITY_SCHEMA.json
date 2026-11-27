@@ -1624,6 +1624,14 @@
               "null"
             ],
             "minimum": 0
+          },
+          "decorative_basis": {
+            "description": "Why an image carries no legal text (NOT_REQUIRED_DECORATIVE). Accounting an image is not reading it: decorative images never count as extracted text.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 300
           }
         },
         "allOf": [
@@ -1642,6 +1650,26 @@
               "properties": {
                 "ocr_derivative_sha256": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "ocr_state": {
+                  "const": "NOT_REQUIRED_DECORATIVE"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "decorative_basis"
+              ],
+              "properties": {
+                "decorative_basis": {
+                  "type": "string",
+                  "minLength": 3
                 }
               }
             }

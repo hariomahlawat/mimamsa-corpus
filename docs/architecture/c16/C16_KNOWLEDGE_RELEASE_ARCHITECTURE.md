@@ -1,6 +1,6 @@
 # C16 knowledge release architecture (WP06)
 
-- **Status:** proposed design, Cycle 16 Tranche A, **revised after the independent review of `4d476fab`** (findings C03, C04, C07). For re-review. Not implemented, not frozen.
+- **Status:** proposed design, Cycle 16 Tranche A, **revised after the independent review of `4d476fab`** (findings C03, C04, C07) **and the re-review of `7baf1b9f`** (C03-R1, C07-R1, owner decisions D3–D6). For acceptance review. Not implemented, not frozen.
 - **Builds on:**
   - contract v1 signed bundles (`release_manifest`, `trust_list`, `exclusion_update`, `app/contract/README.md` §3);
   - the release importer (`app/importer`: vault, generations, atomic `ACTIVE`);
@@ -34,7 +34,7 @@ The goal: an ordinary deployment needs **no OCR, no embedding and no full graph 
 | --- | --- | --- | --- | --- | --- |
 | 1 | **Application release** | Installer (MSI/bootstrapper), .NET binaries, web assets, application-owned DB migrations (DDL for site tables **and** the knowledge-schema DDL), the bundled trust list, default config | Authenticode (installer, every binary); trust list inside | Installer channel (separate media or path) | Code and DDL only. Never corpus content |
 | 2 | **Knowledge release** | Originals, extracted and OCR text, records (v1 and C16), research aids, integrity and admission registers (all **authoritative**), plus **accelerators**: allowlisted knowledge-table rows (no PostgreSQL archive; section 7), the persistent text store, the persistent lexical index, vector packs for the installed models and the prebuilt graph | Owner Ed25519 key, purpose `release`, over `SHA256SUMS` (v1, unchanged) | Release drop folder (v1) | What is known and searchable. Never code, never models |
-| 3 | **Intelligence and model release** | ONNX models and tokenizers (embedder, cross-encoder, OCR models), and later rule packs (gated: none exist; refused at AUTH-LEDGER v0) and agent configuration; plus **full vector packs** for a new embedder | Owner Ed25519 key, purpose `release` (a `model` purpose is open question O2) | Release drop folder, `release_class = INTELLIGENCE` | Which models run. Never corpus content |
+| 3 | **Intelligence and model release** | ONNX models and tokenizers (embedder, cross-encoder, OCR models), and later rule packs (gated: none exist; refused at AUTH-LEDGER v0) and agent configuration; plus **full vector packs** for a new embedder | Owner Ed25519 key, separate purpose **`model`** (owner decision D3; `signing_purpose` in the manifest). No such key exists yet, and authorising one is a separate trust change, so intelligence releases fail closed until then | Release drop folder, `release_class = INTELLIGENCE` | Which models run. Never corpus content |
 | 4 | **Local installation data** | Users, sessions, audit log, local Admin uploads and their publication records, local withdrawals, Document Studio working documents and versions, credit ledger, serving policy, the exclusion store, site config, TLS keys, the activation log | Never signed upstream; owned by the site | Never leaves the site, except backups | Site state. **Never** written by a release |
 
 **Why separate.**
@@ -99,7 +99,17 @@ Rule `KR_NAMESPACE` rejects:
 
 **What an accelerator can and cannot do.** An accelerator is a pure function of authoritative components and a versioned builder. It is never needed for correctness, only for speed. It never carries eligibility: withdrawal, restriction and per-request visibility are applied at query time (ADR-0006 §4, ADR-0007, ADR-0008, VectorStore). At worst, a corrupt accelerator that passes its checks degrades ranking or speed; it cannot surface an excluded item or change evidence.
 
-### 4a. Capability accounting and outcomes (review finding C07)
+### 4a. Capability accounting and outcomes (review findings C07, C07-R1)
+
+**Mandatory versus legitimately empty components (C07-R1):**
+- **Mandatory in every knowledge release** (`KR_MANDATORY_COMPONENT`): ORIGINALS, TEXT_DERIVATIVES, RECORDS, INTEGRITY_REGISTER and ADMISSION_REGISTER. Each is SHIPPED, or UNCHANGED_FROM_BASE in a delta.
+- **Legitimately empty:** only RESEARCH_AIDS may be NOT_APPLICABLE, with a reason.
+- **Accelerators** are SHIPPED, SITE_BUILDS_CHEAP or OMITTED_DEGRADED, never NOT_APPLICABLE. The exception is VECTOR_PACK when semantic search is not promised.
+
+**Full transport is not full service (C07-R1):**
+- **Full transport.** `base.mode` FULL means the files carry every component; it cannot rely on a base.
+- **Full service.** `declared_service_level` FULL means every capability, and requires `semantic_search_promised: true`, an EMBEDDER declared, its vectors present, and every mandatory payload present (`KR_FULL_CAPABILITY_CLAIM`). Promising semantic search also requires a declared embedder.
+- **Future gates.** `capability.pending_future_gates` (at least one) records acceptance work that is specified but not implemented or calibrated: FG-SITE-IMPORTER, FG-RECEIPTS, FG-ROW-LOADER, FG-JOURNAL-DURABILITY, FG-CALIBRATED-SAMPLES, FG-REAL-RESTORE-TEST, FG-DISK-PREFLIGHT, FG-MODEL-TRUST-PURPOSE. A manifest that passes this contract is **contract-valid, not site-accepted**.
 
 **Accounting.** `capability.accounting` lists every MKR-1 component kind once, with its status:
 - SHIPPED;
@@ -203,7 +213,8 @@ Because the rows are re-derived from records, KNOWLEDGE_ROWS is purely an accele
 2. **Disk budget.** Check free space against the components' `disk_budget_bytes` plus the vault additions.
 3. **Vault and generation.** Write originals write-once to the vault, and materialise records into `generations/.tmp-<id>/` (existing importer).
 4. **Components.** Apply deltas and check every `result_digest`. Build or verify every accelerator (section 4) into staging locations (`kr_<n>_staging`, `.building-*` directories, a temporary vector-store copy). Record each component's outcome.
-5. **Smoke test and rename.** Run the smoke test, then rename staging directories into place. **The new generation is staged and verified but not active.** A crash here leaves the previous release serving, and the leftovers are quarantined at the next start (existing rules).
+5. **Measured disk preflight** (owner decision D5; `Site.preflight`). Measure the bytes the activation still has to materialise for the target (views, indexes, stores, vault additions, as measured at staging), add the **configurable** headroom fraction, and compare with the measured free space while the retained set stays on disk. Activation is refused when it fails. There is no fixed allocation, and the result is recorded in the activation record (`preflight`). The real implementation is future gate FG-DISK-PREFLIGHT.
+6. **Smoke test and rename.** Run the smoke test, then rename staging directories into place. **The new generation is staged and verified but not active.** A crash here leaves the previous release serving, and the leftovers are quarantined at the next start (existing rules).
 
 ### 8.2 The activation journal: one authoritative commit decision
 
@@ -230,6 +241,13 @@ Only then does the service accept requests. The same machine drives activation, 
 - **Pinning.** Each request pins one generation and one exclusion sequence (`pin`). Its whole result comes from that generation, so readers never see a mix.
 - **Exclusions during a switch.** Exclusion acceptance takes the same single-writer lock. An update accepted while a switch is in progress is applied before OPEN; when the site is serving, it is applied at once to the active and every retained generation.
 
+**C03-R1 strengthening:**
+- **Pins.** A pin captures the **knowledge generation, the model generation and the exclusion sequence**.
+- **Response boundary.** Every response is filtered by the **current** exclusion state (`respond`), so an exclusion accepted after a reader pinned is never bypassed.
+- **MODELS transitions** need a staged, **verified** model whose vectors are verified for the active knowledge generation. A KNOWLEDGE transition needs the active model's vectors for the target.
+- **Cleanup.** Every transaction's scratch state (staging, temporary pointer files) is removed on OPEN, on abort and by recovery, on every crash path.
+- **Production proof.** The model proves the protocol only. Real fsync and PostgreSQL transaction behaviour, process crashes and concurrent requests are future gate **FG-JOURNAL-DURABILITY** for the site implementation.
+
 **Covered by tests:**
 - a crash at each of the seven boundaries;
 - an exclusion arriving mid-switch;
@@ -254,11 +272,12 @@ Vectors for the old model are retained (bounded), so a model rollback needs no r
 - re-apply the exclusion state, which is monotone: tombstones never lift by omission, so a rollback cannot resurrect a withdrawn or restricted item;
 - record it.
 
-**Retention** (decision O6): keep the active release plus two previous verified releases when the disk budget permits. Retention **never** deletes:
+**Retention** (owner decision D4): keep the active release plus **two previous distinct** verified releases (`Site.previous_distinct`: rollback history can repeat ids, so the most recent distinct ones are selected). Storage limits are configurable, and the budget comes from the measured preflight (D5). Retention **never** deletes (D6):
 - the active generation;
 - a rollback target;
 - the target of an in-flight (BEGIN without OPEN or ABORTED) transaction;
 - a generation pinned by a reader;
+- an explicit verified recovery target (`recovery_target`);
 - the sole remaining recovery copy.
 
 Pruning happens only when the service is OPEN. Reference: `Site.protected`, `Site.prune`.
@@ -301,18 +320,44 @@ Pruning happens only when the service is OPEN. Reference: `Site.protected`, `Sit
 - **No SQL from a release.** There is no archive restore; rows are loaded through allowlisted, typed, parameterised COPY by a restricted role into an isolated staging schema.
 - **No legal effect.** Admission, activation and publication are not legal approval. A rule pack is refused at AUTH-LEDGER v0.
 
-## 12. Adopted working decisions (owner-overridable)
+## 12. Decisions
+
+**Owner decisions (2026-11-27):**
 
 | # | Decision |
 | --- | --- |
-| O1 | A FULL release ships the text derivatives, the text store and the lexical index. A delta may ship full replacements of the index and text store, or let the site build them incrementally; both are recorded in the accounting |
-| O2 | A separate trust-list purpose `model` for intelligence releases is recommended. Until the owner approves a trust-list migration, intelligence releases use the existing `release` purpose, and no trust change is made by this design |
-| O3 | Per-release isolated `kr_<n>` schemas initially, subject to disk and restore tests at full scale |
-| O4 | Vector spot re-embed: a deterministic, stratified sample with a tolerance calibrated from actual model and platform evidence. No acceptance threshold is invented here. Bounded embedding of local Admin uploads is optional and separate, never a corpus re-embed |
-| O5 | `CHANGES.json` drives dependency-freshness (REVALIDATION_REQUIRED) flags only, never legal approval |
-| O6 | Retain the active release plus two previous verified releases when the disk budget permits; never prune a pinned reader's generation, a rollback target, an in-flight target or the sole recovery copy |
+| D3 | A separate `model` signing purpose for intelligence releases (manifest `signing_purpose`). No trust key or trust-list entry is added or changed by this design; the v1 trust-list purpose extension and the keys need separate owner authorisation (FG-MODEL-TRUST-PURPOSE). Until then, intelligence releases are refused in production |
+| D4 | Retain the active release plus two previous **distinct** verified releases |
+| D5 | Configurable storage limits; the disk budget is a measured preflight from actual corpus and release sizes, never a fixed number; activation is refused when it fails |
+| D6 | Never prune an active, pinned, in-flight, explicit recovery-target or sole verified recovery generation |
 
-**Remaining limits:**
-- The site importer, the row loader and the restore role are specified, and their tests listed, but not implemented here: no application code changed.
-- The activation journal is proven only on the reference model.
-- Real offline restore, corruption recovery on real artefacts and full-scale disk measurements remain to be demonstrated in the site implementation.
+**Working defaults (owner-overridable):**
+
+| # | Decision |
+| --- | --- |
+| O1 | A FULL-transport release ships the text derivatives, the text store and the lexical index. A delta may ship full replacements, or let the site build them incrementally; both are recorded in the accounting |
+| O3 | Per-release isolated `kr_<n>` schemas initially, subject to disk and restore tests |
+| O4 | Vector spot re-embed: a deterministic, stratified sample with a tolerance calibrated from real model and platform evidence (FG-CALIBRATED-SAMPLES); no invented threshold. Bounded embedding of local uploads is optional and separate |
+| O5 | `CHANGES.json` drives revalidation flags only, never legal approval |
+
+O2 and O6 are superseded by D3 and D4–D6.
+
+**Future gates (not completed acceptance):**
+- FG-SITE-IMPORTER: site importer;
+- FG-RECEIPTS: gate receipt resolution;
+- FG-ROW-LOADER: knowledge-row loader and restore role;
+- FG-JOURNAL-DURABILITY: production concurrency and durability of the journal;
+- FG-CALIBRATED-SAMPLES: calibrated sample sizes and tolerances;
+- FG-REAL-RESTORE-TEST: real offline restore and corruption recovery;
+- FG-DISK-PREFLIGHT: measured disk preflight on real releases;
+- FG-MODEL-TRUST-PURPOSE: model trust purpose and keys.
+
+No application code changed in this contract work.
+
+**Residual-corrections disposition:**
+
+| Finding | Resolution | Where | Tests |
+| --- | --- | --- | --- |
+| C03-R1 | pins capture the model generation; response-boundary exclusion filtering; verified staged model and vector compatibility for MODELS transitions (and vectors for KNOWLEDGE targets); scratch cleanup on every crash path; distinct previous releases and an explicit recovery target; measured preflight; production proof recorded as FG-JOURNAL-DURABILITY | `activation.py`, `KNOWLEDGE_ACTIVATION_RECORD_SCHEMA.json` (`preflight`), section 8 | crash-at-every-boundary (now also asserts cleanup and model pin), `test_model_transition_requires_verified_staged_model_with_vectors`, `test_reader_pinned_before_an_exclusion_never_bypasses_it`, `test_retention_selects_distinct_previous_releases_and_protects_the_recovery_target`, `test_measured_disk_preflight_refuses_activation`; N53 |
+| C07-R1 | mandatory vs legitimately empty kinds; full transport vs full service; semantic promise needs an embedder and vectors; pending future gates recorded in every manifest; model signing purpose | `rules._release_manifest`, `KNOWLEDGE_RELEASE_MANIFEST_SCHEMA.json`, section 4a | N37, N49–N52, N54 |
+

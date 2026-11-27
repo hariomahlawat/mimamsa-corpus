@@ -1,6 +1,6 @@
 {
  "anchors": [
-  "ANC-6f9978a2cbc5cca121f2f196"
+  "ANC-851e4d8431af7762dd528d95"
  ],
  "approval_ref": null,
  "category": "cites_provision",
@@ -15,7 +15,7 @@
  "is_finding": true,
  "proposition_ref": null,
  "record_kind": "corpus_relationship",
- "relationship_id": "REL-5c72d55872fd5dc8e09abf21",
+ "relationship_id": "REL-3d7c2c9f62e5099537ed064b",
  "review_binding": null,
  "review_ref": null,
  "source": {

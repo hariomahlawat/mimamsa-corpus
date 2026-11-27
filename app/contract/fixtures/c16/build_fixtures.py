@@ -301,7 +301,7 @@ def build_anchors(ids):
     w = SHA["word-screenshots"]
     d = der("word-screenshots")
     A["docx_image_ocr"] = anchor(doc_id=DOC["word-screenshots"], original_sha256=w, representation_sha256=w,
-                                 derivative_text_sha256=d["derivative_text_sha256"], image_sha256=H("image:2"),
+                                 derivative_text_sha256=H("image-ocr:2"), image_sha256=H("image:2"),
                                  locator={"kind": "IMAGE_SEQUENCE", "image_sequence_id": f"IMG:{w}:2", "physical_page": None,
                                           "citable_as_source_page": False},
                                  text_span={"passage_id": None, "char_start": 0, "char_end": 48, "text_sha256": H("span:docx-image")},
@@ -444,13 +444,30 @@ def gates(**over):
     return out
 
 
-def admission(key, decision, g, *, eligible=False, dup=None, rid=None, reasons=("fixture",), doc=None, sha=None, disp=None,
+def receipts(g, sha, derivative=None):
+    """Typed receipts for every PASS gate (C01-R1): bound to the copy, derivative, rule, config and register revision."""
+    kinds = {"G01_HASH_VERIFIED": "HASH_REDOWNLOAD", "G02_FORMAT_DETECTED": "FORMAT_DETECTION", "G03_RESTRICTED_REGISTER": "REGISTER_CHECK",
+             "G04_ACCESS_MARKING_REVIEWED": "MARKING_SCREEN", "G05_IDENTITY_RECORD_VALID": "IDENTITY_VALIDATION",
+             "G06_TEXT_DERIVATIVE_VERIFIED": "DERIVATIVE_VERIFICATION", "G07_EMBEDDED_IMAGES_ACCOUNTED": "IMAGE_ACCOUNTING",
+             "G08_RELEVANCE_ASSESSED": "RELEVANCE_DECISION", "G09_DUPLICATE_RESOLVED": "DUPLICATE_RESOLUTION", "G10_SCHEMA_VALID": "SCHEMA_VALIDATION"}
+    for x in g:
+        if x["result"] == "PASS":
+            x["receipt"] = {"receipt_kind": kinds[x["gate_id"]], "subject_sha256": sha,
+                            "derivative_sha256": derivative if x["gate_id"] == "G06_TEXT_DERIVATIVE_VERIFIED" else None,
+                            "rule_id": "c16-gate-" + x["gate_id"][:3].lower(), "rule_version": "1.0", "config_sha256": H("gate-config"),
+                            "register_sha256": H("register-fixture") if x["gate_id"] == "G03_RESTRICTED_REGISTER" else None,
+                            "outcome": "PASS", "receipt_sha256": H(f"receipt:{sha}:{x['gate_id']}")}
+    return g
+
+
+def admission(key, decision, g, *, eligible=False, scope=None, dup=None, rid=None, reasons=("fixture",), doc=None, sha=None, disp=None,
               revision=1, supersedes=None, gen=CG):
     a = {"contract": CONTRACT_ID, "record_kind": "corpus_admission", "admission_id": "", "revision": revision,
          "supersedes_admission_id": supersedes,
          "subject": {"doc_id": doc or DOC.get(key, key), "source_copy_sha256": sha or SHA[key]}, "corpus_generation_id": gen,
          "decision": decision, "source_disposition": disp, "duplicate_of": dup, "restriction_id": rid, "gates": g,
-         "application_eligible": eligible, "publication_effect": "NONE", "legal_effect": "NONE",
+         "application_eligible": eligible, "service_scope": scope or ("SEARCHABLE" if eligible else "NONE"),
+         "publication_effect": "NONE", "legal_effect": "NONE",
          "decided_by": {"kind": "AUTOMATED_RULE", "id": "c16-fixture-admission"}, "decided_at": None,
          "rule_set": {"id": "c16-admission", "version": "1.1"}, "reasons": list(reasons)}
     a["admission_id"] = canonical.admission_id(a)
@@ -465,7 +482,9 @@ def build_admissions():
                    reasons=["embedded image 3 not yet read (ocr_state QUEUED)"], revision=2, supersedes=w1["admission_id"],
                    disp={"system": "c16-local-reconcile", "value": "NEW_DOCUMENT", "secondary_flags": []})
     return [
-        admission("official-pdf", "ADMITTED_AS_PRIMARY", gates(G01_HASH_VERIFIED="PASS", **NA7), eligible=True,
+        admission("official-pdf", "ADMITTED_AS_PRIMARY",
+                  receipts(gates(G01_HASH_VERIFIED="PASS", **NA7), SHA["official-pdf"],
+                           H("derivative:%s:mimamsa-corpus-text:1.0.0" % DOC["official-pdf"])), eligible=True,
                   reasons=["all gates passed with evidence (fixture)"]),
         admission("scan-pdf", "HELD_INTEGRITY_UNVERIFIED", gates(**NA7), reasons=["hash declared, not re-verified"]),
         admission("mixed-pdf", "HELD_RELEVANCE_UNRESOLVED", gates(G08_RELEVANCE_ASSESSED="NOT_RUN", **NA7), reasons=["relevance not assessed"]),
@@ -627,6 +646,19 @@ def negatives(ids, A, R, T, ADM):
     x = copy.deepcopy(ids["duplicate-copy"])
     x["source_copy"]["detected_format"] = "UNKNOWN"
     m("N36_unknown_format_claimed_pdf", x, "SCHEMA", "mime_type")
+    x = copy.deepcopy(ADM[0])
+    for g in x["gates"]:
+        g.pop("receipt", None)
+    x["admission_id"] = canonical.admission_id(x)
+    m("N46_eligible_admission_with_asserted_evidence_only", x, "SCHEMA", "gates")
+    x = copy.deepcopy(ADM[0])
+    g6 = next(g for g in x["gates"] if g["gate_id"] == "G06_TEXT_DERIVATIVE_VERIFIED")
+    g6.update(result="NOT_APPLICABLE", evidence_ref=None, receipt=None)
+    x["admission_id"] = canonical.admission_id(x)
+    m("N47_searchable_admission_without_derivative_gate", x, "SCHEMA", "result")
+    x = copy.deepcopy(ids["word-screenshots"])
+    x["embedded_images"][2]["ocr_state"] = "NOT_REQUIRED_DECORATIVE"
+    m("N48_decorative_image_without_basis", x, "SCHEMA", "embedded_images")
     return N
 
 
@@ -788,6 +820,80 @@ def exchange_negatives(pop):
         d = next(d for d in p["identities"] if d["doc_id"] == DOC["mixed-pdf"])
         del d["integrity"]
     var("X26_identity_missing_field_excluded_from_cross_checks", "SCHEMA", missing_field)
+
+    def quote_denied(p):
+        d = next(d for d in p["identities"] if d["doc_id"] == DOC["extract-pdf"])
+        d["research_eligibility"]["quoting_permitted"] = False
+    var("X27_identity_denies_quotation", "C16_QUOTE_NOT_PERMITTED", quote_denied)
+
+    def other_image_ocr(p):
+        a = next(a for a in p["anchors"] if a["locator"]["kind"] == "IMAGE_SEQUENCE")
+        a["derivative_text_sha256"] = H("image-ocr:1")
+        rename_anchor(p, a)
+    var("X28_image_locator_with_another_images_ocr", "C16_ANCHOR_IMAGE", other_image_ocr)
+
+    def method_mismatch(p):
+        a = next(a for a in p["anchors"] if a["locator"]["kind"] == "GENERATED_SEGMENT")
+        a["extraction"]["method"] = "HTML"
+    var("X29_anchor_method_not_of_derivative", "C16_ANCHOR_DERIVATIVE", method_mismatch)
+
+    def pipeline_mismatch(p):
+        a = next(a for a in p["anchors"] if a["anchor_id"] == pop_anchor(p, "native_cite_judgment"))
+        a["extraction"]["pipeline_version"] = "9.9.9"
+    var("X30_anchor_pipeline_mismatch", "C16_ANCHOR_DERIVATIVE", pipeline_mismatch)
+
+    def span_on_image_with_document_text(p):
+        a = next(a for a in p["anchors"] if a["locator"]["kind"] == "IMAGE_SEQUENCE")
+        d = next(d for d in p["identities"] if d["doc_id"] == DOC["word-screenshots"])
+        a["derivative_text_sha256"] = d["text_derivatives"][0]["derivative_text_sha256"]
+        rename_anchor(p, a)
+    var("X31_image_span_counted_into_document_text", "C16_ANCHOR_SPAN_NOT_PERMITTED", span_on_image_with_document_text)
+
+    def reviewed_unresolved_member(p):
+        comp = next(d for d in p["identities"] if d["doc_id"] == DOC["compilation-pdf"])
+        anc = {"contract": CONTRACT_ID, "record_kind": "evidence_anchor", "anchor_id": "", "doc_id": comp["doc_id"],
+               "original_sha256": comp["source_copy"]["sha256"], "representation_sha256": comp["source_copy"]["sha256"],
+               "derivative_text_sha256": comp["text_derivatives"][0]["derivative_text_sha256"], "image_sha256": None,
+               "locator": {"kind": "SOURCE_PHYSICAL_PAGE", "physical_page": 25, "citable_as_source_page": True},
+               "text_span": {"passage_id": None, "char_start": 0, "char_end": 10, "text_sha256": H("span:comp")}, "bbox": None,
+               "extraction": {"method": "NATIVE_TEXT_LAYER", "pipeline_name": "mimamsa-corpus-text", "pipeline_version": "1.0.0", "ocr_config": None},
+               "quality": {"text_reliability": "reliable", "ocr_mean_confidence": None, "low_confidence": False},
+               "verification": {"state": "AUTOMATED_CANDIDATE_NOT_VERIFIED", "review_ref": None}, "quoting_permitted": True, "quote": None}
+        anc["anchor_id"] = canonical.anchor_id(anc)
+        rva = review_record("RV-FIXTURE-0031", anc["anchor_id"])
+        anc["verification"] = {"state": "DOCUMENTARY_CHECKED", "review_ref": "RV-FIXTURE-0031", "review_binding": binding(rva)}
+        p["anchors"].append(anc)
+        r = rel("cites_provision", "compilation-pdf", {"resolved": True, "node_id": "PROV:AA-1950:s.69"}, "DOCUMENT_TEXT_REVIEWED",
+                [anc["anchor_id"]], verification="DOCUMENTARY_CHECKED", review="RV-FIXTURE-0032", date="2019-03-01")
+        r["subject"]["graph_node_ref"] = U()
+        r["subject"]["compilation_member_seq"] = 3          # member 3 has an unresolved page range
+        r.pop("graph_projection")
+        r["relationship_id"] = canonical.relationship_id(r)
+        rvr = review_record("RV-FIXTURE-0032", r["relationship_id"])
+        r["review_binding"] = binding(rvr)
+        p["relationships"].append(r)
+        p["reviewed_records"] += [rva, rvr]
+    var("X32_reviewed_compilation_evidence_unresolved_member", "C16_COMPILATION_MEMBER", reviewed_unresolved_member)
+
+    def search_without_coverage(p):
+        d = next(d for d in p["identities"] if d["doc_id"] == DOC["scan-pdf"])
+        d["text_derivatives"] = []
+        d["research_eligibility"]["source_page_citation_permitted"] = False
+        p["anchors"] = [a for a in p["anchors"] if a["doc_id"] != DOC["scan-pdf"]]
+        a = next(a for a in p["admissions"] if a["subject"]["doc_id"] == DOC["scan-pdf"])
+        next(g for g in a["gates"] if g["gate_id"] == "G06_TEXT_DERIVATIVE_VERIFIED").update(result="NOT_APPLICABLE", evidence_ref=None)
+        readmit(a)
+    var("X33_searchable_identity_without_derivative_uses_na", "C16_SEARCH_WITHOUT_COVERAGE", search_without_coverage)
+
+    def receipt_other_copy(p):
+        a = next(a for a in p["admissions"] if a["application_eligible"])
+        a["gates"][0]["receipt"]["subject_sha256"] = H("another-copy")
+    var("X34_receipt_for_another_copy", "C16_RECEIPT_MISMATCH", receipt_other_copy)
+
+    def receipt_other_register(p):
+        a = next(a for a in p["admissions"] if a["application_eligible"])
+        next(g for g in a["gates"] if g["gate_id"] == "G03_RESTRICTED_REGISTER")["receipt"]["register_sha256"] = H("older-register")
+    var("X35_register_receipt_for_another_revision", "C16_RECEIPT_MISMATCH", receipt_other_register)
     return X
 
 
@@ -883,7 +989,9 @@ def knowledge_manifest(mode, level="FULL", vectors=True):
                               "required_models": [{"role": "EMBEDDER", "model_id": "multilingual-e5-small (fixture)", "sha256": E5},
                                                   {"role": "RERANKER", "model_id": "cross-encoder (fixture)", "sha256": XENC}]},
             "components": comps,
-            "capability": {"declared_service_level": level, "accounting": acct},
+            "signing_purpose": "release",
+            "capability": {"declared_service_level": level, "accounting": acct, "semantic_search_promised": vectors,
+                           "pending_future_gates": FUTURE_GATES},
             "heavy_compute_on_site": {"ocr": "NONE", "embedding": "NONE", "graph_rebuild": "ONLY_IF_ACCELERATOR_REJECTED"},
             "notes": "synthetic fixture"}
 
@@ -905,7 +1013,9 @@ def intelligence_manifest():
                               "text_store_format": "mimamsa-text-store/1", "vector_store_format": "MIMVEC01",
                               "required_models": [{"role": "EMBEDDER", "model_id": "next embedder (fixture)", "sha256": nxt}]},
             "components": comps,
-            "capability": {"declared_service_level": "FULL", "accounting": [
+            "signing_purpose": "model",
+            "capability": {"declared_service_level": "FULL", "semantic_search_promised": True,
+                           "pending_future_gates": FUTURE_GATES + ["FG-MODEL-TRUST-PURPOSE"], "accounting": [
                 {"kind": "MODEL_FILE", "status": "SHIPPED", "reason": "new embedder"},
                 {"kind": "VECTOR_PACK", "status": "SHIPPED", "reason": "full vectors for the new embedder, built upstream"},
                 {"kind": "RULE_PACK", "status": "NOT_APPLICABLE", "reason": "no rule pack exists; refused at AUTH-LEDGER v0"},
@@ -924,8 +1034,15 @@ def activation_record():
                           [{"component_id": "graph", "result": "ACCELERATOR_REBUILT_LOCALLY", "failed_checks": ["SAMPLED_REBUILD_PARITY"]}],
             "exclusion_state": {"sequence": 4, "digest": H("exclusions:4"), "items_suppressed": 2},
             "result": "ACTIVE_AFTER_LOCAL_REBUILD", "service_level": "FULL", "degradation_acknowledged_by": None,
+            "active_models_release_id": None,
+            "preflight": {"measured_required_bytes": 3 * 10 ** 10, "free_bytes": 9 * 10 ** 10, "headroom_fraction": 0.1,
+                          "retained_releases": [REL_DELTA, REL_FULL], "result": "PASS"},
             "reason": "graph accelerator failed sampled rebuild parity; rebuilt locally", "actor": {"role": "ADMIN", "id": "admin-fixture"},
             "at": "2026-12-15T09:30:00Z"}
+
+
+FUTURE_GATES = ["FG-CALIBRATED-SAMPLES", "FG-DISK-PREFLIGHT", "FG-JOURNAL-DURABILITY", "FG-REAL-RESTORE-TEST",
+                "FG-RECEIPTS", "FG-ROW-LOADER", "FG-SITE-IMPORTER"]
 
 
 def release_negatives():
@@ -951,6 +1068,7 @@ def release_negatives():
     x["capability"]["accounting"] = [a for a in x["capability"]["accounting"] if a["kind"] != "ADMISSION_REGISTER"]
     N["N28_knowledge_release_without_admission_register"] = (x, "KR_ACCOUNTING", None, 0)
     x = knowledge_manifest("FULL", level="FULL", vectors=False)
+    x["capability"]["semantic_search_promised"] = True
     N["N37_full_capability_claimed_while_degraded"] = (x, "KR_FULL_CAPABILITY_CLAIM", None, 0)
     x = knowledge_manifest("FULL")
     x["components"].append({**component("pg", "KNOWLEDGE_ROWS", "mimamsa-knowledge-rows/1", ["accelerators/rows/x.jsonl"],
@@ -982,6 +1100,27 @@ def release_negatives():
     x["components"][-1]["result"] = "ACCELERATOR_DEGRADED"
     x.update(result="ACTIVE_DEGRADED", service_level="DEGRADED_LEXICAL_ONLY")
     N["N45_degraded_without_acknowledgement"] = (x, "SCHEMA", "degradation_acknowledged_by", 0)
+    x = knowledge_manifest("FULL")
+    x["components"] = [c for c in x["components"] if c["kind"] != "INTEGRITY_REGISTER"]
+    next(a for a in x["capability"]["accounting"] if a["kind"] == "INTEGRITY_REGISTER").update(status="NOT_APPLICABLE", reason="claimed empty")
+    N["N49_full_release_with_mandatory_payload_not_applicable"] = (x, "KR_MANDATORY_COMPONENT", None, 0)
+    x = knowledge_manifest("FULL")
+    x["compatibility"]["required_models"] = [m for m in x["compatibility"]["required_models"] if m["role"] != "EMBEDDER"]
+    x["components"] = [c for c in x["components"] if c["kind"] != "VECTOR_PACK"]
+    next(a for a in x["capability"]["accounting"] if a["kind"] == "VECTOR_PACK").update(status="NOT_APPLICABLE", reason="no embedder")
+    N["N50_full_service_without_embedder_declaration"] = (x, "KR_FULL_CAPABILITY_CLAIM", None, 0)
+    x = knowledge_manifest("FULL")
+    x["capability"]["semantic_search_promised"] = False
+    N["N51_full_service_without_semantic_promise"] = (x, "SCHEMA", "semantic_search_promised", 0)
+    x = intelligence_manifest()
+    x["signing_purpose"] = "release"
+    N["N52_intelligence_release_not_model_signed"] = (x, "SCHEMA", "signing_purpose", 0)
+    x = activation_record()
+    x["preflight"]["result"] = "FAIL"
+    N["N53_activation_after_failed_disk_preflight"] = (x, "SCHEMA", "preflight", 0)
+    x = knowledge_manifest("FULL")
+    x["capability"]["pending_future_gates"] = []
+    N["N54_release_claims_no_pending_future_gates"] = (x, "SCHEMA", "pending_future_gates", 0)
     return N
 
 

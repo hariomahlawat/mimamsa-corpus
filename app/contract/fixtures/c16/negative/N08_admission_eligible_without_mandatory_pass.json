@@ -74,6 +74,7 @@
   "id": "c16-admission",
   "version": "1.1"
  },
+ "service_scope": "NONE",
  "source_disposition": null,
  "subject": {
   "doc_id": "aft-2004-example-scan-oa0002",
