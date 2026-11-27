@@ -1,6 +1,6 @@
 # ADR-0007: Persistent search index
 
-- **Status:** Proposed (C15 WP1). The engine is selectable; the default stays `memory` until the owner accepts this ADR.
+- **Status:** Technically accepted with conditions alongside ADR-0008 (PR #80 closeout, comment 7220574432; C16 WP05 evaluator made the 10k p95 target on synthetic data). The engine is selectable; **the operational default stays `memory`**. Making `disk` the default, or any full-corpus deployment, needs owner authorisation and the carried-forward gates in `app/b1/evidence/c16_integration/C16A_COMPLETION_REPORT.md` §4.
 - **Date:** 2026-11-27.
 - **Context:** C14 S4 measured about 6.5 KB of live heap per passage with the B1 in-process index. That projects to roughly 12 GB at the full corpus, which does not fit a 16 GB host with PostgreSQL. Search p95 was 2.25 s at 10 readers on 10,000 documents. WP1 asks for a disk-backed index with bounded memory, incremental indexing, atomic publication and rollback, crash recovery and integrity verification. It must keep identifier priority and exact citations, enforce withdrawal, run natively on Windows, port to Linux, and need no external service.
 

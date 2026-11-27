@@ -1,5 +1,7 @@
 # C16 Tranche A: integration of WP04 (text store) and WP05 (evaluator)
 
+> Superseded for status by `C16A_COMPLETION_REPORT.md` (PR #80 closeout). This note records the original integration.
+
 **Branch:** `claude/c16-integration`, from staging `c8fa5290`.
 
 **Merged:**

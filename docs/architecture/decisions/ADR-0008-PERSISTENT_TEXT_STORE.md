@@ -1,6 +1,6 @@
 # ADR-0008: Persistent text and passage store
 
-- **Status:** Proposed (C16 WP04). The store is selectable; the default stays `memory` until the owner accepts this ADR. Renumber at integration if another Cycle 16 stream also took 0008.
+- **Status:** Technically accepted with conditions (development-stage integration, independent ChatGPT review of PR #80, comment 7220574432). The store is selectable; **the operational default stays `memory`**. Making `disk` the default, or any full-corpus deployment, needs owner authorisation and the carried-forward gates in `app/b1/evidence/c16_integration/C16A_COMPLETION_REPORT.md` §4. Since the review, every open binds the store to the generation's records (`DiskTextStore.Bind`); the cost is measured in that report, §3.
 - **Date:** 2026-11-27.
 - **Context:** C15 moved search postings to disk (ADR-0007) but left generation text in memory. `GenerationStore` holds every page (`DocumentRecord.Pages`) and every passage (`DocumentRecord.Passages`) as .NET strings, and each passage is a separate copy of part of its page, so text is held twice in UTF-16. C15 projected about 7 GB for this at the full corpus, the dominant memory term once the index is on disk. WP04 asks for lazy page and passage retrieval, persistent disk-backed text, bounded caches, stable passage identity, efficient snippets, generation-aware storage, integrity validation and withdrawal-aware access, with no new infrastructure and output identical to today.
 

@@ -395,13 +395,15 @@ public sealed class DiskTextStore : ITextStore, IDisposable
             // store to match it exactly: derivative identity and text_sha256, quoting, pages and their byte ranges, passages
             // and their offsets, the text assessment, and which derivatives are available with which load issues. Any
             // difference quarantines the store (or refuses it), whatever VerifyOnOpen says.
+            var bindWatch = System.Diagnostics.Stopwatch.StartNew();
             if (loaded is not null && Bind(loaded, derived) is { } mismatch) { loaded = null; why = "store differs from the generation's records: " + mismatch; }
+            var bindMs = bindWatch.ElapsedMilliseconds;
             if (loaded is not null)
             {
                 var store = new DiskTextStore(dir, o.CacheBytes);
                 store.Attach(loaded, issue);
                 Retain(root, dir, o.KeepPrevious, log);
-                log?.Invoke($"text store: opened {dir}");
+                log?.Invoke($"text store: opened {dir} (bound {loaded.Docs.Count} documents to the generation's records in {bindMs} ms)");
                 return store;
             }
             log?.Invoke($"text store: {dir} failed verification: {why}");
