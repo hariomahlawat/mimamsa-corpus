@@ -34,8 +34,8 @@ No paid infrastructure was added. **Nothing is merged to staging; that needs own
 
 | Suite | Result |
 | --- | --- |
-| C# (SYN site, real sample, real e5-small and reranker models) | **205/205** |
-| Playwright (SYN and real sample, Chromium, 1 worker) | **71/71** |
+| C# (SYN site, real sample, real e5-small and reranker models) | **207/207** |
+| Playwright (SYN and real sample, Chromium, 1 worker) | **81/81** |
 | Design checks (contrast, scaling, keymap, cache policy, capability matrix) | **117/117** |
 | Retrieval oracle, hybrid off | **10/14**: RET-06, 07, 09 and 10 require hybrid, as on staging |
 | Retrieval oracle, hybrid on (e5-small, floor 0.8579) | **12/14**: RET-07 and RET-10 open |
@@ -45,7 +45,26 @@ Integration fixes:
 - the index ADR was renumbered to 0007;
 - the W-06 journey now waits for the Studio document to render before counting.
 
-## 3. Open issues carried to Cycle 16
+## 3. Codex review of PR #75
+
+Eleven review rounds; the last (`ef583929`) found no major issues. Every finding was a genuine defect and was fixed with a regression test:
+
+| Round | Findings fixed | Regression |
+| --- | --- | --- |
+| 1 | Unavailable quotes keep their stored reference, so documents still save; neighbourhood edges are de-duplicated before the limit | C# withdrawal-and-save test; C# exact-limit neighbourhood test |
+| 2 | Each version keeps its own title; every note up to the 2,000 cap is listed | `EachVersionKeepsItsOwnTitle`, `AllNotesUpToTheCapAreListed` |
+| 3 | An open graph view follows withdrawals; paragraph label added to the Studio refresh key | G-04, W-05b |
+| 4 | A policy refresh never discards edits made while it is in flight | W-05c |
+| 5 | Failed Studio refreshes are retried, with library content withheld meanwhile | W-05d |
+| 6 | Late editor loads cannot take over the refresh; quoting gate on Commander excerpts | W-05e |
+| 7 | Studio home refreshes its lists in place; the editor is locked during a save | W-05f, W-05g |
+| 8 | Note text typed while "Add note" is in flight is kept | W-05h |
+| 9 | Superseded assessment responses are ignored | G-05 |
+| 10 | Superseded graph lookups are ignored | G-06 |
+
+**Deployment:** the commissioned app on port 5199 (sample data, `mimamsa_b1`) runs the integrated build. The graph is published at start-up (7,529 nodes, 9,161 edges). A signed-in smoke test of the graph, reasoning, Commander, Studio and search routes passed.
+
+## 4. Open issues carried to Cycle 16
 
 1. **WP1b top-k evaluator:** the 10k latency is evaluator work per matching passage, not storage. A lazy, disk-backed text store is also needed: generation text is projected at about 7 GB for the full corpus. Linux has not been tested.
 2. **RET-07 and RET-10:** need a legal-domain model for contrary and paraphrased holdings, or a reviewed synonym list, which is a legal-content decision. Q05 (s.80 heading only in the contents) and Q07 ("arrest" → s.101) are open for the same reasons.
@@ -55,7 +74,7 @@ Integration fixes:
 6. **Studio:** no retention policy, backup exclusion or DOCX export. The Readiness Report and template registry are blocked on the Form/Template Registry.
 7. **Security residuals:** per-copy restriction in graph and reasoning (L4); rate limits and a Studio byte quota (L5); labels for reviewed edges (I7).
 
-## 4. Constraints honoured
+## 5. Constraints honoured
 
 - No changes to the oracle or AUTH-LEDGER.
 - No generative advice; the Assistant stays closed.
