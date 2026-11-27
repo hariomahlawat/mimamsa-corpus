@@ -1,0 +1,210 @@
+[
+  {
+    "doc_id": "hc-ph-2024-crwp-275-2024-phhc010026662024-1-2024-11-12",
+    "sha256": "e663f01082ce09936f7ce6800607ba58744ed2b186e26bc2b361f0f763c35e02",
+    "reviewed_pages": [
+      10
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of statutory limits on tribunal jurisdiction."
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-28861-2023-phhc011659072023-1-2024-10-23",
+    "sha256": "698e89abb6006a308c2eb16a599545d5a7a2ef6b1b1e7fc7c98278e97f5336b4",
+    "reviewed_pages": [
+      3,
+      4,
+      5,
+      7
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of the three-year limit on pension arrears."
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-16651-2024-phhc010909682024-1-2024-10-24",
+    "sha256": "de1f5890316749909f97a91d8cf023ce497907c71fe5e4a2ca3779011379745e",
+    "reviewed_pages": [
+      3,
+      4,
+      7
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of the three-year limit on pension arrears."
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-16678-2024-phhc010902292024-1-2024-10-24",
+    "sha256": "b0446a8790b2a1f6f200e0256f27dc63b3e696e73554c6b247828f77ac900cc4",
+    "reviewed_pages": [
+      2,
+      3,
+      4,
+      7
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of the three-year limit on pension arrears."
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-28301-2024-phhc011420252024-1-2024-10-24",
+    "sha256": "71680abff0b48ad2c4402b3230cfedcad773ed7bb95e1b76707a1ba16c52d6b5",
+    "reviewed_pages": [
+      2,
+      4,
+      7
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of the three-year limit on pension arrears."
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-30173-2024-phhc011535732024-1-2024-11-07",
+    "sha256": "1f155e7343b9d635d8fc34e7af48657eadead832f39f5904a65a87b161c3ebf6",
+    "reviewed_pages": [
+      2,
+      3,
+      4,
+      6
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of the three-year limit on pension arrears."
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-30626-2024-phhc011390792024-1-2024-11-13",
+    "sha256": "926cbc37419cf6e23f6c5c7778d3c8f77ce3fe820387e0913e6036435ee88270",
+    "reviewed_pages": [
+      2,
+      3,
+      4,
+      6
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of the three-year limit on pension arrears."
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-26257-2024-phhc011368052024-1-2024-11-29",
+    "sha256": "3ab471f741c0e23a25c5926deeaf95e82e00be21b40154ced24920903c701b67",
+    "reviewed_pages": [
+      3
+    ],
+    "status": "visual-false-positive",
+    "reason": "Medical specialist's designation in judicial discussion of disability assessment."
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-16781-2024-phhc010910392024-1-2024-12-17",
+    "sha256": "c4331bf2838508e35966eda7954377198e30365d6b225be054d82bc7bc88f0d8",
+    "reviewed_pages": [
+      6,
+      7
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of effective dates for pension arrears and dual family pensions."
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-20059-2024-phhc011052542024-1-2024-12-17",
+    "sha256": "dd73306a7cc62c6993b9c3bcea207902d9545742e874c383d8adb7e456f96afd",
+    "reviewed_pages": [
+      6,
+      8
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of effective dates for pension arrears and dual family pensions."
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-31300-2024-phhc011107912024-1-2024-12-17",
+    "sha256": "a0779f490cac411818fdc67f6e8ad034d70867ccc14232109b3b71e187cfa468",
+    "reviewed_pages": [
+      6,
+      8
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of effective dates for pension arrears and dual family pensions."
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-16802-2024-phhc010913432024-1-2024-12-19",
+    "sha256": "84fd829f3454abb4b3b0606afa90674cf879c3bd962659c771c1f738cadeb7e6",
+    "reviewed_pages": [
+      6,
+      9
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of effective dates for pension arrears and dual family pensions."
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-20060-2024-phhc011052602024-1-2025-01-13",
+    "sha256": "c3c3fcf16f7cf710c0a9db9d9a0cbeedadff50e0be83297d3ec5cab38d77dbf5",
+    "reviewed_pages": [
+      6,
+      7
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of effective dates for pension arrears and dual family pensions."
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-20062-2024-phhc011049532024-1-2025-01-13",
+    "sha256": "b756ebbac0b4b1845689dcbb7d1a249d12e0fdaa39c5e93e63c7d45800378d3a",
+    "reviewed_pages": [
+      6,
+      9
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of effective dates for pension arrears and dual family pensions."
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-20070-2024-phhc011052262024-1-2025-01-13",
+    "sha256": "cbc09a789ec15e8502e5524c5d391e504e8f3b5ddb607ccede94171de9961b4e",
+    "reviewed_pages": [
+      6,
+      7
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of effective dates for pension arrears and dual family pensions."
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-20079-2024-phhc011051622024-1-2025-01-13",
+    "sha256": "0f672d540f2add6c9712ca4506049a734f9a2c3538cc79a88ee1415fd3be7462",
+    "reviewed_pages": [
+      6,
+      8
+    ],
+    "status": "hold",
+    "reason": "Judicial discussion of effective dates for pension arrears and dual family pensions. Pages 6 and 8 are false positives. The additional legal-context flag on page 2 has no verified page image in the local review set."
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-20080-2024-phhc011050012024-1-2025-01-13",
+    "sha256": "5cffcf5976df1fa4be6e711523fe77c5f7d77f998d5c4e92ea5d3e7c43f3acf1",
+    "reviewed_pages": [
+      6,
+      8
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of effective dates for pension arrears and dual family pensions."
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-21971-2024-phhc011036242024-1-2025-01-13",
+    "sha256": "eeefb2e5ade5c0a444999835a701a751b50d571a98a9b6f936ff1e9ce7a1f7cf",
+    "reviewed_pages": [
+      6,
+      8
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of effective dates for pension arrears and dual family pensions."
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-21976-2024-phhc011053842024-1-2025-01-13",
+    "sha256": "8ab1ec1e223b62e6db933f532278e7cc1e76aa539fb50955a23ee9998c87d0c3",
+    "reviewed_pages": [
+      6,
+      8
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of effective dates for pension arrears and dual family pensions."
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-34935-2024-phhc011807942024-1-2025-01-14",
+    "sha256": "5484dc08ec85e213be0febd8d3ea9baae85efcb7b126814a105549e8d818163f",
+    "reviewed_pages": [
+      6,
+      8
+    ],
+    "status": "visual-false-positive",
+    "reason": "Judicial discussion of effective dates for pension arrears and dual family pensions."
+  }
+]

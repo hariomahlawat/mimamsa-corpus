@@ -1,0 +1,177 @@
+{
+  "schema": "c14-phhc-recovery-queue-v1",
+  "date": "2026-11-26",
+  "baseline": "ee17b0660511b66fdd5307833e11d1268de35b56",
+  "source_manifest_path": "legal_knowledge/audit_work/C11-JUDICIAL-QUALITY/excluded/RE_ACQUISITION_MANIFEST.csv",
+  "source_manifest_git_blob": "8578c060563960ed73b0b96493d7e20ce2655414",
+  "restriction_register_git_blob": "ca1096f11feb6f1cdffb69aca48ca016ac7d4a0b",
+  "other_inputs": [
+    "legal_knowledge/audit_work/C12-CONSOLIDATION/judicial_recovery_c12/INGESTION_LOG.csv",
+    "legal_knowledge/audit_work/C13-A7-ACQUISITION/acquisition/ACQUISITION_MANIFEST_C13.csv",
+    "legal_knowledge/audit_work/C13-A7-ACQUISITION/acquisition/HF_VERIFY_C13.csv"
+  ],
+  "selection": "Historical C11 T1 PHHC records minus exact C12 ingested SHA/doc_id/URL joins and C13 SHA/URL joins with successful pinned HF re-download verification",
+  "counts": {
+    "ranked_excluded_rows": 8077,
+    "phhc_t1": 562,
+    "c12_ingested": 12,
+    "c13_preserved": 16,
+    "pending": 534,
+    "unique_urls": 534,
+    "unique_sha256": 534,
+    "unique_doc_ids": 534,
+    "restricted_identity_matches": 0
+  },
+  "limits": [
+    "No live HF inventory; pending means not accounted for by these C12/C13 overlays, not independently absent from all stores.",
+    "Historical SHA256 is the byte acceptance pin, not legal authentication.",
+    "Known-restriction identity prefilter only; PDF access-marking checks still required on acquisition.",
+    "Original download attempts in current runtime failed at DNS; no new original acquired."
+  ],
+  "excluded": {
+    "c12": [
+      {
+        "rank": 187,
+        "doc_id": "hc-ph-2013-cwp-8140-2013-phhc010960252013-1-2013-08-12",
+        "sha256": "626ae775fed0a404766e2f3a3d9471c9d0c4448e22a678ec93e76fd305b620a6"
+      },
+      {
+        "rank": 188,
+        "doc_id": "hc-ph-2014-cwp-20380-2012-phhc010774422012-1-2014-05-21",
+        "sha256": "3b9bcf2f5e0fb13ff7a5681bf7f3f0ebb84c593056052e367ed534b8cac40c26"
+      },
+      {
+        "rank": 189,
+        "doc_id": "hc-ph-2014-cwp-14191-2013-phhc010740772013-1-2014-07-25",
+        "sha256": "ba9c4e674c1b3b5e7714288942f0c3fcd40a4fffc88bbb64640a801414f88b21"
+      },
+      {
+        "rank": 195,
+        "doc_id": "hc-ph-2019-cwp-21429-2019-phhc010949672019-1-2019-08-09",
+        "sha256": "a5ac7f7ea79c41e1167920a98fb4e2050b500b630184590af4ab60d2d0338286"
+      },
+      {
+        "rank": 202,
+        "doc_id": "hc-ph-2023-cwp-14249-2023-phhc010845612023-1-2023-07-07",
+        "sha256": "6dc58e8721c502c67874102e09ef59a2d75f79b77004c577625e8afec2e73fc2"
+      },
+      {
+        "rank": 203,
+        "doc_id": "hc-ph-2023-cwp-17142-2023-phhc010993062023-1-2023-08-07",
+        "sha256": "2dbcb7e2f365503118671311458809bb471c8581d4ed6b5fc97156922f4424a8"
+      },
+      {
+        "rank": 207,
+        "doc_id": "hc-ph-2024-cwp-14834-2024-phhc010776672024-1-2024-07-10",
+        "sha256": "cb39739c7c2c55e5676c0fb2981a70a27f19e855654f61c40ec9dbd3d6d09789"
+      },
+      {
+        "rank": 209,
+        "doc_id": "hc-ph-2024-cwp-24556-2021-phhc011119162021-1-2024-09-30",
+        "sha256": "a05de7b6b33cb9ef7b5f3d421d4b6184157f0710c3621d36f66a6f94f1382ec4"
+      },
+      {
+        "rank": 211,
+        "doc_id": "hc-ph-2024-cwp-16812-2024-phhc010928662024-1-2024-11-21",
+        "sha256": "dcdfac610ef1ed181b871645370ca84690aec91d9cc42d79905bac32994dbd02"
+      },
+      {
+        "rank": 212,
+        "doc_id": "hc-ph-2024-cwp-16371-2024-phhc010909582024-1-2024-11-22",
+        "sha256": "9960904c701ce9ef8a1b7b46b0e895a6a345f1ca2f59df1be10e3a142b14d7a9"
+      },
+      {
+        "rank": 213,
+        "doc_id": "hc-ph-2024-cwp-16643-2024-phhc010919992024-1-2024-11-22",
+        "sha256": "cb1785cf0db679cf4d64a0bce2a3f64dc18748b1f1b0a0631d26c2c355d59fcd"
+      },
+      {
+        "rank": 214,
+        "doc_id": "hc-ph-2024-cwp-28668-2024-phhc011389462024-1-2024-11-27",
+        "sha256": "df316862fa58b73052f2412bb1038cf2b630c52b1d3d70337603830b4e9fd918"
+      }
+    ],
+    "c13": [
+      {
+        "rank": 215,
+        "doc_id": "hc-ph-2024-cwp-16171-2024-phhc010900112024-1-2024-11-29",
+        "sha256": "a5bf15855022ccea642d41cfd4d0ea7608bdd59f10629444fe55f98839642aef"
+      },
+      {
+        "rank": 216,
+        "doc_id": "hc-ph-2024-cwp-16679-2024-phhc010922762024-1-2024-11-29",
+        "sha256": "152202c8193b927ac93338a04a226aeb41341d9045d1906b7904ca34cbe8894d"
+      },
+      {
+        "rank": 217,
+        "doc_id": "hc-ph-2024-cwp-16685-2024-phhc010922262024-1-2024-11-29",
+        "sha256": "2b47d52e0087c214aa97a6489798866d4f2b1a40cda94d6fb34931679b027677"
+      },
+      {
+        "rank": 219,
+        "doc_id": "hc-ph-2024-cwp-16165-2024-phhc010896452024-1-2024-12-13",
+        "sha256": "ab3091b8e61455d63dc5b5813a611f8f521b46450d6a88cc5c28fa7b71a7f2de"
+      },
+      {
+        "rank": 220,
+        "doc_id": "hc-ph-2025-cwp-17353-2025-phhc010948072025-1-2025-07-01",
+        "sha256": "236b7b66b489e84571e20c79896595e860180066e278c860216d9b8d975f11f3"
+      },
+      {
+        "rank": 225,
+        "doc_id": "hc-ph-2026-cwp-8911-2026-phhc010439542026-1-2026-03-24",
+        "sha256": "d3caba502c44dbd77884f47c8e118d1f749e957a06b7a10151afc68452805bcc"
+      },
+      {
+        "rank": 227,
+        "doc_id": "hc-ph-2026-cwp-17401-2025-phhc010957672025-1-2026-04-02",
+        "sha256": "566e2296bf6be6ed8f260cd88460009ece2e426d4e5bb45f166916b678dc5c9e"
+      },
+      {
+        "rank": 228,
+        "doc_id": "hc-ph-2026-cwp-1960-2025-phhc010061642025-1-2026-04-08",
+        "sha256": "fc5513b5284169ed27809cc47efb8e41604cece0580415c7a37f8f0614059cd4"
+      },
+      {
+        "rank": 229,
+        "doc_id": "hc-ph-2026-cwp-33066-2024-phhc011707512024-1-2026-04-27",
+        "sha256": "bafb3538d15ad52fe1da8dff167b77e164217bd9ef037ef1b54b349add4edb24"
+      },
+      {
+        "rank": 231,
+        "doc_id": "hc-ph-2026-cwp-32188-2024-phhc011534052024-1-2026-05-07",
+        "sha256": "a7bc0c03d30bc8a6d248c74083f7a31fa13efd3cfb8e5f8476821ebc01239807"
+      },
+      {
+        "rank": 233,
+        "doc_id": "hc-ph-2026-untitled-phhc011084722026-1-2026-08-14",
+        "sha256": "2f568cb5c7bbdb24520c89a61cf32963d8ccfb0e6b762523c6ad2382d514ae2f"
+      },
+      {
+        "rank": 234,
+        "doc_id": "hc-ph-2026-untitled-phhc011391252026-1-2026-09-11",
+        "sha256": "6877c5b7be0d490849ed93e2297497c6659415e1289078f1fb816cb330deed38"
+      },
+      {
+        "rank": 1197,
+        "doc_id": "hc-ph-2010-lpa-414-2010-phhc010951352010-1-2010-09-22",
+        "sha256": "b79de56eef01abc6e25c786880cc4624d26e36987fee347fd90f61b5bd32761b"
+      },
+      {
+        "rank": 1303,
+        "doc_id": "hc-ph-2016-lpa-326-2016-phhc011124862016-1-2016-12-19",
+        "sha256": "455d61f6d964eccfeb50eb337608f444e6fe131eda81e0d8fb8213a6267530c8"
+      },
+      {
+        "rank": 1310,
+        "doc_id": "hc-ph-2017-lpa-305-2017-phhc011195222017-1-2017-02-27",
+        "sha256": "8596e763d8cfc33e6339d9f69341798be3518275b4a50d5af6f940b44eb539fe"
+      },
+      {
+        "rank": 1697,
+        "doc_id": "hc-ph-2026-lpa-599-2026-phhc010352012026-1-2026-03-05",
+        "sha256": "f2f74f4af8a131377a77108103d98a13a881c8c295547cfac9a7449e1673f940"
+      }
+    ]
+  }
+}

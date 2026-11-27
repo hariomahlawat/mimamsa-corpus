@@ -1,0 +1,379 @@
+{
+  "schema": "mimamsa-c14-candidate-package-v1",
+  "active_import_allowed": false,
+  "counts": {
+    "candidate_records": 1278,
+    "physical_pages": 5632,
+    "citation_mentions": 206,
+    "unbound_or_partial_page_map": 58,
+    "local_pair_missing": 3,
+    "search_hits_for_court": 3108
+  },
+  "restriction_register_sha256": "fc7ea07e62e7e41f348639973f19187540593e7b3237933758f64e865b95b2b6",
+  "skips": [
+    {
+      "doc_id": "CA01-ACT19-1955-CARRIER",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 334,
+      "segments": 2
+    },
+    {
+      "doc_id": "hc-ph-2010-cwp-5113-2010-phhc010797492010-1-2010-03-22",
+      "status": "local_pair_missing"
+    },
+    {
+      "doc_id": "hc-ph-2011-cwp-70-2011-phhc010843742011-1-2011-01-04",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 3,
+      "segments": 1
+    },
+    {
+      "doc_id": "hc-ph-2013-cwp-23445-2013-phhc010843022013-1-2013-10-25",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 5
+    },
+    {
+      "doc_id": "hc-ph-2014-rsa-1401-1994-phhc010289731994-1-2014-03-27",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 4
+    },
+    {
+      "doc_id": "hc-ph-2017-cr-4329-2016-phhc010076002016-1-2017-04-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 6,
+      "segments": 11
+    },
+    {
+      "doc_id": "hc-ph-2017-cwp-18468-2014-phhc010815952014-1-2017-05-09",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 3,
+      "segments": 6
+    },
+    {
+      "doc_id": "hc-ph-2017-lpa-1021-2015-phhc011102292015-1-2017-09-29",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 3
+    },
+    {
+      "doc_id": "hc-ph-2018-cocp-2673-2014-phhc010022482014-1-2018-07-13",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 3
+    },
+    {
+      "doc_id": "hc-ph-2018-cr-6224-2017-phhc010100872017-1-2018-05-31",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 4
+    },
+    {
+      "doc_id": "hc-ph-2020-cwp-20724-2017-phhc010898742017-1-2020-02-18",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 3
+    },
+    {
+      "doc_id": "hc-ph-2020-cwp-2717-2020-phhc010114402020-1-2020-02-03",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 3
+    },
+    {
+      "doc_id": "hc-ph-2020-cwp-30256-2018-phhc011023082018-1-2020-02-18",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 3
+    },
+    {
+      "doc_id": "hc-ph-2022-cwp-27002-2022-phhc011340272022-1-2022-11-24",
+      "status": "local_pair_missing"
+    },
+    {
+      "doc_id": "hc-ph-2023-cr-3336-2022-phhc010895332022-1-2023-12-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 3
+    },
+    {
+      "doc_id": "hc-ph-2023-cwp-357-2023-phhc010006122023-1-2023-10-17",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 30
+    },
+    {
+      "doc_id": "hc-ph-2023-cwp-7339-2016-phhc010984762016-1-2023-10-18",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 28
+    },
+    {
+      "doc_id": "hc-ph-2023-cwp-7395-2016-phhc010985382016-1-2023-10-18",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 28
+    },
+    {
+      "doc_id": "hc-ph-2023-cwp-7701-2016-phhc010988752016-1-2023-10-18",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 27
+    },
+    {
+      "doc_id": "hc-ph-2023-cwp-9802-2015-phhc011002692015-1-2023-12-11",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 24
+    },
+    {
+      "doc_id": "hc-ph-2024-cr-3610-2022-phhc010980762022-1-2024-08-20",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 4
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-15151-2024-phhc010824382024-1-2024-11-20",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 16,
+      "segments": 19
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-15496-2024-phhc010839592024-1-2024-12-13",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 11,
+      "segments": 13
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-18307-2024-phhc010990242024-1-2024-11-18",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 11,
+      "segments": 12
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-18533-2024-phhc011008102024-1-2024-11-29",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 16,
+      "segments": 18
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-19109-2023-phhc010992452023-1-2024-01-23",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 10,
+      "segments": 11
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-19431-2024-phhc010999612024-1-2024-08-12",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 5,
+      "segments": 24
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-19502-2024-phhc011051892024-1-2024-11-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 11,
+      "segments": 12
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-19863-2024-phhc011034502024-1-2024-11-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 11,
+      "segments": 22
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-20795-2024-phhc011101542024-1-2024-11-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 11,
+      "segments": 12
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-24386-2024-phhc011086152024-1-2024-11-18",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 11,
+      "segments": 12
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-26374-2024-phhc011357102024-1-2024-11-28",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 11,
+      "segments": 12
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-29773-2024-phhc011300702024-1-2024-12-13",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 8,
+      "segments": 10
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-6873-2000-phhc010294312000-1-2024-02-21",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 6,
+      "segments": 89
+    },
+    {
+      "doc_id": "hc-ph-2025-cocp-4796-2025-phhc011500752025-1-2025-12-04",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 2,
+      "segments": 3
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-15171-2024-phhc010846032024-1-2025-11-10",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 5,
+      "segments": 12
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-27816-2025-phhc011501072025-1-2025-10-30",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 6,
+      "segments": 10
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-28077-2024-phhc011422362024-1-2025-11-07",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 6,
+      "segments": 18
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-10013-2026-phhc010530882026-1-2026-04-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 4,
+      "segments": 6
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-10045-2026-phhc010533602026-1-2026-04-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 5,
+      "segments": 6
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-10098-2026-phhc010342392026-1-2026-04-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 6,
+      "segments": 12
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-10614-2026-phhc010556182026-1-2026-04-08",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 6,
+      "segments": 7
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-10743-2026-phhc010573002026-1-2026-04-09",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 3,
+      "segments": 5
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-11028-2026-phhc010571372026-1-2026-04-10",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 6,
+      "segments": 8
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-11797-2026-phhc010645932026-1-2026-04-20",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 5,
+      "segments": 11
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-14172-2026-phhc010765752026-1-2026-05-07",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 3,
+      "segments": 4
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-14293-2026-phhc010769842026-1-2026-05-08",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 5,
+      "segments": 11
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-14660-2026-phhc010792422026-1-2026-05-12",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 6,
+      "segments": 7
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-15760-2026-phhc010848302026-1-2026-05-20",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 5,
+      "segments": 11
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-23236-2024-phhc011220562024-1-2026-01-15",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 5,
+      "segments": 6
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-23245-2024-phhc011220332024-1-2026-01-15",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 5,
+      "segments": 6
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-6605-2026-phhc010346892026-1-2026-03-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 7,
+      "segments": 9
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-6649-2026-phhc010332272026-1-2026-03-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 7,
+      "segments": 9
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-6698-2026-phhc010339552026-1-2026-03-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 7,
+      "segments": 9
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-7635-2026-phhc010367462026-1-2026-03-13",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 6,
+      "segments": 8
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-8926-2026-phhc010482952026-1-2026-03-24",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 4,
+      "segments": 5
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-8975-2026-phhc010485432026-1-2026-03-24",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 5,
+      "segments": 13
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-9248-2026-phhc010505212026-1-2026-03-27",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 4,
+      "segments": 6
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-9399-2026-phhc010496632026-1-2026-03-30",
+      "status": "local_pair_missing"
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-9978-2026-phhc010346652026-1-2026-04-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 6,
+      "segments": 12
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-9983-2026-phhc010341312026-1-2026-04-06",
+      "status": "unbound_or_partial_page_map",
+      "physical_pages": 4,
+      "segments": 6
+    }
+  ],
+  "files": {
+    "records.jsonl": "768f6434cfd32d10dc994bd6484b5b1b3a28129b4ae1a935d0f3636723baf188",
+    "search.sqlite": "294cc59ade55e5545ab4a934b69fe3aab405363cd548220edda4b6a847f88c91"
+  }
+}

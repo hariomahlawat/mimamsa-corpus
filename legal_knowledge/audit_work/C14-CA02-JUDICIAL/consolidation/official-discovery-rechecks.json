@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Army Rules 1954 official India Code",
+    "url": "https://upload.indiacode.nic.in/showfile?actid=AC_CEN_28_38_00012_195046_1517807323368&filename=armyrules1954.pdf&type=rule",
+    "status": 503
+  },
+  {
+    "name": "Army Rules source robots",
+    "url": "https://upload.indiacode.nic.in/robots.txt",
+    "status": 503
+  },
+  {
+    "name": "DESW official pension source policy",
+    "url": "https://www.desw.gov.in/robots.txt",
+    "status": 403
+  },
+  {
+    "name": "Army pension regulations",
+    "url": "https://www.desw.gov.in/sites/default/files/PRA-I-2008-corrected.pdf",
+    "status": 404
+  },
+  {
+    "name": "Entitlement Rules and Guide 2023 index",
+    "url": "https://www.desw.gov.in/en/node/91410",
+    "status": 200,
+    "content_type": "text/html; charset=UTF-8"
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "active_import_allowed": false,
+  "blank_check_render_dpi": 144,
+  "input_count": 61,
+  "method_counts": {
+    "out-of-scope": 332,
+    "pdf-text": 13,
+    "tesseract-ocr": 317
+  },
+  "ocr_render_dpi": 200,
+  "prior_status_counts": {
+    "local_pair_missing": 3,
+    "unbound_or_partial_page_map": 58
+  },
+  "pymupdf_version": "1.26.6",
+  "quality_risk_counts": {
+    "native_encoding_review": 315,
+    "ocr_transcription_review": 317,
+    "sparse_page_text": 1,
+    "substantial_image_content": 2,
+    "table_or_column_reading_order_review": 13
+  },
+  "register_sha256": "2d3a88884ba9e44a4246412fefac60e210d83f3a201f4bad7b87e74df97c8abd",
+  "restriction_register_sha256": "fc7ea07e62e7e41f348639973f19187540593e7b3237933758f64e865b95b2b6",
+  "schema": "mimamsa-c15-physical-page-repair-run-v1",
+  "source_manifest_sha256": "faf684bb1b3095b79a7e4453b70c2e72121a335bb4d08772469290f99b77eeac",
+  "status_counts": {
+    "mapped": 60,
+    "mapped-scope-limited": 1
+  },
+  "tesseract_english_model_sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+  "tesseract_version": "tesseract 5.5.0"
+}

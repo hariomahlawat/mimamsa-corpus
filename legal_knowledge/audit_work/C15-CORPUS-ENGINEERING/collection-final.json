@@ -1,0 +1,159 @@
+{
+  "retry_queue": 618,
+  "distinct_retry_targets_with_disposition": 618,
+  "distinct_retry_target_dispositions": {
+    "verified-local": 589,
+    "marking-review": 18,
+    "sparse-page-review": 1,
+    "HTTP-503": 8,
+    "integrity": 2
+  },
+  "retry_verified_originals": 589,
+  "retry_verified_derivatives": 589,
+  "retry_verified_revisions": [
+    "01acb9a44e0efc11d48e152881ee81a97b15c04c",
+    "03adf48c1f6b0de7e6257e70ffac6620278c2da2",
+    "0e2e762a5bb49af14216ac01c34b1e06647cbfd3",
+    "10e4cf4699d2207d3c662fb0465f3c2b4c1a76b4",
+    "11033c2e11ebcdcc797b77d7795e6441f89e081b",
+    "17e77f6838e949e54ee898dd96574cf485b1cffb",
+    "1adfe8e9fe29d135ce953a612802cb48b70160e5",
+    "2c9ed4ebe353d474b9f7d43f34baa1d631e10c93",
+    "2d1e93590a50766e502fd57436ae005a31594210",
+    "33bc7110e05550ce042633c8e77c60821a5ef921",
+    "53e1395c83224324e537f7da9393bdc3917b554b",
+    "553c4362a83cb0726cac7647853145be10628ec9",
+    "58a9a07b37aca18a83031db36aed52bbe0d12a5f",
+    "5e534720c1eb62e44bc2f1d63693bfcf7f898c1e",
+    "6a0a326b38c446e62325fa023e9546f9942a51ed",
+    "6db11d353c8b7c2b682f8093fec00e16736500de",
+    "723ee61ecc82a209aea451f6ec70c762640d8bdf",
+    "7b2baa6ae46fd0c2ab98de051a477147b7339620",
+    "86787c33c455fb2e15d483d9398c1f9c8fd48730",
+    "877efe651f29d7fa0a1a94a9999b4075e2a19597",
+    "8cbe9f471a2a71e687228673123be4ca17023b21",
+    "8e4ac2636d1613edfb12713782a726d3117fbf48",
+    "9c45cd081cce5adf7048bc9346770bffd83f2290",
+    "9d7fec81bd7a672918a0bb5e632d08c438bd75b7",
+    "9f2e8fb958864da30ef394f81bfd0814643131c5",
+    "a8bb77252f4e5587d7ba4defb87300bda479bbb7",
+    "aa6b3fb84d425ed96fced57126435ba6cd78edd7",
+    "acd785c7deb79281af15c04f499392e7952a3680",
+    "adfe229b2dbec2327383441f025224234bf179e4",
+    "b558c94279a73c41d721e7eb1ed0ca1982400e14",
+    "b7714a531bdb600ff9b64bd13b387bfc02fcb424",
+    "bc5538e1834e07b29a478691ab8218092a79101d",
+    "bcc9a9ad95bf5c01b01898c819a344043fa1601b",
+    "bef222731fdb0ed8e386b5d536db20267cf0136c",
+    "c3ded9380775e340a5c9edb407d00e16014009a7",
+    "c403b46e426d172afe70a1e7e526b68731b4b89e",
+    "cf469556639a6a82fcba0eec13c7b59ec0bc2fa5",
+    "d4b1b4e57e442e86375f756ba1638df87266cc50",
+    "e9dbb773cd32b8a0e845fa499a5f48759075eb2f",
+    "ec1beb7dc4370b6f0eb694bf4cb797045d40bbec",
+    "f535b1003473fea86d08f464636b556876691c21",
+    "f6815a475bae04df8d9b5b2189d222e9d8be0e7d"
+  ],
+  "unverified_revisions": [],
+  "additional_staged_verified_originals": 644,
+  "staged_commit_receipts": [
+    {
+      "revision": "7668a2adaaf253bce4ccbce1511db5262c3f1c0e",
+      "originals": 64,
+      "derivatives": 64,
+      "groups": {
+        "AFT": 64
+      }
+    },
+    {
+      "revision": "e0fd64113c7514948e23b3eafe0fec63730b9df6",
+      "originals": 64,
+      "derivatives": 64,
+      "groups": {
+        "AFT": 64
+      }
+    },
+    {
+      "revision": "c1c7dfb400e3f987328365dd94cf23c642e1454a",
+      "originals": 33,
+      "derivatives": 33,
+      "groups": {
+        "AFT": 33
+      }
+    },
+    {
+      "revision": "cd2def086995135ad80cfaffcca4791af6785773",
+      "originals": 29,
+      "derivatives": 29,
+      "groups": {
+        "AFT": 29
+      }
+    },
+    {
+      "revision": "f8a46dfaec55a13f2aaac2fde4139ca0acd5cff9",
+      "originals": 7,
+      "derivatives": 7,
+      "groups": {
+        "PHHC": 7
+      }
+    },
+    {
+      "revision": "4ef86ecbf533f527ff781650a8350d41981d5d30",
+      "originals": 64,
+      "derivatives": 64,
+      "groups": {
+        "PHHC": 1,
+        "AFT": 63
+      }
+    },
+    {
+      "revision": "db6dfa83e6f173d171037f46232c2696aaa5d9ca",
+      "originals": 64,
+      "derivatives": 64,
+      "groups": {
+        "AFT": 64
+      }
+    },
+    {
+      "revision": "d409ec256019ff7116437dea0230ff97d4dbca5f",
+      "originals": 63,
+      "derivatives": 63,
+      "groups": {
+        "AFT": 63
+      }
+    },
+    {
+      "revision": "2a0594abe45d64514959aeb8ae76961a527104f3",
+      "originals": 64,
+      "derivatives": 64,
+      "groups": {
+        "AFT": 64
+      }
+    },
+    {
+      "revision": "279ce7bc2c5ae654aed6418d2b53c339919cb83b",
+      "originals": 64,
+      "derivatives": 64,
+      "groups": {
+        "AFT": 64
+      }
+    },
+    {
+      "revision": "8cf70d8a0a6f4bf145d176cd8ba2bdf996faf1fb",
+      "originals": 64,
+      "derivatives": 64,
+      "groups": {
+        "AFT": 64
+      }
+    },
+    {
+      "revision": "2bfac7a252ee99dd403eb89737b489debbcf6aa7",
+      "originals": 64,
+      "derivatives": 64,
+      "groups": {
+        "AFT": 64
+      }
+    }
+  ],
+  "active_application_promotion": false
+}

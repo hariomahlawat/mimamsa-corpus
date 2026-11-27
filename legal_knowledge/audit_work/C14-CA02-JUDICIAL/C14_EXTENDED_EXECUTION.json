@@ -1,0 +1,5808 @@
+{
+  "inventory_revision": "1fe8e860fb9130bbd40c397c4e247d15d0d5128d",
+  "inventory_counts": {
+    "held-recheck": 45,
+    "queued-tier1": 1185,
+    "prior-hash": 560,
+    "tier2-5-review": 6287
+  },
+  "prior_independent_verification": {
+    "verified": 986
+  },
+  "all_job_statuses": {
+    "marking-review": 46,
+    "verified-local": 560,
+    "sparse-page-review": 1,
+    "HTTPError": 623
+  },
+  "extended_uploads": 561,
+  "pending_jobs": 0,
+  "official_pilot": [
+    {
+      "id": "AFT-GUW-1",
+      "url": "https://aftrbghy.nic.in/judgement/0A-07-2018.pdf",
+      "status": "text-review",
+      "page": 2
+    },
+    {
+      "id": "AFT-GUW-2",
+      "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-03 of 2018.pdf",
+      "status": "eligible-local",
+      "sha256": "fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804",
+      "pages": 2,
+      "ocr": 0
+    },
+    {
+      "id": "AFT-GUW-3",
+      "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-06 of 2018.pdf",
+      "status": "eligible-local",
+      "sha256": "3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e",
+      "pages": 2,
+      "ocr": 0
+    },
+    {
+      "id": "AFT-GUW-4",
+      "url": "https://aftrbghy.nic.in/judgement/6.8.2019 MA-28 of 2019.pdf",
+      "status": "eligible-local",
+      "sha256": "253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d",
+      "pages": 1,
+      "ocr": 0
+    },
+    {
+      "id": "AFT-GUW-5",
+      "url": "https://aftrbghy.nic.in/judgement/C.A. No. 01 of 2020 in O.A. No 05 of 2017.pdf",
+      "status": "eligible-local",
+      "sha256": "f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964",
+      "pages": 1,
+      "ocr": 0
+    },
+    {
+      "id": "AFT-GUW-6",
+      "url": "https://aftrbghy.nic.in/judgement/C.A. No. 02 of 2021 in O.A. No. 34 of 2017.pdf",
+      "status": "identity-review"
+    },
+    {
+      "id": "SC-ROJER-MATHEW",
+      "url": "https://cdnbbsr.s3waas.gov.in/s3ec0490f1f4972d133619a60c30f3559e/documents/aor_notice_circular/55.pdf",
+      "status": "marking-review",
+      "page": 24
+    },
+    {
+      "id": "CA01-ACT19-1955-CARRIER",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Acts_of_the_Parliament_of_India_1955.pdf",
+      "status": "eligible-local",
+      "sha256": "55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262",
+      "pages": 334,
+      "ocr": 2,
+      "derivative_physical_pages": [
+        110,
+        111
+      ],
+      "documentary_status": "Act title and Schedule visually matched; publication annotations and strike marks retained; legal authentication pending"
+    },
+    {
+      "id": "PHHC-HEADER-ONLY-PAGE",
+      "doc_id": "hc-ph-2011-cwp-70-2011-phhc010843742011-1-2011-01-04",
+      "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2011/court=3_22/bench=phhc/PHHC010843742011_1_2011-01-04.pdf",
+      "status": "eligible-local",
+      "sha256": "f96ec4e7b3307cd75b68d97f029e8ac43e69ffe165f2af4c04a86a319e8588ac",
+      "pages": 3,
+      "ocr": 0,
+      "documentary_status": "Physical page 3 visually verified as running header and page number only; signed disposition ends on page 2"
+    },
+    {
+      "id": "SC-ROJER-MATHEW",
+      "url": "https://cdnbbsr.s3waas.gov.in/s3ec0490f1f4972d133619a60c30f3559e/documents/aor_notice_circular/55.pdf",
+      "sha256": "4a177cdf0b3089fa7ec4b60773cdbeb0c50efe54e2fd1cf03f41d68a233719eb",
+      "pages": 251,
+      "ocr": 0,
+      "ocr_screened": 251,
+      "status": "eligible-local",
+      "findings": [],
+      "documentary_status": "Official Supreme Court accessible SCR edition; original court PDF endpoint returned 503"
+    },
+    {
+      "id": "AFT-GUW-7",
+      "url": "https://aftrbghy.nic.in/judgement/CA -05-2016.pdf",
+      "status": "text-review",
+      "page": 2
+    },
+    {
+      "id": "AFT-GUW-8",
+      "url": "https://aftrbghy.nic.in/judgement/CA 01 OF 17   23 Mar.pdf",
+      "status": "text-review",
+      "page": 3
+    },
+    {
+      "id": "AFT-GUW-9",
+      "url": "https://aftrbghy.nic.in/judgement/CA 01 of 2018.pdf",
+      "status": "text-review",
+      "page": 3
+    },
+    {
+      "id": "AFT-GUW-10",
+      "url": "https://aftrbghy.nic.in/judgement/CA 01-17 daily order dated 24-05-2017.pdf",
+      "status": "eligible-local",
+      "sha256": "7b155b2e8f7c243a789e050723eb593893313485976f55f3fe5da584fe6e0b7f",
+      "pages": 1,
+      "ocr": 0
+    },
+    {
+      "id": "AFT-GUW-11",
+      "url": "https://aftrbghy.nic.in/judgement/CA 02 of 17   23 Mar.pdf",
+      "status": "text-review",
+      "page": 3
+    },
+    {
+      "id": "AFT-GUW-12",
+      "url": "https://aftrbghy.nic.in/judgement/CA 02 of 2018.pdf",
+      "status": "text-review",
+      "page": 3
+    },
+    {
+      "id": "AFT-GUW-13",
+      "url": "https://aftrbghy.nic.in/judgement/CA 02-17 daily order dated 24-05-2017.pdf",
+      "status": "eligible-local",
+      "sha256": "1a5a16c25ae5c8aa01f3111a9a0c5d6a537ba3d3b455953d57f7034e5217e214",
+      "pages": 2,
+      "ocr": 0
+    },
+    {
+      "id": "AFT-GUW-14",
+      "url": "https://aftrbghy.nic.in/judgement/CA 03 of 19.pdf",
+      "status": "eligible-local",
+      "sha256": "6325315f02b4e2be07cf837a8e659a63713e3b927b12823e5ea6e3934b88fc57",
+      "pages": 1,
+      "ocr": 0
+    },
+    {
+      "id": "AFT-GUW-15",
+      "url": "https://aftrbghy.nic.in/judgement/CA 03 of 2018   6 June Monica.pdf",
+      "status": "eligible-local",
+      "sha256": "e3d87f84c48a517f59824289bd03c17bf0720912160df771239e1cee94b11bcc",
+      "pages": 1,
+      "ocr": 0
+    },
+    {
+      "id": "AFT-GUW-16",
+      "url": "https://aftrbghy.nic.in/judgement/CA 03 of 2018 _in 40 of 2017_.pdf",
+      "status": "text-review",
+      "page": 2
+    },
+    {
+      "id": "AFT-GUW-17",
+      "url": "https://aftrbghy.nic.in/judgement/CA 04 OF 16    24 Mar.pdf",
+      "status": "text-review",
+      "page": 3
+    },
+    {
+      "id": "AFT-GUW-18",
+      "url": "https://aftrbghy.nic.in/judgement/CA 04 of 2018 _in OA-12 of 2017_.pdf",
+      "status": "text-review",
+      "page": 2
+    },
+    {
+      "id": "AFT-GUW-7",
+      "url": "https://aftrbghy.nic.in/judgement/CA -05-2016.pdf",
+      "status": "eligible-local",
+      "sha256": "7adb85e2a9e64ccff0d613c658872fc19ab39cf05015ca8fef44a039bafbdbf4",
+      "pages": 2,
+      "ocr": 1,
+      "certified_blank_pages": [
+        2
+      ]
+    },
+    {
+      "id": "AFT-GUW-8",
+      "url": "https://aftrbghy.nic.in/judgement/CA 01 OF 17   23 Mar.pdf",
+      "status": "eligible-local",
+      "sha256": "dca0560149345c93fc68517908c3d01e62aa347df4d6c8ee4d0a5da494317f78",
+      "pages": 3,
+      "ocr": 2,
+      "certified_blank_pages": [
+        3
+      ]
+    },
+    {
+      "id": "AFT-GUW-9",
+      "url": "https://aftrbghy.nic.in/judgement/CA 01 of 2018.pdf",
+      "status": "text-review",
+      "page": 3,
+      "visible_pixels_below_gray_210": 7555
+    },
+    {
+      "id": "AFT-GUW-11",
+      "url": "https://aftrbghy.nic.in/judgement/CA 02 of 17   23 Mar.pdf",
+      "status": "text-review",
+      "page": 3,
+      "visible_pixels_below_gray_210": 9462
+    },
+    {
+      "id": "AFT-GUW-12",
+      "url": "https://aftrbghy.nic.in/judgement/CA 02 of 2018.pdf",
+      "status": "text-review",
+      "page": 3,
+      "visible_pixels_below_gray_210": 7392
+    },
+    {
+      "id": "AFT-GUW-16",
+      "url": "https://aftrbghy.nic.in/judgement/CA 03 of 2018 _in 40 of 2017_.pdf",
+      "status": "text-review",
+      "page": 2,
+      "visible_pixels_below_gray_210": 5091
+    },
+    {
+      "id": "AFT-GUW-17",
+      "url": "https://aftrbghy.nic.in/judgement/CA 04 OF 16    24 Mar.pdf",
+      "status": "eligible-local",
+      "sha256": "822341b14105717c116b8285bf7c380d87bcfd358a52bb1ed795f2978548b400",
+      "pages": 3,
+      "ocr": 1,
+      "certified_blank_pages": [
+        3
+      ]
+    },
+    {
+      "id": "AFT-GUW-18",
+      "url": "https://aftrbghy.nic.in/judgement/CA 04 of 2018 _in OA-12 of 2017_.pdf",
+      "status": "text-review",
+      "page": 2,
+      "visible_pixels_below_gray_210": 5091
+    }
+  ],
+  "official_probes": [
+    {
+      "name": "AFT central bench directory",
+      "url": "https://aft.gov.in/reg-benches",
+      "status": "503",
+      "curl_exit": 0
+    },
+    {
+      "name": "AFT central judgments",
+      "url": "https://www.aft.gov.in/judgements/freetext",
+      "status": "503",
+      "curl_exit": 0
+    },
+    {
+      "name": "AFT larger bench orders",
+      "url": "https://aft.gov.in/large-bench-orders",
+      "status": "503",
+      "curl_exit": 0
+    },
+    {
+      "name": "AFT Jaipur bench directory",
+      "url": "https://aftjaipur.gov.in/pages/benches-of-aft",
+      "status": "503",
+      "curl_exit": 0
+    },
+    {
+      "name": "AFT Guwahati",
+      "url": "https://aftrbghy.nic.in/",
+      "status": "200",
+      "curl_exit": 0
+    },
+    {
+      "name": "AFT Principal legacy",
+      "url": "https://www.aftdelhi.nic.in/index.php/site-links/judgement-by-case",
+      "status": "503",
+      "curl_exit": 0
+    },
+    {
+      "name": "AFT Chandigarh legacy",
+      "url": "https://www.aftdelhi.nic.in/index.php/rbs/chandigarh/chandigarh-judgement",
+      "status": "503",
+      "curl_exit": 0
+    },
+    {
+      "name": "AFT Lucknow legacy",
+      "url": "https://aftlko.up.nic.in/",
+      "status": "503",
+      "curl_exit": 0
+    },
+    {
+      "name": "AFT Kolkata legacy",
+      "url": "https://aftkolkata.nic.in/judgements/index/page:1",
+      "status": "503",
+      "curl_exit": 0
+    },
+    {
+      "name": "DESW pension regulations",
+      "url": "https://desw.gov.in/en/pension-regulations",
+      "status": "200",
+      "curl_exit": 0
+    },
+    {
+      "name": "DESW pension circulars",
+      "url": "https://desw.gov.in/en/pension-circulars",
+      "status": "200",
+      "curl_exit": 0
+    },
+    {
+      "name": "DESW 2023 rules circular",
+      "url": "https://desw.gov.in/en/node/91410",
+      "status": "200",
+      "curl_exit": 0
+    },
+    {
+      "name": "DESW medical guidelines 2023",
+      "url": "https://desw.gov.in/sites/default/files/2026-10/GMO%202023.pdf",
+      "status": "200",
+      "curl_exit": 63
+    },
+    {
+      "name": "AFT acts and rules",
+      "url": "https://aft.gov.in/act-rules",
+      "status": "503",
+      "curl_exit": 0
+    },
+    {
+      "name": "CA01 1960 original",
+      "url": "https://www.indiacode.nic.in/repealedfileopen?rfilename=A1960-58.pdf",
+      "status": "000",
+      "curl_exit": 28
+    },
+    {
+      "name": "CA01 Army Act s12 Gazette",
+      "url": "https://egazette.gov.in/WriteReadData/2026/276593.pdf",
+      "status": "503",
+      "curl_exit": 0
+    },
+    {
+      "name": "SC Rojer Mathew",
+      "url": "https://webapi.sci.gov.in/supremecourt/2017/9680/9680_2017_1_1501_18247_Judgement_13-Nov-2019.pdf",
+      "status": "503",
+      "curl_exit": 0
+    },
+    {
+      "name": "SC accessible versions index",
+      "url": "https://www.sci.gov.in/aor-examination/",
+      "status": "200",
+      "curl_exit": 0
+    },
+    {
+      "name": "CGDA official pensioners corner",
+      "url": "https://cgda.nic.in/index.php?page=pensionerscol",
+      "status": "503",
+      "disposition": "Source unavailable to the runner"
+    },
+    {
+      "name": "CGDA robots policy",
+      "url": "https://cgda.nic.in/robots.txt",
+      "status": "503",
+      "disposition": "Source unavailable to the runner"
+    },
+    {
+      "name": "India Code replacement portal 1960 endpoint",
+      "url": "https://indiacode.gov.in/repealedfileopen?rfilename=A1960-58.pdf",
+      "status": "200",
+      "disposition": "Endpoint response alone does not establish a permissible matching original"
+    },
+    {
+      "name": "India Code replacement portal robots policy",
+      "url": "https://indiacode.gov.in/robots.txt",
+      "status": "500",
+      "disposition": "Source unavailable to the runner"
+    },
+    {
+      "name": "Tier 1 source outage check",
+      "method": "HEAD",
+      "tested_targets": 6,
+      "status_counts": {
+        "503": 6
+      },
+      "scope": "One previously reachable and five pending source objects",
+      "disposition": "Remaining HTTP errors are retryable source failures. No access or integrity conclusion was reached."
+    }
+  ],
+  "source_retry_local": [
+    [
+      "hc-delhi-2024-w-p-c-12783-2024-dlhc010602132024-1-2024-09-24",
+      "verified-local",
+      "ac80413512010b86a03b03c313a186d96c632e2ef876860c708ac2aa67c719ef",
+      19359,
+      1,
+      0
+    ],
+    [
+      "hc-delhi-2024-w-p-c-9613-2023-dlhc010276462023-1-2024-10-24",
+      "verified-local",
+      "7c5f7652b9558cece8d8ba0b626488045b6d062355eaef0a6fd57c2d40b90753",
+      24421,
+      1,
+      0
+    ],
+    [
+      "hc-jkl-2025-swp-659-2019-jkhc020024152019-1-2025-08-28",
+      "verified-local",
+      "fd96188fc5eedff593d2532ea08d665de81b5d682dda74eb7d8a92107616c2f7",
+      385272,
+      1,
+      0
+    ],
+    [
+      "hc-allahabad-2025-capl-3688-2025-uphc020899832025-1-2025-11-15",
+      "verified-local",
+      "4a01054bd7e1284d7df7675c69ec148b5c7214e26fe5c322d4eb7b2b68de7c79",
+      13461,
+      1,
+      0
+    ],
+    [
+      "hc-delhi-2025-w-p-c-10493-2017-dlhc015043962017-1-2025-12-01",
+      "verified-local",
+      "9992ed6f1109d862a0fed0a016f2da1174e8ef8fad1db1aab4c081eeb49a4f87",
+      138755,
+      11,
+      0
+    ],
+    [
+      "hc-allahabad-2022-wria-8984-2022-uphc010964002022-1-2022-07-08",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-wria-4050-2022-uphc010403182022-1-2022-07-11",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-clre-33-2000-uphc010836272000-1-2022-07-14",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-6379-2004-dlhc010285122004-1-2022-07-14",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-arco-110-2022-uphc011279312022-1-2022-08-01",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-bail-30630-2022-uphc011237122022-1-2022-08-02",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-capl-6501-2014-uphc012006972014-1-2022-08-08",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-coma-3-2008-uphc020393302008-1-2022-08-22",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-capl-2413-2018-uphc020461032018-1-2022-08-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-crl-m-c-2159-2021-dlhc010284752021-1-2022-08-26",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-wric-24560-2022-uphc011559782022-1-2022-08-29",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-abail-12453-2021-uphc010838922021-1-2022-09-02",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-wric-33934-2010-uphc011731332010-1-2022-09-09",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-arco-136-2022-uphc011615582022-1-2022-09-12",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-untitled-uphc010192982022-1-2022-09-16",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-untitled-uphc011016752019-1-2022-09-19",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-wria-5159-2011-uphc020447232011-1-2022-09-28",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-capl-3454-2015-uphc010465562015-1-2022-09-30",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-crlp-3599-2021-uphc020438242021-1-2022-10-19",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2022-trp-c-28-2021-jkhc020041892021-1-2022-10-19",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2022-aa-8-2022-jkhc020027702022-1-2022-11-04",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2022-wp-c-2571-2022-jkhc010056792022-1-2022-11-17",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-capl-6067-2015-uphc011962742015-1-2022-11-19",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-crlp-17479-2022-uphc012232722022-1-2022-11-19",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-untitled-uphc020725592022-1-2022-12-01",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-capl-7343-2015-uphc011997302015-1-2022-12-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-16428-2022-dlhc010448682022-1-2023-02-01",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-crlp-1453-2023-uphc020106132023-1-2023-02-21",
+      "HTTPError"
+    ],
+    [
+      "sc-2023-union-of-india-2023insc152",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-cona-6-2022-uphc020740352022-1-2023-03-13",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wtax-81-2023-uphc010195312023-1-2023-03-24",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc020231012023-1-2023-04-04",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc020254012023-1-2023-04-12",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wric-1004940-2011-uphc020424582011-1-2023-04-12",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wria-4935-2023-uphc010613792023-1-2023-04-13",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc020284312023-1-2023-04-21",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-habc-45-2021-uphc010037762021-1-2023-04-27",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wria-6784-2023-uphc010769132023-1-2023-05-09",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc010961262023-1-2023-05-11",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc020324422023-1-2023-05-11",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wric-26793-2018-uphc011517642018-1-2023-05-16",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-abail-5448-2023-uphc011076662023-1-2023-05-24",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-capl-4291-2023-uphc011215192023-1-2023-05-29",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc020316262023-1-2023-05-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-7659-2010-dlhc011629892010-1-2023-07-25",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wric-24932-2023-uphc011635962023-1-2023-07-31",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-7807-2022-dlhc010194532022-1-2023-08-10",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wric-811-2008-uphc020305832008-1-2023-08-18",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2023-cpowp-202-2009-jkhc010043752009-1-2023-08-21",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc020549432023-1-2023-08-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-8804-2021-dlhc010256872021-1-2023-08-24",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2023-cpsw-322-2010-jkhc020057072010-1-2023-09-06",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc011267342023-1-2023-10-05",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2023-owp-1289-2014-jkhc020062212014-1-2023-10-06",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc010613692023-1-2023-10-18",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wric-3930-2023-uphc020348142023-1-2023-10-28",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wric-9526-2023-uphc020766362023-1-2023-10-31",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wric-24580-2017-uphc020425202017-1-2023-11-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-crl-m-c-960-2020-dlhc010132842020-1-2023-11-03",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2023-wp-c-2666-2022-jkhc020062472022-1-2023-11-03",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wric-2000027-2009-uphc020019462009-1-2023-11-23",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2023-ccp-s-359-2019-jkhc020042842019-1-2023-11-29",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc012613512023-1-2023-11-30",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc012613392023-1-2023-12-01",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-o-m-p-comm-469-2023-dlhc010462352023-1-2023-12-01",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-o-m-p-comm-470-2023-dlhc010462362023-1-2023-12-01",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wric-40360-2023-uphc012538792023-1-2023-12-07",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc020856612023-1-2023-12-08",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2023-owp-1346-2018-jkhc020058122018-1-2023-12-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-2610-2018-dlhc010858542018-1-2025-04-04",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-2634-2018-dlhc010858532018-1-2024-10-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-932-2018-dlhc015290112017-1-2024-10-22",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-untitled-uphc020844402023-1-2024-01-16",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-untitled-uphc020844422023-1-2024-01-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-o-m-p-misc-comm-51-2024-dlhc010019442024-1-2024-01-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-mat-app-f-c-257-2023-dlhc010351282023-1-2024-01-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-12777-2023-dlhc010387492023-1-2024-01-29",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-capl-1304-2021-uphc020349742021-1-2024-02-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-6236-2023-dlhc010179272023-1-2024-02-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-10114-2019-dlhc010378552019-1-2024-02-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-arb-p-1234-2022-dlhc010416522022-1-2024-02-22",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2024-conc-9900007-2014-jkhc020047992014-1-2024-02-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-cm-m-1988-2024-dlhc010093452024-1-2024-02-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-lpa-638-2022-dlhc010415102022-1-2024-02-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-2252-2012-dlhc010591662012-1-2024-02-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-2281-2010-dlhc010521312010-1-2024-08-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-cm-m-2070-2024-dlhc010119012024-1-2024-03-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-cm-m-2075-2024-dlhc010119052024-1-2024-04-15",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-o-m-p-misc-comm-196-2024-dlhc010125452024-1-2024-03-12",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2024-ccp-s-180-2023-jkhc010022392023-1-2024-03-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-4807-2024-dlhc010174102024-1-2024-04-03",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-fapld-44-1997-uphc020153441997-1-2024-04-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-arb-p-475-2024-dlhc010186482024-1-2024-04-08",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-untitled-uphc020252542024-1-2024-04-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-2669-2018-dlhc010878032018-1-2024-04-23",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-untitled-uphc020272042024-1-2024-04-26",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-2822-2017-dlhc011524142017-1-2024-04-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-cs-comm-434-2021-dlhc010283212021-1-2025-05-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-lpa-345-2024-dlhc010236642024-1-2024-04-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-2354-2024-dlhc010071062024-1-2024-05-03",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2024-arb-p-18-2024-jkhc020006972024-1-2024-05-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-arb-p-601-2024-dlhc010258262024-1-2024-05-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-6254-2024-dlhc010247702024-1-2024-05-10",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-untitled-uphc020222622024-1-2024-05-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-crl-m-c-4554-2022-dlhc010348692022-1-2024-05-17",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2024-wp-c-1167-2024-jkhc020026322024-1-2024-05-27",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-wria-29726-2021-uphc020426182021-1-2024-05-29",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-clred-79-2018-uphc020041622018-1-2024-05-30",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-wria-1939-2014-uphc020373692014-1-2024-05-30",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2024-wp-c-1259-2024-jkhc020028072024-1-2024-05-31",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-wric-5294-2024-uphc020406122024-1-2024-06-13",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-untitled-uphc020422752024-1-2024-06-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-6213-2023-dlhc010178802023-1-2024-07-03",
+      "HTTPError"
+    ],
+    [
+      "sc-2024-army-welfare-education-society-2024insc501",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-arb-p-473-2024-dlhc010186462024-1-2024-07-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-arb-p-474-2024-dlhc010186472024-1-2024-07-10",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-cont-cas-c-1141-2024-dlhc010430822024-1-2024-07-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-11236-2022-dlhc010283932022-1-2024-07-26",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-o-m-p-misc-comm-565-2024-dlhc010463932024-1-2024-08-02",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-wria-7214-2022-uphc020643402022-1-2024-08-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-10176-2024-dlhc010432192024-1-2024-11-08",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2024-wp-c-253-2022-jkhc020005552022-1-2024-08-14",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-lpa-771-2023-dlhc010478622023-1-2024-09-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-o-m-p-misc-comm-666-2024-dlhc010572502024-1-2024-09-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-o-m-p-misc-comm-663-2024-dlhc010572472024-1-2024-09-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-o-m-p-misc-comm-680-2024-dlhc010577942024-1-2024-09-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-1807-2021-dlhc010089702021-1-2024-09-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-o-m-p-misc-comm-721-2024-dlhc010601292024-1-2024-09-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-4884-2014-dlhc011210342014-1-2024-10-04",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-14172-2024-dlhc010688632024-1-2024-10-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-o-m-p-comm-273-2020-dlhc010111992020-1-2024-10-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-12097-2022-dlhc010311032022-1-2024-12-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-14955-2024-dlhc010733362024-1-2024-10-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-11615-2024-dlhc010529082024-1-2024-11-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-crl-m-c-1919-2022-dlhc010166342022-1-2024-11-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-lpa-741-2024-dlhc010463692024-1-2025-04-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-lpa-1180-2024-dlhc010887192024-1-2024-12-04",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2024-arb-p-52-2024-jkhc020025322024-1-2024-12-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-17433-2024-dlhc010948932024-1-2024-12-18",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-wp-c-2914-2024-jkhc020064662024-1-2025-01-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-352-2025-dlhc011000272024-1-2025-01-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-o-m-p-misc-comm-91-2025-dlhc010034072025-1-2025-01-29",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-untitled-uphc020036082017-1-2025-02-04",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-mat-app-f-c-444-2024-dlhc010986492024-1-2025-02-10",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-capl-374-2025-uphc020098852025-1-2025-02-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-2610-2018-dlhc010858542018-1-2025-04-04",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-wria-3993-2005-uphc020328512005-1-2025-02-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-cs-comm-882-2024-dlhc010688082024-1-2025-02-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-o-m-p-i-comm-423-2023-dlhc010561682023-1-2025-03-27",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-untitled-uphc011476292025-1-2025-04-04",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-wric-3473-2025-uphc020256442025-1-2025-04-11",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-untitled-uphc020235692025-1-2025-04-18",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-untitled-uphc020285022025-1-2025-04-18",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-wric-36301-2024-uphc015623122024-1-2025-04-22",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-untitled-uphc014298372024-1-2025-04-25",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-fapl-419-2009-uphc011908682009-1-2025-05-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-4295-2023-dlhc010119322023-1-2025-05-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-6120-2023-dlhc010176182023-1-2025-05-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-6306-2023-dlhc010180922023-1-2025-05-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-6325-2023-dlhc010181582023-1-2025-05-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-6327-2023-dlhc010181602023-1-2025-05-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-6329-2023-dlhc010181622023-1-2025-05-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-6348-2023-dlhc010181912023-1-2025-05-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-o-m-p-comm-205-2021-dlhc010219452021-1-2025-05-30",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-untitled-uphc020455362025-1-2025-06-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-o-m-p-misc-comm-475-2025-dlhc010386552025-1-2025-07-01",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-crl-m-c-3982-2025-dlhc010355072025-1-2025-07-02",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-untitled-uphc020541772025-1-2025-07-22",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-cpsw-104-2011-jkhc020006382011-1-2025-07-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-cm-m-1403-2025-dlhc010509072025-1-2025-07-30",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-wp-c-143-2025-jkhc010003082025-1-2025-08-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-11465-2025-dlhc010530152025-1-2025-08-06",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-ccp-s-276-2021-jkhc020054362021-1-2025-08-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-fao-os-comm-125-2025-dlhc010561112025-1-2025-08-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-o-m-p-misc-comm-628-2025-dlhc010567882025-1-2025-08-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-cm-m-1572-2025-dlhc010594382025-1-2025-08-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-cm-m-1587-2025-dlhc010600132025-1-2025-08-22",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-arb-p-74-2024-jkhc020040212024-1-2025-08-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-lpa-534-2025-dlhc010600662025-1-2025-08-26",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-o-m-p-comm-28-2021-dlhc010021972020-1-2025-09-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-o-m-p-misc-comm-749-2025-dlhc010665642025-1-2025-09-10",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-swp-2127-2010-jkhc020009812010-1-2025-09-10",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-efa-os-2-2017-dlhc013261322016-1-2025-09-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-cont-cas-c-1762-2023-dlhc010479932023-1-2025-09-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-fao-os-comm-41-2024-dlhc010119882024-1-2025-10-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-o-m-p-misc-comm-827-2025-dlhc010765652025-1-2025-10-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-o-m-p-misc-comm-828-2025-dlhc010765662025-1-2025-10-08",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-ccp-s-161-2025-jkhc010025482025-1-2025-10-09",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-wric-30564-2025-uphc014543212025-1-2025-10-15",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-capl-2705-2025-uphc020641612025-1-2025-10-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-7766-2025-dlhc010352942025-1-2026-02-18",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-capl-4077-2023-uphc020820112023-1-2025-10-30",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-untitled-uphc020781182025-1-2025-10-30",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-crlp-10459-2025-uphc020869372025-1-2025-11-07",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-untitled-uphc020739232025-1-2025-11-14",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-arb-p-10-2025-jkhc020004842025-1-2025-11-14",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-untitled-uphc020739072025-1-2025-11-15",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-arb-p-46-2025-jkhc010059322025-1-2025-11-21",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-cpsw-178-2013-jkhc020005852013-1-2025-11-26",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-untitled-uphc020571842024-1-2025-11-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-5215-2002-dlhc010236792002-1-2025-12-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-8962-2024-dlhc010380402024-1-2025-12-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-13260-2024-dlhc010629672024-1-2025-12-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-o-m-p-comm-15-2021-dlhc010018512020-1-2026-01-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-cm-m-23-2023-dlhc010004482022-1-2026-01-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-cont-cas-c-144-2026-dlhc010022762026-1-2026-01-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-c-r-p-27-2026-dlhc010026412026-1-2026-01-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-c-r-p-28-2026-dlhc010026432026-1-2026-01-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-fao-os-comm-136-2025-dlhc010646292025-1-2026-01-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-untitled-dlhc010053102026-1-2026-02-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-o-m-p-misc-comm-188-2026-dlhc010065752026-1-2026-02-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-2894-2026-dlhc010079172026-1-2026-03-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-12510-2009-dlhc011538682009-1-2026-03-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-12689-2025-dlhc010611672025-1-2026-04-21",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2026-untitled-uphc012633762026-1-2026-05-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-5969-2026-dlhc010191252026-1-2026-05-04",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-o-m-p-comm-497-2022-dlhc010472862022-1-2026-05-26",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-fao-535-2016-dlhc012744692016-1-2026-07-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-crl-m-c-5243-2026-dlhc010330732026-1-2026-07-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-c-r-p-222-2026-dlhc010357182026-1-2026-08-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-cm-m-1731-2026-dlhc010358632026-1-2026-08-06",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2026-ccp-s-146-2024-jkhc010017942024-1-2026-08-10",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-13372-2023-dlhc010406822023-1-2026-08-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-o-m-p-misc-comm-639-2026-dlhc010378932026-1-2026-08-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-omp-enf-comm-1-2024-dlhc010576072023-1-2026-08-31",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2026-wp-c-2133-2026-jkhc010046562026-1-2026-09-01",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-cont-cas-c-1696-2026-dlhc010437032026-1-2026-09-15",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-rfa-comm-620-2026-dlhc010436492026-1-2026-09-15",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2026-ccp-s-270-2025-jkhc010045322025-1-2026-09-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-cont-cas-c-1494-2025-dlhc010764782025-1-2026-10-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2004-w-p-c-6724-2004-dlhc010286882004-1-2004-11-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2004-w-p-c-8085-2004-dlhc010292632004-1-2004-11-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2005-w-p-c-6937-2003-dlhc010272522003-1-2005-05-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2006-w-p-c-13629-2004-dlhc010228442004-1-2019-07-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2006-w-p-c-1925-2002-dlhc010200242002-1-2020-03-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2006-w-p-c-8984-2003-dlhc010288562003-1-2006-08-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2006-w-p-c-10630-2006-dlhc010668462006-1-2006-10-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2007-w-p-c-17025-2006-dlhc010704782006-1-2007-08-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2008-w-p-c-9522-2004-dlhc010299862004-1-2008-02-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2008-w-p-c-60-2008-dlhc010011982008-1-2008-05-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2008-w-p-c-20215-2005-dlhc010676782005-1-2008-05-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2008-w-p-c-4950-2008-dlhc010989862008-1-2008-07-14",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2008-w-p-c-3702-2003-dlhc010236622003-1-2008-07-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2008-w-p-c-7941-2003-dlhc010282432003-1-2008-08-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2008-w-p-c-12814-2006-dlhc010679752006-1-2008-09-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2009-w-p-c-6828-2009-dlhc010244232009-1-2009-07-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2010-w-p-c-6827-2009-dlhc010249312009-1-2010-01-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2010-cm-m-1342-2008-dlhc011811502008-1-2010-03-02",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2010-swp-1493-2003-jkhc010035902003-1-2025-04-15",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2010-w-p-c-9028-2008-dlhc011905182008-1-2010-03-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2010-w-p-c-16699-2006-dlhc010702842006-1-2010-06-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2010-w-p-c-14034-2009-dlhc011961792009-1-2010-07-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2010-w-p-c-9525-2007-dlhc011734222007-1-2017-01-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2010-la-app-149-2007-dlhc010295642007-1-2011-01-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2011-w-p-c-722-2010-dlhc010170712010-1-2011-02-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2011-w-p-c-2515-2010-dlhc010575622010-1-2011-03-15",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2011-w-p-c-6392-2010-dlhc011427992010-1-2011-09-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2012-la-app-129-2011-dlhc011504632010-1-2012-01-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2012-la-app-250-2010-dlhc010189222010-1-2012-01-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2012-la-app-392-2010-dlhc010490612010-1-2012-01-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2012-w-p-c-774-2012-dlhc010230592012-1-2012-02-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2012-w-p-c-2880-2012-dlhc010801942012-1-2012-05-15",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2012-la-app-163-2012-dlhc011379832010-1-2012-05-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2012-w-p-c-2144-2012-dlhc010616582012-1-2012-08-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2012-w-p-c-2145-2012-dlhc010616652012-1-2012-08-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2012-w-p-c-8633-2003-dlhc010286772003-1-2012-10-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2012-la-app-462-2009-dlhc011634472008-1-2012-10-31",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2012-w-p-c-1138-2012-dlhc010344872012-1-2012-11-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2012-w-p-c-1144-2012-dlhc010344882012-1-2012-11-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2013-w-p-c-4670-2008-dlhc010930692008-1-2013-02-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2013-w-p-c-5689-2013-dlhc011332222013-1-2013-09-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2013-w-p-c-6908-2013-dlhc011658862013-1-2013-11-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2014-w-p-c-554-2014-dlhc010130392014-1-2014-09-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2014-w-p-c-2803-2014-dlhc010782842014-1-2014-09-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2014-w-p-c-5112-2013-dlhc011196262013-1-2014-09-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2014-w-p-c-5248-2013-dlhc011226642013-1-2014-09-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2014-w-p-c-5073-2013-dlhc011033072013-1-2014-10-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2014-w-p-c-7146-2014-dlhc011954442014-1-2014-10-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2014-la-app-136-2013-dlhc010865832013-1-2014-11-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-6369-2014-dlhc011752082014-1-2015-02-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-7451-2013-dlhc011800662013-1-2015-04-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-la-app-257-2014-dlhc010666442014-1-2025-02-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-4081-2015-dlhc012040812015-1-2015-05-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-6983-2015-dlhc012647702015-1-2016-03-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-8427-2014-dlhc012316002014-1-2015-08-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-8230-2015-dlhc014261392015-1-2015-08-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-3217-2015-dlhc011540422015-1-2015-09-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-7704-2015-dlhc013931412015-1-2016-02-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-10977-2015-dlhc016013942015-1-2015-11-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-10815-2015-dlhc016033412015-1-2015-12-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-7908-2011-dlhc011556792011-1-2016-07-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-9242-2015-dlhc014831082015-1-2015-12-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-9360-2015-dlhc014845662015-1-2015-12-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2015-w-p-c-9439-2015-dlhc014831112015-1-2015-12-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-222-2016-dlhc010037422016-1-2016-01-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-1195-2016-dlhc010415292016-1-2016-02-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-961-2014-dlhc010205012014-1-2016-02-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-4039-2013-dlhc010902202013-1-2016-02-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-1676-2016-dlhc010302902016-1-2016-02-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-cont-app-c-3-2016-dlhc010576502016-1-2016-03-04",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-8308-2015-dlhc014263702015-1-2016-03-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-1453-2016-dlhc010454602016-1-2016-03-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-1621-2016-dlhc010454232016-1-2016-03-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-2629-2016-dlhc011053922016-1-2016-03-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-3033-2016-dlhc011127912016-1-2016-04-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-3603-2016-dlhc011267372016-1-2016-04-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-3666-2016-dlhc011183002016-1-2016-05-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-10192-2015-dlhc015619742015-1-2016-05-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-8444-2015-dlhc014275282015-1-2016-05-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-9043-2015-dlhc014680722015-1-2016-05-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-9046-2015-dlhc014680652015-1-2016-05-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-9634-2015-dlhc015194562015-1-2016-05-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-2020-2016-dlhc010884032016-1-2016-05-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-7687-2015-dlhc013944372015-1-2016-05-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-8435-2015-dlhc014260852015-1-2016-05-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-9055-2015-dlhc014501432015-1-2016-05-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-9098-2015-dlhc014680692015-1-2016-05-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-11550-2015-dlhc016421942015-1-2016-05-31",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-5422-2016-dlhc011611962016-1-2016-06-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-10980-2015-dlhc016119652015-1-2016-07-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-5697-2016-dlhc011651782016-1-2016-07-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-cs-os-3248-2015-dlhc015569942015-1-2016-07-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-5145-2016-dlhc011567092016-1-2016-07-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-7482-2014-dlhc012036542014-1-2016-08-01",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-6919-2016-dlhc011918072016-1-2016-08-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-7312-2016-dlhc011994342016-1-2016-08-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-7658-2016-dlhc012084182016-1-2016-08-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-8143-2016-dlhc012411042016-1-2016-09-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-crl-2723-2016-dlhc012064222016-1-2016-09-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-8372-2016-dlhc012463632016-1-2016-09-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-8302-2015-dlhc014263592015-1-2016-10-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-10197-2016-dlhc012797472016-1-2016-10-26",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-c-10274-2016-dlhc012808622016-1-2016-10-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2016-w-p-crl-1218-2016-dlhc011200742016-1-2016-11-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-76-2017-dlhc010023692017-1-2017-01-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-7677-2013-dlhc011855102013-1-2017-05-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-11241-2015-dlhc016040132015-1-2017-02-01",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-5952-2016-dlhc011725212016-1-2017-02-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-3636-2003-dlhc010235882003-1-2017-03-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-780-2004-dlhc010291032004-1-2017-07-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-3706-2017-dlhc012133652017-1-2017-05-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-3952-2017-dlhc012251262017-1-2017-05-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-783-2017-dlhc010149192017-1-2017-05-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-5232-2017-dlhc012679672017-1-2017-09-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-5884-2017-dlhc012677402017-1-2017-07-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-cm-m-719-2017-dlhc013211182017-1-2017-07-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-6871-2017-dlhc013363232017-1-2017-08-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-4256-2017-dlhc012490622017-1-2017-08-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-7597-2017-dlhc014127352017-1-2017-08-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-8106-2016-dlhc012388032016-1-2017-09-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-8413-2017-dlhc014316702017-1-2017-09-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-8109-2017-dlhc014318842017-1-2017-10-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-5522-2017-dlhc012951802017-1-2017-10-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-9958-2017-dlhc014826202017-1-2017-11-10",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-3935-2017-dlhc012228052017-1-2017-11-14",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-494-2017-dlhc010150002017-1-2017-11-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-10430-2017-dlhc015005272017-1-2017-11-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-11088-2017-dlhc015248322017-1-2017-12-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-11296-2017-dlhc015289332017-1-2017-12-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2017-w-p-c-11567-2017-dlhc015328732017-1-2017-12-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-34-2018-dlhc015343232017-1-2018-01-10",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-3237-2017-dlhc011859262017-1-2018-01-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-7462-2017-dlhc013914782017-1-2018-01-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-586-2018-dlhc010086772018-1-2018-02-01",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-504-2018-dlhc010099832018-1-2018-02-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-448-2018-dlhc010084252018-1-2018-03-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-9154-2017-dlhc014595022017-1-2018-03-15",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-2564-2018-dlhc010803712018-1-2018-03-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-9233-2016-dlhc012480892016-1-2018-04-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-11095-2017-dlhc015265002017-1-2018-04-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-5673-2018-dlhc011397082018-1-2018-05-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-4641-2018-dlhc011203862018-1-2018-05-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-5925-2018-dlhc011427052018-1-2018-05-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-6073-2018-dlhc011450822018-1-2018-05-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-6107-2018-dlhc011452712018-1-2018-08-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-6115-2018-dlhc011438542018-1-2018-05-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-rfa-1016-2016-dlhc012661082016-1-2018-07-04",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-7004-2018-dlhc011649692018-1-2018-07-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-7503-2018-dlhc011720792018-1-2018-07-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-7505-2018-dlhc011772752018-1-2018-07-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-7200-2018-dlhc011688082018-1-2018-07-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-8017-2018-dlhc011921592018-1-2018-08-01",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-8046-2018-dlhc011871542018-1-2018-08-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-7469-2018-dlhc011742402018-1-2018-08-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-8490-2018-dlhc012116262018-1-2018-08-14",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-9329-2018-dlhc012628812018-1-2018-09-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-8818-2018-dlhc012158592018-1-2018-09-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-9349-2018-dlhc012608812018-1-2018-09-12",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2018-wpil-4332-2018-uphc011751142018-1-2018-09-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-9894-2018-dlhc013020932018-1-2018-09-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-9443-2018-dlhc012569462018-1-2018-10-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-11780-2018-dlhc013132982018-1-2018-10-31",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-10830-2018-dlhc013652872018-1-2019-08-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-8824-2017-dlhc014470552017-1-2018-11-01",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-9505-2018-dlhc012668822018-1-2018-11-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-7883-2018-dlhc011861392018-1-2018-12-04",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2018-w-p-c-13425-2018-dlhc014304132018-1-2018-12-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-162-2019-dlhc010067982019-1-2019-01-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-546-2019-dlhc010076492019-1-2019-01-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-567-2019-dlhc010078592019-1-2019-02-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-571-2019-dlhc010078582019-1-2019-02-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-585-2019-dlhc010078572019-1-2019-02-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-653-2019-dlhc010080462019-1-2019-01-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-707-2019-dlhc010080352019-1-2019-01-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-8405-2018-dlhc012006302018-1-2019-01-23",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2019-splad-374-2006-uphc011690972006-1-2019-01-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-1025-2019-dlhc010091152019-1-2019-02-01",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-1284-2019-dlhc010099232019-1-2019-02-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-9971-2017-dlhc014832672017-1-2019-02-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-1863-2019-dlhc010119942019-1-2019-02-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-1875-2019-dlhc010120452019-1-2019-02-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-8353-2018-dlhc011966182018-1-2019-02-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-8355-2018-dlhc011966162018-1-2019-02-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-12889-2018-dlhc014609362018-1-2019-11-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-2092-2019-dlhc010128532019-1-2019-08-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-11192-2018-dlhc012959732018-1-2019-03-14",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-12697-2018-dlhc014548162018-1-2019-03-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-2571-2019-dlhc010142892019-1-2019-03-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-3637-2018-dlhc011066802018-1-2019-03-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-8189-2018-dlhc011935572018-1-2019-03-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-3858-2019-dlhc010183612019-1-2019-04-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-5169-2019-dlhc010224122019-1-2019-05-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-6525-2019-dlhc010266322019-1-2019-05-31",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-7879-2019-dlhc010303632019-1-2019-08-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-crl-m-c-7938-2019-dlhc010306422019-1-2019-09-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-8637-2019-dlhc010329252019-1-2019-09-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-10497-2019-dlhc010023832019-1-2019-11-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-10500-2019-dlhc010037642019-1-2019-09-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2019-w-p-c-12354-2018-dlhc014372312018-1-2019-10-01",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-663-2020-dlhc010088942020-1-2020-01-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-747-2020-dlhc010093492020-1-2020-01-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-858-2020-dlhc010095542020-1-2020-01-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-1218-2020-dlhc010107992020-1-2020-02-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-32-2020-dlhc010001622019-1-2020-02-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-1385-2020-dlhc010114542020-1-2020-02-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-1397-2020-dlhc010115002020-1-2020-02-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-1587-2020-dlhc010120502020-1-2020-02-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-11772-2018-dlhc013762822018-1-2020-02-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-2139-2020-dlhc010136702020-1-2020-02-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-3363-2020-dlhc010175162020-1-2020-06-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-5001-2020-dlhc010215352020-1-2020-09-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-10404-2019-dlhc010055222019-1-2020-09-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2020-w-p-c-10017-2020-dlhc010059722020-1-2020-12-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2021-w-p-c-89-2021-dlhc010016842020-1-2021-01-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2021-w-p-c-908-2021-dlhc010071152021-1-2021-01-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2021-w-p-c-2695-2021-dlhc010110412021-1-2021-02-26",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2021-w-p-c-2942-2021-dlhc010117302021-1-2021-03-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2021-w-p-c-4191-2021-dlhc010147032021-1-2021-04-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2021-w-p-c-6043-2021-dlhc010194942021-1-2021-06-30",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2021-aa-13-2006-jkhc020000852006-1-2021-06-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2021-w-p-c-8592-2021-dlhc010251642021-1-2021-08-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2021-w-p-c-9409-2021-dlhc010268692021-1-2021-09-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2021-w-p-c-11339-2021-dlhc010311392021-1-2021-10-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2021-w-p-c-12314-2021-dlhc010338062021-1-2021-10-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2021-w-p-c-12946-2021-dlhc010353982021-1-2021-11-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2021-w-p-c-13467-2021-dlhc010366862021-1-2021-11-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-1378-2022-dlhc010040122022-1-2022-01-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-3451-2022-dlhc010085122022-1-2022-02-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-4581-2022-dlhc010111032022-1-2022-03-22",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-untitled-uphc011060232022-1-2022-07-01",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2022-consw-24-2018-jkhc010043952018-1-2022-07-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-12085-2021-dlhc010331202021-1-2022-07-26",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-3721-2022-dlhc010091562022-1-2022-07-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-11719-2022-dlhc010300002022-1-2022-08-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-12286-2022-dlhc010317692022-1-2022-08-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-13203-2022-dlhc010344492022-1-2022-09-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-13288-2022-dlhc010347782022-1-2022-09-13",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-wria-24-2015-uphc020369632015-1-2022-09-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-12008-2022-dlhc010308402022-1-2022-09-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-14105-2022-dlhc010373262022-1-2022-10-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-12905-2022-dlhc010337722022-1-2022-10-19",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2022-wric-3000105-1996-uphc020223561996-1-2022-10-31",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-11970-2021-dlhc010326842021-1-2022-10-31",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-6725-2021-dlhc010212992021-1-2022-10-31",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-14174-2021-dlhc010384582021-1-2022-11-15",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2022-w-p-c-15704-2022-dlhc010425112022-1-2022-11-15",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-1648-2023-dlhc010013822022-1-2023-02-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-6280-2021-dlhc010201662021-1-2023-02-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-6507-2021-dlhc010206712021-1-2023-02-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-10889-2022-dlhc010270612022-1-2023-03-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-4942-2023-dlhc010140472023-1-2023-04-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-5411-2023-dlhc010154372023-1-2023-04-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-5449-2023-dlhc010156112023-1-2023-04-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-5468-2023-dlhc010156612023-1-2023-04-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-5482-2023-dlhc010156942023-1-2023-04-28",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wria-19039-2019-uphc020454992019-1-2023-05-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-2905-2023-dlhc010078602023-1-2023-05-10",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-2641-2023-dlhc010069702023-1-2023-05-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-6908-2023-dlhc010196542023-1-2023-05-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-8003-2023-dlhc010227582023-1-2023-06-01",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-untitled-uphc020417932023-1-2023-06-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-13716-2018-dlhc015633112018-1-2023-07-11",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2023-wria-10816-2023-uphc011461282023-1-2023-07-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-9625-2023-dlhc010276582023-1-2023-07-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-9793-2023-dlhc010282422023-1-2023-07-26",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-2985-2023-dlhc010081662023-1-2023-09-15",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2023-w-p-c-12115-2023-dlhc010364022023-1-2023-09-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-296-2024-dlhc010582392023-1-2024-01-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-15524-2023-dlhc010484522023-1-2024-01-10",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-602-2017-dlhc010149752017-1-2024-01-10",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-11161-2020-dlhc010358272020-1-2024-01-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-14238-2023-dlhc010436972023-1-2024-01-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-8377-2021-dlhc010247052021-1-2024-01-15",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-10288-2020-dlhc010338772020-1-2024-01-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-15961-2023-dlhc010519592023-1-2024-01-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-15597-2023-dlhc010486902023-1-2024-01-24",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-untitled-uphc020532112023-1-2024-01-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-14959-2023-dlhc010464252023-1-2024-01-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-5264-2019-dlhc010229812019-1-2024-01-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-8152-2023-dlhc010230472023-1-2024-01-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-2102-2024-dlhc010058902024-1-2024-02-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-11518-2016-dlhc013157682016-1-2024-02-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-2333-2024-dlhc010070872024-1-2024-02-16",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-2437-2024-dlhc010075822024-1-2024-02-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-crl-346-2021-dlhc010097802021-1-2025-12-04",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-3221-2024-dlhc010103772024-1-2024-03-04",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-2566-2024-dlhc010080592024-1-2024-03-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-17733-2022-dlhc010491332022-1-2024-04-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-4791-2024-dlhc010173962024-1-2024-04-03",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-7189-2024-dlhc010300562024-1-2024-05-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-7541-2023-dlhc010214232023-1-2024-10-04",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-957-2005-dlhc010729202005-1-2024-08-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-10949-2024-dlhc010482542024-1-2024-11-22",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2024-wp-c-1765-2024-jkhc010039562024-1-2024-08-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-9897-2024-dlhc010419502024-1-2024-08-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-7181-2024-dlhc010295252024-1-2024-10-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-6247-2024-dlhc010247632024-1-2024-09-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-12390-2024-dlhc010578142024-1-2024-09-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-12397-2024-dlhc010578212024-1-2024-09-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-12493-2024-dlhc010583362024-1-2024-09-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-12568-2024-dlhc010587682024-1-2024-09-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-8600-2024-dlhc010363772024-1-2024-09-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-12814-2024-dlhc010604142024-1-2024-09-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-12827-2024-dlhc010604272024-1-2024-09-12",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-13116-2024-dlhc010626492024-1-2024-09-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-13119-2024-dlhc010626522024-1-2024-09-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-13256-2024-dlhc010629632024-1-2024-09-20",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2024-untitled-uphc020656492024-1-2024-09-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-13383-2024-dlhc010639362024-1-2024-09-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-16175-2024-dlhc010840662024-1-2024-11-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-16517-2024-dlhc010868662024-1-2024-11-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-16563-2024-dlhc010872512024-1-2024-12-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2024-w-p-c-18006-2024-dlhc010988322024-1-2024-12-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-1925-2025-dlhc011067412024-1-2025-02-14",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-2581-2024-dlhc010080732024-1-2025-02-17",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-2126-2025-dlhc010080132025-1-2025-02-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-2230-2025-dlhc010083302025-1-2025-02-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-670-2025-dlhc010014502025-1-2025-03-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-987-2025-dlhc011027302024-1-2025-03-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-4202-2025-dlhc010181562025-1-2025-04-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-5294-2025-dlhc010234012025-1-2025-04-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-6275-2025-dlhc010291772025-1-2025-05-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-cont-cas-c-264-2023-dlhc010072572023-1-2025-05-22",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-4779-2024-dlhc010171952024-1-2025-12-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-9270-2025-dlhc010411242025-1-2025-07-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-4343-2025-dlhc010184942025-1-2025-07-15",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-10681-2025-dlhc010484292025-1-2025-12-11",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-11675-2025-dlhc010537522025-1-2025-08-05",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-7161-2025-dlhc010328752025-1-2025-08-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-7179-2025-dlhc010332072025-1-2025-08-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-8132-2023-dlhc010230272023-1-2025-08-13",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-wria-14414-2009-uphc011555292009-1-2025-08-19",
+      "HTTPError"
+    ],
+    [
+      "hc-allahabad-2025-wria-26281-2008-uphc011528612008-1-2025-08-19",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-11941-2025-dlhc010550792025-1-2025-08-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-15202-2025-dlhc010755202025-1-2025-10-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-1233-2019-dlhc010096942019-1-2025-10-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-12468-2024-dlhc010583112024-1-2025-10-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-15731-2025-dlhc010787542025-1-2026-03-10",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-wp-c-3021-2025-jkhc020064672025-1-2025-10-31",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-13690-2025-dlhc010652762025-1-2025-12-01",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-wp-c-2991-2025-jkhc010063832025-1-2025-12-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2025-w-p-c-11979-2025-dlhc010552422025-1-2025-12-08",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2025-wp-c-1736-2023-jkhc020034882023-1-2025-12-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-16989-2025-dlhc010874822025-1-2026-01-15",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-13440-2024-dlhc010645802024-1-2026-01-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-502-2026-dlhc010007892026-1-2026-02-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-15990-2022-dlhc010434162022-1-2026-02-04",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-4865-2023-dlhc010137402023-1-2026-02-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-1747-2026-dlhc010043422026-1-2026-02-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-1748-2026-dlhc010043432026-1-2026-02-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-1749-2026-dlhc010043442026-1-2026-02-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-1814-2026-dlhc010045152026-1-2026-02-09",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-2386-2026-dlhc010063782026-1-2026-04-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-5634-2025-dlhc010251172025-1-2026-03-30",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-3264-2026-dlhc010091302026-1-2026-03-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-8633-2023-dlhc010242972023-1-2026-03-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-6365-2023-dlhc010182922023-1-2026-03-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-4331-2026-dlhc010132302026-1-2026-04-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-4332-2026-dlhc010132112026-1-2026-04-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-4333-2026-dlhc010131882026-1-2026-04-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-14370-2025-dlhc010692172025-1-2026-04-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-2724-2026-dlhc010073872026-1-2026-04-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-9229-2025-dlhc010406152025-1-2026-04-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-4888-2026-dlhc010151932026-1-2026-04-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-2775-2026-dlhc010076062026-1-2026-04-20",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-403-2023-dlhc010006822023-1-2026-04-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-1736-2026-dlhc010041152026-1-2026-04-29",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-7598-2019-dlhc010295122019-1-2026-05-08",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-6649-2026-dlhc010217352026-1-2026-05-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-6871-2026-dlhc010222682026-1-2026-05-18",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-17214-2025-dlhc010888152025-1-2026-05-26",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-9117-2026-dlhc010290252026-1-2026-07-10",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-10031-2026-dlhc010319652026-1-2026-07-23",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-10330-2026-dlhc010330182026-1-2026-07-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-2997-2025-dlhc010124412025-1-2026-07-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-7511-2026-dlhc010241022026-1-2026-07-27",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-10428-2026-dlhc010333562026-1-2026-07-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-10454-2026-dlhc010333842026-1-2026-07-28",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-8589-2026-dlhc010271822026-1-2026-08-13",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-12319-2026-dlhc010397272026-1-2026-08-24",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-12421-2026-dlhc010401032026-1-2026-08-25",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-12108-2025-dlhc010563092025-1-2026-08-31",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-12727-2026-dlhc010411952026-1-2026-09-02",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-12783-2026-dlhc010413792026-1-2026-09-07",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-13046-2026-dlhc010422992026-1-2026-09-08",
+      "HTTPError"
+    ],
+    [
+      "hc-jkl-2026-wp-c-2612-2024-jkhc020057662024-1-2026-09-21",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-14780-2026-dlhc010481202026-1-2026-10-06",
+      "HTTPError"
+    ],
+    [
+      "hc-delhi-2026-w-p-c-15331-2026-dlhc010499932026-1-2026-10-27",
+      "HTTPError"
+    ]
+  ],
+  "aft_benches": [
+    "New Delhi",
+    "Chandigarh",
+    "Lucknow",
+    "Kolkata",
+    "Guwahati",
+    "Chennai",
+    "Kochi",
+    "Mumbai",
+    "Jabalpur",
+    "Srinagar/Jammu",
+    "Jaipur"
+  ],
+  "aft_discovery_limit": "Guwahati official listing directly accessible. Central cross-bench portal and known legacy bench pages returned 503. Bench directory is not evidence of complete judgment coverage.",
+  "tier2_5_triage": {
+    "metadata-insufficient": 6268,
+    "military-nexus-title-review": 19
+  },
+  "tier2_5_shortlist_native_text": [
+    {
+      "doc_id": "hc-delhi-2012-w-p-c-16789-2006-dlhc010703592006-1-2012-04-10",
+      "sha256": "19e73d0a8ee371466191acf3eeaf1d2f9a7e3dcd82567ba93e333d911d5c13b0",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 4,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2013-rsa-4329-2012-phhc011130592012-1-2013-01-16",
+      "sha256": "2346895fa92aae8d79971270f0cd8dd02f1efbb3cc30b6288223915f71e8d8b4",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 7,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2014-rsa-174-2012-dlhc011731562012-1-2014-03-04",
+      "sha256": "12eecbc8365c7a98bf80626a0022bc6a54f4b671e47f95a6f00cd8317df7ff46",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 4,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2014-cwp-19409-2002-phhc010392372002-1-2014-07-04",
+      "sha256": "d092adc27cf5ea7b1c07dbf3a9e334903a9af1f8dcf3db0cc2e1e65bec3eecc6",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 8,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-3832-2016-dlhc011081282016-1-2016-05-09",
+      "sha256": "0bff0c90393399581b77244599562602ae576dcf05766449982bed5fad281393",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 6,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2018-cm-m-627-2017-dlhc012640642017-1-2018-07-17",
+      "sha256": "d50f065e58b190a575d10c2966610d5ab2cf9ba9f54e97469bdc53742e97767f",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2019-ma-65-2019-jkhc020030472019-1-2019-07-22",
+      "sha256": "c2a7742303646bbf34a4870bfd420df8c1c6859471f0e7c058cd3dbe3f76a9a3",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 4,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2022-arb-p-16-2021-jkhc010036082021-1-2025-04-04",
+      "sha256": "7f32cf1ae37ffd820093309d7ff4793c1e59cb4b95dadf1b3a483fe756ed518d",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2022-aa-10-2021-jkhc010035842021-1-2022-12-12",
+      "sha256": "3f32a71e0c0730f1e7af8d786b0affde92e6d141fbe7acd5bca9d10dfd6a7541",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2023-cwp-586-2021-phhc010019412021-1-2023-03-02",
+      "sha256": "782f5f473bab75a04e5fef7b80479f9a81268c889102f0e0f984b1e853a7fce3",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2023-arb-a-comm-50-2023-dlhc010476532023-1-2023-11-29",
+      "sha256": "f12a129f62bda7b7fa4bf8180da54467ca7a74b6b24ee2bd14d0545c7436c8cc",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 4,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2024-cm-m-3185-2024-dlhc010516492024-1-2024-09-24",
+      "sha256": "cf7afa682990ff4173c3a531842562c80a6c096e818859ef6d4c0eac4e8c7908",
+      "tier": "T2",
+      "status": "marking-review"
+    },
+    {
+      "doc_id": "hc-delhi-2024-o-m-p-comm-532-2023-dlhc010552262023-1-2024-10-07",
+      "sha256": "33698bd4ced749109d4f9114fea41d2c52c92623473af3cc31f20f8d0be6362c",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-wp-c-130-2023-jkhc010002322023-1-2025-04-05",
+      "sha256": "971d7145466b1987f58804b3bd263cf1c90610be5fa6e9d0757d82e814f06193",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-3203-2026-dlhc010090022026-1-2026-03-17",
+      "sha256": "525462a07bf80562fbb64f2fae8bc19bd3ee6ef8a94744e737278ca0ca69a22a",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-3165-2024-dlhc010101602024-1-2026-05-12",
+      "sha256": "eeeb2f797f74414da1e54e75059b23cbd7403b341c26cfea1768b713dc24cbc9",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 7,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-9796-2026-dlhc010313282026-1-2026-07-21",
+      "sha256": "7444beda55f00d05f785b802821d2e60aaa438988632c9b78b83fd7dd14f5cc6",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-10112-2019-dlhc010378742019-1-2026-09-25",
+      "sha256": "cd30a52745178b1b988a60859b5ab55745a298281208fd2183ff297434707b2e",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2024-omp-enf-comm-72-2024-dlhc010164402024-1-2024-11-06",
+      "sha256": "cdd20db67c0d1292caa70721f866725595b08a4a1b40f315b3296d732aaec9e0",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    }
+  ],
+  "tier2_5_stratified_native_text_sample": [
+    {
+      "doc_id": "hc-jkl-2026-ccp-s-350-2024-jkhc020051062024-1-2026-02-18",
+      "sha256": "f8e20e11416023a62ceb0c8bf5213374a82f48f39da86c3915243663a55d4a4e",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-owp-623-2018-jkhc020027412018-1-2025-05-01",
+      "sha256": "7334f61a20a56451cadc2ddf341a7a79cdd3a95bb47e64814305b4bad87d77ba",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2019-cocp-2173-2018-phhc010017352018-1-2019-05-02",
+      "sha256": "41112ce04293ff37abd453b14bbdef665c2bd4afe555d62221db0d26e1ee25a6",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2019-reslp-1-2019-jkhc020013362019-1-2019-03-08",
+      "sha256": "426fc90077d7032036fec134a837a015a59de801bff412bfa0d94da3e0eea82b",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-wp-c-2241-2024-jkhc010049592024-1-2025-07-18",
+      "sha256": "bfd8014f03872f35a6c5ffa73b7288742038f36cc14ce685321bc476f1ef89e2",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2023-wp-c-1681-2020-jkhc020033622020-1-2023-02-07",
+      "sha256": "f450025d6802d851e7f8ac28a1c515c1f1e0fec691ca0221c447d00ac12d9c09",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-wp-c-500-2025-jkhc020010492025-1-2025-03-03",
+      "sha256": "8df472b665eb2119fc06663188a821bb77a65415c0a19001400e4bd6bae9db75",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2022-untitled-uphc020124222022-1-2022-03-22",
+      "sha256": "94c205fe84e86feaf2e7ea31a64cf37daf5fe2cfad438cab5b3af427010105a3",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2019-wria-22651-2003-uphc011035282003-1-2019-03-07",
+      "sha256": "f70d5c1f66ecd0dbbba14c4335f195be798dd08fbe277e330a44c413c8de7707",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2025-wpil-803-2025-uphc020595252025-1-2025-09-16",
+      "sha256": "a5b9b76ba39fad880777fefddbbd752361eef05290db27cd972bbc7c36fc44a6",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2019-swp-1733-2017-jkhc020047062017-1-2019-12-23",
+      "sha256": "f030545cf562b96135988a40593e65eca5cad5551c84915e2ea4ad6082e8d8d4",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-owp-814-2010-jkhc020008132010-1-2025-07-23",
+      "sha256": "aea59d232b3abb780fe63d8157148bc23978ee8d35efb8e63bca3d5c14ab631e",
+      "tier": "T2",
+      "status": "marking-review"
+    },
+    {
+      "doc_id": "hc-jkl-2020-conc-96-2018-jkhc020035852018-1-2020-07-15",
+      "sha256": "51f339629aa897119ad05b499a2eed6d25d6804d4d7527191a2c9035804cb8f7",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2023-swp-1401-2011-jkhc020008302011-1-2023-09-05",
+      "sha256": "5df53a3ad1a81cf5709c9d36f7bbc61bdfae686e49433e22c406194e2079a869",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 11,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc020104532023-1-2023-02-08",
+      "sha256": "581c9842b3afdb385c6d75bf953dea4f07aa10560e03a492647f03e6668b2352",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2019-wria-18293-2019-uphc012154492019-1-2019-11-18",
+      "sha256": "35dc4404384edb192a7456af66dca4cfaa5acf680190839da6190e8876777e8b",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2020-owp-1680-2016-jkhc020019162016-1-2020-09-22",
+      "sha256": "3f57730725c1997c292b3a061a23f5f5c1dc549ba06db41767b560c6d0c9208d",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2021-aa-9-2008-jkhc020034722008-1-2021-03-22",
+      "sha256": "c276ec98f552481ed2654ae02faed9a80454cc06560fc39168f8360a099f2ed7",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2025-wria-507-2025-uphc020020122025-1-2025-01-17",
+      "sha256": "f38f9b6c4a8cb6178436fe47c6971cb3d4343277091037a02c862c3ae032de1e",
+      "tier": "T2",
+      "status": "marking-review"
+    },
+    {
+      "doc_id": "hc-jkl-2025-wp-c-381-2024-jkhc010007592024-1-2025-12-22",
+      "sha256": "2cbfa7fc8e6f995d64438f3361b5f9a00f5b7af342f3e98a8ca3563847be5db8",
+      "tier": "T2",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2017-cr-8-2013-jkhc020093192013-1-2017-11-10",
+      "sha256": "cd79c16bb6029111f4d93ffcc0c054fb9783b37db7de7d724e06b756b75b76a0",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2019-wric-24178-2005-uphc011261592005-1-2019-07-18",
+      "sha256": "3ea9757d43098f06540007afb861c00cec8f87456757968e293ab0a0049bc76a",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2018-wric-9285-2018-uphc010472852018-1-2018-03-13",
+      "sha256": "e9858dc89c82df10a70030f00b6f93849457273a40e87dc63467b73015a2f794",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-9966-2015-dlhc015506312015-1-2015-10-28",
+      "sha256": "ab413ff1e7e048ee84be0cbb21d61966bd3f6c73db964fb3c9c368f9fbb56426",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-10565-2018-dlhc013397512018-1-2018-10-05",
+      "sha256": "7b749649520fa7448cad256c29b23df8b2a4f4eee558e74cbe1d3c5e7641d088",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "sc-1963-the-cantonment-board-ambala-ca-1962insc120",
+      "sha256": "6a055a79362f3ebd561759381b21b183acb5a6ca64e08b078014b00b6c1a3bd1",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 9,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2023-ma-182-2003-jkhc020063092003-1-2023-05-11",
+      "sha256": "334049624e1cc0aabccba6ace09b8487bbce430ad7d5af48ecfcbc4d42ad53e7",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 13,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2022-arco-65-2020-uphc010916262020-1-2022-09-30",
+      "sha256": "1a22d692cbad69a94a41814fc656c4326e082bca149d81e54a41d85e79d33e11",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "sc-2007-union-of-india-and-anr-2007insc1120",
+      "sha256": "63f0d4a37d77c59a81ffc0397a3f9563a64992646de11b441263efadc03c55b0",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 6,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2024-wric-54448-2016-uphc011918162016-1-2018-01-24",
+      "sha256": "2bfdd3432b274d03e795f260f7a3dc6ac0d9908874422d5a03d67c6f7e3d7b33",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2014-w-p-c-7139-2014-dlhc011945792014-1-2014-11-19",
+      "sha256": "e94aab821e28b5807060bde4be9d3b720551153bdbd78a1a579872d0d9e9f8b3",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 27,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2024-wp-c-514-2022-jkhc010009292022-1-2026-04-17",
+      "sha256": "7d219731660a2dbc7524a93840e6760a309261cdc56cd318754cb0b64ec79e72",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2022-wric-31648-2022-uphc011959752022-1-2022-11-02",
+      "sha256": "613c5552970d187278b91a0e2d15817bc67aae3010579bbc96809c61ac762475",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2021-conc-289-2012-jkhc020012272012-1-2021-02-25",
+      "sha256": "67116bbb21f41e01d42d6a553d61917f0cdec6569e39167d1203b09ad3460e9d",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2016-cm-m-174-2016-dlhc010477752016-1-2016-02-19",
+      "sha256": "affadb2379625fe1ca996edeacd206304e7f249c4f2f45d3fa8f082c65121478",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2016-cm-m-1050-2015-dlhc015366782015-1-2016-07-29",
+      "sha256": "775dd8497ea80fbd4463679b458793ba003f2e4e5bad2d808c58f07330ad6f5c",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2019-rfa-3220-2006-phhc010781862006-1-2019-07-24",
+      "sha256": "b3603a702aeb09ecee08917375947de8f32f2786ae4ca72a216319c8d1a4b85e",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 13,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2021-cpc-4-2013-jkhc020047192013-1-2021-07-09",
+      "sha256": "6e6b3ef81bc1567cf0521ae4a06071a877cfe382cbd1b3033dfcb3d11e8c9e2f",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2018-cr-3938-2015-phhc010071572015-1-2018-01-11",
+      "sha256": "cbc3f22768db8845670be71edf8e7d1e46ee71ecd620c73f7d2200b6238350a9",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2019-cwp-18346-2019-phhc010820442019-1-2019-07-10",
+      "sha256": "7938cdca6660383dddc207aeed985df21dd734344109a05c511dbb20ec237a96",
+      "tier": "T3",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2013-w-p-c-4268-2012-dlhc011123362012-1-2013-07-08",
+      "sha256": "3bc03389d527d7286115290815f1b0b2e30fba2e99a33ab601ee33a4cb28fa88",
+      "tier": "T4",
+      "status": "marking-review"
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-6662-2017-dlhc013318362017-1-2017-08-21",
+      "sha256": "023590ad71678416c760f0354833348ccaa25d3f1faa384752f16d93e00538cb",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2016-rfa-590-2003-phhc010155612003-1-2016-01-25",
+      "sha256": "d57e18e804bc95b32ac71e30506a7c806de37d644a5163aa0ca7499ac70decff",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2016-rfa-582-2003-phhc010337372003-1-2016-01-25",
+      "sha256": "6e10e3a004d3d47a2cdd2a5a3135d31b753d44d5bbca5f47edd5ff7c7bbfcb61",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2021-o-m-p-comm-21-2021-dlhc010021632020-1-2021-02-24",
+      "sha256": "b11f04a248e80bc9501e8a2aab852c1248c891c77c34e0cbb605bc294fc05090",
+      "tier": "T4",
+      "status": "marking-review"
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-11051-2017-dlhc015257962017-1-2019-03-12",
+      "sha256": "5c11521dae33b028bc100cfe16fbda33952a18356f827401bc170b2f4c5ea337",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 15,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-4438-2021-dlhc010153182021-1-2021-04-09",
+      "sha256": "730e434e3aa4d98781e2bd0ec273fa1aee0ba9583abfded0024fe8b06ae68eae",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 7,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "sc-1989-assam-rifles-multi-purpose-co-1989insc162",
+      "sha256": "425d4788026ef003767c4320bf519841693f9886409e9b1a5ff28f55ecdbb403",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 5,
+      "sparse_pages": 1,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2011-rfa-4138-2006-phhc010854132006-1-2011-02-07",
+      "sha256": "372e98f206dd8734311cfcb74451066c47aaabc3778bdc2a5a2a43fd1a39ebc8",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2023-swp-255-2018-jkhc020012122018-1-2023-11-29",
+      "sha256": "aa9a47d9865d092c0ace9324ad24553c5923c2d9930e0006b0e2667674495bd7",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-11248-2023-dlhc010332742023-1-2023-12-14",
+      "sha256": "1352084f9ed22862bf9fb57319451925419200b6bfd30819be289c41a5b1820d",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 18,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-4683-2024-dlhc010171012024-1-2026-02-12",
+      "sha256": "8f35bf1a9984295a932ca95300b4bad15cc6fa2cb0b1cb6c3ef3e40f570e4143",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 11,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-9765-2018-dlhc012957922018-1-2018-09-24",
+      "sha256": "d4dad503851917f0a6ccbc98e4eb2cb43255ba06e6a521b22a04c79c57f30fb9",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2011-rfa-4047-2006-phhc010791022006-1-2011-02-07",
+      "sha256": "26e191f9d74277d10c0befc8eb8752ed6c7da69dfa45aa88125b080cdb41c1c4",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2016-rfa-605-2003-phhc010270612003-1-2016-01-25",
+      "sha256": "f14c7bd1f46ee74a2b1695b86dcf13863880c94374ef1abad71c4d891017eccc",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2024-wp-c-2871-2023-jkhc010056622023-1-2024-11-22",
+      "sha256": "87f592058ffe770b55cfe68d04c24023eea5d3631f3df8a06a0c37cb3885296a",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc020104422023-1-2023-02-17",
+      "sha256": "47fd89be242eb651df8bc84025d12958db4dcbb64e5d65eb30dc116d6a044977",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-lpa-21-2025-jkhc010003932025-1-2025-02-19",
+      "sha256": "e6e348b473f05f1a5e423d4762d60b3988f7050e6939d25e0353c5a7d614532e",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-13306-2023-dlhc010404742023-1-2023-12-07",
+      "sha256": "dc4584f87259e9bfb52ef4d65c32c93269ddced8e56ebd04cd5889713a5331d6",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 5,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-5951-2014-dlhc011524432014-1-2019-03-19",
+      "sha256": "79ad0837bdf01dff2b90a85e9541f49e597972d280077aff7e119e81a03aa2f9",
+      "tier": "T4",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 10,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2010-rfa-72-2005-dlhc010633772005-1-2010-08-27",
+      "sha256": "c48be698437cb19ab1e278ca5b7aea04f6a8cf3ccd8c2beb311278556e62913b",
+      "tier": "T5",
+      "status": "marking-review"
+    },
+    {
+      "doc_id": "hc-allahabad-2019-fafo-506-1989-uphc010131441989-1-2019-03-06",
+      "sha256": "cdbc37c5ec5da429b7bc9a634150ef01f149532975075894f1f6138f05352173",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2022-untitled-jkhc020015112014-1-2022-03-23",
+      "sha256": "e76809bd26da9455c94ba032b4a70d6f246f4b29e6801f27c36a9931558ece26",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2022-untitled-uphc010192012022-1-2022-02-21",
+      "sha256": "6b8b14060dce350ec9768dd384ec2e7698a030c9aeda9766e62e74385c6b56d4",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2024-tr-p-crl-68-2024-dlhc010394042024-1-2024-07-10",
+      "sha256": "6a88846c9fb1026f8b2a8ad3d306c38f200db928ad3d9f20ccba605a871f27c4",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2022-wp-c-3942-2019-jkhc020073932019-1-2022-07-06",
+      "sha256": "38afd6be614813d7882dacebf44951ec6d9950eebee845008e99950382e89711",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2024-wp-c-2400-2024-jkhc010052852024-1-2024-11-19",
+      "sha256": "87ff49cd9064335d0f5c450b22f8d7be347c8483328f34e222f5f32dd1b4fa91",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2020-cpsw-716-2018-jkhc010097772018-1-2020-09-21",
+      "sha256": "29343419bd347fb6fcee15532ee8bb617473a94779f428c485686e5d86cd7d33",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-878-2017-dlhc012308952016-1-2024-09-20",
+      "sha256": "518b1176f98e163275c86f7af7b5971b936bcad769e31c1d76058a18220ccead",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 5,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-4870-2016-dlhc011494682016-1-2016-10-26",
+      "sha256": "f94fd0861d17c1944030bc64085cdb7c34236667e49e0c5ff8271a5074363906",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-delhi-2016-cs-os-2092-2015-dlhc012773412015-1-2016-01-13",
+      "sha256": "34ff208a8d302d4833ec854140f95f523b3b08d977e98f810ea963f52b671ef1",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2023-owp-445-2018-jkhc020018662018-1-2023-09-06",
+      "sha256": "75bf31878c37eff1c14c4e480b351a67cecd59038f1dcff350ca29ec98db670a",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2019-untitled-uphc010819922002-1-2019-07-15",
+      "sha256": "13de4c3c7bd5703778fcb4c827b88cdf9fe60adcf3c4280eebac63b2821fe628",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2021-owp-1363-2012-jkhc010022772012-1-2021-03-26",
+      "sha256": "f7221c467e51fccc39fb31b5549451144f657e9b06012a84c4890b6c29a7a500",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2018-cwp-13145-2016-phhc010775412016-1-2018-07-04",
+      "sha256": "2916725dcbafc6380e2058507711f1a6998e8bc9c67f1ea5d15f091d89cfc929",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-19406-2025-phhc011060882025-1-2025-08-06",
+      "sha256": "b80b710c49352b560b9ea47cd578df19fce3185a9a6e060b37f360a9d1b9b724",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 2,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2022-owp-337-2008-jkhc020002092008-1-2022-12-06",
+      "sha256": "ba51073f9826df34b94b8b7f2bc42dd1b9ae24c6917165f0fec1dda5c5ff46ae",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-29830-2018-phhc011018402018-1-2025-11-26",
+      "sha256": "19a350e00149b607d6f5551a94423d2d6bcd3a5c8454fbba790b1b6b0fbb28ee",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 3,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-jkl-2025-ma-172-2018-jkhc020071972018-1-2025-08-07",
+      "sha256": "da7953ba4b7022c5bf7c860974c3c121e484152aedaf355ed00a69112e1cf08f",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    },
+    {
+      "doc_id": "hc-allahabad-2022-untitled-uphc010067642022-1-2022-02-04",
+      "sha256": "4285fa7bf283ac7f676617a1f9940622cc32847404d7921ee2dd2b69672444a4",
+      "tier": "T5",
+      "status": "no-specific-signal-in-native-text",
+      "pages": 1,
+      "sparse_pages": 0,
+      "signals": {
+        "court_martial": [],
+        "tribunal": [],
+        "service_statute": [],
+        "pension_entitlement": []
+      }
+    }
+  ],
+  "holds": [
+    {
+      "doc_id": "hc-ph-2026-cwp-18817-2026-phhc010984362026-1-2026-08-18",
+      "sha256": "3c3c548932e039e48e4cc95011edcd511ec52ec4fc07c55ef51869e6067b71bb",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          7,
+          "ambiguous-body",
+          "native",
+          [
+            "sealed"
+          ]
+        ],
+        [
+          7,
+          "ambiguous-body",
+          "ocr",
+          [
+            "sealed"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2007-cwp-8961-2007-phhc010661762007-1-2007-10-04",
+      "sha256": "188b006da52b048ebf06f2daebd9dabb22e479625da9924fa5d507ab9c8d4fb8",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          11,
+          "ambiguous-body",
+          "native",
+          [
+            "classified"
+          ]
+        ],
+        [
+          11,
+          "ambiguous-body",
+          "ocr",
+          [
+            "classified"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 1,
+      "secondary_review": {
+        "context_pages": [
+          11
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2010-cwp-3302-1995-phhc010220211995-1-2010-03-09",
+      "sha256": "8282dd173032f84c0fd093403482f4e895ae3c41dff1bfff1a44cb59edb60fc7",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          3,
+          "legal-context",
+          "native",
+          [
+            "classified"
+          ]
+        ],
+        [
+          3,
+          "legal-context",
+          "ocr",
+          [
+            "classified"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "f7f76930d2335520d4db5fd6a5e773d4a48d67e9",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2011-cwp-70-2011-phhc010843742011-1-2011-01-04",
+      "sha256": "f96ec4e7b3307cd75b68d97f029e8ac43e69ffe165f2af4c04a86a319e8588ac",
+      "state": "verified-header-only-page",
+      "page_diagnostics": [
+        [
+          3,
+          "sparse-text"
+        ]
+      ],
+      "preservation": {
+        "revision": "99288bace264e0a6c78d5e7057404e7315de62cc",
+        "verified": true
+      },
+      "pages_using_ocr": 0,
+      "documentary_status": "Physical page 3 visually verified as running header and page number only; signed disposition ends on page 2"
+    },
+    {
+      "doc_id": "hc-ph-2015-cwp-8338-2012-phhc010902392012-1-2015-03-17",
+      "sha256": "31884edf2911ba2b48d2b037819939ffba909174c760a1032f01f68fd76dd14a",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          2,
+          "ambiguous-body",
+          "ocr",
+          [
+            "classified"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-crwp-275-2024-phhc010026662024-1-2024-11-12",
+      "sha256": "e663f01082ce09936f7ce6800607ba58744ed2b186e26bc2b361f0f763c35e02",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          10,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          10
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-8947-2026-phhc010483952026-1-2026-03-24",
+      "sha256": "d3e4bd831d5023ecc3338c45239c65caca8b59dc7a043198fd4c9d066e4f5715",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          4,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "f7f76930d2335520d4db5fd6a5e773d4a48d67e9",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-12335-2026-phhc010669552026-1-2026-04-23",
+      "sha256": "abb50c22472a9518145141044394376cd2594609c752e1cd9e0559e68d90ac4b",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          1,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "f7f76930d2335520d4db5fd6a5e773d4a48d67e9",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2026-untitled-phhc010970002026-1-2026-06-01",
+      "sha256": "66022adc2a88a7c4f473467cf6117a18fcdc07c55d0db1feb84850df1cab6efe",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          4,
+          "ambiguous-body",
+          "native",
+          [
+            "secret"
+          ]
+        ],
+        [
+          4,
+          "ambiguous-body",
+          "ocr",
+          [
+            "secret"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          4
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2010-cwp-3229-1996-phhc010237841996-1-2010-04-22",
+      "sha256": "e6454d14937ffe05ccc227e0516a8501e0cd8f8528949f3f1b0b272116487f85",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          3,
+          "legal-context",
+          "native",
+          [
+            "confidential"
+          ]
+        ],
+        [
+          3,
+          "legal-context",
+          "ocr",
+          [
+            "confidential"
+          ]
+        ],
+        [
+          5,
+          "ambiguous-body",
+          "native",
+          [
+            "confidential"
+          ]
+        ],
+        [
+          5,
+          "ambiguous-body",
+          "ocr",
+          [
+            "confidential"
+          ]
+        ],
+        [
+          7,
+          "legal-context",
+          "native",
+          [
+            "confidential",
+            "sealed"
+          ]
+        ],
+        [
+          7,
+          "legal-context",
+          "ocr",
+          [
+            "confidential",
+            "sealed"
+          ]
+        ],
+        [
+          9,
+          "legal-context",
+          "native",
+          [
+            "confidential"
+          ]
+        ],
+        [
+          9,
+          "legal-context",
+          "ocr",
+          [
+            "confidential"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          5
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2017-cwp-22278-2016-phhc010876462016-1-2017-02-20",
+      "sha256": "cdcb596a331224c78e8514c00d5ed42f76d567aef61efec757acb9ca2bee6097",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          2,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-28861-2023-phhc011659072023-1-2024-10-23",
+      "sha256": "698e89abb6006a308c2eb16a599545d5a7a2ef6b1b1e7fc7c98278e97f5336b4",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          3,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          4,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          5,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          7,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          3,
+          4,
+          5,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-16651-2024-phhc010909682024-1-2024-10-24",
+      "sha256": "de1f5890316749909f97a91d8cf023ce497907c71fe5e4a2ca3779011379745e",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          3,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          4,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          7,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          3,
+          4,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-16678-2024-phhc010902292024-1-2024-10-24",
+      "sha256": "b0446a8790b2a1f6f200e0256f27dc63b3e696e73554c6b247828f77ac900cc4",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          2,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          3,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          4,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          7,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2,
+          3,
+          4,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-28301-2024-phhc011420252024-1-2024-10-24",
+      "sha256": "71680abff0b48ad2c4402b3230cfedcad773ed7bb95e1b76707a1ba16c52d6b5",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          2,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          4,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          7,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2,
+          4,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-30173-2024-phhc011535732024-1-2024-11-07",
+      "sha256": "1f155e7343b9d635d8fc34e7af48657eadead832f39f5904a65a87b161c3ebf6",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          2,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          3,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          4,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2,
+          3,
+          4,
+          6
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-30626-2024-phhc011390792024-1-2024-11-13",
+      "sha256": "926cbc37419cf6e23f6c5c7778d3c8f77ce3fe820387e0913e6036435ee88270",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          2,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          3,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          4,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2,
+          3,
+          4,
+          6
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-24836-2024-phhc011289522024-1-2024-11-21",
+      "sha256": "0b76ce4b4fbec52422064a518f685b91af77297c698be21f5f7e036dc90f9edf",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          3,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "60f0beddb8211b084310fca52a66da854f126505",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-14751-2024-phhc010818682024-1-2024-11-27",
+      "sha256": "65c09d6febc797b458f120b4cb4deb7ad597de9ae098c7182ec2446ba1b3651c",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          9,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "60f0beddb8211b084310fca52a66da854f126505",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-26257-2024-phhc011368052024-1-2024-11-29",
+      "sha256": "3ab471f741c0e23a25c5926deeaf95e82e00be21b40154ced24920903c701b67",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          3,
+          "ambiguous-body",
+          "ocr",
+          [
+            "classified"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          3
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-16781-2024-phhc010910392024-1-2024-12-17",
+      "sha256": "c4331bf2838508e35966eda7954377198e30365d6b225be054d82bc7bc88f0d8",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          7,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-20059-2024-phhc011052542024-1-2024-12-17",
+      "sha256": "dd73306a7cc62c6993b9c3bcea207902d9545742e874c383d8adb7e456f96afd",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          8,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-31300-2024-phhc011107912024-1-2024-12-17",
+      "sha256": "a0779f490cac411818fdc67f6e8ad034d70867ccc14232109b3b71e187cfa468",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          8,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-33992-2024-phhc011734302024-1-2024-12-17",
+      "sha256": "cc75c01d463f6342bc524dd87d15d9edd16ea6ba702de2cbe153352445d6b9ab",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          3,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "60f0beddb8211b084310fca52a66da854f126505",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-33829-2024-phhc011757962024-1-2024-12-18",
+      "sha256": "2f3e3cb09ccc8366509c146ac9c8b424339a02f1d735ff6e38b84527f9f1405f",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          2,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "60f0beddb8211b084310fca52a66da854f126505",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-16802-2024-phhc010913432024-1-2024-12-19",
+      "sha256": "84fd829f3454abb4b3b0606afa90674cf879c3bd962659c771c1f738cadeb7e6",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          9,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          9
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2024-cwp-30711-2024-phhc011570122024-1-2024-12-19",
+      "sha256": "7d6589c5d0ff1e49402ae7b50807709faf97e4715e52476f434732c64337325a",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          3,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "60f0beddb8211b084310fca52a66da854f126505",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-20060-2024-phhc011052602024-1-2025-01-13",
+      "sha256": "c3c3fcf16f7cf710c0a9db9d9a0cbeedadff50e0be83297d3ec5cab38d77dbf5",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          7,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-20062-2024-phhc011049532024-1-2025-01-13",
+      "sha256": "b756ebbac0b4b1845689dcbb7d1a249d12e0fdaa39c5e93e63c7d45800378d3a",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          9,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          9
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-20070-2024-phhc011052262024-1-2025-01-13",
+      "sha256": "cbc09a789ec15e8502e5524c5d391e504e8f3b5ddb607ccede94171de9961b4e",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          7,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-20079-2024-phhc011051622024-1-2025-01-13",
+      "sha256": "0f672d540f2add6c9712ca4506049a734f9a2c3538cc79a88ee1415fd3be7462",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          2,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          8,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-20080-2024-phhc011050012024-1-2025-01-13",
+      "sha256": "5cffcf5976df1fa4be6e711523fe77c5f7d77f998d5c4e92ea5d3e7c43f3acf1",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          8,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-21971-2024-phhc011036242024-1-2025-01-13",
+      "sha256": "eeefb2e5ade5c0a444999835a701a751b50d571a98a9b6f936ff1e9ce7a1f7cf",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          8,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-21976-2024-phhc011053842024-1-2025-01-13",
+      "sha256": "8ab1ec1e223b62e6db933f532278e7cc1e76aa539fb50955a23ee9998c87d0c3",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          8,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-34935-2024-phhc011807942024-1-2025-01-14",
+      "sha256": "5484dc08ec85e213be0febd8d3ea9baae85efcb7b126814a105549e8d818163f",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          8,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-23968-2024-phhc011226182024-1-2025-01-20",
+      "sha256": "272ce7f43a54e99e25af29f52c185aa449c2103ebc12d71181f2328f53ec8800",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          3,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          7,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          3
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-29368-2025-phhc011543462025-1-2025-09-30",
+      "sha256": "d7a41f5f008c9ca821ff8690ec028dde91f0ca884b9fcc6e8fb56b32d5795b04",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          5,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "4f25b885e97537e30b5881f64cf6db1918ce4ee5",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-29369-2025-phhc011543502025-1-2025-09-30",
+      "sha256": "4e85aec7a32802d606d95a9f7ae79b6deaab9af5e40fba61f9a5dcfedd766d12",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          5,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "4f25b885e97537e30b5881f64cf6db1918ce4ee5",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2025-cwp-36886-2025-phhc011994972025-1-2025-12-24",
+      "sha256": "c7485636cfc7bf8a86770adf9a8c4061356305a73f7b9185e7ead39398755d9b",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          9,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "4f25b885e97537e30b5881f64cf6db1918ce4ee5",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-34614-2024-phhc011781972024-1-2026-01-15",
+      "sha256": "38406fc94834380e340082a7d219ece419acd831a5c2258c01c1dcff25d8edee",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          2,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "4f25b885e97537e30b5881f64cf6db1918ce4ee5",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-7091-2026-phhc010395442026-1-2026-03-10",
+      "sha256": "2f465857e6753819ca944089955ea392c09573469ff3a1a52bcef1795883008e",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          3,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          4,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          3
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-11766-2026-phhc010614552026-1-2026-04-20",
+      "sha256": "3df49eacd0e48833be5bce7aaf694c4eb4603b42c13e5a669e0f2544c757c121",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          2,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "4f25b885e97537e30b5881f64cf6db1918ce4ee5",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-14693-2026-phhc010786602026-1-2026-05-12",
+      "sha256": "2696b6059259b453500faf2f48fccb23b4e034478d845b3c433dbb91bcf9c258",
+      "state": "verified-local",
+      "page_diagnostics": [
+        [
+          1,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": {
+        "revision": "4f25b885e97537e30b5881f64cf6db1918ce4ee5",
+        "verified": true
+      },
+      "pages_using_ocr": 0
+    },
+    {
+      "doc_id": "hc-ph-2026-cwp-14706-2026-phhc010754762026-1-2026-05-12",
+      "sha256": "8e23d0c526e1d663f28e29f04d671c8848f14651b0f29b90e46ec275286c8c59",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          2,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ],
+        [
+          3,
+          "legal-context",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    },
+    {
+      "doc_id": "hc-ph-2026-untitled-phhc010868762026-1-2026-09-18",
+      "sha256": "ce0d69211f87336976cb5c63980addbc15c7f0ce05c620c1e31cf5184ed1fa3f",
+      "state": "marking-review",
+      "page_diagnostics": [
+        [
+          6,
+          "ambiguous-body",
+          "ocr",
+          [
+            "restricted"
+          ]
+        ]
+      ],
+      "preservation": null,
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
+    }
+  ],
+  "limits": [
+    "Preparation and preservation do not establish legal authentication or application release.",
+    "Automated legal-context flags are used for triage only. Remaining ambiguous markings are not cleared."
+  ],
+  "official_uploads": [
+    {
+      "revision": "7aed711caf816d8ce3842021c422669aeac0de81",
+      "files": {
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/fe/fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804/original.pdf": "fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/fe/fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804/text.txt": "1b1154877b174ff3018c7453ab5107eb1af8c8843c83ca83368f0db12e8e98dc",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/3a/3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e/original.pdf": "3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/3a/3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e/text.txt": "db201de6f28f80d006928cd971c46d5ab8007dd48f8aa7cb2d01b7013581f559",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/25/253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d/original.pdf": "253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/25/253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d/text.txt": "ab1badced275a5b4f2ae7c445eeb591e39afb15646ca03c7a9510d86e35e44e8",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/f6/f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964/original.pdf": "f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964",
+        "legal_knowledge/preservation/c14_aft_guwahati/v2/f6/f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964/text.txt": "43ff2d08ea583164a71c5dbb6f1b01055158a6f4329706d48b4fe76e1785e925"
+      },
+      "verified": true,
+      "entries": [
+        {
+          "id": "AFT-GUW-2",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-03 of 2018.pdf",
+          "status": "queued-for-upload",
+          "sha256": "fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804",
+          "pages": 2,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-3",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-06 of 2018.pdf",
+          "status": "queued-for-upload",
+          "sha256": "3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e",
+          "pages": 2,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-4",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 MA-28 of 2019.pdf",
+          "status": "queued-for-upload",
+          "sha256": "253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d",
+          "pages": 1,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-5",
+          "url": "https://aftrbghy.nic.in/judgement/C.A. No. 01 of 2020 in O.A. No 05 of 2017.pdf",
+          "status": "queued-for-upload",
+          "sha256": "f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964",
+          "pages": 1,
+          "ocr": 0
+        }
+      ]
+    },
+    {
+      "revision": "d24eb43e40ea2df3a28b0118781abb3cd97798b5",
+      "files": {
+        "legal_knowledge/preservation/c14_statutory/v2/55/55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262/original.pdf": "55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262",
+        "legal_knowledge/preservation/c14_statutory/v2/55/55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262/text.txt": "9a1f3db03e29eb212f7939b5600833baf0fd2ff062919b8be56f7f740f48ad18"
+      },
+      "verified": true,
+      "entries": [
+        {
+          "id": "AFT-GUW-2",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-03 of 2018.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804",
+          "pages": 2,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-3",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-06 of 2018.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e",
+          "pages": 2,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-4",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 MA-28 of 2019.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d",
+          "pages": 1,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-5",
+          "url": "https://aftrbghy.nic.in/judgement/C.A. No. 01 of 2020 in O.A. No 05 of 2017.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964",
+          "pages": 1,
+          "ocr": 0
+        },
+        {
+          "id": "CA01-ACT19-1955-CARRIER",
+          "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Acts_of_the_Parliament_of_India_1955.pdf",
+          "status": "queued-for-upload",
+          "sha256": "55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262",
+          "pages": 334,
+          "ocr": 2,
+          "derivative_physical_pages": [
+            110,
+            111
+          ],
+          "documentary_status": "Act title and Schedule visually matched; publication annotations and strike marks retained; legal authentication pending"
+        }
+      ]
+    },
+    {
+      "revision": "99288bace264e0a6c78d5e7057404e7315de62cc",
+      "files": {
+        "legal_knowledge/preservation/c14_tier1_extension/v2/f9/f96ec4e7b3307cd75b68d97f029e8ac43e69ffe165f2af4c04a86a319e8588ac/original.pdf": "f96ec4e7b3307cd75b68d97f029e8ac43e69ffe165f2af4c04a86a319e8588ac",
+        "legal_knowledge/preservation/c14_tier1_extension/v2/f9/f96ec4e7b3307cd75b68d97f029e8ac43e69ffe165f2af4c04a86a319e8588ac/text.txt": "945e22ce42e61affee42ac83fd9a18da21877cb71863523caad76bea556c45d8"
+      },
+      "verified": true,
+      "entries": [
+        {
+          "id": "AFT-GUW-2",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-03 of 2018.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "fe9d5ad96971020dd49105b2f6687ca2708959dc0e820a4f06f160ac1019e804",
+          "pages": 2,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-3",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 CA-06 of 2018.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "3abf8cc74723da0fa2ac2361f20a2741a18b4b21ca39993ca4566d447757908e",
+          "pages": 2,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-4",
+          "url": "https://aftrbghy.nic.in/judgement/6.8.2019 MA-28 of 2019.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "253991c51460d30a501c1e18142b8eaf2b618591909dddee8836ebe37e8d2e2d",
+          "pages": 1,
+          "ocr": 0
+        },
+        {
+          "id": "AFT-GUW-5",
+          "url": "https://aftrbghy.nic.in/judgement/C.A. No. 01 of 2020 in O.A. No 05 of 2017.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "f6d15aedbf1ece8c326516eaa30cfdbc3403223b9d175610ee116e4afaaaa964",
+          "pages": 1,
+          "ocr": 0
+        },
+        {
+          "id": "CA01-ACT19-1955-CARRIER",
+          "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Acts_of_the_Parliament_of_India_1955.pdf",
+          "status": "duplicate-at-pinned-head",
+          "sha256": "55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262",
+          "pages": 334,
+          "ocr": 2,
+          "derivative_physical_pages": [
+            110,
+            111
+          ],
+          "documentary_status": "Act title and Schedule visually matched; publication annotations and strike marks retained; legal authentication pending"
+        },
+        {
+          "id": "PHHC-HEADER-ONLY-PAGE",
+          "doc_id": "hc-ph-2011-cwp-70-2011-phhc010843742011-1-2011-01-04",
+          "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2011/court=3_22/bench=phhc/PHHC010843742011_1_2011-01-04.pdf",
+          "status": "queued-for-upload",
+          "sha256": "f96ec4e7b3307cd75b68d97f029e8ac43e69ffe165f2af4c04a86a319e8588ac",
+          "pages": 3,
+          "ocr": 0,
+          "documentary_status": "Physical page 3 visually verified as running header and page number only; signed disposition ends on page 2"
+        }
+      ]
+    }
+  ]
+}

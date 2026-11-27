@@ -1,0 +1,284 @@
+{
+  "supplement_sha256": "b8bd449749ac4e25d7aafdb7ed3256d3fec2bbf47c33e3ee5d2a7195b5c3f7c0",
+  "supplement_rows": 52,
+  "checks": {
+    "local_pdf_pairs": 44,
+    "local_temporary_fts_anchors": 122,
+    "anchors": 147,
+    "sqlite_records": 8,
+    "sqlite_fts_anchors": 25
+  },
+  "merged_context_reviews": {
+    "disciplinary": 20,
+    "service": 20,
+    "pension": 20,
+    "aft": 20,
+    "interpretation": 20
+  },
+  "local_paths": [
+    {
+      "doc_id": "AFT-GUW-929",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/5f2b081660d8f79109c2fd11935633d85e6ae6bd9d5399fa686a96d976884182.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/5f2b081660d8f79109c2fd11935633d85e6ae6bd9d5399fa686a96d976884182.txt",
+      "physical_pages": 17
+    },
+    {
+      "doc_id": "AFT-GUW-318",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/54c4de15486b7be028408e2179e30b413d26033c2d83963c4eb55a131bb503e1.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/54c4de15486b7be028408e2179e30b413d26033c2d83963c4eb55a131bb503e1.txt",
+      "physical_pages": 10
+    },
+    {
+      "doc_id": "AFT-GUW-1067",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/4ecf23f7dd58bf944d441b0aec2488575464a81e80c8b60f6ba024bb6abf461d.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/4ecf23f7dd58bf944d441b0aec2488575464a81e80c8b60f6ba024bb6abf461d.txt",
+      "physical_pages": 22
+    },
+    {
+      "doc_id": "AFT-GUW-939",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/338878b8651c2674876d158323ab1121a0da529d47b3a83a4cba52b9d510ba0e.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/338878b8651c2674876d158323ab1121a0da529d47b3a83a4cba52b9d510ba0e.txt",
+      "physical_pages": 19
+    },
+    {
+      "doc_id": "AFT-GUW-948",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/6229a724538e36dafe4e98d765e68419150a1874737389835ed141e1b05e6c26.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/6229a724538e36dafe4e98d765e68419150a1874737389835ed141e1b05e6c26.txt",
+      "physical_pages": 20
+    },
+    {
+      "doc_id": "AFT-GUW-1053",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/fcc67ca887abb408e0e683db1b15e1ec15a117aaae040ec109555a934c8f629f.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/fcc67ca887abb408e0e683db1b15e1ec15a117aaae040ec109555a934c8f629f.txt",
+      "physical_pages": 19
+    },
+    {
+      "doc_id": "AFT-GUW-715",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/fe1e3d49c0e2a2154017b0a77511b4be6d7c615eb1b3a41b48f5aab4ab6a23a5.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/fe1e3d49c0e2a2154017b0a77511b4be6d7c615eb1b3a41b48f5aab4ab6a23a5.txt",
+      "physical_pages": 7
+    },
+    {
+      "doc_id": "AFT-GUW-512",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/8fba698cac6b0f0aa7443a0787e89fff07ac424f38c6ae447af740025580b4cb.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/8fba698cac6b0f0aa7443a0787e89fff07ac424f38c6ae447af740025580b4cb.txt",
+      "physical_pages": 14
+    },
+    {
+      "doc_id": "AFT-GUW-311",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/7ff6457702711b88dca14bc13245b2f4cdbc3a5e1f0aca70730ec6bc55fa7f40.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/7ff6457702711b88dca14bc13245b2f4cdbc3a5e1f0aca70730ec6bc55fa7f40.txt",
+      "physical_pages": 14
+    },
+    {
+      "doc_id": "AFT-GUW-497",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/4fa7e0db3ff53a390e9cc25f58b8426fac88931e7f3a7d54e042223e9e9a285b.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/4fa7e0db3ff53a390e9cc25f58b8426fac88931e7f3a7d54e042223e9e9a285b.txt",
+      "physical_pages": 8
+    },
+    {
+      "doc_id": "AFT-GUW-940",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/5ac48cfd87de0598dc869b5fa2046c60c01143fadf4e4991607935d5472eccbc.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/5ac48cfd87de0598dc869b5fa2046c60c01143fadf4e4991607935d5472eccbc.txt",
+      "physical_pages": 10
+    },
+    {
+      "doc_id": "AFT-GUW-941",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/deb25b754a168030387d96eac3a500a1d916a12ceb40504f24c94e3e8c988ac4.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/deb25b754a168030387d96eac3a500a1d916a12ceb40504f24c94e3e8c988ac4.txt",
+      "physical_pages": 14
+    },
+    {
+      "doc_id": "AFT-GUW-946",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/be8b3dc7bab3459661322c142b5f4f10f11d72e29173c878119a58fb3b3abfde.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/be8b3dc7bab3459661322c142b5f4f10f11d72e29173c878119a58fb3b3abfde.txt",
+      "physical_pages": 15
+    },
+    {
+      "doc_id": "AFT-GUW-564",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/1e13424f0986542cd12c9e18a13ed590aa7176ee4e0fa6cd6361cd24e7e3dd6a.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/1e13424f0986542cd12c9e18a13ed590aa7176ee4e0fa6cd6361cd24e7e3dd6a.txt",
+      "physical_pages": 4
+    },
+    {
+      "doc_id": "AFT-GUW-792",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/ff2f85a5742ca616477ff2d09c7bdde26d828cd1c8ba956554fbde97e681e9b8.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/ff2f85a5742ca616477ff2d09c7bdde26d828cd1c8ba956554fbde97e681e9b8.txt",
+      "physical_pages": 2
+    },
+    {
+      "doc_id": "AFT-GUW-847",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/b50c6dacc577ed1dbe737209ae3c21e41250f5ff02ff58f81ee40edcb919bc8a.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/b50c6dacc577ed1dbe737209ae3c21e41250f5ff02ff58f81ee40edcb919bc8a.txt",
+      "physical_pages": 6
+    },
+    {
+      "doc_id": "AFT-GUW-944",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/7231c716052ed6bb61cf09a6d7243e9c06856027f3dc63494fab5f14c8b89a46.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/7231c716052ed6bb61cf09a6d7243e9c06856027f3dc63494fab5f14c8b89a46.txt",
+      "physical_pages": 8
+    },
+    {
+      "doc_id": "AFT-GUW-113",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/811e6dac9bd2fd554b80611cd50b79882df43500b334ae5eb4b511a19d115e95.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/811e6dac9bd2fd554b80611cd50b79882df43500b334ae5eb4b511a19d115e95.txt",
+      "physical_pages": 2
+    },
+    {
+      "doc_id": "AFT-GUW-952",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/a4f58993dafb215b4f44ac9a05c2a469bcaa6146a24b5ec0cbddeca301316e1c.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/a4f58993dafb215b4f44ac9a05c2a469bcaa6146a24b5ec0cbddeca301316e1c.txt",
+      "physical_pages": 40
+    },
+    {
+      "doc_id": "AFT-GUW-1066",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/0d9c4de1387f3c15435dd6c2453a8d48532a9cae27d4e7863943bd04a3c66ae3.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/0d9c4de1387f3c15435dd6c2453a8d48532a9cae27d4e7863943bd04a3c66ae3.txt",
+      "physical_pages": 30
+    },
+    {
+      "doc_id": "AFT-GUW-603",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/cf381de8e8e5ef823dc18986fa13c97b7e73f65d4b93c232d4c143eba8fddac9.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/cf381de8e8e5ef823dc18986fa13c97b7e73f65d4b93c232d4c143eba8fddac9.txt",
+      "physical_pages": 8
+    },
+    {
+      "doc_id": "AFT-GUW-252",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/fc7af2e8bc7d496755e78b15bfc6aa4ab60fb2af883108ecbab6aed76fe0da65.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/fc7af2e8bc7d496755e78b15bfc6aa4ab60fb2af883108ecbab6aed76fe0da65.txt",
+      "physical_pages": 4
+    },
+    {
+      "doc_id": "AFT-GUW-536",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/6a8a39cce11159fd3f3784e4651eed7d8ac7e842d09a96e6c6682b3bf73d7e73.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/6a8a39cce11159fd3f3784e4651eed7d8ac7e842d09a96e6c6682b3bf73d7e73.txt",
+      "physical_pages": 10
+    },
+    {
+      "doc_id": "AFT-GUW-758",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/cf027c1938d924c9419a5c53f864f6e7a846449059687d8377ea0999680a8483.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/cf027c1938d924c9419a5c53f864f6e7a846449059687d8377ea0999680a8483.txt",
+      "physical_pages": 7
+    },
+    {
+      "doc_id": "AFT-GUW-433",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/bd5a45133c8a1475f9f28e49f3882f7efaed738b03a7db20c52cfce59dff9f4c.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/bd5a45133c8a1475f9f28e49f3882f7efaed738b03a7db20c52cfce59dff9f4c.txt",
+      "physical_pages": 13
+    },
+    {
+      "doc_id": "AFT-GUW-570",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/3608d64c6e64bd1a0746213a1c88a4b33ccb873c6c2ab8b89aecbd6df636467e.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/3608d64c6e64bd1a0746213a1c88a4b33ccb873c6c2ab8b89aecbd6df636467e.txt",
+      "physical_pages": 17
+    },
+    {
+      "doc_id": "AFT-GUW-963",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/3a9d2ae00ef00356585eeeefd976d9216e607a4d23920c8e35d1f5276b68ab13.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/3a9d2ae00ef00356585eeeefd976d9216e607a4d23920c8e35d1f5276b68ab13.txt",
+      "physical_pages": 14
+    },
+    {
+      "doc_id": "AFT-GUW-475",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/22ad72f0efce73fbf27cd848a2e1ed564823d38437afcad090e07a8bdaec4bc8.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/22ad72f0efce73fbf27cd848a2e1ed564823d38437afcad090e07a8bdaec4bc8.txt",
+      "physical_pages": 11
+    },
+    {
+      "doc_id": "AFT-GUW-805",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/b581986e8ec6c5af21e98ef5eecd67372cfb69a6b70859405e266a2531b540df.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/b581986e8ec6c5af21e98ef5eecd67372cfb69a6b70859405e266a2531b540df.txt",
+      "physical_pages": 6
+    },
+    {
+      "doc_id": "AFT-GUW-648",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/077c69ae15e74d5b37ff290d7e4f89af3f9a200697547a1563cb4dd20c6a9528.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/077c69ae15e74d5b37ff290d7e4f89af3f9a200697547a1563cb4dd20c6a9528.txt",
+      "physical_pages": 6
+    },
+    {
+      "doc_id": "AFT-GUW-780",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/b9f30397cd85ae37ad01d73eb2ba7e780462acf035cdf8d75d51a4d5c1ce92ee.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/b9f30397cd85ae37ad01d73eb2ba7e780462acf035cdf8d75d51a4d5c1ce92ee.txt",
+      "physical_pages": 39
+    },
+    {
+      "doc_id": "AFT-GUW-841",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/c2f71a1fb33fd3be1ea5413b4a1b2f3b4fa7ae484406908c2baba91f8822e08f.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/c2f71a1fb33fd3be1ea5413b4a1b2f3b4fa7ae484406908c2baba91f8822e08f.txt",
+      "physical_pages": 18
+    },
+    {
+      "doc_id": "AFT-GUW-524",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/1433340911f64c56b6fa9f41d414e3ca8341a9952ea91efccac551e53fd2e9b6.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/1433340911f64c56b6fa9f41d414e3ca8341a9952ea91efccac551e53fd2e9b6.txt",
+      "physical_pages": 18
+    },
+    {
+      "doc_id": "AFT-GUW-813",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/a2138de9e08b8db3d68a82d6daa7496d8fa2681ff304b98578a44b2ab11e53e2.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/a2138de9e08b8db3d68a82d6daa7496d8fa2681ff304b98578a44b2ab11e53e2.txt",
+      "physical_pages": 5
+    },
+    {
+      "doc_id": "AFT-GUW-1074",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/5c83cddbe46f46a4ec9b36336c897ae01d450c5fe66c28eb347211b38f69e7dc.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/5c83cddbe46f46a4ec9b36336c897ae01d450c5fe66c28eb347211b38f69e7dc.txt",
+      "physical_pages": 16
+    },
+    {
+      "doc_id": "AFT-GUW-1082",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/871be24ff7d1c88773c3229f4c33e05a3f3ff3040c2333bd37b1958f3740702c.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/871be24ff7d1c88773c3229f4c33e05a3f3ff3040c2333bd37b1958f3740702c.txt",
+      "physical_pages": 10
+    },
+    {
+      "doc_id": "AFT-GUW-596",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/c8cc547af9b553cdfc8a7e7da39bef9d87c2ddf1d0efc9549809f23c805827ae.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/c8cc547af9b553cdfc8a7e7da39bef9d87c2ddf1d0efc9549809f23c805827ae.txt",
+      "physical_pages": 8
+    },
+    {
+      "doc_id": "AFT-GUW-426",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/b2a2e3e986614013b455e63c134b9b929508b955790ad542177f65d3be63eba3.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/b2a2e3e986614013b455e63c134b9b929508b955790ad542177f65d3be63eba3.txt",
+      "physical_pages": 4
+    },
+    {
+      "doc_id": "AFT-GUW-535",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/ce34f033e1c85f3a0023a0f13674187bac234fa0d11c604abc67971b1e1dd336.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/ce34f033e1c85f3a0023a0f13674187bac234fa0d11c604abc67971b1e1dd336.txt",
+      "physical_pages": 8
+    },
+    {
+      "doc_id": "AFT-GUW-763",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/d3693976da7f668c05f85ce498f076243d413ff8c5e1d0885551435699090e6b.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/d3693976da7f668c05f85ce498f076243d413ff8c5e1d0885551435699090e6b.txt",
+      "physical_pages": 8
+    },
+    {
+      "doc_id": "AFT-GUW-331",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/7dcdc9c21f414de48ebdd3bb2d6e71590bf1d2d46b34c09189164859abe29ba0.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/7dcdc9c21f414de48ebdd3bb2d6e71590bf1d2d46b34c09189164859abe29ba0.txt",
+      "physical_pages": 14
+    },
+    {
+      "doc_id": "AFT-GUW-869",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/e1ac3a75f76db4e7a28cca3ebbd41947d303ef8b2c34facd44ba8af13cbe2807.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/e1ac3a75f76db4e7a28cca3ebbd41947d303ef8b2c34facd44ba8af13cbe2807.txt",
+      "physical_pages": 10
+    },
+    {
+      "doc_id": "AFT-GUW-605",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/bccde8b95e031288904ad5269ade4feaaa6270cfa7d9508a9b104d417130ce15.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/bccde8b95e031288904ad5269ade4feaaa6270cfa7d9508a9b104d417130ce15.txt",
+      "physical_pages": 8
+    },
+    {
+      "doc_id": "AFT-GUW-1036",
+      "pdf": "/workspace/c14-consolidation/aft-expansion/official-files/f2ee2cf087fb375a31d28e5d25d4fecbe3ca34fefe355e32d8be973f1545108d.pdf",
+      "derivative": "/workspace/c14-consolidation/aft-expansion/official-files/f2ee2cf087fb375a31d28e5d25d4fecbe3ca34fefe355e32d8be973f1545108d.txt",
+      "physical_pages": 7
+    }
+  ]
+}

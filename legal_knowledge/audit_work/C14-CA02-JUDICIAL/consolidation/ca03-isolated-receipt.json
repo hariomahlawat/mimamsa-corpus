@@ -1,0 +1,35 @@
+{
+  "schema": "c14-candidate-run-v2",
+  "manifest_sha256": "5967c15d4ef5160cbd77943e8f39a806267a4d787e19ee3f7235fdc680810e0d",
+  "status": "CANDIDATE_ONLY_NOT_RELEASED",
+  "documents": [
+    {
+      "doc_id": "hc-allahabad-2018-wria-22663-2007-uphc011724832007-1-2018-07-16",
+      "source_sha256": "7c07f2b53eeb4454daf45f34503bbbb226dcd2e1f0fbfc634ddcf9f851761b38",
+      "assessment_id": "35e9244482d08c2714ce0928d47267dd9f5c24a35acdf184a16eb1085014031b",
+      "recovery_state": "HISTORICALLY_EXCLUDED_CANDIDATE",
+      "relevance": "OCR_REQUIRED",
+      "research_eligible": false,
+      "event_id": "d924555b067ab5bb7bd95efdb81f380e15f14a5756c303a94fbcf3f5f69f29a3"
+    },
+    {
+      "doc_id": "hc-allahabad-2018-wric-4147-2018-uphc010165912018-1-2018-02-05",
+      "source_sha256": "1e1614598321ce266f32200ebe1a57b492de79d2821061c0a3c846d9de9e0d57",
+      "assessment_id": "b3186caa427812e2990b698cad8e24f07333dd1ae0c32de733db5575cb6fd6ac",
+      "recovery_state": "HISTORICALLY_EXCLUDED_CANDIDATE",
+      "relevance": "OCR_REQUIRED",
+      "research_eligible": false,
+      "event_id": "5da43750c60fa411c0c15d37304cae0412ef8bc093684c289181ebea01caeb9c"
+    }
+  ],
+  "restricted_omitted_count": 0,
+  "release_allowed": false,
+  "research_eligible": false,
+  "receipt_sha256": "ef5e8a6ee627225243368fe8b691b1c9944398e1aa2fea2b46913a145031de98",
+  "journal": {
+    "events": 2,
+    "documents": 2,
+    "research_eligible": false,
+    "status": "CANDIDATE_JOURNAL_AUDITED"
+  }
+}

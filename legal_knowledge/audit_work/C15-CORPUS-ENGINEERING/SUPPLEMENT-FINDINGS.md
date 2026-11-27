@@ -1,0 +1,17 @@
+# Cycle 15 independent supplemental review QA
+
+The supplement at SHA-256 `b8bd449749ac4e25d7aafdb7ed3256d3fec2bbf47c33e3ee5d2a7195b5c3f7c0` adds 52 records and 147 exact evidence anchors. The baseline and supplement together contain 100 context-reviewed records, 20 per category, and one extraction quarantine. Document IDs and original source digests are unique across the merged set.
+
+The verifier reconciled the supplement and input hashes to its build receipt, independently rehashed both files in each of the 44 local pairs, verified official URLs and hashes against the collection journals, and recounted physical PDF pages with `pdfinfo`. It reconciled the other eight records to the frozen package's SQLite and JSONL identities and page hashes. All 147 excerpts reproduced at their exact Unicode offsets, agreed with their full-page hashes and were found on the cited pages by exact phrase searches constrained to document ID. A temporary in-memory FTS index supplied the search surface for the 122 local-pair anchors. The other 25 used the frozen SQLite package. The machine receipt records the absolute PDF and text paths of all 44 pairs.
+
+| Severity | Status | Finding |
+|---|---|---|
+| High | Open for authority and application | Original scan inspection in this audit covered two targeted pages. Case relationships, later history and historical and current instrument versions still require verification before determining legal authority or application. The quota is met for selected contextual findings. |
+| Medium | Corrected and reverified | AFT-GUW-948 p.19 now anchors attribution to military service to the readable operative item. The original scan confirms both attribution and the 30% assessment. The cover sheet independently reports allowance and denial of oral leave, and the award direction remains anchored to p.20. |
+| Medium | Document inconsistency identified and retained | AFT-GUW-952 p.40 prints OA 40/2022 in the dispositive paragraph and OA 40/2020 in the footer, as confirmed against the original scan. The supplement now flags the inconsistency separately. The generalized disposition matches the operative text. |
+| Low | Corrected and reverified | AFT-GUW-929 p.16 now anchors the absence of reinstatement and cited presumption alongside the later reassessment. The p.17 statement correctly specifies annual default interest. The short p.17 excerpt locates the clause on arrears, and the deadline and interest remain on the same page. |
+| Low | Open for deployment | Exact phrase replay establishes evidence accessibility in the respective test indexes. Corpus-wide ranks, adverse queries, and deployed retrieval for local-only pairs remain unverified. |
+
+Additional derivative context checks confirmed that AFT-GUW-603 p.7 distinguishes the authority on the inquiry facts and confines the copy-duty finding to the case's procedural posture. AFT-GUW-648 pp.5–6 keeps Rule 115(2A)'s recording obligation separate from the finding that Rule 115(2) was breached, and records reinstatement with pension credit and without back wages. AFT-GUW-946 pp.14–15 attributes the prior appellate outcomes to the tribunal’s account and leaves independent confirmation pending. AFT-GUW-596 p.8 and AFT-GUW-763 pp.5–6 preserve distinct statutory settings for the historical notification and the 2006 Act. AFT-GUW-426 pp.3–4 separates the forum ruling in the bail order from the grounds on which bail was denied.
+
+Reproduce with `PYTHONDONTWRITEBYTECODE=1 python /workspace/c15-qa/verify_supplement.py`.

@@ -1,0 +1,15 @@
+{
+  "prior_hold_total": 486,
+  "distinct_rechecks": 404,
+  "diagnostic_outcomes": {
+    "context-review-required": 32,
+    "review-error-hold": 13,
+    "target-page-sparse-or-blank-hold": 258,
+    "identity-unresolved": 10,
+    "bench-name-recovered-hold": 23,
+    "integrity-hold": 15,
+    "http-hold": 53
+  },
+  "newly_cleared_and_verified_originals": 58,
+  "diagnostics_do_not_confer_clearance": true
+}

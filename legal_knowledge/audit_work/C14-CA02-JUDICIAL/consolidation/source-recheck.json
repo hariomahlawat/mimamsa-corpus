@@ -1,0 +1,3142 @@
+{
+  "schema": "c14-source-recheck-v1",
+  "isolated": true,
+  "judicial_retry_count": 618,
+  "observations": {
+    "hc-allahabad-2018-wpil-4332-2018-uphc011751142018-1-2018-09-17": [
+      503,
+      503,
+      200
+    ],
+    "hc-delhi-2021-w-p-c-13467-2021-dlhc010366862021-1-2021-11-29": [
+      503,
+      503,
+      200
+    ],
+    "sc-2024-army-welfare-education-society-2024insc501": [
+      503,
+      503,
+      200
+    ],
+    "Guwahati AFT listing": [
+      503,
+      503,
+      200
+    ],
+    "AFT central judgments": [
+      503,
+      503,
+      503
+    ],
+    "Gazette Army Act": [
+      503,
+      503,
+      503
+    ],
+    "India Code 1960": [
+      "TimeoutError",
+      "TimeoutError",
+      "TimeoutError"
+    ],
+    "DESW robots": [
+      403
+    ],
+    "CGDA pension index": [
+      503,
+      503,
+      503
+    ]
+  },
+  "judicial": [
+    {
+      "doc_id": "hc-allahabad-2018-wpil-4332-2018-uphc011751142018-1-2018-09-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": true
+    },
+    {
+      "doc_id": "hc-allahabad-2019-splad-374-2006-uphc011690972006-1-2019-01-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-abail-12453-2021-uphc010838922021-1-2022-09-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-arco-110-2022-uphc011279312022-1-2022-08-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-arco-136-2022-uphc011615582022-1-2022-09-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-bail-30630-2022-uphc011237122022-1-2022-08-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-capl-2413-2018-uphc020461032018-1-2022-08-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-capl-3454-2015-uphc010465562015-1-2022-09-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-capl-6067-2015-uphc011962742015-1-2022-11-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-capl-6501-2014-uphc012006972014-1-2022-08-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-capl-7343-2015-uphc011997302015-1-2022-12-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-clre-33-2000-uphc010836272000-1-2022-07-14",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-coma-3-2008-uphc020393302008-1-2022-08-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-crlp-17479-2022-uphc012232722022-1-2022-11-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-crlp-3599-2021-uphc020438242021-1-2022-10-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-untitled-uphc010192982022-1-2022-09-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-untitled-uphc011016752019-1-2022-09-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-untitled-uphc011060232022-1-2022-07-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-untitled-uphc020725592022-1-2022-12-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-wria-24-2015-uphc020369632015-1-2022-09-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-wria-4050-2022-uphc010403182022-1-2022-07-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-wria-5159-2011-uphc020447232011-1-2022-09-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-wria-8984-2022-uphc010964002022-1-2022-07-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-wric-24560-2022-uphc011559782022-1-2022-08-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-wric-3000105-1996-uphc020223561996-1-2022-10-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2022-wric-33934-2010-uphc011731332010-1-2022-09-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-abail-5448-2023-uphc011076662023-1-2023-05-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-capl-4291-2023-uphc011215192023-1-2023-05-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-cona-6-2022-uphc020740352022-1-2023-03-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-crlp-1453-2023-uphc020106132023-1-2023-02-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-habc-45-2021-uphc010037762021-1-2023-04-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc010613692023-1-2023-10-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc010961262023-1-2023-05-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc011267342023-1-2023-10-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc012613392023-1-2023-12-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc012613512023-1-2023-11-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc020231012023-1-2023-04-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc020254012023-1-2023-04-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc020284312023-1-2023-04-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc020316262023-1-2023-05-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc020324422023-1-2023-05-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc020417932023-1-2023-06-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc020549432023-1-2023-08-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-untitled-uphc020856612023-1-2023-12-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wria-10816-2023-uphc011461282023-1-2023-07-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wria-19039-2019-uphc020454992019-1-2023-05-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wria-4935-2023-uphc010613792023-1-2023-04-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wria-6784-2023-uphc010769132023-1-2023-05-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wric-1004940-2011-uphc020424582011-1-2023-04-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wric-2000027-2009-uphc020019462009-1-2023-11-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wric-24580-2017-uphc020425202017-1-2023-11-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wric-24932-2023-uphc011635962023-1-2023-07-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wric-26793-2018-uphc011517642018-1-2023-05-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wric-3930-2023-uphc020348142023-1-2023-10-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wric-40360-2023-uphc012538792023-1-2023-12-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wric-811-2008-uphc020305832008-1-2023-08-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wric-9526-2023-uphc020766362023-1-2023-10-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2023-wtax-81-2023-uphc010195312023-1-2023-03-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-capl-1304-2021-uphc020349742021-1-2024-02-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-clred-79-2018-uphc020041622018-1-2024-05-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-fapld-44-1997-uphc020153441997-1-2024-04-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-untitled-uphc020222622024-1-2024-05-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-untitled-uphc020252542024-1-2024-04-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-untitled-uphc020272042024-1-2024-04-26",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-untitled-uphc020422752024-1-2024-06-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-untitled-uphc020532112023-1-2024-01-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-untitled-uphc020656492024-1-2024-09-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-untitled-uphc020844402023-1-2024-01-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-untitled-uphc020844422023-1-2024-01-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-wria-1939-2014-uphc020373692014-1-2024-05-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-wria-29726-2021-uphc020426182021-1-2024-05-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-wria-7214-2022-uphc020643402022-1-2024-08-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2024-wric-5294-2024-uphc020406122024-1-2024-06-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-capl-2705-2025-uphc020641612025-1-2025-10-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-capl-374-2025-uphc020098852025-1-2025-02-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-capl-4077-2023-uphc020820112023-1-2025-10-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-crlp-10459-2025-uphc020869372025-1-2025-11-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-fapl-419-2009-uphc011908682009-1-2025-05-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-untitled-uphc011476292025-1-2025-04-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-untitled-uphc014298372024-1-2025-04-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-untitled-uphc020036082017-1-2025-02-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-untitled-uphc020235692025-1-2025-04-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-untitled-uphc020285022025-1-2025-04-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-untitled-uphc020455362025-1-2025-06-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-untitled-uphc020541772025-1-2025-07-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-untitled-uphc020571842024-1-2025-11-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-untitled-uphc020739072025-1-2025-11-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-untitled-uphc020739232025-1-2025-11-14",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-untitled-uphc020781182025-1-2025-10-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-wria-14414-2009-uphc011555292009-1-2025-08-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-wria-26281-2008-uphc011528612008-1-2025-08-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-wria-3993-2005-uphc020328512005-1-2025-02-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-wric-30564-2025-uphc014543212025-1-2025-10-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-wric-3473-2025-uphc020256442025-1-2025-04-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2025-wric-36301-2024-uphc015623122024-1-2025-04-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-allahabad-2026-untitled-uphc012633762026-1-2026-05-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2004-w-p-c-6724-2004-dlhc010286882004-1-2004-11-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2004-w-p-c-8085-2004-dlhc010292632004-1-2004-11-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2005-w-p-c-6937-2003-dlhc010272522003-1-2005-05-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2006-w-p-c-10630-2006-dlhc010668462006-1-2006-10-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2006-w-p-c-13629-2004-dlhc010228442004-1-2019-07-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2006-w-p-c-1925-2002-dlhc010200242002-1-2020-03-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2006-w-p-c-8984-2003-dlhc010288562003-1-2006-08-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2007-w-p-c-17025-2006-dlhc010704782006-1-2007-08-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2008-w-p-c-12814-2006-dlhc010679752006-1-2008-09-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2008-w-p-c-20215-2005-dlhc010676782005-1-2008-05-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2008-w-p-c-3702-2003-dlhc010236622003-1-2008-07-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2008-w-p-c-4950-2008-dlhc010989862008-1-2008-07-14",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2008-w-p-c-60-2008-dlhc010011982008-1-2008-05-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2008-w-p-c-7941-2003-dlhc010282432003-1-2008-08-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2008-w-p-c-9522-2004-dlhc010299862004-1-2008-02-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2009-w-p-c-6828-2009-dlhc010244232009-1-2009-07-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2010-cm-m-1342-2008-dlhc011811502008-1-2010-03-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2010-la-app-149-2007-dlhc010295642007-1-2011-01-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2010-w-p-c-14034-2009-dlhc011961792009-1-2010-07-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2010-w-p-c-16699-2006-dlhc010702842006-1-2010-06-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2010-w-p-c-6827-2009-dlhc010249312009-1-2010-01-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2010-w-p-c-9028-2008-dlhc011905182008-1-2010-03-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2010-w-p-c-9525-2007-dlhc011734222007-1-2017-01-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2011-w-p-c-2515-2010-dlhc010575622010-1-2011-03-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2011-w-p-c-6392-2010-dlhc011427992010-1-2011-09-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2011-w-p-c-722-2010-dlhc010170712010-1-2011-02-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2012-la-app-129-2011-dlhc011504632010-1-2012-01-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2012-la-app-163-2012-dlhc011379832010-1-2012-05-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2012-la-app-250-2010-dlhc010189222010-1-2012-01-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2012-la-app-392-2010-dlhc010490612010-1-2012-01-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2012-la-app-462-2009-dlhc011634472008-1-2012-10-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2012-w-p-c-1138-2012-dlhc010344872012-1-2012-11-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2012-w-p-c-1144-2012-dlhc010344882012-1-2012-11-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2012-w-p-c-2144-2012-dlhc010616582012-1-2012-08-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2012-w-p-c-2145-2012-dlhc010616652012-1-2012-08-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2012-w-p-c-2880-2012-dlhc010801942012-1-2012-05-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2012-w-p-c-774-2012-dlhc010230592012-1-2012-02-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2012-w-p-c-8633-2003-dlhc010286772003-1-2012-10-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2013-w-p-c-4670-2008-dlhc010930692008-1-2013-02-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2013-w-p-c-5689-2013-dlhc011332222013-1-2013-09-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2013-w-p-c-6908-2013-dlhc011658862013-1-2013-11-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2014-la-app-136-2013-dlhc010865832013-1-2014-11-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2014-w-p-c-2803-2014-dlhc010782842014-1-2014-09-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2014-w-p-c-5073-2013-dlhc011033072013-1-2014-10-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2014-w-p-c-5112-2013-dlhc011196262013-1-2014-09-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2014-w-p-c-5248-2013-dlhc011226642013-1-2014-09-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2014-w-p-c-554-2014-dlhc010130392014-1-2014-09-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2014-w-p-c-7146-2014-dlhc011954442014-1-2014-10-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-la-app-257-2014-dlhc010666442014-1-2025-02-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-10815-2015-dlhc016033412015-1-2015-12-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-10977-2015-dlhc016013942015-1-2015-11-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-3217-2015-dlhc011540422015-1-2015-09-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-4081-2015-dlhc012040812015-1-2015-05-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-6369-2014-dlhc011752082014-1-2015-02-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-6983-2015-dlhc012647702015-1-2016-03-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-7451-2013-dlhc011800662013-1-2015-04-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-7704-2015-dlhc013931412015-1-2016-02-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-7908-2011-dlhc011556792011-1-2016-07-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-8230-2015-dlhc014261392015-1-2015-08-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-8427-2014-dlhc012316002014-1-2015-08-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-9242-2015-dlhc014831082015-1-2015-12-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-9360-2015-dlhc014845662015-1-2015-12-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2015-w-p-c-9439-2015-dlhc014831112015-1-2015-12-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-cont-app-c-3-2016-dlhc010576502016-1-2016-03-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-cs-os-3248-2015-dlhc015569942015-1-2016-07-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-10192-2015-dlhc015619742015-1-2016-05-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-10197-2016-dlhc012797472016-1-2016-10-26",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-10274-2016-dlhc012808622016-1-2016-10-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-10980-2015-dlhc016119652015-1-2016-07-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-11550-2015-dlhc016421942015-1-2016-05-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-1195-2016-dlhc010415292016-1-2016-02-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-1453-2016-dlhc010454602016-1-2016-03-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-1621-2016-dlhc010454232016-1-2016-03-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-1676-2016-dlhc010302902016-1-2016-02-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-2020-2016-dlhc010884032016-1-2016-05-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-222-2016-dlhc010037422016-1-2016-01-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-2629-2016-dlhc011053922016-1-2016-03-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-3033-2016-dlhc011127912016-1-2016-04-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-3603-2016-dlhc011267372016-1-2016-04-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-3666-2016-dlhc011183002016-1-2016-05-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-4039-2013-dlhc010902202013-1-2016-02-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-5145-2016-dlhc011567092016-1-2016-07-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-5422-2016-dlhc011611962016-1-2016-06-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-5697-2016-dlhc011651782016-1-2016-07-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-6919-2016-dlhc011918072016-1-2016-08-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-7312-2016-dlhc011994342016-1-2016-08-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-7482-2014-dlhc012036542014-1-2016-08-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-7658-2016-dlhc012084182016-1-2016-08-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-7687-2015-dlhc013944372015-1-2016-05-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-8143-2016-dlhc012411042016-1-2016-09-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-8302-2015-dlhc014263592015-1-2016-10-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-8308-2015-dlhc014263702015-1-2016-03-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-8372-2016-dlhc012463632016-1-2016-09-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-8435-2015-dlhc014260852015-1-2016-05-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-8444-2015-dlhc014275282015-1-2016-05-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-9043-2015-dlhc014680722015-1-2016-05-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-9046-2015-dlhc014680652015-1-2016-05-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-9055-2015-dlhc014501432015-1-2016-05-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-9098-2015-dlhc014680692015-1-2016-05-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-961-2014-dlhc010205012014-1-2016-02-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-c-9634-2015-dlhc015194562015-1-2016-05-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-crl-1218-2016-dlhc011200742016-1-2016-11-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2016-w-p-crl-2723-2016-dlhc012064222016-1-2016-09-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-cm-m-719-2017-dlhc013211182017-1-2017-07-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-10430-2017-dlhc015005272017-1-2017-11-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-11088-2017-dlhc015248322017-1-2017-12-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-11241-2015-dlhc016040132015-1-2017-02-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-11296-2017-dlhc015289332017-1-2017-12-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-11567-2017-dlhc015328732017-1-2017-12-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-3636-2003-dlhc010235882003-1-2017-03-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-3706-2017-dlhc012133652017-1-2017-05-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-3935-2017-dlhc012228052017-1-2017-11-14",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-3952-2017-dlhc012251262017-1-2017-05-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-4256-2017-dlhc012490622017-1-2017-08-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-494-2017-dlhc010150002017-1-2017-11-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-5232-2017-dlhc012679672017-1-2017-09-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-5522-2017-dlhc012951802017-1-2017-10-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-5884-2017-dlhc012677402017-1-2017-07-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-5952-2016-dlhc011725212016-1-2017-02-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-6871-2017-dlhc013363232017-1-2017-08-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-7597-2017-dlhc014127352017-1-2017-08-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-76-2017-dlhc010023692017-1-2017-01-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-7677-2013-dlhc011855102013-1-2017-05-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-780-2004-dlhc010291032004-1-2017-07-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-783-2017-dlhc010149192017-1-2017-05-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-8106-2016-dlhc012388032016-1-2017-09-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-8109-2017-dlhc014318842017-1-2017-10-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-8413-2017-dlhc014316702017-1-2017-09-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2017-w-p-c-9958-2017-dlhc014826202017-1-2017-11-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-rfa-1016-2016-dlhc012661082016-1-2018-07-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-10830-2018-dlhc013652872018-1-2019-08-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-11095-2017-dlhc015265002017-1-2018-04-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-11780-2018-dlhc013132982018-1-2018-10-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-13425-2018-dlhc014304132018-1-2018-12-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-2564-2018-dlhc010803712018-1-2018-03-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-3237-2017-dlhc011859262017-1-2018-01-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-34-2018-dlhc015343232017-1-2018-01-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-448-2018-dlhc010084252018-1-2018-03-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-4641-2018-dlhc011203862018-1-2018-05-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-504-2018-dlhc010099832018-1-2018-02-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-5673-2018-dlhc011397082018-1-2018-05-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-586-2018-dlhc010086772018-1-2018-02-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-5925-2018-dlhc011427052018-1-2018-05-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-6073-2018-dlhc011450822018-1-2018-05-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-6107-2018-dlhc011452712018-1-2018-08-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-6115-2018-dlhc011438542018-1-2018-05-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-7004-2018-dlhc011649692018-1-2018-07-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-7200-2018-dlhc011688082018-1-2018-07-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-7462-2017-dlhc013914782017-1-2018-01-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-7469-2018-dlhc011742402018-1-2018-08-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-7503-2018-dlhc011720792018-1-2018-07-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-7505-2018-dlhc011772752018-1-2018-07-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-7883-2018-dlhc011861392018-1-2018-12-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-8017-2018-dlhc011921592018-1-2018-08-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-8046-2018-dlhc011871542018-1-2018-08-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-8490-2018-dlhc012116262018-1-2018-08-14",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-8818-2018-dlhc012158592018-1-2018-09-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-8824-2017-dlhc014470552017-1-2018-11-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-9154-2017-dlhc014595022017-1-2018-03-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-9233-2016-dlhc012480892016-1-2018-04-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-9329-2018-dlhc012628812018-1-2018-09-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-9349-2018-dlhc012608812018-1-2018-09-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-9443-2018-dlhc012569462018-1-2018-10-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-9505-2018-dlhc012668822018-1-2018-11-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2018-w-p-c-9894-2018-dlhc013020932018-1-2018-09-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-crl-m-c-7938-2019-dlhc010306422019-1-2019-09-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-1025-2019-dlhc010091152019-1-2019-02-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-10497-2019-dlhc010023832019-1-2019-11-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-10500-2019-dlhc010037642019-1-2019-09-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-11192-2018-dlhc012959732018-1-2019-03-14",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-12354-2018-dlhc014372312018-1-2019-10-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-12697-2018-dlhc014548162018-1-2019-03-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-1284-2019-dlhc010099232019-1-2019-02-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-12889-2018-dlhc014609362018-1-2019-11-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-162-2019-dlhc010067982019-1-2019-01-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-1863-2019-dlhc010119942019-1-2019-02-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-1875-2019-dlhc010120452019-1-2019-02-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-2092-2019-dlhc010128532019-1-2019-08-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-2571-2019-dlhc010142892019-1-2019-03-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-3637-2018-dlhc011066802018-1-2019-03-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-3858-2019-dlhc010183612019-1-2019-04-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-5169-2019-dlhc010224122019-1-2019-05-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-546-2019-dlhc010076492019-1-2019-01-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-567-2019-dlhc010078592019-1-2019-02-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-571-2019-dlhc010078582019-1-2019-02-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-585-2019-dlhc010078572019-1-2019-02-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-6525-2019-dlhc010266322019-1-2019-05-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-653-2019-dlhc010080462019-1-2019-01-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-707-2019-dlhc010080352019-1-2019-01-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-7879-2019-dlhc010303632019-1-2019-08-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-8189-2018-dlhc011935572018-1-2019-03-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-8353-2018-dlhc011966182018-1-2019-02-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-8355-2018-dlhc011966162018-1-2019-02-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-8405-2018-dlhc012006302018-1-2019-01-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-8637-2019-dlhc010329252019-1-2019-09-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2019-w-p-c-9971-2017-dlhc014832672017-1-2019-02-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-10017-2020-dlhc010059722020-1-2020-12-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-10404-2019-dlhc010055222019-1-2020-09-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-11772-2018-dlhc013762822018-1-2020-02-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-1218-2020-dlhc010107992020-1-2020-02-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-1385-2020-dlhc010114542020-1-2020-02-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-1397-2020-dlhc010115002020-1-2020-02-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-1587-2020-dlhc010120502020-1-2020-02-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-2139-2020-dlhc010136702020-1-2020-02-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-32-2020-dlhc010001622019-1-2020-02-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-3363-2020-dlhc010175162020-1-2020-06-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-5001-2020-dlhc010215352020-1-2020-09-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-663-2020-dlhc010088942020-1-2020-01-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-747-2020-dlhc010093492020-1-2020-01-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2020-w-p-c-858-2020-dlhc010095542020-1-2020-01-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-11339-2021-dlhc010311392021-1-2021-10-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-12314-2021-dlhc010338062021-1-2021-10-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-12946-2021-dlhc010353982021-1-2021-11-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-13467-2021-dlhc010366862021-1-2021-11-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": true
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-2695-2021-dlhc010110412021-1-2021-02-26",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-2942-2021-dlhc010117302021-1-2021-03-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-4191-2021-dlhc010147032021-1-2021-04-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-6043-2021-dlhc010194942021-1-2021-06-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-8592-2021-dlhc010251642021-1-2021-08-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-89-2021-dlhc010016842020-1-2021-01-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-908-2021-dlhc010071152021-1-2021-01-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2021-w-p-c-9409-2021-dlhc010268692021-1-2021-09-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-crl-m-c-2159-2021-dlhc010284752021-1-2022-08-26",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-11719-2022-dlhc010300002022-1-2022-08-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-11970-2021-dlhc010326842021-1-2022-10-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-12008-2022-dlhc010308402022-1-2022-09-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-12085-2021-dlhc010331202021-1-2022-07-26",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-12286-2022-dlhc010317692022-1-2022-08-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-12905-2022-dlhc010337722022-1-2022-10-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-13203-2022-dlhc010344492022-1-2022-09-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-13288-2022-dlhc010347782022-1-2022-09-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-1378-2022-dlhc010040122022-1-2022-01-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-14105-2022-dlhc010373262022-1-2022-10-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-14174-2021-dlhc010384582021-1-2022-11-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-15704-2022-dlhc010425112022-1-2022-11-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-3451-2022-dlhc010085122022-1-2022-02-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-3721-2022-dlhc010091562022-1-2022-07-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-4581-2022-dlhc010111032022-1-2022-03-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-6379-2004-dlhc010285122004-1-2022-07-14",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2022-w-p-c-6725-2021-dlhc010212992021-1-2022-10-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-crl-m-c-960-2020-dlhc010132842020-1-2023-11-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-o-m-p-comm-469-2023-dlhc010462352023-1-2023-12-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-o-m-p-comm-470-2023-dlhc010462362023-1-2023-12-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-10889-2022-dlhc010270612022-1-2023-03-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-12115-2023-dlhc010364022023-1-2023-09-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-13716-2018-dlhc015633112018-1-2023-07-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-16428-2022-dlhc010448682022-1-2023-02-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-1648-2023-dlhc010013822022-1-2023-02-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-2641-2023-dlhc010069702023-1-2023-05-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-2905-2023-dlhc010078602023-1-2023-05-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-2985-2023-dlhc010081662023-1-2023-09-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-4942-2023-dlhc010140472023-1-2023-04-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-5411-2023-dlhc010154372023-1-2023-04-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-5449-2023-dlhc010156112023-1-2023-04-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-5468-2023-dlhc010156612023-1-2023-04-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-5482-2023-dlhc010156942023-1-2023-04-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-6280-2021-dlhc010201662021-1-2023-02-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-6507-2021-dlhc010206712021-1-2023-02-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-6908-2023-dlhc010196542023-1-2023-05-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-7659-2010-dlhc011629892010-1-2023-07-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-7807-2022-dlhc010194532022-1-2023-08-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-8003-2023-dlhc010227582023-1-2023-06-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-8804-2021-dlhc010256872021-1-2023-08-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-9625-2023-dlhc010276582023-1-2023-07-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2023-w-p-c-9793-2023-dlhc010282422023-1-2023-07-26",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-arb-p-1234-2022-dlhc010416522022-1-2024-02-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-arb-p-473-2024-dlhc010186462024-1-2024-07-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-arb-p-474-2024-dlhc010186472024-1-2024-07-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-arb-p-475-2024-dlhc010186482024-1-2024-04-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-arb-p-601-2024-dlhc010258262024-1-2024-05-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-cm-m-1988-2024-dlhc010093452024-1-2024-02-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-cm-m-2070-2024-dlhc010119012024-1-2024-03-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-cm-m-2075-2024-dlhc010119052024-1-2024-04-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-cont-cas-c-1141-2024-dlhc010430822024-1-2024-07-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-crl-m-c-1919-2022-dlhc010166342022-1-2024-11-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-crl-m-c-4554-2022-dlhc010348692022-1-2024-05-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-cs-comm-434-2021-dlhc010283212021-1-2025-05-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-lpa-1180-2024-dlhc010887192024-1-2024-12-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-lpa-345-2024-dlhc010236642024-1-2024-04-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-lpa-638-2022-dlhc010415102022-1-2024-02-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-lpa-741-2024-dlhc010463692024-1-2025-04-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-lpa-771-2023-dlhc010478622023-1-2024-09-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-mat-app-f-c-257-2023-dlhc010351282023-1-2024-01-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-o-m-p-comm-273-2020-dlhc010111992020-1-2024-10-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-o-m-p-misc-comm-196-2024-dlhc010125452024-1-2024-03-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-o-m-p-misc-comm-51-2024-dlhc010019442024-1-2024-01-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-o-m-p-misc-comm-565-2024-dlhc010463932024-1-2024-08-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-o-m-p-misc-comm-663-2024-dlhc010572472024-1-2024-09-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-o-m-p-misc-comm-666-2024-dlhc010572502024-1-2024-09-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-o-m-p-misc-comm-680-2024-dlhc010577942024-1-2024-09-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-o-m-p-misc-comm-721-2024-dlhc010601292024-1-2024-09-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-10114-2019-dlhc010378552019-1-2024-02-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-10176-2024-dlhc010432192024-1-2024-11-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-10288-2020-dlhc010338772020-1-2024-01-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-10949-2024-dlhc010482542024-1-2024-11-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-11161-2020-dlhc010358272020-1-2024-01-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-11236-2022-dlhc010283932022-1-2024-07-26",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-11518-2016-dlhc013157682016-1-2024-02-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-11615-2024-dlhc010529082024-1-2024-11-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-12097-2022-dlhc010311032022-1-2024-12-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-12390-2024-dlhc010578142024-1-2024-09-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-12397-2024-dlhc010578212024-1-2024-09-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-12493-2024-dlhc010583362024-1-2024-09-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-12568-2024-dlhc010587682024-1-2024-09-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-12777-2023-dlhc010387492023-1-2024-01-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-12814-2024-dlhc010604142024-1-2024-09-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-12827-2024-dlhc010604272024-1-2024-09-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-13116-2024-dlhc010626492024-1-2024-09-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-13119-2024-dlhc010626522024-1-2024-09-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-13256-2024-dlhc010629632024-1-2024-09-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-13383-2024-dlhc010639362024-1-2024-09-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-14172-2024-dlhc010688632024-1-2024-10-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-14238-2023-dlhc010436972023-1-2024-01-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-14955-2024-dlhc010733362024-1-2024-10-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-14959-2023-dlhc010464252023-1-2024-01-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-15524-2023-dlhc010484522023-1-2024-01-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-15597-2023-dlhc010486902023-1-2024-01-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-15961-2023-dlhc010519592023-1-2024-01-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-16175-2024-dlhc010840662024-1-2024-11-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-16517-2024-dlhc010868662024-1-2024-11-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-16563-2024-dlhc010872512024-1-2024-12-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-17433-2024-dlhc010948932024-1-2024-12-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-17733-2022-dlhc010491332022-1-2024-04-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-18006-2024-dlhc010988322024-1-2024-12-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-1807-2021-dlhc010089702021-1-2024-09-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-2102-2024-dlhc010058902024-1-2024-02-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-2252-2012-dlhc010591662012-1-2024-02-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-2281-2010-dlhc010521312010-1-2024-08-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-2333-2024-dlhc010070872024-1-2024-02-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-2354-2024-dlhc010071062024-1-2024-05-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-2437-2024-dlhc010075822024-1-2024-02-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-2566-2024-dlhc010080592024-1-2024-03-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-2610-2018-dlhc010858542018-1-2025-04-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-2634-2018-dlhc010858532018-1-2024-10-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-2669-2018-dlhc010878032018-1-2024-04-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-2822-2017-dlhc011524142017-1-2024-04-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-296-2024-dlhc010582392023-1-2024-01-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-3221-2024-dlhc010103772024-1-2024-03-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-4791-2024-dlhc010173962024-1-2024-04-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-4807-2024-dlhc010174102024-1-2024-04-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-4884-2014-dlhc011210342014-1-2024-10-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-5264-2019-dlhc010229812019-1-2024-01-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-602-2017-dlhc010149752017-1-2024-01-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-6213-2023-dlhc010178802023-1-2024-07-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-6236-2023-dlhc010179272023-1-2024-02-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-6247-2024-dlhc010247632024-1-2024-09-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-6254-2024-dlhc010247702024-1-2024-05-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-7181-2024-dlhc010295252024-1-2024-10-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-7189-2024-dlhc010300562024-1-2024-05-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-7541-2023-dlhc010214232023-1-2024-10-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-8152-2023-dlhc010230472023-1-2024-01-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-8377-2021-dlhc010247052021-1-2024-01-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-8600-2024-dlhc010363772024-1-2024-09-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-932-2018-dlhc015290112017-1-2024-10-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-957-2005-dlhc010729202005-1-2024-08-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-c-9897-2024-dlhc010419502024-1-2024-08-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2024-w-p-crl-346-2021-dlhc010097802021-1-2025-12-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-cm-m-1403-2025-dlhc010509072025-1-2025-07-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-cm-m-1572-2025-dlhc010594382025-1-2025-08-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-cm-m-1587-2025-dlhc010600132025-1-2025-08-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-cont-cas-c-1762-2023-dlhc010479932023-1-2025-09-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-cont-cas-c-264-2023-dlhc010072572023-1-2025-05-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-crl-m-c-3982-2025-dlhc010355072025-1-2025-07-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-cs-comm-882-2024-dlhc010688082024-1-2025-02-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-efa-os-2-2017-dlhc013261322016-1-2025-09-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-fao-os-comm-125-2025-dlhc010561112025-1-2025-08-12",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-fao-os-comm-41-2024-dlhc010119882024-1-2025-10-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-lpa-534-2025-dlhc010600662025-1-2025-08-26",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-mat-app-f-c-444-2024-dlhc010986492024-1-2025-02-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-o-m-p-comm-205-2021-dlhc010219452021-1-2025-05-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-o-m-p-comm-28-2021-dlhc010021972020-1-2025-09-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-o-m-p-i-comm-423-2023-dlhc010561682023-1-2025-03-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-o-m-p-misc-comm-475-2025-dlhc010386552025-1-2025-07-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-o-m-p-misc-comm-628-2025-dlhc010567882025-1-2025-08-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-o-m-p-misc-comm-749-2025-dlhc010665642025-1-2025-09-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-o-m-p-misc-comm-827-2025-dlhc010765652025-1-2025-10-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-o-m-p-misc-comm-828-2025-dlhc010765662025-1-2025-10-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-o-m-p-misc-comm-91-2025-dlhc010034072025-1-2025-01-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-10681-2025-dlhc010484292025-1-2025-12-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-11465-2025-dlhc010530152025-1-2025-08-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-11675-2025-dlhc010537522025-1-2025-08-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-11941-2025-dlhc010550792025-1-2025-08-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-11979-2025-dlhc010552422025-1-2025-12-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-1233-2019-dlhc010096942019-1-2025-10-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-12468-2024-dlhc010583112024-1-2025-10-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-13260-2024-dlhc010629672024-1-2025-12-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-13690-2025-dlhc010652762025-1-2025-12-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-15202-2025-dlhc010755202025-1-2025-10-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-15731-2025-dlhc010787542025-1-2026-03-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-1925-2025-dlhc011067412024-1-2025-02-14",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-2126-2025-dlhc010080132025-1-2025-02-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-2230-2025-dlhc010083302025-1-2025-02-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-2581-2024-dlhc010080732024-1-2025-02-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-2610-2018-dlhc010858542018-1-2025-04-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-352-2025-dlhc011000272024-1-2025-01-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-4202-2025-dlhc010181562025-1-2025-04-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-4295-2023-dlhc010119322023-1-2025-05-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-4343-2025-dlhc010184942025-1-2025-07-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-4779-2024-dlhc010171952024-1-2025-12-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-5215-2002-dlhc010236792002-1-2025-12-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-5294-2025-dlhc010234012025-1-2025-04-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-6120-2023-dlhc010176182023-1-2025-05-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-6275-2025-dlhc010291772025-1-2025-05-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-6306-2023-dlhc010180922023-1-2025-05-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-6325-2023-dlhc010181582023-1-2025-05-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-6327-2023-dlhc010181602023-1-2025-05-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-6329-2023-dlhc010181622023-1-2025-05-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-6348-2023-dlhc010181912023-1-2025-05-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-670-2025-dlhc010014502025-1-2025-03-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-7161-2025-dlhc010328752025-1-2025-08-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-7179-2025-dlhc010332072025-1-2025-08-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-7766-2025-dlhc010352942025-1-2026-02-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-8132-2023-dlhc010230272023-1-2025-08-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-8962-2024-dlhc010380402024-1-2025-12-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-9270-2025-dlhc010411242025-1-2025-07-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2025-w-p-c-987-2025-dlhc011027302024-1-2025-03-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-c-r-p-222-2026-dlhc010357182026-1-2026-08-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-c-r-p-27-2026-dlhc010026412026-1-2026-01-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-c-r-p-28-2026-dlhc010026432026-1-2026-01-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-cm-m-1731-2026-dlhc010358632026-1-2026-08-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-cm-m-23-2023-dlhc010004482022-1-2026-01-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-cont-cas-c-144-2026-dlhc010022762026-1-2026-01-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-cont-cas-c-1494-2025-dlhc010764782025-1-2026-10-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-cont-cas-c-1696-2026-dlhc010437032026-1-2026-09-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-crl-m-c-5243-2026-dlhc010330732026-1-2026-07-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-fao-535-2016-dlhc012744692016-1-2026-07-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-fao-os-comm-136-2025-dlhc010646292025-1-2026-01-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-o-m-p-comm-15-2021-dlhc010018512020-1-2026-01-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-o-m-p-comm-497-2022-dlhc010472862022-1-2026-05-26",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-o-m-p-misc-comm-188-2026-dlhc010065752026-1-2026-02-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-o-m-p-misc-comm-639-2026-dlhc010378932026-1-2026-08-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-omp-enf-comm-1-2024-dlhc010576072023-1-2026-08-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-rfa-comm-620-2026-dlhc010436492026-1-2026-09-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-untitled-dlhc010053102026-1-2026-02-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-10031-2026-dlhc010319652026-1-2026-07-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-10330-2026-dlhc010330182026-1-2026-07-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-10428-2026-dlhc010333562026-1-2026-07-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-10454-2026-dlhc010333842026-1-2026-07-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-12108-2025-dlhc010563092025-1-2026-08-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-12319-2026-dlhc010397272026-1-2026-08-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-12421-2026-dlhc010401032026-1-2026-08-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-12510-2009-dlhc011538682009-1-2026-03-16",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-12689-2025-dlhc010611672025-1-2026-04-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-12727-2026-dlhc010411952026-1-2026-09-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-12783-2026-dlhc010413792026-1-2026-09-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-13046-2026-dlhc010422992026-1-2026-09-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-13372-2023-dlhc010406822023-1-2026-08-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-13440-2024-dlhc010645802024-1-2026-01-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-14370-2025-dlhc010692172025-1-2026-04-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-14780-2026-dlhc010481202026-1-2026-10-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-15331-2026-dlhc010499932026-1-2026-10-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-15990-2022-dlhc010434162022-1-2026-02-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-16989-2025-dlhc010874822025-1-2026-01-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-17214-2025-dlhc010888152025-1-2026-05-26",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-1736-2026-dlhc010041152026-1-2026-04-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-1747-2026-dlhc010043422026-1-2026-02-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-1748-2026-dlhc010043432026-1-2026-02-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-1749-2026-dlhc010043442026-1-2026-02-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-1814-2026-dlhc010045152026-1-2026-02-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-2386-2026-dlhc010063782026-1-2026-04-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-2724-2026-dlhc010073872026-1-2026-04-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-2775-2026-dlhc010076062026-1-2026-04-20",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-2894-2026-dlhc010079172026-1-2026-03-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-2997-2025-dlhc010124412025-1-2026-07-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-3264-2026-dlhc010091302026-1-2026-03-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-403-2023-dlhc010006822023-1-2026-04-28",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-4331-2026-dlhc010132302026-1-2026-04-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-4332-2026-dlhc010132112026-1-2026-04-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-4333-2026-dlhc010131882026-1-2026-04-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-4865-2023-dlhc010137402023-1-2026-02-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-4888-2026-dlhc010151932026-1-2026-04-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-502-2026-dlhc010007892026-1-2026-02-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-5634-2025-dlhc010251172025-1-2026-03-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-5969-2026-dlhc010191252026-1-2026-05-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-6365-2023-dlhc010182922023-1-2026-03-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-6649-2026-dlhc010217352026-1-2026-05-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-6871-2026-dlhc010222682026-1-2026-05-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-7511-2026-dlhc010241022026-1-2026-07-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-7598-2019-dlhc010295122019-1-2026-05-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-8589-2026-dlhc010271822026-1-2026-08-13",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-8633-2023-dlhc010242972023-1-2026-03-18",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-9117-2026-dlhc010290252026-1-2026-07-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-delhi-2026-w-p-c-9229-2025-dlhc010406152025-1-2026-04-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2010-swp-1493-2003-jkhc010035902003-1-2025-04-15",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2021-aa-13-2006-jkhc020000852006-1-2021-06-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2022-aa-8-2022-jkhc020027702022-1-2022-11-04",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2022-consw-24-2018-jkhc010043952018-1-2022-07-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2022-trp-c-28-2021-jkhc020041892021-1-2022-10-19",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2022-wp-c-2571-2022-jkhc010056792022-1-2022-11-17",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2023-ccp-s-359-2019-jkhc020042842019-1-2023-11-29",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2023-cpowp-202-2009-jkhc010043752009-1-2023-08-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2023-cpsw-322-2010-jkhc020057072010-1-2023-09-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2023-owp-1289-2014-jkhc020062212014-1-2023-10-06",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2023-owp-1346-2018-jkhc020058122018-1-2023-12-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2023-wp-c-2666-2022-jkhc020062472022-1-2023-11-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2024-arb-p-18-2024-jkhc020006972024-1-2024-05-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2024-arb-p-52-2024-jkhc020025322024-1-2024-12-11",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2024-ccp-s-180-2023-jkhc010022392023-1-2024-03-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2024-conc-9900007-2014-jkhc020047992014-1-2024-02-23",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2024-wp-c-1167-2024-jkhc020026322024-1-2024-05-27",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2024-wp-c-1259-2024-jkhc020028072024-1-2024-05-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2024-wp-c-1765-2024-jkhc010039562024-1-2024-08-07",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2024-wp-c-253-2022-jkhc020005552022-1-2024-08-14",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-arb-p-10-2025-jkhc020004842025-1-2025-11-14",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-arb-p-46-2025-jkhc010059322025-1-2025-11-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-arb-p-74-2024-jkhc020040212024-1-2025-08-25",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-ccp-s-161-2025-jkhc010025482025-1-2025-10-09",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-ccp-s-276-2021-jkhc020054362021-1-2025-08-08",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-cpsw-104-2011-jkhc020006382011-1-2025-07-22",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-cpsw-178-2013-jkhc020005852013-1-2025-11-26",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-swp-2127-2010-jkhc020009812010-1-2025-09-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-wp-c-143-2025-jkhc010003082025-1-2025-08-05",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-wp-c-1736-2023-jkhc020034882023-1-2025-12-24",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-wp-c-2914-2024-jkhc020064662024-1-2025-01-03",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-wp-c-2991-2025-jkhc010063832025-1-2025-12-02",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2025-wp-c-3021-2025-jkhc020064672025-1-2025-10-31",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2026-ccp-s-146-2024-jkhc010017942024-1-2026-08-10",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2026-ccp-s-270-2025-jkhc010045322025-1-2026-09-30",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2026-wp-c-2133-2026-jkhc010046562026-1-2026-09-01",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "hc-jkl-2026-wp-c-2612-2024-jkhc020057662024-1-2026-09-21",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "sc-2023-union-of-india-2023insc152",
+      "status": "availability-recheck-required",
+      "directly_sampled": false
+    },
+    {
+      "doc_id": "sc-2024-army-welfare-education-society-2024insc501",
+      "status": "availability-recheck-required",
+      "directly_sampled": true
+    }
+  ]
+}

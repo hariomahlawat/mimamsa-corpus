@@ -1,0 +1,191 @@
+[
+  {
+    "doc_id": "hc-ph-2025-cwp-23968-2024-phhc011226182024-1-2025-01-20",
+    "sha256": "272ce7f43a54e99e25af29f52c185aa449c2103ebc12d71181f2328f53ec8800",
+    "reviewed_pages": [
+      3
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "Reviewed occurrence concerns a proposed limit on pension arrears. Legal-context-only pages with no available visual 7."
+  },
+  {
+    "doc_id": "hc-ph-2026-cwp-7091-2026-phhc010395442026-1-2026-03-10",
+    "sha256": "2f465857e6753819ca944089955ea392c09573469ff3a1a52bcef1795883008e",
+    "reviewed_pages": [
+      3
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "Reviewed occurrence concerns a proposed limit on pension arrears. Legal-context-only pages with no available visual 4."
+  },
+  {
+    "doc_id": "hc-ph-2026-cwp-14706-2026-phhc010754762026-1-2026-05-12",
+    "sha256": "8e23d0c526e1d663f28e29f04d671c8848f14651b0f29b90e46ec275286c8c59",
+    "reviewed_pages": [
+      2
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "Reviewed occurrences concern limits on pension arrears. Legal-context-only pages with no available visual 3."
+  },
+  {
+    "doc_id": "hc-ph-2026-untitled-phhc010868762026-1-2026-09-18",
+    "sha256": "ce0d69211f87336976cb5c63980addbc15c7f0ce05c620c1e31cf5184ed1fa3f",
+    "reviewed_pages": [
+      6
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The term describes the scope of review jurisdiction."
+  },
+  {
+    "doc_id": "sc-2022-atlanta-limited-thr-its-managi-2022insc50",
+    "sha256": "baa7c1d7f1f6b2f7f3833861f9b02ece63346667f16ca4403266b29ec6af0232",
+    "reviewed_pages": [
+      8
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The term describes physical access to the construction site in the case history."
+  },
+  {
+    "doc_id": "sc-2023-m-s-shree-vishnu-constructions-2023insc508",
+    "sha256": "51ea12dd0ddfc0564f715140fe927dd9d9c16f4550f3fc1400b46dbff9049968",
+    "reviewed_pages": [
+      1,
+      2,
+      17
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The terms describe the statutory scope of arbitral appointment and award challenges."
+  },
+  {
+    "doc_id": "hc-delhi-2025-arb-p-297-2025-dlhc010065612025-1-2025-05-28",
+    "sha256": "f8948c90d1f01cb8f4ebd1e99f91f00fe414d4117499a553d07e297a6979b1b4",
+    "reviewed_pages": [
+      14
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The term describes the proposed scope of judicial intervention in arbitration."
+  },
+  {
+    "doc_id": "hc-delhi-2018-w-p-c-10690-2018-dlhc013369462018-1-2018-10-08",
+    "sha256": "4605eaabf5a2d3b3851404ed8a89b13b2249f1f941b41913deb90951c8724526",
+    "reviewed_pages": [
+      2
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The term describes grouping retired employees for benefits."
+  },
+  {
+    "doc_id": "hc-delhi-2026-w-p-c-1049-2020-dlhc010101752020-1-2026-01-05",
+    "sha256": "3f67c6dd89a59400ae2de7313e60fbda4f35311879e17823f77d59557ed640f4",
+    "reviewed_pages": [
+      11
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The term describes assignment of expenditure to a budget head."
+  },
+  {
+    "doc_id": "sc-1993-state-of-punjab-and-ors-1993insc215",
+    "sha256": "5ed2df8269771e88d5511bcaed51e464183da1e2c917a3a70bfa43ba6db54f22",
+    "reviewed_pages": [
+      7,
+      8
+    ],
+    "status": "visual-review-hold",
+    "reason": "The judgment reproduces an explicit confidentiality label from a historical record. Retained for access review."
+  },
+  {
+    "doc_id": "hc-delhi-2010-w-p-c-3357-2007-dlhc010340092007-1-2010-03-12",
+    "sha256": "7db94cc797111e65b48a209f5a9c45319b97df1caabe3414846972a06b54a4ca",
+    "reviewed_pages": [
+      5,
+      18
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "Reviewed occurrences concern the scope of military roles and legitimate-expectation doctrine. Legal-context-only pages with no available visual 7."
+  },
+  {
+    "doc_id": "hc-delhi-2010-w-p-c-9084-2009-dlhc010869342009-1-2010-04-06",
+    "sha256": "4f6033b152d56fc301161726eaa3753f2229c323d87f86de94b41ef29b01b4b3",
+    "reviewed_pages": [
+      3,
+      4
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The terms occur in judicial discussion of an information-disclosure dispute and a statutory quotation."
+  },
+  {
+    "doc_id": "hc-delhi-2010-w-p-c-9478-2007-dlhc011722552007-1-2010-07-12",
+    "sha256": "e3621930db58259aadefbe773043321e5b33127de4255f5da803ab4cd089eac3",
+    "reviewed_pages": [
+      22,
+      24
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The terms occur in cited reasoning about statutory discretion and legitimate expectations."
+  },
+  {
+    "doc_id": "hc-delhi-2012-w-p-c-4358-2012-dlhc011172472012-1-2012-08-13",
+    "sha256": "0821ff8e9b6697d33cb688906ebdc4155835d7e8e9f815d0c5c7f1de5154fdaa",
+    "reviewed_pages": [
+      23
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The term describes narrow constraints on natural justice in cited reasoning."
+  },
+  {
+    "doc_id": "hc-delhi-2013-w-p-c-2620-2012-dlhc010747932012-1-2013-05-29",
+    "sha256": "3a650c28353d8babcff6fc748a6b8f47af8eb8efd38766ea7c2973616eccaf37",
+    "reviewed_pages": [
+      22,
+      24
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The terms occur in constitutional reasoning and a case summary referring to a letter."
+  },
+  {
+    "doc_id": "hc-delhi-2016-lpa-363-2015-dlhc012643462015-1-2016-02-10",
+    "sha256": "38d5162a5641d45b9c7acfbea480f14640323187f48b9c84df8256f07f021d68",
+    "reviewed_pages": [
+      11
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The reviewed occurrence relates to employee performance reports used for promotion. Legal-context-only pages with no available visual 7, 8, 16."
+  },
+  {
+    "doc_id": "hc-delhi-2018-w-p-c-3573-2017-dlhc012116292017-1-2018-09-05",
+    "sha256": "b686206b8651f4388103f07c47e403147595d1d9b5b1bab23f8d21067f96b729",
+    "reviewed_pages": [
+      5
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The term describes the scope of relief sought in an eviction dispute."
+  },
+  {
+    "doc_id": "hc-jkl-2019-swp-1159-2018-jkhc020049232018-1-2019-07-03",
+    "sha256": "0c27a6832c4b9418dbebce8708189998a80fefd3bc02fbe94f4110972d31073e",
+    "reviewed_pages": [
+      11,
+      12,
+      13
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "Reviewed occurrences describe recruitment allegations and physical seals on examination materials. Legal-context-only pages with no available visual 21."
+  },
+  {
+    "doc_id": "hc-delhi-2019-o-m-p-i-comm-206-2019-dlhc010273212019-1-2019-07-11",
+    "sha256": "daba7ad0514e94f4fc422007ff70c236a38391bbfda82e10499ccd3c6e08d74d",
+    "reviewed_pages": [
+      12
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The reviewed occurrence describes the contractual cap on a bank guarantee. Legal-context-only pages with no available visual 13."
+  },
+  {
+    "doc_id": "hc-jkl-2022-lpa-16-2022-jkhc020009042022-1-2022-03-23",
+    "sha256": "ef351d4b3260f446fbfd220697f2abc5d8486b9b31992a98bfa05c9a0d44e30b",
+    "reviewed_pages": [
+      2
+    ],
+    "status": "visual-false-positive-cleared",
+    "reason": "The term describes a construction radius around a military installation discussed in the dispute."
+  }
+]
