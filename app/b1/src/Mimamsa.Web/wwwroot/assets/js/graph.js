@@ -25,7 +25,7 @@ export function refreshGraph() { if (live && graphShown()) live(); }
 
 export async function graphPage(main, nav) {
   clear(main);
-  let shown = null, lastRun = null, gen = 0;      // node on screen, last assessment, and a guard against late responses
+  let shown = null, lastRun = null, gen = 0, aseq = 0;   // node on screen, last assessment, and guards against late responses
   const u = new URL(location.href);
   const root = h("section.graph-page", { "aria-label": "Legal knowledge graph" });
   add(main, root);
@@ -94,15 +94,16 @@ export async function graphPage(main, nav) {
     const out = h("div#g-assess-out");
     const run = async (kind) => {
       lastRun = { kind, as_of: asOf.value, conduct: conduct.value, proceeding: proceeding.value };
-      const my = gen;
+      const my = gen, mine = ++aseq;      // Codex review of PR #75: only the latest run on the shown node renders
       clear(out); add(out, h("span.skeleton.w40"));
       const q = new URLSearchParams({ kind, doc, section });
       if (asOf.value) q.set("as_of", asOf.value);
       if (conduct.value) q.set("conduct_date", conduct.value);
       if (proceeding.value) q.set("proceeding_date", proceeding.value);
       let a;
-      try { a = await api(`/api/reasoning/assess?${q}`); } catch { if (my === gen) { clear(out); add(out, h("p.notice", "The assessment could not be produced.")); } return; }
-      if (my === gen) renderAssessment(out, a);
+      const current = () => my === gen && mine === aseq;
+      try { a = await api(`/api/reasoning/assess?${q}`); } catch { if (current()) { clear(out); add(out, h("p.notice", "The assessment could not be produced.")); } return; }
+      if (current()) renderAssessment(out, a);
     };
     if (rerun) { asOf.value = rerun.as_of; conduct.value = rerun.conduct; proceeding.value = rerun.proceeding; queueMicrotask(() => run(rerun.kind)); }
     return h("section.sect.g-assess", { "aria-label": "Research assessment" },

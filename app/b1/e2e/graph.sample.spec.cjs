@@ -87,6 +87,21 @@ test("G-04 an open graph view and its assessment drop a withdrawn source without
   await expect(corr).toHaveCount(1, { timeout: 25_000 });                          // reinstatement is followed too
 });
 
+// Codex review of PR #75: an assessment response that arrives after a newer run on the same node never replaces it.
+test("G-05 a superseded assessment response does not overwrite the newer one", async ({ page }) => {
+  await login(page);
+  await page.goto("/g?doc=act-ipc-1860&section=302");
+  await expect(page.locator(".g-node")).toContainText("302");
+  let release; const gate = new Promise((r) => { release = r; });
+  await page.route((u) => u.pathname === "/api/reasoning/assess" && u.searchParams.get("kind") === "temporal", async (route) => { await gate; await route.continue(); });
+  await page.getByRole("button", { name: "Which version on the as-of date?" }).click();          // held
+  await page.getByRole("button", { name: "Commencement, repeal, savings, correspondence" }).click();
+  await expect(page.locator('.g-findings li[data-code="correspondence"]')).toBeVisible();
+  release();
+  await page.waitForTimeout(1500);
+  await expect(page.locator('.g-findings li[data-code="correspondence"]')).toBeVisible();          // still the newer result
+});
+
 test("G-03 graph and reasoning routes need a session", async ({ request }) => {
   for (const u of ["/api/graph/stats", "/api/graph/node?id=x", "/api/graph/path?from=a&to=b", "/api/graph/resolve?doc=act-army-1950",
                    "/api/reasoning/assess?kind=temporal&doc=act-army-1950&section=75", "/api/reasoning/rule-gate"])
