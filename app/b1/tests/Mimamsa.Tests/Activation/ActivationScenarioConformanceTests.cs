@@ -255,10 +255,14 @@ public class ActivationScenarioConformanceTests
             .Select(f => new object[] { Path.GetFileNameWithoutExtension(f) }).OrderBy(x => (string)x[0], StringComparer.Ordinal);
 
     [Fact]
-    public void All_30_shared_scenarios_are_present()
+    public void Every_shared_scenario_in_the_fixture_directory_is_present_with_its_expected_outcome()
     {
+        // The full set comes from the contract fixture directory (SC01-SC31 at 2.1 f653c4b8): contiguous, none skipped,
+        // and every scenario has its reference outcome. The theory below runs each of them.
         var ids = Scenarios().Select(x => ((string)x[0])[..4]).ToList();
-        Assert.Equal(Enumerable.Range(1, 30).Select(n => $"SC{n:D2}"), ids);
+        Assert.True(ids.Count >= 31, $"expected at least SC01-SC31, found {ids.Count}");
+        Assert.Equal(Enumerable.Range(1, ids.Count).Select(n => $"SC{n:D2}"), ids);
+        foreach (var x in Scenarios()) Assert.True(File.Exists(Path.Combine(Dir, (string)x[0] + ".expected.json")), (string)x[0]);
     }
 
     [Theory]
