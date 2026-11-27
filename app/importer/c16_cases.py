@@ -427,6 +427,15 @@ class C16Harness:
                 (path / p).parent.mkdir(parents=True, exist_ok=True)
                 (path / p).write_bytes(b)
         write_bundle(path, m, documents=docs, derived=derived, extra_files=files, signing_key=self.key, public_key_raw=self.pub)
+        # devbundle orders SHA256SUMS by sorted Path objects, which compare case-insensitively on Windows and
+        # case-sensitively elsewhere ('CHANGES.json' vs 'corpus-v2/...'). Re-list in code-point order of the POSIX
+        # path and re-sign, so the bundle (and the generation's sums_sha256) is identical on every platform.
+        from mimamsa_contract.bundle import SIG, SUMS
+        lines = sorted(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.relative_to(path).as_posix()}\n"
+                       for p in path.rglob("*") if p.is_file() and p.name not in (SUMS, SIG))
+        sums = "".join(sorted(lines, key=lambda x: x[66:])).encode()
+        (path / SUMS).write_bytes(sums)
+        (path / SIG).write_bytes(self.key.sign(sums))
         return path
 
     def default_accounting(self, release_id, docs, exchange_files=None, *, v7=True):
