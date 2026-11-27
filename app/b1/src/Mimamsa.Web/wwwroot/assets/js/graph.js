@@ -16,8 +16,16 @@ function verChip(v) {
   return chip("neutral", "Structure", "Structure read from the held text");
 }
 
+/** Codex review of PR #75: an open graph view follows withdrawals. The page registers a refresh that re-fetches the
+ *  statistics, the node shown and the last assessment run; app.js calls it on a policy-epoch change and keeps the
+ *  epoch poll running while the graph is on screen. */
+let live = null;
+export const graphShown = () => !!document.querySelector("section.graph-page");
+export function refreshGraph() { if (live && graphShown()) live(); }
+
 export async function graphPage(main, nav) {
   clear(main);
+  let shown = null, lastRun = null, gen = 0;      // node on screen, last assessment, and a guard against late responses
   const u = new URL(location.href);
   const root = h("section.graph-page", { "aria-label": "Legal knowledge graph" });
   add(main, root);
@@ -32,10 +40,12 @@ export async function graphPage(main, nav) {
       h("p.home-summary", "Typed relationships derived from held records: tables of contents, provision-version candidates, citation candidates, comparison tables and repeal notices. None is a verified legal fact; absence of a relationship is not evidence that none exists.")),
     statsBox, form, h("p.g-examples", "Examples: ", EXAMPLES.map(([d, s, l], i) => [i ? " · " : "", h("a", { href: "#", onclick: (e) => { e.preventDefault(); docIn.value = d; secIn.value = s; go(d, s); } }, l)])), body);
 
-  api("/api/graph/stats").then((s) => {
+  const loadStats = () => api("/api/graph/stats").then((s) => {
     statsBox.textContent = `${s.nodes.toLocaleString("en-GB")} nodes · ${s.edges.toLocaleString("en-GB")} relationships (` +
       Object.entries(s.edges_by_verification).map(([k, v]) => `${v.toLocaleString("en-GB")} ${k.toLowerCase().replaceAll("_", " ")}`).join(", ") + `) · AUTH-LEDGER v${s.auth_ledger_version}`;
   }).catch(() => { statsBox.textContent = "The legal knowledge graph is not available in this installation."; });
+  loadStats();
+  live = () => { loadStats(); if (shown) showNode(shown.id, shown.doc, shown.section, lastRun); };
 
   async function go(doc, section, push = true) {
     if (!doc) return;
@@ -47,10 +57,13 @@ export async function graphPage(main, nav) {
     await showNode(r.node_id, doc, section);
   }
 
-  async function showNode(id, doc, section) {
+  async function showNode(id, doc, section, rerun = null) {
+    const my = ++gen;
+    shown = { id, doc, section }; lastRun = rerun;
     let n;
     try { n = await api(`/api/graph/node?id=${encodeURIComponent(id)}&depth=1`); }
-    catch { clear(body); add(body, h("p.notice", "This item is not available in this installation.")); return; }
+    catch { if (my !== gen) return; clear(body); add(body, h("p.notice", "This item is not available in this installation.")); return; }
+    if (my !== gen) return;
     clear(body);
     const groups = new Map();
     for (const e of n.edges) { const k = e.type; (groups.get(k) || groups.set(k, []).get(k)).push(e); }
@@ -71,22 +84,27 @@ export async function graphPage(main, nav) {
               h("td", `${e.temporal.from_status.replaceAll("_", " ").toLowerCase()}${e.temporal.from ? ` (${e.temporal.from})` : ""}`));
           }))))),
       n.truncated ? h("p.notice", "Only the first relationships are shown.") : null);
-    if (n.node.kind === "provision" && doc && section) add(body, assessPanel(doc, section));
+    if (n.node.kind === "provision" && doc && section) add(body, assessPanel(doc, section, rerun));
   }
 
-  function assessPanel(doc, section) {
+  function assessPanel(doc, section, rerun) {
     const asOf = h("input#g-asof", { type: "date", "aria-label": "As-of date" });
     const conduct = h("input#g-conduct", { type: "date", "aria-label": "Date of the act or omission" });
     const proceeding = h("input#g-proceeding", { type: "date", "aria-label": "Date the proceeding started" });
     const out = h("div#g-assess-out");
     const run = async (kind) => {
+      lastRun = { kind, as_of: asOf.value, conduct: conduct.value, proceeding: proceeding.value };
+      const my = gen;
       clear(out); add(out, h("span.skeleton.w40"));
       const q = new URLSearchParams({ kind, doc, section });
       if (asOf.value) q.set("as_of", asOf.value);
       if (conduct.value) q.set("conduct_date", conduct.value);
       if (proceeding.value) q.set("proceeding_date", proceeding.value);
-      try { renderAssessment(out, await api(`/api/reasoning/assess?${q}`)); } catch { clear(out); add(out, h("p.notice", "The assessment could not be produced.")); }
+      let a;
+      try { a = await api(`/api/reasoning/assess?${q}`); } catch { if (my === gen) { clear(out); add(out, h("p.notice", "The assessment could not be produced.")); } return; }
+      if (my === gen) renderAssessment(out, a);
     };
+    if (rerun) { asOf.value = rerun.as_of; conduct.value = rerun.conduct; proceeding.value = rerun.proceeding; queueMicrotask(() => run(rerun.kind)); }
     return h("section.sect.g-assess", { "aria-label": "Research assessment" },
       h("h3", "Research assessment ", chip("candidate", "Research only")),
       h("p.muted", "States what the held evidence shows and what is missing. It does not decide which law applies and is not legal advice."),

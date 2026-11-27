@@ -137,6 +137,36 @@ test("W-05 A cited source is withdrawn: the open Studio page shows 'Source no lo
   }
 });
 
+// Codex review of PR #75: with unsaved edits, a policy change refreshes library blocks in place keyed by their full
+// reference, so two citations to different paragraphs of one page stay distinct and are saved unchanged.
+test("W-05b citations to two paragraphs of one page survive an in-place refresh with unsaved edits", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  const meta = await (await user.request.get("/api/v2/documents/act-navy-1957/pdf-meta")).json();
+  const copy = meta.copy_sha256.slice(0, 12);
+  const created = await (await apiPost(user, "/api/studio/documents", { title: "W-05b two paragraphs", template: "blank" })).json();
+  expect((await apiPost(user, `/api/studio/documents/${created.id}/append`, { blocks: [
+    { type: "text", origin: "user", text: "Analysis." },
+    { type: "citation", doc_id: "act-navy-1957", copy, page: 3, para: "10" },
+    { type: "citation", doc_id: "act-navy-1957", copy, page: 3, para: "11" }] })).status()).toBe(200);
+  await user.goto(`/studio/${created.id}`);
+  await expect(user.locator(".ws-block.corpus")).toHaveCount(2);
+  await user.locator(".ws-block textarea").first().fill("Analysis, edited and not yet saved.");
+  await login(page, "admin");
+  // an unrelated withdrawal changes the policy epoch; the open editor refreshes its library blocks in place
+  expect((await apiPost(page, "/api/admin/withdraw", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C15 W-05b policy change" })).status()).toBe(200);
+  try {
+    await user.waitForTimeout(12_000);                                        // one poll interval
+    await expect(user.locator(".ws-block textarea").first()).toHaveValue("Analysis, edited and not yet saved.");
+    const [resp] = await Promise.all([user.waitForResponse((r) => r.url().includes(`/api/studio/documents/${created.id}/save`)), user.locator("#studio-save").click()]);
+    expect(resp.status()).toBe(200);
+    const saved = await (await user.request.get(`/api/studio/documents/${created.id}`)).json();
+    expect(saved.blocks.filter((b) => b.type === "citation").map((b) => b.para)).toEqual(["10", "11"]);
+  } finally {
+    expect((await apiPost(page, "/api/admin/reinstate", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C15 W-05b restore after test" })).status()).toBe(200);
+  }
+});
+
 test("W-06 Commander questions go into a Studio document as automated suggestions", async ({ page }) => {
   await login(page);
   await page.goto("/c/court-of-inquiry");

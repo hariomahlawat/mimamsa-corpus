@@ -213,14 +213,14 @@ async function studioEditor(page, nav, id, version) {
   // On a withdrawal or reinstatement: without unsaved edits, reload the document; with unsaved edits, refresh only the
   // library blocks in place (the server re-renders them from the current eligible copy), keeping the author's text.
   const isCorpus = (b) => b.type === "citation" || b.type === "quote";
-  const key = (b) => [b.type, b.doc_id, b.copy, b.page, b.passage_id || ""].join("|");
+  const key = (b) => [b.type, b.doc_id, b.copy, b.page, b.passage_id || "", b.para || ""].join("|");   // para: two paragraphs on one page are distinct (Codex review of PR #75)
   current = { kind: "studio", render: async () => {
     if (!ed.changed) return studioEditor(page, nav, id, viewingOld ? d.version : undefined);
     try {
       const fresh = await api(`/api/studio/documents/${encodeURIComponent(id)}${viewingOld ? `?version=${d.version}` : ""}`);
       const m = new Map(fresh.blocks.filter(isCorpus).map((b) => [key(b), b]));
       ed.blocks = ed.blocks.map((b) => !isCorpus(b) ? b
-        : m.get(key(b)) || { type: b.type, origin: "corpus", doc_id: b.doc_id, copy: b.copy, page: b.page, passage_id: b.passage_id, available: false, notice: "Source no longer available in this installation." });
+        : m.get(key(b)) || { type: b.type, origin: "corpus", doc_id: b.doc_id, copy: b.copy, page: b.page, passage_id: b.passage_id, para: b.para, available: false, notice: "Source no longer available in this installation." });
       draw();
     } catch { /* the next policy change or reload re-checks */ }
   } };

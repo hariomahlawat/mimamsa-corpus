@@ -60,6 +60,33 @@ test("G-02 withdrawing the comparison table removes its relationships from the g
   expect(after.edges_by_type.RE_ENACTED_AS).toBe(before.edges_by_type.RE_ENACTED_AS);
 });
 
+// Codex review of PR #75: a graph view that is already open follows a withdrawal without any reader action (the epoch
+// poll runs while the graph is shown); the relationships and the assessment evidence from the withdrawn source go.
+test("G-04 an open graph view and its assessment drop a withdrawn source without any reader action", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  await user.goto("/g?doc=act-ipc-1860&section=302");
+  const corr = user.locator('details.g-group[data-type="RE_ENACTED_AS"]');
+  await expect(corr).toHaveCount(1);
+  await user.fill("#g-conduct", "2023-12-01");
+  await user.getByRole("button", { name: "Commencement, repeal, savings, correspondence" }).click();
+  await expect(user.locator('.g-findings li[data-code="correspondence"]')).toBeVisible();
+  await login(page, "admin");
+  const origin = new URL(page.url()).origin;
+  const csrf = (await (await page.request.get("/api/session")).json()).csrf;
+  const post = (url, data) => page.request.post(url, { headers: { "X-CSRF-Token": csrf, Origin: origin }, data });
+  expect((await post("/api/admin/withdraw", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C15 G-04 open graph view" })).status()).toBe(200);
+  try {
+    await expect(corr).toHaveCount(0, { timeout: 25_000 });
+    await expect(user.locator('.g-findings li[data-code="correspondence"]')).toHaveCount(0, { timeout: 10_000 });
+    await expect(user.locator(".g-overall")).toBeVisible();                       // the assessment was re-run, not just cleared
+    await expect(user.locator("#g-conduct")).toHaveValue("2023-12-01");
+  } finally {
+    expect((await post("/api/admin/reinstate", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C15 G-04 restore after test" })).status()).toBe(200);
+  }
+  await expect(corr).toHaveCount(1, { timeout: 25_000 });                          // reinstatement is followed too
+});
+
 test("G-03 graph and reasoning routes need a session", async ({ request }) => {
   for (const u of ["/api/graph/stats", "/api/graph/node?id=x", "/api/graph/path?from=a&to=b", "/api/graph/resolve?doc=act-army-1950",
                    "/api/reasoning/assess?kind=temporal&doc=act-army-1950&section=75", "/api/reasoning/rule-gate"])
