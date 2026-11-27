@@ -1,10 +1,12 @@
 import json,os,hashlib,re,time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from huggingface_hub import HfApi,CommitOperationAdd,hf_hub_download
 token=os.environ['HF_TOKEN'];repo='hariomahlawat/mimamsa-corpus';api=HfApi(token=token)
 receipt=Path('official-upload.json')
 def confirm(j):
- for path,want in j['files'].items():
+ def confirm_one(item):
+  path,want=item
   for delay in (0,2,6,15,30):
    if delay:time.sleep(delay)
    try:
@@ -15,6 +17,8 @@ def confirm(j):
     break
    except Exception as e:
     if delay==30: raise RuntimeError(f'Pinned read-back failed: {type(e).__name__}') from None
+ with ThreadPoolExecutor(max_workers=5) as workers:
+  list(workers.map(confirm_one,j['files'].items()))
  j.update(verified=True)
  tmp=receipt.with_suffix('.tmp')
  tmp.write_text(json.dumps(j))
@@ -29,10 +33,7 @@ known=set()
 for f in api.list_repo_tree(repo,repo_type='dataset',revision=info.sha,recursive=True):
  if not hasattr(f,'size') or not f.path.lower().endswith('.pdf'):continue
  h=getattr(f.lfs,'sha256',None) or next(iter(re.findall(r'(?<![a-f0-9])[a-f0-9]{64}(?![a-f0-9])',f.path)),None)
- if not h:
-  fpath=hf_hub_download(repo,f.path,repo_type='dataset',revision=info.sha,token=token,cache_dir='cache')
-  h=hashlib.sha256(Path(fpath).read_bytes()).hexdigest()
- known.add(h)
+ if h:known.add(h)
 entries=[];files={}
 for x in map(json.loads,open('official-pilot.jsonl')):
  if x['status']!='eligible-local':continue

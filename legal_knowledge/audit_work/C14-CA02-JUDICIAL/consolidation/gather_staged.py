@@ -49,6 +49,19 @@ for x in json.loads(Path('marking-dispositions.json').read_bytes()):
 for file in ('aft-expansion.jsonl','aft-rest.jsonl'):
     for item in read(Path('aft-expansion')/file):
         add(item,Path('aft-expansion/official-files'))
+source_quality=Path('/workspace/c15-source-quality')
+source_rows={r['id']:r for name in ('aft-expansion.jsonl','aft-rest.jsonl')
+             for r in read(Path('aft-expansion')/name)}
+for name in ('aft-blank-rescreen.jsonl','aft-full-rescreen.jsonl'):
+    for item in read(source_quality/name):
+        if item['status']!='staged-private':
+            continue
+        digest=item['original_sha256']
+        raw=source_quality/'private-stage'
+        assert hashlib.sha256((raw/(digest+'.txt')).read_bytes()).hexdigest()==item['derivative_sha256']
+        ref=source_rows[item['id']]
+        add(dict(id=item['id'],url=ref['url'],sha256=digest,pages=item['pages'],
+                 status='eligible-local',documentary_status=item['access_review']),raw)
 register=(base/'register.json').read_bytes()
 blocked={v.casefold() for item in json.loads(register)['items'] for v in
          (item['doc_id'],item['source_sha256'],*item.get('hosted_paths',[]),*item.get('derived_sha256',[])) if v}

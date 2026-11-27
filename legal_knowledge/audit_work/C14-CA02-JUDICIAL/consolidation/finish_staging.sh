@@ -17,7 +17,9 @@ for slot in $(seq 3 30); do
   cd "$stage"
   timeout 240 env HF_HOME=/workspace/c14-collection/.hf-runtime HF_HUB_DISABLE_XET=1 /tmp/mim-c14-corrective-venv/bin/python ../upload_staged_verified.py >upload.log 2>&1
  )
- bash publish_checkpoint.sh
+ if ! bash publish_checkpoint.sh; then
+  printf '%s\n' 'GitHub checkpoint retained locally after push failure.' >&2
+ fi
  count=$(python -c 'import json,sys;print(len(json.load(open(sys.argv[1]))["files"]))' "$stage/official-upload.json")
  if test "$count" = 0; then
   if ! pgrep -f '^/tmp/mim-c14-corrective-venv/bin/python aft_rest.py$' >/dev/null; then exit 0; fi
