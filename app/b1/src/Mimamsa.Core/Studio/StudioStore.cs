@@ -125,6 +125,7 @@ public sealed class StudioStore(NpgsqlDataSource db)
         var id = NewId("sd-");
         await using var c = await db.OpenConnectionAsync();
         await using var tx = await c.BeginTransactionAsync();
+        await LockOwnerAsync(c, tx, owner);
         await using (var q = new NpgsqlCommand("SELECT count(*) FROM studio_documents WHERE owner=$1", c, tx))
         {
             q.Parameters.AddWithValue(owner);
@@ -135,6 +136,15 @@ public sealed class StudioStore(NpgsqlDataSource db)
         await InsertVersionAsync(c, tx, id, 1, "draft", blocks);
         await tx.CommitAsync();
         return (await GetAsync(owner, id))!;
+    }
+
+    /// C15 security review L5: per-owner caps are count-then-insert; a transaction-scoped advisory lock on the owner
+    /// serialises that owner's creates so parallel requests cannot exceed the cap.
+    static async Task LockOwnerAsync(NpgsqlConnection c, NpgsqlTransaction tx, string owner)
+    {
+        await using var l = new NpgsqlCommand("SELECT pg_advisory_xact_lock(hashtext('studio:' || $1))", c, tx);
+        l.Parameters.AddWithValue(owner);
+        await l.ExecuteNonQueryAsync();
     }
 
     static async Task InsertVersionAsync(NpgsqlConnection c, NpgsqlTransaction tx, string id, int version, string state, JsonArray blocks)
@@ -236,16 +246,19 @@ public sealed class StudioStore(NpgsqlDataSource db)
             throw new StudioValidationException("A note's reference must name a document, a 12-character copy hash and a page.");
         var id = NewId("sn-");
         await using var c = await db.OpenConnectionAsync();
-        await using (var q = new NpgsqlCommand("SELECT count(*) FROM studio_notes WHERE owner=$1", c))
+        await using var tx = await c.BeginTransactionAsync();
+        await LockOwnerAsync(c, tx, owner);
+        await using (var q = new NpgsqlCommand("SELECT count(*) FROM studio_notes WHERE owner=$1", c, tx))
         {
             q.Parameters.AddWithValue(owner);
             if ((long)(await q.ExecuteScalarAsync())! >= MaxNotesPerUser) throw new StudioValidationException($"At most {MaxNotesPerUser} notes per user.");
         }
-        await using var ins = new NpgsqlCommand("INSERT INTO studio_notes(note_id, owner, text, ref_doc, ref_copy, ref_page) VALUES ($1,$2,$3,$4,$5,$6) RETURNING created_at", c);
+        await using var ins = new NpgsqlCommand("INSERT INTO studio_notes(note_id, owner, text, ref_doc, ref_copy, ref_page) VALUES ($1,$2,$3,$4,$5,$6) RETURNING created_at", c, tx);
         ins.Parameters.AddWithValue(id); ins.Parameters.AddWithValue(owner); ins.Parameters.AddWithValue(text);
         ins.Parameters.AddWithValue((object?)refDoc ?? DBNull.Value); ins.Parameters.AddWithValue((object?)refCopy?.ToLowerInvariant() ?? DBNull.Value);
         ins.Parameters.AddWithValue((object?)refPage ?? DBNull.Value);
         var at = (DateTime)(await ins.ExecuteScalarAsync())!;
+        await tx.CommitAsync();
         return new StudioNote(id, text, refDoc, refCopy?.ToLowerInvariant(), refPage, at);
     }
 

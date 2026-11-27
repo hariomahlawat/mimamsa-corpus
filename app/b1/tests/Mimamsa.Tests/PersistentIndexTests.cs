@@ -139,13 +139,17 @@ public class PersistentIndexTests : IDisposable
         for (int i = 0; i < 4; i++)
         {
             var d = Directory.CreateDirectory(Path.Combine(_root, $"R-old-{i}")).FullName;
-            File.WriteAllText(Path.Combine(d, "MANIFEST.json"), "{}");
+            File.WriteAllText(Path.Combine(d, "MANIFEST.json"), "{\"format\":\"mimamsa-search-index/1\"}");
             File.SetLastWriteTimeUtc(Path.Combine(d, "MANIFEST.json"), DateTime.UtcNow.AddDays(-10 + i));
         }
+        // C15 security review L6: a directory that is not one of our indexes is never removed, however old.
+        var foreign = Directory.CreateDirectory(Path.Combine(_root, "other-data")).FullName;
+        File.WriteAllText(Path.Combine(foreign, "MANIFEST.json"), "{\"format\":\"something-else\"}");
+        File.SetLastWriteTimeUtc(Path.Combine(foreign, "MANIFEST.json"), DateTime.UtcNow.AddDays(-30));
         Microsoft.Data.Sqlite.SqliteConnection.ClearAllPools();
         OpenDisk(new SearchIndexOptions { KeepPrevious = 2 });
         var left = Directory.GetDirectories(_root).Where(d => !Path.GetFileName(d).StartsWith('.')).Select(Path.GetFileName).OrderBy(x => x).ToList();
-        Assert.Equal(new[] { "R-old-2", "R-old-3", Path.GetFileName(current) }.OrderBy(x => x), left);
+        Assert.Equal(new[] { "R-old-2", "R-old-3", "other-data", Path.GetFileName(current) }.OrderBy(x => x), left);
     }
 
     const string IndexStore_DbFile = "search.sqlite";

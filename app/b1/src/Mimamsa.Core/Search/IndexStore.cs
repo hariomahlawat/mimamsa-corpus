@@ -127,10 +127,18 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
             Directory.Delete(old, true);
     }
 
+    /// C15 security review L6: retention deletes only directories whose manifest names this index format, never other
+    /// data that happens to sit under a misconfigured index root.
+    static bool IsOwnIndex(string dir)
+    {
+        try { return System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(Path.Combine(dir, ManifestFile)))?["format"]?.GetValue<string>() is { } f && f.StartsWith("mimamsa-search-index/", StringComparison.Ordinal); }
+        catch { return false; }
+    }
+
     void Retain(string current)
     {
         var others = Directory.GetDirectories(root).Where(d => !Path.GetFileName(d).StartsWith('.') && !string.Equals(d, current, StringComparison.OrdinalIgnoreCase)
-                                                             && File.Exists(Path.Combine(d, ManifestFile)))
+                                                             && File.Exists(Path.Combine(d, ManifestFile)) && IsOwnIndex(d))
             .OrderByDescending(d => File.GetLastWriteTimeUtc(Path.Combine(d, ManifestFile))).ToList();
         foreach (var d in others.Skip(Math.Max(0, options.KeepPrevious)))
         {

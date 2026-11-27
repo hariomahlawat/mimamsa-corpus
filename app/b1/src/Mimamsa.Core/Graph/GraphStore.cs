@@ -17,7 +17,7 @@ public sealed class GraphNotPublishedException(string gen) : Exception($"graph f
 
 public sealed class GraphStore(NpgsqlDataSource db)
 {
-    public const int MaxDepth = 4, MaxFrontier = 5000, MaxEdges = 2000;
+    public const int MaxDepth = 4, MaxFrontier = 5000, MaxEdges = 2000, MaxPathEdgesPerLevel = 10_000;
 
     public async Task EnsureSchemaAsync()
     {
@@ -132,7 +132,20 @@ public sealed class GraphStore(NpgsqlDataSource db)
     static GraphNode ReadNode(NpgsqlDataReader r, int o) => new(r.GetString(o), r.GetString(o + 1), r.GetString(o + 2), S(r, o + 3), S(r, o + 4),
         r.GetBoolean(o + 5), r.IsDBNull(o + 6) ? null : r.GetInt32(o + 6), S(r, o + 7), S(r, o + 8));
     static string? S(NpgsqlDataReader r, int i) => r.IsDBNull(i) ? null : r.GetString(i);
-    const string Hidden = "(n.doc_id IS NULL OR NOT n.doc_id = ANY($2))";
+    /// A node with its own document is visible when that document is. A node without one (an unresolved reference,
+    /// whose label is text from the citing judgment) is visible only while at least one visible edge touches it (a node with no edges at all is structural and stays), so a
+    /// withdrawal hides it on lookup and in the statistics too (C15 security review L3).
+    const string Hidden = """
+        ((n.doc_id IS NOT NULL AND NOT n.doc_id = ANY($2)) OR (n.doc_id IS NULL AND (
+            NOT EXISTS (SELECT 1 FROM graph_edges e WHERE e.generation_id=n.generation_id AND (e.from_node=n.node_id OR e.to_node=n.node_id))
+         OR 
+            EXISTS (SELECT 1 FROM graph_edges e JOIN graph_nodes o ON o.generation_id=e.generation_id AND o.node_id=e.to_node
+                    WHERE e.generation_id=n.generation_id AND e.from_node=n.node_id
+                      AND (e.source_doc_id IS NULL OR NOT e.source_doc_id = ANY($2)) AND (o.doc_id IS NULL OR NOT o.doc_id = ANY($2)))
+         OR EXISTS (SELECT 1 FROM graph_edges e JOIN graph_nodes o ON o.generation_id=e.generation_id AND o.node_id=e.from_node
+                    WHERE e.generation_id=n.generation_id AND e.to_node=n.node_id
+                      AND (e.source_doc_id IS NULL OR NOT e.source_doc_id = ANY($2)) AND (o.doc_id IS NULL OR NOT o.doc_id = ANY($2))))))
+        """;
 
     public async Task<GraphNode?> NodeAsync(string gen, string nodeId, string[] hidden)
     {
@@ -210,9 +223,11 @@ public sealed class GraphStore(NpgsqlDataSource db)
         for (int d = 0; d < maxDepth && frontier.Length > 0; d++)
         {
             var next = new List<string>();
-            foreach (var e in await ExpandAsync(c, gen, frontier, hidden, 50_000))
+            var inFrontier = new HashSet<string>(frontier, StringComparer.Ordinal);
+            // C15 security review L5: bounded per level (was 50,000) so one path request cannot pull a large share of the graph
+            foreach (var e in await ExpandAsync(c, gen, frontier, hidden, MaxPathEdgesPerLevel))
                 foreach (var (a, b) in new[] { (e.Edge.From, e.Edge.To), (e.Edge.To, e.Edge.From) })
-                    if (frontier.Contains(a) && !parent.ContainsKey(b)) { parent[b] = e; next.Add(b); }
+                    if (inFrontier.Contains(a) && !parent.ContainsKey(b)) { parent[b] = e; next.Add(b); }
             if (parent.ContainsKey(to))
             {
                 var nodes = new List<string> { to }; var edges = new List<EdgeView>();

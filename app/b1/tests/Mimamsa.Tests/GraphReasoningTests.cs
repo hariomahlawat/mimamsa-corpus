@@ -161,7 +161,12 @@ public class GraphStoreTests
         await using var ds = Db();
         var store = new GraphStore(ds); await store.EnsureSchemaAsync();
         var gen = "test-" + Guid.NewGuid().ToString("N")[..10];
-        var graph = WithGen(GraphBuilder.Build(Syn.Gen), gen);
+        var built = WithGen(GraphBuilder.Build(Syn.Gen), gen);
+        // C15 security review L3: an unresolved reference cited only by syn-j-allow, labelled with text from that judgment
+        var refNode = new GraphNode(GraphIds.Reference("L3 probe reference text"), NodeKind.UnresolvedReference, "L3 probe reference text", null, null, false, null, null, null);
+        var refEdge = new GraphEdge("E-L3-PROBE", EdgeType.CitesJudgment, GraphIds.Judgment("syn-j-allow"), refNode.Id, "A5", "syn-j-allow", null, 1, null,
+            null, "AS_OF_SOURCE_DATE", null, "NOT_APPLICABLE", Verification.Candidate, "UNREVIEWED", "test probe", false);
+        var graph = built with { Nodes = built.Nodes.Append(refNode).ToList(), Edges = built.Edges.Append(refEdge).ToList() };
         try
         {
             await Assert.ThrowsAsync<GraphNotPublishedException>(() => store.StatsAsync(gen, Array.Empty<string>()));
@@ -187,6 +192,12 @@ public class GraphStoreTests
             Assert.Null(await store.PathAsync(gen, jud, target, 2, hidden));
             Assert.NotNull(await store.PathAsync(gen, jud, target, 2, none));
             Assert.Equal(stats.Edges, (await store.StatsAsync(gen, none)).Edges);
+
+            // C15 security review L3: a node without its own document (an unresolved reference labelled with text from
+            // the citing judgment) is hidden once every edge touching it comes from, or leads to, a withdrawn document
+            Assert.Equal("L3 probe reference text", (await store.NodeAsync(gen, refNode.Id, none))!.Label);
+            Assert.Null(await store.NodeAsync(gen, refNode.Id, hidden));
+            Assert.True((await store.StatsAsync(gen, hidden)).Nodes <= stats.Nodes - 2);   // the judgment and its orphaned reference leave the count
 
             // every instrument reaches its provisions, and a path never crosses a hidden document
             var inst = graph.Nodes.First(n => n.Kind == NodeKind.Instrument && graph.Edges.Any(e => e.From == n.Id && e.Type == EdgeType.Contains));

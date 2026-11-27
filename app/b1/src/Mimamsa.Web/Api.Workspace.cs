@@ -92,6 +92,8 @@ public static partial class Api
             var pid = b["passage_id"]?.GetValue<string>();
             var passage = res.State == "CITED_COPY_ELIGIBLE" ? d.Passages.FirstOrDefault(x => x.PassageId == pid && x.Page == page) : null;
             if (passage is null) { b["quote_available"] = false; b["quote_notice"] = "The quoted passage is not available for this copy."; }
+            // C15 security review M1: OCR text (QuotingPermitted=false) is for search only and is never exported as a quotation.
+            else if (!d.QuotingPermitted) { b["quote_available"] = false; b["quote_notice"] = "This text includes OCR: quote from the original page."; }
             else { b["quote_available"] = true; b["quote"] = passage.Text.Length > 1500 ? passage.Text[..1500] + "…" : passage.Text; }
         }
         return b;

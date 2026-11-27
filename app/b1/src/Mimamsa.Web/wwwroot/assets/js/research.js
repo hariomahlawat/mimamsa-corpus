@@ -686,7 +686,7 @@ function addCurrentToStudio() {
   if (!tab?.doc) return;
   const hit = (tab.hits || [])[tab.hitIndex];
   const para = hit && hit.page === tab.page ? hit.paragraph_label : null;
-  openAddToStudio({ doc_id: tab.docId, copy: (tab.copy || tab.doc.copy?.sha256 || "").slice(0, 12), page: tab.page, passage_id: tab.copy ? null : tab.passage, para,
+  openAddToStudio({ doc_id: tab.docId, copy: (tab.copy || tab.doc.copy?.sha256 || "").slice(0, 12), page: tab.page, passage_id: tab.copy || !tab.doc.quoting_permitted ? null : tab.passage, para,   // OCR text is never offered as a quotation
     label: `${tab.doc.title || tab.docId}, p.${tab.page}` });
 }
 

@@ -116,6 +116,27 @@ public class WorkspaceStudioTests(ServiceFixture f)
         Assert.Equal(HttpStatusCode.OK, (await owner.GetAsync($"/api/studio/documents/{id}")).StatusCode);   // still the owner's
     }
 
+    /// C15 security review M1: OCR text is for search only, so a quote block on an OCR page never carries the text,
+    /// in the API or in either export; the citation itself stays available.
+    [Fact]
+    public async Task OcrTextIsNeverExportedAsAQuotation()
+    {
+        var (user, csrf) = await f.Login("reader");
+        var s = JsonNode.Parse(await user.GetStringAsync("/api/search?q=" + Uri.EscapeDataString("सुनवाई से पहले लिखित सूचना")))!;
+        var hit = s["passages"]!.AsArray().First(p => p!["ocr"]!.GetValue<bool>())!;
+        var doc = hit["doc_id"]!.GetValue<string>(); var page = hit["page"]!.GetValue<int>(); var pid = hit["passage_id"]!.GetValue<string>();
+        var copy = s["documents"]![doc]!["copy_sha256"]!.GetValue<string>()[..12];
+        var id = (await J(await Post(user, csrf, "/api/studio/documents", new { title = "Quotes OCR", template = "blank" })))["id"]!.GetValue<string>();
+        var r = await Post(user, csrf, $"/api/studio/documents/{id}/append", new { blocks = new object[] { new { type = "quote", doc_id = doc, copy, page, passage_id = pid } } });
+        Assert.Equal(HttpStatusCode.OK, r.StatusCode);
+        var q = (await J(r))["blocks"]!.AsArray().Single(b => b!["type"]!.GetValue<string>() == "quote")!.AsObject();
+        Assert.True(q["available"]!.GetValue<bool>());
+        Assert.False(q["quote_available"]!.GetValue<bool>());
+        Assert.False(q.ContainsKey("quote"));
+        foreach (var fmt in new[] { "html", "md" })
+            Assert.DoesNotContain("सुनवाई", await user.GetStringAsync($"/api/studio/documents/{id}/export?format={fmt}"));
+    }
+
     [Fact]
     public async Task CitationsFollowWithdrawalWithoutDeletingTheAuthorsText()
     {
