@@ -108,20 +108,31 @@ public sealed class ServingState
         Func<Task<(long epoch, string digest, bool changed)>> durableCas, Action emitAdmit, Action<long, string> emitFence,
         Action? onFenced = null)
     {
-        _guard.EnterWriteLock();
-        try { Pending = true; foreach (var sha in shas) _withdrawn.Add(Key(docId, sha)); _withdrawnDocs.Add(docId); emitAdmit(); }
-        finally { _guard.ExitWriteLock(); }
-        var (e, d, changed) = await durableCas();      // throws -> Pending stays true: fail closed
-        _guard.EnterWriteLock();
+        await _policyGate.WaitAsync();
         try
         {
-            if (changed) { Epoch = e; Digest = d; emitFence(e, d); }
-            Pending = false;
+            _guard.EnterWriteLock();
+            try { Pending = true; foreach (var sha in shas) _withdrawn.Add(Key(docId, sha)); _withdrawnDocs.Add(docId); emitAdmit(); }
+            finally { _guard.ExitWriteLock(); }
+            var (e, d, changed) = await durableCas();      // throws -> Pending stays true: fail closed
+            _guard.EnterWriteLock();
+            try
+            {
+                if (changed && e >= Epoch) { Epoch = e; Digest = d; emitFence(e, d); }
+                Pending = false;
+            }
+            finally { _guard.ExitWriteLock(); }
+            onFenced?.Invoke();
+            return (e, d, changed);
         }
-        finally { _guard.ExitWriteLock(); }
-        onFenced?.Invoke();
-        return (e, d, changed);
+        finally { _policyGate.Release(); }
     }
+
+    /// Codex review of PR #70: every policy operation (withdrawal or reinstatement) runs to completion, durable commit
+    /// AND mirror update, before the next one starts. Without this, a reinstatement whose durable commit had finished
+    /// but whose mirror update was delayed could clear the fence of a withdrawal committed after it and roll the epoch
+    /// back, leaving the document served while its rows say withdrawn. The mirror also never moves the epoch backwards.
+    private readonly SemaphoreSlim _policyGate = new(1, 1);
 
     /// Reinstatement (C14, owner policy). The reverse order of WithdrawAsync: the durable CAS commits FIRST (copy rows
     /// eligible, epoch+1) and only then is the in-memory mirror relaxed under the write lock, so a failed commit leaves
@@ -129,17 +140,22 @@ public sealed class ServingState
     public async Task<(long epoch, string digest, bool changed)> ReinstateAsync(string docId,
         Func<Task<(long epoch, string digest, bool changed, List<string> shas)>> durableCas)
     {
-        var (e, d, changed, shas) = await durableCas();
-        if (!changed) return (e, d, false);
-        _guard.EnterWriteLock();
+        await _policyGate.WaitAsync();
         try
         {
-            foreach (var sha in shas) _withdrawn.Remove(Key(docId, sha));
-            if (!_withdrawn.Any(k => k.StartsWith(docId + "|", StringComparison.Ordinal))) _withdrawnDocs.Remove(docId);
-            Epoch = e; Digest = d;
+            var (e, d, changed, shas) = await durableCas();
+            if (!changed) return (e, d, false);
+            _guard.EnterWriteLock();
+            try
+            {
+                foreach (var sha in shas) _withdrawn.Remove(Key(docId, sha));
+                if (!_withdrawn.Any(k => k.StartsWith(docId + "|", StringComparison.Ordinal))) _withdrawnDocs.Remove(docId);
+                if (e >= Epoch) { Epoch = e; Digest = d; }
+            }
+            finally { _guard.ExitWriteLock(); }
+            return (e, d, true);
         }
-        finally { _guard.ExitWriteLock(); }
-        return (e, d, true);
+        finally { _policyGate.Release(); }
     }
 }
 
