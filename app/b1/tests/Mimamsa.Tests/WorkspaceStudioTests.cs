@@ -56,6 +56,35 @@ public class WorkspaceStudioTests(ServiceFixture f)
         Assert.Equal(new[] { 2, 1 }, (await st.VersionsAsync("owner-v", d.Id))!.Select(v => v.Version));
     }
 
+    /// Codex review of PR #75: an earlier version is read (and so exported and restored) with the title it was saved with.
+    [Fact]
+    public async Task EachVersionKeepsItsOwnTitle()
+    {
+        await using var db = Db();
+        var st = new StudioStore(db); await st.EnsureSchemaAsync();
+        var d = await st.CreateAsync("owner-t", "Original title", "blank");
+        var d2 = await st.SaveAsync("owner-t", d.Id, 1, "Renamed", "draft", new JsonArray());
+        Assert.Equal("Renamed", d2!.Title);
+        Assert.Equal("Original title", (await st.GetAsync("owner-t", d.Id, 1))!.Title);
+        Assert.Equal("Renamed", (await st.GetAsync("owner-t", d.Id))!.Title);
+        Assert.True(await st.DeleteAsync("owner-t", d.Id));
+    }
+
+    /// Codex review of PR #75: every note up to the per-user cap is listed (the list used to stop at 500).
+    [Fact]
+    public async Task AllNotesUpToTheCapAreListed()
+    {
+        await using var db = Db();
+        var st = new StudioStore(db); await st.EnsureSchemaAsync();
+        const string owner = "owner-notes-501";
+        await using (var del = db.CreateCommand("DELETE FROM studio_notes WHERE owner=$1"))
+        { del.Parameters.AddWithValue(owner); await del.ExecuteNonQueryAsync(); }
+        for (int i = 0; i < 501; i++) await st.AddNoteAsync(owner, $"note {i}", null, null, null);
+        var notes = await st.NotesAsync(owner);
+        Assert.Equal(501, notes.Count);
+        Assert.Contains(notes, n => n.Text == "note 0");
+    }
+
     [Fact]
     public void NormaliseKeepsOnlyReferencesForCorpusBlocksAndRejectsSpoofing()
     {

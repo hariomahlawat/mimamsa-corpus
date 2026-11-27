@@ -56,6 +56,8 @@ public sealed class StudioStore(NpgsqlDataSource db)
               doc_id text NOT NULL REFERENCES studio_documents(doc_id) ON DELETE CASCADE, version int NOT NULL,
               state text NOT NULL, body jsonb NOT NULL, bytes int NOT NULL, created_at timestamptz NOT NULL DEFAULT now(),
               PRIMARY KEY(doc_id, version));
+            -- Codex review of PR #75: each version keeps the title it was saved with (NULL for versions saved before this)
+            ALTER TABLE studio_versions ADD COLUMN IF NOT EXISTS title text;
             CREATE TABLE IF NOT EXISTS studio_notes(
               note_id text PRIMARY KEY, owner text NOT NULL, text text NOT NULL,
               ref_doc text, ref_copy text, ref_page int, created_at timestamptz NOT NULL DEFAULT now());
@@ -133,7 +135,7 @@ public sealed class StudioStore(NpgsqlDataSource db)
         }
         await using (var ins = new NpgsqlCommand("INSERT INTO studio_documents(doc_id, owner, title, template, version) VALUES ($1,$2,$3,$4,1)", c, tx))
         { ins.Parameters.AddWithValue(id); ins.Parameters.AddWithValue(owner); ins.Parameters.AddWithValue(t); ins.Parameters.AddWithValue(template); await ins.ExecuteNonQueryAsync(); }
-        await InsertVersionAsync(c, tx, id, 1, "draft", blocks);
+        await InsertVersionAsync(c, tx, id, 1, "draft", blocks, t);
         await tx.CommitAsync();
         return (await GetAsync(owner, id))!;
     }
@@ -147,12 +149,12 @@ public sealed class StudioStore(NpgsqlDataSource db)
         await l.ExecuteNonQueryAsync();
     }
 
-    static async Task InsertVersionAsync(NpgsqlConnection c, NpgsqlTransaction tx, string id, int version, string state, JsonArray blocks)
+    static async Task InsertVersionAsync(NpgsqlConnection c, NpgsqlTransaction tx, string id, int version, string state, JsonArray blocks, string title)
     {
         var json = blocks.ToJsonString();
-        await using var v = new NpgsqlCommand("INSERT INTO studio_versions(doc_id, version, state, body, bytes) VALUES ($1,$2,$3,$4::jsonb,$5)", c, tx);
+        await using var v = new NpgsqlCommand("INSERT INTO studio_versions(doc_id, version, state, body, bytes, title) VALUES ($1,$2,$3,$4::jsonb,$5,$6)", c, tx);
         v.Parameters.AddWithValue(id); v.Parameters.AddWithValue(version); v.Parameters.AddWithValue(state); v.Parameters.AddWithValue(json);
-        v.Parameters.AddWithValue(System.Text.Encoding.UTF8.GetByteCount(json));
+        v.Parameters.AddWithValue(System.Text.Encoding.UTF8.GetByteCount(json)); v.Parameters.AddWithValue(title);
         await v.ExecuteNonQueryAsync();
     }
 
@@ -176,7 +178,7 @@ public sealed class StudioStore(NpgsqlDataSource db)
     {
         await using var c = await db.OpenConnectionAsync();
         await using var q = new NpgsqlCommand("""
-            SELECT d.doc_id, d.title, d.template, v.state, v.version, d.created_at, d.updated_at, v.body::text
+            SELECT d.doc_id, COALESCE(v.title, d.title), d.template, v.state, v.version, d.created_at, d.updated_at, v.body::text
             FROM studio_documents d JOIN studio_versions v ON v.doc_id = d.doc_id AND v.version = COALESCE($3, d.version)
             WHERE d.owner = $1 AND d.doc_id = $2
             """, c);
@@ -205,7 +207,7 @@ public sealed class StudioStore(NpgsqlDataSource db)
         }
         if (current != baseVersion) throw new StudioConflictException(current);
         if (current >= MaxVersionsPerDoc) throw new StudioValidationException($"At most {MaxVersionsPerDoc} versions per document; export it and start a new one.");
-        await InsertVersionAsync(c, tx, id, current + 1, state, blocks);
+        await InsertVersionAsync(c, tx, id, current + 1, state, blocks, t);
         await using (var u = new NpgsqlCommand("UPDATE studio_documents SET version=$3, title=$4, state=$5, updated_at=now() WHERE owner=$1 AND doc_id=$2", c, tx))
         { u.Parameters.AddWithValue(owner); u.Parameters.AddWithValue(id); u.Parameters.AddWithValue(current + 1); u.Parameters.AddWithValue(t); u.Parameters.AddWithValue(state); await u.ExecuteNonQueryAsync(); }
         await tx.CommitAsync();
@@ -265,8 +267,8 @@ public sealed class StudioStore(NpgsqlDataSource db)
     public async Task<IReadOnlyList<StudioNote>> NotesAsync(string owner)
     {
         await using var c = await db.OpenConnectionAsync();
-        await using var q = new NpgsqlCommand("SELECT note_id, text, ref_doc, ref_copy, ref_page, created_at FROM studio_notes WHERE owner=$1 ORDER BY created_at DESC LIMIT 500", c);
-        q.Parameters.AddWithValue(owner);
+        await using var q = new NpgsqlCommand("SELECT note_id, text, ref_doc, ref_copy, ref_page, created_at FROM studio_notes WHERE owner=$1 ORDER BY created_at DESC LIMIT $2", c);   // every note up to the per-user cap (Codex review of PR #75)
+        q.Parameters.AddWithValue(owner); q.Parameters.AddWithValue(MaxNotesPerUser);
         var list = new List<StudioNote>();
         await using var r = await q.ExecuteReaderAsync();
         while (await r.ReadAsync())
