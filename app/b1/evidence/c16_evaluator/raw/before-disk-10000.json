@@ -1,0 +1,107 @@
+{
+  "site": "E:/Mimamsa-Data/bench/c16c/10000/site",
+  "engine": "disk",
+  "with_page": false,
+  "replicate": 1,
+  "documents": 10000,
+  "passages": 246020,
+  "vocabulary": 19477,
+  "load_ms": 17750,
+  "index_ms": 5255,
+  "index_file_mb": 62.3,
+  "mem_after_load": {
+    "working_set_mb": 1112.2,
+    "managed_heap_mb": 733.9
+  },
+  "mem_after_index": {
+    "working_set_mb": 1135,
+    "managed_heap_mb": 761.2
+  },
+  "mem_end": {
+    "working_set_mb": 2739.6,
+    "managed_heap_mb": 869.9
+  },
+  "sequential": {
+    "n": 78,
+    "p50": 16.1,
+    "p95": 141.1,
+    "max": 209.4
+  },
+  "concurrent": {
+    "readers_10": {
+      "stats": {
+        "n": 1560,
+        "p50": 48,
+        "p95": 460.6,
+        "max": 695.2
+      },
+      "throughput_qps": 80.8
+    },
+    "readers_25": {
+      "stats": {
+        "n": 3900,
+        "p50": 58.5,
+        "p95": 535.4,
+        "max": 1007.1
+      },
+      "throughput_qps": 82.7
+    }
+  },
+  "per_query_median_ms": {
+    "s.69 Army Act": 13.0826,
+    "2013 INSC 408": 0.0902,
+    "disability pension": 47.9111,
+    "court martial": 141.0691,
+    "summary of evidence": 16.0624,
+    "AFT jurisdiction": 38.359,
+    "invalided out of service": 73.7301,
+    "exact:\u0022Entitlement Rules\u0022": 1.6975,
+    "desertion AND NOT pension": 3.0661,
+    "Rule 22 Army Rules": 11.2558,
+    "release medical board": 22.832,
+    "\u0022court martial\u0022 NEAR/10 delay": 6.117,
+    "Civil Appeal No. 4949 of 2013": 0.0235,
+    "writ petition armed forces tribunal": 70.568,
+    "field punishment": 9.8581,
+    "attributable to military service": 41.0422,
+    "sentence of dismissal": 12.0178,
+    "section 302 Indian Penal Code": 17.1017,
+    "Navy Act": 35.7297,
+    "natural justice court of inquiry": 65.8438,
+    "Dharamvir Singh": 19.2148,
+    "section 302 IPC": 2.0289,
+    "court marshal": 73.0536,
+    "\u0022summary of evidence\u0022": 1.4561,
+    "pension*": 15.4857,
+    "title:army": 15.2448
+  },
+  "per_query_alloc_mb": {
+    "s.69 Army Act": 0.94,
+    "2013 INSC 408": 0.01,
+    "disability pension": 22.57,
+    "court martial": 76.99,
+    "summary of evidence": 13.02,
+    "AFT jurisdiction": 23.42,
+    "invalided out of service": 39.11,
+    "exact:\u0022Entitlement Rules\u0022": 0.9,
+    "desertion AND NOT pension": 5.06,
+    "Rule 22 Army Rules": 0.64,
+    "release medical board": 19.05,
+    "\u0022court martial\u0022 NEAR/10 delay": 7.12,
+    "Civil Appeal No. 4949 of 2013": 0.01,
+    "writ petition armed forces tribunal": 71.63,
+    "field punishment": 11.92,
+    "attributable to military service": 42.69,
+    "sentence of dismissal": 12.82,
+    "section 302 Indian Penal Code": 13.87,
+    "Navy Act": 40.03,
+    "natural justice court of inquiry": 77.68,
+    "Dharamvir Singh": 20,
+    "section 302 IPC": 1.26,
+    "court marshal": 72.62,
+    "\u0022summary of evidence\u0022": 0.52,
+    "pension*": 15.15,
+    "title:army": 27.68
+  },
+  "sequential_alloc_mb_per_query": 23.72
+}

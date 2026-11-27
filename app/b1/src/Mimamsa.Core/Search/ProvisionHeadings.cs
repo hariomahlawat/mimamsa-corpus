@@ -71,24 +71,32 @@ public sealed partial class ProvisionHeadings
     /// Returns `scores` with the matching provisions boosted (a new dictionary; the input is not modified).
     public Dictionary<int, double> Boost(Dictionary<int, double> scores, IReadOnlyList<string> words, Dictionary<int, string> reasons)
     {
+        var picks = Picks(p => scores.GetValueOrDefault(p), () => scores.Count > 0 ? scores.Values.Max() : 1.0, words);
+        if (picks.Count == 0) return scores;
+        var r = new Dictionary<int, double>(scores);
+        foreach (var (p, s, why) in picks) { r[p] = s; reasons[p] = why; }
+        return r;
+    }
+
+    /// C16 WP05: the boosted provisions with their new scores, in pick order, for any score representation. `own` is
+    /// a passage's current score (0 when it has none) and `top` the highest current score (1.0 when there is none).
+    /// Boost() above is this applied to a dictionary; the rule and the arithmetic are unchanged.
+    internal List<(int Passage, double Score, string Reason)> Picks(Func<int, double> own, Func<double> top, IReadOnlyList<string> words)
+    {
+        var none = new List<(int, double, string)>();
         var raw = words.SelectMany(w => Text.Tokenize(w)).Select(t => t.Term).ToList();
-        if (!raw.Any(ProceduralCues.Contains)) return scores;
+        if (!raw.Any(ProceduralCues.Contains)) return none;
         var q = Stems(string.Join(" ", words));
-        if (q.Count < MinMatched) return scores;
+        if (q.Count < MinMatched) return none;
         var picks = _entries.Select(e => (e, m: e.Stems.Count(q.Contains)))
             .Where(x => x.m >= MinMatched && (double)x.m / x.e.Stems.Count >= MinCoverage && (double)x.m / q.Count >= MinQueryCoverage)
-            .Select(x => (x.e, x.m, c: (double)x.m / x.e.Stems.Count, own: scores.GetValueOrDefault(x.e.Passage)))
+            .Select(x => (x.e, x.m, c: (double)x.m / x.e.Stems.Count, own: own(x.e.Passage)))
             .GroupBy(x => x.e.Passage).Select(g => g.OrderByDescending(x => x.c).First())
             .OrderByDescending(x => x.c).ThenByDescending(x => x.m).ThenByDescending(x => x.own).ThenBy(x => x.e.Passage)
             .Take(MaxBoosted).ToList();
-        if (picks.Count == 0) return scores;
-        double top = scores.Count > 0 ? scores.Values.Max() : 1.0;
-        var r = new Dictionary<int, double>(scores);
-        foreach (var x in picks)
-        {
-            r[x.e.Passage] = top * (1 + x.c) + x.own * 1e-3;
-            reasons[x.e.Passage] = $"Provision heading matches the question: {x.e.Number}. {x.e.Heading} ({x.e.DocTitle}); heading as printed in the held copy";
-        }
-        return r;
+        if (picks.Count == 0) return none;
+        double t = top();
+        return picks.Select(x => (x.e.Passage, t * (1 + x.c) + x.own * 1e-3,
+            $"Provision heading matches the question: {x.e.Number}. {x.e.Heading} ({x.e.DocTitle}); heading as printed in the held copy")).ToList();
     }
 }

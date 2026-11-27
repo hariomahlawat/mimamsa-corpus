@@ -17,6 +17,13 @@ public sealed class CreditLedger
 {
     public const string SitePool = "site";
     private readonly NpgsqlDataSource _db;
+    // C16 (PR #80 connection-exhaustion investigation): connection pools of THIS instance that have attempted a credit
+    // reservation. Only TryReserveAsync writes rows with a conn_pool, so a pool that never reserved has nothing to drain;
+    // skipping its drain transaction stops every closed HTTP connection (ordinary API calls included) from taking a
+    // pooled database connection and the site-wide credit lock. A pool is marked BEFORE its reservation transaction
+    // starts, so a committed reservation is always followed by a real drain. Prior instances are reconciled at start-up
+    // as before (ReconcilePriorInstancesAsync), independent of this in-memory set.
+    private readonly System.Collections.Concurrent.ConcurrentDictionary<string, byte> _reservedPools = new(StringComparer.Ordinal);
     private readonly CreditConfig _cfg;
     public string InstanceId { get; } = $"{Environment.MachineName}:{Environment.ProcessId}:{Guid.NewGuid():N}";
 
@@ -73,6 +80,7 @@ public sealed class CreditLedger
                                                     Func<NpgsqlConnection, NpgsqlTransaction, Guid, Task<bool>>? admit = null,
                                                     int? localPort = null, int? remotePort = null)
     {
+        _reservedPools[connPool] = 1;
         await using var c = await _db.OpenConnectionAsync();
         await using var tx = await c.BeginTransactionAsync();
         await LockSiteAsync(c, tx);
@@ -150,6 +158,7 @@ public sealed class CreditLedger
     /// then drained with the same evidence (never refunded as if unused).
     public async Task<List<(Guid id, string priorState)>> DrainConnectionAsync(string connPool, string evidence)
     {
+        if (!_reservedPools.TryRemove(connPool, out _)) return new();   // never reserved here: no rows can exist for it
         await using var c = await _db.OpenConnectionAsync();
         await using var tx = await c.BeginTransactionAsync();
         var pools = new[] { connPool, SitePool };

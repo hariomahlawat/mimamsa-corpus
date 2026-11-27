@@ -50,6 +50,8 @@ public sealed partial class GenerationStore
     public required IReadOnlyList<Abbreviation> Abbreviations { get; init; }
     public required IReadOnlyDictionary<string, int> LoadIssues { get; init; }
     public required JsonArray Quarantine { get; init; }
+    /// C16 WP04: where page and passage text lives (memory reference or the verified disk store); numbers-only stats.
+    public ITextStore Text { get; init; } = MemoryTextStore.Instance;
 
     Statutes.StatuteRelations? _relations;
     /// Statutory relationships derived from verified held text (C14 F03), built once on first use.
@@ -89,7 +91,9 @@ public sealed partial class GenerationStore
     static string? S(JsonNode? n) => n is JsonValue v && v.TryGetValue<string>(out var s) ? s : null;
     static List<string> L(JsonNode? n) => n is JsonArray a ? a.Select(x => S(x)).Where(x => x is not null).Select(x => x!).ToList() : new();
 
-    public static GenerationStore Load(string siteRoot, Vault? vault = null)
+    /// Loads the ACTIVE generation. `text` selects the text store (default memory, the reference); `log` receives
+    /// text-store build, open and verification lines (no text).
+    public static GenerationStore Load(string siteRoot, Vault? vault = null, TextStoreOptions? text = null, Action<string>? log = null)
     {
         siteRoot = Path.GetFullPath(siteRoot);
         var activePath = Path.Combine(siteRoot, "ACTIVE");
@@ -147,44 +151,33 @@ public sealed partial class GenerationStore
             docs[id] = rec;
         }
 
-        foreach (var t in Jsonl(Path.Combine(gdir, "records", "derived_text.jsonl")))
+        // C16 WP04: derivative text is held in memory (reference) or persisted to and read lazily from the generation's
+        // verified disk text store. Both run the same verification (ReadDerived) and attach identical pages/passages.
+        text ??= TextStoreOptions.Memory;
+        ITextStore textStore;
+        switch (text.Store)
         {
-            var docId = S(t["doc_id"])!;
-            var pname = S(t["pipeline"]?["name"])!; var pver = S(t["pipeline"]?["version"])!;
-            var did = $"{docId}@{pname}/{pver}";
-            if (!okDer.Contains(did) || !docs.TryGetValue(docId, out var doc) || S(t["source_copy_sha256"]) != doc.CopySha)
-            { Issue("DERIVATIVE_NOT_SERVABLE"); continue; }
-            var tsha = S(t["text_sha256"])!;
-            if (ServingState.CanonicalSha(tsha) is null) { Issue("DERIVATIVE_BAD_HASH"); continue; }
-            var path = Path.Combine(gdir, "derived", tsha + ".txt");
-            if (!File.Exists(path)) { Issue("DERIVATIVE_TEXT_MISSING"); continue; }
-            var bytes = File.ReadAllBytes(path);
-            if (Sha(bytes) != tsha) { Issue("DERIVATIVE_TEXT_HASH_MISMATCH"); continue; }
-            var pages = SplitPages(Encoding.UTF8.GetString(bytes));
-            if (pages is null) { Issue("DERIVATIVE_MARKERS_MALFORMED"); continue; }
-            if (doc.DerivativeId is not null) { Issue("DERIVATIVE_DUPLICATE_IGNORED"); continue; }
-            doc.DerivativeId = did; doc.DerivativeTextSha = tsha; doc.PipelineName = pname; doc.PipelineVersion = pver;
-            doc.QuotingPermitted = t["quoting_permitted"]?.GetValue<bool>() ?? false;
-            foreach (var pg in t["pages"]!.AsArray())
-            {
-                int n = pg!["page"]!.GetValue<int>();
-                if (!pages.TryGetValue(n, out var body)) continue;
-                doc.Pages[n] = new PageText(n, body, S(pg["method"]) ?? "pdf_text", pg["low_confidence"]?.GetValue<bool>() ?? false,
-                    pg["ocr_mean_confidence"] is JsonValue cv && cv.TryGetValue<double>(out var c) ? c : null);
-            }
-            foreach (var ps in t["passages"]!.AsArray())
-            {
-                int n = ps!["page"]!.GetValue<int>(), cps = ps["char_start"]!.GetValue<int>(), cpe = ps["char_end"]!.GetValue<int>();
-                // Contract offsets count Unicode code points (producer and importer are Python); map to UTF-16 indexes.
-                if (!doc.Pages.TryGetValue(n, out var body) || !CodePoints.TryMap(body.Text, cps, cpe, out var cs, out var ce))
-                { Issue("PASSAGE_OUT_OF_RANGE"); continue; }
-                var text = body.Text[cs..ce];
-                if (Sha(text) != S(ps["text_sha256"])) { Issue("PASSAGE_HASH_MISMATCH"); continue; }
-                doc.Passages.Add(new Passage(docId, S(ps["passage_id"])!, n, cs, ce, S(ps["paragraph_label"]), text));
-            }
+            case "memory":
+                foreach (var t in ReadDerived(gdir, okDer, docs, Issue))
+                {
+                    var doc = t.Doc;
+                    doc.DerivativeId = t.DerivativeId; doc.DerivativeTextSha = t.TextSha; doc.PipelineName = t.PipelineName; doc.PipelineVersion = t.PipelineVersion;
+                    doc.QuotingPermitted = t.QuotingPermitted;
+                    foreach (var (pg, _, _) in t.Pages) doc.Pages[pg.Page] = pg;
+                    doc.Passages.AddRange(t.Passages);
+                }
+                textStore = MemoryTextStore.Instance;
+                break;
+            case "disk":
+                var root = text.Dir is { Length: > 0 } tdir ? Path.GetFullPath(tdir) : Path.Combine(siteRoot, "text-store");
+                textStore = DiskTextStore.OpenOrBuild(root, text, gid, DiskTextStore.SourceDigest(gid, gdir, docs.Values), docs,
+                    issue => ReadDerived(gdir, okDer, docs, issue), (code, n) => issues[code] = issues.GetValueOrDefault(code) + n, log);
+                break;
+            default:
+                throw new ArgumentException("text store must be 'memory' or 'disk'");
         }
 
-        foreach (var doc in docs.Values) TextQuality.Apply(doc);
+        foreach (var doc in docs.Values) if (doc.TextAssessment is null) TextQuality.Apply(doc);
 
         foreach (var c in Jsonl(Path.Combine(gdir, "records", "candidates.jsonl")))
         {
@@ -227,8 +220,91 @@ public sealed partial class GenerationStore
         {
             SiteRoot = siteRoot, GenerationId = gid, Release = release, Documents = docs, HeldCopies = held,
             ProvisionVersions = versions, Abbreviations = abbrevs, LoadIssues = issues,
-            Quarantine = gen["quarantine"] as JsonArray ?? new JsonArray(),
+            Quarantine = gen["quarantine"] as JsonArray ?? new JsonArray(), Text = textStore,
         };
+    }
+
+    /// Importer page format with offsets: page number -> (start, length) of its body in `text` (UTF-16), same rule as
+    /// SplitPages. Null when malformed.
+    static List<(int Page, int Start, int Length)>? PageSpans(string text)
+    {
+        var marks = Marker().Matches(text);
+        if (marks.Count == 0 || marks[0].Index != 0) return null;
+        var spans = new List<(int, int, int)>(marks.Count);
+        var seen = new HashSet<int>();
+        for (int i = 0; i < marks.Count; i++)
+        {
+            int start = marks[i].Index + marks[i].Length;
+            int end = i + 1 < marks.Count ? marks[i + 1].Index : text.Length;
+            if (end > start && text[end - 1] == '\n') end--;
+            int n = int.Parse(marks[i].Groups[1].Value);
+            if (!seen.Add(n)) return null;
+            spans.Add((n, start, end - start));
+        }
+        return spans;
+    }
+
+    /// The verified derivatives of the generation, one per accepted document, in derived_text.jsonl order. Every check
+    /// is the B1 load rule: servable derivative of a loaded document's copy, canonical hash, file present and re-hashed,
+    /// well-formed page markers, first derivative per document only, passage offsets in range and passage text hashed.
+    /// Pages carry their UTF-8 byte range in the derivative (for the disk store). Yields one document at a time.
+    static IEnumerable<DerivedText> ReadDerived(string gdir, HashSet<string> okDer, Dictionary<string, DocumentRecord> docs, Action<string> issue)
+    {
+        var taken = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var t in Jsonl(Path.Combine(gdir, "records", "derived_text.jsonl")))
+        {
+            var docId = S(t["doc_id"])!;
+            var pname = S(t["pipeline"]?["name"])!; var pver = S(t["pipeline"]?["version"])!;
+            var did = $"{docId}@{pname}/{pver}";
+            if (!okDer.Contains(did) || !docs.TryGetValue(docId, out var doc) || S(t["source_copy_sha256"]) != doc.CopySha)
+            { issue("DERIVATIVE_NOT_SERVABLE"); continue; }
+            var tsha = S(t["text_sha256"])!;
+            if (ServingState.CanonicalSha(tsha) is null) { issue("DERIVATIVE_BAD_HASH"); continue; }
+            var path = Path.Combine(gdir, "derived", tsha + ".txt");
+            if (!File.Exists(path)) { issue("DERIVATIVE_TEXT_MISSING"); continue; }
+            var bytes = File.ReadAllBytes(path);
+            if (Sha(bytes) != tsha) { issue("DERIVATIVE_TEXT_HASH_MISMATCH"); continue; }
+            var all = Encoding.UTF8.GetString(bytes);
+            var spans = PageSpans(all);
+            if (spans is null) { issue("DERIVATIVE_MARKERS_MALFORMED"); continue; }
+            if (!taken.Add(docId)) { issue("DERIVATIVE_DUPLICATE_IGNORED"); continue; }
+            // UTF-8 byte offset of every page body (markers are ASCII, so body boundaries are character boundaries).
+            var byteRange = new Dictionary<int, (int start, int len)>(spans.Count);
+            int charPos = 0, bytePos = 0;
+            foreach (var (n, start, len) in spans.OrderBy(x => x.Start))
+            {
+                bytePos += Encoding.UTF8.GetByteCount(all.AsSpan(charPos, start - charPos));
+                int bl = Encoding.UTF8.GetByteCount(all.AsSpan(start, len));
+                byteRange[n] = (bytePos, bl);
+                charPos = start + len; bytePos += bl;
+            }
+            var bodies = spans.ToDictionary(x => x.Page, x => all.Substring(x.Start, x.Length));
+            var pages = new List<(PageText, int, int)>();
+            var byPage = new Dictionary<int, PageText>();
+            foreach (var pg in t["pages"]!.AsArray())
+            {
+                int n = pg!["page"]!.GetValue<int>();
+                if (!bodies.TryGetValue(n, out var body)) continue;
+                var p = new PageText(n, body, S(pg["method"]) ?? "pdf_text", pg["low_confidence"]?.GetValue<bool>() ?? false,
+                    pg["ocr_mean_confidence"] is JsonValue cv && cv.TryGetValue<double>(out var c) ? c : null);
+                // A repeated page entry replaces the earlier one in its original position (the B1 dictionary rule).
+                int at = byPage.ContainsKey(n) ? pages.FindIndex(x => x.Item1.Page == n) : -1;
+                byPage[n] = p;
+                if (at >= 0) pages[at] = (p, byteRange[n].start, byteRange[n].len); else pages.Add((p, byteRange[n].start, byteRange[n].len));
+            }
+            var passages = new List<Passage>();
+            foreach (var ps in t["passages"]!.AsArray())
+            {
+                int n = ps!["page"]!.GetValue<int>(), cps = ps["char_start"]!.GetValue<int>(), cpe = ps["char_end"]!.GetValue<int>();
+                // Contract offsets count Unicode code points (producer and importer are Python); map to UTF-16 indexes.
+                if (!byPage.TryGetValue(n, out var body) || !CodePoints.TryMap(body.Text, cps, cpe, out var cs, out var ce))
+                { issue("PASSAGE_OUT_OF_RANGE"); continue; }
+                var ptext = body.Text[cs..ce];
+                if (Sha(ptext) != S(ps["text_sha256"])) { issue("PASSAGE_HASH_MISMATCH"); continue; }
+                passages.Add(new Passage(docId, S(ps["passage_id"])!, n, cs, ce, S(ps["paragraph_label"]), ptext));
+            }
+            yield return new DerivedText(doc, did, tsha, pname, pver, t["quoting_permitted"]?.GetValue<bool>() ?? false, bytes, pages, passages);
+        }
     }
 
     static ProvisionVersion ToVersion(JsonObject v, Dictionary<string, DocumentRecord> bySha)

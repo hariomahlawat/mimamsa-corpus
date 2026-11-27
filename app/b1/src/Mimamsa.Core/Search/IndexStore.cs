@@ -60,7 +60,7 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
         foreach (var d in docs)
         {
             Add($"D\t{d.DocId}\t{d.DerivativeId}\t{d.CopySha}");
-            foreach (var p in SearchIndex.OrderedPassages(d)) Add($"P\t{p.PassageId}\t{p.Page}\t{p.CharStart}\t{p.CharEnd}\t{p.Text.Length}");
+            foreach (var p in SearchIndex.OrderedPassages(d)) Add($"P\t{p.PassageId}\t{p.Page}\t{p.CharStart}\t{p.CharEnd}\t{p.Length}");
         }
         return Convert.ToHexString(h.GetHashAndReset()).ToLowerInvariant();
     }

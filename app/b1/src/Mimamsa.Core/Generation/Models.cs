@@ -3,11 +3,63 @@ using System.Text.Json.Nodes;
 namespace Mimamsa.Core.Generation;
 
 /// One page of verified derived text (importer page format: text after the [[page N]] marker line).
-public sealed record PageText(int Page, string Text, string Method, bool LowConfidence, double? OcrConfidence);
+/// C16 WP04: the text is either held (memory store, the reference) or read on demand from the generation's verified
+/// disk text store through a `DocumentText` handle (disk store). Callers read `Text` either way and get identical
+/// strings; `Length` needs no text read.
+public sealed record PageText
+{
+    readonly string? _text;
+    readonly DocumentText? _source;
+
+    public PageText(int Page, string Text, string Method, bool LowConfidence, double? OcrConfidence)
+    {
+        this.Page = Page; _text = Text; this.Method = Method; this.LowConfidence = LowConfidence; this.OcrConfidence = OcrConfidence; Length = Text.Length;
+    }
+
+    internal PageText(int page, DocumentText source, int length, string method, bool lowConfidence, double? ocrConfidence)
+    {
+        Page = page; _source = source; Length = length; Method = method; LowConfidence = lowConfidence; OcrConfidence = ocrConfidence;
+    }
+
+    public int Page { get; init; }
+    /// Page text (UTF-16). Disk store: verified against the derivative's text_sha256 before first use.
+    public string Text => _text ?? _source!.Page(Page);
+    /// Length of `Text` in UTF-16 code units, known without reading the text.
+    public int Length { get; }
+    public string Method { get; init; }
+    public bool LowConfidence { get; init; }
+    public double? OcrConfidence { get; init; }
+}
 
 /// A paragraph-sized span with an exact page anchor (contract derived_text.passages).
-public sealed record Passage(string DocId, string PassageId, int Page, int CharStart, int CharEnd, string? ParagraphLabel, string Text)
+/// C16 WP04: the identity (DocId, PassageId, Page, CharStart, CharEnd, ParagraphLabel) is always held; `Text` is held
+/// (memory store) or sliced on demand from the verified page text (disk store). Both give identical strings.
+public sealed record Passage
 {
+    readonly string? _text;
+    readonly DocumentText? _source;
+
+    public Passage(string DocId, string PassageId, int Page, int CharStart, int CharEnd, string? ParagraphLabel, string Text)
+    {
+        this.DocId = DocId; this.PassageId = PassageId; this.Page = Page; this.CharStart = CharStart; this.CharEnd = CharEnd;
+        this.ParagraphLabel = ParagraphLabel; _text = Text;
+    }
+
+    internal Passage(string docId, string passageId, int page, int charStart, int charEnd, string? paragraphLabel, DocumentText source)
+    {
+        DocId = docId; PassageId = passageId; Page = page; CharStart = charStart; CharEnd = charEnd; ParagraphLabel = paragraphLabel; _source = source;
+    }
+
+    public string DocId { get; init; }
+    public string PassageId { get; init; }
+    public int Page { get; init; }
+    /// UTF-16 offsets into the page text.
+    public int CharStart { get; init; }
+    public int CharEnd { get; init; }
+    public string? ParagraphLabel { get; init; }
+    public string Text => _text ?? _source!.Slice(Page, CharStart, CharEnd);
+    /// Length of `Text` in UTF-16 code units, known without reading the text.
+    public int Length => _text?.Length ?? CharEnd - CharStart;
     public string Key => DocId + "#" + PassageId;
 }
 

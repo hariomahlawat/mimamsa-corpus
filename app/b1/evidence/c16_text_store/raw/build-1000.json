@@ -1,0 +1,13 @@
+{
+  "site": "E:\\Mimamsa-Data\\bench\\c16b\\1000\\site",
+  "engine": "disk",
+  "text_store": "disk",
+  "load_ms": 15199,
+  "index_ms": 4435,
+  "documents": 1000,
+  "passages": 24030,
+  "mem_after_index": {
+    "working_set_mb": 281.1,
+    "managed_heap_mb": 52.9
+  }
+}

@@ -1,0 +1,156 @@
+# C16 WP05 profiling build (NOT committed code): phase timers added to the C15 SearchService at c8fa5290,
+# and the IndexBench --phase-profile mode that reads them. 10k results: profile-before-*-10000.json.
+--- a/app/b1/src/Mimamsa.Core/Search/SearchService.cs
++++ b/app/b1/src/Mimamsa.Core/Search/SearchService.cs
+@@ -20,6 +20,7 @@
+                                   IReadOnlyList<IReadOnlyList<string>> HighlightPhrases, IReadOnlyList<string> Notes,
+                                   string? Service = null);
+ 
++public static class Prof { [ThreadStatic] public static long[]? T; public static long Now => System.Diagnostics.Stopwatch.GetTimestamp(); public static void Add(int i, long t0) { (T ??= new long[16])[i] += Now - t0; } }
+ public sealed class SearchService
+ {
+     public const int MaxHits = 200;
+@@ -65,7 +66,7 @@
+             return new SearchResult("parser_error", "parser_error", Array.Empty<Chip>(), Array.Empty<Hit>(), 0, 0,
+                 new Dictionary<string, IReadOnlyList<FacetValue>>(), e.Message, e.Position, Array.Empty<string>(), Array.Empty<IReadOnlyList<string>>(), Array.Empty<string>());
+         }
+-        var ctx = new Ctx { Exact = q.Exact };
++        var ctx = new Ctx { Exact = q.Exact }; long _t = Prof.Now;
+         var notes = new List<string> { "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1." };
+         var ordered = new List<Hit>();
+         var seen = new HashSet<int>();
+@@ -74,7 +75,7 @@
+ 
+         if (q.Plain)
+         {
+-            var (pinned, mentions, rest) = IdentifierTiers(q.Raw, ctx);
++            var (pinned, mentions, rest) = IdentifierTiers(q.Raw, ctx); Prof.Add(0, _t); _t = Prof.Now;
+             foreach (var h in pinned) if (seen.Add(h.PassageIndex)) ordered.Add(h);
+             // Case-name tier (C14 F02): a query naming the parties pins those judgments above judgments that cite them.
+             if (rest.Count > 0 && Identifiers.Recognise(q.Raw).Count == 0 && _ix.Resolver.ResolveCaseName(rest) is { } cn)
+@@ -104,7 +105,7 @@
+                     for (int d = 0; d < _ix.Docs.Count; d++)
+                         if (_ix.Docs[d].IsStatute && NormTitle(_ix.Docs[d].Title).Split(' ').ToHashSet().SetEquals(words) && seen.Add(_ix.DocPassages[d][0]))
+                             ordered.Add(new Hit(_ix.DocPassages[d][0], "title", 5e8, new[] { $"title match: {_ix.Docs[d].Title}" }));
+-                var scores = PlainScores(rest, ctx);
++                Prof.Add(1, _t); _t = Prof.Now; var scores = PlainScores(rest, ctx); Prof.Add(2, _t); _t = Prof.Now;
+                 // C15 WP2/WP7: provision-heading boost for procedural plain-language queries (see ProvisionHeadings).
+                 if (!q.Exact && Headings is not null)
+                     scores = Headings.Boost(scores, rest, ctx.HeadingReasons);
+@@ -166,32 +167,32 @@
+                 }
+                 else
+                 // ---- C14 S4 hybrid hook (end)
+-                foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))
+-                    if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx)));
++                { _t = Prof.Now; foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))
++                    if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx))); Prof.Add(3, _t); }
+             }
+         }
+         else
+         {
+-            var scores = Eval(q.Root!, ctx);
++            var scores = Eval(q.Root!, ctx); Prof.Add(2, _t); _t = Prof.Now;
+             foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))
+                 if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx)));
+-            DescribeChips(q.Root!, ctx);
++            DescribeChips(q.Root!, ctx); Prof.Add(3, _t);
+         }
+ 
+         // eligibility is decided once per document within this query (C15 WP1), not once per passage hit
+-        var hiddenByDoc = new Dictionary<int, bool>();
++        _t = Prof.Now; var hiddenByDoc = new Dictionary<int, bool>();
+         bool Hidden(int p) { int d = _ix.DocOf(p); if (!hiddenByDoc.TryGetValue(d, out var h)) hiddenByDoc[d] = h = _docHidden(_ix.Docs[d].DocId); return h; }
+         ordered = ordered.Where(h => !Hidden(h.PassageIndex)).ToList();
+-        if (service is not null && Legal.LegalIdentifierResolver.ServiceLabels.TryGetValue(service, out var svcLabel))
++        Prof.Add(4, _t); _t = Prof.Now; if (service is not null && Legal.LegalIdentifierResolver.ServiceLabels.TryGetValue(service, out var svcLabel))
+         {
+             ordered = ServicePreference(ordered, service, hybrid: mode == "hybrid");
+             notes.Add($"Service preference: {svcLabel}. Ranked results from {svcLabel} instruments and judgments are raised and those of other services lowered; identifier, case-name and mention tiers are unchanged and nothing is excluded.");
+         }
+         else service = null;
+-        var facets = Facets(ordered, filters);
++        _t = Prof.Now; var facets = Facets(ordered, filters); Prof.Add(5, _t); _t = Prof.Now;
+         var filtered = ordered.Where(h => Pass(_ix.Docs[_ix.DocOf(h.PassageIndex)], filters, null)).ToList();
+         int docs = filtered.Select(h => _ix.DocOf(h.PassageIndex)).Distinct().Count();
+-        var state = filtered.Count > 0 ? "results" : "empty";
++        Prof.Add(6, _t); var state = filtered.Count > 0 ? "results" : "empty";
+         // All filtered hits are returned in relevance order; the HTTP layer pages them by document (C14 F10).
+         return new SearchResult(state, mode, ctx.Chips, filtered, filtered.Count, docs, facets, null, null,
+             ctx.Highlight.ToList(), ctx.Phrases, notes, service);
+@@ -232,6 +233,7 @@
+     /// order of the full result; sort "new"/"old" orders groups by the representative's date (undated last).
+     public ResultPage Page(SearchResult r, int page, int size, string? sort)
+     {
++        long _t = Prof.Now; try {
+         size = Math.Clamp(size <= 0 ? DefaultPageSize : size, 1, MaxPageSize);
+         var order = new List<string>();
+         var members = new Dictionary<string, List<int>>(StringComparer.Ordinal);
+@@ -275,6 +277,7 @@
+             if (hits.Count < LeadPassages || perDoc.GetValueOrDefault(d) < PassagesPerGroup) { hits.Add(h); perDoc[d] = perDoc.GetValueOrDefault(d) + 1; }
+         }
+         return new ResultPage(hits, slice, page, size, pages, groups.Count, counts);
++        } finally { Prof.Add(7, _t); }
+     }
+     public const int LeadPassages = 20, PassagesPerGroup = 3;
+ 
+@@ -456,7 +459,7 @@
+         var total = clauses.Count(c => c.weight >= 1.0);
+         var acc = new Dictionary<int, (double s, int hits)>();
+         foreach (var (display, node, weight) in clauses)
+-            foreach (var (p, s) in Eval(node, ctx))
++            foreach (var (p, s) in ProfEval(node, ctx))
+             {
+                 acc.TryGetValue(p, out var cur);
+                 acc[p] = (cur.s + s * weight, cur.hits + (weight >= 1.0 ? 1 : 0));
+@@ -480,6 +483,7 @@
+         counts[p] = counts.GetValueOrDefault(p) + n;
+     }
+ 
++    Dictionary<int, double> ProfEval(QNode n, Ctx ctx) { long t0 = Prof.Now; var r = Eval(n, ctx); Prof.Add(8, t0); return r; }
+     Dictionary<int, double> Eval(QNode node, Ctx ctx)
+     {
+         switch (node)
+@@ -490,12 +494,12 @@
+                 var tf = new Dictionary<int, int>();
+                 foreach (var v in Variants(t.Term, t.Prefix, ctx))
+                 {
+-                    if (!_ix.Postings.TryGetValue(v, out var post)) continue;
++                    long t0 = Prof.Now; if (!_ix.Postings.TryGetValue(v, out var post)) continue; Prof.Add(9, t0); t0 = Prof.Now;
+                     ctx.Highlight.Add(v);
+-                    foreach (var x in post) tf[x.P] = tf.GetValueOrDefault(x.P) + x.Pos.Length;
++                    foreach (var x in post) tf[x.P] = tf.GetValueOrDefault(x.P) + x.Pos.Length; Prof.Add(10, t0);
+                 }
+-                double idf = _ix.Idf(tf.Count);
+-                foreach (var (p, n) in tf) { res[p] = idf * _ix.TfNorm(n, p); Note(ctx, p, t.Term + (t.Prefix ? "*" : ""), n); }
++                double idf = _ix.Idf(tf.Count); long t1 = Prof.Now;
++                foreach (var (p, n) in tf) { res[p] = idf * _ix.TfNorm(n, p); Note(ctx, p, t.Term + (t.Prefix ? "*" : ""), n); } Prof.Add(11, t1);
+                 return res;
+             }
+             case QPhrase ph:
+# IndexBench Program.cs, --phase-profile block (inserted before the --parity branch):
+if (args.Contains("--phase-profile"))
+{
+    var ps = new SearchService(ix, _ => false);
+    foreach (var q in Q) { var r0 = ps.Search(q, new SearchFilters()); ps.Page(r0, 1, 25, null); }
+    string[] names = { "identifier_tiers", "case_name_title_speller", "scores_eval", "order_hits", "hidden_filter", "facets", "filter_distinct", "page", "clause_eval", "postings_fetch", "tf_accumulate", "score_note" };
+    var rows = new List<object>();
+    foreach (var q in Q)
+    {
+        var ticks = new long[16];
+        long alloc0 = GC.GetAllocatedBytesForCurrentThread(); var sw0 = Stopwatch.StartNew();
+        for (int i = 0; i < 5; i++)
+        {
+            Prof.T = new long[16];
+            var r0 = ps.Search(q, new SearchFilters()); var pg0 = ps.Page(r0, 1, 25, null); foreach (var h in pg0.Hits) _ = h.Reasons.Count;
+            for (int k = 0; k < 16; k++) ticks[k] += Prof.T[k];
+        }
+        double tot = sw0.Elapsed.TotalMilliseconds / 5; long alloc = (GC.GetAllocatedBytesForCurrentThread() - alloc0) / 5;
+        var hitsN = ps.Search(q, new SearchFilters()).TotalPassages;
+        rows.Add(new { q, hits = hitsN, total_ms = Math.Round(tot, 1), alloc_mb = Math.Round(alloc / 1048576.0, 1),
+            phases_ms = names.Select((n, k) => (n, v: Math.Round(ticks[k] * 1000.0 / Stopwatch.Frequency / 5, 1))).Where(x => x.v > 0).ToDictionary(x => x.n, x => x.v) });
+    }
+    var pj = JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true });
+    Console.WriteLine(pj); if (Arg("--out") is { } po) File.WriteAllText(po, pj);
+    return;
+}

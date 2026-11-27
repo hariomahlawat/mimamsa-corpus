@@ -90,7 +90,7 @@ public class GraphBuilderTests
     }
 
     static GenerationStore? _sample;
-    static GenerationStore? Sample => Environment.GetEnvironmentVariable("MIMAMSA_SAMPLE_SITE") is { Length: > 0 } s && Directory.Exists(s) ? _sample ??= GenerationStore.Load(s) : null;
+    static GenerationStore? Sample => Environment.GetEnvironmentVariable("MIMAMSA_SAMPLE_SITE") is { Length: > 0 } s && Directory.Exists(s) ? _sample ??= TestText.Load(s) : null;
 
     /// Golden research assessments built from held texts of the real sample (skipped without MIMAMSA_SAMPLE_SITE).
     [Fact]
