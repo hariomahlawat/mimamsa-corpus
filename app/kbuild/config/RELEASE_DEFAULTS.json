@@ -1,0 +1,10 @@
+{
+ "description": "Committed release constants for B02 S4/S7 that the frozen build-spec schema does not carry. Development defaults, not production decisions. Changing this file changes the S1 inventory and so re-runs the build from S1.",
+ "record_kind": "kbuild_release_defaults",
+ "min_app_version": "0.16.0",
+ "max_app_version": null,
+ "knowledge_format": "1.0",
+ "candidate_banner": "Research and candidate data. Not legally verified. AUTH-LEDGER version 0: no legal approval exists.",
+ "auth_ledger_version": 0,
+ "notes": "CP-1 fixture build: development-signed (WD-11), explicitly degraded (lexical-only, no vectors), fixture-level acceptance only; never ACTIVE_FULL; closes no FG gate on real data."
+}

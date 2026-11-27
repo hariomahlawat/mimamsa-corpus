@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- C16 B02 stage S6 helper (not part of the service or the B1 solution): builds the ADR-0008 text store, the ADR-0007
+       lexical index and the C15 graph of a scratch reference site's ACTIVE generation with the existing B1 builders,
+       with a pinned build time, and exports the graph rows. Called by `python -m mimamsa_kbuild`; it never uses the
+       network and never embeds. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\b1\src\Mimamsa.Core\Mimamsa.Core.csproj" />
+  </ItemGroup>
+</Project>

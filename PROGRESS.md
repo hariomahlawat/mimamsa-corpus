@@ -1,5 +1,16 @@
 # Progress
 
+## 2026-11-27 — C16 Tranche B Stage 2, B02: build pipeline skeleton
+
+- `python -m mimamsa_kbuild build --spec <spec>` (app/kbuild): stages S0-S9 with chained stage manifests, the
+  contract resume rule, deterministic output (two builds byte-identical) and a shared-host budget applied through a
+  Windows job object (half the CPUs and memory at most, below-normal CPU and low I/O priority).
+- Builds a development-signed, explicitly degraded (lexical-only) MKR-1 release from the contract fixtures and the SYN
+  site; it validates under the contract rules. Fixture level only; no FG gate closed.
+- Finding for B04: the text store's source digest covers the bundle's own SHA256SUMS digest, so a prebuilt text
+  store can never match the site; it is accounted SITE_BUILDS_CHEAP until B04 changes the digest.
+- Next (Stage 3): HF fetch, real canonical layout, S3 re-derivation, B01/B03/B04/B06 integration, vectors, deltas.
+
 ## 2026-11-22 — OCR of the scanned judgments
 
 - 944 scanned judgments (4,705 pages) read with Tesseract, English only, 300 dpi, then run through the
