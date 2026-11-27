@@ -96,6 +96,7 @@ public sealed class GraphStore(NpgsqlDataSource db)
             await ins.ExecuteNonQueryAsync();
         }
         await tx.CommitAsync();
+        _statsCache.Clear();
         return true;
     }
 
@@ -224,7 +225,21 @@ public sealed class GraphStore(NpgsqlDataSource db)
         return null;
     }
 
+    // Statistics depend only on (generation, hidden set); they are cached per exact hidden set, so a withdrawal (a new
+    // hidden set) is never answered from a stale entry. Bounded: cleared when it grows past 32 entries.
+    readonly System.Collections.Concurrent.ConcurrentDictionary<string, GraphStats> _statsCache = new();
+
     public async Task<GraphStats> StatsAsync(string gen, string[] hidden)
+    {
+        var key = gen + "|" + string.Join(",", hidden.OrderBy(h => h, StringComparer.Ordinal));
+        if (_statsCache.TryGetValue(key, out var cached)) return cached;
+        var s = await StatsUncachedAsync(gen, hidden);
+        if (_statsCache.Count > 32) _statsCache.Clear();
+        _statsCache[key] = s;
+        return s;
+    }
+
+    async Task<GraphStats> StatsUncachedAsync(string gen, string[] hidden)
     {
         await using var c = await db.OpenConnectionAsync();
         await RequirePublished(c, gen);

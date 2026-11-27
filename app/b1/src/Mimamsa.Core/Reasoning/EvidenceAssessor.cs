@@ -12,6 +12,7 @@ using Mimamsa.Core.Statutes;
 
 namespace Mimamsa.Core.Reasoning;
 
+[System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<EvidenceState>))]
 public enum EvidenceState { ESTABLISHED, CANDIDATE, INSUFFICIENT_INFORMATION }
 
 public sealed record EvidenceLink(string DocId, int? Page, string? Quote, string? EdgeId, string Verification, string Origin);
@@ -26,9 +27,13 @@ public sealed class EvidenceAssessor(GenerationStore g, LegalGraph graph, Func<s
     public const string LedgerBlocker = "AUTH-LEDGER is at version 0: no source or relationship in this installation is legally verified, so no finding can be ESTABLISHED.";
     public static readonly DateOnly SecondarySourceDate = new(2024, 7, 1);
 
-    readonly Dictionary<string, GraphNode> _nodes = graph.Nodes.ToDictionary(n => n.Id);
-    readonly ILookup<string, GraphEdge> _in = graph.Edges.ToLookup(e => e.To);
-    readonly ILookup<string, GraphEdge> _out = graph.Edges.ToLookup(e => e.From);
+    // The graph is immutable for a generation, so its lookups are built once per graph and shared by every request.
+    sealed record Index(Dictionary<string, GraphNode> Nodes, ILookup<string, GraphEdge> In, ILookup<string, GraphEdge> Out);
+    static readonly System.Runtime.CompilerServices.ConditionalWeakTable<LegalGraph, Index> Indexes = new();
+    readonly Index _ix = Indexes.GetValue(graph, gr => new Index(gr.Nodes.ToDictionary(n => n.Id), gr.Edges.ToLookup(e => e.To), gr.Edges.ToLookup(e => e.From)));
+    Dictionary<string, GraphNode> _nodes => _ix.Nodes;
+    ILookup<string, GraphEdge> _in => _ix.In;
+    ILookup<string, GraphEdge> _out => _ix.Out;
     int Ledger => g.Release.AuthLedgerVersion;
 
     bool NodeVisible(GraphNode n) => n.DocId is null || visible(n.DocId);

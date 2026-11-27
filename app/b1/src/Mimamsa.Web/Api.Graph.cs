@@ -24,6 +24,17 @@ public static partial class Api
         label = v.Edge.Verification == Verification.Candidate ? "Candidate (automated, not verified)" : v.Edge.Verification == Verification.CuratedNavigation ? "Navigation aid (not a legal requirement)" : "Structure read from the held text",
     };
 
+    static object AssessmentDto(Assessment a) => new
+    {
+        kind = a.Kind, subject = a.Subject, inputs = a.Inputs, overall = a.Overall.ToString(),
+        findings = a.Findings.Select(f => new
+        {
+            code = f.Code, statement = f.Statement, state = f.State.ToString(), basis = f.Basis,
+            evidence = f.Evidence.Select(e => new { doc_id = e.DocId, page = e.Page, quote = e.Quote, edge_id = e.EdgeId, verification = e.Verification, origin = e.Origin }),
+        }),
+        missing_facts = a.MissingFacts, blockers = a.Blockers, notice = a.Notice, auth_ledger_version = a.AuthLedgerVersion,
+    };
+
     static IResult NotPublished() => Json(new { state = "unavailable", notice = "The legal knowledge graph is not available in this installation." }, 503);
 
     static void MapGraph(WebApplication app)
@@ -101,7 +112,7 @@ public static partial class Api
             if (s.Graph is null) return NotPublished();
             static DateOnly? D(string? v) => DateOnly.TryParse(v, out var d) ? d : null;
             var a = new EvidenceAssessor(s.Generation, s.Graph, id => s.VisibleDocument(id) is not null);
-            if (kind == "procedure") return task is null ? Json(new { error = "task is required" }, 400) : Json(a.Procedure(task));
+            if (kind == "procedure") return task is null ? Json(new { error = "task is required" }, 400) : Json(AssessmentDto(a.Procedure(task)));
             if (doc is null || section is null) return Json(new { error = "doc and section are required" }, 400);
             var d = s.VisibleDocument(doc);
             var inst = d is null ? null : s.Generation.Relations.InstrumentOf(d.DocId);
@@ -109,9 +120,9 @@ public static partial class Api
             var code = GraphIds.InstrumentCode(inst.PrimaryDocId); var prefix = GraphIds.Prefix(s.Generation.Documents[inst.PrimaryDocId].DocType);
             return kind switch
             {
-                "temporal" => Json(a.Temporal(code, prefix, section, D(as_of))),
-                "succession" => Json(a.Succession(code, prefix, section, D(conduct_date), D(proceeding_date))),
-                "conflicts" => Json(a.Conflicts(code, prefix, section)),
+                "temporal" => Json(AssessmentDto(a.Temporal(code, prefix, section, D(as_of)))),
+                "succession" => Json(AssessmentDto(a.Succession(code, prefix, section, D(conduct_date), D(proceeding_date)))),
+                "conflicts" => Json(AssessmentDto(a.Conflicts(code, prefix, section))),
                 _ => Json(new { error = "kind must be temporal, succession, procedure or conflicts" }, 400),
             };
         });

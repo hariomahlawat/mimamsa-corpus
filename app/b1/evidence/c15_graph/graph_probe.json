@@ -1,0 +1,669 @@
+{
+ "base": "http://127.0.0.1:5530",
+ "stats": {
+  "generation": "R13-b1-sample-20261126-4b31855f",
+  "builder": "c15-graph-1",
+  "nodes": 7529,
+  "edges": 9161,
+  "nodes_by_kind": {
+   "instrument": 51,
+   "provision_version": 488,
+   "unresolved_reference": 1583,
+   "provision": 5103,
+   "procedural_requirement": 6,
+   "judgment": 298
+  },
+  "edges_by_type": {
+   "AMENDS_PROVISION_VERSION": 82,
+   "OVERRULES_OR_LIMITS_PROPOSITION": 1,
+   "REPEALS_INSTRUMENT": 3,
+   "CITES_PROVISION": 894,
+   "FOLLOWS_PROPOSITION": 7,
+   "PROCEDURE_REFERENCES_PROVISION": 17,
+   "SAVES_OR_TRANSITIONS": 3,
+   "VERSION_OF": 351,
+   "CITES_JUDGMENT": 1845,
+   "REPEALS_PROVISION": 4,
+   "CONTAINS_PROVISION": 4793,
+   "QUOTES_PROVISION": 12,
+   "SUBSTITUTES_PROVISION_TEXT": 22,
+   "OMITS_PROVISION": 13,
+   "INSERTS_PROVISION": 13,
+   "RE_ENACTED_AS": 1098,
+   "COMMENCES": 3
+  },
+  "edges_by_verification": {
+   "CURATED_NAVIGATION": 17,
+   "EXTRACTED_STRUCTURE": 4793,
+   "CANDIDATE": 4351
+  },
+  "auth_ledger_version": 0,
+  "notice": "Every relationship is a candidate, structure read from held text, or a navigation aid. None is a verified legal fact."
+ },
+ "resolved": {
+  "AA s.69": "PROV:AA-1950:s.69",
+  "AA s.75": "PROV:AA-1950:s.75",
+  "IPC s.302": "PROV:IPC-1860:s.302",
+  "BNS s.103": "PROV:BNS-2023:s.103",
+  "Army Act": "INST:no:46 of 1950",
+  "Dharamvir Singh": "JUD:sc-2013-dharamvir-singh-2013insc408"
+ },
+ "neighbourhoods": {
+  "AA s.69": {
+   "status": 200,
+   "node": {
+    "id": "PROV:AA-1950:s.69",
+    "kind": "provision",
+    "label": "s.69 Civil offences",
+    "doc_id": "act-army-1950",
+    "held": true,
+    "page": 25,
+    "family": "no:46 of 1950",
+    "code": "AA-1950"
+   },
+   "edge_count": 5,
+   "truncated": false,
+   "by_type": {
+    "CITES_PROVISION": 2,
+    "CONTAINS_PROVISION": 1,
+    "PROCEDURE_REFERENCES_PROVISION": 1,
+    "VERSION_OF": 1
+   }
+  },
+  "AA s.75": {
+   "status": 200,
+   "node": {
+    "id": "PROV:AA-1950:s.75",
+    "kind": "provision",
+    "label": "s.75 [Field punishment.] Omitted by the Army (Amendment) Act, 1992 (37 of 1992), s. 2",
+    "doc_id": "act-army-1950",
+    "held": true,
+    "page": 27,
+    "family": "no:46 of 1950",
+    "code": "AA-1950"
+   },
+   "edge_count": 3,
+   "truncated": false,
+   "by_type": {
+    "CONTAINS_PROVISION": 1,
+    "OMITS_PROVISION": 1,
+    "VERSION_OF": 1
+   }
+  },
+  "IPC s.302": {
+   "status": 200,
+   "node": {
+    "id": "PROV:IPC-1860:s.302",
+    "kind": "provision",
+    "label": "s.302 Punishment for murder",
+    "doc_id": "act-ipc-1860",
+    "held": true,
+    "page": 74,
+    "family": "no:45 of 1860",
+    "code": "IPC-1860"
+   },
+   "edge_count": 5,
+   "truncated": false,
+   "by_type": {
+    "CITES_PROVISION": 3,
+    "CONTAINS_PROVISION": 1,
+    "RE_ENACTED_AS": 1
+   }
+  },
+  "BNS s.103": {
+   "status": 200,
+   "node": {
+    "id": "PROV:BNS-2023:s.103",
+    "kind": "provision",
+    "label": "s.103 Punishment for murder",
+    "doc_id": "act-bns-2023",
+    "held": true,
+    "page": 47,
+    "family": "no:45 of 2023",
+    "code": "BNS-2023"
+   },
+   "edge_count": 2,
+   "truncated": false,
+   "by_type": {
+    "CONTAINS_PROVISION": 1,
+    "RE_ENACTED_AS": 1
+   }
+  },
+  "Army Act": {
+   "status": 200,
+   "node": {
+    "id": "INST:no:46 of 1950",
+    "kind": "instrument",
+    "label": "The Army Act, 1950",
+    "doc_id": "act-army-1950",
+    "held": true,
+    "page": null,
+    "family": "no:46 of 1950",
+    "code": "AA-1950"
+   },
+   "edge_count": 196,
+   "truncated": false,
+   "by_type": {
+    "CONTAINS_PROVISION": 196
+   }
+  },
+  "Dharamvir Singh": {
+   "status": 200,
+   "node": {
+    "id": "JUD:sc-2013-dharamvir-singh-2013insc408",
+    "kind": "judgment",
+    "label": "DHARAMVIR SINGH versus UNION OF INDIA & ORS.",
+    "doc_id": "sc-2013-dharamvir-singh-2013insc408",
+    "held": true,
+    "page": null,
+    "family": null,
+    "code": null
+   },
+   "edge_count": 12,
+   "truncated": false,
+   "by_type": {
+    "CITES_JUDGMENT": 6,
+    "CITES_PROVISION": 5,
+    "QUOTES_PROVISION": 1
+   }
+  }
+ },
+ "path_ipc302_bns103": {
+  "found": true,
+  "max_depth": 2,
+  "nodes": [
+   "PROV:IPC-1860:s.302",
+   "PROV:BNS-2023:s.103"
+  ],
+  "edges": [
+   {
+    "id": "E080b16c3a8dcc181cab9",
+    "type": "RE_ENACTED_AS",
+    "from": {
+     "id": "PROV:IPC-1860:s.302",
+     "kind": "provision",
+     "label": "s.302 Punishment for murder",
+     "doc_id": "act-ipc-1860",
+     "held": true,
+     "page": 74,
+     "family": "no:45 of 1860",
+     "code": "IPC-1860"
+    },
+    "to": {
+     "id": "PROV:BNS-2023:s.103",
+     "kind": "provision",
+     "label": "s.103 Punishment for murder",
+     "doc_id": "act-bns-2023",
+     "held": true,
+     "page": 47,
+     "family": "no:45 of 2023",
+     "code": "BNS-2023"
+    },
+    "origin": "C14_CORRESPONDENCE",
+    "source": {
+     "doc_id": "ref-bprd-comparison-bns-ipc",
+     "page": 11
+    },
+    "quote": "103(1) Punishment for murder. 302 No Change, except IPC section is included as subsection in BNS.",
+    "temporal": {
+     "from": null,
+     "from_status": "NOT_DETERMINED",
+     "to": null,
+     "to_status": "NOT_DETERMINED"
+    },
+    "verification": "CANDIDATE",
+    "review_state": "UNREVIEWED",
+    "uncertainty": "Correspondence is read from a secondary comparison table held in this library. Corresponding provisions are not legally interchangeable: wording, ingredients, punishments and application dates can differ. Which law applies depends on the date of the act and on the repeal and savings provisions, and is not determined here.",
+    "has_legal_effect": true,
+    "label": "Candidate (automated, not verified)"
+   }
+  ],
+  "notice": "A path is navigation through candidate records, not a legal relationship."
+ },
+ "path_dharamvir_aa": {
+  "found": false,
+  "max_depth": 3,
+  "nodes": [],
+  "edges": [],
+  "notice": "No connection of that length through available records. A path is navigation, not a legal relationship."
+ },
+ "assessments": {
+  "temporal AA s.75 @2000-01-01": {
+   "kind": "temporal",
+   "subject": "PROV:AA-1950:s.75",
+   "inputs": {
+    "provision": "PROV:AA-1950:s.75",
+    "as_of": "2000-01-01"
+   },
+   "overall": "INSUFFICIENT_INFORMATION",
+   "findings": [
+    {
+     "code": "printed_as_omitted",
+     "statement": "The held compilation prints this provision as omitted.",
+     "state": "CANDIDATE",
+     "basis": "Heading as printed in the held compilation (a compilation is not the amending instrument).",
+     "evidence": [
+      {
+       "doc_id": "act-army-1950",
+       "page": 27,
+       "quote": "[Field punishment.] Omitted by the Army (Amendment) Act, 1992 (37 of 1992), s. 2",
+       "edge_id": "E4a852d3104cdbaf21b75",
+       "verification": "EXTRACTED_STRUCTURE",
+       "origin": "TOC"
+      }
+     ]
+    },
+    {
+     "code": "version_record",
+     "statement": "AA1950/s.75/v01 (as enacted): version of; effective from REPORTED_IN_COMPILATION_ONLY (1950-07-22); effective to ENDS_ON_NEXT_VERSION_DATE_NOT_DETERMINED.",
+     "state": "CANDIDATE",
+     "basis": "A4 automated provision-version candidate (AUTOMATED_CANDIDATE_NOT_VERIFIED); temporal chain not established.",
+     "evidence": [
+      {
+       "doc_id": "act-army-1950",
+       "page": null,
+       "quote": "Section as enacted in Act 46 of 1950 (enacted text not held; only a compilation is held)",
+       "edge_id": "E3cfea7ea910105e9476c",
+       "verification": "CANDIDATE",
+       "origin": "A4"
+      }
+     ]
+    },
+    {
+     "code": "version_record",
+     "statement": "AA1950/s.75/v02 (omission): omits provision; effective from NOT_STATED_PENDING_ADVICE; effective to CEASED_OMITTED_OR_REPEALED.",
+     "state": "CANDIDATE",
+     "basis": "A4 automated provision-version candidate (AUTOMATED_CANDIDATE_NOT_VERIFIED); temporal chain not established.",
+     "evidence": [
+      {
+       "doc_id": "act-army-1950",
+       "page": null,
+       "quote": "ss.75, 76: s.2: omitted",
+       "edge_id": "E041d6d9a07b8c7a7cd83",
+       "verification": "CANDIDATE",
+       "origin": "A4"
+      }
+     ]
+    },
+    {
+     "code": "version_for_date_not_determined",
+     "statement": "Which version applied on 2000-01-01 cannot be determined from held records: the effective dates are not established.",
+     "state": "INSUFFICIENT_INFORMATION",
+     "basis": "Effective-from or effective-to dates are not recorded as established for the held versions.",
+     "evidence": [
+      {
+       "doc_id": "act-army-1950",
+       "page": null,
+       "quote": "Section as enacted in Act 46 of 1950 (enacted text not held; only a compilation is held)",
+       "edge_id": "E3cfea7ea910105e9476c",
+       "verification": "CANDIDATE",
+       "origin": "A4"
+      },
+      {
+       "doc_id": "act-army-1950",
+       "page": null,
+       "quote": "ss.75, 76: s.2: omitted",
+       "edge_id": "E041d6d9a07b8c7a7cd83",
+       "verification": "CANDIDATE",
+       "origin": "A4"
+      }
+     ]
+    }
+   ],
+   "missing_facts": [],
+   "blockers": [
+    "AUTH-LEDGER is at version 0: no source or relationship in this installation is legally verified, so no finding can be ESTABLISHED."
+   ],
+   "notice": "Research aid derived from held records. It states what the held evidence shows and what is missing; it is not legal advice and does not determine what applies to any matter.",
+   "auth_ledger_version": 0
+  },
+  "succession IPC s.302 conduct 2023-12-01": {
+   "kind": "succession",
+   "subject": "PROV:IPC-1860:s.302",
+   "inputs": {
+    "provision": "PROV:IPC-1860:s.302",
+    "conduct_date": "2023-12-01",
+    "proceeding_date": null
+   },
+   "overall": "INSUFFICIENT_INFORMATION",
+   "findings": [
+    {
+     "code": "correspondence",
+     "statement": "A held comparison table lists s.103 Punishment for murder as corresponding to this provision.",
+     "state": "CANDIDATE",
+     "basis": "Correspondence is read from a secondary comparison table held in this library. Corresponding provisions are not legally interchangeable: wording, ingredients, punishments and application dates can differ. Which law applies depends on the date of the act and on the repeal and savings provisions, and is not determined here.",
+     "evidence": [
+      {
+       "doc_id": "ref-bprd-comparison-bns-ipc",
+       "page": 11,
+       "quote": "103(1) Punishment for murder. 302 No Change, except IPC section is included as subsection in BNS.",
+       "edge_id": "E080b16c3a8dcc181cab9",
+       "verification": "CANDIDATE",
+       "origin": "C14_CORRESPONDENCE"
+      }
+     ]
+    },
+    {
+     "code": "repealed_by",
+     "statement": "The Indian Penal Code: Repealed by section 358 of the BNS. The held text of the BNS repeals this code. Savings and transitional text in the same section can keep it relevant to matters arising before commencement.",
+     "state": "CANDIDATE",
+     "basis": "Quoted from the held text of the new code.",
+     "evidence": [
+      {
+       "doc_id": "act-bns-2023",
+       "page": 110,
+       "quote": "—(1) The Indian Penal Code (45 of 1860) is hereby repealed.",
+       "edge_id": null,
+       "verification": "CANDIDATE",
+       "origin": "C14_NOTICE"
+      }
+     ]
+    },
+    {
+     "code": "savings_transitional",
+     "statement": "The Indian Penal Code: Savings and transitional text: section 358(2) of the BNS. Savings for things done and proceedings pending under this code, as printed in the new code. Their effect on a particular matter is not determined here.",
+     "state": "CANDIDATE",
+     "basis": "Quoted from the held text of the new code.",
+     "evidence": [
+      {
+       "doc_id": "act-bns-2023",
+       "page": 110,
+       "quote": "(2) Notwithstanding the repeal of the Code referred to in sub-section (1), it shall not affect,— (a) the previous operation of the Code so repealed or anything duly done or suffered thereunder; or (b) any right, privilege, obligation or liability acquired, accrued or incurred under the Code so repealed; or (c) any penalty, or punishment incurred in respect of any offences committed against the Code so repealed; or (d) any investigation or remedy in respect of any such penalty, or punishment; or (e) any proceeding, investigation or remedy in respect of any such penalty or punishment as aforesaid, and any such proceeding or remedy may be instituted, continued or enforced, and any such penalty may be imposed as if that Code had not been repealed. (3) Notwithstanding such repeal, anything done or any action taken under the said Code shall be deemed to have been done or taken under the corres…",
+       "edge_id": null,
+       "verification": "CANDIDATE",
+       "origin": "C14_NOTICE"
+      }
+     ]
+    },
+    {
+     "code": "commencement_delegated",
+     "statement": "The Bharatiya Nyaya Sanhita, 2023: Commencement (enacting text). The held text of the BNS leaves the date of commencement to a Central Government notification.",
+     "state": "CANDIDATE",
+     "basis": "Quoted from the held text of the Act.",
+     "evidence": [
+      {
+       "doc_id": "act-bns-2023",
+       "page": 16,
+       "quote": "come into force on such date1 as the Central Government may, by notification in the Official Gazette, appoint, and different dates may be appointed for different provisions of this Sanhita.",
+       "edge_id": null,
+       "verification": "CANDIDATE",
+       "origin": "C14_NOTICE"
+      }
+     ]
+    },
+    {
+     "code": "commencement_not_established",
+     "statement": "The Bharatiya Nyaya Sanhita, 2023: no commencement notification is held; the commencement date is not established from primary text.",
+     "state": "INSUFFICIENT_INFORMATION",
+     "basis": "No held document is linked as the commencement notification.",
+     "evidence": []
+    },
+    {
+     "code": "commencement_secondary_source",
+     "statement": "The Bharatiya Nyaya Sanhita, 2023: A secondary comparison table held in this library mentions 1 July 2024. A secondary source does not establish commencement.",
+     "state": "CANDIDATE",
+     "basis": "Quoted from the comparison table (secondary source).",
+     "evidence": [
+      {
+       "doc_id": "ref-bprd-comparison-bns-ipc",
+       "page": 12,
+       "quote": "into force from 1st July 2024 with other new",
+       "edge_id": null,
+       "verification": "CANDIDATE",
+       "origin": "C14_NOTICE"
+      }
+     ]
+    },
+    {
+     "code": "repeal",
+     "statement": "The Bharatiya Nyaya Sanhita, 2023: Repeal: section 358 of the BNS. Repealing text as printed in the held copy.",
+     "state": "CANDIDATE",
+     "basis": "Quoted from the held text.",
+     "evidence": [
+      {
+       "doc_id": "act-bns-2023",
+       "page": 110,
+       "quote": "358. Repeal and savings.—(1) The Indian Penal Code (45 of 1860) is hereby repealed.",
+       "edge_id": null,
+       "verification": "CANDIDATE",
+       "origin": "C14_NOTICE"
+      }
+     ]
+    },
+    {
+     "code": "savings_transitional",
+     "statement": "The Bharatiya Nyaya Sanhita, 2023: Savings and transitional text: section 358(2) onwards. Savings for things done and proceedings pending under the repealed law, as printed. Their effect on a particular matter is not determined here.",
+     "state": "CANDIDATE",
+     "basis": "Quoted from the held text.",
+     "evidence": [
+      {
+       "doc_id": "act-bns-2023",
+       "page": 110,
+       "quote": "(2) Notwithstanding the repeal of the Code referred to in sub-section (1), it shall not affect,— (a) the previous operation of the Code so repealed or anything duly done or suffered thereunder; or (b) any right, privilege, obligation or liability acquired, accrued or incurred under the Code so repealed; or (c) any penalty, or punishment incurred in respect of any offences committed against the Code so repealed; or (d) any investigation or remedy in respect of any such penalty, or punishment; or (e) any proceeding, investigation or remedy in respect of any such penalty or punishment as aforesaid, and any such proceeding or remedy may be instituted, continued or enforced, and any such penalty may be imposed as if that Code had not been repealed. (3) Notwithstanding such repeal, anything done or any action taken under the said Code shall be deemed to have been done or taken under the corres…",
+       "edge_id": null,
+       "verification": "CANDIDATE",
+       "origin": "C14_NOTICE"
+      }
+     ]
+    },
+    {
+     "code": "conduct_date_vs_secondary_date",
+     "statement": "The conduct date 2023-12-01 is before 1 July 2024, the date stated in a held secondary source. That date is not established from a held commencement notification.",
+     "state": "CANDIDATE",
+     "basis": "Comparison with a date read from a secondary source only.",
+     "evidence": []
+    }
+   ],
+   "missing_facts": [
+    "proceeding_date: the date the proceeding was or will be started (procedure may follow a different date)"
+   ],
+   "blockers": [
+    "AUTH-LEDGER is at version 0: no source or relationship in this installation is legally verified, so no finding can be ESTABLISHED.",
+    "Which law governs a matter depends on commencement and on the repeal and savings provisions; neither is evaluated here (no approved rule pack)."
+   ],
+   "notice": "Research aid derived from held records. It states what the held evidence shows and what is missing; it is not legal advice and does not determine what applies to any matter.",
+   "auth_ledger_version": 0
+  },
+  "procedure Summary court-martial": {
+   "kind": "procedure",
+   "subject": "Summary court-martial",
+   "inputs": {
+    "task": "Summary court-martial"
+   },
+   "overall": "INSUFFICIENT_INFORMATION",
+   "findings": [
+    {
+     "code": "referenced_provision",
+     "statement": "s.116 Summary court-martial (heading as printed).",
+     "state": "CANDIDATE",
+     "basis": "Navigation aid chosen for unit commanders; not a statement of a legal requirement or of what applies.",
+     "evidence": [
+      {
+       "doc_id": "act-army-1950",
+       "page": 34,
+       "quote": "Summary court-martial",
+       "edge_id": "E1fa47a1ea17770ade8f6",
+       "verification": "CURATED_NAVIGATION",
+       "origin": "C14_COMMANDER_TASK"
+      }
+     ]
+    },
+    {
+     "code": "referenced_provision",
+     "statement": "s.120 Powers of summary courts-martial (heading as printed).",
+     "state": "CANDIDATE",
+     "basis": "Navigation aid chosen for unit commanders; not a statement of a legal requirement or of what applies.",
+     "evidence": [
+      {
+       "doc_id": "act-army-1950",
+       "page": 34,
+       "quote": "Powers of summary courts-martial",
+       "edge_id": "Ec661691fb0013076f1fb",
+       "verification": "CURATED_NAVIGATION",
+       "origin": "C14_COMMANDER_TASK"
+      }
+     ]
+    },
+    {
+     "code": "procedural_prerequisites",
+     "statement": "Procedural prerequisites: not evaluated. No approved rule pack encodes them and no competent-authority record is extracted from the held texts.",
+     "state": "INSUFFICIENT_INFORMATION",
+     "basis": "Rule gate closed: AUTH-LEDGER is at version 0: no approval, appointment or legal promotion exists, so no rule pack may be evaluated. No approved grant covers the exact requested scope (service, procedure, dates, output class, pack revision).",
+     "evidence": []
+    },
+    {
+     "code": "competent_authority",
+     "statement": "Competent authority: not evaluated. No approved rule pack encodes them and no competent-authority record is extracted from the held texts.",
+     "state": "INSUFFICIENT_INFORMATION",
+     "basis": "Rule gate closed: AUTH-LEDGER is at version 0: no approval, appointment or legal promotion exists, so no rule pack may be evaluated. No approved grant covers the exact requested scope (service, procedure, dates, output class, pack revision).",
+     "evidence": []
+    },
+    {
+     "code": "mandatory_safeguards",
+     "statement": "Mandatory safeguards: not evaluated. No approved rule pack encodes them and no competent-authority record is extracted from the held texts.",
+     "state": "INSUFFICIENT_INFORMATION",
+     "basis": "Rule gate closed: AUTH-LEDGER is at version 0: no approval, appointment or legal promotion exists, so no rule pack may be evaluated. No approved grant covers the exact requested scope (service, procedure, dates, output class, pack revision).",
+     "evidence": []
+    }
+   ],
+   "missing_facts": [
+    "the facts of the matter (who, what, when, status of the person, stage of the proceeding)"
+   ],
+   "blockers": [
+    "AUTH-LEDGER is at version 0: no source or relationship in this installation is legally verified, so no finding can be ESTABLISHED.",
+    "AUTH-LEDGER is at version 0: no approval, appointment or legal promotion exists, so no rule pack may be evaluated.",
+    "No approved grant covers the exact requested scope (service, procedure, dates, output class, pack revision)."
+   ],
+   "notice": "Research aid derived from held records. It states what the held evidence shows and what is missing; it is not legal advice and does not determine what applies to any matter.",
+   "auth_ledger_version": 0
+  },
+  "conflicts AA s.127": {
+   "kind": "conflicts",
+   "subject": "PROV:AA-1950:s.127",
+   "inputs": {
+    "provision": "PROV:AA-1950:s.127"
+   },
+   "overall": "INSUFFICIENT_INFORMATION",
+   "findings": [
+    {
+     "code": "version_chain_undetermined",
+     "statement": "2 version records are held and 1 have no established start date, so their order in time is unresolved.",
+     "state": "INSUFFICIENT_INFORMATION",
+     "basis": "Temporal chain not established.",
+     "evidence": [
+      {
+       "doc_id": "act-army-1950",
+       "page": null,
+       "quote": "s.127: s.11: 'Section 127 of the principal Act shall be omitted.'",
+       "edge_id": "E73c902e34fe8033e64ed",
+       "verification": "CANDIDATE",
+       "origin": "A4"
+      }
+     ]
+    }
+   ],
+   "missing_facts": [],
+   "blockers": [
+    "AUTH-LEDGER is at version 0: no source or relationship in this installation is legally verified, so no finding can be ESTABLISHED."
+   ],
+   "notice": "Research aid derived from held records. It states what the held evidence shows and what is missing; it is not legal advice and does not determine what applies to any matter.",
+   "auth_ledger_version": 0
+  }
+ },
+ "rule_gate": {
+  "evaluation_admitted": false,
+  "delivery_authorized": false,
+  "blockers": [
+   "AUTH-LEDGER is at version 0: no approval, appointment or legal promotion exists, so no rule pack may be evaluated.",
+   "No approved grant covers the exact requested scope (service, procedure, dates, output class, pack revision)."
+  ],
+  "rule_packs_installed": 0,
+  "auth_ledger_version": 0
+ },
+ "latency_ms": {
+  "node depth1 provision": {
+   "sequential": {
+    "n": 30,
+    "p50": 32.8,
+    "p95": 56.5
+   },
+   "concurrent10": {
+    "n": 100,
+    "p50": 30.9,
+    "p95": 52.7
+   }
+  },
+  "node depth2 provision": {
+   "sequential": {
+    "n": 30,
+    "p50": 80.1,
+    "p95": 103.4
+   },
+   "concurrent10": {
+    "n": 100,
+    "p50": 114.4,
+    "p95": 206.3
+   }
+  },
+  "node depth1 judgment": {
+   "sequential": {
+    "n": 30,
+    "p50": 29.7,
+    "p95": 43.1
+   },
+   "concurrent10": {
+    "n": 100,
+    "p50": 37.1,
+    "p95": 61.0
+   }
+  },
+  "path depth3": {
+   "sequential": {
+    "n": 30,
+    "p50": 82.4,
+    "p95": 98.2
+   },
+   "concurrent10": {
+    "n": 100,
+    "p50": 147.6,
+    "p95": 228.5
+   }
+  },
+  "stats": {
+   "sequential": {
+    "n": 30,
+    "p50": 6.9,
+    "p95": 17.9
+   },
+   "concurrent10": {
+    "n": 100,
+    "p50": 16.7,
+    "p95": 29.9
+   }
+  },
+  "assess succession": {
+   "sequential": {
+    "n": 30,
+    "p50": 17.6,
+    "p95": 37.2
+   },
+   "concurrent10": {
+    "n": 100,
+    "p50": 13.4,
+    "p95": 32.1
+   }
+  },
+  "assess temporal": {
+   "sequential": {
+    "n": 30,
+    "p50": 8.8,
+    "p95": 63.2
+   },
+   "concurrent10": {
+    "n": 100,
+    "p50": 14.0,
+    "p95": 27.0
+   }
+  }
+ }
+}
