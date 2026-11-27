@@ -151,6 +151,21 @@ def test_degraded_release_validates_under_the_contract_rules(built):
             assert listed.get(r) == "other", r
 
 
+def test_release_inventories_are_in_ordinal_path_order_on_mixed_case_paths(tmp_path):
+    """Cross-platform hazard (B01 c006d300): Path objects compare case-insensitively on Windows and case-sensitively on
+    Linux. SHA256SUMS, component file lists and concat digests must use the ordinal order of the '/'-separated path."""
+    root = tmp_path / "rel"
+    for rel in ("a/x.txt", "B/y.txt", "Z.txt", "b/z.txt", "accelerators/Rows/q.jsonl", "accelerators/rows/p.jsonl"):
+        p = root / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(rel.encode())
+    want = sorted(p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file())   # str order = code point order
+    sums = release.sums_bytes(root).decode().splitlines()
+    assert [line.split("  ", 1)[1] for line in sums] == want
+    assert [e["path"] for e in release.file_entries(root, "accelerators")] == [w for w in want if w.startswith("accelerators/")]
+    assert release.concat_digest(root, list(reversed(want))) == digests.concat_digest({w: (root / w).read_bytes() for w in want})
+
+
 def test_component_digests_are_the_contract_2_1_definitions():
     """B02 computes every component digest with mimamsa_contract.c16.digests: checked against the 2.1 golden vectors."""
     g = json.loads((REPO / "app" / "contract" / "fixtures" / "c16" / "v2_1" / "digests" / "golden.json").read_text(encoding="utf-8"))
