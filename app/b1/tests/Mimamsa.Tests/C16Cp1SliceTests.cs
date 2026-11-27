@@ -155,55 +155,28 @@ public class C16Cp1SliceTests
             var loader = new KnowledgeRowLoader(owner, Cp1Pg.RoleDsn(app, role, pw)) { LoaderRole = role };
             var loads = new JsonObject();
             var componentResults = new JsonObject();
+            var layout = new SiteLayout(site);
+            var cat = new GenerationCatalog(layout);
+            // ---------------------------------------------------------------- staging (Core owner of C16_VERIFIED.json):
+            // B03 rows + graph through the restricted loader, B04 text store adoption and lexical index file checks
             foreach (var gid in new[] { g1, g2 })
             {
-                var gdir = Path.Combine(site, "generations", gid);
-                var g = GenerationStore.Load(site, null, TextStoreOptions.Memory, null, gid);
-                var km = Obj(Path.Combine(gdir, "KNOWLEDGE_RELEASE.json"));
-                var comps = km["components"]!.AsArray().Select(x => x!.AsObject()).ToList();
-                var files = new Dictionary<string, byte[]>(StringComparer.Ordinal);
-                var declared = new List<DeclaredTable>();
-                foreach (var comp in comps.Where(c => (string)c["kind"]! is "KNOWLEDGE_ROWS" or "GRAPH"))
-                    foreach (var t in comp["tables"]!.AsArray().Select(x => x!.AsObject()))
-                    {
-                        files[(string)t["table"]!] = File.ReadAllBytes(Path.Combine(gdir, ((string)t["file"]!).Replace('/', Path.DirectorySeparatorChar)));
-                        declared.Add(new DeclaredTable((string)t["table"]!, (long)t["row_count"]!, (string)t["rows_sha256"]!));
-                    }
-                var res = await loader.LoadAsync(new KnowledgeLoadRequest { ReleaseSequence = seq[gid], Files = files, Declared = declared, Sources = KnowledgeSources.FromGeneration(g) });
-                Check($"b03_loader_{gid}", res.Ok, string.Join("; ", res.Issues.Select(i => i.ToString())));
-                Check($"b03_graph_rows_through_typed_loader_{gid}", res.Verified.Any(t => t.Spec.Table == "graph_nodes") && res.Verified.Any(t => t.Spec.Table == "graph_edges"));
-                loads[gid] = new JsonObject { ["staging"] = res.StagingSchema, ["tables"] = new JsonArray(res.Verified.Select(t => (JsonNode)$"{t.Spec.Table}:{t.RowCount}").ToArray()) };
-
-                // ------------------------------------------------------------ B04 slice: text store adoption, lexical index file
+                Check($"not_installed_before_staging_{gid}", !cat.Installed().Contains(gid));
                 var tlog = new List<string>();
-                var tg = GenerationStore.Load(site, null, new TextStoreOptions { Store = "disk", Dir = Path.Combine(work, $"verify-text-{r}-{gid}") }, tlog.Add, gid);
-                var origin = ((DiskTextStore)tg.Text).Origin;
-                Check($"b04_text_store_adopted_{gid}", origin == "adopted", string.Join(" | ", tlog));
-                Check($"b04_text_store_equals_memory_{gid}", tg.Documents.Values.Sum(d => d.Passages.Count) == g.Documents.Values.Sum(d => d.Passages.Count)
-                                                            && tg.Documents.Values.All(d => d.Pages.Values.All(p => p.Text == g.Documents[d.DocId].Pages[p.Page].Text)));
-                (tg.Text as IDisposable)?.Dispose();
-                var lex = comps.Single(c => (string)c["kind"]! == "LEXICAL_INDEX");
-                var lexFiles = lex["files"]!.AsArray().Select(x => x!.AsObject()).ToList();
-                bool lexOk = lexFiles.All(f => Sha(Path.Combine(gdir, ((string)f["path"]!).Replace('/', Path.DirectorySeparatorChar))) == (string)f["sha256"]!);
-                using (var sc = new Microsoft.Data.Sqlite.SqliteConnection($"Data Source={Path.Combine(gdir, "accelerators", "search-index", "search.sqlite")};Mode=ReadOnly;Pooling=False"))
-                { sc.Open(); using var q = sc.CreateCommand(); q.CommandText = "PRAGMA quick_check"; lexOk &= (string?)q.ExecuteScalar() == "ok"; }
-                Check($"b04_lexical_index_sha_and_quick_check_{gid}", lexOk);
-                Check($"no_vector_pack_{gid}", !comps.Any(c => (string)c["kind"]! == "VECTOR_PACK") && (string)km["capability"]!["declared_service_level"]! == "DEGRADED_LEXICAL_ONLY");
-                if (gid == g2)
-                    componentResults = new JsonObject { ["KNOWLEDGE_ROWS"] = "VERIFIED", ["GRAPH"] = "VERIFIED", ["TEXT_STORE"] = "VERIFIED", ["LEXICAL_INDEX"] = "VERIFIED", ["VECTOR_PACK"] = "MISSING" };
-                Microsoft.Data.Sqlite.SqliteConnection.ClearAllPools();
+                var rep = await GenerationStaging.VerifyAndStageAsync(layout, gid, loader, Path.Combine(work, $"verify-text-{r}-{gid}"), tlog.Add);
+                Check($"staging_verified_and_marked_{gid}", rep.Ok && cat.Installed().Contains(gid), string.Join("; ", rep.Issues));
+                Check($"b03_loader_rows_and_graph_{gid}", rep.Components["KNOWLEDGE_ROWS"] == "VERIFIED" && rep.Components["GRAPH"] == "VERIFIED");
+                Check($"b04_text_store_adopted_{gid}", rep.TextStoreOrigin == "adopted" && rep.Components["TEXT_STORE"] == "VERIFIED", string.Join(" | ", tlog));
+                Check($"b04_lexical_index_sha_and_quick_check_{gid}", rep.Components["LEXICAL_INDEX"] == "VERIFIED");
+                Check($"no_vector_pack_{gid}", rep.Components["VECTOR_PACK"] == "MISSING" && rep.DeclaredServiceLevel == "DEGRADED_LEXICAL_ONLY");
+                loads[gid] = new JsonObject { ["tables"] = new JsonArray(rep.LoadedTables.Select(t => (JsonNode)t).ToArray()) };
+                if (gid == g2) foreach (var (k, v) in rep.Components) componentResults[k] = v;
             }
             results["loads"] = loads;
             results["component_results"] = componentResults;
             results["component_checks_not_run"] = "GRAPH_STRUCTURAL_RECHECK, SAMPLED_REBUILD_PARITY, SAMPLED_POSTINGS_REDERIVE, SAMPLED_QUERY_PARITY (UNCALIBRATED sizes; B04 .NET verifiers not built); GRAPH and KNOWLEDGE_ROWS verified by the loader's full re-derivation instead";
 
-            // ---------------------------------------------------------------- B06: stage, initialise on G1
-            var layout = new SiteLayout(site);
-            var cat = new GenerationCatalog(layout);
-            cat.StageGeneration(g1); cat.StageGeneration(g2);
-            // GAP (flagged): B06 refuses a KNOWLEDGE switch unless the active model "has vectors for" the target; a lexical-only
-            // release has none. CP-1 stages a placeholder model, NOT verified, so that only this precondition is met.
-            cat.StageModel(model, verified: false, vectorsFor: [g1, g2]);
+            // ---------------------------------------------------------------- B06: initialise on G1 (lexical-only: NO model)
             var reader = ActivationCli.Reader(layout, production: false);
             var snap = reader.Read();
             Check("b06_exclusion_reader_healthy_development_trust", snap.Healthy, snap.Health + " " + snap.Detail);

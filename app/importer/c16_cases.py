@@ -510,7 +510,12 @@ class C16Harness:
             accounting_bytes = self.default_accounting(m["release_id"], docs, exchange_files if c16 else None, v7=v7)
         if accounting_bytes is not False:
             files["registers/source_accounting.json"] = (accounting_bytes, "other")
-            if v7:   # the v7 candidate hash set the declared V7_REFERENCE source digests (proposed 2.1 addition)
+            declares_v7 = False
+            try:
+                declares_v7 = any(s.get("source") == V7_SOURCE for s in json.loads(accounting_bytes).get("sources", []))
+            except (ValueError, AttributeError, TypeError):
+                pass
+            if v7 and declares_v7:   # the candidate set of the declared V7_REFERENCE source (2.1 CS1-CS5; no orphans)
                 files["registers/candidate_sets/cycle15.txt"] = (candidate_set_bytes([h(cp.f)]), "other")
         files.update(extra or {})
         for p in drop:
