@@ -108,7 +108,7 @@ jobs:
   # through app/importer. The real-sample screenshots (sample.spec.cjs) run only where the corpus sample exists.
   b1:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     services:
       postgres:
         image: postgres:16
@@ -173,10 +173,42 @@ jobs:
           npx playwright install --with-deps chromium
           cd "$GITHUB_WORKSPACE"
           NODE_PATH="$RUNNER_TEMP/pw/node_modules" node "$RUNNER_TEMP/pw/node_modules/playwright/cli.js" test --config app/b1/e2e/playwright.config.cjs --trace off
+      # C16 (PR #80 review, acceptance evidence): the same C# suite, unmodified oracle and journeys again with the
+      # persistent disk text store (ADR-0008) and disk search engine (ADR-0007). Defaults stay memory/memory.
+      - name: Disk configuration - unit and integration tests (disk text store + disk search engine)
+        env:
+          MIMAMSA_TEST_SITE: ${{ runner.temp }}/syn/site
+          MIMAMSA_TEST_MAP: ${{ runner.temp }}/syn/fixture_map.json
+          MIMAMSA_TEST_DB: Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_test;Maximum Pool Size=40
+          MIMAMSA_TEST_TEXT_STORE: disk
+          Mimamsa__Text__Store: disk
+          Mimamsa__Text__Dir: ${{ runner.temp }}/disk/text
+          Mimamsa__Search__Engine: disk
+          Mimamsa__Search__IndexDir: ${{ runner.temp }}/disk/index
+        run: dotnet test -c Release --no-build app/b1/Mimamsa.B1.slnx --logger "trx;LogFileName=b1-tests-disk.trx" --results-directory out/b1-disk
+      - name: Disk configuration - retrieval oracle (unmodified)
+        env:
+          Mimamsa__Text__Store: disk
+          Mimamsa__Text__Dir: ${{ runner.temp }}/disk/text
+          Mimamsa__Search__Engine: disk
+          Mimamsa__Search__IndexDir: ${{ runner.temp }}/disk/index
+        run: |
+          python app/b1/tests/b1server.py --site "$RUNNER_TEMP/syn/site" --log out/b1-disk/oracle-service.log             --db "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_oracle;Maximum Pool Size=40" --             python app/b1/tests/oracles/run_retrieval_oracle.py --map "$RUNNER_TEMP/syn/fixture_map.json" --out out/b1-disk/oracle
+      - name: Disk configuration - Playwright journeys
+        env:
+          B1_SYN_SITE: ${{ runner.temp }}/syn/site
+          B1_SYN_DB: Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_e2e_syn;Maximum Pool Size=40
+          Mimamsa__Text__Store: disk
+          Mimamsa__Text__Dir: ${{ runner.temp }}/disk/text
+          Mimamsa__Search__Engine: disk
+          Mimamsa__Search__IndexDir: ${{ runner.temp }}/disk/index
+        run: |
+          NODE_PATH="$RUNNER_TEMP/pw/node_modules" node "$RUNNER_TEMP/pw/node_modules/playwright/cli.js" test --config app/b1/e2e/playwright.config.cjs --trace off
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: b1-linux-results
           path: |
             out/b1
+            out/b1-disk
             app/b1/e2e/out

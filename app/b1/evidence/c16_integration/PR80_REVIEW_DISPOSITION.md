@@ -96,4 +96,4 @@ The raw figures are in `raw/pool_probe_10k_after.txt`.
 
 ## Not addressed here (recorded for release activation)
 - **Retention, store-root ownership and concurrent live-generation lifecycle:** the review lists these as items to review before release activation, not as proven defects. They belong to WP06 activation design (PR #77).
-- **CI:** it runs both suites in the default configuration. The disk configuration is exercised locally (above) and by the disk-mode C# tests in `TextStoreTests`; it is not yet a separate CI matrix leg.
+- **CI:** the Linux `b1` job now runs the C# suite, the unmodified oracle and the Playwright journeys a second time with the disk text store and disk search engine (`app-ci.yml`, "Disk configuration" steps). Windows `b1-windows` still runs the default configuration only.
