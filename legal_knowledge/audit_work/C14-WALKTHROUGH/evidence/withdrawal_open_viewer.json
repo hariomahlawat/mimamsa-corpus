@@ -1,0 +1,33 @@
+{
+ "doc": "sc-1991-ex-havildar-rat-an-singh-1991insc300",
+ "steps": [
+  {
+   "step": "before: rendered page canvases",
+   "observed": 1
+  },
+  {
+   "step": "withdraw API",
+   "observed": "200 {\"status\":\"withdrawn\",\"changed\":true,\"epoch\":3,\"reset_streams\":0,\"copies_withdrawn\":1,\"effect\":\"Every copy of this docum"
+  },
+  {
+   "step": "after: go to page 6 in the open viewer — protected range responses",
+   "observed": []
+  },
+  {
+   "step": "after: notice in document pane",
+   "observed": "EX-HAVILDAR RAT AN SINGH versus UNION OF × EX-HAVILDAR RAT AN SINGH versus UNION OF INDIA AND ORS.crawler Type Judgment Court Supreme Court of India Date 19 Nov 1991 crawler Number 1991 INSC 300 Neutral citation 1991 INSC 300 Reported [1991] SUPP. 2 S.C.R. 370 Judges (crawler; may be incomplete) L.M. SHARMA crawler Copy 2d33465ae5d2 5 pages · 0.2 MB Source indian-supreme-court-judgments.s3.ap-sout"
+  },
+  {
+   "step": "after: page 1 canvas still displayed",
+   "observed": true
+  },
+  {
+   "step": "deep link: toast",
+   "observed": ""
+  },
+  {
+   "step": "deep link: main",
+   "observed": "FILTERS Filters appear with results. Search the published library Type words, a phrase in quotes, or an identifier such as s.69 Army Act, OA 411/2021 or 2013 INSC 408. Identifiers are matched exactly and listed first. Search is lexical (word and phrase matching). It does not answer questions and dra"
+  }
+ ]
+}

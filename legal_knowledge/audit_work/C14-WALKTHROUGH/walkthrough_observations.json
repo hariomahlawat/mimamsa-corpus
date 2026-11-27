@@ -1,0 +1,1352 @@
+{
+  "started": "2026-11-26T13:39:28.013Z",
+  "base": "http://127.0.0.1:5199",
+  "audit": "http://127.0.0.1:5299",
+  "journeys": [
+    {
+      "id": "J01",
+      "title": "Authentication, logout and session",
+      "instance": "http://127.0.0.1:5199",
+      "steps": [
+        {
+          "step": "open sign-in page",
+          "observed": "Sign in to Mimamsa Offline research library of published Indian military-law sources. Research and candidate data only: nothing here is legally verified. Username Password Sign in Local accounts. Five failed attempts lock the account for five minutes. Sessions end after 30 minutes without activity."
+        },
+        {
+          "step": "wrong password",
+          "observed": "Sign in to Mimamsa Offline research library of published Indian military-law sources. Research and candidate data only: nothing here is legally verified. The username or password is not correct, or the account is locked. Username Password Sign in Local accounts. Five failed attempts lock the account for five minutes. Sessions end after 30 minutes without activity."
+        },
+        {
+          "step": "sign in as user",
+          "observed": "research shell visible after 448 ms"
+        },
+        {
+          "step": "landing view (dashboard)",
+          "observed": "FILTERS Filters appear with results. Search the published library Type words, a phrase in quotes, or an identifier such as s.69 Army Act, OA 411/2021 or 2013 INSC 408. Identifiers are matched exactly and listed first. Search is lexical (word and phrase matching). It does not answer questions and draws no legal conclusions. Press / to focus the search field, ? for all shortcuts. No document open Open a result to read the original at the cited page. Enter opens the selected result, O opens it in a new tab and Space previews it. Originals are delivered in bounded, authenticated byte ranges and are never stored in the browser. Evidence, provenance and related candidates for the open document appear here."
+        },
+        {
+          "step": "session cookie flags",
+          "observed": [
+            {
+              "name": "mimamsa_session",
+              "httpOnly": true,
+              "secure": false,
+              "sameSite": "Strict",
+              "expires": -1
+            }
+          ]
+        },
+        {
+          "step": "user menu",
+          "observed": "user · User Signed in as user (User) Release R13-b1-sample-20261126-4b31855f · HF 3864faf3 Screen-reader mode (turn single-key shortcuts off) Switch light / dark theme Keyboard shortcuts (?) Sign out"
+        },
+        {
+          "step": "sign out",
+          "observed": "Sign in to Mimamsa Offline research library of published Indian military-law sources. Research and candidate data only: nothing here is legally verified. You have signed out. Username Password Sign in Local accounts. Five failed attempts lock the account for five minutes. Sessions end after 30 minut"
+        },
+        {
+          "step": "browser Back after sign-out",
+          "observed": {
+            "url": "about:blank",
+            "researchVisible": false,
+            "signInVisible": false
+          }
+        },
+        {
+          "step": "deep link after sign-out",
+          "observed": {
+            "url": "http://127.0.0.1:5199/d/act-army-1950?p=25",
+            "signInVisible": true
+          }
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J01-signin.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J01-wrong-password.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J01-landing-user.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J01-user-menu.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J01-signed-out.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J01-back-after-signout.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "id": "J02",
+      "title": "Dashboard, navigation and keyboard",
+      "instance": "http://127.0.0.1:5199",
+      "steps": [
+        {
+          "step": "workspace links (user)",
+          "observed": [
+            "Research",
+            "Statutes",
+            "Graph",
+            "Studio",
+            "Assistant"
+          ]
+        },
+        {
+          "step": "open Statutes",
+          "observed": "ACTS, RULES AND REGULATIONS Schedule Act · 2 pp The Air Force Act, 1950 Act · 45 of 1950 · 37 pp · Hindi The Air Force Act, 1950 Act · 45 of 1950 · 55 pp The Armed Forces Tribunal Act, 2007 Act · 55 of 2007 · 13 pp · Hindi The Armed Forces Tribunal Act, 2007 Act · 55 of 2007 · 16 pp The Army Act, 1950 Act · 46 of 1950 · 38 pp · Hindi The Army Act, 1950 Act · 46 of 1950 · 51 pp The Army and Air For"
+        },
+        {
+          "step": "open Graph",
+          "observed": "Graph The citation graph workspace (canvas with a synchronised list view) is a later milestone (B3). In B1, extracted citations of a document are listed in its Cited/Citing tab, labelled as candidates. Extracted links shown elsewhere in B1 are candidates; the absence of a link does not mean there is no related or adverse authority. Return to research search"
+        },
+        {
+          "step": "open Studio",
+          "observed": "Document Studio Private working sessions are a later milestone (B3). No files can be uploaded in B1. Extracted links shown elsewhere in B1 are candidates; the absence of a link does not mean there is no related or adverse authority. Return to research search"
+        },
+        {
+          "step": "open Assistant",
+          "observed": "Closed Commander assistant Would answer situation questions for unit commanders with cited sources. Why it is closed: No Legal Reviewer is appointed and AUTH-LEDGER is at version 0. No legal reasoning is available in this version. What must happen to open it: a Legal Reviewer appointment is recorded; the underlying records receive recorded legal approvals; the reasoning-feature gate is opened by t"
+        },
+        {
+          "step": "? shortcut help",
+          "observed": "Keyboard shortcuts Single-key shortcuts work when focus is not in a text field and can be turned off (user menu, screen-reader mode). Browser keys such as F3, F6 and Ctrl+F stay native. / Focus search ? Shortcut help : Command palette G then R / S / G / D / A Research / Statutes / Graph / Studio / Administration . / , Next / previous pane B / Shift+B Toggle filters / context pane ] / [ Next / previous document tab J / K or ↓ / ↑ Next / previous result Enter / O / Space Open / open in new tab / p"
+        },
+        {
+          "step": "command palette (:)",
+          "observed": "Command palette Go to Research Go to Statutes Open Commander assistant (closed) Toggle filters Toggle context pane Copy legal citation Copy internal reference Toggle Original / Text Keyboard shortcuts Switch to Commander view Switch to Practitioner view Close"
+        },
+        {
+          "step": "/ focuses search",
+          "observed": "q"
+        },
+        {
+          "step": "first 15 Tab stops",
+          "observed": [
+            "a \"Skip to main content\"",
+            "a \"Mimamsa, research home\"",
+            "a \"Research\"",
+            "a \"Statutes\"",
+            "a \"Graph\"",
+            "a \"Studio\"",
+            "a \"Assistant\"",
+            "input#q \"\"",
+            "button \"Search\"",
+            "button#view-practitioner \"Practitioner\"",
+            "button#view-commander \"Commander\"",
+            "button \"user · User\"",
+            "div#results-list \"Results\"",
+            "button \"Resize results pane\"",
+            "button \"Resize context pane\""
+          ]
+        },
+        {
+          "step": "a11y basics on landing",
+          "observed": []
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J02-statutes.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J02-graph.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J02-studio.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J02-assistant.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J02-shortcut-help.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J02-command-palette.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "id": "J03",
+      "title": "Statutory identifier search and PDF viewer",
+      "instance": "http://127.0.0.1:5199",
+      "steps": [
+        {
+          "step": "search s.69 Army Act",
+          "observed": {
+            "ms": 277,
+            "chips": [
+              "IDENTIFIER\nSection 69 · The Army Act, 1950"
+            ],
+            "head": "6 documents · 17 passages Identifier match first, then lexical · semantic search not part of B1 · 0 filter(s) · release R13-b1-sample-20261126-4b31855f · 44.2 ms IDENTIFIER Section 69 · The Army Act, ",
+            "hits": 13,
+            "groups": 6
+          }
+        },
+        {
+          "step": "open first hit (time to first PDF canvas)",
+          "observed": {
+            "ms": 940,
+            "dochead": "The Army Act, 1950crawler Type Act Issuer Parliament rule Date 20 May 1950 crawler Commencement (as recorded) 22 Jul 1950 crawler Number 46 of 1950 crawler Copy e47a4265813e 51 pages · 0.7 MB Source indiacode.gov.in Retrieved 21 Nov 2026 Corpus status amended (display only) Candidate",
+            "toolbar": "Original Text hit 2 of 6 Page of 51 Fit width Copy citation Internal ref"
+          }
+        },
+        {
+          "step": "highlight marks on the original",
+          "observed": {
+            "marks": 1
+          }
+        },
+        {
+          "step": "N next hit",
+          "observed": "hit 3 of 6"
+        },
+        {
+          "step": "go to page 30 via page box",
+          "observed": {
+            "ms_incl_wait": 1360,
+            "pageInput": "30"
+          }
+        },
+        {
+          "step": "zoom in twice then fit width",
+          "observed": "done"
+        },
+        {
+          "step": "Text view (T)",
+          "observed": "Extracted text (automated, not verified). Page markers are physical pages of the original. Earlier pages (before 28) PAGE 28 28 81. Limit of punishments under section 80.—1[(1)* * * * ]. (2) In the case of an award of two or more of the punishments specified in clauses (a), (b), (c) and (d) of the said section, the punishment specified in clause (c) or clause (d) shall take effect only at the end "
+        },
+        {
+          "step": "Hindi Army Act text quality",
+          "observed": "The Army Act, 1950 × The Army Act, 1950crawler Type Act Issuer Parliament rule Date 20 May 1950 crawler Commencement (as recorded) 22 Jul 1950 crawler Number 46 of 1950 crawler Copy 42b9a2f816f6 38 pages · 1.6 MB Source indiacode.gov.in Retrieved 21 Nov 2026 Corpus status amended (display only) Cand"
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J03-results.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J03-document.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J03-page-30.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J03-zoomed.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J03-text-view.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J03-hindi-text.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "id": "J04",
+      "title": "Judgment viewer, evidence status, provenance and cross-references",
+      "instance": "http://127.0.0.1:5199",
+      "steps": [
+        {
+          "step": "search 2013 INSC 408",
+          "observed": {
+            "ms": 171,
+            "first": "DHARAMVIR SINGH versus UNION OF INDIA & ORS. Judgment Supreme Court of India 2 Jul 2013 2013 INSC 408 Source indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com copy a9ccc45cd8c4 retrieved 21 Nov 2026 corpus status: unknown (display only) p.1 [2013] 8 S.C.R. 1119 DHARAMVIR SINGH v. UNION OF I"
+          }
+        },
+        {
+          "step": "open judgment",
+          "observed": {
+            "ms": 829,
+            "dochead": "DHARAMVIR SINGH versus UNION OF INDIA & ORS.crawler Type Judgment Court Supreme Court of India Date 2 Jul 2013 crawler Number 2013 INSC 408 Neutral citation 2013 INSC 408 Reported [2013] 8 S.C.R. 1119 Judges (crawler; may be incomplete) A.K. PATNAIK crawler Case numbers on p.1 Civil Appeal No. 4949 of 2013 Candidate Copy a9ccc45cd8c4 30 pages · 0.9 MB Source indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com Retrieved 21 Nov 2026 Corpus status unknown (display only) Candidate",
+            "axes": 7
+          }
+        },
+        {
+          "step": "context tabs available",
+          "observed": [
+            "DHARAMVIR SINGH versus UNION OF INDIA &\n×",
+            "Evidence",
+            "Provenance",
+            "Related",
+            "Cited/Citing",
+            "Notes"
+          ]
+        },
+        {
+          "step": "tab Evidence",
+          "observed": "Seven separate status axes, in fixed order. No single “verified” state exists. Source integrity Bytes re-hashed (SHA-256) Source authenticity Unknown Evidence fidelity Candidate (automated, not verified) Legal applicability Not established Legal approval T0 Research only Publication Published Dependency freshness Not evaluated Checked by this installation Importer Copy SHA-256, size, content type and page count verified from the bundled bytes before activation At service start Original re-hashed from the vault: matches Derived text Page and passage hashes verified; text is automated (not checked against the page image)"
+        },
+        {
+          "step": "tab Provenance",
+          "observed": "Source URL https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2013/english/2013_8_1119_1148_EN.pdf Copy Retrieved 2026-11-21T16:16:29+00:00 Channel CRAWLER Source system aws-open-data:indian-supreme-court-judgments Record id ESCR010007152013 Original file name 2013_8_1119_1148_EN.pdf SHA-256 a9ccc45cd8c45d4d20652fe29057151435c33d1a3231e3f043a8543aef83b7c1 Copy Bytes / pages 910,956 bytes · 30 physical pages Vault key vault/sha256/a9/a9ccc45cd8c45d4d20652fe29057151435c33d1a3231e3f043a8543aef83b7c1 HF repository hariomahlawat/mimamsa-corpus @ 3864faf3bb24 HF path data/raw/sci/2013/a9ccc45cd8c45d4d20652fe29057151435c33d1a3231e3f043a8543aef83b7c1.pdf Release R13-b1-"
+        },
+        {
+          "step": "tab Cited/Citing",
+          "observed": "Extracted citations: candidates. Absence of a citation is not absence of authority. A citation does not establish how one court treated another. Cites (12 extracted) Candidate cites judgment Unresolved reference Evidence on p.8 Candidate cites judgment LPA No.26 of 2004 Evidence on p.7 Candidate cites judgment UNION OF INDIA & ORS. versus RAM PRAKASH Evidence on p.26 Candidate cites judgment Unresolved reference Evidence on p.26 Candidate cites judgment 2007 (4) SLR 100 Evidence on p.9 Candidate cites judgment Unresolved reference Evidence on p.26 Candidate cites provision Unresolved reference Evidence on p.9 Candidate cites provision Unresolved reference Evidence on p.9 Candidate quotes pro"
+        },
+        {
+          "step": "tab Related",
+          "observed": "Extracted links are candidates. No extracted link does not mean there is no related or adverse authority. No related candidate records for this document."
+        },
+        {
+          "step": "tab Notes",
+          "observed": "Private notes and pins are not part of the B1 prototype. When they arrive they are stored on the server for your account only, never in the browser, and never shared or searched by others."
+        },
+        {
+          "step": "party-name search ranks the judgment",
+          "observed": {
+            "rank": 9,
+            "firstThree": [
+              "sc-2015-union-of-india-anr-2015insc114",
+              "hc-jkl-2025-wp-c-1095-2024-jkhc020024492024-1-2025-11-03",
+              "hc-jkl-2025-wp-c-301-2024-jkhc020006242024-1-2025-11-03"
+            ]
+          }
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J04-judgment.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J04-tab-evidence.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J04-tab-provenance.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J04-tab-citedciting.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J04-tab-related.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J04-tab-notes.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J04-party-name-search.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "id": "J05",
+      "title": "Citation copying and exact source-page navigation",
+      "instance": "http://127.0.0.1:5199",
+      "steps": [
+        {
+          "step": "open Army Act s.69 at its page",
+          "observed": "25"
+        },
+        {
+          "step": "C copies legal citation",
+          "observed": "The Army Act, 1950, 46 of 1950 (Parliament, 20 May 1950), p. 25 (metadata not verified)"
+        },
+        {
+          "step": "Shift+C copies internal reference and permalink",
+          "observed": "[act-army-1950 · copy e47a4265813e · p.25 · R13-b1-sample-20261126-4b31855f] /cite/R13-b1-sample-20261126-4b31855f/act-army-1950/e47a4265813e/25"
+        },
+        {
+          "step": "permalink opens exact copy and page",
+          "observed": {
+            "url": "http://127.0.0.1:5199/cite/R13-b1-sample-20261126-4b31855f/act-army-1950/e47a4265813e/25",
+            "page": "25",
+            "dochead": "The Army Act, 1950crawler Type Act Issuer Parliament rule Date 20 May 1950 crawler Commencement (as recorded) 22 Jul 1950 crawler Number 46 of 1950 crawler Copy e47a4265813e 51 pages · 0.7 MB Source i"
+          }
+        },
+        {
+          "step": "reload keeps document and page",
+          "observed": {
+            "url": "http://127.0.0.1:5199/cite/R13-b1-sample-20261126-4b31855f/act-army-1950/e47a4265813e/25",
+            "page": "25"
+          }
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J05-permalink.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "id": "J06",
+      "title": "Statutory provisions, amendments and temporal applicability",
+      "instance": "http://127.0.0.1:5199",
+      "steps": [
+        {
+          "step": "Statutes workspace",
+          "observed": "ACTS, RULES AND REGULATIONS Schedule Act · 2 pp The Air Force Act, 1950 Act · 45 of 1950 · 37 pp · Hindi The Air Force Act, 1950 Act · 45 of 1950 · 55 pp The Armed Forces Tribunal Act, 2007 Act · 55 of 2007 · 13 pp · Hindi The Armed Forces Tribunal Act, 2007 Act · 55 of 2007 · 16 pp The Army Act, 1950 Act · 46 of 1950 · 38 pp · Hindi The Army Act, 1950 Act · 46 of 1950 · 51 pp The Army and Air Force (Disposal of Private Property) Act, 1950 Act · 40 of 1950 · 5 pp · Hindi The Army and Air Force (Disposal of Private Property) Act, 1950 Act · 40 of 1950 · 10 pp The Bharatiya Nagarik Suraksha Sanhita, 2023 Act · 46 of 2023 · 319 pp · Hindi The Bharatiya Nagarik Suraksha Sanhita, 2023 Act · 46 of 2023 · 282 pp The Bharatiya Nyaya Sanhita, 2023 Act · 45 of 2023 · 145 pp · Hindi The Bharatiya Nyaya Sanhita, 2023 Act · 45 of 2023 · 112 pp The Bharatiya Sakshya Adhiniyam, 2023 Act · 47 of 2023 · "
+        },
+        {
+          "step": "Army Act s.75 (omitted 1992)",
+          "observed": {
+            "head": "Section 75. [Field punishment.] Omitted by the Army (Amendment) Act, 1992 (37 of 1992), s. 2 Heading and any amendment note are compilation text as printed in the held copy. They are not a verified amendment history. The held compilation prints this provision as omitted. Commencement and chain are n",
+            "a4": "Candidate Temporal version candidates (A4). Temporal chain not established. as enacted AA1950/s.75/v01 linked by evidence in this copy Section as enacted in Act 46 of 1950 (enacted text not held; only a compilation is held) Effective from: REPORTED IN COMPILATION ONLY (reported in compilation: 1950-07-22) Effective to: ENDS ON NEXT VERSION DATE NOT DETERMINED · currency NOT_ESTABLISHED register only: no copy named government compilation: page not stated omission AA1950/s.75/v02 linked by same provision family as evidence in this copy ss.75, 76: s.2: omitted Effective from: NOT STATED PENDING A",
+            "asOfDisabled": true
+          }
+        },
+        {
+          "step": "Army Act s.127 (omitted 1992)",
+          "observed": {
+            "head": "Section 127. [Successive trials by a criminal court and court-martial.] Omitted by the Army (Amendment) Heading and any amendment note are compilation text as printed in the held copy. They are not a verified amendment history. The held compilation prints this provision as omitted. Commencement and ",
+            "a4": "Candidate Temporal version candidates (A4). Temporal chain not established. as enacted AA1950/s.127/v01 linked by evidence in this copy Section as enacted in Act 46 of 1950 (enacted text not held; only a compilation is held) Effective from: REPORTED IN COMPILATION ONLY (reported in compilation: 1950-07-22) Effective to: ENDS ON NEXT VERSION DATE NOT DETERMINED · currency NOT_ESTABLISHED register o"
+          }
+        },
+        {
+          "step": "IPC s.302 to BNS equivalence",
+          "observed": {
+            "head": "Section 302. Punishment for murder Heading and any amendment note are compilation text as printed in the held copy. They are not a verified amendment history. No A4 temporal version candidate is recorded for this provision with evidence in this copy.",
+            "a4": "No A4 temporal version candidate is recorded for this provision with evidence in this copy.",
+            "mentionsBns": false
+          }
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J06-statutes-home.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J06-army-act-s75.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J06-army-act-s127.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J06-ipc-302.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ],
+      "rerun": "rerun after script fix (J06: selector strict-mode; J15: recovery condition)"
+    },
+    {
+      "id": "J07",
+      "title": "Search results, filters, pagination and sorting",
+      "instance": "http://127.0.0.1:5199",
+      "steps": [
+        {
+          "step": "search court martial",
+          "observed": {
+            "ms": 307,
+            "head": "255 documents · 13,497 passages showing the first 200 passages Lexical (BM25) · semantic search not part of B1 · 0 filter(s) · release R13-b1-sample-20261126-4b31855f · 31.9 ms Sort Relevance Date, newest Date, oldest Flat passages",
+            "shownHits": 62,
+            "groups": 28
+          }
+        },
+        {
+          "step": "facet groups",
+          "observed": [
+            "Document type",
+            "Court or issuer",
+            "Year",
+            "Corpus status (display only)"
+          ]
+        },
+        {
+          "step": "filter type = judgment",
+          "observed": "220 documents · 9,683 passages showing the first 200 passages Lexical (BM25) · semantic search not part of B1 · 1 filter(s) · release R13-b1-sample-20261126-4b31855f · 37.6 ms TYPE Judgment × Sort Relevance Date, newest Date, oldest Flat passages"
+        },
+        {
+          "step": "year range 2020-2026",
+          "observed": {
+            "head": "109 documents · 2,031 passages showing the first 200 passages Lexical (BM25) · semantic search not part of B1 · 2 filter(s) · release R13-b1-sample-20261126-4b31855f · 24.7 ms TYPE Judgment × YEAR 2020–2026 × Sort Relevance Date, newest Date, oldest ",
+            "url": "http://127.0.0.1:5199/r?q=court+martial&type=judgment&year_from=2020&year_to=2026"
+          }
+        },
+        {
+          "step": "pagination or load-more control",
+          "observed": {
+            "more": 0,
+            "pager": 0
+          }
+        },
+        {
+          "step": "sort control",
+          "observed": {
+            "sortControls": 1
+          }
+        },
+        {
+          "step": "end of results list",
+          "observed": "LPASW/89/2010 of UOI.TH.MINISTRY OF DEFENCE AND ORS. Vs V.K.RAMPAL\nJudgment\nHigh Court of Jammu and Kashmir\n28 Dec 2021\nLPASW/89/2010\nLPASW/89/2010\nSource indian-high-court-judgments.s3.ap-south-1.amazonaws.com\ncopy f384b3b1a241\nretrieved 21 Nov 2026\ncorpus status: unknown (display only)\nCandidate o"
+        },
+        {
+          "step": "deep link restores filters",
+          "observed": {
+            "url": "http://127.0.0.1:5199/r?q=court+martial&type=judgment&year_from=2020&year_to=2026",
+            "head": "109 documents · 2,031 passages showing the first 200 passages Lexical (BM25) · semantic search not part of B1 · 2 filter(s) · release R13-b1-sample-20261126-4b31855f · 21.8 ms TYPE Judgment × YEAR 202"
+          }
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J07-results.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J07-filtered-judgment.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J07-filtered-years.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J07-results-end.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "id": "J08",
+      "title": "Misspellings, ambiguous and zero-result queries",
+      "instance": "http://127.0.0.1:5199",
+      "steps": [
+        {
+          "step": "query court marshal",
+          "observed": {
+            "ms": 227,
+            "chips": [],
+            "head": "255 documents · 13,521 passages showing the first 200 passages Lexical (BM25) · semantic search not part of B1 · 0 filter(s) · release R13-b1-sample-20261126-4b31855f · 20.8 ms Sort Relevance Date, ne",
+            "body": "Regulations for the Navy Part II Regulations Ministry of Defence 1 May 1991 Regulations for the Navy Part II Source indiacode.gov.in copy 884a893c725d retrieved 21 Nov 2026 corpus status: in_force (display only) p.166 (b) The provost marshal shall carry a drawn sword while escorting the accused in a"
+          }
+        },
+        {
+          "step": "query Rule 22 Rules",
+          "observed": {
+            "ms": 134,
+            "chips": [
+              "AMBIGUOUS\nRule 22: which instrument?"
+            ],
+            "head": "No results Lexical (BM25) · semantic search not part of B1 · 0 filter(s) · release R13-b1-sample-20261126-4b31855f · 0.4 ms AMBIGUOUS Rule 22: which instrument?",
+            "body": "No published documents match Try fewer filters, or search the words without the section number. Rule 22: which instrument? Several instruments could be meant: 11 candidate instrument(s): Army Rules,1954; AFT Practice Rules-2009; AFT Salary Rules 2009; AFT-Procedure-Rules-2008; Exemption-from-UPSC-Ru"
+          }
+        },
+        {
+          "step": "query xqzvbn plorktastic",
+          "observed": {
+            "ms": 121,
+            "chips": [],
+            "head": "No results Lexical (BM25) · semantic search not part of B1 · 0 filter(s) · release R13-b1-sample-20261126-4b31855f · 0.5 ms",
+            "body": "No published documents match Try fewer filters, or search the words without the section number. This is a statement about the published library in this installation only. It is not evidence that no authority exists."
+          }
+        },
+        {
+          "step": "query \"court martial NEAR/5",
+          "observed": {
+            "ms": 134,
+            "chips": [],
+            "head": "The query could not be read",
+            "body": "Quotation mark is not closed. \"court martial NEAR/5 Problem at character 1. Your query is kept unchanged in the search field. Nothing was searched. You can correct it, or search the words only, without operators, phrases or fields: Search the words without operators"
+          }
+        },
+        {
+          "step": "query section 302 IPC",
+          "observed": {
+            "ms": 153,
+            "chips": [
+              "NOT_HELD\nNo instrument titled “IPC” in this library"
+            ],
+            "head": "13 documents · 146 passages Lexical (BM25) · semantic search not part of B1 · 0 filter(s) · release R13-b1-sample-20261126-4b31855f · 0.4 ms NOT_HELD No instrument titled “IPC” in this library Sort Re",
+            "body": "Correspondence Table and Comparison Summary of the BNS, 2023 and the IPC, 1860 Other Bureau of Police Research and Development, Ministry of Home Affairs Source www.keralaprisons.gov.in copy 3ad875b6162d retrieved 21 Nov 2026 corpus status: unknown (display only) p.1 … CORRESPONDENCE TABLE and COMPAR"
+          }
+        },
+        {
+          "step": "parser error: run as words",
+          "observed": {
+            "button": "Search the words without operators",
+            "head": "255 documents · 13,497 passages showing the first 200 passages Lexical (BM25) · semantic search not part of B1 · words only (operators removed on request) · 0 filter(s) · release R13-b1-sample-2026112"
+          }
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J08-misspelling.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J08-ambiguous.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J08-zero-result.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J08-parser-error.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J08-ipc-abbrev.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "id": "J09",
+      "title": "Commander view and dark theme",
+      "instance": "http://127.0.0.1:5199",
+      "steps": [
+        {
+          "step": "Commander view search",
+          "observed": {
+            "facets": [
+              "Document type",
+              "Year"
+            ],
+            "hits": 75
+          }
+        },
+        {
+          "step": "Commander document",
+          "observed": "Army Rules,1954crawler Type Rules Issuer Ministry of Defence crawler Date 27 Nov 1954 crawler Copy 48f52219121b 214 pages · 1.5 MB Source indiacode.gov.in Retrieved 21 Nov 2026 Corpus status in_force (display only) Candidate"
+        },
+        {
+          "step": "dark theme",
+          "observed": "dark theme applied"
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J09-commander-results.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J09-commander-document.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J09-dark-document.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "id": "J10",
+      "title": "Desktop layouts 1366x768, 1920x1080, 2560x1440",
+      "instance": "http://127.0.0.1:5199",
+      "steps": [
+        {
+          "step": "1366 results",
+          "observed": {
+            "overflowX": false,
+            "resultsW": 360,
+            "hitsVisible": 1
+          }
+        },
+        {
+          "step": "1366 document",
+          "observed": {
+            "overflowX": false,
+            "docpaneW": 952,
+            "pageCanvasW": 904,
+            "viewportW": 1366
+          }
+        },
+        {
+          "step": "1366 a11y basics",
+          "observed": []
+        },
+        {
+          "step": "1920 results",
+          "observed": {
+            "overflowX": false,
+            "resultsW": 400,
+            "hitsVisible": 4
+          }
+        },
+        {
+          "step": "1920 document",
+          "observed": {
+            "overflowX": false,
+            "docpaneW": 968,
+            "pageCanvasW": 920,
+            "viewportW": 1920
+          }
+        },
+        {
+          "step": "1920 a11y basics",
+          "observed": []
+        },
+        {
+          "step": "2560 results",
+          "observed": {
+            "overflowX": false,
+            "resultsW": 400,
+            "hitsVisible": 5
+          }
+        },
+        {
+          "step": "2560 document",
+          "observed": {
+            "overflowX": false,
+            "docpaneW": 1608,
+            "pageCanvasW": 1530,
+            "viewportW": 2560
+          }
+        },
+        {
+          "step": "2560 a11y basics",
+          "observed": []
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J10-1366-results.jpg",
+          "viewport": {
+            "width": 1366,
+            "height": 768
+          }
+        },
+        {
+          "file": "J10-1366-document.jpg",
+          "viewport": {
+            "width": 1366,
+            "height": 768
+          }
+        },
+        {
+          "file": "J10-1920-results.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J10-1920-document.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J10-2560-results.jpg",
+          "viewport": {
+            "width": 2560,
+            "height": 1440
+          }
+        },
+        {
+          "file": "J10-2560-document.jpg",
+          "viewport": {
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "id": "J11",
+      "title": "Access control and unauthorised access",
+      "instance": "http://127.0.0.1:5199",
+      "steps": [
+        {
+          "step": "anonymous GET /api/session",
+          "observed": {
+            "status": 401,
+            "body": "{\"authenticated\":false,\"release\":{\"release_id\":\"R13-b1-sample-20261126-4b31855f\",\"sequence\":1,\"created_at\":\"2026-11-26T02:24:01Z\",\"hf_repo\":\"hariomahlawat/mimam"
+          }
+        },
+        {
+          "step": "anonymous GET /api/search?q=army",
+          "observed": {
+            "status": 401,
+            "body": "{\"error\":\"auth\"}"
+          }
+        },
+        {
+          "step": "anonymous GET /api/documents/act-army-1950",
+          "observed": {
+            "status": 401,
+            "body": "{\"error\":\"auth\"}"
+          }
+        },
+        {
+          "step": "anonymous GET /api/documents/act-army-1950/text",
+          "observed": {
+            "status": 401,
+            "body": "{\"error\":\"auth\"}"
+          }
+        },
+        {
+          "step": "anonymous GET /api/statutes",
+          "observed": {
+            "status": 401,
+            "body": "{\"error\":\"auth\"}"
+          }
+        },
+        {
+          "step": "anonymous GET /api/admin/overview",
+          "observed": {
+            "status": 401,
+            "body": "{\"error\":\"auth\"}"
+          }
+        },
+        {
+          "step": "anonymous GET /api/v2/documents/act-army-1950/pdf-meta",
+          "observed": {
+            "status": 401,
+            "body": ""
+          }
+        },
+        {
+          "step": "anonymous GET /api/cite?doc=act-army-1950&sha=e47a4265813e&page=25",
+          "observed": {
+            "status": 401,
+            "body": "{\"error\":\"auth\"}"
+          }
+        },
+        {
+          "step": "path traversal on document id",
+          "observed": {
+            "status": 401,
+            "body": "{\"error\":\"auth\"}"
+          }
+        },
+        {
+          "step": "user GET /api/admin/overview",
+          "observed": {
+            "status": 403,
+            "body": "{\"error\":\"This action is for Admins.\"}"
+          }
+        },
+        {
+          "step": "user opens /admin in the UI",
+          "observed": "This action is for Admins."
+        },
+        {
+          "step": "user POST withdraw (with Origin, no CSRF token)",
+          "observed": {
+            "status": 403,
+            "body": "{\"error\":\"This action is for Admins.\"}"
+          }
+        },
+        {
+          "step": "Range beyond file on protected original",
+          "observed": {
+            "meta": 200,
+            "metaBody": "{\"doc_id\":\"act-army-1950\",\"copy_sha256\":\"e47a4265813e95b491a24926428ed306cfeaae9013e7edb928cefef6e69a7c08\",\"length\":733498,\"page_count\":51,\"range_supported\":tru"
+          }
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J11-user-admin-forbidden.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "id": "J12",
+      "title": "Administrator functions",
+      "instance": "http://127.0.0.1:5299",
+      "steps": [
+        {
+          "step": "admin workspace links",
+          "observed": [
+            "Research",
+            "Statutes",
+            "Graph",
+            "Studio",
+            "Assistant",
+            "Administration"
+          ]
+        },
+        {
+          "step": "Administration overview",
+          "observed": "Administration Release import and staging screens arrive with B2. B1 shows the verified active generation and lets an Admin withdraw a published document. Active release Release R13-b1-sample-20261126-4b31855f Generation R13-b1-sample-20261126-4b31855f HF revision 3864faf3 Created 26 Nov 2026 Documents verified 290 Derivatives verified 290 Candidates verified 3262 Originals re-hashed at start 290 Quarantined at import 0 Exclusion channel none Serving policy epoch 1 AUTH-LEDGER version 0 No load issues: every served item passed the service's start-up re-checks. Withdraw a published document Document id The current copy of the document is withdrawn for every user at once. Reason (required) Withdraw… Withdrawals No withdrawals. Quarantined at import Nothing was quarantined by the importer for this generation."
+        },
+        {
+          "step": "admin POST withdraw with wrong Origin",
+          "observed": {
+            "status": 403,
+            "body": "{\"error\":\"csrf\"}"
+          }
+        },
+        {
+          "step": "admin POST withdraw without CSRF token",
+          "observed": {
+            "status": 403,
+            "body": "{\"error\":\"csrf\"}"
+          }
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J12-overview.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "id": "J13",
+      "title": "Document withdrawal and enforcement across access routes",
+      "instance": "http://127.0.0.1:5299",
+      "steps": [
+        {
+          "step": "user opens the document before withdrawal",
+          "observed": {
+            "searchRank": 2,
+            "permalink": "/cite/R13-b1-sample-20261126-4b31855f/sc-1987-ranjit-thakur-1987insc285/35b9c948fe62/1",
+            "copy12": "35b9c948fe62",
+            "permalinkCopy12": "35b9c948fe62",
+            "copiesAgree": true
+          }
+        },
+        {
+          "step": "CONTROL+ before withdrawal: /api/cite with the real copy hash",
+          "observed": {
+            "status": 200,
+            "state": "CITED_COPY_ELIGIBLE",
+            "doc_id": "sc-1987-ranjit-thakur-1987insc285",
+            "page": 1
+          }
+        },
+        {
+          "step": "CONTROL+ before withdrawal: document and pdf-meta",
+          "observed": {
+            "document": 200,
+            "pdfMeta": 200
+          }
+        },
+        {
+          "step": "CONTROL- before withdrawal: /api/cite with a malformed hash",
+          "observed": {
+            "status": 200,
+            "state": "CITED_COPY_UNAVAILABLE"
+          }
+        },
+        {
+          "step": "withdraw via the Admin UI while searches run",
+          "observed": {
+            "withdrawClickToRefreshMs": 848,
+            "concurrentSearchMs": {
+              "n": 20,
+              "max": 113,
+              "median": 67
+            },
+            "toast": "Withdrawn (policy epoch 2)"
+          }
+        },
+        {
+          "step": "open viewer after withdrawal",
+          "observed": "RANJIT THAKUR versus UNION OF INDIA AND × RANJIT THAKUR versus UNION OF INDIA AND ORS.crawler Type Judgment Court Supreme Court of India Date 15 Oct 1987 crawler Number 1987 INSC 285 Neutral citation 1987 INSC 285 Reported [1988] 1 S.C.R. 512 Judges (crawler; may be incomplete) A.P. SEN crawler Copy"
+        },
+        {
+          "step": "search no longer lists it",
+          "observed": {
+            "present": false
+          }
+        },
+        {
+          "step": "deep link",
+          "observed": "FILTERS Filters appear with results. Search the published library Type words, a phrase in quotes, or an identifier such as s.69 Army Act, OA 411/2021 or 2013 INSC 408. Identifiers are matched exactly and listed first. Search is lexical (word and phrase matching). It does not answer questions and dra"
+        },
+        {
+          "step": "citation permalink",
+          "observed": "Citation The cited copy is not available in this installation. The citation and internal reference keep the original copy hash and page. No other copy or page is opened in its place. Return to research search"
+        },
+        {
+          "step": "user GET /api/documents/sc-1987-ranjit-thakur-1987insc285",
+          "observed": {
+            "status": 404,
+            "body": "{\"state\":\"unavailable\",\"notice\":\"This document is not available in this installation.\"}"
+          }
+        },
+        {
+          "step": "user GET /api/documents/sc-1987-ranjit-thakur-1987insc285/text",
+          "observed": {
+            "status": 404,
+            "body": "{\"state\":\"unavailable\",\"notice\":\"This document is not available in this installation.\"}"
+          }
+        },
+        {
+          "step": "user GET /api/documents/sc-1987-ranjit-thakur-1987insc285/citation",
+          "observed": {
+            "status": 400,
+            "body": ""
+          }
+        },
+        {
+          "step": "user GET /api/v2/documents/sc-1987-ranjit-thakur-1987insc285/pdf-meta",
+          "observed": {
+            "status": 404,
+            "body": ""
+          }
+        },
+        {
+          "step": "after withdrawal: /api/cite with the same real copy hash",
+          "observed": {
+            "status": 200,
+            "state": "CITED_COPY_UNAVAILABLE",
+            "doc_id": null,
+            "page": null
+          }
+        },
+        {
+          "step": "admin still sees it in search?",
+          "observed": {
+            "status": 200,
+            "mentions": false
+          }
+        },
+        {
+          "step": "undo withdrawal available in UI",
+          "observed": {
+            "restoreControls": 0
+          }
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J13-before-withdrawal-viewer.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J13-confirm-dialog.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J13-after-withdrawal.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J13-open-viewer-after.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J13-deep-link.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J13-permalink.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "rerun": "Correction C1 (Codex PR #64): rerun on a fresh audit clone with a real copy hash and positive/negative controls. Original J13 preserved in evidence/original/walkthrough_observations.v1.json."
+    },
+    {
+      "id": "J14",
+      "title": "Account lockout",
+      "instance": "http://127.0.0.1:5299",
+      "steps": [
+        {
+          "step": "five wrong passwords then the right one",
+          "observed": {
+            "wrong": [
+              401,
+              401,
+              401,
+              401,
+              401
+            ],
+            "correctAfterLock": 401,
+            "message": "{\"error\":\"The username or password is not correct, or the account is locked.\"}"
+          }
+        },
+        {
+          "step": "unknown user gives the same message",
+          "observed": "{\"error\":\"The username or password is not correct, or the account is locked.\"}"
+        },
+        {
+          "step": "locked account in the UI",
+          "observed": "Sign in to Mimamsa Offline research library of published Indian military-law sources. Research and candidate data only: nothing here is legally verified. The username or password is not correct, or the account is locked. Username Password Sign in Local accounts. Five failed attempts lock the account"
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J14-locked.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "id": "J15",
+      "title": "Error handling and service recovery",
+      "instance": "http://127.0.0.1:5299",
+      "steps": [
+        {
+          "step": "document open before outage",
+          "observed": "open"
+        },
+        {
+          "step": "stop service",
+          "observed": {
+            "degraded": "Connection to the server lost. Retrying. Not a production installation. The library release is signed with a development key.",
+            "main": "Connection to the server lost Retrying. Open views have been cleared; nothing is shown from cache and no changes are sent until the connection returns."
+          }
+        },
+        {
+          "step": "restart service and wait for recovery",
+          "observed": {
+            "recoveredWithinMs": 10615,
+            "signInShown": false,
+            "main": "FILTERS Document type Judgment 95 Rules 9 Act 8 Regulations 5 Court or issuer Supreme Court of India 33 High Court of Punjab and Haryana 24 High Court of Delhi 18 High Court of Jammu and Kashmir 16 Mi"
+          }
+        }
+      ],
+      "screenshots": [
+        {
+          "file": "J15-outage.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "file": "J15-recovered.jpg",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "Failed to load resource: net::ERR_CONNECTION_REFUSED"
+      ],
+      "rerun": "rerun after script fix (J06: selector strict-mode; J15: recovery condition)"
+    }
+  ],
+  "finished": "2026-11-26T13:42:07.788Z"
+}
