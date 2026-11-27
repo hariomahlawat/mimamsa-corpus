@@ -1,0 +1,275 @@
+{
+ "acceptance_level": "FIXTURE (SG-5): CP-1 vertical slice on an isolated development site; not synthetic-scale, not full-corpus; closes no FG-* gate on real data",
+ "activation_outcome": {
+  "reasons": [
+   "vectors missing or failed: lexical-only service, no site embedding",
+   "uncalibrated sampled checks (development only): GRAPH, LEXICAL_INDEX"
+  ],
+  "result": "ACTIVE_DEGRADED",
+  "service_level": "DEGRADED_LEXICAL_ONLY",
+  "site_embedding": "NEVER"
+ },
+ "builds": {
+  "G1": {
+   "build_outcome": "BUILT",
+   "bundle": "E:\\Mimamsa-Data\\c16cp1\\slice\\out-G1\\build\\B-20261127-cp1-fixture\\S8\\bundle",
+   "bundle_sha256sums": "b2a62a1a97c302a432d9b75de1a19b22c202524cf486654ca491e0385c2ce95a",
+   "expected_activation": {
+    "reasons": [
+     "vectors missing or failed: lexical-only service, no site embedding",
+     "uncalibrated sampled checks (development only): GRAPH, LEXICAL_INDEX"
+    ],
+    "result": "ACTIVE_DEGRADED",
+    "service_level": "DEGRADED_LEXICAL_ONLY",
+    "site_embedding": "NEVER"
+   },
+   "release_id": "R16-cp1-fixture-20261127-00000001",
+   "release_sequence": 1,
+   "spec": "cp1-fixture.spec.json",
+   "stages_ran": [],
+   "trust": "E:\\Mimamsa-Data\\c16cp1\\slice\\out-G1\\build\\B-20261127-cp1-fixture\\S8\\dev-trust\\trust_list.json"
+  },
+  "G2": {
+   "build_outcome": "BUILT",
+   "bundle": "E:\\Mimamsa-Data\\c16cp1\\slice\\out-G2\\build\\B-20261128-cp1-slice\\S8\\bundle",
+   "bundle_sha256sums": "e164a82fddb6169ebf419c27abd9e060192039501bfe9012df9c28f407b62658",
+   "expected_activation": {
+    "reasons": [
+     "vectors missing or failed: lexical-only service, no site embedding",
+     "uncalibrated sampled checks (development only): GRAPH, LEXICAL_INDEX"
+    ],
+    "result": "ACTIVE_DEGRADED",
+    "service_level": "DEGRADED_LEXICAL_ONLY",
+    "site_embedding": "NEVER"
+   },
+   "release_id": "R16-cp1-slice-20261128-00000002",
+   "release_sequence": 2,
+   "spec": "cp1-slice.spec.json",
+   "stages_ran": [],
+   "trust": "E:\\Mimamsa-Data\\c16cp1\\slice\\out-G2\\build\\B-20261128-cp1-slice\\S8\\dev-trust\\trust_list.json"
+  }
+ },
+ "import": {
+  "G1": {
+   "accounting": {
+    "declared_sha256": "36c53e46c62e2298dc3dd9b21b32a81078cc8834cd31d774015d1f43a38e3807",
+    "site_sha256": "651c6cb829055ea3f879675399584190bd2bed82a794d527c25933161ce55936"
+   },
+   "activated": true,
+   "c16_codes": {
+    "C16_ANCHOR_COPY_NOT_VERIFIED": 8,
+    "C16_IMAGE_OCR_DERIVATIVE_MISSING": 1,
+    "C16_LEGACY_NOT_ESTABLISHED": 1,
+    "C16_PAGE_MAPPING_UNVERIFIED": 1,
+    "C16_RECEIPTS_REQUIRE_2_1": 1,
+    "C16_SUBJECT_NOT_SERVABLE": 10
+   },
+   "c16_served_copies": [],
+   "knowledge_release": true,
+   "release_id": "R16-cp1-fixture-20261127-00000001",
+   "served_documents": [
+    "syn-h-manual",
+    "syn-j-allow",
+    "syn-j-lookalike",
+    "syn-j-reject",
+    "syn-j-reject-short",
+    "syn-l-scan",
+    "syn-m-guide",
+    "syn-s-act",
+    "syn-s-notice",
+    "syn-s-rule",
+    "syn-v-other",
+    "syn-v-withdrawn"
+   ],
+   "staged": false
+  },
+  "G2": {
+   "accounting": {
+    "declared_sha256": "fbc2b67d36730a0a58aa292e2ef2480e3a8f1dbe878a5ba2764eb9697ec7789b",
+    "site_sha256": "dda5c0f70961191371bd6b7a3da76e0fd482503962175dec3bbd00194250a6b5"
+   },
+   "activated": false,
+   "c16_codes": {
+    "C16_IMAGE_OCR_DERIVATIVE_MISSING": 1,
+    "C16_LEGACY_NOT_ESTABLISHED": 1,
+    "C16_RECEIPT_UNVERIFIABLE": 1,
+    "C16_SUBJECT_NOT_SERVABLE": 2
+   },
+   "c16_served_copies": [
+    "sc-2020-b01-eligible-ca0101"
+   ],
+   "knowledge_release": true,
+   "release_id": "R16-cp1-slice-20261128-00000002",
+   "served_documents": [
+    "sc-2020-b01-eligible-ca0101",
+    "syn-h-manual",
+    "syn-j-allow",
+    "syn-j-lookalike",
+    "syn-j-reject",
+    "syn-j-reject-short",
+    "syn-l-scan",
+    "syn-m-guide",
+    "syn-s-act",
+    "syn-s-notice",
+    "syn-s-rule",
+    "syn-v-other",
+    "syn-v-withdrawn"
+   ],
+   "staged": true
+  },
+  "active_after_import": "R16-cp1-fixture-20261127-00000001"
+ },
+ "journey": {
+  "acceptance_level": "FIXTURE (SG-5) CP-1 slice; closes no FG-* gate on real data",
+  "checks": {
+   "b03_graph_rows_through_typed_loader_R16-cp1-fixture-20261127-00000001": true,
+   "b03_graph_rows_through_typed_loader_R16-cp1-slice-20261128-00000002": true,
+   "b03_loader_R16-cp1-fixture-20261127-00000001": {
+    "detail": "",
+    "ok": true
+   },
+   "b03_loader_R16-cp1-slice-20261128-00000002": {
+    "detail": "",
+    "ok": true
+   },
+   "b03_migration_applied_on_clone": {
+    "detail": "13 tables copied and verified",
+    "ok": true
+   },
+   "b03_migration_public_unchanged": true,
+   "b03_rows_visible_through_knowledge_views": true,
+   "b04_lexical_index_sha_and_quick_check_R16-cp1-fixture-20261127-00000001": true,
+   "b04_lexical_index_sha_and_quick_check_R16-cp1-slice-20261128-00000002": true,
+   "b04_text_store_adopted_R16-cp1-fixture-20261127-00000001": {
+    "detail": "text store: adopted shipped store for R16-cp1-fixture-20261127-00000001 (no rebuild) | text store: opened E:\\Mimamsa-Data\\c16cp1\\slice\\verify-text-3fdd8b11-R16-cp1-fixture-20261127-00000001\\R16-cp1-fixture-20261127-00000001 (bound 12 documents to the generation's records in 19 ms)",
+    "ok": true
+   },
+   "b04_text_store_adopted_R16-cp1-slice-20261128-00000002": {
+    "detail": "text store: adopted shipped store for R16-cp1-slice-20261128-00000002 (no rebuild) | text store: opened E:\\Mimamsa-Data\\c16cp1\\slice\\verify-text-3fdd8b11-R16-cp1-slice-20261128-00000002\\R16-cp1-slice-20261128-00000002 (bound 13 documents to the generation's records in 4 ms)",
+    "ok": true
+   },
+   "b04_text_store_equals_memory_R16-cp1-fixture-20261127-00000001": true,
+   "b04_text_store_equals_memory_R16-cp1-slice-20261128-00000002": true,
+   "b04_web_process_adopted_shipped_text_store": true,
+   "b06_activated_g2": {
+    "detail": "TX-00000001-cf1b84ae925f",
+    "ok": true
+   },
+   "b06_db_applied_views_on_kr_g2": {
+    "detail": "kr_2",
+    "ok": true
+   },
+   "b06_exclusion_accepted_and_applied": true,
+   "b06_exclusion_reader_healthy_development_trust": {
+    "detail": "HEALTHY ok",
+    "ok": true
+   },
+   "b06_initialised_on_g1": {
+    "detail": "kr_1",
+    "ok": true
+   },
+   "b06_rollback_to_g1": {
+    "detail": "TX-00000002-08c32377e5d4",
+    "ok": true
+   },
+   "boundary_citation_withheld": true,
+   "boundary_document_withheld": true,
+   "boundary_leaves_other_copies": true,
+   "boundary_permalink_withheld": true,
+   "boundary_search_filtered": true,
+   "boundary_text_withheld": true,
+   "degraded_lexical_only_no_semantic": {
+    "detail": "lexical / not part of B1",
+    "ok": true
+   },
+   "no_vector_pack_R16-cp1-fixture-20261127-00000001": true,
+   "no_vector_pack_R16-cp1-slice-20261128-00000002": true,
+   "web_after_rollback_serves_g1": true,
+   "web_g1_does_not_have_admitted_copy": true,
+   "web_g1_serves_legacy": true,
+   "web_g2_admitted_citation": true,
+   "web_g2_admitted_permalink": {
+    "detail": "CITED_COPY_ELIGIBLE",
+    "ok": true
+   },
+   "web_g2_admitted_text": true,
+   "web_g2_c16_only_copy_not_visible": true,
+   "web_g2_held_copy_not_visible": true,
+   "web_g2_legacy_visible": true,
+   "web_g2_process_fails_closed_after_rollback": true,
+   "web_g2_search_finds_admitted_copy": {
+    "detail": "sc-2020-b01-eligible-ca0101",
+    "ok": true
+   },
+   "web_g2_search_never_returns_held_copy": true,
+   "web_old_process_fails_closed_after_switch": true
+  },
+  "component_checks_not_run": "GRAPH_STRUCTURAL_RECHECK, SAMPLED_REBUILD_PARITY, SAMPLED_POSTINGS_REDERIVE, SAMPLED_QUERY_PARITY (UNCALIBRATED sizes; B04 .NET verifiers not built); GRAPH and KNOWLEDGE_ROWS verified by the loader's full re-derivation instead",
+  "component_results": {
+   "GRAPH": "VERIFIED",
+   "KNOWLEDGE_ROWS": "VERIFIED",
+   "LEXICAL_INDEX": "VERIFIED",
+   "TEXT_STORE": "VERIFIED",
+   "VECTOR_PACK": "MISSING"
+  },
+  "embedder_calls": 0,
+  "journal_steps": [
+   "BEGIN",
+   "DECIDED",
+   "OPEN",
+   "BEGIN",
+   "DECIDED",
+   "OPEN"
+  ],
+  "loads": {
+   "R16-cp1-fixture-20261127-00000001": {
+    "staging": "kr_1_staging",
+    "tables": [
+     "document_identities:10",
+     "evidence_anchors:8",
+     "corpus_relationships:12",
+     "taxonomy_nodes:10",
+     "corpus_admissions:11",
+     "graph_nodes:18",
+     "graph_edges:5"
+    ]
+   },
+   "R16-cp1-slice-20261128-00000002": {
+    "staging": "kr_2_staging",
+    "tables": [
+     "document_identities:3",
+     "evidence_anchors:1",
+     "corpus_relationships:3",
+     "taxonomy_nodes:7",
+     "corpus_admissions:3",
+     "graph_nodes:19",
+     "graph_edges:5"
+    ]
+   }
+  },
+  "migration": {
+   "left_in_place": "graph_edges,graph_generation,graph_nodes",
+   "tables": 13,
+   "version": "c16-b03-site-v1"
+  },
+  "publication_rows": 2,
+  "transactions": [
+   "TX-00000001-cf1b84ae925f",
+   "TX-00000002-08c32377e5d4"
+  ],
+  "web_logs_text_store": [
+   "text store: adopted shipped store for R16-cp1-slice-20261128-00000002 (no rebuild)",
+   "text store: opened E:\\Mimamsa-Data\\c16cp1\\slice\\web-text-3fdd8b11-2\\R16-cp1-slice-20261128-00000002 (bound 13 documents to the generation's records in 52 ms)",
+   "2026-11-28T00:51:52.7164092+05:30info: mimamsa[0] text store: disk at E:\\Mimamsa-Data\\c16cp1\\slice\\web-text-3fdd8b11-2\\R16-cp1-slice-20261128-00000002"
+  ]
+ },
+ "oracle_default_mode": {
+  "exit_code": 0,
+  "out": "E:\\Mimamsa-Data\\c16cp1\\slice\\oracle",
+  "summary_tail": [
+   "RET-13: Passed  mode parser_error (exp parser_error) state parser_error top [] ",
+   "RET-14: Passed  mode lexical (exp lexical) state results top ['M-SYN'] ",
+   "oracle: 10/14 cases without hard-assertion errors (exit 1)"
+  ]
+ }
+}

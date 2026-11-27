@@ -176,7 +176,7 @@ public class C16Cp1SliceTests
 
                 // ------------------------------------------------------------ B04 slice: text store adoption, lexical index file
                 var tlog = new List<string>();
-                var tg = GenerationStore.Load(site, null, new TextStoreOptions { Store = "disk", Dir = Path.Combine(work, "verify-text-" + gid) }, tlog.Add, gid);
+                var tg = GenerationStore.Load(site, null, new TextStoreOptions { Store = "disk", Dir = Path.Combine(work, $"verify-text-{r}-{gid}") }, tlog.Add, gid);
                 var origin = ((DiskTextStore)tg.Text).Origin;
                 Check($"b04_text_store_adopted_{gid}", origin == "adopted", string.Join(" | ", tlog));
                 Check($"b04_text_store_equals_memory_{gid}", tg.Documents.Values.Sum(d => d.Passages.Count) == g.Documents.Values.Sum(d => d.Passages.Count)
@@ -230,7 +230,7 @@ public class C16Cp1SliceTests
                 ["Mimamsa__Activation__Pipe"] = pipe, ["Mimamsa__Activation__KeyFile"] = layout.ChannelKeyPath,
                 ["Mimamsa__Text__Store"] = "disk", ["Mimamsa__Text__Dir"] = textDir, ["Mimamsa__Search__Engine"] = "memory",
             };
-            async Task<Cp1Web> Web(string name) { var w = await Cp1Web.StartAsync(WebEnv(Path.Combine(work, "web-text-" + name))); webs.Add(w); return w; }
+            async Task<Cp1Web> Web(string name) { var w = await Cp1Web.StartAsync(WebEnv(Path.Combine(work, $"web-text-{r}-{name}"))); webs.Add(w); return w; }
             static async Task<HttpStatusCode> St(HttpClient c, string url) => (await c.GetAsync(url)).StatusCode;
 
             var w1 = await Web("1");
