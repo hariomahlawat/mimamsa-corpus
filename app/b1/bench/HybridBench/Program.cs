@@ -2,6 +2,7 @@
 //   throughput <site> <model> <cpu|dml> [n=512] [tokens=256]   passage embedding throughput + query latency
 //   embed      <site> <model> <cpu|dml> <cacheDir>             build (or load) the cached passage vectors; time it
 //   calibrate  <site> <model> <cacheDir> <queries.json> <out.json>
+//   probe      <site> <model> <cacheDir> <query> [n=15]           C15 diagnosis: dense ranking of every passage for one query
 // calibrate never reads the retrieval oracle or its fixture: it uses the C14 walkthrough query set on the real sample.
 using System.Diagnostics;
 using System.Text.Json;
@@ -40,7 +41,7 @@ switch (a[0])
         using var e = new E5Embedder(a[2], tryDirectMl: a[3] == "dml");
         var d = DenseIndex.Build(ix, gen.GenerationId, e, a[4], "multilingual-e5-small@614241f6", log: m => Console.Error.WriteLine(m));
         sw.Restart(); for (int i = 0; i < 20; i++) d.TopK("disability pension attributable to military service", 100);
-        Console.WriteLine(JsonSerializer.Serialize(new { device = e.Device, passages = d.Count, from_cache = d.FromCache, build_s = Math.Round(d.BuildTime.TotalSeconds, 1),
+        Console.WriteLine(JsonSerializer.Serialize(new { device = e.Device, passages = d.Count, reused = d.Reused, embedded = d.Embedded, build_s = Math.Round(d.BuildTime.TotalSeconds, 1),
             topk_ms_incl_query_embed = Math.Round(sw.Elapsed.TotalMilliseconds / 20, 1), working_set_mb = Process.GetCurrentProcess().WorkingSet64 / 1048576 }));
         break;
     }
@@ -71,6 +72,18 @@ switch (a[0])
             ["floor_median_p999"] = Math.Round(p999s.OrderBy(x => x).ElementAt(p999s.Count / 2), 4), ["median_lexical_top1_similarity"] = Math.Round(lexTop.OrderBy(x => x).ElementAt(lexTop.Count / 2), 4) };
         File.WriteAllText(a[5], new JsonObject { ["summary"] = summary, ["per_query"] = rows }.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
         Console.WriteLine(summary.ToJsonString());
+        break;
+    }
+    case "probe":
+    {
+        // C15 S2 diagnosis only: prints the dense ranking (passage id, document, cosine) for one query. Used to explain
+        // RET-07/RET-10 mechanisms; no parameter is chosen from its output.
+        using var e = new E5Embedder(a[2]);
+        var d = DenseIndex.Build(ix, gen.GenerationId, e, a[3], "probe");
+        int n = a.Length > 5 ? int.Parse(a[5]) : 15;
+        var all = d.TopK(a[4], ix.N);
+        int r = 0;
+        foreach (var (p, sc) in all.Take(n)) Console.WriteLine($"{++r,3}  {sc:0.0000}  {ix.Passages[p].DocId,-22} {ix.Passages[p].PassageId,-10} {ix.Passages[p].Text[..Math.Min(70, ix.Passages[p].Text.Length)]}");
         break;
     }
 }

@@ -18,7 +18,16 @@ public interface ISemanticScorer
         include is null ? TopK(query, k) : TopK(query, k * 4 + 16).Where(x => include(x.Passage)).Take(k).ToList();
 }
 
-public sealed record HybridOptions(int LexicalDepth = 200, int DenseDepth = 100, int RrfK = 60, double MinSimilarity = 0.0);
+public sealed record HybridOptions(int LexicalDepth = 200, int DenseDepth = 100, int RrfK = 60, double MinSimilarity = 0.0,
+    int RerankPool = 30, double RerankAdmit = 0.0);
+
+/// C15 WP2: scores (query, passage) pairs jointly (a cross-encoder). Higher is more relevant; the score describes text,
+/// never legal relevance. `Admit` semantics belong to the caller (HybridOptions.RerankAdmit).
+public interface IReranker
+{
+    string Description { get; }
+    float[] Score(string query, IReadOnlyList<string> passages);
+}
 
 /// Reciprocal-rank fusion (Cormack et al. 2009) of a lexical ranking and a dense ranking. Deterministic: equal fused
 /// scores are ordered by passage index. Identifier and title tiers are never passed in; they stay above fused hits.

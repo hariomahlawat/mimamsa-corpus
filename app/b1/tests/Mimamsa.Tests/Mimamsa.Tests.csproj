@@ -18,5 +18,6 @@
   <ItemGroup>
     <Using Include="Xunit" />
     <None Include="hybrid_tokenizer_vectors.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="reranker_tokenizer_vectors.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>
