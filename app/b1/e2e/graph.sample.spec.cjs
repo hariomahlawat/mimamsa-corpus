@@ -102,6 +102,23 @@ test("G-05 a superseded assessment response does not overwrite the newer one", a
   await expect(page.locator('.g-findings li[data-code="correspondence"]')).toBeVisible();          // still the newer result
 });
 
+// Codex review of PR #75: a lookup that resolves after a newer one never replaces the newer provision.
+test("G-06 a superseded provision lookup does not replace the newer one", async ({ page }) => {
+  await login(page);
+  await page.goto("/g");
+  let release; const gate = new Promise((r) => { release = r; });
+  await page.route((u) => u.pathname === "/api/graph/resolve" && u.searchParams.get("section") === "302", async (route) => { await gate; await route.continue(); });
+  await page.fill("#g-doc", "act-ipc-1860"); await page.fill("#g-sec", "302");
+  await page.getByRole("button", { name: "Show relationships" }).click();                         // held
+  await page.fill("#g-doc", "act-bns-2023"); await page.fill("#g-sec", "103");
+  await page.getByRole("button", { name: "Show relationships" }).click();
+  await expect(page.locator(".g-node")).toContainText("103");
+  release();
+  await page.waitForTimeout(1500);
+  await expect(page.locator(".g-node")).toContainText("103");
+  await expect(page.locator(".g-node")).not.toContainText("302");
+});
+
 test("G-03 graph and reasoning routes need a session", async ({ request }) => {
   for (const u of ["/api/graph/stats", "/api/graph/node?id=x", "/api/graph/path?from=a&to=b", "/api/graph/resolve?doc=act-army-1950",
                    "/api/reasoning/assess?kind=temporal&doc=act-army-1950&section=75", "/api/reasoning/rule-gate"])

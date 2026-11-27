@@ -50,10 +50,12 @@ export async function graphPage(main, nav) {
   async function go(doc, section, push = true) {
     if (!doc) return;
     if (push) nav.replace(`/g?doc=${encodeURIComponent(doc)}${section ? `&section=${encodeURIComponent(section)}` : ""}`);
+    const my = ++gen;                        // Codex review of PR #75: a later lookup or node supersedes this one
     clear(body); add(body, h("span.skeleton.w60"));
     let r;
     try { r = await api(`/api/graph/resolve?doc=${encodeURIComponent(doc)}${section ? `&section=${encodeURIComponent(section)}` : ""}`); }
-    catch { clear(body); add(body, h("p.notice", "This document is not available in this installation, or it is not part of the graph.")); return; }
+    catch { if (my !== gen) return; clear(body); add(body, h("p.notice", "This document is not available in this installation, or it is not part of the graph.")); return; }
+    if (my !== gen) return;
     await showNode(r.node_id, doc, section);
   }
 
