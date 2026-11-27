@@ -72,13 +72,17 @@ def pdf(pages: int, label: str) -> bytes:
 def docx(images: dict[str, bytes], body: str) -> bytes:
     """A minimal, deterministic DOCX container (fixed timestamps) holding a document part and image parts."""
     buf = io.BytesIO()
-    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+    # Platform-independent bytes: STORED (no dependence on the zlib build) and a fixed 'made by' system and
+    # attributes (zipfile defaults create_system to 0 on Windows and 3 elsewhere).
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_STORED) as z:
         parts = {"[Content_Types].xml": b"<?xml version='1.0'?><Types/>",
                  "word/document.xml": f"<?xml version='1.0'?><document><body>{body}</body></document>".encode()}
         parts.update(images)
         for name in sorted(parts):
             zi = zipfile.ZipInfo(name, date_time=(2026, 11, 28, 0, 0, 0))
-            zi.compress_type = zipfile.ZIP_DEFLATED
+            zi.compress_type = zipfile.ZIP_STORED
+            zi.create_system = 3
+            zi.external_attr = 0o644 << 16
             z.writestr(zi, parts[name])
     return buf.getvalue()
 
@@ -519,6 +523,15 @@ class C16Harness:
                 (path / p).parent.mkdir(parents=True, exist_ok=True)
                 (path / p).write_bytes(b)
         write_bundle(path, m, documents=docs, derived=derived, extra_files=files, signing_key=self.key, public_key_raw=self.pub)
+        # devbundle orders SHA256SUMS by sorted Path objects, which compare case-insensitively on Windows and
+        # case-sensitively elsewhere ('CHANGES.json' vs 'corpus-v2/...'). Re-list in code-point order of the POSIX
+        # path and re-sign, so the bundle (and the generation's sums_sha256) is identical on every platform.
+        from mimamsa_contract.bundle import SIG, SUMS
+        lines = sorted(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.relative_to(path).as_posix()}\n"
+                       for p in path.rglob("*") if p.is_file() and p.name not in (SUMS, SIG))
+        sums = "".join(sorted(lines, key=lambda x: x[66:])).encode()
+        (path / SUMS).write_bytes(sums)
+        (path / SIG).write_bytes(self.key.sign(sums))
         return path
 
     def default_accounting(self, release_id, docs, exchange_files=None, *, v7=True):
@@ -578,8 +591,19 @@ if __name__ == "__main__":  # python -I c16_cases.py <fixture_dir> [--check]
         (out / "expected.json").write_text(json.dumps(exp, indent=1, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
         (out / ".gitattributes").write_bytes(b"* -text\n")
         if a.check:
-            same = _tree(out) == _tree(a.fixture)
+            got, want = _tree(out), _tree(a.fixture)
+            same = got == want
             print("fixture site is byte-identical to the importer's output" if same else "fixture site DIFFERS from the importer's output")
+            for p in sorted(set(got) | set(want)):
+                if got.get(p) != want.get(p):
+                    if p not in got or p not in want:
+                        print(f"  {p}: only in {'committed fixture' if p in want else 'importer output'}")
+                    else:
+                        g, w = got[p], want[p]
+                        i = next((k for k in range(min(len(g), len(w))) if g[k] != w[k]), min(len(g), len(w)))
+                        print(f"  {p}: first difference at byte {i} (sizes {len(g)} vs {len(w)}): "
+                              f"output {g[max(0, i - 20):i + 20]!r} committed {w[max(0, i - 20):i + 20]!r}")
+                    break
             sys.exit(0 if same else 1)
         if a.fixture.exists():
             for p in sorted(a.fixture.rglob("*"), reverse=True):
