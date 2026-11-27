@@ -71,7 +71,23 @@ if (testMode && conf.GetValue("Mimamsa:Test:AllowNoRegister", false)) register =
 else register = RestrictedRegister.LoadRequired(conf["Mimamsa:RestrictedRegister"], generation.Release.RegisterSha256);
 var eligibility = new Eligibility(generation, state, register, vault);
 var phase = System.Diagnostics.Stopwatch.StartNew();
-var index = SearchIndex.Build(generation);
+// C15 WP1 (ADR-0008): Mimamsa:Search:Engine = memory (B1 in-process index) | disk (persistent SQLite index under
+// Mimamsa:Search:IndexDir, default <site>/search-index: built, verified and published atomically on first start of a
+// generation, verified and reopened afterwards). Results are identical; only memory, start-up and persistence differ.
+var searchEngine = conf["Mimamsa:Search:Engine"] ?? "memory";
+var index = searchEngine switch
+{
+    "memory" => SearchIndex.Build(generation),
+    "disk" => SearchIndex.Open(generation, conf["Mimamsa:Search:IndexDir"] is { Length: > 0 } idir ? idir : Path.Combine(site, "search-index"),
+        new SearchIndexOptions
+        {
+            CacheBytes = conf.GetValue("Mimamsa:Search:CacheMb", 128L) << 20,
+            VerifyOnOpen = conf.GetValue("Mimamsa:Search:VerifyOnOpen", true),
+            RebuildOnFailure = conf.GetValue("Mimamsa:Search:RebuildOnFailure", true),
+            KeepPrevious = conf.GetValue("Mimamsa:Search:KeepPrevious", 2),
+        }, Console.WriteLine),
+    _ => throw new InvalidOperationException("Mimamsa:Search:Engine must be 'memory' or 'disk'"),
+};
 var indexBuildMs = phase.ElapsedMilliseconds;
 AppServices? appRef = null;
 // C14 S4 hybrid-retrieval PoC: off unless Mimamsa:Hybrid:Enabled=true. The model directory and its pinned SHA-256
