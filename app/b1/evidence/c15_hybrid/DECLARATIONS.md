@@ -35,3 +35,9 @@ This file exists so that reviewers can check, from git history, what was fixed *
    - *Rule:* the same rule as C14: the median over the 43 walkthrough queries of each query's 99.9th-percentile cosine.
    - *Bounded variant:* the percentile is taken over a **seeded uniform random sample of 3,000 passages** of the real 290-document sample (seed 15), not over all 37,558. Embedding everything with e5-base takes hours on this CPU.
    - *Fixed:* the value obtained is used as-is for the oracle run.
+3. **Heading tier in hybrid and rerank modes.**
+   - *When:* after the 43 walkthrough queries showed that the boost had no effect in hybrid mode (development data, not the oracle).
+   - *Why:* rank fusion dilutes a boosted lexical score.
+   - *Change:* matched provisions are placed before fused or reranked hits, after the identifier, case-name and title tiers.
+   - *Oracle with hybrid on:* unchanged at 12/14 (R2b).
+   - *Status:* a development-tuned rule, not independent evidence.

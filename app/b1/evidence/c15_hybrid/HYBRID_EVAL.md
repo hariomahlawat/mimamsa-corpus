@@ -8,7 +8,7 @@
 | --- | --- |
 | Unchanged retrieval oracle, hybrid **off** (lexical + heading boost) | **10/14**, unchanged from staging (the 4 hybrid cases fail by design) |
 | Oracle, best hybrid configuration | **12/14**. RET-07 and RET-10 still fail under every evaluated configuration. **14/14 not reached**, and not pursued by tuning on oracle text |
-| Default | Hybrid stays **off** (not all acceptance holds). The **provision-heading boost is on** in lexical search (WP7) |
+| Default | Hybrid stays **off** (not all acceptance holds). The **provision-heading boost is on** (WP7). In hybrid modes, matched provisions form their own tier ahead of fused results; this fixes the C14 Q01 hybrid regression |
 | Persistent vectors | Incremental per-passage store, SHA-256 trailer, atomic publish, checkpoints; **interrupted embedding resumed at 16,000/37,558** after a hard kill |
 | Withdrawal | Eligibility applied inside the dense scan and before the rerank pool; withdrawn passages never returned and never use up depth (tests) |
 | Blind holdout | **Not accessed.** The procedure for the independent evaluator is updated in `app/b1/hybrid/HOLDOUT_PROCEDURE.md` §C15 |
@@ -47,6 +47,7 @@ This reproduces the C14 S4 report exactly (`runs/` and `E:\Mimamsa-Data\c15s2\ev
 | R2 | R1 + e5-small, RRF k=60, floor 0.8579 | 12/14 | As C14 |
 | R3 | R1 + e5-small candidates + cross-encoder rerank (fp32, pool 30+30, admit logit ≥ 0) | 12/14 | RET-07 now in hybrid mode, J1-MAJ still missing; RET-10 J2-MAJ missing. Declared configuration, unchanged after the run |
 | R5 | R1 + e5-base, RRF k=60, floor 0.8339 (declared rule on a seeded 3,000-passage sample) | 12/14 | Same two failures |
+| R2b | R2 with the heading tier (final C15 hybrid) | 12/14 | Unchanged from R2 |
 
 Run outputs (summaries and RESULTS JSON) are committed under `oracle/` (`<run>__oracle-<mode>.txt`, `<run>__<mode>__*RESULTS*.json`). `oracle_identity.txt` records the oracle git blob, which is identical to staging.
 
@@ -81,7 +82,7 @@ Run outputs (summaries and RESULTS JSON) are committed under `oracle/` (`<run>__
 
 **Residual deficiency:** Q05 → s.80 and Q07 → ss.101–102 remain open (§8).
 
-**Hybrid on the real sample (43 queries):** see §9, filled when the sample embedding completes.
+**Hybrid on the real sample (43 queries):** see §9.
 
 ## 7. Latency, memory and storage
 
@@ -102,3 +103,55 @@ Even at a fraction of these figures when uncontended, a 60-pair pool is multi-se
 2. **Q05 → Army Act s.80:** the TOC (`Generation/Toc.cs`) does not find s.80's body heading. A text-extraction or TOC issue, outside this stream.
 3. **Q07 (arrest → custody):** needs a vocabulary bridge (statutory synonym list, reviewed) or semantics. Not added: a hand-made synonym list is a legal-content decision.
 4. **Reranker:** kept as an opt-in seam (`Mimamsa:Hybrid:Reranker:*`) for a future smaller or GPU model. Not recommended on this host.
+
+## 9. Real sample results
+
+### 9.1 43 walkthrough queries
+
+| Q | Query | Staging lexical | C15 lexical (+headings) | C14-style hybrid | C15 hybrid (+heading tier) |
+| --- | --- | --- | --- | --- | --- |
+| Q01 | how to hold a summary court martial | act:army-1950 | act:army-1950 | SC 1991 ex-havildar-rat-an | act:army-1950 |
+| Q13 | absence without leave punishment | SC 2023 ex-sepoy-madan-pra | act:air-force-1950 | act:navy-1957 | act:air-force-1950 |
+| Q21 | disability pension attributable to military service | SC 2015 union-of-india-anr | SC 2015 union-of-india-anr | SC 2013 dharamvir-singh-20 | SC 2013 dharamvir-singh-20 |
+| Q22 | can high court entertain writ against armed forces tribunal order | HC allahabad 2023 | HC allahabad 2023 | HC jkl 2019 | HC jkl 2019 |
+| Q23 | court martial set aside violation of natural justice | SC 2019 union-of-india-thr | SC 2019 union-of-india-thr | SC 1973 captain-harish-upp | SC 1973 captain-harish-upp |
+| Q25 | dharamveer singh | SC 2023 dr-jaya-thakur-202 | SC 2023 dr-jaya-thakur-202 | SC 2013 dharamvir-singh-20 | SC 2013 dharamvir-singh-20 |
+| Q35 | AFT jurisdiction | notif:aft-kolkata | notif:aft-kolkata | rules:aft-group-b-rrs | rules:aft-group-b-rrs |
+| Q43 | सेना अधिनियम | act:bnss-2023-alt-60d145 | act:bnss-2023-alt-60d145 | act:bns-2023-alt-d163e7 | act:bns-2023-alt-d163e7 |
+
+Top-1 document per configuration; only the 8 of 43 queries where any configuration differs are listed. The full runs (top 5 documents, top 3 passages, timings) are in `runs/*.json`.
+
+**Readings** (observations, not relevance judgements):
+- **Q01 and Q13:** the C15 configurations lead with the statutory provision. In C14-style hybrid, Q01 had lost the Army Act from the top (two SC judgments led).
+- **Q21 and Q25:** hybrid brings Dharamvir Singh to the top, including for the misspelling.
+- **Q22, Q23 and Q35:** hybrid changes the lead without a clear gain.
+- **Q43:** the Hindi query still leads with BNS/BNSS alternate copies.
+- **Identifier queries (13):** the same top passage and mode in every configuration.
+- **Unchanged:** 35 queries keep the same top document in all four configurations.
+
+### 9.2 Latency, memory and storage
+
+- **Conditions:** quiet host (CPU 6–7% before the run), i7-10750H, 16 GB, client on the same host. Real sample of 290 documents and 37,558 indexed passages (the unreliable Hindi texts are excluded from search). Tool: `scripts/perf.py`. One run each.
+
+| Configuration | Sequential p50 / p95 | 10 readers p50 / p95 | 25 readers p95 | Working set idle → after load | Start-up |
+| --- | --- | --- | --- | --- | --- |
+| Lexical + heading boost (default) | 13.5 / 80 ms | 40 / 152 ms | 260 ms | 597 → 1,207 MB | ~6.5 s |
+| Hybrid e5-small + heading tier | 39 / 75 ms | 155 / 339 ms | 637 ms | 1,428 → 1,789 MB | +1.2 s to load 37,558 vectors from the store |
+| Rerank fp32, pool 30+30 (declared) | p50 4.6 s; p95 788 s (one 13-minute outlier, unexplained) | not run | not run | 2,299 MB | |
+| Rerank AVX2 quint8, pool 10+10 | p50 1.4 s; p95 2.2 s | not run | not run | 1,694 MB | |
+
+**Storage:**
+
+| Item | Size |
+| --- | --- |
+| e5-small vector store | 51.7 MB |
+| SYN store | < 0.2 MB |
+| e5-small model | 0.47 GB |
+| e5-base model | 1.1 GB |
+| Reranker (fp32 + quint8) | 0.59 GB |
+| **Total models** | **2.08 GB** (budget 8 GB) |
+
+**Embedding:**
+- e5-small on CPU: 37,558 passages in about 2 h 10 min. It shared the CPU with other streams' benchmarks; C14 measured 12 passages/s uncontended.
+- A hard kill at 16,000 resumed from the checkpoint: 16,000 reused, 21,558 embedded.
+- After that, no embedding was needed on later starts.
