@@ -1,0 +1,18 @@
+[
+  {
+    "config": "rerank_fp32_pool30",
+    "n": 10,
+    "p50_ms": 4648,
+    "p95_ms": 787672,
+    "mean_ms": 83027,
+    "working_set_mb": 2298.8
+  },
+  {
+    "config": "rerank_quint8_pool10",
+    "n": 10,
+    "p50_ms": 1397,
+    "p95_ms": 2205,
+    "mean_ms": 1500,
+    "working_set_mb": 1693.5
+  }
+]

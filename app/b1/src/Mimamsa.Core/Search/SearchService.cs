@@ -30,6 +30,10 @@ public sealed class SearchService
     public SearchIndex Index => _ix;
     /// C14 S4 hybrid PoC. Null (the default) = B1 lexical behaviour, unchanged.
     public ISemanticScorer? Semantic { get; init; }
+    /// C15 WP2: optional cross-encoder rerank stage (off when null).
+    public IReranker? Reranker { get; init; }
+    /// C15 WP2/WP7: provision-heading boost for procedural queries (off when null).
+    public ProvisionHeadings? Headings { get; init; }
     public HybridOptions Hybrid { get; init; } = new();
 
     sealed class Ctx
@@ -42,6 +46,8 @@ public sealed class SearchService
         public readonly List<(string display, Dictionary<int, int> counts)> Matched = new();
         public readonly Dictionary<string, int> MatchedIndex = new(StringComparer.Ordinal);
         public readonly List<Chip> Chips = new();
+        /// C15: passage -> reason for a provision-heading boost (shown with the match reasons).
+        public readonly Dictionary<int, string> HeadingReasons = new();
     }
 
     SpellingSuggester? _speller;
@@ -99,12 +105,52 @@ public sealed class SearchService
                         if (_ix.Docs[d].IsStatute && NormTitle(_ix.Docs[d].Title).Split(' ').ToHashSet().SetEquals(words) && seen.Add(_ix.DocPassages[d][0]))
                             ordered.Add(new Hit(_ix.DocPassages[d][0], "title", 5e8, new[] { $"title match: {_ix.Docs[d].Title}" }));
                 var scores = PlainScores(rest, ctx);
+                // C15 WP2/WP7: provision-heading boost for procedural plain-language queries (see ProvisionHeadings).
+                if (!q.Exact && Headings is not null)
+                    scores = Headings.Boost(scores, rest, ctx.HeadingReasons);
+                // In hybrid and rerank modes the matched provisions are placed before fused/reranked results (after the
+                // identifier, case-name and title tiers): rank fusion would otherwise dilute the boost. Added after the
+                // C14 walkthrough queries showed no effect in hybrid mode (development data; DECLARATIONS.md item 3).
+                if (ctx.HeadingReasons.Count > 0 && (Semantic is not null || Reranker is not null) && !q.Exact)
+                    foreach (var p in ctx.HeadingReasons.Keys.Where(scores.ContainsKey).OrderByDescending(p => scores[p]).ThenBy(p => p))
+                        if (!_docHidden(_ix.Passages[p].DocId) && seen.Add(p)) ordered.Add(new Hit(p, "lexical", scores[p], Reasons(p, ctx)));
+                // ---- C15 WP2 rerank stage (begin). Only when a reranker is configured; pinned tiers above are untouched.
+                if (Reranker is not null && !q.Exact)
+                {
+                    var lex = scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key).Select(kv => kv.Key).ToList();
+                    var query = string.Join(" ", rest);
+                    var dense = Semantic is null ? new List<(int Passage, double Score)>()
+                        : Semantic.TopK(query, Hybrid.RerankPool, p => !_docHidden(_ix.Passages[p].DocId)).ToList();
+                    var pool = new List<(int p, bool lexical)>();
+                    var inPool = new HashSet<int>();
+                    foreach (var p in lex.Where(p => !seen.Contains(p) && !_docHidden(_ix.Passages[p].DocId)).Take(Hybrid.RerankPool)) if (inPool.Add(p)) pool.Add((p, true));
+                    foreach (var (p, _) in dense) if (!seen.Contains(p) && inPool.Add(p)) pool.Add((p, false));
+                    var rr = pool.Count == 0 ? Array.Empty<float>() : Reranker.Score(query, pool.Select(x => _ix.Passages[x.p].Text).ToList());
+                    var kept = pool.Select((x, i) => (x.p, x.lexical, s: rr[i], i))
+                                   .Where(x => x.lexical || x.s >= Hybrid.RerankAdmit)
+                                   .OrderByDescending(x => x.s).ThenBy(x => x.i).ToList();
+                    foreach (var k in kept)
+                    {
+                        if (!seen.Add(k.p)) continue;
+                        var why = new List<string>(k.lexical ? Reasons(k.p, ctx) : Array.Empty<string>());
+                        why.Add($"Reranked by textual relevance (cross-encoder logit {k.s:0.00}); textual relevance is not legal relevance");
+                        ordered.Add(new Hit(k.p, k.lexical ? "lexical" : "semantic", k.s, why));
+                    }
+                    foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))   // lexical tail beyond the pool
+                        if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx)));
+                    if (mode == "lexical" && pool.Count > 0) mode = "hybrid";
+                    notes[0] = $"Hybrid search (BM25{(Semantic is null ? "" : $" with embedding candidates: {Semantic.Description}")}, reranked by {Reranker.Description}). Identifier matches are placed first and are never re-ranked.";
+                }
+                else
+                // ---- C15 WP2 rerank stage (end)
                 // ---- C14 S4 hybrid hook (begin). Only plain, non-exact queries; identifier and title tiers above are
                 // already placed and are never re-ranked. With Semantic == null this block is skipped entirely.
                 if (Semantic is not null && !q.Exact)
                 {
                     var lex = scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key).Select(kv => kv.Key).ToList();
-                    var dense = Semantic.TopK(string.Join(" ", rest), Hybrid.DenseDepth).Where(x => x.Score >= Hybrid.MinSimilarity).ToList();
+                    // C15 WP2: eligibility is applied inside the dense scan (withdrawn passages never use up depth)
+                    var dense = Semantic.TopK(string.Join(" ", rest), Hybrid.DenseDepth, p => !_docHidden(_ix.Passages[p].DocId))
+                                        .Where(x => x.Score >= Hybrid.MinSimilarity).ToList();
                     var sim = dense.ToDictionary(x => x.Passage, x => x.Score);
                     foreach (var f in HybridFusion.Rrf(lex, dense.Select(x => x.Passage).ToList(), Hybrid))
                     {
@@ -639,10 +685,15 @@ public sealed class SearchService
     };
 
     /// C15 WP1: built on first read (only displayed hits are ever read), from the same per-passage match counts.
+    /// C15 WP2: a provision-heading match adds its reason after the matched terms.
     IReadOnlyList<string> Reasons(int p, Ctx ctx) => new LazyReasons(() =>
-        ctx.Matched.Where(x => x.counts.ContainsKey(p)).Select(x => new KeyValuePair<string, int>(x.display, x.counts[p])).ToList() is { Count: > 0 } m
+    {
+        var r = ctx.Matched.Where(x => x.counts.ContainsKey(p)).Select(x => new KeyValuePair<string, int>(x.display, x.counts[p])).ToList() is { Count: > 0 } m
             ? new List<string> { "Matched: " + string.Join(", ", m.OrderByDescending(kv => kv.Value).Take(4).Select(kv => $"{(kv.Key.StartsWith('“') ? kv.Key : "'" + kv.Key + "'")} ({kv.Value})")) }
-            : new List<string> { "Matched the query filters" });
+            : new List<string> { "Matched the query filters" };
+        if (ctx.HeadingReasons.TryGetValue(p, out var h)) r.Add(h);
+        return r;
+    });
 
     sealed class LazyReasons(Func<List<string>> make) : IReadOnlyList<string>
     {

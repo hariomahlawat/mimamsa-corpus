@@ -100,17 +100,28 @@ if (conf.GetValue("Mimamsa:Hybrid:Enabled", false))
     var emb = new Mimamsa.Hybrid.E5Embedder(conf["Mimamsa:Hybrid:ModelDir"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelDir is required when hybrid is enabled"),
         conf.GetValue("Mimamsa:Hybrid:Threads", 0), conf.GetValue("Mimamsa:Hybrid:Cuda", false),
         conf["Mimamsa:Hybrid:ModelSha256"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelSha256 is required when hybrid is enabled"));
-    semantic = Mimamsa.Hybrid.DenseIndex.Build(index, generation.GenerationId, emb, conf["Mimamsa:Hybrid:CacheDir"], "multilingual-e5-small@614241f6",
+    semantic = Mimamsa.Hybrid.DenseIndex.Build(index, generation.GenerationId, emb, conf["Mimamsa:Hybrid:CacheDir"], conf["Mimamsa:Hybrid:ModelLabel"] ?? "multilingual-e5-small@614241f6",
         conf.GetValue("Mimamsa:Hybrid:PassageTokens", 256), log: Console.WriteLine);
     hybridMs = phase.ElapsedMilliseconds;
 }
+// C15 WP2: optional cross-encoder rerank stage (off unless Mimamsa:Hybrid:Reranker:Enabled=true; pinned SHA-256 required).
+IReranker? reranker = null;
+if (conf.GetValue("Mimamsa:Hybrid:Reranker:Enabled", false))
+    reranker = new Mimamsa.Hybrid.CrossEncoder(
+        conf["Mimamsa:Hybrid:Reranker:ModelDir"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:Reranker:ModelDir is required when the reranker is enabled"),
+        conf["Mimamsa:Hybrid:Reranker:OnnxFile"] ?? "onnx/model.onnx",
+        conf["Mimamsa:Hybrid:Reranker:Sha256"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:Reranker:Sha256 is required when the reranker is enabled"),
+        conf.GetValue("Mimamsa:Hybrid:Threads", 0)) { MaxTokens = conf.GetValue("Mimamsa:Hybrid:Reranker:MaxTokens", 256) };
 var search = new SearchService(index, docId => appRef!.VisibleDocument(docId) is null)
 {
     Semantic = semantic,
+    Reranker = reranker,
+    // C15 WP2/WP7: provision-heading boost for procedural plain-language queries (see ProvisionHeadings).
+    Headings = conf.GetValue("Mimamsa:Search:ProvisionHeadings", true) ? ProvisionHeadings.Build(index) : null,
     // MinSimilarity: a passage enters through the dense layer only at or above this cosine similarity. The value is
     // calibrated on the C14 walkthrough queries over the real sample (HybridBench calibrate), never on oracle data.
     Hybrid = new HybridOptions(conf.GetValue("Mimamsa:Hybrid:LexicalDepth", 200), conf.GetValue("Mimamsa:Hybrid:DenseDepth", 100), conf.GetValue("Mimamsa:Hybrid:RrfK", 60),
-                               conf.GetValue("Mimamsa:Hybrid:MinSimilarity", 0.0)),
+                               conf.GetValue("Mimamsa:Hybrid:MinSimilarity", 0.0), conf.GetValue("Mimamsa:Hybrid:Reranker:Pool", 30), conf.GetValue("Mimamsa:Hybrid:Reranker:Admit", 0.0)),
 };
 var app0 = new AppServices
 {
