@@ -420,3 +420,55 @@ dialog .actions { display: flex; justify-content: flex-end; gap: var(--space-4);
 .g-quote { display: block; font-family: var(--font-reading); margin: var(--space-2) 0; }
 .g-findings { list-style: none; padding: 0; }
 .g-findings li { padding: var(--space-2) 0; border-bottom: 1px solid var(--border-subtle); font-size: var(--size-sm); }
+/* ---------------------------------------------------------------- C15 WP7: compact results on short viewports */
+/* Short screens (e.g. 1366x768) show at least three results: titles clamp to two lines, metadata to one line, snippets
+   to two lines (a selected or focused hit still expands, as before). Taller screens are unchanged. */
+@media (max-height: 900px) {
+  .results-head { padding: var(--space-3) var(--space-4); gap: var(--space-2); }
+  .runline { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rgroup { padding: var(--space-2) var(--space-4) var(--space-1); }
+  .rgroup-title { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+  .rgroup-meta { flex-wrap: nowrap; white-space: nowrap; overflow: hidden; margin-top: 1px; }
+  .rgroup-prov { margin-top: 0; }
+  .hit { padding-top: var(--space-2); padding-bottom: var(--space-2); }
+  .hit .ex { -webkit-line-clamp: 2; line-clamp: 2; }
+  .hit .meta { flex-wrap: nowrap; white-space: nowrap; overflow: hidden; margin-top: 2px; }
+}
+
+/* ---------------------------------------------------------------- C15 WP5/WP6: Commander workspace and Document Studio */
+.workspace { max-width: 1100px; }
+.ws-head h1 { margin: 0 0 var(--space-2); font-size: var(--size-lg); }
+.ws-head input#studio-title { font-size: var(--size-lg); font-weight: 600; width: 100%; padding: var(--space-2) var(--space-3); border: 1px solid var(--border-control); border-radius: var(--radius-control); background: var(--bg-surface); color: var(--fg-primary); }
+.ws-label { margin: var(--space-2) 0; display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; }
+.ws-nav { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); margin: var(--space-4) 0; padding-bottom: var(--space-3); border-bottom: 1px solid var(--border-subtle); font-size: var(--size-sm); }
+.ws-nav a[aria-current="page"] { font-weight: 600; text-decoration: underline; }
+.ws-card { text-decoration: none; color: var(--fg-primary); display: block; }
+.ws-card:hover { background: var(--bg-selected); }
+.ws-sect { margin: var(--space-6) 0; }
+.ws-sect h2 { font-size: var(--size-md); margin: 0 0 var(--space-2); display: flex; gap: var(--space-3); align-items: center; }
+.ws-group { margin: var(--space-4) 0; }
+.ws-group h3 { font-size: var(--size-sm); margin: 0 0 var(--space-1); }
+.ws-list { list-style: none; margin: var(--space-2) 0; padding: 0; }
+.ws-list > li { padding: var(--space-3) 0; border-bottom: 1px solid var(--border-subtle); }
+.ws-prov-head { display: flex; gap: var(--space-3); align-items: baseline; flex-wrap: wrap; }
+.ws-prov-head a { font-weight: 600; text-decoration: none; color: var(--accent-interactive); }
+.ws-prov .num, .ws-prov.unavailable .num { font-family: var(--font-mono); font-size: var(--size-sm); }
+.ws-src, .ws-snip { font-size: var(--size-xs); }
+.ws-excerpt { font-family: var(--font-reading); font-size: var(--size-sm); line-height: 1.5; margin: var(--space-2) 0 0; padding: var(--space-2) var(--space-4); border-left: 3px solid var(--border-control); color: var(--fg-primary); }
+.ws-questions li { margin: var(--space-2) 0; }
+.ws-na { color: var(--fg-secondary); font-style: italic; }
+.ws-inline { display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: flex-start; }
+.ws-inline input, .ws-inline select, .ws-inline textarea { padding: var(--space-2) var(--space-3); border: 1px solid var(--border-control); border-radius: var(--radius-control); background: var(--bg-surface); color: var(--fg-primary); }
+.ws-inline input, .ws-inline textarea { min-width: 18rem; flex: 1; }
+.ws-toolbar { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; margin: var(--space-4) 0; }
+.ws-blocks { display: flex; flex-direction: column; gap: var(--space-3); }
+.ws-block { border: 1px solid var(--border-subtle); border-radius: var(--radius-control); padding: var(--space-3) var(--space-4); background: var(--bg-surface); }
+.ws-block.corpus { border-left: 3px solid var(--accent-interactive); }
+.ws-block-head { display: flex; gap: var(--space-3); align-items: center; margin-bottom: var(--space-2); }
+.ws-tools { margin-left: auto; display: flex; gap: var(--space-1); }
+.ws-origin { font-size: var(--size-xs); text-transform: uppercase; letter-spacing: .04em; color: var(--fg-muted); }
+.ws-origin[data-origin="suggestion"] { color: var(--fg-secondary); font-weight: 600; }
+.ws-block .ws-heading, .ws-block .ws-text { width: 100%; box-sizing: border-box; padding: var(--space-2) var(--space-3); border: 1px solid var(--border-control); border-radius: var(--radius-control); background: var(--bg-canvas); color: var(--fg-primary); font: inherit; }
+.ws-block .ws-heading { font-weight: 600; }
+.ws-block .ws-text { font-family: var(--font-reading); line-height: 1.5; resize: vertical; }
+.ws-cite { margin: var(--space-2) 0 0; font-size: var(--size-sm); }

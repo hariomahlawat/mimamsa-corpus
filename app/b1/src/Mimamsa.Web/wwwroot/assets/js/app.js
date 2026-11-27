@@ -6,6 +6,7 @@ import * as research from "./research.js";
 import { loginPage, gatePage, laterPage, statutesPage, citePage, adminPage } from "./pages.js";
 import { graphPage } from "./graph.js";
 import { noteRecentSearch, invalidateLibrary } from "./home.js";
+import { commanderPage, studioPage, refreshWorkspace, workspaceShown } from "./workspace.js";
 import { refreshRelations, liveRelationViews, relationsRefreshPending } from "./relations.js";
 const add = (el, ...k) => append(el, k);
 
@@ -40,10 +41,11 @@ window.addEventListener("mimamsa:unauthenticated", () => {
 // poll also runs while such evidence is displayed (Codex review of PR #70).
 // The library home (statute shortcuts, Commander task provisions) is re-fetched too, and the poll also runs while the
 // home is displayed (Codex review of PR #70).
-window.addEventListener("mimamsa:policy-changed", () => { if (S) { research.revalidateOpenDocuments(); refreshRelations(); invalidateLibrary(); research.refreshHome(); } });
+// C15: the Commander workspace and Studio pages re-render too (library-derived content follows withdrawals).
+window.addEventListener("mimamsa:policy-changed", () => { if (S) { research.revalidateOpenDocuments(); refreshRelations(); invalidateLibrary(); research.refreshHome(); refreshWorkspace(); } });
 const POLICY_POLL_MS = 10_000;
 setInterval(async () => {
-  if (!S || document.hidden || !(research.openDocumentCount() || liveRelationViews() || document.querySelector("section.home"))) return;
+  if (!S || document.hidden || !(research.openDocumentCount() || liveRelationViews() || document.querySelector("section.home") || workspaceShown())) return;
   // plain fetch: the poll only reads the epoch; it never changes the connection or session state shown to the user
   try { noteEpoch(await fetch("/api/policy", { credentials: "same-origin", cache: "no-store" })); } catch { /* next tick */ }
   // a re-check that could not decide after an earlier epoch change is retried on every tick until it resolves
@@ -83,7 +85,7 @@ function renderShell() {
   if (S) {
     add(ws, link("/r", "Research", path === "/r" || path.startsWith("/d/") || path.startsWith("/cite/")),
       link("/s", "Statutes", path.startsWith("/s")), link("/g", "Graph", path.startsWith("/g")),
-      link("/studio", "Studio", path.startsWith("/studio")),
+      link("/c", "Commander", path === "/c" || path.startsWith("/c/")), link("/studio", "Studio", path.startsWith("/studio")),
       link("/assistant", "Assistant", path.startsWith("/assistant"), h("span.chip.chip-gated", { style: "height:16px", title: "Closed" }, "")));
     if (S.role === "Admin") add(ws, link("/admin", "Administration", path.startsWith("/admin")));
   }
@@ -166,7 +168,8 @@ async function route() {
   if (p.startsWith("/admin")) return S.role === "Admin" ? adminPage(main, nav) : forbidden();
   if (p.startsWith("/assistant")) return gatePage(main, "assistant");
   if (p.startsWith("/g")) return graphPage(main, nav);   // C15 WP3/WP4: graph inspection list view (graph.js)
-  if (p.startsWith("/studio")) return laterPage(main, "Document Studio", "Private working sessions are a later milestone (B3). No files can be uploaded in B1.");
+  if (p === "/c" || p.startsWith("/c/")) return commanderPage(main, nav, p.length > 3 ? decodeURIComponent(p.slice(3)) : null);
+  if (p === "/studio" || p.startsWith("/studio/")) return studioPage(main, nav, p.length > 8 ? decodeURIComponent(p.slice(8)) : null);
   clear(main); add(main, h("div.page", h("h1", "Not found"), h("p", h("a", { href: "/r" }, "Go to research"))));
 }
 function forbidden() { clear(main); add(main, h("div.page", h("div.error-state", { role: "alert" }, h("h2", "This action is for Admins.")))); }
