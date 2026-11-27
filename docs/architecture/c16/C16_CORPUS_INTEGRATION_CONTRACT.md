@@ -14,6 +14,7 @@
 | Compatibility matrix | [C16_COMPATIBILITY_MATRIX.md](C16_COMPATIBILITY_MATRIX.md) |
 | Producer (Codex) requirements | [C16_PRODUCER_REQUIREMENTS.md](C16_PRODUCER_REQUIREMENTS.md) |
 | Consumer (B1 application) requirements | [C16_CONSUMER_REQUIREMENTS.md](C16_CONSUMER_REQUIREMENTS.md) |
+| Knowledge release architecture (WP06) | [C16_KNOWLEDGE_RELEASE_ARCHITECTURE.md](C16_KNOWLEDGE_RELEASE_ARCHITECTURE.md); schemas `KNOWLEDGE_RELEASE_MANIFEST_SCHEMA.json`, `KNOWLEDGE_ACTIVATION_RECORD_SCHEMA.json` |
 
 ## 1. Why a second contract version, and why it is an extension
 
