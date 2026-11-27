@@ -109,7 +109,36 @@ public sealed class ControlChannelServer : IAsyncDisposable
         }
     }
 
-    void Reject(string why) { Interlocked.Increment(ref Rejected); LastRejectReason = why; Log?.Invoke("control channel: rejected (" + why + ")"); }
+    readonly List<string> _rejections = [];
+
+    void Reject(string why)
+    {
+        lock (_rejections)
+        {
+            Interlocked.Increment(ref Rejected);
+            LastRejectReason = why;
+            _rejections.Add(why);
+            Monitor.PulseAll(_rejections);
+        }
+        Log?.Invoke("control channel: rejected (" + why + ")");
+    }
+
+    /// Wait until the server has recorded a rejection with this reason (the client may give up before the server
+    /// gets to it under load). Returns false when none arrives within `timeout`.
+    public bool WaitForRejection(string reason, TimeSpan timeout)
+    {
+        var deadline = DateTime.UtcNow + timeout;
+        lock (_rejections)
+        {
+            while (!_rejections.Contains(reason))
+            {
+                var left = deadline - DateTime.UtcNow;
+                if (left <= TimeSpan.Zero) return false;
+                Monitor.Wait(_rejections, left);
+            }
+            return true;
+        }
+    }
 
     async Task Serve(NamedPipeServerStream pipe, CancellationToken ct)
     {
