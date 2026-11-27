@@ -1,0 +1,80 @@
+{
+ "contract": "mimamsa-corpus-contract/2.1",
+ "record_kind": "activation_scenario_outcomes",
+ "scenario_id": "SC22-model-without-vectors",
+ "scenario_sha256": "7c67b42e9fbedc0385feccda7aa3072a2946b9d1d35fb8ac1b1760c347590d21",
+ "trace": [
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [],
+   "knowledge": "R1",
+   "lock_epoch": 0,
+   "log_length": 0,
+   "models": "M1",
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "serving": true,
+   "state": "OPEN",
+   "step": 0,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [],
+   "knowledge": "R1",
+   "lock_epoch": 1,
+   "log_length": 0,
+   "models": "M1",
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "serving": true,
+   "state": "OPEN",
+   "step": 1,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": "Refused",
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [],
+   "knowledge": "R1",
+   "lock_epoch": 1,
+   "log_length": 0,
+   "models": "M1",
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "serving": true,
+   "state": "OPEN",
+   "step": 2,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R1"
+  }
+ ]
+}

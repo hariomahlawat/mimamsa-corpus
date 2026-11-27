@@ -1,0 +1,201 @@
+{
+ "admission": {
+  "admission_id": "ADM-ba88382ed191623d6edaf7fb",
+  "application_eligible": true,
+  "contract": "mimamsa-corpus-contract/2.0",
+  "corpus_generation_id": "CG-20261127-fixtures-0a1b2c3d",
+  "decided_at": null,
+  "decided_by": {
+   "id": "c16-fixture-admission",
+   "kind": "AUTOMATED_RULE"
+  },
+  "decision": "ADMITTED_AS_PRIMARY",
+  "duplicate_of": null,
+  "gates": [
+   {
+    "evidence_ref": "fixture evidence for G01_HASH_VERIFIED",
+    "gate_id": "G01_HASH_VERIFIED",
+    "receipt": {
+     "config_sha256": "17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756",
+     "derivative_sha256": null,
+     "outcome": "PASS",
+     "receipt_kind": "HASH_REDOWNLOAD",
+     "receipt_sha256": "ba9cb0a6979532cf79407f6b5f37dc09139818db62c668f99f8e56e959cfc552",
+     "register_sha256": null,
+     "rule_id": "c16-gate-g01",
+     "rule_version": "1.0",
+     "subject_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+    },
+    "result": "PASS"
+   },
+   {
+    "evidence_ref": "fixture evidence for G02_FORMAT_DETECTED",
+    "gate_id": "G02_FORMAT_DETECTED",
+    "receipt": {
+     "config_sha256": "17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756",
+     "derivative_sha256": null,
+     "outcome": "PASS",
+     "receipt_kind": "FORMAT_DETECTION",
+     "receipt_sha256": "a24a1401642265133c9d33448977b738c696839cfe81fedccdc86a444df5a41a",
+     "register_sha256": null,
+     "rule_id": "c16-gate-g02",
+     "rule_version": "1.0",
+     "subject_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+    },
+    "result": "PASS"
+   },
+   {
+    "evidence_ref": "fixture evidence for G03_RESTRICTED_REGISTER",
+    "gate_id": "G03_RESTRICTED_REGISTER",
+    "receipt": {
+     "config_sha256": "17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756",
+     "derivative_sha256": null,
+     "outcome": "PASS",
+     "receipt_kind": "REGISTER_CHECK",
+     "receipt_sha256": "830295a223ce9eccc90c8c1fa2d5880c7638ebc6312c2b7c78b8e52daeb6b933",
+     "register_sha256": "e1f42864f1aaa16604ffb620c2144538d2c12623a1793bbdc634dc919b93dafc",
+     "rule_id": "c16-gate-g03",
+     "rule_version": "1.0",
+     "subject_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+    },
+    "result": "PASS"
+   },
+   {
+    "evidence_ref": "fixture evidence for G04_ACCESS_MARKING_REVIEWED",
+    "gate_id": "G04_ACCESS_MARKING_REVIEWED",
+    "receipt": {
+     "config_sha256": "17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756",
+     "derivative_sha256": null,
+     "outcome": "PASS",
+     "receipt_kind": "MARKING_SCREEN",
+     "receipt_sha256": "2e68b4c0bf9f577055212eb6ccb264e15c5ce87bec94d4d2ca98eed8d1560792",
+     "register_sha256": null,
+     "rule_id": "c16-gate-g04",
+     "rule_version": "1.0",
+     "subject_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+    },
+    "result": "PASS"
+   },
+   {
+    "evidence_ref": "fixture evidence for G05_IDENTITY_RECORD_VALID",
+    "gate_id": "G05_IDENTITY_RECORD_VALID",
+    "receipt": {
+     "config_sha256": "17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756",
+     "derivative_sha256": null,
+     "outcome": "PASS",
+     "receipt_kind": "IDENTITY_VALIDATION",
+     "receipt_sha256": "fae17d2060f93516fd4e8fe568e845a1b75bc8aa84979052bc96bc76caa68584",
+     "register_sha256": null,
+     "rule_id": "c16-gate-g05",
+     "rule_version": "1.0",
+     "subject_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+    },
+    "result": "PASS"
+   },
+   {
+    "evidence_ref": "fixture evidence for G06_TEXT_DERIVATIVE_VERIFIED",
+    "gate_id": "G06_TEXT_DERIVATIVE_VERIFIED",
+    "receipt": {
+     "config_sha256": "17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756",
+     "derivative_sha256": "3ec4af40b9d5d8f49bdc3cbb8c8844ce6ea3eb39da1b05ccfbd78ce77c8b06ec",
+     "outcome": "PASS",
+     "receipt_kind": "DERIVATIVE_VERIFICATION",
+     "receipt_sha256": "0200634752ff766285afa2d000e84b2cd099304e78ab9288be517755919ce85b",
+     "register_sha256": null,
+     "rule_id": "c16-gate-g06",
+     "rule_version": "1.0",
+     "subject_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+    },
+    "result": "PASS"
+   },
+   {
+    "evidence_ref": null,
+    "gate_id": "G07_EMBEDDED_IMAGES_ACCOUNTED",
+    "result": "NOT_APPLICABLE"
+   },
+   {
+    "evidence_ref": "fixture evidence for G08_RELEVANCE_ASSESSED",
+    "gate_id": "G08_RELEVANCE_ASSESSED",
+    "receipt": {
+     "config_sha256": "17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756",
+     "derivative_sha256": null,
+     "outcome": "PASS",
+     "receipt_kind": "RELEVANCE_DECISION",
+     "receipt_sha256": "c9b33c6cf32b47ae5817b0e0acd151946e19b5080fde7cda8e07284684624480",
+     "register_sha256": null,
+     "rule_id": "c16-gate-g08",
+     "rule_version": "1.0",
+     "subject_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+    },
+    "result": "PASS"
+   },
+   {
+    "evidence_ref": "fixture evidence for G09_DUPLICATE_RESOLVED",
+    "gate_id": "G09_DUPLICATE_RESOLVED",
+    "receipt": {
+     "config_sha256": "17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756",
+     "derivative_sha256": null,
+     "outcome": "PASS",
+     "receipt_kind": "DUPLICATE_RESOLUTION",
+     "receipt_sha256": "2b2a6c223e188c798f84bf89320d15ab47be215b30f14c7dfd26f369db8a43fb",
+     "register_sha256": null,
+     "rule_id": "c16-gate-g09",
+     "rule_version": "1.0",
+     "subject_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+    },
+    "result": "PASS"
+   },
+   {
+    "evidence_ref": "fixture evidence for G10_SCHEMA_VALID",
+    "gate_id": "G10_SCHEMA_VALID",
+    "receipt": {
+     "config_sha256": "17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756",
+     "derivative_sha256": null,
+     "outcome": "PASS",
+     "receipt_kind": "SCHEMA_VALIDATION",
+     "receipt_sha256": "eccf288c49f98e60c705d091ee2d4caecd4445151f6f9cb7060a4d90fde0bfb5",
+     "register_sha256": null,
+     "rule_id": "c16-gate-g10",
+     "rule_version": "1.0",
+     "subject_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+    },
+    "result": "PASS"
+   }
+  ],
+  "legal_effect": "NONE",
+  "publication_effect": "NONE",
+  "reasons": [
+   "all gates passed with evidence (fixture)"
+  ],
+  "record_kind": "corpus_admission",
+  "restriction_id": null,
+  "revision": 1,
+  "rule_set": {
+   "id": "c16-admission",
+   "version": "1.1"
+  },
+  "service_scope": "SEARCHABLE",
+  "source_disposition": null,
+  "subject": {
+   "doc_id": "sc-2019-example-v-union-of-india-ca0001",
+   "source_copy_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+  },
+  "supersedes_admission_id": null
+ },
+ "artefacts": {
+  "registers/receipts/0200634752ff766285afa2d000e84b2cd099304e78ab9288be517755919ce85b.json": "{\"config_sha256\":\"17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756\",\"contract\":\"mimamsa-corpus-contract/2.1\",\"corpus_generation_id\":\"CG-20261127-fixtures-0a1b2c3d\",\"derivative_sha256\":\"3ec4af40b9d5d8f49bdc3cbb8c8844ce6ea3eb39da1b05ccfbd78ce77c8b06ec\",\"gate_id\":\"G06_TEXT_DERIVATIVE_VERIFIED\",\"outcome\":\"PASS\",\"payload\":{\"unit_text_sha256\":[\"2c285a9d6112309fc3db7c83550445d2665cea91ff715b188cfafbfa1cf813d6\",\"9bce85db3261403c1f1c95b958c3814b8b8f8342c2e50c4ca44f0e962b280ff0\",\"73a40c32729340ac695e4e46e2f2947abc8822bc334854ab6b19df04e2681642\",\"d84082cbb2efd3865517f7cbe6ffcd4a62ca40745cf3420d70382ea083ae55e5\",\"7ef2ce4420501d35e92f2fd9712b52f625b2405617a01f9da98d2861965076ee\",\"0ee74d4696bb576a44611d30a966e3d97467dd667dd14dd8f28136c806cac1de\",\"5d8095ea488707727ac185784e39c30d46338f06184ea4041fce579c151ab28e\",\"ed740e8f547cbca729bf4a2c87d4b41a71053f01b0b214c889eca43dc027f49d\",\"ce2c2737327544c4c105fc1ac5cbcfdaa6345fa721be09b6d3bac596c53da40f\",\"56d09ed4c8c332b44a032b95915d674841daad2c31c4f7779f112fa68baf0fd5\",\"a944b232606561c19aaf28a47c4d4489c34fe22852a54f9e4cbff830d4b076eb\",\"1940b988f8c921b925652ca0ed2414ba8243c8c578c12081f4bafe6e4a856328\"],\"units_total\":12,\"units_with_text\":12},\"producer\":{\"commit\":\"c8fa5290\",\"config_sha256\":null,\"name\":\"c16-fixture-gates\",\"version\":\"1.0.0\"},\"receipt_kind\":\"DERIVATIVE_VERIFICATION\",\"record_kind\":\"gate_receipt_artefact\",\"register_sha256\":null,\"revision\":1,\"rule\":{\"id\":\"c16-gate-g06\",\"version\":\"1.0\"},\"subject\":{\"doc_id\":\"sc-2019-example-v-union-of-india-ca0001\",\"source_copy_sha256\":\"52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d\"},\"supersedes_receipt_sha256\":null,\"verification_class\":\"SITE_RECOMPUTABLE\"}",
+  "registers/receipts/1390616b2bcfc4387cf8bee0105fe91e7c73554fea2c99e6d5d83ef5ef2604f9.json": "{\n \"config_sha256\": \"17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756\",\n \"contract\": \"mimamsa-corpus-contract/2.1\",\n \"corpus_generation_id\": \"CG-20261127-fixtures-0a1b2c3d\",\n \"derivative_sha256\": null,\n \"gate_id\": \"G02_FORMAT_DETECTED\",\n \"outcome\": \"PASS\",\n \"payload\": {\n  \"detected_format\": \"PDF\",\n  \"magic_hex\": \"255044462d\",\n  \"mime_type\": \"application/pdf\"\n },\n \"producer\": {\n  \"commit\": \"c8fa5290\",\n  \"config_sha256\": null,\n  \"name\": \"c16-fixture-gates\",\n  \"version\": \"1.0.0\"\n },\n \"receipt_kind\": \"FORMAT_DETECTION\",\n \"record_kind\": \"gate_receipt_artefact\",\n \"register_sha256\": null,\n \"revision\": 1,\n \"rule\": {\n  \"id\": \"c16-gate-g02\",\n  \"version\": \"1.0\"\n },\n \"subject\": {\n  \"doc_id\": \"sc-2019-example-v-union-of-india-ca0001\",\n  \"source_copy_sha256\": \"52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d\"\n },\n \"supersedes_receipt_sha256\": null,\n \"verification_class\": \"SITE_RECOMPUTABLE\"\n}",
+  "registers/receipts/2b2a6c223e188c798f84bf89320d15ab47be215b30f14c7dfd26f369db8a43fb.json": "{\"config_sha256\":\"17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756\",\"contract\":\"mimamsa-corpus-contract/2.1\",\"corpus_generation_id\":\"CG-20261127-fixtures-0a1b2c3d\",\"derivative_sha256\":null,\"gate_id\":\"G09_DUPLICATE_RESOLVED\",\"outcome\":\"PASS\",\"payload\":{\"compared_scope\":\"fixture canonical index\",\"method\":\"BYTE_HASH_AND_TEXT_REVIEW\",\"result\":\"UNIQUE\"},\"producer\":{\"commit\":\"c8fa5290\",\"config_sha256\":null,\"name\":\"c16-fixture-gates\",\"version\":\"1.0.0\"},\"receipt_kind\":\"DUPLICATE_RESOLUTION\",\"record_kind\":\"gate_receipt_artefact\",\"register_sha256\":null,\"revision\":1,\"rule\":{\"id\":\"c16-gate-g09\",\"version\":\"1.0\"},\"subject\":{\"doc_id\":\"sc-2019-example-v-union-of-india-ca0001\",\"source_copy_sha256\":\"52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d\"},\"supersedes_receipt_sha256\":null,\"verification_class\":\"ASSERTED_BOUND\"}",
+  "registers/receipts/2e68b4c0bf9f577055212eb6ccb264e15c5ce87bec94d4d2ca98eed8d1560792.json": "{\"config_sha256\":\"17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756\",\"contract\":\"mimamsa-corpus-contract/2.1\",\"corpus_generation_id\":\"CG-20261127-fixtures-0a1b2c3d\",\"derivative_sha256\":null,\"gate_id\":\"G04_ACCESS_MARKING_REVIEWED\",\"outcome\":\"PASS\",\"payload\":{\"images_screened\":0,\"markings_found\":[],\"method\":\"page text and page-image screen (fixture)\",\"ocr_config_sha256\":null,\"pages_screened\":12},\"producer\":{\"commit\":\"c8fa5290\",\"config_sha256\":null,\"name\":\"c16-fixture-gates\",\"version\":\"1.0.0\"},\"receipt_kind\":\"MARKING_SCREEN\",\"record_kind\":\"gate_receipt_artefact\",\"register_sha256\":null,\"revision\":1,\"rule\":{\"id\":\"c16-gate-g04\",\"version\":\"1.0\"},\"subject\":{\"doc_id\":\"sc-2019-example-v-union-of-india-ca0001\",\"source_copy_sha256\":\"52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d\"},\"supersedes_receipt_sha256\":null,\"verification_class\":\"ASSERTED_BOUND\"}",
+  "registers/receipts/830295a223ce9eccc90c8c1fa2d5880c7638ebc6312c2b7c78b8e52daeb6b933.json": "{\"config_sha256\":\"17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756\",\"contract\":\"mimamsa-corpus-contract/2.1\",\"corpus_generation_id\":\"CG-20261127-fixtures-0a1b2c3d\",\"derivative_sha256\":null,\"gate_id\":\"G03_RESTRICTED_REGISTER\",\"outcome\":\"PASS\",\"payload\":{\"fields_checked\":[\"doc_id\",\"paths\",\"record_strings\",\"sha256\"],\"matches\":0},\"producer\":{\"commit\":\"c8fa5290\",\"config_sha256\":null,\"name\":\"c16-fixture-gates\",\"version\":\"1.0.0\"},\"receipt_kind\":\"REGISTER_CHECK\",\"record_kind\":\"gate_receipt_artefact\",\"register_sha256\":\"e1f42864f1aaa16604ffb620c2144538d2c12623a1793bbdc634dc919b93dafc\",\"revision\":1,\"rule\":{\"id\":\"c16-gate-g03\",\"version\":\"1.0\"},\"subject\":{\"doc_id\":\"sc-2019-example-v-union-of-india-ca0001\",\"source_copy_sha256\":\"52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d\"},\"supersedes_receipt_sha256\":null,\"verification_class\":\"SITE_RECOMPUTABLE\"}",
+  "registers/receipts/ba9cb0a6979532cf79407f6b5f37dc09139818db62c668f99f8e56e959cfc552.json": "{\"config_sha256\":\"17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756\",\"contract\":\"mimamsa-corpus-contract/2.1\",\"corpus_generation_id\":\"CG-20261127-fixtures-0a1b2c3d\",\"derivative_sha256\":null,\"gate_id\":\"G01_HASH_VERIFIED\",\"outcome\":\"PASS\",\"payload\":{\"measured_bytes\":112000,\"measured_sha256\":\"52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d\",\"source\":{\"hf_repo\":\"owner/fixture-corpus\",\"hf_revision\":\"008d447011808d3d3f9095b0dbf14125002d1642\",\"path\":\"data/raw/fixture/52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d.pdf\"}},\"producer\":{\"commit\":\"c8fa5290\",\"config_sha256\":null,\"name\":\"c16-fixture-gates\",\"version\":\"1.0.0\"},\"receipt_kind\":\"HASH_REDOWNLOAD\",\"record_kind\":\"gate_receipt_artefact\",\"register_sha256\":null,\"revision\":1,\"rule\":{\"id\":\"c16-gate-g01\",\"version\":\"1.0\"},\"subject\":{\"doc_id\":\"sc-2019-example-v-union-of-india-ca0001\",\"source_copy_sha256\":\"52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d\"},\"supersedes_receipt_sha256\":null,\"verification_class\":\"SITE_RECOMPUTABLE\"}",
+  "registers/receipts/c9b33c6cf32b47ae5817b0e0acd151946e19b5080fde7cda8e07284684624480.json": "{\"config_sha256\":\"17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756\",\"contract\":\"mimamsa-corpus-contract/2.1\",\"corpus_generation_id\":\"CG-20261127-fixtures-0a1b2c3d\",\"derivative_sha256\":null,\"gate_id\":\"G08_RELEVANCE_ASSESSED\",\"outcome\":\"PASS\",\"payload\":{\"basis\":\"military-law judgment (fixture)\",\"decided_by\":\"owner-fixture\",\"decided_by_kind\":\"OWNER\"},\"producer\":{\"commit\":\"c8fa5290\",\"config_sha256\":null,\"name\":\"c16-fixture-gates\",\"version\":\"1.0.0\"},\"receipt_kind\":\"RELEVANCE_DECISION\",\"record_kind\":\"gate_receipt_artefact\",\"register_sha256\":null,\"revision\":1,\"rule\":{\"id\":\"c16-gate-g08\",\"version\":\"1.0\"},\"subject\":{\"doc_id\":\"sc-2019-example-v-union-of-india-ca0001\",\"source_copy_sha256\":\"52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d\"},\"supersedes_receipt_sha256\":null,\"verification_class\":\"ASSERTED_BOUND\"}",
+  "registers/receipts/eccf288c49f98e60c705d091ee2d4caecd4445151f6f9cb7060a4d90fde0bfb5.json": "{\"config_sha256\":\"17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756\",\"contract\":\"mimamsa-corpus-contract/2.1\",\"corpus_generation_id\":\"CG-20261127-fixtures-0a1b2c3d\",\"derivative_sha256\":null,\"gate_id\":\"G10_SCHEMA_VALID\",\"outcome\":\"PASS\",\"payload\":{\"copy_records_sha256\":\"ff975406c475def53af1463e30dea54178ec5110cecdadd436379948b9a6feaa\",\"issues\":0},\"producer\":{\"commit\":\"c8fa5290\",\"config_sha256\":null,\"name\":\"c16-fixture-gates\",\"version\":\"1.0.0\"},\"receipt_kind\":\"SCHEMA_VALIDATION\",\"record_kind\":\"gate_receipt_artefact\",\"register_sha256\":null,\"revision\":1,\"rule\":{\"id\":\"c16-gate-g10\",\"version\":\"1.0\"},\"subject\":{\"doc_id\":\"sc-2019-example-v-union-of-india-ca0001\",\"source_copy_sha256\":\"52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d\"},\"supersedes_receipt_sha256\":null,\"verification_class\":\"SITE_RECOMPUTABLE\"}",
+  "registers/receipts/fae17d2060f93516fd4e8fe568e845a1b75bc8aa84979052bc96bc76caa68584.json": "{\"config_sha256\":\"17cafa7843ab5ced9dbdd707638d85a5560102b797fa96d97bf6688b7803f756\",\"contract\":\"mimamsa-corpus-contract/2.1\",\"corpus_generation_id\":\"CG-20261127-fixtures-0a1b2c3d\",\"derivative_sha256\":null,\"gate_id\":\"G05_IDENTITY_RECORD_VALID\",\"outcome\":\"PASS\",\"payload\":{\"identity_record_sha256\":\"a27e739d576eb5ad3ab655f7e5df3726fdb3db6f903a1aed8a2deaa911167f05\",\"issues\":0},\"producer\":{\"commit\":\"c8fa5290\",\"config_sha256\":null,\"name\":\"c16-fixture-gates\",\"version\":\"1.0.0\"},\"receipt_kind\":\"IDENTITY_VALIDATION\",\"record_kind\":\"gate_receipt_artefact\",\"register_sha256\":null,\"revision\":1,\"rule\":{\"id\":\"c16-gate-g05\",\"version\":\"1.0\"},\"subject\":{\"doc_id\":\"sc-2019-example-v-union-of-india-ca0001\",\"source_copy_sha256\":\"52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d\"},\"supersedes_receipt_sha256\":null,\"verification_class\":\"SITE_RECOMPUTABLE\"}"
+ },
+ "description": "an artefact stored in non-canonical form",
+ "drop_site_facts": [],
+ "exchange_contract": "mimamsa-corpus-contract/2.1",
+ "expect_code": "C16_RECEIPT_NOT_CANONICAL",
+ "inventory": null
+}

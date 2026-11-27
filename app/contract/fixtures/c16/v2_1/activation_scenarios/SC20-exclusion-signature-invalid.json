@@ -1,0 +1,56 @@
+{
+ "assert_final": {
+  "serving": false
+ },
+ "contract": "mimamsa-corpus-contract/2.1",
+ "covers": [
+  "EXCLUSION_READER_FAIL_CLOSED"
+ ],
+ "description": "A store whose signature does not verify fails closed.",
+ "initial": {
+  "active": "R1",
+  "free_bytes": 1000000000000,
+  "installed": [
+   "R1",
+   "R2",
+   "R3"
+  ],
+  "keep_previous": 2,
+  "lock_stale_after_seconds": 30,
+  "models": "M1",
+  "recovery_target": null,
+  "sizes": {},
+  "staged_models": {
+   "M1": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   },
+   "M2": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   }
+  }
+ },
+ "record_kind": "activation_scenario",
+ "scenario_id": "SC20-exclusion-signature-invalid",
+ "steps": [
+  {
+   "args": {},
+   "expect_error": null,
+   "op": "exclusion_signature_invalidate"
+  },
+  {
+   "args": {},
+   "expect_error": "Refused",
+   "op": "pin"
+  }
+ ]
+}

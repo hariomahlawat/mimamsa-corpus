@@ -1,0 +1,27 @@
+{
+ "build_id": "B-20261201-fixture",
+ "contract": "mimamsa-corpus-contract/2.1",
+ "input_digest": "f2abdf82cc0c64a5b3b9a76b3978e0fb8308dea0172f36350b58fe13eb0f8cd8",
+ "network_used": false,
+ "output_digest": "ecd085103fccfef314fb1053f053579a58b7ba485d6899abd1da2114b3259bb2",
+ "outputs": [
+  {
+   "bytes": 100,
+   "path": "build/B-20261201-fixture/S7/assemble.out",
+   "sha256": "1558cac8b8d4a3c7fcdeaf74f7414db561e4f5721637fbefd19951fc430f4142"
+  }
+ ],
+ "previous_stage_manifest_sha256": "b6600e6fbcfe7c25061034874568a6d63f45b9ba6404f96ee46a1028ede35649",
+ "record_kind": "build_stage_manifest",
+ "spec_sha256": "f97585e7946d46025de5358d18cc0f53e21862df264254b301ef311b14299a0d",
+ "stage_id": "S7",
+ "status": "COMPLETE",
+ "tools": [
+  {
+   "commit": "c8fa5290",
+   "config_sha256": null,
+   "name": "mimamsa_kbuild",
+   "version": "0.1.0"
+  }
+ ]
+}

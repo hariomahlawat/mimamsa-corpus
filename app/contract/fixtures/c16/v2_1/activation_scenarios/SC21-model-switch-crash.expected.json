@@ -1,0 +1,139 @@
+{
+ "contract": "mimamsa-corpus-contract/2.1",
+ "record_kind": "activation_scenario_outcomes",
+ "scenario_id": "SC21-model-switch-crash",
+ "scenario_sha256": "09eeb213f17ef45d663425e3e49667805668f39f47c20d049ee2c67e6b6d0b3e",
+ "trace": [
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [],
+   "knowledge": "R1",
+   "lock_epoch": 0,
+   "log_length": 0,
+   "models": "M1",
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "serving": true,
+   "state": "OPEN",
+   "step": 0,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [],
+   "knowledge": "R1",
+   "lock_epoch": 1,
+   "log_length": 0,
+   "models": "M1",
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "serving": true,
+   "state": "OPEN",
+   "step": 1,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": "Crash",
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [
+    "BEGIN",
+    "DECIDED"
+   ],
+   "knowledge": "R1",
+   "lock_epoch": 1,
+   "log_length": 0,
+   "models": "M1",
+   "pins": 0,
+   "publication_rows": 1,
+   "response": null,
+   "serving": false,
+   "state": "RECOVERING",
+   "step": 2,
+   "store_seq": 0,
+   "temp_empty": false,
+   "views": "R1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [
+    "BEGIN",
+    "DECIDED",
+    "OPEN"
+   ],
+   "knowledge": "R1",
+   "lock_epoch": 1,
+   "log_length": 1,
+   "models": "M2",
+   "pins": 0,
+   "publication_rows": 1,
+   "response": null,
+   "serving": true,
+   "state": "OPEN",
+   "step": 3,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [
+    "BEGIN",
+    "DECIDED",
+    "OPEN"
+   ],
+   "knowledge": "R1",
+   "lock_epoch": 1,
+   "log_length": 1,
+   "models": "M2",
+   "pins": 1,
+   "publication_rows": 1,
+   "response": null,
+   "serving": true,
+   "state": "OPEN",
+   "step": 4,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R1"
+  }
+ ]
+}

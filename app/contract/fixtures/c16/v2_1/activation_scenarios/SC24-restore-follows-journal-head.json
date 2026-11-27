@@ -1,0 +1,104 @@
+{
+ "assert_final": {
+  "knowledge": "R2",
+  "last_response": [
+   "doc-y"
+  ]
+ },
+ "contract": "mimamsa-corpus-contract/2.1",
+ "covers": [
+  "RESTORE"
+ ],
+ "description": "A restored database follows the journal head and the latest exclusions.",
+ "initial": {
+  "active": "R1",
+  "free_bytes": 1000000000000,
+  "installed": [
+   "R1",
+   "R2",
+   "R3"
+  ],
+  "keep_previous": 2,
+  "lock_stale_after_seconds": 30,
+  "models": "M1",
+  "recovery_target": null,
+  "sizes": {},
+  "staged_models": {
+   "M1": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   },
+   "M2": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   }
+  }
+ },
+ "record_kind": "activation_scenario",
+ "scenario_id": "SC24-restore-follows-journal-head",
+ "steps": [
+  {
+   "args": {
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "lock_acquire"
+  },
+  {
+   "args": {
+    "name": "b1"
+   },
+   "expect_error": null,
+   "op": "backup"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "R2",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "transition"
+  },
+  {
+   "args": {
+    "items": [
+     "doc-z"
+    ]
+   },
+   "expect_error": null,
+   "op": "accept_exclusion"
+  },
+  {
+   "args": {
+    "name": "b1",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "restore"
+  },
+  {
+   "args": {},
+   "expect_error": null,
+   "op": "pin"
+  },
+  {
+   "args": {
+    "items": [
+     "doc-z",
+     "doc-y"
+    ]
+   },
+   "expect_error": null,
+   "op": "respond"
+  }
+ ]
+}

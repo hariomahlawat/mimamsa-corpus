@@ -1,0 +1,89 @@
+{
+ "assert_final": {
+  "knowledge": "R2",
+  "serving": true,
+  "temp_empty": true
+ },
+ "contract": "mimamsa-corpus-contract/2.1",
+ "covers": [
+  "CRASH_BOUNDARY"
+ ],
+ "description": "Crash after EXCLUSIONS_APPLIED; nothing is served until recovery; DECIDED is the commit decision.",
+ "initial": {
+  "active": "R1",
+  "free_bytes": 1000000000000,
+  "installed": [
+   "R1",
+   "R2",
+   "R3"
+  ],
+  "keep_previous": 2,
+  "lock_stale_after_seconds": 30,
+  "models": "M1",
+  "recovery_target": null,
+  "sizes": {},
+  "staged_models": {
+   "M1": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   },
+   "M2": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   }
+  }
+ },
+ "record_kind": "activation_scenario",
+ "scenario_id": "SC05-crash-after-exclusions-applied",
+ "steps": [
+  {
+   "args": {
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "lock_acquire"
+  },
+  {
+   "args": {
+    "crash_after": "EXCLUSIONS_APPLIED",
+    "target": "KNOWLEDGE",
+    "to": "R2",
+    "writer": "activator-1"
+   },
+   "expect_error": "Crash",
+   "op": "transition"
+  },
+  {
+   "args": {},
+   "expect_error": "Refused",
+   "op": "pin"
+  },
+  {
+   "args": {
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "recover"
+  },
+  {
+   "args": {
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "recover"
+  },
+  {
+   "args": {},
+   "expect_error": null,
+   "op": "pin"
+  }
+ ]
+}

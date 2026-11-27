@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/BUILD_STAGE_MANIFEST_SCHEMA.json",
+  "title": "Central build stage manifest (B02; contract 2.1 interface)",
+  "description": "Written atomically (write .partial, fsync, rename) at the end of each build stage under build/<build_id>/<stage_id>/STAGE.json. It chains to the previous stage's manifest and records the stage's input digest (spec hash plus the previous output digest plus pinned inputs used), every output file and the output digest. Resume rule: a stage reruns only if it has no COMPLETE manifest, its input digest changed, or its outputs fail re-hashing; every later stage then reruns. network_used may be true only for S1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "record_kind", "build_id", "stage_id", "spec_sha256", "previous_stage_manifest_sha256", "input_digest", "outputs", "output_digest", "tools", "network_used", "status"],
+  "properties": {
+    "contract": {"const": "mimamsa-corpus-contract/2.1"},
+    "record_kind": {"const": "build_stage_manifest"},
+    "build_id": {"type": "string", "pattern": "^B-[0-9]{8}-[a-z0-9-]{1,40}$"},
+    "stage_id": {"enum": ["S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9"]},
+    "spec_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
+    "previous_stage_manifest_sha256": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
+    "input_digest": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
+    "outputs": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["path", "sha256", "bytes"], "properties": {"path": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/relative_path"}, "sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, "bytes": {"type": "integer", "minimum": 0}}}},
+    "output_digest": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
+    "tools": {"type": "array", "items": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/tool"}},
+    "network_used": {"type": "boolean"},
+    "status": {"const": "COMPLETE"}
+  },
+  "allOf": [
+    {"if": {"properties": {"stage_id": {"const": "S0"}}}, "then": {"properties": {"previous_stage_manifest_sha256": {"type": "null"}}}, "else": {"properties": {"previous_stage_manifest_sha256": {"type": "string"}}}},
+    {"if": {"properties": {"stage_id": {"not": {"const": "S1"}}}}, "then": {"properties": {"network_used": {"const": false}}}}
+  ]
+}

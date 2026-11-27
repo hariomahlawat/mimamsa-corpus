@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/ACTIVATION_SCENARIO_OUTCOMES_SCHEMA.json",
+  "title": "Expected outcomes of an activation conformance scenario (B06; contract 2.1 interface)",
+  "description": "The observable trace after every step of one scenario, bound to the scenario by its canonical sha256. Observables are deliberately implementation-neutral: pointers, views, serving state, error raised, journal steps, publication and log counts, applied exclusion sequence of the active generation, installed set, pin count, temp-empty flag and exclusion-reader health. The .NET implementation must produce the identical trace.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "record_kind", "scenario_id", "scenario_sha256", "trace"],
+  "properties": {
+    "contract": {"const": "mimamsa-corpus-contract/2.1"},
+    "record_kind": {"const": "activation_scenario_outcomes"},
+    "scenario_id": {"type": "string", "pattern": "^SC[0-9]{2}-[a-z0-9-]{3,60}$"},
+    "scenario_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
+    "trace": {
+      "type": "array",
+      "items": {"type": "object", "additionalProperties": false,
+        "required": ["step", "error", "knowledge", "models", "views", "state", "serving", "journal_steps", "publication_rows", "log_length", "active_exclusion_seq", "store_seq", "installed", "pins", "temp_empty", "exclusion_reader", "lock_epoch", "response"],
+        "properties": {
+          "step": {"type": "integer", "minimum": 0}, "error": {"type": ["string", "null"]},
+          "knowledge": {"type": "string"}, "models": {"type": "string"}, "views": {"type": "string"},
+          "state": {"enum": ["OPEN", "SWITCHING", "RECOVERING", "FAILED_CLOSED"]}, "serving": {"type": "boolean"},
+          "journal_steps": {"type": "array", "items": {"type": "string"}}, "publication_rows": {"type": "integer"}, "log_length": {"type": "integer"},
+          "active_exclusion_seq": {"type": ["integer", "null"]}, "store_seq": {"type": ["integer", "null"]},
+          "installed": {"type": "array", "items": {"type": "string"}}, "pins": {"type": "integer"}, "temp_empty": {"type": "boolean"},
+          "exclusion_reader": {"enum": ["HEALTHY", "MISSING", "BAD_SIGNATURE", "REGRESSED"]}, "lock_epoch": {"type": "integer"},
+          "response": {"type": ["array", "null"], "items": {"type": "string"}}
+        }}
+    }
+  }
+}

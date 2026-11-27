@@ -1,0 +1,79 @@
+{
+ "assert_final": {
+  "serving": false
+ },
+ "contract": "mimamsa-corpus-contract/2.1",
+ "covers": [
+  "EXCLUSION_READER_FAIL_CLOSED"
+ ],
+ "description": "A store older than the state already seen (non-monotone) fails closed.",
+ "initial": {
+  "active": "R1",
+  "free_bytes": 1000000000000,
+  "installed": [
+   "R1",
+   "R2",
+   "R3"
+  ],
+  "keep_previous": 2,
+  "lock_stale_after_seconds": 30,
+  "models": "M1",
+  "recovery_target": null,
+  "sizes": {},
+  "staged_models": {
+   "M1": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   },
+   "M2": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   }
+  }
+ },
+ "record_kind": "activation_scenario",
+ "scenario_id": "SC19-exclusion-store-regressed",
+ "steps": [
+  {
+   "args": {
+    "items": [
+     "doc-x"
+    ]
+   },
+   "expect_error": null,
+   "op": "accept_exclusion"
+  },
+  {
+   "args": {},
+   "expect_error": null,
+   "op": "pin"
+  },
+  {
+   "args": {},
+   "expect_error": null,
+   "op": "exclusion_store_regress"
+  },
+  {
+   "args": {
+    "items": [
+     "doc-x"
+    ]
+   },
+   "expect_error": "Refused",
+   "op": "respond"
+  },
+  {
+   "args": {},
+   "expect_error": "Refused",
+   "op": "pin"
+  }
+ ]
+}

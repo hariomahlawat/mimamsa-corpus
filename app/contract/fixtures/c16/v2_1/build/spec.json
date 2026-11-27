@@ -1,0 +1,130 @@
+{
+ "build_id": "B-20261201-fixture",
+ "contract": "mimamsa-corpus-contract/2.1",
+ "inputs": {
+  "contracts": {
+   "corpus": "mimamsa-corpus-contract/2.1",
+   "v1": "1.0.0"
+  },
+  "git": [
+   {
+    "commit": "c8fa5290a7f03ed47f57ba82cc57503005e11d48",
+    "purpose": "contract, tools and build code"
+   }
+  ],
+  "hf": [
+   {
+    "purpose": "canonical corpus and producer exchange",
+    "repo": "owner/fixture-corpus",
+    "revision": "008d447011808d3d3f9095b0dbf14125002d1642"
+   }
+  ],
+  "models": [
+   {
+    "model_id": "multilingual-e5-small (fixture)",
+    "role": "EMBEDDER",
+    "sha256": "9907ffc6f6673f17a74a21320921169a745535916420107a72b8aef922497040"
+   }
+  ],
+  "producer_generations": [
+   {
+    "corpus_generation_id": "CG-20261127-fixtures-0a1b2c3d",
+    "generation_manifest_sha256": "d56fe6b1b7207fcbade9b0db3471555f48511b27078f77d9e3779f047bb016fc",
+    "hf_repo": "owner/fixture-corpus",
+    "hf_revision": "008d447011808d3d3f9095b0dbf14125002d1642",
+    "path": "exchanges/fixture/GENERATION.json"
+   }
+  ],
+  "restricted_register_sha256": "e1f42864f1aaa16604ffb620c2144538d2c12623a1793bbdc634dc919b93dafc",
+  "tools": [
+   {
+    "commit": "c8fa5290",
+    "config_sha256": null,
+    "name": "mimamsa_kbuild",
+    "version": "0.1.0"
+   }
+  ]
+ },
+ "output_dir": "build/B-20261201-fixture",
+ "pinned_build_time": "2026-12-01T00:00:00Z",
+ "record_kind": "mkr_build_spec",
+ "release": {
+  "base_mode": "FULL",
+  "base_release_id": null,
+  "release_id": "R16-knowledge-20261201-0a0b0c0d",
+  "release_sequence": 16,
+  "signing_mode": "DEVELOPMENT"
+ },
+ "resources": {
+  "cpu_priority": "BELOW_NORMAL",
+  "io_priority": "LOW",
+  "max_disk_bytes": 214748364800,
+  "max_memory_bytes": 6442450944,
+  "max_workers": 2,
+  "measured_logical_cpus": 12,
+  "measured_memory_bytes": 17179869184,
+  "shared_host": true
+ },
+ "stages": [
+  {
+   "max_workers": 1,
+   "name": "spec",
+   "network": false,
+   "stage_id": "S0"
+  },
+  {
+   "max_workers": 1,
+   "name": "fetch",
+   "network": true,
+   "stage_id": "S1"
+  },
+  {
+   "max_workers": 1,
+   "name": "validate",
+   "network": false,
+   "stage_id": "S2"
+  },
+  {
+   "max_workers": 2,
+   "name": "text",
+   "network": false,
+   "stage_id": "S3"
+  },
+  {
+   "max_workers": 1,
+   "name": "bundle",
+   "network": false,
+   "stage_id": "S4"
+  },
+  {
+   "max_workers": 1,
+   "name": "ref-import",
+   "network": false,
+   "stage_id": "S5"
+  },
+  {
+   "max_workers": 2,
+   "name": "accelerate",
+   "network": false,
+   "stage_id": "S6"
+  },
+  {
+   "max_workers": 1,
+   "name": "assemble",
+   "network": false,
+   "stage_id": "S7"
+  },
+  {
+   "max_workers": 1,
+   "name": "sign",
+   "network": false,
+   "stage_id": "S8"
+  },
+  {
+   "max_workers": 1,
+   "name": "verify",
+   "network": false,
+   "stage_id": "S9"
+  }
+ ]
+}

@@ -1,0 +1,116 @@
+{
+ "contract": "mimamsa-corpus-contract/2.1",
+ "knowledge_schema_version": 1,
+ "loader": {
+  "forbidden": [
+   "site schema access",
+   "knowledge schema access",
+   "other kr_ schemas",
+   "CREATE FUNCTION",
+   "CREATE TRIGGER",
+   "CREATE RULE",
+   "CREATE EXTENSION",
+   "SET ROLE",
+   "DDL of any kind"
+  ],
+  "grants": [
+   "USAGE ON SCHEMA kr_<n>_staging",
+   "INSERT ON ALL TABLES IN SCHEMA kr_<n>_staging"
+  ],
+  "load_method": "PARAMETERISED_COPY_FROM_STDIN",
+  "role": "mimamsa_kr_loader",
+  "role_attributes": [
+   "NOSUPERUSER",
+   "NOCREATEROLE",
+   "NOCREATEDB",
+   "NOREPLICATION",
+   "NOBYPASSRLS",
+   "NOINHERIT"
+  ],
+  "staging_schema_pattern": "^kr_[0-9]{1,9}_staging$"
+ },
+ "record_kind": "knowledge_rows_allowlist",
+ "tables": [
+  {
+   "derivation": "PYTHON_REFERENCE",
+   "owner_component": "KNOWLEDGE_ROWS",
+   "primary_key": [
+    "doc_id"
+   ],
+   "row_schema": "#/$defs/document_identities_row",
+   "table": "document_identities"
+  },
+  {
+   "derivation": "PYTHON_REFERENCE",
+   "owner_component": "KNOWLEDGE_ROWS",
+   "primary_key": [
+    "anchor_id"
+   ],
+   "row_schema": "#/$defs/evidence_anchors_row",
+   "table": "evidence_anchors"
+  },
+  {
+   "derivation": "PYTHON_REFERENCE",
+   "owner_component": "KNOWLEDGE_ROWS",
+   "primary_key": [
+    "relationship_id"
+   ],
+   "row_schema": "#/$defs/corpus_relationships_row",
+   "table": "corpus_relationships"
+  },
+  {
+   "derivation": "PYTHON_REFERENCE",
+   "owner_component": "KNOWLEDGE_ROWS",
+   "primary_key": [
+    "node_id"
+   ],
+   "row_schema": "#/$defs/taxonomy_nodes_row",
+   "table": "taxonomy_nodes"
+  },
+  {
+   "derivation": "PYTHON_REFERENCE",
+   "owner_component": "KNOWLEDGE_ROWS",
+   "primary_key": [
+    "admission_id"
+   ],
+   "row_schema": "#/$defs/corpus_admissions_row",
+   "table": "corpus_admissions"
+  },
+  {
+   "derivation": "DOTNET_B03",
+   "owner_component": "KNOWLEDGE_ROWS",
+   "primary_key": [
+    "candidate_id"
+   ],
+   "row_schema": "#/$defs/candidates_row",
+   "table": "candidates"
+  },
+  {
+   "derivation": "DOTNET_B03",
+   "owner_component": "KNOWLEDGE_ROWS",
+   "primary_key": [
+    "version_id"
+   ],
+   "row_schema": "#/$defs/provision_versions_row",
+   "table": "provision_versions"
+  },
+  {
+   "derivation": "DOTNET_B03",
+   "owner_component": "GRAPH",
+   "primary_key": [
+    "id"
+   ],
+   "row_schema": "#/$defs/graph_nodes_row",
+   "table": "graph_nodes"
+  },
+  {
+   "derivation": "DOTNET_B03",
+   "owner_component": "GRAPH",
+   "primary_key": [
+    "id"
+   ],
+   "row_schema": "#/$defs/graph_edges_row",
+   "table": "graph_edges"
+  }
+ ]
+}
