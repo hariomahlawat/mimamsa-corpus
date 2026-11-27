@@ -3,8 +3,10 @@
     <Project Path="src/Mimamsa.Core/Mimamsa.Core.csproj" />
     <Project Path="src/Mimamsa.Web/Mimamsa.Web.csproj" />
     <Project Path="src/Mimamsa.Hybrid/Mimamsa.Hybrid.csproj" />
+    <Project Path="src/Mimamsa.Activation/Mimamsa.Activation.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Mimamsa.Tests/Mimamsa.Tests.csproj" />
+    <Project Path="tests/Mimamsa.Activation.TestHost/Mimamsa.Activation.TestHost.csproj" />
   </Folder>
 </Solution>

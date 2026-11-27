@@ -1,0 +1,2 @@
+# Signed bytes: never normalise line endings (digests and Ed25519 signatures cover the exact bytes).
+* -text
