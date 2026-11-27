@@ -1,0 +1,14 @@
+{
+ "n": 1000,
+ "release_id": "R14-bench1000-20261127-58a7f0cf",
+ "base_pool": 220,
+ "activated": true,
+ "verified_documents": 1000,
+ "verified_derived": 1000,
+ "refused": [],
+ "unresolved": 0,
+ "bundle_write_s": 28.9,
+ "import_s": 20.4,
+ "bundle_gb": 0.2,
+ "site_gb": 0.19
+}

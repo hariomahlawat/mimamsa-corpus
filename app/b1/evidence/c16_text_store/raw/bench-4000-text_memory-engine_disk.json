@@ -1,0 +1,97 @@
+{
+  "site": "E:\\Mimamsa-Data\\bench\\c16b\\4000\\site",
+  "engine": "disk",
+  "text_store": "memory",
+  "replicate": 1,
+  "documents": 4000,
+  "passages": 98486,
+  "vocabulary": 19477,
+  "load_ms": 7715,
+  "index_ms": 3045,
+  "startup_ms": 10760,
+  "index_file_mb": 25.4,
+  "text_file_mb": null,
+  "derived_text_mb": 3.2,
+  "derived_text_mb_per_document": 59.5,
+  "mem_after_load": {
+    "working_set_mb": 462.1,
+    "managed_heap_mb": 295.3
+  },
+  "mem_after_index": {
+    "working_set_mb": 476.7,
+    "managed_heap_mb": 309.5
+  },
+  "mem_end": {
+    "working_set_mb": 979.9,
+    "managed_heap_mb": 362.5
+  },
+  "sequential": {
+    "n": 78,
+    "p50": 9.1,
+    "p95": 65.3,
+    "max": 78.8
+  },
+  "concurrent": {
+    "readers_10": {
+      "stats": {
+        "n": 1560,
+        "p50": 17.9,
+        "p95": 166.2,
+        "max": 350.2
+      },
+      "throughput_qps": 200
+    }
+  },
+  "doc_text_api": {
+    "documents": 300,
+    "cold": {
+      "n": 300,
+      "p50": 0.1,
+      "p95": 0.2,
+      "max": 36.6
+    },
+    "warm": {
+      "n": 300,
+      "p50": 0.1,
+      "p95": 0.2,
+      "max": 0.6
+    },
+    "readers_10": {
+      "n": 3000,
+      "p50": 0.1,
+      "p95": 0.5,
+      "max": 1.6
+    }
+  },
+  "snippet_us": {
+    "cold": {
+      "n": 460,
+      "p50": 20.2,
+      "p95": 51,
+      "max": 13929.9
+    },
+    "warm": {
+      "n": 460,
+      "p50": 18.8,
+      "p95": 44.6,
+      "max": 66.4
+    }
+  },
+  "text_store_stats": {
+    "Kind": "memory",
+    "CacheHits": 0,
+    "CacheMisses": 0,
+    "CachedChars": 0,
+    "CacheBudgetChars": 0,
+    "DocumentsVerified": 0,
+    "PageReads": 0,
+    "BytesRead": 0,
+    "FileBytes": 0
+  },
+  "parity": {
+    "search_signatures_sha256": "01968ace8ad74673bad0b19d3b59b43de7a8c2224ba9cd7bd23df2a45a5f2f8e",
+    "doc_text_api_sha256": "24c1cb7be66ac80513fe0a44f7016be5383c4ab868a5f8adc2aeb2ef5296078e",
+    "snippets_sha256": "ee58ea768628aea5309520d7b0a013891ce2769cb8d12b816451b342f26cf1f7"
+  },
+  "per_query_median_ms": null
+}
