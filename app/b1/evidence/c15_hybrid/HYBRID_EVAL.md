@@ -86,7 +86,7 @@ Run outputs (summaries and RESULTS JSON) are committed under `oracle/` (`<run>__
 
 ## 7. Latency, memory and storage
 
-See §9 (measured after the sample embedding, with the host otherwise as quiet as possible).
+See §9.2 for figures measured on a quiet host after the sample embedding.
 
 Reranker cost under load: during this stream, concurrent sample embedding and other streams' benchmarks shared the CPU.
 

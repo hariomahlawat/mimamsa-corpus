@@ -61,7 +61,7 @@ public sealed class DenseIndex : ISemanticScorer, IDisposable
             if (path is not null && sinceCheckpoint >= checkpointEvery)
             {
                 try { store.Save(path, keys.Where(k => store.TryGet(k, out _))); }
-                catch (IOException ex) { log?.Invoke($"hybrid: checkpoint not saved ({ex.GetType().Name}); continuing"); }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException) { log?.Invoke($"hybrid: checkpoint not saved ({ex.GetType().Name}); continuing"); }
                 sinceCheckpoint = 0;
                 log?.Invoke($"hybrid: embedded {s + idx.Count}/{missing.Count} new passages (checkpoint saved)");
             }
@@ -75,7 +75,7 @@ public sealed class DenseIndex : ISemanticScorer, IDisposable
         {
             var retained = prune ? keep.AsEnumerable() : keys.Concat(StoreKeysNotIn(store, keep));
             try { store.Save(path, retained); }
-            catch (IOException ex) { log?.Invoke($"hybrid: vector store not saved ({ex.GetType().Name}); vectors are in memory and will be re-saved later"); }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException) { log?.Invoke($"hybrid: vector store not saved ({ex.GetType().Name}); vectors are in memory and will be re-saved later"); }
         }
         log?.Invoke($"hybrid: {n} passages ready in {sw.Elapsed.TotalSeconds:0.0} s ({emb.Device}); embedded {missing.Count}, reused {reused}");
         return new DenseIndex(emb, vec, n, sw.Elapsed, modelLabel, reused, missing.Count, issue);

@@ -68,7 +68,7 @@ public class C15HybridTests
                 var s = new VectorStore(8);
                 foreach (var k in keys) s.Put(k, Enumerable.Repeat(1f, 8).ToArray());
                 for (int i = 0; i < 5; i++)
-                    try { s.Save(path, keys); } catch (IOException) { /* a concurrent replace may be refused; callers log and continue */ }
+                    try { s.Save(path, keys); } catch (Exception e) when (e is IOException or UnauthorizedAccessException) { /* a concurrent replace may be refused (Windows reports either); callers log and continue */ }
             })));
             var r = VectorStore.Load(path, 8);
             Assert.Null(r.LoadIssue);
