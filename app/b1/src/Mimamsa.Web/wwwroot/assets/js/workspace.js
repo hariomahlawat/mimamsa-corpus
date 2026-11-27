@@ -44,7 +44,11 @@ export async function commanderPage(main, nav, id) {
           it.omitted_as_printed ? chip("warning", "Printed as omitted") : null,
           h("button.btn.btn-small.btn-quiet", { type: "button", title: "Add a copy-pinned citation of this provision to a Studio document",
             onclick: () => openAddToStudio({ doc_id: it.doc_id, copy: it.copy, page: it.page, passage_id: null, label: `${it.kind} ${it.number}, ${it.instrument}` }) }, "Add to Studio")),
-        h("div.muted.ws-src", `${it.instrument} · p.${it.page} · printed text from the held copy`),
+        h("div.muted.ws-src", `${it.instrument} · p.${it.page} · printed text from the held copy · `,
+          // C15 integration: the same legal knowledge graph and research assessment as the Practitioner view (S3)
+          h("a.ws-graph", { href: `/g?doc=${encodeURIComponent(it.doc_id)}&section=${encodeURIComponent(it.number)}`,
+            title: "Open this provision's relationships and research assessment in the shared legal knowledge graph",
+            onclick: go(nav, `/g?doc=${encodeURIComponent(it.doc_id)}&section=${encodeURIComponent(it.number)}`) }, "Relationships in the graph")),
         it.excerpt ? h("blockquote.ws-excerpt", it.excerpt) : null)
     : h("li.ws-prov.unavailable", { "data-provision": `${it.kind} ${it.number}` }, h("span.num", `${it.kind} ${it.number}`), h("span.muted", " not available in this library"));
   add(page,

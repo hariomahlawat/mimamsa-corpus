@@ -167,3 +167,19 @@ for (const [vp, min] of [[{ width: 1366, height: 768 }, 3], [{ width: 1920, heig
     await evidence(page, `w07-density-${vp.width}`);
   });
 }
+
+// C15 integration: Commander provisions open the SAME legal knowledge graph and research assessment as the
+// Practitioner view (no separate knowledge or reasoning path).
+test("C15-INT-01 a Commander provision opens the shared legal knowledge graph", async ({ page }) => {
+  await login(page);
+  await page.goto("/c/disciplinary");
+  const link = page.locator(".ws-prov a.ws-graph").first();
+  await expect(link).toBeVisible();
+  const href = await link.getAttribute("href");
+  expect(href).toMatch(/^\/g\?doc=[^&]+&section=[^&]+$/);
+  await link.click();
+  await expect(page).toHaveURL(/\/g\?doc=/);
+  await expect(page.locator("#g-body")).toBeVisible();
+  await expect(page.locator("#g-body table.data, #g-body .notice").first()).toBeVisible({ timeout: 15_000 });
+  await expect(page.locator("#g-body")).not.toContainText("later milestone");
+});
