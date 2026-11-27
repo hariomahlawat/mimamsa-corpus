@@ -5,10 +5,13 @@
 import { api, ApiError, state as apiState } from "./api.js";
 import { h, append, clear, $, $$, chip, candidateChip, axisChip, fmtDate, short, host, typeLabel, toast, announce, copyText, marked, session, icon, openDialog } from "./ui.js";
 import { ProtectedViewer } from "./viewer.js";
+import { renderHome, noteRecentDoc, resetRecent } from "./home.js";
+import { bindRelations } from "./relations.js";
+const STATUTE_TYPES = new Set(["act", "rules", "regulations", "notification", "order"]);
 
 const add = (el, ...k) => append(el, k);
 export const R = {
-  query: "", filters: emptyFilters(), result: null, flat: false, sort: "relevance", selected: -1, plainConfirmed: false,
+  query: "", filters: emptyFilters(), result: null, flat: false, sort: "relevance", page: 1, service: "", selected: -1, plainConfirmed: false,
   tabs: [], active: -1, ctxTab: "evidence", ctxOpen: false, railOpen: false, resultsOpen: false, el: null, reqSeq: 0, abort: null,
 };
 
@@ -22,6 +25,9 @@ export function paramsFromUrl(url) {
   for (const k of ["type", "court", "status"]) for (const v of sp.getAll(k)) R.filters[k].add(v);
   R.filters.year_from = sp.get("year_from") || ""; R.filters.year_to = sp.get("year_to") || "";
   R.plainConfirmed = sp.get("plain") === "1";
+  R.page = Math.max(1, parseInt(sp.get("page") || "1", 10) || 1);
+  R.sort = ["new", "old"].includes(sp.get("sort")) ? sp.get("sort") : "relevance";
+  R.service = ["army", "navy", "airforce"].includes(sp.get("service")) ? sp.get("service") : "";
 }
 function searchParams() {
   const sp = new URLSearchParams();
@@ -30,11 +36,17 @@ function searchParams() {
   if (R.filters.year_from) sp.set("year_from", R.filters.year_from);
   if (R.filters.year_to) sp.set("year_to", R.filters.year_to);
   if (R.plainConfirmed) sp.set("plain", "1");
+  if (R.service) sp.set("service", R.service);
+  if (R.sort !== "relevance") sp.set("sort", R.sort);
+  if (R.page > 1) sp.set("page", String(R.page));
   return sp;
 }
 export function researchUrl() { const s = searchParams().toString(); return "/r" + (s ? "?" + s : ""); }
 
 // ------------------------------------------------------------------ layout
+// C14 S3: the home pane depends on the view (Library or Commander); re-render it when nothing is open.
+export function refreshHome() { if (R.el && !R.tabs.length) renderDocPane(); }
+
 export function mountResearch(main, nav) {
   R.nav = nav;
   if (R.el && main.contains(R.el)) return R.el;
@@ -96,9 +108,10 @@ export function toggleCtx() {
 }
 
 // ------------------------------------------------------------------ search
-export async function runSearch({ push = true } = {}) {
+export async function runSearch({ push = true, keepPage } = {}) {
   const head = $("#results-head"), list = $("#results-list");
   if (!head) return;
+  if (!(keepPage ?? !push)) R.page = 1;       // a new query, filter, sort or service starts at page 1 (C14 F10)
   if (push) R.nav.replace(researchUrl());
   if (!R.query.trim()) { R.result = null; renderResults(); renderFacets(); return; }
   const seq = ++R.reqSeq;
@@ -110,7 +123,7 @@ export async function runSearch({ push = true } = {}) {
   try {
     const res = await api("/api/search?" + searchParams().toString(), { signal: R.abort.signal });
     if (seq !== R.reqSeq) return;           // a later query won (UX-14)
-    R.result = res; R.selected = -1;
+    R.result = res; R.selected = -1; R.page = res.page || 1;
     announce(res.state === "results" ? `${res.total_documents} documents, ${res.total_passages} passages` : res.state === "empty" ? "No published documents match" : "The query could not be read");
   } catch (e) {
     if (e.name === "AbortError" || seq !== R.reqSeq) return;
@@ -162,15 +175,21 @@ function renderResults() {
     return;
   }
   const docsCount = r.total_documents, pass = r.total_passages;
-  add(head, 
+  const groupsCount = r.total_groups ?? docsCount;
+  add(head,
     h("div.results-count", h("strong", r.state === "empty" ? "No results" : `${docsCount.toLocaleString("en-GB")} document${docsCount === 1 ? "" : "s"} · ${pass.toLocaleString("en-GB")} passage${pass === 1 ? "" : "s"}`),
-      r.shown_passages < pass ? h("span.muted", `showing the first ${r.shown_passages} passages`) : null),
-    h("div.runline", { "data-testid": "runline" }, `${r.run.mode_label} · semantic search ${r.run.semantic} · ${R.plainConfirmed ? "words only (operators removed on request) · " : ""}${[...R.filters.type, ...R.filters.court, ...R.filters.status].length + (R.filters.year_from || R.filters.year_to ? 1 : 0)} filter(s) · release ${r.run.release_id} · ${r.run.elapsed_ms} ms`),
-    r.chips?.length ? h("div.chips-row", { "aria-label": "How the query was read" }, r.chips.map((c) => h("span.qchip", { title: c.source || "" }, h("span.qchip-kind", c.kind), c.text))) : null,
+      r.state === "results" && r.page_count > 1 ? h("span.muted", `page ${r.page} of ${r.page_count} · ${groupsCount.toLocaleString("en-GB")} result group${groupsCount === 1 ? "" : "s"}`) : null),
+    h("div.runline", { "data-testid": "runline" }, `${r.run.mode_label} · semantic search ${r.run.semantic} · ${R.plainConfirmed ? "words only (operators removed on request) · " : ""}${r.run.service_label ? `service preference ${r.run.service_label} (ranking only) · ` : ""}${[...R.filters.type, ...R.filters.court, ...R.filters.status].length + (R.filters.year_from || R.filters.year_to ? 1 : 0)} filter(s) · release ${r.run.release_id} · ${r.run.elapsed_ms} ms`),
+    r.chips?.length ? h("div.chips-row", { "aria-label": "How the query was read" }, r.chips.map((c) => c.kind === "suggestion"
+      ? h("button.qchip.qchip-suggest", { type: "button", title: "Run this spelling instead. Your query ran as typed.", onclick: () => { R.query = c.source; const q = $("#q"); if (q) q.value = c.source; R.plainConfirmed = false; runSearch(); } }, h("span.qchip-kind", "suggestion"), c.text)
+      : h("span.qchip", { title: c.source || "", "data-kind": c.kind }, h("span.qchip-kind", kindLabel(c.kind)), c.text))) : null,
     filterChips().length ? h("div.chips-row", { "aria-label": "Active filters" }, filterChips()) : null,
-    r.state === "results" ? h("div.results-tools",
-      h("label", "Sort ", h("select", { onchange: (e) => { R.sort = e.target.value; renderResults(); } },
+    r.state === "results" || R.service ? h("div.results-tools",
+      h("label", "Sort ", h("select#sort", { onchange: (e) => { R.sort = e.target.value; runSearch(); } },
         h("option", { value: "relevance", selected: R.sort === "relevance" }, "Relevance"), h("option", { value: "new", selected: R.sort === "new" }, "Date, newest"), h("option", { value: "old", selected: R.sort === "old" }, "Date, oldest"))),
+      h("label", { title: "Raises ranked results from the chosen service and lowers those of other services. Identifier and case-name matches keep their place; nothing is excluded." }, "Service ",
+        h("select#service", { onchange: (e) => { R.service = e.target.value; runSearch(); } },
+          [["", "All services"], ["army", "Army"], ["navy", "Navy"], ["airforce", "Air Force"]].map(([v, l]) => h("option", { value: v, selected: R.service === v }, l)))),
       h("label", h("input", { type: "checkbox", checked: R.flat, onchange: (e) => { R.flat = e.target.checked; renderResults(); } }), " Flat passages")) : null);
   if (r.state === "empty") {
     add(list, h("div.empty", h("h2", "No published documents match"),
@@ -180,31 +199,47 @@ function renderResults() {
       h("p.muted", "This is a statement about the published library in this installation only. It is not evidence that no authority exists.")));
     return;
   }
+  // Groups come from the server (one per instrument; editions and language versions nested), in page order.
   const groups = [];
   const byDoc = new Map();
-  for (const p of r.passages) {
-    if (R.flat) { groups.push({ doc: r.documents[p.doc_id], hits: [p] }); continue; }
-    if (!byDoc.has(p.doc_id)) { const g = { doc: r.documents[p.doc_id], hits: [] }; byDoc.set(p.doc_id, g); groups.push(g); }
-    byDoc.get(p.doc_id).hits.push(p);
+  for (const g of r.groups || []) { const e = { doc: r.documents[g.doc_id], hits: [], variants: g.variants || [], total: g.passage_count || 0 }; byDoc.set(g.doc_id, e); groups.push(e); }
+  if (R.flat) {
+    // Codex review of PR #70: the server orders GROUPS by the chosen sort but keeps passages in relevance order. For a
+    // date sort, flat passages follow the server's group order (a variant's passages go with its group); within a
+    // group, and for relevance sort, the relevance order is kept. Stable, so equal keys keep relevance order.
+    let flat = r.passages;
+    if (R.sort !== "relevance") {
+      const rank = new Map();
+      (r.groups || []).forEach((g, i) => { rank.set(g.doc_id, i); for (const v of g.variants || []) if (!rank.has(v.doc_id)) rank.set(v.doc_id, i); });
+      flat = r.passages.map((p, i) => ({ p, i, k: rank.has(p.doc_id) ? rank.get(p.doc_id) : Number.MAX_SAFE_INTEGER }))
+        .sort((a, b) => a.k - b.k || a.i - b.i).map((x) => x.p);
+    }
+    groups.length = 0;
+    for (const p of flat) groups.push({ doc: r.documents[p.doc_id], hits: [p], variants: [] });
   }
-  if (R.sort !== "relevance") groups.sort((a, b) => ((a.doc.issue_date || "") < (b.doc.issue_date || "") ? -1 : 1) * (R.sort === "new" ? -1 : 1));
+  else for (const p of r.passages) byDoc.get(p.doc_id)?.hits.push(p);
   let idx = 0;
   for (const g of groups) {
     const d = g.doc;
-    const shown = R.flat ? g.hits : g.hits.slice(0, 3);
+    if (!d || !g.hits.length) continue;
+    const shown = R.flat ? g.hits : g.hits.slice(0, 2);
     const li = h("div.rgroup", { "data-doc": d.doc_id },
       h("a.rgroup-title", { href: shown[0].link, onclick: (e) => { e.preventDefault(); openFromHit(shown[0], false); } }, d.title || d.doc_id),
       h("div.rgroup-meta", h("span", typeLabel(d.type)), d.language === "hi" ? h("span", { lang: "en" }, "Hindi text") : null, h("span", d.court || d.issuer || "Issuer not recorded"), d.issue_date ? h("span", fmtDate(d.issue_date)) : null,
-        d.neutral_citation ? h("span.mono", d.neutral_citation) : null, (d.case_numbers || []).slice(0, 2).map((c) => h("span.mono", c)), d.number && !d.neutral_citation ? h("span", d.number) : null),
-      h("div.rgroup-prov", { "aria-label": "Provenance" }, h("span", `Source ${host(d.source_url)}`), h("span.mono", `copy ${short(d.copy_sha256)}`),
-        h("span", `retrieved ${fmtDate(d.retrieved_at) || "not recorded"}`), h("span", `corpus status: ${d.corpus_status} (display only)`),
-        d.candidate_outcomes ? h("span", candidateChip("Candidate outcomes are automated and not verified"), " outcome candidates") : null));
+        d.neutral_citation ? h("span.mono", d.neutral_citation) : null, (d.case_numbers || []).slice(0, 2).map((c) => h("span.mono", c)), d.number && !d.neutral_citation ? h("span", d.number) : null,
+        d.candidate_outcomes ? h("span", candidateChip("Candidate outcomes are automated and not verified"), " outcomes") : null),
+      h("details.rgroup-prov", h("summary", { "aria-label": "Provenance" }, `${host(d.source_url)} · copy ${short(d.copy_sha256)} · ${statusLabel(d.corpus_status)}`),
+        h("div", h("span", `Source ${host(d.source_url)}`), h("span.mono", `copy ${short(d.copy_sha256)}`),
+          h("span", `retrieved ${fmtDate(d.retrieved_at) || "not recorded"}`), h("span", `corpus status: ${d.corpus_status} (display only)`))),
+      g.variants.length ? h("div.rgroup-variants", "Also held: ", g.variants.map((v, k) => [k ? " · " : "",
+        h("a", { href: v.link, title: v.title || v.doc_id, onclick: (e) => { e.preventDefault(); openFromHit({ link: v.link, doc_id: v.doc_id, page: v.page, passage_id: v.passage_id }, false); } }, v.label)])) : null);
     for (const p of shown) {
       const i = idx++;
       const states = [];
       if (p.ocr) states.push(chip("warning", "OCR", "OCR text: for search only. Quote from the original page."));
       if (p.low_confidence) states.push(chip("warning", "Low OCR confidence"));
       const reason = p.tier === "identifier" ? chip("checked", "Identifier", p.reasons.join("; "))
+        : p.tier === "case_name" ? chip("checked", "Case name", p.reasons.join("; "))
         : p.tier === "document" ? chip("reason", "Document match", p.reasons.join("; "))
         : p.tier === "title" ? chip("reason", "Title match", p.reasons.join("; "))
         : p.tier === "mention" ? chip("reason", "Mention", p.reasons.join("; ")) : chip("reason", "Lexical", p.reasons.join("; "));
@@ -217,11 +252,26 @@ function renderResults() {
       row._hit = p;
       add(li, row);
     }
-    if (!R.flat && g.hits.length > 3) add(li, h("div.muted", { style: "font-size:12px;margin-top:4px" }, `${g.hits.length - 3} more passage(s) in this document`));
+    const total = Math.max(g.total || 0, g.hits.length);
+    if (!R.flat && total > shown.length) add(li, h("div.muted.more-passages", `${total - shown.length} more passage(s) in this document`));
     add(list, li);
   }
+  if (r.page_count > 1) add(list, pager(r));
 }
 
+function pager(r) {
+  const go = (n) => { R.page = n; runSearch({ keepPage: true }); $("#results-list")?.scrollTo(0, 0); };
+  return h("nav.pager", { "aria-label": "Result pages" },
+    h("button.btn.btn-small", { type: "button", disabled: r.page <= 1 || null, onclick: () => go(r.page - 1) }, "Previous"),
+    h("span.muted", `Page ${r.page} of ${r.page_count}`),
+    h("button.btn.btn-small", { type: "button", disabled: r.page >= r.page_count || null, onclick: () => go(r.page + 1) }, "Next"));
+}
+
+const KIND_LABELS = { identifier: "identifier", alias: "alias", case_name: "case name", not_held: "not held", ambiguous: "ambiguous", abbreviation: "abbreviation", suggestion: "suggestion" };
+function kindLabel(k) { return KIND_LABELS[k] || k; }
+const STATUS_LABELS = { in_force: "In force (crawler)", amended: "Amended (crawler)", partly_repealed: "Partly repealed (crawler)", repealed: "Repealed (crawler)",
+  superseded: "Superseded (crawler)", overruled: "Overruled (crawler)", unknown: "Status unknown" };
+export function statusLabel(v) { return STATUS_LABELS[v] || `${v} (crawler)`; }
 function visibleHits() { return $$("#results-list .hit"); }
 function select(i) {
   const rows = visibleHits();
@@ -276,11 +326,12 @@ function renderFacets() {
   if (!commander) add(box, group("court", "Court or issuer"));
   const years = (facets.year || []).map((v) => +v.value).filter(Boolean);
   const yf = h("fieldset.facet", h("legend", "Year"),
-    h("div.yearrange", h("label.visually-hidden", { for: "yf" }, "From year"), h("input#yf", { inputmode: "numeric", placeholder: years.length ? String(Math.min(...years)) : "from", value: R.filters.year_from }),
-      "–", h("label.visually-hidden", { for: "yt" }, "To year"), h("input#yt", { inputmode: "numeric", placeholder: years.length ? String(Math.max(...years)) : "to", value: R.filters.year_to }),
+    h("div.yearrange", h("label.visually-hidden", { for: "yf" }, "From year"), h("input#yf", { inputmode: "numeric", placeholder: "from", value: R.filters.year_from }),
+      "–", h("label.visually-hidden", { for: "yt" }, "To year"), h("input#yt", { inputmode: "numeric", placeholder: "to", value: R.filters.year_to }),
       h("button.btn.btn-small", { type: "button", onclick: () => { R.filters.year_from = $("#yf").value.trim(); R.filters.year_to = $("#yt").value.trim(); runSearch(); } }, "Apply")));
+  if (years.length) add(yf, h("p.hint.year-hint", `Results span ${Math.min(...years)}–${Math.max(...years)}`));
   add(box, yf);
-  if (!commander) add(box, group("status", "Corpus status (display only)"));
+  if (!commander) add(box, group("status", "Corpus status (display only)", statusLabel));
   add(box, h("p.sr-hint", "Counts are documents in the published library matching the query. Statuses are crawler summaries, not legal applicability."));
 }
 
@@ -309,6 +360,7 @@ export async function openDocument({ docId, page, passage, copy, notice, citeSta
   } else {
     const tab = R.tabs[t];
     tab.page = page || tab.page; tab.passage = passage || null; tab.notice = notice ?? tab.notice; tab.hits = hitsFor(docId);
+    tab.unavailable = false;   // an explicit re-open asks the server again (C14: the document may have been reinstated)
   }
   R.active = t;
   R.el?.classList.add("doc-open");
@@ -347,9 +399,10 @@ async function renderDocPane() {
       h("span.tab-title", `${t.preview ? "Preview · " : ""}${(t.doc?.title || t.docId).slice(0, 40)}`),
       h("button.tab-close", { type: "button", "aria-label": `Close ${t.doc?.title || t.docId} (X)`, onclick: () => closeTab(i) }, "×")))));
   const tab = R.tabs[R.active];
+  if (tab?.unavailable) { renderUnavailable(pane, ctx); return; }
   if (!tab) {
-    add(pane, h("div.docempty", h("h2", "No document open"), h("p", "Open a result to read the original at the cited page. ", h("kbd", "Enter"), " opens the selected result, ", h("kbd", "O"), " opens it in a new tab and ", h("kbd", "Space"), " previews it."),
-      h("p", "Originals are delivered in bounded, authenticated byte ranges and are never stored in the browser.")));
+    // C14 S3: library home (or the early Commander task home) instead of an empty pane
+    renderHome(pane, { nav: R.nav, commander: document.body.classList.contains("commander"), openDoc: (docId) => openDocument({ docId, page: 1 }) });
     clear(ctx); add(ctx, h("div.ctx-body", h("p.muted", "Evidence, provenance and related candidates for the open document appear here.")));
     return;
   }
@@ -365,6 +418,7 @@ async function renderDocPane() {
       return;
     }
     if (R.tabs[R.active] !== tab) return;
+    noteRecentDoc(tab.docId, tab.doc.title);
     return renderDocPane();
   }
   const d = tab.doc;
@@ -398,6 +452,8 @@ function docHeader(d, tab) {
     h("h1", { lang: d.language === "hi" ? "hi" : null }, d.title || "Title not printed", origin(d, "title")),
     h("div.meta",
       f("Type", typeLabel(d.doc_type)), j ? f("Court", j.court, "court") : f("Issuer", d.issuing_authority, "issuing_authority"),
+      d.language_name ? h("span.field", { "data-language": d.language || d.language_detected || "" }, h("span.label", "Language"), h("span", d.language_name)) : null,
+      d.text_reliability?.label ? h("span.field", h("span.chip.chip-warning", { title: d.text_reliability.basis || "", "data-text-reliability": d.text_reliability.state }, d.text_reliability.label)) : null,
       j?.bench ? f("Bench", j.bench, "bench") : null, f("Date", fmtDate(d.issue_date), "issue_date"),
       d.effective_date ? f("Commencement (as recorded)", fmtDate(d.effective_date), "effective_date") : null,
       f("Number", d.number, "number", true), j?.neutral_citation ? f("Neutral citation", j.neutral_citation, "neutral_citation", true) : null,
@@ -471,7 +527,8 @@ function renderToolbar() {
     tab.view === "original" ? [h("span.sep"),
       h("button.icon-btn", { type: "button", "aria-label": "Zoom out", onclick: () => zoom(-1) }, icon("minus")),
       h("button.icon-btn", { type: "button", "aria-label": "Zoom in", onclick: () => zoom(1) }, icon("plus")),
-      h("button.btn.btn-small", { type: "button", onclick: () => zoom(0) }, "Fit width")] : null,
+      h("button.btn.btn-small", { type: "button", onclick: () => zoom(0) }, "Fit width"),
+      h("button.btn.btn-small", { type: "button", onclick: () => zoom("page") }, "Fit page")] : null,
     h("span", { style: "flex:1" }),
     h("button.btn.btn-small", { type: "button", onclick: () => copyCitation(false), title: "Copy legal citation (C)" }, icon("cite"), "Copy citation"),
     h("button.btn.btn-small", { type: "button", onclick: () => copyCitation(true), title: "Copy internal reference and permalink (Shift+C)" }, icon("copy"), "Internal ref"),
@@ -507,18 +564,36 @@ async function showView(tab) {
     tab.pageCount = tab.viewer.numPages; renderToolbar();
   } else tab.viewer.host = vw;
   if (tab.view !== "original") return;
-  await tab.viewer.render(tab.page, { terms: terms(), ocr: pageOcr });
+  const anchor = await anchorText(tab);
+  if (R.tabs[R.active] !== tab || tab.view !== "original") return;
+  await tab.viewer.render(tab.page, { terms: terms(), ocr: pageOcr, anchor });
+}
+
+// C14 S3 (F12): the text of the cited passage on the current page, used by the viewer to scroll it into view. Read from
+// the verified derivative of the current edition only (never for an earlier cited copy).
+async function anchorText(tab) {
+  if (!tab.passage || tab.copy) return null;
+  const key = `${tab.page}|${tab.passage}`;
+  if (tab.anchorKey === key) return tab.anchorValue;
+  let value = null;
+  try {
+    const t = await api(`/api/documents/${encodeURIComponent(tab.docId)}/text?from=${tab.page}&to=${tab.page}`);
+    const pg = t.pages.find((p) => p.page === tab.page);
+    const ps = pg?.passages.find((p) => p.id === tab.passage);
+    if (pg && ps) value = pg.text.slice(ps.start, Math.min(ps.end, ps.start + 160));
+  } catch { value = null; }
+  tab.anchorKey = key; tab.anchorValue = value;
+  return value;
 }
 
 function viewerState(tab, s, info) {
+  // C14 F05: an unavailable original clears the header, text and evidence too, in background tabs as well
+  if (s === "unavailable") { tab.viewer = null; invalidateDocument(tab.docId); return; }
   if (R.tabs[R.active] !== tab) return;
   const vw = $("#viewer");
-  if (s === "unavailable") {
+  if (s === "failed") {
     tab.viewer = null;
-    clear(vw); add(vw, h("div.docempty", { role: "alert" }, h("h2", "Not available"), h("p", "This document is not available in this installation."),
-      h("p.muted", "Anything already displayed has been cleared.")));
-  } else if (s === "failed") {
-    tab.viewer = null;
+    revalidateOpenDocuments();   // a transfer cut off by a withdrawal surfaces as a network failure: ask the server
     clear(vw); add(vw, h("div.error-state", { role: "alert", style: "margin:24px" }, h("h2", "The original could not be displayed in the browser"),
       h("p", "No derived or substitute file is shown in its place. You can read the extracted text (labelled as such) or check the provenance, and retry the same copy and page."),
       h("p.mono", `Reference: VIEW-${Date.now().toString(36)} · copy ${short(tab.doc.copy.sha256)} · p.${tab.page}`),
@@ -537,6 +612,10 @@ async function showText(tab, vw) {
   const from = Math.max(1, tab.page - 2), to = Math.min(tab.doc.copy.page_count, tab.page + 12);
   add(box, h("p.muted", { style: "font-family:var(--font-ui);font-size:13px" }, "Extracted text (automated, not verified). Page markers are physical pages of the original. ",
     tab.doc.quoting_permitted ? "" : "This text includes OCR: for search only; quote from the original page."));
+  const rel = tab.doc.text_reliability;
+  if (rel?.label) add(box, h("div.notice.text-unreliable", { role: "note", "data-text-reliability": rel.state }, chip("warning", rel.label),
+    ` ${rel.state === "unreliable" ? "The extracted text of this copy is not reliable and is not used for search. Read the original page." : "Some passages of the extracted text are not reliable. Read the original page."} `,
+    h("span.muted", rel.basis || "")));
   let data;
   try { data = await api(`/api/documents/${encodeURIComponent(tab.docId)}/text?from=${from}&to=${to}`); }
   catch (e) { add(box, h("div.error-state", { role: "alert" }, h("p", e.status === 404 ? "This document is not available in this installation." : "The text could not be loaded."))); return; }
@@ -594,7 +673,8 @@ export function nextHit(d) {
 function zoom(dir) {
   const tab = R.tabs[R.active];
   if (!tab?.viewer) return;
-  const cur = tab.viewer.scale || 1.2;
+  if (dir === "page") { tab.viewer.setScale("page"); return; }
+  const cur = typeof tab.viewer.scale === "number" ? tab.viewer.scale : (tab.viewer.lastScale || 1.2);
   tab.viewer.setScale(dir === 0 ? null : Math.max(0.5, Math.min(3, cur + dir * 0.2)));
 }
 
@@ -651,22 +731,30 @@ function renderCtx() {
         h("dt", "Derived text"), h("dd", "Page and passage hashes verified; text is automated (not checked against the page image)"))));
   } else if (R.ctxTab === "provenance") {
     const p = d.provenance;
-    add(body, h("dl.kv",
-      h("dt", "Source URL"), h("dd", h("span.mono", p.source_url || "not recorded"), " ", p.source_url ? h("button.btn-quiet.btn-small", { type: "button", onclick: async () => toast(await copyText(p.source_url) ? "Source URL copied" : "Copy blocked") }, "Copy") : null),
-      h("dt", "Retrieved"), h("dd", p.retrieved_at || "not recorded"),
-      h("dt", "Channel"), h("dd", p.acquisition_channel || ""), h("dt", "Source system"), h("dd", p.source_system || "not recorded"),
-      h("dt", "Record id"), h("dd.mono", p.source_record_id || "not recorded"), h("dt", "Original file name"), h("dd.mono", p.original_filename || "not recorded"),
-      h("dt", "SHA-256"), h("dd", h("div.copybox", h("code", d.copy.sha256), h("button.btn-quiet.btn-small", { type: "button", onclick: async () => toast(await copyText(d.copy.sha256) ? "SHA-256 copied" : "Copy blocked") }, "Copy"))),
-      h("dt", "Bytes / pages"), h("dd", `${d.copy.bytes.toLocaleString("en-GB")} bytes · ${d.copy.page_count} physical pages`),
-      h("dt", "Vault key"), h("dd.mono", d.copy.vault_key),
-      h("dt", "HF repository"), h("dd.mono", p.hf ? `${p.hf.repo} @ ${p.hf.revision?.slice(0, 12)}` : "not recorded"), h("dt", "HF path"), h("dd.mono", p.hf?.path || ""),
-      h("dt", "Release"), h("dd.mono", p.release_id), h("dt", "Generation"), h("dd.mono", p.generation),
-      h("dt", "Text pipeline"), h("dd.mono", `${p.pipeline.name} ${p.pipeline.version} · text ${short(p.pipeline.text_sha256)}`),
-      h("dt", "Text method"), h("dd", `${d.text_method}${d.ocr_confidence != null ? ` · OCR mean confidence ${d.ocr_confidence}` : ""}`),
-      h("dt", "Aliases"), h("dd", (p.aliases || []).length ? p.aliases.map((a) => h("div.mono", a.source_url)) : "none"),
-      h("dt", "Access marking"), h("dd", p.access_marking || "none printed (as recorded)"),
-      h("dt", "Corpus status note"), h("dd", d.corpus_status_note || "none"),
-      h("dt", "Publication"), h("dd", p.publication_history.map((x) => h("div", `${x.channel} · ${x.release_id}${x.actor ? " · " + x.actor : ""}`)))));
+    // C14 S3: grouped, plain-language provenance (same facts as B1, read top-down: where from, this copy, this library)
+    const group = (title, lead, ...rows) => h("div.sect.prov", h("h3", title), lead ? h("p.muted", lead) : null, h("dl.kv", ...rows));
+    const rel = d.text_reliability;
+    add(body,
+      group("Where it came from", `Downloaded from ${host(p.source_url)} on ${fmtDate(p.retrieved_at) || "a date not recorded"}.`,
+        h("dt", "Source URL"), h("dd", h("span.mono", p.source_url || "not recorded"), " ", p.source_url ? h("button.btn-quiet.btn-small", { type: "button", onclick: async () => toast(await copyText(p.source_url) ? "Source URL copied" : "Copy blocked") }, "Copy") : null),
+        h("dt", "Retrieved"), h("dd", p.retrieved_at || "not recorded"),
+        h("dt", "Channel"), h("dd", p.acquisition_channel || ""), h("dt", "Source system"), h("dd", p.source_system || "not recorded"),
+        h("dt", "Record id"), h("dd.mono", p.source_record_id || "not recorded"), h("dt", "Original file name"), h("dd.mono", p.original_filename || "not recorded"),
+        h("dt", "Other URLs (aliases)"), h("dd", (p.aliases || []).length ? p.aliases.map((a) => h("div.mono", a.source_url)) : "none")),
+      group("This copy", `The original file is identified by its SHA-256 and was re-checked when this service started.`,
+        h("dt", "SHA-256"), h("dd", h("div.copybox", h("code", d.copy.sha256), h("button.btn-quiet.btn-small", { type: "button", onclick: async () => toast(await copyText(d.copy.sha256) ? "SHA-256 copied" : "Copy blocked") }, "Copy"))),
+        h("dt", "Size"), h("dd", `${d.copy.bytes.toLocaleString("en-GB")} bytes · ${d.copy.page_count} physical pages`),
+        h("dt", "Language"), h("dd", d.language_name || d.language || "not recorded"),
+        h("dt", "Extracted text"), h("dd", `${d.text_method}${d.ocr_confidence != null ? ` · OCR mean confidence ${d.ocr_confidence}` : ""} · ${p.pipeline.name} ${p.pipeline.version} · text ${short(p.pipeline.text_sha256)}`,
+          rel?.label ? h("div", chip("warning", rel.label), " ", h("span.muted", rel.basis)) : rel?.basis ? h("div.muted", rel.basis) : null),
+        h("dt", "Vault key"), h("dd.mono", d.copy.vault_key)),
+      group("In this library", null,
+        h("dt", "Release"), h("dd.mono", p.release_id), h("dt", "Generation"), h("dd.mono", p.generation),
+        h("dt", "Corpus repository"), h("dd.mono", p.hf ? `${p.hf.repo} @ ${p.hf.revision?.slice(0, 12)}` : "not recorded"), h("dt", "Path"), h("dd.mono", p.hf?.path || ""),
+        h("dt", "Published"), h("dd", p.publication_history.map((x) => h("div", `${x.channel.replaceAll("_", " ").toLowerCase()} · ${x.release_id}${x.actor ? " · " + x.actor : ""}`)))),
+      group("Notes", null,
+        h("dt", "Access marking"), h("dd", p.access_marking || "none printed (as recorded)"),
+        h("dt", "Corpus status note"), h("dd", d.corpus_status_note || "none")));
   } else if (R.ctxTab === "related") {
     add(body, h("div.absence", d.absence_notice));
     if (d.outcomes.length) {
@@ -682,7 +770,14 @@ function renderCtx() {
           v.evidence.filter((e) => e.page).map((e) => h("div", h("a", { href: "#", onclick: (ev) => { ev.preventDefault(); openDocument({ docId: e.doc_id, page: e.page }); } }, `Evidence: ${e.role.replaceAll("_", " ")} p.${e.page}`))))));
       add(body, s);
     }
-    if (!d.outcomes.length && !d.provision_versions.length) add(body, h("p.muted", "No related candidate records for this document."));
+    if (!d.outcomes.length && !d.provision_versions.length && !STATUTE_TYPES.has(d.doc_type)) add(body, h("p.muted", "No related candidate records for this document."));
+    if (STATUTE_TYPES.has(d.doc_type)) {
+      // C14 S3: statutory relationships for the sections printed on the current page, and the instrument's notices
+      const rbox = h("div.sect", { "data-rel": "statutory" }, h("h3", `Statutory relationships (page ${tab.page})`), h("span.skeleton.w60"));
+      add(body, rbox);
+      bindRelations(rbox, `/api/documents/${encodeURIComponent(d.doc_id)}/relations?page=${tab.page}`,
+        { nav: R.nav, onOpen: (docId, page) => openDocument({ docId, page }, { newTab: docId !== d.doc_id }) });
+    }
   } else if (R.ctxTab === "cited") {
     add(body, h("div.absence", "Extracted citations: candidates. Absence of a citation is not absence of authority. A citation does not establish how one court treated another."));
     const out = h("div.sect", h("h3", `Cites (${d.edges_out_total} extracted)`));
@@ -716,7 +811,9 @@ function edgeCard(e, d) {
   const proposed = !["CITES_JUDGMENT", "CITES_PROVISION", "QUOTES_PROVISION"].includes(p.relation);
   return h("div.cand", h("div.cand-head", candidateChip(), h("span", rel), proposed ? h("span.chip.chip-warning", "Proposed, not verified") : null),
     h("div.cand-body", e.target_in_library ? h("a", { href: "#", onclick: (ev) => { ev.preventDefault(); openDocument({ docId: e.target_in_library.doc_id, page: 1 }, { newTab: true }); } }, e.target_in_library.title)
-      : h("span.mono", p.target?.raw_reference || "Unresolved reference"),
+      : h("span", p.target?.raw_reference ? h("span.mono", p.target.raw_reference)
+          : p.target?.resolved ? "A judgment identified by the extractor that is not held in this library" : "Reference not resolved by the extractor",
+        p.evidence_text ? h("div.muted", "Cited in: ", h("q", p.evidence_text.slice(0, 240))) : null),
       e.anchors[0] ? h("div", h("a", { href: "#", onclick: (ev) => { ev.preventDefault(); goPage(e.anchors[0].page); } }, `Evidence on p.${e.anchors[0].page}`)) : null));
 }
 
@@ -727,9 +824,10 @@ export function resetResearch() {
   for (const t of R.tabs) { try { t.viewer && t.viewer.destroy(); } catch { /* ignore */ } }
   if (R.abort) { try { R.abort.abort(); } catch { /* ignore */ } }
   R.reqSeq++;
-  Object.assign(R, { query: "", filters: emptyFilters(), result: null, flat: false, sort: "relevance", selected: -1, plainConfirmed: false,
+  Object.assign(R, { query: "", filters: emptyFilters(), result: null, flat: false, sort: "relevance", page: 1, service: "", selected: -1, plainConfirmed: false,
                      tabs: [], active: -1, ctxTab: "evidence", ctxOpen: false, railOpen: false, resultsOpen: false, el: null, abort: null });
   window.__mimamsaViewer = null; window.__mimamsaLastCopy = null;
+  resetRecent();   // a new user never sees the previous user's recent items (PR #57 P2)
 }
 
 /** A URL naming a copy that is not eligible: the one generic notice, no content. */
@@ -740,4 +838,75 @@ export function showDocNotice(notice, state) {
   add(pane, h("div.docempty", { role: "alert" }, h("h2", "Not available"), h("p.notice", { "data-cite-state": state }, notice)));
 }
 export function hasResults() { return !!R.result; }
+
+// ------------------------------------------------------------------ C14 F05: policy-aware invalidation
+// A withdrawal is enforced on the server for every new request. These functions make the client match: an open tab
+// whose document is no longer available loses its viewer, header, text and evidence, and shows the one generic notice.
+
+function renderUnavailable(pane, ctx) {
+  add(pane, h("div.docempty", { role: "alert", "data-invalidated": "true" }, h("h2", "Not available"),
+    h("p", "This document is not available in this installation."),
+    h("p.muted", "Anything already displayed has been cleared.")));
+  if (ctx) { clear(ctx); add(ctx, h("div.ctx-body", h("p.muted", "Nothing is shown for a document that is not available."))); }
+}
+
+/** Clear every open tab of `docId` and show the generic notice in its place. Safe to call repeatedly. */
+export function invalidateDocument(docId) {
+  let hit = false;
+  for (const t of R.tabs) {
+    if (t.docId !== docId) continue;
+    hit = true;
+    try { t.viewer && t.viewer.destroy(); } catch { /* ignore */ }
+    Object.assign(t, { viewer: null, doc: null, hits: [], hitIndex: -1, unavailable: true });
+  }
+  if (window.__mimamsaViewer && window.__mimamsaViewer.docId === docId) window.__mimamsaViewer = null;
+  if (hit && R.tabs[R.active]?.docId === docId) renderDocPane();
+  return hit;
+}
+
+/** Re-check every open tab against the server (after an epoch change or on the periodic poll). A tab naming an
+ *  earlier copy is re-checked through the citation resolver; any other tab through the document route.
+ *  Uses plain fetch, not api(): a background re-check must never change the connection state (the connection-lost
+ *  view is owned by the user's own requests), and a network failure means "cannot tell yet", not "unavailable". */
+let revalidating = null;
+async function stillAvailable(t) {
+  const url = t.copy
+    ? `/api/cite?doc=${encodeURIComponent(t.docId)}&sha=${encodeURIComponent(t.copy.slice(0, 12))}&page=${t.page || 1}`
+    : `/api/documents/${encodeURIComponent(t.docId)}`;
+  let r;
+  try { r = await fetch(url, { headers: { Accept: "application/json" }, credentials: "same-origin", cache: "no-store" }); }
+  catch { return null; }
+  if (r.status === 401) return null;                          // session handling stays with the API client
+  if (r.status === 404 || r.status === 403) return false;
+  if (!r.ok) return null;
+  if (!t.copy) return true;
+  let j = null; try { j = await r.json(); } catch { return null; }
+  return j?.state === "CITED_COPY_ELIGIBLE" || j?.state === "CITED_COPY_ELIGIBLE_NOT_CURRENT";
+}
+// Codex review of PR #70: a re-check that cannot decide (network error, 5xx) must not be lost once the new epoch has
+// been recorded, so it stays pending and the periodic poll retries it; and an epoch change that arrives while a pass
+// is running triggers another full pass, because the running one may have checked a tab before the change.
+let recheckPending = false, rerunRequested = false;
+export function hasPendingRecheck() { return recheckPending; }
+export function revalidateOpenDocuments() {
+  if (revalidating) { rerunRequested = true; return revalidating; }
+  revalidating = (async () => {
+    do {
+      rerunRequested = false;
+      let unresolved = false;
+      const seen = new Set();
+      for (const t of [...R.tabs]) {
+        const key = t.docId + "|" + (t.copy || "");
+        if (t.unavailable || seen.has(key)) continue;
+        seen.add(key);
+        const ok = await stillAvailable(t);
+        if (ok === false) invalidateDocument(t.docId);
+        else if (ok === null) unresolved = true;
+      }
+      recheckPending = unresolved;
+    } while (rerunRequested);
+  })().finally(() => { revalidating = null; });
+  return revalidating;
+}
+export function openDocumentCount() { return R.tabs.filter((t) => !t.unavailable).length; }
 void apiState;

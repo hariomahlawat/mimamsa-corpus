@@ -128,7 +128,9 @@ test("UX-05 W-05 candidate outcomes per proceeding, labelled, 'not evaluated' wh
 test("UX-06 W-06 statutes TOC to a rule, as-of closed with gate, temporal chain not established", async ({ page }) => {
   await login(page);
   await page.goto("/s");
-  await page.getByRole("link", { name: /Bracken Hearing Rules/ }).click();
+  // C14 S3 (intended change): the grouped Statutes list shows the instrument link plus nested edition links, so the
+  // instrument entry is selected explicitly instead of by link name.
+  await page.locator(".statute-list .instrument > a", { hasText: /Bracken Hearing Rules/ }).first().click();
   await expect(page.locator(".toc")).toContainText("8(3)(a)");
   await page.locator(".toc a", { hasText: "8(3)(a)" }).click();
   await expect(page.locator("#asof")).toBeDisabled();
@@ -387,4 +389,184 @@ test("F01 withdrawal covers the earlier edition: cited copy and its byte ranges 
   expect(after.status()).toBe(404);
   const meta = await user.request.get(`/api/v2/documents/syn-j-allow/pdf-meta?copy=${old}`);
   expect(meta.status()).toBe(404);
+});
+
+// C14 S1: case-name tier, spelling suggestion offered (never applied), readable facets, collapsed provenance.
+test("C14-S1a case name pins the judgment; a suggestion runs only when clicked", async ({ page }) => {
+  await login(page);
+  await search(page, "Vale v Lark");
+  await expect(page.locator(".qchip[data-kind=case_name]")).toContainText("Case name");
+  await expect(page.locator(".hit").first().locator(".chip", { hasText: "Case name" })).toBeVisible();
+  await expect(page.locator(".rgroup").first()).toHaveAttribute("data-doc", /syn-j-(allow|lookalike)/);
+  await search(page, "hearnig");
+  await expect(page.locator("#results-head")).toContainText("No results");
+  const sug = page.locator(".qchip-suggest");
+  await expect(sug).toContainText("Did you mean: hearing");
+  await sug.click();
+  await expect(page.locator("#q")).toHaveValue("hearing");
+  await page.waitForFunction(() => !document.querySelector("#results-list.dim"));
+  await expect(page.locator(".rgroup").first()).toBeVisible();
+  expect(page.url()).toContain("q=hearing");
+});
+
+test("C14-S1b compact cards: provenance collapsed to one line, readable status labels, service preference in the run line", async ({ page }) => {
+  await login(page);
+  await search(page, "notice");
+  const prov = page.locator("details.rgroup-prov").first();
+  await expect(prov).toBeVisible();
+  expect(await prov.evaluate((d) => d.open)).toBe(false);
+  await expect(prov.locator("summary")).toContainText("copy ");
+  const status = await page.locator("#facets fieldset.facet", { hasText: "Corpus status" }).innerText();
+  expect(status).not.toMatch(/\b[a-z]+_[a-z_]+\b/);              // no raw codes such as in_force
+  expect(status).toMatch(/Status unknown|\(crawler\)/);
+  await page.selectOption("#service", "army");
+  await page.waitForFunction(() => !document.querySelector("#results-list.dim"));
+  await expect(page.getByTestId("runline")).toContainText("service preference Army");
+  expect(page.url()).toContain("service=army");
+  expect(await a11yBasics(page)).toEqual([]);
+});
+
+// ------------------------------------------------------------------ C14 S2 safety journeys (run last, in this order)
+async function adminCsrf(page) { return (await (await page.request.get("/api/session")).json()).csrf; }
+
+test("C14-S2-01 F05 a withdrawal clears a viewer that is already open, without any reader action", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  await user.goto("/d/syn-h-manual?p=1");
+  await expect(user.locator(".pagewrap canvas").first()).toBeVisible();
+  await expect(user.locator(".dochead")).toBeVisible();
+  await login(page, "admin");
+  await page.getByRole("link", { name: "Administration" }).click();
+  await page.fill("#wd-doc", "syn-h-manual");
+  await page.fill("#wd-reason", "C14 S2 open-viewer invalidation");
+  await page.getByRole("button", { name: "Withdraw…" }).click();
+  await expect(page.locator("dialog")).toContainText("Pages already on a reader's screen are cleared");
+  await expect(page.locator("dialog")).toContainText("No byte-identical copy of this document is held under another document id.");
+  await page.locator("dialog").getByRole("button", { name: "Withdraw" }).click();
+  await expect(page.locator("table.data")).toContainText("C14 S2 open-viewer invalidation");
+  // the reader does nothing: the epoch poll (10 s) clears the page, the header and the evidence
+  await expect(user.locator(".docempty[data-invalidated]")).toContainText("This document is not available in this installation.", { timeout: 20_000 });
+  await expect(user.locator(".pagewrap canvas")).toHaveCount(0);
+  await expect(user.locator(".dochead")).toHaveCount(0);
+  await shot(user, "c14-s2-01-viewer-cleared.png");
+});
+
+test("C14-S2-02 F05 a deep link to a withdrawn document shows the notice", async ({ page }) => {
+  await login(page);
+  await page.goto("/d/syn-h-manual?p=1");
+  await expect(page.locator(".docempty")).toContainText("This document is not available in this installation.");
+  await expect(page.locator(".pagewrap canvas")).toHaveCount(0);
+});
+
+test("C14-S2-03 reinstatement needs a reason, re-verifies, and makes the document available again", async ({ page, browser }) => {
+  await login(page, "admin");
+  await page.getByRole("link", { name: "Administration" }).click();
+  const row = page.locator("table.data tr", { hasText: "syn-h-manual" }).first();
+  await row.getByRole("button", { name: "Reinstate…" }).click();
+  await expect(page.locator("dialog")).toContainText("verifies again");
+  await page.locator("dialog").getByRole("button", { name: "Reinstate" }).click();
+  await expect(page.locator("dialog .err")).toContainText("A reason");
+  await page.fill("#ri-reason", "C14 S2 reinstatement after review");
+  await page.locator("dialog").getByRole("button", { name: "Reinstate" }).click();
+  await expect(page.locator("table.data")).toContainText("Reinstated");
+  await expect(page.locator("table.data")).toContainText("re-hashed");
+  const user = await browser.newPage();
+  await login(user);
+  await user.goto("/d/syn-h-manual?p=1");
+  await expect(user.locator(".pagewrap canvas").first()).toBeVisible();
+});
+
+test("C14-S2-04 a protected transfer in progress when the document is withdrawn is refused at handoff", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  const meta = await (await user.request.get("/api/v2/documents/syn-j-reject/pdf-meta")).json();
+  const url = `/api/v2/documents/syn-j-reject/copies/${meta.copy_sha256}/range`;
+  const pull = () => user.evaluate(async (u) => {
+    const r = await fetch(u, { headers: { Range: "bytes=0-99", "X-Mimamsa-Test-Pause": "before-enter" }, cache: "no-store" });
+    return { status: r.status, bytes: (await r.arrayBuffer()).byteLength };
+  }, url);
+  expect(await pull()).toEqual({ status: 206, bytes: 100 });          // control: completes when nothing happens
+  await login(page, "admin");
+  const csrf = await adminCsrf(page);
+  const inFlight = pull();                                               // admitted, credit reserved, paused before handoff
+  await page.waitForTimeout(1200);
+  const w = await page.request.post("/api/admin/withdraw", { headers: { "X-CSRF-Token": csrf }, data: { doc_id: "syn-j-reject", reason: "C14 S2 in-flight transfer" } });
+  expect(w.status()).toBe(200);
+  expect(await inFlight).toEqual({ status: 404, bytes: 0 });            // no byte of the withdrawn original is handed over
+  const r = await page.request.post("/api/admin/reinstate", { headers: { "X-CSRF-Token": csrf }, data: { doc_id: "syn-j-reject", reason: "C14 S2 restore fixture state" } });
+  expect(r.status()).toBe(200);
+});
+
+test("C14-S2-05 F15 lockout, Admin unlock with a reason, and the audit log", async ({ page, browser }) => {
+  const anon = await browser.newContext({ baseURL: test.info().project.use.baseURL });
+  for (let i = 0; i < 5; i++) expect((await anon.request.post("/api/login", { data: { username: "locktest", password: "wrong-password-xx" } })).status()).toBe(401);
+  const user = await browser.newPage();
+  await user.goto("/");
+  await user.fill("#username", "locktest"); await user.fill("#password", "locktest-password-1");
+  await user.click("form.login button[type=submit]");
+  await expect(user.locator("form.login .err")).toContainText("not correct, or the account is locked");
+  await login(page, "admin");
+  await page.getByRole("link", { name: "Administration" }).click();
+  const row = page.locator("#accounts-table tr", { hasText: "locktest" });
+  await expect(row).toContainText("Locked until");
+  await row.getByRole("button", { name: "Unlock…" }).click();
+  await page.fill("#ul-reason", "C14 S2 identity confirmed by the owner");
+  await page.locator("dialog").getByRole("button", { name: "Unlock" }).click();
+  await expect(page.locator("#accounts-table tr", { hasText: "locktest" })).toContainText("Active");
+  await expect(page.locator("#audit-table")).toContainText("unlock");
+  await expect(page.locator("#audit-table")).toContainText("C14 S2 identity confirmed by the owner");
+  await expect(page.locator("#audit-table")).toContainText("lockout");
+  await expect(page.locator("#audit-table")).not.toContainText("wrong-password-xx");
+  await shot(page, "c14-s2-05-admin-accounts-audit.png");
+  await user.click("form.login button[type=submit]");
+  await expect(user.locator("#research")).toBeVisible();
+  await anon.close();
+});
+
+// Codex review of PR #70: a re-check that fails transiently (503) after the epoch change must be retried by the poll,
+// not dropped because the new epoch was already recorded.
+test("C14-INT-01 F05 a transient failure of the re-check is retried and the viewer is still cleared", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  await user.goto("/d/syn-m-guide?p=1");
+  await expect(user.locator(".pagewrap canvas").first()).toBeVisible();
+  let failed = 0;
+  await user.route("**/api/documents/syn-m-guide", async (route) => {
+    if (failed === 0) { failed++; return route.fulfill({ status: 503, contentType: "application/json", body: "{}" }); }
+    return route.continue();
+  });
+  await login(page, "admin");
+  const csrf = await adminCsrf(page);
+  const w = await page.request.post("/api/admin/withdraw", { headers: { "X-CSRF-Token": csrf, Origin: new URL(page.url()).origin }, data: { doc_id: "syn-m-guide", reason: "C14 integration transient re-check" } });
+  expect(w.status()).toBe(200);
+  await expect(user.locator(".docempty[data-invalidated]")).toContainText("This document is not available in this installation.", { timeout: 40_000 });
+  expect(failed).toBe(1);
+  await expect(user.locator(".pagewrap canvas")).toHaveCount(0);
+});
+
+// Codex review of PR #70: an older relationship refresh pass that finishes late (its answer superseded) must not clear
+// the retry left pending by a newer pass whose request failed (503). Exact timing is controlled in the page.
+test("C14-INT-02 an older relationship refresh finishing late keeps a newer pass's retry pending", async ({ page }) => {
+  await login(page);
+  const result = await page.evaluate(async () => {
+    const m = await import("/assets/js/relations.js");
+    const realFetch = window.fetch, calls = [];
+    window.fetch = (url, init) => String(url).includes("/c14-int-02/relations") ? new Promise((resolve) => calls.push(resolve)) : realFetch(url, init);
+    const ok = () => new Response(JSON.stringify({ doc_id: "x", instrument: null, correspondence: [], notices: [] }), { status: 200, headers: { "Content-Type": "application/json" } });
+    const box = document.createElement("div"); document.body.append(box);
+    try {
+      const first = m.bindRelations(box, "/api/documents/c14-int-02/relations", { nav: null, onOpen: () => {} });
+      calls[0](ok()); await first;
+      const passA = m.refreshRelations();          // older pass: its request stays open
+      const passB = m.refreshRelations();          // newer pass
+      await new Promise((r) => setTimeout(r, 0));
+      calls[2](new Response("{}", { status: 503 })); await passB;
+      const afterNewerFailed = m.relationsRefreshPending();
+      calls[1](ok()); await passA;                 // the older, superseded answer arrives last
+      return { calls: calls.length, afterNewerFailed, afterOlderFinished: m.relationsRefreshPending() };
+    } finally { window.fetch = realFetch; box.remove(); }
+  });
+  expect(result.calls).toBe(3);
+  expect(result.afterNewerFailed).toBe(true);
+  expect(result.afterOlderFinished).toBe(true);
 });

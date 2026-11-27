@@ -44,7 +44,7 @@ public sealed class ServiceFixture : IAsyncLifetime
         return (p.ExitCode, await outTask + await errTask);
     }
 
-    static string WebDir()
+    internal static string WebDir()
     {
         var d = new DirectoryInfo(AppContext.BaseDirectory);
         while (d is not null && !Directory.Exists(Path.Combine(d.FullName, "src", "Mimamsa.Web"))) d = d.Parent;
@@ -62,6 +62,10 @@ public sealed class ServiceFixture : IAsyncLifetime
             ["ASPNETCORE_URLS"] = Base, ["Mimamsa__Site"] = Syn.Site, ["Mimamsa__Db"] = db, ["Mimamsa__Test__Enabled"] = "true",
             ["Mimamsa__Test__ResetState"] = "true", ["Mimamsa__Test__ResetLedger"] = "true", ["Mimamsa__Test__Users__0"] = "admin:Admin:admin-password-1",
             ["Mimamsa__Test__Users__1"] = "reader:User:reader-password-1", ["Mimamsa__Test__Users__2"] = "locktest:User:locktest-password-1",
+            // C14 S2: short lock (test mode only) so expiry is testable; accounts reserved for the lockout and unlock
+            // tests; a high per-source throttle so the suite's own failed sign-ins from 127.0.0.1 never trip it.
+            ["Mimamsa__Test__LockSeconds"] = "3", ["Mimamsa__Login__ThrottlePerSource"] = "1000",
+            ["Mimamsa__Test__Users__3"] = "locktest2:User:locktest2-password-1", ["Mimamsa__Test__Users__4"] = "unlocktest:User:unlocktest-password-1",
             ["Mimamsa__RestrictedRegister"] = RegisterPath,
         }) psi.Environment[k] = v;
         _p = Process.Start(psi)!;
@@ -172,6 +176,31 @@ public class HttpTests(ServiceFixture f)
         Assert.Equal(HttpStatusCode.NotFound, (await c.GetAsync("/api/v2/documents/syn-v-staged/pdf-meta")).StatusCode);
         var s = JsonNode.Parse(await c.GetStringAsync("/api/search?q=exact%3Aviolet-plume-canary"))!;
         Assert.DoesNotContain("syn-v-staged", s.ToJsonString());
+    }
+
+    /// C14 F10: results are paged by document group; every group is reachable and passages keep relevance order.
+    [Fact] public async Task SearchIsPagedByDocumentGroup()
+    {
+        var (c, _) = await f.Login("reader");
+        var first = JsonNode.Parse(await c.GetStringAsync("/api/search?q=notice&page_size=1"))!;
+        int pages = first["page_count"]!.GetValue<int>(), groups = first["total_groups"]!.GetValue<int>();
+        Assert.True(pages >= 2);
+        Assert.Equal(groups, pages);
+        var seen = new HashSet<string>();
+        for (int p = 1; p <= pages; p++)
+        {
+            var r = JsonNode.Parse(await c.GetStringAsync($"/api/search?q=notice&page_size=1&page={p}"))!;
+            Assert.Equal(p, r["page"]!.GetValue<int>());
+            var g = Assert.Single(r["groups"]!.AsArray());
+            Assert.True(seen.Add(g!["doc_id"]!.GetValue<string>()));
+            Assert.All(r["passages"]!.AsArray(), x => Assert.Equal(g["doc_id"]!.GetValue<string>(), x!["doc_id"]!.GetValue<string>()));
+        }
+        var beyond = JsonNode.Parse(await c.GetStringAsync($"/api/search?q=notice&page_size=1&page={pages + 5}"))!;
+        Assert.Equal(pages, beyond["page"]!.GetValue<int>());      // clamped, never empty
+        var svc = JsonNode.Parse(await c.GetStringAsync("/api/search?q=notice&service=army"))!;
+        Assert.Equal("Army", svc["run"]!["service_label"]!.GetValue<string>());
+        var bad = JsonNode.Parse(await c.GetStringAsync("/api/search?q=notice&service=marines"))!;
+        Assert.Null(bad["run"]!["service"]);                          // unknown service ignored, not an error
     }
 
     [Fact] public async Task UsersCannotReachAdministration()

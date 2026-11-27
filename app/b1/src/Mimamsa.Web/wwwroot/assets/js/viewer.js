@@ -4,6 +4,7 @@
 // is retried with backoff; 401/404 (withdrawn or not authorised) destroys the document and reports "unavailable".
 // PDF.js is bundled offline (/vendor/pdfjs, pdfjs-dist 6.5.438); eval and scripting are off; no URL is given to PDF.js.
 import * as pdfjs from "/vendor/pdfjs/pdf.min.mjs";
+import { noteEpoch } from "./api.js";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.mjs";
 
@@ -12,12 +13,13 @@ export class ProtectedViewer {
     this.host = host; this.docId = docId; this.copy = copy; this.onState = onState || (() => {});
     this.metrics = { ranges: [], meta: null, transport_error: null, withdrawn: false };
     this.doc = null; this.task = null; this.page = 1; this.scale = null; this.renderSeq = 0; this.destroyed = false;
-    this.terms = []; this.ocr = false;
+    this.terms = []; this.ocr = false; this.anchor = null; this.lastScale = null; this.anchored = false;
   }
 
   async open() {
     const q = this.copy ? `?copy=${encodeURIComponent(this.copy)}` : "";
     const r = await fetch(`/api/v2/documents/${encodeURIComponent(this.docId)}/pdf-meta${q}`, { cache: "no-store", credentials: "same-origin" });
+    noteEpoch(r);
     if (r.status === 404 || r.status === 401) { this.metrics.withdrawn = true; this.onState("unavailable"); return false; }
     if (!r.ok) throw new Error(`meta ${r.status}`);
     const meta = await r.json();
@@ -35,6 +37,7 @@ export class ProtectedViewer {
         const resp = await fetch(`/api/v2/documents/${encodeURIComponent(this.docId)}/copies/${meta.copy_sha256}/range`,
           { headers: { Range: `bytes=${a}-${b}`, ...(window.__mimamsaTestFail ? { "X-Mimamsa-Test-Fail": window.__mimamsaTestFail } : {}) }, cache: "no-store", credentials: "same-origin" });
         this.metrics.ranges.push({ a, b, status: resp.status, ms: Math.round(performance.now() - t) });
+        noteEpoch(resp);
         if (resp.status === 206) {
           const buf = new Uint8Array(await resp.arrayBuffer());
           if (buf.length !== b - a + 1 || resp.headers.get("content-range") !== `bytes ${a}-${b}/${meta.length}`) throw new Error("bad 206");
@@ -75,16 +78,19 @@ export class ProtectedViewer {
 
   get numPages() { return this.doc ? this.doc.numPages : 0; }
 
-  async render(pageNo, { terms, ocr } = {}) {
+  // C14 S3: `anchor` is the text of the cited passage; after the text layer renders, the page scrolls so the passage is in
+  // view and a bar marks where it starts (F12). Without an anchor the first search highlight is scrolled into view.
+  async render(pageNo, { terms, ocr, anchor } = {}) {
     if (!this.doc || this.destroyed) return;
     if (terms) this.terms = terms;
     if (ocr !== undefined) this.ocr = ocr;
+    if (anchor !== undefined) this.anchor = anchor;
     this.page = Math.max(1, Math.min(this.doc.numPages, pageNo));
     const seq = ++this.renderSeq;
     const host = this.host;
     const width = Math.max(320, host.clientWidth - 48);
     let page;
-    try { page = await this.doc.getPage(this.page); } catch (e) { if (!this.destroyed) this.onState("failed", String(e.message || e)); return; }
+    try { page = await this.doc.getPage(this.page); } catch (e) { if (!this.destroyed) this.onState(this.metrics.withdrawn ? "unavailable" : "failed", String(e.message || e)); return; }
     if (seq !== this.renderSeq || !host.isConnected) return;
     host.replaceChildren();
     const legend = document.createElement("div");
@@ -100,7 +106,9 @@ export class ProtectedViewer {
     host.append(wrap);
     const ph = document.createElement("div"); ph.className = "placeholder"; ph.textContent = `Loading page ${this.page}…`;
     const base = page.getViewport({ scale: 1 });
-    const scale = this.scale || Math.min(2.5, width / base.width);
+    const height = Math.max(240, host.clientHeight - 64);
+    const scale = this.scale === "page" ? Math.min(width / base.width, height / base.height) : this.scale || Math.min(2.5, width / base.width);
+    this.lastScale = scale;
     const vp = page.getViewport({ scale });
     wrap.style.width = `${Math.floor(vp.width)}px`; wrap.style.height = `${Math.floor(vp.height)}px`;
     wrap.style.setProperty("--total-scale-factor", String(scale));
@@ -125,7 +133,21 @@ export class ProtectedViewer {
       const layer = new pdfjs.TextLayer({ textContentSource: await page.getTextContent(), container: tl, viewport: vp });
       await layer.render();
       this.marks = markTerms(layer.textDivs, this.terms);
-    } catch { this.marks = 0; }
+      this.anchored = false;
+      const target = findAnchor(layer.textDivs, this.anchor);
+      if (target) {
+        this.anchored = true;
+        const wr = wrap.getBoundingClientRect(), tr = target.getBoundingClientRect();
+        const bar = document.createElement("div");
+        bar.className = "cited-bar"; bar.setAttribute("aria-hidden", "true");
+        bar.style.top = `${Math.max(0, tr.top - wr.top - 2)}px`; bar.style.height = `${Math.max(14, tr.height + 4)}px`;
+        wrap.append(bar);
+        scrollIntoHost(host, target);
+      } else {
+        const mk = this.marks ? tl.querySelector("mark") : null;
+        if (mk) scrollIntoHost(host, mk);
+      }
+    } catch { this.marks = this.marks || 0; }
     this.onState("rendered", this.page);
   }
 
@@ -138,6 +160,27 @@ export class ProtectedViewer {
     try { this.task && this.task.destroy(); } catch { /* ignore */ }
     this.doc = null;
   }
+}
+
+// Find the text-layer element where the cited passage starts: compare whitespace-free, case-folded text.
+function findAnchor(divs, anchor) {
+  if (!anchor) return null;
+  const norm = (t) => t.replace(/\s+/g, "").toLowerCase();
+  const key = norm(anchor);
+  if (key.length < 8) return null;
+  let all = ""; const starts = [];
+  for (const d of divs) { starts.push(all.length); all += norm(d.textContent); }
+  for (const len of [48, 28, 16]) {
+    if (key.length < Math.min(len, 8)) continue;
+    const at = all.indexOf(key.slice(0, len));
+    if (at >= 0) { let i = starts.length - 1; while (i > 0 && starts[i] > at) i--; return divs[i]; }
+  }
+  return null;
+}
+
+function scrollIntoHost(host, el) {
+  const hr = host.getBoundingClientRect(), er = el.getBoundingClientRect();
+  host.scrollTop += er.top - hr.top - Math.min(120, host.clientHeight * 0.2);
 }
 
 function markTerms(divs, terms) {

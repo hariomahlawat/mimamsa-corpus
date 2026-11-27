@@ -17,7 +17,8 @@ public sealed record FacetValue(string Value, int Count);
 public sealed record SearchResult(string State, string Mode, IReadOnlyList<Chip> Chips, IReadOnlyList<Hit> Hits,
                                   int TotalPassages, int TotalDocuments, IReadOnlyDictionary<string, IReadOnlyList<FacetValue>> Facets,
                                   string? Error, int? ErrorPosition, IReadOnlyList<string> HighlightTerms,
-                                  IReadOnlyList<IReadOnlyList<string>> HighlightPhrases, IReadOnlyList<string> Notes);
+                                  IReadOnlyList<IReadOnlyList<string>> HighlightPhrases, IReadOnlyList<string> Notes,
+                                  string? Service = null);
 
 public sealed class SearchService
 {
@@ -27,6 +28,9 @@ public sealed class SearchService
 
     public SearchService(SearchIndex ix, Func<string, bool> docHidden) { _ix = ix; _docHidden = docHidden; }
     public SearchIndex Index => _ix;
+    /// C14 S4 hybrid PoC. Null (the default) = B1 lexical behaviour, unchanged.
+    public ISemanticScorer? Semantic { get; init; }
+    public HybridOptions Hybrid { get; init; } = new();
 
     sealed class Ctx
     {
@@ -37,10 +41,16 @@ public sealed class SearchService
         public readonly List<Chip> Chips = new();
     }
 
-    public SearchResult Search(string raw, SearchFilters filters, bool plainAfterConfirmation = false)
+    SpellingSuggester? _speller;
+    SpellingSuggester Speller => _speller ??= new SpellingSuggester(_ix);
+
+    public SearchResult Search(string raw, SearchFilters filters, bool plainAfterConfirmation = false, string? service = null)
     {
         ParsedQuery q;
-        try { q = plainAfterConfirmation ? QueryParser.PlainWords(raw) : QueryParser.Parse(raw); }
+        // A citation such as "(2013) 7 SCC 316" uses brackets as part of the identifier, not as query syntax (C14 F06).
+        if (!plainAfterConfirmation && Legal.LegalIdentifierResolver.IsIdentifierQuery(raw ?? ""))
+            q = new ParsedQuery(raw!, false, true, null, raw!.Split(' ', StringSplitOptions.RemoveEmptyEntries));
+        else try { q = plainAfterConfirmation ? QueryParser.PlainWords(raw!) : QueryParser.Parse(raw!); }
         catch (ParseException e)
         {
             return new SearchResult("parser_error", "parser_error", Array.Empty<Chip>(), Array.Empty<Hit>(), 0, 0,
@@ -57,8 +67,25 @@ public sealed class SearchService
         {
             var (pinned, mentions, rest) = IdentifierTiers(q.Raw, ctx);
             foreach (var h in pinned) if (seen.Add(h.PassageIndex)) ordered.Add(h);
+            // Case-name tier (C14 F02): a query naming the parties pins those judgments above judgments that cite them.
+            if (rest.Count > 0 && Identifiers.Recognise(q.Raw).Count == 0 && _ix.Resolver.ResolveCaseName(rest) is { } cn)
+            {
+                if (cn.TooMany)
+                    ctx.Chips.Add(new Chip("case_name", $"Party name matches {cn.Count} judgments",
+                        $"Too many to pin. Add the other party (“X v Y”), the year, or use party:“{string.Join(" ", cn.Terms)}”. Results below are ranked by words."));
+                else
+                {
+                    ctx.Chips.Add(new Chip("case_name", cn.Docs.Count == 1 ? $"Case name · {_ix.Resolver.CaseLabel(cn.Docs[0])}" : $"Case name · {cn.Docs.Count} judgments with these parties",
+                        "Matched against the parties recorded in the judgment metadata (crawler, not verified). Judgments that only cite the case follow as ranked results."));
+                    foreach (var d in cn.Docs)
+                        if (seen.Add(_ix.DocPassages[d][0]))
+                            ordered.Add(new Hit(_ix.DocPassages[d][0], "case_name", 1e9, new[] { $"Case name: parties {_ix.Resolver.CaseLabel(d)} (metadata, not verified)" }));
+                }
+            }
             if (ordered.Count > 0) mode = "identifier";
             foreach (var h in mentions) if (seen.Add(h.PassageIndex)) ordered.Add(h);
+            if (!q.Exact && mode == "lexical" && rest.Count > 0 && Speller.Suggest(rest) is { } suggestion)
+                ctx.Chips.Add(new Chip("suggestion", $"Did you mean: {suggestion}", suggestion));
             if (rest.Count > 0)
             {
                 // Short-title match: plain words that are exactly an instrument's title (ignoring years/stopwords) put
@@ -69,6 +96,27 @@ public sealed class SearchService
                         if (_ix.Docs[d].IsStatute && NormTitle(_ix.Docs[d].Title).Split(' ').ToHashSet().SetEquals(words) && seen.Add(_ix.DocPassages[d][0]))
                             ordered.Add(new Hit(_ix.DocPassages[d][0], "title", 5e8, new[] { $"title match: {_ix.Docs[d].Title}" }));
                 var scores = PlainScores(rest, ctx);
+                // ---- C14 S4 hybrid hook (begin). Only plain, non-exact queries; identifier and title tiers above are
+                // already placed and are never re-ranked. With Semantic == null this block is skipped entirely.
+                if (Semantic is not null && !q.Exact)
+                {
+                    var lex = scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key).Select(kv => kv.Key).ToList();
+                    var dense = Semantic.TopK(string.Join(" ", rest), Hybrid.DenseDepth).Where(x => x.Score >= Hybrid.MinSimilarity).ToList();
+                    var sim = dense.ToDictionary(x => x.Passage, x => x.Score);
+                    foreach (var f in HybridFusion.Rrf(lex, dense.Select(x => x.Passage).ToList(), Hybrid))
+                    {
+                        if (!seen.Add(f.Passage)) continue;
+                        var why = new List<string>(f.LexRank is null ? Array.Empty<string>() : Reasons(f.Passage, ctx));
+                        if (f.DenseRank is { } dr) why.Add($"Similar wording (embedding similarity {sim[f.Passage]:0.00}, rank {dr}); similarity is not legal relevance");
+                        ordered.Add(new Hit(f.Passage, f.LexRank is null ? "semantic" : "lexical", f.Fused, why));
+                    }
+                    foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))   // lexical tail beyond fusion depth
+                        if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx)));
+                    if (mode == "lexical" && dense.Count > 0) mode = "hybrid";
+                    notes[0] = $"Hybrid search (BM25 fused with embedding similarity: {Semantic.Description}). Identifier matches are placed first and are never re-ranked.";
+                }
+                else
+                // ---- C14 S4 hybrid hook (end)
                 foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))
                     if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx)));
             }
@@ -82,13 +130,101 @@ public sealed class SearchService
         }
 
         ordered = ordered.Where(h => !_docHidden(_ix.Passages[h.PassageIndex].DocId)).ToList();
+        if (service is not null && Legal.LegalIdentifierResolver.ServiceLabels.TryGetValue(service, out var svcLabel))
+        {
+            ordered = ServicePreference(ordered, service, hybrid: mode == "hybrid");
+            notes.Add($"Service preference: {svcLabel}. Ranked results from {svcLabel} instruments and judgments are raised and those of other services lowered; identifier, case-name and mention tiers are unchanged and nothing is excluded.");
+        }
+        else service = null;
         var facets = Facets(ordered, filters);
         var filtered = ordered.Where(h => Pass(_ix.Docs[_ix.DocOf(h.PassageIndex)], filters, null)).ToList();
         int docs = filtered.Select(h => _ix.DocOf(h.PassageIndex)).Distinct().Count();
         var state = filtered.Count > 0 ? "results" : "empty";
-        return new SearchResult(state, mode, ctx.Chips, filtered.Take(MaxHits).ToList(), filtered.Count, docs, facets, null, null,
-            ctx.Highlight.ToList(), ctx.Phrases, notes);
+        // All filtered hits are returned in relevance order; the HTTP layer pages them by document (C14 F10).
+        return new SearchResult(state, mode, ctx.Chips, filtered, filtered.Count, docs, facets, null, null,
+            ctx.Highlight.ToList(), ctx.Phrases, notes, service);
     }
+
+    // ------------------------------------------------------------------ service preference (C14 F09, short term)
+    public const double SameServiceBoost = 1.6, OtherServicePenalty = 0.5;
+
+    /// Re-orders only the ranked tiers ("lexical", "title"): a document of the preferred service scores ×1.6, one of
+    /// another service ×0.5, a general document ×1.0. Pinned tiers keep their place and order. Deterministic.
+    /// Hybrid mode (Codex review of PR #70): fused RRF scores, the raw-BM25 lexical tail beyond LexicalDepth and
+    /// dense-only ("semantic") hits are not on one scale, so the preference is applied to a rank-based score
+    /// 1/(RrfK + position) over the incoming hybrid order (fused hits, then the tail). Equal multipliers therefore keep
+    /// that order exactly, and dense-only hits are ranked with the others instead of being treated as pinned.
+    /// Lexical-only search keeps the original BM25 × multiplier behaviour.
+    List<Hit> ServicePreference(List<Hit> hits, string service, bool hybrid = false)
+    {
+        bool Ranked(Hit h) => h.Tier is "lexical" || (hybrid && h.Tier is "semantic");
+        var fixedPart = hits.Where(h => !Ranked(h)).ToList();
+        double F(Hit h) => _ix.Service[_ix.DocOf(h.PassageIndex)] is not { } s ? 1.0 : s == service ? SameServiceBoost : OtherServicePenalty;
+        var ranked = hits.Where(Ranked).Select((h, i) => (h, i, s: (hybrid ? 1.0 / (HybridRankK + i + 1) : h.Score) * F(h)))
+                         .OrderByDescending(x => x.s).ThenBy(x => x.i).Select(x => x.h with { Score = x.s });
+        return fixedPart.Concat(ranked).ToList();
+    }
+
+    /// Same constant as the default RRF k (HybridOptions.RrfK), so a position weight matches the fusion's own scale.
+    public const int HybridRankK = 60;
+
+    // ------------------------------------------------------------------ document-level pages and instrument groups (C14 F10, F11)
+    public sealed record GroupVariant(int Doc, string Label, int Passage);
+    public sealed record ResultGroup(int Doc, IReadOnlyList<GroupVariant> Variants);
+    public sealed record ResultPage(IReadOnlyList<Hit> Hits, IReadOnlyList<ResultGroup> Groups, int Page, int PageSize, int PageCount, int TotalGroups,
+                                    IReadOnlyDictionary<int, int> PassageCounts);
+    public const int DefaultPageSize = 25, MaxPageSize = 100;
+
+    /// Groups hits by instrument (editions and language versions of one instrument form one group, represented by
+    /// the English, unsuffixed copy when it has hits) and returns one page of groups. Passages keep the relevance
+    /// order of the full result; sort "new"/"old" orders groups by the representative's date (undated last).
+    public ResultPage Page(SearchResult r, int page, int size, string? sort)
+    {
+        size = Math.Clamp(size <= 0 ? DefaultPageSize : size, 1, MaxPageSize);
+        var order = new List<string>();
+        var members = new Dictionary<string, List<int>>(StringComparer.Ordinal);
+        var firstPassage = new Dictionary<int, int>();
+        foreach (var h in r.Hits)
+        {
+            int d = _ix.DocOf(h.PassageIndex);
+            if (!firstPassage.TryAdd(d, h.PassageIndex)) continue;
+            var key = _ix.GroupKey[d];
+            if (!members.TryGetValue(key, out var l)) { members[key] = l = new(); order.Add(key); }
+            l.Add(d);
+        }
+        var groups = order.Select(k =>
+        {
+            var ds = members[k];
+            int rep = ds.OrderBy(d => Legal.LegalIdentifierResolver.PrimaryRank(_ix.Docs[d])).ThenBy(d => ds.IndexOf(d)).First();
+            return new ResultGroup(rep, ds.Where(d => d != rep).Select(d => new GroupVariant(d, Legal.LegalIdentifierResolver.VariantLabel(_ix.Docs[d]), firstPassage[d])).ToList());
+        }).ToList();
+        if (sort is "new" or "old")
+        {
+            var idx = groups.Select((g, i) => (g, i)).ToList();
+            string Date(ResultGroup g) => _ix.Docs[g.Doc].IssueDate ?? "";
+            groups = (sort == "new"
+                ? idx.OrderBy(x => Date(x.g).Length == 0).ThenByDescending(x => Date(x.g), StringComparer.Ordinal)
+                : idx.OrderBy(x => Date(x.g).Length == 0).ThenBy(x => Date(x.g), StringComparer.Ordinal)).ThenBy(x => x.i).Select(x => x.g).ToList();
+        }
+        int pages = Math.Max(1, (groups.Count + size - 1) / size);
+        page = Math.Clamp(page <= 0 ? 1 : page, 1, pages);
+        var slice = groups.Skip((page - 1) * size).Take(size).ToList();
+        // Passages carried by a page: the first LeadPassages in relevance order (unchanged from before paging, so the
+        // top of the ranking is complete), then at most PassagesPerGroup per document. Counts are reported per group.
+        var shown = slice.Select(g => g.Doc).ToHashSet();
+        var perDoc = new Dictionary<int, int>();
+        var counts = new Dictionary<int, int>();
+        var hits = new List<Hit>();
+        foreach (var h in r.Hits)
+        {
+            int d = _ix.DocOf(h.PassageIndex);
+            if (!shown.Contains(d)) continue;
+            counts[d] = counts.GetValueOrDefault(d) + 1;
+            if (hits.Count < LeadPassages || perDoc.GetValueOrDefault(d) < PassagesPerGroup) { hits.Add(h); perDoc[d] = perDoc.GetValueOrDefault(d) + 1; }
+        }
+        return new ResultPage(hits, slice, page, size, pages, groups.Count, counts);
+    }
+    public const int LeadPassages = 20, PassagesPerGroup = 3;
 
     // ------------------------------------------------------------------ identifier tiers
     (List<Hit> pinned, List<Hit> mentions, List<string> rest) IdentifierTiers(string raw, Ctx ctx)
@@ -111,6 +247,9 @@ public sealed class SearchService
             var cover = new SortedSet<int>();
             if (_ix.CoverIds.TryGetValue(id.Normalized, out var c)) cover.UnionWith(c.Where(d => !docs.Contains(d)));
             ctx.Chips.Add(new Chip("identifier", $"{label} · {id.Raw.Trim()}", docs.Count + cover.Count > 0 ? $"{docs.Count + cover.Count} matching document(s)" : "no document carries this identifier"));
+            if (docs.Count + cover.Count == 0 && id.Kind is IdKind.ReportedCitation or IdKind.NeutralCitation)
+                ctx.Chips.Add(new Chip("not_held", $"Citation not recorded in this library: {id.Raw.Trim()}",
+                    "No held document carries this citation in its metadata or in the masthead of its first page. Parallel citations (SCC, AIR, SCALE) are often not recorded: search the party names or the neutral citation. Absence here is not evidence that the judgment is not held, or that it does not exist."));
             ctx.Phrases.Add(idToks);
             var mentionHits = PhraseOccurrences(idToks);
             // A document-level identifier pins ONE representative passage per matching document: a passage that
@@ -134,69 +273,35 @@ public sealed class SearchService
 
         foreach (var id in ids.Where(i => i.Kind == IdKind.Section))
         {
-            var actWords = restWords.Select(w => Text.Tokenize(w)).SelectMany(t => t).Select(t => t.Term)
-                                    .Where(t => !Text.Stopwords.Contains(t)).ToList();
-            // Instrument scoping (review F05): among Acts/Rules whose title contains every query word, keep only the
-            // closest titles (fewest extra title words, ignoring years and stopwords). Distinct closest titles are
-            // ambiguous: nothing is pinned and a disambiguation chip lists them.
-            // Instrument scoping (review F05, F14), general rules:
-            //  - no instrument words: provision in any Act/Rules/Regulations;
-            //  - only generic words ("Rules", "Act"): ambiguous; nothing pinned; candidate instruments offered;
-            //  - instrument words that match no held title: say so; nothing pinned; the words run as lexical text;
-            //  - otherwise keep the closest titles (fewest extra words); distinct closest titles are ambiguous.
-            var scoped = new List<int>();
-            string? ambiguous = null, notHeld = null;
-            var specific = actWords.Where(w => !GenericInstrumentWords.Contains(w) && !w.All(char.IsDigit)).ToList();
-            if (actWords.Count > 0 && specific.Count == 0)
+            // Instrument scoping (review F05, F14) and short names/abbreviations (C14 F01): Legal.LegalIdentifierResolver.
+            var scope = _ix.Resolver.ResolveInstrument(restWords);
+            var actWords = scope.Terms.ToList();
+            void AliasChips()
             {
-                var kinds = actWords.Where(GenericInstrumentWords.Contains).ToHashSet();
-                // candidates ordered by closeness (fewest other title words), then title; count always stated
-                var all = Enumerable.Range(0, _ix.Docs.Count)
-                    .Where(d => _ix.Docs[d].IsStatute && kinds.All(k => _ix.TitleTerms[d].Contains(k) || _ix.TitleTerms[d].Contains(k + "s") || _ix.TitleTerms[d].Contains(k.TrimEnd('s'))))
-                    .OrderBy(d => _ix.TitleTerms[d].Count(t => !kinds.Contains(t) && !Text.Stopwords.Contains(t) && !t.All(char.IsDigit)))
-                    .ThenBy(d => _ix.Docs[d].Title, StringComparer.OrdinalIgnoreCase)
-                    .Select(d => _ix.Docs[d].Title).Distinct().ToList();
-                ambiguous = all.Count == 0 ? "" : $"{all.Count} candidate instrument(s): " + string.Join("; ", all.Take(8)) + (all.Count > 8 ? $"; +{all.Count - 8} more" : "");
-                if (ambiguous.Length == 0) ambiguous = "no instrument of that kind is held";
+                foreach (var a in scope.Aliases)
+                    ctx.Chips.Add(new Chip("alias", $"{a.Alias.ToUpperInvariant()} → {a.HeldTitle}",
+                        $"The letters “{a.Alias.ToUpperInvariant()}” were read as the held instrument “{a.HeldTitle}”. An alias says which title was searched; it is not a statement that two instruments are equivalent."));
             }
-            else if (actWords.Count > 0)
+            if (scope.Kind == Legal.ScopeKind.NotHeld)
             {
-                var cands = new List<(int d, int extra)>();
-                for (int d = 0; d < _ix.Docs.Count; d++)
-                    if (_ix.Docs[d].IsStatute && actWords.All(w => _ix.TitleTerms[d].Contains(w)))
-                        cands.Add((d, _ix.TitleTerms[d].Count(t => !actWords.Contains(t) && !Text.Stopwords.Contains(t) && !t.All(char.IsDigit))));
-                if (cands.Count == 0) notHeld = string.Join(" ", restWords);
-                else
-                {
-                    int best = cands.Min(c => c.extra);
-                    var top = cands.Where(c => c.extra == best).Select(c => c.d).ToList();
-                    var titles = top.Select(d => NormTitle(_ix.Docs[d].Title)).Distinct().ToList();
-                    if (titles.Count == 1) scoped = top;
-                    else ambiguous = string.Join("; ", top.Select(d => _ix.Docs[d].Title).Distinct().Take(6));
-                }
-            }
-            string scopeText;
-            if (notHeld is not null)
-            {
-                ctx.Chips.Add(new Chip("not_held", $"No instrument titled \u201c{notHeld}\u201d in this library",
+                ctx.Chips.Add(new Chip("not_held", $"No instrument titled “{scope.Text}” in this library",
                     $"{id.ProvisionWord} {id.Base}{id.Sub} was not looked up in any other instrument. The words are searched as plain text. Absence here is not evidence that the instrument or provision does not exist."));
                 ctx.Phrases.Add(Text.Tokenize(id.Raw).Select(t => t.Term).ToList());
                 continue;
             }
-            if (ambiguous is not null)
+            if (scope.Kind == Legal.ScopeKind.Ambiguous)
             {
-                ctx.Chips.Add(new Chip("ambiguous", $"{id.ProvisionWord} {id.Base}{id.Sub}: which instrument?", "Several instruments could be meant: " + ambiguous + ". Add the full title or year."));
+                ctx.Chips.Add(new Chip("ambiguous", $"{id.ProvisionWord} {id.Base}{id.Sub}: which instrument?", "Several instruments could be meant: " + scope.Text + ". Add the full title or year."));
+                AliasChips();
                 restWords.Clear();
                 continue;
             }
-            if (scoped.Count > 0) { scopeText = _ix.Docs[scoped[0]].Title ?? string.Join(" ", restWords); restWords.Clear(); }
-            else
-            {
-                scopeText = "any Act, Rules or Regulations in the library";
-                for (int d = 0; d < _ix.Docs.Count; d++) if (_ix.Docs[d].IsStatute) scoped.Add(d);
-            }
+            var scoped = scope.Docs.ToList();
+            var scopeText = scope.Text;
+            if (scope.Kind == Legal.ScopeKind.Scoped) restWords.Clear();
             var label = $"{id.ProvisionWord} {id.Base}{id.Sub}";
             ctx.Chips.Add(new Chip("identifier", $"{label} · {scopeText}", null));
+            AliasChips();
             var found = new List<(int p, int strength)>();
             foreach (var d in scoped)
                 foreach (var p in _ix.DocPassages[d])
@@ -224,10 +329,8 @@ public sealed class SearchService
         return (pinned, mentions, restWords);
     }
 
-    static readonly HashSet<string> GenericInstrumentWords = new(StringComparer.Ordinal)
-    { "act", "acts", "rule", "rules", "regulation", "regulations", "order", "orders", "notification", "notifications", "code", "manual" };
+    static string NormTitle(string? t) => Legal.LegalIdentifierResolver.NormTitle(t);
 
-    static string NormTitle(string? t) => string.Join(" ", Text.Tokenize(t ?? "").Select(x => x.Term).Where(x => !x.All(char.IsDigit) && !Text.Stopwords.Contains(x)));
 
     Dictionary<int, int> PhraseOccurrences(IReadOnlyList<string> terms)
     {

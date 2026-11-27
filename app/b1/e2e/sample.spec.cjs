@@ -114,3 +114,49 @@ test("S-07 Administration overview (Admin) and closed assistant", async ({ page 
   await page.getByRole("link", { name: "Assistant" }).click();
   await shot(page, "b1-12-gated-assistant.png");
 });
+
+// C14 S1 on the real sample: statutory aliases, party names, unrecorded citations, editions nested, document pages.
+test("S-10 IPC and BNS abbreviations pin the provision with a disclosed alias; I.P.C. too", async ({ page }) => {
+  await login(page);
+  for (const [q, chipText, hitText] of [["section 302 IPC", "IPC → The Indian Penal Code", "302. Punishment for murder"],
+                                         ["s.302 I.P.C.", "IPC → The Indian Penal Code", "302. Punishment for murder"],
+                                         ["section 103 BNS", "BNS → The Bharatiya Nyaya Sanhita", null]]) {
+    await search(page, q);
+    await expect(page.locator(".qchip[data-kind=alias]")).toContainText(chipText);
+    await expect(page.locator(".qchip", { hasText: "No instrument titled" })).toHaveCount(0);
+    await expect(page.locator(".hit").first().locator(".chip", { hasText: "Identifier" })).toBeVisible();
+    if (hitText) await expect(page.locator(".rgroup").first().locator(".hit").first()).toContainText(hitText);
+  }
+  await expect(page.locator(".rgroup").first().locator(".rgroup-variants")).toContainText("Hindi text");
+});
+
+test("S-11 party name ranks the named judgment first; an unrecorded SCC citation says so", async ({ page }) => {
+  await login(page);
+  await search(page, "Dharamvir Singh");
+  await expect(page.locator(".rgroup").first()).toHaveAttribute("data-doc", "sc-2013-dharamvir-singh-2013insc408");
+  await expect(page.locator(".qchip[data-kind=case_name]")).toContainText("DHARAMVIR SINGH");
+  await search(page, "(2013) 7 SCC 316");
+  await expect(page.locator(".qchip[data-kind=not_held]")).toContainText("Citation not recorded in this library");
+  await search(page, "[2013] 8 S.C.R. 1119");
+  await expect(page.locator(".rgroup").first()).toHaveAttribute("data-doc", "sc-2013-dharamvir-singh-2013insc408");
+  await search(page, "court marshal");
+  await expect(page.locator(".qchip-suggest")).toContainText("court martial");
+});
+
+test("S-12 document pages reach every result; page is in the URL and restores", async ({ page }) => {
+  await login(page);
+  await search(page, "court martial");
+  const pager = page.locator("nav.pager");
+  await expect(pager).toContainText("Page 1 of");
+  const total = parseInt((await pager.innerText()).match(/of (\d+)/)[1], 10);
+  expect(total).toBeGreaterThan(5);
+  await pager.getByRole("button", { name: "Next" }).click();
+  await expect(page.locator("nav.pager")).toContainText(`Page 2 of ${total}`);
+  expect(page.url()).toContain("page=2");
+  await page.goto(`/r?q=court+martial&page=${total}`);
+  await expect(page.locator("nav.pager")).toContainText(`Page ${total} of ${total}`);
+  await expect(page.locator("nav.pager").getByRole("button", { name: "Next" })).toBeDisabled();
+  await expect(page.locator(".rgroup").first()).toBeVisible();
+  await page.selectOption("#sort", "new");
+  await expect(page.locator("nav.pager")).toContainText(`Page 1 of ${total}`);     // a new ordering starts at page 1
+});

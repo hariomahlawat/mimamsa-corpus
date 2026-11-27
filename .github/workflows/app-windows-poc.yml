@@ -283,7 +283,7 @@ jobs:
           Start-Service $svc.Name
           $psql = Join-Path $env:PGBIN "psql.exe"; $env:PGPASSWORD = "root"
           & $psql -U postgres -h 127.0.0.1 -c "CREATE ROLE mimamsa LOGIN PASSWORD 'mimamsa';"
-          foreach ($db in @("mimamsa_b1_test", "mimamsa_b1_oracle", "mimamsa_b1_e2e_syn", "mimamsa_b1_svc")) {
+          foreach ($db in @("mimamsa_b1_test", "mimamsa_b1_test_xfer", "mimamsa_b1_oracle", "mimamsa_b1_e2e_syn", "mimamsa_b1_svc")) {
             & $psql -U postgres -h 127.0.0.1 -c "CREATE DATABASE $db OWNER mimamsa;"
             if ($LASTEXITCODE) { throw "create $db failed" }
           }

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- C14 S4 hybrid-retrieval PoC: in-process ONNX embedding model (CPU; optional CUDA EP) behind Core's narrow
+       ISemanticScorer interface. Off unless Mimamsa:Hybrid:Enabled=true. No network access at run time. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.31.1" />
+    <PackageReference Include="Microsoft.ML.Tokenizers" Version="2.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mimamsa.Core\Mimamsa.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Mimamsa.Tests" />
+  </ItemGroup>
+</Project>

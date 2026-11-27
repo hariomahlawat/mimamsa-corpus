@@ -11,6 +11,10 @@ public static partial class Toc
 {
     [GeneratedRegex(@"(?m)^[ \t]*(?:(?:Section|Rule|Regulation|Article)[ \t]+)?(?<n>\d{1,3}[A-Z]{0,2}(?:\([0-9a-zA-Z]{1,4}\))*)\.[ \t]+(?<h>\S[^\n]{0,180})")]
     private static partial Regex Heading();
+    // C14 S3: some instruments (Army Rules, 1954) print the number alone on its line and the heading on the next:
+    // "22.\nHearing of charge."
+    [GeneratedRegex(@"(?m)^[ \t]*(?:(?:Section|Rule|Regulation|Article)[ \t]+)?(?<n>\d{1,3}[A-Z]{0,2})\.[ \t]*\r?\n[ \t]*(?<h>[A-Z\[][^\n]{1,180})")]
+    private static partial Regex SplitHeading();
     // compilation footnotes printed with the same "N. ..." shape ("1. Subs. by Act 19 of 1955", "4. The words ... omitted")
     [GeneratedRegex(@"^(?:Subs\.|Ins\.|Omitted by|Added by|Rep\.|The (?:words|word|figures|brackets|letters?)\b.*\b(?:omitted|substituted|inserted)\b)", RegexOptions.IgnoreCase)]
     private static partial Regex Footnote();
@@ -31,6 +35,20 @@ public static partial class Toc
                 bool omitted = h.StartsWith('[') && h.Contains("Omitted", StringComparison.Ordinal);
                 int rank = body || (omitted && h.Length > 15) ? 3 : omitted ? 2 : Footnote().IsMatch(h) ? 0 : 1;
                 if (rank == 0) continue;
+                var pid = d.Passages.Where(p => p.Page == page.Page && p.CharStart <= m.Index && m.Index < p.CharEnd).Select(p => p.PassageId).FirstOrDefault();
+                var e = new TocEntry(n, heading.Length > 120 ? heading[..120] + "…" : heading, page.Page, pid, omitted);
+                if (!best.TryGetValue(n, out var cur) || rank > cur.rank) best[n] = (e, rank);
+            }
+        foreach (var page in d.Pages.Values.OrderBy(p => p.Page))
+            foreach (Match m in SplitHeading().Matches(page.Text))
+            {
+                var n = m.Groups["n"].Value; var h = m.Groups["h"].Value.Trim();
+                if (Footnote().IsMatch(h)) continue;
+                int dash = h.IndexOf('—');
+                var heading = (dash > 0 ? h[..dash] : h).TrimEnd('.', ' ');
+                if (heading.Length < 2) continue;
+                bool omitted = h.StartsWith('[') && h.Contains("Omitted", StringComparison.Ordinal);
+                const int rank = 2;   // below an inline body heading ("69. Civil offences.—…"), above an arrangement-list entry
                 var pid = d.Passages.Where(p => p.Page == page.Page && p.CharStart <= m.Index && m.Index < p.CharEnd).Select(p => p.PassageId).FirstOrDefault();
                 var e = new TocEntry(n, heading.Length > 120 ? heading[..120] + "…" : heading, page.Page, pid, omitted);
                 if (!best.TryGetValue(n, out var cur) || rank > cur.rank) best[n] = (e, rank);

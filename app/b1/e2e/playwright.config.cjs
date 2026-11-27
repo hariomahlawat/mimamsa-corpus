@@ -13,23 +13,28 @@ const dll = process.env.B1_DLL || path.join(root, "src", "Mimamsa.Web", "bin", "
 const dotnet = process.env.DOTNET || "dotnet";
 const webDir = require("fs").existsSync(path.join(path.dirname(dll), "wwwroot")) ? path.dirname(dll) : path.join(root, "src", "Mimamsa.Web");
 
-function server(port, site, db) {
+function server(port, site, db, extra = {}) {
   return {
     command: `"${dotnet}" "${dll}"`, cwd: webDir, url: `http://127.0.0.1:${port}/health`, reuseExistingServer: false, timeout: 120_000,
-    stdout: "ignore", stderr: "pipe",
+    stdout: process.env.B1_SERVER_STDOUT || "ignore", stderr: "pipe",
     env: { ASPNETCORE_URLS: `http://127.0.0.1:${port}`, Mimamsa__Site: site, Mimamsa__Db: db, Mimamsa__Test__Enabled: "true",
       Mimamsa__Test__ResetState: "true", Mimamsa__Test__ResetLedger: "true", Mimamsa__Test__Users__0: "admin:Admin:admin-password-1",
       Mimamsa__Test__Users__1: "reader:User:reader-password-1", DOTNET_CLI_TELEMETRY_OPTOUT: "1", DOTNET_NOLOGO: "1",
-      Mimamsa__RestrictedRegister: process.env.B1_REGISTER || path.resolve(root, "..", "..", "config", "restricted_material.json") },
+      Mimamsa__RestrictedRegister: process.env.B1_REGISTER || path.resolve(root, "..", "..", "config", "restricted_material.json"), ...extra },
   };
 }
 
 if (!process.env.B1_SYN_SITE || !process.env.B1_SYN_DB) throw new Error("B1_SYN_SITE and B1_SYN_DB are required");
-const projects = [{ name: "syn", testMatch: /journeys\.spec\.cjs/, use: { baseURL: "http://127.0.0.1:5302" } }];
-const webServer = [server(5302, process.env.B1_SYN_SITE, process.env.B1_SYN_DB)];
+// Ports can be moved so that several checkouts on one host can run the journeys at the same time.
+const synPort = +(process.env.B1_SYN_PORT || 5302), samplePort = +(process.env.B1_SAMPLE_PORT || 5301);
+const projects = [{ name: "syn", testMatch: /journeys\.spec\.cjs/, use: { baseURL: `http://127.0.0.1:${synPort}` } }];
+// C14 S2 (test mode only): an account reserved for the lockout journey, a 4 s lock, and the pause used by the
+// mid-transfer withdrawal journey (X-Mimamsa-Test-Pause: before-enter). Delivery settings are unchanged.
+const webServer = [server(synPort, process.env.B1_SYN_SITE, process.env.B1_SYN_DB, {
+  Mimamsa__Test__Users__2: "locktest:User:locktest-password-1", Mimamsa__Test__LockSeconds: "4", Mimamsa__Test__PauseMs: "5000" })];
 if (process.env.B1_SAMPLE_SITE && process.env.B1_SAMPLE_DB) {
-  projects.push({ name: "sample", testMatch: /sample\.spec\.cjs/, use: { baseURL: "http://127.0.0.1:5301" } });
-  webServer.push(server(5301, process.env.B1_SAMPLE_SITE, process.env.B1_SAMPLE_DB));
+  projects.push({ name: "sample", testMatch: /sample\.spec\.cjs/, use: { baseURL: `http://127.0.0.1:${samplePort}` } });
+  webServer.push(server(samplePort, process.env.B1_SAMPLE_SITE, process.env.B1_SAMPLE_DB));
 }
 
 module.exports = {

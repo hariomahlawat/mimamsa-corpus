@@ -1,9 +1,11 @@
 // Shell, router and keymap (app/design/02 §2-4, 05 §2, keymap.json). Client policy: no localStorage/IndexedDB/
 // service worker; sessionStorage only for pane_widths, rail_collapsed, view_mode, theme; no query text stored.
-import { api, probe, state as apiState } from "./api.js";
+import { api, probe, noteEpoch, state as apiState } from "./api.js";
 import { h, append, clear, $, toast, announce, openDialog, session, fmtDate } from "./ui.js";
 import * as research from "./research.js";
 import { loginPage, gatePage, laterPage, statutesPage, citePage, adminPage } from "./pages.js";
+import { noteRecentSearch, invalidateLibrary } from "./home.js";
+import { refreshRelations, liveRelationViews, relationsRefreshPending } from "./relations.js";
 const add = (el, ...k) => append(el, k);
 
 const main = $("#main");
@@ -30,6 +32,24 @@ window.addEventListener("mimamsa:unauthenticated", () => {
   renderShell(); loginPage(main, onLogin, "Your session has ended. Sign in again.");
 });
 
+// C14 F05: a change of serving-policy epoch (seen on any API response) re-checks the open documents at once; while
+// documents are open, the epoch is also polled so pages already on screen are cleared within about 10 seconds even
+// when the reader does nothing. The poll does not refresh the session.
+// Relationship evidence on screen (Statutes section view, instrument overview, context pane) is refreshed too, and the
+// poll also runs while such evidence is displayed (Codex review of PR #70).
+// The library home (statute shortcuts, Commander task provisions) is re-fetched too, and the poll also runs while the
+// home is displayed (Codex review of PR #70).
+window.addEventListener("mimamsa:policy-changed", () => { if (S) { research.revalidateOpenDocuments(); refreshRelations(); invalidateLibrary(); research.refreshHome(); } });
+const POLICY_POLL_MS = 10_000;
+setInterval(async () => {
+  if (!S || document.hidden || !(research.openDocumentCount() || liveRelationViews() || document.querySelector("section.home"))) return;
+  // plain fetch: the poll only reads the epoch; it never changes the connection or session state shown to the user
+  try { noteEpoch(await fetch("/api/policy", { credentials: "same-origin", cache: "no-store" })); } catch { /* next tick */ }
+  // a re-check that could not decide after an earlier epoch change is retried on every tick until it resolves
+  if (research.hasPendingRecheck()) research.revalidateOpenDocuments();
+  if (relationsRefreshPending()) refreshRelations();
+}, POLICY_POLL_MS);
+
 // ------------------------------------------------------------------ shell
 function applyTheme() {
   const t = session.get("theme");
@@ -48,9 +68,11 @@ function renderShell() {
   const rel = S?.release;
   $("#banner-text").textContent = rel?.banner || "Research and candidate data. Not legally verified.";
   $("#banner-meta").textContent = rel ? `AUTH-LEDGER v${rel.auth_ledger_version} · Release ${rel.release_id}` : "";
+  const dev = (S?.degraded || []).map((d) => d.text).join(" ");
+  $("#banner-dev").textContent = dev; $("#banner-dev").hidden = !dev; $("#banner").title = [$("#banner-text").textContent, dev].filter(Boolean).join(" ");
   const deg = $("#degraded");
   clear(deg);
-  const items = [...(S?.degraded || []).map((d) => d.text)];
+  const items = [];   // C14 S3: one banner line; the development-key statement moved onto it (#banner-dev)
   if (!apiState.online) items.unshift("Connection to the server lost. Retrying.");
   deg.hidden = !items.length;
   for (const t of items) add(deg, h("span", t));
@@ -112,6 +134,7 @@ async function route() {
     $("#q").value = research.R.query;
     research.mountResearch(main, nav);
     if (document.body.classList.contains("commander")) research.R.el.classList.add("no-ctx");
+    if (p === "/r") research.refreshHome();   // mountResearch keeps an existing shell, so a view switch must redraw the home
     await research.runSearch({ push: false });
     if (p.startsWith("/d/")) {
       const docId = decodeURIComponent(p.slice(3));
@@ -151,7 +174,7 @@ function forbidden() { clear(main); add(main, h("div.page", h("div.error-state",
 $("#searchform").addEventListener("submit", (e) => {
   e.preventDefault();
   const q = $("#q").value;
-  research.R.query = q; research.R.plainConfirmed = false;
+  research.R.query = q; research.R.plainConfirmed = false; noteRecentSearch(q);
   if (!location.pathname.startsWith("/r") && !location.pathname.startsWith("/d/")) { history.pushState({}, "", "/r?q=" + encodeURIComponent(q)); return route(); }
   research.mountResearch(main, nav);
   research.runSearch();

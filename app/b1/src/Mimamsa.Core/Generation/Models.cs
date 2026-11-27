@@ -57,6 +57,10 @@ public sealed class DocumentRecord
     public List<Passage> Passages { get; } = new();
     public List<Candidate> Candidates { get; } = new();
     public bool OriginalVerified { get; set; }
+    /// Detected language and extracted-text reliability (C14 F07); null until the derivative is loaded.
+    public TextAssessment? TextAssessment { get; set; }
+    /// Unreliable extracted text is not indexed for search (the document stays openable and labelled).
+    public bool TextExcludedFromSearch => TextAssessment?.Reliability == Generation.TextQuality.Unreliable;
     public int? Year => IssueDate is { Length: >= 4 } d && int.TryParse(d[..4], out var y) ? y : null;
     public bool IsStatute => DocType is "act" or "rules" or "regulations" or "notification" or "order";
     public string CourtOrIssuer => Judicial?.Court ?? IssuingAuthority ?? "Not recorded";

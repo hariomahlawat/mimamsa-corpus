@@ -1,6 +1,18 @@
 // Same-origin JSON API client. Session is an HttpOnly cookie; state-changing calls send the CSRF token.
 // Responses are never cached (server sends no-store; fetch uses cache: "no-store").
-export const state = { session: null, online: true, listeners: new Set() };
+export const state = { session: null, online: true, listeners: new Set(), epoch: null };
+
+/** C14 F05: every API response names the serving-policy epoch; a change means a withdrawal or reinstatement happened,
+ *  and open documents must be re-checked (event "mimamsa:policy-changed"). */
+export function noteEpoch(r) {
+  const v = r?.headers?.get?.("X-Mimamsa-Policy-Epoch");
+  if (v == null || v === "") return;
+  const e = Number(v);
+  if (!Number.isFinite(e)) return;
+  const before = state.epoch;
+  state.epoch = e;
+  if (before !== null && before !== e) window.dispatchEvent(new CustomEvent("mimamsa:policy-changed", { detail: { from: before, to: e } }));
+}
 
 export class ApiError extends Error {
   constructor(status, body) { super(body?.error || body?.notice || `HTTP ${status}`); this.status = status; this.body = body; }
@@ -25,6 +37,7 @@ export async function api(path, { method = "GET", body, signal } = {}) {
     throw new ApiError(0, { error: "Connection to the server lost." });
   }
   setOnline(true);
+  noteEpoch(r);
   let data = null;
   try { data = await r.json(); } catch { data = null; }
   if (r.status === 401 && path !== "/api/login" && path !== "/api/session") { window.dispatchEvent(new CustomEvent("mimamsa:unauthenticated")); }

@@ -230,12 +230,13 @@ def release(hn_key, pub, register, fixture, n: int, cover_ids=(), out: Path = No
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--fixture", type=Path, default=FIXTURE, help="default: the committed dev fixture; an independent evaluator may pass a holdout file")
     a = ap.parse_args()
     out = a.out.resolve()
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
-    fixture = json.loads(FIXTURE.read_text(encoding="utf-8"))
+    fixture = json.loads(a.fixture.read_text(encoding="utf-8"))
     register = load_register(REPO / "config" / "restricted_material.json")
     key, pub = new_dev_keypair()
     site = out / "site"
@@ -245,7 +246,7 @@ def main():
     b2, maps2, recs2 = release(key, pub, register, fixture, 2, cover_ids={"J-ALLOW"}, out=out)
     r2 = import_release(b2, site, trusted_public_key=pub, mode="development", register=register)
     del key
-    res = {"fixture_sha256": sha(FIXTURE.read_bytes()), "r1": {"activated": r1.activated, "refused": r1.refused_reasons, "unresolved": r1.unresolved},
+    res = {"fixture_sha256": sha(a.fixture.read_bytes()), "r1": {"activated": r1.activated, "refused": r1.refused_reasons, "unresolved": r1.unresolved},
            "r2": {"activated": r2.activated, "refused": r2.refused_reasons, "unresolved": r2.unresolved},
            "active_release": f"R13-syn-fixture-20261125-{2:08x}", "map": maps2,
            "doc_ids": {k: v["doc_id"] for k, v in recs2.items()},

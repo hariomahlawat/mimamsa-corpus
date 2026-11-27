@@ -1,0 +1,20 @@
+[
+ {
+  "viewport": "1366x768",
+  "hitsFullyVisible": 2,
+  "groupsStartingInView": 2,
+  "overflowX": false
+ },
+ {
+  "viewport": "1920x1080",
+  "hitsFullyVisible": 5,
+  "groupsStartingInView": 3,
+  "overflowX": false
+ },
+ {
+  "viewport": "2560x1440",
+  "hitsFullyVisible": 7,
+  "groupsStartingInView": 4,
+  "overflowX": false
+ }
+]
