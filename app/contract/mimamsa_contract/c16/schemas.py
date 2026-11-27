@@ -39,6 +39,7 @@ KIND_TO_SCHEMA = {
     "activation_scenario": "ACTIVATION_SCENARIO_SCHEMA.json",
     "activation_scenario_outcomes": "ACTIVATION_SCENARIO_OUTCOMES_SCHEMA.json",
     "component_verification_contract": "COMPONENT_VERIFICATION_SCHEMA.json",
+    "source_admission_accounting": "SOURCE_ADMISSION_ACCOUNTING_SCHEMA.json",
 }
 SHARED = "C16_SHARED_DEFINITIONS_SCHEMA.json"
 

@@ -278,6 +278,11 @@
      "bytes": 1026,
      "path": "corpus-v2/admissions.jsonl",
      "sha256": "69ed9afa4c47813be581d92597131da14a97772d0033ea2549fda0d29f5728d3"
+    },
+    {
+     "bytes": 1032,
+     "path": "registers/source_accounting.json",
+     "sha256": "624c9164f301c4b549803377193620684dcd0feec07ca70e6a4fba6b4d97beb5"
     }
    ],
    "format": "canonical-jsonl",
@@ -307,44 +312,66 @@
    "fallback": "REBUILD_LOCALLY_CHEAP",
    "files": [
     {
-     "bytes": 1035,
-     "path": "accelerators/rows/graph_edges.jsonl",
-     "sha256": "cfc735b2d6f4ab7535d32940ccf3e8dde4a500b3c730d65ad43845662128e406"
+     "bytes": 4205,
+     "path": "accelerators/rows/corpus_admissions.jsonl",
+     "sha256": "d8595dc857de07e4745e46f7d99d18b8d132f95da6899eb81775f69e3976cc7a"
     },
     {
-     "bytes": 1035,
-     "path": "accelerators/rows/graph_nodes.jsonl",
-     "sha256": "7ed26b1de5aa2d4e88da72e2850c3a6ae03179d9111dcb318946291ba6243173"
+     "bytes": 5570,
+     "path": "accelerators/rows/corpus_relationships.jsonl",
+     "sha256": "91c881d713d8b7584ad041f882d7e0d1211ebb00a87bb9cba667af527b907d22"
     },
     {
-     "bytes": 1038,
+     "bytes": 4359,
+     "path": "accelerators/rows/document_identities.jsonl",
+     "sha256": "2a25087915c3a0c5ce4a6a990fd08c9f4e266a0d8d2f8f4f199223a3fee7c548"
+    },
+    {
+     "bytes": 4862,
+     "path": "accelerators/rows/evidence_anchors.jsonl",
+     "sha256": "cf572c9be1ece21d777b3ef790b7ea19e7f74b7f83a9cb7fa488f2ac1e125742"
+    },
+    {
+     "bytes": 2665,
      "path": "accelerators/rows/taxonomy_nodes.jsonl",
-     "sha256": "e4a078a9b17038a1da2f129e21eefeddeb0bba53e0e6b0c31d6a8cac8100d990"
+     "sha256": "b51e66e76ed48c2e0c6ba10c2c854a94f3a792c17e6db6491c4644745422d736"
     }
    ],
    "format": "mimamsa-knowledge-rows/1",
    "kind": "KNOWLEDGE_ROWS",
    "model_sha256": null,
-   "result_count": 30,
-   "result_digest": "6beb9c90b2d3c8795798b41965a480d3b234eb4c580e4fdaf7d6fae82ec05b6b",
+   "result_count": 51,
+   "result_digest": "9b8a24df4551e119de7d0129e7ca85f650c73cb6129cd3576173c9cd8efb4d96",
    "source_digest": "7f8a8aa9b6ffd8166bac8cf3fae5658713fd46a2516b427449abd48639753688",
    "tables": [
     {
-     "file": "accelerators/rows/graph_edges.jsonl",
-     "row_count": 10,
-     "rows_sha256": "9918d6f2e56fca8e7d4fb0d34a38a9635a7fe0f9582ae1236bf38ed14af5bcaf",
-     "table": "graph_edges"
+     "file": "accelerators/rows/corpus_admissions.jsonl",
+     "row_count": 11,
+     "rows_sha256": "d8595dc857de07e4745e46f7d99d18b8d132f95da6899eb81775f69e3976cc7a",
+     "table": "corpus_admissions"
     },
     {
-     "file": "accelerators/rows/graph_nodes.jsonl",
+     "file": "accelerators/rows/corpus_relationships.jsonl",
+     "row_count": 12,
+     "rows_sha256": "91c881d713d8b7584ad041f882d7e0d1211ebb00a87bb9cba667af527b907d22",
+     "table": "corpus_relationships"
+    },
+    {
+     "file": "accelerators/rows/document_identities.jsonl",
      "row_count": 10,
-     "rows_sha256": "24b158da538610775cc202cfdb41898a92b3cf913d453268b1fb68401a791778",
-     "table": "graph_nodes"
+     "rows_sha256": "2a25087915c3a0c5ce4a6a990fd08c9f4e266a0d8d2f8f4f199223a3fee7c548",
+     "table": "document_identities"
+    },
+    {
+     "file": "accelerators/rows/evidence_anchors.jsonl",
+     "row_count": 8,
+     "rows_sha256": "cf572c9be1ece21d777b3ef790b7ea19e7f74b7f83a9cb7fa488f2ac1e125742",
+     "table": "evidence_anchors"
     },
     {
      "file": "accelerators/rows/taxonomy_nodes.jsonl",
      "row_count": 10,
-     "rows_sha256": "cdb5d9234c18e8ee2245bc511352b608ed703abaa61462c67d14e7cc24bb575b",
+     "rows_sha256": "b51e66e76ed48c2e0c6ba10c2c854a94f3a792c17e6db6491c4644745422d736",
      "table": "taxonomy_nodes"
     }
    ],
@@ -370,22 +397,36 @@
    "fallback": "REBUILD_LOCALLY_CHEAP",
    "files": [
     {
-     "bytes": 1030,
-     "path": "accelerators/graph/nodes.jsonl",
-     "sha256": "959a08e626a5eb770a3b325acb551aefe7d21f19b31571062e23c8f7136e929a"
+     "bytes": 1036,
+     "path": "accelerators/graph/graph_edges.jsonl",
+     "sha256": "51f00f8c06ba11710e553e0d173fb9a5f1f2b682e3a6fdd9cc58209e7c8f62ba"
     },
     {
-     "bytes": 1030,
-     "path": "accelerators/graph/edges.jsonl",
-     "sha256": "54f52566c31d67535fd6b04761d549ede22e7c4ffdea7df42044ee38b6448d76"
+     "bytes": 1036,
+     "path": "accelerators/graph/graph_nodes.jsonl",
+     "sha256": "98f578c656303c78903acf5a80e84328b242cf5c6eeceec4f2ed894e84cc4e66"
     }
    ],
    "format": "c15-graph-rows-v1",
    "kind": "GRAPH",
    "model_sha256": null,
-   "result_count": 180000,
+   "result_count": 20,
    "result_digest": "7eb9e1c9285aa67085cf1267fbbf7ac3e9001c658a03ef1e277a55d2ee9b4bf4",
    "source_digest": "b0fcb1533e0bf9eb9d1906b30f7a9f8eb3ed651c2089c07aa01889569322a366",
+   "tables": [
+    {
+     "file": "accelerators/graph/graph_edges.jsonl",
+     "row_count": 10,
+     "rows_sha256": "9918d6f2e56fca8e7d4fb0d34a38a9635a7fe0f9582ae1236bf38ed14af5bcaf",
+     "table": "graph_edges"
+    },
+    {
+     "file": "accelerators/graph/graph_nodes.jsonl",
+     "row_count": 10,
+     "rows_sha256": "24b158da538610775cc202cfdb41898a92b3cf913d453268b1fb68401a791778",
+     "table": "graph_nodes"
+    }
+   ],
    "transport": "FULL",
    "verify": [
     "SHA256_EACH_FILE",
@@ -486,7 +527,7 @@
   "ocr": "NONE"
  },
  "manifest_format": "MKR-1",
- "notes": "CP-1 fixture vertical slice: explicitly degraded (no vectors, uncalibrated samples); never ACTIVE_FULL; closes no FG on real data",
+ "notes": "CP-1 fixture vertical slice: explicitly degraded (no vectors, uncalibrated samples); never ACTIVE_FULL; closes no FG on real data. Graph tables belong to GRAPH (I-2).",
  "record_kind": "knowledge_release_manifest",
  "release_class": "KNOWLEDGE",
  "release_id": "R16-knowledge-20261201-0a0b0c0d",

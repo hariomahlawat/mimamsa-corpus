@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/SOURCE_ADMISSION_ACCOUNTING_SCHEMA.json",
+  "title": "Per-source admission accounting register (I-5; contract 2.1, additive)",
+  "description": "The ONE accounting format for B01 (site importer) and B02 (central build). File: registers/source_accounting.json, canonical JSON plus a final LF, owned by the ADMISSION_REGISTER component, listed in its signed component inventory and therefore covered by SHA256SUMS and its signature. The build writes the DECLARED register; the site importer recomputes its own (RECOMPUTED_BY_SITE, written into the generation beside the declared copy) and compares (accounting.compare_declared): inputs, identities, held, rejected and decision counts must match exactly; the site may only narrow eligibility and service. Reconciliation rules: accounting.accounting_issues. SITE_ONLY sources (local Admin uploads) never appear in a release.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "record_kind", "release_id", "scope", "sources"],
+  "properties": {
+    "contract": {"const": "mimamsa-corpus-contract/2.1"},
+    "record_kind": {"const": "source_admission_accounting"},
+    "release_id": {"type": "string", "pattern": "^R[0-9]{2,3}-[a-z0-9-]{1,40}-[0-9]{8}-[0-9a-f]{8}$"},
+    "scope": {"enum": ["DECLARED_BY_BUILD", "RECOMPUTED_BY_SITE"]},
+    "sources": {
+      "description": "One entry per input source, sorted by source id (code point order), unique.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source", "path", "provenance", "input", "identities", "effective_admissions", "by_decision", "held", "rejected", "quarantined", "eligible", "served", "not_served_reasons"],
+        "properties": {
+          "source": {"description": "v1:hf:<repo>@<40-hex revision> | v1:<ACQUISITION_CHANNEL> | c16:<corpus_generation_id> | v7:<name> | site:local-uploads", "type": "string",
+                     "pattern": "^(v1:hf:[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+@[0-9a-f]{40}|v1:[A-Z_]{3,40}|c16:CG-[0-9]{8}-[a-z0-9-]{1,40}-[0-9a-f]{8}|v7:[a-z0-9][a-z0-9._-]{0,63}|site:local-uploads)$"},
+          "path": {"enum": ["V1", "C16", "V7_REFERENCE", "SITE_ONLY"]},
+          "provenance": {
+            "type": ["object", "null"], "additionalProperties": false,
+            "required": ["generation_manifest_sha256", "hf_repo", "hf_revision", "candidate_set_sha256"],
+            "properties": {
+              "generation_manifest_sha256": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
+              "hf_repo": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"},
+              "hf_revision": {"anyOf": [{"$ref": "../v1/common.schema.json#/$defs/hf_revision"}, {"type": "null"}]},
+              "candidate_set_sha256": {"description": "V7_REFERENCE: sha256 of the sorted, LF-joined candidate original hashes.", "anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]}
+            }
+          },
+          "input": {"description": "Items the source contributed (v1 document records; C16 identities; v7 candidate records).", "type": "integer", "minimum": 0},
+          "identities": {"type": "integer", "minimum": 0},
+          "effective_admissions": {"description": "C16: effective (chain-head) admissions; 0 for other paths.", "type": "integer", "minimum": 0},
+          "by_decision": {"description": "C16: effective admissions per decision; {} for other paths.", "type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+          "held": {"type": "integer", "minimum": 0},
+          "rejected": {"type": "integer", "minimum": 0},
+          "quarantined": {"type": "integer", "minimum": 0},
+          "eligible": {"type": "integer", "minimum": 0},
+          "served": {"type": "integer", "minimum": 0},
+          "not_served_reasons": {"description": "Every input item that is not served, by reason code; sums with served to input.", "type": "object", "additionalProperties": {"type": "integer", "minimum": 1}, "propertyNames": {"pattern": "^[A-Z][A-Z0-9_]{2,63}$"}}
+        },
+        "allOf": [
+          {"if": {"properties": {"path": {"const": "C16"}}}, "then": {"properties": {"source": {"pattern": "^c16:"}, "provenance": {"type": "object", "properties": {"generation_manifest_sha256": {"type": "string"}, "hf_revision": {"type": "string"}}}}}},
+          {"if": {"properties": {"path": {"const": "V1"}}}, "then": {"properties": {"source": {"pattern": "^v1:"}, "effective_admissions": {"const": 0}, "by_decision": {"maxProperties": 0}}}},
+          {"if": {"properties": {"path": {"const": "V7_REFERENCE"}}}, "then": {"properties": {"source": {"pattern": "^v7:"}, "eligible": {"const": 0}, "served": {"const": 0}, "effective_admissions": {"const": 0}, "provenance": {"type": "object", "properties": {"candidate_set_sha256": {"type": "string"}}}}}},
+          {"if": {"properties": {"path": {"const": "SITE_ONLY"}}}, "then": {"properties": {"source": {"const": "site:local-uploads"}}}}
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {"if": {"properties": {"scope": {"const": "DECLARED_BY_BUILD"}}}, "then": {"properties": {"sources": {"items": {"properties": {"path": {"not": {"const": "SITE_ONLY"}}}}}}}}
+  ]
+}

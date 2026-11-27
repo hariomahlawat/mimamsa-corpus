@@ -73,6 +73,47 @@ The codes come from the contracts and reference code; no new meaning is introduc
 
    For each source the counts are: identities, effective admissions by decision, eligible, served, held, rejected and quarantined. Each source is reconciled to its input count. A source whose counts do not reconcile refuses the bundle.
 
+   The one format for this is the accounting register in section 5a.
+
+## 5a. Per-source admission accounting register (2.1 clarification, PR #82)
+
+**One format for B01 and B02.** Schema `SOURCE_ADMISSION_ACCOUNTING_SCHEMA.json`; reference `accounting.py`; fixtures `v2_1/accounting/` (declared, recomputed, `negative/NA01–NA10`, `NC01–NC04`).
+
+| Item | Rule |
+| --- | --- |
+| File | `registers/source_accounting.json`: canonical JSON (contract §9.1) plus one final LF (`accounting.register_bytes`) |
+| Record kind | `source_admission_accounting`, `contract: "mimamsa-corpus-contract/2.1"` |
+| Scope | `DECLARED_BY_BUILD` (written by B02 S7) or `RECOMPUTED_BY_SITE` (written by B01) |
+| Inventory | listed in the **ADMISSION_REGISTER** component's `files` (namespace `registers/`), so it is in the signed component inventory, `SHA256SUMS` and the release signature. It is an ordinary register file: its bytes count toward the component's `result_digest` (arch §5, "registers") |
+| Site copy | B01 writes its recomputation to `<generation>/registers/source_accounting.site.json` (never shipped, never signed) and records both digests in the import report |
+| Source ids | `v1:hf:<repo>@<40-hex revision>`, `v1:<ACQUISITION_CHANNEL>`, `c16:<corpus_generation_id>`, `v7:<name>`, `site:local-uploads` (SITE_ONLY, site copy only); sorted, unique |
+| Fields per source | `source`, `path` (V1, C16, V7_REFERENCE, SITE_ONLY), `provenance` (`generation_manifest_sha256`, `hf_repo`, `hf_revision`, `candidate_set_sha256`, each nullable; required non-null where the path needs it), `input`, `identities`, `effective_admissions`, `by_decision`, `held`, `rejected`, `quarantined`, `eligible`, `served`, `not_served_reasons` (reason code → count) |
+
+**Reconciliation (`accounting_issues`, code `C16_SOURCE_ACCOUNTING`):**
+- R1 `identities == input`;
+- R2 `held + rejected + quarantined + eligible == input`;
+- R3 `served <= eligible` and `served + sum(not_served_reasons) == input`;
+- R4 C16: `sum(by_decision) == effective_admissions == identities`;
+- R5 V7_REFERENCE: `eligible == served == 0` (schema);
+- R6 sources unique and sorted;
+- R7 no SITE_ONLY source in a declared register (schema).
+
+**Declared vs site (`compare_declared`).** Same sources (SITE_ONLY ignored). `input`, `identities`, `held`, `rejected`, `effective_admissions` and `by_decision` must be equal. The site may only **narrow**: `eligible` and `served` may be lower, never higher; `quarantined` may be higher, never lower. Any difference beyond that refuses the bundle. A missing declared register refuses it (`C16_SOURCE_ACCOUNTING_MISSING`, B01's code).
+
+**Why B01's design.** B01's design is the stricter and more complete one: one kind, exact equality of everything but narrowing, and a site recomputation compared to a signed declaration. B02's richer fields (decision counts, not-served reasons, generation and HF pins) are kept as fields of the same record.
+
+**Mapping the streams must adopt:**
+
+| Stream | Was | Now |
+| --- | --- | --- |
+| B01 | `registers/source_accounting.json` = importer counts; `registers/source_accounting.declared.json` = declaration | **declared** = `registers/source_accounting.json` (shipped, signed); importer counts = `registers/source_accounting.site.json` (scope RECOMPUTED_BY_SITE) |
+| B01 | fields `candidate_sha256` (V7) | `provenance.candidate_set_sha256` (sha256 of the sorted, LF-joined candidate hashes); add `provenance`, `effective_admissions`, `by_decision`, `not_served_reasons`, `scope` |
+| B02 | `registers/admission-accounting.json`, kind `admission_accounting`, `format`, top-level `reconciled` | `registers/source_accounting.json`, kind `source_admission_accounting`, `contract` 2.1, `scope: DECLARED_BY_BUILD`; no `format`, no `reconciled` (reconciliation is the validator's job) |
+| B02 | sources `v1_canonical`, `c16_producer_generation`, `v7_candidates`, `local_admin_uploads` | ids `v1:hf:<repo>@<rev>`, `c16:<corpus_generation_id>`, `v7:<name>`; local uploads **omitted** from a declared register |
+| B02 | `documents` / `declared_servable` / `not_servable{reason}` | `input` and `identities` / `served` / `not_served_reasons` |
+| B02 | `admissions`, `effective_admissions`, `effective_by_decision`, `eligible` | `effective_admissions`, `by_decision`, `eligible` (all admission revisions are not counted) |
+| B02 | `generation_manifest_sha256`, `hf_repo`, `hf_revision`; `status` strings | `provenance.*`; the status is the `path` enum |
+
 ## 6. Producer obligations (Codex), additive to R1–R19
 
 - **Receipts.** Emit receipt artefacts (2.1) for every PASS gate of an eligible admission, with re-verifiable payloads. Never claim SITE_RECOMPUTABLE facts the bytes cannot support.

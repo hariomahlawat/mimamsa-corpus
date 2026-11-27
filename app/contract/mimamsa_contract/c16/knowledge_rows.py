@@ -44,6 +44,22 @@ def allowlist_issues(doc) -> list[Issue]:
     return issues
 
 
+GRAPH_TABLES = ("graph_edges", "graph_nodes")
+
+
+def manifest_table_owner_issues(manifest: dict) -> list[Issue]:
+    """I-2 on a knowledge release manifest (2.1 clarification): graph_nodes and graph_edges are declared only by the
+    GRAPH component (files under accelerators/graph/, loaded by the same typed loader into kr_<n>_staging); every
+    other row table only by KNOWLEDGE_ROWS. No other component kind may declare row tables."""
+    out = []
+    for c in manifest.get("components", []):
+        for t in c.get("tables", []):
+            owner = "GRAPH" if t["table"] in GRAPH_TABLES else "KNOWLEDGE_ROWS"
+            if c["kind"] != owner:
+                out.append(_e("KR_ROWS_ALLOWLIST", f"table {t['table']} belongs to the {owner} component (I-2)", c["component_id"]))
+    return out
+
+
 def _row_validator(table: str) -> Draft202012Validator:
     s = {"$ref": f"https://contract.mimamsa.invalid/c16/{SCHEMA_NAME}#/$defs/{table}_row"}
     return Draft202012Validator(s, registry=registry())

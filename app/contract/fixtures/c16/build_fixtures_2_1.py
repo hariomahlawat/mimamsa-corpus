@@ -16,7 +16,7 @@ sys.path.insert(0, str(HERE.parents[1]))
 sys.path.insert(0, str(HERE))
 
 import build_fixtures as bf  # noqa: E402
-from mimamsa_contract.c16 import canonical, knowledge_rows, receipts, scenarios  # noqa: E402
+from mimamsa_contract.c16 import accounting, canonical, digests, knowledge_rows, receipts, scenarios  # noqa: E402
 from mimamsa_contract.c16.build_spec import STAGES, make_stage_manifest  # noqa: E402
 
 C21 = "mimamsa-corpus-contract/2.1"
@@ -323,7 +323,8 @@ def component_contracts():
                        chk("SQLITE_QUICK_CHECK", "the SQLite file is structurally sound", "PRAGMA quick_check"),
                        chk("TEXT_STORE_BIND_EXACT", "store metadata equals the generation's records exactly", "DiskTextStore.Bind on every open (ADR-0008)"),
                        chk("PAGE_HASH_ON_READ", "every page read equals the verified derivative bytes", "per-page hash check on read"),
-                       chk("SOURCE_DIGEST_EQUALS_SITE", "built from the same generation", "ADR-0008 source digest recomputed")],
+                       chk("SOURCE_DIGEST_EQUALS_SITE", "built from the same generation's derivative records",
+                           "digests.text_store_source_digest recomputed (bundle-independent, 2.1); Bind still re-derives on every open")],
         "LEXICAL_INDEX": [chk("SHA256_EACH_FILE", "index files are the signed bytes", "sha256 per file"),
                           chk("SQLITE_QUICK_CHECK", "the SQLite file is structurally sound", "PRAGMA quick_check"),
                           chk("SAMPLED_POSTINGS_REDERIVE", "postings of sampled documents equal a fresh tokenisation", "re-tokenise a seeded document sample and compare postings", seeded, U, "EXACT"),
@@ -342,6 +343,140 @@ def component_contracts():
     }
 
 
+def cp1_manifest(al, row_files: dict[str, bytes]):
+    """CP-1 (2.1 clarification 4): graph_nodes and graph_edges are GRAPH tables under accelerators/graph/ (shared typed
+    loader), never KNOWLEDGE_ROWS tables. The KNOWLEDGE_ROWS component carries the real reference row files and its
+    result_digest is digests.table_rows_digest over them. The admission register carries the accounting register."""
+    cp1 = bf.knowledge_manifest("FULL", level="DEGRADED_LEXICAL_ONLY", vectors=False)
+    kr = [{"table": t, "file": f"accelerators/rows/{t}.jsonl", "row_count": row_files[t].count(b"\n"),
+           "rows_sha256": knowledge_rows.rows_sha256(row_files[t])} for t in sorted(row_files)]
+    gt = [{"table": t, "file": f"accelerators/graph/{t}.jsonl", "row_count": 10, "rows_sha256": H("rows:" + t)}
+          for t in sorted(tb["table"] for tb in al["tables"] if tb["owner_component"] == "GRAPH")]
+    for i, c in enumerate(cp1["components"]):
+        if c["kind"] == "KNOWLEDGE_ROWS":
+            n = bf.component("knowledge-rows", "KNOWLEDGE_ROWS", "mimamsa-knowledge-rows/1", [r["file"] for r in kr], tables=kr,
+                             count=sum(r["row_count"] for r in kr))
+            n["files"] = [{"path": r["file"], "sha256": r["rows_sha256"], "bytes": len(row_files[r["table"]])} for r in kr]
+            n["result_digest"] = digests.table_rows_digest([(r["table"], r["row_count"], r["rows_sha256"]) for r in kr])
+            cp1["components"][i] = n
+        elif c["kind"] == "GRAPH":
+            cp1["components"][i] = bf.component("graph", "GRAPH", "c15-graph-rows-v1", [r["file"] for r in gt], tables=gt,
+                                                count=sum(r["row_count"] for r in gt))
+        elif c["kind"] == "ADMISSION_REGISTER":
+            c["files"].append(bf.fe(accounting.FILE))
+    cp1["notes"] = ("CP-1 fixture vertical slice: explicitly degraded (no vectors, uncalibrated samples); never ACTIVE_FULL; closes no FG "
+                    "on real data. Graph tables belong to GRAPH (I-2).")
+    return cp1
+
+
+# ----------------------------------------------------------------------------- accounting register (clarification 1)
+V1_HF = "v1:hf:hariomahlawat/mimamsa-corpus@" + "a" * 40
+
+
+def _src(source, path, *, prov=None, n, held=0, rejected=0, quarantined=0, served=None, by_decision=None, reasons=None):
+    eligible = n - held - rejected - quarantined
+    served = eligible if served is None else served
+    nsr = dict(reasons or {})
+    for k, v in (("HELD", held), ("REJECTED", rejected), ("QUARANTINED", quarantined), ("ELIGIBLE_NOT_SERVED", eligible - served)):
+        if v and k not in nsr:
+            nsr[k] = v
+    return {"source": source, "path": path, "provenance": prov, "input": n, "identities": n,
+            "effective_admissions": n if path == "C16" else 0, "by_decision": by_decision or {}, "held": held, "rejected": rejected,
+            "quarantined": quarantined, "eligible": eligible, "served": served, "not_served_reasons": nsr}
+
+
+def accounting_declared():
+    P = lambda **k: {"generation_manifest_sha256": None, "hf_repo": None, "hf_revision": None, "candidate_set_sha256": None, **k}  # noqa: E731
+    src = [
+        _src("c16:" + bf.CG, "C16", prov=P(generation_manifest_sha256=H("generation-manifest"), hf_repo="hariomahlawat/mimamsa-corpus",
+                                           hf_revision="b" * 40),
+             n=12, held=2, rejected=1, quarantined=1, served=7, by_decision={"ADMIT": 8, "HOLD": 2, "QUARANTINE": 1, "REJECT": 1}),
+        _src(V1_HF, "V1", prov=P(hf_repo="hariomahlawat/mimamsa-corpus", hf_revision="a" * 40), n=20, held=1, served=19),
+        _src("v7:candidates-2026", "V7_REFERENCE", prov=P(candidate_set_sha256=H("v7-candidate-set")), n=5, held=5,
+             reasons={"HELD": 5}),
+    ]
+    src.sort(key=lambda s: s["source"])
+    return {"contract": C21, "record_kind": "source_admission_accounting", "release_id": bf.REL_FULL, "scope": "DECLARED_BY_BUILD", "sources": src}
+
+
+def accounting_fixtures() -> dict[str, dict]:
+    d = accounting_declared()
+    r = copy.deepcopy(d)
+    r["scope"] = "RECOMPUTED_BY_SITE"
+    c16 = next(s for s in r["sources"] if s["path"] == "C16")
+    c16["served"] -= 1  # the site narrows: one more document withheld by a local exclusion
+    c16["not_served_reasons"]["SITE_EXCLUDED"] = 1
+    r["sources"].append(_src("site:local-uploads", "SITE_ONLY", n=3, served=3))
+    r["sources"].sort(key=lambda s: s["source"])
+    out = {"declared": d, "recomputed": r}
+
+    def neg(name, code, mutate, *, compare=False):
+        x = copy.deepcopy(r if compare else d)
+        mutate(x)
+        out[f"negative/{name}"] = {"expected_code": code, "check": "compare_declared" if compare else "accounting_issues",
+                                   "register": x, **({"declared": d} if compare else {})}
+
+    def s_of(x, path):
+        return next(s for s in x["sources"] if s["path"] == path)
+    neg("NA01_identities_differ_from_input", "C16_SOURCE_ACCOUNTING", lambda x: s_of(x, "V1").update(identities=19))
+    neg("NA02_partition_does_not_sum", "C16_SOURCE_ACCOUNTING", lambda x: s_of(x, "V1").update(held=2))
+    neg("NA03_served_exceeds_eligible", "C16_SOURCE_ACCOUNTING", lambda x: s_of(x, "C16").update(served=9, not_served_reasons={"HELD": 2, "REJECTED": 1}))
+    neg("NA04_decisions_do_not_reconcile", "C16_SOURCE_ACCOUNTING", lambda x: s_of(x, "C16")["by_decision"].update(ADMIT=7))
+    neg("NA05_v7_served", "SCHEMA", lambda x: s_of(x, "V7_REFERENCE").update(eligible=5, held=0, served=5, not_served_reasons={}))
+    neg("NA06_sources_unsorted", "C16_SOURCE_ACCOUNTING", lambda x: x["sources"].reverse())
+    neg("NA07_site_only_in_declared", "SCHEMA", lambda x: x["sources"].append(_src("site:local-uploads", "SITE_ONLY", n=1)))
+    neg("NA08_b02_legacy_kind", "SCHEMA", lambda x: x.update(record_kind="admission_accounting"))
+    neg("NA09_c16_without_generation_pin", "SCHEMA", lambda x: s_of(x, "C16").update(provenance=None))
+    neg("NA10_unknown_field", "SCHEMA", lambda x: s_of(x, "V1").update(declared_servable=19))
+    neg("NC01_site_widens_service", "C16_SOURCE_ACCOUNTING",
+        lambda x: s_of(x, "V1").update(served=20, held=0, eligible=20, not_served_reasons={}), compare=True)
+    neg("NC02_site_held_differs", "C16_SOURCE_ACCOUNTING",
+        lambda x: s_of(x, "C16").update(held=3, eligible=7, served=6, not_served_reasons={"HELD": 3, "QUARANTINED": 1, "REJECTED": 1, "SITE_EXCLUDED": 1}),
+        compare=True)
+    neg("NC03_site_missing_source", "C16_SOURCE_ACCOUNTING", lambda x: x["sources"].remove(s_of(x, "V7_REFERENCE")), compare=True)
+    neg("NC04_site_unquarantines", "C16_SOURCE_ACCOUNTING",
+        lambda x: s_of(x, "C16").update(quarantined=0, eligible=9, not_served_reasons={"HELD": 2, "REJECTED": 1, "ELIGIBLE_NOT_SERVED": 2, "SITE_EXCLUDED": 1}),
+        compare=True)
+    return out
+
+
+# ----------------------------------------------------------------------------- digest golden vectors (clarifications 2, 5)
+def golden_digests(row_files: dict[str, bytes]):
+    G = {"format": "mimamsa-c16-digest-golden/2.1", "reference": "app/contract/mimamsa_contract/c16/digests.py"}
+    tables = [(t, row_files[t].count(b"\n"), knowledge_rows.rows_sha256(row_files[t])) for t in sorted(row_files)]
+    G["KNOWLEDGE_ROWS"] = {"tables": [{"table": t, "row_count": n, "rows_sha256": s} for t, n, s in tables],
+                           "preimage": "".join(f"{t}|{n}|{s}\n" for t, n, s in tables), "digest": digests.table_rows_digest(tables),
+                           "wrong_no_final_lf": digests._h("\n".join(f"{t}|{n}|{s}" for t, n, s in tables).encode())}
+    nodes, edges = ["GN-b", "GN-a", "GN-c"], ["GE-2", "GE-1"]
+    G["GRAPH"] = {"builder_version": "c15-graph-1", "node_ids": nodes, "edge_ids": edges,
+                  "preimage": "c15-graph-1|GN-a,GN-b,GN-c|GE-1,GE-2", "digest": digests.graph_digest("c15-graph-1", nodes, edges)}
+    sq = b"SQLite format 3\x00" + bytes(range(16))
+    G["LEXICAL_INDEX"] = {"file_hex": sq.hex(), "digest": digests.file_digest(sq)}
+    G["TEXT_STORE"] = {"file_hex": sq[::-1].hex(), "digest": digests.file_digest(sq[::-1])}
+    import struct
+    e = [(bytes([2] + [0] * 15), struct.pack("<2f", 0.5, -1.0)), (bytes([1] + [0] * 15), struct.pack("<2f", 1.0, 0.25))]
+    G["VECTOR_PACK"] = {"entries": [{"key_hex": k.hex(), "vector_hex": v.hex()} for k, v in e], "digest": digests.vector_pack_digest(e)}
+    hs = [H("o2"), H("o1")]
+    G["HASHSET"] = {"hashes": hs, "digest": digests.hashset_digest(hs)}
+    cf = {"registers/b.jsonl": b"{\"b\":1}\n", "registers/a.jsonl": b"{\"a\":1}\n"}
+    G["CONCAT"] = {"files": {k: v.decode() for k, v in cf.items()}, "digest": digests.concat_digest(cf)}
+    docs = [{"doc_id": "doc-b", "copy_sha256": H("copy-b")}, {"doc_id": "doc-a", "copy_sha256": H("copy-a")}]
+    der = [{"doc_id": "doc-a", "source_copy_sha256": H("copy-a"), "pipeline": {"name": "pdf-text", "version": "1.2"},
+            "text_sha256": H("text-a"), "quoting_permitted": True,
+            "pages": [{"page": 2, "method": "pdf_text", "char_count": 40, "text_sha256": H("pa2")},
+                      {"page": 1, "method": "pdf_text", "char_count": 50, "text_sha256": H("pa1")}],
+            "passages": [{"passage_id": "p1-2", "page": 1, "char_start": 20, "char_end": 50, "text_sha256": H("qa12")},
+                         {"passage_id": "p1-1", "page": 1, "char_start": 0, "char_end": 20, "paragraph_label": "1.", "text_sha256": H("qa11")}]},
+           {"doc_id": "doc-b", "source_copy_sha256": H("copy-b"), "pipeline": {"name": "ocr", "version": "3.0"},
+            "text_sha256": H("text-b"), "quoting_permitted": False,
+            "pages": [{"page": 1, "method": "ocr", "char_count": 30, "low_confidence": True, "text_sha256": None}],
+            "passages": [{"passage_id": "p1-1", "page": 1, "char_start": 0, "char_end": 30, "text_sha256": H("qb11")}]}]
+    G["TEXT_STORE_SOURCE"] = {"generation_id": bf.CG, "documents": docs, "derived": der,
+                              "digest": digests.text_store_source_digest(bf.CG, docs, der),
+                              "note": "no generation.json and no SHA256SUMS digest enter the preimage; Bind() still re-derives on every open"}
+    return G
+
+
 def outputs() -> dict[str, bytes]:
     ids, pop = population()
     arts, facts = official_artefacts(ids, pop)
@@ -358,9 +493,15 @@ def outputs() -> dict[str, bytes]:
     al = allowlist()
     files["knowledge_rows/allowlist.json"] = json.dumps(al, indent=1, sort_keys=True).encode() + b"\n"
     derived = knowledge_rows.derive_rows(pop)
+    row_files = {}
     for t in al["tables"]:
         if t["derivation"] == "PYTHON_REFERENCE":
-            files[f"knowledge_rows/rows/{t['table']}.jsonl"] = knowledge_rows.row_file_bytes(derived[t["table"]], t["primary_key"])
+            row_files[t["table"]] = knowledge_rows.row_file_bytes(derived[t["table"]], t["primary_key"])
+            files[f"knowledge_rows/rows/{t['table']}.jsonl"] = row_files[t["table"]]
+    for name, reg in accounting_fixtures().items():
+        body = accounting.register_bytes(reg) if name in ("declared", "recomputed") else json.dumps(reg, indent=1, sort_keys=True).encode() + b"\n"
+        files[f"accounting/{name}.json"] = body
+    files["digests/golden.json"] = json.dumps(golden_digests(row_files), indent=1, sort_keys=True).encode() + b"\n"
     spec = build_spec()
     files["build/spec.json"] = json.dumps(spec, indent=1, sort_keys=True).encode() + b"\n"
     for sid, m in stage_manifests(spec).items():
@@ -372,8 +513,7 @@ def outputs() -> dict[str, bytes]:
         c = {"contract": C21, "record_kind": "component_verification_contract", "kind": kind, "checks": checks,
              "on_failure": "SERVE_LEXICAL_ONLY" if kind == "VECTOR_PACK" else "REBUILD_LOCALLY_CHEAP", "site_embedding": "NEVER"}
         files[f"component_contracts/{kind}.json"] = json.dumps(c, indent=1, sort_keys=True).encode() + b"\n"
-    cp1 = bf.knowledge_manifest("FULL", level="DEGRADED_LEXICAL_ONLY", vectors=False)
-    cp1["notes"] = "CP-1 fixture vertical slice: explicitly degraded (no vectors, uncalibrated samples); never ACTIVE_FULL; closes no FG on real data"
+    cp1 = cp1_manifest(al, row_files)
     files["cp1/KNOWLEDGE_RELEASE.json"] = json.dumps(cp1, indent=1, sort_keys=True).encode() + b"\n"
     rec = bf.activation_record()
     rec["components"] = [{"component_id": c["component_id"], "result": "VERIFIED_USED", "failed_checks": []} for c in cp1["components"]]

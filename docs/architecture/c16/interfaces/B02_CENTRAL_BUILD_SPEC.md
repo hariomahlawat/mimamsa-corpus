@@ -22,7 +22,7 @@ python -m mimamsa_kbuild build --spec <spec.json> [--from <stage>] [--dry-run]
 | S4 bundle | records, `corpus-v2/`, originals, text, research, registers, receipts | unsigned v1 bundle tree | canonical JSONL; sorted paths | no |
 | S5 ref-import | S4 tree | a scratch reference site generation, imported by B01 exactly as a site would | same code as the site | no |
 | S6 accelerate | reference generation, models | rows, graph, text store, index, vectors, each with digests | same assembly as the site; vectors per §5 | no |
-| S7 assemble | S4 and S6 | `KNOWLEDGE_RELEASE.json`, accounting, inventory, `SHA256SUMS` | `rules._release_manifest`; `pending_future_gates` from the committed gate-status file | no |
+| S7 assemble | S4 and S6 | `KNOWLEDGE_RELEASE.json`, `registers/source_accounting.json` (DECLARED_BY_BUILD, in ADMISSION_REGISTER; B01 §5a), inventory, `SHA256SUMS`; component digests per B04 §4 | `rules._release_manifest`; `pending_future_gates` from the committed gate-status file | no |
 | S8 sign | `SHA256SUMS` | development signature, or prepared for the owner's **offline** signature | — | no |
 | S9 verify | signed bundle | fresh scratch site through B01, B03, B04 and B06; outcome recorded | — | no |
 

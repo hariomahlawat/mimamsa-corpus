@@ -24,6 +24,20 @@ Every interface here is an **additive contract 2.1** item:
 | 4. Knowledge-row format (B03; I-2, I-3) | [B03_KNOWLEDGE_ROWS.md](B03_KNOWLEDGE_ROWS.md) | `KNOWLEDGE_ROWS_SCHEMA.json` | `knowledge_rows.py` | `knowledge_rows/allowlist.json`, `knowledge_rows/rows/*.jsonl` |
 | 5. Activation journal (B06; I-4, I-6) | [B06_ACTIVATION_JOURNAL.md](B06_ACTIVATION_JOURNAL.md) | `ACTIVATION_JOURNAL_RECORD_SCHEMA.json`, `ACTIVATION_SCENARIO_SCHEMA.json`, `ACTIVATION_SCENARIO_OUTCOMES_SCHEMA.json` | `activation.py` (2.0, unchanged), `scenarios.py` | `activation_scenarios/SC01–SC25` and `.expected.json` |
 | 6. Component verification (B04; CP-1) | [B04_COMPONENT_VERIFICATION.md](B04_COMPONENT_VERIFICATION.md) | `COMPONENT_VERIFICATION_SCHEMA.json` | `components.py` | `component_contracts/*.json`, `cp1/` |
+| 7. Per-source accounting register (B01, B02; PR #82 clarification 1) | [B01 §5a](B01_PRODUCER_CONSUMER_INTERFACE.md) | `SOURCE_ADMISSION_ACCOUNTING_SCHEMA.json` | `accounting.py` | `accounting/declared.json`, `recomputed.json`, `negative/NA01–NA10`, `NC01–NC04` |
+| 8. Exact component digests and the text-store source digest (PR #82 clarifications 2, 5) | [B04 §4–5](B04_COMPONENT_VERIFICATION.md) | none | `digests.py` | `digests/golden.json` |
+
+## Where 2.1 governs over frozen 2.0 prose (PR #82)
+
+The 2.0 files are not edited. Where their prose differs from 2.1, the 2.1 rule applies to 2.1 producers, builds and sites, for the stated reason. Each is a tightening or a byte-level precision, never a relaxation.
+
+| Frozen 2.0 text | 2.1 rule | Why | Where |
+| --- | --- | --- | --- |
+| arch §7.3: the staging schema is owned by `mimamsa_kr_loader`, with CREATE on it | the activator creates and owns staging; the loader gets USAGE and INSERT only, no DDL; the site DB revokes TEMPORARY, and CREATE on `public`, from PUBLIC | CREATE would let the loader plant objects the activator later touches | [B03 §4](B03_KNOWLEDGE_ROWS.md) |
+| arch §5: KNOWLEDGE_ROWS digest "over `table \| row_count \| rows_sha256`" (terminator unstated) | one LF-terminated line per table, including the last | §5 left the bytes open; B02 and B03 differed | [B04 §4](B04_COMPONENT_VERIFICATION.md) |
+| arch §5: the TEXT_STORE source digest is ADR-0008's | bundle-independent `text_store_source_digest` over the same named inputs | the ADR-0008 implementation hashes `generation.json`, which contains the bundle's own checksum (circular) | [B04 §5](B04_COMPONENT_VERIFICATION.md) |
+| B01 interface §5.4: per-source accounting "recorded" (format open) | one register: `registers/source_accounting.json`, kind `source_admission_accounting` | B01 and B02 had diverged | [B01 §5a](B01_PRODUCER_CONSUMER_INTERFACE.md) |
+| 2.0 fixture `knowledge_manifest` lists graph tables under KNOWLEDGE_ROWS | CP-1 (2.1) lists them under GRAPH (I-2) | the 2.0 fixture predates I-2; it is frozen and is not CP-1 | [B04 §3](B04_COMPONENT_VERIFICATION.md) |
 
 **Tests:**
 - `app/contract/tests/test_c16_interfaces.py`, in the existing CI contract job.
