@@ -1,0 +1,42 @@
+key,source_id,basis
+act-army-1950,C5-SRC-P0-ARMY-ACT-1950-INDIACODE,WS-D doc id; only the compilation is held (Gazette as enacted not held)
+rules-army-rules-1954,C5-SRC-P0-ARMY-RULES-1954,"WS-D doc id; 1954 Gazette facsimile held (text as notified, not current text)"
+act-armed-forces-tribunal-2007,C5-SRC-P0-AFT-ACT-2007-INDIACODE,"WS-D doc id; compilation held, Gazette not held"
+act-bnss-2023,C5-SRC-P0-BNSS-2023-INDIACODE,WS-D doc id; compilation held
+act-bsa-2023,C5-SRC-P0-BSA-2023-INDIACODE,WS-D doc id; compilation held
+act-bns-2023,C5-SRC-P1-BNS-2023,WS-D doc id; not held
+rules-aft-procedure-rules-2008,C5-SRC-P1-AFT-PROC-RULES,WS-D doc id
+rules-aft-amendment-procedure-rules-2011,C5-SRC-P1-AFT-PROC-RULES,WS-D doc id
+DCLR-SC-1982-001,C5-SRC-J-SC-1982-PPS-BEDI,case id
+DCLR-SC-2020-002,C5-SRC-J-SC-2020-VIRENDRA,case id
+DCLR-SC-2022-004,C5-SRC-J-SC-2022-JASBIR,case id
+DCLR-SC-2023-009,C5-SRC-J-SC-2023-PARASHOTAM,case id
+DCLR-SC-2014-N12,C5-SRC-J-SC-2014-ANVAR,case id
+DCLR-SC-2020-N13,C5-SRC-J-SC-2020-ARJUN,case id
+DCLR-SC-2013-N08,C5-SRC-J-SC-2013-DHARAMVIR,case id
+DCLR-SC-2015-N09,C5-SRC-J-SC-2015-RAJBIR,case id
+DCLR-SC-2026-007,C5-SRC-J-SC-2026-GIRISH-FEB,case id
+DCLR-SC-2026-N16,C5-SRC-J-SC-2026-MULLIKOTE,case id
+DCLR-SC-1987-R01,C5-SRC-J-SC-1987-RANJIT-THAKUR,case id
+DCLR-SC-1990-N02,C5-SRC-J-SC-1990-SN-MUKHERJEE,case id
+V6-S01,C5-SRC-P1-PRA-2008-PT1,WS-D v4 resolved identity (MEDIUM; Part I inferred)
+V6-S02,C5-SRC-P1-PRA-2008-PT2,"WS-D v4 resolved identity (LOW, PROBABLE)"
+V6-S04,C5-SRC-P1-ER-GMO-2023,WS-D v4: MoD letter 21 Sep 2023 / ER 2023
+V6-S05,C5-SRC-P1-DESW-FAQ-PIB,WS-D v4: DESW FAQ
+V6-S06,C5-SRC-P1-DESW-FAQ-PIB,WS-D v4: PIB/DESW clarification (LOW)
+SRC-RA,C5-SRC-P0-RA-1987,"record says ""Regulations for the Army"" (edition not stated); 1987 is the only edition evidenced as current-era"
+SRC-AO,C5-SRC-P0-ARMY-ORDERS-INSTRUCTIONS,category only
+AO,C5-SRC-P0-ARMY-ORDERS-INSTRUCTIONS,category only
+SRC-ISO,C5-SRC-P1-ISO-ACT-RULES,WS-D v4
+SRC-ISOR,C5-SRC-P1-ISO-ACT-RULES,WS-D v4
+ISO Act,C5-SRC-P1-ISO-ACT-RULES,plaintext
+V8-S03,C5-SRC-P1-CCCM-ADJ-RULES,WS-D v4
+1978 Rules,C5-SRC-P1-CCCM-ADJ-RULES,plaintext
+V8-S11,C5-SRC-P0-SANHITA-COMMENCEMENT-2024,WS-D v4 (PROBABLE)
+SC_GILL,C5-SRC-J-SC-2019-PS-GILL,WS-D v4
+P S Gill 2019,C5-SRC-J-SC-2019-PS-GILL,plaintext
+Prithi Pal Singh Bedi,C5-SRC-J-SC-1982-PPS-BEDI,plaintext
+Virendra Kumar paras 11-13,C5-SRC-J-SC-2020-VIRENDRA,plaintext
+Parashotam Dass 2023,C5-SRC-J-SC-2023-PARASHOTAM,plaintext
+V6-S16,C5-SRC-J-SC-2019-NS-YADAV,WS-D v4 (LOW)
+DCLR-SC-2005-L01,C5-SRC-J-SC-2005-NAVJOT,case id

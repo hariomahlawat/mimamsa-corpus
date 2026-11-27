@@ -1,0 +1,55 @@
+sid,edge_type_reviewed,reviewer_fully_correct,reviewer_note,passage_id,current_relation,current_voice,current_target_raw,current_reasons,outcome
+T01,FOLLOWS,Y,"covered by Gawas Anil Madso (fn 2 = 2025 SCC OnLine Del 2018), resolved correctly",PT-6627ad2922da,FOLLOWS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T02,FOLLOWS,Y,same template as T01,PT-00d448e91d74,FOLLOWS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T03,FOLLOWS,Y,same template,PT-f872f1acdb33,FOLLOWS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T04,FOLLOWS,Y,same template,PE-b622d0ca850e,FOLLOWS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T05,FOLLOWS,Y,squarely covered by Gyanendra Dutt Misra CWP 7877/2009,PE-f1d71fbbc4bb,FOLLOWS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T06,FOLLOWS,Y,same template,PT-7fdac667b868,FOLLOWS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T07,FOLLOWS,Y,covered by Tarsem Singh (2008) 8 SCC 648,PT-5a5eee86ef27,FOLLOWS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T08,FOLLOWS,Y,issue settled by SC in Ram Avtar; raw target,PE-c4c289c6718e,FOLLOWS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T09,FOLLOWS,N,QUOTED: sentence is inside a reproduced passage of Gala International (opened with a curly quote before para 34); not the court's own voice,PT-f318495f1ae8,CITES,QUOTED_PASSAGE,,follows an elision marker ('xx xx xx') of a reproduced passage with no closing quotation mark,WITHDRAWN_REVIEWER_FOUND_ERROR
+T10,FOLLOWS,Y,no longer res integra: Jujhar Singh (2011) 7 SCC 735,PE-bc6501a77e07,FOLLOWS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T11,FOLLOWS,Y,same template,PE-b7e703ee465e,FOLLOWS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T12,FOLLOWS,Y,same template,PT-98c2793374bd,FOLLOWS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T13,FOLLOWS,N,WRONG TARGET: covered-by authority is Gawas Anil Madso (fn 4); edge bound to fn 3 (2013) 7 SCC 316 Dharamvir Singh,PE-1a3c0f7aa247,CITES,CUES_REJECTED,,cue bound to footnote 4; this anchor is not footnote 4's citation (F03),WITHDRAWN_REVIEWER_FOUND_ERROR
+T14,FOLLOWS,Y,same template,PT-5f87f2c4a121,FOLLOWS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T15,CONSIDERS,Y,Ranjit Thakur described,PE-d07990aac372,CONSIDERS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T16,CONSIDERS,Y,,PE-226a672c9034,CITES,QUOTED_PASSAGE,,follows a reproduction lead-in ('which read as under:') with no closing quotation mark,WITHDRAWN_LOST_CORRECT_EDGE
+T17,CONSIDERS,Y,,PE-f1689e4b7c84,CONSIDERS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T18,CONSIDERS,Y,,PE-987a0a185574,CONSIDERS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T19,CONSIDERS,Y,,PE-10c07c00a66e,CONSIDERS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T20,CONSIDERS,Y,,PE-559eff6987c2,CONSIDERS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T21,CONSIDERS,N,"PARTY CONTENTION: ""Before the learned AFT, the petitioner primarily contended that ... Dharamvir Singh, wherein it was held""",PE-b6b3d69ce60b,CITES,PARTY_SUBMISSION,,submission lead earlier in the paragraph,WITHDRAWN_REVIEWER_FOUND_ERROR
+T22,CONSIDERS,Y,,PE-e009a1135408,CONSIDERS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T23,CONSIDERS,N,"QUOTED: ""this Court considered"" is the Supreme Court's voice inside a quotation reproduced by the HC",PE-08f99cb76e8d,CITES,QUOTED_PASSAGE,,follows a reproduction lead-in ('observed as under:') with no closing quotation mark,WITHDRAWN_REVIEWER_FOUND_ERROR
+T24,CONSIDERS,N,QUOTED: sentence ends a reproduced SC passage (closing quote then para 37),PE-2233b2fbe3ad,CITES,QUOTED_PASSAGE,,"more opening than closing curly quotation marks in the preceding 6,000 characters (cross-paragraph)",WITHDRAWN_REVIEWER_FOUND_ERROR
+T25,CONSIDERS,Y,,PE-ed381c9ee7ba,CONSIDERS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T26,CONSIDERS,Y,,PE-5d4df5a90779,CONSIDERS,COURT_OWN_VOICE,,,KEPT_CORRECT
+T27,DISTINGUISHES,N,"""Article 323A does not apply because the AFT is not an Administrative Tribunal"": subject is Article 323A, not the cited authority (2025 SCC OnLine Del 6230)",PE-79423a22d398,CITES,CUES_REJECTED,,the anchor is a footnote entry and no body marker binds the cue to it (F03),WITHDRAWN_REVIEWER_FOUND_ERROR
+T28,DISTINGUISHES,N,"REPORTED TREATMENT: list of earlier decisions; ""was distinguished"" refers to Prakash Katiyar distinguishing Pradeep Kumar Rai, not this court",PE-63f457b34e1e,CITES,CUES_REJECTED,,"past passive ('was distinguished/followed'): reported treatment, usually in a list of earlier decisions (F03)",WITHDRAWN_REVIEWER_FOUND_ERROR
+T29,DISTINGUISHES,Y,"Man Kanhaiya Kumar ""has no application in the present case""",PT-fe916383e200,DISTINGUISHES,COURT_OWN_VOICE,,,KEPT_CORRECT
+T30,DISTINGUISHES,N,"tabular entry; ""the amendment of 2018 is not applicable"": subject is an amendment; raw target is a connected matter of the same common judgment",PT-82207c5c10bf,CITES,CUES_REJECTED,,"a statute, rule or instrument stands between the authority and 'not applicable to the facts': it is the subject (F03)",WITHDRAWN_REVIEWER_FOUND_ERROR
+T31,DISTINGUISHES,Y,borderline: court notes Independent Thought by its own terms would not apply to an adult woman; split-verdict opinion,PT-0a6db0ca9504,CITES,PARTY_SUBMISSION,,submission lead earlier in the paragraph,WITHDRAWN_LOST_CORRECT_EDGE
+T32,DISTINGUISHES,N,"REPORTED TREATMENT, and target W.P.(C) 5145/2016 was in fact followed in the listed decisions",PT-3e712920c5a5,CITES,CUES_REJECTED,,"past passive ('was distinguished/followed'): reported treatment, usually in a list of earlier decisions (F03)",WITHDRAWN_REVIEWER_FOUND_ERROR
+T33,APPLIES,Y,Applying Dharamvir Singh,PT-b002232e9962,APPLIES,COURT_OWN_VOICE,,,KEPT_CORRECT
+T34,APPLIES,N,"QUOTED SC judgment (paras 22-23, ""the appellant"", ""the Tribunal"") reproduced in Gawas Anil Madso; two authorities in the sentence despite the stated one-authori",PT-15a0ca92f1be,CITES,QUOTED_PASSAGE,,follows a reproduction lead-in ('reads as under:') with no closing quotation mark,WITHDRAWN_REVIEWER_FOUND_ERROR
+T35,APPLIES,N,same quoted passage as T34 (other doc_id of the common judgment),PT-5e3d4733ac68,CITES,QUOTED_PASSAGE,,follows a reproduction lead-in ('reads as under:') with no closing quotation mark,WITHDRAWN_REVIEWER_FOUND_ERROR
+T36,APPLIES,N,"WRONG TARGET: applies L. Chandra Kumar (fn 11, (1997) 3 SCC 261); bound to fn 10 WP(C) 9139/2019",PE-5fc7a5396584,CITES,CUES_REJECTED,,cue bound to footnote 11; this anchor is not footnote 11's citation (F03),WITHDRAWN_REVIEWER_FOUND_ERROR
+T37,EXPLAINS,N,"""principles ... have been explained in Ranjit Thakur"": the authority explains a principle; the citing court does not explain the authority (CONSIDERS/CITES)",PE-3af12d98ad86,CONSIDERS,COURT_OWN_VOICE,,,RETYPED_EXPLAINS_TO_CONSIDERS
+T38,EXPLAINS,N,"""concept of right to dignity has been explained in para 8 of Francis Coralie Mullin"": same semantic issue",PE-9a7bf8d23788,CONSIDERS,COURT_OWN_VOICE,,,RETYPED_EXPLAINS_TO_CONSIDERS
+T39,EXPLAINS,N,"""principle was clarified in R.K. Sharma"": same semantic issue",PE-201a2efa0287,CONSIDERS,COURT_OWN_VOICE,,,RETYPED_EXPLAINS_TO_CONSIDERS
+T40,EXPLAINS,N,"""as clarified by the policy circular dated 11.3.2011"": cue is about a policy circular, not D.S. Nakara",PE-47c9a8d23eb8,CITES,NO_TREATMENT_CUE,,no treatment wording bound in the passage,WITHDRAWN_REVIEWER_FOUND_ERROR
+T41,DOUBTS,N,"QUOTED: McDowell ""per incuriam"" is Nariman J in Shayara Bano, reproduced inside Sikri J's opinion (p.212); not this court's voice",PT-90c9e02ff612,CITES,QUOTED_PASSAGE,,follows an elision marker ('xx xx xx') of a reproduced passage with no closing quotation mark,WITHDRAWN_REVIEWER_FOUND_ERROR
+T42,OVERRULES,Y,"order of the court: M P Sharma stands overruled; raw target text truncated (""isposed of..."") but anchor resolves to M P Sharma",PT-44e4cead92b0,OVERRULES,COURT_OWN_VOICE,… of in the following terms: (i) The decision in M P Sharma which holds that the right to privacy is not protected by th,,KEPT_CORRECT
+T43,OVERRULES,Y,Sowmithri Vishnu overruled (anchor (1985) Supp SCC 137),PT-3c0fb3f2e38a,OVERRULES,COURT_OWN_VOICE,"In view of the foregoing analysis, the decisions in Sowmithri Vishnu (supra) and V. Revathi (supra)",,KEPT_CORRECT
+T44,OVERRULES,Y,M P Sharma overruled (plurality conclusions); duplicates T42 target,PT-7321756415bb,OVERRULES,COURT_OWN_VOICE,MP Sharma,,KEPT_CORRECT
+T45,OVERRULES,Y,"""decisions of this Court saying to the contrary ... are accordingly overruled""; no anchor, unidentified target",PT-8111df7aac52,OVERRULES,COURT_OWN_VOICE,The decisions of this Court saying to the contrary must be held to have been decided wrongly and,,KEPT_CORRECT
+T46,OVERRULES,Y,"duplicate of T45 (same passage, different raw-target string)",PT-204093fae39f,OVERRULES,COURT_OWN_VOICE,The decisions of this Court saying to the contrary,,KEPT_CORRECT
+T47,OVERRULES,Y,"Sriharan: ""we specifically overrule"" Sangeet (2013) 2 SCC 452",PE-040f470be7b4,OVERRULES,COURT_OWN_VOICE,,,KEPT_CORRECT
+T48,OVERRULES,Y,Bhanudas Krishna Gawde overruled,PT-bd05dc37276a,OVERRULES,COURT_OWN_VOICE,Union oflndia v Bhanudas Krishna Gawde213,,KEPT_CORRECT
+T49,OVERRULES,Y,V. Revathi overruled (anchor (1988) 2 SCC 72),PT-8682d402357c,OVERRULES,COURT_OWN_VOICE,"In view of the foregoing analysis, the decisions in Sowmithri Vishnu (supra) and V. Revathi (supra)",,KEPT_CORRECT
+T50,OVERRULES,Y,Kharak Singh overruled to the extent stated,PT-a073b2e4fab8,OVERRULES,COURT_OWN_VOICE,Kharak Singh to the extent that it holds that the right to privacy is not protected under the Indian Constitution,,KEPT_CORRECT
+T51,DISAPPROVES,N,passage disapproves the SUBSEQUENT decisions following Kanhaiyalal; anchor binds to Kanhaiyalal itself (already captured by T54),PT-900ee3f8d5c6,DISAPPROVES,COURT_OWN_VOICE,the subsequent decisions of this Court follow- F ing and applying the said propositions in Kanhaiyalal have also been (d,,KEPT_TARGET_CORRECTED
+T52,DISAPPROVES,Y,"""these two decisions do not lay down the correct law"" (Subramanian, Kerala HC, and one other); raw target with context; no anchor",PT-4289a1bc33bc,DISAPPROVES,COURT_OWN_VOICE,We hold that these two decisions,,KEPT_CORRECT
+T53,DISAPPROVES,Y,Shri Kant Sharma does not lay down the correct law; resolved correctly,PT-222df5c885ad,DISAPPROVES,COURT_OWN_VOICE,,,KEPT_CORRECT
+T54,DISAPPROVES,Y,Kanhaiyalal wrongly decided,PT-cd1cb49fedd0,DISAPPROVES,COURT_OWN_VOICE,,,KEPT_CORRECT

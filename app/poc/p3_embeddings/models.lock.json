@@ -1,0 +1,250 @@
+{
+ "bge-small-en-v1.5": {
+  "repo": "BAAI/bge-small-en-v1.5",
+  "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+  "license_card": "mit",
+  "files": {
+   "onnx/model.onnx": {
+    "sha256": "828e1496d7fabb79cfa4dcd84fa38625c0d3d21da474a00f08db0f559940cf35",
+    "bytes": 133093490
+   },
+   "tokenizer.json": {
+    "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+    "bytes": 711396
+   },
+   "tokenizer_config.json": {
+    "sha256": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3",
+    "bytes": 366
+   },
+   "config.json": {
+    "sha256": "094f8e891b932f2000c92cfc663bac4c62069f5d8af5b5278c4306aef3084750",
+    "bytes": 743
+   },
+   "special_tokens_map.json": {
+    "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+    "bytes": 125
+   },
+   "README.md": {
+    "sha256": "ddb964361a55c6e5dfca6361615854b260c9c960205d04c7520151aaa1d75837",
+    "bytes": 94783
+   }
+  }
+ },
+ "bge-base-en-v1.5": {
+  "repo": "BAAI/bge-base-en-v1.5",
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "license_card": "mit",
+  "files": {
+   "onnx/model.onnx": {
+    "sha256": "9bc579acdba21c253c62a9bf866891355a63ffa3442b52c8a37d75b2ccb91848",
+    "bytes": 435811539
+   },
+   "tokenizer.json": {
+    "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+    "bytes": 711396
+   },
+   "tokenizer_config.json": {
+    "sha256": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3",
+    "bytes": 366
+   },
+   "config.json": {
+    "sha256": "bc00af31a4a31b74040d73370aa83b62da34c90b75eb77bfa7db039d90abd591",
+    "bytes": 777
+   },
+   "special_tokens_map.json": {
+    "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+    "bytes": 125
+   },
+   "README.md": {
+    "sha256": "fd29e6117a8c2bc83f8eafb73f261d35341702dcd95c9cc0b34f5be75afa8231",
+    "bytes": 94551
+   }
+  }
+ },
+ "e5-small-v2": {
+  "repo": "intfloat/e5-small-v2",
+  "revision": "ffb93f3bd4047442299a41ebb6fa998a38507c52",
+  "license_card": "mit",
+  "files": {
+   "model.onnx": {
+    "sha256": "4b8205be2a3c5fc53c6534d76a2012064f7309c162b806f2889c6ec8ec4fdcba",
+    "bytes": 133093468
+   },
+   "tokenizer.json": {
+    "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+    "bytes": 711396
+   },
+   "tokenizer_config.json": {
+    "sha256": "ae83fa6ca0333117ff12606020af925d648667ef70d92ff7f27d781ba0ca4544",
+    "bytes": 314
+   },
+   "config.json": {
+    "sha256": "5dfb0363cd0243be179c03bcaafd1542d0fbb95e8cbcf575fff3e229342adc2f",
+    "bytes": 615
+   },
+   "special_tokens_map.json": {
+    "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+    "bytes": 125
+   },
+   "README.md": {
+    "sha256": "0d57eda4766cc7ac045f2bf7e700286ea5a8360bb9b57278f67f9b8ef60b0b24",
+    "bytes": 67791
+   }
+  }
+ },
+ "e5-base-v2": {
+  "repo": "intfloat/e5-base-v2",
+  "revision": "f52bf8ec8c7124536f0efb74aca902b2995e5bcd",
+  "license_card": "mit",
+  "files": {
+   "onnx/model.onnx": {
+    "sha256": "157f97ef1957d34f52efa26f8031371bf9043acc45460cec7ebe94631ac0e96b",
+    "bytes": 435811516
+   },
+   "tokenizer.json": {
+    "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+    "bytes": 711396
+   },
+   "tokenizer_config.json": {
+    "sha256": "ae83fa6ca0333117ff12606020af925d648667ef70d92ff7f27d781ba0ca4544",
+    "bytes": 314
+   },
+   "config.json": {
+    "sha256": "01cc39aa39538a8179aa131c8a16adc03b506c92009f091502e4eb0c702f5f78",
+    "bytes": 650
+   },
+   "special_tokens_map.json": {
+    "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+    "bytes": 125
+   },
+   "README.md": {
+    "sha256": "127d92b493963c5e7f74fcad5190546e19e404e5ff5b5c0c606dbcda57ca530e",
+    "bytes": 67561
+   }
+  }
+ },
+ "arctic-embed-s": {
+  "repo": "Snowflake/snowflake-arctic-embed-s",
+  "revision": "e596f507467533e48a2e17c007f0e1dacc837b33",
+  "license_card": "apache-2.0",
+  "files": {
+   "onnx/model.onnx": {
+    "sha256": "579c1f1778a0993eb0d2a1403340ffb491c769247fb46acc4f5cf8ac5b89c1e1",
+    "bytes": 133093492
+   },
+   "tokenizer.json": {
+    "sha256": "91f1def9b9391fdabe028cd3f3fcc4efd34e5d1f08c3bf2de513ebb5911a1854",
+    "bytes": 711649
+   },
+   "tokenizer_config.json": {
+    "sha256": "9ca59277519f6e3692c8685e26b94d4afca2d5438deff66483db495e48735810",
+    "bytes": 1433
+   },
+   "config.json": {
+    "sha256": "4e519aa92ec40943356032afe458c8829d70c5766b109e4a57490b82f72dcfb7",
+    "bytes": 703
+   },
+   "special_tokens_map.json": {
+    "sha256": "5d5b662e421ea9fac075174bb0688ee0d9431699900b90662acd44b2a350503a",
+    "bytes": 695
+   },
+   "README.md": {
+    "sha256": "6f231741560fd8e2ba338b705918553f819f6848adcd5ee9293fc87990685e38",
+    "bytes": 85025
+   }
+  }
+ },
+ "arctic-embed-m-v1.5": {
+  "repo": "Snowflake/snowflake-arctic-embed-m-v1.5",
+  "revision": "e58a8f756156a1293d763f17e3aae643474e9b8a",
+  "license_card": "apache-2.0",
+  "files": {
+   "onnx/model.onnx": {
+    "sha256": "bc6f7662487a0796e6f86229c8e5c3ab2f7059e08e0bb2f524125273f72171c4",
+    "bytes": 435939137
+   },
+   "tokenizer.json": {
+    "sha256": "91f1def9b9391fdabe028cd3f3fcc4efd34e5d1f08c3bf2de513ebb5911a1854",
+    "bytes": 711649
+   },
+   "tokenizer_config.json": {
+    "sha256": "0e83e9d7206b3ade43f8f2aeef523cf5d5b4a25b67af21b273de21972c0f58b7",
+    "bytes": 1381
+   },
+   "config.json": {
+    "sha256": "d2dddc06af0aeeb7fd3289a3dee1ac76dce0c3df2467cadd26f5f731f8d7919b",
+    "bytes": 772
+   },
+   "special_tokens_map.json": {
+    "sha256": "5d5b662e421ea9fac075174bb0688ee0d9431699900b90662acd44b2a350503a",
+    "bytes": 695
+   },
+   "README.md": {
+    "sha256": "c4db76f0902e1d102d455d5ca5f75272134e8a06392a089e7f7d03c484fa7a7d",
+    "bytes": 272657
+   }
+  }
+ },
+ "all-MiniLM-L6-v2": {
+  "repo": "sentence-transformers/all-MiniLM-L6-v2",
+  "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "license_card": "apache-2.0",
+  "files": {
+   "onnx/model.onnx": {
+    "sha256": "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452",
+    "bytes": 90405214
+   },
+   "tokenizer.json": {
+    "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+    "bytes": 466247
+   },
+   "tokenizer_config.json": {
+    "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+    "bytes": 350
+   },
+   "config.json": {
+    "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+    "bytes": 612
+   },
+   "special_tokens_map.json": {
+    "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+    "bytes": 112
+   },
+   "README.md": {
+    "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0",
+    "bytes": 10502
+   }
+  }
+ },
+ "nomic-embed-text-v1.5": {
+  "repo": "nomic-ai/nomic-embed-text-v1.5",
+  "revision": "e9b6763023c676ca8431644204f50c2b100d9aab",
+  "license_card": "apache-2.0",
+  "files": {
+   "onnx/model.onnx": {
+    "sha256": "147d5aa88c2101237358e17796cf3a227cead1ec304ec34b465bb08e9d952965",
+    "bytes": 547310275
+   },
+   "tokenizer.json": {
+    "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+    "bytes": 711396
+   },
+   "tokenizer_config.json": {
+    "sha256": "d7e0000bcc80134debd2222220427e6bf5fa20a669f40a0d0d1409cc18e0a9bc",
+    "bytes": 1191
+   },
+   "config.json": {
+    "sha256": "9ab00bd92cee80a569f708140b7b6c1661a65891ff3765b1519e181ba2f2c92b",
+    "bytes": 2538
+   },
+   "special_tokens_map.json": {
+    "sha256": "5d5b662e421ea9fac075174bb0688ee0d9431699900b90662acd44b2a350503a",
+    "bytes": 695
+   },
+   "README.md": {
+    "sha256": "4430178908fbd574fdb6457e302d23e643d733ed036b5777180b0806946767b2",
+    "bytes": 71843
+   }
+  }
+ }
+}

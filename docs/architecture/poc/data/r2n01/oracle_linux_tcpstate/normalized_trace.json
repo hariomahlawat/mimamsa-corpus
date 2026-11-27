@@ -1,0 +1,1212 @@
+{
+ "limits": {
+  "site": 196608,
+  "connection": 196608
+ },
+ "initial_witness": {
+  "epoch": 1,
+  "digest": "state-1"
+ },
+ "events": [
+  {
+   "case": "metadata",
+   "authenticated": true,
+   "copy": "target",
+   "status": 200,
+   "length": 176,
+   "content_range": null,
+   "body_sha256": "19beb932fa8fa2534102aa653f4eb62cb9f054247b2214e834ac99b787f358dd",
+   "body_matches_fixture": true,
+   "kind": "http",
+   "source": "client",
+   "seq": 1
+  },
+  {
+   "attempt": "86e0ef45-c03b-491d-b0ba-0a4ebe2e67de",
+   "connection": "c53150",
+   "stream": "0HNQB6JVJLK6L:00000001",
+   "copy": "target",
+   "offset": 0,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 2
+  },
+  {
+   "attempt": "86e0ef45-c03b-491d-b0ba-0a4ebe2e67de",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 3
+  },
+  {
+   "attempt": "86e0ef45-c03b-491d-b0ba-0a4ebe2e67de",
+   "offset": 0,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 4
+  },
+  {
+   "attempt": "86e0ef45-c03b-491d-b0ba-0a4ebe2e67de",
+   "outcome": "accepted",
+   "size": 65536,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 5
+  },
+  {
+   "attempt": "e5af3f6b-c376-4f95-bd77-d7b0cd5ddfd6",
+   "connection": "c53150",
+   "stream": "0HNQB6JVJLK6L:00000001",
+   "copy": "target",
+   "offset": 65536,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 6
+  },
+  {
+   "attempt": "e5af3f6b-c376-4f95-bd77-d7b0cd5ddfd6",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 7
+  },
+  {
+   "attempt": "e5af3f6b-c376-4f95-bd77-d7b0cd5ddfd6",
+   "offset": 65536,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 8
+  },
+  {
+   "attempt": "e5af3f6b-c376-4f95-bd77-d7b0cd5ddfd6",
+   "outcome": "accepted",
+   "size": 65536,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 9
+  },
+  {
+   "attempt": "5d823423-21a3-4bc4-9866-5e58d7650ee6",
+   "connection": "c53150",
+   "stream": "0HNQB6JVJLK6L:00000001",
+   "copy": "target",
+   "offset": 131072,
+   "size": 3072,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 10
+  },
+  {
+   "attempt": "5d823423-21a3-4bc4-9866-5e58d7650ee6",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 11
+  },
+  {
+   "attempt": "5d823423-21a3-4bc4-9866-5e58d7650ee6",
+   "offset": 131072,
+   "size": 3072,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 12
+  },
+  {
+   "attempt": "5d823423-21a3-4bc4-9866-5e58d7650ee6",
+   "outcome": "accepted",
+   "size": 3072,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 13
+  },
+  {
+   "case": "first_chunk",
+   "authenticated": true,
+   "copy": "target",
+   "status": 206,
+   "length": 131072,
+   "content_range": "bytes 0-131071/396871",
+   "range": "bytes=0-131071",
+   "body_sha256": "b85779d6597e70ae4c312790794eb8f3baca993ce8f7b0c929527fa12ee391ac",
+   "body_matches_fixture": true,
+   "kind": "http",
+   "source": "client",
+   "seq": 14
+  },
+  {
+   "attempt": "63be9390-8c10-44f5-9ba3-cd12bfa05a93",
+   "connection": "c53158",
+   "stream": "0HNQB6JVJLK6M:00000001",
+   "copy": "target",
+   "offset": 0,
+   "size": 4679,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 15
+  },
+  {
+   "attempt": "63be9390-8c10-44f5-9ba3-cd12bfa05a93",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 16
+  },
+  {
+   "attempt": "63be9390-8c10-44f5-9ba3-cd12bfa05a93",
+   "offset": 0,
+   "size": 4679,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 17
+  },
+  {
+   "attempt": "63be9390-8c10-44f5-9ba3-cd12bfa05a93",
+   "outcome": "accepted",
+   "size": 4679,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 18
+  },
+  {
+   "case": "near_end",
+   "authenticated": true,
+   "copy": "target",
+   "status": 206,
+   "length": 3655,
+   "content_range": "bytes 393216-396870/396871",
+   "range": "bytes=393216-396870",
+   "body_sha256": "a1493daa4a34070fc291b6b563295d113e73d331b385efd592fdebdc06c734cf",
+   "body_matches_fixture": true,
+   "kind": "http",
+   "source": "client",
+   "seq": 19
+  },
+  {
+   "attempt": "86e0ef45-c03b-491d-b0ba-0a4ebe2e67de",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53150 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 20
+  },
+  {
+   "attempt": "e5af3f6b-c376-4f95-bd77-d7b0cd5ddfd6",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53150 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 21
+  },
+  {
+   "attempt": "5d823423-21a3-4bc4-9866-5e58d7650ee6",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53150 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 22
+  },
+  {
+   "attempt": "63be9390-8c10-44f5-9ba3-cd12bfa05a93",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53158 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 23
+  },
+  {
+   "attempt": "498d0962-e90f-4f1f-97fd-eed525eff14c",
+   "connection": "c53198",
+   "stream": "0HNQB6JVJLK6Q:00000001",
+   "copy": "target",
+   "offset": 0,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 24
+  },
+  {
+   "attempt": "498d0962-e90f-4f1f-97fd-eed525eff14c",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 25
+  },
+  {
+   "attempt": "498d0962-e90f-4f1f-97fd-eed525eff14c",
+   "offset": 0,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 26
+  },
+  {
+   "attempt": "498d0962-e90f-4f1f-97fd-eed525eff14c",
+   "outcome": "accepted",
+   "size": 65536,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 27
+  },
+  {
+   "attempt": "e2075cbc-ea91-49f0-aba6-b874afa3a68e",
+   "connection": "c53198",
+   "stream": "0HNQB6JVJLK6Q:00000001",
+   "copy": "target",
+   "offset": 65536,
+   "size": 2048,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 28
+  },
+  {
+   "attempt": "e2075cbc-ea91-49f0-aba6-b874afa3a68e",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 29
+  },
+  {
+   "attempt": "e2075cbc-ea91-49f0-aba6-b874afa3a68e",
+   "offset": 65536,
+   "size": 2048,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 30
+  },
+  {
+   "attempt": "e2075cbc-ea91-49f0-aba6-b874afa3a68e",
+   "outcome": "accepted",
+   "size": 2048,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 31
+  },
+  {
+   "case": "conditional",
+   "authenticated": true,
+   "copy": "target",
+   "status": 206,
+   "length": 65536,
+   "content_range": "bytes 0-65535/396871",
+   "range": "bytes=0-65535",
+   "conditional": "If-Range",
+   "body_sha256": "898687a4df1d62c2931e7fa43eee9dcaa2e80aaec5a5f5277275d8b01e407a59",
+   "body_matches_fixture": true,
+   "kind": "http",
+   "source": "client",
+   "seq": 32
+  },
+  {
+   "case": "anonymous",
+   "authenticated": false,
+   "copy": "target",
+   "status": 401,
+   "length": 0,
+   "content_range": null,
+   "range": "bytes=0-65535",
+   "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "body_matches_fixture": true,
+   "kind": "http",
+   "source": "client",
+   "seq": 33
+  },
+  {
+   "case": "other_user",
+   "authenticated": true,
+   "copy": "target",
+   "status": 404,
+   "length": 0,
+   "content_range": null,
+   "range": "bytes=0-65535",
+   "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "body_matches_fixture": true,
+   "kind": "http",
+   "source": "client",
+   "seq": 34
+  },
+  {
+   "case": "oversize",
+   "authenticated": true,
+   "copy": "target",
+   "status": 400,
+   "length": 0,
+   "content_range": null,
+   "range": "bytes=0-131072",
+   "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "body_matches_fixture": true,
+   "kind": "http",
+   "source": "client",
+   "seq": 35
+  },
+  {
+   "case": "multi_range",
+   "authenticated": true,
+   "copy": "target",
+   "status": 400,
+   "length": 0,
+   "content_range": null,
+   "range": "bytes=0-1,3-4",
+   "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "body_matches_fixture": true,
+   "kind": "http",
+   "source": "client",
+   "seq": 36
+  },
+  {
+   "case": "no_range",
+   "authenticated": true,
+   "copy": "target",
+   "status": 400,
+   "length": 0,
+   "content_range": null,
+   "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "body_matches_fixture": true,
+   "kind": "http",
+   "source": "client",
+   "seq": 37
+  },
+  {
+   "case": "out_of_bounds",
+   "authenticated": true,
+   "copy": "target",
+   "status": 416,
+   "length": 0,
+   "content_range": "bytes */396871",
+   "range": "bytes=396871-396880",
+   "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "body_matches_fixture": true,
+   "kind": "http",
+   "source": "client",
+   "seq": 38
+  },
+  {
+   "attempt": "498d0962-e90f-4f1f-97fd-eed525eff14c",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53198 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 39
+  },
+  {
+   "attempt": "e2075cbc-ea91-49f0-aba6-b874afa3a68e",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53198 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 40
+  },
+  {
+   "attempt": "15042847-385b-4c41-b2a0-f2cf13cd27b5",
+   "connection": "c53240",
+   "stream": "0HNQB6JVJLK71:00000001",
+   "copy": "target",
+   "offset": 0,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 41
+  },
+  {
+   "attempt": "15042847-385b-4c41-b2a0-f2cf13cd27b5",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 42
+  },
+  {
+   "attempt": "15042847-385b-4c41-b2a0-f2cf13cd27b5",
+   "offset": 0,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 43
+  },
+  {
+   "attempt": "15042847-385b-4c41-b2a0-f2cf13cd27b5",
+   "outcome": "accepted",
+   "size": 65536,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 44
+  },
+  {
+   "attempt": "95536be2-e585-451c-b326-10a82e3f9e1f",
+   "connection": "c53240",
+   "stream": "0HNQB6JVJLK71:00000001",
+   "copy": "target",
+   "offset": 65536,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 45
+  },
+  {
+   "attempt": "95536be2-e585-451c-b326-10a82e3f9e1f",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 46
+  },
+  {
+   "attempt": "95536be2-e585-451c-b326-10a82e3f9e1f",
+   "offset": 65536,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 47
+  },
+  {
+   "connections": {
+    "c53158": 0,
+    "c53198": 0,
+    "c53150": 0,
+    "c53240": 6144,
+    "c53222": 0,
+    "c60376": 0,
+    "c39390": 0,
+    "c56760": 0,
+    "c60332": 0,
+    "c60310": 0,
+    "c60406": 0,
+    "c60420": 0,
+    "c60348": 0,
+    "c53144": 0,
+    "c60474": 0,
+    "c53186": 0,
+    "c60296": 0,
+    "c53228": 0,
+    "c60478": 0,
+    "c60392": 0,
+    "c60536": 0,
+    "c53212": 0,
+    "c60322": 0,
+    "c60520": 0,
+    "c60360": 0,
+    "c53224": 0,
+    "c53220": 0,
+    "c39378": 0,
+    "c53190": 0,
+    "c53230": 0,
+    "c39374": 0,
+    "c60294": 0,
+    "c60432": 0,
+    "c53174": 0,
+    "c60462": 0,
+    "c60388": 0,
+    "c60448": 0,
+    "c60438": 0
+   },
+   "site": 6144,
+   "note": "slow reader holding, after 1 KiB",
+   "probe": "/proc/net/tcp tx_queue",
+   "kind": "occupancy",
+   "source": "drain_probe",
+   "seq": 48
+  },
+  {
+   "connections": {
+    "c53158": 0,
+    "c53198": 0,
+    "c53150": 0,
+    "c53240": 6144,
+    "c53222": 0,
+    "c60376": 0,
+    "c39390": 0,
+    "c56760": 0,
+    "c60332": 0,
+    "c60310": 0,
+    "c60406": 0,
+    "c60420": 0,
+    "c60348": 0,
+    "c53144": 0,
+    "c60474": 0,
+    "c53186": 0,
+    "c60296": 0,
+    "c53228": 0,
+    "c60478": 0,
+    "c60392": 0,
+    "c60536": 0,
+    "c53212": 0,
+    "c60322": 0,
+    "c60520": 0,
+    "c60360": 0,
+    "c53224": 0,
+    "c53220": 0,
+    "c39378": 0,
+    "c53190": 0,
+    "c53230": 0,
+    "c39374": 0,
+    "c60294": 0,
+    "c60432": 0,
+    "c53174": 0,
+    "c60462": 0,
+    "c60388": 0,
+    "c60448": 0,
+    "c60438": 0
+   },
+   "site": 6144,
+   "note": "slow reader holding, +0.6 s",
+   "probe": "/proc/net/tcp tx_queue",
+   "kind": "occupancy",
+   "source": "drain_probe",
+   "seq": 49
+  },
+  {
+   "attempt": "95536be2-e585-451c-b326-10a82e3f9e1f",
+   "outcome": "accepted",
+   "size": 65536,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 50
+  },
+  {
+   "attempt": "a619fbca-9c11-49a5-bc50-31e65fd8a7d5",
+   "connection": "c53240",
+   "stream": "0HNQB6JVJLK71:00000001",
+   "copy": "target",
+   "offset": 131072,
+   "size": 3072,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 51
+  },
+  {
+   "attempt": "a619fbca-9c11-49a5-bc50-31e65fd8a7d5",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 52
+  },
+  {
+   "attempt": "a619fbca-9c11-49a5-bc50-31e65fd8a7d5",
+   "offset": 131072,
+   "size": 3072,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 53
+  },
+  {
+   "attempt": "a619fbca-9c11-49a5-bc50-31e65fd8a7d5",
+   "outcome": "accepted",
+   "size": 3072,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 54
+  },
+  {
+   "attempt": "15042847-385b-4c41-b2a0-f2cf13cd27b5",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53240 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 55
+  },
+  {
+   "attempt": "95536be2-e585-451c-b326-10a82e3f9e1f",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53240 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 56
+  },
+  {
+   "attempt": "a619fbca-9c11-49a5-bc50-31e65fd8a7d5",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53240 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 57
+  },
+  {
+   "connections": {
+    "c53158": 0,
+    "c53198": 0,
+    "c53150": 0,
+    "c53240": 0,
+    "c53222": 0,
+    "c60376": 0,
+    "c39390": 0,
+    "c56760": 0,
+    "c60332": 0,
+    "c60310": 0,
+    "c60406": 0,
+    "c60420": 0,
+    "c60348": 0,
+    "c53144": 0,
+    "c60474": 0,
+    "c53186": 0,
+    "c60296": 0,
+    "c53228": 0,
+    "c60478": 0,
+    "c60392": 0,
+    "c60536": 0,
+    "c53212": 0,
+    "c60322": 0,
+    "c60520": 0,
+    "c60360": 0,
+    "c53224": 0,
+    "c53220": 0,
+    "c39378": 0,
+    "c53190": 0,
+    "c53230": 0,
+    "c39374": 0,
+    "c60294": 0,
+    "c60432": 0,
+    "c53174": 0,
+    "c60462": 0,
+    "c60388": 0,
+    "c60448": 0,
+    "c60438": 0
+   },
+   "site": 0,
+   "note": "after slow reader finished and drain grace",
+   "probe": "/proc/net/tcp tx_queue",
+   "kind": "occupancy",
+   "source": "drain_probe",
+   "seq": 58
+  },
+  {
+   "attempt": "45d0e883-cafb-469e-8232-31d31f99b7ef",
+   "connection": "c53242",
+   "stream": "0HNQB6JVJLK72:00000001",
+   "copy": "target",
+   "offset": 0,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 59
+  },
+  {
+   "attempt": "45d0e883-cafb-469e-8232-31d31f99b7ef",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 60
+  },
+  {
+   "attempt": "45d0e883-cafb-469e-8232-31d31f99b7ef",
+   "offset": 0,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 61
+  },
+  {
+   "attempt": "45d0e883-cafb-469e-8232-31d31f99b7ef",
+   "outcome": "accepted",
+   "size": 65536,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 62
+  },
+  {
+   "attempt": "123b31e1-4ff4-4f15-9dd3-793b192674f4",
+   "connection": "c53246",
+   "stream": "0HNQB6JVJLK73:00000001",
+   "copy": "target",
+   "offset": 0,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 63
+  },
+  {
+   "attempt": "123b31e1-4ff4-4f15-9dd3-793b192674f4",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 64
+  },
+  {
+   "attempt": "123b31e1-4ff4-4f15-9dd3-793b192674f4",
+   "offset": 0,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 65
+  },
+  {
+   "attempt": "123b31e1-4ff4-4f15-9dd3-793b192674f4",
+   "outcome": "accepted",
+   "size": 65536,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 66
+  },
+  {
+   "connections": {
+    "c53240": 0,
+    "c53246": 6144,
+    "c53150": 0,
+    "c53242": 6144,
+    "c53158": 0,
+    "c53198": 0,
+    "c53222": 0,
+    "c60376": 0,
+    "c39390": 0,
+    "c56760": 0,
+    "c60332": 0,
+    "c60310": 0,
+    "c60406": 0,
+    "c60420": 0,
+    "c60348": 0,
+    "c53144": 0,
+    "c60474": 0,
+    "c53186": 0,
+    "c60296": 0,
+    "c53228": 0,
+    "c60478": 0,
+    "c60392": 0,
+    "c60536": 0,
+    "c53212": 0,
+    "c60322": 0,
+    "c60520": 0,
+    "c60360": 0,
+    "c53224": 0,
+    "c53220": 0,
+    "c39378": 0,
+    "c53190": 0,
+    "c53230": 0,
+    "c39374": 0,
+    "c60294": 0,
+    "c60432": 0,
+    "c53174": 0,
+    "c60462": 0,
+    "c60388": 0,
+    "c60448": 0,
+    "c60438": 0
+   },
+   "site": 12288,
+   "note": "two holders",
+   "probe": "/proc/net/tcp tx_queue",
+   "kind": "occupancy",
+   "source": "drain_probe",
+   "seq": 67
+  },
+  {
+   "attempt": "987cd0ad-ef0a-4222-8657-25ec094c877d",
+   "connection": "c53256",
+   "stream": "0HNQB6JVJLK75:00000001",
+   "copy": "target",
+   "offset": 0,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 68
+  },
+  {
+   "attempt": "987cd0ad-ef0a-4222-8657-25ec094c877d",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 69
+  },
+  {
+   "attempt": "987cd0ad-ef0a-4222-8657-25ec094c877d",
+   "offset": 0,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 70
+  },
+  {
+   "attempt": "987cd0ad-ef0a-4222-8657-25ec094c877d",
+   "outcome": "accepted",
+   "size": 65536,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 71
+  },
+  {
+   "attempt": "123b31e1-4ff4-4f15-9dd3-793b192674f4",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53246 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 72
+  },
+  {
+   "attempt": "45d0e883-cafb-469e-8232-31d31f99b7ef",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53242 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 73
+  },
+  {
+   "attempt": "987cd0ad-ef0a-4222-8657-25ec094c877d",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53256 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 74
+  },
+  {
+   "attempt": "e8a109ad-5331-4cc1-a76c-bdac23428217",
+   "connection": "c53278",
+   "stream": "0HNQB6JVJLK76:00000001",
+   "copy": "target",
+   "offset": 0,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 75
+  },
+  {
+   "attempt": "e8a109ad-5331-4cc1-a76c-bdac23428217",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 76
+  },
+  {
+   "attempt": "e8a109ad-5331-4cc1-a76c-bdac23428217",
+   "offset": 0,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 77
+  },
+  {
+   "attempt": "e8a109ad-5331-4cc1-a76c-bdac23428217",
+   "outcome": "accepted",
+   "size": 65536,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 78
+  },
+  {
+   "attempt": "15e740d3-3801-4b93-9b3f-9f62e00f230a",
+   "connection": "c53278",
+   "stream": "0HNQB6JVJLK76:00000001",
+   "copy": "target",
+   "offset": 65536,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 79
+  },
+  {
+   "attempt": "15e740d3-3801-4b93-9b3f-9f62e00f230a",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 80
+  },
+  {
+   "attempt": "15e740d3-3801-4b93-9b3f-9f62e00f230a",
+   "offset": 65536,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 81
+  },
+  {
+   "attempt": "15e740d3-3801-4b93-9b3f-9f62e00f230a",
+   "outcome": "uncertain",
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 82
+  },
+  {
+   "kind": "cancel",
+   "source": "client",
+   "stream": "0HNQB6JVJLK76:00000001",
+   "note": "uncertain stream (client RST)",
+   "seq": 83
+  },
+  {
+   "attempt": "e8a109ad-5331-4cc1-a76c-bdac23428217",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53278 gone (all data ACKed or connection reset)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 84
+  },
+  {
+   "attempt": "15e740d3-3801-4b93-9b3f-9f62e00f230a",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53278 gone (all data ACKed or connection reset)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 85
+  },
+  {
+   "attempt": "d07a4730-4b3d-4a97-abf6-eef1ca971444",
+   "connection": "c53280",
+   "stream": "0HNQB6JVJLK77:00000001",
+   "copy": "target",
+   "offset": 0,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 86
+  },
+  {
+   "attempt": "d07a4730-4b3d-4a97-abf6-eef1ca971444",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 87
+  },
+  {
+   "attempt": "d07a4730-4b3d-4a97-abf6-eef1ca971444",
+   "offset": 0,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 88
+  },
+  {
+   "attempt": "d07a4730-4b3d-4a97-abf6-eef1ca971444",
+   "outcome": "accepted",
+   "size": 65536,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 89
+  },
+  {
+   "attempt": "db0dd746-6e24-4215-bb25-25fce60a9cd1",
+   "connection": "c53286",
+   "stream": "0HNQB6JVJLK78:00000001",
+   "copy": "target",
+   "offset": 0,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 90
+  },
+  {
+   "operation": "withdraw-b14fe68f",
+   "copy": "target",
+   "monotonic_ms": 1795639518129,
+   "kind": "admit",
+   "source": "policy_probe",
+   "seq": 91
+  },
+  {
+   "operation": "withdraw-b14fe68f",
+   "copy": "target",
+   "epoch": 2,
+   "digest": "state-e6b1eb3af0098ed1",
+   "kind": "fence",
+   "source": "witness",
+   "seq": 92
+  },
+  {
+   "operation": "withdraw-b14fe68f",
+   "epoch": 2,
+   "digest": "state-e6b1eb3af0098ed1",
+   "monotonic_ms": 1795639518139,
+   "kind": "ack",
+   "source": "client",
+   "seq": 93
+  },
+  {
+   "kind": "cancel",
+   "source": "client",
+   "stream": "0HNQB6JVJLK77:00000001",
+   "note": "withdrawn stream ended early; viewer cancels",
+   "seq": 94
+  },
+  {
+   "kind": "cancel",
+   "source": "client",
+   "stream": "0HNQB6JVJLK78:00000001",
+   "note": "stream reserved before the fence, denied at handoff (zero transfer)",
+   "seq": 95
+  },
+  {
+   "attempt": "db0dd746-6e24-4215-bb25-25fce60a9cd1",
+   "outcome": "zero",
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 96
+  },
+  {
+   "case": "withdrawn",
+   "authenticated": true,
+   "copy": "target",
+   "status": 404,
+   "length": 0,
+   "content_range": null,
+   "range": "bytes=0-65535",
+   "phase": "withdrawn",
+   "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "body_matches_fixture": true,
+   "kind": "http",
+   "source": "client",
+   "seq": 97
+  },
+  {
+   "attempt": "d07a4730-4b3d-4a97-abf6-eef1ca971444",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53280 gone (all data ACKed or connection reset)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 98
+  },
+  {
+   "attempt": "cdf74228-3e65-4589-b6a4-931a76a47627",
+   "connection": "c53312",
+   "stream": "0HNQB6JVJLK7B:00000001",
+   "copy": "unrelated",
+   "offset": 0,
+   "size": 65536,
+   "epoch": 2,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 99
+  },
+  {
+   "attempt": "cdf74228-3e65-4589-b6a4-931a76a47627",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 100
+  },
+  {
+   "attempt": "cdf74228-3e65-4589-b6a4-931a76a47627",
+   "offset": 0,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 101
+  },
+  {
+   "attempt": "cdf74228-3e65-4589-b6a4-931a76a47627",
+   "outcome": "accepted",
+   "size": 65536,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 102
+  },
+  {
+   "attempt": "a6f22b7c-9959-4e1d-b482-1f2dfbea01fe",
+   "connection": "c53312",
+   "stream": "0HNQB6JVJLK7B:00000001",
+   "copy": "unrelated",
+   "offset": 65536,
+   "size": 65536,
+   "epoch": 2,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 103
+  },
+  {
+   "attempt": "a6f22b7c-9959-4e1d-b482-1f2dfbea01fe",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 104
+  },
+  {
+   "attempt": "a6f22b7c-9959-4e1d-b482-1f2dfbea01fe",
+   "offset": 65536,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 105
+  },
+  {
+   "kind": "restart",
+   "source": "fault_driver",
+   "seq": 106
+  },
+  {
+   "kind": "cancel",
+   "source": "client",
+   "stream": "0HNQB6JVJLK7B:00000001",
+   "note": "stream lost in crash",
+   "seq": 107
+  },
+  {
+   "kind": "recover",
+   "source": "witness",
+   "epoch": 2,
+   "digest": "state-e6b1eb3af0098ed1",
+   "seq": 108
+  },
+  {
+   "attempt": "cdf74228-3e65-4589-b6a4-931a76a47627",
+   "proof": "reconciliation",
+   "evidence": "OS TCP table: socket 5191->53312 gone",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 109
+  },
+  {
+   "attempt": "a6f22b7c-9959-4e1d-b482-1f2dfbea01fe",
+   "proof": "reconciliation",
+   "evidence": "OS TCP table: socket 5191->53312 gone",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 110
+  },
+  {
+   "attempt": "32ed3081-9451-45df-b9bf-a2aa03afbed4",
+   "connection": "c53048",
+   "stream": "0HNQB6K3PHV7I:00000001",
+   "copy": "unrelated",
+   "offset": 0,
+   "size": 2048,
+   "epoch": 2,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 111
+  },
+  {
+   "attempt": "32ed3081-9451-45df-b9bf-a2aa03afbed4",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 112
+  },
+  {
+   "attempt": "32ed3081-9451-45df-b9bf-a2aa03afbed4",
+   "offset": 0,
+   "size": 2048,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 113
+  },
+  {
+   "attempt": "32ed3081-9451-45df-b9bf-a2aa03afbed4",
+   "outcome": "accepted",
+   "size": 2048,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 114
+  },
+  {
+   "case": "unrelated_after_restart",
+   "authenticated": true,
+   "copy": "unrelated",
+   "status": 206,
+   "length": 1024,
+   "content_range": "bytes 0-1023/396888",
+   "range": "bytes=0-1023",
+   "body_sha256": "a801de09618478bf5596ef8999d9bbd955cdd7f712d9263f85bdc0dc5293da42",
+   "body_matches_fixture": true,
+   "kind": "http",
+   "source": "client",
+   "seq": 115
+  },
+  {
+   "attempt": "32ed3081-9451-45df-b9bf-a2aa03afbed4",
+   "proof": "drain",
+   "evidence": "OS TCP table: socket 5191->53048 in TimeWait (peer ACKed all bytes incl. FIN)",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 116
+  }
+ ],
+ "provenance": {
+  "server_events": "in-process instrumentation (not independent probes)",
+  "client_events": "trace_n01.py raw-socket client",
+  "occupancy": "Linux /proc/net/tcp tx_queue read by the client process, when available",
+  "platform": "linux"
+ }
+}

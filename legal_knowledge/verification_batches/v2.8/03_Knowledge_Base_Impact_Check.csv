@@ -1,0 +1,9 @@
+record_id,topic,finding,action,supporting_proposition_ids
+KB-006,Rule 23 Summary of Evidence,PRESERVES_VOLUNTARY_STATEMENT_CONTEXT,Verify the exact caution from Gazette; existing record directs offer of statement; no silent amendment,SRC-DIFF-001
+HCE-010,"Accused statement, silence and defence witnesses",CONSISTENT_WITH_USER_MML_WORDING,Explicitly says accused is not obliged; keep with 'source discrepancy pending' annotation,SRC-DIFF-001
+KB-026,"Rule 180 mandatory, effects context-specific",CONSISTENT_WITH_2020_SC,Existing record correctly avoids automatic nullity of completed court martial; attach 2020 paras 12–16 pinpoint,JUD-V28-002;JUD-V28-003;JUD-V28-004
+COI-024,Legal consequence of noncompliance,CONSISTENT_WITH_2020_SC,Existing record already distinguishes timely objection and later remedies; link to paragraphs and subsequent-treatment check,JUD-V28-002;JUD-V28-003
+HCE-004,Rule 22(1) proviso after CoI,NARROW_STATUTORY_TEXT_MATCH,Existing conditional explanation agrees with Rule 22(1); verify source date and individual Rule180 compliance,R22-STATUTE
+KB-012,CoI evidence and later proceedings,NARROW_STATUTORY_TEXT_MATCH,Existing rule 182 exceptions well signposted; maintain distinction between substantive proof and cross-examination,R182-STATUTE
+COI-025,Rule 182 evidentiary restriction,NARROW_STATUTORY_TEXT_MATCH,Keep exception and proviso separate from general prohibition; no current-law status yet,R182-STATUTE
+AFT-004,AFT sections 14 vs 15,LEGAL_CAVEAT_ADD,P S Gill confirms service-matter jurisdiction at pre-convening stage under s14 and limits s15 court-martial appeal before court-martial order,JUD-V28-005;JUD-V28-006

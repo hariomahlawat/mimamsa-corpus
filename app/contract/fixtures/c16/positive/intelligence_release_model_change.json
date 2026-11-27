@@ -1,0 +1,175 @@
+{
+ "base": {
+  "base_manifest_sha256": null,
+  "base_release_id": null,
+  "mode": "FULL"
+ },
+ "capability": {
+  "accounting": [
+   {
+    "kind": "MODEL_FILE",
+    "reason": "new embedder",
+    "status": "SHIPPED"
+   },
+   {
+    "kind": "VECTOR_PACK",
+    "reason": "full vectors for the new embedder, built upstream",
+    "status": "SHIPPED"
+   },
+   {
+    "kind": "RULE_PACK",
+    "reason": "no rule pack exists; refused at AUTH-LEDGER v0",
+    "status": "NOT_APPLICABLE"
+   },
+   {
+    "kind": "INTEGRITY_REGISTER",
+    "reason": "model hashes",
+    "status": "SHIPPED"
+   }
+  ],
+  "declared_service_level": "FULL",
+  "pending_future_gates": [
+   "FG-CALIBRATED-SAMPLES",
+   "FG-DISK-PREFLIGHT",
+   "FG-JOURNAL-DURABILITY",
+   "FG-REAL-RESTORE-TEST",
+   "FG-RECEIPTS",
+   "FG-ROW-LOADER",
+   "FG-SITE-IMPORTER",
+   "FG-MODEL-TRUST-PURPOSE"
+  ],
+  "semantic_search_promised": true
+ },
+ "compatibility": {
+  "contracts": {
+   "corpus": "mimamsa-corpus-contract/2.0",
+   "v1": "1.0.0"
+  },
+  "graph_builder_version": "c15-graph-1",
+  "index_format": "mimamsa-index-sqlite-1",
+  "knowledge_format": "1.0",
+  "knowledge_schema_version": 1,
+  "max_app_version": null,
+  "min_app_version": "0.16.0",
+  "required_models": [
+   {
+    "model_id": "next embedder (fixture)",
+    "role": "EMBEDDER",
+    "sha256": "a6df3705aeb6a98d861b540985cb20a28f5e34fde1a2f2bed972059e89de67b5"
+   }
+  ],
+  "text_store_format": "mimamsa-text-store/1",
+  "vector_store_format": "MIMVEC01"
+ },
+ "components": [
+  {
+   "authority": "AUTHORITATIVE",
+   "builder": null,
+   "component_id": "model-embedder",
+   "disk_budget_bytes": null,
+   "fallback": null,
+   "files": [
+    {
+     "bytes": 1026,
+     "path": "models/embedder/model.onnx",
+     "sha256": "478a5cc08b1c63c1bfa6fee9d362de478becc962790fb3a12ee33e95dbaf022b"
+    },
+    {
+     "bytes": 1030,
+     "path": "models/embedder/tokenizer.json",
+     "sha256": "cadf3d86eb2c29c73ed0a9278e7285f06e2d3f08476bb55ba8cd95f13c6d00b9"
+    }
+   ],
+   "format": "onnx",
+   "kind": "MODEL_FILE",
+   "model_sha256": "a6df3705aeb6a98d861b540985cb20a28f5e34fde1a2f2bed972059e89de67b5",
+   "result_count": 1,
+   "result_digest": "3b363d80ddd189cd0144e81663b1f4f8e61b6ca9da69d42e7e82ef54d3a28494",
+   "source_digest": null,
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "RESULT_DIGEST",
+    "ONNX_LOAD_SELFTEST"
+   ]
+  },
+  {
+   "authority": "ACCELERATOR",
+   "builder": {
+    "commit": "c8fa5290",
+    "config_sha256": null,
+    "name": "vectors-next-builder",
+    "version": "1.0.0"
+   },
+   "component_id": "vectors-next",
+   "disk_budget_bytes": 1000000000,
+   "fallback": "REFUSE_RELEASE",
+   "files": [
+    {
+     "bytes": 1032,
+     "path": "accelerators/vectors/next.mimvec",
+     "sha256": "07913150268fc24f8c3c38bc21e9ea8f282eff450ee7618be13b1c7cbe943c27"
+    }
+   ],
+   "format": "MIMVEC01",
+   "kind": "VECTOR_PACK",
+   "model_sha256": "a6df3705aeb6a98d861b540985cb20a28f5e34fde1a2f2bed972059e89de67b5",
+   "result_count": 310000,
+   "result_digest": "fd320cdf6a07e70ea71841797e1f72060fe12cf2c6e3ad6203c67d1f0a2077f7",
+   "source_digest": "2a914a0ab02c13267aa9739a02fab9fdea15d5773f09c68447feb2c9f72314d6",
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "VECTOR_TRAILER",
+    "VECTOR_KEYS_RECOMPUTED",
+    "VECTOR_SPOT_REEMBED",
+    "SOURCE_DIGEST_EQUALS_SITE"
+   ]
+  },
+  {
+   "authority": "AUTHORITATIVE",
+   "builder": null,
+   "component_id": "integrity",
+   "disk_budget_bytes": null,
+   "fallback": null,
+   "files": [
+    {
+     "bytes": 1032,
+     "path": "registers/integrity-models.jsonl",
+     "sha256": "9a0e7755112ddd647e4949dc6685eef49b0d0829287d52e56dedad0abcddf07e"
+    }
+   ],
+   "format": "canonical-jsonl",
+   "kind": "INTEGRITY_REGISTER",
+   "model_sha256": null,
+   "result_count": 3,
+   "result_digest": "328c6844b2c8c870340b4d9e7d579c8e2d89d3240a5baf5f91e4d41aa8a85a47",
+   "source_digest": null,
+   "transport": "FULL",
+   "verify": [
+    "SHA256_EACH_FILE",
+    "RESULT_DIGEST",
+    "RESTRICTED_REGISTER"
+   ]
+  }
+ ],
+ "contract": "mimamsa-corpus-contract/2.0",
+ "corpus_generations": [
+  {
+   "corpus_generation_id": "CG-20261127-fixtures-0a1b2c3d",
+   "manifest_sha256": "d56fe6b1b7207fcbade9b0db3471555f48511b27078f77d9e3779f047bb016fc"
+  }
+ ],
+ "heavy_compute_on_site": {
+  "embedding": "NONE",
+  "graph_rebuild": "NONE",
+  "ocr": "NONE"
+ },
+ "manifest_format": "MKR-1",
+ "notes": "synthetic fixture",
+ "record_kind": "knowledge_release_manifest",
+ "release_class": "INTELLIGENCE",
+ "release_id": "R18-intelligence-20261220-2a2b2c2d",
+ "release_sequence": 18,
+ "signing_purpose": "model"
+}

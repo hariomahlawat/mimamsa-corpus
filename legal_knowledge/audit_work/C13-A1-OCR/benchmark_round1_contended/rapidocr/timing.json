@@ -1,0 +1,44 @@
+{
+ "engine": "rapidocr",
+ "dpi": 200,
+ "threads": 2,
+ "model_load_seconds": 1.41,
+ "pages": [
+  {
+   "gt_id": "GT01",
+   "seconds": 36.35,
+   "lines": 31,
+   "mean_engine_conf": 0.879
+  },
+  {
+   "gt_id": "GT02",
+   "seconds": 47.54,
+   "lines": 37,
+   "mean_engine_conf": 0.88
+  },
+  {
+   "gt_id": "GT03",
+   "seconds": 8.11,
+   "lines": 31,
+   "mean_engine_conf": 0.81
+  },
+  {
+   "gt_id": "GT04",
+   "seconds": 12.58,
+   "lines": 24,
+   "mean_engine_conf": 0.757
+  },
+  {
+   "gt_id": "GT05",
+   "seconds": 15.07,
+   "lines": 36,
+   "mean_engine_conf": 0.915
+  },
+  {
+   "gt_id": "GT06",
+   "seconds": 10.09,
+   "lines": 25,
+   "mean_engine_conf": 0.792
+  }
+ ]
+}

@@ -1,0 +1,337 @@
+[
+  {
+    "id": "Q01",
+    "persona": "commander",
+    "kind": "natural",
+    "query": "how to hold a summary court martial",
+    "intent": "Procedure for an SCM: Army Act ss.116-120 and Army Rules ch. on SCM"
+  },
+  {
+    "id": "Q02",
+    "persona": "commander",
+    "kind": "keyword",
+    "query": "summary of evidence",
+    "intent": "Army Rules r.23 (recording of summary of evidence) and judgments on it"
+  },
+  {
+    "id": "Q03",
+    "persona": "commander",
+    "kind": "abbreviation",
+    "query": "AWL",
+    "intent": "Absence without leave: Army Act s.39"
+  },
+  {
+    "id": "Q04",
+    "persona": "commander",
+    "kind": "keyword",
+    "query": "desertion",
+    "intent": "Army Act s.38 and desertion judgments"
+  },
+  {
+    "id": "Q05",
+    "persona": "commander",
+    "kind": "natural",
+    "query": "punishments a commanding officer can award",
+    "intent": "Army Act s.80 (punishments by CO)"
+  },
+  {
+    "id": "Q06",
+    "persona": "commander",
+    "kind": "keyword",
+    "query": "field punishment",
+    "intent": "Army Act ss.75-76, omitted 1992: must show omission"
+  },
+  {
+    "id": "Q07",
+    "persona": "commander",
+    "kind": "natural",
+    "query": "arrest of a soldier for an offence",
+    "intent": "Army Act ss.101-102 (custody/arrest)"
+  },
+  {
+    "id": "Q08",
+    "persona": "commander",
+    "kind": "abbreviation",
+    "query": "SCM",
+    "intent": "Summary court-martial provisions"
+  },
+  {
+    "id": "Q09",
+    "persona": "adjutant",
+    "kind": "identifier",
+    "query": "s.69 Army Act",
+    "intent": "Army Act s.69 civil offences, provision text first"
+  },
+  {
+    "id": "Q10",
+    "persona": "adjutant",
+    "kind": "identifier",
+    "query": "section 63 Army Act",
+    "intent": "Army Act s.63 violation of good order and discipline"
+  },
+  {
+    "id": "Q11",
+    "persona": "adjutant",
+    "kind": "identifier",
+    "query": "Rule 22 Army Rules",
+    "intent": "Army Rules r.22 hearing of charge"
+  },
+  {
+    "id": "Q12",
+    "persona": "adjutant",
+    "kind": "identifier",
+    "query": "Rule 180 Army Rules",
+    "intent": "Army Rules r.180 court of inquiry: character at stake"
+  },
+  {
+    "id": "Q13",
+    "persona": "adjutant",
+    "kind": "natural",
+    "query": "absence without leave punishment",
+    "intent": "Army Act s.39"
+  },
+  {
+    "id": "Q14",
+    "persona": "adjutant",
+    "kind": "identifier",
+    "query": "section 82 Air Force Act",
+    "intent": "Air Force Act s.82 (punishment by CO)"
+  },
+  {
+    "id": "Q15",
+    "persona": "adjutant",
+    "kind": "identifier",
+    "query": "section 80 Army Act",
+    "intent": "Army Act s.80"
+  },
+  {
+    "id": "Q16",
+    "persona": "adjutant",
+    "kind": "identifier",
+    "query": "s.127 Army Act",
+    "intent": "s.127 omitted 1992: must show omission"
+  },
+  {
+    "id": "Q17",
+    "persona": "jag",
+    "kind": "citation",
+    "query": "2013 INSC 408",
+    "intent": "Dharamvir Singh v Union of India"
+  },
+  {
+    "id": "Q18",
+    "persona": "jag",
+    "kind": "party",
+    "query": "Dharamvir Singh",
+    "intent": "Same judgment by party name"
+  },
+  {
+    "id": "Q19",
+    "persona": "jag",
+    "kind": "citation",
+    "query": "(2013) 7 SCC 316",
+    "intent": "Reported citation of Dharamvir Singh"
+  },
+  {
+    "id": "Q20",
+    "persona": "jag",
+    "kind": "case_number",
+    "query": "Civil Appeal No. 4949 of 2013",
+    "intent": "Case number of Dharamvir Singh"
+  },
+  {
+    "id": "Q21",
+    "persona": "jag",
+    "kind": "natural",
+    "query": "disability pension attributable to military service",
+    "intent": "SC/HC disability pension judgments"
+  },
+  {
+    "id": "Q22",
+    "persona": "jag",
+    "kind": "natural",
+    "query": "can high court entertain writ against armed forces tribunal order",
+    "intent": "L. Chandra Kumar line / 2023 SC ruling on HC writs v AFT"
+  },
+  {
+    "id": "Q23",
+    "persona": "jag",
+    "kind": "natural",
+    "query": "court martial set aside violation of natural justice",
+    "intent": "Judgments quashing CM proceedings"
+  },
+  {
+    "id": "Q24",
+    "persona": "jag",
+    "kind": "natural",
+    "query": "burden of proof on medical board disability not noted at entry",
+    "intent": "Dharamvir Singh presumption"
+  },
+  {
+    "id": "Q25",
+    "persona": "jag",
+    "kind": "misspelling",
+    "query": "dharamveer singh",
+    "intent": "Spelling variant should still find Dharamvir Singh"
+  },
+  {
+    "id": "Q26",
+    "persona": "jag",
+    "kind": "misspelling",
+    "query": "court marshal",
+    "intent": "Common misspelling of court martial"
+  },
+  {
+    "id": "Q27",
+    "persona": "jag",
+    "kind": "misspelling",
+    "query": "disabilty pension",
+    "intent": "Typo should still find disability pension"
+  },
+  {
+    "id": "Q28",
+    "persona": "researcher",
+    "kind": "identifier",
+    "query": "section 302 IPC",
+    "intent": "IPC s.302 (historical); ideally note BNS s.103"
+  },
+  {
+    "id": "Q29",
+    "persona": "researcher",
+    "kind": "identifier",
+    "query": "section 103 BNS",
+    "intent": "BNS s.103 murder"
+  },
+  {
+    "id": "Q30",
+    "persona": "researcher",
+    "kind": "natural",
+    "query": "IPC to BNS comparison table",
+    "intent": "BPRD comparison IPC-BNS"
+  },
+  {
+    "id": "Q31",
+    "persona": "researcher",
+    "kind": "identifier",
+    "query": "section 65B Evidence Act",
+    "intent": "Evidence Act s.65B (electronic records)"
+  },
+  {
+    "id": "Q32",
+    "persona": "researcher",
+    "kind": "phrase",
+    "query": "omitted by Act 37 of 1992",
+    "intent": "1992 amendment footprint in the Army Act"
+  },
+  {
+    "id": "Q33",
+    "persona": "researcher",
+    "kind": "keyword",
+    "query": "Tribunals Reforms Act 2021",
+    "intent": "The Act and judgments on it"
+  },
+  {
+    "id": "Q34",
+    "persona": "researcher",
+    "kind": "identifier",
+    "query": "section 30 Armed Forces Tribunal Act",
+    "intent": "AFT Act s.30 appeal to Supreme Court"
+  },
+  {
+    "id": "Q35",
+    "persona": "researcher",
+    "kind": "abbreviation",
+    "query": "AFT jurisdiction",
+    "intent": "AFT Act s.14/15 jurisdiction, abbreviation expanded"
+  },
+  {
+    "id": "Q36",
+    "persona": "edge",
+    "kind": "zero_result",
+    "query": "quantum entanglement",
+    "intent": "Clear empty state"
+  },
+  {
+    "id": "Q37",
+    "persona": "edge",
+    "kind": "parser_error",
+    "query": "\"court martial NEAR/5",
+    "intent": "Parser error with position, words-only offered"
+  },
+  {
+    "id": "Q38",
+    "persona": "edge",
+    "kind": "ambiguous",
+    "query": "Rule 22 Rules",
+    "intent": "Which-instrument chip, nothing pinned"
+  },
+  {
+    "id": "Q39",
+    "persona": "edge",
+    "kind": "syntax",
+    "query": "exact:\"summary of evidence\"",
+    "intent": "Exact phrase only"
+  },
+  {
+    "id": "Q40",
+    "persona": "edge",
+    "kind": "syntax",
+    "query": "desertion AND NOT pension",
+    "intent": "Boolean exclusion"
+  },
+  {
+    "id": "Q41",
+    "persona": "edge",
+    "kind": "field",
+    "query": "court:delhi disability pension",
+    "intent": "Field filter to Delhi HC"
+  },
+  {
+    "id": "Q42",
+    "persona": "edge",
+    "kind": "filter",
+    "query": "court martial",
+    "params": {
+      "type": "judgment",
+      "year_from": "2020"
+    },
+    "intent": "Type and year filters applied"
+  },
+  {
+    "id": "Q43",
+    "persona": "edge",
+    "kind": "hindi",
+    "query": "सेना अधिनियम",
+    "intent": "Hindi query for Army Act (Hindi text held)"
+  },
+  {
+    "id": "Q05-army",
+    "persona": "commander",
+    "kind": "natural",
+    "query": "punishments a commanding officer can award",
+    "params": {
+      "service": "army"
+    },
+    "intent": "Army Act s.80 (punishments by CO) (service preference Army)"
+  },
+  {
+    "id": "Q07-army",
+    "persona": "commander",
+    "kind": "natural",
+    "query": "arrest of a soldier for an offence",
+    "params": {
+      "service": "army"
+    },
+    "intent": "Army Act ss.101-102 (custody/arrest) (service preference Army)"
+  },
+  {
+    "id": "Q13-army",
+    "persona": "adjutant",
+    "kind": "natural",
+    "query": "absence without leave punishment",
+    "params": {
+      "service": "army"
+    },
+    "intent": "Army Act s.39 (service preference Army)"
+  }
+]

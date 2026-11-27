@@ -1,0 +1,17 @@
+{
+  "extractor": "c12-holdings/1.0.0",
+  "ids_file_sha256": "14fbd168fcbc2c975c067ca853f0942bf2aa631761267888743211c03d0c6425",
+  "n_ids": 30,
+  "output_sha256": {
+    "HOLDINGS_C12.jsonl": "9be1973970e609e69d941e0a4486fb04f2d550ee61dcb4008ad4c2b692c3edd2",
+    "HOLDINGS_C12_JUDGMENTS.csv": "10f98cf5a3ee195121e2a2136f8db08a4d60c269e180e1baddb5824da3b8522c"
+  },
+  "text_source": {
+    "commit": "ad77758d",
+    "repo": "/home/user/c7"
+  },
+  "tool_sha256": {
+    "holdings_c12.py": "a1b0163824e4062b38efe1423985559935130f7e581f3c3ba61e29a50fc7bb89",
+    "holdings_core.py": "6d5b05e447e082cb8d9be4a1784148a18221091bd836b5fceb4cecbf6178fe8e"
+  }
+}

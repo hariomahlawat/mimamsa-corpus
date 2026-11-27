@@ -1,0 +1,2 @@
+date,hf_revision,storage_identifier,files,bytes,verify_result,verifier,notes
+2026-11-25,3864faf3bb24edef4bfb18fa0916cc788eb68d79,NONE,0,0,NO_SECOND_BACKUP_VERIFIED,coordinator,"No second persistent backup exists yet; owner storage pending (see BACKUP_AND_RESTORE_INSTRUCTIONS.md). Tool tested on prefixes only."

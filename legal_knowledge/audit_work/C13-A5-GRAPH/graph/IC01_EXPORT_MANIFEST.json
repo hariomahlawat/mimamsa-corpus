@@ -1,0 +1,63 @@
+{
+ "contract": "IC-01",
+ "contract_version": "1.0.0",
+ "files": {
+  "EDGE_TYPE_EVALUATION_C13.json": {
+   "bytes": 7057,
+   "records": null,
+   "sha256": "32fc0e12b0cf0c0e19b8d7738a937a807701c1e9c6bbf7abb4db494fdd34fd86",
+   "sha256_note": null
+  },
+  "GRAPH_SUMMARY_C13.json": {
+   "bytes": 6296,
+   "records": null,
+   "sha256": "0878cadf63f863e5187777f3d949aa0521254d61490a5918d8469280c9b8bc93",
+   "sha256_note": null
+  },
+  "edges_candidate.jsonl.gz": {
+   "bytes": 78499377,
+   "records": 44826,
+   "sha256": "da6f99a246909f0932e7626dbe0e3a73a44777619a5ae1d678cd7f90f20b986a",
+   "sha256_note": "sha256 of the uncompressed content"
+  },
+  "edges_reviewed.jsonl": {
+   "bytes": 349352,
+   "records": 171,
+   "sha256": "f49818b010b0c67c24c11a4d6bcfafab8df9f67aece914d2b0852c79d688e7c9",
+   "sha256_note": null
+  },
+  "nodes.jsonl.gz": {
+   "bytes": 14462975,
+   "records": 13406,
+   "sha256": "ff35e7831bd75bb229682b50169bf0c575245a32e0c1fd176ad7d4e061023b6c",
+   "sha256_note": "sha256 of the uncompressed content"
+  }
+ },
+ "pins": {
+  "artefact_git_commit": "the GitHub commit that contains this manifest (Track B release pins it)",
+  "hf_corpus_revision_inputs": "3864faf3bb24edef4bfb18fa0916cc788eb68d79",
+  "hf_metadata_overlay_commit": "844383f55d3b8e61068c3c786a69e8160061cc32",
+  "text_and_meta_git_commit": "ad77758d"
+ },
+ "producer": "C13-A5 graph workstream",
+ "restricted_material_excluded": {
+  "sha256": "fc7ea07e62e7e41f348639973f19187540593e7b3237933758f64e865b95b2b6",
+  "source": "git:72fe7a75:config/restricted_material.json"
+ },
+ "schema_sha256": {
+  "edge": "11b5ceb039de2411dd4d45dcd925d1e0648d123493f61ee347e9eaf34924426e",
+  "node": "cbfb8d989276602ea7386018740ffe5686df2547c4fd651dc763d08116bca0ae"
+ },
+ "schemas": {
+  "edge": "legal_knowledge/audit_work/C13-A5-GRAPH/schema/graph_edge.schema.json",
+  "node": "legal_knowledge/audit_work/C13-A5-GRAPH/schema/graph_node.schema.json"
+ },
+ "semantics": [
+  "Every edge is candidate data unless verification_state is REVIEWED_AI_DOCUMENTARY_NOT_LEGAL_VALIDATION, which is an AI documentary check, never legal validation.",
+  "OVERRULES, DISAPPROVES, DOUBTS and amendment edges are always candidates.",
+  "Edges carrying UNVERIFIED_MARKER_REQUIRED must render the 'proposed, not verified' marker.",
+  "Nodes/edges with NON_OPERATIONAL_RESEARCH_ONLY must not drive advice, checklists, compliance or form validation; HIDDEN_FROM_USERS_THIS_CYCLE items are Admin-diagnostic only.",
+  "Missing data is missing: the absence of an edge never establishes the absence of adverse authority."
+ ],
+ "tool": "graph-c13/1.0.0"
+}

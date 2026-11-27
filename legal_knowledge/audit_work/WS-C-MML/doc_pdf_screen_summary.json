@@ -1,0 +1,39 @@
+{
+ "method": "scripts/doc_pdf_diff.py over every provision cited by the KB and located in MML (216 provisions); text-layer screen only",
+ "pairs": {
+  "MML vol 2(AA).doc.doc vs MML 2.pdf": {
+   "provision_pairs": 110,
+   "identical": 68,
+   "similarity_ge_0.98": 92,
+   "diff_ops": 109,
+   "consequential_screen_ops": 59
+  },
+  "MML vol 2(AR).doc-1.doc vs MML 2.pdf": {
+   "provision_pairs": 105,
+   "identical": 50,
+   "similarity_ge_0.98": 90,
+   "diff_ops": 257,
+   "consequential_screen_ops": 107
+  },
+  "MML vol 2(AR).doc.doc vs MML 2.pdf": {
+   "provision_pairs": 103,
+   "identical": 49,
+   "similarity_ge_0.98": 88,
+   "diff_ops": 252,
+   "consequential_screen_ops": 102
+  },
+  "MML vol 2(AA).doc.doc vs MML vol 2(AA).pdf": {
+   "provision_pairs": 110,
+   "identical": 109,
+   "similarity_ge_0.98": 109,
+   "diff_ops": 5,
+   "consequential_screen_ops": 4
+  }
+ },
+ "no_locator": [
+  "r.116 MML vol 2(AR).doc.doc",
+  "r.15 MML vol 2(AR).doc.doc",
+  "s.40 MML vol 2(AA).doc.doc"
+ ],
+ "note": "Differences between the vol 2(AR) DOCs and MML 2.pdf mix transcription errors with edition/version differences (MML 2 reflects 2002/2003 notes); only image-checked rows in doc_pdf_fidelity_register.csv are findings."
+}

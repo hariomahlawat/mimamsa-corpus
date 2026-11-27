@@ -1,0 +1,22 @@
+{
+  "require_exact_retrieved_by": true,
+  "first_pass_agents": [
+    "orchestrator",
+    "statutory-auditor",
+    "manual-of-military-law-auditor",
+    "cross-volume-auditor",
+    "procedure-auditor",
+    "judgment-auditor"
+  ],
+  "reviewers": {
+    "independent-reviewer-D": {
+      "stage": "blind",
+      "source_prefixes": [
+        "S-REVD-"
+      ],
+      "finding_prefixes": [
+        "F-REVD-"
+      ]
+    }
+  }
+}

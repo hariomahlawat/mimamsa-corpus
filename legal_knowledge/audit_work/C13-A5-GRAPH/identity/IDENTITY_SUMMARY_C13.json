@@ -1,0 +1,52 @@
+{
+ "copies_in_overlay": 127,
+ "copies_in_scope": 128,
+ "copies_withheld_restricted": 1,
+ "files_with_several_doc_ids": 42,
+ "group_sizes": {
+  "RD-act-air-force-1950": 4,
+  "RD-act-armed-forces-tribunal-2007": 35,
+  "RD-act-army-1950": 7,
+  "RD-act-army-af-disposal-private-property-1950": 4,
+  "RD-act-bns-2023": 6,
+  "RD-act-bnss-2023": 10,
+  "RD-act-bsa-2023": 5,
+  "RD-act-navy-1957": 9,
+  "SD-C5-SRC-J-SC-2015-RAJBIR": 3,
+  "SD-C5-SRC-P0-AA-AMD-ACT37-1992": 3,
+  "SD-C5-SRC-P0-AFT-ACT-2007-INDIACODE": 2
+ },
+ "input_sha256": {
+  "legal_knowledge/audit_work/C12-CONSOLIDATION/copy_verification_c12/COPY_VERIFICATION_MANIFEST.csv": "a3a3ab564468576913bb4e6f2fa3d40f253ab0a053b2515b3b6bdbbe984434c7"
+ },
+ "logical_identities": 117,
+ "logical_identities_by_kind": {
+  "INSTRUMENT": 47,
+  "INSTRUMENT_OR_NOTIFICATION": 1,
+  "INSTRUMENT_PART": 4,
+  "JUDGMENT": 41,
+  "LISTING_PAGE": 21,
+  "SOURCE_DOCUMENT": 3
+ },
+ "membership_rows": 439,
+ "one_id_several_sha256_groups": 11,
+ "policy": "non-destructive: every copy and doc_id kept; no deletion, merge or rename; overlay only",
+ "proceedings_from_common_judgments": 305,
+ "resolution_rows": {
+  "ALTERNATE_COPY_OF_SAME_INSTRUMENT_VERSION_NOT_ESTABLISHED": 3,
+  "DISTINCT_INSTRUMENT_GROUPED_UNDER_PARENT_ID": 39,
+  "LANGUAGE_RENDITION_OF_SAME_INSTRUMENT": 5,
+  "LISTING_PAGE_NOT_AN_INSTRUMENT": 21,
+  "ONE_JUDGMENT_DUPLICATE_DOC_ID_YEAR_PARTITION": 44,
+  "ONE_JUDGMENT_SEVERAL_PROCEEDINGS": 305,
+  "PRINCIPAL_COPY": 8,
+  "SAME_BYTES_DIFFERENT_DOC_TYPES_REVIEW": 2,
+  "SAME_LOGICAL_DOCUMENT_SEVERAL_COPIES": 8,
+  "SCHEDULE_PART_OF_INSTRUMENT": 4
+ },
+ "restricted_register": {
+  "sha256": "fc7ea07e62e7e41f348639973f19187540593e7b3237933758f64e865b95b2b6",
+  "source": "git:72fe7a75:config/restricted_material.json"
+ },
+ "tool": "identity-c13/1.0.0"
+}

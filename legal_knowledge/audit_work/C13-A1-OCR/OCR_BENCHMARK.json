@@ -1,0 +1,72 @@
+{
+ "paddle_hi (PP-OCRv5_server_det + devanagari rec)": {
+  "note": "MemoryError: tried to allocate 20,150,747,136 bytes on this 15 GB host (benchmark/paddle_hi_server_det_FAILED.txt); replaced by paddle_hi_mobile.",
+  "status": "FAILED"
+ },
+ "paddle_hi_mobile": {
+  "dpi": 200,
+  "mean_char_accuracy_all": 0.9849,
+  "mean_char_accuracy_english_pages": null,
+  "mean_content_word_recall": 0.9065,
+  "mean_seconds_per_page": 30.07,
+  "mean_word_accuracy_all": 0.9295,
+  "mean_word_accuracy_english_pages": null,
+  "model_load_seconds": 47.53,
+  "pages": 1,
+  "pages_covered": 1,
+  "threads": 2
+ },
+ "paddle_v5_mobile": {
+  "dpi": 200,
+  "mean_char_accuracy_all": 0.8803,
+  "mean_char_accuracy_english_pages": 0.977,
+  "mean_content_word_recall": 0.8362,
+  "mean_seconds_per_page": 26.1183,
+  "mean_word_accuracy_all": 0.8124,
+  "mean_word_accuracy_english_pages": 0.9052,
+  "model_load_seconds": 5.75,
+  "pages": 6,
+  "pages_covered": 5,
+  "threads": 2
+ },
+ "paddle_v6_medium": {
+  "dpi": 200,
+  "mean_char_accuracy_all": 0.881,
+  "mean_char_accuracy_english_pages": 0.9744,
+  "mean_content_word_recall": 0.8585,
+  "mean_seconds_per_page": 85.94,
+  "mean_word_accuracy_all": 0.8125,
+  "mean_word_accuracy_english_pages": 0.9019,
+  "model_load_seconds": 8.14,
+  "pages": 6,
+  "pages_covered": 5,
+  "threads": 2
+ },
+ "pdf_text_layer": {
+  "mean_char_accuracy_all": 0.2125,
+  "mean_char_accuracy_english_pages": 0.1101,
+  "mean_content_word_recall": 0.1079,
+  "mean_seconds_per_page": null,
+  "mean_word_accuracy_all": 0.1118,
+  "mean_word_accuracy_english_pages": 0.0522,
+  "pages": 6,
+  "pages_covered": 2
+ },
+ "rapidocr": {
+  "dpi": 200,
+  "mean_char_accuracy_all": 0.8139,
+  "mean_char_accuracy_english_pages": 0.9003,
+  "mean_content_word_recall": 0.7298,
+  "mean_seconds_per_page": 25.1867,
+  "mean_word_accuracy_all": 0.6485,
+  "mean_word_accuracy_english_pages": 0.7121,
+  "model_load_seconds": 1.03,
+  "pages": 6,
+  "pages_covered": 5,
+  "threads": 2
+ },
+ "tesseract": {
+  "note": "Tesseract is not installed and apt is not allowed; not installed, not benchmarked.",
+  "status": "BLOCKED_PENDING_OWNER_APPROVAL_FOR_SYSTEM_PACKAGE"
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "changed_edges": [
+  "C9-AG-AA-C3-03",
+  "C9-AG-AFT-00",
+  "C9-AG-BNS-COMM",
+  "C9-AG-BNSS-COMM",
+  "C9-AG-BSA-COMM",
+  "C9-AG-BNSS-REPEAL",
+  "C9-AG-BSA-REPEAL",
+  "C9-AG-AFTSRO9E2009"
+ ],
+ "graph_c10_counts": {
+  "DISPUTED_PRESERVE_BOTH": 15,
+  "EVIDENCED": 17,
+  "NOT_LOCATED": 41,
+  "UNRESOLVED_COMMENCEMENT": 43
+ },
+ "graph_c9_counts": {
+  "DISPUTED_PRESERVE_BOTH": 15,
+  "EVIDENCED": 17,
+  "NOT_LOCATED": 43,
+  "UNRESOLVED_COMMENCEMENT": 41
+ },
+ "graph_changes": {
+  "EVIDENCE_ADDED": 6,
+  "STATUS_CHANGED": 2,
+  "UNCHANGED": 108
+ },
+ "pins": {
+  "auth_ledger_version": 0,
+  "c10_outputs": {
+   "COPY_EQUIVALENCE_REGISTER.csv": "6db0cde8c936d6be1b46113463f576b138c96d5a062bc8ec3ebfa9fb551045f3",
+   "MISSING_SOURCE_EVIDENCE.csv": "3aa947cb076431d40d27d6bc3e0d285f6304c36980d6043e2e41520bfbb95b21",
+   "SOURCE_IDENTITY_CONFLICTS.csv": "379bc1d79c09da85391130cbd2482a3e39270ae3515e78b0f4b1836d6deaa832",
+   "UNIFIED_CORPUS_INVENTORY.csv": "91519458af20c6bd849ccb8ab72d4dd32057fa0382738fa240055fe8a5b22e91",
+   "UNREGISTERED_HELD_SOURCES.csv": "3f6be222e5cd48962819d0ba31572fee0a23cf321cbe23128db75e57d68977d6"
+  },
+  "c9_statutory": "cfc52d5792796050dcae351afda5609f7db41a5f",
+  "hf_legal_knowledge_listing": "5e7a482df3c67ae082489ee0df44367369bd23f9f865ac9921efbece500837a5",
+  "raw_data": "ad77758d4569ba6aafa955cc7843d874489e10f7",
+  "registers": "21e73b8348767d5f1524167fcec538e1aad6e732"
+ },
+ "preservation_actions": 48,
+ "preservation_risk_rows": 9,
+ "readings": 14,
+ "registration_rows": {
+  "ADD": 32,
+  "ADD_AFTER_ACCESS_MARKING_DECISION": 1,
+  "ADD_AS_SECONDARY_REFERENCE_ONLY": 3,
+  "ADD_OPTIONAL_LOW_PRIORITY": 9,
+  "EXCLUDE (metadata)": 21,
+  "KEEP": 15,
+  "RESTATE_AS_PROVENANCE_ATTACHMENT": 7
+ },
+ "schema": "c10-statutory-counts/1",
+ "status_counts": {
+  "HELD_INCOMPLETE": 7,
+  "HELD_PROVENANCE_UNCERTAIN": 8,
+  "HELD_SECONDARY_COMPILATION_ONLY": 13,
+  "HELD_UNREGISTERED": 13,
+  "LOCATED_NOT_ACQUIRED": 14,
+  "NOT_FOUND_AFTER_DOCUMENTED_SEARCH": 11
+ }
+}

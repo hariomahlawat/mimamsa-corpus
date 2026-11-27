@@ -1,0 +1,79 @@
+name: Legal Database Audit Kit Validation
+
+on:
+  pull_request:
+    paths:
+      - ".claude/agents/**"
+      - "docs/legal-audit/**"
+      - "tools/legal_audit/**"
+      - "legal_knowledge/audit_work/**"
+      - "tests/test_legal_audit_*.py"
+      - ".github/workflows/legal-audit-kit-ci.yml"
+      - "scripts/hf_protect.py"
+      - "scripts/push_hf.py"
+      - "scripts/push_legal_knowledge.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-kit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history and all refs: AUTH-LEDGER BIND-line verification fails closed in a shallow clone, and the
+          # corpus-ref regeneration checks skip when origin/raw-data is absent. Read-only; no credentials are persisted.
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Pin the crawler corpus ref to the commit recorded by the committed WS-D outputs
+        # Decouples audit PRs from the moving tip of raw-data: the corpus-ref regeneration tests compare against outputs
+        # generated from this commit. If it is unavailable, the ref is removed and those tests skip (with a warning).
+        run: |
+          PIN=ad77758d4569ba6aafa955cc7843d874489e10f7
+          if git cat-file -e "${PIN}^{commit}" 2>/dev/null; then
+            git update-ref refs/remotes/origin/raw-data "$PIN"
+          else
+            git update-ref -d refs/remotes/origin/raw-data || true
+            echo "::warning::pinned crawler corpus commit unavailable; corpus-ref tests will skip"
+          fi
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate audit schemas
+        run: python tools/legal_audit/validate.py --schema-check
+      - name: AUTH-LEDGER verification (offline; pins, hash chain, version-zero reproduction, BIND lines)
+        run: python legal_knowledge/audit_work/AUTH-LEDGER/tools/auth_ledger.py verify
+      - name: TXN-DEMO synthetic transaction reproduces (fails on stale expected values after any AUTH-LEDGER tool change)
+        run: python -I -B legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/TXN-DEMO/tools/synthetic_transaction_demo.py --check
+      - name: Test fail-closed review checks
+        run: python -m unittest discover -s tests -p "test_legal_audit_*.py" -v
+      - name: Validate PILOT-01 audit batch (strict, frozen manifest, reviewer identities)
+        run: python tools/legal_audit/validate.py --batch legal_knowledge/audit_work/PILOT-01 --manifest legal_knowledge/audit_work/PILOT-01/pilot-manifest.json --strict
+      - name: Validate R23-VERIFY-01 batch (strict)
+        run: python tools/legal_audit/validate.py --batch legal_knowledge/audit_work/R23-VERIFY-01 --manifest legal_knowledge/audit_work/R23-VERIFY-01/pilot-manifest.json --strict
+      - name: Citation-code inventory fully registered (87 codes; fails on any missing code)
+        run: python legal_knowledge/audit_work/PILOT-01/build_code_inventory.py
+      - name: Audit register CSVs are well-formed (UTF-8, unique headers, no ragged rows)
+        run: python tools/legal_audit/check_csv.py
+      - name: Provenance controls (render hashes, REQUIRES_VERIFICATION, carrier/authority values, acquisition approvals, no approval states)
+        run: python tools/legal_audit/check_provenance.py
+      - name: ARMY-RULES-CHAIN-01 / ACQ-02 register cross-references and date semantics
+        run: python legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/check_registers.py
+      - name: Reproduce frozen record hashes (PILOT-01 and R23-VERIFY-01 manifests; no private bytes)
+        run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/hash_reproduction.py --out "$RUNNER_TEMP/hash_reproduction.json"
+      - name: Relation graph integrity (no dangling KB/case/source/finding/review edges, no ID collisions)
+        run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/relation_graph.py --no-write
+      - name: Versioned statutory edges regenerate byte-identically (no unstated effective date without a flag)
+        run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/build_versioned_edges.py --check
+      - name: Canonical coverage (CP-01) pinned inputs unchanged; full regeneration where the corpus ref exists
+        run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/canonical_coverage.py --check
+      - name: Proposed identity map pinned inputs unchanged; full regeneration where the corpus ref exists
+        run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/build_identity_map.py --check
+      - name: Check frozen originals are unchanged
+        run: |
+          echo "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1  legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl" > /tmp/originals.sha256
+          echo "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a  legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl" >> /tmp/originals.sha256
+          sha256sum -c /tmp/originals.sha256

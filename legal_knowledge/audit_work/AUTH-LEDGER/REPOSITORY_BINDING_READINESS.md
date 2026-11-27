@@ -1,0 +1,17 @@
+# Repository-binding readiness (Cycle 8)
+
+A BIND line is the step that makes an approved ledger version effective (`APPROVAL_CONTROLS.md`). **No BIND line exists yet; the ledger is at version 0.** This file lists what must be in place before the first one, and states what each control does and does not prove.
+
+| Dependency | State at Cycle 8 | Needed before the first BIND line | Who |
+| --- | --- | --- | --- |
+| Full git history in CI | The audit workflow uses `actions/checkout@v4` with its default depth of 1. A shallow clone makes binding verification fail closed, by design | The `fetch-depth: 0` change, prepared as a separate draft PR. That PR also runs `auth_ledger.py verify` as an explicit CI step. **Update (Cycle 9):** done; PR #37 merged at `ff425a9a` | owner (O-3); done |
+| Shallow-clone detection | Implemented: `git rev-parse --is-shallow-repository` must be false | — | done |
+| Branch protection on `legal-knowledge/v2.5-staging` | Unknown. Not readable or changeable from here, and not changed | Require a PR, at least one approving review, dismissal of stale approvals on new pushes, no force-push, no bypass | owner (O-2) |
+| Required independent review | Recorded in the BIND line as asserted values (review id, login, commit). The commit must equal `reviewed_head` | An auditor confirms them online (GitHub API: pull request reviews), because git history does not contain reviews | auditor |
+| Stale-approval dismissal | GitHub setting (O-2). Offline, the BIND check already requires the review commit to equal `reviewed_head`, and the package tree to be identical at review and merge | Enable it in branch protection | owner |
+| Owner identity assurance | Not provided. A merge commit, author text or a `decided_by` name does **not** prove who approved. An AI-agent owner name is rejected as a lint only | Optionally, an owner signature over the BIND statement, checked against an out-of-band key (O-1), plus a committed list of identities (O-4) | owner |
+| Git-bundle reproducibility | Verification needs only local objects, and network transports are refused. Tested: a clone of `git bundle create --all` verifies (`C8SecurityRound2.test_f07_bundle_clone_verifies`), and so does a fresh clone | Snapshots ship a full-history bundle, and the offline side clones it before verifying | packaging |
+| Git object integrity | The merge, reviewed-head and parent commit objects, and every tree and blob on each path the verdict reads, are re-hashed from their stored bytes. A forged object stored under a genuine id is rejected (tested for commits and trees). Objects the verdict never reads are not checked, and a full `git fsck` (about 14 s on this 1.3 GB repository) is not run on every read | Audit from a `git clone --no-local` or bundle clone; optionally run `git fsck --no-dangling` once per audit | auditor |
+| Online versus offline | Offline, git history proves topology: an ordinary two-parent merge of the reviewed head, with identical package bytes. Online, GitHub can prove that a named account approved a named commit. Neither proves legal authority | — | — |
+
+**What a verified BIND line establishes.** The ledger version entered staging through an ordinary merge whose second parent was the stated reviewed head, and nothing in the ledger package changed between review and merge. It does **not** establish owner identity, legal or JAG approval, or documentary authenticity beyond the entry's own evidence checks.

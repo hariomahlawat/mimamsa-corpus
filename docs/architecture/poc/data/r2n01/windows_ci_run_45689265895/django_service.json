@@ -1,0 +1,17 @@
+{
+  "service": "MimamsaPocDjango",
+  "checks": {
+    "start_to_healthy_s": 0.1248691,
+    "account": "NT SERVICE\\MimamsaPocDjango",
+    "auth_401": true,
+    "search_results": 2,
+    "metadata_ok": true,
+    "pdf_range_status": 206,
+    "pdf_range_header": "bytes 0-7/4640",
+    "restart_to_healthy_s": 1.06,
+    "crash_recovered": true,
+    "crash_to_healthy_s": 2.77,
+    "pid_before": 1752,
+    "pid_after": 1416
+  }
+}

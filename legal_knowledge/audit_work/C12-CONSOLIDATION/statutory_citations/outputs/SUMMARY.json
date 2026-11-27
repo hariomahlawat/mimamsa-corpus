@@ -1,0 +1,1991 @@
+{
+ "workstream": "C12-F statutory citations",
+ "version": "C12F-v1.1",
+ "frozen_originals": {
+  "legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl": {
+   "sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+   "worktree": "MATCH",
+   "git_21e73b83": "MATCH"
+  },
+  "legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl": {
+   "sha256": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+   "worktree": "MATCH",
+   "git_21e73b83": "MATCH"
+  }
+ },
+ "input_sha256": {
+  "kb": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+  "cases": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+  "c10_citation": "c07d48b5ed39c0ef4bb1154dc9dcec57a28d65538f057a18cd0b089794060663",
+  "c10_preservation": "bc7b04e5c7537fe07c8b76cb3bac01d22a940686a283d5ff7691fd5917a5b613",
+  "c10_escalation": "20917856f183c5e6e092dce7bab53e794ea7e0d4c982340a7a294d15eb5af945",
+  "c5_crosswalk": "5fae890a493eea2050488a05e54547c1f537f346e348b8e55d7c5fc12f95efa8",
+  "c5_copy": "415c85f4a2434dfbdd9e0ea0c35a3c0abbb9d64b9481c8b043c8256d145ff73b",
+  "c5_master": "d4c4b9b21bcf18c607856873bb2beb9aa7db5bc5141ee2b8848c5f7be4104261",
+  "c5_conflict": "97c8d4b65dc44769c61f2012e83340d41db40a5b68461aec735b26e2811bb118",
+  "ar_chronology": "4bb18af8fef4b62f1620bea6ac2eb111e4e9494f948e67d2f68c064cda5020a1",
+  "ar_instruments": "3ea1404828dccb8be52c4db4f8288b1022b5a0b0fbc7e1bb209d9738614eef56",
+  "wsa_pcl": "b61625caa04a5db37cab91b50323aaf99b3ea7684c88439b18c8125efb86822a",
+  "c11_links": "d56be6cae32990c02f4176c323355d60ee2d7b19667fb0ee4bfd575f01c41eb1",
+  "pilot_corrections": "659bcaf8c9036d4941f5db8b4d127644091687f5c7a3fcc3a06141d0a439cd43",
+  "page_evidence": "013a14948f3585c472daa5b1599ec9fad035b676228ba46c917cb8ee88e66233",
+  "wsa_open_questions": "7e81e14a5899eadf74bfd11aed1e1bf228aff7205ca1e91ddf027abb8e97fbda",
+  "wsa_open_questions_c3": "5316c50fe7205380ca6601c85ba5fe357f85f869012b983bc093915ffb135be0",
+  "wsa_gaps": "964402ddc4e7bd6a61250ba96726f12ce961675357bd7842c99f0a609110907f",
+  "wsa_mml_xcheck": "c6a7be7dcd0a41f7b8829b428e108dcd46680878a60b06c26dbd9c6a43838333",
+  "wsc_open_questions": "61a05953175c7b3a8040a56e4bad1f798978d66c9611a03ee0f3c6a839611286",
+  "wsa_r15_trace": "c7cd0106b8fa16b4ebd3c98b00c1bcd58b575a6020d18b3beb5a125903d336dc",
+  "review_promotions": "1c58695bb8a27878cac0dc3f0b85bc17f92889d72f1c8d3e0afbc2fcfe593e79"
+ },
+ "page_evidence_validation": {
+  "PE-1954-296-R14": "VERIFIED",
+  "PE-1954-297-R15-R17": "VERIFIED",
+  "PE-1954-299-R22": "VERIFIED",
+  "PE-1954-300-R23": "VERIFIED",
+  "PE-1954-300-R24": "VERIFIED",
+  "PE-1954-301-R26": "VERIFIED",
+  "PE-1954-303-R33-R34": "VERIFIED",
+  "PE-1954-304-R35-R36": "VERIFIED",
+  "PE-1954-305-R37-R38": "VERIFIED",
+  "PE-1954-305-R39": "VERIFIED",
+  "PE-1954-306-R40-R41": "VERIFIED",
+  "PE-1954-307-R43": "VERIFIED",
+  "PE-1954-331-R134-R136": "VERIFIED",
+  "PE-1954-340-R178-R179": "VERIFIED",
+  "PE-1954-341-R180": "VERIFIED",
+  "PE-1954-341-R181-183": "VERIFIED",
+  "PE-1954-342-R185-R186": "VERIFIED",
+  "PE-1961-141-R14": "VERIFIED",
+  "PE-1961-142-R15": "VERIFIED",
+  "PE-1961-143-R16-R17": "VERIFIED",
+  "PE-1993-12-R1": "VERIFIED",
+  "PE-1993-12-R14": "VERIFIED",
+  "PE-1993-14-R22": "VERIFIED",
+  "PE-1993-14-R25-R26": "VERIFIED",
+  "PE-1993-15-R26-R37": "VERIFIED",
+  "PE-1993-17-R134-136": "VERIFIED",
+  "PE-1993-18-R179-R182": "VERIFIED",
+  "PE-1993-19-R186": "VERIFIED"
+ },
+ "pymupdf_version": "2.1",
+ "citation_items": 983,
+ "before": {
+  "EXACT_ANCHOR": 42,
+  "MISSING_EVIDENCE": 289,
+  "PARTIAL_MATCH": 652
+ },
+ "after_proposed": {
+  "EXACT_ANCHOR": 99,
+  "MISSING_EVIDENCE": 289,
+  "PARTIAL_MATCH": 595
+ },
+ "delta": {
+  "EXACT_ANCHOR": 57,
+  "MISSING_EVIDENCE": 0,
+  "PARTIAL_MATCH": -57
+ },
+ "transitions": {
+  "EXACT_ANCHOR->EXACT_ANCHOR": 42,
+  "MISSING_EVIDENCE->MISSING_EVIDENCE": 289,
+  "PARTIAL_MATCH->EXACT_ANCHOR": 57,
+  "PARTIAL_MATCH->PARTIAL_MATCH": 595
+ },
+ "c12_change_counts": {
+  "EXACT_RETAINED_BASIS_CORRECTED_AMENDMENT_ANCHORED": 2,
+  "EXACT_RETAINED_PAGE_ANCHOR_ADDED": 40,
+  "NONE": 543,
+  "PARTIAL_RETAINED_NOT_ESTABLISHED": 53,
+  "PARTIAL_RETAINED_PAGE_EVIDENCE_ADDED": 288,
+  "PROMOTE_PARTIAL_TO_EXACT_PROPOSED": 57
+ },
+ "promotions_by_source": {
+  "C5-SRC-J-SC-2020-VIRENDRA": 17,
+  "C5-SRC-J-SC-2023-PARASHOTAM": 3,
+  "C5-SRC-P0-ARMY-RULES-1954": 37
+ },
+ "promotions_by_rule_set": {
+  "r134": 1,
+  "r14": 3,
+  "r14,r17": 3,
+  "r17": 2,
+  "r178,r179,r180,r181": 1,
+  "r179": 5,
+  "r179,r179": 1,
+  "r179,r179,r180": 1,
+  "r179,r180": 1,
+  "r186": 2,
+  "r26": 7,
+  "r33,r34": 3,
+  "r33,r34,r35,r36": 1,
+  "r33,r34,r35,r36,r37,r38,r39,r40,r41": 1,
+  "r36": 3,
+  "r37": 2
+ },
+ "tier_counts": {
+  "A": 105,
+  "B": 443,
+  "C": 435
+ },
+ "verification_rows": 1156,
+ "verification_status_counts": {
+  "CONFLICTING_RESERVED_NOT_RESOLVED": 63,
+  "ESTABLISHED_EXACT_VERSION_ANCHOR": 326,
+  "ESTABLISHED_PARA_PAGE_ANCHOR": 20,
+  "NOT_ESTABLISHED": 86,
+  "PAGES_ANCHORED_OPEN_ALLEGED_AMENDMENT_UNLOCATED": 6,
+  "PAGES_ANCHORED_SPECIFIC_UNLOCATED_INSTRUMENT": 29,
+  "PAGE_LOCATED_IN_COMPILATION_ONLY": 579,
+  "PARA_VERSION_AMBIGUOUS": 1,
+  "PRINCIPAL_PAGE_ONLY_AMENDMENT_NOT_ANCHORABLE": 44,
+  "PROVISION_OMITTED_PAGES_ANCHORED": 2
+ },
+ "cross_volume_issues": 13,
+ "cross_volume_issue_types": {
+  "CONSISTENCY_CHECK": 1,
+  "MISSING_CONNECTION": 4,
+  "OBSOLETE_PROVISION_REFERENCE": 1,
+  "RESERVED_CONFLICT_DEPENDENCY": 2,
+  "TEMPORAL_MISMATCH_RISK": 1,
+  "TEXT_VERSION_CONFLICT": 1,
+  "UNSUPPORTED_CLAIM_CHECK": 1,
+  "VERSION_DEPENDENCY": 2
+ },
+ "correction_proposals": 119,
+ "proposal_types": {
+  "ANCHOR_BASIS_CORRECTION": 2,
+  "APPLICABILITY_NOTE": 3,
+  "CROSS_VOLUME_CORRECTION": 8,
+  "EVIDENCE_STATE_PROMOTION": 57,
+  "OPEN_ALLEGED_AMENDMENT_NOTE": 4,
+  "PAGE_ANCHOR_ADDITION": 40,
+  "RESERVED_CONFLICT_NOTE": 3,
+  "VERSION_NOTE": 2
+ },
+ "priority_rule_clusters": {
+  "r22": {
+   "army_rules_items_citing": 29,
+   "baseline": {
+    "PARTIAL_MATCH": 29
+   },
+   "c12_proposed": {
+    "PARTIAL_MATCH": 29
+   },
+   "unit_status": "AR-030 (S.R.O. 258) GAP: alleged/unopened instrument naming r22; OPEN alleged/unlocated amendment naming the rule in the WS-A registers: GAP-02 - S.R.O. 258 of 27-11-2002"
+  },
+  "r23": {
+   "army_rules_items_citing": 26,
+   "baseline": {
+    "PARTIAL_MATCH": 26
+   },
+   "c12_proposed": {
+    "PARTIAL_MATCH": 26
+   },
+   "unit_status": "OPEN alleged/unlocated amendment naming the rule in the WS-A registers: GAP-01; OQ-A-06 - Are the six unregistered 1967-1974 hints genuine Army Rules amendments, and do any touch r.23, r.193 or r.194?; reserved wording conflict: C5 baseline reserved conflict; C5-CF-C-01 (CONFLICTING (retained until legal review)"
+  },
+  "r24": {
+   "army_rules_items_citing": 11,
+   "baseline": {
+    "EXACT_ANCHOR": 2,
+    "PARTIAL_MATCH": 9
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 2,
+    "PARTIAL_MATCH": 9
+   },
+   "unit_status": "ESTABLISHED"
+  },
+  "r25": {
+   "army_rules_items_citing": 2,
+   "baseline": {
+    "PARTIAL_MATCH": 2
+   },
+   "c12_proposed": {
+    "PARTIAL_MATCH": 2
+   },
+   "unit_status": "whole rule omitted by S.R.O. 17(E) of 1993 (AR-029): a live citation is not supportable"
+  },
+  "r180": {
+   "army_rules_items_citing": 23,
+   "baseline": {
+    "EXACT_ANCHOR": 5,
+    "PARTIAL_MATCH": 18
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 8,
+    "PARTIAL_MATCH": 15
+   },
+   "unit_status": "ESTABLISHED"
+  },
+  "summary_of_evidence_subject_items": {
+   "items": 22,
+   "baseline": {
+    "EXACT_ANCHOR": 2,
+    "MISSING_EVIDENCE": 1,
+    "PARTIAL_MATCH": 19
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 2,
+    "MISSING_EVIDENCE": 1,
+    "PARTIAL_MATCH": 19
+   }
+  }
+ },
+ "by_subject": {
+  "AR22_HEARING_OF_CHARGE": {
+   "items": 39,
+   "baseline": {
+    "PARTIAL_MATCH": 39
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 6,
+    "PARTIAL_MATCH": 33
+   }
+  },
+  "AR23_SUMMARY_OF_EVIDENCE_RULE": {
+   "items": 19,
+   "baseline": {
+    "MISSING_EVIDENCE": 1,
+    "PARTIAL_MATCH": 18
+   },
+   "c12_proposed": {
+    "MISSING_EVIDENCE": 1,
+    "PARTIAL_MATCH": 18
+   }
+  },
+  "AR180_COI_CHARACTER": {
+   "items": 44,
+   "baseline": {
+    "EXACT_ANCHOR": 5,
+    "MISSING_EVIDENCE": 11,
+    "PARTIAL_MATCH": 28
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 17,
+    "MISSING_EVIDENCE": 11,
+    "PARTIAL_MATCH": 16
+   }
+  },
+  "SUMMARY_OF_EVIDENCE": {
+   "items": 3,
+   "baseline": {
+    "EXACT_ANCHOR": 2,
+    "PARTIAL_MATCH": 1
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 2,
+    "PARTIAL_MATCH": 1
+   }
+  },
+  "COURT_MARTIAL_JURISDICTION_PROCEDURE": {
+   "items": 227,
+   "baseline": {
+    "EXACT_ANCHOR": 22,
+    "MISSING_EVIDENCE": 34,
+    "PARTIAL_MATCH": 171
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 35,
+    "MISSING_EVIDENCE": 34,
+    "PARTIAL_MATCH": 158
+   }
+  },
+  "DISCIPLINARY_POWERS": {
+   "items": 26,
+   "baseline": {
+    "PARTIAL_MATCH": 26
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 9,
+    "PARTIAL_MATCH": 17
+   }
+  },
+  "LIMITATION": {
+   "items": 74,
+   "baseline": {
+    "MISSING_EVIDENCE": 25,
+    "PARTIAL_MATCH": 49
+   },
+   "c12_proposed": {
+    "MISSING_EVIDENCE": 25,
+    "PARTIAL_MATCH": 49
+   }
+  },
+  "PUNISHMENTS": {
+   "items": 7,
+   "baseline": {
+    "MISSING_EVIDENCE": 1,
+    "PARTIAL_MATCH": 6
+   },
+   "c12_proposed": {
+    "MISSING_EVIDENCE": 1,
+    "PARTIAL_MATCH": 6
+   }
+  },
+  "STATUTORY_COMPLAINTS": {
+   "items": 25,
+   "baseline": {
+    "MISSING_EVIDENCE": 15,
+    "PARTIAL_MATCH": 10
+   },
+   "c12_proposed": {
+    "MISSING_EVIDENCE": 15,
+    "PARTIAL_MATCH": 10
+   }
+  },
+  "ADMINISTRATIVE_ACTION": {
+   "items": 64,
+   "baseline": {
+    "EXACT_ANCHOR": 3,
+    "MISSING_EVIDENCE": 22,
+    "PARTIAL_MATCH": 39
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 12,
+    "MISSING_EVIDENCE": 22,
+    "PARTIAL_MATCH": 30
+   }
+  },
+  "RIGHTS_PROCEDURAL_SAFEGUARDS": {
+   "items": 20,
+   "baseline": {
+    "MISSING_EVIDENCE": 4,
+    "PARTIAL_MATCH": 16
+   },
+   "c12_proposed": {
+    "MISSING_EVIDENCE": 4,
+    "PARTIAL_MATCH": 16
+   }
+  },
+  "COURT_OF_INQUIRY_OTHER": {
+   "items": 45,
+   "baseline": {
+    "EXACT_ANCHOR": 10,
+    "MISSING_EVIDENCE": 2,
+    "PARTIAL_MATCH": 33
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 16,
+    "MISSING_EVIDENCE": 2,
+    "PARTIAL_MATCH": 27
+   }
+  },
+  "EVIDENCE_LAW": {
+   "items": 68,
+   "baseline": {
+    "MISSING_EVIDENCE": 3,
+    "PARTIAL_MATCH": 65
+   },
+   "c12_proposed": {
+    "MISSING_EVIDENCE": 3,
+    "PARTIAL_MATCH": 65
+   }
+  },
+  "AFT_REMEDIES": {
+   "items": 103,
+   "baseline": {
+    "MISSING_EVIDENCE": 34,
+    "PARTIAL_MATCH": 69
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 2,
+    "MISSING_EVIDENCE": 34,
+    "PARTIAL_MATCH": 67
+   }
+  },
+  "PENSION_ENTITLEMENT": {
+   "items": 72,
+   "baseline": {
+    "MISSING_EVIDENCE": 65,
+    "PARTIAL_MATCH": 7
+   },
+   "c12_proposed": {
+    "MISSING_EVIDENCE": 65,
+    "PARTIAL_MATCH": 7
+   }
+  },
+  "CIVIL_CRIMINAL_INTERFACE": {
+   "items": 74,
+   "baseline": {
+    "MISSING_EVIDENCE": 17,
+    "PARTIAL_MATCH": 57
+   },
+   "c12_proposed": {
+    "MISSING_EVIDENCE": 17,
+    "PARTIAL_MATCH": 57
+   }
+  },
+  "GENERAL_OTHER": {
+   "items": 73,
+   "baseline": {
+    "MISSING_EVIDENCE": 55,
+    "PARTIAL_MATCH": 18
+   },
+   "c12_proposed": {
+    "MISSING_EVIDENCE": 55,
+    "PARTIAL_MATCH": 18
+   }
+  }
+ },
+ "by_volume_family": {
+  "ADM": {
+   "items": 63,
+   "baseline": {
+    "EXACT_ANCHOR": 3,
+    "MISSING_EVIDENCE": 16,
+    "PARTIAL_MATCH": 44
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 11,
+    "MISSING_EVIDENCE": 16,
+    "PARTIAL_MATCH": 36
+   }
+  },
+  "AFT_V7": {
+   "items": 163,
+   "baseline": {
+    "MISSING_EVIDENCE": 86,
+    "PARTIAL_MATCH": 77
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 1,
+    "MISSING_EVIDENCE": 86,
+    "PARTIAL_MATCH": 76
+   }
+  },
+  "CIV_V8": {
+   "items": 169,
+   "baseline": {
+    "EXACT_ANCHOR": 2,
+    "MISSING_EVIDENCE": 35,
+    "PARTIAL_MATCH": 132
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 2,
+    "MISSING_EVIDENCE": 35,
+    "PARTIAL_MATCH": 132
+   }
+  },
+  "CM": {
+   "items": 132,
+   "baseline": {
+    "EXACT_ANCHOR": 20,
+    "MISSING_EVIDENCE": 8,
+    "PARTIAL_MATCH": 104
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 27,
+    "MISSING_EVIDENCE": 8,
+    "PARTIAL_MATCH": 97
+   }
+  },
+  "COI": {
+   "items": 84,
+   "baseline": {
+    "EXACT_ANCHOR": 10,
+    "MISSING_EVIDENCE": 22,
+    "PARTIAL_MATCH": 52
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 27,
+    "MISSING_EVIDENCE": 22,
+    "PARTIAL_MATCH": 35
+   }
+  },
+  "CORE_KB": {
+   "items": 51,
+   "baseline": {
+    "EXACT_ANCHOR": 3,
+    "MISSING_EVIDENCE": 7,
+    "PARTIAL_MATCH": 41
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 10,
+    "MISSING_EVIDENCE": 7,
+    "PARTIAL_MATCH": 34
+   }
+  },
+  "EV_V9": {
+   "items": 104,
+   "baseline": {
+    "EXACT_ANCHOR": 2,
+    "MISSING_EVIDENCE": 3,
+    "PARTIAL_MATCH": 99
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 3,
+    "MISSING_EVIDENCE": 3,
+    "PARTIAL_MATCH": 98
+   }
+  },
+  "HCE": {
+   "items": 85,
+   "baseline": {
+    "EXACT_ANCHOR": 2,
+    "MISSING_EVIDENCE": 4,
+    "PARTIAL_MATCH": 79
+   },
+   "c12_proposed": {
+    "EXACT_ANCHOR": 18,
+    "MISSING_EVIDENCE": 4,
+    "PARTIAL_MATCH": 63
+   }
+  },
+  "PEN": {
+   "items": 132,
+   "baseline": {
+    "MISSING_EVIDENCE": 108,
+    "PARTIAL_MATCH": 24
+   },
+   "c12_proposed": {
+    "MISSING_EVIDENCE": 108,
+    "PARTIAL_MATCH": 24
+   }
+  }
+ },
+ "army_rules_provision_units": {
+  "r6": {
+   "principal_pdf_page": 2,
+   "principal_printed_page": 292,
+   "principal_printed_span": "292",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r13": {
+   "principal_pdf_page": null,
+   "principal_printed_page": null,
+   "principal_printed_span": null,
+   "principal_page_basis": null,
+   "amending_instruments": [
+    "AR-004",
+    "AR-009",
+    "AR-010",
+    "AR-032"
+   ],
+   "established": false,
+   "blockers": [
+    "1954 page not located in the text layer",
+    "AR-004 (S.R.O. 351) located from text layer only; copy not registered as eligible",
+    "AR-009 (S.R.O. 126): amending copy not registered as eligible_for_exact_anchor",
+    "AR-010 (S.R.O. 116): amending copy not registered as eligible_for_exact_anchor",
+    "AR-032 (S.R.O. 22) located from text layer only; copy not registered as eligible"
+   ]
+  },
+  "r13A": {
+   "principal_pdf_page": null,
+   "principal_printed_page": null,
+   "principal_printed_span": null,
+   "principal_page_basis": null,
+   "amending_instruments": [
+    "AR-014",
+    "AR-028"
+   ],
+   "established": false,
+   "blockers": [
+    "1954 page not located in the text layer",
+    "AR-014 (S.R.O. 5): amending copy not registered as eligible_for_exact_anchor",
+    "AR-028 (S.R.O. 235): amending copy not registered as eligible_for_exact_anchor"
+   ]
+  },
+  "r14": {
+   "principal_pdf_page": 6,
+   "principal_printed_page": 296,
+   "principal_printed_span": "296-297",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-006",
+    "AR-029"
+   ],
+   "established": true,
+   "blockers": []
+  },
+  "r15": {
+   "principal_pdf_page": 7,
+   "principal_printed_page": 297,
+   "principal_printed_span": "297",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-006"
+   ],
+   "established": false,
+   "blockers": [
+    "OPEN alleged/unlocated amendment naming the rule in the WS-A registers: GAP-15; OQ-A-10 (cross-refs: WS-C OQ-C-10; XC-03 DISCREPANCY) - Which instrument inserted '[or Military Secretary]' in r.15 (MML 2 p.142 says S.R.O. 17(E)/1993, which has no r.15 item)"
+   ]
+  },
+  "r15A": {
+   "principal_pdf_page": null,
+   "principal_printed_page": null,
+   "principal_printed_span": null,
+   "principal_page_basis": null,
+   "amending_instruments": [
+    "AR-006",
+    "AR-027"
+   ],
+   "established": false,
+   "blockers": [
+    "1954 page not located in the text layer",
+    "AR-006: no C12 page evidence for r15A",
+    "AR-027 (S.R.O. 61): amending copy not registered as eligible_for_exact_anchor"
+   ]
+  },
+  "r16": {
+   "principal_pdf_page": 7,
+   "principal_printed_page": 297,
+   "principal_printed_span": "297",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-006"
+   ],
+   "established": true,
+   "blockers": []
+  },
+  "r17": {
+   "principal_pdf_page": 7,
+   "principal_printed_page": 297,
+   "principal_printed_span": "297",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-006"
+   ],
+   "established": true,
+   "blockers": []
+  },
+  "r18": {
+   "principal_pdf_page": 7,
+   "principal_printed_page": 297,
+   "principal_printed_span": "297-298",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r22": {
+   "principal_pdf_page": 9,
+   "principal_printed_page": 299,
+   "principal_printed_span": "299",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-029",
+    "AR-030"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-030 (S.R.O. 258) GAP: alleged/unopened instrument naming r22",
+    "OPEN alleged/unlocated amendment naming the rule in the WS-A registers: GAP-02 - S.R.O. 258 of 27-11-2002"
+   ]
+  },
+  "r23": {
+   "principal_pdf_page": 10,
+   "principal_printed_page": 300,
+   "principal_printed_span": "300",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": false,
+   "blockers": [
+    "OPEN alleged/unlocated amendment naming the rule in the WS-A registers: GAP-01; OQ-A-06 - Are the six unregistered 1967-1974 hints genuine Army Rules amendments, and do any touch r.23, r.193 or r.194?",
+    "reserved wording conflict: C5 baseline reserved conflict; C5-CF-C-01 (CONFLICTING (retained until legal review)"
+   ]
+  },
+  "r24": {
+   "principal_pdf_page": 10,
+   "principal_printed_page": 300,
+   "principal_printed_span": "300",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r25": {
+   "principal_pdf_page": 11,
+   "principal_printed_page": 301,
+   "principal_printed_span": "301",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "whole rule omitted by S.R.O. 17(E) of 1993 (AR-029): a live citation is not supportable"
+   ]
+  },
+  "r26": {
+   "principal_pdf_page": 11,
+   "principal_printed_page": 301,
+   "principal_printed_span": "301",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": true,
+   "blockers": []
+  },
+  "r27": {
+   "principal_pdf_page": 11,
+   "principal_printed_page": 301,
+   "principal_printed_span": "301-302",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r28": {
+   "principal_pdf_page": 12,
+   "principal_printed_page": 302,
+   "principal_printed_span": "302",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r29": {
+   "principal_pdf_page": 12,
+   "principal_printed_page": 302,
+   "principal_printed_span": "302",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r30": {
+   "principal_pdf_page": 12,
+   "principal_printed_page": 302,
+   "principal_printed_span": "302",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r31": {
+   "principal_pdf_page": 12,
+   "principal_printed_page": 302,
+   "principal_printed_span": "302",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r32": {
+   "principal_pdf_page": 12,
+   "principal_printed_page": 302,
+   "principal_printed_span": "302-303",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r33": {
+   "principal_pdf_page": 13,
+   "principal_printed_page": 303,
+   "principal_printed_span": "303",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": true,
+   "blockers": []
+  },
+  "r34": {
+   "principal_pdf_page": 13,
+   "principal_printed_page": 303,
+   "principal_printed_span": "303-304",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r35": {
+   "principal_pdf_page": 14,
+   "principal_printed_page": 304,
+   "principal_printed_span": "304",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r36": {
+   "principal_pdf_page": 14,
+   "principal_printed_page": 304,
+   "principal_printed_span": "304-305",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": true,
+   "blockers": []
+  },
+  "r37": {
+   "principal_pdf_page": 15,
+   "principal_printed_page": 305,
+   "principal_printed_span": "305",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": true,
+   "blockers": []
+  },
+  "r38": {
+   "principal_pdf_page": 15,
+   "principal_printed_page": 305,
+   "principal_printed_span": "305",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r39": {
+   "principal_pdf_page": 15,
+   "principal_printed_page": 305,
+   "principal_printed_span": "305-306",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r40": {
+   "principal_pdf_page": 16,
+   "principal_printed_page": 306,
+   "principal_printed_span": "306",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r41": {
+   "principal_pdf_page": 16,
+   "principal_printed_page": 306,
+   "principal_printed_span": "306-307",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r42": {
+   "principal_pdf_page": 17,
+   "principal_printed_page": 307,
+   "principal_printed_span": "307",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r43": {
+   "principal_pdf_page": 17,
+   "principal_printed_page": 307,
+   "principal_printed_span": "307",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r44": {
+   "principal_pdf_page": 17,
+   "principal_printed_page": 307,
+   "principal_printed_span": "307-308",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r45": {
+   "principal_pdf_page": 18,
+   "principal_printed_page": 308,
+   "principal_printed_span": "308",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r46": {
+   "principal_pdf_page": 18,
+   "principal_printed_page": 308,
+   "principal_printed_span": "308-309",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r47": {
+   "principal_pdf_page": 19,
+   "principal_printed_page": 309,
+   "principal_printed_span": "309",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r48": {
+   "principal_pdf_page": 20,
+   "principal_printed_page": 310,
+   "principal_printed_span": "310",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r49": {
+   "principal_pdf_page": 20,
+   "principal_printed_page": 310,
+   "principal_printed_span": "310",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r50": {
+   "principal_pdf_page": 20,
+   "principal_printed_page": 310,
+   "principal_printed_span": "310",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r51": {
+   "principal_pdf_page": 20,
+   "principal_printed_page": 310,
+   "principal_printed_span": "310",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r52": {
+   "principal_pdf_page": 20,
+   "principal_printed_page": 310,
+   "principal_printed_span": "310-311",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-029: no C12 page evidence for r52"
+   ]
+  },
+  "r53": {
+   "principal_pdf_page": 21,
+   "principal_printed_page": 311,
+   "principal_printed_span": "311",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-029: no C12 page evidence for r53"
+   ]
+  },
+  "r54": {
+   "principal_pdf_page": 22,
+   "principal_printed_page": 312,
+   "principal_printed_span": "312",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-029: no C12 page evidence for r54"
+   ]
+  },
+  "r55": {
+   "principal_pdf_page": 22,
+   "principal_printed_page": 312,
+   "principal_printed_span": "312",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r56": {
+   "principal_pdf_page": 22,
+   "principal_printed_page": 312,
+   "principal_printed_span": "312-313",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r57": {
+   "principal_pdf_page": 23,
+   "principal_printed_page": 313,
+   "principal_printed_span": "313",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-029: no C12 page evidence for r57"
+   ]
+  },
+  "r58": {
+   "principal_pdf_page": 23,
+   "principal_printed_page": 313,
+   "principal_printed_span": "313-314",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-029: no C12 page evidence for r58"
+   ]
+  },
+  "r59": {
+   "principal_pdf_page": 24,
+   "principal_printed_page": 314,
+   "principal_printed_span": "314",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-029: no C12 page evidence for r59"
+   ]
+  },
+  "r60": {
+   "principal_pdf_page": 24,
+   "principal_printed_page": 314,
+   "principal_printed_span": "314",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r61": {
+   "principal_pdf_page": 24,
+   "principal_printed_page": 314,
+   "principal_printed_span": "314",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r62": {
+   "principal_pdf_page": 24,
+   "principal_printed_page": 314,
+   "principal_printed_span": "314-315",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-029: no C12 page evidence for r62"
+   ]
+  },
+  "r63": {
+   "principal_pdf_page": 25,
+   "principal_printed_page": 315,
+   "principal_printed_span": "315",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r64": {
+   "principal_pdf_page": 26,
+   "principal_printed_page": 316,
+   "principal_printed_span": "316",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r92": {
+   "principal_pdf_page": 32,
+   "principal_printed_page": 322,
+   "principal_printed_span": "322",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-029: no C12 page evidence for r92"
+   ]
+  },
+  "r95": {
+   "principal_pdf_page": null,
+   "principal_printed_page": null,
+   "principal_printed_span": null,
+   "principal_page_basis": null,
+   "amending_instruments": [
+    "AR-039"
+   ],
+   "established": false,
+   "blockers": [
+    "1954 page not located in the text layer",
+    "AR-039 (pre-1960 hint (FTS)) TO_CHECK: alleged/unopened instrument naming r95",
+    "OPEN alleged/unlocated amendment naming the rule in the WS-A registers: GAP-13 - Pre-1960 Army Rules amendments (1956-04-21; 28-11-1958 r.187(1)(r); 12-12-1958 r.95; 1959-12-12)"
+   ]
+  },
+  "r96": {
+   "principal_pdf_page": 33,
+   "principal_printed_page": 323,
+   "principal_printed_span": "323",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "1954 page located only by fallback line match (heading order not confirmed)",
+    "AR-029: no C12 page evidence for r96"
+   ]
+  },
+  "r97": {
+   "principal_pdf_page": 33,
+   "principal_printed_page": 323,
+   "principal_printed_span": "323-324",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r98": {
+   "principal_pdf_page": 34,
+   "principal_printed_page": 324,
+   "principal_printed_span": "324",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r99": {
+   "principal_pdf_page": 34,
+   "principal_printed_page": 324,
+   "principal_printed_span": "324",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r100": {
+   "principal_pdf_page": 34,
+   "principal_printed_page": 324,
+   "principal_printed_span": "324",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r101": {
+   "principal_pdf_page": 34,
+   "principal_printed_page": 324,
+   "principal_printed_span": "324",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r106": {
+   "principal_pdf_page": 35,
+   "principal_printed_page": 325,
+   "principal_printed_span": "325",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-029: no C12 page evidence for r106"
+   ]
+  },
+  "r107": {
+   "principal_pdf_page": 35,
+   "principal_printed_page": 325,
+   "principal_printed_span": "325-326",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r108": {
+   "principal_pdf_page": 36,
+   "principal_printed_page": 326,
+   "principal_printed_span": "326",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r109": {
+   "principal_pdf_page": 36,
+   "principal_printed_page": 326,
+   "principal_printed_span": "326",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r110": {
+   "principal_pdf_page": 36,
+   "principal_printed_page": 326,
+   "principal_printed_span": "326-327",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r111": {
+   "principal_pdf_page": 37,
+   "principal_printed_page": 327,
+   "principal_printed_span": "327",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r112": {
+   "principal_pdf_page": 37,
+   "principal_printed_page": 327,
+   "principal_printed_span": "327",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r113": {
+   "principal_pdf_page": 37,
+   "principal_printed_page": 327,
+   "principal_printed_span": "327",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r114": {
+   "principal_pdf_page": 37,
+   "principal_printed_page": 327,
+   "principal_printed_span": "327",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r115": {
+   "principal_pdf_page": 37,
+   "principal_printed_page": 327,
+   "principal_printed_span": "327",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-029: no C12 page evidence for r115"
+   ]
+  },
+  "r116": {
+   "principal_pdf_page": 38,
+   "principal_printed_page": 328,
+   "principal_printed_span": "328",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r117": {
+   "principal_pdf_page": 38,
+   "principal_printed_page": 328,
+   "principal_printed_span": "328",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r118": {
+   "principal_pdf_page": 39,
+   "principal_printed_page": 329,
+   "principal_printed_span": "329",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-029: no C12 page evidence for r118"
+   ]
+  },
+  "r119": {
+   "principal_pdf_page": 39,
+   "principal_printed_page": 329,
+   "principal_printed_span": "329",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r120": {
+   "principal_pdf_page": 39,
+   "principal_printed_page": 329,
+   "principal_printed_span": "329",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r121": {
+   "principal_pdf_page": 39,
+   "principal_printed_page": 329,
+   "principal_printed_span": "329",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r122": {
+   "principal_pdf_page": 39,
+   "principal_printed_page": 329,
+   "principal_printed_span": "329",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r123": {
+   "principal_pdf_page": 39,
+   "principal_printed_page": 329,
+   "principal_printed_span": "329-330",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r124": {
+   "principal_pdf_page": 40,
+   "principal_printed_page": 330,
+   "principal_printed_span": "330",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r125": {
+   "principal_pdf_page": 40,
+   "principal_printed_page": 330,
+   "principal_printed_span": "330",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r126": {
+   "principal_pdf_page": 40,
+   "principal_printed_page": 330,
+   "principal_printed_span": "330",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r127": {
+   "principal_pdf_page": 40,
+   "principal_printed_page": 330,
+   "principal_printed_span": "330",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r128": {
+   "principal_pdf_page": 40,
+   "principal_printed_page": 330,
+   "principal_printed_span": "330",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r129": {
+   "principal_pdf_page": 40,
+   "principal_printed_page": 330,
+   "principal_printed_span": "330",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r130": {
+   "principal_pdf_page": 40,
+   "principal_printed_page": 330,
+   "principal_printed_span": "330",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r131": {
+   "principal_pdf_page": 40,
+   "principal_printed_page": 330,
+   "principal_printed_span": "330",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r132": {
+   "principal_pdf_page": 40,
+   "principal_printed_page": 330,
+   "principal_printed_span": "330",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r133": {
+   "principal_pdf_page": 40,
+   "principal_printed_page": 330,
+   "principal_printed_span": "330",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r134": {
+   "principal_pdf_page": 41,
+   "principal_printed_page": 331,
+   "principal_printed_span": "331",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": true,
+   "blockers": []
+  },
+  "r135": {
+   "principal_pdf_page": 41,
+   "principal_printed_page": 331,
+   "principal_printed_span": "331",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": true,
+   "blockers": []
+  },
+  "r136": {
+   "principal_pdf_page": 41,
+   "principal_printed_page": 331,
+   "principal_printed_span": "331",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": true,
+   "blockers": []
+  },
+  "r137": {
+   "principal_pdf_page": 41,
+   "principal_printed_page": 331,
+   "principal_printed_span": "331",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r138": {
+   "principal_pdf_page": 41,
+   "principal_printed_page": 331,
+   "principal_printed_span": "331-332",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r139": {
+   "principal_pdf_page": 42,
+   "principal_printed_page": 332,
+   "principal_printed_span": "332",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r140": {
+   "principal_pdf_page": 42,
+   "principal_printed_page": 332,
+   "principal_printed_span": "332",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r141": {
+   "principal_pdf_page": 42,
+   "principal_printed_page": 332,
+   "principal_printed_span": "332",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r142": {
+   "principal_pdf_page": 42,
+   "principal_printed_page": 332,
+   "principal_printed_span": "332-333",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r143": {
+   "principal_pdf_page": 43,
+   "principal_printed_page": 333,
+   "principal_printed_span": "333",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r177": {
+   "principal_pdf_page": 50,
+   "principal_printed_page": 340,
+   "principal_printed_span": "340",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-031"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-031: no C12 page evidence for r177",
+    "reserved wording conflict: C5-CF-C-03 (CONFLICTING pending text comparison and )"
+   ]
+  },
+  "r178": {
+   "principal_pdf_page": 50,
+   "principal_printed_page": 340,
+   "principal_printed_span": "340",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r179": {
+   "principal_pdf_page": 50,
+   "principal_printed_page": 340,
+   "principal_printed_span": "340-341",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": true,
+   "blockers": []
+  },
+  "r180": {
+   "principal_pdf_page": 51,
+   "principal_printed_page": 341,
+   "principal_printed_span": "341",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r181": {
+   "principal_pdf_page": 51,
+   "principal_printed_page": 341,
+   "principal_printed_span": "341",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r182": {
+   "principal_pdf_page": 51,
+   "principal_printed_page": 341,
+   "principal_printed_span": "341",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": false,
+   "blockers": [
+    "reserved wording conflict: C5 baseline reserved conflict; C5-CF-SC4-01 (OPEN (not resolved; no corrigendum searc)"
+   ]
+  },
+  "r183": {
+   "principal_pdf_page": 51,
+   "principal_printed_page": 341,
+   "principal_printed_span": "341-342",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r184": {
+   "principal_pdf_page": 52,
+   "principal_printed_page": 342,
+   "principal_printed_span": "342",
+   "principal_page_basis": "TEXT_LAYER_NEXT_HEADING",
+   "amending_instruments": [
+    "AR-018"
+   ],
+   "established": false,
+   "blockers": [
+    "AR-018 (S.R.O. 44 (1985)): amending copy not registered as eligible_for_exact_anchor"
+   ]
+  },
+  "r185": {
+   "principal_pdf_page": 52,
+   "principal_printed_page": 342,
+   "principal_printed_span": "342",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [],
+   "established": true,
+   "blockers": []
+  },
+  "r186": {
+   "principal_pdf_page": 52,
+   "principal_printed_page": 342,
+   "principal_printed_span": "342-343",
+   "principal_page_basis": "IMAGE_CHECKED",
+   "amending_instruments": [
+    "AR-029"
+   ],
+   "established": true,
+   "blockers": []
+  }
+ },
+ "open_alleged_amendment_blockers_F01": {
+  "r15": {
+   "wsa_ids": [
+    "GAP-15",
+    "OQ-A-10"
+   ],
+   "cross_refs": [
+    "WS-C OQ-C-10",
+    "XC-03 DISCREPANCY"
+   ],
+   "questions": [
+    "OQ-A-10 [OPEN]: Which instrument inserted '[or Military Secretary]' in r.15 (MML 2 p.142 says S.R.O. 17(E)/1993, which has no r.15 item)?",
+    "GAP-15 [NOT_FOUND]: Source of '[or Military Secretary]' in r.15 (MML attributes to 17(E)/1993; not in the 41 items)"
+   ],
+   "citing_army_rules_items": 6,
+   "citing_items_exact": [],
+   "other_blockers_on_rule": [],
+   "only_blocker_is_open_alleged": true
+  },
+  "r22": {
+   "wsa_ids": [
+    "GAP-02"
+   ],
+   "cross_refs": [],
+   "questions": [
+    "GAP-02 [NOT_FOUND]: S.R.O. 258 of 27-11-2002"
+   ],
+   "citing_army_rules_items": 29,
+   "citing_items_exact": [],
+   "other_blockers_on_rule": [
+    "AR-030 (S.R.O. 258) GAP: alleged/unopened instrument naming r22"
+   ],
+   "only_blocker_is_open_alleged": false
+  },
+  "r23": {
+   "wsa_ids": [
+    "GAP-01",
+    "OQ-A-06"
+   ],
+   "cross_refs": [],
+   "questions": [
+    "OQ-A-06 [OPEN]: Are the six unregistered 1967-1974 hints genuine Army Rules amendments, and do any touch r.23, r.193 or r.194?",
+    "GAP-01 [NOT_FOUND]: E-7 dated 17-06-1960 (alleged first Army Rules amendment of 1960)"
+   ],
+   "citing_army_rules_items": 26,
+   "citing_items_exact": [],
+   "other_blockers_on_rule": [
+    "reserved wording conflict: C5 baseline reserved conflict; C5-CF-C-01 (CONFLICTING (retained until legal review)"
+   ],
+   "only_blocker_is_open_alleged": false
+  },
+  "r95": {
+   "wsa_ids": [
+    "GAP-13"
+   ],
+   "cross_refs": [],
+   "questions": [
+    "GAP-13 [LOCATED_UNVERIFIED (OCR locator)]: Pre-1960 Army Rules amendments (1956-04-21; 28-11-1958 r.187(1)(r); 12-12-1958 r.95; 1959-12-12)"
+   ],
+   "citing_army_rules_items": 4,
+   "citing_items_exact": [],
+   "other_blockers_on_rule": [
+    "1954 page not located in the text layer",
+    "AR-039 (pre-1960 hint (FTS)) TO_CHECK: alleged/unopened instrument naming r95"
+   ],
+   "only_blocker_is_open_alleged": false
+  },
+  "r187": {
+   "wsa_ids": [
+    "GAP-13",
+    "GAP-14"
+   ],
+   "cross_refs": [
+    "XC-11 DISCREPANCY"
+   ],
+   "questions": [
+    "GAP-13 [LOCATED_UNVERIFIED (OCR locator)]: Pre-1960 Army Rules amendments (1956-04-21; 28-11-1958 r.187(1)(r); 12-12-1958 r.95; 1959-12-12)",
+    "GAP-14 [NOT_CHECKED (not held)]: Mar-Apr 1964 Pt II-Sec 4 issues other than 28-03-1964 (r.187(1) 1964 footnote, OQ-C-06)"
+   ],
+   "citing_army_rules_items": 0,
+   "citing_items_exact": [],
+   "other_blockers_on_rule": [
+    "AR-038 (pre-1960 hint (FTS)) TO_CHECK: alleged/unopened instrument naming r187",
+    "AR-007 (S.R.O. 1): amending copy not registered as eligible_for_exact_anchor",
+    "NEW (unregistered) (NEW (unregistered)): amending copy not registered as eligible_for_exact_anchor"
+   ],
+   "only_blocker_is_open_alleged": false
+  },
+  "r193": {
+   "wsa_ids": [
+    "OQ-A-01",
+    "OQ-A-06"
+   ],
+   "cross_refs": [
+    "WS-C OQ-C-05",
+    "WS-C OQ-C-06"
+   ],
+   "questions": [
+    "OQ-A-01 [OPEN]: r.193 (C-08): is the operative text the S.R.O. 17(E)/1993 substitution (s.90(i) and s.91(i); 'Chief of the Army Staff or the officer commanding the Army')?",
+    "OQ-A-06 [OPEN]: Are the six unregistered 1967-1974 hints genuine Army Rules amendments, and do any touch r.23, r.193 or r.194?"
+   ],
+   "citing_army_rules_items": 0,
+   "citing_items_exact": [],
+   "other_blockers_on_rule": [
+    "AR-023 (S.R.O. 302): amending copy not registered as eligible_for_exact_anchor",
+    "AR-029: no C12 page evidence for r193",
+    "reserved wording conflict: C5 baseline reserved conflict; C5-CF-C-04 (OPEN (observation only)); C5-CF-C-08 (OPEN: chronology incomplete; no correcti)"
+   ],
+   "only_blocker_is_open_alleged": false
+  },
+  "r194": {
+   "wsa_ids": [
+    "OQ-A-06"
+   ],
+   "cross_refs": [],
+   "questions": [
+    "OQ-A-06 [OPEN]: Are the six unregistered 1967-1974 hints genuine Army Rules amendments, and do any touch r.23, r.193 or r.194?"
+   ],
+   "citing_army_rules_items": 0,
+   "citing_items_exact": [],
+   "other_blockers_on_rule": [
+    "AR-025 (S.R.O. 332): amending copy not registered as eligible_for_exact_anchor",
+    "reserved wording conflict: C5 baseline reserved conflict; C5-CF-C-04 (OPEN (observation only))"
+   ],
+   "only_blocker_is_open_alleged": false
+  }
+ },
+ "annotation_locator_blocked_items_F02": [
+  "C10Q-CW-0071 (COI-009)",
+  "C10Q-CW-0087 (COI-021)",
+  "C10Q-CW-0966 (EV-017)"
+ ],
+ "army_rules_exact_items_by_1954_page_basis_F03": {
+  "baseline EXACT all 1954 pages image-checked": 26,
+  "baseline EXACT some 1954 pages text-layer only": 16,
+  "promoted all 1954 pages image-checked": 37
+ },
+ "record_scope_F04": {
+  "rule": "record-level state = minimum of c12_state_proposed over the record's citation items; a citation-level EXACT never propagates (matrix columns record_level_state, exact_scope)",
+  "exact_items_citation_locator_only": 66,
+  "records_with_exact_item_but_record_level_below_exact": 66,
+  "judgment_promotions_on_records_with_partial_statutory_content": {
+   "COI-003": {
+    "judgment_items_exact": [
+     "C10Q-CW-0060 (C5-SRC-J-SC-2020-VIRENDRA)"
+    ],
+    "statutory_items_partial": [
+     "C10Q-CW-0059 (rules-army-rules-1954#r177,r182,r22,r23,r24)"
+    ],
+    "record_level_state": "PARTIAL_MATCH"
+   },
+   "COI-021": {
+    "judgment_items_exact": [
+     "C10Q-CW-0088 (C5-SRC-J-SC-2020-VIRENDRA)"
+    ],
+    "statutory_items_partial": [
+     "C10Q-CW-0087 (rules-army-rules-1954#r180,r179)"
+    ],
+    "record_level_state": "PARTIAL_MATCH"
+   },
+   "HCE-003": {
+    "judgment_items_exact": [
+     "C10Q-CW-0144 (C5-SRC-J-SC-2020-VIRENDRA)"
+    ],
+    "statutory_items_partial": [
+     "C10Q-CW-0142 (rules-army-rules-1954#r22)"
+    ],
+    "record_level_state": "PARTIAL_MATCH"
+   },
+   "HCE-004": {
+    "judgment_items_exact": [
+     "C10Q-CW-0146 (C5-SRC-J-SC-2020-VIRENDRA)"
+    ],
+    "statutory_items_partial": [
+     "C10Q-CW-0145 (rules-army-rules-1954#r22,r180)"
+    ],
+    "record_level_state": "PARTIAL_MATCH"
+   },
+   "HCE-008": {
+    "judgment_items_exact": [
+     "C10Q-CW-0153 (C5-SRC-J-SC-2020-VIRENDRA)"
+    ],
+    "statutory_items_partial": [
+     "C10Q-CW-0152 (rules-army-rules-1954#r22,r23)"
+    ],
+    "record_level_state": "PARTIAL_MATCH"
+   },
+   "HCE-029": {
+    "judgment_items_exact": [
+     "C10Q-CW-0185 (C5-SRC-J-SC-2020-VIRENDRA)"
+    ],
+    "statutory_items_partial": [
+     "C10Q-CW-0184 (rules-army-rules-1954#r177,r178,r179,r180,r181,r182,r22,r23)"
+    ],
+    "record_level_state": "PARTIAL_MATCH"
+   },
+   "KB-005": {
+    "judgment_items_exact": [
+     "C10Q-CW-0011 (C5-SRC-J-SC-2020-VIRENDRA)"
+    ],
+    "statutory_items_partial": [
+     "C10Q-CW-0010 (rules-army-rules-1954#r22)"
+    ],
+    "record_level_state": "PARTIAL_MATCH"
+   },
+   "KB-012": {
+    "judgment_items_exact": [
+     "C10Q-CW-0020 (C5-SRC-J-SC-2020-VIRENDRA)"
+    ],
+    "statutory_items_partial": [
+     "C10Q-CW-0019 (rules-army-rules-1954#r182)"
+    ],
+    "record_level_state": "PARTIAL_MATCH"
+   },
+   "KB-025": {
+    "judgment_items_exact": [
+     "C10Q-CW-0041 (C5-SRC-J-SC-2023-PARASHOTAM)"
+    ],
+    "statutory_items_partial": [
+     "C10Q-CW-0040 (act-armed-forces-tribunal-2007#s30,s31,s32)"
+    ],
+    "record_level_state": "MISSING_EVIDENCE"
+   },
+   "KB-028": {
+    "judgment_items_exact": [
+     "C10Q-CW-0048 (C5-SRC-J-SC-2023-PARASHOTAM)"
+    ],
+    "statutory_items_partial": [
+     "C10Q-CW-0047 (act-armed-forces-tribunal-2007#s30,s31,s32)"
+    ],
+    "record_level_state": "PARTIAL_MATCH"
+   }
+  }
+ },
+ "page_ranges_F05": {
+  "r14": [
+   "1954 printed pp.296-297 (IMAGE_CHECKED)",
+   "AR-006 printed pp.141-142 (image-checked)"
+  ],
+  "r18": [
+   "1954 printed pp.297-298 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r26": [
+   "AR-029 printed pp.14-15 (image-checked)"
+  ],
+  "r27": [
+   "1954 printed pp.301-302 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r32": [
+   "1954 printed pp.302-303 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r34": [
+   "1954 printed pp.303-304 (IMAGE_CHECKED)"
+  ],
+  "r36": [
+   "1954 printed pp.304-305 (IMAGE_CHECKED)"
+  ],
+  "r39": [
+   "1954 printed pp.305-306 (IMAGE_CHECKED)"
+  ],
+  "r41": [
+   "1954 printed pp.306-307 (IMAGE_CHECKED)"
+  ],
+  "r44": [
+   "1954 printed pp.307-308 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r46": [
+   "1954 printed pp.308-309 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r52": [
+   "1954 printed pp.310-311 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r56": [
+   "1954 printed pp.312-313 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r58": [
+   "1954 printed pp.313-314 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r62": [
+   "1954 printed pp.314-315 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r97": [
+   "1954 printed pp.323-324 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r107": [
+   "1954 printed pp.325-326 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r110": [
+   "1954 printed pp.326-327 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r123": [
+   "1954 printed pp.329-330 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r138": [
+   "1954 printed pp.331-332 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r142": [
+   "1954 printed pp.332-333 (TEXT_LAYER_NEXT_HEADING)"
+  ],
+  "r179": [
+   "1954 printed pp.340-341 (IMAGE_CHECKED)"
+  ],
+  "r183": [
+   "1954 printed pp.341-342 (IMAGE_CHECKED)"
+  ],
+  "r186": [
+   "1954 printed pp.342-343 (IMAGE_CHECKED)"
+  ],
+  "r187": [
+   "1954 printed pp.343-344 (TEXT_LAYER_NEXT_HEADING)"
+  ]
+ },
+ "review_reconciliation": {
+  "review_rows": 63,
+  "supported_and_promoted": 57,
+  "supported_not_promoted": [],
+  "not_supported_withdrawn": [
+   "C10Q-CW-0031 (KB-018)",
+   "C10Q-CW-0087 (COI-021)",
+   "C10Q-CW-0363 (ADM-006)",
+   "C10Q-CW-0369 (ADM-012)",
+   "C10Q-CW-0395 (ADM-032)",
+   "C10Q-CW-0402 (ADM-SC-03)"
+  ],
+  "not_supported_still_promoted": [],
+  "promoted_not_in_review": [],
+  "note": "read only for reconciliation; states are set by the evidence rules, never by the review file"
+ },
+ "honesty_notes": [
+  "Counts under after_proposed are PROPOSALS; corpus_crosswalk.csv, the C10 outputs and the KB records are unchanged.",
+  "EXACT_ANCHOR means an exact page anchor in a registered documented-primary copy of the version text on located instruments; it does not authenticate the archival facsimile, establish currency after the located instruments, or establish legal applicability.",
+  "No MISSING_EVIDENCE item is promoted; MISSING items need source identification or approved acquisition.",
+  "Army Act / AFT Act / BSA / BNSS citations stay PARTIAL: only government compilations with undocumented provenance are held.",
+  "Anchoring copies held only in the ephemeral working store (e.g. the 1954 Gazette c5ef95a9) remain a C10 preservation risk.",
+  "Subject classification is a deterministic keyword/provision heuristic, not a legal characterisation.",
+  "v1.1: every OPEN alleged-amendment question or gap in the WS-A registers that names a rule blocks EXACT for that rule (F-01); annotation/note locators are not anchorable (F-02); a citation-level EXACT is never a record-level state (F-04)."
+ ]
+}

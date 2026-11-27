@@ -1,0 +1,10 @@
+priority,code,issue,required_action,state
+BLOCKER,HF_ITEM_LEVEL_MANIFEST_NOT_ACCESSED,Unable to cross-join individual Mimamsa records to local case IDs or source hashes,Export dataset manifest and section/judgment metadata or give readable connection,OPEN
+HIGH,UPLOAD_EDITORIAL_VERSIONS,MML uploads include multiple revised Word/PDF copies; editions and amendments unestablished,"Compare full text, identify printed edition, maintain immutable versions",OPEN
+HIGH,LEGAL_CONTENT_UNVERIFIED,658 records and 81 case propositions cannot inherit validity from upstream documents,"Authenticate each pinpoint, applicable dates and subsequent treatments",OPEN
+HIGH,MML_REUSE_RIGHTS,Manual reproduction permissions and access markings have not been assessed,Check redistribution/access restrictions before remote upload,OPEN
+HIGH,SCHEMA_UNEQUAL,Mimamsa document schema handles documents and sections but not evidence of reviewed atomic claims,Add independent claim/review schema; do not overload document.status,OPEN
+HIGH,MIMAMSA_RELEVANCE_FILTER,Pipeline log reports 1035 borderline and 47 not_checked judgments,Manually review before treating corpus coverage as complete,OPEN
+HIGH,AFT_COLLECTION_GAP,Progress log notes AFT site collection blocked,Alternate authorized official sources and documented gap register,OPEN
+MEDIUM,HISTORICAL_BSA_TRANSITION,Manual commentary may use superseded evidentiary framework,Track time-conditional provisions and savings,OPEN
+MEDIUM,REGRESSION_GOLDEN_SET,Progress report states 50-question golden set not supplied,Keep correctness test separate from source coverage test,OPEN

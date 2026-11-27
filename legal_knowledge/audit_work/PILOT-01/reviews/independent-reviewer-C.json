@@ -1,0 +1,46 @@
+[
+  {
+    "review_id": "R-C-001",
+    "finding_id": "F-REM-001",
+    "reviewer_id": "independent-reviewer-C",
+    "reviewer_role": "INDEPENDENT_AGENT",
+    "decision": "SUPPORTS",
+    "decision_date": "2026-11-22",
+    "rationale": "Tests and results. (1) Bytes: India Code Army Rules PDF from raw-data re-hashed (48f52219...a727) and a live re-fetch from the India Code URL on 2026-11-22 gave identical bytes, so the compilation India Code serves today still lacks the proviso. (2) Page images: rendered India Code PDF p.209 shows r.192(i)-(ii) ending 'detention to the full extent.' with no proviso; MML 2.pdf p.227 image shows the bracketed proviso (reduction to a lower grade of pay limited to the immediately next lower grade, not effective beyond one year) with footnote 1 'Substituted by SRO 215 dated 17 June, 1965'. (3) Is the proviso on another page? A full-text search of all 214 pages of the compilation finds no 'lower grade' anywhere; p.208 and p.210 checked in text; it is absent, not displaced. (4) Corroboration: MML vol 2(AR).doc.doc (my own conversion) also prints the proviso; this is the same manual lineage, not independent authority. (5) Later supersession: no later amendment mark beside r.192 in MML 2 (the next mark, SRO 17(E) of 6-12-1993, is on r.193). The India Code compilation carries no amendment footnotes at all (Word 2013 conversion, created 2015) and also differs on r.194 (it lacks 'or the officer commanding an Army'), so it looks like an unannotated, possibly outdated text. That weakens it as evidence that the proviso does not exist, but it does not settle the conflict. Supersession of SRO 215/1965 after the MML edition cannot be excluded (Gazette not reachable). (6) HCE-017 references are '[AA: ss 80-82]; [AR: r 22(3)(a), Appendix III]'. It does not cite r.192, even though s.80 says 'to the extent prescribed' and r.192 is that prescription, and it does not mention the proviso, though the body covers s.80 deprivations and 'Check ceilings'. The finding's statement is correct. Narrowing: the record misstates nothing. The defect is an omission plus an unresolved conflict in the text of the omitted rule. Small wording point: footnote 1 says 'Substituted', so SRO 215 may have replaced an earlier proviso rather than inserted this one. Severity: P1 is acceptable because it concerns the ceiling of a CO's summary punishment power (disciplinary powers). P0 is not warranted because nothing positive is false. P2 would be the floor if an advisor treats it as pure omission. CONFLICTING state upheld; do not resolve without the SRO 215/1965 Gazette. Limitation: same model family as first pass, orchestrator and reviewers A/B; shared raw files (but independently re-hashed, re-fetched and re-rendered). Not legal approval.",
+    "source_ids": [
+      "S-REVC-001",
+      "S-REVC-002",
+      "S-REVC-003"
+    ],
+    "independent_source_ids": [
+      "S-REVC-001",
+      "S-REVC-002",
+      "S-REVC-003"
+    ],
+    "blind": false,
+    "reviewed_original_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be"
+  },
+  {
+    "review_id": "R-C-002",
+    "finding_id": "F-REM-002",
+    "reviewer_id": "independent-reviewer-C",
+    "reviewer_role": "INDEPENDENT_AGENT",
+    "decision": "SUPPORTS",
+    "decision_date": "2026-11-22",
+    "rationale": "Partly supported; one sub-claim disputed. Tests. (1) s.121 wording, read on the rendered India Code Army Act PDF p.35 image (the printed page is also 35): after acquittal or conviction 'by a court-martial or by a criminal court', or disposal under ss.80/83/84/85, the person 'shall not be liable to be tried again for the same offence by a court-martial or dealt with under the said sections'. The bar runs only against court-martial or summary re-disposal. Upheld. (2) The MML 2.pdf p.89 image confirms note 6: 'prohibits a second trial by court-martial or a criminal court'. MML 2 p.88 prints s.121 itself correctly, so the error is in the note, not in the reproduced text. Attributing a criminal-court bar to s.121 is wrong on the text. Upheld. (3) Is the note correct in effect? Partly, perhaps. s.127 (which allowed a criminal court to retry after court-martial with Central Government sanction) was omitted w.e.f. 6-9-1992 (India Code p.36 image). With it gone, Art 20(2) (prosecuted AND punished) and BNSS s.337(1) (formerly CrPC s.300; trial by 'a Court of competent jurisdiction', India Code BNSS p.117 image) may now bar a criminal-court retrial in some cases. Whether a court-martial counts for either was not determined, and no case law was examined. MML 2 seems to have deliberately rewritten the note after 1992. So the note's legal effect may be partly right while its attribution to s.121 is wrong. (4) DISPUTED sub-claim: the finding says the vol 2(AA) note 6 'tracks the section text; only its cross-reference to omitted s.127 is dead'. The MML vol 2(AA).pdf p.111 image shows the note goes further. It states positively that 'the civil law remains supreme' and that a person acquitted or convicted by court-martial 'can be tried again by a criminal court', relying on s.127. That is an outdated substantive proposition, not just a dead cross-reference, and it sits squarely within MMLPKT-10 (s.127). MML 2 p.12 s.21 note (a) likewise still says Art 20(2) is 'abrogated by AA. s. 127' (text layer only). Severity: the MML 2 note 6 misattribution is P2 unless an advisor holds that criminal-court retrial is now permitted, in which case it is P1. The vol 2(AA) note 6 affirmative statement should be flagged separately at P1 (court-martial / double jeopardy). Overall P1 for MMLPKT-10 is justified, but the finding's rationale and proposed_text should be re-scoped as above. Limitation: same model family as the authors; Act 37 of 1992 Gazette and Art 20(2) case law not examined. Not legal approval.",
+    "source_ids": [
+      "S-REVC-004",
+      "S-REVC-005",
+      "S-REVC-006",
+      "S-REVC-007"
+    ],
+    "independent_source_ids": [
+      "S-REVC-004",
+      "S-REVC-005",
+      "S-REVC-006",
+      "S-REVC-007"
+    ],
+    "blind": false,
+    "reviewed_original_sha256": "ef031a01f9f95768537c5590e76a4853403a893a2bb72c79e9e886abe14e8679"
+  }
+]

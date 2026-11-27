@@ -1,0 +1,48 @@
+uq_id,source,priority,question
+UQ-P001,F-XVOL-001 (EV-016),P0,Which text of the r.23(3) caution is authoritative: the original S.R.O. 484 of 27-11-1954 and any amending S.R.O. must be obtained before any record quotes the caution.
+UQ-P002,F-XVOL-001 (EV-016),P0,Should records describing the caution carry a mandatory 'disputed wording' flag until authentication?
+UQ-P003,F-XVOL-002 (EV-016),P0,"Until r.23(3) is authenticated, should HCE-010's 'not obliged' sentence be marked as the MML reading rather than as the rule text?"
+UQ-P004,F-XVOL-002 (EV-016),P0,Is the voluntariness of an SoE statement independently secured by other law (e.g. Constitution Art 20(3)) such that records may state 'not obliged' without relying on r.23(3)? (Not checked here.)
+UQ-P005,F-MML-003 (MMLPKT-02),P0,Obtain and authenticate the Gazette text of S.R.O. 484 dated 27-11-1954 (r.23(3)) and any later amendment before any wording is adopted.
+UQ-P006,F-MML-003 (MMLPKT-02),P0,"Pending authentication, what interim wording, if any, may be displayed with a conflict warning?"
+UQ-P007,F-STAT-001 (HCE-010),P0,Can the custodian (MoD/JAG/Central Secretariat Library/National Archives) supply the authenticated Gazette S.R.O. 484 of 27-11-1954 and every later S.R.O. amending r.23?
+UQ-P008,F-STAT-001 (HCE-010),P0,"Pending that, should commander-facing content quote the caution at all, or only describe the right to silence with a source-conflict notice?"
+UQ-P009,F-STAT-020 (MMLPKT-02),P0,Custodian request for authenticated S.R.O. 484 Gazette scan (see registers/RULE23_3_CUSTODIAN_REQUEST_DRAFT.md).
+UQ-P010,F-XVOL-006 (CIV-034),P1,"How is 'pending' under BSA s.170(2) applied to court-martial stages (CoI, hearing of charge, SoE, convening, trial, confirmation, AFT appeal)?"
+UQ-P011,F-XVOL-007 (CIV-034),P1,Does General Clauses Act 1897 s.8 (or any notified adaptation) make Army Act s.133 refer to the BSA from 1-7-2024?
+UQ-P012,F-XVOL-007 (CIV-034),P1,Does 'subject to the provisions of this Act' in s.133 interact with BSA s.1(2) for matters the Army Act regulates specially?
+UQ-P013,F-XVOL-009 (AFT-004),P1,"For a court-martial sentence of dismissal, does an applicant proceed under s.14 (service matter by virtue of s.3(o)(iii)), s.15, or either?"
+UQ-P014,F-XVOL-009 (AFT-004),P1,Should KB-022/ADM-024/AFT-003 be harmonised to state the s.3(o)(iii) inclusion alongside the exclusions?
+UQ-P015,F-XVOL-010 (AFT-004),P1,Does a s.15 appeal lie against an SCM sentence outside the s.3(o)(iv) carve-back (e.g. 30 days' detention)? What is the binding authority and has the Supreme Court addressed it?
+UQ-P016,F-JUD-005 (PEN-043),P1,"Obtain the official sci.gov.in PDF of 2026 INSC 993 and confirm paras 30.7, 33-35 and 39 before any KB wording change."
+UQ-P017,F-JUD-005 (PEN-043),P1,"Which Entitlement Rules (1982, 2008 or 2023) govern by date of discharge/claim, and should the record add the 2008 tier and Isaac's 15-year Rule 7 proviso?"
+UQ-P018,F-JUD-007 (PEN-J-01),P1,Confirm on the official 2026 INSC 993 text that the Court did not itself adopt the AG's para 18.3 propositions beyond para 39(ii).
+UQ-P019,F-JUD-007 (PEN-J-01),P1,"Should the case-law relation be recorded as 'follows' (Rajbir->Dharamvir, verified) and 'distinguishes/limits' (Isaac->Dharamvir, pending) rather than 'overruled'?"
+UQ-P020,F-JUD-017 (DCLR-SC-2023-009),P1,Approve correcting the pinpoint and holding fields; should the relation Parashotam Dass -> Shri Kant Sharma be typed 'overrules' (three-judge bench declaring a two-judge decision not good law) for the relations graph?
+UQ-P021,F-JUD-021 (DCLR-SC-2013-N08),P1,After obtaining the official 2026 INSC 993 text: type the edge Isaac->Dharamvir as 'distinguishes' (2008 Rules context) or leave as 'cites'?
+UQ-P022,F-MML-002 (MMLPKT-01),P1,Confirm from the Gazette that SRO 258 of 27 Nov 2002 inserted the r.22 Explanation and its exact wording ('shall ... may be complied with').
+UQ-P023,F-MML-002 (MMLPKT-01),P1,Is 'call any witness' (MML 2.pdf) or 'call such witness' (India Code) the authenticated wording of r.22(1) as substituted by SRO 17(E) of 1993?
+UQ-P024,F-MML-011 (MMLPKT-06),P1,"Confirm no residual field-punishment power survives (e.g., under s.82 specifications) after Act 37 of 1992."
+UQ-P025,F-MML-015 (MMLPKT-08),P1,Which Regulations for the Army paragraph currently defines 'exemplary manner' for s.122(4)?
+UQ-P026,F-MML-017 (MMLPKT-09),P1,"Have the Criminal Courts and Court-Martial (Adjustment of Jurisdiction) Rules, 1978 been re-made or adapted under BNSS s.521?"
+UQ-P027,F-MML-019 (MMLPKT-10),P1,"After omission of s.127 (6-9-1992), may a criminal court try a person already tried by court-martial for the same offence? Identify controlling authority."
+UQ-P028,F-PROC-006 (CM-011),P1,"Confirm the computation formula: (a) date of offence by default; (b)/(c) only when their conditions are met, using the earlier of the two persons' knowledge."
+UQ-P029,F-PROC-007 (CM-011),P1,"Do s.122 and s.123(2) apply cumulatively to a person who has ceased to be subject to the Act, so that both periods must be satisfied?"
+UQ-P030,F-PROC-007 (CM-011),P1,Does the s.123(2) stay/injunction exclusion have any counterpart for persons still subject to the Act?
+UQ-P031,F-PROC-012 (AFT-011),P1,Does the authenticated Gazette text of s.22(1)(b) include a period (e.g. 'within six months from the date of expiry of the said period')?
+UQ-P032,F-PROC-012 (AFT-011),P1,What is the controlling judicial construction of s.22(1)(b) read with s.22(2)?
+UQ-P033,F-PROC-012 (AFT-011),P1,What limitation governs s.15 appeals against court-martial?
+UQ-P034,F-PROC-019 (HCE-017),P1,Confirm KB should state s.81(4) with both limbs (present rank and rank at time of offence).
+UQ-P035,F-REM-001 (HCE-017),P1,"Is the r.192 proviso (SRO 215/1965) part of the operative rule, and should the database flag its omission from the India Code compilation?"
+UQ-P036,F-REM-002 (MMLPKT-10),P1,"Confirm the scope of s.121 and whether any rule bars criminal-court retrial after court-martial (Art 20(2), CrPC s.300 / BNSS equivalent)."
+UQ-P037,F-STAT-006 (HCE-017),P1,Confirm r.192 current text and any amendment against authenticated Gazette S.R.O.s.
+UQ-P038,F-STAT-010 (CIV-033),P1,Obtain authenticated Gazette copy of the 1978 Adjustment of Jurisdiction Rules and all amendments; confirm no replacement rules were notified under BNSS s.521.
+UQ-P039,F-STAT-013 (CM-025),P1,Does General Clauses Act 1897 s.8 operate to read Army Act s.133's reference to the IEA as a reference to the BSA from 1-7-2024?
+UQ-P040,F-STAT-013 (CM-025),P1,"Is a court-martial a 'trial' or 'proceeding' pending for BSA s.170(2) once convened, or from an earlier stage (charge, summary of evidence)?"
+UQ-P041,F-STAT-018 (CIV-008),P1,Confirm r.197A text and insertion S.R.O. against Gazette; confirm whether 'station' commander includes a unit CO acting as station commander.
+UQ-P042,F-STAT-019 (MMLPKT-01),P1,Obtain Gazette S.R.O. 484 (1954) and S.R.O. 258 of 27-11-2002 and identify the instrument that inserted the r.22(1) proviso.
+UQ-P043,F-STAT-022 (MMLPKT-04),P1,Identify and obtain the S.R.O. that introduced the prisoner-of-war saving in r.180 (if any).
+UQ-P044,F-STAT-029 (MMLPKT-11),P1,Confirm via S.R.O. 17(E) of 6-12-1993 that ARs 172-176 were cancelled.
+UQ-P045,F-PROC-018 (COI-008),P2,Obtain S.R.O. 8(E) of 23-06-2003 and confirm current r.177(1)-(2); flag the corpus compilation as possibly stale for r.177.
+UQ-P046,F-STAT-021 (MMLPKT-03),P2,Obtain S.R.O. 17(E) dated 6-12-1993 to confirm r.25 omission and commencement.
+UQ-P047,F-STAT-023 (MMLPKT-05),P2,Obtain the instrument (if any) that amended r.182 or its proviso.

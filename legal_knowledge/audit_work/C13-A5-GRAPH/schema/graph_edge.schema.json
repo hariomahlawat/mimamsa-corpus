@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mimamsa:c13-a5:graph_edge:1.0.0",
+  "title": "Mimamsa candidate legal knowledge graph: edge (IC-01 entity)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["edge_id", "edge_type", "edge_class", "source", "target", "target_raw", "direction", "court", "date", "evidence",
+               "extraction_method", "extractor_version", "verification_state", "verification_axes", "legal_effect", "reviews",
+               "evaluation_ref", "restrictions", "attributes"],
+  "properties": {
+    "edge_id": {"type": "string", "pattern": "^G[A-Z]-[0-9a-f]{16}$"},
+    "edge_type": {"enum": [
+      "CITES", "FOLLOWS", "APPLIES", "DISTINGUISHES", "CONSIDERS", "EXPLAINS", "DOUBTS", "DISAPPROVES", "OVERRULES",
+      "CITES_PROVISION", "APPLIES_PROVISION",
+      "AMENDS_PROVISION_VERSION", "SUBSTITUTES_PROVISION_TEXT", "INSERTS_PROVISION", "OMITS_PROVISION", "REPEALS_INSTRUMENT",
+      "COMMENCES", "SAVES_OR_TRANSITIONS", "IMPLEMENTS", "AMENDMENT_GRAPH_ENTRY_UNTYPED",
+      "DECIDES_PROCEEDING", "HAS_PROVISION", "RAISES_QUESTION", "STATES_PROPOSITION",
+      "PRESCRIBES_OR_EXEMPLIFIES_FORM", "FORM_COMPETENT_AUTHORITY", "FORM_PROCEDURE", "REQUIREMENT_FROM_SOURCE"]},
+    "edge_class": {"enum": ["CITATION", "JUDICIAL_TREATMENT", "STATUTORY_REFERENCE", "AMENDMENT", "STRUCTURAL", "FORMS"]},
+    "source": {"type": "string"},
+    "target": {"type": ["string", "null"], "description": "node_id, or null when the target is known only as raw text (target_raw)"},
+    "target_raw": {"type": ["string", "null"]},
+    "direction": {"type": "string", "description": "Plain-language reading of source -> target, e.g. 'citing judgment -> cited authority'"},
+    "court": {"type": ["string", "null"]},
+    "date": {"type": ["string", "null"], "pattern": "^(\\d{4}-\\d{2}-\\d{2}|\\d{4})?$"},
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_copy_sha256", "doc_id", "page", "paragraph", "passage", "passage_sha256", "anchor_text"],
+      "description": "passage is the exported text (at most 600 characters) and passage_sha256 its SHA-256 (UTF-8). For treatment edges the full passage is located by char_start/char_end, page-relative offsets into data/text at the stated pipeline_version, counted from the character after the '[[page N]]' marker; passage_full_sha256 hashes the whitespace-collapsed full passage.",
+      "properties": {
+        "source_copy_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "doc_id": {"type": ["string", "null"]},
+        "page": {"type": ["integer", "null"]},
+        "paragraph": {"type": ["string", "null"]},
+        "passage": {"type": ["string", "null"]},
+        "passage_sha256": {"type": ["string", "null"]},
+        "anchor_text": {"type": ["string", "null"]},
+        "char_start": {"type": ["integer", "null"], "minimum": 0},
+        "char_end": {"type": ["integer", "null"], "minimum": 0},
+        "pipeline_version": {"type": ["string", "null"]},
+        "passage_full_sha256": {"type": ["string", "null"]},
+        "passage_truncated": {"type": ["boolean", "null"]}
+      }
+    },
+    "extraction_method": {"type": "string"},
+    "extractor_version": {"type": "string"},
+    "verification_state": {"enum": ["AUTOMATED_CANDIDATE_NOT_VERIFIED", "REVIEWED_AI_DOCUMENTARY_NOT_LEGAL_VALIDATION",
+                                    "PROPOSED_NOT_APPLIED"]},
+    "verification_axes": {"type": "object", "additionalProperties": false,
+                          "required": ["attribution_extraction", "legal_proposition", "temporal_applicability", "authority_approval"],
+                          "properties": {
+                            "attribution_extraction": {"enum": ["extraction.AUTOMATED_CANDIDATE", "extraction.DOCUMENTARY_CHECKED"]},
+                            "legal_proposition": {"enum": ["proposition.RESEARCH_CANDIDATE", "proposition.NOT_APPLICABLE"]},
+                            "temporal_applicability": {"enum": ["temporal.EVIDENCED", "temporal.PARTIAL_CHAIN", "temporal.UNRESOLVED", "temporal.NOT_APPLICABLE"]},
+                            "authority_approval": {"enum": ["approval.NONE"]}}},
+    "legal_effect": {"type": "boolean", "description": "true for edges with legal effect; these are candidates until a Legal Reviewer verifies them"},
+    "reviews": {"type": "array", "items": {"type": "object"}},
+    "evaluation_ref": {"type": ["string", "null"]},
+    "restrictions": {"type": "array", "items": {"enum": ["NON_OPERATIONAL_RESEARCH_ONLY", "HIDDEN_FROM_USERS_THIS_CYCLE", "CANDIDATE_DATA", "UNVERIFIED_MARKER_REQUIRED", "LOW_RELIABILITY_CANDIDATE"]}},
+    "attributes": {"type": "object"}
+  },
+  "allOf": [
+    {"if": {"properties": {"edge_type": {"enum": ["OVERRULES", "DISAPPROVES", "DOUBTS", "AMENDS_PROVISION_VERSION", "SUBSTITUTES_PROVISION_TEXT",
+                                                  "INSERTS_PROVISION", "OMITS_PROVISION", "REPEALS_INSTRUMENT", "SAVES_OR_TRANSITIONS"]}}},
+     "then": {"properties": {"verification_state": {"enum": ["AUTOMATED_CANDIDATE_NOT_VERIFIED", "PROPOSED_NOT_APPLIED"]}}}},
+    {"if": {"properties": {"edge_class": {"enum": ["CITATION", "JUDICIAL_TREATMENT", "STATUTORY_REFERENCE"]}}},
+     "then": {"properties": {"evidence": {"required": ["source_copy_sha256"], "properties": {"source_copy_sha256": {"type": "string"}, "page": {"type": "integer"}}}}}},
+    {"if": {"properties": {"edge_type": {"not": {"enum": ["CITES", "CITES_PROVISION", "DECIDES_PROCEEDING", "HAS_PROVISION"]}}}},
+     "then": {"properties": {"restrictions": {"contains": {"const": "UNVERIFIED_MARKER_REQUIRED"}}}}}
+  ]
+}

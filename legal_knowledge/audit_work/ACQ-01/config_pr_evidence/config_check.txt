@@ -1,0 +1,4 @@
+WARNING sources.indiacode has the robots-5xx exception (crawls if robots.txt answers 5xx)
+WARNING sources.indiacode has the robots-unreachable exception (crawls if robots.txt cannot be fetched)
+WARNING regs-army-1987 is targeted by both indiacode and mod (first hit wins)
+config OK

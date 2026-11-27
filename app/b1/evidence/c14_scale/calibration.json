@@ -1,0 +1,356 @@
+{
+  "summary": {
+    "queries": 43,
+    "passages": 38445,
+    "mean_p99": 0.8373,
+    "max_p99": 0.8949,
+    "floor_median_p999": 0.8579,
+    "median_lexical_top1_similarity": 0.8572
+  },
+  "per_query": [
+    {
+      "id": "Q01",
+      "median": 0.7934,
+      "p99": 0.8408,
+      "p999": 0.866,
+      "max": 0.897,
+      "lexical_top1_similarity": 0.8618
+    },
+    {
+      "id": "Q02",
+      "median": 0.8014,
+      "p99": 0.8485,
+      "p999": 0.8688,
+      "max": 0.8895,
+      "lexical_top1_similarity": 0.8783
+    },
+    {
+      "id": "Q03",
+      "median": 0.7441,
+      "p99": 0.8032,
+      "p999": 0.8268,
+      "max": 0.8378,
+      "lexical_top1_similarity": 0.7407
+    },
+    {
+      "id": "Q04",
+      "median": 0.7711,
+      "p99": 0.8131,
+      "p999": 0.8434,
+      "max": 0.8575,
+      "lexical_top1_similarity": 0.8372
+    },
+    {
+      "id": "Q05",
+      "median": 0.7911,
+      "p99": 0.8451,
+      "p999": 0.8773,
+      "max": 0.9001,
+      "lexical_top1_similarity": 0.9001
+    },
+    {
+      "id": "Q06",
+      "median": 0.7781,
+      "p99": 0.8272,
+      "p999": 0.8419,
+      "max": 0.898,
+      "lexical_top1_similarity": 0.898
+    },
+    {
+      "id": "Q07",
+      "median": 0.7888,
+      "p99": 0.8391,
+      "p999": 0.8515,
+      "max": 0.8663,
+      "lexical_top1_similarity": 0.8507
+    },
+    {
+      "id": "Q08",
+      "median": 0.7587,
+      "p99": 0.8168,
+      "p999": 0.8361,
+      "max": 0.8514,
+      "lexical_top1_similarity": 0.8218
+    },
+    {
+      "id": "Q09",
+      "median": 0.8014,
+      "p99": 0.8413,
+      "p999": 0.8566,
+      "max": 0.8885,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q10",
+      "median": 0.8009,
+      "p99": 0.8458,
+      "p999": 0.8638,
+      "max": 0.9028,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q11",
+      "median": 0.7946,
+      "p99": 0.8379,
+      "p999": 0.8512,
+      "max": 0.8749,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q12",
+      "median": 0.7998,
+      "p99": 0.8437,
+      "p999": 0.8579,
+      "max": 0.8738,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q13",
+      "median": 0.7913,
+      "p99": 0.8363,
+      "p999": 0.8547,
+      "max": 0.8831,
+      "lexical_top1_similarity": 0.8747
+    },
+    {
+      "id": "Q14",
+      "median": 0.7982,
+      "p99": 0.8393,
+      "p999": 0.8558,
+      "max": 0.8797,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q15",
+      "median": 0.7993,
+      "p99": 0.8424,
+      "p999": 0.8579,
+      "max": 0.8794,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q16",
+      "median": 0.8071,
+      "p99": 0.8462,
+      "p999": 0.8614,
+      "max": 0.9004,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q17",
+      "median": 0.798,
+      "p99": 0.8448,
+      "p999": 0.8625,
+      "max": 0.8816,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q18",
+      "median": 0.7422,
+      "p99": 0.8012,
+      "p999": 0.8184,
+      "max": 0.8768,
+      "lexical_top1_similarity": 0.8518
+    },
+    {
+      "id": "Q19",
+      "median": 0.7868,
+      "p99": 0.8401,
+      "p999": 0.861,
+      "max": 0.8987,
+      "lexical_top1_similarity": 0.8524
+    },
+    {
+      "id": "Q20",
+      "median": 0.799,
+      "p99": 0.839,
+      "p999": 0.8547,
+      "max": 0.8743,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q21",
+      "median": 0.7912,
+      "p99": 0.8949,
+      "p999": 0.9136,
+      "max": 0.9259,
+      "lexical_top1_similarity": 0.9171
+    },
+    {
+      "id": "Q22",
+      "median": 0.7967,
+      "p99": 0.8413,
+      "p999": 0.8581,
+      "max": 0.8811,
+      "lexical_top1_similarity": 0.8618
+    },
+    {
+      "id": "Q23",
+      "median": 0.7864,
+      "p99": 0.8324,
+      "p999": 0.8497,
+      "max": 0.8766,
+      "lexical_top1_similarity": 0.8245
+    },
+    {
+      "id": "Q24",
+      "median": 0.8017,
+      "p99": 0.8628,
+      "p999": 0.8844,
+      "max": 0.9036,
+      "lexical_top1_similarity": 0.8918
+    },
+    {
+      "id": "Q25",
+      "median": 0.742,
+      "p99": 0.8124,
+      "p999": 0.828,
+      "max": 0.866,
+      "lexical_top1_similarity": 0.7833
+    },
+    {
+      "id": "Q26",
+      "median": 0.7639,
+      "p99": 0.8107,
+      "p999": 0.8267,
+      "max": 0.8429,
+      "lexical_top1_similarity": 0.8223
+    },
+    {
+      "id": "Q27",
+      "median": 0.7739,
+      "p99": 0.8531,
+      "p999": 0.8708,
+      "max": 0.8883,
+      "lexical_top1_similarity": 0.8663
+    },
+    {
+      "id": "Q28",
+      "median": 0.8003,
+      "p99": 0.838,
+      "p999": 0.8577,
+      "max": 0.879,
+      "lexical_top1_similarity": 0.8586
+    },
+    {
+      "id": "Q29",
+      "median": 0.7961,
+      "p99": 0.8341,
+      "p999": 0.8534,
+      "max": 0.8807,
+      "lexical_top1_similarity": 0.8497
+    },
+    {
+      "id": "Q30",
+      "median": 0.7844,
+      "p99": 0.8336,
+      "p999": 0.8587,
+      "max": 0.8857,
+      "lexical_top1_similarity": 0.8843
+    },
+    {
+      "id": "Q31",
+      "median": 0.8076,
+      "p99": 0.8464,
+      "p999": 0.8611,
+      "max": 0.889,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q32",
+      "median": 0.7985,
+      "p99": 0.8392,
+      "p999": 0.8552,
+      "max": 0.9054,
+      "lexical_top1_similarity": 0.8715
+    },
+    {
+      "id": "Q33",
+      "median": 0.7977,
+      "p99": 0.8397,
+      "p999": 0.8686,
+      "max": 0.9143,
+      "lexical_top1_similarity": 0.9054
+    },
+    {
+      "id": "Q34",
+      "median": 0.8071,
+      "p99": 0.8527,
+      "p999": 0.8788,
+      "max": 0.9173,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q35",
+      "median": 0.794,
+      "p99": 0.8354,
+      "p999": 0.859,
+      "max": 0.8861,
+      "lexical_top1_similarity": 0.8391
+    },
+    {
+      "id": "Q36",
+      "median": 0.7458,
+      "p99": 0.7975,
+      "p999": 0.8286,
+      "max": 0.846,
+      "lexical_top1_similarity": 0.7986
+    },
+    {
+      "id": "Q37",
+      "median": 0.7881,
+      "p99": 0.8393,
+      "p999": 0.8577,
+      "max": 0.8743,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q38",
+      "median": 0.8014,
+      "p99": 0.8413,
+      "p999": 0.8595,
+      "max": 0.878,
+      "lexical_top1_similarity": null
+    },
+    {
+      "id": "Q39",
+      "median": 0.8036,
+      "p99": 0.8497,
+      "p999": 0.8626,
+      "max": 0.8805,
+      "lexical_top1_similarity": 0.8607
+    },
+    {
+      "id": "Q40",
+      "median": 0.8032,
+      "p99": 0.8467,
+      "p999": 0.8585,
+      "max": 0.8744,
+      "lexical_top1_similarity": 0.8536
+    },
+    {
+      "id": "Q41",
+      "median": 0.7838,
+      "p99": 0.8505,
+      "p999": 0.8694,
+      "max": 0.8968,
+      "lexical_top1_similarity": 0.8236
+    },
+    {
+      "id": "Q42",
+      "median": 0.7756,
+      "p99": 0.8303,
+      "p999": 0.8558,
+      "max": 0.8807,
+      "lexical_top1_similarity": 0.8495
+    },
+    {
+      "id": "Q43",
+      "median": 0.7736,
+      "p99": 0.828,
+      "p999": 0.847,
+      "max": 0.8705,
+      "lexical_top1_similarity": 0.8572
+    }
+  ]
+}

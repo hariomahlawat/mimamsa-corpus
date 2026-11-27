@@ -1,0 +1,2 @@
+text store: built and published E:\Mimamsa-Data\bench\c16b\stores\290\text\R13-b1-sample-20261126-4b31855f (290 documents, 11352 pages, 38445 passages, 27.7 MB text; 2252 ms)
+search index: built and published E:\Mimamsa-Data\bench\c16b\stores\290\index\R13-b1-sample-20261126-4b31855f (285 documents, 37558 passages, 66908 terms, 1 runs; tokens 6139 ms (forward cache 0 documents reused, 285 tokenised, 0 stale entries pruned), total 6817 ms)

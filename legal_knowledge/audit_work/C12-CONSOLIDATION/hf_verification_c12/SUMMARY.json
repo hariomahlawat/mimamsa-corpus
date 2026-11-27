@@ -1,0 +1,231 @@
+{
+ "byte_verified_server_hash_match": 15971,
+ "bytes_hashed": 1990747622,
+ "bytes_listed": 1990747622,
+ "c5_working_store": {
+  "counts": {
+   "C5_PACKAGE_SHA256SUMS_MATCH": 105
+  },
+  "files": 105,
+  "hf_package_sha256sums_equals_C12_copy": true,
+  "listed_but_absent_on_hf": [],
+  "package_sha256sums_entries": 106
+ },
+ "capture": {
+  "capture_finished_utc": "2026-11-24T13:26:24Z",
+  "capture_runtime_seconds_this_invocation": 837.5,
+  "capture_started_utc": "2026-11-24T13:12:27Z",
+  "max_concurrency": 4,
+  "pymupdf": "2.1"
+ },
+ "download_failed": 0,
+ "files": 15971,
+ "files_downloaded_and_hashed": 15971,
+ "files_needing_retries": 12,
+ "git_only_by_prefix": {
+  ".gitignore": 1,
+  "CLAUDE.md": 1,
+  "PROGRESS.md": 1,
+  "README_RAW_DATA.md": 1,
+  "config/sources.yaml": 1,
+  "crawler/__init__.py": 1,
+  "crawler/__main__.py": 1,
+  "crawler/audit.py": 1,
+  "crawler/cli.py": 1,
+  "crawler/config.py": 1,
+  "crawler/fetch.py": 1,
+  "crawler/http.py": 1,
+  "crawler/indiacode.py": 1,
+  "crawler/plan.py": 1,
+  "crawler/probe.py": 1,
+  "crawler/state.py": 1,
+  "pipeline/__init__.py": 1,
+  "pipeline/schemas.py": 1,
+  "reports/.gitkeep": 1,
+  "requirements.in": 1,
+  "requirements.txt": 1,
+  "snapshots/.gitkeep": 1,
+  "state/.gitkeep": 1,
+  "tests/__init__.py": 1,
+  "tests/fixtures": 15,
+  "tests/test_crawler_foundation.py": 1,
+  "tests/test_indiacode.py": 1,
+  "tests/test_schemas.py": 1
+ },
+ "git_reference": {
+  "c7_commit": "ad77758d4569ba6aafa955cc7843d874489e10f7",
+  "staging_commit": "e0b3e7d2b8c3a1aa78f13ff99b67962534cf7e73",
+  "staging_ref": "origin/legal-knowledge/v2.5-staging"
+ },
+ "hf_only_by_prefix": {
+  ".gitattributes": 1,
+  "legal_knowledge/DATA_AUTHORITY.md": 1,
+  "legal_knowledge/README.md": 1,
+  "legal_knowledge/crosswalk": 14,
+  "legal_knowledge/curated_originals": 2,
+  "legal_knowledge/full_text_working": 12,
+  "legal_knowledge/gazette_discovery": 1,
+  "legal_knowledge/holding_review": 9,
+  "legal_knowledge/judgment_originals": 13,
+  "legal_knowledge/judgment_sources": 2,
+  "legal_knowledge/judicial_treatment": 6,
+  "legal_knowledge/legal_review": 17,
+  "legal_knowledge/manual_sources": 11,
+  "legal_knowledge/preservation": 107,
+  "legal_knowledge/quality_audit": 9,
+  "legal_knowledge/reconciliation": 8,
+  "legal_knowledge/reference_data": 4,
+  "legal_knowledge/source_acquisition": 1,
+  "legal_knowledge/verification_batches": 55,
+  "reports/phase2_report.md": 1,
+  "reports/relevance.csv": 1,
+  "schema/correspondence.schema.json": 1
+ },
+ "hf_vs_git_ad77758d_paths": {
+  "DIFFERENT_BLOB": 5,
+  "GIT_ONLY": 42,
+  "HF_ONLY": 277,
+  "IDENTICAL_BLOB": 15689
+ },
+ "incomplete_files": {
+  "complete_candidates_retrieved": 4,
+  "listed": 23,
+  "verdicts": {
+   "HF_IDENTICAL_TO_STORED_COPY_ALSO_INCOMPLETE": 19,
+   "HF_ONLY_NO_LOCAL_BYTES_HF_COPY_OPENS_WITH_EOF_RETRIEVED": 4
+  }
+ },
+ "ledger_status_rederivation_drift": 0,
+ "legal_knowledge_vs_staging": {
+  "counts": {
+   "MATCHES_GITHUB_STAGING": 89,
+   "NOT_IN_GITHUB_STAGING": 184
+  },
+  "hf_files": 273,
+  "staging_only_paths": 1174
+ },
+ "lfs_files": 2450,
+ "manifests": {
+  "manifest_csv_rows": 4327,
+  "manifest_csv_sha256_not_present_on_hf": 0,
+  "manifest_csv_sha256_not_present_on_hf_list": [],
+  "raw_manifest_git_mismatch": 0,
+  "raw_manifest_git_rows": 4039,
+  "raw_manifest_hf_mismatch": 0,
+  "raw_manifest_hf_rows": 4039
+ },
+ "marking_scan": {
+  "files_per_term": {
+   "confidential": 134,
+   "for_official_use_only": 2,
+   "restricted": 526,
+   "secret": 56
+  },
+  "known_fouo_4284820e_paths_on_hf": [
+   "data/raw/indiacode/0000/4284820e5bc2fb7f52ae9fbe8a61650f1579e9b6389ba206a916a69fed016b14.pdf"
+  ],
+  "pdfs_opened": 4070,
+  "pdfs_scanned": 4077,
+  "pdfs_with_any_term": 636,
+  "pdfs_with_for_official_use_only": [
+   "data/raw/indiacode/0000/4284820e5bc2fb7f52ae9fbe8a61650f1579e9b6389ba206a916a69fed016b14.pdf",
+   "data/raw/indiacode/0000/68dd1cea126dc5c4c0ebce20fbd1b5ab0a350ef5d77d5f3601046461a1034985.pdf"
+  ],
+  "pdfs_with_marking_like_line": 22
+ },
+ "raw": {
+  "filename_sha256_match": 4039,
+  "filename_sha256_mismatch": 0,
+  "files": 4039
+ },
+ "raw_manifest_hf_vs_git_columns": {
+  "differing_cells_in_common_columns": 0,
+  "git_columns": [
+   "sha256",
+   "raw_path",
+   "bytes",
+   "content_type",
+   "retrieved_at",
+   "source_url",
+   "source_aliases",
+   "doc_id",
+   "parent_doc_id",
+   "category",
+   "title",
+   "original_filename",
+   "on_this_branch"
+  ],
+  "git_only_columns": [
+   "source_aliases",
+   "on_this_branch"
+  ],
+  "hf_columns": [
+   "sha256",
+   "raw_path",
+   "bytes",
+   "content_type",
+   "retrieved_at",
+   "source_url",
+   "doc_id",
+   "parent_doc_id",
+   "category",
+   "title",
+   "original_filename"
+  ],
+  "hf_only_columns": [],
+  "same_raw_paths": true
+ },
+ "reference_files_hf_vs_git_ad77758d": {
+  "data/SHA256SUMS": {
+   "git_ad77758d_blob": "1cbffda81dfe4d989d492cd205dd80becec20e66",
+   "hf_git_sha1": "1cbffda81dfe4d989d492cd205dd80becec20e66",
+   "identical": true
+  },
+  "data/excluded_judgments.jsonl": {
+   "git_ad77758d_blob": "f17b80c5dcfc70a8c833894e2035ead4355196f9",
+   "hf_git_sha1": "f17b80c5dcfc70a8c833894e2035ead4355196f9",
+   "identical": true
+  },
+  "data/manifest.csv": {
+   "git_ad77758d_blob": "f808ccdd9bd5ea3b8c26e90add9b3508faa31e87",
+   "hf_git_sha1": "f808ccdd9bd5ea3b8c26e90add9b3508faa31e87",
+   "identical": true
+  },
+  "data/raw_manifest.csv": {
+   "git_ad77758d_blob": "8d9ccacc20429f8ee2d4277debcc29f79821d63f",
+   "hf_git_sha1": "45d8047cf2f0c13a738f2060248e58ff5feb54ce",
+   "identical": false
+  },
+  "data/relations.jsonl": {
+   "git_ad77758d_blob": "44f5acfb458700122274b40dc0a389967c0f3e13",
+   "hf_git_sha1": "44f5acfb458700122274b40dc0a389967c0f3e13",
+   "identical": true
+  }
+ },
+ "repo": "hariomahlawat/mimamsa-corpus",
+ "revision": "5524c3d99b6a069249012fecea75093b875a22c7",
+ "revision_last_modified": "2026-11-24 12:08:44+00:00",
+ "sha256sums": {
+  "git_entries": 4039,
+  "hf_entries": 4039,
+  "hf_vs_git_entry_differences": 0,
+  "mismatch_vs_computed_git": 0,
+  "mismatch_vs_computed_hf": 0
+ },
+ "status_counts": {
+  "BYTE_VERIFIED_AND_MATCHES_GIT_AD77758D": 15689,
+  "BYTE_VERIFIED_SERVER_HASH_MATCH": 15971,
+  "C5_PACKAGE_SHA256SUMS_MATCH": 105,
+  "HF_ONLY": 277,
+  "MANIFEST_CSV_SHA256_LISTED": 4018,
+  "MANIFEST_CSV_SHA256_NOT_LISTED": 21,
+  "MATCHES_GITHUB_STAGING": 89,
+  "MISMATCH_GIT_AD77758D_BLOB": 5,
+  "NOT_IN_GITHUB_STAGING": 184,
+  "RAW_FILENAME_SHA256_MATCH": 4039,
+  "RAW_MANIFEST_GIT_AD77758D_SHA256_MATCH": 4039,
+  "RAW_MANIFEST_HF_SHA256_MATCH": 4039,
+  "SHA256SUMS_GIT_AD77758D_MATCH": 4039,
+  "SHA256SUMS_HF_MATCH": 4039
+ }
+}

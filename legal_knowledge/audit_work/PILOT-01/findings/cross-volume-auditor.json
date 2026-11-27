@@ -1,0 +1,433 @@
+[
+ {
+  "finding_id": "F-XVOL-001",
+  "batch_id": "PILOT-01",
+  "record_id": "EV-016",
+  "original_sha256": "b2fe32d5eaee939764ab5011c9f0cc794197f64113f1ad90376c061547a4e293",
+  "workstream": "CROSS_VOLUME",
+  "severity": "P0",
+  "issue_type": "CONFLICT",
+  "claim": "EV-016 states the accused may make 'a voluntary statement after appropriate caution' under Rule 23 without quoting the caution. The r.23(3) caution wording is CONFLICTING between the India Code compilation (no 'not') and the MML copies ('not obliged'). EV-016 is caution-neutral in wording but its 'may ... voluntary statement' framing implies the 'not obliged' reading, and its url field points to a government-hosted Army Rules compilation of the kind that omits 'not'.",
+  "original_location": "records_658.jsonl:line 578",
+  "original_text": "The accused may cross-examine, make a voluntary statement after appropriate caution, and call defence witnesses; evidence must be read over and signed as provided.",
+  "proposed_text": "Proposal only: add a visible flag, e.g. 'The wording of the Rule 23(3) caution differs between government-hosted compilations and Manual of Military Law copies; the original S.R.O. 484 (27-11-1954) has not been authenticated. Do not quote either version as authoritative; refer to legal review.'",
+  "rationale": "Compared EV-016 wording with S-XVOL-002 (India Code compilation r.23(3), [[page 41]]: 'You are obliged to say anything unless you wish to do so') and with MML reproductions registered by the manual auditor (S-MML-005/006/007, 'not obliged'). Per COMMON.md fixed position the source conflict is recorded, not resolved. Record-level classification: EV-016 does not itself assert either caution text, so it is not internally wrong, but it is silent on a known P0 source conflict concerning a coercive pre-trial safeguard, and its cited url (upload.indiacode.nic.in armyrules1954.pdf) is a compilation-type source.",
+  "source_ids": [
+   "S-XVOL-002"
+  ],
+  "verification_state": "CONFLICTING",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Which text of the r.23(3) caution is authoritative: the original S.R.O. 484 of 27-11-1954 and any amending S.R.O. must be obtained before any record quotes the caution.",
+   "Should records describing the caution carry a mandatory 'disputed wording' flag until authentication?"
+  ],
+  "limitations": [
+   "The specific url in EV-016 (upload.indiacode.nic.in showfile ... armyrules1954.pdf) was not fetched; the comparison used the corpus India Code copy at a different URL (bitstream a7bf1768...).",
+   "MML texts were not re-read beyond confirming the 'not obliged' line in derived text; MML is cited only via mml_anchor_ids.",
+   "No judgment on r.23(3) wording or on voluntariness of SoE statements was checked."
+  ],
+  "examination_outcome": "CONFLICTING_SOURCES",
+  "pinpoint": "Army Rules 1954 r.23(3), caution sentence; India Code compilation [[page 41]]",
+  "temporal_scope": "Army Rules 1954 as consolidated on India Code (corpus copy retrieved 2026-11-21); original S.R.O. 484 of 27-11-1954 and later amending S.R.O.s not held or verified.",
+  "mml_anchor_ids": [
+   "S-MML-005",
+   "S-MML-006",
+   "S-MML-007",
+   "S-MML-008"
+  ],
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "cross-volume-auditor",
+  "related_record_ids": [
+   "HCE-010",
+   "V9-SC-19",
+   "KB-006",
+   "V9-CL-04",
+   "V9-WF-05"
+  ]
+ },
+ {
+  "finding_id": "F-XVOL-002",
+  "batch_id": "PILOT-01",
+  "record_id": "EV-016",
+  "original_sha256": "b2fe32d5eaee939764ab5011c9f0cc794197f64113f1ad90376c061547a4e293",
+  "workstream": "CROSS_VOLUME",
+  "severity": "P0",
+  "issue_type": "POTENTIAL_CONFLICT",
+  "claim": "Across volumes the 658 records describe the r.23(3) caution inconsistently: HCE-010 states as settled law that the accused 'is not obliged' to make a statement (the MML reading); V9-SC-19 implies the same ('voluntary statement protections ... record refusal without coercion'); EV-016, KB-006, V9-CL-04 and V9-WF-05 are caution-neutral. No record found states the compilation wording ('obliged') as authoritative. Because the primary text is CONFLICTING, HCE-010's unqualified assertion and EV-016's silence cannot both be correct presentations of an unresolved source position.",
+  "original_location": "records_658.jsonl:line 578",
+  "original_text": "The accused may cross-examine, make a voluntary statement after appropriate caution, and call defence witnesses; evidence must be read over and signed as provided.",
+  "proposed_text": "Proposal only: harmonise EV-016, HCE-010, V9-SC-19, KB-006, V9-CL-04 and V9-WF-05 so that each either avoids paraphrasing the caution or carries the same disputed-wording flag; do not adopt either reading by majority of records.",
+  "rationale": "Detection: regex (Rule 23|r 23|obliged|caution|voluntar|silen|SoE) over records_658.jsonl, then manual reading of every hit. Category: unresolved (source conflict) with inconsistent record-level treatment. HCE-010 itself recommends 'Use the current authenticated caution' and warns of 'an inaccurate caution copied from an OCR error', yet states 'not obliged' as fact; its reference 'AR_ALT: rule 23 transcription cross-check' is unresolved (source_code_resolution.csv: LOW, UNRESOLVED). EV-016 is the Volume IX statement of the same rights; it omits the flag present in substance in HCE-010's risk list.",
+  "source_ids": [
+   "S-XVOL-002"
+  ],
+  "verification_state": "CONFLICTING",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Until r.23(3) is authenticated, should HCE-010's 'not obliged' sentence be marked as the MML reading rather than as the rule text?",
+   "Is the voluntariness of an SoE statement independently secured by other law (e.g. Constitution Art 20(3)) such that records may state 'not obliged' without relying on r.23(3)? (Not checked here.)"
+  ],
+  "limitations": [
+   "Record-to-record comparison covered only records located by the stated regex searches over records_658.jsonl (body + references); records phrased differently may have been missed.",
+   "HCE-010 and V9-SC-19 are not primary records of this agent; findings on their own accuracy belong to other agents.",
+   "Art 20(3) and any judgment on SoE voluntariness were not checked."
+  ],
+  "examination_outcome": "CONFLICTING_SOURCES",
+  "pinpoint": "Army Rules 1954 r.23(3); India Code compilation [[page 41]]; HCE-010 (line 86), V9-SC-19 (line 633)",
+  "temporal_scope": "Army Rules 1954 as consolidated on India Code (corpus copy retrieved 2026-11-21); original S.R.O. 484 of 27-11-1954 and later amending S.R.O.s not held or verified.",
+  "mml_anchor_ids": [
+   "S-MML-005",
+   "S-MML-006",
+   "S-MML-007"
+  ],
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "cross-volume-auditor",
+  "related_record_ids": [
+   "HCE-010",
+   "V9-SC-19",
+   "KB-006",
+   "V9-CL-04",
+   "V9-WF-05",
+   "HCE-008",
+   "HCE-009"
+  ]
+ },
+ {
+  "finding_id": "F-XVOL-003",
+  "batch_id": "PILOT-01",
+  "record_id": "EV-016",
+  "original_sha256": "b2fe32d5eaee939764ab5011c9f0cc794197f64113f1ad90376c061547a4e293",
+  "workstream": "CROSS_VOLUME",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "Apart from the caution sentence, EV-016's statement of Rule 23 (record in presence and hearing of accused; cross-examination; read-over and signature of witness evidence; accused's statement; defence witnesses) matches the India Code compilation r.23(1)-(4) and is consistent with KB-006, HCE-008, HCE-009, V9-WF-05 and V9-CL-04. Its statement that the SoE is a preliminary stage is consistent with EV-017 (no oath), whose basis is an editorial note, not rule text.",
+  "original_location": "records_658.jsonl:line 578",
+  "original_text": "The SoE is a written evidentiary record taken in the presence and hearing of the accused in the manner of Rule 23.",
+  "proposed_text": null,
+  "rationale": "Checked against S-XVOL-001 ([[page 41]]): r.23(1) 'taken down in writing in the presence and hearing of the accused'; r.23(2) cross-examination questions and answers added; r.23(3) witness evidence read over and signed, accused's statement read over and not cross-examined, accused may call witnesses including character witnesses; r.23(4) English and interpretation. Category for the overlapping records: duplicate (consistent restatement). Minor: EV-016 says 'evidence must be read over and signed'; the rule requires signature of witness evidence, while the accused's statement is read over (signature of the statement is not stated in r.23(3)). Not treated as an error. EV-017's 'not taken on oath' corresponds to Note 2 under r.23 (S-XVOL-003), which is editorial and not rule text; S-XVOL-003 is registered for that note but deliberately not cited as verifying authority.",
+  "source_ids": [
+   "S-XVOL-001"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Is it acceptable for EV-017 to rely on an editorial note (not rule text) for 'SoE is not taken on oath'?"
+  ],
+  "limitations": [
+   "Verification is against a government-hosted consolidation only; caution sentence excluded (see F-XVOL-001).",
+   "r.23(5)-(6) and r.24 not compared.",
+   "Record-to-record comparison covered only records located by the stated regex searches over records_658.jsonl (body + references); records phrased differently may have been missed."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Rules 1954 r.23(1)-(4), India Code compilation [[page 41]]; Note 2 at [[page 42]]",
+  "temporal_scope": "Army Rules 1954 as consolidated on India Code (corpus copy retrieved 2026-11-21); original S.R.O. 484 of 27-11-1954 and later amending S.R.O.s not held or verified.",
+  "mml_anchor_ids": [
+   "S-MML-005",
+   "S-MML-064"
+  ],
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "cross-volume-auditor",
+  "related_record_ids": [
+   "KB-006",
+   "HCE-008",
+   "HCE-009",
+   "V9-WF-05",
+   "V9-CL-04",
+   "EV-017"
+  ]
+ },
+ {
+  "finding_id": "F-XVOL-004",
+  "batch_id": "PILOT-01",
+  "record_id": "EV-016",
+  "original_sha256": "b2fe32d5eaee939764ab5011c9f0cc794197f64113f1ad90376c061547a4e293",
+  "workstream": "CROSS_VOLUME",
+  "severity": "P2",
+  "issue_type": "BROKEN_REFERENCE",
+  "claim": "EV-016's source link is unresolved: sources ['V9-S03'] has no identified document (source_code_resolution.csv: V9-S03 UNRESOLVED, no locator), and its url (upload.indiacode.nic.in showfile ... armyrules1954.pdf) differs from the corpus India Code copy. Overlapping r.23 records use different unresolved or generic source codes (KB-006 SRC-AR, HCE-010 AR/AR_ALT), so the same proposition is anchored to non-equivalent sources across volumes.",
+  "original_location": "records_658.jsonl:line 578",
+  "original_text": "Army Rule 23(1)-(4)",
+  "proposed_text": "Proposal only: map V9-S03 and the EV-016 url to a registered source with sha256, and record that r.23(3) caution text differs between that source class and MML copies.",
+  "rationale": "Detection: comparison of references/sources/url fields of r.23 records against registers/source_code_resolution.csv. Category: missing source. Documentary equivalence of the EV-016 url and the corpus copy is unknown and left as an unresolved join.",
+  "source_ids": [
+   "S-XVOL-001"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Who can identify the V9-S03 source used by Volume IX authors?"
+  ],
+  "limitations": [
+   "The EV-016 url was not fetched or hashed.",
+   "No inference about V9-S03 identity was made beyond the register."
+  ],
+  "examination_outcome": "UNVERIFIED",
+  "pinpoint": "EV-016 fields 'sources' and 'url'",
+  "temporal_scope": "Record metadata as frozen in records_658.jsonl (v0.9).",
+  "mml_anchor_ids": [],
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "cross-volume-auditor",
+  "related_record_ids": [
+   "KB-006",
+   "HCE-010"
+  ]
+ },
+ {
+  "finding_id": "F-XVOL-005",
+  "batch_id": "PILOT-01",
+  "record_id": "CIV-034",
+  "original_sha256": "9efda464a4e1e926a2088b401e690c500442415a81536f8343aed8dce3c6f1b5",
+  "workstream": "CROSS_VOLUME",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "CIV-034's statement that BSA s.1(2) applies the Act to judicial proceedings including courts-martial matches the enacted text; the same proposition is restated consistently in CIV-019, EV-001 and EV-003.",
+  "original_location": "records_658.jsonl:line 493",
+  "original_text": "Bharatiya Sakshya Adhiniyam section 1(2) expressly extends the Act to judicial proceedings in or before Courts, including courts-martial.",
+  "proposed_text": null,
+  "rationale": "S-XVOL-004 ([[page 10]]): 'It applies to all judicial proceedings in or before any Court, including Courts-martial, but not to affidavits ... nor to proceedings before an arbitrator.' CIV-034 paraphrases 'applies to' as 'extends'; s.1 is headed 'application' and contains no separate extent clause, so the paraphrase is editorial only. CIV-034 omits the affidavit/arbitrator exclusions, which are immaterial to courts-martial. Category for CIV-019 / EV-001 / EV-003: duplicate.",
+  "source_ids": [
+   "S-XVOL-004"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Temporal limits are dealt with in F-XVOL-006; the Army Act s.133 interaction in F-XVOL-007.",
+   "Record-to-record comparison covered only records located by the stated regex searches over records_658.jsonl (body + references); records phrased differently may have been missed."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "BSA 2023 s.1(2), India Code consolidation [[page 10]]",
+  "temporal_scope": "BSA 2023 India Code consolidation retrieved 2026-11-21; in force 1-7-2024 per compilation footnote (S.O. 849(E) of 23-2-2024 not itself retrieved); Army Act 1950 consolidation retrieved 2026-11-21; amendments after retrieval and General Clauses Act 1897 not checked.",
+  "mml_anchor_ids": [
+   "S-MML-063"
+  ],
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "cross-volume-auditor",
+  "related_record_ids": [
+   "CIV-019",
+   "EV-001",
+   "EV-003"
+  ]
+ },
+ {
+  "finding_id": "F-XVOL-006",
+  "batch_id": "PILOT-01",
+  "record_id": "CIV-034",
+  "original_sha256": "9efda464a4e1e926a2088b401e690c500442415a81536f8343aed8dce3c6f1b5",
+  "workstream": "CROSS_VOLUME",
+  "severity": "P1",
+  "issue_type": "PROCEDURAL_GAP",
+  "claim": "CIV-034's title 'BSA applies to courts-martial' and its legal position are unqualified as to time; BSA s.170(2) preserves the Indian Evidence Act 1872 for any trial, inquiry, investigation, proceeding or appeal pending immediately before 1 July 2024. EV-002, V9-CL-01 and V9-WF-01 state this savings rule expressly; CIV-034 and CIV-019 refer only generically to 'commencement and savings rules' or none. Category: different effective dates.",
+  "original_location": "records_658.jsonl:line 493",
+  "original_text": "The relevant commencement and savings rules, the Army Act evidence provisions and court-martial procedure must be analysed together for a particular case.",
+  "proposed_text": "Proposal only: qualify the title/legal position, e.g. 'BSA s.1(2) applies the BSA to courts-martial from 1 July 2024; under BSA s.170(2) a trial or other proceeding pending immediately before that date is dealt with under the Indian Evidence Act 1872.'",
+  "rationale": "S-XVOL-005 ([[page 51]]) s.170(1)-(2) and commencement footnote ([[page 10]]): in force 1-7-2024. EV-002 correctly frames the test as pendency of the particular proceeding, not incident date. CIV-034's body does mention commencement and savings, so this is an omission of the operative rule rather than a misstatement; but the unqualified title is the retrieval-facing proposition and concerns evidence law at court-martial.",
+  "source_ids": [
+   "S-XVOL-004",
+   "S-XVOL-005"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "How is 'pending' under BSA s.170(2) applied to court-martial stages (CoI, hearing of charge, SoE, convening, trial, confirmation, AFT appeal)?"
+  ],
+  "limitations": [
+   "No judgment interpreting s.170(2) was checked.",
+   "Record-to-record comparison covered only records located by the stated regex searches over records_658.jsonl (body + references); records phrased differently may have been missed."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "BSA 2023 s.170(1)-(2) [[page 51]]; s.1(3) and footnote 1 [[page 10]]",
+  "temporal_scope": "BSA 2023 India Code consolidation retrieved 2026-11-21; in force 1-7-2024 per compilation footnote (S.O. 849(E) of 23-2-2024 not itself retrieved); Army Act 1950 consolidation retrieved 2026-11-21; amendments after retrieval and General Clauses Act 1897 not checked.",
+  "mml_anchor_ids": [],
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "cross-volume-auditor",
+  "related_record_ids": [
+   "EV-002",
+   "V9-CL-01",
+   "V9-WF-01",
+   "CIV-019"
+  ]
+ },
+ {
+  "finding_id": "F-XVOL-007",
+  "batch_id": "PILOT-01",
+  "record_id": "CIV-034",
+  "original_sha256": "9efda464a4e1e926a2088b401e690c500442415a81536f8343aed8dce3c6f1b5",
+  "workstream": "CROSS_VOLUME",
+  "severity": "P1",
+  "issue_type": "POTENTIAL_CONFLICT",
+  "claim": "CIV-034 does not mention that Army Act s.133 (India Code consolidation) still provides that the Indian Evidence Act 1872 'shall, subject to the provisions of this Act, apply to all proceedings before a court-martial', while BSA s.1(2) applies the BSA to courts-martial and s.170(1) repeals the IEA. CM-025 and EV-003 expose this cross-reference; CIV-034 refers only to 'Army Act evidence provisions' and cites 'V8-S01|court martial evidence chapter' without a section. Record-level category: legitimate distinction (each record accurately states a different enactment) plus probable gap in CIV-034; the statutory interaction is unresolved.",
+  "original_location": "records_658.jsonl:line 493",
+  "original_text": "Bharatiya Sakshya Adhiniyam section 1(2) expressly extends the Act to judicial proceedings in or before Courts, including courts-martial.",
+  "proposed_text": "Proposal only: add to CIV-034 'Army Act s.133 as consolidated still names the Indian Evidence Act 1872; the interaction with BSA ss.1(2) and 170 is unresolved pending legal review (see CM-025, EV-003).'",
+  "rationale": "S-XVOL-006 ([[page 37]]) s.133 text vs S-XVOL-004/005. The two enactments, read on their face, name different evidence statutes for court-martial proceedings. Whether s.8 of the General Clauses Act 1897 or any adaptation/amendment reads the s.133 reference as a reference to the BSA was NOT checked and is not resolved here. CM-025 and EV-003 are duplicates of each other on this point (both: '2025 Army Act text still ... names/refers to the Indian Evidence Act').",
+  "source_ids": [
+   "S-XVOL-004",
+   "S-XVOL-005",
+   "S-XVOL-006"
+  ],
+  "verification_state": "CONFLICTING",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Does General Clauses Act 1897 s.8 (or any notified adaptation) make Army Act s.133 refer to the BSA from 1-7-2024?",
+   "Does 'subject to the provisions of this Act' in s.133 interact with BSA s.1(2) for matters the Army Act regulates specially?"
+  ],
+  "limitations": [
+   "General Clauses Act 1897 text, Gazette amendment search for s.133 and judicial treatment were not checked.",
+   "The MML s.133 reproduction (S-MML-058/059) is historical and cited only as anchor."
+  ],
+  "examination_outcome": "CONFLICTING_SOURCES",
+  "pinpoint": "Army Act 1950 s.133 [[page 37]]; BSA 2023 s.1(2) [[page 10]], s.170(1) [[page 51]]",
+  "temporal_scope": "BSA 2023 India Code consolidation retrieved 2026-11-21; in force 1-7-2024 per compilation footnote (S.O. 849(E) of 23-2-2024 not itself retrieved); Army Act 1950 consolidation retrieved 2026-11-21; amendments after retrieval and General Clauses Act 1897 not checked.",
+  "mml_anchor_ids": [
+   "S-MML-058",
+   "S-MML-059",
+   "S-MML-063"
+  ],
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "cross-volume-auditor",
+  "related_record_ids": [
+   "CM-025",
+   "EV-003",
+   "V9-WF-01",
+   "CIV-019",
+   "EV-001"
+  ]
+ },
+ {
+  "finding_id": "F-XVOL-008",
+  "batch_id": "PILOT-01",
+  "record_id": "AFT-004",
+  "original_sha256": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+  "workstream": "CROSS_VOLUME",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "AFT-004's description of AFT Act s.14 (service-matter applications) and s.15 (appeal against order, decision, finding or sentence of a court-martial; powers over conviction, sentence and bail; enhancement only after hearing) matches the enacted text and is consistent with CM-036, AFT-001, AFT-030 and V7-WF-02.",
+  "original_location": "records_658.jsonl:line 365",
+  "original_text": "Section 15 provides appellate jurisdiction over an order, decision, finding or sentence passed by court-martial, with specified powers over conviction, sentence and bail.",
+  "proposed_text": null,
+  "rationale": "S-XVOL-008 ([[page 8]]-[[page 9]]) s.14(1)-(2); S-XVOL-009 ([[page 9]]-[[page 10]]) s.15(1)-(2) 'any order, decision, finding or sentence passed by a court-martial', s.15(3) bail with death/life proviso, s.15(4)-(6), s.15(6)(c) enhancement with proviso 'unless the appellant has been given an opportunity of being heard'. AFT-004's 'Failing to consider s15 appellate power to enhance after hearing' and 'Identify relief within s15(4)-(6)' match. Category for CM-036 / AFT-001 / AFT-030: duplicate.",
+  "source_ids": [
+   "S-XVOL-008",
+   "S-XVOL-009"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "AFT-004 references 'V7-S02|Rules 4-9' (AFT Procedure Rules 2008) were not checked; limitation for appeals not checked.",
+   "Record-to-record comparison covered only records located by the stated regex searches over records_658.jsonl (body + references); records phrased differently may have been missed."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "AFT Act 2007 s.14(1)-(2) [[page 8]]; s.15(1)-(6) [[page 9]]-[[page 10]]",
+  "temporal_scope": "AFT Act 2007 India Code consolidation retrieved 2026-11-21 (corpus status 'amended'; amendment chain not verified); judicial treatment after 2023 not verified.",
+  "mml_anchor_ids": [],
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "cross-volume-auditor",
+  "related_record_ids": [
+   "CM-036",
+   "AFT-001",
+   "AFT-030",
+   "V7-WF-02",
+   "KB-022"
+  ]
+ },
+ {
+  "finding_id": "F-XVOL-009",
+  "batch_id": "PILOT-01",
+  "record_id": "AFT-004",
+  "original_sha256": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+  "workstream": "CROSS_VOLUME",
+  "severity": "P1",
+  "issue_type": "PROCEDURAL_GAP",
+  "claim": "AFT-004 frames s.14 and s.15 as alternative routes ('Do not force a trial appeal into a generic service-law cause of action'), and KB-022, ADM-024, AFT-003 and CM-036 mention only the SCM exclusion from 'service matters'. None of these records states that s.3(o) expressly INCLUDES '(iii) summary disposal and trials where the punishment of dismissal is awarded' and, by the exception to exclusion (iv), SCMs awarding dismissal or imprisonment over three months. For AFT-004's own example (soldier dismissed by SCM) the statutory text places the matter within 'service matters' under s.14 as well as within s.15. Category: legitimate distinction / probable gap.",
+  "original_location": "records_658.jsonl:line 365",
+  "original_text": "Do not force a trial appeal into a generic service-law cause of action.",
+  "proposed_text": "Proposal only: add 'Note: s.3(o)(iii) includes summary disposals and trials awarding dismissal within service matters, and exclusion (iv) carves back SCMs awarding dismissal or imprisonment over three months; the relationship between a s.14 application and a s.15 appeal for such cases requires legal review.'",
+  "rationale": "S-XVOL-007 ([[page 6]]) s.3(o)(iii) and exclusion (iv); S-XVOL-008 s.14(1)-(2); S-XVOL-009 s.15(1)-(2). The records are not textually wrong, but the cross-volume set consistently omits the inclusion limb, which is material to forum choice for court-martial outcomes (a formal remedy). Which route is correct, or whether both lie, is an interpretive question not resolved here.",
+  "source_ids": [
+   "S-XVOL-007",
+   "S-XVOL-008",
+   "S-XVOL-009"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "For a court-martial sentence of dismissal, does an applicant proceed under s.14 (service matter by virtue of s.3(o)(iii)), s.15, or either?",
+   "Should KB-022/ADM-024/AFT-003 be harmonised to state the s.3(o)(iii) inclusion alongside the exclusions?"
+  ],
+  "limitations": [
+   "No AFT, High Court or Supreme Court decision on the s.14/s.15 interface was retrieved (aftdelhi.nic.in unreachable; judgments not searched).",
+   "Record-to-record comparison covered only records located by the stated regex searches over records_658.jsonl (body + references); records phrased differently may have been missed."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "AFT Act 2007 s.3(o)(iii) and exclusion (iv) [[page 6]]; ss.14-15 [[page 8]]-[[page 10]]",
+  "temporal_scope": "AFT Act 2007 India Code consolidation retrieved 2026-11-21 (corpus status 'amended'; amendment chain not verified); judicial treatment after 2023 not verified.",
+  "mml_anchor_ids": [],
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "cross-volume-auditor",
+  "related_record_ids": [
+   "KB-022",
+   "ADM-024",
+   "AFT-003",
+   "CM-036",
+   "CM-SC-16",
+   "AFT-001"
+  ]
+ },
+ {
+  "finding_id": "F-XVOL-010",
+  "batch_id": "PILOT-01",
+  "record_id": "AFT-004",
+  "original_sha256": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+  "workstream": "CROSS_VOLUME",
+  "severity": "P1",
+  "issue_type": "UNSUPPORTED_ASSERTION",
+  "claim": "The SCM-route propositions across Volume VII and other volumes (AFT-004 example, AFT-005, V7-SC-05, V7-JD-05, V7-WF-02, V7-CL-01, CM-SC-16, CM-036, KB-022, ADM-024) are mutually consistent in treating SCM forum questions as litigation-sensitive; no record found makes a flat 'no AFT remedy against SCM' claim. The statutory text supports that s.3(o)(iv) limits only the 'service matters' definition and that s.15 contains no express SCM exclusion, but the judicial treatment relied on (Nk Santosh Lohar, P&H HC, 2023:PHHC:127834) was not retrieved, so the proposition that s.15 independently reaches SCMs remains unverified.",
+  "original_location": "records_658.jsonl:line 365",
+  "original_text": "Example: A soldier dismissed by a SCM must receive a distinct jurisdiction analysis under ss3(o),14 and 15.",
+  "proposed_text": null,
+  "rationale": "Detection: regex (3\\(o\\)|s ?14|s ?15|three months|SCM ... AFT|no appeal|not appealable) over records_658.jsonl restricted to records mentioning AFT/Tribunal, then manual reading. S-XVOL-007 s.3(f) defines court-martial as one 'held under the Army Act, 1950' (no SCM carve-out); S-XVOL-009 s.15(1)-(2) applies to 'any ... sentence passed by a court-martial'. These facts are textual only. AFT-005 warns against a 'Flat claim no SCM appeal lies'; V7-JD-05 attributes the contrary reasoning to a High Court decision whose binding scope is noted as uncertain. Category: unresolved (judgment not checked); records consistent.",
+  "source_ids": [
+   "S-XVOL-007",
+   "S-XVOL-009"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Does a s.15 appeal lie against an SCM sentence outside the s.3(o)(iv) carve-back (e.g. 30 days' detention)? What is the binding authority and has the Supreme Court addressed it?"
+  ],
+  "limitations": [
+   "Nk Santosh Lohar v Union of India and any subsequent treatment were not retrieved or read; the citation is taken from V7-JD-05 and is unverified.",
+   "Absence of a flat-exclusion record in the search is not proof that none exists.",
+   "Record-to-record comparison covered only records located by the stated regex searches over records_658.jsonl (body + references); records phrased differently may have been missed."
+  ],
+  "examination_outcome": "UNVERIFIED",
+  "pinpoint": "AFT Act 2007 s.3(f), s.3(o) exclusion (iv) [[page 6]]; s.15(1)-(2) [[page 9]]",
+  "temporal_scope": "AFT Act 2007 India Code consolidation retrieved 2026-11-21 (corpus status 'amended'; amendment chain not verified); judicial treatment after 2023 not verified.",
+  "mml_anchor_ids": [],
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "cross-volume-auditor",
+  "related_record_ids": [
+   "AFT-005",
+   "V7-SC-05",
+   "V7-JD-05",
+   "V7-WF-02",
+   "V7-CL-01",
+   "CM-SC-16",
+   "CM-036",
+   "KB-022",
+   "ADM-024"
+  ]
+ }
+]

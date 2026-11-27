@@ -1,0 +1,18 @@
+{
+ "c4_adviser_topics": 13,
+ "c4_calibration_escalations": 29,
+ "c6_01_documentary_inputs_for_adviser": [
+  "ER 2023 covering letter 'with effect from 21st September, 2023 ... in supersession of all previous orders/rules' (held, C5-PIC-01): LAQ-03/LAQ-04",
+  "Act 37/1992 has no commencement provision (independent review RV-26): AQ-05",
+  "7 SC judgments proposed PROVENANCE_DOCUMENTED (C6-01 D2) change evidence availability, not holdings or treatment"
+ ],
+ "determinations_made": 0,
+ "reserved_items": 9,
+ "reserved_states": {
+  "C5-CF-C-01": "CONFLICTING (r.23(3))",
+  "C5-CF-C-08": "OPEN (r.193)",
+  "C5-CF-C-09": "PROPOSAL (r.194)",
+  "C5-CF-SC4-01": "OPEN (r.182)"
+ },
+ "ws_b_inconsistencies_open": 13
+}

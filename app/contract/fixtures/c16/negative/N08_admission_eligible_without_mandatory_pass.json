@@ -1,0 +1,84 @@
+{
+ "admission_id": "ADM-9153f075d4af23c60ba41803",
+ "application_eligible": true,
+ "contract": "mimamsa-corpus-contract/2.0",
+ "corpus_generation_id": "CG-20261127-fixtures-0a1b2c3d",
+ "decided_at": null,
+ "decided_by": {
+  "id": "c16-fixture-admission",
+  "kind": "AUTOMATED_RULE"
+ },
+ "decision": "ADMITTED_AS_PRIMARY",
+ "duplicate_of": null,
+ "gates": [
+  {
+   "evidence_ref": null,
+   "gate_id": "G01_HASH_VERIFIED",
+   "result": "NOT_RUN"
+  },
+  {
+   "evidence_ref": "fixture evidence for G02_FORMAT_DETECTED",
+   "gate_id": "G02_FORMAT_DETECTED",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": "fixture evidence for G03_RESTRICTED_REGISTER",
+   "gate_id": "G03_RESTRICTED_REGISTER",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": "fixture evidence for G04_ACCESS_MARKING_REVIEWED",
+   "gate_id": "G04_ACCESS_MARKING_REVIEWED",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": "fixture evidence for G05_IDENTITY_RECORD_VALID",
+   "gate_id": "G05_IDENTITY_RECORD_VALID",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": "fixture evidence for G06_TEXT_DERIVATIVE_VERIFIED",
+   "gate_id": "G06_TEXT_DERIVATIVE_VERIFIED",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": null,
+   "gate_id": "G07_EMBEDDED_IMAGES_ACCOUNTED",
+   "result": "NOT_APPLICABLE"
+  },
+  {
+   "evidence_ref": "fixture evidence for G08_RELEVANCE_ASSESSED",
+   "gate_id": "G08_RELEVANCE_ASSESSED",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": "fixture evidence for G09_DUPLICATE_RESOLVED",
+   "gate_id": "G09_DUPLICATE_RESOLVED",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": "fixture evidence for G10_SCHEMA_VALID",
+   "gate_id": "G10_SCHEMA_VALID",
+   "result": "PASS"
+  }
+ ],
+ "legal_effect": "NONE",
+ "publication_effect": "NONE",
+ "reasons": [
+  "hash declared, not re-verified"
+ ],
+ "record_kind": "corpus_admission",
+ "restriction_id": null,
+ "revision": 1,
+ "rule_set": {
+  "id": "c16-admission",
+  "version": "1.1"
+ },
+ "service_scope": "NONE",
+ "source_disposition": null,
+ "subject": {
+  "doc_id": "aft-2004-example-scan-oa0002",
+  "source_copy_sha256": "6d01d5756880c765890a8987501b4e556e58f6d898766a8ba818e66644c8c62d"
+ },
+ "supersedes_admission_id": null
+}

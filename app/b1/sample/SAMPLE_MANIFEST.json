@@ -1,0 +1,2973 @@
+{
+ "built_at": "2026-11-25T21:39:47Z",
+ "counts": {
+  "a2_outcomes": 503,
+  "a4_provision_versions": 488,
+  "a5_graph_edges": 2759,
+  "abbreviations": 1221,
+  "by_type": {
+   "act": 27,
+   "judgment": 223,
+   "notification": 16,
+   "order": 1,
+   "other": 3,
+   "regulations": 5,
+   "rules": 15
+  },
+  "bytes": 423445719,
+  "candidates": 3262,
+  "documents": 290,
+  "dropped": 1,
+  "pages": 11352
+ },
+ "description": "B1 offline sample bundle manifest. Corpus bytes are NOT in git; they live under the scratchpad work directory and can be rebuilt from the HF revision with app/b1/build/build_sample.py.",
+ "documents": [
+  {
+   "bytes": 590779,
+   "doc_id": "act-air-force-1950",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/1950/ef50375ea0550ddc1e6414c45bd9403d3842aa395a297e71e2e627403632ebd0.pdf",
+   "pages": 55,
+   "sha256": "ef50375ea0550ddc1e6414c45bd9403d3842aa395a297e71e2e627403632ebd0",
+   "text_hf_path": "data/text/act-air-force-1950.txt",
+   "text_sha256": "dc20458359b03685b5541963835582c887bd9cb7744a75e681d2fc8a9a3ea997"
+  },
+  {
+   "bytes": 1930919,
+   "doc_id": "act-air-force-1950-hi",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/1950/0ccc80026e30a5a50ee3b29b3b1e4bf43566509e745878670b1e41d414110bcd.pdf",
+   "pages": 37,
+   "sha256": "0ccc80026e30a5a50ee3b29b3b1e4bf43566509e745878670b1e41d414110bcd",
+   "text_hf_path": "data/text/act-air-force-1950-hi.txt",
+   "text_sha256": "2b52ee7cb6e78bbfef46bd387e6369f2954de8d5d2c790e1f3fee6097e6b89c1"
+  },
+  {
+   "bytes": 334417,
+   "doc_id": "act-armed-forces-tribunal-2007",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/2007/665863d1abb802f7488eb75f776946e30e72ccec16962da8e2b3ee8f2e023e3b.pdf",
+   "pages": 16,
+   "sha256": "665863d1abb802f7488eb75f776946e30e72ccec16962da8e2b3ee8f2e023e3b",
+   "text_hf_path": "data/text/act-armed-forces-tribunal-2007.txt",
+   "text_sha256": "9d128ae7bede5fdea1e2dfa32d6cf2ee56b53398a0618fd64984b54ada1da6d1"
+  },
+  {
+   "bytes": 600088,
+   "doc_id": "act-armed-forces-tribunal-2007-hi",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/2007/48f57c81bbc1d84796ecb34d3269b18b65ab0e1f43eab651ee84f64085a285b4.pdf",
+   "pages": 13,
+   "sha256": "48f57c81bbc1d84796ecb34d3269b18b65ab0e1f43eab651ee84f64085a285b4",
+   "text_hf_path": "data/text/act-armed-forces-tribunal-2007-hi.txt",
+   "text_sha256": "3c670c5e59d3adf4ae95690be5b48336abf1108abc21620454bfd95dff36e2a4"
+  },
+  {
+   "bytes": 733498,
+   "doc_id": "act-army-1950",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/1950/e47a4265813e95b491a24926428ed306cfeaae9013e7edb928cefef6e69a7c08.pdf",
+   "pages": 51,
+   "sha256": "e47a4265813e95b491a24926428ed306cfeaae9013e7edb928cefef6e69a7c08",
+   "text_hf_path": "data/text/act-army-1950.txt",
+   "text_sha256": "88a9f1dcf859a0158c0a526f8abd82350cd3caf5af13dd1b1485b70a8abd2428"
+  },
+  {
+   "bytes": 1629678,
+   "doc_id": "act-army-1950-hi",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/1950/42b9a2f816f635b41c8ec75bb769978e7f113bdb322e15faaec871139e1d0d68.pdf",
+   "pages": 38,
+   "sha256": "42b9a2f816f635b41c8ec75bb769978e7f113bdb322e15faaec871139e1d0d68",
+   "text_hf_path": "data/text/act-army-1950-hi.txt",
+   "text_sha256": "acd81b0ec0c00803a3b3e23b1b38ad594bbd380032e2471e99a8def54e679654"
+  },
+  {
+   "bytes": 286682,
+   "doc_id": "act-army-1950-sched-the-schedule",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/0000/3a551c1f5919dd9011eed191962950d6ce3e7267dc0987785408798d8b49f87d.pdf",
+   "pages": 1,
+   "sha256": "3a551c1f5919dd9011eed191962950d6ce3e7267dc0987785408798d8b49f87d",
+   "text_hf_path": "data/text/act-army-1950-sched-the-schedule.txt",
+   "text_sha256": "efc549e0e4ee34f0c8c705c3a23a88b7829195b4b3b76b20a795935ef692d9fa"
+  },
+  {
+   "bytes": 286451,
+   "doc_id": "act-army-af-disposal-private-property-1950",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/1950/0884f3b50114c71f98f9aa0dfea43aaa0d1b0eee3da276591f6d6e2051ecdfca.pdf",
+   "pages": 10,
+   "sha256": "0884f3b50114c71f98f9aa0dfea43aaa0d1b0eee3da276591f6d6e2051ecdfca",
+   "text_hf_path": "data/text/act-army-af-disposal-private-property-1950.txt",
+   "text_sha256": "47e4abd792ff825fe4fe4496f2df6923b82df6e038330fd8ad57a3b58cf72988"
+  },
+  {
+   "bytes": 452358,
+   "doc_id": "act-army-af-disposal-private-property-1950-hi",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/1950/6ca297a1972ed35c400caead51d2681340064dcd967cee7aeb5f8e91f322a126.pdf",
+   "pages": 5,
+   "sha256": "6ca297a1972ed35c400caead51d2681340064dcd967cee7aeb5f8e91f322a126",
+   "text_hf_path": "data/text/act-army-af-disposal-private-property-1950-hi.txt",
+   "text_sha256": "386dfde4d998fc2256fb037d6c6b3ac3d7eca8ebfa6e157a329e1f84c00bda0c"
+  },
+  {
+   "bytes": 1115210,
+   "doc_id": "act-bns-2023",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/2023/d4449e9995b21fd52627811d08f9d21feda6a3678b7e5355b651242d152167f5.pdf",
+   "pages": 112,
+   "sha256": "d4449e9995b21fd52627811d08f9d21feda6a3678b7e5355b651242d152167f5",
+   "text_hf_path": "data/text/act-bns-2023.txt",
+   "text_sha256": "536db0594353088e9abeb44a484bd0ff7befb4bc2e76c05a49202ba116de0500"
+  },
+  {
+   "bytes": 40958522,
+   "doc_id": "act-bns-2023-alt-d163e7",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/2023/d163e785bfb3783287a641fc81621a6f16583f3435227110e066eb9d12c9d4da.pdf",
+   "pages": 145,
+   "sha256": "d163e785bfb3783287a641fc81621a6f16583f3435227110e066eb9d12c9d4da",
+   "text_hf_path": "data/text/act-bns-2023-alt-d163e7.txt",
+   "text_sha256": "fa6f3eda9e5edd502c591eb03bf19afb7ab7ee11134c578cae018ce1acd400fe"
+  },
+  {
+   "bytes": 2872470,
+   "doc_id": "act-bnss-2023",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/2023/572c79880b9f8effc8fa6e39b864101835a0fb5d85b194b90a99d170121a0562.pdf",
+   "pages": 282,
+   "sha256": "572c79880b9f8effc8fa6e39b864101835a0fb5d85b194b90a99d170121a0562",
+   "text_hf_path": "data/text/act-bnss-2023.txt",
+   "text_sha256": "3672ebd3fae8f2e254bd6506ecba5deb98879acf2edab320a1d962db0236fe27"
+  },
+  {
+   "bytes": 76501811,
+   "doc_id": "act-bnss-2023-alt-60d145",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/2023/60d145c5964afc41c150be7f4036a805171aadeb160c2899d47d3acd522804ed.pdf",
+   "pages": 319,
+   "sha256": "60d145c5964afc41c150be7f4036a805171aadeb160c2899d47d3acd522804ed",
+   "text_hf_path": "data/text/act-bnss-2023-alt-60d145.txt",
+   "text_sha256": "be3a944120ef7337ec842bb705f5d373855c3a6102b16c1a57e0aae2e58ca8eb"
+  },
+  {
+   "bytes": 944518,
+   "doc_id": "act-bnss-2023-sched-the-first-schedule",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/0000/d5e5554b4002a579cbcef6d81f35d6a24a3f593810967cf40e2a19fcb44d8f37.pdf",
+   "pages": 47,
+   "sha256": "d5e5554b4002a579cbcef6d81f35d6a24a3f593810967cf40e2a19fcb44d8f37",
+   "text_hf_path": "data/text/act-bnss-2023-sched-the-first-schedule.txt",
+   "text_sha256": "ba7a8ac117ef65531dafe5437c7e3d2feb6083366eca347649ce514bcbbeaefc"
+  },
+  {
+   "bytes": 509348,
+   "doc_id": "act-bnss-2023-sched-the-second-schedule",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/0000/0cdc96bbb16c571be9447140c9f8faa17353a209bb8e5e8b6e61c4e02dd6132a.pdf",
+   "pages": 61,
+   "sha256": "0cdc96bbb16c571be9447140c9f8faa17353a209bb8e5e8b6e61c4e02dd6132a",
+   "text_hf_path": "data/text/act-bnss-2023-sched-the-second-schedule.txt",
+   "text_sha256": "982906f5d25fee4da366450a8ba88a0b85d06c38c34e6bb69052bd0c7e511ea9"
+  },
+  {
+   "bytes": 642831,
+   "doc_id": "act-bsa-2023",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/2023/554b2b4ae3d9f09bf31e6e1ba2b2cb8a4e7f4f5ffd6f3156736752cbbce116d5.pdf",
+   "pages": 54,
+   "sha256": "554b2b4ae3d9f09bf31e6e1ba2b2cb8a4e7f4f5ffd6f3156736752cbbce116d5",
+   "text_hf_path": "data/text/act-bsa-2023.txt",
+   "text_sha256": "a88c574ddac5fd0713bd14be4219b6a69447b54771d200461e351a0178f702ed"
+  },
+  {
+   "bytes": 17258498,
+   "doc_id": "act-bsa-2023-alt-72fc9a",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/2023/72fc9a751097cb63e959ae120b4d8996fddcd92b37e5ae3ad0aaa61a875c2ca3.pdf",
+   "pages": 61,
+   "sha256": "72fc9a751097cb63e959ae120b4d8996fddcd92b37e5ae3ad0aaa61a875c2ca3",
+   "text_hf_path": "data/text/act-bsa-2023-alt-72fc9a.txt",
+   "text_sha256": "b53fecf49008824ed96df7539cc81f1100d9c8da0c29aef88564f76360c6378d"
+  },
+  {
+   "bytes": 115870,
+   "doc_id": "act-bsa-2023-sched-schedule",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/0000/63797c96911964f7519d8d5743d126ab47efbced59b674c94c381c817b290dad.pdf",
+   "pages": 2,
+   "sha256": "63797c96911964f7519d8d5743d126ab47efbced59b674c94c381c817b290dad",
+   "text_hf_path": "data/text/act-bsa-2023-sched-schedule.txt",
+   "text_sha256": "174909dff918cddd18362a00a1fa48037d101f13a1151bc94ed4ad1a68cfa82a"
+  },
+  {
+   "bytes": 9176717,
+   "doc_id": "act-crpc-1973",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/1973/865cc3e1989536882c97d58cd16581e3409745ad53e6f359853bf7472709194b.pdf",
+   "pages": 259,
+   "sha256": "865cc3e1989536882c97d58cd16581e3409745ad53e6f359853bf7472709194b",
+   "text_hf_path": "data/text/act-crpc-1973.txt",
+   "text_sha256": "71c1774ed53e6ffb590126dbe0e8c1d1fde75aa10c064f51e7ad073421f86a1b"
+  },
+  {
+   "bytes": 1646231,
+   "doc_id": "act-crpc-1973-consolidated",
+   "doc_type": "act",
+   "hf_path": "data/raw/official_copies/1974/982059ca1f87197210a112b9120438dc79ae5bcccb80c94a39522586578214a3.pdf",
+   "pages": 226,
+   "sha256": "982059ca1f87197210a112b9120438dc79ae5bcccb80c94a39522586578214a3",
+   "text_hf_path": "data/text/act-crpc-1973-consolidated.txt",
+   "text_sha256": "f0ec95ffb6d1cb691244dcb05927e1ba977fa05ca6d511b7b430ab76a1e518f2"
+  },
+  {
+   "bytes": 822186,
+   "doc_id": "act-evidence-1872",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/1872/06729a1f84e186ae953798766696a736c344dcbd94da2b0cc2a474e7859378ce.pdf",
+   "pages": 61,
+   "sha256": "06729a1f84e186ae953798766696a736c344dcbd94da2b0cc2a474e7859378ce",
+   "text_hf_path": "data/text/act-evidence-1872.txt",
+   "text_sha256": "2d086a8a4fd01f4e1dd3a5c55e3176fdd5eb63cffc48b01f95328c7a10105a79"
+  },
+  {
+   "bytes": 1155037,
+   "doc_id": "act-ipc-1860",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/1860/fa8878e0208e0942e51bcf7e437efa7b6d25baecb04f4cd83da30df44c977f85.pdf",
+   "pages": 119,
+   "sha256": "fa8878e0208e0942e51bcf7e437efa7b6d25baecb04f4cd83da30df44c977f85",
+   "text_hf_path": "data/text/act-ipc-1860.txt",
+   "text_sha256": "e6b254f0f04ae5355048d376e3004c1c8e6e8845550d5d47364d5367d429dab9"
+  },
+  {
+   "bytes": 651714,
+   "doc_id": "act-navy-1957",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/1957/db6d2b3ef1e60d95f4d8127730430a01a3aab39637d88a39901aa20142399083.pdf",
+   "pages": 63,
+   "sha256": "db6d2b3ef1e60d95f4d8127730430a01a3aab39637d88a39901aa20142399083",
+   "text_hf_path": "data/text/act-navy-1957.txt",
+   "text_sha256": "7a0a1c98ad83fea5148624a1017da204b89eafbb33432765450ac167f4849d1c"
+  },
+  {
+   "bytes": 1521064,
+   "doc_id": "act-navy-1957-hi",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/1957/ac7acfc758fa359c7dcaaf1faa5384c92024e3d607f46cb255faf29ba7e74f31.pdf",
+   "pages": 49,
+   "sha256": "ac7acfc758fa359c7dcaaf1faa5384c92024e3d607f46cb255faf29ba7e74f31",
+   "text_hf_path": "data/text/act-navy-1957-hi.txt",
+   "text_sha256": "f4097d1811ac885af57c7b32cd336fc2291aa88c104e8ccbc2ab2285b932ac96"
+  },
+  {
+   "bytes": 1454572,
+   "doc_id": "act-the-finance-act-2017",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/0000/7a5551bab08518a7f52eb60c6cb08dc775726a8b2f5b89369413af771d173766.pdf",
+   "pages": 92,
+   "sha256": "7a5551bab08518a7f52eb60c6cb08dc775726a8b2f5b89369413af771d173766",
+   "text_hf_path": "data/text/act-the-finance-act-2017.txt",
+   "text_sha256": "fb991e446c824560ca0267d29d47848d098d3085f3d7dadefc57ee3a8cdbf578"
+  },
+  {
+   "bytes": 545972,
+   "doc_id": "act-the-tribunals-reforms-act-2021",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/0000/0c2f4e9e023d5d7b72d60797e1df67a7b2d2e340da8fe493a4328940638f0451.pdf",
+   "pages": 17,
+   "sha256": "0c2f4e9e023d5d7b72d60797e1df67a7b2d2e340da8fe493a4328940638f0451",
+   "text_hf_path": "data/text/act-the-tribunals-reforms-act-2021.txt",
+   "text_sha256": "9db3b74713ab82b14007d832669e541a2bb6bcdae8f5471598810b7cca83dead"
+  },
+  {
+   "bytes": 637026,
+   "doc_id": "act-the-tribunals-reforms-act-2026",
+   "doc_type": "act",
+   "hf_path": "data/raw/indiacode/0000/be619533e45739bf8e975bd4b39c826d99e2bc7627942252020360fcc1a63423.pdf",
+   "pages": 15,
+   "sha256": "be619533e45739bf8e975bd4b39c826d99e2bc7627942252020360fcc1a63423",
+   "text_hf_path": "data/text/act-the-tribunals-reforms-act-2026.txt",
+   "text_sha256": "bd1546fec4ce707b9a3d14ba536b93bd556f685015675932cb6e416d2f2472e9"
+  },
+  {
+   "bytes": 24731,
+   "doc_id": "hc-allahabad-2018-wria-10243-2018-uphc010750362018-1-2018-04-19",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2018/6f4aadd11cf1892cabc57d77522ebadb375e8496bb80902bee4b25043bb04b19.pdf",
+   "pages": 1,
+   "sha256": "6f4aadd11cf1892cabc57d77522ebadb375e8496bb80902bee4b25043bb04b19",
+   "text_hf_path": "data/text/hc-allahabad-2018-wria-10243-2018-uphc010750362018-1-2018-04-19.txt",
+   "text_sha256": "3b20d4d572c8c40bc1a9620ef634c70b1631cead4c5c298ccc6f40bcc5e995bf"
+  },
+  {
+   "bytes": 26230,
+   "doc_id": "hc-allahabad-2018-wria-12895-2018-uphc011047492018-1-2018-05-28",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2018/0e185c0c0adbe3950f0fe6e22a380efde64f10c7d3808c2f526832ebddc4bca0.pdf",
+   "pages": 1,
+   "sha256": "0e185c0c0adbe3950f0fe6e22a380efde64f10c7d3808c2f526832ebddc4bca0",
+   "text_hf_path": "data/text/hc-allahabad-2018-wria-12895-2018-uphc011047492018-1-2018-05-28.txt",
+   "text_sha256": "ddfb2c898475980eef0f742a9d49f72dc13bcbfbb3fd74ccaf3bb0a8f98dc96b"
+  },
+  {
+   "bytes": 35312,
+   "doc_id": "hc-allahabad-2018-wria-17517-2018-uphc011579682018-1-2018-08-18",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2018/bee585b99ebddb67b90530c3445202ce99eab5dae52b484e445548e4313a0e59.pdf",
+   "pages": 3,
+   "sha256": "bee585b99ebddb67b90530c3445202ce99eab5dae52b484e445548e4313a0e59",
+   "text_hf_path": "data/text/hc-allahabad-2018-wria-17517-2018-uphc011579682018-1-2018-08-18.txt",
+   "text_sha256": "37e448e8b068980359b64088c5f35c1286a3fcbf53702f23b34c42318c4418e0"
+  },
+  {
+   "bytes": 27586,
+   "doc_id": "hc-allahabad-2018-wria-6672-2018-uphc010366162018-1-2018-05-21",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2018/f7266b727b0cdc42fa7fd4236eeb009771546c01c3fb241fc984227034303475.pdf",
+   "pages": 1,
+   "sha256": "f7266b727b0cdc42fa7fd4236eeb009771546c01c3fb241fc984227034303475",
+   "text_hf_path": "data/text/hc-allahabad-2018-wria-6672-2018-uphc010366162018-1-2018-05-21.txt",
+   "text_sha256": "1520155f25fd798925025b9dc1b0b73ab01dcd571ce43a4f1e47dceaf68fc855"
+  },
+  {
+   "bytes": 26079,
+   "doc_id": "hc-allahabad-2018-wria-9083-2018-uphc010601092018-1-2018-03-30",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2018/d19a01df17d7b8d45e8250b85a3baaaba84bbc175207f924e791aa5621ad9983.pdf",
+   "pages": 1,
+   "sha256": "d19a01df17d7b8d45e8250b85a3baaaba84bbc175207f924e791aa5621ad9983",
+   "text_hf_path": "data/text/hc-allahabad-2018-wria-9083-2018-uphc010601092018-1-2018-03-30.txt",
+   "text_sha256": "6fa8898ee74a127f84db7db37b00c8a9ca9663c9be61dd196b93841da4fb2bb7"
+  },
+  {
+   "bytes": 80001,
+   "doc_id": "hc-allahabad-2019-spla-869-2009-uphc011990182009-1-2019-03-11",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2019/ad63a8cc0075d69e78fd94a80ac309efb87fdbbb2bb93ee8d66dd700998bd390.pdf",
+   "pages": 5,
+   "sha256": "ad63a8cc0075d69e78fd94a80ac309efb87fdbbb2bb93ee8d66dd700998bd390",
+   "text_hf_path": "data/text/hc-allahabad-2019-spla-869-2009-uphc011990182009-1-2019-03-11.txt",
+   "text_sha256": "6954a87abb5aa00ea93b18003993fa77ebbd7b888f92c87bde063991ede43a98"
+  },
+  {
+   "bytes": 27273,
+   "doc_id": "hc-allahabad-2019-wria-13455-2019-uphc011653062019-1-2019-09-13",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2019/2f202624935583c069086e0d74640fe408cd1d82800fab8320e3a152e05f87c1.pdf",
+   "pages": 1,
+   "sha256": "2f202624935583c069086e0d74640fe408cd1d82800fab8320e3a152e05f87c1",
+   "text_hf_path": "data/text/hc-allahabad-2019-wria-13455-2019-uphc011653062019-1-2019-09-13.txt",
+   "text_sha256": "1347144592f3bd2fd1d58d6413350a431fd02bbd7065e5d7e5d0332bc1b3d8dd"
+  },
+  {
+   "bytes": 26118,
+   "doc_id": "hc-allahabad-2019-wria-16740-2019-uphc011981002019-1-2019-10-22",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2019/2207e617e74592186079757fb2ddd434319ec4013b35d014b226ba4a25715aa8.pdf",
+   "pages": 1,
+   "sha256": "2207e617e74592186079757fb2ddd434319ec4013b35d014b226ba4a25715aa8",
+   "text_hf_path": "data/text/hc-allahabad-2019-wria-16740-2019-uphc011981002019-1-2019-10-22.txt",
+   "text_sha256": "d6318b8acafe38cc039bfe62760560de31edf093f91489398bab945a219d5573"
+  },
+  {
+   "bytes": 86073,
+   "doc_id": "hc-allahabad-2019-wria-4486-2019-uphc010575332019-1-2019-03-28",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2019/e2b561f509e360a8117c9ecf24cc801fbd0690632fbd7180b5357d7fecdb3ba0.pdf",
+   "pages": 4,
+   "sha256": "e2b561f509e360a8117c9ecf24cc801fbd0690632fbd7180b5357d7fecdb3ba0",
+   "text_hf_path": "data/text/hc-allahabad-2019-wria-4486-2019-uphc010575332019-1-2019-03-28.txt",
+   "text_sha256": "fedf3f4a39648686f5c99aa5e5fada3513cf7fc76aab17e7c24ffa868c7aa787"
+  },
+  {
+   "bytes": 27711,
+   "doc_id": "hc-allahabad-2019-wria-57380-2016-uphc011929002016-1-2019-01-09",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2019/a7668068f6f80d0e7040b4f3e2c922b04c5b0942a6169dfe5e19d8b62344dac7.pdf",
+   "pages": 1,
+   "sha256": "a7668068f6f80d0e7040b4f3e2c922b04c5b0942a6169dfe5e19d8b62344dac7",
+   "text_hf_path": "data/text/hc-allahabad-2019-wria-57380-2016-uphc011929002016-1-2019-01-09.txt",
+   "text_sha256": "1c19543ec6c54cac92f3a205f93f957c749f2fd22e7e92a341764323d38b26cb"
+  },
+  {
+   "bytes": 35429,
+   "doc_id": "hc-allahabad-2020-wria-1359-2020-uphc010144532020-1-2020-01-27",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2020/96436604623177b64d9f6e8c9d8f1ed822a9270c7fab76c2db18774b54f5f04b.pdf",
+   "pages": 1,
+   "sha256": "96436604623177b64d9f6e8c9d8f1ed822a9270c7fab76c2db18774b54f5f04b",
+   "text_hf_path": "data/text/hc-allahabad-2020-wria-1359-2020-uphc010144532020-1-2020-01-27.txt",
+   "text_sha256": "18e608fdbd547a8f6f9422d4050b689295ae0193ced0df2f0128497619dba3b3"
+  },
+  {
+   "bytes": 26556,
+   "doc_id": "hc-allahabad-2021-wria-10041-2021-uphc011173522021-1-2021-08-18",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/a954e30443de6e4cc8a186ad9555cc694f701dfb5de9f3b68ee4a6c22250f87a.pdf",
+   "pages": 1,
+   "sha256": "a954e30443de6e4cc8a186ad9555cc694f701dfb5de9f3b68ee4a6c22250f87a",
+   "text_hf_path": "data/text/hc-allahabad-2021-wria-10041-2021-uphc011173522021-1-2021-08-18.txt",
+   "text_sha256": "935f24df257dc1bcd66b5d38ad33070d25f5d72890d6a4ae488d75fd1209e4ca"
+  },
+  {
+   "bytes": 36083,
+   "doc_id": "hc-allahabad-2021-wria-14408-2021-uphc011633492021-1-2021-10-22",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/0e14d8039f1f10a3a7cfb07c1c8123971f3d4eb44c3f2b5f77702defa14208dd.pdf",
+   "pages": 1,
+   "sha256": "0e14d8039f1f10a3a7cfb07c1c8123971f3d4eb44c3f2b5f77702defa14208dd",
+   "text_hf_path": "data/text/hc-allahabad-2021-wria-14408-2021-uphc011633492021-1-2021-10-22.txt",
+   "text_sha256": "920f4199ad698a665906b8e5fd20ec89ff3f8cee57c6de6db0c12f18f5c92c56"
+  },
+  {
+   "bytes": 30989,
+   "doc_id": "hc-allahabad-2021-wria-14676-2020-uphc011679902020-1-2021-01-07",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/0dab08f4cf9311b0e57fd75c2e300a9a33f18f36e56d6fccb3943b595d10a0c7.pdf",
+   "pages": 1,
+   "sha256": "0dab08f4cf9311b0e57fd75c2e300a9a33f18f36e56d6fccb3943b595d10a0c7",
+   "text_hf_path": "data/text/hc-allahabad-2021-wria-14676-2020-uphc011679902020-1-2021-01-07.txt",
+   "text_sha256": "cc8b71554fabc7f1d8eff16777f223216356a592c21e4f3fe3d503efda230221"
+  },
+  {
+   "bytes": 25493,
+   "doc_id": "hc-allahabad-2021-wria-15177-2021-uphc011698072021-1-2021-11-16",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/3717422b96f37e82795b734031db5941de8848e1c5a439a0efd492b8fd58355b.pdf",
+   "pages": 1,
+   "sha256": "3717422b96f37e82795b734031db5941de8848e1c5a439a0efd492b8fd58355b",
+   "text_hf_path": "data/text/hc-allahabad-2021-wria-15177-2021-uphc011698072021-1-2021-11-16.txt",
+   "text_sha256": "868b4170410862cae36af364b30479f331abddbfaa27fc16b587ea2f3f038108"
+  },
+  {
+   "bytes": 27293,
+   "doc_id": "hc-allahabad-2021-wria-16204-2021-uphc011784192021-1-2021-11-23",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/92a49e0b1ca3891e094672eb288136a74ee4ad723d4ef7d72461271d1514842e.pdf",
+   "pages": 1,
+   "sha256": "92a49e0b1ca3891e094672eb288136a74ee4ad723d4ef7d72461271d1514842e",
+   "text_hf_path": "data/text/hc-allahabad-2021-wria-16204-2021-uphc011784192021-1-2021-11-23.txt",
+   "text_sha256": "5103006ff4a0b2420e1331ed748c061bfc9144dde58627eb4245986c82fab7c1"
+  },
+  {
+   "bytes": 25887,
+   "doc_id": "hc-allahabad-2021-wria-7574-2021-uphc010912052021-1-2021-07-16",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/f7e82e45c08da878cfd0b867491a5ea51f2ef44366efe7c97b4c795fce340c3d.pdf",
+   "pages": 1,
+   "sha256": "f7e82e45c08da878cfd0b867491a5ea51f2ef44366efe7c97b4c795fce340c3d",
+   "text_hf_path": "data/text/hc-allahabad-2021-wria-7574-2021-uphc010912052021-1-2021-07-16.txt",
+   "text_sha256": "4e61d4854382286d4be4a680f2fd0bf4b308051c35452efd331e36131d8a3348"
+  },
+  {
+   "bytes": 64877,
+   "doc_id": "hc-allahabad-2022-untitled-uphc020095172022-1-2022-02-25",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2022/a88c00c79ad551883c4656a6fce9502a524bed92b0c21f215060b7fa9fd75485.pdf",
+   "pages": 6,
+   "sha256": "a88c00c79ad551883c4656a6fce9502a524bed92b0c21f215060b7fa9fd75485",
+   "text_hf_path": "data/text/hc-allahabad-2022-untitled-uphc020095172022-1-2022-02-25.txt",
+   "text_sha256": "3de65f5e8012d22d4652b1af13445fb4404f6aa0ca06f49739f8ab85b55b5dd0"
+  },
+  {
+   "bytes": 34208,
+   "doc_id": "hc-allahabad-2022-wria-2804-2009-uphc020419502009-1-2022-09-26",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2022/b7fc50eac68c56164804e1b269e28047563bc08f97ef57f7b843ece774d62b0d.pdf",
+   "pages": 1,
+   "sha256": "b7fc50eac68c56164804e1b269e28047563bc08f97ef57f7b843ece774d62b0d",
+   "text_hf_path": "data/text/hc-allahabad-2022-wria-2804-2009-uphc020419502009-1-2022-09-26.txt",
+   "text_sha256": "fe68f1cbe9b11faf3b0a8f6bbb3fc596c19970b3eb013cd27be3a233159cbf1c"
+  },
+  {
+   "bytes": 31027,
+   "doc_id": "hc-allahabad-2022-wria-4572-2022-uphc020412812022-1-2022-07-25",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2022/55e31b25d66976032b819422edae26d0c15db08107e72b1f8645a37ede24e3e9.pdf",
+   "pages": 1,
+   "sha256": "55e31b25d66976032b819422edae26d0c15db08107e72b1f8645a37ede24e3e9",
+   "text_hf_path": "data/text/hc-allahabad-2022-wria-4572-2022-uphc020412812022-1-2022-07-25.txt",
+   "text_sha256": "bb70ade06a2fa6dd2c81627d1cbe9d85a897ea24c73149dc268dbe01b2e5e18e"
+  },
+  {
+   "bytes": 161922,
+   "doc_id": "hc-allahabad-2022-wtax-760-2022-uphc010817702022-1-2022-05-23",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2022/6cd040a6faa55d1ed17dd34d258e5e0eba62b29b324f1347aa50143f59e522f0.pdf",
+   "pages": 27,
+   "sha256": "6cd040a6faa55d1ed17dd34d258e5e0eba62b29b324f1347aa50143f59e522f0",
+   "text_hf_path": "data/text/hc-allahabad-2022-wtax-760-2022-uphc010817702022-1-2022-05-23.txt",
+   "text_sha256": "c715b24f8292e2b3643359ec100845dc15778e8ce95e89018e4ceda60eb2576a"
+  },
+  {
+   "bytes": 29266,
+   "doc_id": "hc-allahabad-2023-wria-14357-2023-uphc011896732023-1-2023-09-12",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2023/26faba1ba7ec8ea46e9066481a8361a91fab214829bf6650eeb627004a3c76a1.pdf",
+   "pages": 1,
+   "sha256": "26faba1ba7ec8ea46e9066481a8361a91fab214829bf6650eeb627004a3c76a1",
+   "text_hf_path": "data/text/hc-allahabad-2023-wria-14357-2023-uphc011896732023-1-2023-09-12.txt",
+   "text_sha256": "f13b393f88959f7490904eaa0cdff732843a67496375e732c40116da8ec363df"
+  },
+  {
+   "bytes": 31221,
+   "doc_id": "hc-allahabad-2023-wria-18331-2023-uphc012359042023-1-2023-11-01",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2023/63b5eaa7c2ff73ae82afc363e872653c88c1b62e64cbc97d4772d8a0ec17974c.pdf",
+   "pages": 1,
+   "sha256": "63b5eaa7c2ff73ae82afc363e872653c88c1b62e64cbc97d4772d8a0ec17974c",
+   "text_hf_path": "data/text/hc-allahabad-2023-wria-18331-2023-uphc012359042023-1-2023-11-01.txt",
+   "text_sha256": "2fe356a62e977568d25c9cfc9e20301e013b6fc7f178bebf075a1c0162633849"
+  },
+  {
+   "bytes": 40880,
+   "doc_id": "hc-allahabad-2023-wria-5566-1993-uphc010195031993-1-2023-05-23",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2023/6c196b52809d794381e1f781d4ecd9aa14f96ac9e24276ec12e2f8bac0c8f13e.pdf",
+   "pages": 4,
+   "sha256": "6c196b52809d794381e1f781d4ecd9aa14f96ac9e24276ec12e2f8bac0c8f13e",
+   "text_hf_path": "data/text/hc-allahabad-2023-wria-5566-1993-uphc010195031993-1-2023-05-23.txt",
+   "text_sha256": "1f842e791c14255fde078ff94564de87be50ee9a34ac2b65fa6475ea0cd7d7ac"
+  },
+  {
+   "bytes": 34076,
+   "doc_id": "hc-allahabad-2023-wria-8940-2023-uphc010870602023-1-2023-08-09",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2023/ba62274b4f43202b716b61fc26800d180ce969981177481bb431e85c1989c70f.pdf",
+   "pages": 1,
+   "sha256": "ba62274b4f43202b716b61fc26800d180ce969981177481bb431e85c1989c70f",
+   "text_hf_path": "data/text/hc-allahabad-2023-wria-8940-2023-uphc010870602023-1-2023-08-09.txt",
+   "text_sha256": "47634bad8ed6091b7f2e6528bf31ee5d6a8dcfcac1aca9e4d930c707bb7462fb"
+  },
+  {
+   "bytes": 207850,
+   "doc_id": "hc-allahabad-2023-wria-9268-2022-uphc011085052022-1-2023-07-10",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2023/632892a5fae17f9d0d4259950f34ca54085fc34a487cecd7b3112aabcad4441e.pdf",
+   "pages": 16,
+   "sha256": "632892a5fae17f9d0d4259950f34ca54085fc34a487cecd7b3112aabcad4441e",
+   "text_hf_path": "data/text/hc-allahabad-2023-wria-9268-2022-uphc011085052022-1-2023-07-10.txt",
+   "text_sha256": "a81a7fab6ad99ee9083b273d13427a617f440c44dfdcef514ecc8fff8c7353a6"
+  },
+  {
+   "bytes": 34926,
+   "doc_id": "hc-allahabad-2023-wria-9563-2023-uphc020875162023-1-2023-12-15",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2023/7b96ee822d0bd0e120fab1cc2ed2a17638f4d9a8d693373c6fff9febf62f4cfe.pdf",
+   "pages": 2,
+   "sha256": "7b96ee822d0bd0e120fab1cc2ed2a17638f4d9a8d693373c6fff9febf62f4cfe",
+   "text_hf_path": "data/text/hc-allahabad-2023-wria-9563-2023-uphc020875162023-1-2023-12-15.txt",
+   "text_sha256": "1dbcb69671aee7426a8f8b56cda3a1f5c125e1101fd1ed63ea04bfa5e8862fc8"
+  },
+  {
+   "bytes": 132260,
+   "doc_id": "hc-allahabad-2024-spla-261-2006-uphc020017122006-1-2024-12-18",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2024/fcbefdf0772b1a900ab1f6b1bd976aebdbf504b2a78e11c4c568f17566ab1e9c.pdf",
+   "pages": 6,
+   "sha256": "fcbefdf0772b1a900ab1f6b1bd976aebdbf504b2a78e11c4c568f17566ab1e9c",
+   "text_hf_path": "data/text/hc-allahabad-2024-spla-261-2006-uphc020017122006-1-2024-12-18.txt",
+   "text_sha256": "149cd06fa7c5221080e2521895af05277d5724a0228fb9d5f808d6f32a62a56e"
+  },
+  {
+   "bytes": 30764,
+   "doc_id": "hc-allahabad-2024-untitled-uphc020732612024-1-2024-10-22",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2024/633632055a7b6e83c577ab40ce3d753e971a7ffbe623d6dbd8b3358e228fc4b1.pdf",
+   "pages": 1,
+   "sha256": "633632055a7b6e83c577ab40ce3d753e971a7ffbe623d6dbd8b3358e228fc4b1",
+   "text_hf_path": "data/text/hc-allahabad-2024-untitled-uphc020732612024-1-2024-10-22.txt",
+   "text_sha256": "1dd6b3728fb1b23b0df45cc59c38fb0cef4e9ba86c68bc2d93225ba5c6a31963"
+  },
+  {
+   "bytes": 42826,
+   "doc_id": "hc-allahabad-2024-wria-11399-2024-uphc020841772024-1-2024-11-29",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2024/6dc314b44af1dd87f2e9da07af31526f048cc955490115e495cab69a05946347.pdf",
+   "pages": 2,
+   "sha256": "6dc314b44af1dd87f2e9da07af31526f048cc955490115e495cab69a05946347",
+   "text_hf_path": "data/text/hc-allahabad-2024-wria-11399-2024-uphc020841772024-1-2024-11-29.txt",
+   "text_sha256": "3ab333de80d6f0cfc11353880b0a42aa0012e738a25e1377676a42d6c0158c13"
+  },
+  {
+   "bytes": 15867,
+   "doc_id": "hc-allahabad-2025-wria-14288-2025-uphc020980052025-1-2025-12-11",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/827e92bcfde539f3adf8437d7fdccd9c9b1294b1406adfbfe64fb868f1514c0e.pdf",
+   "pages": 2,
+   "sha256": "827e92bcfde539f3adf8437d7fdccd9c9b1294b1406adfbfe64fb868f1514c0e",
+   "text_hf_path": "data/text/hc-allahabad-2025-wria-14288-2025-uphc020980052025-1-2025-12-11.txt",
+   "text_sha256": "5e4a406dfaf2d333bf11330de5a266745e148107ad053f5cbc972969ede7e3fa"
+  },
+  {
+   "bytes": 29230,
+   "doc_id": "hc-allahabad-2025-wria-16983-2024-uphc015109182024-1-2025-02-14",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/ef5d13bc16235d026399c6169d12b4c128bc8519d14fac7bb623613e0a5a2043.pdf",
+   "pages": 1,
+   "sha256": "ef5d13bc16235d026399c6169d12b4c128bc8519d14fac7bb623613e0a5a2043",
+   "text_hf_path": "data/text/hc-allahabad-2025-wria-16983-2024-uphc015109182024-1-2025-02-14.txt",
+   "text_sha256": "36d2b28f6c9f9d751dfe1614b5af272f8f648938d7097ae0c5b85f6f4ae6a6a9"
+  },
+  {
+   "bytes": 81747,
+   "doc_id": "hc-allahabad-2025-wria-17890-2024-uphc015796712024-1-2025-04-04",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/3ba68fa1360d0fd1b3fdda5f15f5c2dc39feb9a791f5c036524dce88348b75be.pdf",
+   "pages": 1,
+   "sha256": "3ba68fa1360d0fd1b3fdda5f15f5c2dc39feb9a791f5c036524dce88348b75be",
+   "text_hf_path": "data/text/hc-allahabad-2025-wria-17890-2024-uphc015796712024-1-2025-04-04.txt",
+   "text_sha256": "d59383ed46bac4e511fe3656e2110e55ed811d4dbcedf4daec5beeabb26f237f"
+  },
+  {
+   "bytes": 49136,
+   "doc_id": "hc-allahabad-2025-wria-3174-2025-uphc020208802025-1-2025-03-24",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/b228a85a58e5fb9842ca240eae0ba2596e1c47ccf7fc7245c48ddcb3c5a131e4.pdf",
+   "pages": 2,
+   "sha256": "b228a85a58e5fb9842ca240eae0ba2596e1c47ccf7fc7245c48ddcb3c5a131e4",
+   "text_hf_path": "data/text/hc-allahabad-2025-wria-3174-2025-uphc020208802025-1-2025-03-24.txt",
+   "text_sha256": "fb51aee1a711256c40b861b0ab3d67ee91f66915c3a84bddd4da36d7a00ae95f"
+  },
+  {
+   "bytes": 49211,
+   "doc_id": "hc-allahabad-2025-wria-4804-2025-uphc020321482025-1-2025-05-02",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/112403289914299a83a8a5c6a5082843423a095924948ad2b4b1ab46e7fdb258.pdf",
+   "pages": 2,
+   "sha256": "112403289914299a83a8a5c6a5082843423a095924948ad2b4b1ab46e7fdb258",
+   "text_hf_path": "data/text/hc-allahabad-2025-wria-4804-2025-uphc020321482025-1-2025-05-02.txt",
+   "text_sha256": "ee978daef65bc7531fd1e72b984c43dacee9386a7830d3b8c28c7e3e43a6aa56"
+  },
+  {
+   "bytes": 73117,
+   "doc_id": "hc-allahabad-2025-wric-454-2025-uphc020015322025-1-2025-01-28",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/32ec746354d4e71629c8cac8ac9faa5dfc188e08458eae4e5520ebe5d411f4e9.pdf",
+   "pages": 2,
+   "sha256": "32ec746354d4e71629c8cac8ac9faa5dfc188e08458eae4e5520ebe5d411f4e9",
+   "text_hf_path": "data/text/hc-allahabad-2025-wric-454-2025-uphc020015322025-1-2025-01-28.txt",
+   "text_sha256": "936b3a7e47aec56f54f74730ae37a38012602ef3d038771a32fe631dc95a2484"
+  },
+  {
+   "bytes": 928549,
+   "doc_id": "hc-delhi-2011-w-p-c-3203-2011-dlhc010689662011-1-2011-05-18",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2011/6069c60f0c778e6d6e7f9c270ea5e36d803838bebf95d84591f4baf08d8e4d84.pdf",
+   "pages": 20,
+   "sha256": "6069c60f0c778e6d6e7f9c270ea5e36d803838bebf95d84591f4baf08d8e4d84",
+   "text_hf_path": "data/text/hc-delhi-2011-w-p-c-3203-2011-dlhc010689662011-1-2011-05-18.txt",
+   "text_sha256": "068e9a6483aee9e499ee4bae088e274bed9d1dfa3fb7302b5565d02891108c84"
+  },
+  {
+   "bytes": 83425,
+   "doc_id": "hc-delhi-2011-w-p-c-5087-2011-dlhc011002822011-1-2011-09-02",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2011/0f0608fdfb18e5256704e68e40ca40ad15640158103e878bb338c4993f6455a1.pdf",
+   "pages": 5,
+   "sha256": "0f0608fdfb18e5256704e68e40ca40ad15640158103e878bb338c4993f6455a1",
+   "text_hf_path": "data/text/hc-delhi-2011-w-p-c-5087-2011-dlhc011002822011-1-2011-09-02.txt",
+   "text_sha256": "d309542ebcef0e3be5b167f0121fed2e7fcf4244781429ef5403121ffd0721a2"
+  },
+  {
+   "bytes": 62842,
+   "doc_id": "hc-delhi-2013-w-p-c-3439-2010-dlhc010803382010-1-2013-02-25",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2013/0218a5dd63ccf54c796e00433601d92c6d8a0a17ff59d5b93dfacd28a611fc16.pdf",
+   "pages": 5,
+   "sha256": "0218a5dd63ccf54c796e00433601d92c6d8a0a17ff59d5b93dfacd28a611fc16",
+   "text_hf_path": "data/text/hc-delhi-2013-w-p-c-3439-2010-dlhc010803382010-1-2013-02-25.txt",
+   "text_sha256": "c377abbb434a903505085581e7bcceb811413e861be8f496bd0601bdf083e74c"
+  },
+  {
+   "bytes": 57635,
+   "doc_id": "hc-delhi-2016-w-p-c-8714-2014-dlhc012545452014-1-2016-03-21",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2016/7a24bb02dc640f8ad5e76b21b568fe7ad41b1200bff3ff0300950ec272193ca9.pdf",
+   "pages": 2,
+   "sha256": "7a24bb02dc640f8ad5e76b21b568fe7ad41b1200bff3ff0300950ec272193ca9",
+   "text_hf_path": "data/text/hc-delhi-2016-w-p-c-8714-2014-dlhc012545452014-1-2016-03-21.txt",
+   "text_sha256": "59c8dad17cd8644988b1c48dd34518788b30edd7a753eb15fc928f498093a733"
+  },
+  {
+   "bytes": 144883,
+   "doc_id": "hc-delhi-2017-w-p-c-10432-2016-dlhc012836782016-1-2017-08-10",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2017/b2291dce3cf72348f86a30b4b3716a6d1bbd69115de81e87804c917777f3d3d1.pdf",
+   "pages": 7,
+   "sha256": "b2291dce3cf72348f86a30b4b3716a6d1bbd69115de81e87804c917777f3d3d1",
+   "text_hf_path": "data/text/hc-delhi-2017-w-p-c-10432-2016-dlhc012836782016-1-2017-08-10.txt",
+   "text_sha256": "948dba6ae0ec271ee8375da2b3956826266b8f622c1ad932b58f9fce957acffb"
+  },
+  {
+   "bytes": 50118,
+   "doc_id": "hc-delhi-2018-w-p-c-7601-2018-dlhc011811152018-1-2018-07-24",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2018/436b615cb1e16276de2df515b45a894766c47ce6a67b371660ee5201e02bff61.pdf",
+   "pages": 3,
+   "sha256": "436b615cb1e16276de2df515b45a894766c47ce6a67b371660ee5201e02bff61",
+   "text_hf_path": "data/text/hc-delhi-2018-w-p-c-7601-2018-dlhc011811152018-1-2018-07-24.txt",
+   "text_sha256": "36b08b3da2cd53253988d6831745ff83be15fc7b3c1c4210b629b29a5ad20456"
+  },
+  {
+   "bytes": 39763,
+   "doc_id": "hc-delhi-2020-w-p-c-10010-2020-dlhc010056022020-1-2020-12-08",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2020/142e18c92ce19fcd2a339cbccd7ebc6f6a3c7f9c985e0ca88a90fd1a375c21a5.pdf",
+   "pages": 5,
+   "sha256": "142e18c92ce19fcd2a339cbccd7ebc6f6a3c7f9c985e0ca88a90fd1a375c21a5",
+   "text_hf_path": "data/text/hc-delhi-2020-w-p-c-10010-2020-dlhc010056022020-1-2020-12-08.txt",
+   "text_sha256": "9dd2ab6006428be87ee703f2be5e4847484a821e0f6d53fc9f91ecb9c4206bd1"
+  },
+  {
+   "bytes": 37792,
+   "doc_id": "hc-delhi-2020-w-p-c-11506-2019-dlhc010017972019-1-2020-02-25",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2020/c9014a7d76a726371dff93d8256da9e7b7dcd3b5bf468d69b25964fd9bcf0881.pdf",
+   "pages": 2,
+   "sha256": "c9014a7d76a726371dff93d8256da9e7b7dcd3b5bf468d69b25964fd9bcf0881",
+   "text_hf_path": "data/text/hc-delhi-2020-w-p-c-11506-2019-dlhc010017972019-1-2020-02-25.txt",
+   "text_sha256": "5d7ebf8bc812743001d9cc0e5d6cc901e1b5de26a1a34d7e3e63329f9d803dab"
+  },
+  {
+   "bytes": 17420,
+   "doc_id": "hc-delhi-2020-w-p-c-948-2020-dlhc010098422020-1-2020-01-27",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2020/989cceb606b1a193053a0fabbb4d50843a90baa67955d64753ae816d319f57d3.pdf",
+   "pages": 1,
+   "sha256": "989cceb606b1a193053a0fabbb4d50843a90baa67955d64753ae816d319f57d3",
+   "text_hf_path": "data/text/hc-delhi-2020-w-p-c-948-2020-dlhc010098422020-1-2020-01-27.txt",
+   "text_sha256": "6e6045197645f7ab828bf234b11c28a715d89dca62672f567180089dedd8891f"
+  },
+  {
+   "bytes": 131843,
+   "doc_id": "hc-delhi-2021-w-p-c-8002-2020-dlhc010282012020-1-2021-01-12",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/ee32d6f13bf359f125448993c45b47f9c9edf25ce130a121f37a91052713c124.pdf",
+   "pages": 14,
+   "sha256": "ee32d6f13bf359f125448993c45b47f9c9edf25ce130a121f37a91052713c124",
+   "text_hf_path": "data/text/hc-delhi-2021-w-p-c-8002-2020-dlhc010282012020-1-2021-01-12.txt",
+   "text_sha256": "a319d4b0441cf1a2e0f4d0535ade55443ced3a020331a4568c9c1bed41532396"
+  },
+  {
+   "bytes": 136970,
+   "doc_id": "hc-delhi-2021-w-p-c-8668-2020-dlhc010298292020-1-2021-01-11",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/46b73e81654d842d53d40fec36a29bc35602164647820cc399049ba83f633b14.pdf",
+   "pages": 13,
+   "sha256": "46b73e81654d842d53d40fec36a29bc35602164647820cc399049ba83f633b14",
+   "text_hf_path": "data/text/hc-delhi-2021-w-p-c-8668-2020-dlhc010298292020-1-2021-01-11.txt",
+   "text_sha256": "be85a59f6ffcad064f8a6ab56127b678977cbb526aaba5774887fedb06ec7bea"
+  },
+  {
+   "bytes": 136970,
+   "doc_id": "hc-delhi-2021-w-p-c-8670-2020-dlhc010298312020-1-2021-01-11",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/02ef592e069fd8b58d6a6f41ec7faf9e783b5b1daab47478de213378119c1722.pdf",
+   "pages": 13,
+   "sha256": "02ef592e069fd8b58d6a6f41ec7faf9e783b5b1daab47478de213378119c1722",
+   "text_hf_path": "data/text/hc-delhi-2021-w-p-c-8670-2020-dlhc010298312020-1-2021-01-11.txt",
+   "text_sha256": "be85a59f6ffcad064f8a6ab56127b678977cbb526aaba5774887fedb06ec7bea"
+  },
+  {
+   "bytes": 393645,
+   "doc_id": "hc-delhi-2022-w-p-crl-73-2022-dlhc010030862022-1-2022-05-02",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2022/6685df3aaf95d1856ffc7255c06f48b5694ac51f98cde7ca470f93d7ab3fff6f.pdf",
+   "pages": 49,
+   "sha256": "6685df3aaf95d1856ffc7255c06f48b5694ac51f98cde7ca470f93d7ab3fff6f",
+   "text_hf_path": "data/text/hc-delhi-2022-w-p-crl-73-2022-dlhc010030862022-1-2022-05-02.txt",
+   "text_sha256": "daa654afc824143900eb935d03f536d1e5d5e0bc8cb4e2977f50eefc70e048ce"
+  },
+  {
+   "bytes": 69263,
+   "doc_id": "hc-delhi-2024-w-p-c-11660-2024-dlhc010531852024-1-2024-08-23",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2024/f2c2877040ef9b664366be78fc6687e235864de8c46f94c2509d2fb06dea0181.pdf",
+   "pages": 2,
+   "sha256": "f2c2877040ef9b664366be78fc6687e235864de8c46f94c2509d2fb06dea0181",
+   "text_hf_path": "data/text/hc-delhi-2024-w-p-c-11660-2024-dlhc010531852024-1-2024-08-23.txt",
+   "text_sha256": "25afa284281df400d06170f6d578e6a81267aead5d11be5446425eb466f5de36"
+  },
+  {
+   "bytes": 83499,
+   "doc_id": "hc-delhi-2024-w-p-c-15365-2024-dlhc010758162024-1-2024-11-04",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2024/4f73a691463a2899dc01ab1c4f45054fa5b2caf0dfaf41bfe98c8921097c86ec.pdf",
+   "pages": 4,
+   "sha256": "4f73a691463a2899dc01ab1c4f45054fa5b2caf0dfaf41bfe98c8921097c86ec",
+   "text_hf_path": "data/text/hc-delhi-2024-w-p-c-15365-2024-dlhc010758162024-1-2024-11-04.txt",
+   "text_sha256": "97fb4bb6b3572e907c7dbeca2eda613e618291d42502ff7135ca795e248e5d48"
+  },
+  {
+   "bytes": 479907,
+   "doc_id": "hc-delhi-2025-w-p-c-10025-2025-dlhc010445962025-1-2025-07-16",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/4617cb801d9b6dcfeedf450070118056a21e93a6401fe461300896c05d46dace.pdf",
+   "pages": 7,
+   "sha256": "4617cb801d9b6dcfeedf450070118056a21e93a6401fe461300896c05d46dace",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-10025-2025-dlhc010445962025-1-2025-07-16.txt",
+   "text_sha256": "eaff740a493dbf91e5e8cddf527bcc381009efed6cbdd183fad7478b84d0c647"
+  },
+  {
+   "bytes": 1615635,
+   "doc_id": "hc-delhi-2025-w-p-c-11510-2025-dlhc010529472025-1-2025-08-04",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/c8d91a315fde8d14bed1276cd49b3e57dfe29becb98fec87b3df1d3593cbd4eb.pdf",
+   "pages": 8,
+   "sha256": "c8d91a315fde8d14bed1276cd49b3e57dfe29becb98fec87b3df1d3593cbd4eb",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-11510-2025-dlhc010529472025-1-2025-08-04.txt",
+   "text_sha256": "782aad6be4459122da9f83d30a330ced046006f92cbb4bdb776246a1c27f8381"
+  },
+  {
+   "bytes": 1015961,
+   "doc_id": "hc-delhi-2025-w-p-c-12792-2024-dlhc010603922024-1-2025-07-01",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/1c2efe7131a7b7b10fe708a6150efd81b6cad6cec85a7d2978bfb03dc6000c68.pdf",
+   "pages": 85,
+   "sha256": "1c2efe7131a7b7b10fe708a6150efd81b6cad6cec85a7d2978bfb03dc6000c68",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-12792-2024-dlhc010603922024-1-2025-07-01.txt",
+   "text_sha256": "57be4cc9230e750034aea80865f045818cf8d48b6adc5972ce19406f8cc5300b"
+  },
+  {
+   "bytes": 1623447,
+   "doc_id": "hc-delhi-2025-w-p-c-14574-2025-dlhc010698872025-1-2025-09-19",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/00edb3aeaaab775dea6dbfd25a94d435eb58a700a4137a4bf36166bfd3562d0f.pdf",
+   "pages": 8,
+   "sha256": "00edb3aeaaab775dea6dbfd25a94d435eb58a700a4137a4bf36166bfd3562d0f",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-14574-2025-dlhc010698872025-1-2025-09-19.txt",
+   "text_sha256": "e9403ec7d437717ed75280eeb6bfee5060529b0d2f8c76633b7fce615ff49b3a"
+  },
+  {
+   "bytes": 78968,
+   "doc_id": "hc-delhi-2025-w-p-c-1623-2025-dlhc010058542025-1-2025-02-10",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/845204ada5f87a39e5f88a6e2164d2fc96919bd742b3932e7aca79b032151feb.pdf",
+   "pages": 4,
+   "sha256": "845204ada5f87a39e5f88a6e2164d2fc96919bd742b3932e7aca79b032151feb",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-1623-2025-dlhc010058542025-1-2025-02-10.txt",
+   "text_sha256": "09e6b70dd5810c6b4a140e44d06f7a8f066572ca9b45d06ec6a9f7754b656f98"
+  },
+  {
+   "bytes": 75530,
+   "doc_id": "hc-delhi-2025-w-p-c-17424-2025-dlhc011298302024-1-2025-11-17",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/92160cf7835f53b883d19cdadb84ebafb7123f038df3860e07c3c6caa223fa2e.pdf",
+   "pages": 8,
+   "sha256": "92160cf7835f53b883d19cdadb84ebafb7123f038df3860e07c3c6caa223fa2e",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-17424-2025-dlhc011298302024-1-2025-11-17.txt",
+   "text_sha256": "c165fc36a6215e3b1cde36bca9f783d101255a5e3eb18a59b24b01b00c1396fa"
+  },
+  {
+   "bytes": 1806406,
+   "doc_id": "hc-delhi-2025-w-p-c-17880-2024-dlhc010987072024-1-2025-07-17",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/e1eafb46003e5324578fe7f60d20008d799b11852d7a60388ad5d2e29d8d8eba.pdf",
+   "pages": 35,
+   "sha256": "e1eafb46003e5324578fe7f60d20008d799b11852d7a60388ad5d2e29d8d8eba",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-17880-2024-dlhc010987072024-1-2025-07-17.txt",
+   "text_sha256": "bcc5edff12cc3b377821fe91304b5b41c900687c78951675311896801baf6c7e"
+  },
+  {
+   "bytes": 38904,
+   "doc_id": "hc-delhi-2025-w-p-c-18549-2025-dlhc011308982024-1-2025-12-08",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/c9ea361afa13c047aa0daaeb201e8177233fb9b69b9d1cdf04a421e3c43d85be.pdf",
+   "pages": 3,
+   "sha256": "c9ea361afa13c047aa0daaeb201e8177233fb9b69b9d1cdf04a421e3c43d85be",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-18549-2025-dlhc011308982024-1-2025-12-08.txt",
+   "text_sha256": "d5c6b209a15a7b9469be0921a1e61d56e51a140de8c1cccebb83b48e9a5c28fa"
+  },
+  {
+   "bytes": 88882,
+   "doc_id": "hc-delhi-2025-w-p-c-2154-2025-dlhc010081782025-1-2025-02-19",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/e764b3238be584556fb672c402734bc43146c2c03f634fedab41694866bef886.pdf",
+   "pages": 2,
+   "sha256": "e764b3238be584556fb672c402734bc43146c2c03f634fedab41694866bef886",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-2154-2025-dlhc010081782025-1-2025-02-19.txt",
+   "text_sha256": "edba73d066c9f7963ac41b62de7b50474194713eb6b57b9ef425d77c5fd27bc4"
+  },
+  {
+   "bytes": 1806406,
+   "doc_id": "hc-delhi-2025-w-p-c-2942-2025-dlhc010121362025-1-2025-07-17",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/e1eafb46003e5324578fe7f60d20008d799b11852d7a60388ad5d2e29d8d8eba.pdf",
+   "pages": 35,
+   "sha256": "e1eafb46003e5324578fe7f60d20008d799b11852d7a60388ad5d2e29d8d8eba",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-2942-2025-dlhc010121362025-1-2025-07-17.txt",
+   "text_sha256": "bcc5edff12cc3b377821fe91304b5b41c900687c78951675311896801baf6c7e"
+  },
+  {
+   "bytes": 1015961,
+   "doc_id": "hc-delhi-2025-w-p-c-334-2025-dlhc010004582025-1-2025-07-01",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/1c2efe7131a7b7b10fe708a6150efd81b6cad6cec85a7d2978bfb03dc6000c68.pdf",
+   "pages": 85,
+   "sha256": "1c2efe7131a7b7b10fe708a6150efd81b6cad6cec85a7d2978bfb03dc6000c68",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-334-2025-dlhc010004582025-1-2025-07-01.txt",
+   "text_sha256": "57be4cc9230e750034aea80865f045818cf8d48b6adc5972ce19406f8cc5300b"
+  },
+  {
+   "bytes": 1015961,
+   "doc_id": "hc-delhi-2025-w-p-c-5641-2024-dlhc010215082024-1-2025-07-01",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/1c2efe7131a7b7b10fe708a6150efd81b6cad6cec85a7d2978bfb03dc6000c68.pdf",
+   "pages": 85,
+   "sha256": "1c2efe7131a7b7b10fe708a6150efd81b6cad6cec85a7d2978bfb03dc6000c68",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-5641-2024-dlhc010215082024-1-2025-07-01.txt",
+   "text_sha256": "57be4cc9230e750034aea80865f045818cf8d48b6adc5972ce19406f8cc5300b"
+  },
+  {
+   "bytes": 487844,
+   "doc_id": "hc-delhi-2025-w-p-c-9470-2025-dlhc011199172024-1-2025-07-10",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/29e8297d8ce84a965b394c4605234ff8ced57078c67388702adf1293dfed4a49.pdf",
+   "pages": 8,
+   "sha256": "29e8297d8ce84a965b394c4605234ff8ced57078c67388702adf1293dfed4a49",
+   "text_hf_path": "data/text/hc-delhi-2025-w-p-c-9470-2025-dlhc011199172024-1-2025-07-10.txt",
+   "text_sha256": "cdae9bedca4546bb229bc391fe6fcf9cedf0253cb3a6e1aaab60132ea2b01550"
+  },
+  {
+   "bytes": 65593,
+   "doc_id": "hc-delhi-2026-w-p-c-10036-2026-dlhc010321482026-1-2026-07-23",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/cdf714f71350d4b0490af1a700acca8946fed8e57fabe7a7af5177906dfe1bce.pdf",
+   "pages": 2,
+   "sha256": "cdf714f71350d4b0490af1a700acca8946fed8e57fabe7a7af5177906dfe1bce",
+   "text_hf_path": "data/text/hc-delhi-2026-w-p-c-10036-2026-dlhc010321482026-1-2026-07-23.txt",
+   "text_sha256": "91b36aa70b9662704e8dcdc570046dc234e821a4b1c96314360f604d436bee10"
+  },
+  {
+   "bytes": 459545,
+   "doc_id": "hc-delhi-2026-w-p-c-14518-2024-dlhc010705162024-1-2026-04-17",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/93bd6cdb8371103f291694962f69cef18fb0327dacecbc2bdf030fc914a82ee8.pdf",
+   "pages": 73,
+   "sha256": "93bd6cdb8371103f291694962f69cef18fb0327dacecbc2bdf030fc914a82ee8",
+   "text_hf_path": "data/text/hc-delhi-2026-w-p-c-14518-2024-dlhc010705162024-1-2026-04-17.txt",
+   "text_sha256": "62c6ff172c6a218ef8cbdbe231b22a7d521a132f4ae6bd125295ff3e0b803149"
+  },
+  {
+   "bytes": 90167,
+   "doc_id": "hc-delhi-2026-w-p-c-17202-2025-dlhc010888032025-1-2026-05-18",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/a5be962ddb8566be4e83b08c87a2504a8c0f79916b3513dbf31c4c4da03e7e6f.pdf",
+   "pages": 15,
+   "sha256": "a5be962ddb8566be4e83b08c87a2504a8c0f79916b3513dbf31c4c4da03e7e6f",
+   "text_hf_path": "data/text/hc-delhi-2026-w-p-c-17202-2025-dlhc010888032025-1-2026-05-18.txt",
+   "text_sha256": "8ea678376afbef6a492bbc5e787ccdafc265a12e0db8e2e8a4194ac24f292041"
+  },
+  {
+   "bytes": 48965,
+   "doc_id": "hc-delhi-2026-w-p-c-19410-2025-dlhc011045292025-1-2026-05-05",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/c293ae5c05953070b6633b51307b5a102239a426745ff553d2edef9dd9d52709.pdf",
+   "pages": 2,
+   "sha256": "c293ae5c05953070b6633b51307b5a102239a426745ff553d2edef9dd9d52709",
+   "text_hf_path": "data/text/hc-delhi-2026-w-p-c-19410-2025-dlhc011045292025-1-2026-05-05.txt",
+   "text_sha256": "5d477f80a4349e5a7e775f5e9e6ea101d67c729a033adac9b4d5c18be913d051"
+  },
+  {
+   "bytes": 728708,
+   "doc_id": "hc-delhi-2026-w-p-c-4187-2026-dlhc011102572025-1-2026-04-01",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/2b748832fc14de63e210930f64bd9eafd56b94310655bafb6d3557987e9f11bf.pdf",
+   "pages": 9,
+   "sha256": "2b748832fc14de63e210930f64bd9eafd56b94310655bafb6d3557987e9f11bf",
+   "text_hf_path": "data/text/hc-delhi-2026-w-p-c-4187-2026-dlhc011102572025-1-2026-04-01.txt",
+   "text_sha256": "eed0c35bbe9f76b83195b0e94210ff957bacdcdd1e7121d4286003172d52c4da"
+  },
+  {
+   "bytes": 90168,
+   "doc_id": "hc-delhi-2026-w-p-c-9392-2025-dlhc010414702025-1-2026-05-18",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/68e5e6fc83be7f4f410a196f1130dbaf024c76eb7ed36900afb7c64b15c5402f.pdf",
+   "pages": 15,
+   "sha256": "68e5e6fc83be7f4f410a196f1130dbaf024c76eb7ed36900afb7c64b15c5402f",
+   "text_hf_path": "data/text/hc-delhi-2026-w-p-c-9392-2025-dlhc010414702025-1-2026-05-18.txt",
+   "text_sha256": "38c01f398abd2598a5cccf3673402c723526c4dd5d66494c117ca1964c1909aa"
+  },
+  {
+   "bytes": 23355,
+   "doc_id": "hc-delhi-2026-w-p-c-9522-2026-dlhc010303562026-1-2026-07-16",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/0250d540e895de83255b5ad19065a1bc9c76512d22a0cb6b99f7b0358a3788dd.pdf",
+   "pages": 2,
+   "sha256": "0250d540e895de83255b5ad19065a1bc9c76512d22a0cb6b99f7b0358a3788dd",
+   "text_hf_path": "data/text/hc-delhi-2026-w-p-c-9522-2026-dlhc010303562026-1-2026-07-16.txt",
+   "text_sha256": "87653ac493451a68934d4def3019eafe324a53c54e0d0451cfe4a06b322d7127"
+  },
+  {
+   "bytes": 259470,
+   "doc_id": "hc-jkl-2014-lpaow-137-2001-jkhc020002482001-1-2014-04-09",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2014/40ea24bd642b992e02530c17bedfea37eb6ea2d6cc626b8cce3b1f9d130c9ea6.pdf",
+   "pages": 31,
+   "sha256": "40ea24bd642b992e02530c17bedfea37eb6ea2d6cc626b8cce3b1f9d130c9ea6",
+   "text_hf_path": "data/text/hc-jkl-2014-lpaow-137-2001-jkhc020002482001-1-2014-04-09.txt",
+   "text_sha256": "09099d4ce915f2bc6845a540519f696aa17cb700340be296d03a76dc47dcd020"
+  },
+  {
+   "bytes": 136519,
+   "doc_id": "hc-jkl-2017-owp-156-2014-jkhc020021882014-1-2017-08-09",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2017/7730e194d45c6f1ab9f955008dd79b45ba5c7208c7ab38f5fb5ceb7095df4d1a.pdf",
+   "pages": 2,
+   "sha256": "7730e194d45c6f1ab9f955008dd79b45ba5c7208c7ab38f5fb5ceb7095df4d1a",
+   "text_hf_path": "data/text/hc-jkl-2017-owp-156-2014-jkhc020021882014-1-2017-08-09.txt",
+   "text_sha256": "ba4178fa5e9797d8dc38293a7f4ca3b9735b7d2dde998230839e707d7e169251"
+  },
+  {
+   "bytes": 96714,
+   "doc_id": "hc-jkl-2017-swp-1461-2017-jkhc020077472017-1-2017-08-02",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2017/3f8c1e074307e915189f818df70e8db3db9919347ac9eaf3e53f45939a77e176.pdf",
+   "pages": 2,
+   "sha256": "3f8c1e074307e915189f818df70e8db3db9919347ac9eaf3e53f45939a77e176",
+   "text_hf_path": "data/text/hc-jkl-2017-swp-1461-2017-jkhc020077472017-1-2017-08-02.txt",
+   "text_sha256": "c3babf1c285f1f9fcd9d594d2eb3526261a0399ce62964ceda406bd3488aa29a"
+  },
+  {
+   "bytes": 89093,
+   "doc_id": "hc-jkl-2017-swp-2470-2016-jkhc020060892016-1-2017-08-09",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2017/ebacf847e627a2b7cc4a6c86eba2635c7fc9bb0ad9b329172271bb335a5d4446.pdf",
+   "pages": 1,
+   "sha256": "ebacf847e627a2b7cc4a6c86eba2635c7fc9bb0ad9b329172271bb335a5d4446",
+   "text_hf_path": "data/text/hc-jkl-2017-swp-2470-2016-jkhc020060892016-1-2017-08-09.txt",
+   "text_sha256": "ae4082e46d6da32b588a127c9b23eb39bed19770e1d5a592722d23bc282c7d52"
+  },
+  {
+   "bytes": 191804,
+   "doc_id": "hc-jkl-2019-owp-738-2004-jkhc020034232004-1-2019-09-26",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2019/2b9f99404c1590053624f6d0ccb718526af546875fd5e45dbe824a8e2d969f00.pdf",
+   "pages": 8,
+   "sha256": "2b9f99404c1590053624f6d0ccb718526af546875fd5e45dbe824a8e2d969f00",
+   "text_hf_path": "data/text/hc-jkl-2019-owp-738-2004-jkhc020034232004-1-2019-09-26.txt",
+   "text_sha256": "6bb9785794a6407919a78fabe80855031564e059211bc85fa8ccf4b81a87ebb5"
+  },
+  {
+   "bytes": 93708,
+   "doc_id": "hc-jkl-2019-swp-121-2004-jkhc020002452004-1-2019-09-04",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2019/2bf75398978043364881f6156ad5dbe8aa63200db9ae6e9f586feb2808a31ef4.pdf",
+   "pages": 1,
+   "sha256": "2bf75398978043364881f6156ad5dbe8aa63200db9ae6e9f586feb2808a31ef4",
+   "text_hf_path": "data/text/hc-jkl-2019-swp-121-2004-jkhc020002452004-1-2019-09-04.txt",
+   "text_sha256": "45a1683101a436fea0ccfaf1b2710640460b0b94969855a4dc062d196f1cca86"
+  },
+  {
+   "bytes": 94343,
+   "doc_id": "hc-jkl-2019-swp-121-2005-jkhc020047532005-1-2019-09-04",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2019/679d12e403300ca4a1dc889c886e21c14ddb6165f79184952e5942dae1b638c2.pdf",
+   "pages": 1,
+   "sha256": "679d12e403300ca4a1dc889c886e21c14ddb6165f79184952e5942dae1b638c2",
+   "text_hf_path": "data/text/hc-jkl-2019-swp-121-2005-jkhc020047532005-1-2019-09-04.txt",
+   "text_sha256": "a8e1832ecf9844fcf603f5df0444d0a66da7326e0b904854b55f006ff5b45644"
+  },
+  {
+   "bytes": 88829,
+   "doc_id": "hc-jkl-2019-swp-1354-2008-jkhc010007762008-1-2019-07-18",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2019/78bb59f6486b46e24d4aa612d1973c34560391060ef23e69801ddbdaa1636e5e.pdf",
+   "pages": 1,
+   "sha256": "78bb59f6486b46e24d4aa612d1973c34560391060ef23e69801ddbdaa1636e5e",
+   "text_hf_path": "data/text/hc-jkl-2019-swp-1354-2008-jkhc010007762008-1-2019-07-18.txt",
+   "text_sha256": "82967237b1795e37948639da7db14f88dd826aacdc76fab93189da3679c3b2a7"
+  },
+  {
+   "bytes": 185265,
+   "doc_id": "hc-jkl-2019-swp-2060-2009-jkhc020042982009-1-2019-03-18",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2019/d1babce223258cb250bb5a27da8620b3ce5ab30e6c67c922def659138764ff6c.pdf",
+   "pages": 1,
+   "sha256": "d1babce223258cb250bb5a27da8620b3ce5ab30e6c67c922def659138764ff6c",
+   "text_hf_path": "data/text/hc-jkl-2019-swp-2060-2009-jkhc020042982009-1-2019-03-18.txt",
+   "text_sha256": "460892e7c55aa4c44191fc4eadedc0aa676f33da415cd699be45208939c9e550"
+  },
+  {
+   "bytes": 93993,
+   "doc_id": "hc-jkl-2019-swp-75-2017-jkhc020066942017-1-2019-09-04",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2019/4828708b1136634300144f982b3e43eaaa598ebcf6a59d1897886db8858b1c9f.pdf",
+   "pages": 1,
+   "sha256": "4828708b1136634300144f982b3e43eaaa598ebcf6a59d1897886db8858b1c9f",
+   "text_hf_path": "data/text/hc-jkl-2019-swp-75-2017-jkhc020066942017-1-2019-09-04.txt",
+   "text_sha256": "c92e16ebba9a8137ab22cbcc34c55cd024f6c85478657d288ac7b3c5c18a2937"
+  },
+  {
+   "bytes": 125515,
+   "doc_id": "hc-jkl-2019-wp-c-2120-2019-jkhc020041722019-1-2019-12-10",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2019/2ccdc5fcb96ea026ee75e097e6547f1d5ed553073c89d1df3bb43c6b643a99fa.pdf",
+   "pages": 1,
+   "sha256": "2ccdc5fcb96ea026ee75e097e6547f1d5ed553073c89d1df3bb43c6b643a99fa",
+   "text_hf_path": "data/text/hc-jkl-2019-wp-c-2120-2019-jkhc020041722019-1-2019-12-10.txt",
+   "text_sha256": "779dac9ed098771b1cb8d0afbd77442f885124c6b1db09ede87df3aa4f48e02f"
+  },
+  {
+   "bytes": 133207,
+   "doc_id": "hc-jkl-2020-swp-1689-2018-jkhc020062772018-1-2020-10-09",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2020/9a58aba6d816a8d28fc13621d04f03ffa8cba8dabd179b187cf40baf70d61f11.pdf",
+   "pages": 1,
+   "sha256": "9a58aba6d816a8d28fc13621d04f03ffa8cba8dabd179b187cf40baf70d61f11",
+   "text_hf_path": "data/text/hc-jkl-2020-swp-1689-2018-jkhc020062772018-1-2020-10-09.txt",
+   "text_sha256": "37675439a3b703dfca7d6ad0a12f43ef4a6235f11ddfc6a55c9a036758823478"
+  },
+  {
+   "bytes": 134283,
+   "doc_id": "hc-jkl-2020-swp-1892-2002-jkhc020067182002-1-2020-08-24",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2020/7fe948b3e96fd339d1a3027f584ce8d8af93c2c05cf013d45a8685f8628105b8.pdf",
+   "pages": 1,
+   "sha256": "7fe948b3e96fd339d1a3027f584ce8d8af93c2c05cf013d45a8685f8628105b8",
+   "text_hf_path": "data/text/hc-jkl-2020-swp-1892-2002-jkhc020067182002-1-2020-08-24.txt",
+   "text_sha256": "a43ddf835305fcc5c33e2c25184f2828daf02225d30aaf8b8327262d40972bd8"
+  },
+  {
+   "bytes": 193989,
+   "doc_id": "hc-jkl-2021-lpasw-89-2010-jkhc020057972010-1-2021-12-28",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/f384b3b1a24166f462592ef4057fd8b59c2abd4e0f8efac781ebaff387f288db.pdf",
+   "pages": 6,
+   "sha256": "f384b3b1a24166f462592ef4057fd8b59c2abd4e0f8efac781ebaff387f288db",
+   "text_hf_path": "data/text/hc-jkl-2021-lpasw-89-2010-jkhc020057972010-1-2021-12-28.txt",
+   "text_sha256": "0a81bd9353c8be31abc538ec0b53edfb5050f6880946c7d847ab908eeb9d71a0"
+  },
+  {
+   "bytes": 199448,
+   "doc_id": "hc-jkl-2021-swp-1634-2007-jkhc020038512007-1-2021-08-23",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/d0ad70e7c5b4a8773a24f0eb38662750d635d66d3236935bd4ae3a103a129672.pdf",
+   "pages": 1,
+   "sha256": "d0ad70e7c5b4a8773a24f0eb38662750d635d66d3236935bd4ae3a103a129672",
+   "text_hf_path": "data/text/hc-jkl-2021-swp-1634-2007-jkhc020038512007-1-2021-08-23.txt",
+   "text_sha256": "33ea7223b1e67e4ff39a63bcfbfc26cef49bb01cc21582ffd153dc7c6d55577b"
+  },
+  {
+   "bytes": 147231,
+   "doc_id": "hc-jkl-2021-swp-1748-2018-jkhc010055392018-1-2021-09-27",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/156cffcd3fb052aa9e5eb644435ffd274e174bff28308d1ea6c40fff113d51f3.pdf",
+   "pages": 2,
+   "sha256": "156cffcd3fb052aa9e5eb644435ffd274e174bff28308d1ea6c40fff113d51f3",
+   "text_hf_path": "data/text/hc-jkl-2021-swp-1748-2018-jkhc010055392018-1-2021-09-27.txt",
+   "text_sha256": "1021c1a991d8d30cae38084afab103502ce0fdc3c7651a6352a961803a147b77"
+  },
+  {
+   "bytes": 86741,
+   "doc_id": "hc-jkl-2021-swp-2181-2015-jkhc010041272015-1-2021-11-01",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2021/ea131d60e9c678e669af390d3ac3dd2463d399ad84326a53daf6ba111f3a067e.pdf",
+   "pages": 1,
+   "sha256": "ea131d60e9c678e669af390d3ac3dd2463d399ad84326a53daf6ba111f3a067e",
+   "text_hf_path": "data/text/hc-jkl-2021-swp-2181-2015-jkhc010041272015-1-2021-11-01.txt",
+   "text_sha256": "f96f554fa86b6c6a9fd428df238bece5aeb50e3d8c701da48500d0d33055ae52"
+  },
+  {
+   "bytes": 134776,
+   "doc_id": "hc-jkl-2024-wp-c-2093-2024-jkhc020046302024-1-2024-12-04",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2024/19787202857594687635d35844079b4cc2ea895308f2e71b9fa5ef87d4ad25e2.pdf",
+   "pages": 3,
+   "sha256": "19787202857594687635d35844079b4cc2ea895308f2e71b9fa5ef87d4ad25e2",
+   "text_hf_path": "data/text/hc-jkl-2024-wp-c-2093-2024-jkhc020046302024-1-2024-12-04.txt",
+   "text_sha256": "cd21bf723fa2ea20eea8353f1c889103b801bafa2622aaa336dc1283d88bfd30"
+  },
+  {
+   "bytes": 217210,
+   "doc_id": "hc-jkl-2024-wp-c-738-2024-jkhc020016122024-1-2024-04-02",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2024/ae46e40a30383d43c9658e38c5a771ff0f0befa6d432ef50dd22c506c11a59f5.pdf",
+   "pages": 7,
+   "sha256": "ae46e40a30383d43c9658e38c5a771ff0f0befa6d432ef50dd22c506c11a59f5",
+   "text_hf_path": "data/text/hc-jkl-2024-wp-c-738-2024-jkhc020016122024-1-2024-04-02.txt",
+   "text_sha256": "6f2b6519150e3010ecda17196b24342524fc3060348cceba5f7ac3e388641513"
+  },
+  {
+   "bytes": 1302640,
+   "doc_id": "hc-jkl-2025-wp-c-1095-2024-jkhc020024492024-1-2025-11-03",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/38e785f07457b21f4cb7e89fc7cf519c9abcdc59a4056bea228de2c407587555.pdf",
+   "pages": 260,
+   "sha256": "38e785f07457b21f4cb7e89fc7cf519c9abcdc59a4056bea228de2c407587555",
+   "text_hf_path": "data/text/hc-jkl-2025-wp-c-1095-2024-jkhc020024492024-1-2025-11-03.txt",
+   "text_sha256": "49e61c81da6ca5e53fb65cfd6e348c8d3babf60fb1148571aa76aa059d521b2e"
+  },
+  {
+   "bytes": 667600,
+   "doc_id": "hc-jkl-2025-wp-c-2176-2025-jkhc020044072025-1-2025-08-11",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/b13fa96c8fc7ee94e0b3d93285cf86d00dbc2e0f3e37b7576ebee011aeb958a3.pdf",
+   "pages": 2,
+   "sha256": "b13fa96c8fc7ee94e0b3d93285cf86d00dbc2e0f3e37b7576ebee011aeb958a3",
+   "text_hf_path": "data/text/hc-jkl-2025-wp-c-2176-2025-jkhc020044072025-1-2025-08-11.txt",
+   "text_sha256": "a93ee15a3d33562cdfba9213f5963e54f93b60502a4e539fbe5946904b9d51f0"
+  },
+  {
+   "bytes": 393161,
+   "doc_id": "hc-jkl-2025-wp-c-2213-2024-jkhc020048542024-1-2025-11-20",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/bfd0b5d56ef2030a350455ab4434d1d094284c95517c6fa6ae565f8afcdce0de.pdf",
+   "pages": 9,
+   "sha256": "bfd0b5d56ef2030a350455ab4434d1d094284c95517c6fa6ae565f8afcdce0de",
+   "text_hf_path": "data/text/hc-jkl-2025-wp-c-2213-2024-jkhc020048542024-1-2025-11-20.txt",
+   "text_sha256": "eeda94aed8cc24793d7a955bdb5ae4772a0218f77c918315edd0db5207861a3b"
+  },
+  {
+   "bytes": 292684,
+   "doc_id": "hc-jkl-2025-wp-c-2458-2024-jkhc020053892024-1-2025-07-16",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/51f4d8216d6a94ed424c64646b106cc7f702f5b99ac1c16fb0e12f9ee77036bd.pdf",
+   "pages": 3,
+   "sha256": "51f4d8216d6a94ed424c64646b106cc7f702f5b99ac1c16fb0e12f9ee77036bd",
+   "text_hf_path": "data/text/hc-jkl-2025-wp-c-2458-2024-jkhc020053892024-1-2025-07-16.txt",
+   "text_sha256": "cf0cb9e7f16b3681831044b3151aee6cda252e674b6ab70288479c4d4293f861"
+  },
+  {
+   "bytes": 687715,
+   "doc_id": "hc-jkl-2025-wp-c-2491-2025-jkhc020052602025-1-2025-09-09",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/8b84c0e4a33e6e5b2240c53bbbd0fce0f4f0236300f003f3e626508315bc54b3.pdf",
+   "pages": 2,
+   "sha256": "8b84c0e4a33e6e5b2240c53bbbd0fce0f4f0236300f003f3e626508315bc54b3",
+   "text_hf_path": "data/text/hc-jkl-2025-wp-c-2491-2025-jkhc020052602025-1-2025-09-09.txt",
+   "text_sha256": "94b7e9e27f93e242eb02dc9248dffee633577e64bd42d6cf400e37e77a03677f"
+  },
+  {
+   "bytes": 1302640,
+   "doc_id": "hc-jkl-2025-wp-c-301-2024-jkhc020006242024-1-2025-11-03",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/5f16f9d32dba68a982cf9d40588b852ee471b86d69a13a0ce30bbd2f145a2fef.pdf",
+   "pages": 260,
+   "sha256": "5f16f9d32dba68a982cf9d40588b852ee471b86d69a13a0ce30bbd2f145a2fef",
+   "text_hf_path": "data/text/hc-jkl-2025-wp-c-301-2024-jkhc020006242024-1-2025-11-03.txt",
+   "text_sha256": "49e61c81da6ca5e53fb65cfd6e348c8d3babf60fb1148571aa76aa059d521b2e"
+  },
+  {
+   "bytes": 318604,
+   "doc_id": "hc-jkl-2025-wp-c-3053-2024-jkhc010066452024-1-2025-10-06",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/f71dc8fe702f479bc5008385b00346879b04b051cdb405864eff8dbbb05932e4.pdf",
+   "pages": 6,
+   "sha256": "f71dc8fe702f479bc5008385b00346879b04b051cdb405864eff8dbbb05932e4",
+   "text_hf_path": "data/text/hc-jkl-2025-wp-c-3053-2024-jkhc010066452024-1-2025-10-06.txt",
+   "text_sha256": "0620f30a4017e243c8d497cd03cc82fed880ccd776f9a89a00aafe8d1b098c18"
+  },
+  {
+   "bytes": 430911,
+   "doc_id": "hc-jkl-2025-wp-c-554-2024-jkhc020012002024-1-2025-08-20",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/97a206f106ae9f8ba8214675c69bf730f20e7a2a5fdf5e183e176d389a3ae6df.pdf",
+   "pages": 6,
+   "sha256": "97a206f106ae9f8ba8214675c69bf730f20e7a2a5fdf5e183e176d389a3ae6df",
+   "text_hf_path": "data/text/hc-jkl-2025-wp-c-554-2024-jkhc020012002024-1-2025-08-20.txt",
+   "text_sha256": "730ce964dadb4d9b5ee6ecc67a9ef2fdb89774142832752eae397c2012a981e7"
+  },
+  {
+   "bytes": 479015,
+   "doc_id": "hc-jkl-2025-wp-c-887-2024-jkhc020019162024-1-2025-10-06",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/ce37149517379fab0adce273b74552d71eea527ed24c8894bc92cda12b5b255f.pdf",
+   "pages": 7,
+   "sha256": "ce37149517379fab0adce273b74552d71eea527ed24c8894bc92cda12b5b255f",
+   "text_hf_path": "data/text/hc-jkl-2025-wp-c-887-2024-jkhc020019162024-1-2025-10-06.txt",
+   "text_sha256": "108f93e5c549a64c374c29f04c1e1f39a6cf1812e0a22a0ae301250d0a397052"
+  },
+  {
+   "bytes": 400804,
+   "doc_id": "hc-jkl-2026-hcp-331-2025-jkhc010063842025-1-2026-02-12",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/184317e2978fcbe19d3c532b20b21d36cbf4ad348a9bfbc2bf90ad2661da77c9.pdf",
+   "pages": 8,
+   "sha256": "184317e2978fcbe19d3c532b20b21d36cbf4ad348a9bfbc2bf90ad2661da77c9",
+   "text_hf_path": "data/text/hc-jkl-2026-hcp-331-2025-jkhc010063842025-1-2026-02-12.txt",
+   "text_sha256": "a760a9e284d52e777b5a93bf93dced09e75bbf5e2484a116bccacabb76f3999a"
+  },
+  {
+   "bytes": 408786,
+   "doc_id": "hc-jkl-2026-wp-c-1156-2024-jkhc020025682024-1-2026-02-24",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/4723af809fb2ff3a23c3f1ef8c048ede8da4dc02e40039ab1a0a19ab4b298313.pdf",
+   "pages": 6,
+   "sha256": "4723af809fb2ff3a23c3f1ef8c048ede8da4dc02e40039ab1a0a19ab4b298313",
+   "text_hf_path": "data/text/hc-jkl-2026-wp-c-1156-2024-jkhc020025682024-1-2026-02-24.txt",
+   "text_sha256": "96ecf626a12c06be65449ff778d365b1507c3bfc529cea1b2f824c1e23846925"
+  },
+  {
+   "bytes": 585437,
+   "doc_id": "hc-jkl-2026-wp-c-1391-2026-jkhc020027542026-1-2026-06-03",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/71e8a446f3e5cd101ac11377b70ff8a06cbb0a3b8526f9d4fab34d442e408e7f.pdf",
+   "pages": 3,
+   "sha256": "71e8a446f3e5cd101ac11377b70ff8a06cbb0a3b8526f9d4fab34d442e408e7f",
+   "text_hf_path": "data/text/hc-jkl-2026-wp-c-1391-2026-jkhc020027542026-1-2026-06-03.txt",
+   "text_sha256": "0fb454f3bd52709bde96d1125da6831b0e3f6a729f5819495ea63fc81c70c3ed"
+  },
+  {
+   "bytes": 341046,
+   "doc_id": "hc-jkl-2026-wp-c-191-2024-jkhc020002322024-1-2026-03-11",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/c5041c9366ab77aedce74457159a20d8bd933a9b41562ed826351365969331c7.pdf",
+   "pages": 12,
+   "sha256": "c5041c9366ab77aedce74457159a20d8bd933a9b41562ed826351365969331c7",
+   "text_hf_path": "data/text/hc-jkl-2026-wp-c-191-2024-jkhc020002322024-1-2026-03-11.txt",
+   "text_sha256": "10df33f00b9de5cdb0bcd1550b33f7f9ffc0574cb8b5b52e89a2df3a69a765f5"
+  },
+  {
+   "bytes": 337370,
+   "doc_id": "hc-jkl-2026-wp-c-2680-2025-jkhc020057342025-1-2026-02-17",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/67792110cc44db3f79be13fb443a60b1a79d05f57f3be78adb86c470a61b9ac4.pdf",
+   "pages": 4,
+   "sha256": "67792110cc44db3f79be13fb443a60b1a79d05f57f3be78adb86c470a61b9ac4",
+   "text_hf_path": "data/text/hc-jkl-2026-wp-c-2680-2025-jkhc020057342025-1-2026-02-17.txt",
+   "text_sha256": "d3d41cac179a247030f7f5c27f8ceb992ac604cb9f73e6e4c50b09b91bc69f00"
+  },
+  {
+   "bytes": 314040,
+   "doc_id": "hc-jkl-2026-wp-c-302-2026-jkhc020005902026-1-2026-02-16",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/c6904b4deb9b50bdb1fb9e50ff02228e08b024d4e42bd1247b5787467eeb66fe.pdf",
+   "pages": 2,
+   "sha256": "c6904b4deb9b50bdb1fb9e50ff02228e08b024d4e42bd1247b5787467eeb66fe",
+   "text_hf_path": "data/text/hc-jkl-2026-wp-c-302-2026-jkhc020005902026-1-2026-02-16.txt",
+   "text_sha256": "58412d5918cb5d001b3fe674d4c71daaaf6e2db5530d59baf0cf73e23349bc0c"
+  },
+  {
+   "bytes": 283948,
+   "doc_id": "hc-jkl-2026-wp-c-3469-2026-jkhc020070222026-1-2026-10-31",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/ee6234431faec4e5eb713d31f4e0bb868b61bb05920bc555046e95053bfe0bd3.pdf",
+   "pages": 4,
+   "sha256": "ee6234431faec4e5eb713d31f4e0bb868b61bb05920bc555046e95053bfe0bd3",
+   "text_hf_path": "data/text/hc-jkl-2026-wp-c-3469-2026-jkhc020070222026-1-2026-10-31.txt",
+   "text_sha256": "a07f07603692b1b5e715eded4304a5812e0cf9f2b8769a7189c792e5f0ee2c93"
+  },
+  {
+   "bytes": 490455,
+   "doc_id": "hc-jkl-2026-wp-c-567-2024-jkhc020011652024-1-2026-10-07",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/02ad071b2fb54bd51ebce2bb910b083b8679920888c843077391c40bd4a3ed8f.pdf",
+   "pages": 3,
+   "sha256": "02ad071b2fb54bd51ebce2bb910b083b8679920888c843077391c40bd4a3ed8f",
+   "text_hf_path": "data/text/hc-jkl-2026-wp-c-567-2024-jkhc020011652024-1-2026-10-07.txt",
+   "text_sha256": "6c61cf7154d0c7def3cdcc2514acc18fbbb7a20fd33921ed8ae46f348bcbb12e"
+  },
+  {
+   "bytes": 49879,
+   "doc_id": "hc-ph-2008-cwp-21584-2008-phhc010653372008-1-2008-12-23",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2008/f430178c9d7a11c6c4394d55a3d9b68ffad0d5e129e90000b21558be02df1d03.pdf",
+   "pages": 3,
+   "sha256": "f430178c9d7a11c6c4394d55a3d9b68ffad0d5e129e90000b21558be02df1d03",
+   "text_hf_path": "data/text/hc-ph-2008-cwp-21584-2008-phhc010653372008-1-2008-12-23.txt",
+   "text_sha256": "a8bbb633d051b2df8383d028d9a4cd5a572934d3dd0c4c0e1572cca944dcb98b"
+  },
+  {
+   "bytes": 116319,
+   "doc_id": "hc-ph-2009-cwp-1249-2008-phhc010553082008-1-2009-03-17",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2009/04bc004a3f40d67fdf62f2e66bc180360228caacd10f64cb9edf10f488234745.pdf",
+   "pages": 3,
+   "sha256": "04bc004a3f40d67fdf62f2e66bc180360228caacd10f64cb9edf10f488234745",
+   "text_hf_path": "data/text/hc-ph-2009-cwp-1249-2008-phhc010553082008-1-2009-03-17.txt",
+   "text_sha256": "4f9a38fce1db76c16e0d15350cca9b151d67c15340eb1281538833fc0a4352b4"
+  },
+  {
+   "bytes": 99812,
+   "doc_id": "hc-ph-2009-cwp-13297-2007-phhc010514022007-1-2009-03-20",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2009/33a10cad84c9a5b79be609d879037ce1e48f30c42ece5b45255a3af22e0b4ee1.pdf",
+   "pages": 4,
+   "sha256": "33a10cad84c9a5b79be609d879037ce1e48f30c42ece5b45255a3af22e0b4ee1",
+   "text_hf_path": "data/text/hc-ph-2009-cwp-13297-2007-phhc010514022007-1-2009-03-20.txt",
+   "text_sha256": "a3afcf5786383340d989e1d14124c8c08cdae994ba5f6dada206ab8c8691bc15"
+  },
+  {
+   "bytes": 90653,
+   "doc_id": "hc-ph-2009-cwp-1523-2008-phhc010583312008-1-2009-04-21",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2009/b94f23c2a7d27839d77e98d29fdd5e29871ba19967a599a516e0b21ea731c5e4.pdf",
+   "pages": 7,
+   "sha256": "b94f23c2a7d27839d77e98d29fdd5e29871ba19967a599a516e0b21ea731c5e4",
+   "text_hf_path": "data/text/hc-ph-2009-cwp-1523-2008-phhc010583312008-1-2009-04-21.txt",
+   "text_sha256": "bc686a1c9f3c5c5ea917d0b3afc4afba158486c5c1e1cc2182f13b17e25834c1"
+  },
+  {
+   "bytes": 59691,
+   "doc_id": "hc-ph-2009-cwp-16570-2009-phhc010645742009-1-2009-10-30",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2009/504bad02141a5de4ac3106e3233fb54b1fd0d53537d65d3045b92f60436ced47.pdf",
+   "pages": 2,
+   "sha256": "504bad02141a5de4ac3106e3233fb54b1fd0d53537d65d3045b92f60436ced47",
+   "text_hf_path": "data/text/hc-ph-2009-cwp-16570-2009-phhc010645742009-1-2009-10-30.txt",
+   "text_sha256": "d38c8f3132516175d07e7f0dacefaa477a6acb5a954d09a47e358f2b17af81ed"
+  },
+  {
+   "bytes": 27125,
+   "doc_id": "hc-ph-2009-cwp-3070-2008-phhc010666532008-1-2009-02-18",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2009/877b3bceddf1fd9100b0e8526cf44b3c82f9059d4247ba1f27c85332ac098e55.pdf",
+   "pages": 1,
+   "sha256": "877b3bceddf1fd9100b0e8526cf44b3c82f9059d4247ba1f27c85332ac098e55",
+   "text_hf_path": "data/text/hc-ph-2009-cwp-3070-2008-phhc010666532008-1-2009-02-18.txt",
+   "text_sha256": "d6fec1c9beb8b21ad8d7dbfe24450beebb2becd8ab45681ce294eeb9d3515767"
+  },
+  {
+   "bytes": 72374,
+   "doc_id": "hc-ph-2009-cwp-5380-2009-phhc010727492009-1-2009-07-31",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2009/d736e93817d341a9dee330951bcd43494ac3f55b69e290716b14d584a60fbb88.pdf",
+   "pages": 2,
+   "sha256": "d736e93817d341a9dee330951bcd43494ac3f55b69e290716b14d584a60fbb88",
+   "text_hf_path": "data/text/hc-ph-2009-cwp-5380-2009-phhc010727492009-1-2009-07-31.txt",
+   "text_sha256": "c4f3481fe351e644daa8ceabb7be20857cd791b0eec66273a81330dda12efd1f"
+  },
+  {
+   "bytes": 78824,
+   "doc_id": "hc-ph-2010-cwp-1828-2009-phhc010664672009-1-2010-05-04",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2010/8b531bc4b1a16627f931c95f702556ac22167a45bfa4aacc90c54d160bd32118.pdf",
+   "pages": 9,
+   "sha256": "8b531bc4b1a16627f931c95f702556ac22167a45bfa4aacc90c54d160bd32118",
+   "text_hf_path": "data/text/hc-ph-2010-cwp-1828-2009-phhc010664672009-1-2010-05-04.txt",
+   "text_sha256": "50714f8d72e6db33cd80fea0e69834233dcbe7d7b786ebb944859af07d9ab1b6"
+  },
+  {
+   "bytes": 62412,
+   "doc_id": "hc-ph-2010-cwp-3022-2008-phhc010666002008-1-2010-04-05",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2010/093bda1ec26982e33eca3430cc419fb891a6715b80e602d03b43f2c128565d7e.pdf",
+   "pages": 2,
+   "sha256": "093bda1ec26982e33eca3430cc419fb891a6715b80e602d03b43f2c128565d7e",
+   "text_hf_path": "data/text/hc-ph-2010-cwp-3022-2008-phhc010666002008-1-2010-04-05.txt",
+   "text_sha256": "90389e8404ac2077c4077b8a39b9a0e2f1eead6f88bb44dcdbd1264d31ad2d39"
+  },
+  {
+   "bytes": 45734,
+   "doc_id": "hc-ph-2010-cwp-9858-2007-phhc010671632007-1-2010-04-28",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2010/bac95c41662fa5ce072dd38ee10fefdcbb3f60830f5023e9ef3c7b5074880460.pdf",
+   "pages": 2,
+   "sha256": "bac95c41662fa5ce072dd38ee10fefdcbb3f60830f5023e9ef3c7b5074880460",
+   "text_hf_path": "data/text/hc-ph-2010-cwp-9858-2007-phhc010671632007-1-2010-04-28.txt",
+   "text_sha256": "c1f18b1758702d3f962e41422b1c6e3ece5dac656e273e709e4ffc22e8b2372a"
+  },
+  {
+   "bytes": 49215,
+   "doc_id": "hc-ph-2010-cwp-9860-2007-phhc010671652007-1-2010-04-28",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2010/93f1c085b009b72d36a83fa936196d5de6d76de64768c6954c0fc5849ec00225.pdf",
+   "pages": 2,
+   "sha256": "93f1c085b009b72d36a83fa936196d5de6d76de64768c6954c0fc5849ec00225",
+   "text_hf_path": "data/text/hc-ph-2010-cwp-9860-2007-phhc010671652007-1-2010-04-28.txt",
+   "text_sha256": "8bf9bea029d4fc0f8bec4b2125477affc774ff5f08407bf12ef6bdd508678fbd"
+  },
+  {
+   "bytes": 39682,
+   "doc_id": "hc-ph-2010-lpa-1561-2010-phhc010945262010-1-2010-11-17",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2010/449a9306a481a89c97e08874d04a267051f018288373fec6690b9baaac24decd.pdf",
+   "pages": 2,
+   "sha256": "449a9306a481a89c97e08874d04a267051f018288373fec6690b9baaac24decd",
+   "text_hf_path": "data/text/hc-ph-2010-lpa-1561-2010-phhc010945262010-1-2010-11-17.txt",
+   "text_sha256": "80e38110c39155128b375aa789474f15ab1da74781c5f0a4f4a1a619755dd7d7"
+  },
+  {
+   "bytes": 44320,
+   "doc_id": "hc-ph-2010-lpa-433-2010-phhc010951552010-1-2010-07-27",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2010/329f632bdd839dbce1c5a5f743160710c711594a81698878e30c19e7a88bbc1b.pdf",
+   "pages": 2,
+   "sha256": "329f632bdd839dbce1c5a5f743160710c711594a81698878e30c19e7a88bbc1b",
+   "text_hf_path": "data/text/hc-ph-2010-lpa-433-2010-phhc010951552010-1-2010-07-27.txt",
+   "text_sha256": "70f1569fa3a5aee51c9357c42c6a5ce51c7d37fdd1e37df0906168ac4cb3c89e"
+  },
+  {
+   "bytes": 71787,
+   "doc_id": "hc-ph-2010-lpa-894-2010-phhc010956632010-1-2010-08-02",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2010/366ee7ca74dd4764ab57fee457566d2dfdfe94b68dc6dc1bb4badad9a73a07cf.pdf",
+   "pages": 2,
+   "sha256": "366ee7ca74dd4764ab57fee457566d2dfdfe94b68dc6dc1bb4badad9a73a07cf",
+   "text_hf_path": "data/text/hc-ph-2010-lpa-894-2010-phhc010956632010-1-2010-08-02.txt",
+   "text_sha256": "068922ed61d178c32cfd21ee1a82e064cc1688dd117b1f729fce83d8c612f17c"
+  },
+  {
+   "bytes": 69437,
+   "doc_id": "hc-ph-2011-cwp-5731-1998-phhc010298981998-1-2011-09-19",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2011/f25787e9f686f97e88f96bc70d24503a393e7734c4a9b946f263a9668eaad314.pdf",
+   "pages": 1,
+   "sha256": "f25787e9f686f97e88f96bc70d24503a393e7734c4a9b946f263a9668eaad314",
+   "text_hf_path": "data/text/hc-ph-2011-cwp-5731-1998-phhc010298981998-1-2011-09-19.txt",
+   "text_sha256": "f6076158e81436bd814df882bee02a5c0f1b0adeedeccd4a450bee48055d5487"
+  },
+  {
+   "bytes": 26047,
+   "doc_id": "hc-ph-2011-lpa-705-2011-phhc010978742011-1-2011-06-01",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2011/7936fe978cd85692b12519249cf3b4413a9a7742d8822b42fdab208becc69c06.pdf",
+   "pages": 3,
+   "sha256": "7936fe978cd85692b12519249cf3b4413a9a7742d8822b42fdab208becc69c06",
+   "text_hf_path": "data/text/hc-ph-2011-lpa-705-2011-phhc010978742011-1-2011-06-01.txt",
+   "text_sha256": "1dd5deb0997182047f79204bad208708b666bf077db41180ecdb681f399da2a0"
+  },
+  {
+   "bytes": 60922,
+   "doc_id": "hc-ph-2012-rsa-50-1999-phhc010484421999-1-2012-12-17",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2012/71653373a524be1ae48878e0eebcbb6843f270854a4c2d1c25a3f37aaaeac3b5.pdf",
+   "pages": 2,
+   "sha256": "71653373a524be1ae48878e0eebcbb6843f270854a4c2d1c25a3f37aaaeac3b5",
+   "text_hf_path": "data/text/hc-ph-2012-rsa-50-1999-phhc010484421999-1-2012-12-17.txt",
+   "text_sha256": "6ca5cc20813ff32c75a95119558ffa651ad57e0769f32fe87a44e5f657dce919"
+  },
+  {
+   "bytes": 50730,
+   "doc_id": "hc-ph-2013-cwp-22896-2012-phhc010802182012-1-2013-01-30",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2013/59e6131e5b407cf3904d0c080165172c7d68edcb3e57c063a8480095fefa242d.pdf",
+   "pages": 1,
+   "sha256": "59e6131e5b407cf3904d0c080165172c7d68edcb3e57c063a8480095fefa242d",
+   "text_hf_path": "data/text/hc-ph-2013-cwp-22896-2012-phhc010802182012-1-2013-01-30.txt",
+   "text_sha256": "17dab040861b5743b8511afd98c51a2b244a0f9b17ebc0626931d45aaf4b4457"
+  },
+  {
+   "bytes": 43088,
+   "doc_id": "hc-ph-2018-cwp-28305-2018-phhc011001632018-1-2018-11-02",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2018/da075fa3ee800dd928005357cbb62b0b95aa5b13cd612baee4461acd13107e2d.pdf",
+   "pages": 1,
+   "sha256": "da075fa3ee800dd928005357cbb62b0b95aa5b13cd612baee4461acd13107e2d",
+   "text_hf_path": "data/text/hc-ph-2018-cwp-28305-2018-phhc011001632018-1-2018-11-02.txt",
+   "text_sha256": "4fb40a95e9b90b222664af4cf51b3cf8e33040c255c0f1b0f4e7f5b2e71acfb7"
+  },
+  {
+   "bytes": 98916,
+   "doc_id": "hc-ph-2020-cwp-16048-1997-phhc010197421997-1-2020-03-12",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2020/97e9620aea8ea47940ae1d460381ec5447ca8e8ea61eb0332724f2b102ae691d.pdf",
+   "pages": 2,
+   "sha256": "97e9620aea8ea47940ae1d460381ec5447ca8e8ea61eb0332724f2b102ae691d",
+   "text_hf_path": "data/text/hc-ph-2020-cwp-16048-1997-phhc010197421997-1-2020-03-12.txt",
+   "text_sha256": "68c16433817a52c01e85fa6b40af68789fff3a1800b016a29ec03bde35082004"
+  },
+  {
+   "bytes": 245816,
+   "doc_id": "hc-ph-2025-cwp-12146-2020-phhc010625902020-1-2025-04-28",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/c1ee8901a404ebb2638820ced633cf294de7ce899b293f8408f7ef8d1ccc12db.pdf",
+   "pages": 11,
+   "sha256": "c1ee8901a404ebb2638820ced633cf294de7ce899b293f8408f7ef8d1ccc12db",
+   "text_hf_path": "data/text/hc-ph-2025-cwp-12146-2020-phhc010625902020-1-2025-04-28.txt",
+   "text_sha256": "b745c088f4ac12ec867a44ccd1a76ed74ce054e69e5d481bd6afd21cb3013b73"
+  },
+  {
+   "bytes": 165898,
+   "doc_id": "hc-ph-2025-cwp-17884-2025-phhc010987072025-1-2025-07-03",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/a091827fa642664ab5b9b64f8bc13dc205893a432db4a599b790e7b15d508af3.pdf",
+   "pages": 2,
+   "sha256": "a091827fa642664ab5b9b64f8bc13dc205893a432db4a599b790e7b15d508af3",
+   "text_hf_path": "data/text/hc-ph-2025-cwp-17884-2025-phhc010987072025-1-2025-07-03.txt",
+   "text_sha256": "77e58441f4917d1f54a448d1c84a5aa1b16ba18b8ac6214de3de5754fa455fab"
+  },
+  {
+   "bytes": 102617,
+   "doc_id": "hc-ph-2025-cwp-18966-2025-phhc011031042025-1-2025-07-10",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/560e41bcef0bbea04dd748e0c2605bb8bd21fd0706091ead89f9466b6520859b.pdf",
+   "pages": 2,
+   "sha256": "560e41bcef0bbea04dd748e0c2605bb8bd21fd0706091ead89f9466b6520859b",
+   "text_hf_path": "data/text/hc-ph-2025-cwp-18966-2025-phhc011031042025-1-2025-07-10.txt",
+   "text_sha256": "26927adb992772f6733b89bb1a98a0c4ed9658e380672cd364efa5597cc7029d"
+  },
+  {
+   "bytes": 138329,
+   "doc_id": "hc-ph-2025-cwp-19268-2025-phhc010916952025-1-2025-07-14",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/183a52b81db308d5c0a06b6edf4df81c5d1d89551d7f417079fa3bee808548fe.pdf",
+   "pages": 2,
+   "sha256": "183a52b81db308d5c0a06b6edf4df81c5d1d89551d7f417079fa3bee808548fe",
+   "text_hf_path": "data/text/hc-ph-2025-cwp-19268-2025-phhc010916952025-1-2025-07-14.txt",
+   "text_sha256": "0274c9e299d43b3a37601987bf2111aec53852837787850b79e18967cca89fe4"
+  },
+  {
+   "bytes": 244150,
+   "doc_id": "hc-ph-2025-cwp-20736-2025-phhc011128462025-1-2025-07-28",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/3051263c2d36aa429632eed90a5b527288aee6cdf21641ffc4004872ebe12046.pdf",
+   "pages": 5,
+   "sha256": "3051263c2d36aa429632eed90a5b527288aee6cdf21641ffc4004872ebe12046",
+   "text_hf_path": "data/text/hc-ph-2025-cwp-20736-2025-phhc011128462025-1-2025-07-28.txt",
+   "text_sha256": "3d4e6b278c2416b47a48f228d9201963e907b9e5e1abd1ad42b9e60dca7fbd2a"
+  },
+  {
+   "bytes": 133240,
+   "doc_id": "hc-ph-2025-cwp-32574-2024-phhc011673872024-1-2025-11-18",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/62a9b1b3221e31df63e2d362bf3158f21d1f55720951c2fae92b6d898cbd526d.pdf",
+   "pages": 6,
+   "sha256": "62a9b1b3221e31df63e2d362bf3158f21d1f55720951c2fae92b6d898cbd526d",
+   "text_hf_path": "data/text/hc-ph-2025-cwp-32574-2024-phhc011673872024-1-2025-11-18.txt",
+   "text_sha256": "0fd4d427838ce07b242b8f7e81fc91ff84baa9abab03e4fce3e70cf749ca86b0"
+  },
+  {
+   "bytes": 161308,
+   "doc_id": "hc-ph-2025-cwp-33219-2024-phhc011696092024-1-2025-09-23",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/e1a6171632fcf64088258b3d5ba650dc658da7ae9c644ef474402e8f0c0b753a.pdf",
+   "pages": 4,
+   "sha256": "e1a6171632fcf64088258b3d5ba650dc658da7ae9c644ef474402e8f0c0b753a",
+   "text_hf_path": "data/text/hc-ph-2025-cwp-33219-2024-phhc011696092024-1-2025-09-23.txt",
+   "text_sha256": "6b936f890424a1bc5e0825fc0bd764e317575a8e22903320d07d86f43c58c454"
+  },
+  {
+   "bytes": 156709,
+   "doc_id": "hc-ph-2025-cwp-8722-2025-phhc010399412025-1-2025-04-21",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2025/c1d406c72b8d77e262b638c370fa7ea4e53123b7f5bc1a6f3d60c963b156cd77.pdf",
+   "pages": 3,
+   "sha256": "c1d406c72b8d77e262b638c370fa7ea4e53123b7f5bc1a6f3d60c963b156cd77",
+   "text_hf_path": "data/text/hc-ph-2025-cwp-8722-2025-phhc010399412025-1-2025-04-21.txt",
+   "text_sha256": "e78179e39a248ab8c896e53b0d3540aeec3d3e18d25072f0dade898049dc2651"
+  },
+  {
+   "bytes": 80068,
+   "doc_id": "hc-ph-2026-cocp-6333-2025-phhc012092472025-1-2026-01-14",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/b3d5304755209518d7bb6712f060798fff1d935d9a1b581154902b3756d2603e.pdf",
+   "pages": 1,
+   "sha256": "b3d5304755209518d7bb6712f060798fff1d935d9a1b581154902b3756d2603e",
+   "text_hf_path": "data/text/hc-ph-2026-cocp-6333-2025-phhc012092472025-1-2026-01-14.txt",
+   "text_sha256": "b7ee9e8a2890c4a009c421eee7d50a4bd308745d2638b0868bc987db7e57d627"
+  },
+  {
+   "bytes": 104136,
+   "doc_id": "hc-ph-2026-cwp-16901-2024-phhc010919782024-1-2026-05-15",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/9a3e9f986f918c626d05e2a17c82cc7cbae410c59d4934e98635d575dcd5b335.pdf",
+   "pages": 2,
+   "sha256": "9a3e9f986f918c626d05e2a17c82cc7cbae410c59d4934e98635d575dcd5b335",
+   "text_hf_path": "data/text/hc-ph-2026-cwp-16901-2024-phhc010919782024-1-2026-05-15.txt",
+   "text_sha256": "dc6876ba5baf4f5f4ae8f773a8877f739aaaa2a36712d1d73448db87e8628142"
+  },
+  {
+   "bytes": 247742,
+   "doc_id": "hc-ph-2026-cwp-17837-2026-phhc010711322026-1-2026-05-29",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/c9915cb702b79d3b91b7f36a275cb1e1c0ed25a174e5d0e5ba75ea831a182e33.pdf",
+   "pages": 6,
+   "sha256": "c9915cb702b79d3b91b7f36a275cb1e1c0ed25a174e5d0e5ba75ea831a182e33",
+   "text_hf_path": "data/text/hc-ph-2026-cwp-17837-2026-phhc010711322026-1-2026-05-29.txt",
+   "text_sha256": "b3431b9606a4387cc17cf1940b06206eebf95728be969525198be68a2c127718"
+  },
+  {
+   "bytes": 98570,
+   "doc_id": "hc-ph-2026-cwp-21686-2026-phhc011152382026-1-2026-07-17",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/3df115d9bf6216c6323a2277ff18e74b441060493aa15d9b508012be82a5e9db.pdf",
+   "pages": 3,
+   "sha256": "3df115d9bf6216c6323a2277ff18e74b441060493aa15d9b508012be82a5e9db",
+   "text_hf_path": "data/text/hc-ph-2026-cwp-21686-2026-phhc011152382026-1-2026-07-17.txt",
+   "text_sha256": "3eeaa4f2c7e912dce6a596e60e61265237602b2e97c403ac2c0c3a6a8af5d09f"
+  },
+  {
+   "bytes": 192451,
+   "doc_id": "hc-ph-2026-cwp-21807-2026-phhc011169472026-1-2026-07-20",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/2dcb0f9cc2de941b1eda1ee56df76b9519a6c7856c954b488a66637d37ef126a.pdf",
+   "pages": 1,
+   "sha256": "2dcb0f9cc2de941b1eda1ee56df76b9519a6c7856c954b488a66637d37ef126a",
+   "text_hf_path": "data/text/hc-ph-2026-cwp-21807-2026-phhc011169472026-1-2026-07-20.txt",
+   "text_sha256": "946abd01f3adc1f625701353320d2e618b84d12c6d2125e2036c6f759fee4c46"
+  },
+  {
+   "bytes": 119434,
+   "doc_id": "hc-ph-2026-cwp-26757-2026-phhc011398802026-1-2026-08-21",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/30089e9e42a17b67e6a5afd0540d52d36fc29b78175c98222132fe3162bba997.pdf",
+   "pages": 9,
+   "sha256": "30089e9e42a17b67e6a5afd0540d52d36fc29b78175c98222132fe3162bba997",
+   "text_hf_path": "data/text/hc-ph-2026-cwp-26757-2026-phhc011398802026-1-2026-08-21.txt",
+   "text_sha256": "d83a1c78590035965de65d6287878b0dfcf9a46c55e06630d048f505b8b043af"
+  },
+  {
+   "bytes": 199740,
+   "doc_id": "hc-ph-2026-cwp-31834-2025-phhc011736322025-1-2026-08-06",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/47ee833825f2ee0a9183c0f31c1bc856562e0ec46fa9c6bfe2cc679e5456eaa5.pdf",
+   "pages": 6,
+   "sha256": "47ee833825f2ee0a9183c0f31c1bc856562e0ec46fa9c6bfe2cc679e5456eaa5",
+   "text_hf_path": "data/text/hc-ph-2026-cwp-31834-2025-phhc011736322025-1-2026-08-06.txt",
+   "text_sha256": "03b0d921d09bb362519ade6f5962d9aa361a8fd06c1679b4439a8016c313e9d1"
+  },
+  {
+   "bytes": 139352,
+   "doc_id": "hc-ph-2026-cwp-7697-2026-phhc010401002026-1-2026-03-13",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/hc/2026/dc95ee2b61d9e9e0b5cc102270d83ed19414cc77a5235f3b55d859ad1039f443.pdf",
+   "pages": 7,
+   "sha256": "dc95ee2b61d9e9e0b5cc102270d83ed19414cc77a5235f3b55d859ad1039f443",
+   "text_hf_path": "data/text/hc-ph-2026-cwp-7697-2026-phhc010401002026-1-2026-03-13.txt",
+   "text_sha256": "991c31d139cc6641343519c5c8cfd91245a5a3414faa259aa840c5973ee190ce"
+  },
+  {
+   "bytes": 92705,
+   "doc_id": "notif-aft-chandigarh",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/61353e0fae4ba12757c56ba80f38761a632cab48a6b6c902bfaa1b90ebed546b.pdf",
+   "pages": 1,
+   "sha256": "61353e0fae4ba12757c56ba80f38761a632cab48a6b6c902bfaa1b90ebed546b",
+   "text_hf_path": "data/text/notif-aft-chandigarh.txt",
+   "text_sha256": "7accfd9b43c279a05a7c753d6205edadae4dc1ec51c2a5bd64eaef5e35ab17a6"
+  },
+  {
+   "bytes": 57491,
+   "doc_id": "notif-aft-chennai",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/be9e3e7e8889ffa322da4bcccde0fba75b148d2fcb700c8b6999ef6f466fddc5.pdf",
+   "pages": 1,
+   "sha256": "be9e3e7e8889ffa322da4bcccde0fba75b148d2fcb700c8b6999ef6f466fddc5",
+   "text_hf_path": "data/text/notif-aft-chennai.txt",
+   "text_sha256": "befb8bbca37995cbbf0b1a1fc579d205c8b98dec7b622cefc968d57a63a0bfb2"
+  },
+  {
+   "bytes": 80839,
+   "doc_id": "notif-aft-estt-day",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/03961b02ab4567b4ad6633fe50f459936b572e2cdfeb0b846f057a49bbb8bf29.pdf",
+   "pages": 1,
+   "sha256": "03961b02ab4567b4ad6633fe50f459936b572e2cdfeb0b846f057a49bbb8bf29",
+   "text_hf_path": "data/text/notif-aft-estt-day.txt",
+   "text_sha256": "200a713428daa5b60cabf5ddbbd0c3452f58d9f4839edb84fdadd81d8a754f04"
+  },
+  {
+   "bytes": 35204,
+   "doc_id": "notif-aft-guwahati",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/34584afaad89f265c0d5dcb179f5f60d3095b65cdbcd07f982e9a8c072b34870.pdf",
+   "pages": 1,
+   "sha256": "34584afaad89f265c0d5dcb179f5f60d3095b65cdbcd07f982e9a8c072b34870",
+   "text_hf_path": "data/text/notif-aft-guwahati.txt",
+   "text_sha256": "7fdde4dd18e6399c6f5c81cb069b0ba77bf53096d7ef3790f6580adf8de75bc3"
+  },
+  {
+   "bytes": 87312,
+   "doc_id": "notif-aft-jabalpur",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/66a84e53aab363983715efff48acb6e5ae8602bdb8e15bbfe67fdcdbe43dd7b0.pdf",
+   "pages": 1,
+   "sha256": "66a84e53aab363983715efff48acb6e5ae8602bdb8e15bbfe67fdcdbe43dd7b0",
+   "text_hf_path": "data/text/notif-aft-jabalpur.txt",
+   "text_sha256": "506e55121a1eeb96387fe329147fc308a9016c79d26e094cae2656e14ee98d15"
+  },
+  {
+   "bytes": 86616,
+   "doc_id": "notif-aft-jaipur",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/c32157eda6c4c7c1d375f0b517fbd2930c7b636dda39423439510ca299cb100b.pdf",
+   "pages": 1,
+   "sha256": "c32157eda6c4c7c1d375f0b517fbd2930c7b636dda39423439510ca299cb100b",
+   "text_hf_path": "data/text/notif-aft-jaipur.txt",
+   "text_sha256": "848db5e7e9dc4e3e32ecd494ebe74a13eb9a5e31e021ad9afa316a47212a9be9"
+  },
+  {
+   "bytes": 87684,
+   "doc_id": "notif-aft-kochi",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/420b7bf5a787df82aacef537074dea5b8df01b0ef57982a2941b2a19076d9a67.pdf",
+   "pages": 1,
+   "sha256": "420b7bf5a787df82aacef537074dea5b8df01b0ef57982a2941b2a19076d9a67",
+   "text_hf_path": "data/text/notif-aft-kochi.txt",
+   "text_sha256": "ba97ddc56d6da0bbe9b07b434b2b146387028882cf8014c58884050d14a1e790"
+  },
+  {
+   "bytes": 91497,
+   "doc_id": "notif-aft-kolkata",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/2027fecd3fadd21e29aef350d0c33a0233cdd2293d50d84a6a5bd77436096cac.pdf",
+   "pages": 1,
+   "sha256": "2027fecd3fadd21e29aef350d0c33a0233cdd2293d50d84a6a5bd77436096cac",
+   "text_hf_path": "data/text/notif-aft-kolkata.txt",
+   "text_sha256": "42590fbd0a5cfce7b80f30292873583969e746d270862c1da66b9e541c8842fa"
+  },
+  {
+   "bytes": 39323,
+   "doc_id": "notif-aft-lucknow",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/3aa43869abf0db5a22ee880cee6bf0c068ea4b063d5f01c59c8cbccfafc29f79.pdf",
+   "pages": 1,
+   "sha256": "3aa43869abf0db5a22ee880cee6bf0c068ea4b063d5f01c59c8cbccfafc29f79",
+   "text_hf_path": "data/text/notif-aft-lucknow.txt",
+   "text_sha256": "61985c51f3303a792726c22265e4a0fbf9cb2fea0271af44313f91ad6e884f53"
+  },
+  {
+   "bytes": 31175,
+   "doc_id": "notif-aft-mumbai",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/59974179c5323114cb10593d0618217b4f3e20e4a76587a75f510576127e69df.pdf",
+   "pages": 1,
+   "sha256": "59974179c5323114cb10593d0618217b4f3e20e4a76587a75f510576127e69df",
+   "text_hf_path": "data/text/notif-aft-mumbai.txt",
+   "text_sha256": "1199f379c68601a38f4e8986a553aab544b917296532fd4ec073fb1417c40f6e"
+  },
+  {
+   "bytes": 983644,
+   "doc_id": "notif-aft-srinagar-jammu",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/38d8adfaf0fc50c7cc616e684294611bc1d9365d3796e00f3443526429690fb3.pdf",
+   "pages": 1,
+   "sha256": "38d8adfaf0fc50c7cc616e684294611bc1d9365d3796e00f3443526429690fb3",
+   "text_hf_path": "data/text/notif-aft-srinagar-jammu.txt",
+   "text_sha256": "0e6def46ea005a2a9961e343e06404a02031b83499cd0ed362b0feda9aa089b2"
+  },
+  {
+   "bytes": 46355,
+   "doc_id": "notif-appointed-day-aft-notification",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/8d774f1fcc3358e892a288346d2cad361694abec3f4191d35b34156c29425136.pdf",
+   "pages": 1,
+   "sha256": "8d774f1fcc3358e892a288346d2cad361694abec3f4191d35b34156c29425136",
+   "text_hf_path": "data/text/notif-appointed-day-aft-notification.txt",
+   "text_sha256": "551e8b4d98a7b5ded8fbecd745317f137b52a207bf7ad713c1a63d25be761884"
+  },
+  {
+   "bytes": 52016,
+   "doc_id": "notif-jurisdiction-for-telangana",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/d483c44d1f346ec261f6e52c66e8e785029ba82d66f84f329f3e04b8bb74915d.pdf",
+   "pages": 1,
+   "sha256": "d483c44d1f346ec261f6e52c66e8e785029ba82d66f84f329f3e04b8bb74915d",
+   "text_hf_path": "data/text/notif-jurisdiction-for-telangana.txt",
+   "text_sha256": "befb8bbca37995cbbf0b1a1fc579d205c8b98dec7b622cefc968d57a63a0bfb2"
+  },
+  {
+   "bytes": 94581,
+   "doc_id": "notif-jurisdiction-of-jabalpur",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/d56bded1dab4c7ed5b2577fcb0d59d00adc3be72ae39d2222f109a58ce1f0024.pdf",
+   "pages": 1,
+   "sha256": "d56bded1dab4c7ed5b2577fcb0d59d00adc3be72ae39d2222f109a58ce1f0024",
+   "text_hf_path": "data/text/notif-jurisdiction-of-jabalpur.txt",
+   "text_sha256": "a0ca962aa8e36c019fee783f03bf6e820ac50ea78b6dca7f3a45870827a420e9"
+  },
+  {
+   "bytes": 73271,
+   "doc_id": "notif-jurisdiction-of-srinagar",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/48a0137775e4bfbf67c9d09b37f87591c43610cf3a806a96f2105638a528862d.pdf",
+   "pages": 1,
+   "sha256": "48a0137775e4bfbf67c9d09b37f87591c43610cf3a806a96f2105638a528862d",
+   "text_hf_path": "data/text/notif-jurisdiction-of-srinagar.txt",
+   "text_sha256": "d1f52379f2877d2a820ab25594997c1b363b2ec0a712c0ca0a13d11b67b7d4d0"
+  },
+  {
+   "bytes": 545972,
+   "doc_id": "notif-tribunal-reforms",
+   "doc_type": "notification",
+   "hf_path": "data/raw/indiacode/0000/0c2f4e9e023d5d7b72d60797e1df67a7b2d2e340da8fe493a4328940638f0451.pdf",
+   "pages": 17,
+   "sha256": "0c2f4e9e023d5d7b72d60797e1df67a7b2d2e340da8fe493a4328940638f0451",
+   "text_hf_path": "data/text/notif-tribunal-reforms.txt",
+   "text_sha256": "9db3b74713ab82b14007d832669e541a2bb6bcdae8f5471598810b7cca83dead"
+  },
+  {
+   "bytes": 716640,
+   "doc_id": "ref-bprd-comparison-bns-ipc",
+   "doc_type": "other",
+   "hf_path": "data/raw/official_copies/2024/3ad875b6162deb9d6a722244c537b1ffa72ee20e025f08a32d272f2612cf9a25.pdf",
+   "pages": 38,
+   "sha256": "3ad875b6162deb9d6a722244c537b1ffa72ee20e025f08a32d272f2612cf9a25",
+   "text_hf_path": "data/text/ref-bprd-comparison-bns-ipc.txt",
+   "text_sha256": "5d8a2e5c1259bf28a646a0ec560bb6140bada1c01f6159d31d41d2391835a676"
+  },
+  {
+   "bytes": 674648,
+   "doc_id": "ref-bprd-comparison-bnss-crpc",
+   "doc_type": "other",
+   "hf_path": "data/raw/official_copies/2024/aa3e49147cf88141a8471a614246270ab4730cd3a4099e06de7a69792d80d33b.pdf",
+   "pages": 38,
+   "sha256": "aa3e49147cf88141a8471a614246270ab4730cd3a4099e06de7a69792d80d33b",
+   "text_hf_path": "data/text/ref-bprd-comparison-bnss-crpc.txt",
+   "text_sha256": "e75ad6b61c233fd463dda3da0284d02f0b34fdbb1225259c9225fb3f0c162687"
+  },
+  {
+   "bytes": 403032,
+   "doc_id": "ref-bprd-comparison-bsa-iea",
+   "doc_type": "other",
+   "hf_path": "data/raw/official_copies/2024/7693f293acb11ae55d8787a27093c2daa23a08e1a1f5673770ac6486b7c58c87.pdf",
+   "pages": 14,
+   "sha256": "7693f293acb11ae55d8787a27093c2daa23a08e1a1f5673770ac6486b7c58c87",
+   "text_hf_path": "data/text/ref-bprd-comparison-bsa-iea.txt",
+   "text_sha256": "ec8be00b700b4b00ed2d4c57418a3f66b79b0f689a4617e277d4db876e296985"
+  },
+  {
+   "bytes": 2089379,
+   "doc_id": "regs-regulations-for-the-navy-part-i",
+   "doc_type": "regulations",
+   "hf_path": "data/raw/indiacode/0000/68dd1cea126dc5c4c0ebce20fbd1b5ab0a350ef5d77d5f3601046461a1034985.pdf",
+   "pages": 487,
+   "sha256": "68dd1cea126dc5c4c0ebce20fbd1b5ab0a350ef5d77d5f3601046461a1034985",
+   "text_hf_path": "data/text/regs-regulations-for-the-navy-part-i.txt",
+   "text_sha256": "86d71ad99a09ba859300731f0d077a49cc18ab972bb23b64a8db3ee36782185a"
+  },
+  {
+   "bytes": 787268,
+   "doc_id": "regs-regulations-for-the-navy-part-ii",
+   "doc_type": "regulations",
+   "hf_path": "data/raw/indiacode/0000/884a893c725d4025dc95009dcd5aedf158d6726bf499e5a0690d0cdbc7b4064d.pdf",
+   "pages": 188,
+   "sha256": "884a893c725d4025dc95009dcd5aedf158d6726bf499e5a0690d0cdbc7b4064d",
+   "text_hf_path": "data/text/regs-regulations-for-the-navy-part-ii.txt",
+   "text_sha256": "addb902069a85b6bc13dcf9df5784bff9f6f1fc2ae2f7e25aace8d5a30febcfe"
+  },
+  {
+   "bytes": 1261940,
+   "doc_id": "regs-regulations-for-the-navy-part-iii",
+   "doc_type": "regulations",
+   "hf_path": "data/raw/indiacode/0000/272e4c22cd3bb6bfd959f5de3548777c62c9b32029f9f3c6c08bdd4386140c4b.pdf",
+   "pages": 253,
+   "sha256": "272e4c22cd3bb6bfd959f5de3548777c62c9b32029f9f3c6c08bdd4386140c4b",
+   "text_hf_path": "data/text/regs-regulations-for-the-navy-part-iii.txt",
+   "text_sha256": "96c71b979f408b4df551dd94d151bc7c922d1fe2db26a6a7adb5f72d7247903e"
+  },
+  {
+   "bytes": 419222,
+   "doc_id": "regs-regulations-for-the-navy-part-iv",
+   "doc_type": "regulations",
+   "hf_path": "data/raw/indiacode/0000/e4148ee0757de0adfdeb5acf68e7bd8c752f0d21d11c329f7484e108026c9f58.pdf",
+   "pages": 99,
+   "sha256": "e4148ee0757de0adfdeb5acf68e7bd8c752f0d21d11c329f7484e108026c9f58",
+   "text_hf_path": "data/text/regs-regulations-for-the-navy-part-iv.txt",
+   "text_sha256": "ce8187234af0842a74fa40fae3df05a6b694172890326972979eb005c43ffc21"
+  },
+  {
+   "bytes": 6664713,
+   "doc_id": "regs-the-navy-pension-regulations-1964",
+   "doc_type": "regulations",
+   "hf_path": "data/raw/indiacode/0000/f9e11e04f942d3809c7479e37ba37ae70e39023e9191bb379a029d0a53535749.pdf",
+   "pages": 319,
+   "sha256": "f9e11e04f942d3809c7479e37ba37ae70e39023e9191bb379a029d0a53535749",
+   "text_hf_path": "data/text/regs-the-navy-pension-regulations-1964.txt",
+   "text_sha256": "fef00f82da5a5f195a678a6eb7e78f4d5c654b6c482705fe41fc780526051e84"
+  },
+  {
+   "bytes": 526712,
+   "doc_id": "rules-aft-accounts-cadre-posts-rules-2019",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/c85c9c0ebbeb096f35c55167bfa32a48a9ac734c34e9b053ad232f0070e0ba35.pdf",
+   "pages": 12,
+   "sha256": "c85c9c0ebbeb096f35c55167bfa32a48a9ac734c34e9b053ad232f0070e0ba35",
+   "text_hf_path": "data/text/rules-aft-accounts-cadre-posts-rules-2019.txt",
+   "text_sha256": "a44f10823a3e85e91b8197c33896b2a6907f7775b0daf7972e62b6fc769572bc"
+  },
+  {
+   "bytes": 1998468,
+   "doc_id": "rules-aft-act2007",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/338d43addeaa14b7112298f3d460fd18bf8edd7b340b48fce0a546076cf273ef.pdf",
+   "pages": 14,
+   "sha256": "338d43addeaa14b7112298f3d460fd18bf8edd7b340b48fce0a546076cf273ef",
+   "text_hf_path": "data/text/rules-aft-act2007.txt",
+   "text_sha256": "6523a114f2573a7d1061b2171432a2129816afef212c2fd165170e0fda0d432c"
+  },
+  {
+   "bytes": 164715,
+   "doc_id": "rules-aft-amendment-procedure-rules-2011",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/fc27032fadfe44fdd20f899612d45b690f469bcdc96463ac8ea4ae9f82e29904.pdf",
+   "pages": 2,
+   "sha256": "fc27032fadfe44fdd20f899612d45b690f469bcdc96463ac8ea4ae9f82e29904",
+   "text_hf_path": "data/text/rules-aft-amendment-procedure-rules-2011.txt",
+   "text_sha256": "1021d81e854215087aa19f1f659a70042d27b5fbc9ffc29400bd37c85136713e"
+  },
+  {
+   "bytes": 551801,
+   "doc_id": "rules-aft-group-a-rrs",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/5a7ea50c8074c8997ab4f493e9e9fec7f9deb616858461a1a6eb0b3e74527cb8.pdf",
+   "pages": 20,
+   "sha256": "5a7ea50c8074c8997ab4f493e9e9fec7f9deb616858461a1a6eb0b3e74527cb8",
+   "text_hf_path": "data/text/rules-aft-group-a-rrs.txt",
+   "text_sha256": "c0e2e1a3ad37bfcebe71aac2f6dd8434d5297d9e8a8af27b345260a19ab2c57a"
+  },
+  {
+   "bytes": 346422,
+   "doc_id": "rules-aft-group-b-rrs",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/2e90ba87d974bf250a1bc5b78e3249513190e23b24f4605df3f9f467e220eaec.pdf",
+   "pages": 16,
+   "sha256": "2e90ba87d974bf250a1bc5b78e3249513190e23b24f4605df3f9f467e220eaec",
+   "text_hf_path": "data/text/rules-aft-group-b-rrs.txt",
+   "text_sha256": "850a98bb436c07675d8709a57e6650eacbb893a47b8210a8a20e711a830a7ba8"
+  },
+  {
+   "bytes": 389896,
+   "doc_id": "rules-aft-group-c-posts-rules-2013",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/e2ee77552aa437a9c8ff2ee75f941b4d607baed5806eca0c655401211fde5bb3.pdf",
+   "pages": 27,
+   "sha256": "e2ee77552aa437a9c8ff2ee75f941b4d607baed5806eca0c655401211fde5bb3",
+   "text_hf_path": "data/text/rules-aft-group-c-posts-rules-2013.txt",
+   "text_sha256": "836aeca4cc196ab06e9b49e73f85bfd23fe826c21837182dee22e10c1c715f56"
+  },
+  {
+   "bytes": 1446251,
+   "doc_id": "rules-aft-practice-rules-2009",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/c57b113a310d5ec1a9c06e26a266ef7abf0e039f36cbd83977313bb0790a77ea.pdf",
+   "pages": 12,
+   "sha256": "c57b113a310d5ec1a9c06e26a266ef7abf0e039f36cbd83977313bb0790a77ea",
+   "text_hf_path": "data/text/rules-aft-practice-rules-2009.txt",
+   "text_sha256": "d29cb39219d3b4666acec02296089a5afcc79ed2bae6f1186747621e1f558872"
+  },
+  {
+   "bytes": 433806,
+   "doc_id": "rules-aft-procedure-investigation-rules-2008",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/9565ce774a1fd1fb0d1e6da829d3af0acca8b346918ed1204025e3b59a4f8641.pdf",
+   "pages": 7,
+   "sha256": "9565ce774a1fd1fb0d1e6da829d3af0acca8b346918ed1204025e3b59a4f8641",
+   "text_hf_path": "data/text/rules-aft-procedure-investigation-rules-2008.txt",
+   "text_sha256": "7845d1f0f0ac8bee0b4c6cb98d105490af3116881121aabe29c809dfeb2dc2b4"
+  },
+  {
+   "bytes": 46786968,
+   "doc_id": "rules-aft-procedure-rules-2008",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/590cf7cd393564eacab37566d605357662429f900ea58a96f0ce0e5bb0e0e317.pdf",
+   "pages": 47,
+   "sha256": "590cf7cd393564eacab37566d605357662429f900ea58a96f0ce0e5bb0e0e317",
+   "text_hf_path": "data/text/rules-aft-procedure-rules-2008.txt",
+   "text_sha256": "c076b890f6cd18696f792c892bacd3633a5efbaa0a159915e500b1b6bca84be6"
+  },
+  {
+   "bytes": 176671,
+   "doc_id": "rules-aft-salary-rules-2009",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/4553e112dd43c7ac7878eaf031f6e48a24a926fcc7c3cf4097ef95265d564cd7.pdf",
+   "pages": 3,
+   "sha256": "4553e112dd43c7ac7878eaf031f6e48a24a926fcc7c3cf4097ef95265d564cd7",
+   "text_hf_path": "data/text/rules-aft-salary-rules-2009.txt",
+   "text_sha256": "1e5be78f4d53304fa31376f3e8c5578d30e75cbe55424cd3b9506f6d39005a64"
+  },
+  {
+   "bytes": 265703,
+   "doc_id": "rules-amendment-accounts-cadre-rrs",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/0c030041aea6d19427a42294effd75e42a5ac9b41480383567d51d60802c974e.pdf",
+   "pages": 1,
+   "sha256": "0c030041aea6d19427a42294effd75e42a5ac9b41480383567d51d60802c974e",
+   "text_hf_path": "data/text/rules-amendment-accounts-cadre-rrs.txt",
+   "text_sha256": "f1f3b82e1f678c1ca0ad6d6f410857453b176e050ad728537f77d424ea6087e4"
+  },
+  {
+   "bytes": 105113,
+   "doc_id": "rules-armed-forces-tribunal-act-financial-administrative-powers-rules-2008",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/14c19950a91705065fb301360eea876707ef985b9c2eb867a3dae4bfb55d5d00.pdf",
+   "pages": 2,
+   "sha256": "14c19950a91705065fb301360eea876707ef985b9c2eb867a3dae4bfb55d5d00",
+   "text_hf_path": "data/text/rules-armed-forces-tribunal-act-financial-administrative-powers-rules-2008.txt",
+   "text_sha256": "f5547b8f19d7100539739bea698a34a1657ff56b02b04172722ff63fd64aed84"
+  },
+  {
+   "bytes": 1525458,
+   "doc_id": "rules-army-rules-1954",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/48f52219121bf74d070bc832e4573f2f512b239e0a0441ba96b1daca2983a727.pdf",
+   "pages": 214,
+   "sha256": "48f52219121bf74d070bc832e4573f2f512b239e0a0441ba96b1daca2983a727",
+   "text_hf_path": "data/text/rules-army-rules-1954.txt",
+   "text_sha256": "94b464018d4c36fd62d1713bee6adbf48b4d711e04098125085c1da2904d5976"
+  },
+  {
+   "bytes": 293421,
+   "doc_id": "rules-exemption-from-upsc-rules",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/379c4e0a1c2db054cfc9a809b937aaaf703dcbc6ca4292ae5cf3544f3e2d927d.pdf",
+   "pages": 3,
+   "sha256": "379c4e0a1c2db054cfc9a809b937aaaf703dcbc6ca4292ae5cf3544f3e2d927d",
+   "text_hf_path": "data/text/rules-exemption-from-upsc-rules.txt",
+   "text_sha256": "950e9c66286201354acc088a076dda332839411025fbe877062cec04f0a86fd4"
+  },
+  {
+   "bytes": 555235,
+   "doc_id": "rules-the-army-and-air-force-disposal-of-private-property-rules-1953",
+   "doc_type": "rules",
+   "hf_path": "data/raw/indiacode/0000/d969593bbb689144e39a406cab3d6fa806216438871ddf6321ba084e24c9b203.pdf",
+   "pages": 6,
+   "sha256": "d969593bbb689144e39a406cab3d6fa806216438871ddf6321ba084e24c9b203",
+   "text_hf_path": "data/text/rules-the-army-and-air-force-disposal-of-private-property-rules-1953.txt",
+   "text_sha256": "f8b2a0b35abb28abbecc77ef832afd7c6309e546cdd9cbf8e548d6f77f9c95fb"
+  },
+  {
+   "bytes": 589204,
+   "doc_id": "sc-1954-shyam-lal-1954insc34",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1954/9885e27a39c90d7b16f947b392b492243e2cb7c1c7b2fd820f81f91c21a2b3f0.pdf",
+   "pages": 18,
+   "sha256": "9885e27a39c90d7b16f947b392b492243e2cb7c1c7b2fd820f81f91c21a2b3f0",
+   "text_hf_path": "data/text/sc-1954-shyam-lal-1954insc34.txt",
+   "text_sha256": "487e9513050a896840c5f7cbe8bf3951852b4c12ad3e47e988b38a47a324462b"
+  },
+  {
+   "bytes": 771104,
+   "doc_id": "sc-1957-khem-chand-1957insc114",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1957/abc2b50b1f2ee0c4fceddb3c1cc2fb326ea360390f69d8b55c0ae553abad8d45.pdf",
+   "pages": 23,
+   "sha256": "abc2b50b1f2ee0c4fceddb3c1cc2fb326ea360390f69d8b55c0ae553abad8d45",
+   "text_hf_path": "data/text/sc-1957-khem-chand-1957insc114.txt",
+   "text_sha256": "768086b43cfc350aae51271033490a051012452036fd953d40b2945db1688571"
+  },
+  {
+   "bytes": 1728800,
+   "doc_id": "sc-1958-parshotam-lal-dhingra-1957insc96",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1957/bae31191140c5df63b08bd2eaef1f602150a10249ba681c1c0cac8be3d21f626.pdf",
+   "pages": 44,
+   "sha256": "bae31191140c5df63b08bd2eaef1f602150a10249ba681c1c0cac8be3d21f626",
+   "text_hf_path": "data/text/sc-1958-parshotam-lal-dhingra-1957insc96.txt",
+   "text_sha256": "9279f9772297eb59a08b8c2bac5b89d4bb97acecf159f391634fe204a6551086"
+  },
+  {
+   "bytes": 885188,
+   "doc_id": "sc-1960-sardar-kapur-singh-1959insc162",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1959/3b1cd4a1b5e75e2e8bed0bca573a39ade6dac4ba66f621f1119f98565871112b.pdf",
+   "pages": 23,
+   "sha256": "3b1cd4a1b5e75e2e8bed0bca573a39ade6dac4ba66f621f1119f98565871112b",
+   "text_hf_path": "data/text/sc-1960-sardar-kapur-singh-1959insc162.txt",
+   "text_sha256": "19d8d3a44817e82005d9a808531daec40641b2fbedf014439e7513c4f2e19f43"
+  },
+  {
+   "bytes": 1576824,
+   "doc_id": "sc-1962-major-e-g-barsy-1961insc177",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1961/d1f5aada95949bbff354670975936c6877c31a24770a279c24d21ef6a7caa08c.pdf",
+   "pages": 47,
+   "sha256": "d1f5aada95949bbff354670975936c6877c31a24770a279c24d21ef6a7caa08c",
+   "text_hf_path": "data/text/sc-1962-major-e-g-barsy-1961insc177.txt",
+   "text_sha256": "7e105eb1e06bb9e290afb5822842c328b6a59536d8c9fd05e35389d96917f5b7"
+  },
+  {
+   "bytes": 229851,
+   "doc_id": "sc-1972-delhi-special-police-establish-1972insc187",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1972/1c082da572b7b763b036bf5d9acba5a4656fb6389646c81a060839f775878be7.pdf",
+   "pages": 6,
+   "sha256": "1c082da572b7b763b036bf5d9acba5a4656fb6389646c81a060839f775878be7",
+   "text_hf_path": "data/text/sc-1972-delhi-special-police-establish-1972insc187.txt",
+   "text_sha256": "97464e396e310f5ea8aac2fe22dd541d04aefc694587087b6dffc0707b599d9e"
+  },
+  {
+   "bytes": 593411,
+   "doc_id": "sc-1973-captain-harish-uppal-1972insc286",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1972/16b3c40c4fd49e744b007ab79fc6272657c1b53b3e0a3db13e9a0658c7a116d1.pdf",
+   "pages": 10,
+   "sha256": "16b3c40c4fd49e744b007ab79fc6272657c1b53b3e0a3db13e9a0658c7a116d1",
+   "text_hf_path": "data/text/sc-1973-captain-harish-uppal-1972insc286.txt",
+   "text_sha256": "319d1813ffead2f8e6a4c635b167eb0979ecde2b5fb3aa59c06f5c0336939235"
+  },
+  {
+   "bytes": 2712673,
+   "doc_id": "sc-1980-maharao-sahib-sri-bhim-singhji-1980insc219",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1980/7b73bce866bd67167049a3c6b5ff26fdf92f4f2f1022fd19467686c567b03013.pdf",
+   "pages": 85,
+   "sha256": "7b73bce866bd67167049a3c6b5ff26fdf92f4f2f1022fd19467686c567b03013",
+   "text_hf_path": "data/text/sc-1980-maharao-sahib-sri-bhim-singhji-1980insc219.txt",
+   "text_sha256": "f34096ec93e244aa924dc16afb2fca70b916645a4cdbf5ee63fd39b5dd31229a"
+  },
+  {
+   "bytes": 45874645,
+   "doc_id": "sc-1982-s-p-gupta-ors-etc-etc-1981insc209",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1981/ddf835f63effb126e3dd13c9eecebadd2cfdc1fbbfa500ac33d8fe481437b389.pdf",
+   "pages": 1093,
+   "sha256": "ddf835f63effb126e3dd13c9eecebadd2cfdc1fbbfa500ac33d8fe481437b389",
+   "text_hf_path": "data/text/sc-1982-s-p-gupta-ors-etc-etc-1981insc209.txt",
+   "text_sha256": "35c69ca9dd7a2dc2897956a37756edd34022549d2a52a6e87b6299ac1c62fa8a"
+  },
+  {
+   "bytes": 1809638,
+   "doc_id": "sc-1983-lt-col-prithi-pal-singh-bedi-e-1982insc65",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1982/ebb86d4b3308eb89e9dfa2ef1d78d93463f15157278fce2c86b047c915251238.pdf",
+   "pages": 52,
+   "sha256": "ebb86d4b3308eb89e9dfa2ef1d78d93463f15157278fce2c86b047c915251238",
+   "text_hf_path": "data/text/sc-1983-lt-col-prithi-pal-singh-bedi-e-1982insc65.txt",
+   "text_sha256": "963436629701add8861fae08f0c64c09f0492394b85da0275b2796d264e7a30d"
+  },
+  {
+   "bytes": 264927,
+   "doc_id": "sc-1987-ajmer-singh-etc-etc-1987insc142",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1987/b6e706e3cea4e1b674d94a495fe38bb104210141acb6fb1e5bdbc0ce2619e338.pdf",
+   "pages": 9,
+   "sha256": "b6e706e3cea4e1b674d94a495fe38bb104210141acb6fb1e5bdbc0ce2619e338",
+   "text_hf_path": "data/text/sc-1987-ajmer-singh-etc-etc-1987insc142.txt",
+   "text_sha256": "c95252d5e6fd9946181513866e1844dd53b802bf6190e553a7586ca7f14bfcfe"
+  },
+  {
+   "bytes": 343062,
+   "doc_id": "sc-1987-ranjit-thakur-1987insc285",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1987/35b9c948fe6254c66c1a416055cbbd34050fcf132abc7b66d537fe6f711586ee.pdf",
+   "pages": 13,
+   "sha256": "35b9c948fe6254c66c1a416055cbbd34050fcf132abc7b66d537fe6f711586ee",
+   "text_hf_path": "data/text/sc-1987-ranjit-thakur-1987insc285.txt",
+   "text_sha256": "64cb0c1351ef92eb9310b9dd5f1e1c20fbedc4b0d439e90921a4a173f8ce79f7"
+  },
+  {
+   "bytes": 93477,
+   "doc_id": "sc-1989-union-of-india-and-ors-1989insc332",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1989/8968f568cf14e9c07b933166325dfa4cbdff43825d4cdeb43345f437b8881f11.pdf",
+   "pages": 4,
+   "sha256": "8968f568cf14e9c07b933166325dfa4cbdff43825d4cdeb43345f437b8881f11",
+   "text_hf_path": "data/text/sc-1989-union-of-india-and-ors-1989insc332.txt",
+   "text_sha256": "0a1e6baf417b2abf42748a4b9cc3c3279a8bb8d273fa16967576d0a54a3415f1"
+  },
+  {
+   "bytes": 269987,
+   "doc_id": "sc-1990-chief-of-army-staff-and-ors-1990insc399",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1990/d0a1137f5387aff1d4c61434724fd480b5ffbfdba5a30cb719dc6b21a00bb256.pdf",
+   "pages": 10,
+   "sha256": "d0a1137f5387aff1d4c61434724fd480b5ffbfdba5a30cb719dc6b21a00bb256",
+   "text_hf_path": "data/text/sc-1990-chief-of-army-staff-and-ors-1990insc399.txt",
+   "text_sha256": "7c61e44bb68f19a1591f952f7d350c9e6cf6672307b6489cc7269752b3026596"
+  },
+  {
+   "bytes": 232554,
+   "doc_id": "sc-1990-major-suresh-chand-mehra-1990insc347",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1990/e44fa1a569510458fcebf8f008a52cf7f796219cd5a15f88869826d70ae91a31.pdf",
+   "pages": 7,
+   "sha256": "e44fa1a569510458fcebf8f008a52cf7f796219cd5a15f88869826d70ae91a31",
+   "text_hf_path": "data/text/sc-1990-major-suresh-chand-mehra-1990insc347.txt",
+   "text_sha256": "3d4a2ff8e50c3ffd92b17413f687e9a1753df03191b5299f8d0e443d3aa0a574"
+  },
+  {
+   "bytes": 183197,
+   "doc_id": "sc-1991-ex-havildar-rat-an-singh-1991insc300",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1991/2d33465ae5d25d914635ca2d9bb727503eb260632f673622435818e12a0bcd3d.pdf",
+   "pages": 5,
+   "sha256": "2d33465ae5d25d914635ca2d9bb727503eb260632f673622435818e12a0bcd3d",
+   "text_hf_path": "data/text/sc-1991-ex-havildar-rat-an-singh-1991insc300.txt",
+   "text_sha256": "3acd288d4c26b68ef7e65276ec6115509dfdaaa1373a59f5ec02428729683b91"
+  },
+  {
+   "bytes": 231625,
+   "doc_id": "sc-1991-ex-naik-sardar-singh-1991insc128",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1991/bc0f9881322865348fda1d350a4d95fab268fc0d0e777bfe7219f3dc9a7a5bf1.pdf",
+   "pages": 9,
+   "sha256": "bc0f9881322865348fda1d350a4d95fab268fc0d0e777bfe7219f3dc9a7a5bf1",
+   "text_hf_path": "data/text/sc-1991-ex-naik-sardar-singh-1991insc128.txt",
+   "text_sha256": "8f20511b046c5b47b53dc52fb4f08205dbd63106ce57fe6d88af783c304d6d7b"
+  },
+  {
+   "bytes": 439841,
+   "doc_id": "sc-1991-laxmi-shankar-pandey-1991insc79",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1991/aa4849012cbc6980ea0238d4e84dfe384822e18b320e9ca7ce6be1d4d6ed086e.pdf",
+   "pages": 10,
+   "sha256": "aa4849012cbc6980ea0238d4e84dfe384822e18b320e9ca7ce6be1d4d6ed086e",
+   "text_hf_path": "data/text/sc-1991-laxmi-shankar-pandey-1991insc79.txt",
+   "text_sha256": "815637e9382e7395223497d21a2855b7ea2c7ee7b071a46e499da123e3d4fe5c"
+  },
+  {
+   "bytes": 387671,
+   "doc_id": "sc-1991-lt-general-r-k-anand-1991insc344",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1991/10dc5626da5e9a02244ccc979ca24cb95400ca6055f44b1a88d65c564fd3d6fc.pdf",
+   "pages": 8,
+   "sha256": "10dc5626da5e9a02244ccc979ca24cb95400ca6055f44b1a88d65c564fd3d6fc",
+   "text_hf_path": "data/text/sc-1991-lt-general-r-k-anand-1991insc344.txt",
+   "text_sha256": "df668fe00677da9ec271c86460a979c4adeb6db51646c7759b2bc87ab4bece73"
+  },
+  {
+   "bytes": 11453861,
+   "doc_id": "sc-1994-s-r-bommai-1994insc111",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1994/b20b4db0d2e9468f21a256fb790ece7a53610abe5de54cf912f9656f7dd7ef50.pdf",
+   "pages": 357,
+   "sha256": "b20b4db0d2e9468f21a256fb790ece7a53610abe5de54cf912f9656f7dd7ef50",
+   "text_hf_path": "data/text/sc-1994-s-r-bommai-1994insc111.txt",
+   "text_sha256": "4f63e0074253ac44bea35191fbe1fa76c787860507afc7c53fe806bd71ffdd10"
+  },
+  {
+   "bytes": 570025,
+   "doc_id": "sc-1995-sarwan-singh-lamba-and-ors-etc-1995insc370",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1995/8967fb444f838b5a4707cdd5ecc3b400b4b198dc72494b405fb880d89ee1ba44.pdf",
+   "pages": 20,
+   "sha256": "8967fb444f838b5a4707cdd5ecc3b400b4b198dc72494b405fb880d89ee1ba44",
+   "text_hf_path": "data/text/sc-1995-sarwan-singh-lamba-and-ors-etc-1995insc370.txt",
+   "text_sha256": "7d3070f13948eb62ae213fa5937842a71e2f20ad72bb847a1609717aa8329d60"
+  },
+  {
+   "bytes": 342182,
+   "doc_id": "sc-1996-major-r-s-budhwar-1996insc648",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1996/a3a380100066dd9a3cdc349554ec981ca9f523686cfe302882ec96740ad5dab9.pdf",
+   "pages": 12,
+   "sha256": "a3a380100066dd9a3cdc349554ec981ca9f523686cfe302882ec96740ad5dab9",
+   "text_hf_path": "data/text/sc-1996-major-r-s-budhwar-1996insc648.txt",
+   "text_sha256": "8757d44c6bce4ead21cf9d802c256514b9d7c22567a752d3da6e8f6c2b156af4"
+  },
+  {
+   "bytes": 564662,
+   "doc_id": "sc-1997-the-general-court-martial-and-1997insc816",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/1997/c39b336bf48e45b6ed6a6f58e72f9f37204618b25c8a7cf1b51c255b3cb16e3d.pdf",
+   "pages": 18,
+   "sha256": "c39b336bf48e45b6ed6a6f58e72f9f37204618b25c8a7cf1b51c255b3cb16e3d",
+   "text_hf_path": "data/text/sc-1997-the-general-court-martial-and-1997insc816.txt",
+   "text_sha256": "29cd1ce67ef5f2e2fb9717e93a30c53f84b4b56578058df9685c559894aa7f65"
+  },
+  {
+   "bytes": 861605,
+   "doc_id": "sc-2000-union-of-india-and-ors-2000insc313",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2000/d9470d72b572e71d4afdd4fa0db28ea13869e194ecf7b2d7dc0c05858705f31c.pdf",
+   "pages": 26,
+   "sha256": "d9470d72b572e71d4afdd4fa0db28ea13869e194ecf7b2d7dc0c05858705f31c",
+   "text_hf_path": "data/text/sc-2000-union-of-india-and-ors-2000insc313.txt",
+   "text_sha256": "baa72a858a3d6a3d00658447cb03d2bf7040c5b4ce41aa4dfd72705681735a18"
+  },
+  {
+   "bytes": 1137771,
+   "doc_id": "sc-2001-union-of-india-and-ors-2001insc202",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2001/fc15feb56e7eaba8df31dbaf2bb8150e075516e03f595ce55339c986582737ee.pdf",
+   "pages": 38,
+   "sha256": "fc15feb56e7eaba8df31dbaf2bb8150e075516e03f595ce55339c986582737ee",
+   "text_hf_path": "data/text/sc-2001-union-of-india-and-ors-2001insc202.txt",
+   "text_sha256": "d82d8efdcbd1b0a0aeb43faf5b019cf1e729c86894f0e5dec209d157c43335bd"
+  },
+  {
+   "bytes": 186626,
+   "doc_id": "sc-2003-union-of-india-ors-2003insc54",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2003/ca2b9943ede515762198f3bc831a903cb7e47a8e7571c74ea802179c47996237.pdf",
+   "pages": 6,
+   "sha256": "ca2b9943ede515762198f3bc831a903cb7e47a8e7571c74ea802179c47996237",
+   "text_hf_path": "data/text/sc-2003-union-of-india-ors-2003insc54.txt",
+   "text_sha256": "559dfd0cf7832593a80df926bf97b109717551eb2fcca94e609dbc5fb61a88b8"
+  },
+  {
+   "bytes": 6341144,
+   "doc_id": "sc-2006-kuldip-nayar-2006insc532",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2006/fd81a21c767f3daa5f8ceeb96347c4350b6fd6969bdcd7d653d7d85a7ed0d16d.pdf",
+   "pages": 184,
+   "sha256": "fd81a21c767f3daa5f8ceeb96347c4350b6fd6969bdcd7d653d7d85a7ed0d16d",
+   "text_hf_path": "data/text/sc-2006-kuldip-nayar-2006insc532.txt",
+   "text_sha256": "3392c3a14c899b55f40e5bb96e25fcae9c6638a95bad6ff8bcb0f67e74edcf31"
+  },
+  {
+   "bytes": 443191,
+   "doc_id": "sc-2006-union-of-india-and-ors-2006insc163",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2006/2b9615a1c9d8f5993349266be8af6535cb67d608841c4d7a89f5ff82e0b56469.pdf",
+   "pages": 14,
+   "sha256": "2b9615a1c9d8f5993349266be8af6535cb67d608841c4d7a89f5ff82e0b56469",
+   "text_hf_path": "data/text/sc-2006-union-of-india-and-ors-2006insc163.txt",
+   "text_sha256": "3ce0b4afe0ded6f2939e3056c1b26ffe342b5906a500019eb908e48fc07dde0b"
+  },
+  {
+   "bytes": 338624,
+   "doc_id": "sc-2006-union-of-india-and-ors-2006insc627",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2006/3fb6f267d71d3654cceb368b9e038000832e0363878e166117c3ef0884f52b99.pdf",
+   "pages": 11,
+   "sha256": "3fb6f267d71d3654cceb368b9e038000832e0363878e166117c3ef0884f52b99",
+   "text_hf_path": "data/text/sc-2006-union-of-india-and-ors-2006insc627.txt",
+   "text_sha256": "43558e9c0a406580b8be0f34da676a926d94cd2730bc7984b5d57b7f7c6ddb32"
+  },
+  {
+   "bytes": 218177,
+   "doc_id": "sc-2008-union-of-india-ors-2008insc930",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2008/f8a14181e47c69e645840ca0369992d0906f02a93a4ec03ba7103f3f552cb4da.pdf",
+   "pages": 6,
+   "sha256": "f8a14181e47c69e645840ca0369992d0906f02a93a4ec03ba7103f3f552cb4da",
+   "text_hf_path": "data/text/sc-2008-union-of-india-ors-2008insc930.txt",
+   "text_sha256": "4eff29648136ec45cfbf0e39fd454512a62901f51c419fc6d87e366bac9d073f"
+  },
+  {
+   "bytes": 99513,
+   "doc_id": "sc-2009-union-of-india-anr-2009insc837",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2009/e61dc95c5ab477fb1028f97a158975c8c3960df07ebdcfd65c20c5778449482d.pdf",
+   "pages": 3,
+   "sha256": "e61dc95c5ab477fb1028f97a158975c8c3960df07ebdcfd65c20c5778449482d",
+   "text_hf_path": "data/text/sc-2009-union-of-india-anr-2009insc837.txt",
+   "text_sha256": "5d3f72b64f8d5bcfd3bf0223466885f3002caf643debb2b52396a57c35cd5701"
+  },
+  {
+   "bytes": 412247,
+   "doc_id": "sc-2010-j-s-sekhon-2010insc492",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2010/5b5396998dc87d118e4b5e7fa85c90d0cb12624089fd84601bf45bd158e1d983.pdf",
+   "pages": 14,
+   "sha256": "5b5396998dc87d118e4b5e7fa85c90d0cb12624089fd84601bf45bd158e1d983",
+   "text_hf_path": "data/text/sc-2010-j-s-sekhon-2010insc492.txt",
+   "text_sha256": "39ccfc1d4c82b3dddc0c85457faa2a8a1c3cbdebd19dd5fce73d46070421509b"
+  },
+  {
+   "bytes": 80292,
+   "doc_id": "sc-2010-union-of-india-anr-2010insc187",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2010/d1ac13487b2f07420c9c93c578ee086bf1e25d2e5abaec60a4c9fbd1e1f37806.pdf",
+   "pages": 3,
+   "sha256": "d1ac13487b2f07420c9c93c578ee086bf1e25d2e5abaec60a4c9fbd1e1f37806",
+   "text_hf_path": "data/text/sc-2010-union-of-india-anr-2010insc187.txt",
+   "text_sha256": "f51c42b12fde76682ac045188c10f9739e846a38e5e65b0552619dfa5a7efa6f"
+  },
+  {
+   "bytes": 372851,
+   "doc_id": "sc-2010-union-of-india-ors-2010insc350",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2010/dfa4a4605c2d622422302ef339d2de23c4104d8ae228e7f568ae20ed5425536a.pdf",
+   "pages": 13,
+   "sha256": "dfa4a4605c2d622422302ef339d2de23c4104d8ae228e7f568ae20ed5425536a",
+   "text_hf_path": "data/text/sc-2010-union-of-india-ors-2010insc350.txt",
+   "text_sha256": "505b3bb0d948d7f6e267ab5b08215fa31a999b3ced9a687d2c46e5984eed07bd"
+  },
+  {
+   "bytes": 398380,
+   "doc_id": "sc-2011-k-j-s-buttar-2011insc249",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2011/16dcc07543999d260f4cba1e4c9329e336346a7abab62b564265aa8b8394da2a.pdf",
+   "pages": 13,
+   "sha256": "16dcc07543999d260f4cba1e4c9329e336346a7abab62b564265aa8b8394da2a",
+   "text_hf_path": "data/text/sc-2011-k-j-s-buttar-2011insc249.txt",
+   "text_sha256": "51487afa56334eb64d041859dc0c70cc9c2fe7fe7f7e64bc223b140b3b55275b"
+  },
+  {
+   "bytes": 1192287,
+   "doc_id": "sc-2011-union-of-india-ors-2011insc672",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2011/41e4cd15e831fd3254bfb4097cecbaa91a8a2a58b7e0d5f5b81818035c08cb38.pdf",
+   "pages": 39,
+   "sha256": "41e4cd15e831fd3254bfb4097cecbaa91a8a2a58b7e0d5f5b81818035c08cb38",
+   "text_hf_path": "data/text/sc-2011-union-of-india-ors-2011insc672.txt",
+   "text_sha256": "032f7828dd90da9025b6719e02bfd8842062af6fa065673faff4c5901106f362"
+  },
+  {
+   "bytes": 455893,
+   "doc_id": "sc-2012-union-of-india-and-ors-2012insc146",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2012/7908f5b4a7284402b44a85c334c2b1af47ac4546f78d74ed30ff9d5b37e010da.pdf",
+   "pages": 15,
+   "sha256": "7908f5b4a7284402b44a85c334c2b1af47ac4546f78d74ed30ff9d5b37e010da",
+   "text_hf_path": "data/text/sc-2012-union-of-india-and-ors-2012insc146.txt",
+   "text_sha256": "1d884e268a3c21b1794a9a7dc88401544d03e531c978e293341405372d7f1ed0"
+  },
+  {
+   "bytes": 191042,
+   "doc_id": "sc-2012-union-of-india-anr-2012insc179",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2012/47b2dce77d101822851ef3f0d9e9a9ea6c14b12ee98e8047f894c1e7b25fb808.pdf",
+   "pages": 7,
+   "sha256": "47b2dce77d101822851ef3f0d9e9a9ea6c14b12ee98e8047f894c1e7b25fb808",
+   "text_hf_path": "data/text/sc-2012-union-of-india-anr-2012insc179.txt",
+   "text_sha256": "c407aa6e82d7b6e600b71078a44375da3b91f5eae77891b707025d5f82582e68"
+  },
+  {
+   "bytes": 910956,
+   "doc_id": "sc-2013-dharamvir-singh-2013insc408",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2013/a9ccc45cd8c45d4d20652fe29057151435c33d1a3231e3f043a8543aef83b7c1.pdf",
+   "pages": 30,
+   "sha256": "a9ccc45cd8c45d4d20652fe29057151435c33d1a3231e3f043a8543aef83b7c1",
+   "text_hf_path": "data/text/sc-2013-dharamvir-singh-2013insc408.txt",
+   "text_sha256": "a5e3c6733e0b5de7e626fd9dce451420725079c945c3ec08ec23274018d19f0b"
+  },
+  {
+   "bytes": 185509,
+   "doc_id": "sc-2013-nand-kishor-2013insc16",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2013/35e75ee438d9ca89b195b583b6f3d0c1d2aa709da775a87f81d7a15ab0fae2f2.pdf",
+   "pages": 7,
+   "sha256": "35e75ee438d9ca89b195b583b6f3d0c1d2aa709da775a87f81d7a15ab0fae2f2",
+   "text_hf_path": "data/text/sc-2013-nand-kishor-2013insc16.txt",
+   "text_sha256": "c9e3e69b5a1ec7c50688b8b289c66b933e88ef20f75ab69a568526953773735e"
+  },
+  {
+   "bytes": 1976353,
+   "doc_id": "sc-2014-abp-pvt-ltd-anr-2014insc82",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2014/cd27b24da6e99dbce06bfa691be176f3e9151daf16936160b7fd71716048587d.pdf",
+   "pages": 66,
+   "sha256": "cd27b24da6e99dbce06bfa691be176f3e9151daf16936160b7fd71716048587d",
+   "text_hf_path": "data/text/sc-2014-abp-pvt-ltd-anr-2014insc82.txt",
+   "text_sha256": "66636cdc526e0770e22b80f432e6e8ff02e6e88b45a88ad52bfd88c85dffa139"
+  },
+  {
+   "bytes": 416890,
+   "doc_id": "sc-2014-b-d-khunte-2014insc753",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2014/6f92473b87b41a264d864de05b34f164ab335d0c668ae8a42c494a4173d1e119.pdf",
+   "pages": 16,
+   "sha256": "6f92473b87b41a264d864de05b34f164ab335d0c668ae8a42c494a4173d1e119",
+   "text_hf_path": "data/text/sc-2014-b-d-khunte-2014insc753.txt",
+   "text_sha256": "f238a21e8e92c1639e78eb58daeb82ba8460254ca81b5dfea251727b41ffcc48"
+  },
+  {
+   "bytes": 32483552,
+   "doc_id": "sc-2015-supreme-court-advocates-on-rec-2015insc285",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2015/09c67ba85addf43380795090eafd7fb86e503b89812ecec0f52d95752ae4d711.pdf",
+   "pages": 1056,
+   "sha256": "09c67ba85addf43380795090eafd7fb86e503b89812ecec0f52d95752ae4d711",
+   "text_hf_path": "data/text/sc-2015-supreme-court-advocates-on-rec-2015insc285.txt",
+   "text_sha256": "1797348636c343e9ccacc868745b1eaee66d7d3f638a9c55c26c4d76389edfca"
+  },
+  {
+   "bytes": 534853,
+   "doc_id": "sc-2015-union-of-india-anr-2015insc114",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2015/c1ecdaeebf16bd67d832d501e76bc7b369358900a54f76c13375bcd4645ed7ea.pdf",
+   "pages": 19,
+   "sha256": "c1ecdaeebf16bd67d832d501e76bc7b369358900a54f76c13375bcd4645ed7ea",
+   "text_hf_path": "data/text/sc-2015-union-of-india-anr-2015insc114.txt",
+   "text_sha256": "cec7ec9c6088a1f446429c4c2673e081873d9747c64bfef534885721ac5ad3e2"
+  },
+  {
+   "bytes": 655327,
+   "doc_id": "sc-2015-veerendra-kumar-dubey-2015insc797",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2015/73d6fd19e0c9aa51612e143fdd703b380bac74d25cf7e9b7c3d47df902ce5a2c.pdf",
+   "pages": 22,
+   "sha256": "73d6fd19e0c9aa51612e143fdd703b380bac74d25cf7e9b7c3d47df902ce5a2c",
+   "text_hf_path": "data/text/sc-2015-veerendra-kumar-dubey-2015insc797.txt",
+   "text_sha256": "811b8caa6d7f10276f2dd6a318a2380cf42d9e3517b039f7357b3615e307137c"
+  },
+  {
+   "bytes": 944694,
+   "doc_id": "sc-2016-union-of-india-ors-2016insc111",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2016/93a3c70f7462eb946326076dd64964cb994c89c299d34e7f720e684614642ea5.pdf",
+   "pages": 32,
+   "sha256": "93a3c70f7462eb946326076dd64964cb994c89c299d34e7f720e684614642ea5",
+   "text_hf_path": "data/text/sc-2016-union-of-india-ors-2016insc111.txt",
+   "text_sha256": "4c9461c4279dc3136401821cd7decc2a0d98f4e0ce48ce4007ede604f4dc1f32"
+  },
+  {
+   "bytes": 218744,
+   "doc_id": "sc-2016-vijay-shankar-mishra-2016insc1144",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2016/fc44a117606341835779d0171b5122fd0098a5a3f0c68802a37f1bc05ab3ef01.pdf",
+   "pages": 7,
+   "sha256": "fc44a117606341835779d0171b5122fd0098a5a3f0c68802a37f1bc05ab3ef01",
+   "text_hf_path": "data/text/sc-2016-vijay-shankar-mishra-2016insc1144.txt",
+   "text_sha256": "14ce485c1c58ac033c4506734a79898db9c0e0a197faa1a4fa1c5cb645d50766"
+  },
+  {
+   "bytes": 677459,
+   "doc_id": "sc-2017-krishna-mohan-medical-college-2017insc845",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2017/27e556d78e03d02e14d65c707411e3dd3649bd88f80676d5f5fab82338d5e6ca.pdf",
+   "pages": 19,
+   "sha256": "27e556d78e03d02e14d65c707411e3dd3649bd88f80676d5f5fab82338d5e6ca",
+   "text_hf_path": "data/text/sc-2017-krishna-mohan-medical-college-2017insc845.txt",
+   "text_sha256": "c8cc12218f35345d2dc1a23ad2966c906877edc60336e2a92c05b6ba4d6439d6"
+  },
+  {
+   "bytes": 681257,
+   "doc_id": "sc-2017-union-of-india-and-ors-2017insc49",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2017/f3a273f09da43b5485d8d1d0f3abc8cf7c7e628fee4bb85b37b5e29ecc5c060f.pdf",
+   "pages": 27,
+   "sha256": "f3a273f09da43b5485d8d1d0f3abc8cf7c7e628fee4bb85b37b5e29ecc5c060f",
+   "text_hf_path": "data/text/sc-2017-union-of-india-and-ors-2017insc49.txt",
+   "text_sha256": "25f4b0ea9ab48537f3a28e0f18cecaed7839c60deda9a55fce6bfa4e5e28a6a1"
+  },
+  {
+   "bytes": 268071,
+   "doc_id": "sc-2017-union-of-india-ors-2017insc1207",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2017/04f6634017a9aceb345c44226a26b8ef85aae29185e88d2bfd0ae4cf5ab790e5.pdf",
+   "pages": 9,
+   "sha256": "04f6634017a9aceb345c44226a26b8ef85aae29185e88d2bfd0ae4cf5ab790e5",
+   "text_hf_path": "data/text/sc-2017-union-of-india-ors-2017insc1207.txt",
+   "text_sha256": "26dd05f7a504cea9e121165986ec5322fd11130888108a9114d99009a707a98c"
+  },
+  {
+   "bytes": 277664,
+   "doc_id": "sc-2017-yash-pal-ors-2017insc8",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2017/5c46ecb44e3e70098e4382a9c8a991bf1870b207ab0f4c7602a5eb210ad79b77.pdf",
+   "pages": 12,
+   "sha256": "5c46ecb44e3e70098e4382a9c8a991bf1870b207ab0f4c7602a5eb210ad79b77",
+   "text_hf_path": "data/text/sc-2017-yash-pal-ors-2017insc8.txt",
+   "text_sha256": "4941fca9f8a68e4bb9068e5cdd598246e5f750876a1c23103c65dc5314b64f67"
+  },
+  {
+   "bytes": 652875,
+   "doc_id": "sc-2018-ex-lt-col-r-k-rai-2018insc163",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2018/7f5e29192eb0b3a720ab270f3cf9d9100004fd2ec48c39332d3aa2c18aa2cfbb.pdf",
+   "pages": 12,
+   "sha256": "7f5e29192eb0b3a720ab270f3cf9d9100004fd2ec48c39332d3aa2c18aa2cfbb",
+   "text_hf_path": "data/text/sc-2018-ex-lt-col-r-k-rai-2018insc163.txt",
+   "text_sha256": "1cc499fdf94c496172f9a096eea4eac377bf49fe9719992d44cffd89757592ec"
+  },
+  {
+   "bytes": 12741324,
+   "doc_id": "sc-2018-justice-k-s-puttaswamy-retd-2018insc880",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2018/a7adc9ef913589cb0bb48472bea4fc76c2339cd7e3b8a3a2fa8014c7ec300230.pdf",
+   "pages": 1076,
+   "sha256": "a7adc9ef913589cb0bb48472bea4fc76c2339cd7e3b8a3a2fa8014c7ec300230",
+   "text_hf_path": "data/text/sc-2018-justice-k-s-puttaswamy-retd-2018insc880.txt",
+   "text_sha256": "05bf4849cd7189b9f72ad4266e6cae41b114f0a6bbdd8d2a76381ebd5acceeb0"
+  },
+  {
+   "bytes": 193049,
+   "doc_id": "sc-2018-kudrat-sandhu-2018insc185",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2018/8a0be890282d401f4dbf33093e093ac3b7dbe62a8ae4e31e2e3349dfcc25cefd.pdf",
+   "pages": 3,
+   "sha256": "8a0be890282d401f4dbf33093e093ac3b7dbe62a8ae4e31e2e3349dfcc25cefd",
+   "text_hf_path": "data/text/sc-2018-kudrat-sandhu-2018insc185.txt",
+   "text_sha256": "0c0827a64eb00cefc1bd45cf4667d217289dfecdabc05def6100bfb475f764c1"
+  },
+  {
+   "bytes": 358337,
+   "doc_id": "sc-2018-lok-prahari-through-its-genera-2018insc348",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2018/4764059dc8c486dadf8264cb0410e86c62e0f732e6bcc2fb9e8349925f284b6a.pdf",
+   "pages": 17,
+   "sha256": "4764059dc8c486dadf8264cb0410e86c62e0f732e6bcc2fb9e8349925f284b6a",
+   "text_hf_path": "data/text/sc-2018-lok-prahari-through-its-genera-2018insc348.txt",
+   "text_sha256": "9807bdcc53d79aeba9cf090f98b3c572020280bc0536cfc8dead7f8b40743c48"
+  },
+  {
+   "bytes": 311116,
+   "doc_id": "sc-2018-maj-amod-kumar-2018insc795",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2018/93cd2dfbbfc08794c91024a911e74af32d93e113973cdc0d36520e6b12537e98.pdf",
+   "pages": 11,
+   "sha256": "93cd2dfbbfc08794c91024a911e74af32d93e113973cdc0d36520e6b12537e98",
+   "text_hf_path": "data/text/sc-2018-maj-amod-kumar-2018insc795.txt",
+   "text_sha256": "1c48130590655e07facbc21715887baa0536bbbbc54cb4fbc4d971cdb4cc6348"
+  },
+  {
+   "bytes": 258811,
+   "doc_id": "sc-2018-n-n-godfred-ors-2018insc599",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2018/200c755affa9cdb9200f9b3ddd50f232eca337c44674dd52dbe8bf5beb500c8c.pdf",
+   "pages": 10,
+   "sha256": "200c755affa9cdb9200f9b3ddd50f232eca337c44674dd52dbe8bf5beb500c8c",
+   "text_hf_path": "data/text/sc-2018-n-n-godfred-ors-2018insc599.txt",
+   "text_sha256": "d51be9359ad9ad43d72f05024a177ff4fe91419fe23942ad136dccda99c228b5"
+  },
+  {
+   "bytes": 151308,
+   "doc_id": "sc-2018-union-of-india-and-others-2018insc1165",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2018/655a5f31f2639d60dc2ada73f2c917a499dd55b73b92927590900c1a3b7215ef.pdf",
+   "pages": 5,
+   "sha256": "655a5f31f2639d60dc2ada73f2c917a499dd55b73b92927590900c1a3b7215ef",
+   "text_hf_path": "data/text/sc-2018-union-of-india-and-others-2018insc1165.txt",
+   "text_sha256": "9ec264e922670ee3ae2b673600bc12426704d9f1ec8559de383aadf2698327d3"
+  },
+  {
+   "bytes": 229780,
+   "doc_id": "sc-2018-union-of-india-ors-2018insc408",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2018/7f0a99e8428d8ec11c351fd56a8c6815775af91b3f137933c900bef803190c49.pdf",
+   "pages": 5,
+   "sha256": "7f0a99e8428d8ec11c351fd56a8c6815775af91b3f137933c900bef803190c49",
+   "text_hf_path": "data/text/sc-2018-union-of-india-ors-2018insc408.txt",
+   "text_sha256": "844e56ec3e154ba35eefa70488df17cc6c564478c7bfe6f3cc05a363e9b95290"
+  },
+  {
+   "bytes": 752463,
+   "doc_id": "sc-2018-union-of-india-through-its-sec-2018insc668",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2018/0f00b90f46307309b684051d143325943d71d819a6baf37cf5ab5a2b816c2ef7.pdf",
+   "pages": 31,
+   "sha256": "0f00b90f46307309b684051d143325943d71d819a6baf37cf5ab5a2b816c2ef7",
+   "text_hf_path": "data/text/sc-2018-union-of-india-through-its-sec-2018insc668.txt",
+   "text_sha256": "1bd9e75abfbcef9aa03a7e01a830801bbed86f746d94269e6228176ed3663d1e"
+  },
+  {
+   "bytes": 527725,
+   "doc_id": "sc-2019-ex-sepoy-washerman-ram-khilawa-2019insc987",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2019/9cabb52e6823d86ab035e6cd33b424855997bc0b2d06320b025cc7e82d9d1f4b.pdf",
+   "pages": 9,
+   "sha256": "9cabb52e6823d86ab035e6cd33b424855997bc0b2d06320b025cc7e82d9d1f4b",
+   "text_hf_path": "data/text/sc-2019-ex-sepoy-washerman-ram-khilawa-2019insc987.txt",
+   "text_sha256": "3016669be0222e21bec3621ba99764ff53d3637853335f2d4d850007510083ae"
+  },
+  {
+   "bytes": 146525,
+   "doc_id": "sc-2019-narain-singh-2019insc1064",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2019/84225cbed11f6dece47374c9719a460a42d958673e6743f3ba9a7d902938ce43.pdf",
+   "pages": 7,
+   "sha256": "84225cbed11f6dece47374c9719a460a42d958673e6743f3ba9a7d902938ce43",
+   "text_hf_path": "data/text/sc-2019-narain-singh-2019insc1064.txt",
+   "text_sha256": "26ea322e7742ca3bb6c701b8bcdf214b15e9fdb8746774730fe19da1f31e55a7"
+  },
+  {
+   "bytes": 169798,
+   "doc_id": "sc-2019-union-of-india-and-others-2019insc818",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2019/96b64fec9f14d6eb58501a1edb4ff247714a8f29ae478395ce0c035217fd6b13.pdf",
+   "pages": 8,
+   "sha256": "96b64fec9f14d6eb58501a1edb4ff247714a8f29ae478395ce0c035217fd6b13",
+   "text_hf_path": "data/text/sc-2019-union-of-india-and-others-2019insc818.txt",
+   "text_sha256": "ae4678d2275c4b04c2b3831687a8fee6a05615d904a73ef39d807df1ac054e41"
+  },
+  {
+   "bytes": 429000,
+   "doc_id": "sc-2019-union-of-india-ors-2019insc1030",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2019/a8793e00d1d04d56516c3dee5b017e8d816d701833897be32fab6b84855cb5b1.pdf",
+   "pages": 29,
+   "sha256": "a8793e00d1d04d56516c3dee5b017e8d816d701833897be32fab6b84855cb5b1",
+   "text_hf_path": "data/text/sc-2019-union-of-india-ors-2019insc1030.txt",
+   "text_sha256": "200d08946c07bed7f9a611f44ab7ad389b601abc6a5d7baacca34e6a2760a110"
+  },
+  {
+   "bytes": 374917,
+   "doc_id": "sc-2019-union-of-india-ors-2019insc1290",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2019/009ea86c80839b4670bd4189c067d9d9997402db1aa25721a906d6a997b51e72.pdf",
+   "pages": 17,
+   "sha256": "009ea86c80839b4670bd4189c067d9d9997402db1aa25721a906d6a997b51e72",
+   "text_hf_path": "data/text/sc-2019-union-of-india-ors-2019insc1290.txt",
+   "text_sha256": "34c4e51bfeb2a7107bde04c1e9d29fc851a82c4d5fac94858eb6930b8eca379b"
+  },
+  {
+   "bytes": 117266,
+   "doc_id": "sc-2019-union-of-india-ors-2019insc948",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2019/6b68f58fddb66762b3b60b78f739d9d363706743aa2be23244536530a9c84022.pdf",
+   "pages": 3,
+   "sha256": "6b68f58fddb66762b3b60b78f739d9d363706743aa2be23244536530a9c84022",
+   "text_hf_path": "data/text/sc-2019-union-of-india-ors-2019insc948.txt",
+   "text_sha256": "81fe5119d3b3d46b0bf97ab3af808d6014a280ffe8838e266dbe82800041be3e"
+  },
+  {
+   "bytes": 171322,
+   "doc_id": "sc-2019-union-of-india-thr-secretary-o-2019insc1271",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2019/90231bb221aeadfabff992fdb91dc83946fd2f79634720da04d340b08b64dd31.pdf",
+   "pages": 12,
+   "sha256": "90231bb221aeadfabff992fdb91dc83946fd2f79634720da04d340b08b64dd31",
+   "text_hf_path": "data/text/sc-2019-union-of-india-thr-secretary-o-2019insc1271.txt",
+   "text_sha256": "c7692457345fbdc68123b43448cae951db446fa0daba3ed94627d72341983c03"
+  },
+  {
+   "bytes": 684482,
+   "doc_id": "sc-2020-union-of-india-ors-2020insc300",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2020/9a2c4360e23bcd661fab580fc989645d174ff49bfa064f473dbe35b9af6de3b7.pdf",
+   "pages": 64,
+   "sha256": "9a2c4360e23bcd661fab580fc989645d174ff49bfa064f473dbe35b9af6de3b7",
+   "text_hf_path": "data/text/sc-2020-union-of-india-ors-2020insc300.txt",
+   "text_sha256": "7151e3c531d989c7d34a313f982a334830359ea270997786c7dd6780022f56d0"
+  },
+  {
+   "bytes": 178726,
+   "doc_id": "sc-2021-pani-ram-2021insc922",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2021/3e5eed6954f7ee8f160a55cdd01d0bb86e89572709835fa71d52d7c993537031.pdf",
+   "pages": 10,
+   "sha256": "3e5eed6954f7ee8f160a55cdd01d0bb86e89572709835fa71d52d7c993537031",
+   "text_hf_path": "data/text/sc-2021-pani-ram-2021insc922.txt",
+   "text_sha256": "528698aa71fae4a40b54700c2b178e502168a3389b7f3f5c9e4a181ecbcc02ba"
+  },
+  {
+   "bytes": 964564,
+   "doc_id": "sc-2021-union-of-india-2021insc340",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2021/ab345f7b321bd68501b8db17d502e506195105c9e26a30849191f24347c4d2cb.pdf",
+   "pages": 101,
+   "sha256": "ab345f7b321bd68501b8db17d502e506195105c9e26a30849191f24347c4d2cb",
+   "text_hf_path": "data/text/sc-2021-union-of-india-2021insc340.txt",
+   "text_sha256": "7b5ff0ea5587729303610d257d570dc4e13bb566f7578e9796f8089926b5a6a0"
+  },
+  {
+   "bytes": 322322,
+   "doc_id": "sc-2021-union-of-india-and-others-2021insc623",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2021/96c766b5550b07c513aaa1a65c30107921af9f8db0bfc09548b27791b778a1ea.pdf",
+   "pages": 14,
+   "sha256": "96c766b5550b07c513aaa1a65c30107921af9f8db0bfc09548b27791b778a1ea",
+   "text_hf_path": "data/text/sc-2021-union-of-india-and-others-2021insc623.txt",
+   "text_sha256": "6ee9ecd4c63cc60e964a1b191a2ff1a60c1dbd50f7f6bf8593c8ab5f499937d4"
+  },
+  {
+   "bytes": 218957,
+   "doc_id": "sc-2022-ic-56663x-col-anil-kumar-gupta-2022insc1182",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2022/61062c87ac4e009945aeda576fee1c4e2740d3f7ba448cb10a224ba5225d520b.pdf",
+   "pages": 9,
+   "sha256": "61062c87ac4e009945aeda576fee1c4e2740d3f7ba448cb10a224ba5225d520b",
+   "text_hf_path": "data/text/sc-2022-ic-56663x-col-anil-kumar-gupta-2022insc1182.txt",
+   "text_sha256": "384bc23582561d53e0397e98e29ca37b4f5a6cec4e7262975bfcfd36106d0d31"
+  },
+  {
+   "bytes": 424682,
+   "doc_id": "sc-2022-union-of-india-2022insc747",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2022/1e0ec2962d1bd48a762ba8e05471aded9369bf8301ca6ae8c0ac4576ca49a3b2.pdf",
+   "pages": 10,
+   "sha256": "1e0ec2962d1bd48a762ba8e05471aded9369bf8301ca6ae8c0ac4576ca49a3b2",
+   "text_hf_path": "data/text/sc-2022-union-of-india-2022insc747.txt",
+   "text_sha256": "2ab34a245483ccf71db03df7ba99eec52fd80e5038d08e06d56dcbd8199b713e"
+  },
+  {
+   "bytes": 760707,
+   "doc_id": "sc-2023-dr-jaya-thakur-2023insc616",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2023/665683422d9c8e0052b34b3fae7b98bf0797132ec77b02c5bd04efe894e9d2ae.pdf",
+   "pages": 54,
+   "sha256": "665683422d9c8e0052b34b3fae7b98bf0797132ec77b02c5bd04efe894e9d2ae",
+   "text_hf_path": "data/text/sc-2023-dr-jaya-thakur-2023insc616.txt",
+   "text_sha256": "5c95b7c4f1e290a8188b9172ca8b6ef1092a6eb141854702de7a4b9865ef27b2"
+  },
+  {
+   "bytes": 285516,
+   "doc_id": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2023/ddd90c9822aaed8107b0a0671a12e494cbdeb8e25381933983447c9bf0d79ceb.pdf",
+   "pages": 11,
+   "sha256": "ddd90c9822aaed8107b0a0671a12e494cbdeb8e25381933983447c9bf0d79ceb",
+   "text_hf_path": "data/text/sc-2023-ex-sepoy-madan-prasad-2023insc656.txt",
+   "text_sha256": "5c4b5034e929819587d64a344d452f353dd65513e1d494dea789503917120cde"
+  },
+  {
+   "bytes": 2278712,
+   "doc_id": "sc-2023-supriyo-supriya-chakraborty-an-2023insc920",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2023/b69d2f6ca5e71571fea1d13e1d2ecebb77d2c2e6c42c184e7462618487753b7e.pdf",
+   "pages": 316,
+   "sha256": "b69d2f6ca5e71571fea1d13e1d2ecebb77d2c2e6c42c184e7462618487753b7e",
+   "text_hf_path": "data/text/sc-2023-supriyo-supriya-chakraborty-an-2023insc920.txt",
+   "text_sha256": "5b1fa4c1e534506b77543764d6bcf45cef5ab8e487f0235bb79e1854875cb5f3"
+  },
+  {
+   "bytes": 505986,
+   "doc_id": "sc-2023-union-of-india-and-ors-2023insc463",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2023/cda325635214d6a619d7df9ba4712a462eb431f8a4a86c975b1386bebfc856ee.pdf",
+   "pages": 45,
+   "sha256": "cda325635214d6a619d7df9ba4712a462eb431f8a4a86c975b1386bebfc856ee",
+   "text_hf_path": "data/text/sc-2023-union-of-india-and-ors-2023insc463.txt",
+   "text_sha256": "307edd1ddb76607cad01e2a6d995a4e5c1c4f8daf30c960f1fd3bbe8282ad0f5"
+  },
+  {
+   "bytes": 4971063,
+   "doc_id": "sc-2023-vivek-narayan-sharma-2023insc2",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2023/96ce4a1a9cabc707090f265b425584b0d75da1234d719b90d6583898d859cc38.pdf",
+   "pages": 230,
+   "sha256": "96ce4a1a9cabc707090f265b425584b0d75da1234d719b90d6583898d859cc38",
+   "text_hf_path": "data/text/sc-2023-vivek-narayan-sharma-2023insc2.txt",
+   "text_sha256": "498324fb449304f4146cc8d3cb41f9679444b943d1c23a32058fe7fb6a514ac6"
+  },
+  {
+   "bytes": 110012,
+   "doc_id": "sc-2024-union-of-india-ors-2024insc672",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2024/031da390660af4ca064a62857d55d2cdce0628363d867f1e4f6c24dde98d23aa.pdf",
+   "pages": 8,
+   "sha256": "031da390660af4ca064a62857d55d2cdce0628363d867f1e4f6c24dde98d23aa",
+   "text_hf_path": "data/text/sc-2024-union-of-india-ors-2024insc672.txt",
+   "text_sha256": "3c7ee8e773ff4d298974b1f34c69151856ce2ad879ea6a32bd73dd5bbc348444"
+  },
+  {
+   "bytes": 227545,
+   "doc_id": "sc-2026-rishi-malhotra-anr-2026insc873",
+   "doc_type": "judgment",
+   "hf_path": "data/raw/sci/2026/07668a6f01e38976d132b41feb210d56a7f81efb632a722e15aa769675610dfe.pdf",
+   "pages": 30,
+   "sha256": "07668a6f01e38976d132b41feb210d56a7f81efb632a722e15aa769675610dfe",
+   "text_hf_path": "data/text/sc-2026-rishi-malhotra-anr-2026insc873.txt",
+   "text_sha256": "b4dad254af82f4f9561ac41c9fb8276bf6b607faaa798d84c33163a9375e2e9d"
+  },
+  {
+   "bytes": 48108,
+   "doc_id": "xorder-armed-forces-tribunal-act-removal-of-difficulties-order-2008",
+   "doc_type": "order",
+   "hf_path": "data/raw/indiacode/0000/1c6db257efe5ac077d13847177a5c3706375ef92242f1d45d8f2bbabe683e849.pdf",
+   "pages": 1,
+   "sha256": "1c6db257efe5ac077d13847177a5c3706375ef92242f1d45d8f2bbabe683e849",
+   "text_hf_path": "data/text/xorder-armed-forces-tribunal-act-removal-of-difficulties-order-2008.txt",
+   "text_sha256": "af832800a98a5deb4870459ade6d57744dd215b8d047b118378f84ff40ee357e"
+  }
+ ],
+ "dropped": [
+  {
+   "doc_id": "hc-delhi-2025-la-app-18-2016-dlhc010097512016-1-2025-09-26",
+   "reason": "unopenable PDF or derived text pages outside the physical pages"
+  }
+ ],
+ "hf_repo": "hariomahlawat/mimamsa-corpus",
+ "hf_revision": "3864faf3bb24edef4bfb18fa0916cc788eb68d79",
+ "import": {
+  "activated": true,
+  "contract_errors": [],
+  "noop": false,
+  "refused_reasons": [],
+  "unresolved_by_kind": {},
+  "verified": {
+   "candidates": 3262,
+   "derived_text": 290,
+   "documents": 290
+  }
+ },
+ "release_id": "R13-b1-sample-20261125-4b31855f",
+ "restricted_material": {
+  "config_sha256": "fc7ea07e62e7e41f348639973f19187540593e7b3237933758f64e865b95b2b6",
+  "excluded_before_download": [
+   {
+    "count": 1,
+    "reason": "restricted_material_register"
+   }
+  ]
+ },
+ "selection": {
+  "force_include": [
+   "sc-2013-dharamvir-singh-2013insc408"
+  ],
+  "high_court_per_court": 36,
+  "high_courts": [
+   "hc-delhi",
+   "hc-ph",
+   "hc-jkl",
+   "hc-allahabad"
+  ],
+  "non_judgment": "all except restricted",
+  "seed": "mimamsa-b1-sample-v1",
+  "supreme_court": 80
+ },
+ "signing": "development key generated in memory and discarded; public key beside the bundle; NOT a production key",
+ "tools_commit": "941a06ac288d013a5b861055df6dbf165fe534b2"
+}

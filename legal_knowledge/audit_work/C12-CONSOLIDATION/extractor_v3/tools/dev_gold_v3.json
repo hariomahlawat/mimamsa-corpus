@@ -1,0 +1,3392 @@
+{
+ "J-00befd2de6cacc9f": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-045d8c5dba546886": {
+  "item_id": "DO08",
+  "note": "Proceeding label includes a cited case number (Civil Appeal 5605 of 2010).",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-05ed09beb9d72e6f": {
+  "holdout_id": "H044",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "transferred",
+    "nums": [
+     "89/2010"
+    ],
+    "printed": [
+     "transferred"
+    ],
+    "subst": [
+     "no_adjudication"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-07668a6f01e38976": {
+  "item_id": "DC16",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-0831eb715ae615d4": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-08d44db5c31158e4": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-0a0079f7b27bc3d4": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-0ae3e9d0358a137a": {
+  "holdout_id": "H037",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "transferred",
+    "nums": [
+     "260/2000"
+    ],
+    "printed": [
+     "transferred"
+    ],
+    "subst": [
+     "no_adjudication"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-0b14d4a86b26d344": {
+  "item_id": "DC11",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-0b97fbf0f2969f37": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": null
+   }
+  ],
+  "set": "C10"
+ },
+ "J-0e385a952917a2c1": {
+  "holdout_id": "H049",
+  "procs": [
+   {
+    "basis": "consigned to records; left to avail remedy",
+    "gt_outcome": "other (writ petition \"consigned to records\" leaving petitioner free to avail rem",
+    "nums": [
+     "8079/2018"
+    ],
+    "printed": [
+     "disposed_of"
+    ],
+    "subst": [
+     "no_adjudication"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-0f65307432d16f74": {
+  "note": "composite file: SC judgment pp1-15, unrelated Delhi HC judgment pp16-25",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-0ff9d2fc8ef36dfe": {
+  "note": "no text file at the commit for this sha",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-14621b027952a1b0": {
+  "holdout_id": "H021",
+  "procs": [
+   {
+    "basis": "disposed of in above terms; dismissal set aside, reinstatement",
+    "gt_outcome": "allowed",
+    "nums": [
+     "15437/2022"
+    ],
+    "printed": [
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-14e2d11aa4b88fe0": {
+  "holdout_id": "H001",
+  "procs": [
+   {
+    "basis": "allow the appeal and modify the AFT order",
+    "gt_outcome": "allowed",
+    "nums": [
+     "210/2017"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted",
+     "relief_partly_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-150484f6b52b5fed": {
+  "item_id": "DC17",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-18f09d94d25039d7": {
+  "holdout_id": "H028",
+  "procs": [
+   {
+    "basis": "disposed of with directions; relief refused in substance",
+    "gt_outcome": "disposed_of_with_directions",
+    "nums": [
+     "7652/2023"
+    ],
+    "printed": [
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-1b3285e40ca18879": {
+  "item_id": "DO09",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-1bdb12b9e95ea715": {
+  "item_id": "DC07",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-1c2fdb3010e64967": {
+  "item_id": "DC15",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-1cfeeb3fff4df8e3": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-1de6c12b474985bf": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": null
+   }
+  ],
+  "set": "C10"
+ },
+ "J-22b78d7ae149bc19": {
+  "item_id": "DC12",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-239c4e386f0e201b": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-256fcb675dc11dfb": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": null
+   }
+  ],
+  "set": "C10"
+ },
+ "J-25d56e6a918d4b63": {
+  "holdout_id": "H026",
+  "procs": [
+   {
+    "basis": "leave to withdraw granted; disposed of",
+    "gt_outcome": "dismissed_as_withdrawn",
+    "nums": [
+     "3022/2016"
+    ],
+    "printed": [
+     "disposed_of",
+     "disposed_of_with_directions",
+     "dismissed_as_withdrawn"
+    ],
+    "subst": [
+     "no_adjudication"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-2b1633bc85950375": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-2bbbf6fc331774ee": {
+  "holdout_id": "H053",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "6548/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-2e72a6e9c7b445c8": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "#2169"
+    ],
+    "party_rx": null,
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "nums": [
+     "1/2017"
+    ],
+    "party_rx": "transferred",
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-2e7f5344bfceef97": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed_as_withdrawn"
+    ],
+    "subst": [
+     "no_adjudication"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-35b9c948fe6254c6": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-38d3fd93e76e4d51": {
+  "holdout_id": "H002",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "allowed",
+    "nums": [
+     "9190/1995"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-3a4ed1aba90b8e35": {
+  "note": "mixed: Delhi HC appeals allowed and remitted; Rajasthan appeals dismissed",
+  "procs": [
+   {
+    "nums": [
+     "#8360",
+     "#8830",
+     "#8835",
+     "#8838"
+    ],
+    "party_rx": null,
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted",
+     "remanded_for_fresh_decision"
+    ]
+   },
+   {
+    "nums": [
+     "#2547",
+     "#2550",
+     "#6679",
+     "#13803",
+     "#18038"
+    ],
+    "party_rx": null,
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-3f49a31464fec174": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-407f0d2d729dc22c": {
+  "item_id": "DC03",
+  "note": "Proceeding label includes a cited case number (Civil Appeal 418-2012).",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-41e4cd15e831fd32": {
+  "holdout_id": "H008",
+  "procs": [
+   {
+    "basis": "both appeals allowed in terms; net effect mixed",
+    "gt_outcome": "allowed",
+    "nums": [
+     "876/2003"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted",
+     "relief_partly_granted"
+    ]
+   },
+   {
+    "basis": "both appeals allowed in terms; net effect mixed",
+    "gt_outcome": "allowed",
+    "nums": [
+     "877/2003"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted",
+     "relief_partly_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-46155cc20adbc191": {
+  "holdout_id": "H018",
+  "procs": [
+   {
+    "basis": "writ petitions are partly allowed",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-477651e6cc382094": {
+  "holdout_id": "H007",
+  "procs": [
+   {
+    "basis": "no 'allowed' printed; Tribunal order set aside",
+    "gt_outcome": "allowed",
+    "nums": [
+     "524/1988"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-4812678bad7c42a6": {
+  "item_id": "DO05",
+  "note": "Printed \"We find any merit [sic] ... dismissed\".",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-4872f6c07059de30": {
+  "holdout_id": "H019",
+  "procs": [
+   {
+    "basis": "disposed of in terms of this judgment; challenges rejected",
+    "gt_outcome": "other",
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-4def826e207c6bde": {
+  "holdout_id": "H054",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "7077/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-57712c12e64c3cdf": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-5a5e0efd71dba8b3": {
+  "holdout_id": "H041",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "allowed",
+    "nums": [
+     "810/2025"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-605240b49cee0e3b": {
+  "holdout_id": "H050",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "allowed",
+    "nums": [
+     "9578/2020"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-625ab31500b9ef4d": {
+  "holdout_id": "H010",
+  "procs": [
+   {
+    "basis": "allowed to that extent; HC to reconsider sentence",
+    "gt_outcome": "set_aside_and_remanded",
+    "nums": [
+     "127/2003"
+    ],
+    "printed": [
+     "set_aside_and_remanded",
+     "partly_allowed",
+     "allowed",
+     "disposed_of"
+    ],
+    "subst": [
+     "remanded_for_fresh_decision",
+     "relief_partly_granted"
+    ]
+   },
+   {
+    "basis": "allowed to that extent",
+    "gt_outcome": "allowed",
+    "nums": [
+     "606/2003"
+    ],
+    "printed": [
+     "allowed",
+     "partly_allowed",
+     "disposed_of"
+    ],
+    "subst": [
+     "relief_granted",
+     "relief_partly_granted"
+    ]
+   },
+   {
+    "basis": "'sans merit'; para 16 appeals disposed of",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "128/2003"
+    ],
+    "printed": [
+     "dismissed",
+     "disposed_of"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-63d31faf1b02d050": {
+  "holdout_id": "H048",
+  "procs": [
+   {
+    "basis": "remanded back for fresh order; writ petition allowed",
+    "gt_outcome": "allowed",
+    "nums": [
+     "25502/2019"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "remanded_for_fresh_decision"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-66fe68d2e5da43e3": {
+  "item_id": "DC09",
+  "note": "Excerpt carries a signature stamp and page header mid-sentence.",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-676f2df941964780": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-67f9e255a354cb51": {
+  "holdout_id": "H032",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "18257/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-687f79727bdabff4": {
+  "holdout_id": "H014",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "5306/2008"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   },
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "5307/2008"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-6b5c494c16f7c776": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-6bb566fff9009415": {
+  "holdout_id": "H043",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1325/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-6d492bcf9c4ff372": {
+  "holdout_id": "H035",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "13728/2010"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "9796/2010"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "16482/2009"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-6d5aeb10cf99dcdc": {
+  "holdout_id": "H016",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1536/2009"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-6f92473b87b41a26": {
+  "holdout_id": "H013",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "242/2012"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "2328/2014"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-6f9568685d1f5696": {
+  "item_id": "DO10",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-72a623bb18bbef79": {
+  "note": "allowed in above terms (penalty remitted)",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed",
+     "set_aside_and_remanded"
+    ],
+    "subst": [
+     "relief_granted",
+     "remanded_for_fresh_decision"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-74187282a1ee1c3f": {
+  "item_id": "DC02",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-76a1a41c4624e842": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": null
+   }
+  ],
+  "set": "C10"
+ },
+ "J-776cbc5bf705cb9b": {
+  "holdout_id": "H047",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "transferred",
+    "nums": [
+     "3389/2015"
+    ],
+    "printed": [
+     "transferred"
+    ],
+    "subst": [
+     "no_adjudication"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-7d526d8a8204f049": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed_as_withdrawn"
+    ],
+    "subst": [
+     "no_adjudication"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-80c07dc9b427955b": {
+  "holdout_id": "H025",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "allowed",
+    "nums": [
+     "5840/2021"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-815c0ba783296549": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-81a996f5fc5a3566": {
+  "holdout_id": "H012",
+  "procs": [
+   {
+    "basis": "allow the present appeals to the above limited extent",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "20858/2017"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   },
+   {
+    "basis": "allow the present appeals to the above limited extent",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "20862/2017"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   },
+   {
+    "basis": "allow the present appeals to the above limited extent",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "20859/2017"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   },
+   {
+    "basis": "allow the present appeals to the above limited extent",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "20861/2017"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   },
+   {
+    "basis": "allow the present appeals to the above limited extent",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "20860/2017"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   },
+   {
+    "basis": "allow the present appeals to the above limited extent",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "20863/2017"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   },
+   {
+    "basis": "allow the present appeals to the above limited extent",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "20864/2017"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   },
+   {
+    "basis": "List the SLP separately",
+    "gt_outcome": "not_final",
+    "nums": [
+     "16441/2017"
+    ],
+    "printed": [
+     "not_final"
+    ],
+    "subst": [
+     "interim_only"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-833b38a41dfbc212": {
+  "item_id": "DO06",
+  "note": "Printed \"the instant writ petition is allowed\" with relief restricted (no salary arrears); crawler partly_allowed is defensible on substance.",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted",
+     "relief_partly_granted"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-8442ef8d7c682118": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-84b3ec79e944e193": {
+  "item_id": "DC06",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-86328ad6798c875a": {
+  "item_id": "DO03",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-86de3643e66ec27b": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "#7400",
+     "#7375",
+     "#7376",
+     "#7399",
+     "#9388",
+     "#9389"
+    ],
+    "party_rx": null,
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   },
+   {
+    "nums": [
+     "#7338",
+     "96/2014"
+    ],
+    "party_rx": null,
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-880e6c9e2c3fa74f": {
+  "holdout_id": "H052",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "283/2018"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-8968f568cf14e9c0": {
+  "holdout_id": "H004",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "778/1988"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-8a2bafba8b96ed52": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-8bba30f7592ca576": {
+  "holdout_id": "H046",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "transferred",
+    "nums": [
+     "1056/2013"
+    ],
+    "printed": [
+     "transferred"
+    ],
+    "subst": [
+     "no_adjudication"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-8d3522e4e9afeaac": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-8d70cdcd635d4275": {
+  "item_id": "DO07",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "transferred"
+    ],
+    "subst": [
+     "no_adjudication"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-90231bb221aeadfa": {
+  "item_id": "DC14",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-937ee98804344d1e": {
+  "note": "reviewer: AMBIGUOUS (allowed with directions / disposed of)",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed",
+     "disposed_of_with_directions"
+    ],
+    "subst": [
+     "relief_granted",
+     "relief_partly_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-99f81d5d90c41d57": {
+  "holdout_id": "H040",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "61/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-9a20470d28dbd5d6": {
+  "note": "reviewer: AMBIGUOUS reporter's note; court's order para 54 is per appeal",
+  "procs": [
+   {
+    "nums": [
+     "#2196"
+    ],
+    "party_rx": null,
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "nums": [
+     "#537",
+     "#538"
+    ],
+    "party_rx": null,
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-9a2c4360e23bcd66": {
+  "holdout_id": "H015",
+  "procs": [
+   {
+    "basis": "dispose of the appeals; directions",
+    "gt_outcome": "disposed_of_with_directions",
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": null
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-9c376869003ac4e3": {
+  "item_id": "DC04",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-9cabb52e6823d86a": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-9dd3151e88c703b6": {
+  "item_id": "DC18",
+  "note": "Proceeding label includes a cited case number (Civil Appeal 418-2012).",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-a09b2abfee8c4b21": {
+  "holdout_id": "H042",
+  "procs": [
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "3173/2023"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "233/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "234/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "301/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "316/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "387/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "421/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "439/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "526/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "706/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1000/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "allow; AFT judgment set aside; review medical board",
+    "gt_outcome": "allowed",
+    "nums": [
+     "1007/2024"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted",
+     "remanded_for_fresh_decision"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1036/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1094/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1095/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1096/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1097/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1184/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1218/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1219/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1239/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1242/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1258/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1279/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "allowed; set aside; review medical board",
+    "gt_outcome": "allowed",
+    "nums": [
+     "1319/2024"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted",
+     "remanded_for_fresh_decision"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1365/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1504/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1617/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1644/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "partly allowed",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "1653/2024"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "1694/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "allow; set aside; review medical board",
+    "gt_outcome": "allowed",
+    "nums": [
+     "1708/2024"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted",
+     "remanded_for_fresh_decision"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "2018/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "2022/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "2068/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "2275/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "2298/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "no disposal word printed; AFT order set aside; RMB",
+    "gt_outcome": "other (impugned AFT order set aside and Review Medical Board directed; neither \"",
+    "nums": [
+     "2301/2024"
+    ],
+    "printed": null,
+    "subst": [
+     "relief_granted",
+     "remanded_for_fresh_decision"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "2572/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "2594/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "2613/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "540/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "544/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "657/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "per-petition dismissal",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "658/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-a244397f4588eca6": {
+  "holdout_id": "H023",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "3433/2026"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-a3df6d0d70879879": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-a7038ae7aa02d0f8": {
+  "holdout_id": "H027",
+  "procs": [
+   {
+    "basis": "dispose of; impugned order set aside; remanded",
+    "gt_outcome": "set_aside_and_remanded",
+    "nums": [
+     "3725/2025"
+    ],
+    "printed": [
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": [
+     "remanded_for_fresh_decision"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-a7668068f6f80d0e": {
+  "holdout_id": "H056",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "57380/2016"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-a8793e00d1d04d56": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "#9218"
+    ],
+    "party_rx": "union",
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   },
+   {
+    "nums": [
+     "#7204",
+     "#7205"
+    ],
+    "party_rx": "neeraj|sandeep|accused",
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-ad0b71ea65745a81": {
+  "holdout_id": "H005",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "allowed",
+    "nums": [
+     "5015/2008"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-aeadd9caa066a2ae": {
+  "item_id": "DC05",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-aee6c512a49d1d3f": {
+  "item_id": "DC01",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-b159ba1791fd48a2": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-b205fc3cd8deedc0": {
+  "holdout_id": "H024",
+  "procs": [
+   {
+    "basis": "no formal disposal words; AFT order set aside",
+    "gt_outcome": "allowed",
+    "nums": [
+     "933/2024"
+    ],
+    "printed": null,
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-b43240e40da56352": {
+  "expect_abstain": true,
+  "note": "'For orders see LA.APP. 784/2005' - no own disposition",
+  "procs": [],
+  "set": "C10"
+ },
+ "J-b4fd0cb4c3c6d2d5": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": null
+   }
+  ],
+  "set": "C10"
+ },
+ "J-b60901210c879d55": {
+  "item_id": "DO01",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-b7fc50eac68c5616": {
+  "holdout_id": "H055",
+  "procs": [
+   {
+    "basis": "transmitted to the AFT",
+    "gt_outcome": "transferred",
+    "nums": [
+     "2804/2009"
+    ],
+    "printed": [
+     "transferred"
+    ],
+    "subst": [
+     "no_adjudication"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-b822138d8ebc1274": {
+  "holdout_id": "H039",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "986/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-b8c0cce9b8c696af": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-b8d58c1ad94db0df": {
+  "holdout_id": "H031",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "37488/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "37712/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "38175/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-bb1eca543282e252": {
+  "holdout_id": "H051",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "6695/2019"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-bcc5d0a28bd628ed": {
+  "holdout_id": "H017",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "allowed",
+    "nums": [
+     "8139/2019"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-be950a8b5ab4fe4b": {
+  "item_id": "DC19",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-c07078fffc08aa92": {
+  "item_id": "DO02",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-c0cd59b87b44126c": {
+  "holdout_id": "H003",
+  "procs": [
+   {
+    "basis": "dismissed on the aforesaid terms; SJ order modified",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "13783/2015"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused",
+     "relief_partly_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-c219dc9e50c145f9": {
+  "holdout_id": "H006",
+  "procs": [
+   {
+    "basis": "will stand dismissed subject to directions",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-c2f51fac25017d10": {
+  "holdout_id": "H020",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "4357/2015"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   },
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "4358/2015"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-c354e743621c82e4": {
+  "holdout_id": "H045",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed_as_withdrawn",
+    "nums": [
+     "7/2024"
+    ],
+    "printed": [
+     "dismissed_as_withdrawn"
+    ],
+    "subst": [
+     "no_adjudication"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-cb3aa7cfabf6806b": {
+  "holdout_id": "H009",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "allowed",
+    "nums": [
+     "7805/1997"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   },
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "allowed",
+    "nums": [
+     "7806/1997"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   },
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "allowed",
+    "nums": [
+     "7807/1997"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   },
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "allowed",
+    "nums": [
+     "7808/1997"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-cc2c318a88107e3b": {
+  "note": "common order for OWP 1933/2014 and OWP 998/2004 (host per metadata: 998/2004). Reviewer: transferred to AFT; disposed of (host). 1933/2014 'dismissed' read by the C11 workstream from the text layer (para 3).",
+  "procs": [
+   {
+    "nums": [
+     "#998"
+    ],
+    "party_rx": null,
+    "printed": [
+     "transferred"
+    ],
+    "subst": [
+     "no_adjudication"
+    ]
+   },
+   {
+    "nums": [
+     "#1933"
+    ],
+    "party_rx": null,
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-d04286bd4db2cd21": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-d1a88d862bf0947c": {
+  "holdout_id": "H022",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "3742/2011"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-d1d5636286819122": {
+  "item_id": "DC20",
+  "note": "Excerpt carries a signature stamp and page header mid-sentence.",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-d20b2864c5c60718": {
+  "item_id": "DC08",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-d29ce9d4b7627755": {
+  "holdout_id": "H011",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "partly_allowed",
+    "nums": [
+     "967/2017"
+    ],
+    "printed": [
+     "partly_allowed"
+    ],
+    "subst": [
+     "relief_partly_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-d3845af43a1ee881": {
+  "holdout_id": "H029",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "24683/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-d5828c28fa89c62c": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-d97e08ad98b8089c": {
+  "item_id": "DC13",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-d9a135f244c758e7": {
+  "holdout_id": "H030",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "34119/2024"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-db5d2083c8dcb88f": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-dc4e373a2905283f": {
+  "item_id": "DO04",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-dc60fe0001b07e43": {
+  "note": "impugned AFT order quashed; the lower OA dismissed as infructuous; liberty. 'dismissed_as_infructuous' of the OA is NOT the writ petition's outcome",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed",
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-ddf835f63effb126": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-dee5016f0e4e3313": {
+  "holdout_id": "H038",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "dismissed",
+    "nums": [
+     "18253/2025"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-e90b461d579b15c7": {
+  "holdout_id": "H036",
+  "procs": [
+   {
+    "basis": "disposed of in the above terms; none appeared",
+    "gt_outcome": "disposed_of_with_directions",
+    "nums": [
+     "13950/2006"
+    ],
+    "printed": [
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": null
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-eb24633d832c0536": {
+  "note": "no explicit disposal phrase ('no ground for interference')",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-ebb86d4b3308eb89": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-ec2066de997ea77b": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-ed2a29d15d1b3e7f": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-edd9b3e010b4678e": {
+  "holdout_id": "H034",
+  "procs": [
+   {
+    "basis": "disposed of in terms of earlier judgment; same relief",
+    "gt_outcome": "disposed_of_with_directions",
+    "nums": [
+     "13553/2009"
+    ],
+    "printed": [
+     "disposed_of_with_directions",
+     "disposed_of"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-ef262f34b39e2ea7": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-f2493f6249d43842": {
+  "holdout_id": "H033",
+  "procs": [
+   {
+    "basis": "GT label; default substantive mapping",
+    "gt_outcome": "allowed",
+    "nums": [
+     "9985/2009"
+    ],
+    "printed": [
+     "allowed"
+    ],
+    "subst": [
+     "relief_granted"
+    ]
+   }
+  ],
+  "set": "C11H"
+ },
+ "J-f6566760e1b14d52": {
+  "item_id": "DC10",
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C11R"
+ },
+ "J-fc9a590352a30fce": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "J-fefa4ebc7b1bf62a": {
+  "note": "",
+  "procs": [
+   {
+    "nums": [
+     "ALL"
+    ],
+    "printed": [
+     "dismissed"
+    ],
+    "subst": [
+     "relief_refused"
+    ]
+   }
+  ],
+  "set": "C10"
+ },
+ "_note": "IN-SAMPLE development gold; see build_dev_gold_v3.py",
+ "_source": "Build tools/dev_gold_v3.json: the DEVELOPMENT gold for extractor v3 (two-field outcome per proceeding)."
+}

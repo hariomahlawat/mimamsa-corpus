@@ -1,0 +1,159 @@
+{
+ "inputs": {
+  "c10/inputs/hf_snapshot/lk_declared_sidecars.tsv": "be154debd080243cf33417c36fa520e1fabbeebeb9e6d12942c7de3589e619d5",
+  "c10/outputs/UNIFIED_CORPUS_INVENTORY.csv": "91519458af20c6bd849ccb8ab72d4dd32057fa0382738fa240055fe8a5b22e91",
+  "git:21e73b83:legal_knowledge/audit_work/SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv": "5fae890a493eea2050488a05e54547c1f537f346e348b8e55d7c5fc12f95efa8",
+  "git:21e73b83:legal_knowledge/audit_work/SOURCE-LIBRARY-C5/registers/source_copy_register.csv": "415c85f4a2434dfbdd9e0ea0c35a3c0abbb9d64b9481c8b043c8256d145ff73b",
+  "git:21e73b83:legal_knowledge/audit_work/SOURCE-LIBRARY-C5/registers/source_master_register.csv": "d4c4b9b21bcf18c607856873bb2beb9aa7db5bc5141ee2b8848c5f7be4104261",
+  "git:21e73b83:legal_knowledge/audit_work/WS-B-JUDGMENTS/holdings_register.csv": "ea8badfcf9a5d1ce3367fd9275e52356a88069cb4a56292346f3818e39b52de3",
+  "git:21e73b83:legal_knowledge/audit_work/WS-B-JUDGMENTS/identity_resolution.csv": "dcb9c628dbddf59cbbf01381962ba9d22136e8730c198cdf7a51f8eb351cb723",
+  "git:21e73b83:legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+  "git:21e73b83:legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+  "git:9a6f9366:legal_knowledge/audit_work/C8-EVIDENCE/SC-T2/sc_copy_evidence_register.csv": "0878a6532a3457d8887c2f1e4afefbfa4511f9209127f085489c53c7cdfc73ef",
+  "git:9a6f9366:legal_knowledge/audit_work/C9-EVIDENCE-CLEAN/SC-C9/judis_scan_c9.csv": "1b66b3bf1bb7bb02155c970139be90d570cb788dc547034a11f579be2fb083ae",
+  "git:ad77758d:data/excluded_judgments.jsonl": "46c7bd73f99b7474dd5609f94599c9275505e17c303e2952cce8527ea3efdc23",
+  "git:ad77758d:data/meta/(sc-*,hc-*) [4259 files, path+bytes digest]": "5e0339b3360876f69f81bfc983febc8fd9adbe8ac1cdc484ff5c29d8e8bf5695",
+  "git:ad77758d:data/raw_manifest.csv": "85afb98fb234e2212d5727bb1fc72327404e1d804cb557299bb3b36e54971e05",
+  "git:ad77758d:data/text (judgment texts) [4250 files, path+bytes digest]": "bc47f74ff014870d2478d4d78701d9bd0d031f4dcc982d96766331f1cae3c129",
+  "git:cfc52d57:legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/CORRECTIONS/consolidated_finding_register.csv": "5b72aea9362fed778c4004c40ea28ee35f06b0746cb5edb708f6e9cc2a2879dc",
+  "store:citation-codes/girish_feb2026.pdf": "4f7ea3a451c6f9a11d7e4dd96822e68cd9cd7a01d8dc74cf46ad34e79029b86c",
+  "store:citation-codes/jasbir_2022.pdf": "c23ce0e334252849ccf1d85949fc482e33071d4a04db5ae3e83c60c16a05faa2",
+  "store:citation-codes/mullikote_2026.pdf": "10e1954f2e39916ea0f0e8e759c3823581becf752dd6ad2e9058569a1fd97444",
+  "store:citation-codes/nsyadav_2019.pdf": "3c50cdb7f30d1a84b488a72052bdf1868cea18ec4e02aee292cf1e97ebf5bbe6",
+  "store:citation-codes/ppsbedi_judis9884.pdf": "211dbaf4e20371cc476d09c158e41b976786d57f67336ff6fc802170178b3cca",
+  "store:citation-codes/psgill_2019.pdf": "7c32b8e87984c9f3dd52218f9030dffad3ea5aedc98d256744fd5e97d044a0ac",
+  "store:citation-codes/ranjit_judis8566.pdf": "ed7cf31fd8fbe50822e0a60f80b96ed1187dcd465dc4ae2649424c58001ff399",
+  "store:citation-codes/snmukherjee_judis7439.pdf": "eb4420801e978469e9c7407f8c079273f9cd483ad45a4427daa53e3d229969cc",
+  "store:independent-reviewer/rop_275403.pdf": "c6ec489dff7a107b630a8646190a8cda303a54e4e9f5463eaed748ae0a42a1dd",
+  "store:judgment-auditor/anvar_judis_41931.pdf": "06f77a701073bc32f91ab4a67331cb4747f61214a6f3d2e6408196355dac449b",
+  "store:judgment-auditor/arjun_2020.pdf": "9c3d7880471fe22f5be2a501bbff40d5b93e32670a37903e04af4dcd92b4aebc",
+  "store:judgment-auditor/dharamvir_judis_40493.pdf": "3056712cc7614399f72ee19f529f91990e70dba8a317dd3bd07e76e4ac546b75",
+  "store:judgment-auditor/parashotam_2023.pdf": "fe19875b19ed5a4efa257273cd2fb1f1cbb57c4f383117cc40e9a90046568377",
+  "store:judgment-auditor/rajbir_bosir_2213461.pdf": "6b495f1483657581965b808b18aa23c09b424989e41d43226c90d35845855cde",
+  "store:judgment-auditor/rajbir_judis_42379.pdf": "970b96807bcbf8a1255fe16c574b575f64fe2edee1cbb271485fa7661a62c666",
+  "store:judgment-auditor/virendra_2020.pdf": "0ff9d2fc8ef36dfebe862739e517b5ec51f4fff9b4f9b3f7b86beece5d85e819",
+  "store:orchestrator/isaac_2026.pdf": "3f49a31464fec174cdbff5d9e194fa888ca00529b6246eacdc8ac2368eab4653",
+  "store:orchestrator/navjot_2005.pdf": "3b75354869ffb928f73532f475f5f920e2f2a1f8817163caba2f7fb5e1eb215d",
+  "workstream/inputs/hf_lk_text_readings.json": "1e332ff26725302f328a455a9a5d2c12684045294a6b10d28d7698abfb424b24"
+ },
+ "limits": [
+  "HF bytes NOT_CHECKED (no download access); HF legal_knowledge identities rest on HF sidecars and HF working-text excerpts",
+  "No page images rendered in C10; readings are text-layer readings, AI agent, not human-confirmed",
+  "Treatment search is deterministic over held crawler texts only (to 2026-11-03); absence of a hit is not proof of no treatment",
+  "SCR-format copies are third-party mirror renditions; used as comparators only"
+ ],
+ "outputs": {
+  "ADVISER_ESCALATIONS_C10.csv": "6d5bdc3dc916c09440fb50680cea7063d1d8fb346dad91007aa5452ce7847f24",
+  "C9_FINDING_STATUS_C10.csv": "139a870b6ce368e750cc5d75bdd2aa20a608779b81ef775c6fb39ccc4dcaece8",
+  "CORRECTION_PROPOSALS_C10.csv": "f297bb9046cb50c71d2d6e971d3c8da767d34cace3b0382ff579825a65d15b58",
+  "CURATED_CASE_COPY_STATUS.csv": "101b103d55db50c53f9e2ff2e6f05aa9e994b14f4108ab98b5e69d8b9269ea43",
+  "JUDGMENT_RECONCILIATION.csv": "5366e9cbeae77580eeb6051263725a8d745a191621819c364b246167fbc03d12",
+  "JUDICIAL_TREATMENT_C10.csv": "4acc9303731c32f57a1969eefd95f62a65aa9bf7199f8ee320e1dd850d29477e",
+  "SCR_COMPARATOR_RESULTS.csv": "00fe1c5848f78a19bf80beabde66a2e5779950feacc756f516076a82db76fdf7",
+  "SCR_COPY_IDENTITY.csv": "509330884e2bb7429e77b94bb367f21cf9dc07bc18968d406b41798a9499836a",
+  "TREATMENT_CITATION_HITS.csv": "7acfa32177b4ad6caae1b8e4cc7a70c25cbcbb0f091508c00617180f726fd692"
+ },
+ "pinned": {
+  "pr40_head": "9a6f9366a0de45b8443287040421d65ac550f11e",
+  "pr41_head": "cfc52d5792796050dcae351afda5609f7db41a5f",
+  "raw_data": "ad77758d4569ba6aafa955cc7843d874489e10f7",
+  "staging": "21e73b8348767d5f1524167fcec538e1aad6e732"
+ },
+ "schema": "c10-judicial-manifest/1",
+ "summary": {
+  "c9_effects": {
+   "NOT_AFFECTED": 10,
+   "UNCHANGED": 3,
+   "UNCHANGED_CLARIFIED": 1,
+   "UNCHANGED_CONFIRMED": 2,
+   "UNCHANGED_EVIDENCE_ADDED": 6,
+   "UNCHANGED_STRENGTHENED": 1
+  },
+  "copies": 3973,
+  "copies_by_rendition": {
+   "HC_COURT_PDF_AWS_ECOURTS_MIRROR": 3605,
+   "JUDIS_PATH_COURT_LAYOUT_PDF": 3,
+   "JUDIS_TYPED_TEXT_RENDITION": 5,
+   "OTHER_COURT_SYSTEM_COPY_BOSIR": 1,
+   "SCR_REPORT_RENDITION_AWS_ESCR_MIRROR": 346,
+   "SC_OFFICIAL_COURT_PDF": 11,
+   "SC_ROP_PATH_COPY": 1,
+   "THIRD_PARTY_MIRROR_OF_SIGNED_ORDER": 1
+  },
+  "curated_c5_status": {
+   "HELD_UNREGISTERED": 20,
+   "NOT_HELD": 20,
+   "REGISTERED": 13
+  },
+  "curated_cases": 53,
+  "curated_changes_vs_wsb": [
+   "DCLR-SC-1964-A11",
+   "DCLR-SC-2016-L04"
+  ],
+  "curated_held_status": {
+   "CANDIDATE_HELD_DATE+PARTY_ONLY (curated record has no other deterministic key matching)": 3,
+   "CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY (curated record carries no date, case number or citation)": 6,
+   "HELD": 33,
+   "NOT_HELD": 9,
+   "NOT_HELD_EXCLUDED_FROM_CRAWLER_STORE": 2
+  },
+  "curated_official_copy": {
+   "NO_COPY_HELD": 20,
+   "NO_SIGNED_OR_OFFICIAL_COURT_PDF; held: JUDIS_TYPED_TEXT_RENDITION": 2,
+   "NO_SIGNED_OR_OFFICIAL_COURT_PDF; held: JUDIS_TYPED_TEXT_RENDITION+SCR_REPORT_RENDITION_AWS_ESCR_MIRROR": 3,
+   "NO_SIGNED_OR_OFFICIAL_COURT_PDF; held: SCR_REPORT_RENDITION_AWS_ESCR_MIRROR": 18,
+   "NO_SIGNED_OR_OFFICIAL_COURT_PDF; held: THIRD_PARTY_MIRROR_OF_SIGNED_ORDER": 1,
+   "YES_COURT_HOSTED_JUDIS_PATH_LAYOUT": 2,
+   "YES_COURT_HOSTED_JUDIS_PATH_LAYOUT;YES_COURT_HOSTED_ROP_PATH;YES_COURT_SYSTEM_BOSIR": 1,
+   "YES_OFFICIAL_COURT_PDF": 6
+  },
+  "escalations": 6,
+  "groups": 3961,
+  "groups_by_class": {
+   "CORRECTED_JUDGMENT": 1,
+   "DIFFERENT_RENDITION": 9,
+   "EXACT_DUPLICATE": 3943,
+   "MISSING_OFFICIAL_ORIGINAL": 342,
+   "SAME_KEY_DIFFERENT_DECISION_DATES_REVIEW": 1,
+   "SINGLE_COPY": 8
+  },
+  "proposals": 9,
+  "readings": 32,
+  "sc_groups_by_class": {
+   "CORRECTED_JUDGMENT": 1,
+   "DIFFERENT_RENDITION": 9,
+   "EXACT_DUPLICATE": 338,
+   "MISSING_OFFICIAL_ORIGINAL": 342,
+   "SAME_KEY_DIFFERENT_DECISION_DATES_REVIEW": 1,
+   "SINGLE_COPY": 8
+  },
+  "treatment_classes": {
+   "APPLIED": 12,
+   "CLARIFIED": 2,
+   "DISTINGUISHED": 5,
+   "NOT_DETERMINED": 1,
+   "OVERRULED": 1
+  },
+  "treatment_hits": 2034,
+  "treatment_hits_after_decision": {
+   "DHARAMVIR|CITATION_STRING": 597,
+   "DHARAMVIR|NAME_ONLY_REVIEW_REQUIRED": 118,
+   "GIRISH|CITATION_STRING": 20,
+   "GIRISH|NAME_ONLY_REVIEW_REQUIRED": 4,
+   "ISAAC|CITATION_STRING": 1,
+   "MULLIKOTE|CITATION_STRING": 2,
+   "MULLIKOTE|NAME_ONLY_REVIEW_REQUIRED": 54,
+   "PARASHOTAM|CITATION_STRING": 7,
+   "PARASHOTAM|NAME_ONLY_REVIEW_REQUIRED": 8,
+   "RAJBIR|CITATION_STRING": 281,
+   "RAJBIR|NAME_ONLY_REVIEW_REQUIRED": 23,
+   "RAMAVTAR|CITATION_STRING": 308,
+   "RAMAVTAR|NAME_ONLY_REVIEW_REQUIRED": 397,
+   "SHRIKANT|CITATION_STRING": 16,
+   "SHRIKANT|NAME_ONLY_REVIEW_REQUIRED": 13,
+   "SPRATHORE|CITATION_STRING": 1,
+   "TARSEM|CITATION_STRING": 28,
+   "TARSEM|NAME_ONLY_REVIEW_REQUIRED": 80
+  }
+ }
+}

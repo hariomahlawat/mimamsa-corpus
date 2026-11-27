@@ -1,0 +1,426 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/status_axes.schema.json",
+  "title": "Separate status axes",
+  "description": "Seven independent axes, each defined separately and closed (additionalProperties false), so no axis can carry another axis's value or a free-form object. A value on one axis never sets another (Architecture section 6, Document Studio 3, Ingestion 4). There is deliberately no single 'verified' field. Raised values must cite a review record (review_record_id) or, for legal approval, an approval record (approval_record_id); the validator resolves those ids against reviewed_record / approval_record entries in the same bundle (rules RAISED_VALUE_NEEDS_REVIEW, APPROVAL_UNRESOLVED).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_integrity",
+    "source_authenticity",
+    "evidence_fidelity",
+    "legal_applicability",
+    "legal_approval",
+    "publication",
+    "dependency_freshness"
+  ],
+  "properties": {
+    "source_integrity": {
+      "$ref": "#/$defs/source_integrity"
+    },
+    "source_authenticity": {
+      "$ref": "#/$defs/source_authenticity"
+    },
+    "evidence_fidelity": {
+      "$ref": "#/$defs/evidence_fidelity"
+    },
+    "legal_applicability": {
+      "$ref": "#/$defs/legal_applicability"
+    },
+    "legal_approval": {
+      "$ref": "#/$defs/legal_approval"
+    },
+    "publication": {
+      "$ref": "#/$defs/publication"
+    },
+    "dependency_freshness": {
+      "$ref": "#/$defs/dependency_freshness"
+    }
+  },
+  "$defs": {
+    "basis": {
+      "description": "Why this value: tool, rule or review record. Never empty.",
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 2000
+    },
+    "recorded_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "evidence_ref": {
+      "description": "Repository path or verification record supporting the value.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    },
+    "review_record_id": {
+      "description": "Id of a reviewed_record in the same bundle. Required by rule for raised values.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^RV-[A-Za-z0-9._-]{3,80}$"
+    },
+    "source_integrity": {
+      "description": "Are these the exact bytes we claim? BYTE_VERIFIED = re-hashed against an independently held manifest at a pinned revision (evidence_ref required by rule).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "basis"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "BYTE_VERIFIED",
+            "DECLARED_HASH_ONLY",
+            "NOT_CHECKED",
+            "MISMATCH",
+            "TRUNCATED_AT_SOURCE"
+          ]
+        },
+        "basis": {
+          "$ref": "#/$defs/basis"
+        },
+        "recorded_at": {
+          "$ref": "#/$defs/recorded_at"
+        },
+        "evidence_ref": {
+          "$ref": "#/$defs/evidence_ref"
+        }
+      }
+    },
+    "source_authenticity": {
+      "description": "Is the copy what it purports to be? Mirrors SOURCE_AUTHORITY_POLICY v1 (the only axis that carries policy_v1). Never raised by Admin publication. IDENTITY_CONFIRMED also requires authentication_evidence (custodian certificate, official-source record or AUTH-LEDGER entry) and a HUMAN review; an AI review alone can never confirm identity.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "basis",
+        "policy_v1"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "UNKNOWN",
+            "PROVISIONAL",
+            "IDENTITY_CONFIRMED",
+            "DISPUTED"
+          ]
+        },
+        "basis": {
+          "$ref": "#/$defs/basis"
+        },
+        "recorded_at": {
+          "$ref": "#/$defs/recorded_at"
+        },
+        "evidence_ref": {
+          "$ref": "#/$defs/evidence_ref"
+        },
+        "review_record_id": {
+          "$ref": "#/$defs/review_record_id"
+        },
+        "policy_v1": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "document_authority",
+            "carrier_provenance",
+            "copy_fidelity",
+            "amendment_chain_status"
+          ],
+          "properties": {
+            "document_authority": {
+              "enum": [
+                "ENACTED_OR_NOTIFIED_PRIMARY",
+                "OFFICIAL_JUDICIAL_DECISION",
+                "GOVERNMENT_COMPILATION",
+                "GOVERNMENT_ISSUED_MANUAL",
+                "UNVERIFIED_MANUAL",
+                "THIRD_PARTY_COMMENTARY",
+                "UNKNOWN"
+              ]
+            },
+            "carrier_provenance": {
+              "enum": [
+                "ISSUING_AUTHORITY",
+                "GOVERNMENT_HOSTED_COPY",
+                "THIRD_PARTY_ARCHIVAL_FACSIMILE",
+                "USER_SUPPLIED",
+                "THIRD_PARTY_TRANSCRIPTION",
+                "UNKNOWN"
+              ]
+            },
+            "copy_fidelity": {
+              "enum": [
+                "NOT_CHECKED",
+                "HASH_ONLY",
+                "PAGE_IMAGE_CHECKED",
+                "CUSTODIAN_AUTHENTICATED"
+              ]
+            },
+            "amendment_chain_status": {
+              "enum": [
+                "NOT_CHECKED",
+                "PARTIAL",
+                "CHECKED_FOR_RELEVANT_PERIOD",
+                "NOT_APPLICABLE"
+              ]
+            },
+            "instrument_identity": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 500
+            },
+            "authority_rationale": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 2000
+            }
+          }
+        },
+        "authentication_evidence": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "ref"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "CUSTODIAN_CERTIFICATE",
+                "OFFICIAL_SOURCE_RECORD",
+                "AUTH_LEDGER_ENTRY"
+              ]
+            },
+            "ref": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 500
+            },
+            "artefact_sha256": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "official_source_url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 2048
+            }
+          }
+        }
+      }
+    },
+    "evidence_fidelity": {
+      "description": "Has the extracted text, field or candidate been checked against the source page? Anything above AUTOMATED_CANDIDATE_NOT_VERIFIED needs a review record.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "basis"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+            "DOCUMENTARY_CHECKED",
+            "FIDELITY_VERIFIED",
+            "INCORRECT"
+          ]
+        },
+        "basis": {
+          "$ref": "#/$defs/basis"
+        },
+        "recorded_at": {
+          "$ref": "#/$defs/recorded_at"
+        },
+        "evidence_ref": {
+          "$ref": "#/$defs/evidence_ref"
+        },
+        "review_record_id": {
+          "$ref": "#/$defs/review_record_id"
+        }
+      }
+    },
+    "legal_applicability": {
+      "description": "Temporal and scope applicability is a legal determination. NOT_ESTABLISHED is the only value a technical (human or AI) review may leave; any other value must cite an approval_record under a recorded Legal Reviewer appointment with an artefact, and is rejected while AUTH-LEDGER is at version 0 (rules LEGAL_AXIS_NEEDS_APPROVAL, LEDGER_V0_NO_APPLICABILITY).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "basis"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "NOT_ESTABLISHED",
+            "UNRESOLVED",
+            "PARTIAL_CHAIN",
+            "EVIDENCED",
+            "CONFLICTING",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "basis": {
+          "$ref": "#/$defs/basis"
+        },
+        "recorded_at": {
+          "$ref": "#/$defs/recorded_at"
+        },
+        "evidence_ref": {
+          "$ref": "#/$defs/evidence_ref"
+        },
+        "approval_record_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^AP-[A-Za-z0-9._-]{3,80}$"
+        }
+      }
+    },
+    "legal_approval": {
+      "description": "Document Studio 3.3 tiers. Any value other than T0_RESEARCH_ONLY must cite an approval_record (approval_record_id) that names a recorded appointment and an approval artefact hash, both present in the bundle. While AUTH-LEDGER is at version 0 every record must be T0_RESEARCH_ONLY.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "basis"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "T0_RESEARCH_ONLY",
+            "APPROVAL_RECORDED_UNCONFIRMED",
+            "T1_LEGAL_ADVISER_REVIEWED",
+            "T2_FORMAL_JAG_VALIDATED",
+            "REVOKED"
+          ]
+        },
+        "basis": {
+          "$ref": "#/$defs/basis"
+        },
+        "recorded_at": {
+          "$ref": "#/$defs/recorded_at"
+        },
+        "approval_record_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^AP-[A-Za-z0-9._-]{3,80}$"
+        }
+      },
+      "if": {
+        "properties": {
+          "value": {
+            "const": "T0_RESEARCH_ONLY"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "approval_record_id": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "required": [
+          "approval_record_id"
+        ],
+        "properties": {
+          "approval_record_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "publication": {
+      "description": "In a release bundle this is the upstream release state, not a site publication: activation of a release by the site Admin is the publication act and is recorded as a publication_record (channel RELEASE_ACTIVATION). Publication is never legal approval. EXCLUDED_RESTRICTED items must not appear in a bundle at all.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "basis"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "STAGED",
+            "PROCESSING",
+            "REVIEW_REQUIRED",
+            "REJECTED",
+            "FAILED",
+            "PUBLISHED",
+            "WITHDRAWN",
+            "EXCLUDED_RESTRICTED"
+          ]
+        },
+        "basis": {
+          "$ref": "#/$defs/basis"
+        },
+        "recorded_at": {
+          "$ref": "#/$defs/recorded_at"
+        },
+        "publication_record_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^PB-[A-Za-z0-9._-]{3,80}$"
+        }
+      }
+    },
+    "dependency_freshness": {
+      "description": "Whether downstream items built on this record are current for their checked scope. CURRENT_FOR_CHECKED_SCOPE needs a review record.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "basis"
+      ],
+      "properties": {
+        "value": {
+          "enum": [
+            "NOT_EVALUATED",
+            "CURRENT_FOR_CHECKED_SCOPE",
+            "REVALIDATION_REQUIRED",
+            "BLOCKED"
+          ]
+        },
+        "basis": {
+          "$ref": "#/$defs/basis"
+        },
+        "recorded_at": {
+          "$ref": "#/$defs/recorded_at"
+        },
+        "evidence_ref": {
+          "$ref": "#/$defs/evidence_ref"
+        },
+        "review_record_id": {
+          "$ref": "#/$defs/review_record_id"
+        }
+      }
+    }
+  }
+}

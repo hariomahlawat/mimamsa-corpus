@@ -1,0 +1,7 @@
+# C12 WS-F statutory-citation build: tested interpreter and packages (review F-10).
+# Interpreter: CPython 3.13.18 (3.11+ should work but is not the recorded environment;
+# the system python3.11 in this container has neither PyMuPDF nor pytest).
+# PyMuPDF text extraction and PNG rendering are version-sensitive: the outputs and the
+# page_evidence render hashes were produced with the versions below.
+PyMuPDF==2.1
+pytest==9.2.0

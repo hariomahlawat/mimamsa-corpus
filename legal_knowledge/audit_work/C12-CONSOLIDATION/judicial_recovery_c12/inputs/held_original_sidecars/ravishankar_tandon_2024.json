@@ -1,0 +1,20 @@
+{
+  "case_name": "Ravishankar Tandon v State of Chhattisgarh",
+  "court": "Supreme Court of India",
+  "neutral_citation": "2024 INSC 299",
+  "decision_date": "2024-04-10",
+  "source_url": "https://api.sci.gov.in/supremecourt/2023/27190/27190_2023_3_1502_52269_Judgement_10-Apr-2024.pdf",
+  "retrieved_at_utc": "2026-11-22T08:31:31.969211+00:00",
+  "path": "legal_knowledge/judgment_originals/sci/2024/ravishankar_tandon_2024.pdf",
+  "sha256": "adae1b11687f9606ed2d09d3d901590edfcb4a88c747ccde3ccaec9e15315b5d",
+  "bytes": 256820,
+  "pages": 24,
+  "focus": "Prior case Navjot Sandhu (2005), distinct Section 27 discovery-of-fact passage",
+  "reviewed_paragraphs": "12–14",
+  "legal_treatment_scope": "CITED_AND_DISCUSSSED_NOT_WHOLE_CASE_REHABILITATION",
+  "historical_statute": "Indian Evidence Act, 1872, section 27",
+  "current_bsa_2023_checked": false,
+  "subsequent_treatment_exhaustively_checked": false,
+  "holding_cleared_for_operational_use": false,
+  "jag_approved": false
+}

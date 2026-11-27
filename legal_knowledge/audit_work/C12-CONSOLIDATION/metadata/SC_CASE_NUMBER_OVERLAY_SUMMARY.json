@@ -1,0 +1,8 @@
+{
+ "records": 368,
+ "tally": {
+  "NOT_APPLIED_APPLY_CANDIDATE_UNREVIEWED_CONFIRMED": 266,
+  "NOT_APPLIED_UNRESOLVED": 3,
+  "STAGED": 99
+ }
+}

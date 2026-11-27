@@ -1,0 +1,33 @@
+..........<repo>/tests/test_legal_audit_calibration02.py:337: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpf8izljte/CALIBRATION-02/proposals/correction_proposals.csv' mode='r' encoding='utf-8'>
+  st = {r["proposition_id"]: r["support_status"] for r in csv.DictReader(open(base / "proposals/correction_proposals.csv", newline="", encoding="utf-8"))}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<repo>/tests/test_legal_audit_calibration02.py:341: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpf8izljte/CALIBRATION-02/reconciliation/effective_evidence.csv' mode='r' encoding='utf-8'>
+  eff = {r["finding_id"]: r for r in csv.DictReader(open(base / "reconciliation/effective_evidence.csv", newline="", encoding="utf-8"))}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...<repo>/legal_knowledge/audit_work/CALIBRATION-02/tools/build_propositions.py:27: ResourceWarning: unclosed file <_io.TextIOWrapper name='<repo>/legal_knowledge/audit_work/COORDINATION/CALIBRATION-01/calibration_package.csv' mode='r' encoding='utf-8'>
+  cal = list(csv.DictReader(CAL.open(newline="", encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+records=46 propositions=382 kb_sha256=9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1
+<repo>/tests/test_legal_audit_calibration02.py:20: ResourceWarning: unclosed file <_io.TextIOWrapper name='<repo>/legal_knowledge/audit_work/CALIBRATION-02/propositions.csv' mode='r' encoding='utf-8'>
+  rows = list(csv.DictReader(open(C2 / "propositions.csv", newline="", encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.<repo>/tests/test_legal_audit_calibration02.py:164: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4zbwr207/CALIBRATION-02/reconciliation/proposition_matrix.csv' mode='r' encoding='utf-8'>
+  m = {r["proposition_id"]: r for r in csv.DictReader(open(base / "reconciliation/proposition_matrix.csv", newline="", encoding="utf-8"))}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<repo>/tests/test_legal_audit_calibration02.py:165: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4zbwr207/CALIBRATION-02/proposals/correction_proposals.csv' mode='r' encoding='utf-8'>
+  p = list(csv.DictReader(open(base / "proposals/correction_proposals.csv", newline="", encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+<repo>/tests/test_legal_audit_calibration02.py:166: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp4zbwr207/CALIBRATION-02/reconciliation/disagreements.csv' mode='r' encoding='utf-8'>
+  d = list(csv.DictReader(open(base / "reconciliation/disagreements.csv", newline="", encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..<repo>/tests/test_legal_audit_calibration02.py:34: ResourceWarning: unclosed file <_io.TextIOWrapper name='<repo>/legal_knowledge/audit_work/CALIBRATION-02/propositions.csv' mode='r' encoding='utf-8'>
+  self.props = list(csv.DictReader(open(C2 / "propositions.csv", newline="", encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..<repo>/tests/test_legal_audit_calibration02.py:119: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp0k2avwqj/CALIBRATION-02/reviews/A/findings.csv' mode='r' encoding='utf-8'>
+  rows = list(csv.DictReader(open(self.base / "reviews/A/findings.csv", newline="", encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...............
+----------------------------------------------------------------------
+Ran 33 tests in 1.088s
+
+OK

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/LEGAL_TAXONOMY_SCHEMA.json",
+  "title": "Legal taxonomy node (mimamsa-corpus-contract/2.0)",
+  "description": "One node of the navigation taxonomy subject > statute > chapter > provision. The hierarchy is a directed acyclic graph: a statute may sit under several subjects and a subject may have parent subjects. Statute, chapter and provision nodes reuse C15 graph identities (instrument code, PROV:<code>:<prefix>.<number>); subject and chapter nodes are new C15 node kinds ('subject', 'chapter'). A taxonomy node is a navigation structure. It says nothing about which law applies, which version is in force, or what a provision means.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "record_kind", "node_id", "level", "label", "parent_ids", "taxonomy_version", "source", "verification"],
+  "properties": {
+    "contract": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"},
+    "record_kind": {"const": "taxonomy_node"},
+    "node_id": {
+      "description": "SUBJ:<topic>|SUBJ:local:<slug> (SUBJECT), INSTCODE:<code> (STATUTE), CHAP:<code>:<label> (CHAPTER), PROV:<code>:<prefix>.<number> (PROVISION).",
+      "type": "string"
+    },
+    "level": {"enum": ["SUBJECT", "STATUTE", "CHAPTER", "PROVISION"]},
+    "label": {"type": "string", "minLength": 1, "maxLength": 300},
+    "parent_ids": {"description": "Many-to-many. Empty only for a top-level SUBJECT. Order is not significant; canonical form is sorted.", "type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "instrument_code": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_code"}, {"type": "null"}]},
+    "provision": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["prefix", "number"],
+      "properties": {
+        "prefix": {"description": "s = section, r = rule, reg = regulation, part = other unit (GraphIds.Prefix).", "enum": ["s", "r", "reg", "part"]},
+        "number": {"description": "Base number as in GraphIds.BaseSection for s/r/reg (e.g. 22, 69A); free label for part.", "type": "string", "pattern": "^[0-9A-Za-z][0-9A-Za-z.()-]{0,40}$"},
+        "sub_provision": {"description": "Sub-section, sub-rule or clause label as printed, e.g. (2)(a). Not a separate graph node.", "type": ["string", "null"], "maxLength": 40}
+      }
+    },
+    "maps_to_subject": {"description": "For SUBJ:local:* nodes: the controlled subject it is proposed to correspond to (a candidate mapping, never automatic).", "anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/subject_node_id"}, {"type": "null"}]},
+    "aliases": {"description": "Labels as found (for example 'AR 22'). Aliases are search aids; an alias never resolves an ambiguous abbreviation by itself.", "type": "array", "items": {"type": "string", "maxLength": 200}, "uniqueItems": true},
+    "taxonomy_version": {"type": "string", "pattern": "^c16-taxonomy-[0-9]+\\.[0-9]+$"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["basis"],
+      "properties": {
+        "basis": {"description": "CONTROLLED_TOPIC_LIST: schema/document.schema.json topic enum. TABLE_OF_CONTENTS: the held instrument's printed arrangement (C15 EXTRACTED_STRUCTURE). OWNER_FOLDER: a folder of the owner's collection. GRAPH_INSTRUMENT: an instrument held in the C15 graph (code registry). GRAPH_PROVISION: an existing C15 provision node.", "enum": ["CONTROLLED_TOPIC_LIST", "TABLE_OF_CONTENTS", "OWNER_FOLDER", "GRAPH_INSTRUMENT", "GRAPH_PROVISION"]},
+        "doc_id": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/doc_id"}, {"type": "null"}]},
+        "page": {"type": ["integer", "null"], "minimum": 1},
+        "collection": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/collection_ref"}, {"type": "null"}]},
+        "relative_path": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/local_relative_path"}, {"type": "null"}]}
+      },
+      "allOf": [
+        {"if": {"properties": {"basis": {"const": "TABLE_OF_CONTENTS"}}}, "then": {"required": ["doc_id", "page"], "properties": {"doc_id": {"type": "string"}, "page": {"type": "integer"}}}},
+        {"if": {"properties": {"basis": {"const": "OWNER_FOLDER"}}}, "then": {"required": ["collection", "relative_path"], "properties": {"collection": {"type": "string"}, "relative_path": {"type": "string"}}}}
+      ]
+    },
+    "verification": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/producer_verification"}
+  },
+  "allOf": [
+    {"if": {"properties": {"level": {"const": "SUBJECT"}}}, "then": {"properties": {"node_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/subject_node_id"}, "parent_ids": {"items": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/subject_node_id"}}, "instrument_code": {"type": "null"}, "provision": {"type": "null"}, "source": {"properties": {"basis": {"enum": ["CONTROLLED_TOPIC_LIST", "OWNER_FOLDER"]}}}, "verification": {"const": "CURATED_NAVIGATION"}}}},
+    {"if": {"properties": {"level": {"const": "STATUTE"}}}, "then": {"required": ["instrument_code"], "properties": {"node_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_node_ref"}, "parent_ids": {"minItems": 1, "items": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/subject_node_id"}}, "instrument_code": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_code"}, "provision": {"type": "null"}, "maps_to_subject": {"type": "null"}, "source": {"properties": {"basis": {"const": "GRAPH_INSTRUMENT"}}}}}},
+    {"if": {"properties": {"level": {"const": "CHAPTER"}}}, "then": {"required": ["instrument_code"], "properties": {"node_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/chapter_node_id"}, "parent_ids": {"minItems": 1, "maxItems": 1, "items": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_node_ref"}}, "instrument_code": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_code"}, "provision": {"type": "null"}, "maps_to_subject": {"type": "null"}, "source": {"properties": {"basis": {"const": "TABLE_OF_CONTENTS"}}}, "verification": {"const": "EXTRACTED_STRUCTURE"}}}},
+    {"if": {"properties": {"level": {"const": "PROVISION"}}}, "then": {"required": ["instrument_code", "provision"], "properties": {"node_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/provision_node_id"}, "parent_ids": {"minItems": 1, "items": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/chapter_node_id"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_node_ref"}]}}, "instrument_code": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_code"}, "provision": {"type": "object"}, "maps_to_subject": {"type": "null"}, "source": {"properties": {"basis": {"enum": ["TABLE_OF_CONTENTS", "GRAPH_PROVISION"]}}}}}}
+  ]
+}

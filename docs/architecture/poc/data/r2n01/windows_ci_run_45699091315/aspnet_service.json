@@ -1,0 +1,17 @@
+{
+  "service": "MimamsaPocApi",
+  "checks": {
+    "start_to_healthy_s": 0.9203924,
+    "account": "NT SERVICE\\MimamsaPocApi",
+    "auth_401": true,
+    "search_results": 2,
+    "metadata_ok": true,
+    "pdf_range_status": 206,
+    "pdf_range_header": "bytes 0-7/4640",
+    "restart_to_healthy_s": 1.28,
+    "crash_recovered": true,
+    "crash_to_healthy_s": 2.92,
+    "pid_before": 5364,
+    "pid_after": 7780
+  }
+}

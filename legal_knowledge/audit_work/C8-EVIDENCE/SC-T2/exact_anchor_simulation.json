@@ -1,0 +1,1666 @@
+{
+ "candidates": [
+  {
+   "copy_id": "C5-SRC-J-SC-1987-RANJIT-THAKUR~C1",
+   "entry_id": "AL-v0001-001",
+   "sha256": "ed7cf31fd8fbe50822e0a60f80b96ed1187dcd465dc4ae2649424c58001ff399"
+  },
+  {
+   "copy_id": "C5-SRC-J-SC-1990-SN-MUKHERJEE~C1",
+   "entry_id": "AL-v0001-002",
+   "sha256": "eb4420801e978469e9c7407f8c079273f9cd483ad45a4427daa53e3d229969cc"
+  },
+  {
+   "copy_id": "C5-SRC-J-SC-2005-NAVJOT~C1",
+   "entry_id": "AL-v0001-003",
+   "sha256": "3b75354869ffb928f73532f475f5f920e2f2a1f8817163caba2f7fb5e1eb215d"
+  },
+  {
+   "copy_id": "C5-SRC-J-SC-2013-DHARAMVIR~C1",
+   "entry_id": "AL-v0001-004",
+   "sha256": "3056712cc7614399f72ee19f529f91990e70dba8a317dd3bd07e76e4ac546b75"
+  },
+  {
+   "copy_id": "C5-SRC-J-SC-2015-RAJBIR~C1",
+   "entry_id": "AL-v0001-005",
+   "sha256": "970b96807bcbf8a1255fe16c574b575f64fe2edee1cbb271485fa7661a62c666"
+  },
+  {
+   "copy_id": "C5-SRC-J-SC-2019-NS-YADAV~C1",
+   "entry_id": "AL-v0001-006",
+   "sha256": "3c50cdb7f30d1a84b488a72052bdf1868cea18ec4e02aee292cf1e97ebf5bbe6"
+  },
+  {
+   "copy_id": "C5-SRC-J-SC-2026-GIRISH-FEB~C1",
+   "entry_id": "AL-v0001-007",
+   "sha256": "4f7ea3a451c6f9a11d7e4dd96822e68cd9cd7a01d8dc74cf46ad34e79029b86c"
+  },
+  {
+   "copy_id": "C5-SRC-J-SC-2026-MULLIKOTE~C1",
+   "entry_id": "AL-v0001-008",
+   "sha256": "10e1954f2e39916ea0f0e8e759c3823581becf752dd6ad2e9058569a1fd97444"
+  }
+ ],
+ "joint_all_8": {
+  "diff": {
+   "copy_status_changes": [
+    {
+     "after": "EFFECTIVE_PRIMARY_VERIFIED",
+     "before": "PROVENANCE_UNKNOWN",
+     "copy_id": "C5-SRC-J-SC-2013-DHARAMVIR~C1",
+     "eligible_for_exact_anchor": "YES"
+    },
+    {
+     "after": "EFFECTIVE_PRIMARY_VERIFIED",
+     "before": "PROVENANCE_UNKNOWN",
+     "copy_id": "C5-SRC-J-SC-2015-RAJBIR~C1",
+     "eligible_for_exact_anchor": "YES"
+    },
+    {
+     "after": "EFFECTIVE_PRIMARY_VERIFIED",
+     "before": "PROVENANCE_UNKNOWN",
+     "copy_id": "C5-SRC-J-SC-2026-GIRISH-FEB~C1",
+     "eligible_for_exact_anchor": "YES"
+    },
+    {
+     "after": "EFFECTIVE_PRIMARY_VERIFIED",
+     "before": "PROVENANCE_UNKNOWN",
+     "copy_id": "C5-SRC-J-SC-2026-MULLIKOTE~C1",
+     "eligible_for_exact_anchor": "YES"
+    },
+    {
+     "after": "EFFECTIVE_PRIMARY_VERIFIED",
+     "before": "PROVENANCE_UNKNOWN",
+     "copy_id": "C5-SRC-J-SC-2019-NS-YADAV~C1",
+     "eligible_for_exact_anchor": "YES"
+    },
+    {
+     "after": "EFFECTIVE_PRIMARY_VERIFIED",
+     "before": "PROVENANCE_UNKNOWN",
+     "copy_id": "C5-SRC-J-SC-1987-RANJIT-THAKUR~C1",
+     "eligible_for_exact_anchor": "YES"
+    },
+    {
+     "after": "EFFECTIVE_PRIMARY_VERIFIED",
+     "before": "PROVENANCE_UNKNOWN",
+     "copy_id": "C5-SRC-J-SC-1990-SN-MUKHERJEE~C1",
+     "eligible_for_exact_anchor": "YES"
+    },
+    {
+     "after": "EFFECTIVE_PRIMARY_VERIFIED",
+     "before": "PROVENANCE_UNKNOWN",
+     "copy_id": "C5-SRC-J-SC-2005-NAVJOT~C1",
+     "eligible_for_exact_anchor": "YES"
+    }
+   ],
+   "crosswalk_row_changes": [
+    {
+     "after": {
+      "anchor_copy_id": "C5-SRC-J-SC-1987-RANJIT-THAKUR~C1",
+      "basis": "case source_status=OFFICIAL_SCI_JUDIS_PDF_PASSAGES_CHECKED; documented-primary official judgment copy held (identity per mapping input)",
+      "case_id": "DCLR-SC-1987-R01",
+      "evidence_status": "EXACT_ANCHOR",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-1987-RANJIT-THAKUR"
+     },
+     "before": {
+      "anchor_copy_id": "",
+      "basis": "case source_status=OFFICIAL_SCI_JUDIS_PDF_PASSAGES_CHECKED; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "case_id": "DCLR-SC-1987-R01",
+      "evidence_status": "PARTIAL_MATCH",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-1987-RANJIT-THAKUR"
+     },
+     "changed_columns": [
+      "anchor_copy_id",
+      "basis",
+      "evidence_status"
+     ],
+     "key": [
+      "C5-SRC-J-SC-1987-RANJIT-THAKUR",
+      "",
+      "",
+      "DCLR-SC-1987-R01",
+      "IS_SOURCE_OF_CASE_RECORD",
+      1
+     ]
+    },
+    {
+     "after": {
+      "anchor_copy_id": "C5-SRC-J-SC-1990-SN-MUKHERJEE~C1",
+      "basis": "case source_status=OFFICIAL_SCI_JUDIS_TEXT; documented-primary official judgment copy held (identity per mapping input)",
+      "case_id": "DCLR-SC-1990-N02",
+      "evidence_status": "EXACT_ANCHOR",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-1990-SN-MUKHERJEE"
+     },
+     "before": {
+      "anchor_copy_id": "",
+      "basis": "case source_status=OFFICIAL_SCI_JUDIS_TEXT; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "case_id": "DCLR-SC-1990-N02",
+      "evidence_status": "PARTIAL_MATCH",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-1990-SN-MUKHERJEE"
+     },
+     "changed_columns": [
+      "anchor_copy_id",
+      "basis",
+      "evidence_status"
+     ],
+     "key": [
+      "C5-SRC-J-SC-1990-SN-MUKHERJEE",
+      "",
+      "",
+      "DCLR-SC-1990-N02",
+      "IS_SOURCE_OF_CASE_RECORD",
+      1
+     ]
+    },
+    {
+     "after": {
+      "anchor_copy_id": "C5-SRC-J-SC-2005-NAVJOT~C1",
+      "basis": "case source_status=CITATION_LEAD_ONLY; documented-primary official judgment copy held (identity per mapping input)",
+      "case_id": "DCLR-SC-2005-L01",
+      "evidence_status": "EXACT_ANCHOR",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-2005-NAVJOT"
+     },
+     "before": {
+      "anchor_copy_id": "",
+      "basis": "case source_status=CITATION_LEAD_ONLY; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "case_id": "DCLR-SC-2005-L01",
+      "evidence_status": "PARTIAL_MATCH",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-2005-NAVJOT"
+     },
+     "changed_columns": [
+      "anchor_copy_id",
+      "basis",
+      "evidence_status"
+     ],
+     "key": [
+      "C5-SRC-J-SC-2005-NAVJOT",
+      "",
+      "",
+      "DCLR-SC-2005-L01",
+      "IS_SOURCE_OF_CASE_RECORD",
+      1
+     ]
+    },
+    {
+     "after": {
+      "anchor_copy_id": "C5-SRC-J-SC-2013-DHARAMVIR~C1",
+      "basis": "case source_status=OFFICIAL_SC_PDF_TEXT_AND_PAGE_CHECKED; documented-primary official judgment copy held (identity per mapping input)",
+      "case_id": "DCLR-SC-2013-N08",
+      "evidence_status": "EXACT_ANCHOR",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-2013-DHARAMVIR"
+     },
+     "before": {
+      "anchor_copy_id": "",
+      "basis": "case source_status=OFFICIAL_SC_PDF_TEXT_AND_PAGE_CHECKED; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "case_id": "DCLR-SC-2013-N08",
+      "evidence_status": "PARTIAL_MATCH",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-2013-DHARAMVIR"
+     },
+     "changed_columns": [
+      "anchor_copy_id",
+      "basis",
+      "evidence_status"
+     ],
+     "key": [
+      "C5-SRC-J-SC-2013-DHARAMVIR",
+      "",
+      "",
+      "DCLR-SC-2013-N08",
+      "IS_SOURCE_OF_CASE_RECORD",
+      1
+     ]
+    },
+    {
+     "after": {
+      "anchor_copy_id": "C5-SRC-J-SC-2015-RAJBIR~C1",
+      "basis": "case source_status=SECONDARY_TRANSCRIPTION_AND_SC_OFFICE_RECORD; documented-primary official judgment copy held (identity per mapping input)",
+      "case_id": "DCLR-SC-2015-N09",
+      "evidence_status": "EXACT_ANCHOR",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-2015-RAJBIR"
+     },
+     "before": {
+      "anchor_copy_id": "",
+      "basis": "case source_status=SECONDARY_TRANSCRIPTION_AND_SC_OFFICE_RECORD; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "case_id": "DCLR-SC-2015-N09",
+      "evidence_status": "PARTIAL_MATCH",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-2015-RAJBIR"
+     },
+     "changed_columns": [
+      "anchor_copy_id",
+      "basis",
+      "evidence_status"
+     ],
+     "key": [
+      "C5-SRC-J-SC-2015-RAJBIR",
+      "",
+      "",
+      "DCLR-SC-2015-N09",
+      "IS_SOURCE_OF_CASE_RECORD",
+      1
+     ]
+    },
+    {
+     "after": {
+      "anchor_copy_id": "C5-SRC-J-SC-2026-GIRISH-FEB~C1",
+      "basis": "case source_status=INHERITED_V01__PRIMARY_TEXT_CHECKED; documented-primary official judgment copy held (identity per mapping input)",
+      "case_id": "DCLR-SC-2026-007",
+      "evidence_status": "EXACT_ANCHOR",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-2026-GIRISH-FEB"
+     },
+     "before": {
+      "anchor_copy_id": "",
+      "basis": "case source_status=INHERITED_V01__PRIMARY_TEXT_CHECKED; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "case_id": "DCLR-SC-2026-007",
+      "evidence_status": "PARTIAL_MATCH",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-2026-GIRISH-FEB"
+     },
+     "changed_columns": [
+      "anchor_copy_id",
+      "basis",
+      "evidence_status"
+     ],
+     "key": [
+      "C5-SRC-J-SC-2026-GIRISH-FEB",
+      "",
+      "",
+      "DCLR-SC-2026-007",
+      "IS_SOURCE_OF_CASE_RECORD",
+      1
+     ]
+    },
+    {
+     "after": {
+      "anchor_copy_id": "C5-SRC-J-SC-2026-MULLIKOTE~C1",
+      "basis": "case source_status=PRIMARY_RELEVANT_PASSAGES_REVIEWED; documented-primary official judgment copy held (identity per mapping input)",
+      "case_id": "DCLR-SC-2026-N16",
+      "evidence_status": "EXACT_ANCHOR",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-2026-MULLIKOTE"
+     },
+     "before": {
+      "anchor_copy_id": "",
+      "basis": "case source_status=PRIMARY_RELEVANT_PASSAGES_REVIEWED; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "case_id": "DCLR-SC-2026-N16",
+      "evidence_status": "PARTIAL_MATCH",
+      "knowledge_base_record_id": "",
+      "provision_id": "",
+      "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+      "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+      "source_id": "C5-SRC-J-SC-2026-MULLIKOTE"
+     },
+     "changed_columns": [
+      "anchor_copy_id",
+      "basis",
+      "evidence_status"
+     ],
+     "key": [
+      "C5-SRC-J-SC-2026-MULLIKOTE",
+      "",
+      "",
+      "DCLR-SC-2026-N16",
+      "IS_SOURCE_OF_CASE_RECORD",
+      1
+     ]
+    }
+   ],
+   "source_holding_changes": [
+    {
+     "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+     "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+     "source_id": "C5-SRC-J-SC-2013-DHARAMVIR"
+    },
+    {
+     "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+     "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+     "source_id": "C5-SRC-J-SC-2015-RAJBIR"
+    },
+    {
+     "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+     "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+     "source_id": "C5-SRC-J-SC-2026-GIRISH-FEB"
+    },
+    {
+     "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+     "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+     "source_id": "C5-SRC-J-SC-2026-MULLIKOTE"
+    },
+    {
+     "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+     "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+     "source_id": "C5-SRC-J-SC-2019-NS-YADAV"
+    },
+    {
+     "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+     "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+     "source_id": "C5-SRC-J-SC-1987-RANJIT-THAKUR"
+    },
+    {
+     "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+     "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+     "source_id": "C5-SRC-J-SC-1990-SN-MUKHERJEE"
+    },
+    {
+     "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+     "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+     "source_id": "C5-SRC-J-SC-2005-NAVJOT"
+    }
+   ]
+  },
+  "rule1": "PASS",
+  "summary": {
+   "case_rows_by_status": {
+    "EXACT_ANCHOR": 13,
+    "MISSING_EVIDENCE": 40
+   },
+   "coverage_crosswalk_case_rows_by_status": {
+    "EXACT_ANCHOR": 13,
+    "MISSING_EVIDENCE": 40
+   },
+   "crosswalk_rows": 1113,
+   "exact_anchor_case_count": 13,
+   "exact_anchor_cases": [
+    [
+     "DCLR-SC-1982-001",
+     "C5-SRC-J-SC-1982-PPS-BEDI",
+     "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+    ],
+    [
+     "DCLR-SC-1987-R01",
+     "C5-SRC-J-SC-1987-RANJIT-THAKUR",
+     "C5-SRC-J-SC-1987-RANJIT-THAKUR~C1"
+    ],
+    [
+     "DCLR-SC-1990-N02",
+     "C5-SRC-J-SC-1990-SN-MUKHERJEE",
+     "C5-SRC-J-SC-1990-SN-MUKHERJEE~C1"
+    ],
+    [
+     "DCLR-SC-2005-L01",
+     "C5-SRC-J-SC-2005-NAVJOT",
+     "C5-SRC-J-SC-2005-NAVJOT~C1"
+    ],
+    [
+     "DCLR-SC-2013-N08",
+     "C5-SRC-J-SC-2013-DHARAMVIR",
+     "C5-SRC-J-SC-2013-DHARAMVIR~C1"
+    ],
+    [
+     "DCLR-SC-2014-N12",
+     "C5-SRC-J-SC-2014-ANVAR",
+     "C5-SRC-J-SC-2014-ANVAR~C1"
+    ],
+    [
+     "DCLR-SC-2015-N09",
+     "C5-SRC-J-SC-2015-RAJBIR",
+     "C5-SRC-J-SC-2015-RAJBIR~C1"
+    ],
+    [
+     "DCLR-SC-2020-002",
+     "C5-SRC-J-SC-2020-VIRENDRA",
+     "C5-SRC-J-SC-2020-VIRENDRA~C1"
+    ],
+    [
+     "DCLR-SC-2020-N13",
+     "C5-SRC-J-SC-2020-ARJUN",
+     "C5-SRC-J-SC-2020-ARJUN~C1"
+    ],
+    [
+     "DCLR-SC-2022-004",
+     "C5-SRC-J-SC-2022-JASBIR",
+     "C5-SRC-J-SC-2022-JASBIR~C1"
+    ],
+    [
+     "DCLR-SC-2023-009",
+     "C5-SRC-J-SC-2023-PARASHOTAM",
+     "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+    ],
+    [
+     "DCLR-SC-2026-007",
+     "C5-SRC-J-SC-2026-GIRISH-FEB",
+     "C5-SRC-J-SC-2026-GIRISH-FEB~C1"
+    ],
+    [
+     "DCLR-SC-2026-N16",
+     "C5-SRC-J-SC-2026-MULLIKOTE",
+     "C5-SRC-J-SC-2026-MULLIKOTE~C1"
+    ]
+   ],
+   "kb_rows_by_status": {
+    "EXACT_ANCHOR": 42,
+    "MISSING_EVIDENCE": 366,
+    "PARTIAL_MATCH": 652
+   }
+  }
+ },
+ "label": "SIMULATION ONLY: synthetic approval records in a temporary directory, deleted after each run. Not a ledger version, not an approval, not evidence of owner or legal approval. The committed ledger stays at version 0.",
+ "single": {
+  "C5-SRC-J-SC-1987-RANJIT-THAKUR~C1": {
+   "diff": {
+    "copy_status_changes": [
+     {
+      "after": "EFFECTIVE_PRIMARY_VERIFIED",
+      "before": "PROVENANCE_UNKNOWN",
+      "copy_id": "C5-SRC-J-SC-1987-RANJIT-THAKUR~C1",
+      "eligible_for_exact_anchor": "YES"
+     }
+    ],
+    "crosswalk_row_changes": [
+     {
+      "after": {
+       "anchor_copy_id": "C5-SRC-J-SC-1987-RANJIT-THAKUR~C1",
+       "basis": "case source_status=OFFICIAL_SCI_JUDIS_PDF_PASSAGES_CHECKED; documented-primary official judgment copy held (identity per mapping input)",
+       "case_id": "DCLR-SC-1987-R01",
+       "evidence_status": "EXACT_ANCHOR",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-1987-RANJIT-THAKUR"
+      },
+      "before": {
+       "anchor_copy_id": "",
+       "basis": "case source_status=OFFICIAL_SCI_JUDIS_PDF_PASSAGES_CHECKED; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+       "case_id": "DCLR-SC-1987-R01",
+       "evidence_status": "PARTIAL_MATCH",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-1987-RANJIT-THAKUR"
+      },
+      "changed_columns": [
+       "anchor_copy_id",
+       "basis",
+       "evidence_status"
+      ],
+      "key": [
+       "C5-SRC-J-SC-1987-RANJIT-THAKUR",
+       "",
+       "",
+       "DCLR-SC-1987-R01",
+       "IS_SOURCE_OF_CASE_RECORD",
+       1
+      ]
+     }
+    ],
+    "source_holding_changes": [
+     {
+      "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+      "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "source_id": "C5-SRC-J-SC-1987-RANJIT-THAKUR"
+     }
+    ]
+   },
+   "rule1": "PASS",
+   "summary": {
+    "case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "coverage_crosswalk_case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "crosswalk_rows": 1113,
+    "exact_anchor_case_count": 7,
+    "exact_anchor_cases": [
+     [
+      "DCLR-SC-1982-001",
+      "C5-SRC-J-SC-1982-PPS-BEDI",
+      "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+     ],
+     [
+      "DCLR-SC-1987-R01",
+      "C5-SRC-J-SC-1987-RANJIT-THAKUR",
+      "C5-SRC-J-SC-1987-RANJIT-THAKUR~C1"
+     ],
+     [
+      "DCLR-SC-2014-N12",
+      "C5-SRC-J-SC-2014-ANVAR",
+      "C5-SRC-J-SC-2014-ANVAR~C1"
+     ],
+     [
+      "DCLR-SC-2020-002",
+      "C5-SRC-J-SC-2020-VIRENDRA",
+      "C5-SRC-J-SC-2020-VIRENDRA~C1"
+     ],
+     [
+      "DCLR-SC-2020-N13",
+      "C5-SRC-J-SC-2020-ARJUN",
+      "C5-SRC-J-SC-2020-ARJUN~C1"
+     ],
+     [
+      "DCLR-SC-2022-004",
+      "C5-SRC-J-SC-2022-JASBIR",
+      "C5-SRC-J-SC-2022-JASBIR~C1"
+     ],
+     [
+      "DCLR-SC-2023-009",
+      "C5-SRC-J-SC-2023-PARASHOTAM",
+      "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+     ]
+    ],
+    "kb_rows_by_status": {
+     "EXACT_ANCHOR": 42,
+     "MISSING_EVIDENCE": 366,
+     "PARTIAL_MATCH": 652
+    }
+   }
+  },
+  "C5-SRC-J-SC-1990-SN-MUKHERJEE~C1": {
+   "diff": {
+    "copy_status_changes": [
+     {
+      "after": "EFFECTIVE_PRIMARY_VERIFIED",
+      "before": "PROVENANCE_UNKNOWN",
+      "copy_id": "C5-SRC-J-SC-1990-SN-MUKHERJEE~C1",
+      "eligible_for_exact_anchor": "YES"
+     }
+    ],
+    "crosswalk_row_changes": [
+     {
+      "after": {
+       "anchor_copy_id": "C5-SRC-J-SC-1990-SN-MUKHERJEE~C1",
+       "basis": "case source_status=OFFICIAL_SCI_JUDIS_TEXT; documented-primary official judgment copy held (identity per mapping input)",
+       "case_id": "DCLR-SC-1990-N02",
+       "evidence_status": "EXACT_ANCHOR",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-1990-SN-MUKHERJEE"
+      },
+      "before": {
+       "anchor_copy_id": "",
+       "basis": "case source_status=OFFICIAL_SCI_JUDIS_TEXT; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+       "case_id": "DCLR-SC-1990-N02",
+       "evidence_status": "PARTIAL_MATCH",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-1990-SN-MUKHERJEE"
+      },
+      "changed_columns": [
+       "anchor_copy_id",
+       "basis",
+       "evidence_status"
+      ],
+      "key": [
+       "C5-SRC-J-SC-1990-SN-MUKHERJEE",
+       "",
+       "",
+       "DCLR-SC-1990-N02",
+       "IS_SOURCE_OF_CASE_RECORD",
+       1
+      ]
+     }
+    ],
+    "source_holding_changes": [
+     {
+      "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+      "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "source_id": "C5-SRC-J-SC-1990-SN-MUKHERJEE"
+     }
+    ]
+   },
+   "rule1": "PASS",
+   "summary": {
+    "case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "coverage_crosswalk_case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "crosswalk_rows": 1113,
+    "exact_anchor_case_count": 7,
+    "exact_anchor_cases": [
+     [
+      "DCLR-SC-1982-001",
+      "C5-SRC-J-SC-1982-PPS-BEDI",
+      "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+     ],
+     [
+      "DCLR-SC-1990-N02",
+      "C5-SRC-J-SC-1990-SN-MUKHERJEE",
+      "C5-SRC-J-SC-1990-SN-MUKHERJEE~C1"
+     ],
+     [
+      "DCLR-SC-2014-N12",
+      "C5-SRC-J-SC-2014-ANVAR",
+      "C5-SRC-J-SC-2014-ANVAR~C1"
+     ],
+     [
+      "DCLR-SC-2020-002",
+      "C5-SRC-J-SC-2020-VIRENDRA",
+      "C5-SRC-J-SC-2020-VIRENDRA~C1"
+     ],
+     [
+      "DCLR-SC-2020-N13",
+      "C5-SRC-J-SC-2020-ARJUN",
+      "C5-SRC-J-SC-2020-ARJUN~C1"
+     ],
+     [
+      "DCLR-SC-2022-004",
+      "C5-SRC-J-SC-2022-JASBIR",
+      "C5-SRC-J-SC-2022-JASBIR~C1"
+     ],
+     [
+      "DCLR-SC-2023-009",
+      "C5-SRC-J-SC-2023-PARASHOTAM",
+      "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+     ]
+    ],
+    "kb_rows_by_status": {
+     "EXACT_ANCHOR": 42,
+     "MISSING_EVIDENCE": 366,
+     "PARTIAL_MATCH": 652
+    }
+   }
+  },
+  "C5-SRC-J-SC-2005-NAVJOT~C1": {
+   "diff": {
+    "copy_status_changes": [
+     {
+      "after": "EFFECTIVE_PRIMARY_VERIFIED",
+      "before": "PROVENANCE_UNKNOWN",
+      "copy_id": "C5-SRC-J-SC-2005-NAVJOT~C1",
+      "eligible_for_exact_anchor": "YES"
+     }
+    ],
+    "crosswalk_row_changes": [
+     {
+      "after": {
+       "anchor_copy_id": "C5-SRC-J-SC-2005-NAVJOT~C1",
+       "basis": "case source_status=CITATION_LEAD_ONLY; documented-primary official judgment copy held (identity per mapping input)",
+       "case_id": "DCLR-SC-2005-L01",
+       "evidence_status": "EXACT_ANCHOR",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-2005-NAVJOT"
+      },
+      "before": {
+       "anchor_copy_id": "",
+       "basis": "case source_status=CITATION_LEAD_ONLY; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+       "case_id": "DCLR-SC-2005-L01",
+       "evidence_status": "PARTIAL_MATCH",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-2005-NAVJOT"
+      },
+      "changed_columns": [
+       "anchor_copy_id",
+       "basis",
+       "evidence_status"
+      ],
+      "key": [
+       "C5-SRC-J-SC-2005-NAVJOT",
+       "",
+       "",
+       "DCLR-SC-2005-L01",
+       "IS_SOURCE_OF_CASE_RECORD",
+       1
+      ]
+     }
+    ],
+    "source_holding_changes": [
+     {
+      "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+      "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "source_id": "C5-SRC-J-SC-2005-NAVJOT"
+     }
+    ]
+   },
+   "rule1": "PASS",
+   "summary": {
+    "case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "coverage_crosswalk_case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "crosswalk_rows": 1113,
+    "exact_anchor_case_count": 7,
+    "exact_anchor_cases": [
+     [
+      "DCLR-SC-1982-001",
+      "C5-SRC-J-SC-1982-PPS-BEDI",
+      "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+     ],
+     [
+      "DCLR-SC-2005-L01",
+      "C5-SRC-J-SC-2005-NAVJOT",
+      "C5-SRC-J-SC-2005-NAVJOT~C1"
+     ],
+     [
+      "DCLR-SC-2014-N12",
+      "C5-SRC-J-SC-2014-ANVAR",
+      "C5-SRC-J-SC-2014-ANVAR~C1"
+     ],
+     [
+      "DCLR-SC-2020-002",
+      "C5-SRC-J-SC-2020-VIRENDRA",
+      "C5-SRC-J-SC-2020-VIRENDRA~C1"
+     ],
+     [
+      "DCLR-SC-2020-N13",
+      "C5-SRC-J-SC-2020-ARJUN",
+      "C5-SRC-J-SC-2020-ARJUN~C1"
+     ],
+     [
+      "DCLR-SC-2022-004",
+      "C5-SRC-J-SC-2022-JASBIR",
+      "C5-SRC-J-SC-2022-JASBIR~C1"
+     ],
+     [
+      "DCLR-SC-2023-009",
+      "C5-SRC-J-SC-2023-PARASHOTAM",
+      "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+     ]
+    ],
+    "kb_rows_by_status": {
+     "EXACT_ANCHOR": 42,
+     "MISSING_EVIDENCE": 366,
+     "PARTIAL_MATCH": 652
+    }
+   }
+  },
+  "C5-SRC-J-SC-2013-DHARAMVIR~C1": {
+   "diff": {
+    "copy_status_changes": [
+     {
+      "after": "EFFECTIVE_PRIMARY_VERIFIED",
+      "before": "PROVENANCE_UNKNOWN",
+      "copy_id": "C5-SRC-J-SC-2013-DHARAMVIR~C1",
+      "eligible_for_exact_anchor": "YES"
+     }
+    ],
+    "crosswalk_row_changes": [
+     {
+      "after": {
+       "anchor_copy_id": "C5-SRC-J-SC-2013-DHARAMVIR~C1",
+       "basis": "case source_status=OFFICIAL_SC_PDF_TEXT_AND_PAGE_CHECKED; documented-primary official judgment copy held (identity per mapping input)",
+       "case_id": "DCLR-SC-2013-N08",
+       "evidence_status": "EXACT_ANCHOR",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-2013-DHARAMVIR"
+      },
+      "before": {
+       "anchor_copy_id": "",
+       "basis": "case source_status=OFFICIAL_SC_PDF_TEXT_AND_PAGE_CHECKED; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+       "case_id": "DCLR-SC-2013-N08",
+       "evidence_status": "PARTIAL_MATCH",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-2013-DHARAMVIR"
+      },
+      "changed_columns": [
+       "anchor_copy_id",
+       "basis",
+       "evidence_status"
+      ],
+      "key": [
+       "C5-SRC-J-SC-2013-DHARAMVIR",
+       "",
+       "",
+       "DCLR-SC-2013-N08",
+       "IS_SOURCE_OF_CASE_RECORD",
+       1
+      ]
+     }
+    ],
+    "source_holding_changes": [
+     {
+      "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+      "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "source_id": "C5-SRC-J-SC-2013-DHARAMVIR"
+     }
+    ]
+   },
+   "rule1": "PASS",
+   "summary": {
+    "case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "coverage_crosswalk_case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "crosswalk_rows": 1113,
+    "exact_anchor_case_count": 7,
+    "exact_anchor_cases": [
+     [
+      "DCLR-SC-1982-001",
+      "C5-SRC-J-SC-1982-PPS-BEDI",
+      "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+     ],
+     [
+      "DCLR-SC-2013-N08",
+      "C5-SRC-J-SC-2013-DHARAMVIR",
+      "C5-SRC-J-SC-2013-DHARAMVIR~C1"
+     ],
+     [
+      "DCLR-SC-2014-N12",
+      "C5-SRC-J-SC-2014-ANVAR",
+      "C5-SRC-J-SC-2014-ANVAR~C1"
+     ],
+     [
+      "DCLR-SC-2020-002",
+      "C5-SRC-J-SC-2020-VIRENDRA",
+      "C5-SRC-J-SC-2020-VIRENDRA~C1"
+     ],
+     [
+      "DCLR-SC-2020-N13",
+      "C5-SRC-J-SC-2020-ARJUN",
+      "C5-SRC-J-SC-2020-ARJUN~C1"
+     ],
+     [
+      "DCLR-SC-2022-004",
+      "C5-SRC-J-SC-2022-JASBIR",
+      "C5-SRC-J-SC-2022-JASBIR~C1"
+     ],
+     [
+      "DCLR-SC-2023-009",
+      "C5-SRC-J-SC-2023-PARASHOTAM",
+      "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+     ]
+    ],
+    "kb_rows_by_status": {
+     "EXACT_ANCHOR": 42,
+     "MISSING_EVIDENCE": 366,
+     "PARTIAL_MATCH": 652
+    }
+   }
+  },
+  "C5-SRC-J-SC-2015-RAJBIR~C1": {
+   "diff": {
+    "copy_status_changes": [
+     {
+      "after": "EFFECTIVE_PRIMARY_VERIFIED",
+      "before": "PROVENANCE_UNKNOWN",
+      "copy_id": "C5-SRC-J-SC-2015-RAJBIR~C1",
+      "eligible_for_exact_anchor": "YES"
+     }
+    ],
+    "crosswalk_row_changes": [
+     {
+      "after": {
+       "anchor_copy_id": "C5-SRC-J-SC-2015-RAJBIR~C1",
+       "basis": "case source_status=SECONDARY_TRANSCRIPTION_AND_SC_OFFICE_RECORD; documented-primary official judgment copy held (identity per mapping input)",
+       "case_id": "DCLR-SC-2015-N09",
+       "evidence_status": "EXACT_ANCHOR",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-2015-RAJBIR"
+      },
+      "before": {
+       "anchor_copy_id": "",
+       "basis": "case source_status=SECONDARY_TRANSCRIPTION_AND_SC_OFFICE_RECORD; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+       "case_id": "DCLR-SC-2015-N09",
+       "evidence_status": "PARTIAL_MATCH",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-2015-RAJBIR"
+      },
+      "changed_columns": [
+       "anchor_copy_id",
+       "basis",
+       "evidence_status"
+      ],
+      "key": [
+       "C5-SRC-J-SC-2015-RAJBIR",
+       "",
+       "",
+       "DCLR-SC-2015-N09",
+       "IS_SOURCE_OF_CASE_RECORD",
+       1
+      ]
+     }
+    ],
+    "source_holding_changes": [
+     {
+      "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+      "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "source_id": "C5-SRC-J-SC-2015-RAJBIR"
+     }
+    ]
+   },
+   "rule1": "PASS",
+   "summary": {
+    "case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "coverage_crosswalk_case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "crosswalk_rows": 1113,
+    "exact_anchor_case_count": 7,
+    "exact_anchor_cases": [
+     [
+      "DCLR-SC-1982-001",
+      "C5-SRC-J-SC-1982-PPS-BEDI",
+      "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+     ],
+     [
+      "DCLR-SC-2014-N12",
+      "C5-SRC-J-SC-2014-ANVAR",
+      "C5-SRC-J-SC-2014-ANVAR~C1"
+     ],
+     [
+      "DCLR-SC-2015-N09",
+      "C5-SRC-J-SC-2015-RAJBIR",
+      "C5-SRC-J-SC-2015-RAJBIR~C1"
+     ],
+     [
+      "DCLR-SC-2020-002",
+      "C5-SRC-J-SC-2020-VIRENDRA",
+      "C5-SRC-J-SC-2020-VIRENDRA~C1"
+     ],
+     [
+      "DCLR-SC-2020-N13",
+      "C5-SRC-J-SC-2020-ARJUN",
+      "C5-SRC-J-SC-2020-ARJUN~C1"
+     ],
+     [
+      "DCLR-SC-2022-004",
+      "C5-SRC-J-SC-2022-JASBIR",
+      "C5-SRC-J-SC-2022-JASBIR~C1"
+     ],
+     [
+      "DCLR-SC-2023-009",
+      "C5-SRC-J-SC-2023-PARASHOTAM",
+      "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+     ]
+    ],
+    "kb_rows_by_status": {
+     "EXACT_ANCHOR": 42,
+     "MISSING_EVIDENCE": 366,
+     "PARTIAL_MATCH": 652
+    }
+   }
+  },
+  "C5-SRC-J-SC-2019-NS-YADAV~C1": {
+   "diff": {
+    "copy_status_changes": [
+     {
+      "after": "EFFECTIVE_PRIMARY_VERIFIED",
+      "before": "PROVENANCE_UNKNOWN",
+      "copy_id": "C5-SRC-J-SC-2019-NS-YADAV~C1",
+      "eligible_for_exact_anchor": "YES"
+     }
+    ],
+    "crosswalk_row_changes": [],
+    "source_holding_changes": [
+     {
+      "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+      "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "source_id": "C5-SRC-J-SC-2019-NS-YADAV"
+     }
+    ]
+   },
+   "rule1": "PASS",
+   "summary": {
+    "case_rows_by_status": {
+     "EXACT_ANCHOR": 6,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 7
+    },
+    "coverage_crosswalk_case_rows_by_status": {
+     "EXACT_ANCHOR": 6,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 7
+    },
+    "crosswalk_rows": 1113,
+    "exact_anchor_case_count": 6,
+    "exact_anchor_cases": [
+     [
+      "DCLR-SC-1982-001",
+      "C5-SRC-J-SC-1982-PPS-BEDI",
+      "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+     ],
+     [
+      "DCLR-SC-2014-N12",
+      "C5-SRC-J-SC-2014-ANVAR",
+      "C5-SRC-J-SC-2014-ANVAR~C1"
+     ],
+     [
+      "DCLR-SC-2020-002",
+      "C5-SRC-J-SC-2020-VIRENDRA",
+      "C5-SRC-J-SC-2020-VIRENDRA~C1"
+     ],
+     [
+      "DCLR-SC-2020-N13",
+      "C5-SRC-J-SC-2020-ARJUN",
+      "C5-SRC-J-SC-2020-ARJUN~C1"
+     ],
+     [
+      "DCLR-SC-2022-004",
+      "C5-SRC-J-SC-2022-JASBIR",
+      "C5-SRC-J-SC-2022-JASBIR~C1"
+     ],
+     [
+      "DCLR-SC-2023-009",
+      "C5-SRC-J-SC-2023-PARASHOTAM",
+      "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+     ]
+    ],
+    "kb_rows_by_status": {
+     "EXACT_ANCHOR": 42,
+     "MISSING_EVIDENCE": 366,
+     "PARTIAL_MATCH": 652
+    }
+   }
+  },
+  "C5-SRC-J-SC-2026-GIRISH-FEB~C1": {
+   "diff": {
+    "copy_status_changes": [
+     {
+      "after": "EFFECTIVE_PRIMARY_VERIFIED",
+      "before": "PROVENANCE_UNKNOWN",
+      "copy_id": "C5-SRC-J-SC-2026-GIRISH-FEB~C1",
+      "eligible_for_exact_anchor": "YES"
+     }
+    ],
+    "crosswalk_row_changes": [
+     {
+      "after": {
+       "anchor_copy_id": "C5-SRC-J-SC-2026-GIRISH-FEB~C1",
+       "basis": "case source_status=INHERITED_V01__PRIMARY_TEXT_CHECKED; documented-primary official judgment copy held (identity per mapping input)",
+       "case_id": "DCLR-SC-2026-007",
+       "evidence_status": "EXACT_ANCHOR",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-2026-GIRISH-FEB"
+      },
+      "before": {
+       "anchor_copy_id": "",
+       "basis": "case source_status=INHERITED_V01__PRIMARY_TEXT_CHECKED; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+       "case_id": "DCLR-SC-2026-007",
+       "evidence_status": "PARTIAL_MATCH",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-2026-GIRISH-FEB"
+      },
+      "changed_columns": [
+       "anchor_copy_id",
+       "basis",
+       "evidence_status"
+      ],
+      "key": [
+       "C5-SRC-J-SC-2026-GIRISH-FEB",
+       "",
+       "",
+       "DCLR-SC-2026-007",
+       "IS_SOURCE_OF_CASE_RECORD",
+       1
+      ]
+     }
+    ],
+    "source_holding_changes": [
+     {
+      "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+      "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "source_id": "C5-SRC-J-SC-2026-GIRISH-FEB"
+     }
+    ]
+   },
+   "rule1": "PASS",
+   "summary": {
+    "case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "coverage_crosswalk_case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "crosswalk_rows": 1113,
+    "exact_anchor_case_count": 7,
+    "exact_anchor_cases": [
+     [
+      "DCLR-SC-1982-001",
+      "C5-SRC-J-SC-1982-PPS-BEDI",
+      "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+     ],
+     [
+      "DCLR-SC-2014-N12",
+      "C5-SRC-J-SC-2014-ANVAR",
+      "C5-SRC-J-SC-2014-ANVAR~C1"
+     ],
+     [
+      "DCLR-SC-2020-002",
+      "C5-SRC-J-SC-2020-VIRENDRA",
+      "C5-SRC-J-SC-2020-VIRENDRA~C1"
+     ],
+     [
+      "DCLR-SC-2020-N13",
+      "C5-SRC-J-SC-2020-ARJUN",
+      "C5-SRC-J-SC-2020-ARJUN~C1"
+     ],
+     [
+      "DCLR-SC-2022-004",
+      "C5-SRC-J-SC-2022-JASBIR",
+      "C5-SRC-J-SC-2022-JASBIR~C1"
+     ],
+     [
+      "DCLR-SC-2023-009",
+      "C5-SRC-J-SC-2023-PARASHOTAM",
+      "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+     ],
+     [
+      "DCLR-SC-2026-007",
+      "C5-SRC-J-SC-2026-GIRISH-FEB",
+      "C5-SRC-J-SC-2026-GIRISH-FEB~C1"
+     ]
+    ],
+    "kb_rows_by_status": {
+     "EXACT_ANCHOR": 42,
+     "MISSING_EVIDENCE": 366,
+     "PARTIAL_MATCH": 652
+    }
+   }
+  },
+  "C5-SRC-J-SC-2026-MULLIKOTE~C1": {
+   "diff": {
+    "copy_status_changes": [
+     {
+      "after": "EFFECTIVE_PRIMARY_VERIFIED",
+      "before": "PROVENANCE_UNKNOWN",
+      "copy_id": "C5-SRC-J-SC-2026-MULLIKOTE~C1",
+      "eligible_for_exact_anchor": "YES"
+     }
+    ],
+    "crosswalk_row_changes": [
+     {
+      "after": {
+       "anchor_copy_id": "C5-SRC-J-SC-2026-MULLIKOTE~C1",
+       "basis": "case source_status=PRIMARY_RELEVANT_PASSAGES_REVIEWED; documented-primary official judgment copy held (identity per mapping input)",
+       "case_id": "DCLR-SC-2026-N16",
+       "evidence_status": "EXACT_ANCHOR",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-2026-MULLIKOTE"
+      },
+      "before": {
+       "anchor_copy_id": "",
+       "basis": "case source_status=PRIMARY_RELEVANT_PASSAGES_REVIEWED; held copy is HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+       "case_id": "DCLR-SC-2026-N16",
+       "evidence_status": "PARTIAL_MATCH",
+       "knowledge_base_record_id": "",
+       "provision_id": "",
+       "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+       "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+       "source_id": "C5-SRC-J-SC-2026-MULLIKOTE"
+      },
+      "changed_columns": [
+       "anchor_copy_id",
+       "basis",
+       "evidence_status"
+      ],
+      "key": [
+       "C5-SRC-J-SC-2026-MULLIKOTE",
+       "",
+       "",
+       "DCLR-SC-2026-N16",
+       "IS_SOURCE_OF_CASE_RECORD",
+       1
+      ]
+     }
+    ],
+    "source_holding_changes": [
+     {
+      "after": "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+      "before": "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+      "source_id": "C5-SRC-J-SC-2026-MULLIKOTE"
+     }
+    ]
+   },
+   "rule1": "PASS",
+   "summary": {
+    "case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "coverage_crosswalk_case_rows_by_status": {
+     "EXACT_ANCHOR": 7,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 6
+    },
+    "crosswalk_rows": 1113,
+    "exact_anchor_case_count": 7,
+    "exact_anchor_cases": [
+     [
+      "DCLR-SC-1982-001",
+      "C5-SRC-J-SC-1982-PPS-BEDI",
+      "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+     ],
+     [
+      "DCLR-SC-2014-N12",
+      "C5-SRC-J-SC-2014-ANVAR",
+      "C5-SRC-J-SC-2014-ANVAR~C1"
+     ],
+     [
+      "DCLR-SC-2020-002",
+      "C5-SRC-J-SC-2020-VIRENDRA",
+      "C5-SRC-J-SC-2020-VIRENDRA~C1"
+     ],
+     [
+      "DCLR-SC-2020-N13",
+      "C5-SRC-J-SC-2020-ARJUN",
+      "C5-SRC-J-SC-2020-ARJUN~C1"
+     ],
+     [
+      "DCLR-SC-2022-004",
+      "C5-SRC-J-SC-2022-JASBIR",
+      "C5-SRC-J-SC-2022-JASBIR~C1"
+     ],
+     [
+      "DCLR-SC-2023-009",
+      "C5-SRC-J-SC-2023-PARASHOTAM",
+      "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+     ],
+     [
+      "DCLR-SC-2026-N16",
+      "C5-SRC-J-SC-2026-MULLIKOTE",
+      "C5-SRC-J-SC-2026-MULLIKOTE~C1"
+     ]
+    ],
+    "kb_rows_by_status": {
+     "EXACT_ANCHOR": 42,
+     "MISSING_EVIDENCE": 366,
+     "PARTIAL_MATCH": 652
+    }
+   }
+  }
+ },
+ "subsets": {
+  "joint_excluding_3_judis_text_renditions (Ranjit, S N Mukherjee, Navjot)": {
+   "copies": [
+    "C5-SRC-J-SC-2013-DHARAMVIR~C1",
+    "C5-SRC-J-SC-2015-RAJBIR~C1",
+    "C5-SRC-J-SC-2019-NS-YADAV~C1",
+    "C5-SRC-J-SC-2026-GIRISH-FEB~C1",
+    "C5-SRC-J-SC-2026-MULLIKOTE~C1"
+   ],
+   "rule1": "PASS",
+   "summary": {
+    "case_rows_by_status": {
+     "EXACT_ANCHOR": 10,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 3
+    },
+    "coverage_crosswalk_case_rows_by_status": {
+     "EXACT_ANCHOR": 10,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 3
+    },
+    "crosswalk_rows": 1113,
+    "exact_anchor_case_count": 10,
+    "exact_anchor_cases": [
+     [
+      "DCLR-SC-1982-001",
+      "C5-SRC-J-SC-1982-PPS-BEDI",
+      "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+     ],
+     [
+      "DCLR-SC-2013-N08",
+      "C5-SRC-J-SC-2013-DHARAMVIR",
+      "C5-SRC-J-SC-2013-DHARAMVIR~C1"
+     ],
+     [
+      "DCLR-SC-2014-N12",
+      "C5-SRC-J-SC-2014-ANVAR",
+      "C5-SRC-J-SC-2014-ANVAR~C1"
+     ],
+     [
+      "DCLR-SC-2015-N09",
+      "C5-SRC-J-SC-2015-RAJBIR",
+      "C5-SRC-J-SC-2015-RAJBIR~C1"
+     ],
+     [
+      "DCLR-SC-2020-002",
+      "C5-SRC-J-SC-2020-VIRENDRA",
+      "C5-SRC-J-SC-2020-VIRENDRA~C1"
+     ],
+     [
+      "DCLR-SC-2020-N13",
+      "C5-SRC-J-SC-2020-ARJUN",
+      "C5-SRC-J-SC-2020-ARJUN~C1"
+     ],
+     [
+      "DCLR-SC-2022-004",
+      "C5-SRC-J-SC-2022-JASBIR",
+      "C5-SRC-J-SC-2022-JASBIR~C1"
+     ],
+     [
+      "DCLR-SC-2023-009",
+      "C5-SRC-J-SC-2023-PARASHOTAM",
+      "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+     ],
+     [
+      "DCLR-SC-2026-007",
+      "C5-SRC-J-SC-2026-GIRISH-FEB",
+      "C5-SRC-J-SC-2026-GIRISH-FEB~C1"
+     ],
+     [
+      "DCLR-SC-2026-N16",
+      "C5-SRC-J-SC-2026-MULLIKOTE",
+      "C5-SRC-J-SC-2026-MULLIKOTE~C1"
+     ]
+    ],
+    "kb_rows_by_status": {
+     "EXACT_ANCHOR": 42,
+     "MISSING_EVIDENCE": 366,
+     "PARTIAL_MATCH": 652
+    }
+   }
+  },
+  "joint_excluding_3_judis_text_renditions_and_mullikote": {
+   "copies": [
+    "C5-SRC-J-SC-2013-DHARAMVIR~C1",
+    "C5-SRC-J-SC-2015-RAJBIR~C1",
+    "C5-SRC-J-SC-2019-NS-YADAV~C1",
+    "C5-SRC-J-SC-2026-GIRISH-FEB~C1"
+   ],
+   "rule1": "PASS",
+   "summary": {
+    "case_rows_by_status": {
+     "EXACT_ANCHOR": 9,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 4
+    },
+    "coverage_crosswalk_case_rows_by_status": {
+     "EXACT_ANCHOR": 9,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 4
+    },
+    "crosswalk_rows": 1113,
+    "exact_anchor_case_count": 9,
+    "exact_anchor_cases": [
+     [
+      "DCLR-SC-1982-001",
+      "C5-SRC-J-SC-1982-PPS-BEDI",
+      "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+     ],
+     [
+      "DCLR-SC-2013-N08",
+      "C5-SRC-J-SC-2013-DHARAMVIR",
+      "C5-SRC-J-SC-2013-DHARAMVIR~C1"
+     ],
+     [
+      "DCLR-SC-2014-N12",
+      "C5-SRC-J-SC-2014-ANVAR",
+      "C5-SRC-J-SC-2014-ANVAR~C1"
+     ],
+     [
+      "DCLR-SC-2015-N09",
+      "C5-SRC-J-SC-2015-RAJBIR",
+      "C5-SRC-J-SC-2015-RAJBIR~C1"
+     ],
+     [
+      "DCLR-SC-2020-002",
+      "C5-SRC-J-SC-2020-VIRENDRA",
+      "C5-SRC-J-SC-2020-VIRENDRA~C1"
+     ],
+     [
+      "DCLR-SC-2020-N13",
+      "C5-SRC-J-SC-2020-ARJUN",
+      "C5-SRC-J-SC-2020-ARJUN~C1"
+     ],
+     [
+      "DCLR-SC-2022-004",
+      "C5-SRC-J-SC-2022-JASBIR",
+      "C5-SRC-J-SC-2022-JASBIR~C1"
+     ],
+     [
+      "DCLR-SC-2023-009",
+      "C5-SRC-J-SC-2023-PARASHOTAM",
+      "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+     ],
+     [
+      "DCLR-SC-2026-007",
+      "C5-SRC-J-SC-2026-GIRISH-FEB",
+      "C5-SRC-J-SC-2026-GIRISH-FEB~C1"
+     ]
+    ],
+    "kb_rows_by_status": {
+     "EXACT_ANCHOR": 42,
+     "MISSING_EVIDENCE": 366,
+     "PARTIAL_MATCH": 652
+    }
+   }
+  },
+  "joint_excluding_navjot_and_mullikote (C8 recommendation to keep PARTIAL)": {
+   "copies": [
+    "C5-SRC-J-SC-1987-RANJIT-THAKUR~C1",
+    "C5-SRC-J-SC-1990-SN-MUKHERJEE~C1",
+    "C5-SRC-J-SC-2013-DHARAMVIR~C1",
+    "C5-SRC-J-SC-2015-RAJBIR~C1",
+    "C5-SRC-J-SC-2019-NS-YADAV~C1",
+    "C5-SRC-J-SC-2026-GIRISH-FEB~C1"
+   ],
+   "rule1": "PASS",
+   "summary": {
+    "case_rows_by_status": {
+     "EXACT_ANCHOR": 11,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 2
+    },
+    "coverage_crosswalk_case_rows_by_status": {
+     "EXACT_ANCHOR": 11,
+     "MISSING_EVIDENCE": 40,
+     "PARTIAL_MATCH": 2
+    },
+    "crosswalk_rows": 1113,
+    "exact_anchor_case_count": 11,
+    "exact_anchor_cases": [
+     [
+      "DCLR-SC-1982-001",
+      "C5-SRC-J-SC-1982-PPS-BEDI",
+      "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+     ],
+     [
+      "DCLR-SC-1987-R01",
+      "C5-SRC-J-SC-1987-RANJIT-THAKUR",
+      "C5-SRC-J-SC-1987-RANJIT-THAKUR~C1"
+     ],
+     [
+      "DCLR-SC-1990-N02",
+      "C5-SRC-J-SC-1990-SN-MUKHERJEE",
+      "C5-SRC-J-SC-1990-SN-MUKHERJEE~C1"
+     ],
+     [
+      "DCLR-SC-2013-N08",
+      "C5-SRC-J-SC-2013-DHARAMVIR",
+      "C5-SRC-J-SC-2013-DHARAMVIR~C1"
+     ],
+     [
+      "DCLR-SC-2014-N12",
+      "C5-SRC-J-SC-2014-ANVAR",
+      "C5-SRC-J-SC-2014-ANVAR~C1"
+     ],
+     [
+      "DCLR-SC-2015-N09",
+      "C5-SRC-J-SC-2015-RAJBIR",
+      "C5-SRC-J-SC-2015-RAJBIR~C1"
+     ],
+     [
+      "DCLR-SC-2020-002",
+      "C5-SRC-J-SC-2020-VIRENDRA",
+      "C5-SRC-J-SC-2020-VIRENDRA~C1"
+     ],
+     [
+      "DCLR-SC-2020-N13",
+      "C5-SRC-J-SC-2020-ARJUN",
+      "C5-SRC-J-SC-2020-ARJUN~C1"
+     ],
+     [
+      "DCLR-SC-2022-004",
+      "C5-SRC-J-SC-2022-JASBIR",
+      "C5-SRC-J-SC-2022-JASBIR~C1"
+     ],
+     [
+      "DCLR-SC-2023-009",
+      "C5-SRC-J-SC-2023-PARASHOTAM",
+      "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+     ],
+     [
+      "DCLR-SC-2026-007",
+      "C5-SRC-J-SC-2026-GIRISH-FEB",
+      "C5-SRC-J-SC-2026-GIRISH-FEB~C1"
+     ]
+    ],
+    "kb_rows_by_status": {
+     "EXACT_ANCHOR": 42,
+     "MISSING_EVIDENCE": 366,
+     "PARTIAL_MATCH": 652
+    }
+   }
+  }
+ },
+ "version0": {
+  "case_rows_by_status": {
+   "EXACT_ANCHOR": 6,
+   "MISSING_EVIDENCE": 40,
+   "PARTIAL_MATCH": 7
+  },
+  "coverage_crosswalk_case_rows_by_status": {
+   "EXACT_ANCHOR": 6,
+   "MISSING_EVIDENCE": 40,
+   "PARTIAL_MATCH": 7
+  },
+  "crosswalk_rows": 1113,
+  "exact_anchor_case_count": 6,
+  "exact_anchor_cases": [
+   [
+    "DCLR-SC-1982-001",
+    "C5-SRC-J-SC-1982-PPS-BEDI",
+    "C5-SRC-J-SC-1982-PPS-BEDI~C1"
+   ],
+   [
+    "DCLR-SC-2014-N12",
+    "C5-SRC-J-SC-2014-ANVAR",
+    "C5-SRC-J-SC-2014-ANVAR~C1"
+   ],
+   [
+    "DCLR-SC-2020-002",
+    "C5-SRC-J-SC-2020-VIRENDRA",
+    "C5-SRC-J-SC-2020-VIRENDRA~C1"
+   ],
+   [
+    "DCLR-SC-2020-N13",
+    "C5-SRC-J-SC-2020-ARJUN",
+    "C5-SRC-J-SC-2020-ARJUN~C1"
+   ],
+   [
+    "DCLR-SC-2022-004",
+    "C5-SRC-J-SC-2022-JASBIR",
+    "C5-SRC-J-SC-2022-JASBIR~C1"
+   ],
+   [
+    "DCLR-SC-2023-009",
+    "C5-SRC-J-SC-2023-PARASHOTAM",
+    "C5-SRC-J-SC-2023-PARASHOTAM~C1"
+   ]
+  ],
+  "kb_rows_by_status": {
+   "EXACT_ANCHOR": 42,
+   "MISSING_EVIDENCE": 366,
+   "PARTIAL_MATCH": 652
+  }
+ },
+ "version0_equals_frozen_c5_registers": {
+  "corpus_crosswalk.csv": true,
+  "coverage_summary.json": true
+ }
+}

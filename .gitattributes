@@ -1,0 +1,3 @@
+# Hash-pinned: a release pins this file's SHA-256 (RELEASE.json restricted_material.config_sha256), so its bytes
+# must not change with the checkout platform (core.autocrlf on Windows rewrote LF to CRLF).
+config/restricted_material.json -text

@@ -1,0 +1,2 @@
+text store: built and published E:\Mimamsa-Data\bench\c16b\stores\4000\text\R14-bench4000-20261127-70591729 (4000 documents, 30091 pages, 99113 passages, 59.5 MB text; 5409 ms)
+search index: built and published E:\Mimamsa-Data\bench\c16b\stores\4000\index\R14-bench4000-20261127-70591729 (3981 documents, 98486 passages, 19477 terms, 1 runs; tokens 12475 ms (forward cache 0 documents reused, 3981 tokenised, 0 stale entries pruned), total 13071 ms)

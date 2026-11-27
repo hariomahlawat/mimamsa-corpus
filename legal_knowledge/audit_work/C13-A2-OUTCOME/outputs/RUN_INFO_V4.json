@@ -1,0 +1,20 @@
+{
+ "excluded_judgments": 325,
+ "exclusion_list_sha256": "bd8813d821c0262608984162abb605ddb32d793c33e63dccde27bce394ae233b",
+ "extractor": "c13-extract-v4/1.0.0",
+ "n_judgments": 3936,
+ "n_rows": 13327,
+ "repo_commit": "ad77758d",
+ "tool_fingerprint": "37642e7bd64582f34a791bd199dee8648b274fa09e74d6253c3b8d19f124e1f4",
+ "tool_sha256": {
+  "extract_v4.py": "972ca646a90a1ed06483b6de4822170c4957c10b3e21e8f0f3449c3f53ecbe63",
+  "v4_clauses.py": "f06a6a0813f8aac27011918d81722865b29a9522ed4700192699deb05c1914c2",
+  "v4_decide.py": "396ed120e279d873dc8590c4ce6cf9356a1f69ab4d2c68ecaf3bfa33c2fbd9c8",
+  "v4_proceedings.py": "529d0e92522808579b2c4551a696641e56318a86d0667a83b42407c4e3a3de39",
+  "v4_quotes.py": "5d7dd3cba042372e9e43318611404d19412bb5c9f58d233f307d80027a85fdce",
+  "v4_relief.py": "a563ca071cb8234b91ec8fc9f2411a68babfe5430295dc65c7e6a413bf72df47",
+  "v4_segment.py": "de3ae47f81d09fcafe8b0f511297995dd66ed817c660bf87f967971ddc153d5b",
+  "v4_text.py": "fa749b309c3aba80b1d857257493ad1ff2dae6387fe8586756f9617fcfcbf99d",
+  "v4core.py": "54f885f02b3bec7b39b0e90c1f80472435113c7849558d8765d3588740835407"
+ }
+}

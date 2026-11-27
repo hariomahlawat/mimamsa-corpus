@@ -1,0 +1,39 @@
+{
+ "note": "Inputs of coverage_reconciliation.csv/.md. The test regenerates from the WS-C inventory whose SHA-256 is wsc_csv_sha256 (worktree file if it matches, else git object wsc_commit) and the crawler corpus at corpus_commit. A different WS-C inventory means: rerun this script.",
+ "wsc_path": "legal_knowledge/audit_work/WS-C-MML/kb658_source_coverage_inventory.csv",
+ "wsc_ref": "origin/claude/ws-c-mml",
+ "wsc_commit": "ba3d370eb3b86ded2f34194fa8530ed944a5a950",
+ "wsc_csv_sha256": "da06631f9b3ac5207dc84508b03cd631831e3e88b825ac356e9fea2247bc17bc",
+ "corpus_ref": "origin/raw-data",
+ "corpus_commit": "ad77758d4569ba6aafa955cc7843d874489e10f7",
+ "kb_sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+ "wsc_state_totals": {
+  "FULL": 370,
+  "NO_CITATION": 77,
+  "PARTIAL": 140,
+  "SOURCE_GAP": 56,
+  "UNRESOLVED": 15
+ },
+ "wsd_state_totals": {
+  "D_CODED_ALL_SEARCHABLE": 279,
+  "D_CODED_NONE_SEARCHABLE": 56,
+  "D_CODED_PARTLY_SEARCHABLE": 54,
+  "D_PLAIN_ALL_STATUTE_SEARCHABLE": 168,
+  "D_PLAIN_CASE_OR_LOCATOR_ONLY": 25,
+  "D_PLAIN_NO_STATUTE_OR_CASE": 66,
+  "D_PLAIN_PARTLY_SEARCHABLE": 8,
+  "D_PLAIN_STATUTE_NOT_SEARCHABLE": 2
+ },
+ "agreement": 556,
+ "explanation_tag_counts": {
+  "R11_PLAIN_NAME_IN_CODED_RECORD": 3,
+  "R1_CO_CITATION": 39,
+  "R2_NO_PINPOINT": 30,
+  "R3_STRUCTURAL_FLAG": 3,
+  "R4_PLACEHOLDER": 6,
+  "R6_PLAIN_CASE": 11,
+  "R7_PLAIN_INSTRUMENT_SET": 19,
+  "R8_NO_CITATION_DEFINITION": 11,
+  "R9_UNRESOLVED_CODE": 2
+ }
+}

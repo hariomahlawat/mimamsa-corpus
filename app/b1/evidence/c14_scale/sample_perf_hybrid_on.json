@@ -1,0 +1,90 @@
+{
+ "base": "http://127.0.0.1:5442",
+ "host_note": "client and service on the same host (i7-10750H, 16 GB, Windows 11)",
+ "phases": {
+  "first_search_after_start_ms": 131.0,
+  "search_sequential": {
+   "n": 100,
+   "p50": 45.1,
+   "p95": 106.0,
+   "max": 136.2,
+   "mean": 50.1
+  },
+  "search_concurrent_10": {
+   "n": 200,
+   "p50": 121.4,
+   "p95": 274.3,
+   "max": 352.1,
+   "mean": 126.4,
+   "throughput_rps": 77.2
+  },
+  "search_concurrent_25": {
+   "n": 500,
+   "p50": 333.9,
+   "p95": 666.8,
+   "max": 848.6,
+   "mean": 329.8,
+   "throughput_rps": 74.3
+  },
+  "session_check_db_roundtrip": {
+   "n": 50,
+   "p50": 1.5,
+   "p95": 1.9,
+   "max": 3.2,
+   "mean": 1.6
+  },
+  "document_metadata": {
+   "n": 25,
+   "p50": 2.2,
+   "p95": 2.8,
+   "max": 3.2,
+   "mean": 2.2
+  },
+  "text_40_pages": {
+   "n": 15,
+   "p50": 3.0,
+   "p95": 3.8,
+   "max": 12.8,
+   "mean": 3.7
+  },
+  "pdf_meta": {
+   "n": 5,
+   "p50": 1.7,
+   "p95": 6.2,
+   "max": 6.2,
+   "mean": 2.7
+  },
+  "pdf_range_64k": {
+   "n": 40,
+   "p50": 6.5,
+   "p95": 13.6,
+   "max": 347.3,
+   "mean": 15.7
+  }
+ },
+ "process_idle": {
+  "working_set_mb": 1420.8,
+  "cpu_s": 34.84,
+  "threads": 60
+ },
+ "process_after_sequential": {
+  "working_set_mb": 1505.3,
+  "cpu_s": 77.11,
+  "threads": 68
+ },
+ "process_after_concurrent_10": {
+  "working_set_mb": 1736.0,
+  "cpu_s": 107.78,
+  "threads": 73
+ },
+ "process_after_concurrent_25": {
+  "working_set_mb": 1981.3,
+  "cpu_s": 182.64,
+  "threads": 75
+ },
+ "process_end": {
+  "working_set_mb": 1989.7,
+  "cpu_s": 187.23,
+  "threads": 75
+ }
+}

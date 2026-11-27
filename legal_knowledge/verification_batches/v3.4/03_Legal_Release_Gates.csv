@@ -1,0 +1,9 @@
+priority,scope,reason,release_control
+CRITICAL,Army Rule 23(3),1954 original S.R.O. 484 Gazette still not authenticated; compendia differ on the negation 'not'.,NO_AUTOMATED_STATUTORY_CORRECTION
+CRITICAL,Post-2014 electronic evidence,Navjot Sandhu 2005 secondary-electronic-evidence rule partly overruled; distinguish its Section 27 discussion and post-2024 BSA.,BLOCK_OLD_65B_PROPOSITION
+HIGH,Disability pension 2026,"2026 INSC 993 governs analysis of burdens, medical-board reasons and >15yr claims; verify exact 1982/2008 status.",BLOCK_GENERIC_OLDER_PENSION_RULE
+HIGH,AFSPA / Naga Peoples Movement,Disturbed-area notification and periodic review require live territorially applicable law and recent SC precedents.,BLOCK_OPERATIONAL_AFSPA_GUIDANCE
+HIGH,Angad Singh Titaria,"Indian Air Force pension regulations, not Army-specific statutory language.",CROSS_SERVICE_LABEL_MANDATORY
+MEDIUM,S.R. Dhingra,"Railway/civilian service pension comparator, original judgment PDF not archived.",EXCLUDE_CORE_ARMY_LAW
+HIGH,Mani Ram Bhaira,"Third-party signed-order reproduction has not been checked against original SCI PDF, plus includes multiple orders.",BLOCK_CASE_FULL_HOLDING_VERIFICATION
+HIGH,KB links to 658,74 lexical matches in v3.4 hold no verified proposition ID or tested statutory applicability.,BLOCK_AUTOMATIC_KB_LINK_PUBLICATION

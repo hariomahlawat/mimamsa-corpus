@@ -156,6 +156,47 @@ Build in phases and stop for review after each. Start small: one source end to e
 
 ## Working rules
 
-Ask before installing system packages, before any real download run, and whenever a source needs login or blocks us. Keep a short PROGRESS.md log of what was done and what is next.
+Ask before installing system packages, before any real download run from external sources (routine Hugging Face corpus operations are covered by the standing instruction below), and whenever a source needs login or blocks us. Keep a short PROGRESS.md log of what was done and what is next.
 
 Open questions to settle early: which machine runs the crawl and how much disk it has; whether the Prism OCR pipeline can be reused as a module; and who on the legal side reviews proposed supersession and overruling edges.
+
+## Corpus repository and Hugging Face access (standing owner instruction, 2026-11-24)
+
+Full text: `docs/governance/CORPUS_REPOSITORY_GOVERNANCE.md` (ADR-0004). In short:
+- **Hugging Face** dataset `hariomahlawat/mimamsa-corpus` (private) is the **central corpus repository**. **GitHub** holds application code, schemas, tools, tests, documentation and review records.
+- **Authorised without repeated approval:** routine HF uploads, dataset updates, metadata corrections, source preservation and integrity verification, within established project policies.
+- **Every such write must:**
+  - be versioned and non-destructive, never deleting or overwriting originals;
+  - keep provenance complete;
+  - be SHA-256 verified by re-downloading at the pinned HF commit and comparing with a manifest held in git;
+  - be recorded in GitHub with the HF commit id;
+  - be reproducible from committed tools.
+- **Still needs separate owner approval:** deleting source documents, publishing restricted material, changing repository visibility, and legal authentication transactions (any real AUTH-LEDGER BIND or approval). Merges to `main` and the GitHub Actions upload gate (`docs/HF_SYNC_SAFEGUARD.md`) are unchanged.
+- **Credentials** are injected securely into the environment (a network secret for `huggingface.co`). Never expose, log or commit token values, and never ask for them in chat.
+
+## Product direction and future design (recorded 2026-11-24)
+
+Before planning future legal-knowledge, retrieval or application work, read:
+- `docs/README.md`
+- `docs/product/PRODUCT_VISION.md`
+- `docs/product/COMMANDER_USE_CASES.md`
+- `docs/architecture/LEGAL_KNOWLEDGE_ARCHITECTURE.md`
+- `docs/architecture/SCENARIO_ADVISORY_ENGINE.md`
+- `docs/architecture/CONTINUOUS_DOCUMENT_INGESTION.md`
+- `docs/architecture/DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md`
+- `docs/architecture/decisions/ADR-0001-SCENARIO_DRIVEN_EVIDENCE_GROUNDED_PRODUCT.md`
+- `docs/architecture/decisions/ADR-0002-SHARED_ACCESS_AND_CONTINUOUS_INGESTION.md`
+- `docs/architecture/decisions/ADR-0003-DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md`
+- `docs/product/FORM_DISCOVERY_AND_COVERAGE_REGISTER.md`
+
+These record the owner's direction: the full legally accessible judgment corpus should remain searchable; Acts/Rules should link to judgments and propositions; and commanders should be able to ask ordinary-English, situation-based questions and receive evidenced, conditional guidance and checklists. The proposed technical designs are **not** implementation or legal-review approvals.
+
+**Updated owner decisions (24 Nov 2026; refined):** The initial app has **exactly two functional roles, Admin and User**. Both can search and use **all published** legal documents, graphs and advisory/research capabilities, with no rank/JAG feature tiers or per-document viewing restrictions. **Only Admin can upload, stage, replace, withdraw, reprocess and publish source documents.** Admin submissions trigger automatic offline preservation, text/OCR extraction, analysis and *candidate* law/judgment/graph linking; submissions remain invisible to ordinary users until Admin checks eligibility and processing and explicitly publishes them. All published sources must be suitable for every app user. **Admin publication is not source authentication or legal validation** and must not silently create authoritative law, mandatory checklist requirements or AUTH-LEDGER promotions. Prioritise search, ingestion, graph and commander capability, retaining minimum Admin/User access checks, safe parsing, network isolation, backup and prompt-injection isolation; advanced hardening can follow.
+
+**Document Studio direction (24 Nov 2026):** Both Admin and User must be able to prepare legal/procedural documents from source-backed, versioned forms, and submit already prepared Word/PDF/scanned files for temporary legal/format/procedural review. Provide guided fields, supporting-document checklists, cross-file checks and editable exports. Build a Form/Template Registry by examining the exact published appendices/specimens and authorised MML (once edition/authenticity verified), Defence Service Regulations, Army Rules and applicable official orders; do **not** invent forms from generic model knowledge. **Temporary drafting/review uploads do not become persistent/shared source uploads, search data, graph evidence or template registry entries.** Admin-only rules still govern publication of common law/policy/template sources. Generated forms and audit reports are assistance, not legal validity certification or completed proceedings, and require competent human verification.
+
+The earlier crawler-only exclusion of internal policy documents remains the **scope of that acquisition phase**, not a restriction on the new in-app Admin source-upload capability (or on Document Studio working-document processing, which never creates shared sources). No present authorisation is given to acquire restricted documents externally.
+
+**Review corrections governing future design:** CORPUS_INGESTION (Admin-only persistent source mutation) is separate from WORKING_DOCUMENT_PROCESSING (both roles, authenticated own-session access). Protect working files, job/results URLs, AI contexts, caches and exports from cross-session access; no sensitive text in shared diagnostics. Maintain independent form authority, fidelity, date applicability, legal approval, publication and dependency freshness states. The operational-use gate requires exact source and applicable scope, attributable competent legal approval at the tier required for the output class (formal JAG status only with its approval artefact), and no material unresolved conflict. Legal approvals would be recorded only through the proposed Legal Reviewer designation (Document Studio 3.3), a blocking open decision; Admin capacity never records legal approval, and the gate fails closed until appointments exist. Track distinct legally controlling conduct, proceeding, procedural-action and preparation/review dates per constraint, with transitional/saving authority. Credible material changes block affected definitive guidance, templates and checks until revalidated; unverified uploads are research leads only. Maintain the Form Discovery and Coverage Register and independent source-derived test oracles/holdouts, not generator/auditor self-agreement. Provide a Document Readiness Report distinguishing tested failures, passed checks, unknown, missing, not applicable and not checked; no aggregate legal-validity score. All evidence-policy tests are source-neutral regarding authorship.
+
+The existing `docs/legal-audit/EVIDENCE_STANDARD.md` and `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md` remain controlling for authenticity, temporal applicability, source conflicts and review. Preserve the original corpus, access restrictions, offline deployment requirement, and AUTH-LEDGER approval boundaries. Do not turn scenario examples into asserted current law without independently verified evidence.

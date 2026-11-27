@@ -1,0 +1,57 @@
+{
+ "anchors": [
+  "ANC-6160c6669842a19d03eaeeea"
+ ],
+ "approval_ref": null,
+ "category": "cites_provision",
+ "classification_provenance": null,
+ "contract": "mimamsa-corpus-contract/2.0",
+ "evidentiary_basis": "DOCUMENT_TEXT_REVIEWED",
+ "graph_projection": {
+  "edge_type": "CITES_PROVISION",
+  "origin": "C16_DOCUMENT_TEXT"
+ },
+ "has_legal_effect": false,
+ "is_finding": true,
+ "proposition_ref": null,
+ "record_kind": "corpus_relationship",
+ "relationship_id": "REL-8fb4e35e10e92e3da06a598c",
+ "review_binding": {
+  "author_id": "fixture-extractor",
+  "review_record_id": "RV-FIXTURE-0001",
+  "review_record_sha256": "9d5c3a2d50ca8802baaf15007720e8089962d9ef6547b95f38d457cb6576a156",
+  "reviewed_commit": "c8fa5290",
+  "reviewer_id": "fixture-extractor",
+  "reviewer_kind": "HUMAN"
+ },
+ "review_ref": "RV-FIXTURE-0001",
+ "source": {
+  "author_id": "fixture-extractor",
+  "producer": {
+   "commit": "c8fa5290",
+   "config_sha256": null,
+   "name": "c16-fixture-producer",
+   "version": "1.0.0"
+  },
+  "rule_id": "C16-FIXTURE-RULE",
+  "rule_version": "1.0"
+ },
+ "subject": {
+  "doc_id": "sc-2019-example-v-union-of-india-ca0001",
+  "graph_node_ref": "JUD:sc-2019-example-v-union-of-india-ca0001",
+  "source_copy_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+ },
+ "target": {
+  "node_id": "PROV:AR-1954:r.22",
+  "resolved": true
+ },
+ "temporal_scope": {
+  "from": "2019-03-01",
+  "from_status": "AS_OF_SOURCE_DATE",
+  "to": null,
+  "to_status": "NOT_APPLICABLE"
+ },
+ "uncertainty": "Citation checked against the page by an independent documentary review (fixture); not a legal finding.",
+ "validates_relationship_id": null,
+ "verification": "DOCUMENTARY_CHECKED"
+}

@@ -1,0 +1,10 @@
+{
+  "os": "Microsoft Windows Server 2025 Datacenter",
+  "build": "10.0.26100.0",
+  "cpu": "AMD EPYC 9V74 80-Core Processor                ",
+  "cores": 2,
+  "ram_gb": 8.0,
+  "dotnet": "11.0.100",
+  "python": "Python 3.12.10",
+  "pgbin": "C:\\Program Files\\PostgreSQL\\17\\bin"
+}

@@ -1,0 +1,93 @@
+{
+ "files": 3973,
+ "fouo_records": 0,
+ "judgments": 3637,
+ "judgments_by_court": {
+  "ALL": 309,
+  "DEL": 1409,
+  "JK": 362,
+  "PH": 1201,
+  "SC": 356
+ },
+ "judgments_by_stratum": {
+  "BATCH_OR_MULTI": 340,
+  "OTHER": 1292,
+  "PARTY_SPECIFIC": 51,
+  "PENSION_OR_DISCIPLINARY": 1954
+ },
+ "judgments_by_text_quality": {
+  "GARBLED": 47,
+  "IMAGE_ONLY": 26,
+  "TRUNCATED": 9,
+  "UNREADABLE": 7,
+  "USABLE": 3548
+ },
+ "judgments_eligible_fresh_holdout": 2812,
+ "judgments_ineligible_by_reason": {
+  "ACCESS_MARKING": 3,
+  "OUT_OF_SCOPE": 65,
+  "SPENT": 679,
+  "TEXT_GARBLED": 47,
+  "TEXT_IMAGE_ONLY": 26,
+  "TEXT_TRUNCATED": 9,
+  "TEXT_UNREADABLE": 7
+ },
+ "judgments_spent_by_set": {
+  "C10_REVIEW": 48,
+  "C11_DEV_AND_REVIEW": 455,
+  "C11_HOLDOUT_56": 56,
+  "C12_EXTRACTOR_DEV": 193,
+  "C12_HOLDINGS_DEV": 156,
+  "C12_HOLDINGS_REFERENCE_30": 30,
+  "C12_V3_HOLDOUT_150": 149
+ },
+ "non_usable_records": 121,
+ "records": 4281,
+ "records_by_court": {
+  "ALL": 309,
+  "DEL": 1957,
+  "JK": 410,
+  "PH": 1227,
+  "SC": 378
+ },
+ "records_by_in_scope": {
+  "IN_SCOPE": 3714,
+  "OUT_OF_SCOPE": 71,
+  "UNCERTAIN": 496
+ },
+ "records_by_population": {
+  "BASE_AD77758D": 4259,
+  "C12_HELD_ORIGINAL_DERIVED": 4,
+  "C12_INGESTED": 18
+ },
+ "records_by_stratum": {
+  "BATCH_OR_MULTI": 984,
+  "OTHER": 1292,
+  "PARTY_SPECIFIC": 51,
+  "PENSION_OR_DISCIPLINARY": 1954
+ },
+ "records_by_stratum_v3": {
+  "batch_or_multi": 2471,
+  "disagreement": 261,
+  "other": 950,
+  "pension_or_disciplinary": 599
+ },
+ "records_by_text_quality": {
+  "GARBLED": 55,
+  "IMAGE_ONLY": 45,
+  "TRUNCATED": 12,
+  "UNREADABLE": 9,
+  "USABLE": 4160
+ },
+ "records_by_year_band": {
+  "1990-1999": 41,
+  "2000-2009": 285,
+  "2010-2014": 529,
+  "2015-2019": 566,
+  "2020-2022": 347,
+  "2023-2026": 2446,
+  "<=1989": 67
+ },
+ "records_raw_path_invalid": 0,
+ "status": "AUTOMATED_CLASSIFICATION_NOT_LEGALLY_VERIFIED"
+}

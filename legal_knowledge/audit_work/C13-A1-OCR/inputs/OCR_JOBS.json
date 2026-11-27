@@ -1,0 +1,1250 @@
+[
+{
+"doc_id": "hc-ph-2013-cwp-8140-2013-phhc010960252013-1-2013-08-12",
+"sha256": "626ae775fed0a404766e2f3a3d9471c9d0c4448e22a678ec93e76fd305b620a6",
+"pages": [
+1,
+2,
+3,
+4
+],
+"tranche": "A_full",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2014-cwp-14191-2013-phhc010740772013-1-2014-07-25",
+"sha256": "ba9c4e674c1b3b5e7714288942f0c3fcd40a4fffc88bbb64640a801414f88b21",
+"pages": [
+1,
+2,
+3
+],
+"tranche": "A_full",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2014-cwp-20380-2012-phhc010774422012-1-2014-05-21",
+"sha256": "3b9bcf2f5e0fb13ff7a5681bf7f3f0ebb84c593056052e367ed534b8cac40c26",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12
+],
+"tranche": "A_full",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2019-cwp-21429-2019-phhc010949672019-1-2019-08-09",
+"sha256": "a5ac7f7ea79c41e1167920a98fb4e2050b500b630184590af4ab60d2d0338286",
+"pages": [
+1,
+2,
+3
+],
+"tranche": "A_full",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2023-cwp-14249-2023-phhc010845612023-1-2023-07-07",
+"sha256": "6dc58e8721c502c67874102e09ef59a2d75f79b77004c577625e8afec2e73fc2",
+"pages": [
+1,
+2,
+3,
+4,
+5
+],
+"tranche": "A_full",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2023-cwp-17142-2023-phhc010993062023-1-2023-08-07",
+"sha256": "2dbcb7e2f365503118671311458809bb471c8581d4ed6b5fc97156922f4424a8",
+"pages": [
+1
+],
+"tranche": "A_full",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-14834-2024-phhc010776672024-1-2024-07-10",
+"sha256": "cb39739c7c2c55e5676c0fb2981a70a27f19e855654f61c40ec9dbd3d6d09789",
+"pages": [
+1
+],
+"tranche": "A_full",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-16371-2024-phhc010909582024-1-2024-11-22",
+"sha256": "9960904c701ce9ef8a1b7b46b0e895a6a345f1ca2f59df1be10e3a142b14d7a9",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11
+],
+"tranche": "A_full",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-16643-2024-phhc010919992024-1-2024-11-22",
+"sha256": "cb1785cf0db679cf4d64a0bce2a3f64dc18748b1f1b0a0631d26c2c355d59fcd",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11
+],
+"tranche": "A_full",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-16812-2024-phhc010928662024-1-2024-11-21",
+"sha256": "dcdfac610ef1ed181b871645370ca84690aec91d9cc42d79905bac32994dbd02",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11
+],
+"tranche": "A_full",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-24556-2021-phhc011119162021-1-2024-09-30",
+"sha256": "a05de7b6b33cb9ef7b5f3d421d4b6184157f0710c3621d36f66a6f94f1382ec4",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+],
+"tranche": "A_full",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-28668-2024-phhc011389462024-1-2024-11-27",
+"sha256": "df316862fa58b73052f2412bb1038cf2b630c52b1d3d70337603830b4e9fd918",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8
+],
+"tranche": "A_full",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "sc-2008-brigadier-man-mohan-sharma-frg-2008insc1353",
+"sha256": "ae741f7c933f08823bea6a947faba62c38257a9b36e21dd38562339c7309a4b3",
+"pages": [
+3
+],
+"tranche": "A_unusable_pages",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2025-w-p-c-792-2025-dlhc010019982025-1-2025-08-01",
+"sha256": "ed1344e0d571e662cf43379a3ef3297832c388fbfe685360c7b9993ef59d368c",
+"pages": [
+5
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2024-cocp-2423-2024-phhc010934072024-1-2024-10-24",
+"sha256": "d9305a71ba6a5888be24e3edd2b6e7bc3b3c40cfe56bad41bc32c28d9ec804b5",
+"pages": [
+1
+],
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-delhi-2025-o-m-p-comm-151-2024-dlhc010180002024-1-2025-07-31",
+"sha256": "268ee3d706eadcd48f7db0029c28259c248a6114325ab8533156b06f8bdd92a0",
+"pages": [
+17
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2025-untitled-phhc010662992025-1-2025-10-30",
+"sha256": "9f3d8817394a8b9bc2867c2078c6f69954ceacf2fb2aceefdc761031eb591d33",
+"pages": [
+1
+],
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-cr-6298-2026-phhc011374212026-1-2026-08-21",
+"sha256": "f252a3012582521528e16344560d35e850b2079169cec442c7d092550d4bfc9f",
+"pages": [
+1
+],
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-cocp-6333-2025-phhc012092472025-1-2026-01-14",
+"sha256": "b3d5304755209518d7bb6712f060798fff1d935d9a1b581154902b3756d2603e",
+"pages": [
+1
+],
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-fao-2717-2022-phhc010370252022-1-2026-03-12",
+"sha256": "71a6b7d0ec1b3359fc8a1d09a8031c56431501cc74d980cc004e0391031d4764",
+"pages": [
+1
+],
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2025-untitled-phhc011033312024-1-2025-07-16",
+"sha256": "40358a816cf172b3d6f6eeb31c1dba23cfe1df2dd0af6f0f2b4be1f4b467eae5",
+"pages": [
+1
+],
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2025-untitled-phhc011715472025-1-2025-10-27",
+"sha256": "412d63608f77c693f8742af720ba015bc4df361e8b2733246a373169c54b746d",
+"pages": [
+1
+],
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2025-cr-5444-2024-phhc011260632024-1-2025-10-27",
+"sha256": "5c3e75ad51fc84bec565c92b88c1ae50507eadf20e0d9e504d128668187e3c6a",
+"pages": [
+1,
+2
+],
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-crwp-6842-2024-phhc010880982024-1-2024-07-22",
+"sha256": "839ffee50904d63cb6a896ce912442b09f0dac9474dede5e986d013837b30a55",
+"pages": [
+1,
+2
+],
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2025-rsa-3901-2023-phhc010863342019-1-2025-11-20",
+"sha256": "e732db6a579d59bb1565a3593eab2d8629fa5fafdbf679a6e48900630940b276",
+"pages": [
+1,
+2
+],
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-delhi-2025-la-app-316-2010-dlhc010467072010-1-2025-09-26",
+"sha256": "38bd54ea27ee36969e80a3ca0661a68cbeb1e7fdec46eb6cdef31e27519cb74e",
+"pages": [
+9,
+28
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2025-la-app-18-2016-dlhc010097512016-1-2025-09-26",
+"sha256": "928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698",
+"pages": [
+9,
+28,
+84
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-472-2010-dlhc010513412010-1-2011-07-08",
+"sha256": "1274964be7e7b2de8c19553390b76c63e2cc84eaf25f33839050f6b000bfa3a0",
+"pages": [
+2,
+3,
+4,
+7,
+10,
+13,
+14,
+15,
+16,
+18,
+19,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-252-2010-dlhc010172142010-1-2011-07-08",
+"sha256": "3aaf310984a074146ae1cfadf94d7f8b3c057ec8cfbeccde0ab6232167fee389",
+"pages": [
+3,
+4,
+5,
+6,
+7,
+11,
+12,
+14,
+15,
+18,
+19,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-872-2010-dlhc010965262010-1-2011-07-08",
+"sha256": "4b665b5a31e5db818bfd9a54afa3d4392e2cfbd03ea2b80a259bfe2756edeea8",
+"pages": [
+3,
+4,
+5,
+6,
+7,
+9,
+10,
+12,
+13,
+14,
+15,
+17,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-907-2010-dlhc011505702010-1-2011-07-08",
+"sha256": "246a32c6422e346ec2310c75711ee92e85e2088d8da0b57cd33430bd6c27b237",
+"pages": [
+2,
+3,
+4,
+5,
+7,
+11,
+12,
+13,
+14,
+15,
+16,
+17,
+18
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-509-2011-dlhc011015372011-1-2011-08-03",
+"sha256": "699863507b87648ca22de979bcc85efd094c9f650020847d8e82689c8a928007",
+"pages": [
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+14,
+16,
+17,
+18,
+21,
+22
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-78-2010-dlhc012029392009-1-2011-07-08",
+"sha256": "b43240e40da563520c5d50841017bea57deadec04b3b6508459f922b1ae00965",
+"pages": [
+3,
+4,
+5,
+6,
+7,
+8,
+10,
+11,
+12,
+14,
+15,
+17,
+18,
+19
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-1056-2010-dlhc011879482010-1-2011-07-08",
+"sha256": "828ce65f1566375c15523dbe5dbc0f41a2811163870f8d0f21d8438d37252d6f",
+"pages": [
+3,
+4,
+5,
+6,
+7,
+9,
+10,
+11,
+13,
+14,
+17,
+18,
+19,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-610-2009-dlhc011701332009-1-2011-07-08",
+"sha256": "1b1fb716461ea7a7093c551f9f86b0b86b6cb3a671262ba24b3def06528e59e4",
+"pages": [
+3,
+4,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+17,
+18,
+19
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-325-2010-dlhc010506002010-1-2011-07-08",
+"sha256": "027897262ef96cd87340f7607486fe7f50152477fd048f37379e8f32b0c560a1",
+"pages": [
+3,
+4,
+5,
+6,
+7,
+9,
+10,
+12,
+13,
+14,
+15,
+17,
+18,
+19,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-326-2010-dlhc010506172010-1-2011-07-08",
+"sha256": "567218a51d53615da69305a7faff180bcfe58636badd155219a5fa97dd0891b6",
+"pages": [
+2,
+3,
+4,
+6,
+7,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+16,
+17,
+19
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-615-2009-dlhc011556352009-1-2011-07-08",
+"sha256": "be8941be35619bd8a40031dc1dc2986b7230879a3abff94fd81aaf3c1955792b",
+"pages": [
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+12,
+13,
+15,
+16,
+17,
+18,
+19,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-698-2010-dlhc011044932010-1-2011-07-08",
+"sha256": "94e11858096d2efdb882de8c154f701f4689dccce49020d98112f26e75c7c9a3",
+"pages": [
+2,
+3,
+4,
+5,
+8,
+9,
+11,
+12,
+13,
+14,
+15,
+17,
+18,
+19,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-74-2010-dlhc012029352009-1-2011-07-08",
+"sha256": "807aa0a251b105c5f2a3b04a657645e5934896947704dc43ef4853204da4e906",
+"pages": [
+2,
+3,
+4,
+6,
+7,
+8,
+9,
+11,
+12,
+14,
+15,
+16,
+17,
+18,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-267-2010-dlhc010396632010-1-2011-07-08",
+"sha256": "ab2f0f267f52f915c87445e39daeb66deb0590852516270fb27480891c4e6f5f",
+"pages": [
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+15,
+17,
+18
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-275-2010-dlhc010402612010-1-2011-07-08",
+"sha256": "bbffe803baeefe9f0abcd6e55de3091371bbb3ed6d05695c2b2bbbfd8efb3e7f",
+"pages": [
+2,
+3,
+4,
+5,
+6,
+8,
+9,
+10,
+12,
+13,
+14,
+15,
+17,
+18,
+19,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-692-2010-dlhc011047752010-1-2011-07-08",
+"sha256": "d930161cd81bb4fb7bc525113a50258ea3bec0ed69b92e6f9afc7af0a4360440",
+"pages": [
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+10,
+12,
+13,
+14,
+15,
+16,
+17,
+18,
+19
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-385-2010-dlhc010576332010-1-2011-07-08",
+"sha256": "ffd58f9db266168b390ce0da9435123cf33c58e8303f33cab1b834a2f97315b8",
+"pages": [
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+18,
+19
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-1049-2010-dlhc011879382010-1-2011-07-08",
+"sha256": "10a310bca5444ed09cee8a99449c67fe996fa491ab9eecd6e137b1f4ee777e05",
+"pages": [
+2,
+3,
+4,
+5,
+7,
+10,
+11,
+12,
+13,
+14,
+15,
+16,
+17,
+18,
+19,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-126-2011-dlhc011915372010-1-2011-07-08",
+"sha256": "b5dae7099ecfbc22cb765a7e15c41145643933fade27865541c23f02167e27b9",
+"pages": [
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+11,
+12,
+13,
+14,
+15,
+17,
+18,
+19,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-186-2010-dlhc010012472010-1-2011-07-08",
+"sha256": "31c314078e525f58c96fee532d234295f96229e8fc8997e4f926399d1e50d301",
+"pages": [
+2,
+3,
+4,
+5,
+7,
+8,
+9,
+10,
+12,
+13,
+14,
+15,
+16,
+17,
+18,
+19,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-la-app-709-2010-dlhc011079072010-1-2011-07-08",
+"sha256": "1ad88e33efa40b86c1ea41856c8b23176ee365d46b2a0e8b52de772711e10426",
+"pages": [
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+17,
+18,
+19,
+20
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2026-cwp-11618-2026-phhc010595072026-1-2026-04-20",
+"sha256": "afefb817abacf86ec5e5ab803095b0939dcb7dbfb2d8ada0bbcdd5c51efbe3ed",
+"pages": [
+1
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2024-incomp-6629-2024-phhc010636662024-1-2024-12-17",
+"sha256": "a508a9e00ba63483ab5d29d80f347133c8c7d38091ba7b3c3856c04233864c34",
+"pages": [
+1
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2025-rsa-2086-1997-phhc010395001997-1-2025-05-05",
+"sha256": "5ef6aedcf60258deda35ebcef40329a7872a3ada916b02a97de39dc15db06fce",
+"pages": [
+1
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2026-cwp-11097-2026-phhc010594862026-1-2026-04-10",
+"sha256": "b3d06c32bfaeb3588faa2275c22532562abeb5b8ccf66d49cfe68d14f2f31da3",
+"pages": [
+1
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2025-w-p-c-116-2025-dlhc010000502025-1-2025-07-17",
+"sha256": "e1eafb46003e5324578fe7f60d20008d799b11852d7a60388ad5d2e29d8d8eba",
+"pages": [
+33,
+34
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2025-w-p-c-3004-2025-dlhc011098562024-1-2025-07-17",
+"sha256": "9f299cc2467f2a6ab49d508813fae3da2a79e0bfe39c457cfae27b00a75f55fd",
+"pages": [
+33,
+34
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2025-w-p-c-16646-2024-dlhc010881022024-1-2025-07-17",
+"sha256": "b17da38647e077ffd20a00134695dbbc27d795259c4297736a0591fe82079f47",
+"pages": [
+33,
+34
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2024-cwp-26159-2023-phhc011399162023-1-2024-12-12",
+"sha256": "ee374975d3d66c52cdfba3aa346e5004b8533cac873da1498daef874194812af",
+"pages": [
+1,
+2
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2024-cwp-29798-2024-phhc011511432024-1-2024-11-05",
+"sha256": "167ca729c26726fa30bd71924392f3fc4ee9c368c792d7bcc4d9294396101a25",
+"pages": [
+1,
+2
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2026-cwp-10985-2026-phhc010444682026-1-2026-04-10",
+"sha256": "81cd462e98121e86e216efae2ce2136099f64c2c152c2a887f04633a9beb5860",
+"pages": [
+1,
+2
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2024-cwp-24455-2019-phhc011058342019-1-2024-08-13",
+"sha256": "7b012193c4f9fb7766c58193410a53a5a7fa82eecee2011ef87d47d92223dead",
+"pages": [
+1,
+2
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-jkl-2025-wp-c-440-2024-jkhc020009792024-1-2025-11-25",
+"sha256": "3abc29b68f4c7f68ea4164c44c3ad40534f9951d59fd95294949254dff353590",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2024-cwp-30550-2024-phhc011567532024-1-2024-11-13",
+"sha256": "a2ee9fc14fb3648a7965ffe1fd06d4245855dd26a84547e8ee6b2397e36439be",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2025-cwp-12291-2018-phhc010824572018-1-2025-12-12",
+"sha256": "d6eb9f322f39afb3edf6f6234c21170452b81aeda9d2ff46f0faba5006c74478",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+10
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2026-cwp-5122-2020-phhc010251122020-1-2026-03-18",
+"sha256": "091e1678f03df8447ffba7259087060dd58ca3022c6db4362076a32281247657",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2026-cwp-1203-2026-phhc010084892026-1-2026-03-16",
+"sha256": "f6bc4002bf253dffc7eb71a4ca250927f4e772e691c069fa84e8d81e03a1d976",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+9,
+10,
+11,
+12,
+13
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-delhi-2011-w-p-c-589-2010-dlhc010147072010-1-2011-03-22",
+"sha256": "69e1cdc0532734b3ef1b6234692c7882cdffe03a1bd74b937e066c26d2b1c076",
+"pages": [
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+16,
+17,
+18,
+19,
+20,
+21,
+22,
+23,
+24,
+25,
+26,
+27,
+28,
+29,
+30,
+31,
+32,
+33,
+34,
+35,
+36
+],
+"tranche": "C_unusable_pages_early_stop",
+"engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2026-cwp-17401-2025-phhc010957672025-1-2026-04-02",
+"sha256": "566e2296bf6be6ed8f260cd88460009ece2e426d4e5bb45f166916b678dc5c9e",
+"pages": [
+1,
+2
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-cwp-33066-2024-phhc011707512024-1-2026-04-27",
+"sha256": "bafb3538d15ad52fe1da8dff167b77e164217bd9ef037ef1b54b349add4edb24",
+"pages": [
+1,
+2,
+3
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "sc-2022-wg-cdr-a-u-tayyaba-retd-and-ot-2022insc1206",
+"sha256": "a6cea1d6a5a9d2ef5ffe725f8d2900cd54e0d6493b77c34f5ed6612e983fcc21",
+"pages": [
+15
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-untitled-phhc011391252026-1-2026-09-11",
+"sha256": "6877c5b7be0d490849ed93e2297497c6659415e1289078f1fb816cb330deed38",
+"pages": [
+1,
+2
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-cwp-8911-2026-phhc010439542026-1-2026-03-24",
+"sha256": "d3caba502c44dbd77884f47c8e118d1f749e957a06b7a10151afc68452805bcc",
+"pages": [
+1,
+2,
+3,
+4
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-16685-2024-phhc010922262024-1-2024-11-29",
+"sha256": "2b47d52e0087c214aa97a6489798866d4f2b1a40cda94d6fb34931679b027677",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+16
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2017-lpa-305-2017-phhc011195222017-1-2017-02-27",
+"sha256": "8596e763d8cfc33e6339d9f69341798be3518275b4a50d5af6f940b44eb539fe",
+"pages": [
+1
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-untitled-phhc011084722026-1-2026-08-14",
+"sha256": "2f568cb5c7bbdb24520c89a61cf32963d8ccfb0e6b762523c6ad2382d514ae2f",
+"pages": [
+1
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-cwp-32188-2024-phhc011534052024-1-2026-05-07",
+"sha256": "a7bc0c03d30bc8a6d248c74083f7a31fa13efd3cfb8e5f8476821ebc01239807",
+"pages": [
+1,
+2,
+3,
+4
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-lpa-599-2026-phhc010352012026-1-2026-03-05",
+"sha256": "f2f74f4af8a131377a77108103d98a13a881c8c295547cfac9a7449e1673f940",
+"pages": [
+1,
+2,
+3,
+4
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "sc-2002-ex-capt-harish-uppal-2002insc523",
+"sha256": "7ebbed32083077a5404a28eb5e53c05470e1a5bcb50945889298ea700158863e",
+"pages": [
+7
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-cwp-1960-2025-phhc010061642025-1-2026-04-08",
+"sha256": "fc5513b5284169ed27809cc47efb8e41604cece0580415c7a37f8f0614059cd4",
+"pages": [
+1,
+2,
+3,
+4,
+5
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-16679-2024-phhc010922762024-1-2024-11-29",
+"sha256": "152202c8193b927ac93338a04a226aeb41341d9045d1906b7904ca34cbe8894d",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2016-lpa-326-2016-phhc011124862016-1-2016-12-19",
+"sha256": "455d61f6d964eccfeb50eb337608f444e6fe131eda81e0d8fb8213a6267530c8",
+"pages": [
+1
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-16171-2024-phhc010900112024-1-2024-11-29",
+"sha256": "a5bf15855022ccea642d41cfd4d0ea7608bdd59f10629444fe55f98839642aef",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+16
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-16165-2024-phhc010896452024-1-2024-12-13",
+"sha256": "ab3091b8e61455d63dc5b5813a611f8f521b46450d6a88cc5c28fa7b71a7f2de",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2025-cwp-17353-2025-phhc010948072025-1-2025-07-01",
+"sha256": "236b7b66b489e84571e20c79896595e860180066e278c860216d9b8d975f11f3",
+"pages": [
+1
+],
+"tranche": "candidate_clipped_text_layer_full_ocr",
+"engine": "paddle_v5_mobile"
+}
+]

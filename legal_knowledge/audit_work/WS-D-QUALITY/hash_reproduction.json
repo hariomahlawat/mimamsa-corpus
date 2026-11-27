@@ -1,0 +1,573 @@
+{
+  "artifact": "WS-D hash reproduction",
+  "tool": "legal_knowledge/audit_work/WS-D-QUALITY/scripts/hash_reproduction.py",
+  "caveat": "Byte integrity only; not legal authenticity, edition, amendment completeness or current law.",
+  "files": [
+    {
+      "path": "legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl",
+      "records": 658,
+      "expected_sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+      "actual_sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+      "match": true
+    },
+    {
+      "path": "legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl",
+      "records": 53,
+      "expected_sha256": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+      "actual_sha256": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+      "match": true
+    }
+  ],
+  "manifests": [
+    {
+      "batch": "PILOT-01",
+      "kb_file_sha256_match": true,
+      "cases_file_sha256_match": true,
+      "mml_manifest_sha256": {
+        "expected": "182e24da3900da59ef5d1ab7d4be5964eca7bcbc361bd8ad576a343e6464bab1",
+        "actual": "182e24da3900da59ef5d1ab7d4be5964eca7bcbc361bd8ad576a343e6464bab1",
+        "match": true
+      },
+      "records": [
+        {
+          "record_id": "HCE-010",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+          "actual": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "CM-013",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "86bc66f70ee191f236be3740c918fc207153b5ebff0a4319ffce00a6b618ece8",
+          "actual": "86bc66f70ee191f236be3740c918fc207153b5ebff0a4319ffce00a6b618ece8",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "HCE-017",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+          "actual": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "CIV-033",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "6846102e992291e1985c7f15de5f3d2c4776c384aa906d1e67b4640fb3ea0759",
+          "actual": "6846102e992291e1985c7f15de5f3d2c4776c384aa906d1e67b4640fb3ea0759",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "CM-025",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "a8ccf31948613da7e423aecf83bcd3f1d74e80be967843e0920f2edb23cc4e32",
+          "actual": "a8ccf31948613da7e423aecf83bcd3f1d74e80be967843e0920f2edb23cc4e32",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "EV-002",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "5eb3f68df1d88ce32320a98bcc2defdbc11b9d8ffe6e6c7808303768594120aa",
+          "actual": "5eb3f68df1d88ce32320a98bcc2defdbc11b9d8ffe6e6c7808303768594120aa",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "HCE-004",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "71b02bcc62a2ed9716983250699f742c71f614506dbd527d126ca620a14bf34a",
+          "actual": "71b02bcc62a2ed9716983250699f742c71f614506dbd527d126ca620a14bf34a",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "COI-025",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "645787c99b5e33ecb773453b7b4c1407da9c9659a8c4cdb812fa5ed2f5d65b8e",
+          "actual": "645787c99b5e33ecb773453b7b4c1407da9c9659a8c4cdb812fa5ed2f5d65b8e",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "CM-011",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "dbf0137e3a85c5aa009b3b648dd690c705c9bc11dd4579d21e24f7b27c14ba88",
+          "actual": "dbf0137e3a85c5aa009b3b648dd690c705c9bc11dd4579d21e24f7b27c14ba88",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "ADM-009",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "d8933e0da4ac5690645bdca33aa8099c903d891e3222e85eaa0f5b9233d958aa",
+          "actual": "d8933e0da4ac5690645bdca33aa8099c903d891e3222e85eaa0f5b9233d958aa",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "AFT-011",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "7bfd456e561fb4b1696aa3fa5cddfaa50e2d4d869583a4533f55e97286e7c0dd",
+          "actual": "7bfd456e561fb4b1696aa3fa5cddfaa50e2d4d869583a4533f55e97286e7c0dd",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "KB-026",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "6f6ffb4e19247361c7e40d9c98d709e3aadf4a20d19a218e2bdfd7d54de948e8",
+          "actual": "6f6ffb4e19247361c7e40d9c98d709e3aadf4a20d19a218e2bdfd7d54de948e8",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "PEN-043",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "aacfa91ed6b956d05b9afe1861526c79b13446626fd4bb0d696d0fb28221fd1e",
+          "actual": "aacfa91ed6b956d05b9afe1861526c79b13446626fd4bb0d696d0fb28221fd1e",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "CIV-019",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "a10b8dce0e2ec483c9fd0f58c6b943238b922b98cdfcf54d1c097a281660d82c",
+          "actual": "a10b8dce0e2ec483c9fd0f58c6b943238b922b98cdfcf54d1c097a281660d82c",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "KB-028",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "5328623a84328e7750e9d85626d8a7e3c5a665198949e54bb927a86a5d3fc6dc",
+          "actual": "5328623a84328e7750e9d85626d8a7e3c5a665198949e54bb927a86a5d3fc6dc",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "PEN-J-01",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "6ed839aa7101abe8c6446b32f3b4d6fa979eec9f34a54e4cfbf82d3da1aeb5f7",
+          "actual": "6ed839aa7101abe8c6446b32f3b4d6fa979eec9f34a54e4cfbf82d3da1aeb5f7",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "KB-003",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "cf94e78ade6043053ddf3194b518f0e25841bb2a8f50f755ad7cbb1666bab668",
+          "actual": "cf94e78ade6043053ddf3194b518f0e25841bb2a8f50f755ad7cbb1666bab668",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "CM-003",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "8bf3946fdb3011eca6765bb60baa5eba0070194650a5d4b1f75ab5bccbaf7232",
+          "actual": "8bf3946fdb3011eca6765bb60baa5eba0070194650a5d4b1f75ab5bccbaf7232",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "COI-008",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "876ee246814af22bc17bd076d83787973f7b2d9f9c779836f8f518b83ac07d80",
+          "actual": "876ee246814af22bc17bd076d83787973f7b2d9f9c779836f8f518b83ac07d80",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "CIV-008",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "07fed784f69887cfc7ff7e18ee6c67314d09838fe790e78987fb40b3605aa844",
+          "actual": "07fed784f69887cfc7ff7e18ee6c67314d09838fe790e78987fb40b3605aa844",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "EV-016",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "b2fe32d5eaee939764ab5011c9f0cc794197f64113f1ad90376c061547a4e293",
+          "actual": "b2fe32d5eaee939764ab5011c9f0cc794197f64113f1ad90376c061547a4e293",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "CIV-034",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "9efda464a4e1e926a2088b401e690c500442415a81536f8343aed8dce3c6f1b5",
+          "actual": "9efda464a4e1e926a2088b401e690c500442415a81536f8343aed8dce3c6f1b5",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "AFT-004",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+          "actual": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "V9-CL-02",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "a45c7b3f02299dd9d34a0f230fae3a2c5979a01acd50e9bbb29aeef6786c3147",
+          "actual": "a45c7b3f02299dd9d34a0f230fae3a2c5979a01acd50e9bbb29aeef6786c3147",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "COI-039",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "d2cea86e4034a98026b4af4aed543055203a50124a32d8d017384d1acb7133de",
+          "actual": "d2cea86e4034a98026b4af4aed543055203a50124a32d8d017384d1acb7133de",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-01",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "b4bb5c3df23bfd6c6025e2b663d3d5132e5be306fe6bf43e513631d5b5009848",
+          "actual": "b4bb5c3df23bfd6c6025e2b663d3d5132e5be306fe6bf43e513631d5b5009848",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-02",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "aee2b541c7ffb67063f24d468f353730ca1efefc89fe97956ee9d2e89944af30",
+          "actual": "aee2b541c7ffb67063f24d468f353730ca1efefc89fe97956ee9d2e89944af30",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-03",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "95904d7070291f7b7df9ced13c07d4cd3d6952e34d3073e7612d972c485f8541",
+          "actual": "95904d7070291f7b7df9ced13c07d4cd3d6952e34d3073e7612d972c485f8541",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-04",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "e594535a3a0b9c556c62c9d82131a711708f54b10bd468c00243bd4f55bf6579",
+          "actual": "e594535a3a0b9c556c62c9d82131a711708f54b10bd468c00243bd4f55bf6579",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-05",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "67b15d127f81091b2a1b68bbdee915516bb675eaae0274a4a8b40a7ea2101754",
+          "actual": "67b15d127f81091b2a1b68bbdee915516bb675eaae0274a4a8b40a7ea2101754",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-06",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "d293fa382dae8553a3e79679f70329922f8d45a3256249ffd86590f4d730a7c1",
+          "actual": "d293fa382dae8553a3e79679f70329922f8d45a3256249ffd86590f4d730a7c1",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-07",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "ef871b67799e62262390a6e830017c82bf99ce2f09c7f1c25a9327dbb504b517",
+          "actual": "ef871b67799e62262390a6e830017c82bf99ce2f09c7f1c25a9327dbb504b517",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-08",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "1b0fb28eacaf9bac7c9bf0448ca09e4c3301773ac3913d2828ca8adfb59b66cf",
+          "actual": "1b0fb28eacaf9bac7c9bf0448ca09e4c3301773ac3913d2828ca8adfb59b66cf",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-09",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "5a9511413b40afc052ae0e9ffda3b3479be0252563f02c4bf106eb13d259418d",
+          "actual": "5a9511413b40afc052ae0e9ffda3b3479be0252563f02c4bf106eb13d259418d",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-10",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "ef031a01f9f95768537c5590e76a4853403a893a2bb72c79e9e886abe14e8679",
+          "actual": "ef031a01f9f95768537c5590e76a4853403a893a2bb72c79e9e886abe14e8679",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-11",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "26f7528d4188f57ee1f5a5ccab189148f11eeaa80d2fc217307ce5160090d958",
+          "actual": "26f7528d4188f57ee1f5a5ccab189148f11eeaa80d2fc217307ce5160090d958",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-12",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "e8c830f5aae806f823f2fad2d37e3b8d363ccac1e14c421258e63c571603a87c",
+          "actual": "e8c830f5aae806f823f2fad2d37e3b8d363ccac1e14c421258e63c571603a87c",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "DCLR-SC-2020-002",
+          "kind": "CASE_ROW",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "c42f28ff1395f0b50e533bae7199ef4a709d306d141a6c9c5216879858e42684",
+          "actual": "c42f28ff1395f0b50e533bae7199ef4a709d306d141a6c9c5216879858e42684",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "DCLR-SC-2023-009",
+          "kind": "CASE_ROW",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "e3610481baf62dc8b4eb375a608dc614710df40fb14d2d3cbc55c38f7d2a1194",
+          "actual": "e3610481baf62dc8b4eb375a608dc614710df40fb14d2d3cbc55c38f7d2a1194",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "DCLR-SC-2013-N08",
+          "kind": "CASE_ROW",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "d0e97edabfbbb52c0b9bc2ee7e204b9a521953a6a8032d10ba9d0a631e638268",
+          "actual": "d0e97edabfbbb52c0b9bc2ee7e204b9a521953a6a8032d10ba9d0a631e638268",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "DCLR-SC-2015-N09",
+          "kind": "CASE_ROW",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "5640759ed8df490944750c2bafa4898488856d5bdaebdcb89e9a745f22b16483",
+          "actual": "5640759ed8df490944750c2bafa4898488856d5bdaebdcb89e9a745f22b16483",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "DCLR-SC-2005-L01",
+          "kind": "CASE_ROW",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "4a71247575e936a04f8959115478b47faf7afd56896a2566715b91a3af15b229",
+          "actual": "4a71247575e936a04f8959115478b47faf7afd56896a2566715b91a3af15b229",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "DCLR-SC-2014-N12",
+          "kind": "CASE_ROW",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "ed6163fe8d19f27728baca42e3e0bd58b6d431b5cadd988443859b3a7175e6f8",
+          "actual": "ed6163fe8d19f27728baca42e3e0bd58b6d431b5cadd988443859b3a7175e6f8",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        }
+      ],
+      "by_kind": {
+        "KB_RECORD": {
+          "total": 25,
+          "match": 25
+        },
+        "MML_PROVISION": {
+          "total": 12,
+          "match": 12
+        },
+        "CASE_ROW": {
+          "total": 6,
+          "match": 6
+        }
+      }
+    },
+    {
+      "batch": "R23-VERIFY-01",
+      "kb_file_sha256_match": true,
+      "cases_file_sha256_match": true,
+      "mml_manifest_sha256": null,
+      "records": [
+        {
+          "record_id": "HCE-010",
+          "kind": "KB_RECORD",
+          "basis": "sha256(JSONL line bytes)",
+          "expected": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+          "actual": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        },
+        {
+          "record_id": "MMLPKT-02",
+          "kind": "MML_PROVISION",
+          "basis": "sha256(json.dumps({id,provision,mml_files}, sort_keys=True), default separators)",
+          "expected": "aee2b541c7ffb67063f24d468f353730ca1efefc89fe97956ee9d2e89944af30",
+          "actual": "aee2b541c7ffb67063f24d468f353730ca1efefc89fe97956ee9d2e89944af30",
+          "source_line_or_file_refs_consistent": true,
+          "match": true
+        }
+      ],
+      "by_kind": {
+        "KB_RECORD": {
+          "total": 1,
+          "match": 1
+        },
+        "MML_PROVISION": {
+          "total": 1,
+          "match": 1
+        }
+      }
+    }
+  ],
+  "mml_originals": {
+    "dir": "<scratchpad>/originals",
+    "checked": 8,
+    "matched": 8,
+    "expected": 8,
+    "rows": [
+      {
+        "filename": "MML 1.doc",
+        "present": true,
+        "bytes": 845312,
+        "expected_bytes": 845312,
+        "expected_sha256": "3a2e3a4f70669483678cdb96e1dd29d901c6c0ffc43a04a794a00d3ef0c3d1ed",
+        "actual_sha256": "3a2e3a4f70669483678cdb96e1dd29d901c6c0ffc43a04a794a00d3ef0c3d1ed",
+        "match": true
+      },
+      {
+        "filename": "MML 2.pdf",
+        "present": true,
+        "bytes": 2443874,
+        "expected_bytes": 2443874,
+        "expected_sha256": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "actual_sha256": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "match": true
+      },
+      {
+        "filename": "MML vol 2(AA).doc.doc",
+        "present": true,
+        "bytes": 1202176,
+        "expected_bytes": 1202176,
+        "expected_sha256": "73fd304227ca680ebf3c8512dfd4aafa0eb2e16952558bb8b1c1edee637a455d",
+        "actual_sha256": "73fd304227ca680ebf3c8512dfd4aafa0eb2e16952558bb8b1c1edee637a455d",
+        "match": true
+      },
+      {
+        "filename": "MML vol 2(AA).pdf",
+        "present": true,
+        "bytes": 1521514,
+        "expected_bytes": 1521514,
+        "expected_sha256": "c8a791a1e3a4d8fee412cae1b0c2daa4517438bf926c9f9e27fffd81cada1ec9",
+        "actual_sha256": "c8a791a1e3a4d8fee412cae1b0c2daa4517438bf926c9f9e27fffd81cada1ec9",
+        "match": true
+      },
+      {
+        "filename": "MML vol 2(AR).doc-1.doc",
+        "present": true,
+        "bytes": 1499136,
+        "expected_bytes": 1499136,
+        "expected_sha256": "8bb17d8255ea1be2b975a96b3c739d002264df3da8a56086d29d2a1961f3a162",
+        "actual_sha256": "8bb17d8255ea1be2b975a96b3c739d002264df3da8a56086d29d2a1961f3a162",
+        "match": true
+      },
+      {
+        "filename": "MML vol 2(AR).doc.doc",
+        "present": true,
+        "bytes": 1302016,
+        "expected_bytes": 1302016,
+        "expected_sha256": "ed1d8a7fc1f4088f8d0fb7db6855c195b205b251874a70f611ced5c3fdb494a2",
+        "actual_sha256": "ed1d8a7fc1f4088f8d0fb7db6855c195b205b251874a70f611ced5c3fdb494a2",
+        "match": true
+      },
+      {
+        "filename": "MML vol 3.doc.doc",
+        "present": true,
+        "bytes": 2074112,
+        "expected_bytes": 2074112,
+        "expected_sha256": "67d788b31e8e2b618bf98b18606b6263a8c497d1ce40c4f9d0a171c3ea1bcad8",
+        "actual_sha256": "67d788b31e8e2b618bf98b18606b6263a8c497d1ce40c4f9d0a171c3ea1bcad8",
+        "match": true
+      },
+      {
+        "filename": "MML vol 3.pdf.pdf",
+        "present": true,
+        "bytes": 2409359,
+        "expected_bytes": 2409359,
+        "expected_sha256": "dfce01c1267dc321acead765aae79764a1a2b45838ac0ba183f1dfec729c68e3",
+        "actual_sha256": "dfce01c1267dc321acead765aae79764a1a2b45838ac0ba183f1dfec729c68e3",
+        "match": true
+      }
+    ]
+  },
+  "mml_transport_zip": {
+    "expected_sha256_per_receipt": "9d82b9c5cb9ac56f41fd6ca74ed0a4704a5897fd26a239fdbafe0377e511f31c",
+    "actual_sha256": "9d82b9c5cb9ac56f41fd6ca74ed0a4704a5897fd26a239fdbafe0377e511f31c",
+    "match": true,
+    "member_count": 10,
+    "originals_found_in_zip_with_manifest_hash": 8,
+    "per_original": {
+      "MML 1.doc": true,
+      "MML 2.pdf": true,
+      "MML vol 2(AA).doc.doc": true,
+      "MML vol 2(AA).pdf": true,
+      "MML vol 2(AR).doc-1.doc": true,
+      "MML vol 2(AR).doc.doc": true,
+      "MML vol 3.doc.doc": true,
+      "MML vol 3.pdf.pdf": true
+    }
+  },
+  "summary": {
+    "failures": [],
+    "all_run_checks_match": true
+  }
+}

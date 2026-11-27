@@ -1,0 +1,360 @@
+name: App Windows PoC (C13 B-PoC P1)
+
+# Builds the ASP.NET Core and Django PoC services, installs both as Windows Services under virtual
+# service accounts, runs smoke + restart + crash-recovery tests, and tries PostgreSQL + pgvector on Windows.
+# Uses a synthetic fixture only: no corpus data, no restricted material, no secrets.
+
+on:
+  push:
+    paths:
+      - "app/**"
+      - ".github/workflows/app-windows-poc.yml"
+  pull_request:
+    paths:
+      - "app/**"
+      - ".github/workflows/app-windows-poc.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: app-windows-poc-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows-services:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      DOTNET_NOLOGO: "1"
+      POC_ROOT: C:\mimamsa
+      PGPASSWORD: root
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Record runner environment
+        run: |
+          New-Item -ItemType Directory -Force out | Out-Null
+          $info = [ordered]@{
+            os = (Get-CimInstance Win32_OperatingSystem).Caption
+            build = [Environment]::OSVersion.Version.ToString()
+            cpu = (Get-CimInstance Win32_Processor | Select-Object -First 1).Name
+            cores = [Environment]::ProcessorCount
+            ram_gb = [math]::Round((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB, 1)
+            dotnet = (dotnet --version)
+            python = (python --version)
+            pgbin = $env:PGBIN
+          }
+          $info | ConvertTo-Json | Tee-Object out\runner.json
+
+      # ---------------- PostgreSQL (preinstalled on the runner image) ----------------
+      - name: Start PostgreSQL and create the PoC database
+        run: |
+          $svc = Get-Service -Name "postgresql*" | Select-Object -First 1
+          if (-not $svc) { throw "No preinstalled PostgreSQL service found on runner" }
+          Set-Service $svc.Name -StartupType Manual
+          Start-Service $svc.Name
+          $psql = Join-Path $env:PGBIN "psql.exe"
+          & $psql -U postgres -h 127.0.0.1 -c "SELECT version();" | Tee-Object out\pg_version.txt
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE ROLE poc LOGIN PASSWORD 'poc';"
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE DATABASE poc OWNER poc;"
+          $env:PGPASSWORD = "poc"
+          & $psql -U poc -h 127.0.0.1 -d poc -v ON_ERROR_STOP=1 -f app/poc/p1_hosting/fixtures/fixture.sql
+
+      - name: Build and install pgvector from source (best effort)
+        id: pgvector
+        continue-on-error: true
+        shell: cmd
+        run: |
+          for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -property installationPath`) do set VSPATH=%%i
+          call "%VSPATH%\VC\Auxiliary\Build\vcvars64.bat" || exit /b 1
+          for %%i in ("%PGBIN%\..") do set "PGROOT=%%~fi"
+          git clone --depth 1 --branch v0.8.1 https://github.com/pgvector/pgvector.git "%RUNNER_TEMP%\pgvector" || exit /b 1
+          cd /d "%RUNNER_TEMP%\pgvector"
+          nmake /F Makefile.win || exit /b 1
+          nmake /F Makefile.win install || exit /b 1
+          set PGPASSWORD=root
+          "%PGBIN%\psql.exe" -U postgres -h 127.0.0.1 -d poc -v ON_ERROR_STOP=1 -c "CREATE EXTENSION vector;" -c "CREATE TABLE v(id int, e vector(3)); INSERT INTO v VALUES (1,'[1,0,0]'),(2,'[0,1,0]'); CREATE INDEX ON v USING hnsw (e vector_cosine_ops); SELECT id, e <=> '[1,0.1,0]' AS d FROM v ORDER BY d LIMIT 1;" > "%GITHUB_WORKSPACE%\out\pgvector.txt" || exit /b 1
+
+      - name: PDF fixture
+        run: |
+          New-Item -ItemType Directory -Force "$env:POC_ROOT\pdfstore" | Out-Null
+          python app/poc/p1_hosting/fixtures/make_fixture_pdf.py "$env:POC_ROOT\pdfstore\fixture.pdf"
+
+      # ---------------- ASP.NET Core as a Windows Service ----------------
+      - name: Publish ASP.NET Core (win-x64, framework-dependent)
+        run: |
+          dotnet publish app/poc/p1_hosting/aspnet/MimamsaPocApi.csproj -c Release -r win-x64 --self-contained false -o "$env:POC_ROOT\aspnet"
+          (Get-ChildItem "$env:POC_ROOT\aspnet" -Recurse | Measure-Object Length -Sum).Sum | Out-File out\aspnet_publish_bytes.txt
+
+      - name: Install ASP.NET Core service (virtual account, recovery actions)
+        run: |
+          app/poc/p1_hosting/windows/install-aspnet-service.ps1 -PublishDir "$env:POC_ROOT\aspnet" -PdfRoot "$env:POC_ROOT\pdfstore" `
+            -DbConnection "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc;Maximum Pool Size=32"
+
+      - name: ASP.NET Core smoke, restart and crash-recovery test
+        run: app/poc/p1_hosting/windows/smoke-and-recovery.ps1 -Name MimamsaPocApi -Base http://127.0.0.1:5081 -Out out\aspnet_service.json
+
+      # ---------------- Django (hypercorn) as a Windows Service ----------------
+      - name: Install Django runtime (pinned)
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r app/poc/p1_hosting/django/requirements-windows.txt
+          python -m pip freeze | Out-File out\django_pip_freeze.txt
+          # register pywin32 DLLs so pythonservice.exe can load them when started by the SCM
+          python -m pywin32_postinstall -install
+          if ($LASTEXITCODE) { python (Join-Path (Split-Path (Get-Command python).Source) "Scripts\pywin32_postinstall.py") -install }
+          New-Item -ItemType Directory -Force "$env:POC_ROOT\django" | Out-Null
+          Copy-Item -Recurse app/poc/p1_hosting/django/* "$env:POC_ROOT\django"
+
+      - name: Install Django service (virtual account, recovery actions)
+        run: |
+          $py = (Get-Command python).Source
+          app/poc/p1_hosting/windows/install-django-service.ps1 -AppDir "$env:POC_ROOT\django" -Python $py -PdfRoot "$env:POC_ROOT\pdfstore" `
+            -DbConnection "host=127.0.0.1 port=5432 user=poc password=poc dbname=poc"
+
+      - name: Django smoke, restart and crash-recovery test
+        run: app/poc/p1_hosting/windows/smoke-and-recovery.ps1 -Name MimamsaPocDjango -Base http://127.0.0.1:5082 -Out out\django_service.json
+
+      # ---------------- R2-N01 (PR #53 Serving §10): credit ledger, uncertain transfers, bounded range delivery ----------------
+      - name: R2-N01 synthetic credit-ledger oracle (Windows)
+        run: |
+          $psql = Join-Path $env:PGBIN "psql.exe"; $env:PGPASSWORD = "root"
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE DATABASE poc_oracle OWNER poc;" -c "CREATE DATABASE poc_r2n01 OWNER poc;"
+          & "$env:POC_ROOT\aspnet\MimamsaPocApi.exe" --ledger-oracle "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_oracle;Maximum Pool Size=80" |
+            Out-File -Encoding utf8 out\r2n01_ledger_oracle_windows.json
+          $o = Get-Content out\r2n01_ledger_oracle_windows.json -Raw | ConvertFrom-Json
+          if (-not $o.allPass) { throw "ledger oracle failed on Windows" }
+
+      - name: R2-N01 transport tests (auth, bounds, concurrency, killed connections, crash/restart) on Windows
+        run: |
+          python app/poc/p1_hosting/fixtures/make_fixture_pdf.py "$env:RUNNER_TEMP\fx_big.pdf" --pages 300 --pad 20000
+          python app/poc/p1_hosting/fixtures/make_fixture_pdf.py "$env:RUNNER_TEMP\fx_small.pdf"
+          python app/poc/p1_hosting/r2n01/test_r2n01.py --server-cmd "$env:POC_ROOT\aspnet\MimamsaPocApi.exe" --server-cwd "$env:POC_ROOT\aspnet" `
+            --db "host=127.0.0.1 port=5432 user=poc password=poc dbname=poc_r2n01" `
+            --npgsql "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_r2n01;Maximum Pool Size=40" `
+            --big "$env:RUNNER_TEMP\fx_big.pdf" --small "$env:RUNNER_TEMP\fx_small.pdf" --out out\r2n01_transport_windows.json --work "$env:RUNNER_TEMP\r2n01"
+          if ($LASTEXITCODE -ne 0) { throw "R2-N01 transport tests failed" }
+
+      - name: R2-N01 evidence trace + independent PR #54 transport oracle (unmodified, hash-pinned) on Windows
+        run: |
+          $psql = Join-Path $env:PGBIN "psql.exe"; $env:PGPASSWORD = "root"
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE DATABASE poc_trace OWNER poc;"
+          git fetch --no-tags --depth 50 origin pull/54/head:pr54-oracle
+          $o = "$env:RUNNER_TEMP\oracle"; New-Item -ItemType Directory -Force $o | Out-Null
+          foreach ($f in @("transport_oracle.py", "transport-fixtures.json")) {
+            cmd /c "git show pr54-oracle:docs/architecture/reviews/c13-assurance/$f > `"$o\$f`""
+          }
+          $pins = @{ "transport_oracle.py" = "fcb4806d07ce5c1e60904ee8510cee1c32c5eb7645b2a32a19a56c892a5741a0";
+                     "transport-fixtures.json" = "b8377355551d76bbb42dbd16f1ff21a7416733eb14bd7adeb20712a85d2fc85d" }
+          foreach ($k in $pins.Keys) {
+            $h = (Get-FileHash "$o\$k" -Algorithm SHA256).Hash.ToLower()
+            if ($h -ne $pins[$k]) { throw "oracle file $k changed in PR #54 (sha256 $h); re-pin deliberately" }
+          }
+          python app/poc/p1_hosting/r2n01/trace_n01.py --server-cmd "$env:POC_ROOT\aspnet\MimamsaPocApi.exe" --server-cwd "$env:POC_ROOT\aspnet" `
+            --db "host=127.0.0.1 port=5432 user=poc password=poc dbname=poc_trace" `
+            --npgsql "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_trace;Maximum Pool Size=40" `
+            --out-dir "$env:GITHUB_WORKSPACE\out\r2n01_trace_windows"
+          python -B "$o\transport_oracle.py" --self-test
+          python -B "$o\transport_oracle.py" --trace out\r2n01_trace_windows\normalized_trace.json `
+            --http-cases app/poc/p1_hosting/r2n01/n01_http_cases.json | Tee-Object out\r2n01_transport_oracle_windows.json
+          if ($LASTEXITCODE -ne 0) { throw "PR #54 transport oracle REJECTED the Windows trace" }
+
+      - name: R2-N01 PDF.js protected progressive bootstrap (Chromium via Playwright) on Windows
+        run: |
+          python app/poc/p1_hosting/fixtures/make_fixture_pdf.py "$env:RUNNER_TEMP\fx_big2.pdf" --pages 300 --pad 20000
+          $w = "$env:RUNNER_TEMP\r2n01_pdfjs"; New-Item -ItemType Directory -Force $w | Out-Null
+          python -c "import hashlib,json,sys; h=lambda p: hashlib.sha256(open(p,'rb').read()).hexdigest(); a,b=sys.argv[1],sys.argv[2]; json.dump({'sessions':[{'token':'tok-alice','user':'alice','session':'s-alice'},{'token':'tok-bob','user':'bob','session':'s-bob'},{'token':'tok-admin','user':'admin','session':'s-admin','admin':True}],'copies':[{'doc_id':'doc-big','source':a,'sha256':h(a)},{'doc_id':'doc-bnss','source':b,'sha256':h(b)}],'grants':[{'user':'alice','doc_id':'doc-big'},{'user':'alice','doc_id':'doc-bnss'}]}, open(sys.argv[3],'w'))" "$env:RUNNER_TEMP\fx_big.pdf" "$env:RUNNER_TEMP\fx_big2.pdf" "$w\seed.json"
+          Stop-Service MimamsaPocApi
+          $env:Urls = "http://127.0.0.1:5081"; $env:ASPNETCORE_URLS = $env:Urls
+          $env:Mimamsa__Db = "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_r2n01"
+          $env:Mimamsa__SeedFile = "$w\seed.json"; $env:Mimamsa__VaultRoot = "$w\vault"; $env:Mimamsa__Test__ResetLedger = "true"; $env:Mimamsa__Test__Enabled = "true"
+          $srv = Start-Process -FilePath "$env:POC_ROOT\aspnet\MimamsaPocApi.exe" -WorkingDirectory "$env:POC_ROOT\aspnet" -PassThru -RedirectStandardOutput "$w\server.out" -RedirectStandardError "$w\server.err"
+          Push-Location app/poc/p4_pdf/pdfjs
+          npm ci --silent
+          npm install --no-save --silent playwright@1.63.0
+          npx playwright install chromium
+          npx vite build
+          $vite = Start-Process -FilePath "npx.cmd" -ArgumentList "vite","preview","--host","127.0.0.1","--port","5199" -WorkingDirectory (Get-Location) -PassThru
+          $ok = $false
+          for ($i = 0; $i -lt 60; $i++) { try { if ((Invoke-WebRequest "http://127.0.0.1:5199/" -UseBasicParsing -TimeoutSec 2).StatusCode -eq 200) { $ok = $true; break } } catch {}; Start-Sleep -Milliseconds 500 }
+          if (-not $ok) { throw "vite preview did not start on 127.0.0.1:5199" }
+          node run_protected.cjs http://127.0.0.1:5199 http://127.0.0.1:5081 "$env:GITHUB_WORKSPACE\out\r2n01_pdfjs_protected_windows.json"
+          $nodeRc = $LASTEXITCODE
+          Pop-Location
+          Stop-Process -Id $vite.Id -Force -ErrorAction SilentlyContinue; Stop-Process -Id $srv.Id -Force -ErrorAction SilentlyContinue
+          python app/poc/p1_hosting/r2n01/check_pdfjs_protected.py out\r2n01_pdfjs_protected_windows.json out\r2n01_pdfjs_protected_windows_checks.json
+          $checkRc = $LASTEXITCODE
+          Start-Service MimamsaPocApi
+          if ($nodeRc -ne 0 -or $checkRc -ne 0) { throw "PDF.js protected viewer failed (node=$nodeRc, checks=$checkRc)" }
+
+      - name: R2-N01 checks against the INSTALLED Windows Service (NT SERVICE account, test mode, SCM crash restart)
+        run: |
+          $psql = Join-Path $env:PGBIN "psql.exe"; $env:PGPASSWORD = "root"
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE DATABASE poc_svc OWNER poc;"
+          $env:PGPASSWORD = "poc"
+          & $psql -U poc -h 127.0.0.1 -d poc_svc -v ON_ERROR_STOP=1 -f app/poc/p1_hosting/fixtures/fixture.sql
+          $fx = "$env:POC_ROOT\svcfix"; $vault = "$env:POC_ROOT\svcvault"
+          New-Item -ItemType Directory -Force $fx, $vault | Out-Null
+          python app/poc/p1_hosting/fixtures/make_fixture_pdf.py "$fx\big.pdf" --pages 300 --pad 20000
+          python app/poc/p1_hosting/fixtures/make_fixture_pdf.py "$fx\w.pdf" --pages 20 --pad 20000
+          python -c "import hashlib,json,sys; h=lambda p: hashlib.sha256(open(p,'rb').read()).hexdigest(); a,b=sys.argv[1],sys.argv[2]; json.dump({'sessions':[{'token':'tok-alice','user':'alice','session':'s-alice'},{'token':'tok-bob','user':'bob','session':'s-bob'},{'token':'tok-admin','user':'admin','session':'s-admin','admin':True}],'copies':[{'doc_id':'doc-svc-big','source':a,'sha256':h(a)},{'doc_id':'doc-svc-w','source':b,'sha256':h(b)}],'grants':[{'user':'alice','doc_id':'doc-svc-big'},{'user':'alice','doc_id':'doc-svc-w'}]}, open(sys.argv[3],'w'))" "$fx\big.pdf" "$fx\w.pdf" "$fx\seed.json"
+          icacls $fx /grant "NT SERVICE\MimamsaPocApi:(OI)(CI)R" | Out-Null
+          icacls $vault /grant "NT SERVICE\MimamsaPocApi:(OI)(CI)M" | Out-Null
+          @{ Urls = "http://127.0.0.1:5081"
+             Mimamsa = @{ Db = "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_svc;Maximum Pool Size=32"; PdfRoot = "$env:POC_ROOT\pdfstore"; DevToken = "dev-token"
+                          SeedFile = "$fx\seed.json"; VaultRoot = $vault
+                          Test = @{ Enabled = $true; ReconcileMinAgeSec = 3 }
+                          Transport = @{ ListenSendBufferBytes = 4096 }; Delivery = @{ DrainGraceMs = 300 } } } |
+            ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 "$env:POC_ROOT\aspnet\appsettings.Production.json"
+          Restart-Service MimamsaPocApi
+          python app/poc/p1_hosting/r2n01/test_service_r2n01.py --base http://127.0.0.1:5081 `
+            --db "host=127.0.0.1 port=5432 user=poc password=poc dbname=poc_svc" --service-name MimamsaPocApi --seed "$fx\seed.json" --out out\r2n01_service_windows.json
+          if ($LASTEXITCODE -ne 0) { throw "R2-N01 service-mode checks failed" }
+
+      - name: Light load comparison on Windows (60 s total, informational)
+        continue-on-error: true
+        run: |
+          npm install --no-save --silent autocannon@8
+          foreach ($t in @(@{n="aspnet";p=5081}, @{n="django";p=5082})) {
+            foreach ($ep in @("/api/documents/fx-army-act", "/api/search?q=disability%20pension")) {
+              $name = "$($t.n)_$(($ep -replace '[^a-z]','_'))"
+              npx autocannon -j -c 10 -d 10 -H "Authorization=Bearer dev-token" "http://127.0.0.1:$($t.p)$ep" | Out-File "out\load_$name.json"
+            }
+            $svcPid = (Get-CimInstance Win32_Service -Filter "Name='MimamsaPoc$(if ($t.n -eq 'aspnet') {'Api'} else {'Django'})'").ProcessId
+            (Get-Process -Id $svcPid).WorkingSet64 / 1MB | Out-File "out\rss_mb_$($t.n).txt"
+          }
+
+      - name: Collect service logs
+        if: always()
+        run: |
+          Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Service Control Manager'} -MaxEvents 60 -ErrorAction SilentlyContinue |
+            Select-Object TimeCreated, Id, Message | Format-List | Out-File out\scm_events.txt
+          Copy-Item "$env:POC_ROOT\django\logs\*" out\ -ErrorAction SilentlyContinue
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: app-windows-poc-results
+          path: out/
+
+  # ---------------- B1 vertical slice on windows-latest: build, tests, oracle, journeys, Windows Service smoke ----------------
+  b1-windows:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      DOTNET_NOLOGO: "1"
+      B1_ROOT: C:\mimamsa-b1
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Start PostgreSQL (preinstalled) and create B1 databases
+        run: |
+          $svc = Get-Service -Name "postgresql*" | Select-Object -First 1
+          if (-not $svc) { throw "No preinstalled PostgreSQL service found on runner" }
+          Set-Service $svc.Name -StartupType Manual
+          Start-Service $svc.Name
+          $psql = Join-Path $env:PGBIN "psql.exe"; $env:PGPASSWORD = "root"
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE ROLE mimamsa LOGIN PASSWORD 'mimamsa';"
+          foreach ($db in @("mimamsa_b1_test", "mimamsa_b1_test_xfer", "mimamsa_b1_oracle", "mimamsa_b1_e2e_syn", "mimamsa_b1_svc")) {
+            & $psql -U postgres -h 127.0.0.1 -c "CREATE DATABASE $db OWNER mimamsa;"
+            if ($LASTEXITCODE) { throw "create $db failed" }
+          }
+      - name: Importer dependencies, design-token drift check, synthetic SYN site
+        run: |
+          python -m pip install --disable-pip-version-check -r app/importer/requirements.txt
+          python app/b1/web/gen_tokens.py --check
+          if ($LASTEXITCODE) { throw "tokens.css drift" }
+          python -I app/b1/build/build_fixture_site.py --out "$env:B1_ROOT\syn"
+          if ($LASTEXITCODE) { throw "fixture site build failed" }
+      - name: Vendor PDF.js and build (Release)
+        run: |
+          Push-Location app/b1/web; npm ci --omit=optional --no-audit --no-fund; node vendor.mjs; if ($LASTEXITCODE) { throw "vendor" }; Pop-Location
+          dotnet build -c Release app/b1/Mimamsa.B1.slnx
+          if ($LASTEXITCODE) { throw "build failed" }
+      - name: Unit and integration tests on Windows (real Kestrel process, PostgreSQL)
+        run: |
+          $env:MIMAMSA_TEST_SITE = "$env:B1_ROOT\syn\site"; $env:MIMAMSA_TEST_MAP = "$env:B1_ROOT\syn\fixture_map.json"
+          $env:MIMAMSA_TEST_DB = "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_test;Maximum Pool Size=40"
+          New-Item -ItemType Directory -Force out\b1 | Out-Null
+          dotnet test -c Release --no-build app/b1/Mimamsa.B1.slnx --logger "trx;LogFileName=b1-tests-windows.trx" --results-directory out\b1
+          if ($LASTEXITCODE) { throw "B1 tests failed on Windows" }
+      - name: PR #54 retrieval oracle (unmodified) against the real search service on Windows
+        run: |
+          python app/b1/tests/b1server.py --site "$env:B1_ROOT\syn\site" --log out\b1\oracle-service.log `
+            --db "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_oracle;Maximum Pool Size=40" -- `
+            python app/b1/tests/oracles/run_retrieval_oracle.py --map "$env:B1_ROOT\syn\fixture_map.json" --out out\b1\oracle
+          if ($LASTEXITCODE) { throw "oracle runner error" }
+      - name: Playwright journeys on Windows (headless Chromium, trace off)
+        run: |
+          $pw = "$env:RUNNER_TEMP\pw"; New-Item -ItemType Directory -Force $pw | Out-Null
+          Push-Location $pw; npm init -y | Out-Null; npm install --no-save --silent playwright@1.63.0; npx playwright install chromium; Pop-Location
+          $env:NODE_PATH = "$pw\node_modules"; $env:B1_SYN_SITE = "$env:B1_ROOT\syn\site"
+          $env:B1_SYN_DB = "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_e2e_syn;Maximum Pool Size=40"
+          node "$pw\node_modules\playwright\cli.js" test --config app/b1/e2e/playwright.config.cjs --trace off
+          if ($LASTEXITCODE) { throw "B1 journeys failed on Windows" }
+      - name: Publish win-x64 and run as a Windows Service (virtual account, production mode, CLI-created account)
+        run: |
+          $pub = "$env:B1_ROOT\svc"
+          dotnet publish app/b1/src/Mimamsa.Web/Mimamsa.Web.csproj -c Release -r win-x64 --self-contained false -o $pub
+          if ($LASTEXITCODE) { throw "publish failed" }
+          $db = "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_svc;Maximum Pool Size=40"
+          Copy-Item config\restricted_material.json "$env:B1_ROOT\restricted_material.json"
+          icacls "$env:B1_ROOT\restricted_material.json" /grant "NT SERVICE\MimamsaB1:R" | Out-Null
+          @{ Urls = "http://127.0.0.1:5310"; Mimamsa = @{ Site = "$env:B1_ROOT\syn\site"; Db = $db; RestrictedRegister = "$env:B1_ROOT\restricted_material.json" } } | ConvertTo-Json -Depth 4 |
+            Set-Content -Encoding UTF8 "$pub\appsettings.Production.json"
+          $env:MIMAMSA_NEW_PASSWORD = "ci-admin-password-1"
+          & "$pub\Mimamsa.Web.exe" --add-user ciadmin Admin --Mimamsa:Db=$db
+          New-Service -Name MimamsaB1 -BinaryPathName "`"$pub\Mimamsa.Web.exe`"" -StartupType Manual | Out-Null
+          sc.exe config MimamsaB1 obj= "NT SERVICE\MimamsaB1" | Out-Null
+          sc.exe failure MimamsaB1 reset= 60 actions= restart/2000 | Out-Null
+          icacls "$env:B1_ROOT\syn\site" /grant "NT SERVICE\MimamsaB1:(OI)(CI)R" | Out-Null
+          icacls $pub /grant "NT SERVICE\MimamsaB1:(OI)(CI)RX" | Out-Null
+          Start-Service MimamsaB1
+          $ok = $false; for ($i = 0; $i -lt 60; $i++) { try { if ((Invoke-WebRequest "http://127.0.0.1:5310/health" -UseBasicParsing -TimeoutSec 2).StatusCode -eq 200) { $ok = $true; break } } catch {}; Start-Sleep 1 }
+          if (-not $ok) { throw "service did not become healthy" }
+          $s = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+          $login = Invoke-WebRequest "http://127.0.0.1:5310/api/login" -Method Post -ContentType "application/json" -Body '{"username":"ciadmin","password":"ci-admin-password-1"}' -WebSession $s -UseBasicParsing
+          $r = Invoke-RestMethod "http://127.0.0.1:5310/api/search?q=OA%20411%2F2021" -WebSession $s
+          if ($r.mode -ne "identifier" -or $r.passages[0].doc_id -ne "syn-j-allow") { throw "service search smoke failed" }
+          try { Invoke-WebRequest "http://127.0.0.1:5310/api/search?q=x" -UseBasicParsing | Out-Null; throw "unauthenticated search allowed" } catch { if ($_.Exception.Response.StatusCode.value__ -ne 401) { throw } }
+          $p1 = (Get-CimInstance Win32_Service -Filter "Name='MimamsaB1'").ProcessId
+          Stop-Process -Id $p1 -Force
+          $ok = $false; for ($i = 0; $i -lt 60; $i++) { Start-Sleep 1; $p2 = (Get-CimInstance Win32_Service -Filter "Name='MimamsaB1'").ProcessId; if ($p2 -and $p2 -ne $p1) { try { if ((Invoke-WebRequest "http://127.0.0.1:5310/health" -UseBasicParsing -TimeoutSec 2).StatusCode -eq 200) { $ok = $true; break } } catch {} } }
+          if (-not $ok) { throw "SCM did not restart the crashed service" }
+          Stop-Service MimamsaB1
+          @{ health = "ok"; search_mode = $r.mode; first = $r.passages[0].doc_id; crash_restart = $ok } | ConvertTo-Json | Out-File out\b1\windows_service_smoke.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: b1-windows-results
+          path: |
+            out/b1
+            app/b1/e2e/out

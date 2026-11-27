@@ -1,0 +1,470 @@
+EEEEEEEEEE<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py:337: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpzh32u_dg/CALIBRATION-02/proposals/correction_proposals.csv' mode='r' encoding='utf-8'>
+  st = {r["proposition_id"]: r["support_status"] for r in csv.DictReader(open(base / "proposals/correction_proposals.csv", newline="", encoding="utf-8"))}
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+FFF<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/build_propositions.py:27: ResourceWarning: unclosed file <_io.TextIOWrapper name='<scratchpad>/old_c4/legal_knowledge/audit_work/COORDINATION/CALIBRATION-01/calibration_package.csv' mode='r' encoding='utf-8'>
+  cal = list(csv.DictReader(CAL.open(newline="", encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+records=46 propositions=382 kb_sha256=9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1
+<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py:20: ResourceWarning: unclosed file <_io.TextIOWrapper name='<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/propositions.csv' mode='r' encoding='utf-8'>
+  rows = list(csv.DictReader(open(C2 / "propositions.csv", newline="", encoding="utf-8")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.E/usr/local/lib/python3.13/tempfile.py:1021: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmpf5293tbi'>
+  _warnings.warn(warn_message, ResourceWarning)
+.EEEEEEEEEEEEEEEEE
+======================================================================
+ERROR: test_01_official_with_documented_provenance (test_legal_audit_calibration02.EvidenceClassification.test_01_official_with_documented_provenance)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 238, in setUp
+    self.ev_mod = load("evidence_classification")
+                  ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 11, in load
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
+                                               ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_02_held_pdf_provenance_unknown (test_legal_audit_calibration02.EvidenceClassification.test_02_held_pdf_provenance_unknown)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 238, in setUp
+    self.ev_mod = load("evidence_classification")
+                  ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 11, in load
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
+                                               ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_03_derived_text_of_official_document (test_legal_audit_calibration02.EvidenceClassification.test_03_derived_text_of_official_document)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 238, in setUp
+    self.ev_mod = load("evidence_classification")
+                  ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 11, in load
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
+                                               ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_04_mirror_only_judgment (test_legal_audit_calibration02.EvidenceClassification.test_04_mirror_only_judgment)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 238, in setUp
+    self.ev_mod = load("evidence_classification")
+                  ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 11, in load
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
+                                               ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_05_identical_bytes_official_claimed_and_secondary (test_legal_audit_calibration02.EvidenceClassification.test_05_identical_bytes_official_claimed_and_secondary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 238, in setUp
+    self.ev_mod = load("evidence_classification")
+                  ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 11, in load
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
+                                               ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_06_missing_held_source_entry (test_legal_audit_calibration02.EvidenceClassification.test_06_missing_held_source_entry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 238, in setUp
+    self.ev_mod = load("evidence_classification")
+                  ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 11, in load
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
+                                               ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_07_hash_mismatch (test_legal_audit_calibration02.EvidenceClassification.test_07_hash_mismatch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 238, in setUp
+    self.ev_mod = load("evidence_classification")
+                  ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 11, in load
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
+                                               ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_08_valid_source_missing_pinpoint (test_legal_audit_calibration02.EvidenceClassification.test_08_valid_source_missing_pinpoint)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 238, in setUp
+    self.ev_mod = load("evidence_classification")
+                  ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 11, in load
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
+                                               ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_09_reviewer_verified_claim_failing_effective_test_is_preserved (test_legal_audit_calibration02.EvidenceClassification.test_09_reviewer_verified_claim_failing_effective_test_is_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 238, in setUp
+    self.ev_mod = load("evidence_classification")
+                  ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 11, in load
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
+                                               ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_10_genuine_source_conflict_passes_through (test_legal_audit_calibration02.EvidenceClassification.test_10_genuine_source_conflict_passes_through)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 238, in setUp
+    self.ev_mod = load("evidence_classification")
+                  ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 11, in load
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
+                                               ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_classes (test_legal_audit_calibration02.Reconciliation.test_classes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 186, in test_classes
+    t, m, p, d = self._tree(f, n=13)
+                 ~~~~~~~~~~^^^^^^^^^
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 141, in _tree
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_approval_claim_in_free_text_fails (test_legal_audit_calibration02.Validator.test_approval_claim_in_free_text_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_bad_state_fails (test_legal_audit_calibration02.Validator.test_bad_state_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_duplicate_finding_id_fails (test_legal_audit_calibration02.Validator.test_duplicate_finding_id_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_missing_coverage_fails (test_legal_audit_calibration02.Validator.test_missing_coverage_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_negated_approval_text_passes (test_legal_audit_calibration02.Validator.test_negated_approval_text_passes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_p1_without_correction_fails (test_legal_audit_calibration02.Validator.test_p1_without_correction_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_p2_with_defect_none_fails (test_legal_audit_calibration02.Validator.test_p2_with_defect_none_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_record_mismatch_fails (test_legal_audit_calibration02.Validator.test_record_mismatch_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_trivial_missing_evidence_fails (test_legal_audit_calibration02.Validator.test_trivial_missing_evidence_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_unknown_proposition_fails (test_legal_audit_calibration02.Validator.test_unknown_proposition_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_valid_passes (test_legal_audit_calibration02.Validator.test_valid_passes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_verified_derived_text_fails (test_legal_audit_calibration02.Validator.test_verified_derived_text_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_verified_primary_pdf_passes (test_legal_audit_calibration02.Validator.test_verified_primary_pdf_passes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_verified_sha_not_held_fails (test_legal_audit_calibration02.Validator.test_verified_sha_not_held_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_verified_without_hash_fails (test_legal_audit_calibration02.Validator.test_verified_without_hash_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_wrong_header_fails (test_legal_audit_calibration02.Validator.test_wrong_header_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+ERROR: test_wrong_reviewer_fails (test_legal_audit_calibration02.Validator.test_wrong_reviewer_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 30, in setUp
+    shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<scratchpad>/old_c4/legal_knowledge/audit_work/CALIBRATION-02/tools/evidence_classification.py'
+
+======================================================================
+FAIL: test_pending_and_unknown_never_primary_in_reconciler (test_legal_audit_calibration02.EvidenceIntegration.test_pending_and_unknown_never_primary_in_reconciler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 338, in test_pending_and_unknown_never_primary_in_reconciler
+    self.assertEqual(st["R-1#P3"], "AUTHENTICATION_PENDING", "held pdf with unknown provenance must not be primary-backed")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PRIMARY_EVIDENCE_SUPPORTED' != 'AUTHENTICATION_PENDING'
+- PRIMARY_EVIDENCE_SUPPORTED
++ AUTHENTICATION_PENDING
+ : held pdf with unknown provenance must not be primary-backed
+
+======================================================================
+FAIL: test_validator_hash_mismatch_with_files (test_legal_audit_calibration02.EvidenceIntegration.test_validator_hash_mismatch_with_files)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 371, in test_validator_hash_mismatch_with_files
+    self.assertEqual(p.returncode, 1); self.assertIn("HASH_MISMATCH", p.stdout)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_validator_reports_effective_status_and_rejects_protocol_errors (test_legal_audit_calibration02.EvidenceIntegration.test_validator_reports_effective_status_and_rejects_protocol_errors)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<scratchpad>/old_c4/tests/test_legal_audit_calibration02.py", line 355, in test_validator_reports_effective_status_and_rejects_protocol_errors
+    self.assertIn("AUTHENTICATION_PENDING", p.stdout)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'AUTHENTICATION_PENDING' not found in "propositions=1 reviewers=['A', 'B', 'C', 'D'] errors=0 warnings=1\nWARNING A A-1 VERIFIED file also indexed under a secondary path (authentication of the bytes rests on provenance records)\n"
+
+----------------------------------------------------------------------
+Ran 33 tests in 0.356s
+
+FAILED (failures=3, errors=28)

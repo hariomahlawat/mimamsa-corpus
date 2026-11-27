@@ -1,0 +1,46 @@
+{
+  "note": "Reviewer identity binding for PILOT-01 (remediation R4). Pilot sources were written with retrieved_by='independent-reviewer'; identity is bound by source/finding ID prefix. Future batches set require_exact_retrieved_by=true.",
+  "require_exact_retrieved_by": false,
+  "first_pass_agents": [
+    "manual-of-military-law-auditor",
+    "statutory-auditor",
+    "judgment-auditor",
+    "procedure-auditor",
+    "cross-volume-auditor",
+    "orchestrator"
+  ],
+  "reviewers": {
+    "independent-reviewer-blind": {
+      "stage": "blind",
+      "source_prefixes": [
+        "S-BLIND-"
+      ],
+      "finding_prefixes": [
+        "F-BLIND-"
+      ]
+    },
+    "independent-reviewer-A": {
+      "stage": "adversarial",
+      "source_prefixes": [
+        "S-REVA-"
+      ],
+      "finding_prefixes": []
+    },
+    "independent-reviewer-B": {
+      "stage": "adversarial",
+      "source_prefixes": [
+        "S-REVB-"
+      ],
+      "finding_prefixes": []
+    },
+    "independent-reviewer-C": {
+      "stage": "adversarial",
+      "source_prefixes": [
+        "S-REVC-"
+      ],
+      "finding_prefixes": [],
+      "note": "Final-controls review of F-REM-001/002 (2026-11-22); must set retrieved_by exactly 'independent-reviewer-C'.",
+      "require_exact_retrieved_by": true
+    }
+  }
+}

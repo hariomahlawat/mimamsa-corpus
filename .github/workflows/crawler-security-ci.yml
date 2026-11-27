@@ -1,0 +1,50 @@
+name: Crawler security guards
+
+on:
+  pull_request:
+    paths:
+      - "config/**"
+      - "crawler/**"
+      - "tests/test_crawler_security.py"
+      - "tests/test_crawler_foundation.py"
+      - ".github/workflows/crawler-security-ci.yml"
+  # C13 A7 review F14 (deferred to A9): also run on direct pushes to staging.
+  push:
+    branches:
+      - "legal-knowledge/v2.5-staging"
+    paths:
+      - "config/**"
+      - "crawler/**"
+      - "tests/test_crawler_security.py"
+      - "tests/test_crawler_foundation.py"
+      - ".github/workflows/crawler-security-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  crawler-security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install pinned dependencies
+        run: pip install -r requirements.txt pytest==9.2.0  # pinned; matches requirements.txt (A7 F14)
+      - name: Blocked host must not appear outside blocked_hosts
+        run: |
+          python - <<'PY'
+          import yaml, sys
+          raw = yaml.safe_load(open("config/sources.yaml", encoding="utf-8"))
+          blocked = raw.pop("blocked_hosts")
+          assert "aftjabalpur.in" in blocked, "aftjabalpur.in must stay on blocked_hosts"
+          assert "aftjabalpur" not in yaml.safe_dump(raw).lower(), "aftjabalpur reintroduced outside blocked_hosts"
+          print("ok: aftjabalpur.in only on blocked_hosts")
+          PY
+      - name: Security tests (offline)
+        run: python -m pytest -v tests/test_crawler_security.py
+      - name: Crawler foundation tests (offline)
+        run: python -m pytest -q tests/test_crawler_foundation.py

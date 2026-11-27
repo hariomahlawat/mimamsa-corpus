@@ -1,0 +1,4 @@
+# training-only environment for tools/c13_train.py (extraction needs only the Python 3.11+ standard library)
+numpy==2.2.6
+scipy==1.15.3
+scikit-learn==1.6.1

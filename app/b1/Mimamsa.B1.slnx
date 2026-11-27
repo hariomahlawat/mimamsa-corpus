@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Mimamsa.Core/Mimamsa.Core.csproj" />
+    <Project Path="src/Mimamsa.Web/Mimamsa.Web.csproj" />
+    <Project Path="src/Mimamsa.Hybrid/Mimamsa.Hybrid.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Mimamsa.Tests/Mimamsa.Tests.csproj" />
+  </Folder>
+</Solution>

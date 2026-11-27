@@ -1,0 +1,7 @@
+issue_id,priority,topic,description,status
+V26-001,HIGH,Rule 22(1) proviso,No automatic dispensation from charge hearing without Rule 180 compliance as to accused,OPEN
+V26-002,HIGH,Rule 182,Do not flatten false-evidence exception and cross-examination proviso into absolute exclusion,OPEN
+V26-003,HIGH,Rule text currency,Obtain Gazette amendments and authoritative as-of-date version,OPEN
+V26-004,HIGH,Rule 23 clauses,Full clause-by-clause primary text comparison outstanding,OPEN
+V26-005,HIGH,Judicial provenance,Distinguish court holdings from procedural history and quoted lower-court orders,OPEN
+V26-006,MEDIUM,Case overlap,Match judgments to Mimamsa manifest by case identity and checksum,OPEN

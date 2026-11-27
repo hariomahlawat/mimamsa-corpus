@@ -1,0 +1,48 @@
+{
+ "anchors": [],
+ "approval_ref": "AP-FIXTURE-0001",
+ "category": "legally_validated",
+ "classification_provenance": null,
+ "contract": "mimamsa-corpus-contract/2.0",
+ "evidentiary_basis": "LEGAL_REVIEW",
+ "has_legal_effect": true,
+ "is_finding": true,
+ "proposition_ref": null,
+ "record_kind": "corpus_relationship",
+ "relationship_id": "REL-cd42b6050e1453be311cb03c",
+ "review_binding": null,
+ "review_ref": null,
+ "source": {
+  "author_id": null,
+  "producer": {
+   "commit": "c8fa5290",
+   "config_sha256": null,
+   "name": "c16-fixture-producer",
+   "version": "1.0.0"
+  },
+  "rule_id": "LEGAL-REVIEW",
+  "rule_version": "1.0"
+ },
+ "subject": {
+  "doc_id": "sc-2019-example-v-union-of-india-ca0001",
+  "graph_node_ref": "JUD:sc-2019-example-v-union-of-india-ca0001",
+  "source_copy_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+ },
+ "target": {
+  "node_id": null,
+  "raw_reference": "(synthetic) Example v. Union, 2001",
+  "resolved": false,
+  "unresolved": {
+   "unresolved": "AMBIGUOUS_REFERENCE"
+  }
+ },
+ "temporal_scope": {
+  "from": null,
+  "from_status": "NOT_DETERMINED",
+  "to": null,
+  "to_status": "NOT_DETERMINED"
+ },
+ "uncertainty": "Representation test only: a legal approval overlay (impossible while AUTH-LEDGER is at version 0).",
+ "validates_relationship_id": "REL-398701865e6598b7f88ecb23",
+ "verification": "LEGAL_REVIEWED"
+}

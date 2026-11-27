@@ -1,0 +1,80 @@
+{
+ "correction_proposals": 47,
+ "correction_proposals_by_support": {
+  "AUTHENTICATION_PENDING": 1,
+  "DISPUTED_ESCALATED": 16,
+  "EVIDENCE_GAP": 3,
+  "PRIMARY_EVIDENCE_SUPPORTED": 5,
+  "SECONDARY_EVIDENCE_ONLY": 16,
+  "SOURCE_CONFLICT_OPEN": 6
+ },
+ "cross_volume_findings": 15,
+ "disagreements": 12,
+ "effective_primary_findings": 134,
+ "findings_by_defect_class_P1_P2": {
+  "CITATION_ERROR": 2,
+  "CROSS_VOLUME_INCONSISTENCY": 1,
+  "HISTORICAL_VERSION": 4,
+  "METADATA_OR_TRANSCRIPTION": 1,
+  "MISLINKED_CASE_OR_CODE": 2,
+  "MISSING_EXCEPTION": 1,
+  "OMISSION": 21,
+  "SOURCE_GAP": 3,
+  "WORDING_ERROR": 7,
+  "WRONG_AUTHORITY": 1,
+  "WRONG_PROVISION": 4
+ },
+ "findings_by_evidence_state": {
+  "CONTRADICTORY_EVIDENCE": 4,
+  "HISTORICAL_VERSION_UNRESOLVED": 21,
+  "INTERPRETATION_REQUIRES_LEGAL_ADVICE": 26,
+  "NOT_A_LEGAL_PROPOSITION": 780,
+  "NOT_YET_REVIEWED": 126,
+  "SOURCE_NOT_HELD": 125,
+  "SUPPORTED_BY_SECONDARY_SOURCE_ONLY": 294,
+  "UNSUPPORTED": 22,
+  "VERIFIED_AGAINST_HELD_PRIMARY_SOURCE": 138
+ },
+ "findings_by_evidence_state_note": "claimed reviewer states, preserved exactly as submitted",
+ "findings_by_reviewer": {
+  "A": 384,
+  "B": 387,
+  "C": 383,
+  "D": 382
+ },
+ "findings_by_severity": {
+  "NONE": 1290,
+  "P1": 1,
+  "P2": 46,
+  "P3": 199
+ },
+ "historical_version_findings": 44,
+ "judicial_relationship_findings": 32,
+ "legal_advisor_questions_raw": 36,
+ "note": "REVIEWED is not LEGAL_APPROVED. Agreement statistics are descriptive; legal disputes are escalated, not decided.",
+ "of": 46,
+ "proposition_agreement": {
+  "ALL_NON_LEGAL_OR_OUT_OF_SCOPE": 151,
+  "CORROBORATED_DEFECT": 8,
+  "DISAGREE": 12,
+  "NO_MATERIAL_DEFECT_RAISED": 199,
+  "SEVERITY_SPLIT": 11,
+  "SINGLE_REVIEWER_DEFECT": 1
+ },
+ "propositions": 382,
+ "record_classification": {
+  "FULLY_EVIDENCE_SUPPORTED": 1,
+  "PARTIALLY_SUPPORTED": 15,
+  "SUBSTANTIVE_DEFECT_FOUND": 19,
+  "UNSUPPORTED_OR_SOURCE_GAP": 11
+ },
+ "records_reviewed": 46,
+ "records_unable_to_progress_missing_primary_sources": 11,
+ "records_with_source_gap_propositions": 29,
+ "severity_splits_escalated": 17,
+ "unsupported_propositions": 13,
+ "verified_claims_by_effective_status": {
+  "AUTHENTICATION_PENDING": 4,
+  "EFFECTIVE_PRIMARY_VERIFIED": 134
+ }
+}

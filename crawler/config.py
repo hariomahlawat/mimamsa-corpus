@@ -44,6 +44,11 @@ class ConfigReport:
         return not self.errors
 
 
+# Hosts that must never be contacted, whatever config/sources.yaml says (compromised; C13 review F02).
+# This is a code-level backstop to config blocked_hosts: removing the config entry cannot re-enable them.
+NEVER_CONTACT = frozenset({"aftjabalpur.in"})
+
+
 def normalise_host(host: str) -> str:
     return host.strip().lower().rstrip(".")
 
@@ -68,6 +73,12 @@ class Config:
     @property
     def blocked_hosts(self) -> set[str]:
         return {normalise_host(h) for h in self.raw.get("blocked_hosts", [])}
+
+    def is_blocked_host(self, host: str) -> bool:
+        """True if host, or any parent domain of it, is on blocked_hosts."""
+        host = normalise_host(host)
+        blocked = set(self.blocked_hosts) | NEVER_CONTACT
+        return any(host == b or host.endswith("." + b) for b in blocked)
 
     def source(self, name: str) -> dict[str, Any]:
         try:
@@ -98,7 +109,7 @@ class Config:
         host = url_host(url)
         if not host:
             return False, "no host"
-        if host in self.blocked_hosts:
+        if self.is_blocked_host(host):
             return False, f"host {host} is on blocked_hosts"
         if host not in self.allowed_hosts(name):
             return False, f"host {host} not in allowed_hosts for {name}"
@@ -116,6 +127,18 @@ class Config:
 
     def may_run_now(self, name: str, now: datetime | None = None) -> bool:
         return not self.source(name).get("heavy") or self.in_quiet_hours(now)
+
+
+def _config_urls(node: Any, path: str):
+    """Yield (path, value) for every http(s) URL string anywhere in a config subtree."""
+    if isinstance(node, dict):
+        for k, v in node.items():
+            yield from _config_urls(v, f"{path}.{k}")
+    elif isinstance(node, list):
+        for i, v in enumerate(node):
+            yield from _config_urls(v, f"{path}[{i}]")
+    elif isinstance(node, str) and node.lower().startswith(("http://", "https://")):
+        yield path, node
 
 
 def _parse_hhmm(s: str) -> time:
@@ -178,7 +201,6 @@ def check_config(cfg: Config) -> ConfigReport:
     if cfg.user_agent_is_placeholder():
         r.warnings.append("contact_email is still the placeholder; real runs will refuse to start")
 
-    blocked = cfg.blocked_hosts
     seen_ids: dict[str, str] = {}
     for name, src in cfg.sources.items():
         where = f"sources.{name}"
@@ -187,8 +209,13 @@ def check_config(cfg: Config) -> ConfigReport:
         hosts = cfg.allowed_hosts(name)
         if src.get("enabled") and not hosts:
             r.errors.append(f"{where} is enabled but has no allowed_hosts")
-        for h in hosts & blocked:
-            r.errors.append(f"{where}: allowed host {h} is also on blocked_hosts")
+        for h in sorted(hosts):
+            if cfg.is_blocked_host(h):
+                r.errors.append(f"{where}: allowed host {h} is also on blocked_hosts")
+        for path, url in _config_urls(src, where):
+            host = url_host(url)
+            if host and cfg.is_blocked_host(host):
+                r.errors.append(f"{path}: URL host {host} is on blocked_hosts")
         if "min_delay_seconds" in src and src["min_delay_seconds"] < d["min_delay_seconds"]:
             # Only a bulk-access open-data bucket may go below the floor that protects government servers.
             if not (src.get("open_data_bucket") and src["min_delay_seconds"] >= 0.1):

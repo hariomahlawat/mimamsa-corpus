@@ -1,0 +1,4 @@
+source_id,instrument,instrument_date,source_tier,url,finding,verification_status,gazette_original_pdf_archived
+SRC-1954-GAZ,"S.R.O. 484, 27 Nov 1954",1954-11-27,UNRESOLVED_ORIGINAL_GAZETTE,https://csl.nic.in/page/innerpage/gazette-of-india.php,The Central Secretariat Library advises 1950–2002 Gazettes are digitized; the exact Gazette issue/scan is not obtained.,OPEN,NO
+SRC-1993-GAZ,"S.R.O. 17(E), 06 Dec 1993",1993-12-06,JUDICIAL_CITATION_ONLY,https://indiankanoon.org/doc/1898644/,Delhi High Court recites 1993 change to Rules 22/182; original Gazetted instrument still needed.,OPEN,NO
+SRC-2022-GAZ,"S.R.O. 6(E), 06 Jun 2022",2022-06-06,GAZETTE_FACSIMILE_THIRD_PARTY,https://www.staffnews.in/2022/06/army-amendment-rules-2022.html,Rule 16A amended; cannot establish exhaustive currency of Rules 22/23/180/182.,PARTIAL,NO

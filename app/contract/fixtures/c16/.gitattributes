@@ -1,0 +1,3 @@
+# Fixture bytes are hashed and compared byte for byte (canonical JSONL, LF only): never convert line ends.
+*.json -text
+*.jsonl -text

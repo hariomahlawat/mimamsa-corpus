@@ -1,0 +1,101 @@
+{
+ "contract": "mimamsa-corpus-contract/2.0",
+ "corpus_generation_id": "CG-20261127-fixtures-0a1b2c3d",
+ "doc_id": "local-compilation-example-0005",
+ "embedded_images": [],
+ "integrity": {
+  "basis": "producer-computed SHA-256 (fixture)",
+  "source_integrity": "DECLARED_HASH_ONLY"
+ },
+ "provenance": {
+  "acquisition": {
+   "acquisition_channel": "MANUAL_OWNER",
+   "hf": null,
+   "original_filename": null,
+   "retrieved_at": null,
+   "source_url": null
+  },
+  "carrier_provenance": "USER_SUPPLIED",
+  "observations": [],
+  "processing_history": []
+ },
+ "record_kind": "document_identity",
+ "representation": {
+  "completeness": "NOT_CHECKED",
+  "content_scope": "COMPILATION",
+  "members": [
+   {
+    "label_as_printed": "First example judgment",
+    "member_completeness": "NOT_CHECKED",
+    "member_seq": 1,
+    "pages": {
+     "from_page": 1,
+     "to_page": 12
+    },
+    "work_kind": "JUDGMENT",
+    "work_ref": {
+     "unresolved": "NOT_DETERMINED"
+    }
+   }
+  ],
+  "origin_status": "ACQUIRED_COPY_ORIGIN_UNDETERMINED",
+  "representation_kind": "NATIVE_DIGITAL_PDF"
+ },
+ "research_eligibility": {
+  "basis": [
+   "TEXT_RELIABLE_NATIVE",
+   "COMPILATION_MEMBER_BOUNDARIES"
+  ],
+  "graph_evidence_permitted": true,
+  "quoting_permitted": true,
+  "source_page_citation_permitted": true,
+  "state": "ELIGIBLE_FULL",
+  "whole_work_claims_permitted": false
+ },
+ "restriction": {
+  "access_marking": null,
+  "basis": "synthetic fixture",
+  "decided_by": "fixture",
+  "eligibility": "ELIGIBLE_ALL_USERS",
+  "restriction_id": null
+ },
+ "source_copy": {
+  "bytes": 115000,
+  "detected_format": "PDF",
+  "mime_type": "application/pdf",
+  "page_count": 30,
+  "physical_pagination": "PHYSICAL_PAGES",
+  "sha256": "7de25a13cf5f457df474c428dc0058a32099c8f2d9c93e3d20b670a9a5c83505",
+  "vault_path": "vault/sha256/7d/7de25a13cf5f457df474c428dc0058a32099c8f2d9c93e3d20b670a9a5c83505"
+ },
+ "text_derivatives": [
+  {
+   "coverage": {
+    "images_text_extracted": 0,
+    "images_total": 0,
+    "units_total": 30,
+    "units_with_text": 30
+   },
+   "derivative_id": "local-compilation-example-0005@mimamsa-corpus-text/1.0.0",
+   "derivative_text_sha256": "811780c9673ad09ef0bfdf683b450dc2c7d578e24d591bf2994340002c9d0437",
+   "methods": [
+    "NATIVE_TEXT_LAYER"
+   ],
+   "ocr_config": null,
+   "pagination_basis": "SOURCE_PHYSICAL",
+   "pipeline_name": "mimamsa-corpus-text",
+   "pipeline_version": "1.0.0",
+   "quoting_permitted": true,
+   "text_reliability": "reliable"
+  }
+ ],
+ "work_identity": {
+  "graph_node_ref": {
+   "unresolved": "NOT_DETERMINED"
+  },
+  "identity_basis": "NOT_ESTABLISHED",
+  "identity_verification": "CANDIDATE",
+  "proceeding_numbers_as_printed": [],
+  "work_kind": "COMPILATION_CONTAINER"
+ }
+}

@@ -1,0 +1,98 @@
+{
+ "contract": "mimamsa-corpus-contract/2.0",
+ "corpus_generation_id": "CG-20261127-fixtures-0a1b2c3d",
+ "doc_id": "aft-2015-example-extract-oa0004",
+ "embedded_images": [],
+ "integrity": {
+  "basis": "producer-computed SHA-256 (fixture)",
+  "source_integrity": "DECLARED_HASH_ONLY"
+ },
+ "provenance": {
+  "acquisition": {
+   "acquisition_channel": "MANUAL_OWNER",
+   "hf": null,
+   "original_filename": null,
+   "retrieved_at": null,
+   "source_url": null
+  },
+  "carrier_provenance": "USER_SUPPLIED",
+  "observations": [],
+  "processing_history": []
+ },
+ "record_kind": "document_identity",
+ "representation": {
+  "completeness": "PARTIAL_EXTRACT",
+  "content_scope": "EXTRACT",
+  "extract_scope": {
+   "description": "operative order only (fixture)",
+   "work_pages": {
+    "from_page": 14,
+    "to_page": 15
+   }
+  },
+  "origin_status": "ACQUIRED_COPY_ORIGIN_UNDETERMINED",
+  "representation_kind": "NATIVE_DIGITAL_PDF"
+ },
+ "research_eligibility": {
+  "basis": [
+   "TEXT_RELIABLE_NATIVE",
+   "PARTIAL_EXTRACT"
+  ],
+  "graph_evidence_permitted": true,
+  "quoting_permitted": true,
+  "source_page_citation_permitted": true,
+  "state": "ELIGIBLE_FULL",
+  "whole_work_claims_permitted": false
+ },
+ "restriction": {
+  "access_marking": null,
+  "basis": "synthetic fixture",
+  "decided_by": "fixture",
+  "eligibility": "ELIGIBLE_ALL_USERS",
+  "restriction_id": null
+ },
+ "source_copy": {
+  "bytes": 111000,
+  "detected_format": "PDF",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "physical_pagination": "PHYSICAL_PAGES",
+  "sha256": "521e660462e11f7de939eb62859130c6782da7f3c7a4eaa2125c16121fa368bf",
+  "vault_path": "vault/sha256/52/521e660462e11f7de939eb62859130c6782da7f3c7a4eaa2125c16121fa368bf"
+ },
+ "text_derivatives": [
+  {
+   "coverage": {
+    "images_text_extracted": 0,
+    "images_total": 0,
+    "units_total": 2,
+    "units_with_text": 2
+   },
+   "derivative_id": "aft-2015-example-extract-oa0004@mimamsa-corpus-text/1.0.0",
+   "derivative_text_sha256": "acf154b7b2409ef48073fa878cdd98490961ef71ec992209d78c55a1739daaa3",
+   "methods": [
+    "NATIVE_TEXT_LAYER"
+   ],
+   "ocr_config": null,
+   "pagination_basis": "SOURCE_PHYSICAL",
+   "pipeline_name": "mimamsa-corpus-text",
+   "pipeline_version": "1.0.0",
+   "quoting_permitted": true,
+   "text_reliability": "reliable"
+  }
+ ],
+ "work_identity": {
+  "graph_node_ref": "JUD:aft-2015-example-extract-oa0004",
+  "identity_basis": "COVER_PAGE_EXTRACTED",
+  "identity_verification": "CANDIDATE",
+  "judgment_id": {
+   "unresolved": "NOT_DETERMINED"
+  },
+  "proceeding_numbers_as_printed": [],
+  "rendition": {
+   "language": "en",
+   "rendition_kind": "UNDETERMINED"
+  },
+  "work_kind": "JUDGMENT"
+ }
+}

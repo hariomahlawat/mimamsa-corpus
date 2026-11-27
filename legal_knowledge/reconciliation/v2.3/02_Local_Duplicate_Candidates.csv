@@ -1,0 +1,29 @@
+file_a,file_b,shared_sampled_12grams,approx_smaller_document_overlap,identity,classification,next_step
+MML 1.doc,MML 2.pdf,0,0.0,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML 1.doc,MML vol 2(AA).doc.doc,2,0.0006,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML 1.doc,MML vol 2(AA).pdf,1,0.0003,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML 1.doc,MML vol 2(AR).doc-1.doc,3,0.0009,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML 1.doc,MML vol 2(AR).doc.doc,5,0.0015,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML 1.doc,MML vol 3.doc.doc,8,0.0024,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML 1.doc,MML vol 3.pdf.pdf,8,0.0024,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML 2.pdf,MML vol 2(AA).doc.doc,402,0.0813,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML 2.pdf,MML vol 2(AA).pdf,169,0.0342,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML 2.pdf,MML vol 2(AR).doc-1.doc,362,0.0566,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML 2.pdf,MML vol 2(AR).doc.doc,390,0.0621,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML 2.pdf,MML vol 3.doc.doc,12,0.001,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML 2.pdf,MML vol 3.pdf.pdf,9,0.0008,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AA).doc.doc,MML vol 2(AA).pdf,373,0.0754,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AA).doc.doc,MML vol 2(AR).doc-1.doc,1,0.0002,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AA).doc.doc,MML vol 2(AR).doc.doc,1,0.0002,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AA).doc.doc,MML vol 3.doc.doc,1,0.0002,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AA).doc.doc,MML vol 3.pdf.pdf,0,0.0,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AA).pdf,MML vol 2(AR).doc-1.doc,3,0.0006,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AA).pdf,MML vol 2(AR).doc.doc,1,0.0002,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AA).pdf,MML vol 3.doc.doc,4,0.0008,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AA).pdf,MML vol 3.pdf.pdf,4,0.0008,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AR).doc-1.doc,MML vol 2(AR).doc.doc,401,0.0639,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AR).doc-1.doc,MML vol 3.doc.doc,3,0.0005,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AR).doc-1.doc,MML vol 3.pdf.pdf,2,0.0003,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AR).doc.doc,MML vol 3.doc.doc,1,0.0002,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 2(AR).doc.doc,MML vol 3.pdf.pdf,2,0.0003,DIFFERENT_BYTES,OVERLAP_NOT_ESTABLISHED_BY_SAMPLE,Paragraph/page-level comparison for same-work candidates; do not discard either source
+MML vol 3.doc.doc,MML vol 3.pdf.pdf,11274,0.8886,DIFFERENT_BYTES,POSSIBLE_SAME_WORK_OR_PARTIAL_COPY,Paragraph/page-level comparison for same-work candidates; do not discard either source

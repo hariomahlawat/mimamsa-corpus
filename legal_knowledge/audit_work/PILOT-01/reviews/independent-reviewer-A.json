@@ -1,0 +1,508 @@
+[
+ {
+  "review_id": "R-A-001",
+  "finding_id": "F-PROC-006",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "DISPUTES",
+  "decision_date": "2026-11-22",
+  "rationale": "Test (a)/(b): s.122(1)(a)-(c) re-read in my own India Code download [[page 35]] and in the Act 37 of 1992 Gazette s.9 (Gazette p.2): first-pass quotation and structure are accurate - (b) and (c) are conditional triggers and 'whichever is earlier' operates only within (b)/(c). Dispute is as to characterisation and severity: the record (line 138), read whole, already states that commencement is 'tied to date of offence, knowledge or known identity' and instructs a chronology of offence, discovery and identity discovery; 'earliest relevant knowledge rule' is a compressed paraphrase of the statutory 'whichever is earlier', not a misdescription. The finding's literal reading ('earliest across clauses would always select (a)') is strained. Recommend reclassifying as drafting ambiguity (issue_type AMBIGUITY-type wording fix), severity P1 -> P2; the proposed clarification text remains a good proposal. Not checked by first pass or by me: judicial construction of 'authority competent to initiate action' and of the knowledge trigger; this should be added before any NO_ISSUE/acceptance. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-002",
+   "S-REVA-005",
+   "S-REVA-028"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "dbf0137e3a85c5aa009b3b648dd690c705c9bc11dd4579d21e24f7b27c14ba88",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-002",
+   "S-REVA-005",
+   "S-REVA-028"
+  ]
+ },
+ {
+  "review_id": "R-A-002",
+  "finding_id": "F-PROC-007",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Test passed: s.123(2) and proviso re-read in my India Code download [[page 35]]; substituted words confirmed against the Gazette scan of Act 37 of 1992 s.10 (three years after ceasing to be subject; exclusion of absconding/concealment and of injunction/stay periods incl. day of issue and withdrawal). Proviso (desertion, fraudulent enrolment, s.37 offences; criminal-court jurisdiction unaffected) correctly reported. Record line 138 cites only s.122(1)-(4). s.122(3) indeed has no injunction/stay exclusion. Severity P1 retained: a separate jurisdictional time bar on court-martial trial is entirely absent from a limitation computation note. Cumulative s.122/s.123 operation correctly left as an advisor question; judicial treatment not checked. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-002",
+   "S-REVA-005"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "dbf0137e3a85c5aa009b3b648dd690c705c9bc11dd4579d21e24f7b27c14ba88",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-002",
+   "S-REVA-005"
+  ]
+ },
+ {
+  "review_id": "R-A-003",
+  "finding_id": "F-PROC-012",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "UNVERIFIED outcome upheld, but the BLOCKED premise is weaker than stated: more official text was obtainable. (1) My English India Code copy [[page 11]] confirms s.22 opens without '(1)' and cl.(b) states no filing period. (2) India Code also hosts a Hindi text of the Act (H2007-55.pdf, S-REVA-015) which the first pass did not use: it numbers the section '22. परिसीमा—(1)' (supporting the inference that '(1)' was dropped in the English compilation) and its cl.(ख) likewise contains no separate filing period - so the gap is not merely a compilation transcription error, though the English Gazette original still is not held. (3) India Code lists The Tribunals Reforms Act 2026 (No. 17 of 2026, Gazette 13-8-2026) as an amendment of the AFT Act; I read it: s.9 substitutes AFT Act s.9A only (service conditions); no change to ss.21-22 seen. Recommend the finding add S-REVA-015/016 and note the 2026 amendment check. Severity P1 retained (formal remedy limitation). Judicial construction of s.22(1)(b) remains unchecked by both agents. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-014",
+   "S-REVA-015",
+   "S-REVA-016"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "7bfd456e561fb4b1696aa3fa5cddfaa50e2d4d869583a4533f55e97286e7c0dd",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-014",
+   "S-REVA-015",
+   "S-REVA-016"
+  ]
+ },
+ {
+  "review_id": "R-A-004",
+  "finding_id": "F-PROC-018",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Test passed: compilation [[page 194]] r.177(1)-(2) (no presiding-officer clause, no marker) vs MML 2.pdf p.221 bracketed r.177 with fn 'Substituted by SRO 8 (E) dated 23 June, 2003' - quotations accurate; r.177(3) identical in both, so the record's specific claim (line 38) is unaffected. Additional evidence strengthening the conflict: the compilation's amendment markers are demonstrably patchy - it carries the 2002 r.22 Explanation note but no marker for r.177 (2003), r.177(5A) (MML 2 p.222: inserted SRO 17(E) 1993), r.192 proviso (1965, absent entirely) or r.193 (1993); India Code item metadata shows entry_date 2018-03-23 and no amending S.R.O. files. CONFLICTING correctly left unresolved; S.R.O. 8(E) 2003 not obtainable from reachable sources. Severity P2 appropriate. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-008",
+   "S-REVA-024",
+   "S-REVA-022"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "876ee246814af22bc17bd076d83787973f7b2d9f9c779836f8f518b83ac07d80",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-008",
+   "S-REVA-024",
+   "S-REVA-022"
+  ]
+ },
+ {
+  "review_id": "R-A-005",
+  "finding_id": "F-PROC-019",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Test passed: s.81(4) in my India Code copy [[page 28]] bars s.80(a)-(c) for a person who is, or was at the time of the offence, an NCO; letters '(a), (b) and (c)' substituted by Act 37 of 1992 s.5 (Gazette p.2 confirms). s.81(5) and s.82 correctly reported; s.80(f) forfeiture of good service and good conduct pay is indeed missing from the record's list (line 93). Severity change recommended: P1 -> P0. The record affirmatively states the NCO bar in a narrower form than the statute, and the omitted limb directly governs the legality of custodial summary punishments (imprisonment in military custody/detention); EVIDENCE_STANDARD lists custody and punishments as P0 gates. Advisor to confirm. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-001",
+   "S-REVA-005"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-001",
+   "S-REVA-005"
+  ]
+ },
+ {
+  "review_id": "R-A-006",
+  "finding_id": "F-STAT-001",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "CONFLICTING outcome upheld and must remain unresolved. I visually checked the compilation page ([[page 41]] rendered to image): 'not' is absent from the printed caution, so the omission is not a text-extraction artefact; India Code's own TEXT bitstream (line 3552) reads the same (same underlying document, not independent). MML 2.pdf p.152 (image-checked) and both vol 2(AR) .doc copies (L00472, L01383) print 'not obliged'. BLOCKED-type gap justified: India Code holds no Army Rules amending S.R.O.s (item metadata) and egazette.gov.in is unreachable; S.R.O. 484 of 27-11-1954 not held. Record line 86 ('not obliged') matches the manuals but cannot be source-verified. P0 retained (self-incrimination caution at summary of evidence). r.23(3) remains UNRESOLVED. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-007",
+   "S-REVA-013",
+   "S-REVA-023",
+   "S-REVA-026",
+   "S-REVA-027"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-007",
+   "S-REVA-013",
+   "S-REVA-023",
+   "S-REVA-026",
+   "S-REVA-027"
+  ]
+ },
+ {
+  "review_id": "R-A-007",
+  "finding_id": "F-STAT-006",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "RETURN_FOR_EVIDENCE",
+  "decision_date": "2026-11-22",
+  "rationale": "Core claim upheld (record line 93 cites only r.22(3)(a)/App III; compilation [[page 209]] r.192 limits an officer below field rank to 7 days' imprisonment/detention unless empowered by a division-level officer). But the evidence base is incomplete and the proposed text would perpetuate a defect: MML 2.pdf p.227 (image-checked) and both vol 2(AR) .doc copies (L02228, L04352) print a r.192 PROVISO - reduction to a lower grade of pay only to the immediately next lower grade and not effective beyond one year - footnoted 'Substituted by SRO 215 dated 17 June, 1965'. The compilation omits it (image-checked). r.192 should therefore be recorded as CONFLICTING (compilation vs manuals), S.R.O. 215 (1965) sought, and the proposed_text should not present r.192 as complete. Severity P1 retained (the missing proviso also limits the s.80(e) reduction punishment the record mentions). Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-010",
+   "S-REVA-025",
+   "S-REVA-026",
+   "S-REVA-027",
+   "S-REVA-001"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-010",
+   "S-REVA-025",
+   "S-REVA-026",
+   "S-REVA-027",
+   "S-REVA-001"
+  ]
+ },
+ {
+  "review_id": "R-A-008",
+  "finding_id": "F-STAT-010",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "BLOCKED upheld. My India Code searches ('Adjustment of Jurisdiction', 'Criminal Courts and Court-martial', 'S.O. 488') found only the NSG 1987 analogue; archive.org metadata search found no copy of the 1978 Rules. Leads the first pass did not record: MML 2.pdf p.92 and vol 2(AA) L01873 identify the Rules as MHA notification S.O. 488 dated 9 Feb 1978 (manual identity lead only), and a Rajya Sabha record of 3-3-1987 (archive.org mirror of rsdebate.nic.in) shows an amending instrument - S.O. No. 4010 dated 6-12-1986, Criminal Courts and Court-Martial (Adjustment of Jurisdiction) Amendment Rules 1986. The amendment chain is therefore longer than the finding implies; whether new rules exist under BNSS s.521 is unknown. Recommend adding these as identity/chain leads. Severity P1 retained. Absence of a found source is not proof of absence. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-020",
+   "S-REVA-021",
+   "S-REVA-028",
+   "S-REVA-029"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "6846102e992291e1985c7f15de5f3d2c4776c384aa906d1e67b4640fb3ea0759",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-020",
+   "S-REVA-021",
+   "S-REVA-028",
+   "S-REVA-029"
+  ]
+ },
+ {
+  "review_id": "R-A-009",
+  "finding_id": "F-STAT-013",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Text test passed: BSA s.1(2) ('including Courts-martial'), s.1(3) fn (1-7-2024, S.O. 849(E) of 23-2-2024) and s.170(1)-(2) quoted accurately; Army Act s.133 [[page 37]] unamended. Two qualifications. (1) The 'by contrast' framing overstates novelty: IEA s.1 excluded only courts-martial under the British Army Act (44 & 45 Vict. c.58) etc., so the IEA already applied to Army Act 1950 courts-martial; BSA s.1(2) continues rather than introduces application to courts-martial. (2) The record (line 152) expressly directs the user to 'Inspect authenticated up-to-date Section 133 and BSA repeal/savings/amendment provisions' and to identify commencement events, so it does not omit the authority, only its detail. Recommend severity P1 -> P2 (omission of detail). General Clauses Act s.8 question correctly left to advisor. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-017",
+   "S-REVA-004",
+   "S-REVA-019"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "a8ccf31948613da7e423aecf83bcd3f1d74e80be967843e0920f2edb23cc4e32",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-017",
+   "S-REVA-004",
+   "S-REVA-019"
+  ]
+ },
+ {
+  "review_id": "R-A-010",
+  "finding_id": "F-STAT-018",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Text test passed: r.197A in my compilation copy [[page 210]] matches the quotation; MML 2.pdf p.227 prints r.197-A identically with no amendment marker; s.125 [[page 36]] names army, army corps, division or independent brigade commanders 'or such other officer as may be prescribed'. However the record (line 467) is not wrong: it already says the choice lies with specified higher commanders 'or another officer duly prescribed', and warns only that an ordinary unit command appointment confers no s.125 power - which remains true (r.197A power flows from brigade/station command, not unit command). The omission is of the identifying rule and the s.69-death exception. Recommend severity P1 -> P2. Insertion instrument/date of r.197A unknown. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-011",
+   "S-REVA-003",
+   "S-REVA-025"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "07fed784f69887cfc7ff7e18ee6c67314d09838fe790e78987fb40b3605aa844",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-011",
+   "S-REVA-003",
+   "S-REVA-025"
+  ]
+ },
+ {
+  "review_id": "R-A-011",
+  "finding_id": "F-STAT-019",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "BLOCKED upheld: no S.R.O. for r.22 is held or available on India Code (item metadata lists only the compilation); egazette unreachable. Partial answer to the finding's open point: MML 2.pdf p.150 attaches 'Inserted by SRO 258/2002' to the Explanation only, and marks the whole r.22 as 'Subs by SRO 17(E), dated 6th December, 1993' - a 1993 instrument the compilation does not mention (vol 2(AR).doc.doc also opens '[22.'). This is manual evidence only, but it shows the amendment chain includes at least S.R.O. 17(E) 1993 and S.R.O. 258/2002, and should be added to the finding. Severity P1 retained (CO hearing procedure). Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-006",
+   "S-REVA-023",
+   "S-REVA-026",
+   "S-REVA-027",
+   "S-REVA-022"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "b4bb5c3df23bfd6c6025e2b663d3d5132e5be306fe6bf43e513631d5b5009848",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-006",
+   "S-REVA-023",
+   "S-REVA-026",
+   "S-REVA-027",
+   "S-REVA-022"
+  ]
+ },
+ {
+  "review_id": "R-A-012",
+  "finding_id": "F-STAT-020",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Same evidence as F-STAT-001 review: compilation [[page 41]] visually confirmed to omit 'not'; all three MML copies include it; original S.R.O. 484 (1954) and any amending S.R.O. unobtainable from reachable sources. CONFLICTING, unresolved; P0 retained. Duplicate of F-STAT-001/F-MML-003 at packet level - acceptable but should be cross-linked. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-007",
+   "S-REVA-013",
+   "S-REVA-023",
+   "S-REVA-026",
+   "S-REVA-027"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "aee2b541c7ffb67063f24d468f353730ca1efefc89fe97956ee9d2e89944af30",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-007",
+   "S-REVA-013",
+   "S-REVA-023",
+   "S-REVA-026",
+   "S-REVA-027"
+  ]
+ },
+ {
+  "review_id": "R-A-013",
+  "finding_id": "F-STAT-022",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "BLOCKED outcome upheld only in the narrow sense that S.R.O. 484 and any amending S.R.O. are not held. I dispute the rationale's inference that the prisoner-of-war saving words 'suggest a later amendment': the same words appear in compilation [[page 196]]-[[page 197]], MML 2.pdf p.222, vol 2(AR).doc.doc L01881 and doc-1 L04050, and r.179(3) uses the parallel 'except a prisoner of war who is still absent'; MML 2, which brackets and footnotes amendments on the same page (r.177(5A), r.182), shows no marker on r.180. Recommend deleting the inference and reducing severity P1 -> P2 (authentication gap, no evidence of textual error). Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-009",
+   "S-REVA-024",
+   "S-REVA-026"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "e594535a3a0b9c556c62c9d82131a711708f54b10bd468c00243bd4f55bf6579",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-009",
+   "S-REVA-024",
+   "S-REVA-026"
+  ]
+ },
+ {
+  "review_id": "R-A-014",
+  "finding_id": "F-STAT-029",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Test passed on my own Gazette download of Act 37 of 1992 (s.2 omits ss.75-76; s.6 substitutes s.85 incl. proviso 'below the rank of Colonel'; assent 6-9-1992, no separate commencement clause) and India Code [[page 27]]-[[page 29]]; compilation [[page 194]] shows rr.172-176 cancelled vide SRO 17E 1993 (S.R.O. not held). Nuance: MML 1 para 14 does not say 'only'; but the Gazette s.6 replaced the words 'and award the punishment ... made good', so pre-1992 s.85 did provide a single stoppage punishment and the 'stoppages only' inference is supported. Chain-of-custody note: my Gazette download has a different SHA-256 from S-STAT-008 though text is identical (PDF trailer /ID regenerated per request); record the stored-bitstream MD5 instead. Duplicates F-MML-020. P1 retained. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-005",
+   "S-REVA-001",
+   "S-REVA-012",
+   "S-REVA-031"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "26f7528d4188f57ee1f5a5ccab189148f11eeaa80d2fc217307ce5160090d958",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-005",
+   "S-REVA-001",
+   "S-REVA-012",
+   "S-REVA-031"
+  ]
+ },
+ {
+  "review_id": "R-A-015",
+  "finding_id": "F-MML-002",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Test passed: MML 2.pdf p.150 has the Explanation (fn 'Inserted by SRO 258/2002'); vol 2(AR).doc.doc L00439-L00451 and doc-1 L01314-L01340 end at r.22(4) with no Explanation; 'call any witness' vs 'call such witness', 'in his discretion' (.doc only) and 'investigating'/'investigation' variants confirmed. Caveat: the proposed label 'pre-2002 text' is an inference - the .doc copies are undated and the missing Explanation could be a transcription omission; prefer 'copy lacking the 2002 Explanation'. Severity P1 -> P2 recommended: an outdated manual copy of r.22 whose only substantive gap is the Explanation on officers other than the CO; operative r.22(1)-(4) text is materially the same. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-023",
+   "S-REVA-026",
+   "S-REVA-027",
+   "S-REVA-006"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "b4bb5c3df23bfd6c6025e2b663d3d5132e5be306fe6bf43e513631d5b5009848",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-023",
+   "S-REVA-026",
+   "S-REVA-027",
+   "S-REVA-006"
+  ]
+ },
+ {
+  "review_id": "R-A-016",
+  "finding_id": "F-MML-003",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Test passed: all three MML locators confirmed ('not obliged'; MML 2 p.152 image-checked); compilation [[page 41]] image-checked without 'not'. Conflict correctly recorded and not resolved; MML notes do not authenticate rule text. P0 retained. r.23(3) remains UNRESOLVED. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-023",
+   "S-REVA-026",
+   "S-REVA-027",
+   "S-REVA-007",
+   "S-REVA-013"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "aee2b541c7ffb67063f24d468f353730ca1efefc89fe97956ee9d2e89944af30",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-023",
+   "S-REVA-026",
+   "S-REVA-027",
+   "S-REVA-007",
+   "S-REVA-013"
+  ]
+ },
+ {
+  "review_id": "R-A-017",
+  "finding_id": "F-MML-011",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Test passed: vol 2(AA).pdf p.78 / .doc L01288-L01290 show ss.75-76 'Omitted' without authority; s.80 note 6(b)(ii) (L01339, pdf p.81) and note 18 cl.(j) (L01366-L01370, pdf p.82) still treat field punishment as available. Current law confirmed on my India Code copy [[page 27]] and the Act 37 of 1992 Gazette (s.2 omits ss.75-76; s.4 omits s.80(j); s.3 amends s.77) - all w.e.f. 6-9-1992. P1 retained (abolished punishment presented as available in commander-facing notes). Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-029",
+   "S-REVA-030",
+   "S-REVA-028",
+   "S-REVA-001",
+   "S-REVA-005"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "d293fa382dae8553a3e79679f70329922f8d45a3256249ffd86590f4d730a7c1",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-029",
+   "S-REVA-030",
+   "S-REVA-028",
+   "S-REVA-001",
+   "S-REVA-005"
+  ]
+ },
+ {
+  "review_id": "R-A-018",
+  "finding_id": "F-MML-015",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Test passed: MML 2 p.90 note 1(a), vol 2(AA) L01837, MML 2 p.64 note 4(c) and MML 1 L00191 state a date-of-commission rule; vol 2(AA) L01834 'in adding arrest'; MML 1 L00194 'six months' for s.123 versus three years substituted by Act 37 of 1992 s.10 (Gazette p.3). Precision point: note 1(a) is accurate for the default s.122(1)(a) case and is 'incomplete' rather than 'inconsistent' for (b)/(c); 'mutiny' is a narrower paraphrase of 's.37 offences'. MML 1 para 15 (six months) is plainly superseded and could wrongly lead to treating a trial as time-barred. P1 retained. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-028",
+   "S-REVA-029",
+   "S-REVA-030",
+   "S-REVA-031",
+   "S-REVA-002",
+   "S-REVA-005"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "1b0fb28eacaf9bac7c9bf0448ca09e4c3301773ac3913d2828ca8adfb59b66cf",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-028",
+   "S-REVA-029",
+   "S-REVA-030",
+   "S-REVA-031",
+   "S-REVA-002",
+   "S-REVA-005"
+  ]
+ },
+ {
+  "review_id": "R-A-019",
+  "finding_id": "F-MML-017",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Test passed: vol 2(AA).pdf p.115 / .doc L01872 'AR 179-A' (MML 2 p.92 'AR 197.A'; r.197A at compilation [[page 210]]); note 2 begins mid-sentence ('2 he is liable...'); all copies cite Cr PC 1973 and MHA S.O. 488 of 9 Feb 1978; BNSS s.521 confirmed (it begins on page 171, before the [[page 172]] marker - minor pinpoint correction). Additional gap: none of the manual copies reflects the 1986 amendment (S.O. 4010 of 6-12-1986) to the 1978 Rules. The substantive prescribed-officer rule in note 1(d) is stated correctly; the defects are cross-reference/currency defects. Recommend severity P1 -> P2 (broken cross-reference, dated citation). Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-029",
+   "S-REVA-030",
+   "S-REVA-028",
+   "S-REVA-011",
+   "S-REVA-018",
+   "S-REVA-021"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "5a9511413b40afc052ae0e9ffda3b3479be0252563f02c4bf106eb13d259418d",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-029",
+   "S-REVA-030",
+   "S-REVA-028",
+   "S-REVA-011",
+   "S-REVA-018",
+   "S-REVA-021"
+  ]
+ },
+ {
+  "review_id": "R-A-020",
+  "finding_id": "F-MML-019",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "DISPUTES",
+  "decision_date": "2026-11-22",
+  "rationale": "Locators and quotations confirmed (vol 2(AA) L00333/pdf p.15; L01826/pdf p.111; MML 2 p.12 fn 'Omittted by Act No. 37 of 1992'; MML 2 p.89 note 6; s.127 omitted by Act 37 of 1992 s.11, Gazette p.3). Dispute on characterisation: enacted s.121 ([[page 35]]) bars a second trial 'by a court-martial or dealt with under the said sections' only - it says nothing about criminal courts. vol 2(AA) s.121 note 6's main proposition ('merely prohibits a second trial by court-martial ...') therefore tracks the s.121 text; only its cross-reference to s.127 is dead. It is MML 2's note 6 ('prohibits a second trial by court-martial or a criminal court') that departs from the s.121 wording. Tagging the vol 2(AA) note as 'relying on omitted s.127' risks steering users to the less text-faithful MML 2 note. Recommend re-scoping: flag the dead s.127 cross-references, and add a separate finding that MML 2 p.89 note 6 overstates s.121; civil-court retrial after court-martial (Art 20(2), CrPC s.300/BNSS successor) is an advisor question not resolved here. Severity P1 retained. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-002",
+   "S-REVA-003",
+   "S-REVA-005",
+   "S-REVA-028",
+   "S-REVA-029",
+   "S-REVA-030"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "ef031a01f9f95768537c5590e76a4853403a893a2bb72c79e9e886abe14e8679",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-002",
+   "S-REVA-003",
+   "S-REVA-005",
+   "S-REVA-028",
+   "S-REVA-029",
+   "S-REVA-030"
+  ]
+ },
+ {
+  "review_id": "R-A-021",
+  "finding_id": "F-MML-020",
+  "reviewer_id": "independent-reviewer-A",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Test passed: MML 1 L00041 (para 13) presents s.75 field punishment and ARs 172-176 as current; L00043 (para 14) describes s.85 JCO punishment as stoppages; current s.85 (India Code [[page 28]]-[[page 29]]) and Act 37 of 1992 s.6 (Gazette p.2) add severe reprimand/reprimand with the 'below the rank of Colonel' proviso. Additional outdated item not captured: para 12 (L00039) still says a WO/NCO sentenced to 'dismissal or field punishment' is deemed reduced under s.77, but Act 37 of 1992 s.3 omitted 'field punishment' from s.77. Duplicates F-STAT-029. P1 retained. Limitation: same-model correlation - reviewer and first-pass agent are the same underlying model; India Code compilation copies are bit-identical to the first-pass copies, so agreement on their text is not independent corroboration of the authentic Gazette text.",
+  "source_ids": [
+   "S-REVA-031",
+   "S-REVA-001",
+   "S-REVA-005"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "26f7528d4188f57ee1f5a5ccab189148f11eeaa80d2fc217307ce5160090d958",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVA-031",
+   "S-REVA-001",
+   "S-REVA-005"
+  ]
+ }
+]

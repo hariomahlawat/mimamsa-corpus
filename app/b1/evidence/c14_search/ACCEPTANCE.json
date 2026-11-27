@@ -1,0 +1,47 @@
+{
+ "Q28 IPC s.302 pinned with alias chip": true,
+ "Q29 BNS s.103 pinned with alias chip": true,
+ "Q18 2013 INSC 408 ranks first by party name": true,
+ "Q19 SCC citation pinned or 'citation not held'": true,
+ "Q25 suggestion dharamvir singh": true,
+ "Q26 suggestion court martial": true,
+ "Q27 suggestion disability pension": true,
+ "Q05 service=army: Army Act in top 3": true,
+ "Q07 service=army: Army Act in top 3": true,
+ "Q13 service=army: Army Act in top 3": true
+}
+{
+ "Q05": {
+  "baseline_army_act_rank": 3,
+  "s1_army_act_rank": 1,
+  "s1_first_army_act_passage": {
+   "rank": 1,
+   "doc_id": "act-army-1950",
+   "page": 29,
+   "tier": "lexical",
+   "reasons": [
+    "Matched: 'punishments' (3), 'commanding' (3), 'officer' (3), 'award' (2)"
+   ],
+   "snippet": "87. Review of proceedings.—If any punishment awarded under any of the sections 83, 84 and 85 appears to a superior military authority as defined in section 88 to be illegal, unjust or excessive, such authority may cancel"
+  }
+ },
+ "Q07": {
+  "baseline_army_act_rank": null,
+  "s1_army_act_rank": 3,
+  "s1_first_army_act_passage": {
+   "rank": 3,
+   "doc_id": "act-army-1950",
+   "page": 4,
+   "tier": "lexical",
+   "reasons": [
+    "Matched: 'arrest' (1), 'offence' (1)"
+   ],
+   "snippet": "subordinate. 48. Intoxication. 49. Permitting escape of person in custody. 50. Irregularity in connection with arrest or confinement. 51. Escape from custody. 52. Offences in respect of property. 53. Extortion and corrup"
+  }
+ },
+ "Q13": {
+  "baseline_army_act_rank": null,
+  "s1_army_act_rank": 2,
+  "s1_first_army_act_passage": null
+ }
+}

@@ -1,0 +1,97 @@
+{
+  "site": "E:\\Mimamsa-Data\\bench\\c16b\\1000\\site",
+  "engine": "memory",
+  "text_store": "disk",
+  "replicate": 1,
+  "documents": 1000,
+  "passages": 24030,
+  "vocabulary": 19477,
+  "load_ms": 1430,
+  "index_ms": 4291,
+  "startup_ms": 5721,
+  "index_file_mb": null,
+  "text_file_mb": 16.4,
+  "derived_text_mb": 3.2,
+  "derived_text_mb_per_document": 14.4,
+  "mem_after_load": {
+    "working_set_mb": 96,
+    "managed_heap_mb": 17.3
+  },
+  "mem_after_index": {
+    "working_set_mb": 299.3,
+    "managed_heap_mb": 134.8
+  },
+  "mem_end": {
+    "working_set_mb": 513.7,
+    "managed_heap_mb": 144.7
+  },
+  "sequential": {
+    "n": 78,
+    "p50": 3.2,
+    "p95": 14.1,
+    "max": 26.7
+  },
+  "concurrent": {
+    "readers_10": {
+      "stats": {
+        "n": 1560,
+        "p50": 6.7,
+        "p95": 51.7,
+        "max": 147.5
+      },
+      "throughput_qps": 665.4
+    }
+  },
+  "doc_text_api": {
+    "documents": 300,
+    "cold": {
+      "n": 300,
+      "p50": 0,
+      "p95": 0.3,
+      "max": 40.5
+    },
+    "warm": {
+      "n": 300,
+      "p50": 0,
+      "p95": 0.3,
+      "max": 0.7
+    },
+    "readers_10": {
+      "n": 3000,
+      "p50": 0.1,
+      "p95": 0.6,
+      "max": 6
+    }
+  },
+  "snippet_us": {
+    "cold": {
+      "n": 460,
+      "p50": 24.3,
+      "p95": 51.3,
+      "max": 5736.6
+    },
+    "warm": {
+      "n": 460,
+      "p50": 21.6,
+      "p95": 49.5,
+      "max": 7931.6
+    }
+  },
+  "text_store_stats": {
+    "Kind": "disk",
+    "CacheHits": 132704,
+    "CacheMisses": 7326,
+    "CachedChars": 14252781,
+    "CacheBudgetChars": 33554432,
+    "DocumentsVerified": 995,
+    "PageReads": 7326,
+    "BytesRead": 28084080,
+    "FileBytes": 17145856
+  },
+  "parity": {
+    "search_signatures_sha256": "1a46124d27dce70694679a349efac0a5c5d68b72a54117439714437c6f4dad32",
+    "doc_text_api_sha256": "6910f63b4dd32b59faea3c0c9ecd1f8f59c09b37467218b5de4a1e71ea2175b6",
+    "snippets_sha256": "266c894f19827d46816af610c4f7285e967080baa518aa0ac365b872fb4a3c45"
+  },
+  "per_query_median_ms": null
+}

@@ -1,0 +1,249 @@
+[
+ {
+  "qid": "CN01",
+  "category": "case_name",
+  "query": "Union Of India v. Hfo (Mwo) Rajendra Prasad Swami (Retd)",
+  "target": "hc-delhi-2026-w-p-c-18067-2025-dlhc010949572025-1-2026-01-19"
+ },
+ {
+  "qid": "CN02",
+  "category": "case_name",
+  "query": "Union Of India v. No Jc 613062W Ex Nb Sub Rakesh Kumar",
+  "target": "hc-ph-2026-cwp-9068-2026-phhc010413262026-1-2026-03-25"
+ },
+ {
+  "qid": "CN03",
+  "category": "case_name",
+  "query": "Union Of India v. Smt Kanta Devi",
+  "target": "hc-ph-2025-cwp-7896-2025-phhc010411012025-1-2025-03-21"
+ },
+ {
+  "qid": "CN04",
+  "category": "case_name",
+  "query": "Ram Pyari v. Uoi.Th.Secy.Defence",
+  "target": "hc-jkl-2017-swp-2496-2014-jkhc020021922014-1-2017-08-03"
+ },
+ {
+  "qid": "CN05",
+  "category": "case_name",
+  "query": "Union Of India v. Ex Nk Surendra Prasad",
+  "target": "hc-delhi-2025-w-p-c-17719-2024-dlhc010965302024-1-2025-07-01"
+ },
+ {
+  "qid": "CN06",
+  "category": "case_name",
+  "query": "Gorakh Pal v. Union Of India",
+  "target": "hc-delhi-2018-w-p-c-9262-2018-dlhc012233552018-1-2018-10-25"
+ },
+ {
+  "qid": "CN07",
+  "category": "case_name",
+  "query": "Secretary, Ministry Of Defence v. Rajbir Singh",
+  "target": "hc-ph-2009-rsa-2540-2009-phhc010940692009-1-2009-09-04"
+ },
+ {
+  "qid": "CN08",
+  "category": "case_name",
+  "query": "Mandip Kumar v. Union Of India",
+  "target": "hc-ph-2005-cwp-12891-2005-phhc010451122005-1-2010-05-12"
+ },
+ {
+  "qid": "CN09",
+  "category": "case_name",
+  "query": "Ashit Kumar Mishra v. Union Of India",
+  "target": "hc-delhi-2020-w-p-c-10010-2020-dlhc010056022020-1-2020-12-08"
+ },
+ {
+  "qid": "CN10",
+  "category": "case_name",
+  "query": "Md Azam Ansari v. Union Of India",
+  "target": "hc-delhi-2019-w-p-c-2738-2019-dlhc010147342019-1-2019-03-18"
+ },
+ {
+  "qid": "CN11",
+  "category": "case_name",
+  "query": "Ravinder Singh v. Union Of India",
+  "target": "hc-delhi-2013-w-p-c-8763-2011-dlhc011783572011-1-2013-02-19"
+ },
+ {
+  "qid": "CN12",
+  "category": "case_name",
+  "query": "Union Of India v. Brg. P. K.Dutta (Retd)",
+  "target": "sc-1994-union-of-india-and-ors-1994insc583"
+ },
+ {
+  "qid": "NO01",
+  "category": "case_number",
+  "query": "CWP 10384/2007",
+  "target": "hc-ph-2008-cwp-10384-2007-phhc010481762007-1-2008-02-12",
+  "identifier": {
+   "kind": "CWP",
+   "num": "10384",
+   "year": "2007"
+  }
+ },
+ {
+  "qid": "NO02",
+  "category": "case_number",
+  "query": "W.P.(C) No. 1181 of 2025",
+  "target": "hc-delhi-2026-w-p-c-1181-2025-dlhc011038082024-1-2026-04-20",
+  "identifier": {
+   "kind": "W.P.(C)",
+   "num": "1181",
+   "year": "2025"
+  }
+ },
+ {
+  "qid": "NO03",
+  "category": "case_number",
+  "query": "WRIA 5649 of 2025",
+  "target": "hc-allahabad-2025-wria-5649-2025-uphc011984472025-1-2025-04-30",
+  "identifier": {
+   "kind": "WRIA",
+   "num": "5649",
+   "year": "2025"
+  }
+ },
+ {
+  "qid": "NO04",
+  "category": "case_number",
+  "query": "OWP 544/2001",
+  "target": "hc-jkl-2009-owp-544-2001-jkhc020067202001-1-2009-04-17",
+  "identifier": {
+   "kind": "OWP",
+   "num": "544",
+   "year": "2001"
+  }
+ },
+ {
+  "qid": "NO05",
+  "category": "case_number",
+  "query": "W.P.(C) No. 3294 of 2012",
+  "target": "hc-delhi-2012-w-p-c-3294-2012-dlhc010892992012-1-2012-05-28",
+  "identifier": {
+   "kind": "W.P.(C)",
+   "num": "3294",
+   "year": "2012"
+  }
+ },
+ {
+  "qid": "NO06",
+  "category": "case_number",
+  "query": "WRIA 11013 of 2018",
+  "target": "hc-allahabad-2018-wria-11013-2018-uphc010848632018-1-2018-05-02",
+  "identifier": {
+   "kind": "WRIA",
+   "num": "11013",
+   "year": "2018"
+  }
+ },
+ {
+  "qid": "NO07",
+  "category": "case_number",
+  "query": "CWP 24217/2025",
+  "target": "hc-ph-2025-cwp-24217-2025-phhc011324072025-1-2025-11-13",
+  "identifier": {
+   "kind": "CWP",
+   "num": "24217",
+   "year": "2025"
+  }
+ },
+ {
+  "qid": "NO08",
+  "category": "case_number",
+  "query": "W.P.(C) No. 6151 of 2016",
+  "target": "hc-delhi-2018-w-p-c-6151-2016-dlhc011604212016-1-2018-07-12",
+  "identifier": {
+   "kind": "W.P.(C)",
+   "num": "6151",
+   "year": "2016"
+  }
+ },
+ {
+  "qid": "CI01",
+  "category": "citation",
+  "query": "2013 INSC 404",
+  "target": "sc-2013-veer-pal-singh-2013insc404",
+  "identifier": {
+   "exact": "2013 INSC 404"
+  }
+ },
+ {
+  "qid": "CI02",
+  "category": "citation",
+  "query": "2014 INSC 421",
+  "target": "sc-2014-sukhvinder-singh-2014insc421",
+  "identifier": {
+   "exact": "2014 INSC 421"
+  }
+ },
+ {
+  "qid": "CI03",
+  "category": "citation",
+  "query": "2023 INSC 656",
+  "target": "sc-2023-ex-sepoy-madan-prasad-2023insc656",
+  "identifier": {
+   "exact": "2023 INSC 656"
+  }
+ },
+ {
+  "qid": "CI04",
+  "category": "citation",
+  "query": "(1987) 3 SCR 456",
+  "target": "sc-1987-union-of-india-through-major-g-1987insc164",
+  "identifier": {
+   "exact": "[1987] 3 S.C.R. 456"
+  }
+ },
+ {
+  "qid": "CI05",
+  "category": "citation",
+  "query": "(2021) 14 SCR 895",
+  "target": "sc-2021-manish-kumar-2021insc28",
+  "identifier": {
+   "exact": "[2021] 14 S.C.R. 895"
+  }
+ },
+ {
+  "qid": "CI06",
+  "category": "citation",
+  "query": "(2024) 7 SCR 1847",
+  "target": "sc-2024-gene-campaign-anr-2024insc545",
+  "identifier": {
+   "exact": "[2024] 7 S.C.R. 1847"
+  }
+ },
+ {
+  "qid": "OA01",
+  "category": "case_number",
+  "query": "OA 151/2024 Armed Forces Tribunal",
+  "target": "hc-jkl-2026-wp-c-3165-2026-jkhc020061982026-1-2026-10-05",
+  "identifier": {
+   "kind": "OA",
+   "num": "151",
+   "year": "2024"
+  }
+ },
+ {
+  "qid": "OA02",
+  "category": "case_number",
+  "query": "OA 146/2010 Armed Forces Tribunal",
+  "target": "hc-ph-2024-cwp-19504-2024-phhc011042632024-1-2024-08-22",
+  "identifier": {
+   "kind": "OA",
+   "num": "146",
+   "year": "2010"
+  }
+ },
+ {
+  "qid": "OA03",
+  "category": "case_number",
+  "query": "OA 1070/2010 Armed Forces Tribunal",
+  "target": "hc-delhi-2016-w-p-c-4631-2016-dlhc011392392016-1-2016-07-28",
+  "identifier": {
+   "kind": "OA",
+   "num": "1070",
+   "year": "2010"
+  }
+ }
+]

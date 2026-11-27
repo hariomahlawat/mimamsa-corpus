@@ -1,0 +1,41 @@
+{
+ "anchor_id": "ANC-088b8c8c94e325e1a305be3a",
+ "bbox": null,
+ "contract": "mimamsa-corpus-contract/2.0",
+ "derivative_text_sha256": "79df4700271ef72aa2db822ee5b11ef0a046f0e81828b58de7842c6e6a07f492",
+ "doc_id": "local-d33bfb0313089bf8",
+ "extraction": {
+  "method": "DOCX_XML",
+  "ocr_config": null,
+  "pipeline_name": "c16-docx",
+  "pipeline_version": "1.0.0"
+ },
+ "image_sha256": null,
+ "locator": {
+  "citable_as_source_page": true,
+  "generated_segment": 1,
+  "kind": "GENERATED_SEGMENT",
+  "paragraph_index": 2,
+  "physical_page": null
+ },
+ "original_sha256": "d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502",
+ "quality": {
+  "low_confidence": false,
+  "ocr_mean_confidence": null,
+  "text_reliability": "reliable"
+ },
+ "quote": null,
+ "quoting_permitted": false,
+ "record_kind": "evidence_anchor",
+ "representation_sha256": "d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502",
+ "text_span": {
+  "char_end": 30,
+  "char_start": 0,
+  "passage_id": "p1-1",
+  "text_sha256": "cd4cb42e24a3501aa779c415bb5fb53dc885fad5feabbe9ffe1d12628b541c76"
+ },
+ "verification": {
+  "review_ref": null,
+  "state": "AUTOMATED_CANDIDATE_NOT_VERIFIED"
+ }
+}

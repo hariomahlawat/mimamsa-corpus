@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "LegalAuditEvidenceSource",
+  "required": [
+    "source_id",
+    "source_type",
+    "title",
+    "issuer",
+    "locator",
+    "pinpoint",
+    "retrieved_on",
+    "verification_state",
+    "authenticity"
+  ],
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "STATUTE",
+        "RULE",
+        "GAZETTE",
+        "REGULATION",
+        "JUDGMENT",
+        "ORDER",
+        "OTHER_PRIMARY",
+        "SECONDARY",
+        "MANUAL"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "issuer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pinpoint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "retrieved_on": {
+      "type": "string",
+      "format": "date"
+    },
+    "version_or_decision_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "effective_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "local_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "verification_state": {
+      "type": "string",
+      "enum": [
+        "NOT_CHECKED",
+        "SOURCE_LOCATED",
+        "SOURCE_VERIFIED",
+        "NOT_FOUND",
+        "CONFLICTING"
+      ]
+    },
+    "authenticity": {
+      "type": "string",
+      "enum": [
+        "ORIGINAL_OFFICIAL",
+        "OFFICIAL_COMPILATION",
+        "OFFICIAL_COURT_ARCHIVE",
+        "SECONDARY",
+        "UNCONFIRMED",
+        "USER_SUPPLIED_REFERENCE",
+        "MANUAL_EDITION_CORROBORATED",
+        "ARCHIVAL_FACSIMILE_OF_OFFICIAL"
+      ]
+    },
+    "caveat": {
+      "type": "string"
+    },
+    "retrieved_by": {
+      "type": "string"
+    },
+    "content_role": {
+      "type": "string",
+      "enum": [
+        "ENACTED_TEXT",
+        "GAZETTE_TEXT",
+        "JUDGMENT_TEXT",
+        "MANUAL_REPRODUCED_LEGAL_TEXT",
+        "MANUAL_COMMENTARY",
+        "SECONDARY_TEXT",
+        "METADATA_ONLY"
+      ]
+    },
+    "document_authority": {
+      "type": "string",
+      "enum": [
+        "ENACTED_OR_NOTIFIED_PRIMARY",
+        "OFFICIAL_JUDICIAL_DECISION",
+        "GOVERNMENT_COMPILATION",
+        "GOVERNMENT_ISSUED_MANUAL",
+        "UNVERIFIED_MANUAL",
+        "THIRD_PARTY_COMMENTARY",
+        "UNKNOWN"
+      ]
+    },
+    "carrier_provenance": {
+      "type": "string",
+      "enum": [
+        "ISSUING_AUTHORITY",
+        "GOVERNMENT_HOSTED_COPY",
+        "THIRD_PARTY_ARCHIVAL_FACSIMILE",
+        "USER_SUPPLIED",
+        "THIRD_PARTY_TRANSCRIPTION",
+        "UNKNOWN"
+      ]
+    },
+    "copy_fidelity": {
+      "type": "string",
+      "enum": [
+        "NOT_CHECKED",
+        "HASH_ONLY",
+        "PAGE_IMAGE_CHECKED",
+        "CUSTODIAN_AUTHENTICATED"
+      ]
+    },
+    "amendment_chain_status": {
+      "type": "string",
+      "enum": [
+        "NOT_CHECKED",
+        "PARTIAL",
+        "CHECKED_FOR_RELEVANT_PERIOD",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "instrument_identity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority_rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "page_image_check_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "custodian_evidence_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "edition_authority_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "proof_type": {
+      "type": "string",
+      "enum": [
+        "PAGE_IMAGE_READING",
+        "TEXT_LAYER_EXTRACTION",
+        "HTML_TEXT",
+        "OCR_TEXT",
+        "METADATA_ONLY",
+        "SEARCH_RESULT_ONLY"
+      ],
+      "description": "How the relied-on passage was read (evidence method, not authority class). OCR_TEXT, METADATA_ONLY and SEARCH_RESULT_ONLY never support SOURCE_VERIFIED."
+    },
+    "render_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 of the page render read for PAGE_IMAGE_READING."
+    },
+    "publication_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Date of publication (e.g. Gazette issue date); distinct from commencement and effective date."
+    },
+    "commencement_as_printed": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Commencement wording as printed in the instrument, verbatim or 'not stated'."
+    },
+    "effective_date_status": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(STATED_IN_INSTRUMENT|NOT_STATED|NOT_DETERMINED|NOT_APPLICABLE)([ _(:;,-].*)?$",
+      "description": "Owner date rule: effective_date may be set only when the instrument states commencement (prefix STATED_IN_INSTRUMENT); otherwise effective_date is null and this explains why."
+    }
+  }
+}

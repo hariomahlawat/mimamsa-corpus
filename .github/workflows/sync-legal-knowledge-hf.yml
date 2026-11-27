@@ -1,0 +1,208 @@
+name: Sync curated legal research to private Hugging Face dataset
+on:
+  push:
+    branches:
+      - legal-knowledge/v2.5-staging
+      - main
+    paths:
+      - "legal_knowledge/**"
+      - "scripts/push_legal_knowledge.py"
+      - "scripts/reconcile_legal_sources.py"
+      - "scripts/audit_53_case_metadata_v30.py"
+      - "scripts/reconcile_p0_case_sources_v31.py"
+      - "scripts/build_p0_holding_dossiers_v34.py"
+      - "scripts/archive_nc_isaac_v34.py"
+      - "scripts/verify_nc_isaac_paras_v34.py"
+      - "scripts/validate_legal_v34.py"
+      - "scripts/extract_p0_fulltext_v35.py"
+      - "scripts/check_isaac_express_citations_v35.py"
+      - "scripts/extract_isaac_reasoning_v35.py"
+      - "scripts/validate_legal_v35.py"
+      - "scripts/validate_legal_v36.py"
+      - "scripts/probe_gazette_1954_v35.py"
+      - "scripts/forensic_p0_source_v32.py"
+      - "scripts/archive_precedent_treatment_v32.py"
+      - "scripts/archive_gazette_v33.py"
+      - "scripts/archive_sci_office_report_v33.py"
+      - "scripts/acquire_historical_judis_v33.py"
+      - "scripts/archive_dhingra_railway_source_v33.py"
+      - "scripts/archive_maniram_court_mirror_v33.py"
+      - "scripts/archive_sc_treatment_v33.py"
+      - "scripts/archive_supreme_court_pilot.py"
+      - "scripts/verify_sc_source_matches_v29.py"
+      - "scripts/push_mml_originals.py"
+      - ".mml_transfer/**"
+      - ".github/workflows/sync-legal-knowledge-hf.yml"
+  workflow_dispatch:
+    inputs:
+      approve_corpus_upload:
+        description: "General corpus upload needs explicit owner approval. Type exactly: I-APPROVE-CORPUS-UPLOAD"
+        required: true
+        default: "no"
+      run_source_acquisition:
+        description: "Also run the network source-acquisition scripts (archive_*/acquire_*/probe_*). Separate owner approval required. Type exactly: I-APPROVE-SOURCE-ACQUISITION"
+        required: true
+        default: "no"
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: mimamsa-hf-legal-knowledge
+  cancel-in-progress: false
+
+jobs:
+  upload:
+    # Job-level safeguard (owner decision 2026-11-22): the general corpus upload never runs on push.
+    # It runs only on a manual workflow_dispatch with the explicit approval phrase.
+    # The separately controlled abbreviation upload (upload_abbreviations) is unchanged.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.approve_corpus_upload == 'I-APPROVE-CORPUS-UPLOAD' }}
+    # GitHub Environment gate: configure 'hf-corpus-upload' with required reviewers in repository settings.
+    # Until configured, GitHub creates it unprotected on first use; the dispatch-and-phrase condition above still applies.
+    environment: hf-corpus-upload
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Refuse unless manually dispatched with approval (defence in depth)
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          APPROVAL: ${{ inputs.approve_corpus_upload }}
+        run: |
+          if [ "$EVENT_NAME" != "workflow_dispatch" ] || [ "$APPROVAL" != "I-APPROVE-CORPUS-UPLOAD" ]; then
+            echo "::error::General corpus upload requires manual dispatch with explicit approval"; exit 1
+          fi
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install current Hugging Face client
+        run: python -m pip install 'huggingface_hub>=1.19.0,<2'
+      - name: Preflight v3.5 source evidence Python scripts
+        run: |
+          python -m py_compile scripts/extract_p0_fulltext_v35.py scripts/check_isaac_express_citations_v35.py scripts/extract_isaac_reasoning_v35.py scripts/probe_gazette_1954_v35.py scripts/validate_legal_v35.py scripts/validate_legal_v36.py
+      - name: Acquire short-lived scoped credential via Trusted Publisher
+        env:
+          HF_OIDC_RESOURCE: datasets/hariomahlawat/mimamsa-corpus
+        run: |
+          TOKEN="$(hf auth token)"
+          if [ -z "$TOKEN" ]; then
+            echo "::error::No Hugging Face OIDC credential; configure Trusted Publisher on the private dataset."
+            exit 1
+          fi
+          echo "::add-mask::$TOKEN"
+          echo "HF_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+      - name: Publish and verify curated text review files
+        run: python scripts/push_legal_knowledge.py
+      - name: Reconcile against canonical HF source manifests and verify output
+        run: python scripts/reconcile_legal_sources.py
+      - name: Audit original 53-case record completeness and verify private HF output
+        run: python scripts/audit_53_case_metadata_v30.py
+      - name: Install official judgment archival dependencies
+        run: python -m pip install 'requests>=2.31,<3' 'pymupdf>=1.24,<2'
+      - name: Attempt official Supreme Court PDF pilot archive with readback
+        if: ${{ inputs.run_source_acquisition == 'I-APPROVE-SOURCE-ACQUISITION' }}
+        continue-on-error: true
+        run: python scripts/archive_supreme_court_pilot.py
+      - name: Reconcile all 11 P0 curated cases against immutable corpus PDFs
+        run: python scripts/reconcile_p0_case_sources_v31.py
+      - name: Forensic PDF identity check for five remaining P0 source cases
+        run: python scripts/forensic_p0_source_v32.py
+      - name: Archive 2025 Supreme Court judgment clarifying Navjot Sandhu treatment
+        if: ${{ inputs.run_source_acquisition == 'I-APPROVE-SOURCE-ACQUISITION' }}
+        continue-on-error: true
+        run: python scripts/archive_precedent_treatment_v32.py
+      - name: Archive official 2024 Supreme Court Section 27 judgment with SHA-256
+        if: ${{ inputs.run_source_acquisition == 'I-APPROVE-SOURCE-ACQUISITION' }}
+        continue-on-error: true
+        run: python scripts/archive_sc_treatment_v33.py
+      - name: Attempt official 2022 eGazette SRO 6(E) PDF acquisition with SHA-256
+        # Manual investigation only until the official portal's TLS/HTML response is fixed.
+        if: ${{ (github.event_name == 'workflow_dispatch') && inputs.run_source_acquisition == 'I-APPROVE-SOURCE-ACQUISITION' }}
+        continue-on-error: true
+        run: python scripts/archive_gazette_v33.py
+      - name: Archive authenticated Supreme Court office report citing Mani Ram Bhaira
+        # Manual investigation only until the official portal's TLS/HTML response is fixed.
+        if: ${{ (github.event_name == 'workflow_dispatch') && inputs.run_source_acquisition == 'I-APPROVE-SOURCE-ACQUISITION' }}
+        continue-on-error: true
+        run: python scripts/archive_sci_office_report_v33.py
+      - name: Test original SCI JUDIS judgment acquisition for Ram Sarup and Navjot Sandhu
+        if: ${{ inputs.run_source_acquisition == 'I-APPROVE-SOURCE-ACQUISITION' }}
+        run: python scripts/acquire_historical_judis_v33.py
+      - name: Preserve and verify official Indian Railways compilation containing S R Dhingra
+        # Indian Railways host timed out from CI; run only on explicit retry.
+        if: ${{ (github.event_name == 'workflow_dispatch') && inputs.run_source_acquisition == 'I-APPROVE-SOURCE-ACQUISITION' }}
+        continue-on-error: true
+        run: python scripts/archive_dhingra_railway_source_v33.py
+      - name: Archive provenance-labelled mirror of 2016 Supreme Court Mani Ram Bhaira order
+        if: ${{ inputs.run_source_acquisition == 'I-APPROVE-SOURCE-ACQUISITION' }}
+        continue-on-error: true
+        run: python scripts/archive_maniram_court_mirror_v33.py
+      - name: Build v3.4 P0 evidence packets and 658-KB candidate links with SHA checks
+        run: python scripts/build_p0_holding_dossiers_v34.py
+      - name: Archive 2026 Supreme Court NC Isaac ruling or record source acquisition exception
+        if: ${{ inputs.run_source_acquisition == 'I-APPROVE-SOURCE-ACQUISITION' }}
+        run: python scripts/archive_nc_isaac_v34.py
+      - name: Crosscheck official NC Isaac 2026 Supreme Court dispositive and rule paragraphs
+        run: python scripts/verify_nc_isaac_paras_v34.py
+      - name: Validate all v3.4 original-source integrity and enforce JAG non-release invariants
+        run: python scripts/validate_legal_v34.py
+      - name: Extract all ten P0 archived source opinions page by page with provenance
+        run: python scripts/extract_p0_fulltext_v35.py
+      - name: Identify direct citations of seven pension cases in 2026 official NC Isaac judgment
+        run: python scripts/check_isaac_express_citations_v35.py
+      - name: Preserve source PDF reasoning context for pension case treatment
+        run: python scripts/extract_isaac_reasoning_v35.py
+      - name: Probe authoritative Gazette archive for original 1954 Army Rules notice
+        if: ${{ inputs.run_source_acquisition == 'I-APPROVE-SOURCE-ACQUISITION' }}
+        run: python scripts/probe_gazette_1954_v35.py
+      - name: Enforce v3.5 original-source and JAG nonrelease integrity gates
+        run: python scripts/validate_legal_v35.py
+      - name: Validate 11 v3.6 dossiers, 28 authority propositions and JAG nonrelease gates
+        run: python scripts/validate_legal_v36.py
+      - name: Verify existing original corpus PDFs for Bedi and Ranjit Thakur with SHA-256
+        run: python scripts/verify_sc_source_matches_v29.py
+      - name: Verify checksum and reconstruct original MML archive
+        if: ${{ hashFiles('.mml_transfer/part_000.b64') != '' }}
+        run: |
+          test "$(find .mml_transfer -maxdepth 1 -name 'part_*.b64' -type f | wc -l)" -eq 32
+          mkdir -p "$RUNNER_TEMP/mml-originals"
+          cat .mml_transfer/part_*.b64 | base64 --decode > "$RUNNER_TEMP/mml-originals/originals.zip"
+          test "$(sha256sum "$RUNNER_TEMP/mml-originals/originals.zip" | cut -d' ' -f1)" = "9d82b9c5cb9ac56f41fd6ca74ed0a4704a5897fd26a239fdbafe0377e511f31c"
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import os
+          dest = Path(os.environ['RUNNER_TEMP']) / 'mml-originals'
+          with ZipFile(dest / 'originals.zip') as z:
+              for f in z.namelist():
+                  p = Path(f)
+                  if p.is_absolute() or '..' in p.parts:
+                      raise RuntimeError(f'Unsafe archive path: {f}')
+              z.extractall(dest)
+          print('Original MML ZIP structure verified and extracted')
+          PY
+      - name: Upload original MML Word/PDF binaries and verify per-file SHA-256
+        if: ${{ hashFiles('.mml_transfer/part_000.b64') != '' }}
+        run: python scripts/push_mml_originals.py --source-dir "$RUNNER_TEMP/mml-originals/originals"
+  upload_abbreviations:
+    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[abbreviations-hf]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Hugging Face client
+        run: python -m pip install 'huggingface_hub>=1.19.0,<2'
+      - name: Acquire credential via configured Trusted Publisher
+        env:
+          HF_OIDC_RESOURCE: datasets/hariomahlawat/mimamsa-corpus
+        run: |
+          TOKEN="$(hf auth token)"
+          if [ -z "$TOKEN" ]; then echo "::error::Trusted Publisher credential unavailable"; exit 1; fi
+          echo "::add-mask::$TOKEN"
+          echo "HF_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+      - name: Upload only glossary and metadata; verify committed SHA-256
+        run: python scripts/upload_army_abbreviations_hf.py

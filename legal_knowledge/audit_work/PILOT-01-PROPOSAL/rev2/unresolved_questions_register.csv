@@ -1,0 +1,9 @@
+uq_id,priority,question,why_unresolved,evidence_needed,owner
+UQ-01,P0,"Authentic text of Army Rules r.23(3) caution (""not obliged"" vs ""obliged"")","Government copies (India Code upload PDF; India Code bitstream 48f52219... line 1785) omit ""not""; all 3 MML copies and SC judgments include it; original S.R.O. 484 not held",Original Gazette 27 Nov 1954 Pt II s.4 pp.291-378 + corrigenda + amendments,Legal advisor + owner (custodian request)
+UQ-02,P1,"Edition and currency of each MML file (printed edition, correction slips, date)",No edition statement located by automated scan; latest-year proxy only,Title pages / correction-slip lists; owner provenance of uploads,Owner
+UQ-03,P1,Rights / access marking of MML files,No marking detected in extracted text; headers/watermarks/cover pages not visually inspected,Visual inspection of covers + owner confirmation,Owner + legal advisor
+UQ-04,P1,Effect of Isaac 2026 on Dharamvir/Rajbir line,Holding vs counsel submission (EX36-003),Paragraph-role analysis of official PDF,Legal advisor
+UQ-05,P1,Representation of unamended references to repealed codes (AA s.133 IEA; MML Part III IEA/IPC/CrPC texts),Interpretation question,Official current AA text + BSA/BNSS savings,Legal advisor
+UQ-06,P1,Acceptable evidence tier for case pinpoints (official only vs SCR/mirror),Policy decision,-,Legal advisor
+UQ-07,P2,"Scope: are Agniveer, ISO Act 2023 and cross-service law in scope for this database?",Not stated in brief,Owner decision,Owner
+UQ-08,ORG,Nine-volume mapping; seven-agent count (six definitions exist),Not documented,Owner confirmation,Owner

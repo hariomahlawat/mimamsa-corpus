@@ -1,0 +1,272 @@
+{
+ "IN_SAMPLE": true,
+ "batch_copies_own_case": {
+  "abstain": 3,
+  "correct": 33,
+  "not_scorable": 0,
+  "rows": 36,
+  "wrong": 0
+ },
+ "extractor": "c12-extract-v3/1.0.0",
+ "n": 136,
+ "v2": {
+  "C10": {
+   "pair": {
+    "abstain": 8,
+    "correct": 41,
+    "coverage": 0.84,
+    "n_scorable": 50,
+    "not_scorable": 0,
+    "precision": 0.9762,
+    "proceeding_completeness": 1.0,
+    "wrong": 1
+   },
+   "printed": {
+    "abstain": 8,
+    "correct": 41,
+    "coverage": 0.84,
+    "n_scorable": 50,
+    "not_scorable": 0,
+    "precision": 0.9762,
+    "proceeding_completeness": 1.0,
+    "wrong": 1
+   },
+   "subst": {
+    "abstain": 7,
+    "correct": 37,
+    "coverage": 0.8444,
+    "n_scorable": 45,
+    "not_scorable": 5,
+    "precision": 0.9737,
+    "proceeding_completeness": 1.0,
+    "wrong": 1
+   }
+  },
+  "C11H": {
+   "pair": {
+    "abstain": 11,
+    "correct": 40,
+    "coverage": 0.8036,
+    "n_scorable": 56,
+    "not_scorable": 0,
+    "precision": 0.8889,
+    "proceeding_completeness": 1.0,
+    "wrong": 5
+   },
+   "printed": {
+    "abstain": 10,
+    "correct": 41,
+    "coverage": 0.8182,
+    "n_scorable": 55,
+    "not_scorable": 1,
+    "precision": 0.9111,
+    "proceeding_completeness": 0.8571,
+    "wrong": 4
+   },
+   "subst": {
+    "abstain": 17,
+    "correct": 33,
+    "coverage": 0.6852,
+    "n_scorable": 54,
+    "not_scorable": 2,
+    "precision": 0.8919,
+    "proceeding_completeness": 0.8542,
+    "wrong": 4
+   }
+  },
+  "C11R": {
+   "pair": {
+    "abstain": 0,
+    "correct": 30,
+    "coverage": 1.0,
+    "n_scorable": 30,
+    "not_scorable": 0,
+    "precision": 1.0,
+    "proceeding_completeness": 1.0,
+    "wrong": 0
+   },
+   "printed": {
+    "abstain": 0,
+    "correct": 30,
+    "coverage": 1.0,
+    "n_scorable": 30,
+    "not_scorable": 0,
+    "precision": 1.0,
+    "proceeding_completeness": 1.0,
+    "wrong": 0
+   },
+   "subst": {
+    "abstain": 0,
+    "correct": 30,
+    "coverage": 1.0,
+    "n_scorable": 30,
+    "not_scorable": 0,
+    "precision": 1.0,
+    "proceeding_completeness": 1.0,
+    "wrong": 0
+   }
+  },
+  "all": {
+   "pair": {
+    "abstain": 19,
+    "correct": 111,
+    "coverage": 0.8603,
+    "n_scorable": 136,
+    "not_scorable": 0,
+    "precision": 0.9487,
+    "proceeding_completeness": 1.0,
+    "wrong": 6
+   },
+   "printed": {
+    "abstain": 18,
+    "correct": 112,
+    "coverage": 0.8667,
+    "n_scorable": 135,
+    "not_scorable": 1,
+    "precision": 0.9573,
+    "proceeding_completeness": 0.9171,
+    "wrong": 5
+   },
+   "subst": {
+    "abstain": 24,
+    "correct": 100,
+    "coverage": 0.814,
+    "n_scorable": 129,
+    "not_scorable": 7,
+    "precision": 0.9524,
+    "proceeding_completeness": 0.9167,
+    "wrong": 5
+   }
+  }
+ },
+ "v3": {
+  "C10": {
+   "pair": {
+    "abstain": 8,
+    "correct": 42,
+    "coverage": 0.84,
+    "n_scorable": 50,
+    "not_scorable": 0,
+    "precision": 1.0,
+    "proceeding_completeness": 1.0,
+    "wrong": 0
+   },
+   "printed": {
+    "abstain": 9,
+    "correct": 41,
+    "coverage": 0.82,
+    "n_scorable": 50,
+    "not_scorable": 0,
+    "precision": 1.0,
+    "proceeding_completeness": 1.0,
+    "wrong": 0
+   },
+   "subst": {
+    "abstain": 7,
+    "correct": 38,
+    "coverage": 0.8444,
+    "n_scorable": 45,
+    "not_scorable": 5,
+    "precision": 1.0,
+    "proceeding_completeness": 1.0,
+    "wrong": 0
+   }
+  },
+  "C11H": {
+   "pair": {
+    "abstain": 5,
+    "correct": 51,
+    "coverage": 0.9107,
+    "n_scorable": 56,
+    "not_scorable": 0,
+    "precision": 1.0,
+    "proceeding_completeness": 0.9643,
+    "wrong": 0
+   },
+   "printed": {
+    "abstain": 5,
+    "correct": 50,
+    "coverage": 0.9091,
+    "n_scorable": 55,
+    "not_scorable": 1,
+    "precision": 1.0,
+    "proceeding_completeness": 0.964,
+    "wrong": 0
+   },
+   "subst": {
+    "abstain": 8,
+    "correct": 46,
+    "coverage": 0.8519,
+    "n_scorable": 54,
+    "not_scorable": 2,
+    "precision": 1.0,
+    "proceeding_completeness": 0.9623,
+    "wrong": 0
+   }
+  },
+  "C11R": {
+   "pair": {
+    "abstain": 0,
+    "correct": 30,
+    "coverage": 1.0,
+    "n_scorable": 30,
+    "not_scorable": 0,
+    "precision": 1.0,
+    "proceeding_completeness": 1.0,
+    "wrong": 0
+   },
+   "printed": {
+    "abstain": 0,
+    "correct": 30,
+    "coverage": 1.0,
+    "n_scorable": 30,
+    "not_scorable": 0,
+    "precision": 1.0,
+    "proceeding_completeness": 1.0,
+    "wrong": 0
+   },
+   "subst": {
+    "abstain": 0,
+    "correct": 30,
+    "coverage": 1.0,
+    "n_scorable": 30,
+    "not_scorable": 0,
+    "precision": 1.0,
+    "proceeding_completeness": 1.0,
+    "wrong": 0
+   }
+  },
+  "all": {
+   "pair": {
+    "abstain": 13,
+    "correct": 123,
+    "coverage": 0.9044,
+    "n_scorable": 136,
+    "not_scorable": 0,
+    "precision": 1.0,
+    "proceeding_completeness": 0.9786,
+    "wrong": 0
+   },
+   "printed": {
+    "abstain": 14,
+    "correct": 121,
+    "coverage": 0.8963,
+    "n_scorable": 135,
+    "not_scorable": 1,
+    "precision": 1.0,
+    "proceeding_completeness": 0.9784,
+    "wrong": 0
+   },
+   "subst": {
+    "abstain": 15,
+    "correct": 114,
+    "coverage": 0.8837,
+    "n_scorable": 129,
+    "not_scorable": 7,
+    "precision": 1.0,
+    "proceeding_completeness": 0.9774,
+    "wrong": 0
+   }
+  }
+ }
+}

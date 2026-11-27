@@ -1,0 +1,32 @@
+{
+ "agrees_with": [
+  "X",
+  "Y",
+  "NEITHER"
+ ],
+ "holdout": "H-OUT-C13",
+ "input": "ADJUDICATION_SHEET.csv produced by `c13_coding.py adjsheet` after both coders return: only the items whose codings differ, each shown as coding X and coding Y (which coder is X is decided per item from a secret per-run seed; the key and seed are sealed in ADJUDICATION_KEY.csv and are not given to you)",
+ "result_columns": [
+  "item_id",
+  "host_case_numbers",
+  "proceeding",
+  "printed_disposal",
+  "substantive_result",
+  "party_specific",
+  "final_or_interim",
+  "page",
+  "para",
+  "excerpt",
+  "confidence",
+  "notes",
+  "agrees_with",
+  "reason"
+ ],
+ "rules": [
+  "Read the source PDF yourself (verify sha256) before deciding; do not choose by majority or by which coding looks more careful.",
+  "Return one row per unit for every item on the sheet and no other item.",
+  "Use the same vocabulary as the coding guide; 'unclear' is allowed.",
+  "If the item cannot be coded, return one row with notes = 'UNCODABLE:<CODE>' (codes in the coding guide); it stays in the sample and is reported, never replaced."
+ ],
+ "task": "outcome"
+}

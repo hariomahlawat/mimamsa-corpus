@@ -1,0 +1,98 @@
+{
+ "metadata": {
+  "authenticated": true,
+  "copy": "target",
+  "status": 200,
+  "length": 176,
+  "content_range": null
+ },
+ "first_chunk": {
+  "authenticated": true,
+  "copy": "target",
+  "status": 206,
+  "range": "bytes=0-131071",
+  "length": 131072,
+  "content_range": "bytes 0-131071/396871"
+ },
+ "near_end": {
+  "authenticated": true,
+  "copy": "target",
+  "status": 206,
+  "range": "bytes=393216-396870",
+  "length": 3655,
+  "content_range": "bytes 393216-396870/396871"
+ },
+ "conditional": {
+  "authenticated": true,
+  "copy": "target",
+  "status": 206,
+  "range": "bytes=0-65535",
+  "conditional": "If-Range",
+  "length": 65536,
+  "content_range": "bytes 0-65535/396871"
+ },
+ "anonymous": {
+  "authenticated": false,
+  "copy": "target",
+  "status": 401,
+  "range": "bytes=0-65535",
+  "length": 0,
+  "content_range": null
+ },
+ "other_user": {
+  "authenticated": true,
+  "copy": "target",
+  "status": 404,
+  "range": "bytes=0-65535",
+  "length": 0,
+  "content_range": null
+ },
+ "oversize": {
+  "authenticated": true,
+  "copy": "target",
+  "status": 400,
+  "range": "bytes=0-131072",
+  "length": 0,
+  "content_range": null
+ },
+ "multi_range": {
+  "authenticated": true,
+  "copy": "target",
+  "status": 400,
+  "range": "bytes=0-1,3-4",
+  "length": 0,
+  "content_range": null
+ },
+ "no_range": {
+  "authenticated": true,
+  "copy": "target",
+  "status": 400,
+  "length": 0,
+  "content_range": null
+ },
+ "out_of_bounds": {
+  "authenticated": true,
+  "copy": "target",
+  "status": 416,
+  "range": "bytes=396871-396880",
+  "length": 0,
+  "content_range": "bytes */396871"
+ },
+ "withdrawn": {
+  "authenticated": true,
+  "copy": "target",
+  "status": 404,
+  "range": "bytes=0-65535",
+  "length": 0,
+  "content_range": null,
+  "phase": "withdrawn"
+ },
+ "unrelated_after_restart": {
+  "authenticated": true,
+  "copy": "unrelated",
+  "status": 206,
+  "range": "bytes=0-1023",
+  "length": 1024,
+  "content_range": "bytes 0-1023/396888"
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "captured_at": "2026-11-24T01:55Z",
+ "method": "Hugging Face MCP connector (OAuth, scopes read-repos/read-mcp; authenticated as the dataset owner). No credential in the shell; no binary download possible through the connector.",
+ "repo": "datasets/hariomahlawat/mimamsa-corpus",
+ "revision": {"pinned": false, "reason": "the connector exposes no commit id for the repo or a file; hub_repo_details reports only 'Updated: 22 Nov, 2026'", "latest_commit_from_github_actions_logs": "e1a7fa47 (2026-11-22T14:49Z), recorded by C10"},
+ "lfs_oid_exposed": false,
+ "binary_read": false,
+ "sha256sums_sample": {
+  "hf_path": "data/SHA256SUMS", "hf_size": 614935, "github_size_at_ad77758d": 614935,
+  "chunks": [
+   {"offset": 0, "length": 1500, "github_chunk_sha256": "fb0ebc46e4573034...", "hf_starts": "d0048b8b57c3f481b093471a4f4f311e6413effa", "hf_ends": "a62224ded6d80308bca99f769d4f8a3a7a665208", "result": "MATCH (start/end and content read by eye)"},
+   {"offset": 307000, "length": 1500, "github_chunk_sha256": "f76bd7fa01f8d91b...", "hf_starts": "bfa950e51051bb2390dbd47e940cb9f1502.pdf", "hf_ends": "dab4127671cd  data/raw/hc/2025/1f87f1ee8", "result": "MATCH"},
+   {"offset": 613435, "length": 1500, "github_chunk_sha256": "fc0f3b4ce6dda1dd...", "hf_starts": "0b713870394791ec83e86e6aaad6664a2c  data", "hf_ends": "c809fe01bf19b9b03f4fcae628590d0d195.pdf", "result": "MATCH (end of file)"}
+  ],
+  "conclusion": "SAMPLED_TEXT_MATCH: equal size and identical content at three offsets including the end; not a full byte comparison"
+ }
+}

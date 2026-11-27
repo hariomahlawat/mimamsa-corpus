@@ -1,0 +1,1439 @@
+{
+ "T1-INC-028ce643f09f": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010577232016_1_2025-09-26.pdf",
+  "sha256": "028ce643f09f1cecaad0258387f63acbaf62a99b0ab88a89fa5b423efb474963",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/02/028ce643f09f1cecaad0258387f63acbaf62a99b0ab88a89fa5b423efb474963/DLHC010577232016_1_2025-09-26.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 176128,
+  "md5": "199e65fabb6a27478087f4e20abc8fef",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "opens": false,
+  "pages": null,
+  "pages_with_text": null,
+  "open_error": "code=7: Invalid number of pages",
+  "completeness": "INCOMPLETE_DOES_NOT_OPEN",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:13:48.789395Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010577232016_1_2025-09-26.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-02e3320fa26f": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC013379622017_1_2025-09-26.pdf",
+  "sha256": "02e3320fa26f4fff02f1ca26759f4aa0f879b9be76a74436de8dd25c76a80699",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/02/02e3320fa26f4fff02f1ca26759f4aa0f879b9be76a74436de8dd25c76a80699/DLHC013379622017_1_2025-09-26.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 319456,
+  "md5": "60fea9ccdddd5f5154077808dd033876",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "opens": false,
+  "pages": null,
+  "pages_with_text": null,
+  "open_error": "Failed to open file '/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/02/02e3320fa26f4fff02f1ca26759f4aa0f879b9be76a74436de8dd25c76a80699/DLHC013379",
+  "completeness": "INCOMPLETE_DOES_NOT_OPEN",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:13:51.284086Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC013379622017_1_2025-09-26.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-2137dd14d58a": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010522572025_1_2025-09-19.pdf",
+  "sha256": "2137dd14d58a2c7269e2a36e6d0f00683150e2441d8903c833ca27d7c2cfc9ab",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/21/2137dd14d58a2c7269e2a36e6d0f00683150e2441d8903c833ca27d7c2cfc9ab/DLHC010522572025_1_2025-09-19.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 40960,
+  "md5": "481168a602199e44b4bae7edf9687436",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "pages": 8,
+  "pages_with_text": 3,
+  "opens": true,
+  "repaired": true,
+  "completeness": "INCOMPLETE_NO_TRAILING_EOF",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:13:53.594621Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010522572025_1_2025-09-19.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-268ee3d706ea": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010180002024_1_2025-07-31.pdf",
+  "sha256": "268ee3d706eadcd48f7db0029c28259c248a6114325ab8533156b06f8bdd92a0",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/26/268ee3d706eadcd48f7db0029c28259c248a6114325ab8533156b06f8bdd92a0/DLHC010180002024_1_2025-07-31.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 262144,
+  "md5": "eaf5acd790fe9aa9e6b2231b9f60dd90",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "pages": 34,
+  "pages_with_text": 17,
+  "opens": true,
+  "repaired": true,
+  "completeness": "INCOMPLETE_NO_TRAILING_EOF",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:13:56.201107Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010180002024_1_2025-07-31.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-2c098828c7ba": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010153952020_1_2025-09-02.pdf",
+  "sha256": "2c098828c7bac3e51ef62eceadff4625dddbe91e230616607b4616e15a3e08f9",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/2c/2c098828c7bac3e51ef62eceadff4625dddbe91e230616607b4616e15a3e08f9/DLHC010153952020_1_2025-09-02.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 15386,
+  "md5": "64c9129e8f86c63db227d29caaa6e69c",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "opens": false,
+  "pages": null,
+  "pages_with_text": null,
+  "open_error": "code=7: Invalid number of pages",
+  "completeness": "INCOMPLETE_DOES_NOT_OPEN",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:13:58.470327Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010153952020_1_2025-09-02.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-30cf7d583e01": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010142802025_1_2025-08-07.pdf",
+  "sha256": "30cf7d583e0151f35e3e05a5c25dad6df9388ac60b206e203de419e294a25574",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/30/30cf7d583e0151f35e3e05a5c25dad6df9388ac60b206e203de419e294a25574/DLHC010142802025_1_2025-08-07.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 188400,
+  "md5": "41668a5a62b53b36c955f2049e1ae986",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "pages": 9,
+  "pages_with_text": 9,
+  "opens": true,
+  "repaired": true,
+  "completeness": "INCOMPLETE_NO_TRAILING_EOF",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:00.922455Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010142802025_1_2025-08-07.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-38bd54ea27ee": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010467072010_1_2025-09-26.pdf",
+  "sha256": "38bd54ea27ee36969e80a3ca0661a68cbeb1e7fdec46eb6cdef31e27519cb74e",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/38/38bd54ea27ee36969e80a3ca0661a68cbeb1e7fdec46eb6cdef31e27519cb74e/DLHC010467072010_1_2025-09-26.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 237544,
+  "md5": "25f23b1e63e2bc52445ff7ea58afebd7",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "pages": 171,
+  "pages_with_text": 76,
+  "opens": true,
+  "repaired": true,
+  "completeness": "INCOMPLETE_NO_TRAILING_EOF",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:03.477469Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010467072010_1_2025-09-26.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-8189c602ff49": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=7_26/bench=dhcdb/DLHC010306612026_1_2026-08-25.pdf",
+  "sha256": "8189c602ff49bd414c6b33b983fb98070bedc41f9a85338218652ae64db28154",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/81/8189c602ff49bd414c6b33b983fb98070bedc41f9a85338218652ae64db28154/DLHC010306612026_1_2026-08-25.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 941968,
+  "md5": "c4f710ea4bc1c543aebe87b6a371e715",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "pages": 28,
+  "pages_with_text": 17,
+  "opens": true,
+  "repaired": true,
+  "completeness": "INCOMPLETE_NO_TRAILING_EOF",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:05.976937Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=7_26/bench=dhcdb/DLHC010306612026_1_2026-08-25.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-8a4689b542d4": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010519872025_1_2025-08-01.pdf",
+  "sha256": "8a4689b542d4ff57ece6cccb45cb8830944df190d98f2212d987fe15155761d3",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/8a/8a4689b542d4ff57ece6cccb45cb8830944df190d98f2212d987fe15155761d3/DLHC010519872025_1_2025-08-01.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 13338,
+  "md5": "258c1dc7a32b8ee69ffbf6d0b7e9ad11",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "opens": false,
+  "pages": null,
+  "pages_with_text": null,
+  "open_error": "code=7: Invalid number of pages",
+  "completeness": "INCOMPLETE_DOES_NOT_OPEN",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:08.234232Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010519872025_1_2025-08-01.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-928d53398c77": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010097512016_1_2025-09-26.pdf",
+  "sha256": "928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/92/928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698/DLHC010097512016_1_2025-09-26.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 270304,
+  "md5": "4e8db187292385e65831b0e5c6bd26e1",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "pages": 171,
+  "pages_with_text": 84,
+  "opens": true,
+  "repaired": true,
+  "completeness": "INCOMPLETE_NO_TRAILING_EOF",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:10.747095Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010097512016_1_2025-09-26.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-b1aa2d028bf8": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010004012023_1_2025-09-08.pdf",
+  "sha256": "b1aa2d028bf8282d81fd8262c0b73e6a356f12932f36970641016be42ebf4c6e",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/b1/b1aa2d028bf8282d81fd8262c0b73e6a356f12932f36970641016be42ebf4c6e/DLHC010004012023_1_2025-09-08.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 32768,
+  "md5": "fbaec40f4ccb992feab6ba743ba89526",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "pages": 32,
+  "pages_with_text": 7,
+  "opens": true,
+  "repaired": true,
+  "completeness": "INCOMPLETE_NO_TRAILING_EOF",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:12.956022Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010004012023_1_2025-09-08.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-cda4a7260447": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010132022015_1_2025-09-26.pdf",
+  "sha256": "cda4a72604478d2989393597025bb2a83e93e9821c6eb27fde6c5f7daf07f653",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/cd/cda4a72604478d2989393597025bb2a83e93e9821c6eb27fde6c5f7daf07f653/DLHC010132022015_1_2025-09-26.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 16384,
+  "md5": "d925fd0b5de01da984e36cd5306993ce",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "opens": false,
+  "pages": null,
+  "pages_with_text": null,
+  "open_error": "code=7: Invalid number of pages",
+  "completeness": "INCOMPLETE_DOES_NOT_OPEN",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:15.242662Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010132022015_1_2025-09-26.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-e04a2422b792": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010623652025_1_2025-09-16.pdf",
+  "sha256": "e04a2422b7927c2d39b0ccea511a6afebd9c8a36593d7c12fc91c19c29fdf201",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/e0/e04a2422b7927c2d39b0ccea511a6afebd9c8a36593d7c12fc91c19c29fdf201/DLHC010623652025_1_2025-09-16.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 114680,
+  "md5": "03ab15936b3e7cb9ea2e430aaba24faa",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "pages": 8,
+  "pages_with_text": 8,
+  "opens": true,
+  "repaired": true,
+  "completeness": "INCOMPLETE_NO_TRAILING_EOF",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:17.728768Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010623652025_1_2025-09-16.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-e81cf875c745": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010281292019_1_2025-09-17.pdf",
+  "sha256": "e81cf875c745b334746e1e30f521d8854cfe514868bc363e6cf491ee456f06e4",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/e8/e81cf875c745b334746e1e30f521d8854cfe514868bc363e6cf491ee456f06e4/DLHC010281292019_1_2025-09-17.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 8192,
+  "md5": "78fe85412529e07f5c262d344b83b6f0",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "opens": false,
+  "pages": null,
+  "pages_with_text": null,
+  "open_error": "code=7: Invalid number of pages",
+  "completeness": "INCOMPLETE_DOES_NOT_OPEN",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:19.991311Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010281292019_1_2025-09-17.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-ed1344e0d571": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010019982025_1_2025-08-01.pdf",
+  "sha256": "ed1344e0d571e662cf43379a3ef3297832c388fbfe685360c7b9993ef59d368c",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/ed/ed1344e0d571e662cf43379a3ef3297832c388fbfe685360c7b9993ef59d368c/DLHC010019982025_1_2025-08-01.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 32768,
+  "md5": "28c8d3a972cf9c17f8f4048faaa73819",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "pages": 32,
+  "pages_with_text": 5,
+  "opens": true,
+  "repaired": true,
+  "completeness": "INCOMPLETE_NO_TRAILING_EOF",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:22.307296Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010019982025_1_2025-08-01.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-f14d5ae83261": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010338972022_1_2025-09-26.pdf",
+  "sha256": "f14d5ae83261688f5aae839099b8fe3de03a04e9bda6e2f5e2f1f1e1e410abf6",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/f1/f14d5ae83261688f5aae839099b8fe3de03a04e9bda6e2f5e2f1f1e1e410abf6/DLHC010338972022_1_2025-09-26.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 65528,
+  "md5": "4342626b88d6bb3dff1d8d4e55452610",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "opens": false,
+  "pages": null,
+  "pages_with_text": null,
+  "open_error": "Failed to open file '/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/f1/f14d5ae83261688f5aae839099b8fe3de03a04e9bda6e2f5e2f1f1e1e410abf6/DLHC010338",
+  "completeness": "INCOMPLETE_DOES_NOT_OPEN",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:24.700521Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010338972022_1_2025-09-26.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-f841d3fb6761": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010020062025_1_2025-08-01.pdf",
+  "sha256": "f841d3fb6761bd279293822254d0c66000262379a1c9f381a2a507e554b7321c",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/f8/f841d3fb6761bd279293822254d0c66000262379a1c9f381a2a507e554b7321c/DLHC010020062025_1_2025-08-01.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 35866,
+  "md5": "5c12e3b9ae0509a62a9d6402f7602fa0",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "pages": 32,
+  "pages_with_text": 5,
+  "opens": true,
+  "repaired": true,
+  "completeness": "INCOMPLETE_NO_TRAILING_EOF",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:27.003213Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010020062025_1_2025-08-01.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T1-INC-fb634cc630f8": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010688322025_1_2025-09-16.pdf",
+  "sha256": "fb634cc630f8c4e473c9723af855a3d783a3739ec79b37bd6fd9b052cc95ba2b",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/fb/fb634cc630f8c4e473c9723af855a3d783a3739ec79b37bd6fd9b052cc95ba2b/DLHC010688322025_1_2025-09-16.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 57344,
+  "md5": "7b104deba8a7cac8e2d859e562d15a99",
+  "is_pdf": true,
+  "eof_at_end": false,
+  "eof_count": 0,
+  "pages": 8,
+  "pages_with_text": 8,
+  "opens": true,
+  "repaired": true,
+  "completeness": "INCOMPLETE_NO_TRAILING_EOF",
+  "relation": "IDENTICAL_TO_STORED_TRUNCATED_COPY: remote copy is also truncated",
+  "retrieved_at": "2026-11-24T10:14:29.337002Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010688322025_1_2025-09-16.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T4-AA-ENACTED-1950": {
+  "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+  "url": "https://dn710300.ca.archive.org/0/items/in.gazette.e.1950.306/E-2350-1950-0011-109089.pdf",
+  "robots": "robots.txt 200 parsed; path allowed",
+  "error": "",
+  "attempts": [
+   {
+    "status": "ROBOTS_DISALLOWED",
+    "url": "https://egazette.gov.in/WriteReadData/1950/E-2350-1950-0011-109089.pdf",
+    "robots": "robots.txt unreachable (ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c): disallow (fail closed)"
+   },
+   {
+    "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+    "url": "https://dn710300.ca.archive.org/0/items/in.gazette.e.1950.306/E-2350-1950-0011-109089.pdf",
+    "robots": "robots.txt 200 parsed; path allowed",
+    "redirect_from": "https://archive.org/download/in.gazette.e.1950.306/E-2350-1950-0011-109089.pdf"
+   }
+  ]
+ },
+ "T4-BSA-COMM-252352": {
+  "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+  "url": "https://dn710003.ca.archive.org/0/items/in.gazette.central.e.2024-02-24.252352/252352.pdf",
+  "robots": "robots.txt 200 parsed; path allowed",
+  "error": "",
+  "attempts": [
+   {
+    "status": "ROBOTS_DISALLOWED",
+    "url": "https://egazette.gov.in/WriteReadData/2024/252352.pdf",
+    "robots": "robots.txt unreachable (ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c): disallow (fail closed)"
+   },
+   {
+    "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+    "url": "https://dn710003.ca.archive.org/0/items/in.gazette.central.e.2024-02-24.252352/252352.pdf",
+    "robots": "robots.txt 200 parsed; path allowed",
+    "redirect_from": "https://archive.org/download/in.gazette.central.e.2024-02-24.252352/252352.pdf"
+   }
+  ]
+ },
+ "T4-BNS-COMM-252353": {
+  "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+  "url": "https://dn710005.ca.archive.org/0/items/in.gazette.central.e.2024-02-24.252353/252353.pdf",
+  "robots": "robots.txt 200 parsed; path allowed",
+  "error": "",
+  "attempts": [
+   {
+    "status": "ROBOTS_DISALLOWED",
+    "url": "https://egazette.gov.in/WriteReadData/2024/252353.pdf",
+    "robots": "robots.txt unreachable (ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c): disallow (fail closed)"
+   },
+   {
+    "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+    "url": "https://dn710005.ca.archive.org/0/items/in.gazette.central.e.2024-02-24.252353/252353.pdf",
+    "robots": "robots.txt 200 parsed; path allowed",
+    "redirect_from": "https://archive.org/download/in.gazette.central.e.2024-02-24.252353/252353.pdf"
+   }
+  ]
+ },
+ "T4-BNSS-COMM-252354": {
+  "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+  "url": "https://dn721603.ca.archive.org/0/items/in.gazette.central.e.2024-02-24.252354/252354.pdf",
+  "robots": "robots.txt 200 parsed; path allowed",
+  "error": "",
+  "attempts": [
+   {
+    "status": "ROBOTS_DISALLOWED",
+    "url": "https://egazette.gov.in/WriteReadData/2024/252354.pdf",
+    "robots": "robots.txt unreachable (ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c): disallow (fail closed)"
+   },
+   {
+    "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+    "url": "https://dn721603.ca.archive.org/0/items/in.gazette.central.e.2024-02-24.252354/252354.pdf",
+    "robots": "robots.txt 200 parsed; path allowed",
+    "redirect_from": "https://archive.org/download/in.gazette.central.e.2024-02-24.252354/252354.pdf"
+   }
+  ]
+ },
+ "T4-AR-INTERIM-1950": {
+  "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+  "url": "https://dn760102.eu.archive.org/0/items/in.gazette.e.1950.8/E-2351-1950-0002-109235.pdf",
+  "robots": "robots.txt 200 parsed; path allowed",
+  "error": "",
+  "attempts": [
+   {
+    "status": "ROBOTS_DISALLOWED",
+    "url": "https://egazette.gov.in/WriteReadData/1950/E-2351-1950-0002-109235.pdf",
+    "robots": "robots.txt unreachable (ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c): disallow (fail closed)"
+   },
+   {
+    "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+    "url": "https://dn760102.eu.archive.org/0/items/in.gazette.e.1950.8/E-2351-1950-0002-109235.pdf",
+    "robots": "robots.txt 200 parsed; path allowed",
+    "redirect_from": "https://archive.org/download/in.gazette.e.1950.8/E-2351-1950-0002-109235.pdf"
+   }
+  ]
+ },
+ "T4-AR-POST2022-236757": {
+  "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+  "url": "https://dn720005.ca.archive.org/0/items/in.gazette.central.e.2022-06-23.236757/236757.pdf",
+  "robots": "robots.txt 200 parsed; path allowed",
+  "error": "",
+  "attempts": [
+   {
+    "status": "ROBOTS_DISALLOWED",
+    "url": "https://egazette.gov.in/WriteReadData/2022/236757.pdf",
+    "robots": "robots.txt unreachable (ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c): disallow (fail closed)"
+   },
+   {
+    "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+    "url": "https://dn720005.ca.archive.org/0/items/in.gazette.central.e.2022-06-23.236757/236757.pdf",
+    "robots": "robots.txt 200 parsed; path allowed",
+    "redirect_from": "https://archive.org/download/in.gazette.central.e.2022-06-23.236757/236757.pdf"
+   }
+  ]
+ },
+ "T4-AR-POST2022-241268": {
+  "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+  "url": "https://dn760106.eu.archive.org/0/items/in.gazette.central.e.2022-12-21.241268/241268.pdf",
+  "robots": "robots.txt 200 parsed; path allowed",
+  "error": "",
+  "attempts": [
+   {
+    "status": "ROBOTS_DISALLOWED",
+    "url": "https://egazette.gov.in/WriteReadData/2022/241268.pdf",
+    "robots": "robots.txt unreachable (ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c): disallow (fail closed)"
+   },
+   {
+    "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+    "url": "https://dn760106.eu.archive.org/0/items/in.gazette.central.e.2022-12-21.241268/241268.pdf",
+    "robots": "robots.txt 200 parsed; path allowed",
+    "redirect_from": "https://archive.org/download/in.gazette.central.e.2022-12-21.241268/241268.pdf"
+   }
+  ]
+ },
+ "T4-AR-POST2022-246457": {
+  "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+  "url": "https://dn710205.ca.archive.org/0/items/in.gazette.central.e.2023-06-12.246457/246457.pdf",
+  "robots": "robots.txt 200 parsed; path allowed",
+  "error": "",
+  "attempts": [
+   {
+    "status": "ROBOTS_DISALLOWED",
+    "url": "https://egazette.gov.in/WriteReadData/2023/246457.pdf",
+    "robots": "robots.txt unreachable (ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c): disallow (fail closed)"
+   },
+   {
+    "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+    "url": "https://dn710205.ca.archive.org/0/items/in.gazette.central.e.2023-06-12.246457/246457.pdf",
+    "robots": "robots.txt 200 parsed; path allowed",
+    "redirect_from": "https://archive.org/download/in.gazette.central.e.2023-06-12.246457/246457.pdf"
+   }
+  ]
+ },
+ "T4-AR-POST2022-254308": {
+  "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+  "url": "https://ia600408.us.archive.org/7/items/in.gazette.central.e.2024-05-22.254308/254308.pdf",
+  "robots": "robots.txt 200 parsed; path allowed",
+  "error": "",
+  "attempts": [
+   {
+    "status": "ROBOTS_DISALLOWED",
+    "url": "https://egazette.gov.in/WriteReadData/2024/254308.pdf",
+    "robots": "robots.txt unreachable (ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c): disallow (fail closed)"
+   },
+   {
+    "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+    "url": "https://ia600408.us.archive.org/7/items/in.gazette.central.e.2024-05-22.254308/254308.pdf",
+    "robots": "robots.txt 200 parsed; path allowed",
+    "redirect_from": "https://archive.org/download/in.gazette.central.e.2024-05-22.254308/254308.pdf"
+   }
+  ]
+ },
+ "T4-AR-POST2022-273809": {
+  "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+  "url": "https://dn711006.ca.archive.org/0/items/in.gazette.central.e.2026-06-24.273809/273809.pdf",
+  "robots": "robots.txt 200 parsed; path allowed",
+  "error": "",
+  "attempts": [
+   {
+    "status": "ROBOTS_DISALLOWED",
+    "url": "https://egazette.gov.in/WriteReadData/2026/273809.pdf",
+    "robots": "robots.txt unreachable (ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c): disallow (fail closed)"
+   },
+   {
+    "status": "REDIRECT_TO_NON_ALLOW_LISTED_HOST",
+    "url": "https://dn711006.ca.archive.org/0/items/in.gazette.central.e.2026-06-24.273809/273809.pdf",
+    "robots": "robots.txt 200 parsed; path allowed",
+    "redirect_from": "https://archive.org/download/in.gazette.central.e.2026-06-24.273809/273809.pdf"
+   }
+  ]
+ },
+ "T5-EXC-0358": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1981/english/1981_3_165_173_EN.pdf",
+  "sha256": "0820e9d446b3ec3b3de1a51c57b090ec94aff3b978bdfb1695784afa6df3ad4e",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/08/0820e9d446b3ec3b3de1a51c57b090ec94aff3b978bdfb1695784afa6df3ad4e/1981_3_165_173_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 303996,
+  "md5": "8792bfbd2074772db06dfee1d85ac3be",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 9,
+  "pages_with_text": 9,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 9 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:06.601014Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1981/english/1981_3_165_173_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0359": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1982/english/1982_3_453_473_EN.pdf",
+  "sha256": "fa1a4c0c09ffc89899dcb1d8ff00baba92952f6441edaaf109c1fef9131c372b",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/fa/fa1a4c0c09ffc89899dcb1d8ff00baba92952f6441edaaf109c1fef9131c372b/1982_3_453_473_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 710879,
+  "md5": "23a7d620fd777256e6bf6f5b3ec8be9e",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 21,
+  "pages_with_text": 21,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 21 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:09.209034Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1982/english/1982_3_453_473_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0360": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1987/english/1987_2_94_106_EN.pdf",
+  "sha256": "c99b38f9654b4cc116f3885905ac94e2b7db7221e7de4aa3adb49ca9a4b686db",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/c9/c99b38f9654b4cc116f3885905ac94e2b7db7221e7de4aa3adb49ca9a4b686db/1987_2_94_106_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 402437,
+  "md5": "e618516b866e575d29769c618d2d618d",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 13,
+  "pages_with_text": 13,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 13 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:11.611347Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1987/english/1987_2_94_106_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0364": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1995/english/S_1995_6_360_363_EN.pdf",
+  "sha256": "f675b043b867a37a1f828f271d4a7812ab171eed2d79f6ce7560e7216d1b7c33",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/f6/f675b043b867a37a1f828f271d4a7812ab171eed2d79f6ce7560e7216d1b7c33/S_1995_6_360_363_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 113648,
+  "md5": "939bf5307c8d2dac48355e6b96e2bcdc",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 4,
+  "pages_with_text": 4,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 4 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:14.049842Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1995/english/S_1995_6_360_363_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0365": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2000/english/S_2000_4_531_538_EN.pdf",
+  "sha256": "9cb4e637c04f814cdac3ac374d2b60a92da61ef9ac1e6acbab86788f2b765633",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/9c/9cb4e637c04f814cdac3ac374d2b60a92da61ef9ac1e6acbab86788f2b765633/S_2000_4_531_538_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 305995,
+  "md5": "b6e1d03c5692daae2f03e7a4af6b6c6c",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 8,
+  "pages_with_text": 8,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 8 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:16.451691Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2000/english/S_2000_4_531_538_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0375": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2008/english/2008_16_701_711_EN.pdf",
+  "sha256": "ae741f7c933f08823bea6a947faba62c38257a9b36e21dd38562339c7309a4b3",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/ae/ae741f7c933f08823bea6a947faba62c38257a9b36e21dd38562339c7309a4b3/2008_16_701_711_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 433981,
+  "md5": "3d491b54a3463c08362b5bccdc1cebe8",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 11,
+  "pages_with_text": 10,
+  "opens": true,
+  "repaired": false,
+  "completeness": "STRUCTURALLY_COMPLETE; 10/11 pages have a text layer (pages without text: 3; likely scanned, OCR needed)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:19.033324Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2008/english/2008_16_701_711_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0435": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2012/english/2012_9_1001_1006_EN.pdf",
+  "sha256": "1aa3838f30b791415e27d0ef0f24e7b3929fc22af7ce8d98efb94c5cc1e61f8c",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/1a/1aa3838f30b791415e27d0ef0f24e7b3929fc22af7ce8d98efb94c5cc1e61f8c/2012_9_1001_1006_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 150382,
+  "md5": "60a641def668d9d9410f6bb09b80153b",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 6,
+  "pages_with_text": 6,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 6 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:21.399615Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2012/english/2012_9_1001_1006_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-1155": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1961/english/1961_2_828_873_EN.pdf",
+  "sha256": "d7a04f0968a64f2fe9f9b463e43ed115c66e96c85f0e8dacfc806c91be919e99",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/d7/d7a04f0968a64f2fe9f9b463e43ed115c66e96c85f0e8dacfc806c91be919e99/1961_2_828_873_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 1812502,
+  "md5": "eaa63c55253d5351e6351f941f95b193",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 46,
+  "pages_with_text": 46,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 46 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:24.095529Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1961/english/1961_2_828_873_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-1156": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1971/english/1971_1_791_797_EN.pdf",
+  "sha256": "bb8cff90e72e977e819a1ee9e508c2d4af96b8dc318f70e0ace9d615d1ac3351",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/bb/bb8cff90e72e977e819a1ee9e508c2d4af96b8dc318f70e0ace9d615d1ac3351/1971_1_791_797_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 249315,
+  "md5": "9514f46a253807bbc753e61aa97b9784",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 7,
+  "pages_with_text": 7,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 7 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:26.647021Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1971/english/1971_1_791_797_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-1157": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1973/english/1973_3_818_829_EN.pdf",
+  "sha256": "ad8781981681d9394014b45b8eb0503bc79b76953e0455c6ef82c3e2e13ea121",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/ad/ad8781981681d9394014b45b8eb0503bc79b76953e0455c6ef82c3e2e13ea121/1973_3_818_829_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 448059,
+  "md5": "81264beb488468e63ec389ac7dddc89f",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 12,
+  "pages_with_text": 12,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 12 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:29.182100Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1973/english/1973_3_818_829_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-1158": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1981/english/1981_1_168_174_EN.pdf",
+  "sha256": "9a8a1cc3524b95e3d496a7811dcda98ec3655da5f921b3a4599c8541d21a6b53",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/9a/9a8a1cc3524b95e3d496a7811dcda98ec3655da5f921b3a4599c8541d21a6b53/1981_1_168_174_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 301201,
+  "md5": "9efe29dd97aa52c8ec2eb97dabfff409",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 7,
+  "pages_with_text": 7,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 7 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:31.772732Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1981/english/1981_1_168_174_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-1159": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1982/english/1982_3_38_42_EN.pdf",
+  "sha256": "bf3d1b277dd9d041b1ee06f22892e08d45544032f796752d9799caa05b1e31e1",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/bf/bf3d1b277dd9d041b1ee06f22892e08d45544032f796752d9799caa05b1e31e1/1982_3_38_42_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 158908,
+  "md5": "8360bca86b8c174aa6e79a71f7b29bd8",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 5,
+  "pages_with_text": 5,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 5 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:34.476438Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1982/english/1982_3_38_42_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-1160": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1983/english/1983_2_448_466_EN.pdf",
+  "sha256": "2890b7b47a443252c089c05ad45b4dab11a163040745e75209cc4c5d65806361",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/28/2890b7b47a443252c089c05ad45b4dab11a163040745e75209cc4c5d65806361/1983_2_448_466_EN.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 942272,
+  "md5": "4a6e0584529c34a661527c8fefe9707e",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 19,
+  "pages_with_text": 19,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 19 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:36.959438Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1983/english/1983_2_448_466_EN.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0187": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2013/court=3_22/bench=phhc/PHHC010960252013_1_2013-08-12.pdf",
+  "sha256": "626ae775fed0a404766e2f3a3d9471c9d0c4448e22a678ec93e76fd305b620a6",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/62/626ae775fed0a404766e2f3a3d9471c9d0c4448e22a678ec93e76fd305b620a6/PHHC010960252013_1_2013-08-12.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 60675,
+  "md5": "3262467d04b79e1c6f3e72aebbc4d534",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 4,
+  "pages_with_text": 4,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 4 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:38.326157Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2013/court=3_22/bench=phhc/PHHC010960252013_1_2013-08-12.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0188": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/court=3_22/bench=phhc/PHHC010774422012_1_2014-05-21.pdf",
+  "sha256": "3b9bcf2f5e0fb13ff7a5681bf7f3f0ebb84c593056052e367ed534b8cac40c26",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/3b/3b9bcf2f5e0fb13ff7a5681bf7f3f0ebb84c593056052e367ed534b8cac40c26/PHHC010774422012_1_2014-05-21.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 147974,
+  "md5": "8924e1770dd2ab320aad94f28aafc282",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 12,
+  "pages_with_text": 12,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 12 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:41.057234Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/court=3_22/bench=phhc/PHHC010774422012_1_2014-05-21.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0189": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/court=3_22/bench=phhc/PHHC010740772013_1_2014-07-25.pdf",
+  "sha256": "ba9c4e674c1b3b5e7714288942f0c3fcd40a4fffc88bbb64640a801414f88b21",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/ba/ba9c4e674c1b3b5e7714288942f0c3fcd40a4fffc88bbb64640a801414f88b21/PHHC010740772013_1_2014-07-25.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 79030,
+  "md5": "a1ef1844d948ab224a0f52095e520ba6",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 3,
+  "pages_with_text": 3,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 3 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:43.464033Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/court=3_22/bench=phhc/PHHC010740772013_1_2014-07-25.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0195": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=3_22/bench=phhc/PHHC010949672019_1_2019-08-09.pdf",
+  "sha256": "a5ac7f7ea79c41e1167920a98fb4e2050b500b630184590af4ab60d2d0338286",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/a5/a5ac7f7ea79c41e1167920a98fb4e2050b500b630184590af4ab60d2d0338286/PHHC010949672019_1_2019-08-09.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 95802,
+  "md5": "38088f79ec5ec7ed8f0e5dbab452a16a",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 3,
+  "pages_with_text": 3,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 3 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:45.921211Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=3_22/bench=phhc/PHHC010949672019_1_2019-08-09.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0202": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=3_22/bench=phhc/PHHC010845612023_1_2023-07-07.pdf",
+  "sha256": "6dc58e8721c502c67874102e09ef59a2d75f79b77004c577625e8afec2e73fc2",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/6d/6dc58e8721c502c67874102e09ef59a2d75f79b77004c577625e8afec2e73fc2/PHHC010845612023_1_2023-07-07.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 82324,
+  "md5": "6798f74cd6bd0ec28a0b116d7889ad0b",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 5,
+  "pages_with_text": 5,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 5 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:48.371498Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=3_22/bench=phhc/PHHC010845612023_1_2023-07-07.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0203": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=3_22/bench=phhc/PHHC010993062023_1_2023-08-07.pdf",
+  "sha256": "2dbcb7e2f365503118671311458809bb471c8581d4ed6b5fc97156922f4424a8",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/2d/2dbcb7e2f365503118671311458809bb471c8581d4ed6b5fc97156922f4424a8/PHHC010993062023_1_2023-08-07.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 53545,
+  "md5": "8a07e922d12297babd9e7802905bd7c7",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 1,
+  "pages_with_text": 1,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 1 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:50.716288Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=3_22/bench=phhc/PHHC010993062023_1_2023-08-07.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0207": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC010776672024_1_2024-07-10.pdf",
+  "sha256": "cb39739c7c2c55e5676c0fb2981a70a27f19e855654f61c40ec9dbd3d6d09789",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/cb/cb39739c7c2c55e5676c0fb2981a70a27f19e855654f61c40ec9dbd3d6d09789/PHHC010776672024_1_2024-07-10.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 51711,
+  "md5": "91dc6db6ef5248731663d97a57b23ca7",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 1,
+  "pages_with_text": 1,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 1 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:53.046600Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC010776672024_1_2024-07-10.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0209": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC011119162021_1_2024-09-30.pdf",
+  "sha256": "a05de7b6b33cb9ef7b5f3d421d4b6184157f0710c3621d36f66a6f94f1382ec4",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/a0/a05de7b6b33cb9ef7b5f3d421d4b6184157f0710c3621d36f66a6f94f1382ec4/PHHC011119162021_1_2024-09-30.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 118715,
+  "md5": "e2e35605f614408902471e8f734b97ab",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 7,
+  "pages_with_text": 7,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 7 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:55.478684Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC011119162021_1_2024-09-30.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0211": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC010928662024_1_2024-11-21.pdf",
+  "sha256": "dcdfac610ef1ed181b871645370ca84690aec91d9cc42d79905bac32994dbd02",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/dc/dcdfac610ef1ed181b871645370ca84690aec91d9cc42d79905bac32994dbd02/PHHC010928662024_1_2024-11-21.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 139937,
+  "md5": "f8923bf192f416204035bed159e595e5",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 11,
+  "pages_with_text": 11,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 11 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:15:57.909389Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC010928662024_1_2024-11-21.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0212": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC010909582024_1_2024-11-22.pdf",
+  "sha256": "9960904c701ce9ef8a1b7b46b0e895a6a345f1ca2f59df1be10e3a142b14d7a9",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/99/9960904c701ce9ef8a1b7b46b0e895a6a345f1ca2f59df1be10e3a142b14d7a9/PHHC010909582024_1_2024-11-22.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 137696,
+  "md5": "3693a5d2ed975b318bf362d54a220697",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 11,
+  "pages_with_text": 11,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 11 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:16:00.344025Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC010909582024_1_2024-11-22.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0213": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC010919992024_1_2024-11-22.pdf",
+  "sha256": "cb1785cf0db679cf4d64a0bce2a3f64dc18748b1f1b0a0631d26c2c355d59fcd",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/cb/cb1785cf0db679cf4d64a0bce2a3f64dc18748b1f1b0a0631d26c2c355d59fcd/PHHC010919992024_1_2024-11-22.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 140284,
+  "md5": "d69d0fc543af3fa890ca404ff3edfd7b",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 11,
+  "pages_with_text": 11,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 11 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:16:02.814477Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC010919992024_1_2024-11-22.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ },
+ "T5-EXC-0214": {
+  "status": "DOWNLOADED",
+  "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC011389462024_1_2024-11-27.pdf",
+  "sha256": "df316862fa58b73052f2412bb1038cf2b630c52b1d3d70337603830b4e9fd918",
+  "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12_acquired/df/df316862fa58b73052f2412bb1038cf2b630c52b1d3d70337603830b4e9fd918/PHHC011389462024_1_2024-11-27.pdf",
+  "already_in_store": false,
+  "robots": "robots.txt HTTP 404: no robots file, allowed",
+  "bytes": 123219,
+  "md5": "8cfab6130b64aef32b966d78d8d46135",
+  "is_pdf": true,
+  "eof_at_end": true,
+  "eof_count": 1,
+  "pages": 8,
+  "pages_with_text": 8,
+  "opens": true,
+  "repaired": false,
+  "completeness": "COMPLETE (%%EOF at end; opens; text on all 8 pages)",
+  "relation": "VERIFIED: sha256 EQUALS crawler-logged value",
+  "retrieved_at": "2026-11-24T10:16:05.333014Z",
+  "attempts": [
+   {
+    "status": "HTTP_200",
+    "http_status": 200,
+    "url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC011389462024_1_2024-11-27.pdf",
+    "robots": "robots.txt HTTP 404: no robots file, allowed",
+    "content_type": "application/pdf"
+   }
+  ]
+ }
+}

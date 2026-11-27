@@ -1,0 +1,6 @@
+control_id,scope,action,trigger,release_gate,status
+C29-1,Rule23,"Mark contradictory hosted compendia as disputed text, do not silently use wording that compels speech",Diff direct-source text,Authentic signed or published Gazette + applicability chain,OPEN
+C29-2,Judgments 1982/1987,"Record original PDF SHA, official source URL, page count and read-back proof",Download via authenticated workflow,Source archive verified before source_doc_archived true,IN_PROGRESS
+C29-3,Precedent use,Resolve post-judgment citations and any overruling or distinguishing decisions,Legal review,Subsequent treatment and full holding review,OPEN
+C29-4,53 curated cases,"Match court, date and case numbers against 3481 corpus titles; flag ambiguous matches",Corpus matching,Never accept fuzzy title-only link as verified,OPEN
+C29-5,Original manual content,Maintain byte-immutable originals and separate commentary from statutes,Document parsing,Edition and access markings reviewed,OPEN

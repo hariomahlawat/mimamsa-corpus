@@ -1,0 +1,7 @@
+gt_id,doc_id,source_sha256,page,category,gt_file,transcriber
+GT01,hc-ph-2013-cwp-8140-2013-phhc010960252013-1-2013-08-12,626ae775fed0a404766e2f3a3d9471c9d0c4448e22a678ec93e76fd305b620a6,1,garbled_text_layer_PH,GT01_ph_cwp8140-2013_p1.txt,AI (Claude) from page image; printed text only
+GT02,hc-ph-2014-cwp-20380-2012-phhc010774422012-1-2014-05-21,3b9bcf2f5e0fb13ff7a5681bf7f3f0ebb84c593056052e367ed534b8cac40c26,2,garbled_text_layer_PH,GT02_ph_cwp20380-2012_p2.txt,AI (Claude) from page image; printed text only
+GT03,hc-delhi-2011-la-app-74-2010-dlhc012029352009-1-2011-07-08,807aa0a251b105c5f2a3b04a657645e5934896947704dc43ef4853204da4e906,2,noisy_photocopy_scan,GT03_dl_la-app-74-2010_p2.txt,AI (Claude) from page image; printed text only
+GT04,hc-ph-2025-untitled-phhc010662992025-1-2025-10-30,9f3d8817394a8b9bc2867c2078c6f69954ceacf2fb2aceefdc761031eb591d33,1,degraded_print_scan,GT04_ph_crm-m-23446-2025_p1.txt,AI (Claude) from page image; printed text only
+GT05,"sc-preserved-ae741f7c933f (Man Mohan Sharma, 2008 16 SCR 701)",ae741f7c933f08823bea6a947faba62c38257a9b36e21dd38562339c7309a4b3,3,old_SCR_image_only_page,GT05_scr_2008-16-701_p3.txt,AI (Claude) from page image; printed text only
+GT06,hc-allahabad-2024-untitled-uphc020576442024-1-2024-08-30,d9e760d3c516699257407f8c384b770cac3f992d4aba0d1509c4138036dc292c,1,bilingual_hindi_english_broken_shaping,GT06_alld_art227-4039-2024_p1_bilingual.txt,AI (Claude) from page image; printed text only

@@ -1,0 +1,128 @@
+{
+ "contract": "mimamsa-corpus-contract/2.0",
+ "corpus_generation_id": "CG-20261127-fixtures-0a1b2c3d",
+ "doc_id": "sc-2019-example-v-union-of-india-ca0001",
+ "embedded_images": [],
+ "integrity": {
+  "basis": "re-downloaded at a pinned revision and re-hashed (fixture)",
+  "source_integrity": "BYTE_VERIFIED"
+ },
+ "provenance": {
+  "acquisition": {
+   "acquisition_channel": "CRAWLER",
+   "hf": null,
+   "original_filename": null,
+   "retrieved_at": "2026-11-20T10:00:00Z",
+   "source_url": "https://judgments.example.invalid/ca0001.pdf"
+  },
+  "carrier_provenance": "GOVERNMENT_HOSTED_COPY",
+  "observations": [],
+  "processing_history": [
+   {
+    "actor_kind": "AUTOMATED",
+    "inputs": [],
+    "operation": "ACQUIRE",
+    "outputs": [
+     "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+    ],
+    "result": "OK",
+    "seq": 1,
+    "tool": {
+     "commit": null,
+     "config_sha256": null,
+     "name": "crawler-fixture",
+     "version": "1.0.0"
+    }
+   },
+   {
+    "actor_kind": "AUTOMATED",
+    "inputs": [
+     "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+    ],
+    "operation": "EXTRACT_TEXT",
+    "outputs": [
+     "3ec4af40b9d5d8f49bdc3cbb8c8844ce6ea3eb39da1b05ccfbd78ce77c8b06ec"
+    ],
+    "result": "OK",
+    "seq": 2,
+    "tool": {
+     "commit": null,
+     "config_sha256": null,
+     "name": "mimamsa-corpus-text",
+     "version": "1.0.0"
+    }
+   }
+  ]
+ },
+ "record_kind": "document_identity",
+ "representation": {
+  "completeness": "COMPLETE",
+  "completeness_basis": "printed page sequence 1-12 matches the 12 physical pages (fixture)",
+  "content_scope": "WHOLE_WORK",
+  "origin_status": "CARRIER_ISSUED_COPY_CLAIMED",
+  "representation_kind": "NATIVE_DIGITAL_PDF"
+ },
+ "research_eligibility": {
+  "basis": [
+   "TEXT_RELIABLE_NATIVE"
+  ],
+  "graph_evidence_permitted": true,
+  "quoting_permitted": true,
+  "source_page_citation_permitted": true,
+  "state": "ELIGIBLE_FULL",
+  "whole_work_claims_permitted": true
+ },
+ "restriction": {
+  "access_marking": null,
+  "basis": "synthetic fixture",
+  "decided_by": "fixture",
+  "eligibility": "RESTRICTED",
+  "restriction_id": "RM-999"
+ },
+ "source_copy": {
+  "bytes": 112000,
+  "detected_format": "PDF",
+  "mime_type": "application/pdf",
+  "page_count": 12,
+  "physical_pagination": "PHYSICAL_PAGES",
+  "sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d",
+  "vault_path": "vault/sha256/52/52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
+ },
+ "text_derivatives": [
+  {
+   "coverage": {
+    "images_text_extracted": 0,
+    "images_total": 0,
+    "units_total": 12,
+    "units_with_text": 12
+   },
+   "derivative_id": "sc-2019-example-v-union-of-india-ca0001@mimamsa-corpus-text/1.0.0",
+   "derivative_text_sha256": "3ec4af40b9d5d8f49bdc3cbb8c8844ce6ea3eb39da1b05ccfbd78ce77c8b06ec",
+   "methods": [
+    "NATIVE_TEXT_LAYER"
+   ],
+   "ocr_config": null,
+   "pagination_basis": "SOURCE_PHYSICAL",
+   "pipeline_name": "mimamsa-corpus-text",
+   "pipeline_version": "1.0.0",
+   "quoting_permitted": true,
+   "text_reliability": "reliable"
+  }
+ ],
+ "work_identity": {
+  "graph_node_ref": "JUD:sc-2019-example-v-union-of-india-ca0001",
+  "identity_basis": "COVER_PAGE_EXTRACTED",
+  "identity_verification": "CANDIDATE",
+  "judgment_id": {
+   "unresolved": "NOT_DETERMINED"
+  },
+  "proceeding_numbers_as_printed": [
+   "Civil Appeal No. 1 of 2019 (synthetic)"
+  ],
+  "rendition": {
+   "language": "en",
+   "rendition_kind": "UNDETERMINED"
+  },
+  "work_kind": "JUDGMENT"
+ }
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/document.schema.json",
+  "title": "Document record",
+  "description": "One logical document bound to one content-addressed source copy in the vault (keyed by sha256). Alternate copies of the same logical document are separate source copies linked through alternate_copy_sha256; they are never merged. Fields the producer cannot fill are null, never guessed. The app imports these records read-only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version", "record_kind", "doc_id", "doc_type", "source_copy", "title", "number",
+    "issuing_authority", "issue_date", "effective_date", "corpus_status", "corpus_status_note",
+    "text_method", "provenance", "status_axes", "restriction", "field_origin"
+  ],
+  "properties": {
+    "contract_version": {"$ref": "common.schema.json#/$defs/contract_version"},
+    "record_kind": {"const": "document"},
+    "doc_id": {"$ref": "common.schema.json#/$defs/doc_id"},
+    "doc_type": {
+      "enum": ["act", "rules", "regulations", "manual", "notification", "judgment", "order", "book_historical", "policy", "sop", "circular", "other"]
+    },
+    "source_copy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "bytes", "mime_type", "vault_path"],
+      "properties": {
+        "sha256": {"$ref": "common.schema.json#/$defs/sha256"},
+        "bytes": {"type": "integer", "minimum": 0},
+        "mime_type": {"enum": ["application/pdf", "text/html", "text/plain", "image/png", "image/jpeg", "image/tiff", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]},
+        "vault_path": {"$ref": "common.schema.json#/$defs/vault_path"},
+        "page_count": {"type": ["integer", "null"], "minimum": 0},
+        "completeness": {"enum": ["COMPLETE", "TRUNCATED_AT_SOURCE", "UNOPENABLE", "NOT_CHECKED"]}
+      }
+    },
+    "alternate_copy_sha256": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/sha256"}, "uniqueItems": true},
+    "parent_doc_id": {"anyOf": [{"$ref": "common.schema.json#/$defs/doc_id"}, {"type": "null"}]},
+    "title": {"type": ["string", "null"], "maxLength": 2000},
+    "number": {"type": ["string", "null"], "maxLength": 500},
+    "issuing_authority": {"type": ["string", "null"], "maxLength": 500},
+    "issue_date": {"anyOf": [{"$ref": "common.schema.json#/$defs/date"}, {"type": "null"}]},
+    "effective_date": {"anyOf": [{"$ref": "common.schema.json#/$defs/date"}, {"type": "null"}]},
+    "language": {"type": ["string", "null"], "maxLength": 16},
+    "corpus_status": {
+      "description": "Corpus-level status copied from data/meta. DISPLAY-ONLY derived summary: it never overrides the provision-level graph and is not a legal_applicability value.",
+      "enum": ["in_force", "amended", "partly_repealed", "repealed", "superseded", "overruled", "unknown"]
+    },
+    "corpus_status_note": {"type": ["string", "null"], "maxLength": 2000},
+    "corpus_status_as_of": {"anyOf": [{"$ref": "common.schema.json#/$defs/date"}, {"type": "null"}]},
+    "text_method": {"enum": ["pdf_text", "ocr", "html", "mixed", "none"]},
+    "ocr_confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+    "judicial": {
+      "description": "Judgment/order cover-page fields. Candidate values; each listed in field_origin. Outcomes, holdings and treatment are NOT here: they are candidate records (candidate.schema.json).",
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "court": {"type": ["string", "null"], "maxLength": 200},
+        "bench": {"type": ["string", "null"], "maxLength": 200},
+        "case_numbers": {"type": "array", "items": {"type": "string", "maxLength": 200}},
+        "neutral_citation": {"type": ["string", "null"], "maxLength": 64},
+        "reported_citations": {"type": "array", "items": {"type": "string", "maxLength": 200}},
+        "parties": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "petitioner": {"type": ["string", "null"], "maxLength": 1000},
+            "respondent": {"type": ["string", "null"], "maxLength": 1000}
+          }
+        },
+        "judges": {"type": "array", "items": {"type": "string", "maxLength": 200}},
+        "judgment_identity_id": {"description": "Canonical Judgment id when identity work (A-track) has resolved it; file hash is not judgment identity.", "type": ["string", "null"], "maxLength": 160}
+      }
+    },
+    "provenance": {"$ref": "provenance.schema.json"},
+    "status_axes": {"$ref": "status_axes.schema.json"},
+    "restriction": {"$ref": "restriction.schema.json"},
+    "field_origin": {
+      "description": "Origin of each populated descriptive field (crawler, rule, llm, human ...).",
+      "type": "object",
+      "additionalProperties": {"$ref": "common.schema.json#/$defs/field_origin"}
+    }
+  }
+}

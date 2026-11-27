@@ -1,0 +1,65 @@
+{
+ "contract": "mimamsa-corpus-contract/2.0",
+ "corpus_generation_id": "CG-20261127-fixtures-0a1b2c3d",
+ "doc_id": "duplicate-copy",
+ "embedded_images": [],
+ "integrity": {
+  "basis": "producer-computed SHA-256 (fixture)",
+  "source_integrity": "DECLARED_HASH_ONLY"
+ },
+ "provenance": {
+  "acquisition": {
+   "acquisition_channel": "MANUAL_OWNER",
+   "hf": null,
+   "original_filename": null,
+   "retrieved_at": null,
+   "source_url": null
+  },
+  "carrier_provenance": "USER_SUPPLIED",
+  "observations": [],
+  "processing_history": []
+ },
+ "record_kind": "document_identity",
+ "representation": {
+  "completeness": "NOT_CHECKED",
+  "content_scope": "UNDETERMINED",
+  "origin_status": "ACQUIRED_COPY_ORIGIN_UNDETERMINED",
+  "representation_kind": "NATIVE_DIGITAL_PDF"
+ },
+ "research_eligibility": {
+  "basis": [
+   "ELIGIBILITY_NOT_ASSESSED"
+  ],
+  "graph_evidence_permitted": false,
+  "quoting_permitted": false,
+  "source_page_citation_permitted": false,
+  "state": "NOT_ASSESSED",
+  "whole_work_claims_permitted": false
+ },
+ "restriction": {
+  "access_marking": null,
+  "basis": "synthetic fixture",
+  "decided_by": "fixture",
+  "eligibility": "ELIGIBLE_ALL_USERS",
+  "restriction_id": null
+ },
+ "source_copy": {
+  "bytes": 114000,
+  "detected_format": "UNKNOWN",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "physical_pagination": "PHYSICAL_PAGES",
+  "sha256": "c65ce330e0d379213a298d721548c1a03f53f4b14bad83bf3d1b50be01af62e5",
+  "vault_path": "vault/sha256/c6/c65ce330e0d379213a298d721548c1a03f53f4b14bad83bf3d1b50be01af62e5"
+ },
+ "text_derivatives": [],
+ "work_identity": {
+  "graph_node_ref": {
+   "unresolved": "NOT_DETERMINED"
+  },
+  "identity_basis": "NOT_ESTABLISHED",
+  "identity_verification": "CANDIDATE",
+  "proceeding_numbers_as_printed": [],
+  "work_kind": "UNKNOWN"
+ }
+}
