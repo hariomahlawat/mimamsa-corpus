@@ -21,6 +21,9 @@ public sealed class AppServices
     public required bool TestMode { get; init; }
     public required bool SecureCookies { get; init; }
     public required Eligibility Eligible { get; init; }
+    /// C15 WP3: the generation's legal knowledge graph (derived, immutable) and its PostgreSQL store; null if not published.
+    public Mimamsa.Core.Graph.LegalGraph? Graph { get; set; }
+    public Mimamsa.Core.Graph.GraphStore? GraphDb { get; set; }
 
     public Task<Principal?> AuthenticateAsync(HttpContext ctx)
     {

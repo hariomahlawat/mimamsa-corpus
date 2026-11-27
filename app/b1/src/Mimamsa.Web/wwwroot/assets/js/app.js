@@ -4,6 +4,7 @@ import { api, probe, noteEpoch, state as apiState } from "./api.js";
 import { h, append, clear, $, toast, announce, openDialog, session, fmtDate } from "./ui.js";
 import * as research from "./research.js";
 import { loginPage, gatePage, laterPage, statutesPage, citePage, adminPage } from "./pages.js";
+import { graphPage } from "./graph.js";
 import { noteRecentSearch, invalidateLibrary } from "./home.js";
 import { refreshRelations, liveRelationViews, relationsRefreshPending } from "./relations.js";
 const add = (el, ...k) => append(el, k);
@@ -164,7 +165,7 @@ async function route() {
   if (p === "/s" || p.startsWith("/s/")) { const [docId, sec] = p.slice(3).split("/").map(decodeURIComponent); return statutesPage(main, nav, docId || null, sec || null); }
   if (p.startsWith("/admin")) return S.role === "Admin" ? adminPage(main, nav) : forbidden();
   if (p.startsWith("/assistant")) return gatePage(main, "assistant");
-  if (p.startsWith("/g")) return laterPage(main, "Graph", "The citation graph workspace (canvas with a synchronised list view) is a later milestone (B3). In B1, extracted citations of a document are listed in its Cited/Citing tab, labelled as candidates.");
+  if (p.startsWith("/g")) return graphPage(main, nav);   // C15 WP3/WP4: graph inspection list view (graph.js)
   if (p.startsWith("/studio")) return laterPage(main, "Document Studio", "Private working sessions are a later milestone (B3). No files can be uploaded in B1.");
   clear(main); add(main, h("div.page", h("h1", "Not found"), h("p", h("a", { href: "/r" }, "Go to research"))));
 }

@@ -408,3 +408,15 @@ dialog .actions { display: flex; justify-content: flex-end; gap: var(--space-4);
 .cited-bar { position: absolute; left: -8px; width: 4px; background: var(--accent-interactive); border-radius: 2px; pointer-events: none; }
 .text-unreliable { margin: 0 0 var(--space-4); font-family: var(--font-ui); font-size: var(--size-sm); }
 .prov h3 { font-size: var(--size-sm); }
+
+/* ---------------------------------------------------------------- C15 S3: graph inspection page */
+.graph-page { padding: var(--space-6); overflow: auto; flex: 1; min-height: 0; }
+.g-form { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; margin: var(--space-3) 0; }
+.g-form input { min-width: 220px; }
+.g-examples { font-size: var(--size-sm); color: var(--fg-secondary); }
+.g-node { margin: var(--space-5) 0 var(--space-3); }
+.g-group summary { cursor: pointer; font-size: var(--size-sm); color: var(--fg-secondary); margin: var(--space-3) 0; }
+.g-edges td { vertical-align: top; font-size: var(--size-sm); }
+.g-quote { display: block; font-family: var(--font-reading); margin: var(--space-2) 0; }
+.g-findings { list-style: none; padding: 0; }
+.g-findings li { padding: var(--space-2) 0; border-bottom: 1px solid var(--border-subtle); font-size: var(--size-sm); }

@@ -170,6 +170,21 @@ await policy.SyncCopiesAsync(generation.Documents.Values.Select(d => (d.DocId, d
                                         .Select(h => (h.DocId, h.Sha, h.Bytes))));
 var (withdrawn, epoch, digest) = await policy.LoadAsync();
 state.Load(withdrawn, epoch, digest);
+// C15 WP3: derive the generation's legal knowledge graph, publish it atomically (skipped when the identical graph is
+// already published) and verify it. A failure leaves the graph routes unavailable (503); the rest of the service is
+// unaffected. Eligibility is applied per request, never baked into the stored graph.
+try
+{
+    phase.Restart();
+    var graph = Mimamsa.Core.Graph.GraphBuilder.Build(generation);
+    var graphDb = new Mimamsa.Core.Graph.GraphStore(dataSource);
+    await graphDb.EnsureSchemaAsync();
+    var published = await graphDb.PublishAsync(graph);
+    var (ok, detail) = await graphDb.VerifyAsync(graph);
+    if (ok) { app0.Graph = graph; app0.GraphDb = graphDb; }
+    log.LogInformation("legal knowledge graph {State}: {Detail} ({Ms} ms)", ok ? (published ? "published" : "already published") : "FAILED VERIFICATION", detail, phase.ElapsedMilliseconds);
+}
+catch (Exception ex) { log.LogWarning("legal knowledge graph not available: {Error}", ex.GetType().Name); }
 DeliveryTrace.Start(testMode ? conf["Mimamsa:Trace:Path"] : null);
 DeliveryTrace.Emit("boot", "witness", new { epoch = state.Epoch, digest = state.Digest, instance = ledger.InstanceId });
 if (testMode)
