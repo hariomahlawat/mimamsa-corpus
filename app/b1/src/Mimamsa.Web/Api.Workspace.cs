@@ -38,11 +38,11 @@ public static partial class Api
     // ------------------------------------------------------------------ Commander
     static object ProvisionDto(ResolvedProvision? r, ProvisionRef pr, AppServices s)
     {
-        bool ok = r is { Found: true } && s.VisibleDocument(r.DocId) is not null;
-        return ok
-            ? new { kind = pr.Kind, number = pr.Number, found = true, doc_id = (string?)r!.DocId, instrument = (string?)r.Instrument, heading = r.Heading, page = r.Page,
+        var vd = r is { Found: true } ? s.VisibleDocument(r.DocId) : null;
+        return vd is not null
+            ? new { kind = pr.Kind, number = pr.Number, found = true, doc_id = (string?)r!.DocId, copy = (string?)vd.CopySha[..12], instrument = (string?)r.Instrument, heading = r.Heading, page = r.Page,
                     passage_id = r.PassageId, omitted_as_printed = r.Omitted, excerpt = r.Excerpt, link = (string?)$"/s/{r.DocId}/{Uri.EscapeDataString(pr.Number)}" }
-            : new { kind = pr.Kind, number = pr.Number, found = false, doc_id = (string?)null, instrument = (string?)null, heading = (string?)null, page = (int?)null,
+            : new { kind = pr.Kind, number = pr.Number, found = false, doc_id = (string?)null, copy = (string?)null, instrument = (string?)null, heading = (string?)null, page = (int?)null,
                     passage_id = (string?)null, omitted_as_printed = false, excerpt = (string?)null, link = (string?)null };
     }
 

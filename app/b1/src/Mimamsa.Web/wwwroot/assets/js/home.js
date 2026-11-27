@@ -78,6 +78,7 @@ function commanderHome(root, L, nav) {
   add(root,
     h("header.home-head", h("h2", "Commander workspace ", chip("candidate", "Early")),
       h("p.home-summary", L.commander_note)),
+    h("p.home-summary", h("a#commander-workspace-link", { href: "/c", onclick: go(nav, "/c") }, "Open the Commander workspace: task areas with provisions, safeguards, forms and questions for legal review →")),
     h("div.home-grid", L.commander_tasks.map((t) => h("div.home-card.task", { "data-task": t.task },
       h("h3", t.task), h("p.muted", t.purpose),
       h("ul.task-items", t.items.map((it) => h("li",
