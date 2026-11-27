@@ -11,24 +11,17 @@ namespace Mimamsa.Tests.Activation;
 
 public static class DevEd25519
 {
-    /// RFC 8032 section 5.1.6 signing (development and test keys only).
+    /// RFC 8032 section 5.1.6 signing (development and test keys only), via BouncyCastle (the verifier's library).
     public static (byte[] pub, Func<byte[], byte[]> sign) FromSeed(byte[] seed)
     {
-        var h = SHA512.HashData(seed);
-        var a = new BigInteger(h.AsSpan(0, 32), isUnsigned: true, isBigEndian: false);
-        a &= (BigInteger.One << 254) - 8;
-        a |= BigInteger.One << 254;
-        var prefix = h.AsSpan(32, 32).ToArray();
-        var pub = Ed25519.Encode(Ed25519.Mul(a, Ed25519.Base));
+        var sk = new Org.BouncyCastle.Crypto.Parameters.Ed25519PrivateKeyParameters(seed, 0);
+        var pub = sk.GeneratePublicKey().GetEncoded();
         byte[] Sign(byte[] msg)
         {
-            var r = Ed25519.ScalarModL(SHA512.HashData([.. prefix, .. msg]));
-            var rs = Ed25519.Encode(Ed25519.Mul(r, Ed25519.Base));
-            var k = Ed25519.ScalarModL(SHA512.HashData([.. rs, .. pub, .. msg]));
-            var s = (r + k * a) % Ed25519.GroupOrder;
-            var sb = new byte[32];
-            s.TryWriteBytes(sb, out _, isUnsigned: true, isBigEndian: false);
-            return [.. rs, .. sb];
+            var signer = new Org.BouncyCastle.Crypto.Signers.Ed25519Signer();
+            signer.Init(true, sk);
+            signer.BlockUpdate(msg, 0, msg.Length);
+            return signer.GenerateSignature();
         }
         return (pub, Sign);
     }
