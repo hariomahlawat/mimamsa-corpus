@@ -252,6 +252,50 @@ test("W-05e a late load of a previous document does not take over the visible ed
   }
 });
 
+// Codex review of PR #75: a policy refresh of the Studio home replaces only its lists; a note being drafted and an
+// unfinished new-document title are kept.
+test("W-05f a policy refresh of the Studio home keeps a note being drafted", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  await user.goto("/studio");
+  await expect(user.locator("#note-text")).toBeVisible();
+  await user.fill("#note-text", "Note being drafted during a withdrawal.");
+  await user.fill("#new-doc-title", "Unfinished title");
+  await login(page, "admin");
+  const [refreshed] = await Promise.all([
+    user.waitForResponse((r) => new URL(r.url()).pathname === "/api/studio/notes" && r.request().method() === "GET", { timeout: 30_000 }),
+    apiPost(page, "/api/admin/withdraw", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C15 W-05f policy change" }),
+  ]);
+  try {
+    expect(refreshed.status()).toBe(200);
+    await user.waitForTimeout(500);
+    await expect(user.locator("#note-text")).toHaveValue("Note being drafted during a withdrawal.");
+    await expect(user.locator("#new-doc-title")).toHaveValue("Unfinished title");
+  } finally {
+    expect((await apiPost(page, "/api/admin/reinstate", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C15 W-05f restore after test" })).status()).toBe(200);
+  }
+});
+
+// Codex review of PR #75: while a save is in flight the editor is locked, so nothing typed after the request was sent
+// can be lost when the saved version is shown.
+test("W-05g the Studio editor is locked while a save is in flight", async ({ page }) => {
+  await login(page);
+  const created = await (await apiPost(page, "/api/studio/documents", { title: "W-05g save lock", template: "blank" })).json();
+  expect((await apiPost(page, `/api/studio/documents/${created.id}/append`, { blocks: [{ type: "text", origin: "user", text: "Before save." }] })).status()).toBe(200);
+  await page.goto(`/studio/${created.id}`);
+  const box = page.locator(".ws-block textarea").first();
+  await box.fill("Saved text.");
+  let release; const gate = new Promise((r) => { release = r; });
+  await page.route((u) => u.pathname === `/api/studio/documents/${created.id}/save`, async (route) => { await gate; await route.continue(); });
+  await page.locator("#studio-save").click();
+  await expect(page.locator("#studio-status")).toHaveText("Saving…");
+  await expect(box).toBeDisabled();
+  await expect(page.locator("#studio-title")).toBeDisabled();
+  release();
+  await expect(page.locator(".ws-block textarea").first()).toHaveValue("Saved text.");
+  await expect(page.locator(".ws-block textarea").first()).toBeEnabled();
+});
+
 test("W-06 Commander questions go into a Studio document as automated suggestions", async ({ page }) => {
   await login(page);
   await page.goto("/c/court-of-inquiry");

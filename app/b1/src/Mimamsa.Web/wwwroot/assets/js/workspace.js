@@ -107,11 +107,31 @@ export async function studioPage(main, nav, id) {
   return id ? studioEditor(page, nav, id) : studioHome(page, nav);
 }
 
+// Codex review of PR #75: the home's two forms are built once; a policy refresh (or adding or deleting a note) re-fetches
+// and replaces only the document and note lists, so a note being drafted or a new-document title is never cleared.
 async function studioHome(page, nav) {
   let docs, tpls, notes;
   try { [docs, tpls, notes] = await Promise.all([api("/api/studio/documents"), api("/api/studio/templates"), api("/api/studio/notes")]); }
   catch (e) { clear(page); add(page, h("div.error-state", { role: "alert" }, h("h2", "Could not load the Studio"), h("p", e.message))); return; }
+  if (!page.isConnected) return;
   clear(page);
+  const docsSect = h("section.ws-sect", { "data-sect": "documents" }), notesList = h("div#studio-notes-wrap");
+  const me = { kind: "studio", pending: false, busy: false, again: false };
+  const refreshLists = async () => {
+    if (me.busy) { me.again = true; return; }
+    me.busy = true;
+    try {
+      do {
+        me.again = false;
+        let d2, n2;
+        try { [d2, n2] = await Promise.all([api("/api/studio/documents"), api("/api/studio/notes")]); }
+        catch { if (current === me && page.isConnected) { me.pending = true; clear(notesList); add(notesList, h("p.ws-na", "Checking whether cited sources are still available…")); } return; }
+        if (current !== me || !page.isConnected) return;
+        me.pending = false; drawDocs(d2); drawNotes(n2);
+      } while (me.again && current === me);
+    } finally { me.busy = false; }
+  };
+  me.render = refreshLists;
   const title = h("input#new-doc-title", { type: "text", maxlength: "200", placeholder: "Title", "aria-label": "Title of the new document", required: true });
   const tpl = h("select#new-doc-template", { "aria-label": "Template" }, tpls.templates.map((t) => h("option", { value: t.id }, t.label)));
   const noteText = h("textarea#note-text", { rows: "2", maxlength: "4000", "aria-label": "New research note" });
@@ -123,21 +143,31 @@ async function studioHome(page, nav) {
       h("form.ws-inline", { onsubmit: async (e) => { e.preventDefault();
         try { const d = await api("/api/studio/documents", { method: "POST", body: { title: title.value, template: tpl.value } }); nav.go(`/studio/${d.id}`); }
         catch (err) { toast(err.body?.error || err.message); } } }, title, tpl, h("button.btn.btn-primary", { type: "submit" }, "Create"))),
-    h("section.ws-sect", { "data-sect": "documents" }, h("h2", `Your documents (${docs.documents.length})`),
+    docsSect,
+    h("section.ws-sect", { "data-sect": "notes" }, h("h2", "Research notes"),
+      h("form.ws-inline", { onsubmit: async (e) => { e.preventDefault();
+        try { await api("/api/studio/notes", { method: "POST", body: { text: noteText.value } }); noteText.value = ""; refreshLists(); }
+        catch (err) { toast(err.body?.error || err.message); } } }, noteText, h("button.btn", { type: "submit" }, "Add note")),
+      notesList));
+  function drawDocs(docs) {
+    clear(docsSect);
+    add(docsSect, h("h2", `Your documents (${docs.documents.length})`),
       docs.documents.length ? h("table.data#studio-docs", h("thead", h("tr", ["Title", "State", "Version", "Updated", "Size"].map((x) => h("th", { scope: "col" }, x)))),
         h("tbody", docs.documents.map((x) => h("tr", { "data-doc": x.id }, h("td", h("a", { href: `/studio/${x.id}`, onclick: go(nav, `/studio/${x.id}`) }, x.title)),
           h("td", STATE[x.state] || x.state), h("td", `v${x.version}`), h("td", fmtDate(x.updated_at)), h("td", `${(x.bytes / 1000).toFixed(1)} kB`)))))
-        : h("p.muted", "No documents yet.")),
-    h("section.ws-sect", { "data-sect": "notes" }, h("h2", "Research notes"),
-      h("form.ws-inline", { onsubmit: async (e) => { e.preventDefault();
-        try { await api("/api/studio/notes", { method: "POST", body: { text: noteText.value } }); studioPage(page.parentElement, nav, null); }
-        catch (err) { toast(err.body?.error || err.message); } } }, noteText, h("button.btn", { type: "submit" }, "Add note")),
-      notes.notes.length ? h("ul.ws-list#studio-notes", notes.notes.map((n) => h("li", { "data-note": n.id }, h("div", n.text),
+        : h("p.muted", "No documents yet."));
+  }
+  function drawNotes(notes) {
+    clear(notesList);
+    add(notesList, notes.notes.length ? h("ul.ws-list#studio-notes", notes.notes.map((n) => h("li", { "data-note": n.id }, h("div", n.text),
         n.has_reference ? (n.reference.available ? h("div.muted", h("a", { href: n.reference.link, onclick: go(nav, n.reference.link) }, n.reference.citation))
           : h("div.ws-na", n.reference.notice)) : null,
         h("div.muted", fmtDate(n.created_at), " ", h("button.btn-quiet.btn-small", { type: "button", onclick: async () => {
-          try { await api(`/api/studio/notes/${encodeURIComponent(n.id)}/delete`, { method: "POST" }); studioPage(page.parentElement, nav, null); } catch (err) { toast(err.message); } } }, "Delete")))))
-        : h("p.muted", "No notes yet.")));
+          try { await api(`/api/studio/notes/${encodeURIComponent(n.id)}/delete`, { method: "POST" }); refreshLists(); } catch (err) { toast(err.message); } } }, "Delete")))))
+        : h("p.muted", "No notes yet."));
+  }
+  drawDocs(docs); drawNotes(notes);
+  current = me;
 }
 
 function blockView(b, i, ed) {
@@ -189,11 +219,19 @@ async function studioEditor(page, nav, id, version, preloaded = null) {
   const toWire = (b) => b.type === "citation" || b.type === "quote"
     ? { type: b.type, doc_id: b.doc_id, copy: b.copy, page: b.page, passage_id: b.passage_id, para: b.para }
     : { type: b.type, origin: b.origin, text: b.text };
+  // Codex review of PR #75: the editor is locked while a save is in flight, so nothing typed after the request was
+  // serialised can be lost when the saved version is shown; a failed save unlocks it with the author's edits intact.
   const save = async (blocks, state, title, base) => {
+    const fields = [...page.querySelectorAll("input, textarea, select, button")].filter((x) => !x.disabled);
+    fields.forEach((x) => { x.disabled = true; });
+    ed.saving = true; const before = status.textContent; status.textContent = "Saving…";
     try {
       const r = await api(`/api/studio/documents/${encodeURIComponent(id)}/save`, { method: "POST", body: { base_version: base, title, state, blocks: blocks.map(toWire) } });
       toast(`Saved as version ${r.version}`); nav.go(`/studio/${id}`);
-    } catch (e) { toast(e.body?.notice || e.body?.error || e.message); }
+    } catch (e) {
+      fields.forEach((x) => { if (x.isConnected) x.disabled = false; }); status.textContent = before;
+      toast(e.body?.notice || e.body?.error || e.message);
+    } finally { ed.saving = false; }
   };
   add(page,
     h("header.ws-head", h("p", h("a", { href: "/studio", onclick: go(nav, "/studio") }, "← Studio")), titleIn,
@@ -239,6 +277,7 @@ async function studioEditor(page, nav, id, version, preloaded = null) {
     try { do { me.again = false; await refreshOnce(); } while (me.again && current === me); } finally { me.busy = false; }
   };
   const refreshOnce = async () => {
+    if (ed.saving) { me.pending = true; return; }                        // retried on the next poll, after the save
     let loaded;
     try { loaded = await loadStudioDoc(id, viewingOld ? d.version : undefined); }
     catch { if (current === me && page.isConnected) { me.pending = true; withhold(); } return; }
