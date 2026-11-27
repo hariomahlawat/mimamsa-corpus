@@ -5,77 +5,279 @@
   "description": "One typed, many-to-many relationship from a document (subject) to a taxonomy node, provision or judgment (target). Each relationship is a separate record with its own evidentiary basis, source, verification and temporal scope: deduplicating bytes never merges relationships, so one judgment filed under 'AR 22, 23, 30' yields three provision associations, each with its provenance. Classification relationships (classified_under_subject, classified_under_chapter, associated_with_provision) may come from folder or filename labels and are never findings. Evidence relationships (cites_provision, interprets_provision, refers_to_judgment, follows, distinguishes, overrules) need at least one document anchor. legally_validated is an overlay on another relationship that can only exist with an approval record under a Legal Reviewer appointment (never at AUTH-LEDGER v0). Every relationship maps to exactly one C15 graph edge (contract section 7).",
   "type": "object",
   "additionalProperties": false,
-  "required": ["contract", "record_kind", "relationship_id", "category", "subject", "target", "evidentiary_basis", "source", "anchors", "verification", "temporal_scope", "has_legal_effect", "is_finding", "uncertainty"],
+  "required": [
+    "contract",
+    "record_kind",
+    "relationship_id",
+    "category",
+    "subject",
+    "target",
+    "evidentiary_basis",
+    "source",
+    "anchors",
+    "verification",
+    "temporal_scope",
+    "has_legal_effect",
+    "is_finding",
+    "uncertainty"
+  ],
   "properties": {
-    "contract": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"},
-    "record_kind": {"const": "corpus_relationship"},
-    "relationship_id": {"description": "REL-<24 hex>, deterministic from the identity tuple (category, subject doc_id, subject sha256, target, evidentiary_basis, provenance discriminator); contract section 9.2.", "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/stable_id"},
+    "contract": {
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"
+    },
+    "record_kind": {
+      "const": "corpus_relationship"
+    },
+    "relationship_id": {
+      "description": "REL-<24 hex>, deterministic from the identity tuple (category, subject doc_id, subject sha256, target, evidentiary_basis, provenance discriminator); contract section 9.2.",
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/stable_id"
+    },
     "category": {
-      "enum": ["classified_under_subject", "classified_under_chapter", "associated_with_provision", "cites_provision", "interprets_provision", "refers_to_judgment", "follows", "distinguishes", "overrules", "legally_validated"]
+      "enum": [
+        "classified_under_subject",
+        "classified_under_chapter",
+        "associated_with_provision",
+        "cites_provision",
+        "interprets_provision",
+        "refers_to_judgment",
+        "follows",
+        "distinguishes",
+        "overrules",
+        "legally_validated"
+      ],
+      "description": "Classification categories (classified_under_subject, classified_under_chapter, associated_with_provision) are navigation only: never DOCUMENT_TEXT_REVIEWED, DOCUMENTARY_CHECKED, LEGAL_REVIEWED or is_finding=true, whatever their basis."
     },
     "subject": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["doc_id", "source_copy_sha256", "graph_node_ref"],
+      "required": [
+        "doc_id",
+        "source_copy_sha256",
+        "graph_node_ref"
+      ],
       "properties": {
-        "doc_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/doc_id"},
-        "source_copy_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
-        "graph_node_ref": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/judgment_node_id"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_node_ref"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}]},
-        "compilation_member_seq": {"description": "When the subject is one member of a compilation.", "type": ["integer", "null"], "minimum": 1}
+        "doc_id": {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/doc_id"
+        },
+        "source_copy_sha256": {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+        },
+        "graph_node_ref": {
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/judgment_node_id"
+            },
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_node_ref"
+            },
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+            }
+          ]
+        },
+        "compilation_member_seq": {
+          "description": "When the subject is one member of a compilation.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
       }
     },
     "target": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["resolved"],
+      "required": [
+        "resolved"
+      ],
       "properties": {
-        "resolved": {"type": "boolean"},
-        "node_id": {"type": ["string", "null"], "maxLength": 200},
-        "raw_reference": {"type": ["string", "null"], "maxLength": 1000},
-        "unresolved": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}, {"type": "null"}]}
+        "resolved": {
+          "type": "boolean"
+        },
+        "node_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "raw_reference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "unresolved": {
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
       },
       "allOf": [
-        {"if": {"properties": {"resolved": {"const": true}}}, "then": {"required": ["node_id"], "properties": {"node_id": {"type": "string"}}}},
-        {"if": {"properties": {"resolved": {"const": false}}}, "then": {"required": ["raw_reference", "unresolved"], "properties": {"raw_reference": {"type": "string", "minLength": 1}, "unresolved": {"type": "object"}}}}
+        {
+          "if": {
+            "properties": {
+              "resolved": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "node_id"
+            ],
+            "properties": {
+              "node_id": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "resolved": {
+                "const": false
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "raw_reference",
+              "unresolved"
+            ],
+            "properties": {
+              "raw_reference": {
+                "type": "string",
+                "minLength": 1
+              },
+              "unresolved": {
+                "type": "object"
+              }
+            }
+          }
+        }
       ]
     },
     "evidentiary_basis": {
       "description": "FOLDER_PATH: a folder name of the owner's collection. FILENAME_PATTERN: a deterministic rule applied to a file name. OWNER_CATALOGUE: an owner-supplied list. AUTOMATED_CLASSIFIER: a model or rule applied to text, without an anchor that states the relationship. DOCUMENT_TEXT_EXTRACTED: an extractor located the relationship in the document's text (anchored). DOCUMENT_TEXT_REVIEWED: an anchored relationship checked against the page by an independent reviewer. LEGAL_REVIEW: a legal decision recorded as an approval (legally_validated only).",
-      "enum": ["FOLDER_PATH", "FILENAME_PATTERN", "OWNER_CATALOGUE", "AUTOMATED_CLASSIFIER", "DOCUMENT_TEXT_EXTRACTED", "DOCUMENT_TEXT_REVIEWED", "LEGAL_REVIEW"]
+      "enum": [
+        "FOLDER_PATH",
+        "FILENAME_PATTERN",
+        "OWNER_CATALOGUE",
+        "AUTOMATED_CLASSIFIER",
+        "DOCUMENT_TEXT_EXTRACTED",
+        "DOCUMENT_TEXT_REVIEWED",
+        "LEGAL_REVIEW"
+      ]
     },
     "source": {
       "description": "Who or what produced the relationship.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["producer", "rule_id", "rule_version"],
+      "required": [
+        "producer",
+        "rule_id",
+        "rule_version"
+      ],
       "properties": {
-        "producer": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/tool"},
-        "rule_id": {"type": "string", "pattern": "^[A-Z0-9][A-Z0-9_.-]{2,63}$"},
-        "rule_version": {"type": "string", "maxLength": 32},
-        "author_id": {"type": ["string", "null"], "maxLength": 120}
+        "producer": {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/tool"
+        },
+        "rule_id": {
+          "type": "string",
+          "pattern": "^[A-Z0-9][A-Z0-9_.-]{2,63}$"
+        },
+        "rule_version": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "author_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 120
+        }
       }
     },
     "classification_provenance": {
       "description": "Required for FOLDER_PATH and FILENAME_PATTERN. The exact label and where it was found. One record per (path, matched label): the same file classified from two paths has two relationships.",
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": false,
-      "required": ["collection", "relative_path", "path_component", "matched_text"],
+      "required": [
+        "collection",
+        "relative_path",
+        "path_component",
+        "matched_text"
+      ],
       "properties": {
-        "collection": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/collection_ref"},
-        "relative_path": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/local_relative_path"},
-        "inventory_id": {"type": ["string", "null"], "pattern": "^L-[0-9a-f]{20}$"},
-        "path_component": {"description": "0-based index of the folder component, or -1 for the file name.", "type": "integer", "minimum": -1},
-        "matched_text": {"type": "string", "minLength": 1, "maxLength": 300},
+        "collection": {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/collection_ref"
+        },
+        "relative_path": {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/local_relative_path"
+        },
+        "inventory_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^L-[0-9a-f]{20}$"
+        },
+        "path_component": {
+          "description": "0-based index of the folder component, or -1 for the file name.",
+          "type": "integer",
+          "minimum": -1
+        },
+        "matched_text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
         "abbreviation_expansion": {
           "description": "When the label is an abbreviation (for example 'AR'), the expansion used and its source. An expansion from a lexicon is a candidate reading; where the lexicon lists more than one expansion the relationship stays CANDIDATE and the alternatives are listed.",
-          "type": ["object", "null"],
+          "type": [
+            "object",
+            "null"
+          ],
           "additionalProperties": false,
-          "required": ["abbreviation", "expansion", "lexicon_ref", "alternatives"],
+          "required": [
+            "abbreviation",
+            "expansion",
+            "lexicon_ref",
+            "alternatives"
+          ],
           "properties": {
-            "abbreviation": {"type": "string", "maxLength": 32},
-            "expansion": {"type": "string", "maxLength": 200},
-            "lexicon_ref": {"type": "string", "maxLength": 300},
-            "alternatives": {"type": "array", "items": {"type": "string", "maxLength": 200}}
+            "abbreviation": {
+              "type": "string",
+              "maxLength": 32
+            },
+            "expansion": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "lexicon_ref": {
+              "type": "string",
+              "maxLength": 300
+            },
+            "alternatives": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 200
+              }
+            }
           }
         }
       }
@@ -83,54 +285,612 @@
     "anchors": {
       "description": "Evidence anchor ids (OCR_EVIDENCE_ANCHOR_SCHEMA records in the same exchange). Empty only for classification relationships.",
       "type": "array",
-      "items": {"type": "string", "pattern": "^ANC-[0-9a-f]{24}$"},
+      "items": {
+        "type": "string",
+        "pattern": "^ANC-[0-9a-f]{24}$"
+      },
       "uniqueItems": true
     },
-    "verification": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/graph_verification"},
-    "review_ref": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/review_ref"}, {"type": "null"}]},
-    "approval_ref": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/approval_ref"}, {"type": "null"}]},
-    "validates_relationship_id": {"description": "legally_validated only: the relationship this legal decision is about.", "anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/stable_id"}, {"type": "null"}]},
-    "proposition_ref": {"description": "follows / distinguishes / overrules: the proposition (held or raw) the treatment is scoped to. Judgment-level treatment is a derived view, never asserted wholesale.", "anyOf": [{"type": "string", "maxLength": 300}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}, {"type": "null"}]},
-    "temporal_scope": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/temporal_scope"},
-    "has_legal_effect": {"description": "As C15 GraphEdge.HasLegalEffect: true for interpretation and treatment, false for classification, citation and reference.", "type": "boolean"},
-    "is_finding": {"description": "True only when an independent review has checked the relationship against the document (DOCUMENTARY_CHECKED) or a legal approval exists. Classification relationships are never findings.", "type": "boolean"},
-    "uncertainty": {"description": "Text shown with the edge (C15 GraphEdge.Uncertainty).", "type": "string", "minLength": 3, "maxLength": 500},
+    "verification": {
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/graph_verification"
+    },
+    "review_ref": {
+      "anyOf": [
+        {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/review_ref"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "approval_ref": {
+      "anyOf": [
+        {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/approval_ref"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "validates_relationship_id": {
+      "description": "legally_validated only: the relationship this legal decision is about.",
+      "anyOf": [
+        {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/stable_id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "proposition_ref": {
+      "description": "follows / distinguishes / overrules: the proposition (held or raw) the treatment is scoped to. Judgment-level treatment is a derived view, never asserted wholesale.",
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 300
+        },
+        {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "temporal_scope": {
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/temporal_scope"
+    },
+    "has_legal_effect": {
+      "description": "As C15 GraphEdge.HasLegalEffect: true for interpretation and treatment, false for classification, citation and reference.",
+      "type": "boolean"
+    },
+    "is_finding": {
+      "description": "True only when an independent review has checked the relationship against the document (DOCUMENTARY_CHECKED) or a legal approval exists. Classification relationships are never findings.",
+      "type": "boolean"
+    },
+    "uncertainty": {
+      "description": "Text shown with the edge (C15 GraphEdge.Uncertainty).",
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 500
+    },
     "graph_projection": {
       "description": "OPTIONAL echo of the C15 edge the consumer will build (contract section 7). The consumer recomputes it and refuses a mismatch.",
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": false,
-      "required": ["edge_type", "origin"],
+      "required": [
+        "edge_type",
+        "origin"
+      ],
       "properties": {
-        "edge_type": {"type": "string", "pattern": "^[A-Z_]{3,64}$"},
-        "origin": {"type": "string", "pattern": "^C16_[A-Z_]{3,40}$"}
+        "edge_type": {
+          "type": "string",
+          "pattern": "^[A-Z_]{3,64}$"
+        },
+        "origin": {
+          "type": "string",
+          "pattern": "^C16_[A-Z_]{3,40}$"
+        }
       }
+    },
+    "review_binding": {
+      "anyOf": [
+        {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/review_binding"
+        },
+        {
+          "type": "null"
+        }
+      ]
     }
   },
   "allOf": [
-    {"if": {"properties": {"category": {"enum": ["classified_under_subject", "classified_under_chapter", "associated_with_provision"]}}},
-     "then": {"properties": {"evidentiary_basis": {"enum": ["FOLDER_PATH", "FILENAME_PATTERN", "OWNER_CATALOGUE", "AUTOMATED_CLASSIFIER", "DOCUMENT_TEXT_EXTRACTED", "DOCUMENT_TEXT_REVIEWED"]}, "has_legal_effect": {"const": false}, "temporal_scope": {"properties": {"from_status": {"const": "NOT_APPLICABLE"}, "to_status": {"const": "NOT_APPLICABLE"}}}}}},
-    {"if": {"properties": {"evidentiary_basis": {"enum": ["FOLDER_PATH", "FILENAME_PATTERN", "OWNER_CATALOGUE", "AUTOMATED_CLASSIFIER"]}}},
-     "then": {"properties": {"category": {"enum": ["classified_under_subject", "classified_under_chapter", "associated_with_provision"]}, "verification": {"enum": ["CANDIDATE", "CURATED_NAVIGATION"]}, "is_finding": {"const": false}, "review_ref": {"type": "null"}, "approval_ref": {"type": "null"}}}},
-    {"if": {"properties": {"evidentiary_basis": {"enum": ["FOLDER_PATH", "FILENAME_PATTERN"]}}},
-     "then": {"required": ["classification_provenance"], "properties": {"classification_provenance": {"type": "object"}}}},
-    {"if": {"properties": {"evidentiary_basis": {"const": "FILENAME_PATTERN"}}},
-     "then": {"properties": {"verification": {"const": "CANDIDATE"}}}},
-    {"if": {"properties": {"category": {"enum": ["cites_provision", "interprets_provision", "refers_to_judgment", "follows", "distinguishes", "overrules"]}}},
-     "then": {"properties": {"anchors": {"minItems": 1}, "evidentiary_basis": {"enum": ["DOCUMENT_TEXT_EXTRACTED", "DOCUMENT_TEXT_REVIEWED"]}, "temporal_scope": {"properties": {"from_status": {"enum": ["AS_OF_SOURCE_DATE", "NOT_RECORDED"]}}}}}},
-    {"if": {"properties": {"category": {"enum": ["cites_provision", "refers_to_judgment"]}}}, "then": {"properties": {"has_legal_effect": {"const": false}}}},
-    {"if": {"properties": {"category": {"enum": ["interprets_provision", "follows", "distinguishes", "overrules"]}}}, "then": {"properties": {"has_legal_effect": {"const": true}}}},
-    {"if": {"properties": {"category": {"enum": ["follows", "distinguishes", "overrules"]}}}, "then": {"required": ["proposition_ref"], "properties": {"proposition_ref": {"not": {"type": "null"}}}}},
-    {"if": {"properties": {"category": {"const": "classified_under_subject"}}}, "then": {"properties": {"target": {"properties": {"resolved": {"const": true}, "node_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/subject_node_id"}}}}}},
-    {"if": {"properties": {"category": {"const": "classified_under_chapter"}}}, "then": {"properties": {"target": {"properties": {"node_id": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/chapter_node_id"}, {"type": "null"}]}}}}}},
-    {"if": {"properties": {"category": {"enum": ["associated_with_provision", "cites_provision", "interprets_provision"]}}}, "then": {"properties": {"target": {"properties": {"node_id": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/provision_node_id"}, {"type": "null"}]}}}}}},
-    {"if": {"properties": {"category": {"enum": ["refers_to_judgment", "follows", "distinguishes", "overrules"]}}}, "then": {"properties": {"target": {"properties": {"node_id": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/judgment_node_id"}, {"type": "null"}]}}}}}},
-    {"if": {"properties": {"verification": {"const": "DOCUMENTARY_CHECKED"}}}, "then": {"required": ["review_ref"], "properties": {"review_ref": {"type": "string"}, "evidentiary_basis": {"const": "DOCUMENT_TEXT_REVIEWED"}}}},
-    {"if": {"properties": {"evidentiary_basis": {"const": "DOCUMENT_TEXT_REVIEWED"}}}, "then": {"properties": {"verification": {"const": "DOCUMENTARY_CHECKED"}}}},
-    {"if": {"properties": {"is_finding": {"const": true}}}, "then": {"properties": {"verification": {"enum": ["DOCUMENTARY_CHECKED", "LEGAL_REVIEWED"]}}}},
-    {"if": {"properties": {"verification": {"const": "LEGAL_REVIEWED"}}}, "then": {"properties": {"category": {"const": "legally_validated"}}}},
-    {"if": {"properties": {"category": {"const": "legally_validated"}}},
-     "then": {"required": ["approval_ref", "validates_relationship_id"], "properties": {"verification": {"const": "LEGAL_REVIEWED"}, "evidentiary_basis": {"const": "LEGAL_REVIEW"}, "approval_ref": {"type": "string"}, "validates_relationship_id": {"type": "string"}, "is_finding": {"const": true}}},
-     "else": {"properties": {"evidentiary_basis": {"not": {"const": "LEGAL_REVIEW"}}, "validates_relationship_id": {"type": "null"}, "approval_ref": {"type": "null"}}}},
-    {"if": {"required": ["classification_provenance"], "properties": {"classification_provenance": {"type": "object", "required": ["abbreviation_expansion"], "properties": {"abbreviation_expansion": {"type": "object"}}}}}, "then": {"properties": {"verification": {"const": "CANDIDATE"}}}}
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "enum": [
+              "classified_under_subject",
+              "classified_under_chapter",
+              "associated_with_provision"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidentiary_basis": {
+            "enum": [
+              "FOLDER_PATH",
+              "FILENAME_PATTERN",
+              "OWNER_CATALOGUE",
+              "AUTOMATED_CLASSIFIER",
+              "DOCUMENT_TEXT_EXTRACTED"
+            ]
+          },
+          "has_legal_effect": {
+            "const": false
+          },
+          "temporal_scope": {
+            "properties": {
+              "from_status": {
+                "const": "NOT_APPLICABLE"
+              },
+              "to_status": {
+                "const": "NOT_APPLICABLE"
+              }
+            }
+          },
+          "is_finding": {
+            "const": false
+          },
+          "verification": {
+            "enum": [
+              "CANDIDATE",
+              "EXTRACTED_STRUCTURE",
+              "CURATED_NAVIGATION"
+            ]
+          },
+          "review_ref": {
+            "type": "null"
+          },
+          "review_binding": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "evidentiary_basis": {
+            "enum": [
+              "FOLDER_PATH",
+              "FILENAME_PATTERN",
+              "OWNER_CATALOGUE",
+              "AUTOMATED_CLASSIFIER"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "category": {
+            "enum": [
+              "classified_under_subject",
+              "classified_under_chapter",
+              "associated_with_provision"
+            ]
+          },
+          "verification": {
+            "enum": [
+              "CANDIDATE",
+              "CURATED_NAVIGATION"
+            ]
+          },
+          "is_finding": {
+            "const": false
+          },
+          "review_ref": {
+            "type": "null"
+          },
+          "approval_ref": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "evidentiary_basis": {
+            "enum": [
+              "FOLDER_PATH",
+              "FILENAME_PATTERN"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "classification_provenance"
+        ],
+        "properties": {
+          "classification_provenance": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "evidentiary_basis": {
+            "const": "FILENAME_PATTERN"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "verification": {
+            "const": "CANDIDATE"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "enum": [
+              "cites_provision",
+              "interprets_provision",
+              "refers_to_judgment",
+              "follows",
+              "distinguishes",
+              "overrules"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "anchors": {
+            "minItems": 1
+          },
+          "evidentiary_basis": {
+            "enum": [
+              "DOCUMENT_TEXT_EXTRACTED",
+              "DOCUMENT_TEXT_REVIEWED"
+            ]
+          },
+          "temporal_scope": {
+            "properties": {
+              "from_status": {
+                "enum": [
+                  "AS_OF_SOURCE_DATE",
+                  "NOT_RECORDED"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "enum": [
+              "cites_provision",
+              "refers_to_judgment"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "has_legal_effect": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "enum": [
+              "interprets_provision",
+              "follows",
+              "distinguishes",
+              "overrules"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "has_legal_effect": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "enum": [
+              "follows",
+              "distinguishes",
+              "overrules"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "proposition_ref"
+        ],
+        "properties": {
+          "proposition_ref": {
+            "not": {
+              "type": "null"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "const": "classified_under_subject"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "target": {
+            "properties": {
+              "resolved": {
+                "const": true
+              },
+              "node_id": {
+                "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/subject_node_id"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "const": "classified_under_chapter"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "target": {
+            "properties": {
+              "node_id": {
+                "anyOf": [
+                  {
+                    "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/chapter_node_id"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "enum": [
+              "associated_with_provision",
+              "cites_provision",
+              "interprets_provision"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "target": {
+            "properties": {
+              "node_id": {
+                "anyOf": [
+                  {
+                    "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/provision_node_id"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "enum": [
+              "refers_to_judgment",
+              "follows",
+              "distinguishes",
+              "overrules"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "target": {
+            "properties": {
+              "node_id": {
+                "anyOf": [
+                  {
+                    "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/judgment_node_id"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification": {
+            "const": "DOCUMENTARY_CHECKED"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "review_ref",
+          "review_binding"
+        ],
+        "properties": {
+          "review_ref": {
+            "type": "string"
+          },
+          "evidentiary_basis": {
+            "const": "DOCUMENT_TEXT_REVIEWED"
+          },
+          "review_binding": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "evidentiary_basis": {
+            "const": "DOCUMENT_TEXT_REVIEWED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "verification": {
+            "const": "DOCUMENTARY_CHECKED"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "is_finding": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "verification": {
+            "enum": [
+              "DOCUMENTARY_CHECKED",
+              "LEGAL_REVIEWED"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification": {
+            "const": "LEGAL_REVIEWED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "category": {
+            "const": "legally_validated"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "const": "legally_validated"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "approval_ref",
+          "validates_relationship_id"
+        ],
+        "properties": {
+          "verification": {
+            "const": "LEGAL_REVIEWED"
+          },
+          "evidentiary_basis": {
+            "const": "LEGAL_REVIEW"
+          },
+          "approval_ref": {
+            "type": "string"
+          },
+          "validates_relationship_id": {
+            "type": "string"
+          },
+          "is_finding": {
+            "const": true
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "evidentiary_basis": {
+            "not": {
+              "const": "LEGAL_REVIEW"
+            }
+          },
+          "validates_relationship_id": {
+            "type": "null"
+          },
+          "approval_ref": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "classification_provenance"
+        ],
+        "properties": {
+          "classification_provenance": {
+            "type": "object",
+            "required": [
+              "abbreviation_expansion"
+            ],
+            "properties": {
+              "abbreviation_expansion": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "verification": {
+            "const": "CANDIDATE"
+          }
+        }
+      }
+    }
   ]
 }

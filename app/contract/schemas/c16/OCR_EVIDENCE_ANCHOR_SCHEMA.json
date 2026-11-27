@@ -5,118 +5,775 @@
   "description": "A pinpoint into evidence, for native text, OCR of page images, OCR of images embedded in Word documents, reconstructed PDFs and flow documents. It names every byte identity involved (original copy, the representation the locator is measured on, the text derivative, the image) and keeps three page notions apart: source physical page, reconstructed-PDF page and generated segment, plus the image sequence. Projection to the v1 page_anchor (PageKey/SpanKey) is defined in the contract, section 6.4; anchors that have no source physical page do not project to a v1 page number.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["contract", "record_kind", "anchor_id", "doc_id", "original_sha256", "representation_sha256", "locator", "extraction", "quality", "verification", "quoting_permitted"],
+  "required": [
+    "contract",
+    "record_kind",
+    "anchor_id",
+    "doc_id",
+    "original_sha256",
+    "representation_sha256",
+    "locator",
+    "extraction",
+    "quality",
+    "verification",
+    "quoting_permitted"
+  ],
   "properties": {
-    "contract": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"},
-    "record_kind": {"const": "evidence_anchor"},
-    "anchor_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/stable_id"},
-    "doc_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/doc_id"},
-    "original_sha256": {"description": "MANDATORY. The source copy the evidence belongs to (v1 page_anchor.source_copy_sha256). For a reconstructed PDF this is the copy it was reconstructed from, never the reconstruction.", "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
-    "representation_sha256": {"description": "MANDATORY. The bytes on which the locator is measured. Equal to original_sha256 unless the locator is in a reconstructed or converted representation.", "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
-    "derivative_text_sha256": {"description": "UNRESOLVABLE when a text span is given: the derivative the offsets count into (v1 page_anchor.derivative_text_sha256).", "anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
-    "image_sha256": {"description": "The embedded or page image the text was read from (OCR anchors).", "anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
+    "contract": {
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"
+    },
+    "record_kind": {
+      "const": "evidence_anchor"
+    },
+    "anchor_id": {
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/stable_id"
+    },
+    "doc_id": {
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/doc_id"
+    },
+    "original_sha256": {
+      "description": "MANDATORY. The source copy the evidence belongs to (v1 page_anchor.source_copy_sha256). For a reconstructed PDF this is the copy it was reconstructed from, never the reconstruction.",
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+    },
+    "representation_sha256": {
+      "description": "MANDATORY. The bytes on which the locator is measured. Equal to original_sha256 unless the locator is in a reconstructed or converted representation.",
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+    },
+    "derivative_text_sha256": {
+      "description": "UNRESOLVABLE when a text span is given: the derivative the offsets count into (v1 page_anchor.derivative_text_sha256).",
+      "anyOf": [
+        {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "image_sha256": {
+      "description": "The embedded or page image the text was read from (OCR anchors).",
+      "anyOf": [
+        {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
     "locator": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "properties": {
         "kind": {
           "description": "SOURCE_PHYSICAL_PAGE: 1-based physical page of original_sha256 (the only kind that projects to a v1 page). RECONSTRUCTED_PAGE: page of a reconstructed PDF; it maps to a source page only through a hash-checked one-to-one page_mapping on the identity record. GENERATED_SEGMENT: segment of a flow document; never shown or cited as a page. IMAGE_SEQUENCE: an embedded image by its position. TEXT_FLOW: paragraph order in a flow document.",
-          "enum": ["SOURCE_PHYSICAL_PAGE", "RECONSTRUCTED_PAGE", "GENERATED_SEGMENT", "IMAGE_SEQUENCE", "TEXT_FLOW"]
+          "enum": [
+            "SOURCE_PHYSICAL_PAGE",
+            "RECONSTRUCTED_PAGE",
+            "GENERATED_SEGMENT",
+            "IMAGE_SEQUENCE",
+            "TEXT_FLOW"
+          ]
         },
-        "physical_page": {"type": ["integer", "null"], "minimum": 1},
-        "printed_page_label": {"description": "Page number as printed on the page, if any. Never inferred from the physical page.", "type": ["string", "null"], "maxLength": 32},
-        "reconstructed_page": {"type": ["integer", "null"], "minimum": 1},
-        "generated_segment": {"type": ["integer", "null"], "minimum": 1},
-        "image_sequence_id": {"anyOf": [{"$ref": "DOCUMENT_IDENTITY_SCHEMA.json#/$defs/image_sequence_id"}, {"type": "null"}]},
-        "paragraph_index": {"type": ["integer", "null"], "minimum": 1},
-        "paragraph_label": {"description": "Numbered paragraph as printed, e.g. '12'.", "type": ["string", "null"], "maxLength": 32},
-        "citable_as_source_page": {"description": "True only for SOURCE_PHYSICAL_PAGE, or RECONSTRUCTED_PAGE with a hash-checked one-to-one mapping (physical_page then set from the mapping).", "type": "boolean"}
+        "physical_page": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "printed_page_label": {
+          "description": "Page number as printed on the page, if any. Never inferred from the physical page.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 32
+        },
+        "reconstructed_page": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "generated_segment": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "image_sequence_id": {
+          "anyOf": [
+            {
+              "$ref": "DOCUMENT_IDENTITY_SCHEMA.json#/$defs/image_sequence_id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "paragraph_index": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "paragraph_label": {
+          "description": "Numbered paragraph as printed, e.g. '12'.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 32
+        },
+        "citable_as_source_page": {
+          "description": "True only for SOURCE_PHYSICAL_PAGE, or RECONSTRUCTED_PAGE with a hash-checked one-to-one mapping (physical_page then set from the mapping).",
+          "type": "boolean"
+        }
       },
       "allOf": [
-        {"if": {"properties": {"kind": {"const": "SOURCE_PHYSICAL_PAGE"}}}, "then": {"required": ["physical_page", "citable_as_source_page"], "properties": {"physical_page": {"type": "integer"}, "citable_as_source_page": {"const": true}, "generated_segment": {"type": "null"}}}},
-        {"if": {"properties": {"kind": {"const": "RECONSTRUCTED_PAGE"}}}, "then": {"required": ["reconstructed_page", "citable_as_source_page"], "properties": {"reconstructed_page": {"type": "integer"}}}},
-        {"if": {"properties": {"kind": {"const": "GENERATED_SEGMENT"}}}, "then": {"required": ["generated_segment", "citable_as_source_page"], "properties": {"generated_segment": {"type": "integer"}, "citable_as_source_page": {"const": false}, "physical_page": {"type": "null"}}}},
-        {"if": {"properties": {"kind": {"const": "IMAGE_SEQUENCE"}}}, "then": {"required": ["image_sequence_id", "citable_as_source_page"], "properties": {"image_sequence_id": {"type": "string"}, "citable_as_source_page": {"const": false}, "physical_page": {"type": "null"}}}},
-        {"if": {"properties": {"kind": {"const": "TEXT_FLOW"}}}, "then": {"required": ["paragraph_index", "citable_as_source_page"], "properties": {"paragraph_index": {"type": "integer"}, "citable_as_source_page": {"const": false}, "physical_page": {"type": "null"}}}},
-        {"if": {"required": ["citable_as_source_page"], "properties": {"citable_as_source_page": {"const": true}}}, "then": {"required": ["physical_page"], "properties": {"physical_page": {"type": "integer"}}}}
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "SOURCE_PHYSICAL_PAGE"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "physical_page",
+              "citable_as_source_page"
+            ],
+            "properties": {
+              "physical_page": {
+                "type": "integer"
+              },
+              "citable_as_source_page": {
+                "const": true
+              },
+              "generated_segment": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "RECONSTRUCTED_PAGE"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "reconstructed_page",
+              "citable_as_source_page"
+            ],
+            "properties": {
+              "reconstructed_page": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "GENERATED_SEGMENT"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "generated_segment",
+              "citable_as_source_page"
+            ],
+            "properties": {
+              "generated_segment": {
+                "type": "integer"
+              },
+              "citable_as_source_page": {
+                "const": false
+              },
+              "physical_page": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "IMAGE_SEQUENCE"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "image_sequence_id",
+              "citable_as_source_page"
+            ],
+            "properties": {
+              "image_sequence_id": {
+                "type": "string"
+              },
+              "citable_as_source_page": {
+                "const": false
+              },
+              "physical_page": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "TEXT_FLOW"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "paragraph_index",
+              "citable_as_source_page"
+            ],
+            "properties": {
+              "paragraph_index": {
+                "type": "integer"
+              },
+              "citable_as_source_page": {
+                "const": false
+              },
+              "physical_page": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "citable_as_source_page"
+            ],
+            "properties": {
+              "citable_as_source_page": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "physical_page"
+            ],
+            "properties": {
+              "physical_page": {
+                "type": "integer"
+              }
+            }
+          }
+        }
       ]
     },
-    "page_mapping_basis": {"description": "For RECONSTRUCTED_PAGE: the identity record's page_mapping basis, repeated so the anchor can be checked alone.", "type": ["string", "null"], "enum": ["ONE_TO_ONE_PAGE_HASH_CHECKED", "ONE_TO_ONE_DECLARED_NOT_CHECKED", "NOT_ONE_TO_ONE", null]},
+    "page_mapping_basis": {
+      "description": "For RECONSTRUCTED_PAGE: the identity record's page_mapping basis, repeated so the anchor can be checked alone.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "ONE_TO_ONE_PAGE_HASH_CHECKED",
+        "ONE_TO_ONE_DECLARED_NOT_CHECKED",
+        "NOT_ONE_TO_ONE",
+        null
+      ]
+    },
     "text_span": {
       "description": "OPTIONAL. Code-point offsets into the page (or segment) text of the named derivative, as v1 (counted from the character after the [[page N]] marker line).",
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": false,
-      "required": ["char_start", "char_end", "text_sha256"],
+      "required": [
+        "char_start",
+        "char_end",
+        "text_sha256"
+      ],
       "properties": {
-        "passage_id": {"type": ["string", "null"], "pattern": "^p[0-9]{1,5}-[0-9]{1,5}$"},
-        "char_start": {"type": "integer", "minimum": 0},
-        "char_end": {"type": "integer", "minimum": 0},
-        "text_sha256": {"description": "SHA-256 of the UTF-8 span text (v1 passage text_sha256).", "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}
+        "passage_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^p[0-9]{1,5}-[0-9]{1,5}$"
+        },
+        "char_start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "char_end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "text_sha256": {
+          "description": "SHA-256 of the UTF-8 span text (v1 passage text_sha256).",
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+        }
       }
     },
     "bbox": {
       "description": "OPTIONAL. Region on the page or image. PDF_POINT origin top-left of the page; IMAGE_PIXEL origin top-left of the image; NORMALIZED 0..1.",
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": false,
-      "required": ["unit", "space", "x0", "y0", "x1", "y1"],
+      "required": [
+        "unit",
+        "space",
+        "x0",
+        "y0",
+        "x1",
+        "y1"
+      ],
       "properties": {
-        "unit": {"enum": ["PDF_POINT", "IMAGE_PIXEL", "NORMALIZED"]},
-        "space": {"enum": ["SOURCE_PAGE", "RECONSTRUCTED_PAGE", "IMAGE"]},
-        "x0": {"type": "number", "minimum": 0},
-        "y0": {"type": "number", "minimum": 0},
-        "x1": {"type": "number", "minimum": 0},
-        "y1": {"type": "number", "minimum": 0}
+        "unit": {
+          "enum": [
+            "PDF_POINT",
+            "IMAGE_PIXEL",
+            "NORMALIZED"
+          ]
+        },
+        "space": {
+          "enum": [
+            "SOURCE_PAGE",
+            "RECONSTRUCTED_PAGE",
+            "IMAGE"
+          ]
+        },
+        "x0": {
+          "type": "number",
+          "minimum": 0
+        },
+        "y0": {
+          "type": "number",
+          "minimum": 0
+        },
+        "x1": {
+          "type": "number",
+          "minimum": 0
+        },
+        "y1": {
+          "type": "number",
+          "minimum": 0
+        }
       }
     },
     "extraction": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["method", "pipeline_name", "pipeline_version"],
+      "required": [
+        "method",
+        "pipeline_name",
+        "pipeline_version"
+      ],
       "properties": {
-        "method": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/extraction_method"},
-        "pipeline_name": {"type": "string", "maxLength": 64},
-        "pipeline_version": {"type": "string", "maxLength": 64},
-        "ocr_config": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/ocr_config"}, {"type": "null"}]}
+        "method": {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/extraction_method"
+        },
+        "pipeline_name": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "pipeline_version": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "ocr_config": {
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/ocr_config"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
       },
       "allOf": [
-        {"if": {"properties": {"method": {"enum": ["OCR_PAGE_IMAGE", "OCR_EMBEDDED_IMAGE"]}}}, "then": {"required": ["ocr_config"], "properties": {"ocr_config": {"type": "object"}}}}
+        {
+          "if": {
+            "properties": {
+              "method": {
+                "enum": [
+                  "OCR_PAGE_IMAGE",
+                  "OCR_EMBEDDED_IMAGE"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ocr_config"
+            ],
+            "properties": {
+              "ocr_config": {
+                "type": "object"
+              }
+            }
+          }
+        }
       ]
     },
     "quality": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["text_reliability", "ocr_mean_confidence", "low_confidence"],
+      "required": [
+        "text_reliability",
+        "ocr_mean_confidence",
+        "low_confidence"
+      ],
       "properties": {
-        "text_reliability": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/text_reliability"},
-        "ocr_mean_confidence": {"description": "UNRESOLVABLE for OCR anchors (0..100); null for non-OCR.", "anyOf": [{"type": "number", "minimum": 0, "maximum": 100}, {"type": "null"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}]},
-        "low_confidence": {"type": "boolean"}
+        "text_reliability": {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/text_reliability"
+        },
+        "ocr_mean_confidence": {
+          "description": "UNRESOLVABLE for OCR anchors (0..100); null for non-OCR.",
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+            }
+          ]
+        },
+        "low_confidence": {
+          "type": "boolean"
+        }
       }
     },
     "verification": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["state"],
+      "required": [
+        "state"
+      ],
       "properties": {
-        "state": {"description": "Evidence-fidelity state of this anchor: has the text at this location been checked against the page image? Never a legal state.", "enum": ["AUTOMATED_CANDIDATE_NOT_VERIFIED", "DOCUMENTARY_CHECKED", "INCORRECT"]},
-        "review_ref": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/review_ref"}, {"type": "null"}]}
+        "state": {
+          "description": "Evidence-fidelity state of this anchor: has the text at this location been checked against the page image? Never a legal state.",
+          "enum": [
+            "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+            "DOCUMENTARY_CHECKED",
+            "INCORRECT"
+          ]
+        },
+        "review_ref": {
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/review_ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "review_binding": {
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/review_binding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
       },
       "allOf": [
-        {"if": {"properties": {"state": {"enum": ["DOCUMENTARY_CHECKED", "INCORRECT"]}}}, "then": {"required": ["review_ref"], "properties": {"review_ref": {"type": "string"}}}}
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "DOCUMENTARY_CHECKED",
+                  "INCORRECT"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "review_ref",
+              "review_binding"
+            ],
+            "properties": {
+              "review_ref": {
+                "type": "string"
+              },
+              "review_binding": {
+                "type": "object"
+              }
+            }
+          }
+        }
       ]
     },
-    "quoting_permitted": {"description": "False for any OCR anchor (as v1 derived_text: OCR text is for search, not quotation), unreliable text or low confidence. This is the application's QuotingPermitted gate; a documentary check of OCR text does not lift it (the user is sent to the original page).", "type": "boolean"},
-    "quote": {"description": "OPTIONAL extractor quote; shown only as 'quoted by extractor', and only when quoting_permitted.", "type": ["string", "null"], "maxLength": 2000}
+    "quoting_permitted": {
+      "description": "False for any OCR anchor (as v1 derived_text: OCR text is for search, not quotation), unreliable text or low confidence. This is the application's QuotingPermitted gate; a documentary check of OCR text does not lift it (the user is sent to the original page).",
+      "type": "boolean"
+    },
+    "quote": {
+      "description": "OPTIONAL extractor quote; shown only as 'quoted by extractor', and only when quoting_permitted.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 2000
+    }
   },
   "allOf": [
-    {"if": {"properties": {"extraction": {"properties": {"method": {"enum": ["OCR_PAGE_IMAGE", "OCR_EMBEDDED_IMAGE"]}}}}}, "then": {"properties": {"quality": {"properties": {"ocr_mean_confidence": {"not": {"type": "null"}}}}}}},
-    {"if": {"properties": {"extraction": {"properties": {"method": {"enum": ["OCR_PAGE_IMAGE", "OCR_EMBEDDED_IMAGE"]}}}}}, "then": {"properties": {"quoting_permitted": {"const": false}}}},
-    {"if": {"properties": {"quoting_permitted": {"const": false}}}, "then": {"properties": {"quote": {"type": "null"}}}},
-    {"if": {"properties": {"quality": {"properties": {"text_reliability": {"not": {"const": "reliable"}}}}}}, "then": {"properties": {"quoting_permitted": {"const": false}}}},
-    {"if": {"properties": {"quality": {"properties": {"low_confidence": {"const": true}}}}}, "then": {"properties": {"quoting_permitted": {"const": false}}}},
-    {"if": {"properties": {"extraction": {"properties": {"method": {"const": "OCR_EMBEDDED_IMAGE"}}}}}, "then": {"required": ["image_sha256"], "properties": {"image_sha256": {"type": "string"}, "locator": {"properties": {"kind": {"enum": ["IMAGE_SEQUENCE", "GENERATED_SEGMENT"]}, "image_sequence_id": {"type": "string"}}, "required": ["image_sequence_id"]}}}},
-    {"if": {"properties": {"locator": {"properties": {"kind": {"const": "RECONSTRUCTED_PAGE"}}}}}, "then": {"required": ["page_mapping_basis"], "properties": {"page_mapping_basis": {"type": "string"}}}},
-    {"if": {"properties": {"locator": {"properties": {"kind": {"const": "RECONSTRUCTED_PAGE"}}}, "page_mapping_basis": {"not": {"const": "ONE_TO_ONE_PAGE_HASH_CHECKED"}}}}, "then": {"properties": {"locator": {"properties": {"citable_as_source_page": {"const": false}, "physical_page": {"type": "null"}}}}}},
-    {"if": {"required": ["text_span"], "properties": {"text_span": {"type": "object"}}}, "then": {"required": ["derivative_text_sha256"], "properties": {"derivative_text_sha256": {"type": "string"}}}}
+    {
+      "if": {
+        "properties": {
+          "extraction": {
+            "properties": {
+              "method": {
+                "enum": [
+                  "OCR_PAGE_IMAGE",
+                  "OCR_EMBEDDED_IMAGE"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "quality": {
+            "properties": {
+              "ocr_mean_confidence": {
+                "not": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "extraction": {
+            "properties": {
+              "method": {
+                "enum": [
+                  "OCR_PAGE_IMAGE",
+                  "OCR_EMBEDDED_IMAGE"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "quoting_permitted": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "quoting_permitted": {
+            "const": false
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "quote": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "quality": {
+            "properties": {
+              "text_reliability": {
+                "not": {
+                  "const": "reliable"
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "quoting_permitted": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "quality": {
+            "properties": {
+              "low_confidence": {
+                "const": true
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "quoting_permitted": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "extraction": {
+            "properties": {
+              "method": {
+                "const": "OCR_EMBEDDED_IMAGE"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "image_sha256"
+        ],
+        "properties": {
+          "image_sha256": {
+            "type": "string"
+          },
+          "locator": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "IMAGE_SEQUENCE",
+                  "GENERATED_SEGMENT"
+                ]
+              },
+              "image_sequence_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "image_sequence_id"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "locator": {
+            "properties": {
+              "kind": {
+                "const": "RECONSTRUCTED_PAGE"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "page_mapping_basis"
+        ],
+        "properties": {
+          "page_mapping_basis": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "locator": {
+            "properties": {
+              "kind": {
+                "const": "RECONSTRUCTED_PAGE"
+              }
+            }
+          },
+          "page_mapping_basis": {
+            "not": {
+              "const": "ONE_TO_ONE_PAGE_HASH_CHECKED"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "locator": {
+            "properties": {
+              "citable_as_source_page": {
+                "const": false
+              },
+              "physical_page": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "text_span"
+        ],
+        "properties": {
+          "text_span": {
+            "type": "object"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "derivative_text_sha256"
+        ],
+        "properties": {
+          "derivative_text_sha256": {
+            "type": "string"
+          }
+        }
+      }
+    }
   ]
 }

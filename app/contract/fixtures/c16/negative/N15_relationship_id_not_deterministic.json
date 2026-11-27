@@ -17,6 +17,7 @@
  "proposition_ref": null,
  "record_kind": "corpus_relationship",
  "relationship_id": "REL-000000000000000000000000",
+ "review_binding": null,
  "review_ref": null,
  "source": {
   "author_id": null,
@@ -27,7 +28,7 @@
    "version": "1.0.0"
   },
   "rule_id": "C16-FOLDER-SUBJECT",
-  "rule_version": "1.0"
+  "rule_version": "1.1"
  },
  "subject": {
   "doc_id": "local-d33bfb0313089bf8",

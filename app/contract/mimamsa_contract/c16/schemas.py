@@ -26,6 +26,7 @@ KIND_TO_SCHEMA = {
     "corpus_relationship": "PROVISION_JUDGMENT_RELATIONSHIP_SCHEMA.json",
     "evidence_anchor": "OCR_EVIDENCE_ANCHOR_SCHEMA.json",
     "corpus_admission": "CORPUS_ADMISSION_SCHEMA.json",
+    "corpus_generation_manifest": "CORPUS_GENERATION_MANIFEST_SCHEMA.json",
     # WP06 knowledge release architecture
     "knowledge_release_manifest": "KNOWLEDGE_RELEASE_MANIFEST_SCHEMA.json",
     "knowledge_activation_record": "KNOWLEDGE_ACTIVATION_RECORD_SCHEMA.json",
@@ -66,9 +67,11 @@ def validator(kind: str) -> Draft202012Validator:
 
 def schema_errors(record: dict) -> list[str]:
     """Schema errors for one record, selected by its record_kind. Messages give the JSON path, never a value."""
-    kind = record.get("record_kind") if isinstance(record, dict) else None
+    if not isinstance(record, dict):
+        return ["$: record is not a JSON object"]
+    kind = record.get("record_kind")
     if kind not in KIND_TO_SCHEMA:
-        return [f"$.record_kind: unknown C16 record kind"]
+        return ["$.record_kind: unknown C16 record kind"]
     out = []
     for err in sorted(validator(kind).iter_errors(record), key=lambda e: (list(e.absolute_path), e.validator)):
         path = "$" + "".join(f"[{p}]" if isinstance(p, int) else f".{p}" for p in err.absolute_path)

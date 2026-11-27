@@ -5,11 +5,9 @@
  "classification_provenance": {
   "abbreviation_expansion": {
    "abbreviation": "AR",
-   "alternatives": [
-    "Regulations for the Army (para), if the owner used AR for Regulations"
-   ],
-   "expansion": "Army Rules, 1954",
-   "lexicon_ref": "docs/architecture/c16/C16_CORPUS_INTEGRATION_CONTRACT.md#83-filename-and-folder-classification-rules"
+   "alternatives": [],
+   "expansion": "Army Rules (repository alias 'army rules')",
+   "lexicon_ref": "app/b1/src/Mimamsa.Core/Identifiers/LegalIdentifierResolver.cs#Aliases; app/b1/build/build_sample.py#SUPPLEMENT"
   },
   "collection": "local:owner-collection-fixture",
   "inventory_id": "L-e81ca321acdd8f12c93c",
@@ -24,6 +22,7 @@
  "proposition_ref": null,
  "record_kind": "corpus_relationship",
  "relationship_id": "REL-1279dba830e5c04355b9b72d",
+ "review_binding": null,
  "review_ref": null,
  "source": {
   "author_id": null,
@@ -34,7 +33,7 @@
    "version": "1.0.0"
   },
   "rule_id": "C16-FN-PROVLIST",
-  "rule_version": "1.0"
+  "rule_version": "1.1"
  },
  "subject": {
   "doc_id": "local-d33bfb0313089bf8",
@@ -51,7 +50,7 @@
   "to": null,
   "to_status": "NOT_APPLICABLE"
  },
- "uncertainty": "Read from the owner's file name by rule C16-FN-PROVLIST; the abbreviation reading and the provision are candidates, not a finding that the judgment concerns this provision.",
+ "uncertainty": "Read from the owner's file name by rule C16-FN-PROVLIST; the abbreviation reading and the provision are candidates, not a finding that the document concerns this provision.",
  "validates_relationship_id": null,
  "verification": "CURATED_NAVIGATION"
 }

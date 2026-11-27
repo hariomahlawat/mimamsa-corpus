@@ -38,12 +38,17 @@
    "result": "VERIFIED_USED"
   },
   {
-   "component_id": "pg-knowledge",
+   "component_id": "knowledge-rows",
    "failed_checks": [],
    "result": "VERIFIED_USED"
   },
   {
    "component_id": "lexical-index",
+   "failed_checks": [],
+   "result": "VERIFIED_USED"
+  },
+  {
+   "component_id": "text-store",
    "failed_checks": [],
    "result": "VERIFIED_USED"
   },
@@ -55,12 +60,13 @@
   {
    "component_id": "graph",
    "failed_checks": [
-    "SOURCE_DIGEST_EQUALS_SITE"
+    "SAMPLED_REBUILD_PARITY"
    ],
    "result": "ACCELERATOR_REBUILT_LOCALLY"
   }
  ],
  "contract": "mimamsa-corpus-contract/2.0",
+ "degradation_acknowledged_by": null,
  "exclusion_state": {
   "digest": "e1c4d1b5594342fc688afa196d94fde33a922a0d22e7ffca3f661d76f767f04f",
   "items_suppressed": 2,
@@ -68,11 +74,14 @@
  },
  "previous_active_release_id": "R16-knowledge-20261201-0a0b0c0d",
  "previous_record_sha256": "e914054d9e319588ee3fe1e9167c09f426e92d0abad9bdfe168fdf940d75bea7",
- "reason": null,
+ "reason": "graph accelerator failed sampled rebuild parity; rebuilt locally",
  "record_kind": "knowledge_activation_record",
  "release_class": "KNOWLEDGE",
  "release_id": "R17-knowledge-20261215-1a1b1c1d",
  "release_sequence": 17,
- "result": "ACTIVE",
- "seq": 2
+ "result": "ACTIVE_AFTER_LOCAL_REBUILD",
+ "seq": 2,
+ "service_level": "FULL",
+ "target": "KNOWLEDGE",
+ "txn_id": "TX-00000002-66652b2468cc"
 }

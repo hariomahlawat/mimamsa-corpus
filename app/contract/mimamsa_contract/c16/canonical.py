@@ -101,8 +101,11 @@ def anchor_identity(a: dict) -> list:
 
 
 def admission_identity(adm: dict) -> list:
+    """Revision identity: a changed decision or gate result is a different id and must be a new revision that
+    supersedes the previous one (append-only chain per generation and copy)."""
     return [adm["corpus_generation_id"], adm["subject"]["doc_id"], adm["subject"]["source_copy_sha256"],
-            adm["rule_set"]["id"], adm["rule_set"]["version"]]
+            adm["revision"], adm.get("supersedes_admission_id"), adm["rule_set"]["id"], adm["rule_set"]["version"],
+            adm["decision"], sorted([g["gate_id"], g["result"]] for g in adm["gates"])]
 
 
 def relationship_id(rel: dict) -> str:
@@ -127,6 +130,7 @@ SORT_KEYS = {
     "corpus_relationship": lambda r: (r["relationship_id"],),
     "taxonomy_node": lambda r: (_LEVEL_RANK.get(r["level"], 9), r["node_id"]),
     "corpus_admission": lambda r: (r["admission_id"],),
+    "reviewed_record": lambda r: (r["review_record_id"],),
 }
 
 
@@ -157,6 +161,8 @@ def jsonl_problems(data: bytes) -> list[str]:
         records = [json.loads(line) for line in data.decode("utf-8").split("\n") if line != ""]
     except (UnicodeDecodeError, ValueError):
         return problems + ["not UTF-8 JSONL"]
+    if not all(isinstance(r, dict) for r in records):
+        return problems + ["a line is not a JSON object"]
     try:
         if dumps_jsonl(records) != data:
             problems.append("records not canonical or not in sort order")

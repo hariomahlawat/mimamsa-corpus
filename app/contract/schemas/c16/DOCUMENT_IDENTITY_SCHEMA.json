@@ -5,81 +5,324 @@
   "description": "One record per (source copy sha256, doc_id). Separates five identities that must never be equated: (1) the binary copy (sha256 of exact bytes, v1 source_copy), (2) the corpus document (v1 doc_id), (3) the representation (what kind of artefact these bytes are: issued PDF, scan, Word document with screenshots, locally reconstructed PDF, extract, compilation), (4) the legal work (judgment, instrument) and its rendition, and (5) derivatives (text, embedded images). It extends v1 document records; it does not replace them. A v1 document record with the same doc_id and sha256 remains the record the application serves.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["contract", "record_kind", "doc_id", "source_copy", "representation", "work_identity", "text_derivatives", "embedded_images", "provenance", "restriction", "integrity", "research_eligibility", "corpus_generation_id"],
+  "required": [
+    "contract",
+    "record_kind",
+    "doc_id",
+    "source_copy",
+    "representation",
+    "work_identity",
+    "text_derivatives",
+    "embedded_images",
+    "provenance",
+    "restriction",
+    "integrity",
+    "research_eligibility",
+    "corpus_generation_id"
+  ],
   "properties": {
-    "contract": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"},
-    "record_kind": {"const": "document_identity"},
+    "contract": {
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"
+    },
+    "record_kind": {
+      "const": "document_identity"
+    },
     "doc_id": {
       "description": "MANDATORY. v1 doc_id, kept stable. Producers assign new local-collection items local-<sha256 first 16 hex> until a readable id is assigned; a later readable id is a new doc_id that lists the old one in previous_doc_ids.",
       "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/doc_id"
     },
-    "previous_doc_ids": {"type": "array", "items": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/doc_id"}, "uniqueItems": true},
+    "previous_doc_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/doc_id"
+      },
+      "uniqueItems": true
+    },
     "source_copy": {
       "description": "MANDATORY. Binary copy identity. Same meaning as v1 document.source_copy; the extended mime list covers local-collection formats that v1 cannot yet carry (see compatibility matrix).",
       "type": "object",
       "additionalProperties": false,
-      "required": ["sha256", "bytes", "mime_type", "detected_format", "page_count", "physical_pagination"],
+      "required": [
+        "sha256",
+        "bytes",
+        "mime_type",
+        "detected_format",
+        "page_count",
+        "physical_pagination"
+      ],
       "properties": {
-        "sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
-        "bytes": {"type": "integer", "minimum": 0},
-        "mime_type": {"enum": ["application/pdf", "text/html", "text/plain", "image/png", "image/jpeg", "image/tiff", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/msword", "application/rtf"]},
-        "detected_format": {"description": "Format detected from the bytes (magic number), never from the extension.", "enum": ["PDF", "DOCX", "DOC", "RTF", "HTML", "TXT", "PNG", "JPEG", "TIFF"]},
+        "sha256": {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mime_type": {
+          "enum": [
+            "application/pdf",
+            "text/html",
+            "text/plain",
+            "image/png",
+            "image/jpeg",
+            "image/tiff",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "application/msword",
+            "application/rtf",
+            "application/octet-stream"
+          ]
+        },
+        "detected_format": {
+          "description": "Format detected from the bytes (magic number), never from the extension. UNKNOWN when detection fails: never defaulted to PDF.",
+          "enum": [
+            "PDF",
+            "DOCX",
+            "DOC",
+            "RTF",
+            "HTML",
+            "TXT",
+            "PNG",
+            "JPEG",
+            "TIFF",
+            "UNKNOWN"
+          ]
+        },
         "page_count": {
           "description": "UNRESOLVABLE. Physical page count measured from the bytes; null for flow documents without physical pages (DOCX, DOC, RTF, HTML, TXT).",
-          "anyOf": [{"type": "integer", "minimum": 0}, {"type": "null"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}]
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+            }
+          ]
         },
-        "physical_pagination": {"enum": ["PHYSICAL_PAGES", "NONE_FLOW_DOCUMENT", "SINGLE_IMAGE"]},
-        "vault_path": {"$ref": "../v1/common.schema.json#/$defs/vault_path"}
+        "physical_pagination": {
+          "enum": [
+            "PHYSICAL_PAGES",
+            "NONE_FLOW_DOCUMENT",
+            "SINGLE_IMAGE",
+            "UNKNOWN"
+          ]
+        },
+        "vault_path": {
+          "$ref": "../v1/common.schema.json#/$defs/vault_path"
+        }
       },
       "allOf": [
-        {"if": {"properties": {"physical_pagination": {"const": "NONE_FLOW_DOCUMENT"}}}, "then": {"properties": {"page_count": {"type": "null"}}}},
-        {"if": {"properties": {"physical_pagination": {"const": "PHYSICAL_PAGES"}}}, "then": {"properties": {"page_count": {"not": {"type": "null"}}}}}
+        {
+          "if": {
+            "properties": {
+              "physical_pagination": {
+                "const": "NONE_FLOW_DOCUMENT"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "page_count": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "physical_pagination": {
+                "const": "PHYSICAL_PAGES"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "page_count": {
+                "not": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "physical_pagination": {
+                "const": "UNKNOWN"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "page_count": {
+                "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "detected_format": {
+                "const": "UNKNOWN"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "mime_type": {
+                "const": "application/octet-stream"
+              },
+              "physical_pagination": {
+                "const": "UNKNOWN"
+              }
+            }
+          }
+        }
       ]
     },
     "representation": {
       "description": "MANDATORY. What these bytes are, independently of what legal work they carry and of whether they are authentic.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["representation_kind", "origin_status", "content_scope", "completeness"],
+      "required": [
+        "representation_kind",
+        "origin_status",
+        "content_scope",
+        "completeness"
+      ],
       "properties": {
         "representation_kind": {
-          "description": "NATIVE_DIGITAL_PDF: born-digital PDF with a text layer. SCANNED_PDF: page images, text only by OCR. MIXED_PDF: some pages text, some images. WORD_NATIVE_TEXT: word-processor file whose content is text. WORD_WITH_EMBEDDED_IMAGES: word-processor file whose legal content is wholly or partly in pasted images (screenshots). WORD_IMAGES_NOT_INVENTORIED: word-processor file whose embedded images have not been inventoried, so it is not known whether its text is complete (embedded_images is then UNRESOLVED). RECONSTRUCTED_SEARCHABLE_PDF: PDF produced locally (OCR layer, conversion, re-assembly). PLAIN_TEXT, HTML_PAGE, IMAGE_FILE: as named.",
-          "enum": ["NATIVE_DIGITAL_PDF", "SCANNED_PDF", "MIXED_PDF", "WORD_NATIVE_TEXT", "WORD_WITH_EMBEDDED_IMAGES", "WORD_IMAGES_NOT_INVENTORIED", "RECONSTRUCTED_SEARCHABLE_PDF", "PLAIN_TEXT", "HTML_PAGE", "IMAGE_FILE"]
+          "description": "NATIVE_DIGITAL_PDF: born-digital PDF with a text layer. SCANNED_PDF: page images, text only by OCR. MIXED_PDF: some pages text, some images. WORD_NATIVE_TEXT: word-processor file whose content is text. WORD_WITH_EMBEDDED_IMAGES: word-processor file whose legal content is wholly or partly in pasted images (screenshots). WORD_IMAGES_NOT_INVENTORIED: word-processor file whose embedded images have not been inventoried, so it is not known whether its text is complete (embedded_images is then UNRESOLVED). RECONSTRUCTED_SEARCHABLE_PDF: PDF produced locally (OCR layer, conversion, re-assembly). PLAIN_TEXT, HTML_PAGE, IMAGE_FILE: as named. UNRECOGNISED_FORMAT: the bytes are preserved and hashed but their format is not recognised; nothing is extracted.",
+          "enum": [
+            "NATIVE_DIGITAL_PDF",
+            "SCANNED_PDF",
+            "MIXED_PDF",
+            "WORD_NATIVE_TEXT",
+            "WORD_WITH_EMBEDDED_IMAGES",
+            "WORD_IMAGES_NOT_INVENTORIED",
+            "RECONSTRUCTED_SEARCHABLE_PDF",
+            "PLAIN_TEXT",
+            "HTML_PAGE",
+            "IMAGE_FILE",
+            "UNRECOGNISED_FORMAT"
+          ]
         },
         "origin_status": {
           "description": "Where the bytes come from. CARRIER_ISSUED_COPY_CLAIMED: obtained from the issuing authority or an official host that presents it as the issued document (still not authenticated; source_authenticity is a separate v1 axis). ACQUIRED_COPY_ORIGIN_UNDETERMINED: obtained (for example from the owner's local collection) with no evidence of its carrier. THIRD_PARTY_REPRODUCTION: a reproduction made by someone other than the issuer (retyped text, screenshots pasted into a Word file). LOCALLY_RECONSTRUCTED: bytes produced by Mimamsa or the owner from another representation; never a court- or authority-issued original.",
-          "enum": ["CARRIER_ISSUED_COPY_CLAIMED", "ACQUIRED_COPY_ORIGIN_UNDETERMINED", "THIRD_PARTY_REPRODUCTION", "LOCALLY_RECONSTRUCTED"]
+          "enum": [
+            "CARRIER_ISSUED_COPY_CLAIMED",
+            "ACQUIRED_COPY_ORIGIN_UNDETERMINED",
+            "THIRD_PARTY_REPRODUCTION",
+            "LOCALLY_RECONSTRUCTED"
+          ]
         },
         "content_scope": {
           "description": "WHOLE_WORK: purports to carry one complete work. EXTRACT: carries part of a work (pages, paragraphs, headnote, operative order only). COMPILATION: carries two or more works (see members). UNDETERMINED: not yet established.",
-          "enum": ["WHOLE_WORK", "EXTRACT", "COMPILATION", "UNDETERMINED"]
+          "enum": [
+            "WHOLE_WORK",
+            "EXTRACT",
+            "COMPILATION",
+            "UNDETERMINED"
+          ]
         },
         "completeness": {
           "description": "Byte/work completeness. COMPLETE needs evidence (all pages present against the work's own pagination or a carrier statement); it is never inferred. Compatible with v1 source_copy.completeness except PARTIAL_EXTRACT, which v1 cannot express.",
-          "enum": ["COMPLETE", "PARTIAL_EXTRACT", "TRUNCATED_AT_SOURCE", "UNOPENABLE", "NOT_CHECKED"]
+          "enum": [
+            "COMPLETE",
+            "PARTIAL_EXTRACT",
+            "TRUNCATED_AT_SOURCE",
+            "UNOPENABLE",
+            "NOT_CHECKED"
+          ]
         },
-        "completeness_basis": {"type": ["string", "null"], "maxLength": 500},
-        "reconstructed_from_sha256": {"description": "For LOCALLY_RECONSTRUCTED: the source copies these bytes were built from. Must not contain the record's own sha256 (rule C16_RECONSTRUCTED_SELF).", "type": "array", "items": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, "uniqueItems": true},
-        "reconstruction_method": {"type": ["string", "null"], "enum": ["OCR_TEXT_LAYER_ADDED", "FORMAT_CONVERSION", "PAGE_REASSEMBLY", "IMAGE_TO_PDF", null]},
+        "completeness_basis": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        },
+        "reconstructed_from_sha256": {
+          "description": "For LOCALLY_RECONSTRUCTED: the source copies these bytes were built from. Must not contain the record's own sha256 (rule C16_RECONSTRUCTED_SELF).",
+          "type": "array",
+          "items": {
+            "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+          },
+          "uniqueItems": true
+        },
+        "reconstruction_method": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "OCR_TEXT_LAYER_ADDED",
+            "FORMAT_CONVERSION",
+            "PAGE_REASSEMBLY",
+            "IMAGE_TO_PDF",
+            null
+          ]
+        },
         "page_mapping": {
           "description": "For a reconstruction whose pages correspond one-to-one to physical pages of an original: the mapping basis. Without it, reconstructed page numbers are never displayed as source pages.",
-          "type": ["object", "null"],
+          "type": [
+            "object",
+            "null"
+          ],
           "additionalProperties": false,
-          "required": ["original_sha256", "basis"],
+          "required": [
+            "original_sha256",
+            "basis"
+          ],
           "properties": {
-            "original_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
-            "basis": {"enum": ["ONE_TO_ONE_PAGE_HASH_CHECKED", "ONE_TO_ONE_DECLARED_NOT_CHECKED", "NOT_ONE_TO_ONE"]},
-            "offset": {"type": "integer"}
+            "original_sha256": {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+            },
+            "basis": {
+              "enum": [
+                "ONE_TO_ONE_PAGE_HASH_CHECKED",
+                "ONE_TO_ONE_DECLARED_NOT_CHECKED",
+                "NOT_ONE_TO_ONE"
+              ]
+            },
+            "offset": {
+              "type": "integer"
+            }
           }
         },
         "extract_scope": {
           "description": "For EXTRACT: what part of which work. A partial extract never supports a claim about the whole work (for example its outcome or the absence of a passage).",
-          "type": ["object", "null"],
+          "type": [
+            "object",
+            "null"
+          ],
           "additionalProperties": false,
-          "required": ["description", "work_pages"],
+          "required": [
+            "description",
+            "work_pages"
+          ],
           "properties": {
-            "description": {"type": "string", "minLength": 3, "maxLength": 500},
-            "work_pages": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/page_range"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}]}
+            "description": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 500
+            },
+            "work_pages": {
+              "anyOf": [
+                {
+                  "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/page_range"
+                },
+                {
+                  "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+                }
+              ]
+            }
           }
         },
         "members": {
@@ -88,64 +331,471 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["member_seq", "work_kind", "work_ref", "pages", "member_completeness"],
+            "required": [
+              "member_seq",
+              "work_kind",
+              "work_ref",
+              "pages",
+              "member_completeness"
+            ],
             "properties": {
-              "member_seq": {"type": "integer", "minimum": 1},
-              "work_kind": {"$ref": "#/$defs/work_kind"},
-              "work_ref": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/judgment_node_id"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}]},
-              "label_as_printed": {"type": ["string", "null"], "maxLength": 500},
-              "pages": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/page_range"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}]},
-              "member_completeness": {"enum": ["COMPLETE", "PARTIAL_EXTRACT", "NOT_CHECKED"]}
+              "member_seq": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "work_kind": {
+                "$ref": "#/$defs/work_kind"
+              },
+              "work_ref": {
+                "anyOf": [
+                  {
+                    "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/judgment_node_id"
+                  },
+                  {
+                    "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+                  }
+                ]
+              },
+              "label_as_printed": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 500
+              },
+              "pages": {
+                "anyOf": [
+                  {
+                    "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/page_range"
+                  },
+                  {
+                    "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+                  }
+                ]
+              },
+              "member_completeness": {
+                "enum": [
+                  "COMPLETE",
+                  "PARTIAL_EXTRACT",
+                  "NOT_CHECKED"
+                ]
+              }
             }
           }
         }
       },
       "allOf": [
-        {"if": {"properties": {"representation_kind": {"const": "RECONSTRUCTED_SEARCHABLE_PDF"}}}, "then": {"properties": {"origin_status": {"const": "LOCALLY_RECONSTRUCTED"}}}},
-        {"if": {"properties": {"origin_status": {"const": "LOCALLY_RECONSTRUCTED"}}}, "then": {"required": ["reconstructed_from_sha256", "reconstruction_method", "page_mapping"], "properties": {"reconstructed_from_sha256": {"minItems": 1}, "reconstruction_method": {"type": "string"}}}},
-        {"if": {"properties": {"representation_kind": {"const": "WORD_WITH_EMBEDDED_IMAGES"}}}, "then": {"properties": {"origin_status": {"not": {"const": "CARRIER_ISSUED_COPY_CLAIMED"}}}}},
-        {"if": {"properties": {"content_scope": {"const": "EXTRACT"}}}, "then": {"required": ["extract_scope"], "properties": {"completeness": {"const": "PARTIAL_EXTRACT"}, "extract_scope": {"type": "object"}}}},
-        {"if": {"properties": {"completeness": {"const": "PARTIAL_EXTRACT"}}}, "then": {"properties": {"content_scope": {"enum": ["EXTRACT", "COMPILATION"]}}}},
-        {"if": {"properties": {"content_scope": {"const": "COMPILATION"}}}, "then": {"required": ["members"], "properties": {"members": {"minItems": 2}}}},
-        {"if": {"properties": {"content_scope": {"not": {"const": "COMPILATION"}}}}, "then": {"properties": {"members": {"maxItems": 0}}}},
-        {"if": {"properties": {"completeness": {"const": "COMPLETE"}}}, "then": {"required": ["completeness_basis"], "properties": {"content_scope": {"enum": ["WHOLE_WORK", "COMPILATION"]}, "completeness_basis": {"type": "string", "minLength": 3}}}}
+        {
+          "if": {
+            "properties": {
+              "representation_kind": {
+                "const": "RECONSTRUCTED_SEARCHABLE_PDF"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "origin_status": {
+                "const": "LOCALLY_RECONSTRUCTED"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "origin_status": {
+                "const": "LOCALLY_RECONSTRUCTED"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "reconstructed_from_sha256",
+              "reconstruction_method",
+              "page_mapping"
+            ],
+            "properties": {
+              "reconstructed_from_sha256": {
+                "minItems": 1
+              },
+              "reconstruction_method": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "representation_kind": {
+                "const": "WORD_WITH_EMBEDDED_IMAGES"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "origin_status": {
+                "not": {
+                  "const": "CARRIER_ISSUED_COPY_CLAIMED"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "content_scope": {
+                "const": "EXTRACT"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "extract_scope"
+            ],
+            "properties": {
+              "completeness": {
+                "const": "PARTIAL_EXTRACT"
+              },
+              "extract_scope": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "completeness": {
+                "const": "PARTIAL_EXTRACT"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "content_scope": {
+                "enum": [
+                  "EXTRACT",
+                  "COMPILATION"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "content_scope": {
+                "const": "COMPILATION"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "members"
+            ],
+            "properties": {
+              "members": {
+                "minItems": 2
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "content_scope": {
+                "not": {
+                  "const": "COMPILATION"
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "members": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "completeness": {
+                "const": "COMPLETE"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "completeness_basis"
+            ],
+            "properties": {
+              "content_scope": {
+                "enum": [
+                  "WHOLE_WORK",
+                  "COMPILATION"
+                ]
+              },
+              "completeness_basis": {
+                "type": "string",
+                "minLength": 3
+              }
+            }
+          }
+        }
       ]
     },
     "work_identity": {
       "description": "MANDATORY. The legal work carried (for a compilation: the container; members carry their own). File hash is not judgment identity; a doc_id is not a judgment identity either.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["work_kind", "graph_node_ref", "identity_basis", "identity_verification"],
+      "required": [
+        "work_kind",
+        "graph_node_ref",
+        "identity_basis",
+        "identity_verification"
+      ],
       "properties": {
-        "work_kind": {"$ref": "#/$defs/work_kind"},
-        "judgment_id": {"description": "UNRESOLVABLE for judgments/orders. Canonical judgment identity (v1 judicial.judgment_identity_id) once identity work has resolved it.", "anyOf": [{"type": "string", "pattern": "^JG-[0-9a-f]{12}$|^[a-z0-9][a-z0-9._-]{0,159}$"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}, {"type": "null"}]},
-        "instrument_code": {"description": "UNRESOLVABLE for instruments.", "anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_code"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}, {"type": "null"}]},
+        "work_kind": {
+          "$ref": "#/$defs/work_kind"
+        },
+        "judgment_id": {
+          "description": "UNRESOLVABLE for judgments/orders. Canonical judgment identity (v1 judicial.judgment_identity_id) once identity work has resolved it.",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^JG-[0-9a-f]{12}$|^[a-z0-9][a-z0-9._-]{0,159}$"
+            },
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "instrument_code": {
+          "description": "UNRESOLVABLE for instruments.",
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_code"
+            },
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "graph_node_ref": {
           "description": "The C15 graph node this document maps to: JUD:<doc_id> for a held judgment, INSTCODE:<code> for an instrument (resolved by the consumer), or UNRESOLVED (for example a compilation container or an unclassified item).",
-          "anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/judgment_node_id"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_node_ref"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}]
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/judgment_node_id"
+            },
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/instrument_node_ref"
+            },
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+            }
+          ]
         },
-        "proceeding_numbers_as_printed": {"type": "array", "items": {"type": "string", "maxLength": 200}},
-        "rendition": {
-          "description": "OPTIONAL. Which issued form of the work these bytes reproduce.",
-          "type": ["object", "null"],
-          "additionalProperties": false,
-          "required": ["rendition_kind"],
-          "properties": {
-            "rendition_kind": {"enum": ["ISSUED_ORIGINAL", "CORRECTED_OR_AMENDED", "REPORTED_VERSION", "TRANSLATION", "OFFICIAL_CONSOLIDATION", "GAZETTE_FACSIMILE", "UNDETERMINED"]},
-            "language": {"type": ["string", "null"], "maxLength": 16}
+        "proceeding_numbers_as_printed": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 200
           }
         },
-        "identity_basis": {"enum": ["NOT_ESTABLISHED", "FOLDER_OR_FILENAME_LABEL", "METADATA_CANDIDATE", "COVER_PAGE_EXTRACTED", "DOCUMENTARY_CHECKED"]},
-        "identity_verification": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/graph_verification"},
-        "identity_review_ref": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/review_ref"}, {"type": "null"}]}
+        "rendition": {
+          "description": "OPTIONAL. Which issued form of the work these bytes reproduce.",
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "rendition_kind"
+          ],
+          "properties": {
+            "rendition_kind": {
+              "enum": [
+                "ISSUED_ORIGINAL",
+                "CORRECTED_OR_AMENDED",
+                "REPORTED_VERSION",
+                "TRANSLATION",
+                "OFFICIAL_CONSOLIDATION",
+                "GAZETTE_FACSIMILE",
+                "UNDETERMINED"
+              ]
+            },
+            "language": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 16
+            }
+          }
+        },
+        "identity_basis": {
+          "enum": [
+            "NOT_ESTABLISHED",
+            "FOLDER_OR_FILENAME_LABEL",
+            "METADATA_CANDIDATE",
+            "COVER_PAGE_EXTRACTED",
+            "DOCUMENTARY_CHECKED"
+          ]
+        },
+        "identity_verification": {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/graph_verification"
+        },
+        "identity_review_ref": {
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/review_ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "identity_review_binding": {
+          "anyOf": [
+            {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/review_binding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
       },
       "allOf": [
-        {"if": {"properties": {"work_kind": {"enum": ["JUDGMENT", "ORDER"]}}}, "then": {"required": ["judgment_id"], "properties": {"judgment_id": {"not": {"type": "null"}}}}},
-        {"if": {"properties": {"work_kind": {"enum": ["INSTRUMENT", "NOTIFICATION"]}}}, "then": {"required": ["instrument_code"], "properties": {"instrument_code": {"not": {"type": "null"}}}}},
-        {"if": {"properties": {"identity_verification": {"const": "DOCUMENTARY_CHECKED"}}}, "then": {"required": ["identity_review_ref"], "properties": {"identity_review_ref": {"type": "string"}, "identity_basis": {"const": "DOCUMENTARY_CHECKED"}}}},
-        {"if": {"properties": {"identity_basis": {"const": "DOCUMENTARY_CHECKED"}}}, "then": {"properties": {"identity_verification": {"const": "DOCUMENTARY_CHECKED"}}}},
-        {"properties": {"identity_verification": {"not": {"const": "LEGAL_REVIEWED"}}}},
-        {"if": {"properties": {"identity_basis": {"const": "FOLDER_OR_FILENAME_LABEL"}}}, "then": {"properties": {"identity_verification": {"enum": ["CANDIDATE", "CURATED_NAVIGATION"]}}}}
+        {
+          "if": {
+            "properties": {
+              "work_kind": {
+                "enum": [
+                  "JUDGMENT",
+                  "ORDER"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "judgment_id"
+            ],
+            "properties": {
+              "judgment_id": {
+                "not": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "work_kind": {
+                "enum": [
+                  "INSTRUMENT",
+                  "NOTIFICATION"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "instrument_code"
+            ],
+            "properties": {
+              "instrument_code": {
+                "not": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "identity_verification": {
+                "const": "DOCUMENTARY_CHECKED"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "identity_review_ref",
+              "identity_review_binding"
+            ],
+            "properties": {
+              "identity_review_ref": {
+                "type": "string"
+              },
+              "identity_basis": {
+                "const": "DOCUMENTARY_CHECKED"
+              },
+              "identity_review_binding": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "identity_basis": {
+                "const": "DOCUMENTARY_CHECKED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "identity_verification": {
+                "const": "DOCUMENTARY_CHECKED"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "identity_verification": {
+              "not": {
+                "const": "LEGAL_REVIEWED"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "identity_basis": {
+                "const": "FOLDER_OR_FILENAME_LABEL"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "identity_verification": {
+                "enum": [
+                  "CANDIDATE",
+                  "CURATED_NAVIGATION"
+                ]
+              }
+            }
+          }
+        }
       ]
     },
     "alternate_copies": {
@@ -154,52 +804,194 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["sha256", "relation", "verification"],
+        "required": [
+          "sha256",
+          "relation",
+          "verification"
+        ],
         "properties": {
-          "sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
-          "relation": {"enum": ["NORMALIZED_TEXT_IDENTICAL", "SAME_WORK_CANDIDATE", "RECONSTRUCTION_OF_THIS", "THIS_RECONSTRUCTED_FROM", "CONVERSION_OF_THIS", "THIS_CONVERTED_FROM", "MEMBER_OF_COMPILATION", "CONTAINS_AS_MEMBER"]},
-          "verification": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/graph_verification"},
-          "basis": {"type": ["string", "null"], "maxLength": 500}
+          "sha256": {
+            "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+          },
+          "relation": {
+            "enum": [
+              "NORMALIZED_TEXT_IDENTICAL",
+              "SAME_WORK_CANDIDATE",
+              "RECONSTRUCTION_OF_THIS",
+              "THIS_RECONSTRUCTED_FROM",
+              "CONVERSION_OF_THIS",
+              "THIS_CONVERTED_FROM",
+              "MEMBER_OF_COMPILATION",
+              "CONTAINS_AS_MEMBER"
+            ]
+          },
+          "verification": {
+            "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/graph_verification"
+          },
+          "basis": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 500
+          }
         }
       }
     },
     "embedded_images": {
       "description": "UNRESOLVABLE. Every image embedded in the container, in reading order (an empty array means inventoried and none found). Required to be non-empty for WORD_WITH_EMBEDDED_IMAGES and UNRESOLVED for WORD_IMAGES_NOT_INVENTORIED. An image whose text was never extracted is listed with ocr_state NOT_RUN or QUEUED, never omitted.",
-      "anyOf": [{"$ref": "#/$defs/embedded_image_list"}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}]
+      "anyOf": [
+        {
+          "$ref": "#/$defs/embedded_image_list"
+        },
+        {
+          "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+        }
+      ]
     },
-
     "text_derivatives": {
       "description": "MANDATORY (may be empty when no text has been produced). Text derivatives of this copy. derivative_id keeps the importer/GenerationStore form <doc_id>@<pipeline name>/<pipeline version>.",
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["derivative_id", "pipeline_name", "pipeline_version", "derivative_text_sha256", "pagination_basis", "methods", "text_reliability", "quoting_permitted", "coverage"],
+        "required": [
+          "derivative_id",
+          "pipeline_name",
+          "pipeline_version",
+          "derivative_text_sha256",
+          "pagination_basis",
+          "methods",
+          "text_reliability",
+          "quoting_permitted",
+          "coverage"
+        ],
         "properties": {
-          "derivative_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,159}@[A-Za-z0-9._-]{1,64}/[A-Za-z0-9._-]{1,64}$"},
-          "pipeline_name": {"type": "string", "maxLength": 64},
-          "pipeline_version": {"type": "string", "maxLength": 64},
-          "derivative_text_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
-          "pagination_basis": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/pagination_basis"},
-          "methods": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/extraction_method"}},
-          "ocr_config": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/ocr_config"}, {"type": "null"}]},
-          "text_reliability": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/text_reliability"},
-          "quoting_permitted": {"description": "False wherever any part of the derivative is OCR (v1 derived_text rule) or the text reliability is not 'reliable'.", "type": "boolean"},
+          "derivative_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]{0,159}@[A-Za-z0-9._-]{1,64}/[A-Za-z0-9._-]{1,64}$"
+          },
+          "pipeline_name": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "pipeline_version": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "derivative_text_sha256": {
+            "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+          },
+          "pagination_basis": {
+            "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/pagination_basis"
+          },
+          "methods": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/extraction_method"
+            }
+          },
+          "ocr_config": {
+            "anyOf": [
+              {
+                "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/ocr_config"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "text_reliability": {
+            "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/text_reliability"
+          },
+          "quoting_permitted": {
+            "description": "False wherever any part of the derivative is OCR (v1 derived_text rule) or the text reliability is not 'reliable'.",
+            "type": "boolean"
+          },
           "coverage": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["units_total", "units_with_text", "images_total", "images_text_extracted"],
+            "required": [
+              "units_total",
+              "units_with_text",
+              "images_total",
+              "images_text_extracted"
+            ],
             "properties": {
-              "units_total": {"type": "integer", "minimum": 0},
-              "units_with_text": {"type": "integer", "minimum": 0},
-              "images_total": {"anyOf": [{"type": "integer", "minimum": 0}, {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"}]},
-              "images_text_extracted": {"type": "integer", "minimum": 0}
+              "units_total": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "units_with_text": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "images_total": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/unresolved"
+                  }
+                ]
+              },
+              "images_text_extracted": {
+                "type": "integer",
+                "minimum": 0
+              }
             }
           }
         },
         "allOf": [
-          {"if": {"properties": {"methods": {"contains": {"enum": ["OCR_PAGE_IMAGE", "OCR_EMBEDDED_IMAGE"]}}}}, "then": {"required": ["ocr_config"], "properties": {"quoting_permitted": {"const": false}, "ocr_config": {"type": "object"}}}},
-          {"if": {"properties": {"text_reliability": {"not": {"const": "reliable"}}}}, "then": {"properties": {"quoting_permitted": {"const": false}}}}
+          {
+            "if": {
+              "properties": {
+                "methods": {
+                  "contains": {
+                    "enum": [
+                      "OCR_PAGE_IMAGE",
+                      "OCR_EMBEDDED_IMAGE"
+                    ]
+                  }
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "ocr_config"
+              ],
+              "properties": {
+                "quoting_permitted": {
+                  "const": false
+                },
+                "ocr_config": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "text_reliability": {
+                  "not": {
+                    "const": "reliable"
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "quoting_permitted": {
+                  "const": false
+                }
+              }
+            }
+          }
         ]
       }
     },
@@ -207,69 +999,501 @@
       "description": "MANDATORY. v1 provenance (acquisition channel, URL, HF location) plus local-collection observations and processing history.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["acquisition", "observations", "processing_history"],
+      "required": [
+        "acquisition",
+        "observations",
+        "processing_history"
+      ],
       "properties": {
-        "acquisition": {"$ref": "../v1/provenance.schema.json"},
-        "carrier_provenance": {"description": "SOURCE_AUTHORITY_POLICY v1 carrier_provenance as recorded upstream.", "enum": ["ISSUING_AUTHORITY", "GOVERNMENT_HOSTED_COPY", "THIRD_PARTY_ARCHIVAL_FACSIMILE", "USER_SUPPLIED", "THIRD_PARTY_TRANSCRIPTION", "UNKNOWN"]},
+        "acquisition": {
+          "$ref": "../v1/provenance.schema.json"
+        },
+        "carrier_provenance": {
+          "description": "SOURCE_AUTHORITY_POLICY v1 carrier_provenance as recorded upstream.",
+          "enum": [
+            "ISSUING_AUTHORITY",
+            "GOVERNMENT_HOSTED_COPY",
+            "THIRD_PARTY_ARCHIVAL_FACSIMILE",
+            "USER_SUPPLIED",
+            "THIRD_PARTY_TRANSCRIPTION",
+            "UNKNOWN"
+          ]
+        },
         "observations": {
           "description": "Every place these exact bytes were observed. Two paths with identical bytes are two observations of one copy (bytes are deduplicated; classifications from each path are kept as separate relationships).",
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["collection", "relative_path"],
+            "required": [
+              "collection",
+              "relative_path"
+            ],
             "properties": {
-              "collection": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/collection_ref"},
-              "relative_path": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/local_relative_path"},
-              "inventory_id": {"type": ["string", "null"], "pattern": "^L-[0-9a-f]{20}$"},
-              "observed_at": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/datetime"}, {"type": "null"}]}
+              "collection": {
+                "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/collection_ref"
+              },
+              "relative_path": {
+                "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/local_relative_path"
+              },
+              "inventory_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^L-[0-9a-f]{20}$"
+              },
+              "observed_at": {
+                "anyOf": [
+                  {
+                    "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
             }
           }
         },
-        "processing_history": {"type": "array", "items": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/processing_step"}}
+        "processing_history": {
+          "type": "array",
+          "items": {
+            "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/processing_step"
+          }
+        }
       }
     },
-    "restriction": {"description": "MANDATORY. v1 restriction (printed marking and eligibility decision). The RM register still overrides it.", "$ref": "../v1/restriction.schema.json"},
+    "restriction": {
+      "description": "MANDATORY. v1 restriction (printed marking and eligibility decision). The RM register still overrides it.",
+      "$ref": "../v1/restriction.schema.json"
+    },
     "integrity": {
       "description": "MANDATORY. Byte integrity only (v1 source_integrity value). SHA-256 is never authenticity.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["source_integrity", "basis"],
+      "required": [
+        "source_integrity",
+        "basis"
+      ],
       "properties": {
-        "source_integrity": {"enum": ["BYTE_VERIFIED", "DECLARED_HASH_ONLY", "NOT_CHECKED", "MISMATCH", "TRUNCATED_AT_SOURCE"]},
-        "basis": {"type": "string", "minLength": 3, "maxLength": 500}
+        "source_integrity": {
+          "enum": [
+            "BYTE_VERIFIED",
+            "DECLARED_HASH_ONLY",
+            "NOT_CHECKED",
+            "MISMATCH",
+            "TRUNCATED_AT_SOURCE"
+          ]
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 500
+        }
       }
     },
-    "status_axes": {"description": "OPTIONAL here (MANDATORY on the v1 document record). When present, the seven v1 axes.", "$ref": "../v1/status_axes.schema.json"},
+    "status_axes": {
+      "description": "OPTIONAL here (MANDATORY on the v1 document record). When present, the seven v1 axes.",
+      "$ref": "../v1/status_axes.schema.json"
+    },
     "research_eligibility": {
       "description": "MANDATORY. What research uses the application may make of this copy. Not publication and not legal approval.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["state", "quoting_permitted", "source_page_citation_permitted", "whole_work_claims_permitted", "graph_evidence_permitted", "basis"],
+      "required": [
+        "state",
+        "quoting_permitted",
+        "source_page_citation_permitted",
+        "whole_work_claims_permitted",
+        "graph_evidence_permitted",
+        "basis"
+      ],
       "properties": {
-        "state": {"enum": ["ELIGIBLE_FULL", "SEARCH_ONLY", "NAVIGATION_ONLY", "NOT_ELIGIBLE", "NOT_ASSESSED"]},
-        "quoting_permitted": {"type": "boolean"},
-        "source_page_citation_permitted": {"description": "False when no derivative is paginated by SOURCE_PHYSICAL pages (or a hash-checked one-to-one mapping).", "type": "boolean"},
-        "whole_work_claims_permitted": {"description": "False for extracts and unchecked completeness: no statement about the whole work (outcome, absence of a passage, complete reasoning) may rest on this copy.", "type": "boolean"},
-        "graph_evidence_permitted": {"type": "boolean"},
-        "basis": {"type": "array", "minItems": 1, "items": {"enum": ["TEXT_RELIABLE_NATIVE", "OCR_TEXT_SEARCH_ONLY", "GENERATED_PAGINATION", "RECONSTRUCTED_PAGINATION_UNMAPPED", "PARTIAL_EXTRACT", "COMPLETENESS_NOT_CHECKED", "EMBEDDED_IMAGES_NOT_EXTRACTED", "RESTRICTED", "ELIGIBILITY_NOT_ASSESSED", "UNRELIABLE_TEXT", "COMPILATION_MEMBER_BOUNDARIES"]}, "uniqueItems": true}
+        "state": {
+          "enum": [
+            "ELIGIBLE_FULL",
+            "SEARCH_ONLY",
+            "NAVIGATION_ONLY",
+            "NOT_ELIGIBLE",
+            "NOT_ASSESSED"
+          ]
+        },
+        "quoting_permitted": {
+          "type": "boolean"
+        },
+        "source_page_citation_permitted": {
+          "description": "False when no derivative is paginated by SOURCE_PHYSICAL pages (or a hash-checked one-to-one mapping).",
+          "type": "boolean"
+        },
+        "whole_work_claims_permitted": {
+          "description": "False for extracts and unchecked completeness: no statement about the whole work (outcome, absence of a passage, complete reasoning) may rest on this copy.",
+          "type": "boolean"
+        },
+        "graph_evidence_permitted": {
+          "type": "boolean"
+        },
+        "basis": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "TEXT_RELIABLE_NATIVE",
+              "OCR_TEXT_SEARCH_ONLY",
+              "GENERATED_PAGINATION",
+              "RECONSTRUCTED_PAGINATION_UNMAPPED",
+              "PARTIAL_EXTRACT",
+              "COMPLETENESS_NOT_CHECKED",
+              "EMBEDDED_IMAGES_NOT_EXTRACTED",
+              "RESTRICTED",
+              "ELIGIBILITY_NOT_ASSESSED",
+              "UNRELIABLE_TEXT",
+              "COMPILATION_MEMBER_BOUNDARIES"
+            ]
+          },
+          "uniqueItems": true
+        }
       },
       "allOf": [
-        {"if": {"properties": {"state": {"enum": ["NOT_ELIGIBLE", "NOT_ASSESSED"]}}}, "then": {"properties": {"quoting_permitted": {"const": false}, "graph_evidence_permitted": {"const": false}}}}
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "NOT_ELIGIBLE",
+                  "NOT_ASSESSED"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "quoting_permitted": {
+                "const": false
+              },
+              "graph_evidence_permitted": {
+                "const": false
+              }
+            }
+          }
+        }
       ]
     },
-    "corpus_generation_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/corpus_generation_id"}
+    "corpus_generation_id": {
+      "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/corpus_generation_id"
+    }
   },
   "allOf": [
-    {"if": {"properties": {"representation": {"properties": {"representation_kind": {"const": "WORD_WITH_EMBEDDED_IMAGES"}}}}}, "then": {"properties": {"embedded_images": {"type": "array", "minItems": 1}}}},
-    {"if": {"properties": {"representation": {"properties": {"representation_kind": {"enum": ["WORD_NATIVE_TEXT", "NATIVE_DIGITAL_PDF", "SCANNED_PDF", "MIXED_PDF", "RECONSTRUCTED_SEARCHABLE_PDF"]}}}}}, "then": {"properties": {"embedded_images": {"type": "array"}}}},
-    {"if": {"properties": {"representation": {"properties": {"representation_kind": {"const": "WORD_IMAGES_NOT_INVENTORIED"}}}}}, "then": {"properties": {"embedded_images": {"type": "object"}, "research_eligibility": {"properties": {"state": {"enum": ["SEARCH_ONLY", "NAVIGATION_ONLY", "NOT_ELIGIBLE", "NOT_ASSESSED"]}, "whole_work_claims_permitted": {"const": false}}}}}},
-    {"if": {"properties": {"representation": {"properties": {"content_scope": {"const": "EXTRACT"}}}}}, "then": {"properties": {"research_eligibility": {"properties": {"whole_work_claims_permitted": {"const": false}}}}}},
-    {"if": {"properties": {"representation": {"properties": {"completeness": {"enum": ["NOT_CHECKED", "PARTIAL_EXTRACT", "TRUNCATED_AT_SOURCE", "UNOPENABLE"]}}}}}, "then": {"properties": {"research_eligibility": {"properties": {"whole_work_claims_permitted": {"const": false}}}}}},
-    {"if": {"properties": {"representation": {"properties": {"origin_status": {"const": "CARRIER_ISSUED_COPY_CLAIMED"}}}}}, "then": {"properties": {"provenance": {"required": ["carrier_provenance"], "properties": {"carrier_provenance": {"enum": ["ISSUING_AUTHORITY", "GOVERNMENT_HOSTED_COPY"]}, "acquisition": {"properties": {"source_url": {"type": "string"}}}}}}}},
-    {"if": {"properties": {"restriction": {"properties": {"eligibility": {"const": "RESTRICTED"}}}}}, "then": {"properties": {"research_eligibility": {"properties": {"state": {"const": "NOT_ELIGIBLE"}}}}}},
-    {"if": {"properties": {"source_copy": {"properties": {"physical_pagination": {"const": "NONE_FLOW_DOCUMENT"}}}}}, "then": {"properties": {"text_derivatives": {"items": {"properties": {"pagination_basis": {"enum": ["GENERATED_SEGMENT", "IMAGE_SEQUENCE"]}}}}}}},
-    {"if": {"properties": {"integrity": {"properties": {"source_integrity": {"const": "MISMATCH"}}}}}, "then": {"properties": {"research_eligibility": {"properties": {"state": {"const": "NOT_ELIGIBLE"}}}}}}
+    {
+      "if": {
+        "properties": {
+          "representation": {
+            "properties": {
+              "representation_kind": {
+                "const": "WORD_WITH_EMBEDDED_IMAGES"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "embedded_images": {
+            "type": "array",
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "representation": {
+            "properties": {
+              "representation_kind": {
+                "enum": [
+                  "WORD_NATIVE_TEXT",
+                  "NATIVE_DIGITAL_PDF",
+                  "SCANNED_PDF",
+                  "MIXED_PDF",
+                  "RECONSTRUCTED_SEARCHABLE_PDF"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "embedded_images": {
+            "type": "array"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "representation": {
+            "properties": {
+              "representation_kind": {
+                "const": "WORD_IMAGES_NOT_INVENTORIED"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "embedded_images": {
+            "type": "object"
+          },
+          "research_eligibility": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "SEARCH_ONLY",
+                  "NAVIGATION_ONLY",
+                  "NOT_ELIGIBLE",
+                  "NOT_ASSESSED"
+                ]
+              },
+              "whole_work_claims_permitted": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "representation": {
+            "properties": {
+              "content_scope": {
+                "const": "EXTRACT"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "research_eligibility": {
+            "properties": {
+              "whole_work_claims_permitted": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "representation": {
+            "properties": {
+              "completeness": {
+                "enum": [
+                  "NOT_CHECKED",
+                  "PARTIAL_EXTRACT",
+                  "TRUNCATED_AT_SOURCE",
+                  "UNOPENABLE"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "research_eligibility": {
+            "properties": {
+              "whole_work_claims_permitted": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "representation": {
+            "properties": {
+              "origin_status": {
+                "const": "CARRIER_ISSUED_COPY_CLAIMED"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "provenance": {
+            "required": [
+              "carrier_provenance"
+            ],
+            "properties": {
+              "carrier_provenance": {
+                "enum": [
+                  "ISSUING_AUTHORITY",
+                  "GOVERNMENT_HOSTED_COPY"
+                ]
+              },
+              "acquisition": {
+                "properties": {
+                  "source_url": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "restriction": {
+            "properties": {
+              "eligibility": {
+                "const": "RESTRICTED"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "research_eligibility": {
+            "properties": {
+              "state": {
+                "const": "NOT_ELIGIBLE"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source_copy": {
+            "properties": {
+              "physical_pagination": {
+                "const": "NONE_FLOW_DOCUMENT"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "text_derivatives": {
+            "items": {
+              "properties": {
+                "pagination_basis": {
+                  "enum": [
+                    "GENERATED_SEGMENT",
+                    "IMAGE_SEQUENCE"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "integrity": {
+            "properties": {
+              "source_integrity": {
+                "const": "MISMATCH"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "research_eligibility": {
+            "properties": {
+              "state": {
+                "const": "NOT_ELIGIBLE"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "representation": {
+            "properties": {
+              "representation_kind": {
+                "const": "UNRECOGNISED_FORMAT"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source_copy": {
+            "properties": {
+              "detected_format": {
+                "const": "UNKNOWN"
+              }
+            }
+          },
+          "text_derivatives": {
+            "maxItems": 0
+          },
+          "research_eligibility": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "NOT_ELIGIBLE",
+                  "NOT_ASSESSED"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source_copy": {
+            "properties": {
+              "detected_format": {
+                "const": "UNKNOWN"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "representation": {
+            "properties": {
+              "representation_kind": {
+                "const": "UNRECOGNISED_FORMAT"
+              }
+            }
+          }
+        }
+      }
+    }
   ],
   "$defs": {
     "embedded_image_list": {
@@ -277,34 +1501,166 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["image_sequence_id", "sequence", "image_sha256", "location", "mime_type", "ocr_state"],
+        "required": [
+          "image_sequence_id",
+          "sequence",
+          "image_sha256",
+          "location",
+          "mime_type",
+          "ocr_state"
+        ],
         "properties": {
-          "image_sequence_id": {"$ref": "#/$defs/image_sequence_id"},
-          "sequence": {"type": "integer", "minimum": 1},
-          "image_sha256": {"description": "SHA-256 of the exact embedded image bytes (content identity; identical images in two documents share it).", "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
+          "image_sequence_id": {
+            "$ref": "#/$defs/image_sequence_id"
+          },
+          "sequence": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "image_sha256": {
+            "description": "SHA-256 of the exact embedded image bytes (content identity; identical images in two documents share it).",
+            "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+          },
           "location": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["kind"],
+            "required": [
+              "kind"
+            ],
             "properties": {
-              "kind": {"enum": ["DOCX_PART", "PDF_PAGE_XOBJECT", "STANDALONE"]},
-              "container_part": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9_./-]{1,200}$"},
-              "pdf_page": {"type": ["integer", "null"], "minimum": 1},
-              "body_order": {"type": ["integer", "null"], "minimum": 1}
+              "kind": {
+                "enum": [
+                  "DOCX_PART",
+                  "PDF_PAGE_XOBJECT",
+                  "STANDALONE"
+                ]
+              },
+              "container_part": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[A-Za-z0-9_./-]{1,200}$"
+              },
+              "pdf_page": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "body_order": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "occurrence_ref": {
+                "description": "Producer occurrence id (e.g. PR #76 'body:<relationship id>:<sequence>'). The same image bytes at two places are two occurrences.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 200
+              },
+              "relationship_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 64
+              }
             }
           },
-          "mime_type": {"enum": ["image/png", "image/jpeg", "image/gif", "image/bmp", "image/tiff", "image/x-emf", "image/x-wmf"]},
-          "pixel_width": {"type": ["integer", "null"], "minimum": 1},
-          "pixel_height": {"type": ["integer", "null"], "minimum": 1},
-          "ocr_state": {"enum": ["NOT_RUN", "QUEUED", "DONE", "FAILED", "NOT_REQUIRED_DECORATIVE"]},
-          "ocr_derivative_sha256": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]}
+          "mime_type": {
+            "enum": [
+              "image/png",
+              "image/jpeg",
+              "image/gif",
+              "image/bmp",
+              "image/tiff",
+              "image/x-emf",
+              "image/x-wmf",
+              "application/octet-stream"
+            ]
+          },
+          "pixel_width": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "pixel_height": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "ocr_state": {
+            "enum": [
+              "NOT_RUN",
+              "QUEUED",
+              "DONE",
+              "FAILED",
+              "NOT_REQUIRED_DECORATIVE"
+            ]
+          },
+          "ocr_derivative_sha256": {
+            "anyOf": [
+              {
+                "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "size_bytes": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          }
         },
         "allOf": [
-          {"if": {"properties": {"ocr_state": {"const": "DONE"}}}, "then": {"required": ["ocr_derivative_sha256"], "properties": {"ocr_derivative_sha256": {"type": "string"}}}}
+          {
+            "if": {
+              "properties": {
+                "ocr_state": {
+                  "const": "DONE"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "ocr_derivative_sha256"
+              ],
+              "properties": {
+                "ocr_derivative_sha256": {
+                  "type": "string"
+                }
+              }
+            }
+          }
         ]
       }
     },
-    "work_kind": {"enum": ["JUDGMENT", "ORDER", "INSTRUMENT", "NOTIFICATION", "MANUAL", "COMMENTARY_OR_NOTE", "COMPILATION_CONTAINER", "UNKNOWN"]},
+    "work_kind": {
+      "enum": [
+        "JUDGMENT",
+        "ORDER",
+        "INSTRUMENT",
+        "NOTIFICATION",
+        "MANUAL",
+        "COMMENTARY_OR_NOTE",
+        "COMPILATION_CONTAINER",
+        "UNKNOWN"
+      ]
+    },
     "image_sequence_id": {
       "description": "Position identity of an embedded image: IMG:<container sha256>:<1-based sequence in reading order>.",
       "type": "string",

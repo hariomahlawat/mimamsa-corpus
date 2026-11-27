@@ -1,5 +1,5 @@
 {
- "description": "C16 fixture manifest. kind=record: one JSON record; kind=exchange: a set of JSONL files validated together. expect=invalid lists the rule code that must be raised and, for SCHEMA, a JSON path fragment showing the intended reason.",
+ "description": "C16 fixture manifest. kind=record: one JSON record; kind=jsonl: records validated singly; kind=exchange_dir: a strict exchange directory; kind=exchange_case: a JSON object {expect_code, mode, ledger, files} validated as one exchange. expect=invalid lists the rule code that must be raised and, for SCHEMA, a JSON path fragment showing the intended reason.",
  "negative": [
   {
    "expect_code": "SCHEMA",
@@ -52,7 +52,7 @@
   },
   {
    "expect_code": "SCHEMA",
-   "file": "negative/N08_admission_eligible_with_failed_gate.json",
+   "file": "negative/N08_admission_eligible_without_mandatory_pass.json",
    "kind": "record",
    "ledger": 0,
    "schema_path_contains": "gates"
@@ -191,24 +191,319 @@
    "schema_path_contains": "result"
   },
   {
-   "expect_code": "KR_COMPONENT_MISSING",
+   "expect_code": "KR_ACCOUNTING",
    "file": "negative/N28_knowledge_release_without_admission_register.json",
    "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N29_admission_eligible_all_not_applicable.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "gates"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N30_admission_repeated_gate.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "gates"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N31_admission_revision_without_supersession.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "supersedes_admission_id"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N32_gate_pass_without_evidence.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "evidence_ref"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N33_classification_text_reviewed_finding.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "evidentiary_basis"
+  },
+  {
+   "expect_code": "C16_REVIEW_NOT_INDEPENDENT",
+   "file": "negative/N34_review_not_independent.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N35_checked_without_review_binding.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "review_binding"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N36_unknown_format_claimed_pdf.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "mime_type"
+  },
+  {
+   "expect_code": "KR_FULL_CAPABILITY_CLAIM",
+   "file": "negative/N37_full_capability_claimed_while_degraded.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N38_postgresql_archive_component.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "kind"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N39_knowledge_rows_table_not_allowlisted.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "table"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N40_text_store_without_authoritative_binding.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "binding"
+  },
+  {
+   "expect_code": "KR_PATH_OVERLAP",
+   "file": "negative/N41_component_path_overlap.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "KR_NAMESPACE",
+   "file": "negative/N42_component_file_in_reserved_namespace.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N43_index_accepted_on_source_digest_alone.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "verify"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N44_local_rebuild_reported_as_normal_acceptance.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "result"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N45_degraded_without_acknowledgement.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "degradation_acknowledged_by"
+  },
+  {
+   "expect_code": "C16_ADMISSION_ORPHAN",
+   "file": "negative/exchange/X01_orphan_admission.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ADMISSION_MISSING",
+   "file": "negative/exchange/X02_identity_without_decision.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_GENERATION_MISMATCH",
+   "file": "negative/exchange/X03_admission_from_another_generation.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ADMISSION_FORK",
+   "file": "negative/exchange/X04_admission_fork.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_GATE_EVIDENCE",
+   "file": "negative/exchange/X05_hash_pass_on_declared_hash.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ELIGIBLE_IDENTITY_NOT_READY",
+   "file": "negative/exchange/X06_restricted_identity_eligible_admission.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ELIGIBLE_IDENTITY_NOT_READY",
+   "file": "negative/exchange/X07_incomplete_identity_eligible_admission.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ADMISSION_SUPERSESSION",
+   "file": "negative/exchange/X08_supersedes_unknown_admission.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ANCHOR_PAGE_RANGE",
+   "file": "negative/exchange/X09_anchor_page_beyond_copy.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ANCHOR_IMAGE",
+   "file": "negative/exchange/X10_anchor_image_not_the_occurrence.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ANCHOR_DERIVATIVE",
+   "file": "negative/exchange/X11_anchor_derivative_of_another_copy.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ANCHOR_MAPPING",
+   "file": "negative/exchange/X12_reconstructed_page_without_checked_mapping.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_SUBJECT_NODE_MISMATCH",
+   "file": "negative/exchange/X13_subject_node_differs_from_identity.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_COMPILATION_MEMBER",
+   "file": "negative/exchange/X14_compilation_evidence_without_member.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_REVIEW_UNRESOLVED",
+   "file": "negative/exchange/X15_review_record_missing.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_REVIEW_BINDING",
+   "file": "negative/exchange/X16_review_record_altered_after_binding.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_TARGET_UNREGISTERED",
+   "file": "negative/exchange/X17_judgment_target_not_registered.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_RESTRICTED_IN_EXCHANGE",
+   "file": "negative/exchange/X18_restricted_item_in_exchange.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_FINDING_ON_WEAK_ANCHOR",
+   "file": "negative/exchange/X19_checked_relationship_on_unchecked_anchor.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_MANIFEST_MISMATCH",
+   "file": "negative/exchange/X20_manifest_count_mismatch.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_FILE_MISSING",
+   "file": "negative/exchange/X21_missing_population_strict.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_DUPLICATE_KEY",
+   "file": "negative/exchange/X22_duplicate_key_across_shards.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "JSONL_NOT_OBJECT",
+   "file": "negative/exchange/X23_non_object_and_null_lines.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_FILE_NAME",
+   "file": "negative/exchange/X24_non_canonical_file_name.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_KIND_MISMATCH",
+   "file": "negative/exchange/X25_record_kind_in_wrong_file.json",
+   "kind": "exchange_case",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/exchange/X26_identity_missing_field_excluded_from_cross_checks.json",
+   "kind": "exchange_case",
    "ledger": 0,
    "schema_path_contains": null
   }
  ],
  "positive": [
   {
-   "file": "positive/identities.jsonl",
-   "kind": "exchange_set",
-   "ledger": 0,
-   "with": [
-    "positive/anchors.jsonl",
-    "positive/relationships.jsonl",
-    "positive/taxonomy.jsonl",
-    "positive/admissions.jsonl"
-   ]
+   "file": "positive/exchange",
+   "kind": "exchange_dir",
+   "ledger": 0
   },
   {
    "file": "positive/legally_validated_ledger_v1.json",
@@ -247,6 +542,11 @@
   },
   {
    "file": "positive/knowledge_activation_record.json",
+   "kind": "record",
+   "ledger": 0
+  },
+  {
+   "file": "positive/knowledge_release_degraded_lexical_only.json",
    "kind": "record",
    "ledger": 0
   },

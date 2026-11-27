@@ -10,11 +10,12 @@
  "proposition_ref": null,
  "record_kind": "corpus_relationship",
  "relationship_id": "REL-cd42b6050e1453be311cb03c",
+ "review_binding": null,
  "review_ref": null,
  "source": {
   "author_id": null,
   "producer": {
-   "commit": null,
+   "commit": "c8fa5290",
    "config_sha256": null,
    "name": "c16-fixture-producer",
    "version": "1.0.0"

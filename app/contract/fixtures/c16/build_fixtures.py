@@ -21,7 +21,9 @@ from mimamsa_contract.c16.schemas import CONTRACT_ID  # noqa: E402
 
 CG = "CG-20261127-fixtures-0a1b2c3d"
 COLL = "local:owner-collection-fixture"
-TOOLS = {"name": "c16-fixture-producer", "version": "1.0.0", "commit": None, "config_sha256": None}
+TOOLS = {"name": "c16-fixture-producer", "version": "1.0.0", "commit": "c8fa5290", "config_sha256": None}
+AUTHOR = "fixture-extractor"
+REVIEWER = "fixture-independent-reviewer"
 
 
 def H(label: str) -> str:
@@ -72,7 +74,7 @@ def derivative(doc_id, name, version, basis, methods, units, with_text, reliabil
 
 
 def identity(key, *, mime, fmt, pages, pagination, rep, work, derivs, images=None, research, prov=None,
-             carrier="USER_SUPPLIED", observations=None, restr=None, alternates=None, history=None):
+             carrier="USER_SUPPLIED", observations=None, restr=None, alternates=None, history=None, integrity="DECLARED_HASH_ONLY"):
     rec = {"contract": CONTRACT_ID, "record_kind": "document_identity", "doc_id": DOC.get(key, key),
            "source_copy": {"sha256": SHA[key], "bytes": 100000 + len(key) * 1000, "mime_type": mime, "detected_format": fmt,
                            "page_count": pages, "physical_pagination": pagination,
@@ -82,7 +84,8 @@ def identity(key, *, mime, fmt, pages, pagination, rep, work, derivs, images=Non
            "provenance": {"acquisition": prov or v1_provenance(), "carrier_provenance": carrier,
                           "observations": observations or [], "processing_history": history or []},
            "restriction": restr or restriction(),
-           "integrity": {"source_integrity": "DECLARED_HASH_ONLY", "basis": "producer-computed SHA-256 (fixture)"},
+           "integrity": {"source_integrity": integrity, "basis": "re-downloaded at a pinned revision and re-hashed (fixture)"
+                         if integrity == "BYTE_VERIFIED" else "producer-computed SHA-256 (fixture)"},
            "research_eligibility": research, "corpus_generation_id": CG}
     if alternates:
         rec["alternate_copies"] = alternates
@@ -117,6 +120,7 @@ def build_identities():
                            12, 12, "reliable", True)],
         research=research("ELIGIBLE_FULL", True, True, True, True, ["TEXT_RELIABLE_NATIVE"]),
         prov=v1_provenance("https://judgments.example.invalid/ca0001.pdf", "CRAWLER"), carrier="GOVERNMENT_HOSTED_COPY",
+        integrity="BYTE_VERIFIED",
         history=[step(1, "ACQUIRE", "crawler-fixture", [], [SHA["official-pdf"]]),
                  step(2, "EXTRACT_TEXT", "mimamsa-corpus-text", [SHA["official-pdf"]], [H("derivative:%s:mimamsa-corpus-text:1.0.0" % DOC["official-pdf"])])])
     ids["scan-pdf"] = identity(
@@ -221,7 +225,30 @@ def build_identities():
                            "not_assessed", False, U("NOT_YET_PROCESSED"), 0)],
         images=U("NOT_YET_PROCESSED"),
         research=research("NOT_ASSESSED", False, False, False, False, ["ELIGIBILITY_NOT_ASSESSED", "EMBEDDED_IMAGES_NOT_EXTRACTED"]))
+    ids["duplicate-copy"] = identity(
+        "duplicate-copy", mime="application/pdf", fmt="PDF", pages=3, pagination="PHYSICAL_PAGES",
+        rep={"representation_kind": "NATIVE_DIGITAL_PDF", "origin_status": "ACQUIRED_COPY_ORIGIN_UNDETERMINED",
+             "content_scope": "UNDETERMINED", "completeness": "NOT_CHECKED"},
+        work={"work_kind": "UNKNOWN", "graph_node_ref": U(), "proceeding_numbers_as_printed": [],
+              "identity_basis": "NOT_ESTABLISHED", "identity_verification": "CANDIDATE"},
+        derivs=[], research=research("NOT_ASSESSED", False, False, False, False, ["ELIGIBILITY_NOT_ASSESSED"]))
     return ids
+
+
+def review_record(rid, subject_id, author=AUTHOR, reviewer=REVIEWER):
+    return {"contract_version": "1.0.0", "record_kind": "reviewed_record", "review_record_id": rid,
+            "subject": {"kind": "candidate", "id": subject_id}, "axis": "evidence_fidelity",
+            "from_value": "AUTOMATED_CANDIDATE_NOT_VERIFIED", "to_value": "DOCUMENTARY_CHECKED",
+            "reviewer": {"reviewer_id": reviewer, "name_or_role": "synthetic fixture reviewer", "kind": "HUMAN"},
+            "method": "page image compared with the anchored span (synthetic fixture)", "decided_at": "2026-11-27T00:00:00Z",
+            "record_location": {"path": "reviews/fixture.md", "commit": "c8fa5290"},
+            "reviewed_artefact": {"author_id": author, "reviewed_commit": "c8fa5290"}}
+
+
+def binding(rec):
+    return {"review_record_id": rec["review_record_id"], "review_record_sha256": canonical.record_sha256(rec),
+            "reviewed_commit": rec["reviewed_artefact"]["reviewed_commit"], "reviewer_id": rec["reviewer"]["reviewer_id"],
+            "reviewer_kind": rec["reviewer"]["kind"], "author_id": rec["reviewed_artefact"]["author_id"]}
 
 
 def anchor(**kw):
@@ -321,7 +348,8 @@ def rel(category, subject_key, target, basis, anchors, *, verification="CANDIDAT
          "target": target, "evidentiary_basis": basis,
          "source": {"producer": TOOLS, "rule_id": rule, "rule_version": "1.0", "author_id": "fixture-extractor"},
          "classification_provenance": None, "anchors": sorted(anchors), "verification": verification,
-         "review_ref": review, "approval_ref": None, "validates_relationship_id": None, "proposition_ref": proposition,
+         "review_ref": review, "review_binding": None, "approval_ref": None, "validates_relationship_id": None,
+         "proposition_ref": proposition,
          "temporal_scope": {"from": date, "from_status": "AS_OF_SOURCE_DATE", "to": None, "to_status": "NOT_APPLICABLE"},
          "has_legal_effect": legal, "is_finding": verification == "DOCUMENTARY_CHECKED", "uncertainty": uncertainty}
     r["relationship_id"] = canonical.relationship_id(r)
@@ -357,7 +385,20 @@ def build_relationships(ids, A):
     R.append(rel("interprets_provision", "official-pdf", {"resolved": True, "node_id": "PROV:AA-1950:s.69"}, "DOCUMENT_TEXT_EXTRACTED",
                  [A["native_follows"]["anchor_id"]], legal=True, date="2019-03-01",
                  uncertainty="Interpretation candidate; requires legal review before any reliance."))
+    checked = next(r for r in R if r["verification"] == "DOCUMENTARY_CHECKED")
+    rv1 = review_record("RV-FIXTURE-0001", checked["relationship_id"])
+    checked["review_binding"] = binding(rv1)
+    REVIEWS.append(rv1)
     return R
+
+
+REVIEWS: list[dict] = []
+
+
+def bind_native_anchor(A):
+    rv2 = review_record("RV-FIXTURE-0002", A["native"]["anchor_id"])
+    A["native"]["verification"] = {"state": "DOCUMENTARY_CHECKED", "review_ref": "RV-FIXTURE-0002", "review_binding": binding(rv2)}
+    REVIEWS.append(rv2)
 
 
 def tax(node_id, level, label, parents, *, code=None, prov=None, basis, verification, maps=None, aliases=(), src=None):
@@ -389,44 +430,61 @@ def build_taxonomy():
     return T
 
 
+GATE_IDS = ["G01_HASH_VERIFIED", "G02_FORMAT_DETECTED", "G03_RESTRICTED_REGISTER", "G04_ACCESS_MARKING_REVIEWED",
+            "G05_IDENTITY_RECORD_VALID", "G06_TEXT_DERIVATIVE_VERIFIED", "G07_EMBEDDED_IMAGES_ACCOUNTED",
+            "G08_RELEVANCE_ASSESSED", "G09_DUPLICATE_RESOLVED", "G10_SCHEMA_VALID"]
+
+
 def gates(**over):
-    ids = ["G01_HASH_VERIFIED", "G02_FORMAT_DETECTED", "G03_RESTRICTED_REGISTER", "G04_ACCESS_MARKING_REVIEWED",
-           "G05_IDENTITY_RECORD_VALID", "G06_TEXT_DERIVATIVE_VERIFIED", "G07_EMBEDDED_IMAGES_ACCOUNTED",
-           "G08_RELEVANCE_ASSESSED", "G09_DUPLICATE_RESOLVED", "G10_SCHEMA_VALID"]
-    return [{"gate_id": g, "result": over.get(g, "PASS"), "evidence_ref": None} for g in ids]
+    """Default: G01 NOT_RUN (declared hash only), every other gate PASS with evidence; override per case."""
+    out = []
+    for g in GATE_IDS:
+        res = over.get(g, "NOT_RUN" if g == "G01_HASH_VERIFIED" else "PASS")
+        out.append({"gate_id": g, "result": res, "evidence_ref": f"fixture evidence for {g}" if res == "PASS" else None})
+    return out
 
 
-def admission(key, decision, g, *, eligible=False, dup=None, rid=None, reasons=("fixture",), doc=None, sha=None, disp=None):
-    a = {"contract": CONTRACT_ID, "record_kind": "corpus_admission", "admission_id": "",
-         "subject": {"doc_id": doc or DOC[key], "source_copy_sha256": sha or SHA[key]}, "corpus_generation_id": CG,
+def admission(key, decision, g, *, eligible=False, dup=None, rid=None, reasons=("fixture",), doc=None, sha=None, disp=None,
+              revision=1, supersedes=None, gen=CG):
+    a = {"contract": CONTRACT_ID, "record_kind": "corpus_admission", "admission_id": "", "revision": revision,
+         "supersedes_admission_id": supersedes,
+         "subject": {"doc_id": doc or DOC.get(key, key), "source_copy_sha256": sha or SHA[key]}, "corpus_generation_id": gen,
          "decision": decision, "source_disposition": disp, "duplicate_of": dup, "restriction_id": rid, "gates": g,
          "application_eligible": eligible, "publication_effect": "NONE", "legal_effect": "NONE",
          "decided_by": {"kind": "AUTOMATED_RULE", "id": "c16-fixture-admission"}, "decided_at": None,
-         "rule_set": {"id": "c16-admission", "version": "1.0"}, "reasons": list(reasons), "supersedes_admission_id": None}
+         "rule_set": {"id": "c16-admission", "version": "1.1"}, "reasons": list(reasons)}
     a["admission_id"] = canonical.admission_id(a)
     return a
 
 
 def build_admissions():
+    NA7 = {"G07_EMBEDDED_IMAGES_ACCOUNTED": "NOT_APPLICABLE"}
+    w1 = admission("word-screenshots", "HELD_OCR_REQUIRED", gates(G07_EMBEDDED_IMAGES_ACCOUNTED="NOT_RUN"),
+                   reasons=["embedded images queued for OCR"], disp={"system": "c16-local-reconcile", "value": "NEW_DOCUMENT", "secondary_flags": []})
+    w2 = admission("word-screenshots", "HELD_EXTRACTION_INCOMPLETE", gates(G07_EMBEDDED_IMAGES_ACCOUNTED="FAIL"),
+                   reasons=["embedded image 3 not yet read (ocr_state QUEUED)"], revision=2, supersedes=w1["admission_id"],
+                   disp={"system": "c16-local-reconcile", "value": "NEW_DOCUMENT", "secondary_flags": []})
     return [
-        admission("official-pdf", "ADMITTED_AS_PRIMARY", gates(G07_EMBEDDED_IMAGES_ACCOUNTED="NOT_APPLICABLE"), eligible=True,
-                  reasons=["all gates passed (fixture)"]),
-        admission("word-screenshots", "HELD_EXTRACTION_INCOMPLETE",
-                  gates(G04_ACCESS_MARKING_REVIEWED="NOT_RUN", G07_EMBEDDED_IMAGES_ACCOUNTED="FAIL"),
-                  reasons=["embedded image 3 not yet read (ocr_state QUEUED)"],
-                  disp={"system": "c16-local-reconcile", "value": "NEW_DOCUMENT", "secondary_flags": []}),
-        admission("reconstructed-pdf", "ADMITTED_AS_ALTERNATE_COPY", gates(G07_EMBEDDED_IMAGES_ACCOUNTED="NOT_APPLICABLE"),
-                  dup={"sha256": SHA["scan-pdf"], "doc_id": DOC["scan-pdf"], "relation": "RECONSTRUCTION_OF"},
+        admission("official-pdf", "ADMITTED_AS_PRIMARY", gates(G01_HASH_VERIFIED="PASS", **NA7), eligible=True,
+                  reasons=["all gates passed with evidence (fixture)"]),
+        admission("scan-pdf", "HELD_INTEGRITY_UNVERIFIED", gates(**NA7), reasons=["hash declared, not re-verified"]),
+        admission("mixed-pdf", "HELD_RELEVANCE_UNRESOLVED", gates(G08_RELEVANCE_ASSESSED="NOT_RUN", **NA7), reasons=["relevance not assessed"]),
+        admission("reconstructed-pdf", "ADMITTED_AS_ALTERNATE_COPY", gates(**NA7),
+                  dup={"sha256": SHA["scan-pdf"], "doc_id": DOC["scan-pdf"], "relation": "RECONSTRUCTION_OF", "held_at": None},
                   reasons=["searchable reconstruction kept beside its original; original remains the evidence copy"]),
+        admission("extract-pdf", "HELD_IDENTITY_UNRESOLVED", gates(G09_DUPLICATE_RESOLVED="NOT_RUN", **NA7), reasons=["work identity open"]),
+        admission("compilation-pdf", "HELD_IDENTITY_UNRESOLVED", gates(G09_DUPLICATE_RESOLVED="NOT_RUN", **NA7), reasons=["member identities open"]),
+        admission("word-native", "HELD_INTEGRITY_UNVERIFIED", gates(**NA7), reasons=["hash declared, not re-verified"]),
         admission("word-uninventoried", "HELD_EXTRACTION_INCOMPLETE",
                   gates(G03_RESTRICTED_REGISTER="NOT_RUN", G04_ACCESS_MARKING_REVIEWED="NOT_RUN", G05_IDENTITY_RECORD_VALID="NOT_RUN",
-                        G06_TEXT_DERIVATIVE_VERIFIED="NOT_RUN", G07_EMBEDDED_IMAGES_ACCOUNTED="NOT_RUN", G08_RELEVANCE_ASSESSED="NOT_RUN"),
+                        G06_TEXT_DERIVATIVE_VERIFIED="NOT_RUN", G07_EMBEDDED_IMAGES_ACCOUNTED="NOT_RUN", G08_RELEVANCE_ASSESSED="NOT_RUN",
+                        G09_DUPLICATE_RESOLVED="NOT_RUN"),
                   reasons=["embedded images not inventoried"]),
-        admission(None, "EXCLUDED_RESTRICTED", gates(G03_RESTRICTED_REGISTER="FAIL"), rid="RM-999",
-                  doc="local-restricted-fixture", sha=SHA["restricted-copy"], reasons=["matches the restricted-material register (fixture id)"]),
-        admission(None, "REJECTED_EXACT_DUPLICATE", gates(),
-                  dup={"sha256": SHA["duplicate-copy"], "doc_id": None, "relation": "BYTE_IDENTICAL"},
-                  doc="local-duplicate-fixture", sha=SHA["duplicate-copy"], reasons=["bytes already held at the canonical revision"]),
+        admission("duplicate-copy", "REJECTED_EXACT_DUPLICATE",
+                  gates(G06_TEXT_DERIVATIVE_VERIFIED="NOT_APPLICABLE", **NA7),
+                  dup={"sha256": SHA["duplicate-copy"], "doc_id": None, "relation": "BYTE_IDENTICAL", "held_at": "hf:fixture-revision"},
+                  reasons=["bytes already held at the canonical revision"]),
+        w1, w2,
     ]
 
 
@@ -435,12 +493,38 @@ def legally_validated(base):
          "subject": copy.deepcopy(base["subject"]), "target": copy.deepcopy(base["target"]), "evidentiary_basis": "LEGAL_REVIEW",
          "source": {"producer": TOOLS, "rule_id": "LEGAL-REVIEW", "rule_version": "1.0", "author_id": None},
          "classification_provenance": None, "anchors": [], "verification": "LEGAL_REVIEWED", "review_ref": None,
-         "approval_ref": "AP-FIXTURE-0001", "validates_relationship_id": base["relationship_id"], "proposition_ref": None,
+         "review_binding": None, "approval_ref": "AP-FIXTURE-0001", "validates_relationship_id": base["relationship_id"],
+         "proposition_ref": None,
          "temporal_scope": {"from": None, "from_status": "NOT_DETERMINED", "to": None, "to_status": "NOT_DETERMINED"},
          "has_legal_effect": True, "is_finding": True,
          "uncertainty": "Representation test only: a legal approval overlay (impossible while AUTH-LEDGER is at version 0)."}
     r["relationship_id"] = canonical.relationship_id(r)
     return r
+
+
+STEMS = {"identities": "document_identity", "anchors": "evidence_anchor", "relationships": "corpus_relationship",
+         "taxonomy": "taxonomy_node", "admissions": "corpus_admission", "reviewed_records": "reviewed_record"}
+GIT_PIN = "c8fa5290a7f03ed47f57ba82cc57503005e11d48"
+
+
+def exchange_files(pop: dict[str, list[dict]], *, manifest_edit=None, raw: dict[str, bytes] | None = None,
+                   gen=CG, external=None) -> dict[str, bytes]:
+    files = {f"{stem}.jsonl": canonical.dumps_jsonl(recs) for stem, recs in pop.items()}
+    files.update(raw or {})
+    man = {"contract": CONTRACT_ID, "record_kind": "corpus_generation_manifest", "corpus_generation_id": gen, "built_at": None,
+           "pinned_inputs": {"hf": [], "git": [{"commit": GIT_PIN, "purpose": "contract, tools and fixtures"}],
+                             "restricted_register_sha256": H("register-fixture"), "tools": [TOOLS]},
+           "files": [{"path": name, "record_kind": STEMS[name.split(".")[0]], "sha256": hashlib.sha256(data).hexdigest(),
+                      "records": sum(1 for x in data.split(b"\n") if x)} for name, data in sorted(files.items())
+                     if name.split(".")[0] in STEMS],
+           "registries": {"instrument_codes": ["AA-1950", "AFA-1950", "AFT-2007", "AFT-PR-2008", "AR-1954", "BNS-2023", "BNSS-2023",
+                                               "BSA-2023", "CRPC-1973", "IEA-1872", "IPC-1860", "NA-1957"],
+                          "external_judgments": sorted(external if external is not None else
+                                                       ["JUD:JG-" + H("jg:cited")[:12], "JUD:JG-" + H("jg:2")[:12]])}}
+    if manifest_edit:
+        manifest_edit(man)
+    files["GENERATION.json"] = json.dumps(man, indent=1, sort_keys=True).encode() + b"\n"
+    return files
 
 
 def negatives(ids, A, R, T, ADM):
@@ -452,7 +536,6 @@ def negatives(ids, A, R, T, ADM):
     folder = next(r for r in R if r["evidentiary_basis"] == "FOLDER_PATH")
     x = copy.deepcopy(folder)
     x.update(verification="DOCUMENTARY_CHECKED", is_finding=True, review_ref="RV-FIXTURE-0002")
-    x["relationship_id"] = canonical.relationship_id(x)
     m("N01_folder_classification_as_verified_finding", x, "SCHEMA", "verification")
     x = copy.deepcopy(ids["reconstructed-pdf"])
     x["representation"]["origin_status"] = "CARRIER_ISSUED_COPY_CLAIMED"
@@ -466,7 +549,6 @@ def negatives(ids, A, R, T, ADM):
     m("N04_missing_mandatory_sha256", x, "SCHEMA", "source_copy")
     x = copy.deepcopy(A["ocr_page"])
     x["quoting_permitted"] = True
-    x["anchor_id"] = canonical.anchor_id(x)
     m("N05_ocr_anchor_quotable", x, "SCHEMA", "quoting_permitted")
     lv = legally_validated(next(r for r in R if r["category"] == "follows"))
     m("N06_legally_validated_at_ledger_v0", lv, "LEDGER_V0_NO_APPROVAL", None, 0)
@@ -474,10 +556,9 @@ def negatives(ids, A, R, T, ADM):
     x["approval_ref"] = None
     m("N07_legally_validated_without_approval", x, "SCHEMA", "approval_ref", 1)
     x = copy.deepcopy(ADM[1])
-    x["application_eligible"] = True
-    x["decision"] = "ADMITTED_AS_PRIMARY"
+    x.update(application_eligible=True, decision="ADMITTED_AS_PRIMARY")
     x["admission_id"] = canonical.admission_id(x)
-    m("N08_admission_eligible_with_failed_gate", x, "SCHEMA", "gates")
+    m("N08_admission_eligible_without_mandatory_pass", x, "SCHEMA", "gates")
     x = copy.deepcopy(next(r for r in R if r["category"] == "follows"))
     x["anchors"] = []
     x["relationship_id"] = canonical.relationship_id(x)
@@ -487,7 +568,6 @@ def negatives(ids, A, R, T, ADM):
     m("N10_word_screenshots_without_image_inventory", x, "SCHEMA", "embedded_images")
     x = copy.deepcopy(A["docx_generated"])
     x["locator"]["citable_as_source_page"] = True
-    x["anchor_id"] = canonical.anchor_id(x)
     m("N11_generated_segment_cited_as_page", x, "SCHEMA", "citable_as_source_page")
     x = copy.deepcopy(ids["compilation-pdf"])
     x["representation"]["members"] = x["representation"]["members"][:1]
@@ -520,98 +600,332 @@ def negatives(ids, A, R, T, ADM):
     x = copy.deepcopy(next(r for r in R if r["category"] == "cites_provision" and r["verification"] == "CANDIDATE"))
     x["is_finding"] = True
     m("N22_candidate_marked_as_finding", x, "SCHEMA", "verification")
+    # C01 admission
+    x = copy.deepcopy(ADM[0])
+    x["gates"] = [dict(g, result="NOT_APPLICABLE", evidence_ref=None) for g in x["gates"]]
+    m("N29_admission_eligible_all_not_applicable", x, "SCHEMA", "gates")
+    x = copy.deepcopy(ADM[0])
+    x["gates"][9] = dict(x["gates"][0])
+    m("N30_admission_repeated_gate", x, "SCHEMA", "gates")
+    x = copy.deepcopy(ADM[-1])
+    x["supersedes_admission_id"] = None
+    m("N31_admission_revision_without_supersession", x, "SCHEMA", "supersedes_admission_id")
+    x = copy.deepcopy(ADM[1])
+    x["gates"][0] = {"gate_id": "G01_HASH_VERIFIED", "result": "PASS", "evidence_ref": None}
+    m("N32_gate_pass_without_evidence", x, "SCHEMA", "evidence_ref")
+    # C02 classification can never be reviewed or a finding
+    x = copy.deepcopy(next(r for r in R if r["evidentiary_basis"] == "FILENAME_PATTERN"))
+    x.update(evidentiary_basis="DOCUMENT_TEXT_REVIEWED", is_finding=True)
+    m("N33_classification_text_reviewed_finding", x, "SCHEMA", "evidentiary_basis")
+    x = copy.deepcopy(next(r for r in R if r["verification"] == "DOCUMENTARY_CHECKED"))
+    x["review_binding"] = dict(x["review_binding"], reviewer_id=AUTHOR)
+    m("N34_review_not_independent", x, "C16_REVIEW_NOT_INDEPENDENT")
+    x = copy.deepcopy(next(r for r in R if r["verification"] == "DOCUMENTARY_CHECKED"))
+    x["review_binding"] = None
+    m("N35_checked_without_review_binding", x, "SCHEMA", "review_binding")
+    # C06 unknown format may not be claimed as PDF
+    x = copy.deepcopy(ids["duplicate-copy"])
+    x["source_copy"]["detected_format"] = "UNKNOWN"
+    m("N36_unknown_format_claimed_pdf", x, "SCHEMA", "mime_type")
     return N
 
 
+def exchange_negatives(pop):
+    X = {}
+
+    def var(name, code, mutate=None, mode="strict", **kw):
+        p = copy.deepcopy(pop)
+        if mutate:
+            mutate(p)
+        X[name] = ({"expect_code": code, "mode": mode, "ledger": 0}, exchange_files(p, **kw))
+
+    def readmit(a):
+        a["admission_id"] = canonical.admission_id(a)
+        return a
+
+    def orphan(p):
+        a = copy.deepcopy(p["admissions"][1])
+        a["subject"] = {"doc_id": "orphan-fixture", "source_copy_sha256": H("orphan")}
+        p["admissions"].append(readmit(a))
+    var("X01_orphan_admission", "C16_ADMISSION_ORPHAN", orphan)
+
+    def missing(p):
+        p["admissions"] = [a for a in p["admissions"] if a["subject"]["doc_id"] != DOC["mixed-pdf"]]
+    var("X02_identity_without_decision", "C16_ADMISSION_MISSING", missing)
+
+    def wrong_gen(p):
+        a = next(a for a in p["admissions"] if a["subject"]["doc_id"] == DOC["mixed-pdf"])
+        a["corpus_generation_id"] = "CG-20261127-other-ffffffff"
+        readmit(a)
+    var("X03_admission_from_another_generation", "C16_GENERATION_MISMATCH", wrong_gen)
+
+    def fork(p):
+        w2 = next(a for a in p["admissions"] if a["revision"] == 2)
+        f = copy.deepcopy(w2)
+        f["reasons"] = ["conflicting second revision"]
+        f["decision"] = "HELD_IDENTITY_UNRESOLVED"
+        p["admissions"].append(readmit(f))
+    var("X04_admission_fork", "C16_ADMISSION_FORK", fork)
+
+    def g01_conflict(p):
+        a = next(a for a in p["admissions"] if a["subject"]["doc_id"] == DOC["scan-pdf"])
+        a["gates"][0] = {"gate_id": "G01_HASH_VERIFIED", "result": "PASS", "evidence_ref": "claimed"}
+        readmit(a)
+    var("X05_hash_pass_on_declared_hash", "C16_GATE_EVIDENCE", g01_conflict)
+
+    def restricted_eligible(p):
+        d = next(d for d in p["identities"] if d["doc_id"] == DOC["official-pdf"])
+        d["restriction"] = restriction("RESTRICTED", "RM-999")
+        d["research_eligibility"] = research("NOT_ELIGIBLE", False, False, False, False, ["RESTRICTED"])
+    var("X06_restricted_identity_eligible_admission", "C16_ELIGIBLE_IDENTITY_NOT_READY", restricted_eligible)
+
+    def incomplete_eligible(p):
+        d = next(d for d in p["identities"] if d["doc_id"] == DOC["official-pdf"])
+        d["integrity"] = {"source_integrity": "DECLARED_HASH_ONLY", "basis": "not re-verified"}
+    var("X07_incomplete_identity_eligible_admission", "C16_ELIGIBLE_IDENTITY_NOT_READY", incomplete_eligible)
+
+    def self_super(p):
+        w2 = next(a for a in p["admissions"] if a["revision"] == 2)
+        w2["supersedes_admission_id"] = "ADM-" + "1" * 24
+        readmit(w2)
+    var("X08_supersedes_unknown_admission", "C16_ADMISSION_SUPERSESSION", self_super)
+
+    def page_range(p):
+        a = next(a for a in p["anchors"] if a["anchor_id"] == pop_anchor(p, "native_cite_judgment"))
+        a["locator"]["physical_page"] = 99
+        rename_anchor(p, a)
+    var("X09_anchor_page_beyond_copy", "C16_ANCHOR_PAGE_RANGE", page_range)
+
+    def bad_image(p):
+        a = next(a for a in p["anchors"] if a["locator"]["kind"] == "IMAGE_SEQUENCE")
+        a["image_sha256"] = H("other-image")
+        rename_anchor(p, a)
+    var("X10_anchor_image_not_the_occurrence", "C16_ANCHOR_IMAGE", bad_image)
+
+    def foreign_derivative(p):
+        a = next(a for a in p["anchors"] if a["anchor_id"] == pop_anchor(p, "native_follows"))
+        a["derivative_text_sha256"] = H("derivative:another-copy")
+        rename_anchor(p, a)
+    var("X11_anchor_derivative_of_another_copy", "C16_ANCHOR_DERIVATIVE", foreign_derivative)
+
+    def unchecked_mapping(p):
+        d = next(d for d in p["identities"] if d["doc_id"] == DOC["reconstructed-pdf"])
+        d["representation"]["page_mapping"]["basis"] = "ONE_TO_ONE_DECLARED_NOT_CHECKED"
+        d["research_eligibility"]["source_page_citation_permitted"] = False
+    var("X12_reconstructed_page_without_checked_mapping", "C16_ANCHOR_MAPPING", unchecked_mapping)
+
+    def node_mismatch(p):
+        r = next(r for r in p["relationships"] if r["category"] == "refers_to_judgment")
+        r["subject"]["graph_node_ref"] = "JUD:someone-else"
+        r["relationship_id"] = canonical.relationship_id(r)
+    var("X13_subject_node_differs_from_identity", "C16_SUBJECT_NODE_MISMATCH", node_mismatch)
+
+    def compilation_no_member(p):
+        comp = next(d for d in p["identities"] if d["doc_id"] == DOC["compilation-pdf"])
+        anc = {"contract": CONTRACT_ID, "record_kind": "evidence_anchor", "anchor_id": "", "doc_id": comp["doc_id"],
+               "original_sha256": comp["source_copy"]["sha256"], "representation_sha256": comp["source_copy"]["sha256"],
+               "derivative_text_sha256": comp["text_derivatives"][0]["derivative_text_sha256"], "image_sha256": None,
+               "locator": {"kind": "SOURCE_PHYSICAL_PAGE", "physical_page": 14, "citable_as_source_page": True},
+               "text_span": None, "bbox": None,
+               "extraction": {"method": "NATIVE_TEXT_LAYER", "pipeline_name": "mimamsa-corpus-text", "pipeline_version": "1.0.0", "ocr_config": None},
+               "quality": {"text_reliability": "reliable", "ocr_mean_confidence": None, "low_confidence": False},
+               "verification": {"state": "AUTOMATED_CANDIDATE_NOT_VERIFIED", "review_ref": None}, "quoting_permitted": True, "quote": None}
+        anc["anchor_id"] = canonical.anchor_id(anc)
+        p["anchors"].append(anc)
+        r = rel("cites_provision", "compilation-pdf", {"resolved": True, "node_id": "PROV:AA-1950:s.69"}, "DOCUMENT_TEXT_EXTRACTED",
+                [anc["anchor_id"]], date="2019-03-01")
+        r["subject"]["graph_node_ref"] = U()
+        r["relationship_id"] = canonical.relationship_id(r)
+        r.pop("graph_projection")
+        p["relationships"].append(r)
+    var("X14_compilation_evidence_without_member", "C16_COMPILATION_MEMBER", compilation_no_member)
+
+    def unresolved_review(p):
+        p["reviewed_records"] = [r for r in p["reviewed_records"] if r["review_record_id"] != "RV-FIXTURE-0001"]
+    var("X15_review_record_missing", "C16_REVIEW_UNRESOLVED", unresolved_review)
+
+    def altered_review(p):
+        rr = next(r for r in p["reviewed_records"] if r["review_record_id"] == "RV-FIXTURE-0001")
+        rr["method"] = "altered after the binding was computed"
+    var("X16_review_record_altered_after_binding", "C16_REVIEW_BINDING", altered_review)
+
+    var("X17_judgment_target_not_registered", "C16_TARGET_UNREGISTERED", external=[])
+
+    def restricted_admission(p):
+        a = admission(None, "EXCLUDED_RESTRICTED", gates(G03_RESTRICTED_REGISTER="FAIL", G07_EMBEDDED_IMAGES_ACCOUNTED="NOT_APPLICABLE"),
+                      rid="RM-999", doc="local-restricted-fixture", sha=H("restricted-copy"), reasons=["register match (fixture id)"])
+        p["admissions"].append(a)
+    var("X18_restricted_item_in_exchange", "C16_RESTRICTED_IN_EXCHANGE", restricted_admission)
+
+    def weak_finding(p):
+        a = next(a for a in p["anchors"] if a["anchor_id"] == pop_anchor(p, "native"))
+        a["verification"] = {"state": "AUTOMATED_CANDIDATE_NOT_VERIFIED", "review_ref": None}
+        p["reviewed_records"] = [r for r in p["reviewed_records"] if r["review_record_id"] != "RV-FIXTURE-0002"]
+    var("X19_checked_relationship_on_unchecked_anchor", "C16_FINDING_ON_WEAK_ANCHOR", weak_finding)
+
+    var("X20_manifest_count_mismatch", "C16_MANIFEST_MISMATCH",
+        manifest_edit=lambda m: next(f for f in m["files"] if f["path"] == "anchors.jsonl").__setitem__("records", 1))
+
+    def drop_anchors(p):
+        p.pop("anchors")
+    var("X21_missing_population_strict", "C16_FILE_MISSING", drop_anchors)
+
+    def dup_shard(p):
+        pass
+    shard = canonical.dumps_jsonl([pop["identities"][0]])
+    var("X22_duplicate_key_across_shards", "C16_DUPLICATE_KEY", dup_shard,
+        raw={"identities.0001.jsonl": shard})
+
+    var("X23_non_object_and_null_lines", "JSONL_NOT_OBJECT", raw={"taxonomy.0001.jsonl": b"null\n[1,2]\n\"text\"\n"})
+    var("X24_non_canonical_file_name", "C16_FILE_NAME", raw={"extra-records.jsonl": canonical.dumps_jsonl([pop["taxonomy"][0]])})
+
+    def kind_mismatch(p):
+        p["taxonomy"] = p["taxonomy"] + []
+    var("X25_record_kind_in_wrong_file", "C16_KIND_MISMATCH",
+        raw={"anchors.0001.jsonl": canonical.dumps_jsonl([pop["taxonomy"][0]])})
+
+    def missing_field(p):
+        d = next(d for d in p["identities"] if d["doc_id"] == DOC["mixed-pdf"])
+        del d["integrity"]
+    var("X26_identity_missing_field_excluded_from_cross_checks", "SCHEMA", missing_field)
+    return X
+
+
+def pop_anchor(p, key):
+    return ANCHOR_KEYS[key]
+
+
+def rename_anchor(p, a):
+    """Recompute an anchor id after a locator change and repoint the relationships that cite it."""
+    old = a["anchor_id"]
+    a["anchor_id"] = canonical.anchor_id(a)
+    for r in p["relationships"]:
+        if old in r["anchors"]:
+            r["anchors"] = sorted(a["anchor_id"] if x == old else x for x in r["anchors"])
+            r["relationship_id"] = canonical.relationship_id(r)
+
+
+ANCHOR_KEYS: dict[str, str] = {}
+
+
+# ----------------------------------------------------------------------------------------- WP06 release fixtures
 E5 = H("model:e5-small-onnx")
 XENC = H("model:cross-encoder-onnx")
 REL_FULL = "R16-knowledge-20261201-0a0b0c0d"
 REL_DELTA = "R17-knowledge-20261215-1a1b1c1d"
 REL_MODEL = "R18-intelligence-20261220-2a2b2c2d"
+ACCEL_VERIFY = {
+    "KNOWLEDGE_ROWS": ["SHA256_EACH_FILE", "ROW_COUNTS", "ROWS_ALLOWLIST_AND_TYPES", "ROWS_REDERIVE_COMPARE", "SOURCE_DIGEST_EQUALS_SITE"],
+    "GRAPH": ["SHA256_EACH_FILE", "GRAPH_DIGEST", "GRAPH_STRUCTURAL_RECHECK", "SAMPLED_REBUILD_PARITY", "SOURCE_DIGEST_EQUALS_SITE"],
+    "LEXICAL_INDEX": ["SHA256_EACH_FILE", "SQLITE_QUICK_CHECK", "SAMPLED_POSTINGS_REDERIVE", "SAMPLED_QUERY_PARITY", "SOURCE_DIGEST_EQUALS_SITE"],
+    "TEXT_STORE": ["SHA256_EACH_FILE", "SQLITE_QUICK_CHECK", "TEXT_STORE_BIND_EXACT", "PAGE_HASH_ON_READ", "SOURCE_DIGEST_EQUALS_SITE"],
+    "VECTOR_PACK": ["SHA256_EACH_FILE", "VECTOR_TRAILER", "VECTOR_KEYS_RECOMPUTED", "VECTOR_SPOT_REEMBED", "SOURCE_DIGEST_EQUALS_SITE"],
+}
 
 
-def component(cid, kind, fmt, files, *, transport="FULL", accel=False, model=None, count=1, verify=None, fallback=None):
+def fe(path):
+    return {"path": path, "sha256": H("file:" + path), "bytes": 1000 + len(path)}
+
+
+def component(cid, kind, fmt, paths, *, transport="FULL", model=None, count=1, verify=None, fallback=None, tables=None):
+    accel = kind in ACCEL_VERIFY
     c = {"component_id": cid, "kind": kind, "format": fmt, "authority": "ACCELERATOR" if accel else "AUTHORITATIVE",
-         "transport": transport, "files": files, "result_digest": H(f"result:{cid}:{transport}"), "result_count": count,
-         "source_digest": H(f"source:{cid}") if accel else None,
+         "transport": transport, "files": [fe(p) for p in paths], "result_digest": H(f"result:{cid}:{transport}"),
+         "result_count": count, "source_digest": H(f"source:{cid}") if accel else None,
          "builder": {"name": f"{cid}-builder", "version": "1.0.0", "commit": "c8fa5290", "config_sha256": None} if accel else None,
-         "model_sha256": model, "verify": verify or ["SHA256_EACH_FILE", "RESULT_DIGEST", "RESTRICTED_REGISTER"],
-         "fallback": fallback}
+         "model_sha256": model, "verify": verify or ACCEL_VERIFY.get(kind) or ["SHA256_EACH_FILE", "RESULT_DIGEST", "RESTRICTED_REGISTER"],
+         "fallback": fallback if fallback else ("REBUILD_LOCALLY_CHEAP" if accel and kind != "VECTOR_PACK" else ("SERVE_LEXICAL_ONLY" if accel else None)),
+         "disk_budget_bytes": 10 ** 9 if accel else None}
+    if kind == "TEXT_STORE":
+        c["binding"] = "BIND_EXACT_TO_GENERATION_RECORDS"
+    if tables:
+        c["tables"] = tables
     return c
 
 
-def knowledge_manifest(mode):
+def knowledge_manifest(mode, level="FULL", vectors=True):
     delta = mode == "DELTA"
     t = "DELTA" if delta else "FULL"
+    rows = [{"table": tb, "file": f"accelerators/rows/{tb}.jsonl", "row_count": 10, "rows_sha256": H("rows:" + tb)}
+            for tb in ("graph_edges", "graph_nodes", "taxonomy_nodes")]
     comps = [
-        component("originals", "ORIGINALS", "vault-sha256", ["originals/"], transport=t, count=2383),
-        component("text", "TEXT_DERIVATIVES", "page-marker-v1", ["text/"], transport=t, count=2383),
+        component("originals", "ORIGINALS", "vault-sha256", ["originals/" + H("o1")], transport=t, count=2383),
+        component("text", "TEXT_DERIVATIVES", "page-marker-v1", ["text/" + H("t1") + ".txt"], transport=t, count=2383),
         component("records", "RECORDS", "canonical-jsonl", ["data/documents.jsonl", "data/derived_text.jsonl", "data/candidates.jsonl",
                                                             "corpus-v2/identities.jsonl", "corpus-v2/relationships.jsonl",
-                                                            "corpus-v2/anchors.jsonl", "corpus-v2/taxonomy.jsonl"],
+                                                            "corpus-v2/anchors.jsonl", "corpus-v2/taxonomy.jsonl", "corpus-v2/GENERATION.json"],
                   transport=t, count=41000, verify=["SHA256_EACH_FILE", "RESULT_DIGEST", "RESTRICTED_REGISTER", "CONTRACT_VALIDATION"]),
         component("research", "RESEARCH_AIDS", "jsonl", ["research/a4_provision_versions.jsonl"], count=488),
         component("integrity", "INTEGRITY_REGISTER", "canonical-jsonl", ["registers/integrity.jsonl"], transport=t, count=2383),
         component("admission", "ADMISSION_REGISTER", "canonical-jsonl", ["corpus-v2/admissions.jsonl"], transport=t, count=3500,
                   verify=["SHA256_EACH_FILE", "RESULT_DIGEST", "RESTRICTED_REGISTER", "CONTRACT_VALIDATION"]),
-        component("pg-knowledge", "PG_KNOWLEDGE_DATA", "pg_dump-custom-data-only", ["accelerators/knowledge.pgdump"], accel=True,
-                  count=1, verify=["SHA256_EACH_FILE", "ROW_COUNTS", "RESULT_DIGEST", "SOURCE_DIGEST_EQUALS_SITE"],
-                  fallback="REBUILD_LOCALLY_CHEAP"),
-        component("graph", "GRAPH", "c15-graph-rows-v1", ["accelerators/graph_nodes.jsonl", "accelerators/graph_edges.jsonl"], accel=True,
-                  count=180000, verify=["SHA256_EACH_FILE", "GRAPH_DIGEST", "SOURCE_DIGEST_EQUALS_SITE"], fallback="REBUILD_LOCALLY_CHEAP"),
+        component("knowledge-rows", "KNOWLEDGE_ROWS", "mimamsa-knowledge-rows/1", [r["file"] for r in rows], tables=rows, count=30),
+        component("graph", "GRAPH", "c15-graph-rows-v1", ["accelerators/graph/nodes.jsonl", "accelerators/graph/edges.jsonl"], count=180000),
         component("lexical-index", "LEXICAL_INDEX", "mimamsa-index-sqlite-1", ["accelerators/search-index/search.sqlite",
-                                                                               "accelerators/search-index/MANIFEST.json"],
-                  accel=True, verify=["SHA256_EACH_FILE", "SQLITE_QUICK_CHECK", "SOURCE_DIGEST_EQUALS_SITE"],
-                  fallback="REBUILD_LOCALLY_CHEAP"),
-        component("vectors-e5", "VECTOR_PACK", "MIMVEC01", ["accelerators/vectors/e5.mimvec"], transport=t, accel=True, model=E5,
-                  count=310000, verify=["SHA256_EACH_FILE", "VECTOR_TRAILER", "VECTOR_SPOT_REEMBED", "SOURCE_DIGEST_EQUALS_SITE"],
-                  fallback="SERVE_LEXICAL_ONLY"),
+                                                                               "accelerators/search-index/MANIFEST.json"]),
+        component("text-store", "TEXT_STORE", "mimamsa-text-store/1", ["accelerators/text-store/text.sqlite",
+                                                                       "accelerators/text-store/MANIFEST.json"]),
     ]
-    return {"contract": CONTRACT_ID, "record_kind": "knowledge_release_manifest", "release_class": "KNOWLEDGE",
+    if vectors:
+        comps.append(component("vectors-e5", "VECTOR_PACK", "MIMVEC01", ["accelerators/vectors/e5.mimvec"], transport=t, model=E5, count=310000))
+    acct = [{"kind": c["kind"], "status": "SHIPPED", "reason": "shipped in this release"} for c in comps]
+    if not vectors:
+        acct.append({"kind": "VECTOR_PACK", "status": "OMITTED_DEGRADED", "reason": "no vectors for the installed embedder: lexical search only"})
+    return {"contract": CONTRACT_ID, "record_kind": "knowledge_release_manifest", "manifest_format": "MKR-1", "release_class": "KNOWLEDGE",
             "release_id": REL_DELTA if delta else REL_FULL, "release_sequence": 17 if delta else 16,
             "base": {"mode": mode, "base_release_id": REL_FULL if delta else None,
                      "base_manifest_sha256": H("manifest:" + REL_FULL) if delta else None},
-            "corpus_generations": [CG],
+            "corpus_generations": [{"corpus_generation_id": CG, "manifest_sha256": H("generation-manifest")}],
             "compatibility": {"knowledge_format": "1.0", "min_app_version": "0.16.0", "max_app_version": None,
-                              "contracts": {"v1": "1.0.0", "corpus": CONTRACT_ID}, "pg_knowledge_schema_version": 1,
+                              "contracts": {"v1": "1.0.0", "corpus": CONTRACT_ID}, "knowledge_schema_version": 1,
                               "graph_builder_version": "c15-graph-1", "index_format": "mimamsa-index-sqlite-1",
-                              "vector_store_format": "MIMVEC01",
+                              "text_store_format": "mimamsa-text-store/1", "vector_store_format": "MIMVEC01",
                               "required_models": [{"role": "EMBEDDER", "model_id": "multilingual-e5-small (fixture)", "sha256": E5},
                                                   {"role": "RERANKER", "model_id": "cross-encoder (fixture)", "sha256": XENC}]},
             "components": comps,
-            "heavy_compute_on_site": {"ocr": "NONE", "embedding": "NONE", "graph_rebuild": "ONLY_IF_BUILDER_VERSION_DIFFERS"},
+            "capability": {"declared_service_level": level, "accounting": acct},
+            "heavy_compute_on_site": {"ocr": "NONE", "embedding": "NONE", "graph_rebuild": "ONLY_IF_ACCELERATOR_REJECTED"},
             "notes": "synthetic fixture"}
 
 
 def intelligence_manifest():
-    return {"contract": CONTRACT_ID, "record_kind": "knowledge_release_manifest", "release_class": "INTELLIGENCE",
+    nxt = H("model:next")
+    comps = [component("model-embedder", "MODEL_FILE", "onnx", ["models/embedder/model.onnx", "models/embedder/tokenizer.json"],
+                       model=nxt, verify=["SHA256_EACH_FILE", "RESULT_DIGEST", "ONNX_LOAD_SELFTEST"]),
+             component("vectors-next", "VECTOR_PACK", "MIMVEC01", ["accelerators/vectors/next.mimvec"], model=nxt, count=310000,
+                       fallback="REFUSE_RELEASE"),
+             component("integrity", "INTEGRITY_REGISTER", "canonical-jsonl", ["registers/integrity-models.jsonl"], count=3)]
+    return {"contract": CONTRACT_ID, "record_kind": "knowledge_release_manifest", "manifest_format": "MKR-1", "release_class": "INTELLIGENCE",
             "release_id": REL_MODEL, "release_sequence": 18,
-            "base": {"mode": "FULL", "base_release_id": None, "base_manifest_sha256": None}, "corpus_generations": [CG],
+            "base": {"mode": "FULL", "base_release_id": None, "base_manifest_sha256": None},
+            "corpus_generations": [{"corpus_generation_id": CG, "manifest_sha256": H("generation-manifest")}],
             "compatibility": {"knowledge_format": "1.0", "min_app_version": "0.16.0", "max_app_version": None,
-                              "contracts": {"v1": "1.0.0", "corpus": CONTRACT_ID}, "pg_knowledge_schema_version": 1,
+                              "contracts": {"v1": "1.0.0", "corpus": CONTRACT_ID}, "knowledge_schema_version": 1,
                               "graph_builder_version": "c15-graph-1", "index_format": "mimamsa-index-sqlite-1",
-                              "vector_store_format": "MIMVEC01",
-                              "required_models": [{"role": "EMBEDDER", "model_id": "next embedder (fixture)", "sha256": H("model:next")}]},
-            "components": [
-                component("model-embedder", "MODEL_FILE", "onnx", ["models/embedder/model.onnx", "models/embedder/tokenizer.json"],
-                          model=H("model:next"), verify=["SHA256_EACH_FILE", "ONNX_LOAD_SELFTEST"]),
-                component("vectors-next", "VECTOR_PACK", "MIMVEC01", ["accelerators/vectors/next.mimvec"], accel=True,
-                          model=H("model:next"), count=310000,
-                          verify=["SHA256_EACH_FILE", "VECTOR_TRAILER", "VECTOR_SPOT_REEMBED", "SOURCE_DIGEST_EQUALS_SITE"],
-                          fallback="SERVE_LEXICAL_ONLY"),
-                component("integrity", "INTEGRITY_REGISTER", "canonical-jsonl", ["registers/integrity.jsonl"], count=3)],
+                              "text_store_format": "mimamsa-text-store/1", "vector_store_format": "MIMVEC01",
+                              "required_models": [{"role": "EMBEDDER", "model_id": "next embedder (fixture)", "sha256": nxt}]},
+            "components": comps,
+            "capability": {"declared_service_level": "FULL", "accounting": [
+                {"kind": "MODEL_FILE", "status": "SHIPPED", "reason": "new embedder"},
+                {"kind": "VECTOR_PACK", "status": "SHIPPED", "reason": "full vectors for the new embedder, built upstream"},
+                {"kind": "RULE_PACK", "status": "NOT_APPLICABLE", "reason": "no rule pack exists; refused at AUTH-LEDGER v0"},
+                {"kind": "INTEGRITY_REGISTER", "status": "SHIPPED", "reason": "model hashes"}]},
             "heavy_compute_on_site": {"ocr": "NONE", "embedding": "NONE", "graph_rebuild": "NONE"}, "notes": "synthetic fixture"}
 
 
 def activation_record():
+    comps = knowledge_manifest("DELTA")["components"]
     return {"contract": CONTRACT_ID, "record_kind": "knowledge_activation_record", "seq": 2,
-            "previous_record_sha256": H("activation:1"), "action": "ACTIVATE", "release_id": REL_DELTA,
-            "release_class": "KNOWLEDGE", "release_sequence": 17, "previous_active_release_id": REL_FULL, "app_version": "0.16.0",
+            "previous_record_sha256": H("activation:1"), "txn_id": "TX-00000002-" + H("txn")[:12], "action": "ACTIVATE",
+            "target": "KNOWLEDGE", "release_id": REL_DELTA, "release_class": "KNOWLEDGE", "release_sequence": 17,
+            "previous_active_release_id": REL_FULL, "app_version": "0.16.0",
             "components": [{"component_id": c["component_id"], "result": "VERIFIED_USED", "failed_checks": []}
-                           for c in knowledge_manifest("DELTA")["components"] if c["component_id"] != "graph"] +
-                          [{"component_id": "graph", "result": "ACCELERATOR_REBUILT_LOCALLY", "failed_checks": ["SOURCE_DIGEST_EQUALS_SITE"]}],
-            "exclusion_state": {"sequence": 4, "digest": H("exclusions:4"), "items_suppressed": 2}, "result": "ACTIVE",
-            "reason": None, "actor": {"role": "ADMIN", "id": "admin-fixture"}, "at": "2026-12-15T09:30:00Z"}
+                           for c in comps if c["component_id"] != "graph"] +
+                          [{"component_id": "graph", "result": "ACCELERATOR_REBUILT_LOCALLY", "failed_checks": ["SAMPLED_REBUILD_PARITY"]}],
+            "exclusion_state": {"sequence": 4, "digest": H("exclusions:4"), "items_suppressed": 2},
+            "result": "ACTIVE_AFTER_LOCAL_REBUILD", "service_level": "FULL", "degradation_acknowledged_by": None,
+            "reason": "graph accelerator failed sampled rebuild parity; rebuilt locally", "actor": {"role": "ADMIN", "id": "admin-fixture"},
+            "at": "2026-12-15T09:30:00Z"}
 
 
 def release_negatives():
@@ -620,7 +934,8 @@ def release_negatives():
     x["base"]["base_manifest_sha256"] = None
     N["N23_delta_release_without_base_manifest"] = (x, "SCHEMA", "base_manifest_sha256", 0)
     x = knowledge_manifest("FULL")
-    x["components"].append(component("model", "MODEL_FILE", "onnx", ["models/x.onnx"], model=E5))
+    x["components"].append(component("model", "MODEL_FILE", "onnx", ["models/x.onnx"], model=E5,
+                                     verify=["SHA256_EACH_FILE", "RESULT_DIGEST", "ONNX_LOAD_SELFTEST"]))
     N["N24_knowledge_release_carries_model"] = (x, "SCHEMA", "kind", 0)
     x = knowledge_manifest("FULL")
     x["components"][-1]["fallback"] = None
@@ -633,38 +948,72 @@ def release_negatives():
     N["N27_activation_active_with_failed_component"] = (x, "SCHEMA", "result", 0)
     x = knowledge_manifest("FULL")
     x["components"] = [c for c in x["components"] if c["kind"] != "ADMISSION_REGISTER"]
-    N["N28_knowledge_release_without_admission_register"] = (x, "KR_COMPONENT_MISSING", None, 0)
+    x["capability"]["accounting"] = [a for a in x["capability"]["accounting"] if a["kind"] != "ADMISSION_REGISTER"]
+    N["N28_knowledge_release_without_admission_register"] = (x, "KR_ACCOUNTING", None, 0)
+    x = knowledge_manifest("FULL", level="FULL", vectors=False)
+    N["N37_full_capability_claimed_while_degraded"] = (x, "KR_FULL_CAPABILITY_CLAIM", None, 0)
+    x = knowledge_manifest("FULL")
+    x["components"].append({**component("pg", "KNOWLEDGE_ROWS", "mimamsa-knowledge-rows/1", ["accelerators/rows/x.jsonl"],
+                                        tables=[{"table": "graph_nodes", "file": "accelerators/rows/x.jsonl", "row_count": 1, "rows_sha256": H("x")}]),
+                            "kind": "PG_KNOWLEDGE_DATA"})
+    N["N38_postgresql_archive_component"] = (x, "SCHEMA", "kind", 0)
+    x = knowledge_manifest("FULL")
+    rows = next(c for c in x["components"] if c["kind"] == "KNOWLEDGE_ROWS")
+    rows["tables"][0]["table"] = "app_users"
+    N["N39_knowledge_rows_table_not_allowlisted"] = (x, "SCHEMA", "table", 0)
+    x = knowledge_manifest("FULL")
+    ts = next(c for c in x["components"] if c["kind"] == "TEXT_STORE")
+    ts["binding"] = None
+    N["N40_text_store_without_authoritative_binding"] = (x, "SCHEMA", "binding", 0)
+    x = knowledge_manifest("FULL")
+    x["components"][1]["files"].append(fe("originals/" + H("o1")))
+    N["N41_component_path_overlap"] = (x, "KR_PATH_OVERLAP", None, 0)
+    x = knowledge_manifest("FULL")
+    x["components"][0]["files"].append(fe("sessions/user/working.docx"))
+    N["N42_component_file_in_reserved_namespace"] = (x, "KR_NAMESPACE", None, 0)
+    x = knowledge_manifest("FULL")
+    li = next(c for c in x["components"] if c["kind"] == "LEXICAL_INDEX")
+    li["verify"] = ["SHA256_EACH_FILE", "SQLITE_QUICK_CHECK", "SOURCE_DIGEST_EQUALS_SITE"]
+    N["N43_index_accepted_on_source_digest_alone"] = (x, "SCHEMA", "verify", 0)
+    x = activation_record()
+    x["result"] = "ACTIVE_FULL"
+    N["N44_local_rebuild_reported_as_normal_acceptance"] = (x, "SCHEMA", "result", 0)
+    x = activation_record()
+    x["components"][-1]["result"] = "ACCELERATOR_DEGRADED"
+    x.update(result="ACTIVE_DEGRADED", service_level="DEGRADED_LEXICAL_ONLY")
+    N["N45_degraded_without_acknowledgement"] = (x, "SCHEMA", "degradation_acknowledged_by", 0)
     return N
 
 
 def outputs() -> dict[str, bytes]:
+    REVIEWS.clear()
     ids = build_identities()
     A = build_anchors(ids)
+    bind_native_anchor(A)
+    ANCHOR_KEYS.clear()
+    ANCHOR_KEYS.update({k: v["anchor_id"] for k, v in A.items()})
     R = build_relationships(ids, A)
     T = build_taxonomy()
     ADM = build_admissions()
-    files = {
-        "positive/identities.jsonl": canonical.dumps_jsonl(list(ids.values())),
-        "positive/anchors.jsonl": canonical.dumps_jsonl(list(A.values())),
-        "positive/relationships.jsonl": canonical.dumps_jsonl(R),
-        "positive/taxonomy.jsonl": canonical.dumps_jsonl(T),
-        "positive/admissions.jsonl": canonical.dumps_jsonl(ADM),
-        "positive/legally_validated_ledger_v1.json": canonical.canonical_bytes(legally_validated(next(r for r in R if r["category"] == "follows"))) + b"\n",
-    }
+    pop = {"identities": list(ids.values()), "anchors": list(A.values()), "relationships": R, "taxonomy": T,
+           "admissions": ADM, "reviewed_records": list(REVIEWS)}
+    files = {f"positive/exchange/{k}": v for k, v in exchange_files(pop).items()}
+    files["positive/legally_validated_ledger_v1.json"] = canonical.canonical_bytes(
+        legally_validated(next(r for r in R if r["category"] == "follows"))) + b"\n"
     for key in ("word-screenshots", "reconstructed-pdf", "extract-pdf", "compilation-pdf"):
         files[f"positive/identity_{key.replace('-', '_')}.json"] = json.dumps(ids[key], indent=1, sort_keys=True, ensure_ascii=False).encode() + b"\n"
     files["positive/relationships_ar_22_23_30.jsonl"] = canonical.dumps_jsonl(
         [r for r in R if r["subject"]["doc_id"] == DOC["word-screenshots"]])
     release_fixtures = {"knowledge_release_full": knowledge_manifest("FULL"), "knowledge_release_delta": knowledge_manifest("DELTA"),
+                        "knowledge_release_degraded_lexical_only": knowledge_manifest("FULL", level="DEGRADED_LEXICAL_ONLY", vectors=False),
                         "intelligence_release_model_change": intelligence_manifest(), "knowledge_activation_record": activation_record()}
     for name, rec in release_fixtures.items():
         files[f"positive/{name}.json"] = json.dumps(rec, indent=1, sort_keys=True, ensure_ascii=False).encode() + b"\n"
-    manifest = {"description": "C16 fixture manifest. kind=record: one JSON record; kind=exchange: a set of JSONL files "
-                               "validated together. expect=invalid lists the rule code that must be raised and, for SCHEMA, a "
-                               "JSON path fragment showing the intended reason.",
-                "positive": [{"file": "positive/identities.jsonl", "kind": "exchange_set",
-                              "with": ["positive/anchors.jsonl", "positive/relationships.jsonl", "positive/taxonomy.jsonl",
-                                       "positive/admissions.jsonl"], "ledger": 0},
+    manifest = {"description": "C16 fixture manifest. kind=record: one JSON record; kind=jsonl: records validated singly; "
+                               "kind=exchange_dir: a strict exchange directory; kind=exchange_case: a JSON object {expect_code, mode, "
+                               "ledger, files} validated as one exchange. expect=invalid lists the rule code that must be raised and, "
+                               "for SCHEMA, a JSON path fragment showing the intended reason.",
+                "positive": [{"file": "positive/exchange", "kind": "exchange_dir", "ledger": 0},
                              {"file": "positive/legally_validated_ledger_v1.json", "kind": "record", "ledger": 1},
                              {"file": "positive/relationships_ar_22_23_30.jsonl", "kind": "jsonl", "ledger": 0}] +
                             [{"file": f"positive/identity_{k.replace('-', '_')}.json", "kind": "record", "ledger": 0}
@@ -679,6 +1028,11 @@ def outputs() -> dict[str, bytes]:
     files["negative/N17_relationships_not_in_canonical_order.jsonl"] = "".join(unsorted).encode()
     manifest["negative"].append({"file": "negative/N17_relationships_not_in_canonical_order.jsonl", "kind": "jsonl",
                                  "expect_code": "C16_JSONL", "schema_path_contains": None, "ledger": 0})
+    for name, (meta, xfiles) in sorted(exchange_negatives(pop).items()):
+        case = dict(meta, files={k: v.decode("utf-8") for k, v in sorted(xfiles.items())})
+        files[f"negative/exchange/{name}.json"] = json.dumps(case, indent=1, sort_keys=True, ensure_ascii=False).encode() + b"\n"
+        manifest["negative"].append({"file": f"negative/exchange/{name}.json", "kind": "exchange_case", "expect_code": meta["expect_code"],
+                                     "schema_path_contains": None, "ledger": 0})
     manifest["negative"].sort(key=lambda x: x["file"])
     files["FIXTURES.json"] = json.dumps(manifest, indent=1, sort_keys=True).encode() + b"\n"
     return files
@@ -686,8 +1040,9 @@ def outputs() -> dict[str, bytes]:
 
 def main(argv):
     check = "--check" in argv
+    out = outputs()
     diff = []
-    for rel_path, data in sorted(outputs().items()):
+    for rel_path, data in sorted(out.items()):
         p = HERE / rel_path
         if check:
             if not p.is_file() or p.read_bytes() != data:
@@ -695,9 +1050,14 @@ def main(argv):
         else:
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_bytes(data)
-    if check and diff:
-        print("fixtures differ from builder output:", ", ".join(diff))
+    stale = sorted(str(p.relative_to(HERE)).replace("\\", "/") for p in HERE.rglob("*")
+                   if p.is_file() and p.suffix in (".json", ".jsonl") and str(p.relative_to(HERE)).replace("\\", "/") not in out)
+    if check and (diff or stale):
+        print("fixtures differ from builder output:", ", ".join(diff + [f"stale {s}" for s in stale]))
         return 1
+    if not check:
+        for s in stale:
+            (HERE / s).unlink()
     print("fixtures " + ("match builder output" if check else "written"))
     return 0
 

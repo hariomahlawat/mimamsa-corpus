@@ -60,7 +60,7 @@ def c16_edge_id(edge_type: str, from_id: str, to_id: str, origin: str, relations
     return "E" + hashlib.sha256(f"{edge_type}|{from_id}|{to_id}|{origin}|{relationship_id}".encode("utf-8")).hexdigest()[:20]
 
 
-def graph_projection(rel: dict, anchors: dict | None = None) -> dict | None:
+def graph_projection(rel: dict, anchors: dict | None = None, usable: set | None = None) -> dict | None:
     """The C15 graph edge a relationship becomes, plus a graph_edge_reviews overlay row where the relationship
     carries a review. legally_validated returns only a review overlay on the validated relationship's edge (the
     caller must supply that relationship's projection to resolve its edge id) and is refused at AUTH-LEDGER v0 by
@@ -79,10 +79,12 @@ def graph_projection(rel: dict, anchors: dict | None = None) -> dict | None:
     basis = rel["evidentiary_basis"]
     origin = "C16_" + ("DOCUMENT_TEXT" if basis.startswith("DOCUMENT_TEXT") else basis)
     page = None
-    if anchors:
+    # an anchor locates the edge only when the consumer has verified it (evidence.usable_as_graph_evidence, with the
+    # span checked against the derivative bytes): `usable` is that set of anchor ids; without it, no page is shown
+    if anchors and usable:
         for aid in rel["anchors"]:
             a = anchors.get(aid)
-            if a and a["locator"].get("citable_as_source_page"):
+            if a and aid in usable and a["locator"].get("citable_as_source_page"):
                 page = a["locator"]["physical_page"]
                 break
     ver = rel["verification"]
@@ -228,23 +230,27 @@ def anchor_from_v1_page_anchor(pa: dict, *, doc_id: str, method: str = "NATIVE_T
     return a
 
 
-def anchor_to_v1_page_anchor(a: dict) -> dict | None:
-    """evidence_anchor -> v1 page_anchor (PageKey, plus SpanKey fields when bound). None when the anchor has no
-    citable source page (generated segment, image sequence, text flow, unmapped reconstruction): v1 cannot carry
-    it and the consumer must not invent a page."""
+def anchor_to_v1_page_anchor(a: dict, identity: dict | None = None, *, span_verified: bool = False) -> dict | None:
+    """evidence_anchor -> v1 page_anchor. PageKey only when the anchor is a citable page of its bound identity (page
+    within the copy, copy permits page citation, anchor not INCORRECT); SpanKey fields only when the span was
+    byte-verified against the derivative (evidence.verify_anchor_bytes) and measured on the original. No identity,
+    a generated segment, an image sequence or an unmapped reconstruction never yields a page: no page is invented."""
+    if identity is None or identity["source_copy"]["sha256"] != a["original_sha256"] or identity["doc_id"] != a["doc_id"]:
+        return None
     loc = a["locator"]
-    if not loc.get("citable_as_source_page"):
+    pc = identity["source_copy"]["page_count"]
+    if not (loc.get("citable_as_source_page") and identity["research_eligibility"]["source_page_citation_permitted"]
+            and a["verification"]["state"] != "INCORRECT" and isinstance(pc, int) and loc["physical_page"] <= pc):
         return None
     out = {"source_copy_sha256": a["original_sha256"], "page": loc["physical_page"],
            "paragraph_label": loc.get("paragraph_label")}
     span = a.get("text_span")
-    # a span measured on a reconstruction never binds to the original's derivative
-    if span and a["representation_sha256"] == a["original_sha256"] and a.get("derivative_text_sha256"):
+    if span and span_verified and a["representation_sha256"] == a["original_sha256"] and a.get("derivative_text_sha256"):
         out.update(passage_id=span.get("passage_id"), char_start=span["char_start"], char_end=span["char_end"],
                    text_sha256=span["text_sha256"], pipeline_name=a["extraction"]["pipeline_name"],
                    pipeline_version=a["extraction"]["pipeline_version"], derivative_text_sha256=a["derivative_text_sha256"])
-    if a.get("quoting_permitted") and a.get("quote"):
-        out["quote"] = a["quote"]
+        if a.get("quoting_permitted") and a.get("quote"):
+            out["quote"] = a["quote"]
     return out
 
 
@@ -273,7 +279,7 @@ def relationship_from_v1_candidate(c: dict, *, subject_sha256: str, subject_node
         "anchors": sorted(a["anchor_id"] for a in anchors),
         "verification": "DOCUMENTARY_CHECKED" if status == "DOCUMENTARY_CHECKED" else "CANDIDATE",
         "review_ref": c.get("review_ref") if status == "DOCUMENTARY_CHECKED" else None,
-        "approval_ref": None, "validates_relationship_id": None,
+        "review_binding": None, "approval_ref": None, "validates_relationship_id": None,
         "proposition_ref": UNRESOLVED("NOT_DETERMINED") if cat in ("follows", "distinguishes", "overrules") else None,
         "temporal_scope": {"from": source_date, "from_status": "AS_OF_SOURCE_DATE" if source_date else "NOT_RECORDED",
                            "to": None, "to_status": "NOT_APPLICABLE"},
@@ -287,36 +293,49 @@ def relationship_from_v1_candidate(c: dict, *, subject_sha256: str, subject_node
 
 
 # ---------------------------------------------------------------------------------------------------------------
-# PR #76 local-collection reconciliation (LOCAL_INVENTORY.jsonl rows; read-only)
+# PR #76 local-collection reconciliation (LOCAL_INVENTORY.jsonl rows, methodology v2 and v3; read-only)
 
 PR76_DISPOSITION_TO_DECISION = {
     "EXACT_DUPLICATE": "REJECTED_EXACT_DUPLICATE",
-    "VERIFIED_ALTERNATE_COPY": "ADMITTED_AS_ALTERNATE_COPY",
+    "VERIFIED_ALTERNATE_COPY": "HELD_IDENTITY_UNRESOLVED",   # normalised-text equality is a review signal (PR #76 v3)
     "PROBABLE_DUPLICATE": "HELD_IDENTITY_UNRESOLVED",
-    "NEW_DOCUMENT": "ADMITTED_AS_PRIMARY",
+    "NEW_DOCUMENT": "HELD_INTEGRITY_UNVERIFIED",             # provisional: hash declared, duplicates not resolved
     "IMPROVED_SOURCE_COPY": "HELD_IDENTITY_UNRESOLVED",
     "HISTORICAL_RECOVERY_MATCH": "HELD_IDENTITY_UNRESOLVED",
     "IDENTITY_UNRESOLVED": "HELD_IDENTITY_UNRESOLVED",
     "RELEVANCE_UNRESOLVED": "HELD_RELEVANCE_UNRESOLVED",
     "NON_RELEVANT": "REJECTED_NON_RELEVANT",
-    "ACCESS_RESTRICTED": "HELD_ACCESS_MARKING_REVIEW",   # a detected marking is not a register entry
+    "ACCESS_RESTRICTED": None,                               # local exclusion receipt only, never exported
     "INTEGRITY_FAILURE": "QUARANTINED_INTEGRITY",
     "UNSUPPORTED_FORMAT": "UNSUPPORTED_FORMAT",
 }
-_PR76_FORMAT = {"PDF": ("PDF", "application/pdf"), "DOCX": ("DOCX", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
+_PR76_FORMAT = {"PDF": ("PDF", "application/pdf"),
+                "DOCX": ("DOCX", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
                 "DOC": ("DOC", "application/msword"), "RTF": ("RTF", "application/rtf"), "TXT": ("TXT", "text/plain")}
+_IMAGE_MIME = {"PNG": "image/png", "JPEG": "image/jpeg", "JPG": "image/jpeg", "GIF": "image/gif", "BMP": "image/bmp",
+               "TIFF": "image/tiff", "EMF": "image/x-emf", "WMF": "image/x-wmf"}
 
-# Filename provision-list rule (C16-FN-PROVLIST 1.0). Abbreviation readings are candidates: the table records the
-# reading used and the alternatives that remain open. It is deliberately small; an unknown abbreviation yields no
-# relationship rather than a guess.
+# Abbreviation readings, version 1.1: ONLY readings already recorded in this repository, never invented.
+# Sources: app/b1/src/Mimamsa.Core/Identifiers/LegalIdentifierResolver.cs (Aliases: aa, afa, na, aft, ar) and the
+# P2/B1 supplement (app/b1/build/build_sample.py SUPPLEMENT: AR "Army Rule(s)", AA "Army Act", AFT "Armed Forces
+# Tribunal"). AFT names the tribunal (a forum), which is distinct from the Armed Forces Tribunal Act, 2007: a number
+# after "AFT" stays an unresolved candidate with both readings. Owner confirmation pending (decision Q3).
+ABBREV_SOURCES = ("app/b1/src/Mimamsa.Core/Identifiers/LegalIdentifierResolver.cs#Aliases",
+                  "app/b1/build/build_sample.py#SUPPLEMENT")
 ABBREVIATIONS = {
-    "AR": {"code": "AR-1954", "prefix": "r", "expansion": "Army Rules, 1954",
-           "alternatives": ["Regulations for the Army (para), if the owner used AR for Regulations"]},
-    "AA": {"code": "AA-1950", "prefix": "s", "expansion": "Army Act, 1950", "alternatives": []},
+    "AA": {"code": "AA-1950", "prefix": "s", "expansion": "Army Act (repository alias 'army act')", "alternatives": []},
+    "AR": {"code": "AR-1954", "prefix": "r", "expansion": "Army Rules (repository alias 'army rules')", "alternatives": []},
+    "AFA": {"code": "AFA-1950", "prefix": "s", "expansion": "Air Force Act (repository alias 'air force act')", "alternatives": []},
+    "NA": {"code": "NA-1957", "prefix": "s", "expansion": "Navy Act (repository alias 'navy act')", "alternatives": []},
+    "AFT": {"code": None, "prefix": "s", "expansion": "Armed Forces Tribunal (repository alias; the forum)",
+            "alternatives": ["Armed Forces Tribunal Act, 2007 (AFT-2007), section <n>",
+                             "Armed Forces Tribunal (the forum); the number is not a provision"]},
 }
-ABBREV_LEXICON_REF = "docs/architecture/c16/C16_CORPUS_INTEGRATION_CONTRACT.md#83-filename-and-folder-classification-rules"
-FN_PROVLIST = re.compile(r"^\s*(?P<abbr>[A-Z]{2,4})\s*(?:Rule|Rules|Sec|Section|s\.|r\.)?\s*"
-                         r"(?P<nums>\d{1,3}[A-Z]?(?:\s*(?:,|&|and)\s*\d{1,3}[A-Z]?)*)\s*[-–—]")
+ABBREV_LEXICON_REF = "; ".join(ABBREV_SOURCES)
+_PROV_LABEL = re.compile(r"^\s*(?P<abbr>[A-Z][A-Z.]{1,7})\s*(?:Rule|Rules|Sec|Section|s\.|r\.)?\s*"
+                         r"(?P<label>\d[\dA-Za-z ,&–—-]*?)\s*(?:[-–—]\s+(?P<rest>.*))?$")
+_RANGE = re.compile(r"\d\s*(?:-|–|—|\bto\b)\s*\d", re.I)
+SLUG_MAX = 150
 
 
 def slug(text: str) -> str:
@@ -324,22 +343,44 @@ def slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", s).strip("-")[:80] or "unnamed"
 
 
+def local_subject_id(folders: list[str]) -> str:
+    """SUBJ:local:<slug of every folder from the root, joined by '__'>, so 'A/Rules' and 'B/Rules' differ."""
+    joined = "__".join(slug(f) for f in folders)
+    if len(joined) > SLUG_MAX:
+        joined = joined[:SLUG_MAX - 13] + "~" + hashlib.sha256("/".join(folders).encode("utf-8")).hexdigest()[:12]
+    return f"SUBJ:local:{joined}"
+
+
 def local_doc_id(sha256: str) -> str:
     return f"local-{sha256[:16]}"
 
 
+def parse_provision_label(label: str) -> dict:
+    """'AR 22, 23, 30 - X v Y' -> {abbr, numbers, ambiguity}. Ranges are preserved, never expanded."""
+    m = _PROV_LABEL.match(label)
+    if not m:
+        return {"abbr": None, "numbers": [], "ambiguity": None, "raw": None}
+    abbr = m["abbr"].replace(".", "").upper()
+    raw = m["label"].strip(" ,")
+    if _RANGE.search(raw):
+        return {"abbr": abbr, "numbers": [], "ambiguity": "PROVISION_RANGE_NOT_EXPANDED", "raw": f"{abbr} {raw}"}
+    tokens = [t.strip() for t in re.split(r",|&|\band\b", raw) if t.strip()]
+    if tokens and all(re.fullmatch(r"\d{1,3}[A-Z]{0,2}", t) for t in tokens):
+        return {"abbr": abbr, "numbers": tokens, "ambiguity": None, "raw": f"{abbr} {raw}"}
+    return {"abbr": abbr, "numbers": [], "ambiguity": "UNPARSED_PROVISION_LABEL", "raw": f"{abbr} {raw}"}
+
+
 def _classification(category, *, doc_id, sha, subject_node, target, basis, collection, rel_path, inventory_id,
-                    component, matched, expansion, verification, uncertainty):
+                    component, matched, expansion, verification, uncertainty, rule):
     rel = {
         "contract": CONTRACT_ID, "record_kind": "corpus_relationship", "relationship_id": "", "category": category,
         "subject": {"doc_id": doc_id, "source_copy_sha256": sha, "graph_node_ref": subject_node},
-        "target": {"resolved": True, "node_id": target}, "evidentiary_basis": basis,
-        "source": {"producer": PRODUCER, "rule_id": "C16-FOLDER-SUBJECT" if basis == "FOLDER_PATH" else "C16-FN-PROVLIST",
-                   "rule_version": "1.0", "author_id": None},
+        "target": target, "evidentiary_basis": basis,
+        "source": {"producer": PRODUCER, "rule_id": rule, "rule_version": "1.1", "author_id": None},
         "classification_provenance": {"collection": collection, "relative_path": rel_path, "inventory_id": inventory_id,
                                       "path_component": component, "matched_text": matched,
                                       "abbreviation_expansion": expansion},
-        "anchors": [], "verification": verification, "review_ref": None, "approval_ref": None,
+        "anchors": [], "verification": verification, "review_ref": None, "review_binding": None, "approval_ref": None,
         "validates_relationship_id": None, "proposition_ref": None,
         "temporal_scope": {"from": None, "from_status": "NOT_APPLICABLE", "to": None, "to_status": "NOT_APPLICABLE"},
         "has_legal_effect": False, "is_finding": False, "uncertainty": uncertainty,
@@ -348,60 +389,167 @@ def _classification(category, *, doc_id, sha, subject_node, target, basis, colle
     return rel
 
 
+def _provision_relationships(label, *, component, basis, rule, ctx) -> list[dict]:
+    p = parse_provision_label(label)
+    ab = ABBREVIATIONS.get(p["abbr"] or "")
+    # Only abbreviations with a repository-recorded statutory reading produce a signal: an unknown prefix (OA, WP,
+    # CA ... are case-number prefixes) is not a provision and is left to PR #76's own filename metadata.
+    if ab is None or (not p["numbers"] and p["ambiguity"] is None):
+        return []
+    expansion = ({"abbreviation": p["abbr"], "expansion": ab["expansion"], "lexicon_ref": ABBREV_LEXICON_REF,
+                  "alternatives": ab["alternatives"]} if ab else None)
+    unc = (f"Read from the owner's {'folder' if component >= 0 else 'file'} name by rule {rule}; the abbreviation "
+           "reading and the provision are candidates, not a finding that the document concerns this provision.")
+    out = []
+    if p["ambiguity"] or ab["code"] is None:
+        reason = "AMBIGUOUS_REFERENCE"
+        note = p["ambiguity"] or "abbreviation has more than one reading"
+        out.append(_classification("associated_with_provision", target={"resolved": False, "node_id": None, "raw_reference": p["raw"],
+                                                                          "unresolved": {"unresolved": reason, "note": note}},
+                                   basis=basis, component=component, matched=p["raw"], expansion=expansion,
+                                   verification="CANDIDATE", uncertainty=unc, rule=rule, **ctx))
+        return out
+    for n in p["numbers"]:
+        out.append(_classification("associated_with_provision", target={"resolved": True, "node_id": f"PROV:{ab['code']}:{ab['prefix']}.{n}"},
+                                   basis=basis, component=component, matched=f"{p['abbr']} {n}", expansion=expansion,
+                                   verification="CANDIDATE", uncertainty=unc, rule=rule, **ctx))
+    return out
+
+
 def classify_path(rel_path: str, *, doc_id: str, sha: str, subject_node, collection: str,
                   inventory_id: str | None = None) -> list[dict]:
-    """Folder components -> classified_under_subject (SUBJ:local:<slug>), and a filename provision list
-    ('AR 22, 23, 30 - ...') -> one associated_with_provision per number. Each relationship keeps its own path."""
+    """One path -> its classifications (rules C16-FOLDER-SUBJECT, C16-FOLDER-PROVLIST, C16-FN-PROVLIST, version 1.1):
+    - the leaf folder -> classified_under_subject SUBJ:local:<full folder path slug> (ancestors via taxonomy parents);
+    - a folder named like a provision list -> candidate associated_with_provision (decision Q4);
+    - a file name 'AR 22, 23, 30 - ...' -> one candidate association per number; ranges and unknown abbreviations stay
+      unresolved candidates with the label preserved. Each relationship keeps its own path."""
     parts = unicodedata.normalize("NFC", rel_path.replace("\\", "/")).split("/")
+    folders, leaf = parts[:-1], parts[-1]
+    full = "/".join(parts)
+    ctx = dict(doc_id=doc_id, sha=sha, subject_node=subject_node, collection=collection, rel_path=full, inventory_id=inventory_id)
     out = []
-    for i, folder in enumerate(parts[:-1]):
-        out.append(_classification(
-            "classified_under_subject", doc_id=doc_id, sha=sha, subject_node=subject_node,
-            target=f"SUBJ:local:{slug(folder)}", basis="FOLDER_PATH", collection=collection, rel_path="/".join(parts),
-            inventory_id=inventory_id, component=i, matched=folder, expansion=None, verification="CURATED_NAVIGATION",
-            uncertainty="Owner folder label; a navigation aid, not a finding about the document."))
-    m = FN_PROVLIST.match(parts[-1])
-    if m and m["abbr"] in ABBREVIATIONS:
-        ab = ABBREVIATIONS[m["abbr"]]
-        for n in re.findall(r"\d{1,3}[A-Z]?", m["nums"]):
-            out.append(_classification(
-                "associated_with_provision", doc_id=doc_id, sha=sha, subject_node=subject_node,
-                target=f"PROV:{ab['code']}:{ab['prefix']}.{n}", basis="FILENAME_PATTERN", collection=collection,
-                rel_path="/".join(parts), inventory_id=inventory_id, component=-1, matched=f"{m['abbr']} {n}",
-                expansion={"abbreviation": m["abbr"], "expansion": ab["expansion"], "lexicon_ref": ABBREV_LEXICON_REF,
-                           "alternatives": ab["alternatives"]},
-                verification="CANDIDATE",
-                uncertainty="Read from the owner's file name by rule C16-FN-PROVLIST; the abbreviation reading and the "
-                            "provision are candidates, not a finding that the judgment concerns this provision."))
+    if folders:
+        out.append(_classification("classified_under_subject", target={"resolved": True, "node_id": local_subject_id(folders)},
+                                   basis="FOLDER_PATH", component=len(folders) - 1, matched=folders[-1], expansion=None,
+                                   verification="CURATED_NAVIGATION",
+                                   uncertainty="Owner folder label; a navigation aid, not a finding about the document.",
+                                   rule="C16-FOLDER-SUBJECT", **ctx))
+    for i, folder in enumerate(folders):
+        out += _provision_relationships(folder, component=i, basis="FOLDER_PATH", rule="C16-FOLDER-PROVLIST", ctx=ctx)
+    stem = leaf.rsplit(".", 1)[0] if "." in leaf else leaf
+    out += _provision_relationships(stem, component=-1, basis="FILENAME_PATTERN", rule="C16-FN-PROVLIST", ctx=ctx)
     return out
+
+
+def local_subject_nodes(rel_paths: list[str], collection: str) -> list[dict]:
+    """Taxonomy SUBJECT nodes for every folder prefix of the given paths (parent = the folder above)."""
+    nodes = {}
+    for rp in rel_paths:
+        folders = unicodedata.normalize("NFC", rp.replace("\\", "/")).split("/")[:-1]
+        for i in range(len(folders)):
+            nid = local_subject_id(folders[:i + 1])
+            nodes[nid] = {"contract": CONTRACT_ID, "record_kind": "taxonomy_node", "node_id": nid, "level": "SUBJECT",
+                          "label": folders[i][:300] or "unnamed", "parent_ids": [local_subject_id(folders[:i])] if i else [],
+                          "instrument_code": None, "provision": None, "maps_to_subject": None, "aliases": [],
+                          "taxonomy_version": "c16-taxonomy-1.1",
+                          "source": {"basis": "OWNER_FOLDER", "collection": collection, "relative_path": "/".join(folders[:i + 1])},
+                          "verification": "CURATED_NAVIGATION"}
+    return [nodes[k] for k in sorted(nodes)]
 
 
 def _gate(gid, result, ev=None):
     return {"gate_id": gid, "result": result, "evidence_ref": ev}
 
 
-def from_pr76_inventory_row(row: dict, *, collection: str, corpus_generation_id: str,
-                            primary_sha256: str | None = None) -> tuple[dict, dict, list[dict]]:
-    """One PR #76 LOCAL_INVENTORY.jsonl row -> (document_identity, corpus_admission, classification relationships).
-    Conservative by construction: nothing becomes application-eligible, Word files are WORD_IMAGES_NOT_INVENTORIED
-    until an image inventory exists (the review finding that embedded screenshots were not extracted)."""
-    sha = row["sha256"]
+def _images_from_row(row, sha):
+    out = []
+    for img in sorted(row.get("embedded_images") or [], key=lambda i: i["sequence"]):
+        fmt = str(img.get("format") or "").upper()
+        state = {"DONE": "DONE", "NOT_REQUIRED_DECORATIVE": "NOT_REQUIRED_DECORATIVE", "FAILED": "FAILED"}.get(img.get("ocr_state"), "QUEUED")
+        out.append({"image_sequence_id": f"IMG:{sha}:{img['sequence']}", "sequence": img["sequence"],
+                    "image_sha256": img["image_sha256"],
+                    "location": {"kind": "DOCX_PART", "container_part": img.get("archive_path"), "pdf_page": None,
+                                 "body_order": img["sequence"], "occurrence_ref": img.get("occurrence_id"),
+                                 "relationship_id": img.get("relationship_id")},
+                    "mime_type": _IMAGE_MIME.get(fmt, "application/octet-stream"),
+                    "pixel_width": img.get("width"), "pixel_height": img.get("height"), "size_bytes": img.get("size_bytes"),
+                    "ocr_state": state,
+                    "ocr_derivative_sha256": img.get("ocr_derivative_sha256") if state == "DONE" else None})
+    return out
+
+
+def from_pr76_inventory(rows: list[dict], *, collection: str, corpus_generation_id: str, ocr_config: dict | None = None) -> dict:
+    """PR #76 LOCAL_INVENTORY rows -> {identities, admissions, relationships, taxonomy, receipts}.
+
+    - One identity and one admission per binary (sha256). Every path of that binary is an observation, and every
+      path keeps its own classifications (bytes merged, classifications not).
+    - Restricted rows (ACCESS_RESTRICTED or a restricted marking) produce only a minimal local exclusion receipt:
+      no identity, path, file name or classification is exported.
+    - Unknown formats are UNRECOGNISED_FORMAT / application/octet-stream, never PDF.
+    - No gate passes without evidence: the PR #76 hash is DECLARED_HASH_ONLY (G01 NOT_RUN), a provisional
+      NEW_DOCUMENT has unresolved duplicates (G09 NOT_RUN). Nothing is application-eligible.
+    The output is a PARTIAL exchange (rules.exchange_issues(..., mode="partial")) until the producer adds a
+    generation manifest and runs the gates."""
+    by_sha: dict[str, list[dict]] = {}
+    receipts = []
+    for row in rows:
+        if row.get("disposition") == "ACCESS_RESTRICTED" or row.get("restricted"):
+            receipts.append({"record_kind": "local_exclusion_receipt", "sha256_prefix": (row.get("sha256") or "")[:12],
+                             "reason": "ACCESS_MARKING_DETECTED", "exportable": False})
+            continue
+        if row.get("sha256"):
+            by_sha.setdefault(row["sha256"], []).append(row)
+    out = {"identities": [], "admissions": [], "relationships": [], "taxonomy": [], "receipts": receipts}
+    paths = []
+    for sha in sorted(by_sha):
+        group = sorted(by_sha[sha], key=lambda r: unicodedata.normalize("NFC", r["relative_path"].replace("\\", "/")))
+        row = group[0]
+        ident, adm = _pr76_identity(row, group, sha, collection, corpus_generation_id, ocr_config)
+        out["identities"].append(ident)
+        out["admissions"].append(adm)
+        for r in group:
+            paths.append(r["relative_path"])
+            out["relationships"] += classify_path(r["relative_path"], doc_id=ident["doc_id"], sha=sha,
+                                                  subject_node=ident["work_identity"]["graph_node_ref"],
+                                                  collection=collection, inventory_id=r.get("inventory_id"))
+    out["taxonomy"] = local_subject_nodes(paths, collection)
+    return out
+
+
+def from_pr76_inventory_row(row: dict, *, collection: str, corpus_generation_id: str, **_) -> tuple:
+    """Single-row convenience wrapper (kept for compatibility): (identity or None, admission or None, relationships)."""
+    res = from_pr76_inventory([row], collection=collection, corpus_generation_id=corpus_generation_id)
+    return (res["identities"][0] if res["identities"] else None, res["admissions"][0] if res["admissions"] else None,
+            res["relationships"])
+
+
+def _pr76_identity(row, group, sha, collection, gen, ocr_config):
     doc_id = local_doc_id(sha)
-    fmt = row.get("detected_format") or ""
-    detected, mime = _PR76_FORMAT.get(fmt, (None, None))
-    is_pdf, is_word = detected == "PDF", detected in ("DOCX", "DOC", "RTF")
+    fmt = (row.get("detected_format") or "").upper()
+    detected, mime = _PR76_FORMAT.get(fmt, ("UNKNOWN", "application/octet-stream"))
+    is_pdf, is_word, unknown = detected == "PDF", detected in ("DOCX", "DOC", "RTF"), detected == "UNKNOWN"
+    v3 = (row.get("extraction_methodology_version") or 0) >= 3
     ocr_pages = row.get("ocr_required_pages") or []
     pages = row.get("page_count")
-    if is_pdf:
+    images = _images_from_row(row, sha) if (is_word and v3) else None
+    if unknown:
+        kind, pagination = "UNRECOGNISED_FORMAT", "UNKNOWN"
+    elif is_pdf:
         kind = "SCANNED_PDF" if pages and len(ocr_pages) >= pages else ("MIXED_PDF" if ocr_pages else "NATIVE_DIGITAL_PDF")
         pagination = "PHYSICAL_PAGES"
     elif is_word:
-        kind, pagination = "WORD_IMAGES_NOT_INVENTORIED", "NONE_FLOW_DOCUMENT"
+        pagination = "NONE_FLOW_DOCUMENT"
+        kind = "WORD_IMAGES_NOT_INVENTORIED" if images is None or detected != "DOCX" else (
+            "WORD_WITH_EMBEDDED_IMAGES" if images else "WORD_NATIVE_TEXT")
+        if detected != "DOCX":
+            images = None
     else:
         kind, pagination = "PLAIN_TEXT", "NONE_FLOW_DOCUMENT"
     ctype = row.get("candidate_document_type") or "legal_reference"
     wk = {"judgment": "JUDGMENT", "order": "ORDER", "act": "INSTRUMENT", "rules": "INSTRUMENT",
           "manual": "MANUAL", "notification": "NOTIFICATION"}.get(ctype, "UNKNOWN")
+    if unknown:
+        wk = "UNKNOWN"
     subject_node = f"JUD:{doc_id}" if wk in ("JUDGMENT", "ORDER") else UNRESOLVED("NOT_DETERMINED")
     work = {"work_kind": wk, "graph_node_ref": subject_node, "identity_basis": "METADATA_CANDIDATE",
             "identity_verification": "CANDIDATE",
@@ -411,82 +559,88 @@ def from_pr76_inventory_row(row: dict, *, collection: str, corpus_generation_id:
     if wk in ("INSTRUMENT", "NOTIFICATION"):
         work["instrument_code"] = UNRESOLVED("NOT_DETERMINED")
     ders = []
-    if row.get("derivative_sha256"):
-        method = {"pymupdf-native": "NATIVE_TEXT_LAYER", "docx-xml": "DOCX_XML", "utf8-replace": "PLAIN_TEXT"}.get(row.get("extraction_method"), "NONE")
+    if row.get("derivative_sha256") and not row.get("derivative_withheld_reason") and not unknown:
+        method = {"pymupdf-native": "NATIVE_TEXT_LAYER", "docx-xml": "DOCX_XML", "docx-xml+embedded-image-inventory": "DOCX_XML",
+                  "utf8-replace": "PLAIN_TEXT"}.get(row.get("extraction_method"), "NONE")
         units = pages if is_pdf and pages else 1
-        ders.append({"derivative_id": f"{doc_id}@c16-local-reconcile/{row.get('classification_version', 0)}",
-                     "pipeline_name": "c16-local-reconcile", "pipeline_version": str(row.get("classification_version", 0)),
+        done = sum(1 for i in images or [] if i["ocr_state"] == "DONE")
+        methods = [method] + (["OCR_EMBEDDED_IMAGE"] if done else [])
+        ders.append({"derivative_id": f"{doc_id}@c16-local-reconcile/{row.get('extraction_methodology_version') or row.get('classification_version', 0)}",
+                     "pipeline_name": "c16-local-reconcile",
+                     "pipeline_version": str(row.get("extraction_methodology_version") or row.get("classification_version", 0)),
                      "derivative_text_sha256": row["derivative_sha256"],
                      "pagination_basis": "SOURCE_PHYSICAL" if is_pdf else "GENERATED_SEGMENT",
-                     "methods": [method], "ocr_config": None, "text_reliability": "not_assessed", "quoting_permitted": False,
-                     "coverage": {"units_total": units, "units_with_text": max(0, units - len(ocr_pages)) if is_pdf else (1 if row.get("text_available") else 0),
-                                  "images_total": UNRESOLVED("NOT_YET_PROCESSED") if is_word else 0, "images_text_extracted": 0}})
-    identity = {
+                     "methods": methods, "ocr_config": ocr_config if done else None, "text_reliability": "not_assessed",
+                     "quoting_permitted": False,
+                     "coverage": {"units_total": units,
+                                  "units_with_text": max(0, units - len(ocr_pages)) if is_pdf else (1 if row.get("text_available") else 0),
+                                  "images_total": len(images) if images is not None else (UNRESOLVED("NOT_YET_PROCESSED") if is_word else 0),
+                                  "images_text_extracted": done}})
+    observations = [{"collection": collection, "relative_path": unicodedata.normalize("NFC", r["relative_path"].replace("\\", "/")),
+                     "inventory_id": r.get("inventory_id"), "observed_at": None} for r in group]
+    basis = ["ELIGIBILITY_NOT_ASSESSED"]
+    if images is None and is_word or any(i["ocr_state"] not in ("DONE", "NOT_REQUIRED_DECORATIVE") for i in images or []):
+        basis.append("EMBEDDED_IMAGES_NOT_EXTRACTED")
+    ident = {
         "contract": CONTRACT_ID, "record_kind": "document_identity", "doc_id": doc_id,
-        "source_copy": {"sha256": sha, "bytes": row["size_bytes"], "mime_type": mime or "application/pdf",
-                        "detected_format": detected or "PDF",
-                        "page_count": (pages if pages is not None else UNRESOLVED("NOT_YET_PROCESSED")) if is_pdf else None,
-                        "physical_pagination": pagination,
-                        "vault_path": f"vault/sha256/{sha[:2]}/{sha}"},
+        "source_copy": {"sha256": sha, "bytes": row["size_bytes"], "mime_type": mime, "detected_format": detected,
+                        "page_count": (pages if pages is not None else UNRESOLVED("NOT_YET_PROCESSED")) if is_pdf
+                        else (UNRESOLVED("NOT_DETERMINED") if unknown else None),
+                        "physical_pagination": pagination, "vault_path": f"vault/sha256/{sha[:2]}/{sha}"},
         "representation": {"representation_kind": kind, "origin_status": "ACQUIRED_COPY_ORIGIN_UNDETERMINED",
                            "content_scope": "UNDETERMINED", "completeness": "NOT_CHECKED"},
         "work_identity": work,
-        "embedded_images": UNRESOLVED("NOT_YET_PROCESSED") if is_word else [],
+        "embedded_images": images if images is not None else (UNRESOLVED("NOT_YET_PROCESSED") if (is_word or unknown) else []),
         "text_derivatives": ders,
         "provenance": {"acquisition": {"acquisition_channel": "MANUAL_OWNER", "source_url": None, "retrieved_at": None,
-                                       "original_filename": row.get("filename"), "hf": None},
-                       "carrier_provenance": "USER_SUPPLIED",
-                       "observations": [{"collection": collection, "relative_path": unicodedata.normalize("NFC", row["relative_path"].replace("\\", "/")),
-                                         "inventory_id": row.get("inventory_id"), "observed_at": None}],
-                       "processing_history": []},
+                                       "original_filename": None, "hf": None},
+                       "carrier_provenance": "USER_SUPPLIED", "observations": observations, "processing_history": []},
         "restriction": {"access_marking": None, "eligibility": "NOT_ASSESSED", "restriction_id": None},
         "integrity": {"source_integrity": "DECLARED_HASH_ONLY", "basis": "SHA-256 computed by the PR #76 reconciliation; not re-verified against an independent manifest"},
         "research_eligibility": {"state": "NOT_ASSESSED", "quoting_permitted": False, "source_page_citation_permitted": False,
-                                 "whole_work_claims_permitted": False, "graph_evidence_permitted": False,
-                                 "basis": ["ELIGIBILITY_NOT_ASSESSED"] + (["EMBEDDED_IMAGES_NOT_EXTRACTED"] if is_word else [])},
-        "corpus_generation_id": corpus_generation_id,
+                                 "whole_work_claims_permitted": False, "graph_evidence_permitted": False, "basis": basis},
+        "corpus_generation_id": gen,
     }
     disp = row.get("disposition") or "IDENTITY_UNRESOLVED"
-    decision = PR76_DISPOSITION_TO_DECISION.get(disp, "HELD_IDENTITY_UNRESOLVED")
-    if decision == "ADMITTED_AS_PRIMARY" and is_word:
-        decision = "HELD_EXTRACTION_INCOMPLETE"
-    elif decision == "ADMITTED_AS_PRIMARY" and ocr_pages:
-        decision = "HELD_OCR_REQUIRED"
+    decision = PR76_DISPOSITION_TO_DECISION.get(disp) or "HELD_IDENTITY_UNRESOLVED"
+    if unknown:
+        decision = "UNSUPPORTED_FORMAT"
+    elif decision == "HELD_INTEGRITY_UNVERIFIED":
+        if row.get("derivative_withheld_reason"):
+            decision = "HELD_ACCESS_MARKING_REVIEW"
+        elif row.get("ocr_required_pages") or row.get("ocr_required_images") or (images and any(i["ocr_state"] == "QUEUED" for i in images)):
+            decision = "HELD_OCR_REQUIRED"
+        elif kind == "WORD_IMAGES_NOT_INVENTORIED":
+            decision = "HELD_EXTRACTION_INCOMPLETE"
     dup = None
-    if decision == "ADMITTED_AS_ALTERNATE_COPY":
-        if primary_sha256 and primary_sha256 != sha:
-            dup = {"sha256": primary_sha256, "doc_id": local_doc_id(primary_sha256), "relation": "NORMALIZED_TEXT_IDENTICAL"}
-        else:
-            decision = "HELD_IDENTITY_UNRESOLVED"
     if decision == "REJECTED_EXACT_DUPLICATE":
-        dup = {"sha256": sha, "doc_id": None, "relation": "BYTE_IDENTICAL"}
+        dup = {"sha256": sha, "doc_id": None, "relation": "BYTE_IDENTICAL", "held_at": "canonical-corpus (PR #76 canonical index)"}
     rel = row.get("relevance")
     gates = [
-        _gate("G01_HASH_VERIFIED", "PASS", "c16_reconcile sha256"),
-        _gate("G02_FORMAT_DETECTED", "PASS" if detected else "FAIL"),
+        _gate("G01_HASH_VERIFIED", "NOT_RUN"),                      # declared hash only
+        _gate("G02_FORMAT_DETECTED", "PASS" if not unknown else "FAIL", "c16_reconcile magic-byte detection" if not unknown else None),
         _gate("G03_RESTRICTED_REGISTER", "NOT_RUN"),
-        _gate("G04_ACCESS_MARKING_REVIEWED", "FAIL" if row.get("restricted") else "NOT_RUN"),
+        _gate("G04_ACCESS_MARKING_REVIEWED", "NOT_RUN"),
         _gate("G05_IDENTITY_RECORD_VALID", "NOT_RUN"),
         _gate("G06_TEXT_DERIVATIVE_VERIFIED", "FAIL" if row.get("parsing_error") else "NOT_RUN"),
-        _gate("G07_EMBEDDED_IMAGES_ACCOUNTED", "NOT_RUN" if is_word else "NOT_APPLICABLE"),
-        _gate("G08_RELEVANCE_ASSESSED", {True: "PASS", False: "FAIL"}.get(rel, "NOT_RUN")),
-        _gate("G09_DUPLICATE_RESOLVED", "PASS" if disp in ("NEW_DOCUMENT", "EXACT_DUPLICATE", "VERIFIED_ALTERNATE_COPY") else "NOT_RUN"),
+        _gate("G07_EMBEDDED_IMAGES_ACCOUNTED", "NOT_APPLICABLE" if ident["embedded_images"] == [] else "NOT_RUN"),
+        _gate("G08_RELEVANCE_ASSESSED", "FAIL" if rel is False else "NOT_RUN"),  # an automated signal is not an assessment
+        _gate("G09_DUPLICATE_RESOLVED", "PASS" if disp == "EXACT_DUPLICATE" else "NOT_RUN",
+              "PR #76 canonical exact-hash match" if disp == "EXACT_DUPLICATE" else None),
         _gate("G10_SCHEMA_VALID", "NOT_RUN"),
     ]
-    adm = {"contract": CONTRACT_ID, "record_kind": "corpus_admission", "admission_id": "",
-           "subject": {"doc_id": doc_id, "source_copy_sha256": sha}, "corpus_generation_id": corpus_generation_id,
-           "decision": decision,
+    adm = {"contract": CONTRACT_ID, "record_kind": "corpus_admission", "admission_id": "", "revision": 1,
+           "supersedes_admission_id": None, "subject": {"doc_id": doc_id, "source_copy_sha256": sha},
+           "corpus_generation_id": gen, "decision": decision,
            "source_disposition": {"system": "c16-local-reconcile", "value": disp,
-                                  "secondary_flags": sorted(row.get("secondary_flags") or [])},
+                                  "secondary_flags": sorted({f for r in group for f in (r.get("secondary_flags") or [])})},
            "duplicate_of": dup, "restriction_id": None, "gates": gates, "application_eligible": False,
            "publication_effect": "NONE", "legal_effect": "NONE",
            "decided_by": {"kind": "AUTOMATED_RULE", "id": "c16-admission-adapter"}, "decided_at": None,
-           "rule_set": {"id": "c16-admission", "version": "1.0"},
-           "reasons": [f"derived from PR #76 disposition {disp}"], "supersedes_admission_id": None}
+           "rule_set": {"id": "c16-admission", "version": "1.1"},
+           "reasons": [f"derived from PR #76 disposition {disp}"]}
     adm["admission_id"] = canonical.admission_id(adm)
-    rels = classify_path(row["relative_path"], doc_id=doc_id, sha=sha, subject_node=subject_node,
-                         collection=collection, inventory_id=row.get("inventory_id"))
-    return identity, adm, rels
+    return ident, adm
 
 
 # ---------------------------------------------------------------------------------------------------------------

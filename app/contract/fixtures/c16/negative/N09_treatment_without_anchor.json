@@ -16,11 +16,12 @@
  },
  "record_kind": "corpus_relationship",
  "relationship_id": "REL-bb75fa36bb0b53f05ebe29df",
+ "review_binding": null,
  "review_ref": null,
  "source": {
   "author_id": "fixture-extractor",
   "producer": {
-   "commit": null,
+   "commit": "c8fa5290",
    "config_sha256": null,
    "name": "c16-fixture-producer",
    "version": "1.0.0"

@@ -1,5 +1,5 @@
 {
- "admission_id": "ADM-889ce3ba364395f61ab0d9bc",
+ "admission_id": "ADM-ba88382ed191623d6edaf7fb",
  "application_eligible": true,
  "contract": "mimamsa-corpus-contract/2.0",
  "corpus_generation_id": "CG-20261127-fixtures-0a1b2c3d",
@@ -12,75 +12,72 @@
  "duplicate_of": null,
  "gates": [
   {
-   "evidence_ref": null,
+   "evidence_ref": "fixture evidence for G01_HASH_VERIFIED",
    "gate_id": "G01_HASH_VERIFIED",
    "result": "PASS"
   },
   {
-   "evidence_ref": null,
+   "evidence_ref": "fixture evidence for G02_FORMAT_DETECTED",
    "gate_id": "G02_FORMAT_DETECTED",
    "result": "PASS"
   },
   {
-   "evidence_ref": null,
+   "evidence_ref": "fixture evidence for G03_RESTRICTED_REGISTER",
    "gate_id": "G03_RESTRICTED_REGISTER",
    "result": "PASS"
   },
   {
-   "evidence_ref": null,
+   "evidence_ref": "fixture evidence for G04_ACCESS_MARKING_REVIEWED",
    "gate_id": "G04_ACCESS_MARKING_REVIEWED",
-   "result": "NOT_RUN"
+   "result": "PASS"
   },
   {
-   "evidence_ref": null,
+   "evidence_ref": "fixture evidence for G05_IDENTITY_RECORD_VALID",
    "gate_id": "G05_IDENTITY_RECORD_VALID",
    "result": "PASS"
   },
   {
-   "evidence_ref": null,
+   "evidence_ref": "fixture evidence for G06_TEXT_DERIVATIVE_VERIFIED",
    "gate_id": "G06_TEXT_DERIVATIVE_VERIFIED",
    "result": "PASS"
   },
   {
    "evidence_ref": null,
    "gate_id": "G07_EMBEDDED_IMAGES_ACCOUNTED",
-   "result": "FAIL"
+   "result": "NOT_APPLICABLE"
   },
   {
-   "evidence_ref": null,
+   "evidence_ref": "fixture evidence for G08_RELEVANCE_ASSESSED",
    "gate_id": "G08_RELEVANCE_ASSESSED",
    "result": "PASS"
   },
   {
-   "evidence_ref": null,
+   "evidence_ref": "fixture evidence for G09_DUPLICATE_RESOLVED",
    "gate_id": "G09_DUPLICATE_RESOLVED",
    "result": "PASS"
   },
   {
-   "evidence_ref": null,
-   "gate_id": "G10_SCHEMA_VALID",
+   "evidence_ref": "fixture evidence for G01_HASH_VERIFIED",
+   "gate_id": "G01_HASH_VERIFIED",
    "result": "PASS"
   }
  ],
  "legal_effect": "NONE",
  "publication_effect": "NONE",
  "reasons": [
-  "embedded image 3 not yet read (ocr_state QUEUED)"
+  "all gates passed with evidence (fixture)"
  ],
  "record_kind": "corpus_admission",
  "restriction_id": null,
+ "revision": 1,
  "rule_set": {
   "id": "c16-admission",
-  "version": "1.0"
+  "version": "1.1"
  },
- "source_disposition": {
-  "secondary_flags": [],
-  "system": "c16-local-reconcile",
-  "value": "NEW_DOCUMENT"
- },
+ "source_disposition": null,
  "subject": {
-  "doc_id": "local-d33bfb0313089bf8",
-  "source_copy_sha256": "d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502"
+  "doc_id": "sc-2019-example-v-union-of-india-ca0001",
+  "source_copy_sha256": "52545c61a2b76934bb3e3dbe4878a8e74ed509da2fed335f98c4c011281e287d"
  },
  "supersedes_admission_id": null
 }

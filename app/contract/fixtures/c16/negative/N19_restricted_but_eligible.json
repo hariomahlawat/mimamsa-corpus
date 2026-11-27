@@ -4,8 +4,8 @@
  "doc_id": "sc-2019-example-v-union-of-india-ca0001",
  "embedded_images": [],
  "integrity": {
-  "basis": "producer-computed SHA-256 (fixture)",
-  "source_integrity": "DECLARED_HASH_ONLY"
+  "basis": "re-downloaded at a pinned revision and re-hashed (fixture)",
+  "source_integrity": "BYTE_VERIFIED"
  },
  "provenance": {
   "acquisition": {

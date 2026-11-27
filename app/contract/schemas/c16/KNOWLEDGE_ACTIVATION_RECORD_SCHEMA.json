@@ -2,16 +2,18 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://contract.mimamsa.invalid/c16/KNOWLEDGE_ACTIVATION_RECORD_SCHEMA.json",
   "title": "Knowledge activation record (site-only, append-only, hash-chained)",
-  "description": "Written by the site importer for every activation, rollback or restore of a knowledge or intelligence release. Site-only installation data: never placed in a release bundle (the importer refuses it there, like RELEASE_ACTIVATION publication records). Each record names the previous record's sha256, so the history is a chain an auditor can replay. Activation is a site Admin act (ADR-0002 publication); it is never legal approval.",
+  "description": "One closed activation journal transaction (architecture section 8): written for every activation, rollback, restore or refusal of a knowledge or intelligence release, idempotently keyed by txn_id. Site-only installation data, never placed in a release bundle. Each record names the previous record's sha256 (a chain an auditor can replay). The outcome distinguishes normal acceptance (ACTIVE_FULL) from acceptance after a cheap local rebuild of a rejected accelerator (ACTIVE_AFTER_LOCAL_REBUILD) and from degraded service (ACTIVE_DEGRADED, which needs an Admin acknowledgement). Activation is a site Admin act (ADR-0002 publication), never legal approval.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["contract", "record_kind", "seq", "previous_record_sha256", "action", "release_id", "release_class", "release_sequence", "previous_active_release_id", "app_version", "components", "exclusion_state", "result", "actor", "at"],
+  "required": ["contract", "record_kind", "seq", "previous_record_sha256", "txn_id", "action", "target", "release_id", "release_class", "release_sequence", "previous_active_release_id", "app_version", "components", "exclusion_state", "result", "service_level", "actor", "at"],
   "properties": {
     "contract": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"},
     "record_kind": {"const": "knowledge_activation_record"},
     "seq": {"type": "integer", "minimum": 1},
-    "previous_record_sha256": {"description": "sha256 of the canonical bytes of record seq-1; null only for seq 1.", "anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
+    "previous_record_sha256": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
+    "txn_id": {"description": "Activation journal transaction id; the record is written once per txn_id (idempotent reconciliation).", "type": "string", "pattern": "^TX-[0-9]{8}-[0-9a-f]{12}$"},
     "action": {"enum": ["ACTIVATE", "ROLLBACK", "RESTORE", "REFUSE"]},
+    "target": {"description": "Which commit pointer the transaction moved.", "enum": ["KNOWLEDGE", "MODELS"]},
     "release_id": {"type": "string", "pattern": "^R[0-9]{2,3}-[a-z0-9-]{1,40}-[0-9]{8}-[0-9a-f]{8}$"},
     "release_class": {"enum": ["KNOWLEDGE", "INTELLIGENCE"]},
     "release_sequence": {"type": "integer", "minimum": 1},
@@ -31,7 +33,7 @@
       }
     },
     "exclusion_state": {
-      "description": "The ExclusionStore effective state re-applied after this action, before the generation served any request.",
+      "description": "The ExclusionStore effective state re-applied immediately before the journal reached OPEN (exposure). If the store advanced during the switch, the newer state is re-applied before OPEN.",
       "type": "object",
       "additionalProperties": false,
       "required": ["sequence", "digest", "items_suppressed"],
@@ -41,14 +43,20 @@
         "items_suppressed": {"type": "integer", "minimum": 0}
       }
     },
-    "result": {"enum": ["ACTIVE", "ROLLED_BACK", "REFUSED"]},
+    "result": {"enum": ["ACTIVE_FULL", "ACTIVE_AFTER_LOCAL_REBUILD", "ACTIVE_DEGRADED", "ROLLED_BACK", "REFUSED"]},
+    "service_level": {"enum": ["FULL", "DEGRADED_LEXICAL_ONLY", "DEGRADED_NO_RERANK", "NOT_SERVING"]},
+    "degradation_acknowledged_by": {"type": ["string", "null"], "maxLength": 120},
     "reason": {"type": ["string", "null"], "maxLength": 500},
     "actor": {"type": "object", "additionalProperties": false, "required": ["role", "id"], "properties": {"role": {"enum": ["ADMIN", "SYSTEM_RECOVERY"]}, "id": {"type": "string", "maxLength": 120}}},
     "at": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/datetime"}
   },
   "allOf": [
     {"if": {"properties": {"seq": {"const": 1}}}, "then": {"properties": {"previous_record_sha256": {"type": "null"}}}, "else": {"properties": {"previous_record_sha256": {"type": "string"}}}},
-    {"if": {"properties": {"result": {"const": "ACTIVE"}}}, "then": {"properties": {"action": {"enum": ["ACTIVATE", "ROLLBACK", "RESTORE"]}, "components": {"items": {"properties": {"result": {"not": {"const": "FAILED"}}}}}}}},
-    {"if": {"properties": {"action": {"const": "REFUSE"}}}, "then": {"required": ["reason"], "properties": {"result": {"const": "REFUSED"}, "reason": {"type": "string", "minLength": 3}}}}
+    {"if": {"properties": {"result": {"enum": ["ACTIVE_FULL", "ACTIVE_AFTER_LOCAL_REBUILD", "ACTIVE_DEGRADED"]}}}, "then": {"properties": {"action": {"enum": ["ACTIVATE", "ROLLBACK", "RESTORE"]}, "components": {"items": {"properties": {"result": {"not": {"const": "FAILED"}}}}}}}},
+    {"if": {"properties": {"result": {"const": "ACTIVE_FULL"}}}, "then": {"properties": {"service_level": {"const": "FULL"}, "components": {"items": {"properties": {"result": {"enum": ["VERIFIED_USED", "VERIFIED_REUSED_FROM_RETAINED"]}}}}}}},
+    {"if": {"properties": {"result": {"const": "ACTIVE_AFTER_LOCAL_REBUILD"}}}, "then": {"properties": {"service_level": {"const": "FULL"}, "components": {"contains": {"properties": {"result": {"const": "ACCELERATOR_REBUILT_LOCALLY"}}}, "items": {"properties": {"result": {"not": {"const": "ACCELERATOR_DEGRADED"}}}}}}}},
+    {"if": {"properties": {"result": {"const": "ACTIVE_DEGRADED"}}}, "then": {"required": ["degradation_acknowledged_by"], "properties": {"service_level": {"enum": ["DEGRADED_LEXICAL_ONLY", "DEGRADED_NO_RERANK"]}, "degradation_acknowledged_by": {"type": "string", "minLength": 3}, "components": {"contains": {"properties": {"result": {"const": "ACCELERATOR_DEGRADED"}}}}}}},
+    {"if": {"properties": {"action": {"const": "REFUSE"}}}, "then": {"required": ["reason"], "properties": {"result": {"const": "REFUSED"}, "reason": {"type": "string", "minLength": 3}}}},
+    {"if": {"properties": {"result": {"const": "REFUSED"}}}, "then": {"properties": {"action": {"const": "REFUSE"}}}}
   ]
 }

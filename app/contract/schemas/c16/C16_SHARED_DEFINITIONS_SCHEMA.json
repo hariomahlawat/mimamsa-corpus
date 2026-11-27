@@ -60,9 +60,23 @@
       "pattern": "^INSTCODE:([A-Z][A-Z0-9]*(-[A-Z]+)*-[0-9]{4}|DOC-[a-z0-9][a-z0-9._-]{0,159})$"
     },
     "subject_node_id": {
-      "description": "Subject taxonomy node. SUBJ:<topic> for the controlled topic list (schema/document.schema.json topic enum); SUBJ:local:<slug> for an owner-collection subject not (yet) mapped to the controlled list.",
+      "description": "Subject taxonomy node. SUBJ:<topic> for the controlled topic list (schema/document.schema.json topic enum); SUBJ:local:<path slug> for an owner-collection folder, where the path slug joins the slug of EVERY folder from the collection root with '__' (so the same leaf name under different parents gives different nodes); paths longer than the limit end in '~' and 12 hex of sha256(full relative folder path).",
       "type": "string",
-      "pattern": "^SUBJ:(local:)?[a-z0-9][a-z0-9_-]{0,80}$"
+      "pattern": "^SUBJ:(local:)?[a-z0-9][a-z0-9_~-]{0,159}$"
+    },
+    "review_binding": {
+      "description": "Binds a raised verification (DOCUMENTARY_CHECKED) to one exact, independent contract-v1 reviewed_record in the same exchange: its id, the sha256 of its canonical bytes, the reviewed commit, the reviewer and the author. The reviewed_record's subject is {kind: candidate, id: <relationship_id or anchor_id>}, axis evidence_fidelity, to_value DOCUMENTARY_CHECKED. reviewer_id must differ from author_id (rule C16_REVIEW_NOT_INDEPENDENT). A shape-valid review_ref alone is never enough.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["review_record_id", "review_record_sha256", "reviewed_commit", "reviewer_id", "reviewer_kind", "author_id"],
+      "properties": {
+        "review_record_id": {"$ref": "#/$defs/review_ref"},
+        "review_record_sha256": {"$ref": "#/$defs/sha256"},
+        "reviewed_commit": {"$ref": "#/$defs/git_commit"},
+        "reviewer_id": {"type": "string", "minLength": 3, "maxLength": 120},
+        "reviewer_kind": {"enum": ["HUMAN", "AI_AGENT"]},
+        "author_id": {"type": "string", "minLength": 3, "maxLength": 120}
+      }
     },
     "chapter_node_id": {
       "description": "Chapter (or Part) node within an instrument: CHAP:<instrument code>:<chapter label, upper-case roman or arabic>.",
