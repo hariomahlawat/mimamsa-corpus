@@ -146,7 +146,8 @@ async function studioHome(page, nav) {
     docsSect,
     h("section.ws-sect", { "data-sect": "notes" }, h("h2", "Research notes"),
       h("form.ws-inline", { onsubmit: async (e) => { e.preventDefault();
-        try { await api("/api/studio/notes", { method: "POST", body: { text: noteText.value } }); noteText.value = ""; refreshLists(); }
+        const sent = noteText.value;   // Codex review of PR #75: text typed after submitting is kept; only the sent text is cleared
+        try { await api("/api/studio/notes", { method: "POST", body: { text: sent } }); if (noteText.value === sent) noteText.value = ""; refreshLists(); }
         catch (err) { toast(err.body?.error || err.message); } } }, noteText, h("button.btn", { type: "submit" }, "Add note")),
       notesList));
   function drawDocs(docs) {

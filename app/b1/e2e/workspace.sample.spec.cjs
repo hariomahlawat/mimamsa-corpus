@@ -276,6 +276,20 @@ test("W-05f a policy refresh of the Studio home keeps a note being drafted", asy
   }
 });
 
+// Codex review of PR #75: text typed into the note field while "Add note" is in flight is kept.
+test("W-05h a note edit made while the note is being added is kept", async ({ page }) => {
+  await login(page);
+  await page.goto("/studio");
+  await page.fill("#note-text", "First note text.");
+  let release; const gate = new Promise((r) => { release = r; });
+  await page.route((u) => u.pathname === "/api/studio/notes", async (route) => { if (route.request().method() === "POST") await gate; await route.continue(); });
+  await page.getByRole("button", { name: "Add note" }).click();
+  await page.fill("#note-text", "Second note, typed while the first was saving.");
+  release();
+  await expect(page.locator("#studio-notes")).toContainText("First note text.");
+  await expect(page.locator("#note-text")).toHaveValue("Second note, typed while the first was saving.");
+});
+
 // Codex review of PR #75: while a save is in flight the editor is locked, so nothing typed after the request was sent
 // can be lost when the saved version is shown.
 test("W-05g the Studio editor is locked while a save is in flight", async ({ page }) => {
