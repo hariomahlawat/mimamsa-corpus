@@ -14,11 +14,12 @@ import pytest
 from conftest import KBUILD, SPEC, copy_build, load_spec
 
 from mimamsa_contract.bundle import parse_sums, validate_bundle
+from mimamsa_contract.c16 import accounting, digests, knowledge_rows
 from mimamsa_contract.c16 import build_spec as bs
 from mimamsa_contract.c16 import rules as c16rules
 from mimamsa_contract.restricted import load_register
 from mimamsa_contract.trust import parse_trust_list
-from mimamsa_kbuild import engine, release, stages
+from mimamsa_kbuild import REPO, engine, release, stages
 from mimamsa_kbuild.cli import dry_run, run_build
 from mimamsa_kbuild.errors import BuildRefused
 from mimamsa_kbuild.fixture_mirror import GENERATION_SHA256, prepare, revision_root
@@ -112,9 +113,18 @@ def test_degraded_release_validates_under_the_contract_rules(built):
     cap = m["capability"]
     assert cap["declared_service_level"] == "DEGRADED_LEXICAL_ONLY" and cap["semantic_search_promised"] is False
     status = {a["kind"]: a["status"] for a in cap["accounting"]}
-    assert status["VECTOR_PACK"] == "OMITTED_DEGRADED" and status["TEXT_STORE"] == "SITE_BUILDS_CHEAP"
+    assert status["VECTOR_PACK"] == "OMITTED_DEGRADED" and status["TEXT_STORE"] == "SHIPPED"   # B04 2.1 source digest
     assert {c["kind"] for c in m["components"]} == {"ORIGINALS", "TEXT_DERIVATIVES", "RECORDS", "RESEARCH_AIDS", "INTEGRITY_REGISTER",
-                                                    "ADMISSION_REGISTER", "KNOWLEDGE_ROWS", "GRAPH", "LEXICAL_INDEX"}
+                                                    "ADMISSION_REGISTER", "KNOWLEDGE_ROWS", "GRAPH", "LEXICAL_INDEX", "TEXT_STORE"}
+    # I-2: graph tables only under GRAPH; KNOWLEDGE_ROWS digest is the 2.1 table_rows_digest (final LF)
+    assert knowledge_rows.manifest_table_owner_issues(m) == []
+    comps = {c["kind"]: c for c in m["components"]}
+    assert {t["table"] for t in comps["GRAPH"]["tables"]} == {"graph_nodes", "graph_edges"}
+    rows = comps["KNOWLEDGE_ROWS"]["tables"]
+    assert comps["KNOWLEDGE_ROWS"]["result_digest"] == digests.table_rows_digest([(t["table"], t["row_count"], t["rows_sha256"]) for t in rows])
+    assert comps["TEXT_STORE"]["result_digest"] == digests.file_digest((bundle / "accelerators" / "text-store" / "text.sqlite").read_bytes())
+    assert comps["LEXICAL_INDEX"]["result_digest"] == digests.file_digest((bundle / "accelerators" / "search-index" / "search.sqlite").read_bytes())
+    assert comps["TEXT_STORE"]["source_digest"] == stages.text_store_source_digest(built["root"] / "S5" / "site")
     gates = json.loads((KBUILD / "config" / "GATE_STATUS.json").read_text(encoding="utf-8"))["gates"]
     assert cap["pending_future_gates"] == sorted(g["gate"] for g in gates if g["status"] == "OPEN" and "KNOWLEDGE" in g["applies_to"])
     assert all(p.relative_to(bundle).as_posix() in sums for p in bundle.rglob("*") if p.is_file() and p.name not in ("SHA256SUMS", "SHA256SUMS.sig"))
@@ -123,8 +133,30 @@ def test_degraded_release_validates_under_the_contract_rules(built):
     assert validate_bundle(bundle, trust_list=trust, mode="development", register=reg, current_release_sequence=0).ok
     prod = validate_bundle(bundle, trust_list=trust, mode="production", register=reg, current_release_sequence=0)
     assert not prod.ok and "SIGNATURE_DEV_KEY_IN_PRODUCTION" in {i.code for i in prod.errors}
-    acct = json.loads((bundle / "registers" / "admission-accounting.json").read_text(encoding="utf-8"))
-    assert acct["reconciled"] and {s["source"] for s in acct["sources"]} == {"v1_canonical", "c16_producer_generation", "v7_candidates", "local_admin_uploads"}
+    # the ONE 2.1 accounting register (PR #82 clarification 1), declared by the build, in the ADMISSION_REGISTER
+    raw = (bundle / "registers" / "source_accounting.json").read_bytes()
+    acct = json.loads(raw)
+    assert raw == accounting.register_bytes(acct) and accounting.accounting_issues(acct) == []
+    assert acct["scope"] == "DECLARED_BY_BUILD" and acct["release_id"] == load_spec()["release"]["release_id"]
+    g = load_spec()["inputs"]["producer_generations"][0]
+    assert [s["source"] for s in acct["sources"]] == [f"c16:{g['corpus_generation_id']}", f"v1:hf:{g['hf_repo']}@{g['hf_revision']}"]
+    assert acct["sources"][0]["provenance"]["generation_manifest_sha256"] == g["generation_manifest_sha256"]
+    assert "registers/source_accounting.json" in {f["path"] for f in comps["ADMISSION_REGISTER"]["files"]}
+    assert not (bundle / "registers" / "admission-accounting.json").exists()
+    # B01 transport: every corpus-v2/ and registers/ file is a RELEASE.json file of kind 'other'
+    listed = {f["path"]: f["kind"] for f in json.loads((bundle / "RELEASE.json").read_text(encoding="utf-8"))["files"]}
+    for p in bundle.rglob("*"):
+        r = p.relative_to(bundle).as_posix()
+        if p.is_file() and r.startswith(("corpus-v2/", "registers/")):
+            assert listed.get(r) == "other", r
+
+
+def test_component_digests_are_the_contract_2_1_definitions():
+    """B02 computes every component digest with mimamsa_contract.c16.digests: checked against the 2.1 golden vectors."""
+    g = json.loads((REPO / "app" / "contract" / "fixtures" / "c16" / "v2_1" / "digests" / "golden.json").read_text(encoding="utf-8"))
+    kr = g["KNOWLEDGE_ROWS"]
+    assert release.rows_component_digest(kr["tables"]) == kr["digest"] != kr["wrong_no_final_lf"]
+    assert release.hashset_digest(g["HASHSET"]["hashes"]) == g["HASHSET"]["digest"]
 
 
 @pytest.mark.parametrize("mutate,code", [
@@ -319,9 +351,9 @@ def test_contract_2_1_exchange_receipts_are_item_level(tmp_path, dev_key, accel_
     root = tmp_path / "out" / spec["output_dir"]
     val = json.loads((root / "S2" / "VALIDATION.json").read_text(encoding="utf-8"))
     assert "C16_RECEIPT_REGISTER" in sum(val["receipts"]["unresolved_admissions"].values(), [])
-    acct = json.loads((root / "S8" / "bundle" / "registers" / "admission-accounting.json").read_text(encoding="utf-8"))
-    c16 = next(s for s in acct["sources"] if s["source"] == "c16_producer_generation")
-    assert c16["not_servable"].get("ELIGIBLE_RECEIPTS_UNRESOLVED") == 1 and c16["declared_servable"] == 0
+    acct = json.loads((root / "S8" / "bundle" / "registers" / "source_accounting.json").read_text(encoding="utf-8"))
+    c16 = next(s for s in acct["sources"] if s["path"] == "C16")
+    assert c16["not_served_reasons"].get("RECEIPTS_UNRESOLVED") == 1 and c16["served"] == 0 and c16["eligible"] == 0
     assert any(p.startswith("registers/receipts/") for p in parse_sums((root / "S8" / "bundle" / "SHA256SUMS").read_text())[0])
     assert res["ran"] == ALL
 

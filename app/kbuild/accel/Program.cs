@@ -23,7 +23,8 @@ var outPath = Arg("--out");
 var buildTime = DateTimeOffset.Parse(Arg("--build-time"), CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
 
 void Log(string m) => Console.Error.WriteLine(m);
-var textOptions = new TextStoreOptions { Store = "disk", Dir = textDir, KeepPrevious = 0, BuildTimeUtc = buildTime };
+// AdoptShipped off: the build (S6) and its parity check (S9) always rebuild, never copy a shipped store.
+var textOptions = new TextStoreOptions { Store = "disk", Dir = textDir, KeepPrevious = 0, BuildTimeUtc = buildTime, AdoptShipped = false };
 var gen = GenerationStore.Load(site, null, textOptions, Log);
 var ix = SearchIndex.Open(gen, indexDir, new SearchIndexOptions { UseForwardCache = false, KeepPrevious = 0, BuildTimeUtc = buildTime }, Log);
 var graph = GraphBuilder.Build(gen);

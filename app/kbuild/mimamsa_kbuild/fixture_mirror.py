@@ -39,10 +39,39 @@ def revision_root(mirror: Path, repo: str, revision: str) -> Path:
     return Path(mirror) / owner / name / revision
 
 
+def cp1_exchange(repo: str, revision: str):
+    """The CP-1 vertical-slice exchange (contract 2.1, real bytes): the B01 synthetic producer exchange
+    (app/importer/c16_cases.py), with its receipts bound to the committed restricted-material register and its G01
+    source pointing at this mirror. A (eligible, nine typed receipts) also gets a v1 record pinned to the mirror, so an
+    admitted copy is served end to end; B (held) and E (eligible, DOCX, C16 only) have no v1 record and are never served.
+    Returns (exchange files, receipt artefacts, extra v1 documents, extra v1 derivatives, {sha: original}, {text path: bytes})."""
+    import sys
+    for p in (REPO / "app" / "importer", REPO / "app" / "contract"):
+        if str(p) not in sys.path:
+            sys.path.insert(0, str(p))
+    import c16_cases as cc  # noqa: E402  (the B01 synthetic producer, unchanged)
+    from mimamsa_contract.restricted import register_from_bytes
+    reg_path = REPO / "config" / "restricted_material.json"
+    cc.REGISTER = register_from_bytes(reg_path.read_bytes(), "config/restricted_material.json")
+    cp = cc.Corpus()
+
+    def point_g01_at_mirror(key, arts):
+        a = arts["G01_HASH_VERIFIED"]
+        a["payload"]["source"] = {"hf_repo": repo, "hf_revision": revision,
+                                  "path": f"v1/originals/{a['subject']['source_copy_sha256']}.pdf"}
+    files, arts, _ids, _adms = cc.exchange(cp, mutate_arts=point_g01_at_mirror)
+    doc = cc.v1_doc(cp.a, cc.DOC_A, pages=2)
+    sha = cc.h(cp.a)
+    doc["provenance"]["hf"] = {"repo": repo, "revision": revision, "path": f"v1/originals/{sha}.pdf"}
+    text_path = f"text/{cc.DOC_A}.txt"
+    der = cc.v1_derived(cc.DOC_A, sha, cp.a_text, text_path, cp.a_pages)
+    return files, arts, [doc], [der], {sha: cp.a}, {text_path: cp.a_text}
+
+
 def prepare(mirror: Path, *, repo: str = CP1_REPO, revision: str = CP1_REVISION, exchange: str = "positive") -> Path:
-    """exchange: "positive" (the strict contract 2.0 positive exchange; the CP-1 spec pins it) or "v2_1" (the 2.1
+    """exchange: "positive" (the strict contract 2.0 positive exchange; the CP-1 fixture spec pins it), "v2_1" (the 2.1
     exchange with typed receipts, whose G03 receipt is bound to a fixture register revision, so it does not resolve
-    against the real register: the item stays unserved)."""
+    against the real register: the item stays unserved) or "cp1" (the CP-1 vertical-slice exchange: `cp1_exchange`)."""
     import sys
     sys.path.insert(0, str(REPO / "app" / "b1" / "build"))
     import build_fixture_site as syn  # noqa: E402  (reuse the SYN renderer, unchanged)
@@ -67,6 +96,15 @@ def prepare(mirror: Path, *, repo: str = CP1_REPO, revision: str = CP1_REVISION,
           "effective_to": {"status": "OPEN_ON_LOCATED_INSTRUMENTS"}, "currency": {"status": "NOT_ESTABLISHED"},
           "text_evidence": [{"role": "synthetic_primary", "sha256": recs["S-ACT"]["source_copy"]["sha256"], "pdf_page": "2", "edition": "synthetic act"},
                             {"role": "synthetic_secondary", "sha256": recs["V-OTHER"]["source_copy"]["sha256"], "pdf_page": "1", "edition": "unrelated synthetic book"}]}
+    if exchange == "cp1":
+        cp1_files, cp1_arts, extra_docs, extra_ders, extra_orig, extra_text = cp1_exchange(repo, revision)
+        for d in extra_docs:
+            recs[d["doc_id"]] = d
+        ders += extra_ders
+        for h, b in extra_orig.items():
+            write_bytes(root / "v1" / "originals" / f"{h}.pdf", b)
+        for p, b in extra_text.items():
+            write_bytes(root / "v1" / p, b)
     docs = sorted(recs.values(), key=lambda r: r["doc_id"])
     write_bytes(root / "v1" / "data" / "documents.jsonl", _jsonl(docs))
     write_bytes(root / "v1" / "data" / "derived_text.jsonl", _jsonl(sorted(ders, key=lambda r: r["doc_id"])))
@@ -80,8 +118,13 @@ def prepare(mirror: Path, *, repo: str = CP1_REPO, revision: str = CP1_REVISION,
             write_bytes(root / EXCHANGE_PATH / p.name, p.read_bytes())
         for p in sorted((V2_1 / "registers" / "receipts").iterdir()):
             write_bytes(root / EXCHANGE_PATH / "registers" / "receipts" / p.name, p.read_bytes())
+    elif exchange == "cp1":
+        for name, b in sorted(cp1_files.items()):
+            write_bytes(root / EXCHANGE_PATH / name, b)
+        for p, b in sorted(cp1_arts.items()):
+            write_bytes(root / EXCHANGE_PATH / p, b)
     else:
-        raise ValueError("exchange must be 'positive' or 'v2_1'")
+        raise ValueError("exchange must be 'positive', 'v2_1' or 'cp1'")
     return root
 
 

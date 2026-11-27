@@ -170,8 +170,15 @@ public sealed partial class GenerationStore
                 break;
             case "disk":
                 var root = text.Dir is { Length: > 0 } tdir ? Path.GetFullPath(tdir) : Path.Combine(siteRoot, "text-store");
-                textStore = DiskTextStore.OpenOrBuild(root, text, gid, DiskTextStore.SourceDigest(gid, gdir, docs.Values), docs,
-                    issue => ReadDerived(gdir, okDer, docs, issue), (code, n) => issues[code] = issues.GetValueOrDefault(code) + n, log);
+                var tsDigest = DiskTextStore.SourceDigest(gid, gdir, docs, okDer);
+                string? shipped = null;
+                if (text.AdoptShipped)
+                {
+                    shipped = DiskTextStore.ShippedStore(gdir, gid, tsDigest, out var shippedWhy);
+                    if (shipped is null && File.Exists(Path.Combine(gdir, "KNOWLEDGE_RELEASE.json"))) log?.Invoke($"text store: no shipped store adopted ({shippedWhy})");
+                }
+                textStore = DiskTextStore.OpenOrBuild(root, text, gid, tsDigest, docs,
+                    issue => ReadDerived(gdir, okDer, docs, issue), (code, n) => issues[code] = issues.GetValueOrDefault(code) + n, log, shipped);
                 break;
             default:
                 throw new ArgumentException("text store must be 'memory' or 'disk'");

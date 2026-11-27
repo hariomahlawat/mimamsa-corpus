@@ -49,6 +49,9 @@ public sealed record TextStoreOptions
     /// C16 B02: a pinned build time written as built_utc instead of the wall clock, so that a central build produces
     /// byte-identical stores from the same inputs. Null (the default) keeps the existing behaviour.
     public DateTimeOffset? BuildTimeUtc { get; init; }
+    /// C16 B04 (2.1): adopt a store shipped with the generation when its source digest equals the site's (default on).
+    /// The central build's own parity check turns it off so that it always rebuilds.
+    public bool AdoptShipped { get; init; } = true;
 
     public static TextStoreOptions Memory { get; } = new();
 }
@@ -164,6 +167,8 @@ public sealed class DiskTextStore : ITextStore, IDisposable
     public string Kind => "disk";
     public string? StorePath { get; }
     public long FileBytes { get; }
+    /// How this process got the store: "opened" (existing), "adopted" (shipped prebuilt, B04 2.1) or "built" (locally).
+    public string Origin { get; private init; } = "opened";
 
     DiskTextStore(string dir, long cacheBytes)
     {
@@ -333,23 +338,112 @@ public sealed class DiskTextStore : ITextStore, IDisposable
 
     static string Sha(byte[] b) => Convert.ToHexString(SHA256.HashData(b)).ToLowerInvariant();
 
-    /// Identity of the text the store holds for this generation: the store format, generation id, generation.json
-    /// (servable derivatives), derived_text.jsonl (derivatives, text_sha256, pages, passages and their hashes) and the
-    /// documents loaded in order with their copies. Any difference means the store must be rebuilt.
-    internal static string SourceDigest(string generation, string gdir, IEnumerable<DocumentRecord> docs)
+    /// Contract 2.1 (PR #82 clarification 5, B04 section 5): the bundle-independent TEXT_STORE source digest.
+    public const string SourceDigestFormat = "mimamsa-text-store-source/2.1";
+
+    /// Identity of the text the store holds for this generation, computed only from what the store is built from: the
+    /// generation id, the servable documents (doc_id, copy sha256) and their servable derivative records (identity,
+    /// text_sha256, quoting, pages, passages). It contains no generation.json bytes and no bundle checksum, so a store
+    /// built centrally for the same generation has the same digest (byte-exact reference: digests.text_store_source_digest).
+    /// It decides only whether an existing or shipped store may be used or must be rebuilt: Bind re-derives every
+    /// document from the records and source derivatives on every open and every page read is hashed, whatever it says.
+    internal static string SourceDigest(string generation, string gdir, IReadOnlyDictionary<string, DocumentRecord> docs, IReadOnlySet<string> servableDerivatives)
     {
-        using var h = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
-        void Add(string s) => h.AppendData(Encoding.UTF8.GetBytes(s + "\n"));
-        Add(FormatVersion); Add(generation);
-        foreach (var f in new[] { "generation.json", Path.Combine("records", "derived_text.jsonl") })
+        var derived = new List<JsonObject>();
+        var path = Path.Combine(gdir, "records", "derived_text.jsonl");
+        if (File.Exists(path))
+            foreach (var line in File.ReadLines(path))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                var t = JsonNode.Parse(line)!.AsObject();
+                var docId = (string)t["doc_id"]!;
+                var did = $"{docId}@{(string)t["pipeline"]!["name"]!}/{(string)t["pipeline"]!["version"]!}";
+                if (servableDerivatives.Contains(did) && docs.TryGetValue(docId, out var d) && (string?)t["source_copy_sha256"] == d.CopySha) derived.Add(t);
+            }
+        return SourceDigest21(generation, docs.Values.Select(d => (d.DocId, d.CopySha)), derived);
+    }
+
+    /// The byte-exact .NET port of `digests.text_store_source_digest` (golden: v2_1/digests/golden.json TEXT_STORE_SOURCE).
+    public static string SourceDigest21(string generationId, IEnumerable<(string DocId, string CopySha)> documents, IEnumerable<JsonObject> derived)
+    {
+        static string Str(JsonNode? n) => n?.GetValue<string>() ?? throw new FormatException("text store source: missing string");
+        static long Long(JsonNode? n) => n is JsonValue v && (v.TryGetValue<long>(out var l) || (v.TryGetValue<int>(out var i) && (l = i) == i))
+            ? l : throw new FormatException("text store source: missing integer");
+        static string Int(JsonNode? n) => Long(n).ToString(System.Globalization.CultureInfo.InvariantCulture);
+        static bool Truthy(JsonNode? n) => n is JsonValue v && (v.TryGetValue<bool>(out var b) ? b : v.TryGetValue<long>(out var l) ? l != 0 : v.TryGetValue<string>(out var s) && s.Length > 0);
+        static string OrDash(JsonNode? n) => n is JsonValue v && v.TryGetValue<string>(out var s) && s.Length > 0 ? s : "-";
+        var sb = new StringBuilder();
+        void Line(string s) => sb.Append(s).Append('\n');
+        Line(SourceDigestFormat);
+        Line("G\t" + generationId);
+        foreach (var (docId, sha) in documents.OrderBy(d => d.DocId, StringComparer.Ordinal)) Line($"D\t{docId}\t{sha}");
+        var ders = derived.OrderBy(t => Str(t["doc_id"]), StringComparer.Ordinal).ThenBy(t => Str(t["pipeline"]!["name"]), StringComparer.Ordinal)
+                          .ThenBy(t => Str(t["pipeline"]!["version"]), StringComparer.Ordinal).ToList();
+        foreach (var t in ders)
+            Line($"T\t{Str(t["doc_id"])}\t{Str(t["source_copy_sha256"])}\t{Str(t["pipeline"]!["name"])}/{Str(t["pipeline"]!["version"])}\t{Str(t["text_sha256"])}\t{(Truthy(t["quoting_permitted"]) ? 1 : 0)}");
+        foreach (var t in ders)
+            foreach (var p in (t["pages"]?.AsArray() ?? []).Select(x => x!.AsObject()).OrderBy(p => Long(p["page"])))
+                Line($"P\t{Str(t["doc_id"])}\t{Int(p["page"])}\t{Str(p["method"])}\t{Int(p["char_count"])}\t{(Truthy(p["low_confidence"]) ? 1 : 0)}\t{OrDash(p["text_sha256"])}");
+        foreach (var t in ders)
+            foreach (var q in (t["passages"]?.AsArray() ?? []).Select(x => x!.AsObject())
+                         .OrderBy(q => Long(q["page"])).ThenBy(q => Long(q["char_start"])).ThenBy(q => Str(q["passage_id"]), StringComparer.Ordinal))
+                Line($"Q\t{Str(t["doc_id"])}\t{Str(q["passage_id"])}\t{Int(q["page"])}\t{Int(q["char_start"])}\t{Int(q["char_end"])}\t{OrDash(q["paragraph_label"])}\t{Str(q["text_sha256"])}");
+        return Sha(Encoding.UTF8.GetBytes(sb.ToString()));
+    }
+
+    /// A prebuilt store shipped with the generation (KNOWLEDGE_RELEASE.json TEXT_STORE component, materialised by the
+    /// site importer under accelerators/text-store/): its directory when the component's source_digest equals the
+    /// site's own 2.1 digest and both files hash to the component inventory; otherwise null and why.
+    internal static string? ShippedStore(string gdir, string generation, string digest, out string why)
+    {
+        why = "no knowledge release manifest";
+        var km = Path.Combine(gdir, "KNOWLEDGE_RELEASE.json");
+        if (!File.Exists(km)) return null;
+        try
         {
-            var p = Path.Combine(gdir, f);
-            if (!File.Exists(p)) { Add($"{f}\tabsent"); continue; }
-            using var s = new FileStream(p, FileMode.Open, FileAccess.Read, FileShare.Read, 1 << 20);
-            Add($"{f}\t{Convert.ToHexString(SHA256.HashData(s)).ToLowerInvariant()}");
+            var comp = JsonNode.Parse(File.ReadAllText(km))!["components"]!.AsArray().Select(c => c!.AsObject())
+                .FirstOrDefault(c => (string?)c["kind"] == "TEXT_STORE");
+            if (comp is null) { why = "no TEXT_STORE component (site builds)"; return null; }
+            if ((string?)comp["source_digest"] != digest) { why = "shipped source digest differs from the site's 2.1 digest"; return null; }
+            var dir = Path.Combine(gdir, "accelerators", "text-store");
+            var want = new HashSet<string>(StringComparer.Ordinal) { "accelerators/text-store/" + DbFile, "accelerators/text-store/" + ManifestFile };
+            foreach (var f in comp["files"]!.AsArray().Select(f => f!.AsObject()))
+            {
+                var rel = (string)f["path"]!;
+                if (!want.Remove(rel)) { why = "unexpected file in the shipped text store"; return null; }
+                var p = Path.Combine(gdir, rel.Replace('/', Path.DirectorySeparatorChar));
+                if (!File.Exists(p) || FileSha(p) != (string?)f["sha256"]) { why = "shipped text store file missing or not the signed inventory's bytes"; return null; }
+            }
+            if (want.Count != 0) { why = "shipped text store incomplete"; return null; }
+            why = "ok";
+            return dir;
         }
-        foreach (var d in docs) Add($"D\t{d.DocId}\t{d.CopySha}");
-        return Convert.ToHexString(h.GetHashAndReset()).ToLowerInvariant();
+        catch (Exception e) when (e is JsonException or InvalidOperationException or NullReferenceException or FormatException or IOException)
+        {
+            why = "knowledge release manifest unreadable: " + e.GetType().Name;
+            return null;
+        }
+    }
+
+    /// Copies a shipped store into the store root (temporary directory, full verification, atomic rename). The caller
+    /// holds the root lock. Returns null when adopted, else why (the store is then built locally).
+    static string? Adopt(string root, string shippedDir, string generation, string digest, string target)
+    {
+        var tmp = Path.Combine(root, $".building-{Safe(generation)}-adopt-{Guid.NewGuid():N}");
+        Directory.CreateDirectory(tmp);
+        try
+        {
+            foreach (var f in new[] { DbFile, ManifestFile })
+            {
+                File.Copy(Path.Combine(shippedDir, f), Path.Combine(tmp, f));
+                using var s = new FileStream(Path.Combine(tmp, f), FileMode.Open, FileAccess.ReadWrite); s.Flush(true);
+            }
+            var why = Verify(tmp, generation, digest, full: true);
+            if (why is not null) { Directory.Delete(tmp, true); return why; }
+            Directory.Move(tmp, target);
+            return null;
+        }
+        catch (IOException e) { try { Directory.Delete(tmp, true); } catch (IOException) { } return "copy failed: " + e.GetType().Name; }
     }
 
     sealed class Lock(string root, TimeSpan timeout) : IDisposable
@@ -373,7 +467,8 @@ public sealed class DiskTextStore : ITextStore, IDisposable
     /// attaches lazy text to `docs`. `derived` yields the verified derivatives (only enumerated for a build);
     /// `issue` receives the derived-stage load issues in the order the build recorded them.
     internal static DiskTextStore OpenOrBuild(string root, TextStoreOptions o, string generation, string digest,
-        Dictionary<string, DocumentRecord> docs, Func<Action<string>, IEnumerable<DerivedText>> derived, Action<string, int> issue, Action<string>? log)
+        Dictionary<string, DocumentRecord> docs, Func<Action<string>, IEnumerable<DerivedText>> derived, Action<string, int> issue, Action<string>? log,
+        string? shippedDir = null)
     {
         Directory.CreateDirectory(root);
         using var held = new Lock(root, o.LockTimeout);
@@ -383,6 +478,16 @@ public sealed class DiskTextStore : ITextStore, IDisposable
             Directory.Delete(d, true);
         }
         var dir = Path.Combine(root, Safe(generation));
+        string origin = "opened";
+        // C16 B04 (2.1): a store shipped prebuilt with the generation is adopted (copied, fully verified, atomically
+        // published) instead of rebuilt, when its 2.1 source digest equals the site's. It then goes through exactly the
+        // same Verify and Bind as any existing store below; a store that fails them is quarantined and rebuilt.
+        if (!Directory.Exists(dir) && shippedDir is not null)
+        {
+            var why = Adopt(root, shippedDir, generation, digest, dir);
+            log?.Invoke(why is null ? $"text store: adopted shipped store for {generation} (no rebuild)" : $"text store: shipped store not adopted: {why}");
+            if (why is null) origin = "adopted";
+        }
         if (Directory.Exists(dir))
         {
             var why = Verify(dir, generation, digest, o.VerifyOnOpen);
@@ -403,7 +508,7 @@ public sealed class DiskTextStore : ITextStore, IDisposable
             var bindMs = bindWatch.ElapsedMilliseconds;
             if (loaded is not null)
             {
-                var store = new DiskTextStore(dir, o.CacheBytes);
+                var store = new DiskTextStore(dir, o.CacheBytes) { Origin = origin };
                 store.Attach(loaded, issue);
                 Retain(root, dir, o.KeepPrevious, log);
                 log?.Invoke($"text store: opened {dir} (bound {loaded.Docs.Count} documents to the generation's records in {bindMs} ms)");
@@ -419,7 +524,7 @@ public sealed class DiskTextStore : ITextStore, IDisposable
         }
         Build(root, o, generation, digest, dir, derived, log);
         var built = ReadMetadata(dir, docs);
-        var s = new DiskTextStore(dir, o.CacheBytes);
+        var s = new DiskTextStore(dir, o.CacheBytes) { Origin = "built" };
         s.Attach(built, issue);
         Retain(root, dir, o.KeepPrevious, log);
         return s;

@@ -52,6 +52,7 @@ REGISTERS_PREFIX = "registers/"
 ACCOUNTING_PATH = accounting.FILE                                   # registers/source_accounting.json (declared, signed)
 SITE_ACCOUNTING_PATH = "registers/source_accounting.site.json"     # the site's recomputation (never shipped)
 CANDIDATE_SET_PREFIX = "registers/candidate_sets/"                  # v7 candidate hash sets (proposed 2.1 addition)
+INTEGRITY_REGISTER_PATH = "registers/integrity.jsonl"                # B02's INTEGRITY_REGISTER file (2.0 namespace registers/)
 KNOWLEDGE_MANIFEST = "KNOWLEDGE_RELEASE.json"
 DECISION_INDEX = "C16_DECISION_INDEX.json"
 SUPPORTED_CONTRACTS = ("mimamsa-corpus-contract/2.0", "mimamsa-corpus-contract/2.1")
@@ -91,6 +92,8 @@ class C16Result:
     accounting: list = field(default_factory=list)          # the site's recomputed sources (RECOMPUTED_BY_SITE)
     declared_accounting: bytes | None = None                # the signed declaration, verbatim
     site_accounting: bytes | None = None                    # register_bytes of the site's recomputation
+    knowledge_manifest: bytes | None = None                 # KNOWLEDGE_RELEASE.json (validated, in SHA256SUMS)
+    accelerator_files: dict = field(default_factory=dict)  # ACCELERATOR component files: path -> verified bytes
     resolved_receipts: list = field(default_factory=list)
     receipt_files: dict = field(default_factory=dict)       # path -> bytes of artefacts resolved for served copies
     index_entries: list = field(default_factory=list)
@@ -472,6 +475,7 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
 
     # knowledge release manifest (optional in a v1 transport bundle): rules and inventory against SHA256SUMS
     inventory = {p for p in listed}
+    integrity_files = {INTEGRITY_REGISTER_PATH}
     km = bundle / KNOWLEDGE_MANIFEST
     if km.is_file():
         try:
@@ -488,6 +492,19 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
             res.refusals += ki
             return res
         inventory = {f["path"] for c in kmanifest["components"] if c["kind"] == "ADMISSION_REGISTER" for f in c["files"]}
+        integrity_files = {f["path"] for c in kmanifest["components"] if c["kind"] == "INTEGRITY_REGISTER" for f in c["files"]}
+        # accelerator components travel with the generation (verbatim, re-hashed against the signed inventory) so the
+        # site can verify and adopt them (B03 rows and graph, B04 text store) or rebuild them locally
+        res.knowledge_manifest = km.read_bytes()
+        for c in kmanifest["components"]:
+            if c["authority"] != "ACCELERATOR":
+                continue
+            for f in c["files"]:
+                b = (bundle / f["path"]).read_bytes()
+                if _sha(b) != f["sha256"]:
+                    refuse(_e("KR_INVENTORY", "accelerator file does not hash to the signed component inventory", f["path"]))
+                    return res
+                res.accelerator_files[f["path"]] = b
 
     # per-source accounting register: required on a C16-aware import
     decl = None
@@ -547,10 +564,11 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
             res.refusals += ci
             return res
 
-    # receipt artefacts: everything under registers/ except the accounting register and the candidate sets is a
-    # candidate artefact
+    # receipt artefacts: everything under registers/ except the accounting register, the candidate sets and the
+    # INTEGRITY_REGISTER component's files (frozen 2.0 namespace registers/; without a knowledge release manifest the
+    # one known integrity register path) is a candidate artefact, so a stray file there still fails closed
     artefacts = {p: b for p, b in data.items() if p.startswith(REGISTERS_PREFIX) and p != ACCOUNTING_PATH
-                 and not p.startswith(CANDIDATE_SET_PREFIX)}
+                 and not p.startswith(CANDIDATE_SET_PREFIX) and p not in integrity_files}
     eff = _effective(adms)
     eligible_ids = {a["admission_id"] for a in eff.values() if a["application_eligible"]}
     texts = {}
@@ -778,12 +796,19 @@ def materialize(res: C16Result) -> dict:
         files[ACCOUNTING_PATH] = res.declared_accounting
     if res.site_accounting is not None:
         files[SITE_ACCOUNTING_PATH] = res.site_accounting
+    knowledge = None
+    if res.knowledge_manifest is not None:
+        files[KNOWLEDGE_MANIFEST] = res.knowledge_manifest
+        files.update(res.accelerator_files)
+        knowledge = {"manifest_sha256": _sha(res.knowledge_manifest),
+                     "accelerators": {p: _sha(b) for p, b in sorted(res.accelerator_files.items())}}
     section = {"contract": res.contract, "corpus_generation_id": res.corpus_generation_id,
                "served_copies": sorted([c["doc_id"], c["sha256"]] for c in res.copies if c["served"]),
                "governed": sorted([c["doc_id"], c["sha256"]] for c in res.copies),
                "denied": [list(k) for k in res.denied], "codes": dict(sorted(res.codes.items())),
                "accounting": {"declared_sha256": _sha(res.declared_accounting) if res.declared_accounting is not None else None,
                               "site_sha256": _sha(res.site_accounting) if res.site_accounting is not None else None},
+               "knowledge_release": knowledge,
                "files": {p: _sha(b) for p, b in sorted(files.items())}}
     return {"files": files, "section": section,
             "materialized": {"dir": C16_PREFIX, "files": {n: _sha(b) for n, b in sorted(res.exchange_files.items())}}}

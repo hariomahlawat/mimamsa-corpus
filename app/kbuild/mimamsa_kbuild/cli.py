@@ -124,6 +124,8 @@ def main(argv=None) -> int:
     b.add_argument("--dry-run", action="store_true")
     m = sub.add_parser("prepare-fixture-mirror")
     m.add_argument("--out", type=Path, required=True)
+    m.add_argument("--exchange", choices=["positive", "v2_1", "cp1"], default="positive",
+                   help="producer exchange: the 2.0 positive fixture (cp1-fixture spec) or the CP-1 slice exchange (cp1-slice spec)")
     t = sub.add_parser("build-accel")
     t.add_argument("--artifacts", type=Path, required=True)
     g = sub.add_parser("budget")
@@ -133,7 +135,7 @@ def main(argv=None) -> int:
     try:
         if a.cmd == "prepare-fixture-mirror":
             from .fixture_mirror import prepare
-            print(prepare(a.out.resolve()))
+            print(prepare(a.out.resolve(), exchange=a.exchange))
             return 0
         if a.cmd == "build-accel":
             print(build_accel(a.artifacts.resolve()))

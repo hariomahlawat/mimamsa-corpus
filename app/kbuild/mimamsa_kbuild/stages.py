@@ -12,7 +12,7 @@ from pathlib import Path
 
 from mimamsa_contract.bundle import parse_sums, strict_loads, validate_bundle
 from mimamsa_contract.c16 import build_spec as bs
-from mimamsa_contract.c16 import canonical, components, knowledge_rows, receipts
+from mimamsa_contract.c16 import accounting, canonical, components, digests, knowledge_rows, receipts
 from mimamsa_contract.c16 import rules as c16rules
 from mimamsa_contract.restricted import register_from_bytes
 from mimamsa_contract.trust import parse_trust_list
@@ -23,8 +23,8 @@ from .engine import BuildContext
 from .errors import BuildRefused
 from .fixture_mirror import revision_root
 from .fsutil import copy_file, files_under, json_pretty, link_or_copy, rmtree, sha256_bytes, sha256_file, write_bytes
-from .release import (SIG, SUMS, admission_accounting, concat_digest, file_entries, hashset_digest, integrity_rows, legacy_issues,
-                      parse_jsonl, rows_component_digest, sums_bytes, write_release_tree)
+from .release import (SIG, SUMS, concat_digest, file_entries, hashset_digest, integrity_rows, legacy_issues, parse_jsonl,
+                      rows_component_digest, source_accounting, sums_bytes, write_release_tree)
 from .resources import child_creationflags, child_env, stage_workers
 
 KB = REPO / "app" / "kbuild"
@@ -48,9 +48,7 @@ CODE_INPUTS = [   # code the stages execute: aggregate digests (LF-normalised), 
     ("code:mimamsa_importer", "app/importer/mimamsa_importer", "*.py"),
     ("code:b1_core", "app/b1/src/Mimamsa.Core", "*.cs"),
 ]
-TEXT_STORE_NOT_SHIPPED = ("ADR-0008 source digest hashes generation.json, which records the bundle's own SHA256SUMS digest: a "
-                          "prebuilt store can never match the site (circular); built cheaply on site until B04 defines a "
-                          "bundle-independent digest")
+ACCOUNTING_FILE = accounting.FILE    # registers/source_accounting.json (contract 2.1, DECLARED_BY_BUILD)
 DEFERRED_RECEIPT_CODES = {"C16_RECEIPT_UNVERIFIABLE", "C16_RECEIPT_SITE_MISMATCH"}   # site-recomputable facts: B01 at import
 
 
@@ -356,12 +354,17 @@ def s3_text(ctx: BuildContext, work: Path) -> None:
 
 # ===================================================================================== S4 bundle
 
-def _accounting(ctx: BuildContext, inp: "Inputs", docs: list[dict], pop: dict, shipped: set[str], unresolved: set[str]) -> dict:
+def _accounting(ctx: BuildContext, inp: "Inputs", docs: list[dict], pop: dict, shipped: set[str], unresolved: set[str], sid: str) -> bytes:
+    """registers/source_accounting.json bytes (accounting.register_bytes); refuses if it does not reconcile (R1-R7)."""
     g = inp.generation
-    return admission_accounting(
-        release_id=ctx.spec["release"]["release_id"], v1_source=inp.v1_source, v1_docs=docs, shipped_original_shas=shipped,
-        generations=[{**{k: g[k] for k in ("corpus_generation_id", "generation_manifest_sha256", "hf_repo", "hf_revision")},
-                      "identities": pop.get("identities", []), "admissions": pop.get("admissions", []), "receipts_unresolved": unresolved}])
+    try:
+        reg = source_accounting(
+            release_id=ctx.spec["release"]["release_id"], v1_docs=docs, shipped_original_shas=shipped,
+            generations=[{**{k: g[k] for k in ("corpus_generation_id", "generation_manifest_sha256", "hf_repo", "hf_revision")},
+                          "identities": pop.get("identities", []), "admissions": pop.get("admissions", []), "receipts_unresolved": unresolved}])
+    except ValueError as exc:
+        _refuse("BUILD_ACCOUNTING", str(exc), sid)
+    return accounting.register_bytes(reg)
 
 
 def s4_bundle(ctx: BuildContext, work: Path) -> None:
@@ -375,10 +378,7 @@ def s4_bundle(ctx: BuildContext, work: Path) -> None:
     src = f"hf:{inp.v1_source['hf_repo']}@{inp.v1_source['hf_revision']}"
     c16["registers/integrity.jsonl"] = integrity_rows(recs["documents"], originals, src)
     unresolved = set(ctx.stage_json("S2", "VALIDATION.json")["receipts"]["unresolved_admissions"])
-    acct = _accounting(ctx, inp, recs["documents"], pop, set(originals), unresolved)
-    if not acct["reconciled"]:
-        _refuse("BUILD_ACCOUNTING", "per-source admission accounting does not reconcile", "S4")
-    c16["registers/admission-accounting.json"] = canonical.canonical_bytes(acct) + b"\n"
+    c16[ACCOUNTING_FILE] = _accounting(ctx, inp, recs["documents"], pop, set(originals), unresolved, "S4")
     write_release_tree(work / "tree", release_manifest_template=inp.template, spec=ctx.spec, defaults=inp.defaults, register=inp.register,
                        key_id=inp.inv["dev_signing"]["key_id"], v1_source=inp.v1_source, records=recs, originals=originals,
                        texts=texts, research=inp.v1_group("research/"), c16_files=c16)
@@ -412,12 +412,14 @@ def s5_ref_import(ctx: BuildContext, work: Path) -> None:
         rmtree(scratch)
     if not res.activated:
         _refuse("BUILD_REF_IMPORT_REFUSED", "the reference site refused the bundle: " + "; ".join(res.refused_reasons), "S5")
+    c16 = res.c16 or {}
     write_bytes(work / "REF_IMPORT.json", json_pretty({
-        "importer": "app/importer (v1 path, development mode, dev key)", "activated": True, "release_id": res.release_id,
-        "verified": {k: len(v) for k, v in sorted(res.verified.items())}, "unresolved": len(res.unresolved),
+        "importer": "app/importer (v1 path plus the B01 C16 stage, development mode, dev key)", "activated": True,
+        "release_id": res.release_id, "verified": {k: len(v) for k, v in sorted(res.verified.items())}, "unresolved": len(res.unresolved),
         "unresolved_kinds": sorted({u["kind"] for u in res.unresolved}),
-        "c16_import": "NOT_RUN: the B01 contract-2.0/2.1 site importer is a separate stream not on this branch; corpus-v2/ is "
-                      "validated strictly at S2 and S9 and shipped verbatim"}))
+        "c16_import": {"active": c16.get("active"), "contract": c16.get("contract"), "codes": c16.get("codes"),
+                       "served_copies": sorted(c["doc_id"] for c in c16.get("copies", []) if c["served"]),
+                       "accounting_digests": c16.get("accounting_digests")}}))
 
 
 # ===================================================================================== S6 accelerate
@@ -454,8 +456,36 @@ def _single_dir(root: Path, sid: str) -> Path:
     return subs[0]
 
 
+def text_store_source_inputs(site: Path) -> tuple[str, list[dict], list[dict]]:
+    """(generation id, documents, derived) of the site's ACTIVE generation, as `digests.text_store_source_digest` takes
+    them and as the B1 DiskTextStore (TextStoreSourceDigest.ForGeneration) selects them: documents the generation
+    serves whose copy matches item_document; derivatives listed servable for such a document's copy."""
+    gid = (site / "ACTIVE").read_text(encoding="utf-8").strip()
+    gdir = site / "generations" / gid
+    gen = json.loads((gdir / "generation.json").read_text(encoding="utf-8"))
+    ok_docs, ok_der = set(gen["servable"]["documents"]), set(gen["servable"]["derived_text"])
+    item = gen["item_document"]["documents"]
+    docs = {}
+    for d in parse_jsonl((gdir / "records" / "documents.jsonl").read_bytes()):
+        sha = d["source_copy"]["sha256"]
+        if d["doc_id"] in ok_docs and (item.get(d["doc_id"]) or [None, None])[1] == sha:
+            docs[d["doc_id"]] = sha
+    derived = []
+    for t in parse_jsonl((gdir / "records" / "derived_text.jsonl").read_bytes()):
+        did = f"{t['doc_id']}@{t['pipeline']['name']}/{t['pipeline']['version']}"
+        if did in ok_der and docs.get(t["doc_id"]) == t["source_copy_sha256"]:
+            derived.append(t)
+    return gid, [{"doc_id": k, "copy_sha256": v} for k, v in docs.items()], derived
+
+
+def text_store_source_digest(site: Path) -> str:
+    gid, docs, derived = text_store_source_inputs(site)
+    return digests.text_store_source_digest(gid, docs, derived)
+
+
 def build_accelerators(ctx: BuildContext, site: Path, out: Path, sid: str, pop: dict, allowlist: dict) -> dict:
-    """Rows (Python reference derivation), then text store, lexical index and graph (B1 builders through KBuildAccel)."""
+    """Rows (Python reference derivation), then text store, lexical index and graph (B1 builders through KBuildAccel).
+    Every result digest is computed with mimamsa_contract.c16.digests (2.1 byte definitions)."""
     tables = []
     derived = knowledge_rows.derive_rows(pop)
     for t in sorted(allowlist["tables"], key=lambda t: t["table"]):
@@ -473,9 +503,9 @@ def build_accelerators(ctx: BuildContext, site: Path, out: Path, sid: str, pop: 
     try:
         summary = _run_accel(ctx, site, tmp, sid)
         manifests = {}
-        # TEXT_STORE is built (the builder is exercised and the site rebuild is checked at S9) but NOT shipped: see
-        # TEXT_STORE_NOT_SHIPPED. It goes to site-built/, which S7 never assembles.
-        for kind, sub, dst in (("TEXT_STORE", "text", "site-built/text-store"), ("LEXICAL_INDEX", "index", "accelerators/search-index")):
+        # TEXT_STORE ships prebuilt (B04 section 5): its source digest is the bundle-independent 2.1 digest, which the
+        # site recomputes from its own generation records before adopting the store (DiskTextStore.AdoptShipped).
+        for kind, sub, dst in (("TEXT_STORE", "text", "accelerators/text-store"), ("LEXICAL_INDEX", "index", "accelerators/search-index")):
             gdir = _single_dir(tmp / sub, sid)
             names = sorted(p.name for p in gdir.iterdir())
             if not set(names) <= {"text.sqlite", "search.sqlite", "MANIFEST.json"} or "MANIFEST.json" not in names:
@@ -484,20 +514,26 @@ def build_accelerators(ctx: BuildContext, site: Path, out: Path, sid: str, pop: 
                 copy_file(gdir / n, out / dst / n)
             manifests[kind] = json.loads((gdir / "MANIFEST.json").read_text(encoding="utf-8"))
             db = out / dst / ("text.sqlite" if kind == "TEXT_STORE" else "search.sqlite")
-            if sha256_file(db) != manifests[kind]["file_sha256"]:
+            if digests.file_digest(db.read_bytes()) != manifests[kind]["file_sha256"]:
                 _refuse("BUILD_ACCEL_DIGEST", f"{kind} file does not hash to its MANIFEST.json", sid)
-        graph_tables = []
+        ts_digest = text_store_source_digest(site)
+        if manifests["TEXT_STORE"]["source_digest"] != ts_digest:
+            _refuse("BUILD_ACCEL_DIGEST", "the text store's source digest is not digests.text_store_source_digest of the generation", sid)
+        graph_tables, ids = [], {}
         for table, raw in (("graph_nodes", "nodes.raw.jsonl"), ("graph_edges", "edges.raw.jsonl")):
             data = _canonical_rows(tmp / "graph" / raw, table, allowlist, sid)
             write_bytes(out / "accelerators" / "graph" / f"{table}.jsonl", data)
-            graph_tables.append({"table": table, "row_count": sum(1 for x in data.split(b"\n") if x), "rows_sha256": sha256_bytes(data)})
+            ids[table] = [json.loads(x)["id"] for x in data.split(b"\n") if x]
+            graph_tables.append({"table": table, "row_count": len(ids[table]), "rows_sha256": knowledge_rows.rows_sha256(data)})
+        if digests.graph_digest(summary["graph_builder_version"], ids["graph_nodes"], ids["graph_edges"]) != summary["graph_digest"]:
+            _refuse("BUILD_ACCEL_DIGEST", "GraphStore.Digest differs from digests.graph_digest over the shipped graph rows", sid)
     finally:
         rmtree(tmp)
     return {"rows": {"tables": tables}, "graph": {"tables": graph_tables, "digest": summary["graph_digest"],
                                                   "builder_version": summary["graph_builder_version"],
                                                   "nodes": summary["graph_nodes"], "edges": summary["graph_edges"]},
             "text_store": {**{k: manifests["TEXT_STORE"][k] for k in ("format", "generation", "source_digest", "documents", "pages", "passages", "file_sha256", "built_utc")},
-                           "shipped": False, "accounting": "SITE_BUILDS_CHEAP", "reason": TEXT_STORE_NOT_SHIPPED},
+                           "shipped": True, "accounting": "SHIPPED"},
             "lexical_index": {k: manifests["LEXICAL_INDEX"][k] for k in ("format", "generation", "source_digest", "documents", "passages", "terms", "file_sha256", "built_utc")},
             "vectors": {"status": "OMITTED_DEGRADED", "reason": "CP-1 is lexical-only: no vectors are built and nothing embeds (SG-4)"},
             "generation_id": summary["generation_id"], "documents": summary["documents"], "passages": summary["passages"]}
@@ -524,7 +560,7 @@ def knowledge_release_manifest(ctx: BuildContext, inp: Inputs, rel: Path, acc: d
     paths = lambda es: [e["path"] for e in es]    # noqa: E731
     originals, text, research = E("originals"), E("text"), E("research")
     records = [e for e in E("data") + E("corpus-v2") if not e["path"].startswith("corpus-v2/admissions")]
-    admission = E("corpus-v2/admissions.jsonl") + E("registers/admission-accounting.json") + E("registers/receipts")
+    admission = E("corpus-v2/admissions.jsonl") + E(ACCOUNTING_FILE) + E("registers/receipts")
     integrity = E("registers/integrity.jsonl")
     rows, graph = E("accelerators/rows"), E("accelerators/graph")
     index, tstore = E("accelerators/search-index"), E("accelerators/text-store")
@@ -560,7 +596,7 @@ def knowledge_release_manifest(ctx: BuildContext, inp: Inputs, rel: Path, acc: d
                  acc["lexical_index"]["passages"], acc["lexical_index"]["source_digest"], "lexical-index-builder",
                  ["SHA256_EACH_FILE", "SQLITE_QUICK_CHECK", "SAMPLED_POSTINGS_REDERIVE", "SAMPLED_QUERY_PARITY", "SOURCE_DIGEST_EQUALS_SITE"]),
     ]
-    if acc["text_store"]["shipped"]:   # never in Stage 2 (TEXT_STORE_NOT_SHIPPED); kept so B04 can switch it on
+    if acc["text_store"]["shipped"]:   # source_digest: the bundle-independent 2.1 digest (B04 section 5)
         comps.append(acc_comp("text-store", "TEXT_STORE", acc["text_store"]["format"], tstore, acc["text_store"]["file_sha256"],
                               acc["text_store"]["documents"], acc["text_store"]["source_digest"], "text-store-builder",
                               ["SHA256_EACH_FILE", "SQLITE_QUICK_CHECK", "TEXT_STORE_BIND_EXACT", "PAGE_HASH_ON_READ", "SOURCE_DIGEST_EQUALS_SITE"],
@@ -568,7 +604,7 @@ def knowledge_release_manifest(ctx: BuildContext, inp: Inputs, rel: Path, acc: d
     shipped = {c["kind"] for c in comps}
     accounting = [{"kind": k, "status": "SHIPPED", "reason": "shipped in this release"} for k in c16rules.KNOWLEDGE_KINDS if k in shipped]
     if "TEXT_STORE" not in shipped:
-        accounting.append({"kind": "TEXT_STORE", "status": "SITE_BUILDS_CHEAP", "reason": acc["text_store"]["reason"]})
+        accounting.append({"kind": "TEXT_STORE", "status": "SITE_BUILDS_CHEAP", "reason": "text store not shipped in this build"})
     accounting.append({"kind": "VECTOR_PACK", "status": "OMITTED_DEGRADED",
                        "reason": "no vectors built (CP-1 lexical-only); the site never embeds passages (SG-4)"})
     gates = sorted(g["gate"] for g in inp.gate_status["gates"] if g["status"] == "OPEN" and "KNOWLEDGE" in g["applies_to"])
@@ -594,6 +630,7 @@ def knowledge_release_manifest(ctx: BuildContext, inp: Inputs, rel: Path, acc: d
 
 def assert_release_manifest(m: dict, sums: dict[str, str] | None, sid: str, ledger: int = 0) -> None:
     issues = c16rules.record_issues(m, auth_ledger_version=ledger)
+    issues += knowledge_rows.manifest_table_owner_issues(m)   # I-2: graph tables only under GRAPH
     if sums is not None:
         issues += c16rules.component_inventory_issues(m, sums)
     if issues:
@@ -687,10 +724,10 @@ def s9_verify(ctx: BuildContext, work: Path) -> None:
     rdir = bundle / "registers" / "receipts"
     rr = receipt_resolution(pop, json.loads(ex["GENERATION.json"]), {p.name: p.read_bytes() for p in rdir.iterdir()} if rdir.is_dir() else {},
                             inp.register)
-    acct = _accounting(ctx, inp, docs, pop, shipped, set(rr["unresolved_admissions"]))
-    if canonical.canonical_bytes(acct) + b"\n" != (bundle / "registers" / "admission-accounting.json").read_bytes():
-        _refuse("BUILD_ACCOUNTING", "admission accounting recomputed from the bundle differs from the shipped register", "S9")
-    checks["admission_accounting_recomputed"] = "equal"
+    acct = _accounting(ctx, inp, docs, pop, shipped, set(rr["unresolved_admissions"]), "S9")
+    if acct != (bundle / ACCOUNTING_FILE).read_bytes():
+        _refuse("BUILD_ACCOUNTING", "source accounting recomputed from the bundle differs from the shipped register", "S9")
+    checks["source_accounting_recomputed"] = "equal (contract 2.1 register, accounting_issues clean)"
     # knowledge rows: loader pre-COPY checks, row counts and the full re-derivation (ROWS_REDERIVE_COMPARE)
     for t in next(c for c in m["components"] if c["kind"] == "KNOWLEDGE_ROWS")["tables"]:
         data = (bundle / t["file"]).read_bytes()
@@ -707,6 +744,10 @@ def s9_verify(ctx: BuildContext, work: Path) -> None:
         res = import_release(bundle, scratch / "site", trust_list=trust, mode="development", register=inp.register)
         if not res.activated:
             _refuse("BUILD_VERIFY_IMPORT_REFUSED", "fresh scratch site refused the signed bundle: " + "; ".join(res.refused_reasons), "S9")
+        site_c16 = res.c16 or {}
+        if not site_c16.get("accounting_digests", {}).get("site_sha256"):
+            _refuse("BUILD_VERIFY_IMPORT_REFUSED", "the site importer did not recompute the source accounting", "S9")
+        ts_site_digest = text_store_source_digest(scratch / "site")
         acc = build_accelerators(ctx, scratch / "site", scratch / "rebuilt", "S9", pop, inp.allowlist)
         mismatched = []
         for p in files_under(scratch / "rebuilt" / "accelerators"):
@@ -723,21 +764,26 @@ def s9_verify(ctx: BuildContext, work: Path) -> None:
         _refuse("BUILD_ACCEL_PARITY", "site-side rebuild differs from the shipped accelerators", "S9", [{"path": x} for x in mismatched])
     s6_ts = ctx.stage_json("S6", "ACCELERATORS.json")["text_store"]
     if site_ts["documents"] != s6_ts["documents"] or site_ts["passages"] != s6_ts["passages"]:
-        _refuse("BUILD_TEXT_STORE_SITE_BUILD", "the site's cheap text-store build does not cover the generation", "S9")
+        _refuse("BUILD_TEXT_STORE_SITE_BUILD", "the site's text-store build does not cover the generation", "S9")
+    ts_comp = next((c for c in m["components"] if c["kind"] == "TEXT_STORE"), None)
+    if ts_comp is None or ts_comp["source_digest"] != ts_site_digest:
+        _refuse("BUILD_TEXT_STORE_SOURCE_DIGEST", "the shipped text store's 2.1 source digest differs from the fresh site's", "S9")
     results = {"KNOWLEDGE_ROWS": "VERIFIED", "GRAPH": "VERIFIED", "LEXICAL_INDEX": "VERIFIED",
                "TEXT_STORE": "VERIFIED" if shipped_ts else "MISSING", "VECTOR_PACK": "MISSING"}
     outcome = components.activation_outcome(results, inp.contracts, mode="development")
     if outcome["result"] == "ACTIVE_FULL" or outcome["service_level"] == "FULL":
         _refuse("BUILD_CLAIMS_FULL", "CP-1 must never reach ACTIVE_FULL", "S9")
-    checks["accelerator_rebuild_parity"] = "byte-identical on a fresh site: lexical index, graph rows and digest, knowledge rows"
-    checks["text_store_site_build"] = {"shipped": shipped_ts, "site_build_documents": site_ts["documents"], "site_build_passages": site_ts["passages"],
-                                       "note": "SITE_BUILDS_CHEAP: " + TEXT_STORE_NOT_SHIPPED}
+    checks["accelerator_rebuild_parity"] = "byte-identical on a fresh site: lexical index, text store, graph rows and digest, knowledge rows"
+    checks["text_store"] = {"shipped": shipped_ts, "source_digest_equals_site": True, "site_build_documents": site_ts["documents"],
+                            "site_build_passages": site_ts["passages"],
+                            "note": "bundle-independent 2.1 source digest (digests.text_store_source_digest, B04 section 5)"}
+    checks["site_importer"] = {"c16_active": site_c16.get("active"), "accounting_digests": site_c16.get("accounting_digests")}
     write_bytes(work / "VERIFY.json", json_pretty({
         "release_id": m["release_id"], "declared_service_level": m["capability"]["declared_service_level"],
         "expected_activation": outcome, "embedder_calls": 0, "checks": checks,
         "acceptance_level": "FIXTURE (SG-5): proves the wiring only; closes no FG gate on real data",
-        "not_run_here": ["B01 C16 site importer (receipts with site-recomputed facts)", "B03 .NET restricted-role row loader",
-                         "B04 .NET kind-specific verifiers (sampled checks UNCALIBRATED)", "B06 activation journal"]}))
+        "not_run_here": ["B03 .NET restricted-role row loader (CP-1 slice)", "B04 .NET kind-specific verifiers (sampled checks UNCALIBRATED)",
+                         "B06 activation journal (CP-1 slice)"]}))
 
 
 STAGES = {"S0": s0_spec, "S1": s1_fetch, "S2": s2_validate, "S3": s3_text, "S4": s4_bundle, "S5": s5_ref_import,
