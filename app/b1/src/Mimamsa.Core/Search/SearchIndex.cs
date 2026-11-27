@@ -78,9 +78,14 @@ public sealed class SearchIndex
 
     /// Fills passages, lengths and document metadata and returns the postings map. `tokens` supplies each document's
     /// passage tokens (default: tokenise now); the result is identical whichever source supplies them.
+    /// `flush` (disk build): called with the postings gathered so far whenever at least `flushEveryPassages` passages
+    /// have been added since the last flush, after which the map is cleared, so build memory stays bounded. The
+    /// returned map holds the remainder. Passage numbering and term first-occurrence order are global either way.
     internal static Dictionary<string, List<Posting>> BuildPostings(GenerationStore g, SearchIndex ix,
-        Func<DocumentRecord, IReadOnlyList<Passage>, PassageTokens[]>? tokens = null)
+        Func<DocumentRecord, IReadOnlyList<Passage>, PassageTokens[]>? tokens = null,
+        Action<Dictionary<string, List<Posting>>>? flush = null, int flushEveryPassages = 0)
     {
+        int sinceFlush = 0;
         tokens ??= (_, ps) => ps.Select(Tokenise).ToArray();
         var postings = new Dictionary<string, List<Posting>>(StringComparer.Ordinal);
         foreach (var a in g.Abbreviations) ix.Abbrev.TryAdd(a.Code, a);
@@ -105,6 +110,9 @@ public sealed class SearchIndex
                 }
             }
             ix.AddDocument(d, ps, Legal.LegalIdentifierResolver.ServiceOf(d, army, navy, air));
+            sinceFlush += ps.Length;
+            if (flush is not null && flushEveryPassages > 0 && sinceFlush >= flushEveryPassages)
+            { flush(postings); postings = new Dictionary<string, List<Posting>>(StringComparer.Ordinal); sinceFlush = 0; }
         }
         return postings;
     }

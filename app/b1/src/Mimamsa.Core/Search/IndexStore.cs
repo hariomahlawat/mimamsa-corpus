@@ -28,6 +28,10 @@ public sealed record SearchIndexOptions
     public bool RebuildOnFailure { get; init; } = true;
     /// Published indexes of other generations kept for rollback (newest first).
     public int KeepPrevious { get; init; } = 2;
+    /// Passages tokenised before their postings are spilled to a run (bounds build memory).
+    public int BuildChunkPassages { get; init; } = 100_000;
+    /// How long to wait for another process that is opening or building in the same index root.
+    public TimeSpan LockTimeout { get; init; } = TimeSpan.FromMinutes(30);
     /// Incremental builds: reuse cached passage tokens of unchanged documents (forward-cache.sqlite under the root).
     public bool UseForwardCache { get; init; } = true;
     /// TEST ONLY: throw after writing this many vocabulary rows, simulating a crash during a build.
@@ -61,9 +65,25 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
         return Convert.ToHexString(h.GetHashAndReset()).ToLowerInvariant();
     }
 
+    /// Exclusive, cross-process lock on the index root for the whole open/build: a second service starting against the
+    /// same root waits instead of deleting the first one's in-progress build or racing to publish. The OS releases it
+    /// if the holder crashes, which is when the leftover .building directory becomes safe to delete.
+    FileStream AcquireLock()
+    {
+        var path = Path.Combine(root, ".lock");
+        var until = DateTime.UtcNow + options.LockTimeout;
+        while (true)
+        {
+            try { return new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None); }
+            catch (IOException) when (DateTime.UtcNow < until) { Thread.Sleep(250); }
+            catch (IOException e) { throw new IndexIntegrityException($"search index root is locked by another process ({e.Message})"); }
+        }
+    }
+
     public string OpenOrBuild(GenerationStore g, SearchIndex ix)
     {
         Directory.CreateDirectory(root);
+        using var held = AcquireLock();
         CleanStaleBuilds();
         var docs = SearchIndex.IndexedDocuments(g);
         var digest = SourceDigest(docs);
@@ -185,25 +205,54 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
     void Build(GenerationStore g, List<DocumentRecord> docs, string digest, SearchIndex ix, string target)
     {
         var sw = System.Diagnostics.Stopwatch.StartNew();
-        Dictionary<string, List<SearchIndex.Posting>> postings;
-        string cacheNote = "forward cache off";
-        if (options.UseForwardCache)
-        {
-            using var fc = ForwardCache.Open(root, log);
-            postings = SearchIndex.BuildPostings(g, ix, fc.Get);
-            int pruned = fc.Prune();
-            cacheNote = $"forward cache {fc.Hits} documents reused, {fc.Misses} tokenised, {pruned} stale entries pruned";
-        }
-        else postings = SearchIndex.BuildPostings(g, ix);
-        SqliteConnection.ClearAllPools();
-        long tokenMs = sw.ElapsedMilliseconds;
         var tmp = Path.Combine(root, $".building-{Safe(g.GenerationId)}-{Guid.NewGuid():N}");
         Directory.CreateDirectory(tmp);
         var db = Path.Combine(tmp, DbFile);
-        using (var c = new SqliteConnection(new SqliteConnectionStringBuilder { DataSource = db, Mode = SqliteOpenMode.ReadWriteCreate, Pooling = false }.ToString()))
+        var runsPath = Path.Combine(tmp, "runs.sqlite");
+
+        // 1. Tokenise in chunks of BuildChunkPassages passages; each chunk's postings go to a run table and are released,
+        //    so build memory is bounded by the chunk, not the corpus. Ordinals follow global first occurrence.
+        var vocab = new Dictionary<string, int>(StringComparer.Ordinal);
+        var terms = new List<string>();
+        var dfs = new List<int>();
+        int chunk = 0;
+        string cacheNote = "forward cache off";
+        using (var runs = OpenWrite(runsPath))
         {
-            c.Open();
-            Exec(c, "PRAGMA journal_mode = OFF; PRAGMA synchronous = OFF; PRAGMA page_size = 8192;");
+            Exec(runs, "CREATE TABLE runs(ord INTEGER NOT NULL, chunk INTEGER NOT NULL, df INTEGER NOT NULL, last_p INTEGER NOT NULL, blob BLOB NOT NULL, PRIMARY KEY(ord, chunk)) WITHOUT ROWID;");
+            void Flush(Dictionary<string, List<SearchIndex.Posting>> part)
+            {
+                if (part.Count == 0) return;
+                using var tx = runs.BeginTransaction();
+                using var cmd = new SqliteCommand("INSERT INTO runs VALUES($o,$c,$d,$l,$b)", runs, tx);
+                var po = cmd.Parameters.Add("$o", SqliteType.Integer); var pc = cmd.Parameters.Add("$c", SqliteType.Integer);
+                var pd = cmd.Parameters.Add("$d", SqliteType.Integer); var pl = cmd.Parameters.Add("$l", SqliteType.Integer); var pb = cmd.Parameters.Add("$b", SqliteType.Blob);
+                foreach (var (term, list) in part)   // insertion order = first occurrence within the chunk
+                {
+                    if (!vocab.TryGetValue(term, out var o)) { o = terms.Count; vocab[term] = o; terms.Add(term); dfs.Add(0); }
+                    dfs[o] += list.Count;
+                    po.Value = o; pc.Value = chunk; pd.Value = list.Count; pl.Value = list[^1].P; pb.Value = SqlitePostingTable.Encode(list);
+                    cmd.ExecuteNonQuery();
+                }
+                tx.Commit();
+                chunk++;
+            }
+            if (options.UseForwardCache)
+            {
+                using var fc = ForwardCache.Open(root, log);
+                Flush(SearchIndex.BuildPostings(g, ix, fc.Get, Flush, options.BuildChunkPassages));
+                int pruned = fc.Prune();
+                cacheNote = $"forward cache {fc.Hits} documents reused, {fc.Misses} tokenised, {pruned} stale entries pruned";
+            }
+            else Flush(SearchIndex.BuildPostings(g, ix, null, Flush, options.BuildChunkPassages));
+        }
+        SqliteConnection.ClearAllPools();
+        long tokenMs = sw.ElapsedMilliseconds;
+
+        // 2. Merge runs into the published table in ordinal order. Each run's first posting is absolute; it is rebased
+        //    onto the previous run's last passage and the rest of the run's bytes are copied unchanged.
+        using (var c = OpenWrite(db))
+        {
             Exec(c, "CREATE TABLE meta(key TEXT PRIMARY KEY, value TEXT NOT NULL);" +
                     "CREATE TABLE docs(di INTEGER PRIMARY KEY, doc_id TEXT NOT NULL, derivative_id TEXT, service TEXT, lens BLOB NOT NULL);" +
                     "CREATE TABLE terms(ord INTEGER PRIMARY KEY, term TEXT NOT NULL, df INTEGER NOT NULL, postings BLOB NOT NULL);");
@@ -217,28 +266,59 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
                            EncodeInts(ix.DocPassages[d].Select(ix.LenOf).ToArray()));
                 t.Commit();
             }
-            int ord = 0;
+            using var runs = new SqliteConnection(SqlitePostingTable.ReadOnlyConnectionString(runsPath));
+            runs.Open();
             var tx = c.BeginTransaction();
             var cmd = new SqliteCommand("INSERT INTO terms VALUES($o,$t,$d,$p)", c, tx);
             var po = cmd.Parameters.Add("$o", SqliteType.Integer); var pt = cmd.Parameters.Add("$t", SqliteType.Text);
             var pd = cmd.Parameters.Add("$d", SqliteType.Integer); var pp = cmd.Parameters.Add("$p", SqliteType.Blob);
-            foreach (var (term, list) in postings)   // dictionary enumeration = first-occurrence order (B1 key order)
+            using (var r = new SqliteCommand("SELECT ord, last_p, blob FROM runs ORDER BY ord, chunk", runs).ExecuteReader())
             {
-                po.Value = ord; pt.Value = term; pd.Value = list.Count; pp.Value = SqlitePostingTable.Encode(list);
-                cmd.ExecuteNonQuery();
-                ord++;
-                if (options.FailAfterTerms is { } fail && ord >= fail) throw new IOException("TEST: simulated crash during index build");
-                if (ord % 50_000 == 0) { tx.Commit(); tx.Dispose(); tx = c.BeginTransaction(); cmd.Transaction = tx; }
+                var buf = new MemoryStream();
+                int cur = -1, prevLast = 0, written = 0;
+                void Emit()
+                {
+                    po.Value = cur; pt.Value = terms[cur]; pd.Value = dfs[cur]; pp.Value = buf.ToArray();
+                    cmd.ExecuteNonQuery();
+                    written++;
+                    if (options.FailAfterTerms is { } fail && written >= fail) throw new IOException("TEST: simulated crash during index build");
+                    if (written % 50_000 == 0) { tx.Commit(); tx.Dispose(); tx = c.BeginTransaction(); cmd.Transaction = tx; }
+                }
+                while (r.Read())
+                {
+                    int ord = r.GetInt32(0);
+                    var blob = (byte[])r[2];
+                    if (ord != cur)
+                    {
+                        if (cur >= 0) Emit();
+                        if (ord != cur + 1) throw new IndexIntegrityException("run ordinals are not contiguous");
+                        cur = ord; buf.SetLength(0);
+                        buf.Write(blob);
+                    }
+                    else
+                    {
+                        int i = 0; uint first = 0; int shift = 0;
+                        while (true) { byte x = blob[i++]; first |= (uint)(x & 0x7F) << shift; if (x < 0x80) break; shift += 7; }
+                        uint rebased = first - (uint)prevLast;
+                        while (rebased >= 0x80) { buf.WriteByte((byte)(rebased | 0x80)); rebased >>= 7; }
+                        buf.WriteByte((byte)rebased);
+                        buf.Write(blob, i, blob.Length - i);
+                    }
+                    prevLast = r.GetInt32(1);
+                }
+                if (cur >= 0) Emit();
+                if (written != terms.Count) throw new IndexIntegrityException("merged term count differs from the vocabulary");
             }
             tx.Commit(); tx.Dispose();
             Exec(c, "PRAGMA journal_mode = DELETE; VACUUM;");
         }
         SqliteConnection.ClearAllPools();
+        File.Delete(runsPath);
         using (var f = new FileStream(db, FileMode.Open, FileAccess.ReadWrite)) f.Flush(true);
         var manifest = new JsonObject
         {
             ["format"] = FormatVersion, ["generation"] = g.GenerationId, ["source_digest"] = digest,
-            ["documents"] = ix.Docs.Count, ["passages"] = ix.N, ["terms"] = postings.Count,
+            ["documents"] = ix.Docs.Count, ["passages"] = ix.N, ["terms"] = terms.Count,
             ["file_bytes"] = new FileInfo(db).Length, ["file_sha256"] = FileSha(db),
             ["built_utc"] = DateTime.UtcNow.ToString("O"),
         };
@@ -249,7 +329,15 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
         var why = Verify(tmp, g.GenerationId, digest, full: true);
         if (why is not null) throw new IndexIntegrityException($"newly built search index failed verification: {why}");
         Directory.Move(tmp, target);   // atomic rename on the same volume: the index becomes visible complete or not at all
-        Log($"search index: built and published {target} ({ix.Docs.Count} documents, {ix.N} passages, {postings.Count} terms; tokens {tokenMs} ms ({cacheNote}), total {sw.ElapsedMilliseconds} ms)");
+        Log($"search index: built and published {target} ({ix.Docs.Count} documents, {ix.N} passages, {terms.Count} terms, {chunk} runs; tokens {tokenMs} ms ({cacheNote}), total {sw.ElapsedMilliseconds} ms)");
+    }
+
+    static SqliteConnection OpenWrite(string path)
+    {
+        var c = new SqliteConnection(new SqliteConnectionStringBuilder { DataSource = path, Mode = SqliteOpenMode.ReadWriteCreate, Pooling = false }.ToString());
+        c.Open();
+        Exec(c, "PRAGMA journal_mode = OFF; PRAGMA synchronous = OFF; PRAGMA page_size = 8192;");
+        return c;
     }
 
     static void Exec(SqliteConnection c, string sql) { using var cmd = new SqliteCommand(sql, c); cmd.ExecuteNonQuery(); }

@@ -34,6 +34,16 @@ public class PersistentIndexTests : IDisposable
     }
 
     [Fact]
+    public void AChunkedBuildMergesRunsIntoExactlyTheSamePostings()
+    {
+        // tiny chunks force many runs and the rebasing merge path
+        var disk = new SearchService(OpenDisk(new SearchIndexOptions { BuildChunkPassages = 3, UseForwardCache = false }), _ => false);
+        Assert.Contains(_log, l => l.Contains(" runs; ") && !l.Contains(" 1 runs; "));
+        var mem = new SearchService(SearchIndex.Build(Syn.Gen), _ => false);
+        foreach (var q in Queries) Assert.Equal(Sig(mem.Search(q, new SearchFilters())), Sig(disk.Search(q, new SearchFilters())));
+    }
+
+    [Fact]
     public void WithdrawnDocumentsAreNeverReturnedByTheDiskEngine()
     {
         var hidden = Syn.Gen.Documents.Keys.First(k => k.StartsWith("syn-j-"));

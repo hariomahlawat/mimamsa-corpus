@@ -136,14 +136,30 @@ public static partial class Identifiers
     /// Does a passage state or refer to provision `base(sub)`? Returns 0 (no), 1 (a reference such as "section 69"),
     /// 2 (a heading line "69. Civil offences." in a statute) or 3 (a heading followed by the provision text "69. ...—").
     /// Headings count only in statute documents; "Section 117" never matches 17; a sub-clause, when given, must match.
-    public static int ProvisionStrength(string text, string baseNo, string? sub, bool statute)
+    // C15 WP1: the two patterns depend only on (base, sub); they were rebuilt for every passage examined. Cached here
+    // (bounded) and guarded by a necessary condition: both patterns contain the base number literally, so a passage
+    // without it (case-insensitively) cannot match. Results are unchanged.
+    static readonly System.Collections.Concurrent.ConcurrentDictionary<(string, string?), (Regex head, Regex refRx)> ProvisionPatterns = new();
+
+    static (Regex head, Regex refRx) Patterns(string baseNo, string? sub)
     {
+        if (ProvisionPatterns.TryGetValue((baseNo, sub), out var p)) return p;
         var b = Regex.Escape(baseNo);
         var s = string.IsNullOrEmpty(sub) ? "" : string.Concat(Regex.Matches(sub, @"\(([0-9a-zA-Z]{1,4})\)").Select(x => @"\s*\(" + Regex.Escape(x.Groups[1].Value) + @"\)"));
+        p = (new Regex(@"(?m)^\s*\[?(?:(?:Section|Rule|Regulation|Article)\s+)?" + b + (s.Length > 0 ? s : @"(?![0-9A-Za-z])(?:\s*\([0-9a-zA-Z]{1,4}\))*") + @"\s*[.\-–—]\s*(?<rest>[^\n]*)"),
+             new Regex(@"(?<![\w])(?:sections?|secs?\.?|ss?\.|rules?|r\.|regulations?|regs?\.|articles?|arts?\.)\s*" + b + @"(?![0-9A-Za-z])" + s, RegexOptions.IgnoreCase));
+        if (ProvisionPatterns.Count > 2000) ProvisionPatterns.Clear();
+        ProvisionPatterns[(baseNo, sub)] = p;
+        return p;
+    }
+
+    public static int ProvisionStrength(string text, string baseNo, string? sub, bool statute)
+    {
+        if (!text.Contains(baseNo, StringComparison.OrdinalIgnoreCase)) return 0;
+        var (head, refRx) = Patterns(baseNo, sub);
         int best = 0;
         if (statute)
         {
-            var head = new Regex(@"(?m)^\s*\[?(?:(?:Section|Rule|Regulation|Article)\s+)?" + b + (s.Length > 0 ? s : @"(?![0-9A-Za-z])(?:\s*\([0-9a-zA-Z]{1,4}\))*") + @"\s*[.\-–—]\s*(?<rest>[^\n]*)");
             foreach (Match m in head.Matches(text))
             {
                 var rest = m.Groups["rest"].Value;
@@ -151,12 +167,7 @@ public static partial class Identifiers
                 best = Math.Max(best, rest.Contains('—') || rest.Contains("Omitted", StringComparison.OrdinalIgnoreCase) || rest.Length > 90 ? 3 : 2);
             }
         }
-        if (best == 0)
-        {
-            var refRx = new Regex(@"(?<![\w])(?:sections?|secs?\.?|ss?\.|rules?|r\.|regulations?|regs?\.|articles?|arts?\.)\s*" + b + @"(?![0-9A-Za-z])" + s,
-                                  RegexOptions.IgnoreCase);
-            if (refRx.IsMatch(text)) best = 1;
-        }
+        if (best == 0 && refRx.IsMatch(text)) best = 1;
         return best;
     }
 

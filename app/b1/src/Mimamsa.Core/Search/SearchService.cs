@@ -37,7 +37,10 @@ public sealed class SearchService
         public bool Exact;
         public readonly HashSet<string> Highlight = new(StringComparer.Ordinal);
         public readonly List<IReadOnlyList<string>> Phrases = new();
-        public readonly Dictionary<int, Dictionary<string, int>> Matched = new();   // passage -> display term -> count
+        // C15 WP1: match counts per display term (display -> passage -> count), in first-noted order. Replaces one
+        // dictionary per matched passage; Reasons() rebuilds the per-passage view on demand for displayed hits only.
+        public readonly List<(string display, Dictionary<int, int> counts)> Matched = new();
+        public readonly Dictionary<string, int> MatchedIndex = new(StringComparer.Ordinal);
         public readonly List<Chip> Chips = new();
     }
 
@@ -129,7 +132,10 @@ public sealed class SearchService
             DescribeChips(q.Root!, ctx);
         }
 
-        ordered = ordered.Where(h => !_docHidden(_ix.Passages[h.PassageIndex].DocId)).ToList();
+        // eligibility is decided once per document within this query (C15 WP1), not once per passage hit
+        var hiddenByDoc = new Dictionary<int, bool>();
+        bool Hidden(int p) { int d = _ix.DocOf(p); if (!hiddenByDoc.TryGetValue(d, out var h)) hiddenByDoc[d] = h = _docHidden(_ix.Docs[d].DocId); return h; }
+        ordered = ordered.Where(h => !Hidden(h.PassageIndex)).ToList();
         if (service is not null && Legal.LegalIdentifierResolver.ServiceLabels.TryGetValue(service, out var svcLabel))
         {
             ordered = ServicePreference(ordered, service, hybrid: mode == "hybrid");
@@ -423,8 +429,9 @@ public sealed class SearchService
 
     void Note(Ctx ctx, int p, string display, int n)
     {
-        if (!ctx.Matched.TryGetValue(p, out var m)) ctx.Matched[p] = m = new();
-        m[display] = m.GetValueOrDefault(display) + n;
+        if (!ctx.MatchedIndex.TryGetValue(display, out var i)) { i = ctx.Matched.Count; ctx.MatchedIndex[display] = i; ctx.Matched.Add((display, new Dictionary<int, int>())); }
+        var counts = ctx.Matched[i].counts;
+        counts[p] = counts.GetValueOrDefault(p) + n;
     }
 
     Dictionary<int, double> Eval(QNode node, Ctx ctx)
@@ -633,7 +640,7 @@ public sealed class SearchService
 
     /// C15 WP1: built on first read (only displayed hits are ever read), from the same per-passage match counts.
     IReadOnlyList<string> Reasons(int p, Ctx ctx) => new LazyReasons(() =>
-        ctx.Matched.TryGetValue(p, out var m) && m.Count > 0
+        ctx.Matched.Where(x => x.counts.ContainsKey(p)).Select(x => new KeyValuePair<string, int>(x.display, x.counts[p])).ToList() is { Count: > 0 } m
             ? new List<string> { "Matched: " + string.Join(", ", m.OrderByDescending(kv => kv.Value).Take(4).Select(kv => $"{(kv.Key.StartsWith('“') ? kv.Key : "'" + kv.Key + "'")} ({kv.Value})")) }
             : new List<string> { "Matched the query filters" });
 
