@@ -1,4 +1,4 @@
-// C15 WP1: the term -> postings map behind SearchIndex, with two engines (ADR-0008):
+// C15 WP1: the term -> postings map behind SearchIndex, with two engines (ADR-0006):
 //   MemoryPostingTable  - the B1 in-process dictionary (unchanged behaviour);
 //   SqlitePostingTable  - postings persisted in a per-generation SQLite file, read on demand through a bounded cache.
 // Both expose the same ordered vocabulary (first-occurrence order, which prefix expansion depends on) and identical

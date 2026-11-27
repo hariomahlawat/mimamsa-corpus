@@ -1,4 +1,4 @@
-// C15 WP1 (ADR-0008): postings persisted in SQLite, read on demand. The vocabulary (term -> ordinal, df) is held in
+// C15 WP1 (ADR-0006): postings persisted in SQLite, read on demand. The vocabulary (term -> ordinal, df) is held in
 // memory because prefix expansion and the speller enumerate it; posting lists are loaded per term through a bounded,
 // thread-safe LRU cache. Encoding (all unsigned LEB128 varints): per posting [delta passage][position count]
 // [first position][position deltas...]; passages ascend, positions ascend (as built), so decoding reproduces the B1 lists.

@@ -58,36 +58,53 @@ public sealed class SearchIndex
         return ix;
     }
 
-    /// Tokenises every indexed passage: fills passages, lengths, document metadata and returns the postings map.
-    internal static Dictionary<string, List<Posting>> BuildPostings(GenerationStore g, SearchIndex ix)
+    /// Tokens of one passage as the index uses them: length, term groups in first-occurrence order with ascending
+    /// positions, and the service-word counts. C15 WP1: cacheable per derivative (ForwardCache) for incremental builds.
+    internal sealed record PassageTokens(int Len, (string Term, int[] Pos)[] Groups, int Army, int Navy, int Air);
+
+    internal static PassageTokens Tokenise(Passage p)
     {
+        var toks = Text.Tokenize(p.Text);
+        int army = 0, navy = 0, air = 0;
+        for (int k = 0; k < toks.Count; k++)
+            switch (toks[k].Term)
+            {
+                case "army": army++; break;
+                case "navy" or "naval": navy++; break;
+                case "air" when k + 1 < toks.Count && toks[k + 1].Term == "force": air++; break;
+            }
+        return new PassageTokens(toks.Count, toks.GroupBy(t => t.Term).Select(g => (g.Key, g.Select(t => t.Position).ToArray())).ToArray(), army, navy, air);
+    }
+
+    /// Fills passages, lengths and document metadata and returns the postings map. `tokens` supplies each document's
+    /// passage tokens (default: tokenise now); the result is identical whichever source supplies them.
+    internal static Dictionary<string, List<Posting>> BuildPostings(GenerationStore g, SearchIndex ix,
+        Func<DocumentRecord, IReadOnlyList<Passage>, PassageTokens[]>? tokens = null)
+    {
+        tokens ??= (_, ps) => ps.Select(Tokenise).ToArray();
         var postings = new Dictionary<string, List<Posting>>(StringComparer.Ordinal);
         foreach (var a in g.Abbreviations) ix.Abbrev.TryAdd(a.Code, a);
         foreach (var d in IndexedDocuments(g))
         {
             int di = ix._docs.Count;
             int army = 0, navy = 0, air = 0;
-            var ps = new List<int>();
-            foreach (var p in OrderedPassages(d))
+            var ordered = OrderedPassages(d).ToList();
+            var tk = tokens(d, ordered);
+            var ps = new int[ordered.Count];
+            for (int k = 0; k < ordered.Count; k++)
             {
                 int pi = ix._passages.Count;
-                ix._passages.Add(p); ix._passageDoc.Add(di); ps.Add(pi);
-                var toks = Text.Tokenize(p.Text);
-                ix._passageLen.Add(toks.Count);
-                for (int k = 0; k < toks.Count; k++)
-                    switch (toks[k].Term)
-                    {
-                        case "army": army++; break;
-                        case "navy" or "naval": navy++; break;
-                        case "air" when k + 1 < toks.Count && toks[k + 1].Term == "force": air++; break;
-                    }
-                foreach (var grp in toks.GroupBy(t => t.Term))
+                ix._passages.Add(ordered[k]); ix._passageDoc.Add(di); ps[k] = pi;
+                var t = tk[k];
+                ix._passageLen.Add(t.Len);
+                army += t.Army; navy += t.Navy; air += t.Air;
+                foreach (var (term, pos) in t.Groups)
                 {
-                    if (!postings.TryGetValue(grp.Key, out var list)) postings[grp.Key] = list = new();
-                    list.Add(new Posting(pi, grp.Select(t => t.Position).ToArray()));
+                    if (!postings.TryGetValue(term, out var list)) postings[term] = list = new();
+                    list.Add(new Posting(pi, pos));
                 }
             }
-            ix.AddDocument(d, ps.ToArray(), Legal.LegalIdentifierResolver.ServiceOf(d, army, navy, air));
+            ix.AddDocument(d, ps, Legal.LegalIdentifierResolver.ServiceOf(d, army, navy, air));
         }
         return postings;
     }
@@ -126,7 +143,7 @@ public sealed class SearchIndex
         AvgLen = _passageLen.Count == 0 ? 1 : _passageLen.Average();
     }
 
-    /// Disk engine (C15 WP1, ADR-0008): opens the verified published index of this generation under `root`, or builds,
+    /// Disk engine (C15 WP1, ADR-0006): opens the verified published index of this generation under `root`, or builds,
     /// verifies and atomically publishes one first. Postings are then read on demand; nothing is served from an index
     /// that failed verification.
     public static SearchIndex Open(GenerationStore g, string root, SearchIndexOptions options, Action<string>? log = null)

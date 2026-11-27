@@ -2,7 +2,7 @@ using Mimamsa.Core.Search;
 
 namespace Mimamsa.Tests;
 
-/// C15 WP1 (ADR-0008): the disk engine returns exactly what the in-memory engine returns, and the index store recovers
+/// C15 WP1 (ADR-0006): the disk engine returns exactly what the in-memory engine returns, and the index store recovers
 /// from interrupted builds and corrupted files without ever serving an unverified index.
 public class PersistentIndexTests : IDisposable
 {
@@ -93,6 +93,32 @@ public class PersistentIndexTests : IDisposable
         OpenDisk();
         Assert.Contains(_log, l => l.Contains("source digest differs"));
         Assert.Contains(_log, l => l.Contains("built and published"));
+    }
+
+    [Fact]
+    public void ARebuildReusesCachedTokensAndGivesIdenticalResults()
+    {
+        var first = OpenDisk();
+        int docs = first.Docs.Count;
+        Assert.Contains(_log, l => l.Contains($"0 documents reused, {docs} tokenised"));
+        Microsoft.Data.Sqlite.SqliteConnection.ClearAllPools();
+        Directory.Delete(Published, true);   // e.g. a new generation with the same documents
+        _log.Clear();
+        var second = OpenDisk();
+        Assert.Contains(_log, l => l.Contains($"{docs} documents reused, 0 tokenised"));
+        var mem = new SearchService(SearchIndex.Build(Syn.Gen), _ => false);
+        foreach (var q in Queries) Assert.Equal(Sig(mem.Search(q, new SearchFilters())), Sig(new SearchService(second, _ => false).Search(q, new SearchFilters())));
+    }
+
+    [Fact]
+    public void AnUnreadableForwardCacheIsRecreatedNotTrusted()
+    {
+        Directory.CreateDirectory(_root);
+        File.WriteAllBytes(Path.Combine(_root, "forward-cache.sqlite"), Enumerable.Repeat((byte)0x42, 8192).ToArray());
+        var ix = OpenDisk();
+        Assert.Contains(_log, l => l.Contains("forward cache unusable"));
+        Assert.Equal(Sig(new SearchService(SearchIndex.Build(Syn.Gen), _ => false).Search("notice", new SearchFilters())),
+                     Sig(new SearchService(ix, _ => false).Search("notice", new SearchFilters())));
     }
 
     [Fact]

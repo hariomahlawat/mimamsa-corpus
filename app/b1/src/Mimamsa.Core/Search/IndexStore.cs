@@ -1,4 +1,4 @@
-// C15 WP1 (ADR-0008): generation-scoped persistent search index with atomic publication, integrity verification,
+// C15 WP1 (ADR-0006): generation-scoped persistent search index with atomic publication, integrity verification,
 // crash recovery and retention for rollback.
 //
 // Layout under the index root (default <site>/search-index, configurable):
@@ -28,6 +28,8 @@ public sealed record SearchIndexOptions
     public bool RebuildOnFailure { get; init; } = true;
     /// Published indexes of other generations kept for rollback (newest first).
     public int KeepPrevious { get; init; } = 2;
+    /// Incremental builds: reuse cached passage tokens of unchanged documents (forward-cache.sqlite under the root).
+    public bool UseForwardCache { get; init; } = true;
     /// TEST ONLY: throw after writing this many vocabulary rows, simulating a crash during a build.
     public int? FailAfterTerms { get; init; }
 }
@@ -183,7 +185,17 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
     void Build(GenerationStore g, List<DocumentRecord> docs, string digest, SearchIndex ix, string target)
     {
         var sw = System.Diagnostics.Stopwatch.StartNew();
-        var postings = SearchIndex.BuildPostings(g, ix);
+        Dictionary<string, List<SearchIndex.Posting>> postings;
+        string cacheNote = "forward cache off";
+        if (options.UseForwardCache)
+        {
+            using var fc = ForwardCache.Open(root, log);
+            postings = SearchIndex.BuildPostings(g, ix, fc.Get);
+            int pruned = fc.Prune();
+            cacheNote = $"forward cache {fc.Hits} documents reused, {fc.Misses} tokenised, {pruned} stale entries pruned";
+        }
+        else postings = SearchIndex.BuildPostings(g, ix);
+        SqliteConnection.ClearAllPools();
         long tokenMs = sw.ElapsedMilliseconds;
         var tmp = Path.Combine(root, $".building-{Safe(g.GenerationId)}-{Guid.NewGuid():N}");
         Directory.CreateDirectory(tmp);
@@ -237,7 +249,7 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
         var why = Verify(tmp, g.GenerationId, digest, full: true);
         if (why is not null) throw new IndexIntegrityException($"newly built search index failed verification: {why}");
         Directory.Move(tmp, target);   // atomic rename on the same volume: the index becomes visible complete or not at all
-        Log($"search index: built and published {target} ({ix.Docs.Count} documents, {ix.N} passages, {postings.Count} terms; tokenise {tokenMs} ms, total {sw.ElapsedMilliseconds} ms)");
+        Log($"search index: built and published {target} ({ix.Docs.Count} documents, {ix.N} passages, {postings.Count} terms; tokens {tokenMs} ms ({cacheNote}), total {sw.ElapsedMilliseconds} ms)");
     }
 
     static void Exec(SqliteConnection c, string sql) { using var cmd = new SqliteCommand(sql, c); cmd.ExecuteNonQuery(); }

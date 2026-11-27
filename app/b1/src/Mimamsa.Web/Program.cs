@@ -71,7 +71,7 @@ if (testMode && conf.GetValue("Mimamsa:Test:AllowNoRegister", false)) register =
 else register = RestrictedRegister.LoadRequired(conf["Mimamsa:RestrictedRegister"], generation.Release.RegisterSha256);
 var eligibility = new Eligibility(generation, state, register, vault);
 var phase = System.Diagnostics.Stopwatch.StartNew();
-// C15 WP1 (ADR-0008): Mimamsa:Search:Engine = memory (B1 in-process index) | disk (persistent SQLite index under
+// C15 WP1 (ADR-0006): Mimamsa:Search:Engine = memory (B1 in-process index) | disk (persistent SQLite index under
 // Mimamsa:Search:IndexDir, default <site>/search-index: built, verified and published atomically on first start of a
 // generation, verified and reopened afterwards). Results are identical; only memory, start-up and persistence differ.
 var searchEngine = conf["Mimamsa:Search:Engine"] ?? "memory";
