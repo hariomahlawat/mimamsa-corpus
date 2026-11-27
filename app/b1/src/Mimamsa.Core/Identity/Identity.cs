@@ -111,9 +111,13 @@ public sealed class IdentityStore
             await AuditAsync(null, "login_throttled", null, null);
             return (LoginOutcome.Throttled, null);
         }
-        await using var c = await _db.OpenConnectionAsync();
+        // C16 (PR #80 connection-exhaustion investigation): a pooled connection is held only for the statements that need
+        // it. It is never held across the password hash (600,000 PBKDF2 iterations) or across AuditAsync, which opens its
+        // own connection: holding one while waiting for another let concurrent sign-ins at the pool size deadlock until
+        // the pool timeout. Each step below opens, uses and returns its connection before the next one is requested.
         string? uid = null, role = null, hash = null; bool disabled = false; bool lockedNow = false;
-        await using (var q = new NpgsqlCommand("SELECT user_id, role, pwd_hash, disabled, (locked_until IS NOT NULL AND locked_until > now()) FROM app_users WHERE username=$1", c))
+        await using (var c0 = await _db.OpenConnectionAsync())
+        await using (var q = new NpgsqlCommand("SELECT user_id, role, pwd_hash, disabled, (locked_until IS NOT NULL AND locked_until > now()) FROM app_users WHERE username=$1", c0))
         {
             q.Parameters.AddWithValue(username);
             await using var r = await q.ExecuteReaderAsync();
@@ -145,10 +149,14 @@ public sealed class IdentityStore
                         ELSE NULL END
                     WHERE user_id = $1
                     RETURNING locked_until IS NOT NULL AND locked_until > now(), failed_count
-                    """, c);
+                    """);
                 f.Parameters.AddWithValue(uid); f.Parameters.AddWithValue(LockThreshold); f.Parameters.AddWithValue(LockDuration);
                 bool locked; int count;
-                await using (var rr = await f.ExecuteReaderAsync()) { await rr.ReadAsync(); locked = rr.GetBoolean(0); count = rr.GetInt32(1); }
+                await using (var c1 = await _db.OpenConnectionAsync())
+                {
+                    f.Connection = c1;
+                    await using var rr = await f.ExecuteReaderAsync(); await rr.ReadAsync(); locked = rr.GetBoolean(0); count = rr.GetInt32(1);
+                }
                 bool newly = locked && count == LockThreshold;
                 await AuditAsync(null, "login_failed", uid, null);
                 if (newly) await AuditAsync(null, "lockout", uid, $"locked for {LockDuration.TotalSeconds:0} s after {LockThreshold} failed attempts");
@@ -158,11 +166,12 @@ public sealed class IdentityStore
             await AuditAsync(null, "login_failed", "unknown", null);
             return (LoginOutcome.Failed, null);
         }
-        await using (var z = new NpgsqlCommand("UPDATE app_users SET failed_count=0, locked_until=NULL WHERE user_id=$1", c))
-        { z.Parameters.AddWithValue(uid!); await z.ExecuteNonQueryAsync(); }
         var token = NewToken(); var sid = "s-" + Guid.NewGuid().ToString("N")[..16]; var csrf = NewToken();
-        await using (var ins = new NpgsqlCommand("INSERT INTO app_sessions(token_sha256, session_id, user_id, csrf, expires_at) VALUES ($1,$2,$3,$4,now() + $5)", c))
+        await using (var c2 = await _db.OpenConnectionAsync())
         {
+            await using (var z = new NpgsqlCommand("UPDATE app_users SET failed_count=0, locked_until=NULL WHERE user_id=$1", c2))
+            { z.Parameters.AddWithValue(uid!); await z.ExecuteNonQueryAsync(); }
+            await using var ins = new NpgsqlCommand("INSERT INTO app_sessions(token_sha256, session_id, user_id, csrf, expires_at) VALUES ($1,$2,$3,$4,now() + $5)", c2);
             ins.Parameters.AddWithValue(TokenHash(token)); ins.Parameters.AddWithValue(sid); ins.Parameters.AddWithValue(uid!);
             ins.Parameters.AddWithValue(csrf); ins.Parameters.AddWithValue(Absolute); await ins.ExecuteNonQueryAsync();
         }
@@ -173,10 +182,13 @@ public sealed class IdentityStore
     /// Admin unlock: clears the lock and the failure count. The reason is mandatory and recorded (content-free audit).
     public async Task<bool> UnlockAsync(string username, string actorUserId, string reason)
     {
-        await using var c = await _db.OpenConnectionAsync();
-        await using var q = new NpgsqlCommand("UPDATE app_users SET failed_count = 0, locked_until = NULL WHERE username = $1 RETURNING user_id", c);
-        q.Parameters.AddWithValue(username);
-        var uid = (string?)await q.ExecuteScalarAsync();
+        string? uid;
+        await using (var c = await _db.OpenConnectionAsync())   // released before AuditAsync opens its own connection
+        await using (var q = new NpgsqlCommand("UPDATE app_users SET failed_count = 0, locked_until = NULL WHERE username = $1 RETURNING user_id", c))
+        {
+            q.Parameters.AddWithValue(username);
+            uid = (string?)await q.ExecuteScalarAsync();
+        }
         if (uid is null) return false;
         Throttle.Clear(username.ToLowerInvariant());
         await AuditAsync(actorUserId, "unlock", uid, reason);

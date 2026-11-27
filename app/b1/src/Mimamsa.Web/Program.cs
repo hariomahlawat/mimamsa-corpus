@@ -300,7 +300,17 @@ app.Use(async (ctx, next) =>
     // C14 F05: every API response names the serving-policy epoch at the moment it is sent, so the client notices a
     // withdrawal on its next request and re-checks the documents it has open.
     if (path.StartsWith("/api/")) ctx.Response.OnStarting(() => { ctx.Response.Headers["X-Mimamsa-Policy-Epoch"] = state.Epoch.ToString(System.Globalization.CultureInfo.InvariantCulture); return Task.CompletedTask; });
-    await next();
+    // ChatGPT review of PR #80 (P1): a document whose stored text fails an integrity check is withheld with a controlled,
+    // content-free response; nothing partial or cached of it is sent, and the log names only the route.
+    try { await next(); }
+    catch (TextIntegrityException) when (!ctx.Response.HasStarted)
+    {
+        log.LogWarning("text integrity failure on {Path}; document text withheld", ctx.GetEndpoint() is RouteEndpoint re ? re.RoutePattern.RawText : "unrouted");
+        ctx.Response.Clear();
+        ctx.Response.Headers.CacheControl = "no-store";
+        ctx.Response.StatusCode = 503;
+        await ctx.Response.WriteAsJsonAsync(new { state = "integrity_failure", notice = "The text of this document failed an integrity check and is withheld. The original can still be checked by an administrator." });
+    }
     var ep = ctx.GetEndpoint() as RouteEndpoint;
     var route = ep?.RoutePattern.RawText ?? (isStatic ? "static" : "spa");
     if (!isStatic) log.LogInformation("request {Method} {Route} {Status} {Ms}ms", ctx.Request.Method, route, ctx.Response.StatusCode, sw.ElapsedMilliseconds);

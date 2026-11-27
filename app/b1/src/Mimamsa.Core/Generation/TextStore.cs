@@ -135,6 +135,14 @@ internal sealed class TextCache
     }
 
     public long Used { get { long u = 0; foreach (var s in _shards) lock (s.Lock) u += s.Used; return u; } }
+
+    /// Drops one entry (used when a document fails verification, so no cached page of it is ever served again).
+    public void Remove(long key)
+    {
+        var s = _shards[(int)((ulong)key % (ulong)_shards.Length)];
+        lock (s.Lock)
+            if (s.Map.Remove(key, out var node)) { s.Lru.Remove(node); s.Used -= node.Value.text.Length; }
+    }
 }
 
 public sealed class DiskTextStore : ITextStore, IDisposable
@@ -230,7 +238,9 @@ public sealed class DiskTextStore : ITextStore, IDisposable
         readonly Dictionary<int, int> _slot;
         readonly long[] _start; readonly int[] _len, _chars;
         byte[]? _hashes;
-        bool _failed;
+        // ChatGPT review of PR #80 (P1): once a document fails, nothing of it is served again, cached pages included.
+        // The flag is published before the cache is invalidated and is checked before and after every cache hit.
+        volatile bool _failed;
         readonly object _lock = new();
 
         public DiskDocumentText(DiskTextStore store, long di, string docId, string textSha, long bytes, List<(int page, long start, int len, int chars)> pages)
@@ -251,7 +261,15 @@ public sealed class DiskTextStore : ITextStore, IDisposable
         void Fail(string why)
         {
             _failed = true;
+            for (int i = 0; i < _start.Length; i++) _store._cache.Remove(Key(i));
             throw new TextIntegrityException($"text store: {_docId}: {why}; text withheld");
+        }
+
+        long Key(int slot) => (_di << 20) | (uint)slot;
+
+        void ThrowIfFailed()
+        {
+            if (_failed) throw new TextIntegrityException($"text store: {_docId}: failed verification earlier; text withheld");
         }
 
         /// Verifies the whole derivative against the generation's text_sha256 once; returns the requested page if read.
@@ -259,7 +277,7 @@ public sealed class DiskTextStore : ITextStore, IDisposable
         {
             lock (_lock)
             {
-                if (_failed) throw new TextIntegrityException($"text store: {_docId}: failed verification earlier; text withheld");
+                ThrowIfFailed();
                 if (_hashes is not null) return null;
                 var all = _store.ReadAll(_di, out var length);
                 if (length != _bytes || Convert.ToHexString(SHA256.HashData(all)).ToLowerInvariant() != _textSha)
@@ -280,14 +298,15 @@ public sealed class DiskTextStore : ITextStore, IDisposable
         internal override string Page(int page)
         {
             if (!_slot.TryGetValue(page, out var slot)) throw new KeyNotFoundException($"page {page} has no text");
-            long key = (_di << 20) | (uint)slot;
-            if (_store._cache.TryGet(key, out var cached)) return cached;
+            long key = Key(slot);
+            ThrowIfFailed();
+            if (_store._cache.TryGet(key, out var cached)) { ThrowIfFailed(); return cached; }
             var hashes = Volatile.Read(ref _hashes);
             string text;
             if (hashes is null && Verify(slot) is { } first) text = first;
             else
             {
-                if (_failed) throw new TextIntegrityException($"text store: {_docId}: failed verification earlier; text withheld");
+                ThrowIfFailed();
                 hashes = Volatile.Read(ref _hashes)!;
                 var b = _store.ReadRange(_di, _start[slot], _len[slot]);
                 if (!PageHash(b).AsSpan().SequenceEqual(hashes.AsSpan(slot * 16, 16))) Fail($"page {page} differs from its verified hash");
@@ -295,6 +314,7 @@ public sealed class DiskTextStore : ITextStore, IDisposable
             }
             Interlocked.Increment(ref _store._pageReads);
             _store._cache.Add(key, text);
+            if (_failed) { _store._cache.Remove(key); ThrowIfFailed(); }   // a failure published while this page was read
             return text;
         }
     }
@@ -369,6 +389,13 @@ public sealed class DiskTextStore : ITextStore, IDisposable
                 catch (Exception e) when (e is TextIntegrityException or SqliteException or InvalidCastException or FormatException or JsonException
                                               or InvalidOperationException or NullReferenceException or ArgumentException)
                 { why = "metadata unreadable: " + e.Message; }
+            // ChatGPT review of PR #80 (P1, P2): the store's own manifest and digest are locally writable, so they are never
+            // the authority. Every reopen re-derives each document's metadata from the generation's records and source
+            // derivative files (the same ReadDerived rule as the memory store, one document at a time) and requires the
+            // store to match it exactly: derivative identity and text_sha256, quoting, pages and their byte ranges, passages
+            // and their offsets, the text assessment, and which derivatives are available with which load issues. Any
+            // difference quarantines the store (or refuses it), whatever VerifyOnOpen says.
+            if (loaded is not null && Bind(loaded, derived) is { } mismatch) { loaded = null; why = "store differs from the generation's records: " + mismatch; }
             if (loaded is not null)
             {
                 var store = new DiskTextStore(dir, o.CacheBytes);
@@ -508,6 +535,52 @@ public sealed class DiskTextStore : ITextStore, IDisposable
         foreach (var (code, n) in l.Issues) issue(code, n);
     }
 
+    /// Null when the stored metadata equals a fresh derivation from the generation's records and source files; else why.
+    /// Text bytes are not compared here: they are hashed on first use against the text_sha256 bound by this check.
+    static string? Bind(Loaded l, Func<Action<string>, IEnumerable<DerivedText>> derived)
+    {
+        var issues = new List<(string code, int count)>();
+        void Issue(string code)
+        {
+            int i = issues.FindIndex(x => x.code == code);
+            if (i < 0) issues.Add((code, 1)); else issues[i] = (code, issues[i].count + 1);
+        }
+        int n = 0;
+        var stored = l.Docs.Select(x => x.Doc).ToHashSet();
+        foreach (var t in derived(Issue))
+        {
+            var id = t.Doc.DocId;
+            if (!stored.Contains(t.Doc)) return $"{id} is available in the generation but not in the store";
+            if (n >= l.Docs.Count) return $"document order differs at {id}";
+            var ld = l.Docs[n++];
+            if (!ReferenceEquals(ld.Doc, t.Doc)) return $"{ld.Doc.DocId} is in the store but not available in the generation";
+            if (ld.DerivativeId != t.DerivativeId || ld.TextSha != t.TextSha || ld.PipelineName != t.PipelineName || ld.PipelineVersion != t.PipelineVersion)
+                return $"derivative identity of {id}";
+            if (ld.Quoting != t.QuotingPermitted) return $"quoting permission of {id}";
+            if (ld.Bytes != t.Bytes.Length) return $"derivative length of {id}";
+            if (ld.Pages.Count != t.Pages.Count) return $"page count of {id}";
+            for (int i = 0; i < t.Pages.Count; i++)
+            {
+                var (pg, bs, bl) = t.Pages[i]; var sp = ld.Pages[i];
+                if (sp.page != pg.Page || sp.start != bs || sp.len != bl || sp.chars != pg.Length || sp.method != pg.Method || sp.low != pg.LowConfidence || !Nullable.Equals(sp.ocr, pg.OcrConfidence))
+                    return $"page {pg.Page} of {id}";
+            }
+            if (ld.Passages.Count != t.Passages.Count) return $"passage count of {id}";
+            for (int i = 0; i < t.Passages.Count; i++)
+            {
+                var p = t.Passages[i]; var sp = ld.Passages[i];
+                if (sp.id != p.PassageId || sp.page != p.Page || sp.cs != p.CharStart || sp.ce != p.CharEnd || sp.label != p.ParagraphLabel)
+                    return $"passage {p.PassageId} of {id}";
+            }
+            if (Assess(t) != ld.Assessment) return $"text assessment of {id}";
+        }
+        if (n != l.Docs.Count) return $"{l.Docs[n].Doc.DocId} is in the store but not available in the generation";
+        if (!issues.SequenceEqual(l.Issues)) return "derivative availability or load issues";
+        return null;
+    }
+
+    static TextAssessment Assess(DerivedText t) => TextQuality.Assess(t.Pages.Select(p => p.Page).OrderBy(p => p.Page).Select(p => p.Text));
+
     // ------------------------------------------------------------------ build and publish
     static void Exec(SqliteConnection c, string sql, SqliteTransaction? t = null) { using var cmd = new SqliteCommand(sql, c, t); cmd.ExecuteNonQuery(); }
 
@@ -548,7 +621,7 @@ public sealed class DiskTextStore : ITextStore, IDisposable
             foreach (var t in derived(Issue))
             {
                 long di = nDocs;
-                var a = TextQuality.Assess(t.Pages.Select(p => p.Page).OrderBy(p => p.Page).Select(p => p.Text));
+                var a = Assess(t);
                 var aj = new JsonObject { ["language"] = a.DetectedLanguage, ["reliability"] = a.Reliability, ["basis"] = a.Basis, ["deva_words"] = a.DevanagariWords, ["ratio"] = a.SignatureRatio };
                 Run(insDoc, di, t.Doc.DocId, t.DerivativeId, t.TextSha, t.PipelineName, t.PipelineVersion, t.QuotingPermitted ? 1 : 0, (long)t.Bytes.Length, aj.ToJsonString());
                 Run(insText, di, t.Bytes);
