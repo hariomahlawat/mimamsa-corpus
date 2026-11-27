@@ -101,7 +101,9 @@ public sealed class SearchService
                 if (Semantic is not null && !q.Exact)
                 {
                     var lex = scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key).Select(kv => kv.Key).ToList();
-                    var dense = Semantic.TopK(string.Join(" ", rest), Hybrid.DenseDepth).Where(x => x.Score >= Hybrid.MinSimilarity).ToList();
+                    // C15 WP2: eligibility is applied inside the dense scan (withdrawn passages never use up depth)
+                    var dense = Semantic.TopK(string.Join(" ", rest), Hybrid.DenseDepth, p => !_docHidden(_ix.Passages[p].DocId))
+                                        .Where(x => x.Score >= Hybrid.MinSimilarity).ToList();
                     var sim = dense.ToDictionary(x => x.Passage, x => x.Score);
                     foreach (var f in HybridFusion.Rrf(lex, dense.Select(x => x.Passage).ToList(), Hybrid))
                     {

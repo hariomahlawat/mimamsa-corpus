@@ -10,6 +10,12 @@ public interface ISemanticScorer
     string Description { get; }
     /// Top-k passage indexes (into SearchIndex.Passages) by similarity to the query, best first; ties by index.
     IReadOnlyList<(int Passage, double Score)> TopK(string query, int k);
+
+    /// C15 WP2: top-k among passages for which `include` is true (eligibility applied inside the scorer, so withdrawn
+    /// or ineligible passages never appear and never use up depth). Scorers without a native filter fall back to
+    /// filtering a deeper unfiltered list.
+    IReadOnlyList<(int Passage, double Score)> TopK(string query, int k, Func<int, bool>? include) =>
+        include is null ? TopK(query, k) : TopK(query, k * 4 + 16).Where(x => include(x.Passage)).Take(k).ToList();
 }
 
 public sealed record HybridOptions(int LexicalDepth = 200, int DenseDepth = 100, int RrfK = 60, double MinSimilarity = 0.0);
