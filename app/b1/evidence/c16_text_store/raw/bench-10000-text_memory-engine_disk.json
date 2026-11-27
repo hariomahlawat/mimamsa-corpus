@@ -1,0 +1,97 @@
+{
+  "site": "E:\\Mimamsa-Data\\bench\\c16b\\10000\\site",
+  "engine": "disk",
+  "text_store": "memory",
+  "replicate": 1,
+  "documents": 10000,
+  "passages": 246020,
+  "vocabulary": 19477,
+  "load_ms": 25759,
+  "index_ms": 6421,
+  "startup_ms": 32180,
+  "index_file_mb": 62.3,
+  "text_file_mb": null,
+  "derived_text_mb": 3.2,
+  "derived_text_mb_per_document": 148.5,
+  "mem_after_load": {
+    "working_set_mb": 1046.9,
+    "managed_heap_mb": 727.5
+  },
+  "mem_after_index": {
+    "working_set_mb": 1057.6,
+    "managed_heap_mb": 754.8
+  },
+  "mem_end": {
+    "working_set_mb": 2320.7,
+    "managed_heap_mb": 895.7
+  },
+  "sequential": {
+    "n": 78,
+    "p50": 19.7,
+    "p95": 136.8,
+    "max": 220.3
+  },
+  "concurrent": {
+    "readers_10": {
+      "stats": {
+        "n": 1560,
+        "p50": 90.1,
+        "p95": 564.3,
+        "max": 915
+      },
+      "throughput_qps": 59.7
+    }
+  },
+  "doc_text_api": {
+    "documents": 300,
+    "cold": {
+      "n": 300,
+      "p50": 0.1,
+      "p95": 0.2,
+      "max": 40.7
+    },
+    "warm": {
+      "n": 300,
+      "p50": 0,
+      "p95": 0.2,
+      "max": 0.6
+    },
+    "readers_10": {
+      "n": 3000,
+      "p50": 0.1,
+      "p95": 0.5,
+      "max": 2.5
+    }
+  },
+  "snippet_us": {
+    "cold": {
+      "n": 460,
+      "p50": 18.9,
+      "p95": 59.9,
+      "max": 5637.5
+    },
+    "warm": {
+      "n": 460,
+      "p50": 17,
+      "p95": 52.9,
+      "max": 195.2
+    }
+  },
+  "text_store_stats": {
+    "Kind": "memory",
+    "CacheHits": 0,
+    "CacheMisses": 0,
+    "CachedChars": 0,
+    "CacheBudgetChars": 0,
+    "DocumentsVerified": 0,
+    "PageReads": 0,
+    "BytesRead": 0,
+    "FileBytes": 0
+  },
+  "parity": {
+    "search_signatures_sha256": "1978bb86a01afcbc024d71c0ad71b76bd4eb205072559029b6796f3ce283da1b",
+    "doc_text_api_sha256": "8e586d16b8d26da55409fe4c1f1f7c357b84ea1958a616cab2a6f40f5bdc5c25",
+    "snippets_sha256": "6282765a8594d77f835200bac5a2da6c39965942c5339b0f81f0923e1f340b35"
+  },
+  "per_query_median_ms": null
+}

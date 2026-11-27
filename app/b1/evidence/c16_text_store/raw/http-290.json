@@ -1,0 +1,154 @@
+{
+ "site": "E:\\Mimamsa-Data\\sample\\site",
+ "generation": "R13-b1-sample-20261126-4b31855f",
+ "documents": 290,
+ "search_engine": "memory",
+ "parity": {
+  "requests_compared": 2300,
+  "differences": 0,
+  "first_differences": [],
+  "response_digest_sha256": {
+   "memory": "c5d3ef25ba1d746d8e85c2792c21468ac2e7c64ec45ad87f3afbdb9daa5b7a4c",
+   "disk": "c5d3ef25ba1d746d8e85c2792c21468ac2e7c64ec45ad87f3afbdb9daa5b7a4c"
+  }
+ },
+ "withdrawal": {
+  "document_kind": "judgment or order",
+  "memory": {
+   "withdraw_status": 200,
+   "text_status": 404,
+   "citation_status": 404,
+   "search_hits_for_withdrawn": 0
+  },
+  "disk": {
+   "withdraw_status": 200,
+   "text_status": 404,
+   "citation_status": 404,
+   "search_hits_for_withdrawn": 0
+  }
+ },
+ "latency": {
+  "memory": {
+   "doc_text_cold_ms": {
+    "n": 290,
+    "p50": 3.62,
+    "p95": 28.96,
+    "max": 297.59,
+    "mean": 11.8
+   },
+   "doc_text_warm_ms": {
+    "n": 290,
+    "p50": 3.45,
+    "p95": 31.55,
+    "max": 368.58,
+    "mean": 11.11
+   },
+   "doc_text_10_readers_ms": {
+    "n": 2900,
+    "p50": 9.76,
+    "p95": 297.16,
+    "max": 1718.53,
+    "mean": 77.84
+   },
+   "search_10_readers_ms": {
+    "n": 520,
+    "p50": 27.96,
+    "p95": 570.28,
+    "max": 833.14,
+    "mean": 97.14
+   }
+  },
+  "disk": {
+   "doc_text_cold_ms": {
+    "n": 290,
+    "p50": 3.29,
+    "p95": 34.25,
+    "max": 417.83,
+    "mean": 15.79
+   },
+   "doc_text_warm_ms": {
+    "n": 290,
+    "p50": 3.12,
+    "p95": 33.7,
+    "max": 353.55,
+    "mean": 12.49
+   },
+   "doc_text_10_readers_ms": {
+    "n": 2900,
+    "p50": 10.27,
+    "p95": 333.84,
+    "max": 2098.95,
+    "mean": 90.07
+   },
+   "search_10_readers_ms": {
+    "n": 520,
+    "p50": 29.58,
+    "p95": 641.69,
+    "max": 968.78,
+    "mean": 110.12
+   }
+  }
+ },
+ "memory_after_gc": {
+  "memory": {
+   "working_set_mb": 1449.8,
+   "private_mb": 1486.4,
+   "managed_heap_mb": 324.8,
+   "gc_heap_size_mb": 328.2,
+   "gc_committed_mb": 1233.5,
+   "gc_fragmented_mb": 3.5,
+   "gc_server": true,
+   "gc_count_gen2": 29,
+   "cpu_s": 608.56,
+   "threads": 60,
+   "text_store": {
+    "kind": "memory",
+    "cacheHits": 0,
+    "cacheMisses": 0,
+    "cachedChars": 0,
+    "cacheBudgetChars": 0,
+    "documentsVerified": 0,
+    "pageReads": 0,
+    "bytesRead": 0,
+    "fileBytes": 0
+   }
+  },
+  "disk": {
+   "working_set_mb": 1560.4,
+   "private_mb": 1598,
+   "managed_heap_mb": 277.2,
+   "gc_heap_size_mb": 278,
+   "gc_committed_mb": 1024.2,
+   "gc_fragmented_mb": 0.9,
+   "gc_server": true,
+   "gc_count_gen2": 22,
+   "cpu_s": 649.86,
+   "threads": 62,
+   "text_store": {
+    "kind": "disk",
+    "cacheHits": 225664,
+    "cacheMisses": 11352,
+    "cachedChars": 25989098,
+    "cacheBudgetChars": 33554432,
+    "documentsVerified": 290,
+    "pageReads": 11352,
+    "bytesRead": 57478409,
+    "fileBytes": 30965760
+   }
+  }
+ },
+ "startup": {
+  "memory": {
+   "health_wait_s": 9.3,
+   "generation_load_ms": 3209,
+   "index_ms": 3035,
+   "process_ms": 8175
+  },
+  "disk": {
+   "health_wait_s": 10.8,
+   "generation_load_ms": 2251,
+   "index_ms": 5508,
+   "process_ms": 10034
+  }
+ }
+}
