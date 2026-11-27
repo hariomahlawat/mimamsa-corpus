@@ -69,7 +69,7 @@ public static class ActivationCli
         {
             var snap = reader.Read();
             if (!snap.Healthy) throw new ActivationRefused("EXCLUSIONS_UNAVAILABLE", snap.Health + ": " + snap.Detail);
-            site.Initialise(a.Req("knowledge"), a.Req("models"), snap.Sequence!.Value);
+            site.Initialise(a.Req("knowledge"), a["models"], snap.Sequence!.Value);   // no --models: no model installed (2.1 lexical-only site)
             new FileActivationDatabase(site.FileDbPath).Initialise(a.Req("knowledge"));
             stdout.WriteLine(Result(true, "OK", "initialised"));
             return 0;

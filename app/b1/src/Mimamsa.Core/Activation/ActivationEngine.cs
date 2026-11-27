@@ -38,7 +38,7 @@ public interface IParticipantLink
     /// ENTER_SWITCHING -> ACK_SWITCHING. Throws ParticipantUnavailableException when there is no acknowledgement.
     SwitchAck EnterSwitching(string txnId, long lockEpoch);
     /// OPEN -> ACK_OPEN. Throws ParticipantUnavailableException when lost (the decision stands regardless).
-    void Open(string txnId, string knowledge, string models, long exclusionSeq, long lockEpoch);
+    void Open(string txnId, string knowledge, string? models, long exclusionSeq, long lockEpoch);
     /// Generations pinned by in-flight requests, or null when the participant cannot be asked.
     IReadOnlySet<string>? PinnedGenerations(long lockEpoch);
 }
@@ -175,6 +175,33 @@ public sealed class ActivationEngine : IDisposable
         });
     }
 
+    // ------------------------------------------------------------------ model compatibility (activation.Site.model_gate)
+    /// M1  a MODELS target must be staged and verified (an unverified placeholder is never activated).
+    /// M2  ...and have verified vectors for the active knowledge generation, unless (2.1) that generation is lexical-only.
+    /// K1  a KNOWLEDGE target that is not lexical-only needs an active, verified model with verified vectors for it
+    ///     (no active model: refused).
+    /// K2  (2.1) a lexical-only KNOWLEDGE target activates with no model or with a model without vectors for it; the
+    ///     model is not consulted, and semantic search stays disabled (SemanticSearchEnabled).
+    public void ModelGate(string target, string to)
+    {
+        var activeK = _s.ReadPointer("KNOWLEDGE")!;
+        if (target == "MODELS")
+        {
+            var m = _cat.Model(to);
+            if (m is null || !m.Verified) throw new ActivationRefused("NOT_STAGED", "target model is not staged and verified (M1)");
+            if (!m.VectorsFor.Contains(activeK) && !_cat.IsLexicalOnly(activeK))
+                throw new ActivationRefused("NO_VECTORS", "target model has no verified vectors for the active knowledge generation (M2)");
+        }
+        else if (!_cat.IsLexicalOnly(to))
+        {
+            var active = _s.ReadPointer("MODELS");
+            if (active is null) throw new ActivationRefused("NO_MODEL", "no active model: a release with vectors needs a verified model with verified vectors (K1)");
+            var m = _cat.Model(active);
+            if (m is null || !m.Verified || !m.VectorsFor.Contains(to))
+                throw new ActivationRefused("NO_VECTORS", "active model has no verified vectors for the target generation (K1)");
+        }
+    }
+
     // ------------------------------------------------------------------ transitions
     public string Transition(string target, string to, string action = "ACTIVATE")
     {
@@ -190,18 +217,7 @@ public sealed class ActivationEngine : IDisposable
             throw new ActivationRefused("RECOVERY_REQUIRED", "another transition or recovery is in progress");
         var installed = _cat.Installed();
         if (target == "KNOWLEDGE" && !installed.Contains(to)) throw new ActivationRefused("NOT_STAGED", "target generation is not staged and verified");
-        var activeK = _s.ReadPointer("KNOWLEDGE")!;
-        if (target == "MODELS")
-        {
-            var m = _cat.Model(to);
-            if (m is null || !m.Verified) throw new ActivationRefused("NOT_STAGED", "target model is not staged and verified");
-            if (!m.VectorsFor.Contains(activeK)) throw new ActivationRefused("NO_VECTORS", "target model has no verified vectors for the active knowledge generation");
-        }
-        else
-        {
-            var m = _cat.Model(_s.ReadPointer("MODELS")!);
-            if (m is null || !m.VectorsFor.Contains(to)) throw new ActivationRefused("NO_VECTORS", "active model has no verified vectors for the target generation");
-        }
+        ModelGate(target, to);
         if (!Preflight(target, to).Pass) throw new ActivationRefused("PREFLIGHT_FAILED", "measured disk preflight failed");
         var txn = TxnId(j.Transactions.Count() + 1, target, to);
         var from = _s.ReadPointer(target);
@@ -249,7 +265,7 @@ public sealed class ActivationEngine : IDisposable
         try
         {
             var seq = HealthyExclusions().Sequence ?? 0;
-            _o.Participant.Open(txn, _s.ReadPointer("KNOWLEDGE")!, _s.ReadPointer("MODELS")!, seq, Lease.Epoch);
+            _o.Participant.Open(txn, _s.ReadPointer("KNOWLEDGE")!, _s.ReadPointer("MODELS"), seq, Lease.Epoch);
         }
         catch (Exception e) when (e is ParticipantUnavailableException or ActivationRefused)
         {

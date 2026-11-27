@@ -32,6 +32,7 @@ public sealed class ScenarioHarness : IDisposable
     readonly int _keep;
     readonly string? _recoveryTarget;
     readonly long _free;
+    readonly bool _observeSemantic;
     long _clock;
     JsonArray? _lastResponse;
     string Snapshot => Path.Combine(_site.Root, "exclusions.snapshot");
@@ -41,10 +42,19 @@ public sealed class ScenarioHarness : IDisposable
         _scn = scenario;
         var init = scenario["initial"]!.AsObject();
         var installed = init["installed"]!.AsArray().Select(x => (string)x!).ToList();
-        var models = init["staged_models"]!.AsObject().ToDictionary(kv => kv.Key,
-            kv => ((bool)kv.Value!["verified"]!, kv.Value!["vectors_for"]!.AsArray().Select(x => (string)x!).ToArray()));
+        // As activation.Site: the active model (when not null) is staged verified with vectors for every installed
+        // generation, unless initial.staged_models describes it explicitly.
+        var activeModel = (string?)init["models"];
+        var models = new Dictionary<string, (bool, string[])>(StringComparer.Ordinal);
+        if (activeModel is not null) models[activeModel] = (true, installed.ToArray());
+        foreach (var (k, v) in init["staged_models"]!.AsObject())
+            models[k] = ((bool)v!["verified"]!, v["vectors_for"]!.AsArray().Select(x => (string)x!).ToArray());
         var sizes = init["sizes"]!.AsObject().ToDictionary(kv => kv.Key, kv => (long)kv.Value!);
-        _site = new FixtureSite("scn-" + ((string)scenario["scenario_id"]!)[..4], installed, (string)init["active"]!, (string)init["models"]!, models, sizes);
+        // 2.1 (SC26+): lexical_only generations are classified as such when staged; its presence adds semantic_search
+        // to the observed trace (SC01-SC25 traces are unchanged).
+        _observeSemantic = init.ContainsKey("lexical_only");
+        var lexical = init["lexical_only"]?.AsArray().Select(x => (string)x!).ToList() ?? [];
+        _site = new FixtureSite("scn-" + ((string)scenario["scenario_id"]!)[..4], installed, (string)init["active"]!, activeModel, models, sizes, lexical);
         _baseline = _site.Store.Sequence;
         _staleAfter = (long)init["lock_stale_after_seconds"]!;
         _keep = (int)(long)init["keep_previous"]!;
@@ -192,7 +202,7 @@ public sealed class ScenarioHarness : IDisposable
         catch (JournalCorruptException) { steps = new JsonArray(ActivationJournal.DiagnosticSteps(s.JournalPath).Select(x => (JsonNode?)JsonValue.Create(x)).ToArray()); }
         var applied = s.ReadApplied();
         var inst = new JsonArray(_observer.Catalog.Installed().Order(StringComparer.Ordinal).Select(x => (JsonNode?)JsonValue.Create(x)).ToArray());
-        return new JsonObject
+        var o = new JsonObject
         {
             ["step"] = step, ["error"] = error, ["knowledge"] = knowledge, ["models"] = s.ReadPointer("MODELS"),
             ["views"] = _site.Db.Views(), ["state"] = _observer.State().ToString(), ["serving"] = _link.Up && _participant.IsServing(),
@@ -205,6 +215,8 @@ public sealed class ScenarioHarness : IDisposable
             ["exclusion_reader"] = ex.Health.ToString(), ["lock_epoch"] = WriterLease.CurrentEpoch(s),
             ["response"] = _lastResponse?.DeepClone(),
         };
+        if (_observeSemantic) o["semantic_search"] = (bool)o["serving"]! && _observer.SemanticSearchEnabled();
+        return o;
     }
 
     /// Run the scenario; returns the trace. Throws with a precise message on an unexpected error.
@@ -243,10 +255,10 @@ public class ActivationScenarioConformanceTests
             .Select(f => new object[] { Path.GetFileNameWithoutExtension(f) }).OrderBy(x => (string)x[0], StringComparer.Ordinal);
 
     [Fact]
-    public void All_25_shared_scenarios_are_present()
+    public void All_30_shared_scenarios_are_present()
     {
         var ids = Scenarios().Select(x => ((string)x[0])[..4]).ToList();
-        Assert.Equal(Enumerable.Range(1, 25).Select(n => $"SC{n:D2}"), ids);
+        Assert.Equal(Enumerable.Range(1, 30).Select(n => $"SC{n:D2}"), ids);
     }
 
     [Theory]
@@ -270,7 +282,7 @@ public class ActivationScenarioConformanceTests
         // assert_final invariants (scenarios.final_assertion_failures)
         var last = trace[^1]!.AsObject();
         var names = new Dictionary<string, string> { ["knowledge"] = "knowledge", ["models"] = "models", ["serving"] = "serving", ["installed"] = "installed",
-            ["log_length"] = "log_length", ["last_response"] = "response", ["temp_empty"] = "temp_empty" };
+            ["log_length"] = "log_length", ["last_response"] = "response", ["temp_empty"] = "temp_empty", ["semantic_search"] = "semantic_search" };
         foreach (var (k, v) in scn["assert_final"]!.AsObject())
         {
             var wantV = k == "installed" ? new JsonArray(v!.AsArray().Select(x => (string)x!).Order(StringComparer.Ordinal).Select(x => (JsonNode?)JsonValue.Create(x)).ToArray()) : v;

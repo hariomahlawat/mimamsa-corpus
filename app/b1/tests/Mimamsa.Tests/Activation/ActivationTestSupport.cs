@@ -186,13 +186,15 @@ public sealed class FixtureSite : IDisposable
     public DevExclusionStore Store { get; }
     public FileActivationDatabase Db { get; }
 
-    public FixtureSite(string label, IEnumerable<string> installed, string active, string models,
-        IDictionary<string, (bool verified, string[] vectorsFor)> stagedModels, IDictionary<string, long>? sizes = null)
+    public FixtureSite(string label, IEnumerable<string> installed, string active, string? models,
+        IDictionary<string, (bool verified, string[] vectorsFor)> stagedModels, IDictionary<string, long>? sizes = null,
+        IEnumerable<string>? lexicalOnly = null)
     {
+        var lex = (lexicalOnly ?? []).ToHashSet(StringComparer.Ordinal);
         Root = TestDirs.NewSite(label);
         Layout = new SiteLayout(Root);
         var cat = new GenerationCatalog(Layout);
-        foreach (var g in installed) cat.StageGeneration(g, sizes is not null && sizes.TryGetValue(g, out var sz) ? sz : 0);
+        foreach (var g in installed) cat.StageGeneration(g, sizes is not null && sizes.TryGetValue(g, out var sz) ? sz : 0, lex.Contains(g));
         foreach (var (m, v) in stagedModels) cat.StageModel(m, v.verified, v.vectorsFor);
         Directory.CreateDirectory(Path.GetDirectoryName(Layout.TrustListPath)!);
         File.WriteAllBytes(Layout.TrustListPath, DevRegisterKey.TrustList((Key, ["register"], false)));

@@ -9,7 +9,10 @@
 // - Old generations stay alive while pinned (the host releases its old AppServices when PinCount reaches zero).
 namespace Mimamsa.Core.Activation;
 
-public sealed record ReaderPin(long Id, string Knowledge, string Models, long ExclusionSeq);
+/// A request's pin. Models is null when no model is installed (2.1). SemanticSearch is fixed for the request:
+/// false (lexical-only knowledge, no model, or a model without verified vectors) means the semantic path, including
+/// query embedding, must not run.
+public sealed record ReaderPin(long Id, string Knowledge, string? Models, long ExclusionSeq, bool SemanticSearch = false);
 
 public sealed class ActivationParticipant
 {
@@ -24,7 +27,7 @@ public sealed class ActivationParticipant
     public string? LoadedKnowledge { get; private set; }
     public string? LoadedModels { get; private set; }
     /// Called with (knowledge, models) when the participant loads a new head; returns false if the swap failed.
-    public Func<string, string, bool>? OnSwap { get; set; }
+    public Func<string, string?, bool>? OnSwap { get; set; }
     /// Called with a generation when its last pin is released and it is no longer loaded (close its stores, CG-4).
     public Action<string>? OnGenerationReleased { get; set; }
 
@@ -46,7 +49,7 @@ public sealed class ActivationParticipant
     {
         var k = _site.Site.ReadPointer("KNOWLEDGE");
         var m = _site.Site.ReadPointer("MODELS");
-        if (k is null || m is null) return false;
+        if (k is null) return false;   // MODELS may be null (2.1: no model installed)
         if (OnSwap is not null && !OnSwap(k, m)) { LoadedKnowledge = null; LoadedModels = null; return false; }
         var old = LoadedKnowledge;
         LoadedKnowledge = k; LoadedModels = m;
@@ -72,7 +75,7 @@ public sealed class ActivationParticipant
     }
 
     /// OPEN from the activation tool: reload the head from disk; serving resumes only if the disk agrees.
-    public bool Open(string txn, string knowledge, string models, long exclusionSeq, long epoch)
+    public bool Open(string txn, string knowledge, string? models, long exclusionSeq, long epoch)
     {
         lock (_gate)
         {
@@ -115,6 +118,9 @@ public sealed class ActivationParticipant
 
     public bool IsServing() => IsServing(out _);
 
+    /// 2.1: semantic search is available only while serving and when SiteInspector.SemanticSearchEnabled holds.
+    public bool SemanticSearchAvailable() { lock (_gate) return IsServing(out _) && _site.SemanticSearchEnabled(LoadedKnowledge, LoadedModels); }
+
     public ReaderPin Pin()
     {
         lock (_gate)
@@ -125,7 +131,7 @@ public sealed class ActivationParticipant
             if (!ex.Healthy || applied.GetValueOrDefault(LoadedKnowledge!, -1) != ex.Sequence)
                 throw new ActivationRefused("NOT_SERVING", "exclusions not applied to the active generation");
             _pins[LoadedKnowledge!] = _pins.GetValueOrDefault(LoadedKnowledge!) + 1;
-            return new ReaderPin(++_nextPin, LoadedKnowledge!, LoadedModels!, ex.Sequence!.Value);
+            return new ReaderPin(++_nextPin, LoadedKnowledge!, LoadedModels, ex.Sequence!.Value, _site.SemanticSearchEnabled(LoadedKnowledge, LoadedModels));
         }
     }
 
@@ -165,7 +171,7 @@ public sealed class DirectParticipantLink(ActivationParticipant participant) : I
         return Participant.EnterSwitching(txnId, lockEpoch);
     }
 
-    public void Open(string txnId, string knowledge, string models, long exclusionSeq, long lockEpoch)
+    public void Open(string txnId, string knowledge, string? models, long exclusionSeq, long lockEpoch)
     {
         if (!Up) throw new ParticipantUnavailableException("participant down");
         Participant.Open(txnId, knowledge, models, exclusionSeq, lockEpoch);

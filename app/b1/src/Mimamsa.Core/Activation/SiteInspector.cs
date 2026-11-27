@@ -59,4 +59,15 @@ public sealed class SiteInspector
     }
 
     public ExclusionSnapshot ReadExclusions() => Exclusions.Read(RecordedExclusionSeq());
+
+    /// 2.1 (activation.Site.semantic_search_enabled): the active knowledge is not lexical-only and the active model is
+    /// verified with verified vectors for it. Serving is checked separately by the participant.
+    public bool SemanticSearchEnabled() => SemanticSearchEnabled(Site.ReadPointer("KNOWLEDGE"), Site.ReadPointer("MODELS"));
+
+    public bool SemanticSearchEnabled(string? knowledge, string? models)
+    {
+        if (knowledge is null || Catalog.IsLexicalOnly(knowledge)) return false;
+        var model = Catalog.Model(models);
+        return model is { Verified: true } && model.VectorsFor.Contains(knowledge);
+    }
 }
