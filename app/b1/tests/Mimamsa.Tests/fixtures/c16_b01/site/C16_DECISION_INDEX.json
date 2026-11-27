@@ -28,21 +28,21 @@
    "site_outcome": "HELD"
   },
   {
-   "admission_id": "ADM-168a90025d4415eaa96b73e9",
+   "admission_id": "ADM-2d0b97a76be8267d714e42ae",
    "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
    "decision": "ADMITTED_AS_PRIMARY",
-   "doc_id": "local-2d87e6cc7207779f",
+   "doc_id": "local-1a01eeca9375a3a6",
    "release_id": "R16-b01-e2e-20261128-00000001",
-   "sha256": "2d87e6cc7207779f1752ebf2f2a1165bbc54b1b23d589f9a650f5b1fab9c4eb2",
+   "sha256": "1a01eeca9375a3a6df32a6d32a0540e436dc852667716a0f258c6b28fa319a6f",
    "site_outcome": "ELIGIBLE"
   },
   {
-   "admission_id": "ADM-168a90025d4415eaa96b73e9",
+   "admission_id": "ADM-2d0b97a76be8267d714e42ae",
    "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
    "decision": "ADMITTED_AS_PRIMARY",
-   "doc_id": "local-2d87e6cc7207779f",
+   "doc_id": "local-1a01eeca9375a3a6",
    "release_id": "R16-b01-e2e-20261128-00000002",
-   "sha256": "2d87e6cc7207779f1752ebf2f2a1165bbc54b1b23d589f9a650f5b1fab9c4eb2",
+   "sha256": "1a01eeca9375a3a6df32a6d32a0540e436dc852667716a0f258c6b28fa319a6f",
    "site_outcome": "ELIGIBLE"
   },
   {
