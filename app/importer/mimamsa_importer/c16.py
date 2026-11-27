@@ -51,7 +51,7 @@ C16_PREFIX = "corpus-v2/"
 REGISTERS_PREFIX = "registers/"
 ACCOUNTING_PATH = accounting.FILE                                   # registers/source_accounting.json (declared, signed)
 SITE_ACCOUNTING_PATH = "registers/source_accounting.site.json"     # the site's recomputation (never shipped)
-CANDIDATE_SET_PREFIX = "registers/candidate_sets/"                  # v7 candidate hash sets (proposed 2.1 addition)
+CANDIDATE_SET_PREFIX = accounting.CANDIDATE_SET_PREFIX              # v7 candidate hash sets (2.1, CS1-CS5)
 INTEGRITY_REGISTER_PATH = "registers/integrity.jsonl"                # B02's INTEGRITY_REGISTER file (2.0 namespace registers/)
 KNOWLEDGE_MANIFEST = "KNOWLEDGE_RELEASE.json"
 DECISION_INDEX = "C16_DECISION_INDEX.json"
@@ -363,36 +363,9 @@ def declared_accounting_issues(decl, release_id: str | None) -> list[Issue]:
     return out
 
 
-def candidate_set_path(source: str) -> str:
-    return f"{CANDIDATE_SET_PREFIX}{source.split(':', 1)[1]}.txt"
-
-
-def candidate_set_bytes(hashes) -> bytes:
-    """The preimage of `provenance.candidate_set_sha256`: sorted, unique, LF-joined hashes, no final LF."""
-    return "\n".join(sorted(set(hashes))).encode("ascii")
-
-
-def candidate_sets(decl: dict, data: dict[str, bytes]) -> tuple[set[str], list[Issue]]:
-    """V7_REFERENCE sources: the relabel check needs the candidate hashes themselves, not only their digest. Each
-    declared candidate set travels as `registers/candidate_sets/<name>.txt` in the ADMISSION_REGISTER: exactly the
-    preimage of `provenance.candidate_set_sha256`, with as many hashes as the source's `input`.
-    (Proposed contract 2.1 additive item; flagged in the CP-1 report; the 2.1 register carries only the digest.)"""
-    shas, out = set(), []
-    for s in decl["sources"]:
-        if s["path"] != "V7_REFERENCE":
-            continue
-        p = candidate_set_path(s["source"])
-        b = data.get(p)
-        if b is None or _sha(b) != s["provenance"]["candidate_set_sha256"]:
-            out.append(_e("C16_SOURCE_ACCOUNTING", "v7 candidate set missing or not the declared candidate_set_sha256", p))
-            continue
-        hs = b.decode("ascii", "replace").split("\n") if b else []
-        if (hs != sorted(set(hs)) or len(hs) != s["input"]
-                or not all(len(x) == 64 and all(c in "0123456789abcdef" for c in x) for x in hs)):
-            out.append(_e("C16_SOURCE_ACCOUNTING", "v7 candidate set malformed or does not match the declared input", p))
-            continue
-        shas |= set(hs)
-    return shas, out
+# v7 candidate sets: the 2.1 reference (PR #82, 9af665e7; CS1-CS5), no private copy
+candidate_set_path = accounting.candidate_set_path
+candidate_set_bytes = accounting.candidate_set_bytes
 
 
 def _source_row(src: str, path: str, provenance: dict | None) -> dict:
@@ -517,7 +490,9 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
             decl = None
         ai = declared_accounting_issues(decl, manifest.get("release_id"))
         if not ai:
-            v7_shas, ai = candidate_sets(decl, data)
+            # CS1-CS5 against the ADMISSION_REGISTER inventory (the signed RELEASE.json inventory when the bundle has
+            # no knowledge release manifest); the verified union feeds the I-5 relabel check (legacy_issues)
+            v7_shas, ai = accounting.candidate_set_issues(decl, data, inventory)
         if ai:
             res.refusals += ai
             return res

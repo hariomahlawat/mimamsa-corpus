@@ -370,7 +370,7 @@ def accounting(release_id, copies: dict | None, v1: dict, v7: list[str] | None =
 
 
 def candidate_set_bytes(hashes) -> bytes:
-    from mimamsa_importer.c16 import candidate_set_bytes as csb
+    from mimamsa_contract.c16.accounting import candidate_set_bytes as csb   # the 2.1 reference (CS3 canonical bytes)
     return csb(hashes)
 
 

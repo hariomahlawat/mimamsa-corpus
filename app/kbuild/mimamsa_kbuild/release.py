@@ -93,7 +93,7 @@ def _row(src: str, path: str, provenance: dict) -> dict:
 
 
 def source_accounting(*, release_id: str, v1_docs: list[dict], generations: list[dict], shipped_original_shas: set[str],
-                      v1_not_established: dict[str, str] | None = None) -> dict:
+                      v1_not_established: dict[str, str] | None = None, v7_sets: dict[str, list[str]] | None = None) -> dict:
     """The ONE per-source admission accounting register (contract 2.1, PR #82 clarification 1;
     SOURCE_ADMISSION_ACCOUNTING_SCHEMA.json, scope DECLARED_BY_BUILD), written to registers/source_accounting.json.
 
@@ -103,8 +103,8 @@ def source_accounting(*, release_id: str, v1_docs: list[dict], generations: list
     (facts only the site can recompute are deferred: the site may narrow) and served only if it also has a v1 record
     and its original ships. v1 documents with a C16 identity for the same (doc_id, sha256) are counted on the C16 path
     only; the others on their v1 source, eligible and served unless the build's SG-1 check or v1 servability says
-    otherwise (`v1_not_established`: doc_id -> reason). v7 candidates are not an input of this build and local Admin
-    uploads never appear in a declared register (R7), so neither is listed."""
+    otherwise (`v1_not_established`: doc_id -> reason). `v7_sets` (name -> candidate hashes, from the pinned revision's
+    v7/candidate_sets/) become V7_REFERENCE sources. Local Admin uploads never appear in a declared register (R7)."""
     from mimamsa_contract.c16 import accounting
     rows: dict[str, dict] = {}
     c16_keys = set()
@@ -165,6 +165,16 @@ def source_accounting(*, release_id: str, v1_docs: list[dict], generations: list
         else:
             r["eligible"] += 1
             r["served"] += 1
+    for name, hashes in sorted((v7_sets or {}).items()):
+        # V7_REFERENCE (2.1, CS1-CS5): reference only, never eligible or served; the candidate set ships as
+        # registers/candidate_sets/<name>.txt, whose bytes are the preimage of candidate_set_sha256
+        n = len(set(hashes))
+        r = rows.setdefault(f"v7:{name}", _row(f"v7:{name}", "V7_REFERENCE", {
+            "generation_manifest_sha256": None, "hf_repo": None, "hf_revision": None,
+            "candidate_set_sha256": hashlib.sha256(accounting.candidate_set_bytes(hashes)).hexdigest()}))
+        r["input"] = r["identities"] = r["held"] = n
+        if n:
+            r["not_served_reasons"]["V7_REFERENCE_ONLY"] = n
     for r in rows.values():
         r["not_served_reasons"] = dict(sorted(r["not_served_reasons"].items()))
     reg = {"contract": "mimamsa-corpus-contract/2.1", "record_kind": "source_admission_accounting", "release_id": release_id,

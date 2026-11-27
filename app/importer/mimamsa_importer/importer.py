@@ -56,6 +56,14 @@ SITE_CONFIG = "SITE_CONFIG.json"
 LATCH = "EXCLUSION_LATCH"
 
 
+JOURNAL_MARKERS = ("journal/journal.jsonl", "activation-state/SITE_INIT.json")   # B06 SiteLayout paths
+
+
+def journal_managed(site: Path) -> bool:
+    """True once the B06 activation journal manages the site (initialised or any journal entry). One-way."""
+    return any((Path(site) / p).exists() for p in JOURNAL_MARKERS)
+
+
 def _latched(site: Path) -> bool:
     """True once the site has ever been in exclusion-store mode: the store's latch exists (any exclusion accepted),
     or any generation recorded mode "signed". One-way: nothing clears it."""
@@ -352,6 +360,12 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
     except (OSError, ValueError):
         manifest, sums_digest = {}, None
     res = ImportResult(release_id=manifest.get("release_id"), activated=False)
+
+    # C16 CP-1: on a site managed by the activation journal (B06), only the journal switches ACTIVE. A direct
+    # activation is refused before anything is written; the import must be stage_only (rollbacks go through the journal).
+    if journal_managed(site) and not stage_only:
+        res.refused_reasons.append("ACTIVATION_JOURNAL_MANAGED: this site is activated through the journal; import with stage_only")
+        return res
 
     # 0a exclusion-mode latch and store integrity (review N4)
     exclusion_mode = _site_mode(site)

@@ -162,6 +162,22 @@ def test_cp1_slice_exchange_is_reproducible_and_pinned(tmp_path):
     assert json.loads(data)["corpus_generation_id"] == g["corpus_generation_id"]
 
 
+def test_v7_candidate_sets_are_declared_and_pass_the_reference_check():
+    """2.1 CS1-CS5: a V7_REFERENCE source B02 declares carries candidate_set_sha256 of exactly the file it ships, with
+    as many hashes as its input; never eligible or served. The reference check accepts it and refuses an orphan."""
+    hs = [hashlib.sha256(x).hexdigest() for x in (b"v7-a", b"v7-b")]
+    reg = release.source_accounting(release_id="R16-cp1-test-20261128-00000001", v1_docs=[], generations=[],
+                                    shipped_original_shas=set(), v7_sets={"cycle15": hs})
+    s = reg["sources"][0]
+    assert (s["source"], s["path"], s["input"], s["held"], s["eligible"], s["served"]) == ("v7:cycle15", "V7_REFERENCE", 2, 2, 0, 0)
+    path = accounting.candidate_set_path("v7:cycle15")
+    files = {path: accounting.candidate_set_bytes(hs)}
+    union, issues = accounting.candidate_set_issues(reg, files, set(files))
+    assert issues == [] and union == set(hs)
+    _, issues = accounting.candidate_set_issues(reg, {**files, "registers/candidate_sets/orphan.txt": b""}, set(files) | {"registers/candidate_sets/orphan.txt"})
+    assert [i.code for i in issues] == ["C16_SOURCE_ACCOUNTING"]
+
+
 def test_release_inventories_are_in_ordinal_path_order_on_mixed_case_paths(tmp_path):
     """Cross-platform hazard (B01 c006d300): Path objects compare case-insensitively on Windows and case-sensitively on
     Linux. SHA256SUMS, component file lists and concat digests must use the ordinal order of the '/'-separated path."""

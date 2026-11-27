@@ -622,6 +622,12 @@ def test_accounting_scope_and_candidate_set_are_checked(hn, seeded):
                                                 accounting_bytes=hn.default_accounting(release, hn.default_docs(), files),
                                                 drop=("registers/candidate_sets/cycle15.txt",)))
     assert r.contract_errors == ["C16_SOURCE_ACCOUNTING"]
+    # CS5: a candidate-set file no declared V7_REFERENCE source owns refuses the bundle (2.1 reference check)
+    release = f"R16-b01-synthetic-20261128-{hn.n + 1:08x}"
+    r = refused_untouched(hn, seeded, hn.bundle(exchange_files=files, artefacts=arts, release=release,
+                                                accounting_bytes=hn.default_accounting(release, hn.default_docs(), files),
+                                                extra={"registers/candidate_sets/orphan.txt": (b"", "other")}))
+    assert r.contract_errors == ["C16_SOURCE_ACCOUNTING"]
 
 
 def test_accounting_for_another_release_refused(hn, seeded):
@@ -793,6 +799,20 @@ def test_stage_only_import_leaves_active_to_the_activation_journal(hn, seeded):
     r2 = hn.run(hn.bundle(), seeded)
     assert r2.activated and (gdir / "generation.json").is_file()
     assert not list((seeded / "quarantine").glob(f"generations/{r.release_id}*"))
+
+
+def test_journal_managed_site_refuses_direct_activation(hn, seeded):
+    """CP-1: once the B06 journal manages the site, only the journal switches ACTIVE: a direct import is refused with
+    the site byte-identical; a stage_only import is accepted and leaves ACTIVE alone."""
+    from mimamsa_importer import import_release
+    (seeded / "activation-state").mkdir()
+    (seeded / "activation-state" / "SITE_INIT.json").write_text('{"initial_knowledge":"x","initial_models":null}')
+    assert importer.journal_managed(seeded)
+    r = refused_untouched(hn, seeded, hn.bundle())
+    assert any("ACTIVATION_JOURNAL_MANAGED" in x for x in r.refused_reasons)
+    before = (seeded / "ACTIVE").read_bytes()
+    r = import_release(hn.bundle(), seeded, trusted_public_key=hn.pub, mode="development", register=cc.REGISTER, stage_only=True)
+    assert r.staged and (seeded / "ACTIVE").read_bytes() == before
 
 
 def test_receipt_reference_matches_the_contract_reference():

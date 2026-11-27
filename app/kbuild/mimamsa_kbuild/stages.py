@@ -49,6 +49,8 @@ CODE_INPUTS = [   # code the stages execute: aggregate digests (LF-normalised), 
     ("code:b1_core", "app/b1/src/Mimamsa.Core", "*.cs"),
 ]
 ACCOUNTING_FILE = accounting.FILE    # registers/source_accounting.json (contract 2.1, DECLARED_BY_BUILD)
+CANDIDATE_SET_DIR = accounting.CANDIDATE_SET_PREFIX.rstrip("/")   # registers/candidate_sets (ADMISSION_REGISTER)
+V7_PREFIX = "v7/candidate_sets/"     # v7 candidate sets in the pinned revision (input); shipped under accounting.CANDIDATE_SET_PREFIX
 DEFERRED_RECEIPT_CODES = {"C16_RECEIPT_UNVERIFIABLE", "C16_RECEIPT_SITE_MISMATCH"}   # site-recomputable facts: B01 at import
 
 
@@ -204,6 +206,9 @@ class Inputs:
             _refuse("BUILD_INPUT_MISSING", "exactly one pinned HF input must carry the v1 canonical corpus (v1/)", None)
         self.v1_source = {"hf_repo": v1[0]["repo"], "hf_revision": v1[0]["revision"]}
         self.v1_files = {f["path"][3:]: f["sha256"] for f in v1[0]["files"] if f["path"].startswith("v1/")}
+        # v7 candidate sets (reference only, never served) at the same pinned revision: v7/candidate_sets/<name>.txt
+        self.v7_files = {f["path"][len(V7_PREFIX):-4]: f["sha256"] for f in v1[0]["files"]
+                         if f["path"].startswith(V7_PREFIX) and f["path"].endswith(".txt")}
         g = self.inv["producer_generations"][0]
         self.generation = g
         self.exchange = {"GENERATION.json": self.blob(g["generation_manifest_sha256"])}
@@ -220,6 +225,17 @@ class Inputs:
 
     def v1_group(self, prefix: str) -> dict[str, bytes]:
         return {p: self.blob(s) for p, s in sorted(self.v1_files.items()) if p.startswith(prefix)}
+
+    def v7_sets(self) -> dict[str, list[str]]:
+        """name -> candidate hashes; each input file must already be the canonical 2.1 bytes (CS3), else refused."""
+        out = {}
+        for name, sha in sorted(self.v7_files.items()):
+            b = self.blob(sha)
+            hs = b.decode("ascii").split("\n") if b else []
+            if accounting.candidate_set_bytes(hs) != b or not all(len(h) == 64 for h in hs):
+                _refuse("BUILD_INPUT_V7", f"v7 candidate set {name} is not canonical (sorted unique lower-case sha256, LF, no final LF)", None)
+            out[name] = hs
+        return out
 
     def originals(self) -> dict[str, bytes]:
         out = {}
@@ -298,7 +314,8 @@ def s2_validate(ctx: BuildContext, work: Path) -> None:
     v1_err = [i for i in rep.issues if i.severity == "error"]
     if v1_err:
         _refuse(v1_err[0].code, "v1 validation failed: " + v1_err[0].message, "S2", _issue_list(v1_err))
-    legacy = legacy_issues(recs["documents"], pop.get("identities", []), pop.get("admissions", []), inp.hf_pins())
+    v7_shas = set().union(*inp.v7_sets().values()) if inp.v7_files else set()
+    legacy = legacy_issues(recs["documents"], pop.get("identities", []), pop.get("admissions", []), inp.hf_pins(), v7_shas)
     if legacy:
         _refuse(legacy[0]["code"], legacy[0]["reason"], "S2", legacy)
     write_bytes(work / "VALIDATION.json", json_pretty({
@@ -361,7 +378,8 @@ def _accounting(ctx: BuildContext, inp: "Inputs", docs: list[dict], pop: dict, s
         reg = source_accounting(
             release_id=ctx.spec["release"]["release_id"], v1_docs=docs, shipped_original_shas=shipped,
             generations=[{**{k: g[k] for k in ("corpus_generation_id", "generation_manifest_sha256", "hf_repo", "hf_revision")},
-                          "identities": pop.get("identities", []), "admissions": pop.get("admissions", []), "receipts_unresolved": unresolved}])
+                          "identities": pop.get("identities", []), "admissions": pop.get("admissions", []), "receipts_unresolved": unresolved}],
+            v7_sets=inp.v7_sets())
     except ValueError as exc:
         _refuse("BUILD_ACCOUNTING", str(exc), sid)
     return accounting.register_bytes(reg)
@@ -379,6 +397,8 @@ def s4_bundle(ctx: BuildContext, work: Path) -> None:
     c16["registers/integrity.jsonl"] = integrity_rows(recs["documents"], originals, src)
     unresolved = set(ctx.stage_json("S2", "VALIDATION.json")["receipts"]["unresolved_admissions"])
     c16[ACCOUNTING_FILE] = _accounting(ctx, inp, recs["documents"], pop, set(originals), unresolved, "S4")
+    for name, hashes in inp.v7_sets().items():   # 2.1 CS1-CS5: one file per declared V7_REFERENCE source
+        c16[accounting.candidate_set_path(f"v7:{name}")] = accounting.candidate_set_bytes(hashes)
     write_release_tree(work / "tree", release_manifest_template=inp.template, spec=ctx.spec, defaults=inp.defaults, register=inp.register,
                        key_id=inp.inv["dev_signing"]["key_id"], v1_source=inp.v1_source, records=recs, originals=originals,
                        texts=texts, research=inp.v1_group("research/"), c16_files=c16)
@@ -560,7 +580,7 @@ def knowledge_release_manifest(ctx: BuildContext, inp: Inputs, rel: Path, acc: d
     paths = lambda es: [e["path"] for e in es]    # noqa: E731
     originals, text, research = E("originals"), E("text"), E("research")
     records = [e for e in E("data") + E("corpus-v2") if not e["path"].startswith("corpus-v2/admissions")]
-    admission = E("corpus-v2/admissions.jsonl") + E(ACCOUNTING_FILE) + E("registers/receipts")
+    admission = E("corpus-v2/admissions.jsonl") + E(ACCOUNTING_FILE) + E(CANDIDATE_SET_DIR) + E("registers/receipts")
     integrity = E("registers/integrity.jsonl")
     rows, graph = E("accelerators/rows"), E("accelerators/graph")
     index, tstore = E("accelerators/search-index"), E("accelerators/text-store")
@@ -728,6 +748,16 @@ def s9_verify(ctx: BuildContext, work: Path) -> None:
     if acct != (bundle / ACCOUNTING_FILE).read_bytes():
         _refuse("BUILD_ACCOUNTING", "source accounting recomputed from the bundle differs from the shipped register", "S9")
     checks["source_accounting_recomputed"] = "equal (contract 2.1 register, accounting_issues clean)"
+    # v7 candidate sets (2.1 CS1-CS5) with the reference check, against the signed ADMISSION_REGISTER inventory
+    decl = json.loads(acct)
+    adm_inv = {f["path"] for c in m["components"] if c["kind"] == "ADMISSION_REGISTER" for f in c["files"]}
+    cs_files = {p.relative_to(bundle).as_posix(): p.read_bytes() for p in files_under(bundle / "registers" / "candidate_sets")} \
+        if (bundle / "registers" / "candidate_sets").is_dir() else {}
+    cs_union, cs_issues = accounting.candidate_set_issues(decl, cs_files, adm_inv)
+    want_union = set().union(*inp.v7_sets().values()) if inp.v7_files else set()
+    if cs_issues or cs_union != want_union:
+        _refuse("BUILD_ACCOUNTING", "v7 candidate sets fail the 2.1 reference check (CS1-CS5)", "S9", _issue_list(cs_issues))
+    checks["v7_candidate_sets"] = {"sources": sorted(inp.v7_files), "hashes": len(cs_union), "check": "accounting.candidate_set_issues: clean"}
     # knowledge rows: loader pre-COPY checks, row counts and the full re-derivation (ROWS_REDERIVE_COMPARE)
     for t in next(c for c in m["components"] if c["kind"] == "KNOWLEDGE_ROWS")["tables"]:
         data = (bundle / t["file"]).read_bytes()

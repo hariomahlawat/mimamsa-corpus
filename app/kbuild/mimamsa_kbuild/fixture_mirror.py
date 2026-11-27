@@ -105,6 +105,10 @@ def prepare(mirror: Path, *, repo: str = CP1_REPO, revision: str = CP1_REVISION,
             write_bytes(root / "v1" / "originals" / f"{h}.pdf", b)
         for p, b in extra_text.items():
             write_bytes(root / "v1" / p, b)
+        # a v7 candidate set (reference only, never served): the B01 harness's never-admitted original F
+        import c16_cases as cc
+        from mimamsa_contract.c16 import accounting
+        write_bytes(root / "v7" / "candidate_sets" / "cycle15.txt", accounting.candidate_set_bytes([cc.h(cc.Corpus().f)]))
     docs = sorted(recs.values(), key=lambda r: r["doc_id"])
     write_bytes(root / "v1" / "data" / "documents.jsonl", _jsonl(docs))
     write_bytes(root / "v1" / "data" / "derived_text.jsonl", _jsonl(sorted(ders, key=lambda r: r["doc_id"])))
