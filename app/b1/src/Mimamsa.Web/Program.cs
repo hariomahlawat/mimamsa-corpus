@@ -316,6 +316,49 @@ app.Use(async (ctx, next) =>
     if (!isStatic) log.LogInformation("request {Method} {Route} {Status} {Ms}ms", ctx.Request.Method, route, ctx.Response.StatusCode, sw.ElapsedMilliseconds);
 });
 
+// ---- C16 B06 (CP-1 slice; OFF unless Mimamsa:Activation:Enabled=true): the service as an activation PARTICIPANT.
+// It serves the authenticated local control channel, refuses /api requests (503) while a transition or recovery is in
+// progress, while the signed exclusion store is unhealthy, or while this process is not on the journal head, and pins
+// {knowledge, model, exclusion sequence} per request. In this slice there is no in-process generation swap: OPEN onto
+// a generation other than the one this process loaded leaves it not serving until it is restarted (fail closed).
+// Response-boundary exclusion filtering of every API surface is B06-integrated work (Core: ActivationParticipant.Respond).
+if (conf.GetValue("Mimamsa:Activation:Enabled", false))
+{
+    var actSite = new Mimamsa.Core.Activation.SiteLayout(site);
+    var actInsp = new Mimamsa.Core.Activation.SiteInspector(actSite,
+        Mimamsa.Core.Activation.ActivationCli.Reader(actSite, production: !conf.GetValue("Mimamsa:Activation:DevelopmentTrust", false)));
+    var participant = new Mimamsa.Core.Activation.ActivationParticipant(actInsp) { OnSwap = (k, _) => k == generation.GenerationId };
+    participant.LoadHead();
+    var channel = new Mimamsa.Core.Activation.ControlChannelServer(new Mimamsa.Core.Activation.ControlChannelOptions
+    {
+        PipeName = conf["Mimamsa:Activation:Pipe"] is { Length: > 0 } pn ? pn : "mimamsa-activation",
+        Secret = Mimamsa.Core.Activation.ControlChannelOptions.LoadSecret(conf["Mimamsa:Activation:KeyFile"] is { Length: > 0 } kf ? kf : actSite.ChannelKeyPath),
+    }, participant) { Log = m => log.LogWarning("{Message}", m) };
+    channel.Start();
+    app.Lifetime.ApplicationStopping.Register(() => channel.DisposeAsync().AsTask().Wait(2000));
+    log.LogInformation("activation participant enabled (serving: {Serving}, semantic search: {Semantic})", participant.IsServing(), participant.SemanticSearchAvailable());
+    // 2.1 lexical-only releases: the semantic path (query embedding, dense candidates) runs only when this request's
+    // pin allows it; otherwise search is lexical only.
+    var semanticForRequest = new AsyncLocal<bool?>();
+    search.SemanticAllowed = () => semanticForRequest.Value ?? false;
+    app.Use(async (ctx, next) =>
+    {
+        if (!ctx.Request.Path.StartsWithSegments("/api")) { await next(); return; }
+        Mimamsa.Core.Activation.ReaderPin pin;
+        try { pin = participant.Pin(); }
+        catch (Mimamsa.Core.Activation.ActivationRefused)
+        {
+            ctx.Response.StatusCode = 503;
+            ctx.Response.Headers.RetryAfter = "5";
+            await ctx.Response.WriteAsJsonAsync(new { state = "activation_not_serving" });
+            return;
+        }
+        ctx.Items["mimamsa.activation.pin"] = pin;
+        semanticForRequest.Value = pin.SemanticSearch;
+        try { await next(); } finally { participant.Unpin(pin); }
+    });
+}
+
 app.UseDefaultFiles();
 var types = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
 types.Mappings[".mjs"] = "text/javascript"; types.Mappings[".bcmap"] = "application/octet-stream";

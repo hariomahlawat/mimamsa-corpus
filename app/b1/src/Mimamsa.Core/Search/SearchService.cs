@@ -30,6 +30,11 @@ public sealed class SearchService
     public SearchIndex Index => _ix;
     /// C14 S4 hybrid PoC. Null (the default) = B1 lexical behaviour, unchanged.
     public ISemanticScorer? Semantic { get; init; }
+    /// C16 B06 (2.1 lexical-only releases): when set and false for the current request, the semantic path is skipped
+    /// entirely (no query embedding, no dense candidates); lexical search is unchanged. Null (default) = always allowed.
+    public Func<bool>? SemanticAllowed { get; set; }
+    /// The scorer this request may use: Semantic unless SemanticAllowed says no.
+    public ISemanticScorer? ActiveSemantic => Semantic is not null && (SemanticAllowed?.Invoke() ?? true) ? Semantic : null;
     /// C15 WP2: optional cross-encoder rerank stage (off when null).
     public IReranker? Reranker { get; init; }
     /// C15 WP2/WP7: provision-heading boost for procedural queries (off when null).
@@ -60,6 +65,7 @@ public sealed class SearchService
 
     public SearchResult Search(string raw, SearchFilters filters, bool plainAfterConfirmation = false, string? service = null)
     {
+        var semantic = ActiveSemantic;   // C16 B06: null when the activation gate disables semantic search for this request
         ParsedQuery q;
         // A citation such as "(2013) 7 SCC 316" uses brackets as part of the identifier, not as query syntax (C14 F06).
         if (!plainAfterConfirmation && Legal.LegalIdentifierResolver.IsIdentifierQuery(raw ?? ""))
@@ -122,7 +128,7 @@ public sealed class SearchService
                 // In hybrid and rerank modes the matched provisions are placed before fused/reranked results (after the
                 // identifier, case-name and title tiers): rank fusion would otherwise dilute the boost. Added after the
                 // C14 walkthrough queries showed no effect in hybrid mode (development data; DECLARATIONS.md item 3).
-                if (ctx.HeadingReasons.Count > 0 && (Semantic is not null || Reranker is not null) && !q.Exact)
+                if (ctx.HeadingReasons.Count > 0 && (semantic is not null || Reranker is not null) && !q.Exact)
                     foreach (var p in ctx.HeadingReasons.Keys.Where(scores.Contains).OrderByDescending(scores.ScoreOf).ThenBy(p => p))
                         if (!_docHidden(_ix.Passages[p].DocId) && seen.Add(p)) ordered.Add(new Hit(p, "lexical", scores.ScoreOf(p), Reasons(p, ctx)));
                 // ---- C15 WP2 rerank stage (begin). Only when a reranker is configured; pinned tiers above are untouched.
@@ -130,8 +136,8 @@ public sealed class SearchService
                 {
                     var lex = scores.Ranked();
                     var query = string.Join(" ", rest);
-                    var dense = Semantic is null ? new List<(int Passage, double Score)>()
-                        : Semantic.TopK(query, Hybrid.RerankPool, p => !_docHidden(_ix.Passages[p].DocId)).ToList();
+                    var dense = semantic is null ? new List<(int Passage, double Score)>()
+                        : semantic.TopK(query, Hybrid.RerankPool, p => !_docHidden(_ix.Passages[p].DocId)).ToList();
                     var pool = new List<(int p, bool lexical)>();
                     var inPool = new HashSet<int>();
                     foreach (var p in lex.Where(p => !seen.Contains(p) && !_docHidden(_ix.Passages[p].DocId)).Take(Hybrid.RerankPool)) if (inPool.Add(p)) pool.Add((p, true));
@@ -149,17 +155,17 @@ public sealed class SearchService
                     }
                     ordered.AddRanked(scores, seen);   // lexical tail beyond the pool
                     if (mode == "lexical" && pool.Count > 0) mode = "hybrid";
-                    notes[0] = $"Hybrid search (BM25{(Semantic is null ? "" : $" with embedding candidates: {Semantic.Description}")}, reranked by {Reranker.Description}). Identifier matches are placed first and are never re-ranked.";
+                    notes[0] = $"Hybrid search (BM25{(semantic is null ? "" : $" with embedding candidates: {semantic.Description}")}, reranked by {Reranker.Description}). Identifier matches are placed first and are never re-ranked.";
                 }
                 else
                 // ---- C15 WP2 rerank stage (end)
                 // ---- C14 S4 hybrid hook (begin). Only plain, non-exact queries; identifier and title tiers above are
-                // already placed and are never re-ranked. With Semantic == null this block is skipped entirely.
-                if (Semantic is not null && !q.Exact)
+                // already placed and are never re-ranked. With no semantic scorer this block is skipped entirely.
+                if (semantic is not null && !q.Exact)
                 {
                     var lex = scores.Ranked();
                     // C15 WP2: eligibility is applied inside the dense scan (withdrawn passages never use up depth)
-                    var dense = Semantic.TopK(string.Join(" ", rest), Hybrid.DenseDepth, p => !_docHidden(_ix.Passages[p].DocId))
+                    var dense = semantic.TopK(string.Join(" ", rest), Hybrid.DenseDepth, p => !_docHidden(_ix.Passages[p].DocId))
                                         .Where(x => x.Score >= Hybrid.MinSimilarity).ToList();
                     var sim = dense.ToDictionary(x => x.Passage, x => x.Score);
                     foreach (var f in HybridFusion.Rrf(lex, dense.Select(x => x.Passage).ToList(), Hybrid))
@@ -171,7 +177,7 @@ public sealed class SearchService
                     }
                     ordered.AddRanked(scores, seen);   // lexical tail beyond fusion depth
                     if (mode == "lexical" && dense.Count > 0) mode = "hybrid";
-                    notes[0] = $"Hybrid search (BM25 fused with embedding similarity: {Semantic.Description}). Identifier matches are placed first and are never re-ranked.";
+                    notes[0] = $"Hybrid search (BM25 fused with embedding similarity: {semantic.Description}). Identifier matches are placed first and are never re-ranked.";
                 }
                 else
                 // ---- C14 S4 hybrid hook (end)
