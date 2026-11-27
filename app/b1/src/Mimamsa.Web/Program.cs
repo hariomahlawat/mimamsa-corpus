@@ -100,6 +100,7 @@ var app0 = new AppServices
 {
     Generation = generation, Search = search, State = state, Policy = policy, Identity = identity, Ledger = ledger, Vault = vault,
     Eligible = eligibility, TestMode = testMode, SecureCookies = conf.GetValue("Mimamsa:SecureCookies", false),
+    Studio = new Mimamsa.Core.Studio.StudioStore(dataSource), Commander = new Mimamsa.Core.Commander.TocCommanderSource(generation),
 };
 appRef = app0;
 var active = new ActiveStreams();
@@ -150,6 +151,7 @@ var log = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("mimams
 // ---- start-up: schemas, single serving instance, policy mirror, bootstrap accounts (test mode only)
 await identity.EnsureSchemaAsync();
 await policy.EnsureSchemaAsync();
+await app0.Studio.EnsureSchemaAsync();
 var instanceLockConn = await dataSource.OpenConnectionAsync();
 await using (var lk = new NpgsqlCommand("SELECT pg_try_advisory_lock(hashtext('mimamsa-b1-serving-instance'))", instanceLockConn))
 {
@@ -161,7 +163,7 @@ if (testMode && conf.GetValue("Mimamsa:Test:ResetState", false))
 {
     // TEST ONLY: disposable database state for repeatable journeys (accounts, sessions, withdrawals, policy witness)
     await using var c = await dataSource.OpenConnectionAsync();
-    await using var cmd = new NpgsqlCommand("TRUNCATE app_sessions, app_users, audit_log, withdrawals, vault_copies; UPDATE serving_policy SET epoch = 1, digest = 'state-1'", c);
+    await using var cmd = new NpgsqlCommand("TRUNCATE app_sessions, app_users, audit_log, withdrawals, vault_copies, studio_versions, studio_documents, studio_notes; UPDATE serving_policy SET epoch = 1, digest = 'state-1'", c);
     await cmd.ExecuteNonQueryAsync();
 }
 await ledger.InitAsync(resetForTest: testMode && conf.GetValue("Mimamsa:Test:ResetLedger", false));

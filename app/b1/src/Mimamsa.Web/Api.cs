@@ -31,6 +31,7 @@ public static partial class Api
     public static void Map(WebApplication app)
     {
         app.MapGet("/health", () => Results.Text("ok"));
+        MapWorkspace(app);  // C15 WP5/WP6: /api/commander/*, /api/studio/* (Api.Workspace.cs)
         MapStatutes(app);   // C14 S3: /api/statutes, /api/documents/{id}/relations, /api/library (Api.Statutes.cs)
 
         app.MapPost("/api/login", async (HttpContext ctx, AppServices s) =>

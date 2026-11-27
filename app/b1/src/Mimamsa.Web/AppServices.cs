@@ -21,6 +21,10 @@ public sealed class AppServices
     public required bool TestMode { get; init; }
     public required bool SecureCookies { get; init; }
     public required Eligibility Eligible { get; init; }
+    /// C15 WP6: per-user private working documents (never corpus, search or graph).
+    public Mimamsa.Core.Studio.StudioStore Studio { get; init; } = null!;
+    /// C15 WP5: the only way the Commander workspace reads the corpus (switchable to the C15 graph API at integration).
+    public Mimamsa.Core.Commander.ICommanderSource Commander { get; init; } = null!;
 
     public Task<Principal?> AuthenticateAsync(HttpContext ctx)
     {
