@@ -20,7 +20,7 @@ full-corpus acceptance. **No FG-\* or CG-\* gate is closed on real data.** The o
 | --- | --- | --- | --- |
 | B03 knowledge rows | #83 | `1107e404`, then `423e4754` (Windows CI admin DSN) | merge commits on `claude/c16-cp1` |
 | B06 activation journal | #86 | `61302ca8`, then `f761b4ca` (Linux pin-test fix), `7906efbe` (channel-test races, merged by the B06 author as `d91f5cd2`), `81b9253f` (lexical-only M1/M2/K1/K2, null MODELS; also merged by the B06 author as `4d54108b`) | ″ |
-| Interfaces | #82 | `767734d8`, then `9af665e7` | ″ |
+| Interfaces | #82 | `767734d8`, then `9af665e7`, then `f653c4b8` (`*.txt -text`; SC31) | ″ |
 | B01 site importer | #85 | `cd6bbfb9`, then `c006d300` (Linux reproducibility) | ″ |
 | B02 build skeleton | #84 | `9b082d13` | ″ |
 
@@ -139,10 +139,15 @@ Checks (all pass; 45 in the journey, list in `slice-evidence-local-windows.json`
 
 | Job | Workflow | Platform | Run id | Result |
 | --- | --- | --- | --- | --- |
-| `cp1-slice` | App contract and design checks (`app-ci.yml`) | ubuntu-latest | 46061338630 (push), 46061344250 (pull_request) | success |
-| `cp1-slice-windows` | App Windows PoC (`app-windows-poc.yml`) | windows-latest | 46061338674 (push), 46061344291 (pull_request) | success |
+| `cp1-slice` | App contract and design checks (`app-ci.yml`) | ubuntu-latest | 46064053119 (push), 46064056715 (pull_request) | success |
+| `cp1-slice-windows` | App Windows PoC (`app-windows-poc.yml`) | windows-latest | 46064053110 (push), 46064056734 (pull_request) | success |
 
-Follow-up head `b7d6071a` (lexical-only with NO model, reference candidate sets, mandatory stage-only). In the same runs
+**Final code head `c7c8da5b`** (interfaces `f653c4b8` merged; B06 conformance 31/31). Every job is green in all four runs.
+One flake: in the pull_request Windows run, the first attempt failed one existing default-mode Playwright journey, F01. It
+timed out waiting for the login page, and is unrelated to activation, which is off in that job. The same commit passed it
+in the push run, and the re-run attempt (attempt 2) passed. Earlier follow-up head `b7d6071a` (lexical-only with NO model,
+reference candidate sets, mandatory stage-only): 46061338630 / 46061344250 (Linux) and 46061338674 / 46061344291
+(Windows), all green. In the same runs
 every existing job is green: contract (3.11, 3.12, 3.13), importer, kbuild, design-tokens, b1 (including the disk-config
 leg), b1-windows and windows-services. First CP-1 head `4452eb21`: 46056708789 / 46056764745 (Linux) and
 46056708810 / 46056764683 (Windows), all green. The load-flaky
@@ -163,7 +168,8 @@ Follow-up head (`b7d6071a`):
 
 | Suite | Result |
 | --- | --- |
-| Contract (`app/contract/tests`) | 497 passed, 10 failed: 8 are the pre-existing Windows-host `test_bundle` cases; 2 (`test_2_1_fixtures_are_byte_identical_to_builder_output`, `test_candidate_set_positive_binds_to_declared_digest`) fail only on a `core.autocrlf=true` checkout because the new PR #82 fixture `accounting/registers/candidate_sets/candidates-2026.txt` is not covered by the fixtures' `-text` rule (§7 item 12). Linux CI passes them |
+| Contract (`app/contract/tests`) | 500 passed, 8 failed (the pre-existing Windows-host `test_bundle` cases only) after merging `f653c4b8`. Before that merge, 2 more failed only on this `core.autocrlf=true` checkout (the `.txt` candidate-set fixture; §7 item 12, fixed in PR #82) |
+| B06 activation scenario conformance | **31/31** (SC01–SC31) reference traces reproduced by the .NET journal, plus the presence test (now the full fixture set). SC31 passes with no product change (`ModelGate` already requires a verified model for K1) |
 | Importer (`app/importer/tests`) | 238 passed |
 | kbuild (`app/kbuild/tests`) | 40 passed |
 | B1 C#, default mode | 386 passed |
@@ -215,7 +221,7 @@ modes, Playwright 81, slice pass.
     stream them).
 11. `mimamsa_contract.devbundle` (v1) still sorts `Path` objects when writing SHA256SUMS (B01's c006d300 finding). The CP-1
     path does not use it (B02 writes its own ordinal inventories), so it is left unchanged and reported.
-12. **For PR #82 (interfaces):** `app/contract/fixtures/c16/v2_1/.gitattributes` marks only `*.json` and `*.jsonl` as
+12. **Resolved in PR #82 `f653c4b8` (merged):** `app/contract/fixtures/c16/v2_1/.gitattributes` marked only `*.json` and `*.jsonl` as
     `-text`. The new `.txt` candidate-set fixture is therefore converted to CRLF on `core.autocrlf=true` checkouts
     (Windows), so two interface tests fail there (CS2 digest, fixture byte-identity). Linux CI is unaffected. Fix: add
     `*.txt -text` in the interface branch. Not changed here.
@@ -225,7 +231,9 @@ modes, Playwright 81, slice pass.
 
 ## 8. CP-1 follow-up (PR #82 `9af665e7`: CP-1 gaps specified as additive 2.1 rules)
 
-- **Merges:** interfaces `9af665e7`; B06 `7906efbe` (channel-test races) and `81b9253f` (lexical-only releases), the latter
+- **Merges:** interfaces `9af665e7`, then `f653c4b8` (byte-exact `.txt` fixtures; SC31: K1 requires a verified active model);
+  the B06 scenario-presence test now takes the full set from the fixture directory, and the .NET journal reproduces
+  SC01–SC31 (31/31); B06 `7906efbe` (channel-test races) and `81b9253f` (lexical-only releases), the latter
   also merged by the B06 author (`4d54108b`); both resolutions of the one `Program.cs` conflict keep both the B06
   per-pin semantic gate and the CP-1 response boundary (identical content).
 - **B01 candidate sets:** the private check is removed. `accounting.candidate_set_issues(declared, files,
