@@ -1,0 +1,57 @@
+{
+ "anchors": [],
+ "approval_ref": null,
+ "category": "associated_with_provision",
+ "classification_provenance": {
+  "abbreviation_expansion": {
+   "abbreviation": "AR",
+   "alternatives": [
+    "Regulations for the Army (para), if the owner used AR for Regulations"
+   ],
+   "expansion": "Army Rules, 1954",
+   "lexicon_ref": "docs/architecture/c16/C16_CORPUS_INTEGRATION_CONTRACT.md#83-filename-and-folder-classification-rules"
+  },
+  "collection": "local:owner-collection-fixture",
+  "inventory_id": "L-e81ca321acdd8f12c93c",
+  "matched_text": "AR 22",
+  "path_component": -1,
+  "relative_path": "Army Rules/AR 22, 23, 30 - Lt Col A B Example v Union of India.docx"
+ },
+ "contract": "mimamsa-corpus-contract/2.0",
+ "evidentiary_basis": "FILENAME_PATTERN",
+ "has_legal_effect": false,
+ "is_finding": false,
+ "proposition_ref": null,
+ "record_kind": "corpus_relationship",
+ "relationship_id": "REL-1279dba830e5c04355b9b72d",
+ "review_ref": null,
+ "source": {
+  "author_id": null,
+  "producer": {
+   "commit": null,
+   "config_sha256": null,
+   "name": "mimamsa-contract-c16-adapters",
+   "version": "1.0.0"
+  },
+  "rule_id": "C16-FN-PROVLIST",
+  "rule_version": "1.0"
+ },
+ "subject": {
+  "doc_id": "local-d33bfb0313089bf8",
+  "graph_node_ref": "JUD:local-d33bfb0313089bf8",
+  "source_copy_sha256": "d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502"
+ },
+ "target": {
+  "node_id": "PROV:AR-1954:r.22",
+  "resolved": true
+ },
+ "temporal_scope": {
+  "from": null,
+  "from_status": "NOT_APPLICABLE",
+  "to": null,
+  "to_status": "NOT_APPLICABLE"
+ },
+ "uncertainty": "Read from the owner's file name by rule C16-FN-PROVLIST; the abbreviation reading and the provision are candidates, not a finding that the judgment concerns this provision.",
+ "validates_relationship_id": null,
+ "verification": "CURATED_NAVIGATION"
+}

@@ -1,0 +1,86 @@
+{
+ "admission_id": "ADM-889ce3ba364395f61ab0d9bc",
+ "application_eligible": true,
+ "contract": "mimamsa-corpus-contract/2.0",
+ "corpus_generation_id": "CG-20261127-fixtures-0a1b2c3d",
+ "decided_at": null,
+ "decided_by": {
+  "id": "c16-fixture-admission",
+  "kind": "AUTOMATED_RULE"
+ },
+ "decision": "ADMITTED_AS_PRIMARY",
+ "duplicate_of": null,
+ "gates": [
+  {
+   "evidence_ref": null,
+   "gate_id": "G01_HASH_VERIFIED",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": null,
+   "gate_id": "G02_FORMAT_DETECTED",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": null,
+   "gate_id": "G03_RESTRICTED_REGISTER",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": null,
+   "gate_id": "G04_ACCESS_MARKING_REVIEWED",
+   "result": "NOT_RUN"
+  },
+  {
+   "evidence_ref": null,
+   "gate_id": "G05_IDENTITY_RECORD_VALID",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": null,
+   "gate_id": "G06_TEXT_DERIVATIVE_VERIFIED",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": null,
+   "gate_id": "G07_EMBEDDED_IMAGES_ACCOUNTED",
+   "result": "FAIL"
+  },
+  {
+   "evidence_ref": null,
+   "gate_id": "G08_RELEVANCE_ASSESSED",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": null,
+   "gate_id": "G09_DUPLICATE_RESOLVED",
+   "result": "PASS"
+  },
+  {
+   "evidence_ref": null,
+   "gate_id": "G10_SCHEMA_VALID",
+   "result": "PASS"
+  }
+ ],
+ "legal_effect": "NONE",
+ "publication_effect": "NONE",
+ "reasons": [
+  "embedded image 3 not yet read (ocr_state QUEUED)"
+ ],
+ "record_kind": "corpus_admission",
+ "restriction_id": null,
+ "rule_set": {
+  "id": "c16-admission",
+  "version": "1.0"
+ },
+ "source_disposition": {
+  "secondary_flags": [],
+  "system": "c16-local-reconcile",
+  "value": "NEW_DOCUMENT"
+ },
+ "subject": {
+  "doc_id": "local-d33bfb0313089bf8",
+  "source_copy_sha256": "d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502"
+ },
+ "supersedes_admission_id": null
+}

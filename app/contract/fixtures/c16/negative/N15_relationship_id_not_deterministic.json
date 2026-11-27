@@ -1,0 +1,50 @@
+{
+ "anchors": [],
+ "approval_ref": null,
+ "category": "classified_under_subject",
+ "classification_provenance": {
+  "abbreviation_expansion": null,
+  "collection": "local:owner-collection-fixture",
+  "inventory_id": "L-e81ca321acdd8f12c93c",
+  "matched_text": "Army Rules",
+  "path_component": 0,
+  "relative_path": "Army Rules/AR 22, 23, 30 - Lt Col A B Example v Union of India.docx"
+ },
+ "contract": "mimamsa-corpus-contract/2.0",
+ "evidentiary_basis": "FOLDER_PATH",
+ "has_legal_effect": false,
+ "is_finding": false,
+ "proposition_ref": null,
+ "record_kind": "corpus_relationship",
+ "relationship_id": "REL-000000000000000000000000",
+ "review_ref": null,
+ "source": {
+  "author_id": null,
+  "producer": {
+   "commit": null,
+   "config_sha256": null,
+   "name": "mimamsa-contract-c16-adapters",
+   "version": "1.0.0"
+  },
+  "rule_id": "C16-FOLDER-SUBJECT",
+  "rule_version": "1.0"
+ },
+ "subject": {
+  "doc_id": "local-d33bfb0313089bf8",
+  "graph_node_ref": "JUD:local-d33bfb0313089bf8",
+  "source_copy_sha256": "d33bfb0313089bf8c7f2b6760e44c0c0b269703373aa0ee7a94adafa1b1e5502"
+ },
+ "target": {
+  "node_id": "SUBJ:local:army-rules",
+  "resolved": true
+ },
+ "temporal_scope": {
+  "from": null,
+  "from_status": "NOT_APPLICABLE",
+  "to": null,
+  "to_status": "NOT_APPLICABLE"
+ },
+ "uncertainty": "Owner folder label; a navigation aid, not a finding about the document.",
+ "validates_relationship_id": null,
+ "verification": "CURATED_NAVIGATION"
+}

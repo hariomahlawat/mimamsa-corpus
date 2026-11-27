@@ -1,0 +1,202 @@
+{
+ "description": "C16 fixture manifest. kind=record: one JSON record; kind=exchange: a set of JSONL files validated together. expect=invalid lists the rule code that must be raised and, for SCHEMA, a JSON path fragment showing the intended reason.",
+ "negative": [
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N01_folder_classification_as_verified_finding.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "verification"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N02_reconstructed_pdf_claims_original.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "origin_status"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N03_extract_claims_complete.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "completeness"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N04_missing_mandatory_sha256.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "source_copy"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N05_ocr_anchor_quotable.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "quoting_permitted"
+  },
+  {
+   "expect_code": "LEDGER_V0_NO_APPROVAL",
+   "file": "negative/N06_legally_validated_at_ledger_v0.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N07_legally_validated_without_approval.json",
+   "kind": "record",
+   "ledger": 1,
+   "schema_path_contains": "approval_ref"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N08_admission_eligible_with_failed_gate.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "gates"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N09_treatment_without_anchor.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "anchors"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N10_word_screenshots_without_image_inventory.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "embedded_images"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N11_generated_segment_cited_as_page.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "citable_as_source_page"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N12_compilation_with_one_member.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "members"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N13_abbreviation_reading_not_candidate.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "verification"
+  },
+  {
+   "expect_code": "C16_RECONSTRUCTED_SELF",
+   "file": "negative/N14_reconstruction_of_itself.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_ID_MISMATCH",
+   "file": "negative/N15_relationship_id_not_deterministic.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_TAXONOMY_ID",
+   "file": "negative/N16_provision_id_mismatch.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "C16_JSONL",
+   "file": "negative/N17_relationships_not_in_canonical_order.jsonl",
+   "kind": "jsonl",
+   "ledger": 0,
+   "schema_path_contains": null
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N18_extract_permits_whole_work_claims.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "whole_work_claims_permitted"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N19_restricted_but_eligible.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "state"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N20_admission_missing_gate.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "gates"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N21_word_screenshots_claims_issued_copy.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "origin_status"
+  },
+  {
+   "expect_code": "SCHEMA",
+   "file": "negative/N22_candidate_marked_as_finding.json",
+   "kind": "record",
+   "ledger": 0,
+   "schema_path_contains": "verification"
+  }
+ ],
+ "positive": [
+  {
+   "file": "positive/identities.jsonl",
+   "kind": "exchange_set",
+   "ledger": 0,
+   "with": [
+    "positive/anchors.jsonl",
+    "positive/relationships.jsonl",
+    "positive/taxonomy.jsonl",
+    "positive/admissions.jsonl"
+   ]
+  },
+  {
+   "file": "positive/legally_validated_ledger_v1.json",
+   "kind": "record",
+   "ledger": 1
+  },
+  {
+   "file": "positive/relationships_ar_22_23_30.jsonl",
+   "kind": "jsonl",
+   "ledger": 0
+  },
+  {
+   "file": "positive/identity_word_screenshots.json",
+   "kind": "record",
+   "ledger": 0
+  },
+  {
+   "file": "positive/identity_reconstructed_pdf.json",
+   "kind": "record",
+   "ledger": 0
+  },
+  {
+   "file": "positive/identity_extract_pdf.json",
+   "kind": "record",
+   "ledger": 0
+  },
+  {
+   "file": "positive/identity_compilation_pdf.json",
+   "kind": "record",
+   "ledger": 0
+  }
+ ]
+}

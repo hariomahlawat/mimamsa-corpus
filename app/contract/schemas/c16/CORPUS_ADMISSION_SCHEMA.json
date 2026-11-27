@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/CORPUS_ADMISSION_SCHEMA.json",
+  "title": "Corpus admission decision (mimamsa-corpus-contract/2.0)",
+  "description": "The producer's decision whether one source copy enters a corpus generation, and on what terms, with the gates it passed. Admission is a technical intake decision. It is not publication (the site Admin's activation of a release publishes, ADR-0002), not source authentication, and not legal approval. Decisions are append-only: a changed decision is a new record that names the one it supersedes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "record_kind", "admission_id", "subject", "corpus_generation_id", "decision", "gates", "application_eligible", "publication_effect", "legal_effect", "decided_by", "rule_set", "reasons"],
+  "properties": {
+    "contract": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/contract"},
+    "record_kind": {"const": "corpus_admission"},
+    "admission_id": {"description": "ADM-<24 hex> from (corpus_generation_id, doc_id, sha256, rule_set id and version).", "$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/stable_id"},
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["doc_id", "source_copy_sha256"],
+      "properties": {
+        "doc_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/doc_id"},
+        "source_copy_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}
+      }
+    },
+    "corpus_generation_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/corpus_generation_id"},
+    "decision": {
+      "enum": ["ADMITTED_AS_PRIMARY", "ADMITTED_AS_ALTERNATE_COPY", "HELD_IDENTITY_UNRESOLVED", "HELD_RELEVANCE_UNRESOLVED", "HELD_OCR_REQUIRED", "HELD_EXTRACTION_INCOMPLETE", "HELD_ACCESS_MARKING_REVIEW", "REJECTED_EXACT_DUPLICATE", "REJECTED_NON_RELEVANT", "EXCLUDED_RESTRICTED", "QUARANTINED_INTEGRITY", "UNSUPPORTED_FORMAT"]
+    },
+    "source_disposition": {
+      "description": "The upstream classification this decision was derived from, kept verbatim (for example the PR #76 reconciliation disposition).",
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["system", "value"],
+      "properties": {
+        "system": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"},
+        "value": {"type": "string", "pattern": "^[A-Z][A-Z_]{2,63}$"},
+        "secondary_flags": {"type": "array", "items": {"type": "string", "pattern": "^[A-Z][A-Z_]{2,95}$"}, "uniqueItems": true}
+      }
+    },
+    "duplicate_of": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["sha256", "relation"],
+      "properties": {
+        "sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
+        "doc_id": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/doc_id"}, {"type": "null"}]},
+        "relation": {"description": "How this copy relates to the primary. A reconstruction is admitted beside its original, never in place of it.", "enum": ["BYTE_IDENTICAL", "NORMALIZED_TEXT_IDENTICAL", "RECONSTRUCTION_OF"]}
+      }
+    },
+    "restriction_id": {"type": ["string", "null"], "pattern": "^RM-[0-9]{3}$"},
+    "gates": {
+      "description": "Every admission gate with its result. The ten gate ids are mandatory on every record (contract section 10).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["gate_id", "result"],
+        "properties": {
+          "gate_id": {"$ref": "#/$defs/gate_id"},
+          "result": {"enum": ["PASS", "FAIL", "NOT_RUN", "NOT_APPLICABLE"]},
+          "evidence_ref": {"type": ["string", "null"], "maxLength": 300}
+        }
+      },
+      "allOf": [
+        {"contains": {"properties": {"gate_id": {"const": "G01_HASH_VERIFIED"}}}},
+        {"contains": {"properties": {"gate_id": {"const": "G02_FORMAT_DETECTED"}}}},
+        {"contains": {"properties": {"gate_id": {"const": "G03_RESTRICTED_REGISTER"}}}},
+        {"contains": {"properties": {"gate_id": {"const": "G04_ACCESS_MARKING_REVIEWED"}}}},
+        {"contains": {"properties": {"gate_id": {"const": "G05_IDENTITY_RECORD_VALID"}}}},
+        {"contains": {"properties": {"gate_id": {"const": "G06_TEXT_DERIVATIVE_VERIFIED"}}}},
+        {"contains": {"properties": {"gate_id": {"const": "G07_EMBEDDED_IMAGES_ACCOUNTED"}}}},
+        {"contains": {"properties": {"gate_id": {"const": "G08_RELEVANCE_ASSESSED"}}}},
+        {"contains": {"properties": {"gate_id": {"const": "G09_DUPLICATE_RESOLVED"}}}},
+        {"contains": {"properties": {"gate_id": {"const": "G10_SCHEMA_VALID"}}}}
+      ]
+    },
+    "application_eligible": {"description": "May this copy be packaged into an application release bundle. True only for an ADMITTED decision with every gate PASS or NOT_APPLICABLE. Even then the site Admin still publishes, and legal axes are unchanged.", "type": "boolean"},
+    "publication_effect": {"const": "NONE"},
+    "legal_effect": {"const": "NONE"},
+    "decided_by": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": {"enum": ["AUTOMATED_RULE", "OWNER", "PRODUCER_OPERATOR"]},
+        "id": {"type": "string", "minLength": 1, "maxLength": 120}
+      }
+    },
+    "decided_at": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/datetime"}, {"type": "null"}]},
+    "rule_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"},
+        "version": {"type": "string", "maxLength": 32}
+      }
+    },
+    "reasons": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 3, "maxLength": 300}},
+    "supersedes_admission_id": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/stable_id"}, {"type": "null"}]}
+  },
+  "allOf": [
+    {"if": {"properties": {"application_eligible": {"const": true}}},
+     "then": {"properties": {"decision": {"enum": ["ADMITTED_AS_PRIMARY", "ADMITTED_AS_ALTERNATE_COPY"]}, "gates": {"items": {"properties": {"result": {"enum": ["PASS", "NOT_APPLICABLE"]}}}}}}},
+    {"if": {"properties": {"decision": {"const": "EXCLUDED_RESTRICTED"}}}, "then": {"required": ["restriction_id"], "properties": {"restriction_id": {"type": "string"}, "application_eligible": {"const": false}}}},
+    {"if": {"properties": {"decision": {"enum": ["REJECTED_EXACT_DUPLICATE", "ADMITTED_AS_ALTERNATE_COPY"]}}}, "then": {"required": ["duplicate_of"], "properties": {"duplicate_of": {"type": "object"}}}},
+    {"if": {"properties": {"decision": {"const": "REJECTED_EXACT_DUPLICATE"}}}, "then": {"properties": {"duplicate_of": {"properties": {"relation": {"const": "BYTE_IDENTICAL"}}}}}},
+    {"if": {"properties": {"decision": {"pattern": "^(HELD|REJECTED|EXCLUDED|QUARANTINED|UNSUPPORTED)"}}}, "then": {"properties": {"application_eligible": {"const": false}}}}
+  ],
+  "$defs": {
+    "gate_id": {"enum": ["G01_HASH_VERIFIED", "G02_FORMAT_DETECTED", "G03_RESTRICTED_REGISTER", "G04_ACCESS_MARKING_REVIEWED", "G05_IDENTITY_RECORD_VALID", "G06_TEXT_DERIVATIVE_VERIFIED", "G07_EMBEDDED_IMAGES_ACCOUNTED", "G08_RELEVANCE_ASSESSED", "G09_DUPLICATE_RESOLVED", "G10_SCHEMA_VALID"]}
+  }
+}
