@@ -93,7 +93,12 @@ public class ActivationCrashTests
             return w;
         }
 
-        public string[] Common(string writer) => ["--site", S, "--pipe", Pipe, "--writer", writer, "--development", "--channel-timeout", "5"];
+        // Channel timeout is a deadline for a live participant (replies take milliseconds); 30 s absorbs a loaded host.
+        public string[] Common(string writer, int channelTimeout = 30) =>
+            ["--site", S, "--pipe", Pipe, "--writer", writer, "--development", "--channel-timeout", channelTimeout.ToString()];
+
+        public Proc Host(string cmd, string writer, int channelTimeout, IDictionary<string, string>? env, params string[] extra) =>
+            Proc.Start(Proc.HostDll, [cmd, .. Common(writer, channelTimeout), .. extra], env);
 
         public Proc Host(string cmd, string writer, IDictionary<string, string>? env = null, params string[] extra) =>
             Proc.Start(Proc.HostDll, [cmd, .. Common(writer), .. extra], env);
@@ -220,7 +225,7 @@ public class ActivationCrashTests
         using var stale = rig.StartWeb(pipe: rig.Pipe + "-stale");          // a web process that never hears OPEN
         Assert.True((bool)JsonNode.Parse(stale.Ask("status"))!["serving"]!);
         var cont = Path.Combine(rig.S, "continue");
-        using var tool = rig.Host("activate", "activator-1", PauseAt("DECIDED", cont), "--to", "R2");
+        using var tool = rig.Host("activate", "activator-1", 5, PauseAt("DECIDED", cont), "--to", "R2");   // OPEN to the dead participant gives up after 5 s
         tool.WaitFor(l => l == "PAUSED DECIDED");
         rig.Web!.Kill();                                                       // participant dies after ACK_SWITCHING
         File.WriteAllText(cont, "go");

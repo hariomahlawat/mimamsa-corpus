@@ -22,8 +22,10 @@ public class ControlChannelTests
             Server = new ControlChannelServer(new ControlChannelOptions { PipeName = Pipe, Secret = Secret }, P);
             Server.Start();
         }
-        public PipeParticipantLink Link(byte[]? secret = null) =>
-            new(new ControlChannelOptions { PipeName = Pipe, Secret = secret ?? Secret, Timeout = TimeSpan.FromSeconds(3) });
+        // A generous DEADLINE, not a delay: replies arrive in milliseconds and rejected connections are closed at once
+        // (EOF), so only a host under heavy load ever comes near it. Tests that expect no server pass a short one.
+        public PipeParticipantLink Link(byte[]? secret = null, double timeoutSeconds = 30) =>
+            new(new ControlChannelOptions { PipeName = Pipe, Secret = secret ?? Secret, Timeout = TimeSpan.FromSeconds(timeoutSeconds) });
         public ActivationEngine Engine(IParticipantLink link) => new(new ActivationEngineOptions
         {
             Site = Site.Layout, WriterId = "activator-1", Database = Site.Db, Exclusions = Site.NewReader(), Participant = link,
@@ -58,7 +60,7 @@ public class ControlChannelTests
         eng.AcquireLock();
         var ex = Assert.Throws<ActivationRefused>(() => eng.Transition("KNOWLEDGE", "R2"));
         Assert.Equal("PARTICIPANT_UNAVAILABLE", ex.Code);
-        Assert.Equal("BAD_MAC", rig.Server.LastRejectReason);
+        Assert.True(rig.Server.WaitForRejection("BAD_MAC", TimeSpan.FromSeconds(60)), "server never recorded BAD_MAC");
         Assert.Empty(ActivationJournal.Read(rig.Site.Layout.JournalPath).Entries);
         Assert.False(rig.P.Switching);
         Assert.True(rig.P.IsServing());
@@ -77,11 +79,11 @@ public class ControlChannelTests
         var captured = ControlEnvelope.Seal(rig.Secret, "PING", new JsonObject(), epoch, a.Session!, a.NextCounter, "tool");
         Assert.NotNull(a.SendRaw(captured));                                  // accepted once
         Assert.Null(a.SendRaw(captured));                                     // same connection, same counter: dropped
-        Assert.Equal("REPLAY_COUNTER", rig.Server.LastRejectReason);
+        Assert.True(rig.Server.WaitForRejection("REPLAY_COUNTER", TimeSpan.FromSeconds(60)), "server never recorded REPLAY_COUNTER");
         using var b = rig.Link();
         b.Connected();
         Assert.Null(b.SendRaw(captured));                                     // another connection: other session nonce
-        Assert.Equal("REPLAY_OTHER_SESSION", rig.Server.LastRejectReason);
+        Assert.True(rig.Server.WaitForRejection("REPLAY_OTHER_SESSION", TimeSpan.FromSeconds(60)), "server never recorded REPLAY_OTHER_SESSION");
         Assert.False(rig.P.Switching);
     }
 
@@ -94,7 +96,7 @@ public class ControlChannelTests
         eng.AcquireLock();
         eng.AcquireLock();                                                    // epoch 2
         Assert.Throws<ParticipantUnavailableException>(() => link.EnterSwitching("TX-00000001-aaaaaaaaaaaa", 1));
-        Assert.Equal("STALE_EPOCH", rig.Server.LastRejectReason);
+        Assert.True(rig.Server.WaitForRejection("STALE_EPOCH", TimeSpan.FromSeconds(60)), "server never recorded STALE_EPOCH");
         Assert.Throws<ParticipantUnavailableException>(() => link.EnterSwitching("TX-00000001-aaaaaaaaaaaa", 7));
         Assert.False(rig.P.Switching);
         link.Ping(2);
@@ -108,14 +110,14 @@ public class ControlChannelTests
         using var link = rig.Link();
         // nobody holds the lock: the connecting process cannot be the holder
         Assert.Throws<ParticipantUnavailableException>(() => link.Ping(0));
-        Assert.Equal("PEER_NOT_LOCK_HOLDER", rig.Server.LastRejectReason);
+        Assert.True(rig.Server.WaitForRejection("PEER_NOT_LOCK_HOLDER", TimeSpan.FromSeconds(60)), "server never recorded PEER_NOT_LOCK_HOLDER");
     }
 
     [Fact]
     public async Task Participant_lost_before_BEGIN_refuses_the_transition()
     {
         await using var rig = new Rig();
-        using var link = rig.Link();
+        using var link = rig.Link(timeoutSeconds: 2);   // no server: the connect attempt must give up
         using var eng = rig.Engine(link);
         eng.AcquireLock();
         await rig.Server.DisposeAsync();
