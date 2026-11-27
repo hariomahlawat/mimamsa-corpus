@@ -200,7 +200,11 @@ public class C16Cp1SliceTests
             // ---------------------------------------------------------------- B06: stage, initialise on G1
             var layout = new SiteLayout(site);
             var cat = new GenerationCatalog(layout);
-            cat.StageGeneration(g1); cat.StageGeneration(g2);
+            // 2.1 (B06 merge): each generation is classified from its KNOWLEDGE_RELEASE.json and the classification recorded;
+            // both CP-1 releases are lexical-only, so rule K2 applies (no model needed). The placeholder below is now
+            // redundant and is left for the CP-1 integrator to remove.
+            foreach (var gid in new[] { g1, g2 })
+                Check($"b06_classified_lexical_only_{gid}", cat.StageGeneration(gid, File.ReadAllBytes(Path.Combine(site, "generations", gid, "KNOWLEDGE_RELEASE.json")), 0));
             // GAP (flagged): B06 refuses a KNOWLEDGE switch unless the active model "has vectors for" the target; a lexical-only
             // release has none. CP-1 stages a placeholder model, NOT verified, so that only this precondition is met.
             cat.StageModel(model, verified: false, vectorsFor: [g1, g2]);

@@ -1,0 +1,112 @@
+{
+ "contract": "mimamsa-corpus-contract/2.1",
+ "record_kind": "activation_scenario_outcomes",
+ "scenario_id": "SC26-lexical-only-without-model",
+ "scenario_sha256": "9533a592c59f714a892f6de359cce87f12e3b9637a606d2c04182b6086bdfc20",
+ "trace": [
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1",
+    "L2"
+   ],
+   "journal_steps": [],
+   "knowledge": "L1",
+   "lock_epoch": 0,
+   "log_length": 0,
+   "models": null,
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 0,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1",
+    "L2"
+   ],
+   "journal_steps": [],
+   "knowledge": "L1",
+   "lock_epoch": 1,
+   "log_length": 0,
+   "models": null,
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 1,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1",
+    "L2"
+   ],
+   "journal_steps": [
+    "BEGIN",
+    "DECIDED",
+    "OPEN"
+   ],
+   "knowledge": "L2",
+   "lock_epoch": 1,
+   "log_length": 1,
+   "models": null,
+   "pins": 0,
+   "publication_rows": 1,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 2,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L2"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1",
+    "L2"
+   ],
+   "journal_steps": [
+    "BEGIN",
+    "DECIDED",
+    "OPEN"
+   ],
+   "knowledge": "L2",
+   "lock_epoch": 1,
+   "log_length": 1,
+   "models": null,
+   "pins": 1,
+   "publication_rows": 1,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 3,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L2"
+  }
+ ]
+}

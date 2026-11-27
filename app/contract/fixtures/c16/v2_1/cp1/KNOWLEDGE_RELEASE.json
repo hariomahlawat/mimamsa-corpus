@@ -283,6 +283,11 @@
      "bytes": 1032,
      "path": "registers/source_accounting.json",
      "sha256": "624c9164f301c4b549803377193620684dcd0feec07ca70e6a4fba6b4d97beb5"
+    },
+    {
+     "bytes": 1044,
+     "path": "registers/candidate_sets/candidates-2026.txt",
+     "sha256": "baa85b63734df75610d54273ae52f53a11f8fc211df96c393fe94eefdb810d92"
     }
    ],
    "format": "canonical-jsonl",

@@ -304,6 +304,38 @@ def scenario_list():
     S.append(scn("SC25-disk-preflight-refusal", ["DISK_PREFLIGHT"], "Measured bytes still to materialise plus headroom exceed free space: refused.",
                  [("lock_acquire", W1, None), ("transition", dict(W1, target="KNOWLEDGE", to="R2"), "Refused")], {"knowledge": "R1", "log_length": 0},
                  sizes={"R1": 40, "R2": 60}, free_bytes=10))
+    # 2.1 addition (CP-1 gap 2): lexical-only knowledge releases and model compatibility (activation.model_gate K2, M2)
+    LEX = ["L1", "L2", "L4"]
+    S.append(scn("SC26-lexical-only-without-model", ["LEXICAL_ONLY_ACTIVATION"],
+                 "With no model installed, a lexical-only release activates and serves; semantic search stays disabled.",
+                 [("lock_acquire", W1, None), ("transition", dict(W1, target="KNOWLEDGE", to="L2"), None), ("pin", {}, None)],
+                 {"knowledge": "L2", "models": None, "serving": True, "semantic_search": False},
+                 installed=["L1", "L2"], active="L1", models=None, staged_models={}, lexical_only=LEX[:2]))
+    S.append(scn("SC27-lexical-only-with-model-without-vectors", ["LEXICAL_ONLY_ACTIVATION"],
+                 "A verified model without vectors for a lexical-only release does not block it; semantic search is off until a release with vectors returns.",
+                 [("lock_acquire", W1, None), ("transition", dict(W1, target="KNOWLEDGE", to="L4"), None), ("pin", {}, None), ("unpin", {}, None),
+                  ("transition", dict(W1, target="KNOWLEDGE", to="R1", action="ROLLBACK"), None)],
+                 {"knowledge": "R1", "models": "M1", "serving": True, "semantic_search": True},
+                 installed=["R1", "L4"], lexical_only=["L4"]))
+    S.append(scn("SC28-full-release-still-needs-vectors", ["LEXICAL_ONLY_ACTIVATION", "MODEL_SWITCH"],
+                 "A release with vectors still needs a verified model with verified vectors for it, also beside lexical-only releases.",
+                 [("lock_acquire", W1, None), ("transition", dict(W1, target="KNOWLEDGE", to="R4"), "Refused"),
+                  ("transition", dict(W1, target="KNOWLEDGE", to="L4"), None)],
+                 {"knowledge": "L4", "models": "M1", "semantic_search": False},
+                 installed=["R1", "R4", "L4"], lexical_only=["L4"],
+                 staged_models={"M1": {"verified": True, "vectors_for": ["R1"]}}))
+    S.append(scn("SC29-full-release-without-model-refused", ["LEXICAL_ONLY_ACTIVATION"],
+                 "With no model installed, a release that is not lexical-only is refused; the lexical-only release stays active.",
+                 [("lock_acquire", W1, None), ("transition", dict(W1, target="KNOWLEDGE", to="R2"), "Refused"), ("pin", {}, None)],
+                 {"knowledge": "L1", "models": None, "serving": True, "semantic_search": False},
+                 installed=["L1", "R2"], active="L1", models=None, staged_models={}, lexical_only=["L1"]))
+    S.append(scn("SC30-model-install-over-lexical-knowledge", ["LEXICAL_ONLY_ACTIVATION", "MODEL_SWITCH"],
+                 "Over lexical-only knowledge an unverified placeholder model is refused, a verified model without vectors for it is accepted, and semantic search stays off.",
+                 [("lock_acquire", W1, None), ("transition", dict(W1, target="MODELS", to="MX"), "Refused"),
+                  ("transition", dict(W1, target="MODELS", to="M2"), None), ("pin", {}, None)],
+                 {"knowledge": "L1", "models": "M2", "serving": True, "semantic_search": False},
+                 installed=["L1"], active="L1", models=None, lexical_only=["L1"],
+                 staged_models={"MX": {"verified": False, "vectors_for": []}, "M2": {"verified": True, "vectors_for": ["R9"]}}))
     return S
 
 
@@ -364,6 +396,7 @@ def cp1_manifest(al, row_files: dict[str, bytes]):
                                                 count=sum(r["row_count"] for r in gt))
         elif c["kind"] == "ADMISSION_REGISTER":
             c["files"].append(bf.fe(accounting.FILE))
+            c["files"].append(bf.fe(V7_SET_PATH))
     cp1["notes"] = ("CP-1 fixture vertical slice: explicitly degraded (no vectors, uncalibrated samples); never ACTIVE_FULL; closes no FG "
                     "on real data. Graph tables belong to GRAPH (I-2).")
     return cp1
@@ -371,6 +404,49 @@ def cp1_manifest(al, row_files: dict[str, bytes]):
 
 # ----------------------------------------------------------------------------- accounting register (clarification 1)
 V1_HF = "v1:hf:hariomahlawat/mimamsa-corpus@" + "a" * 40
+V7_SOURCE = "v7:candidates-2026"
+V7_CANDIDATES = [H(f"v7-candidate-{i}") for i in range(5)]
+V7_SET_PATH = "registers/candidate_sets/candidates-2026.txt"
+
+
+def canonical_hash(b: bytes) -> str:
+    import hashlib
+    return hashlib.sha256(b).hexdigest()
+
+
+def candidate_set_fixtures(declared: dict) -> dict[str, bytes]:
+    """CP-1 gap 1: positive candidate-set file plus negatives. Each negative carries the declared register it is
+    checked against (digest re-pinned to the bad bytes where the rule under test is not CS2), the files (UTF-8 text or
+    hex) and the ADMISSION_REGISTER inventory."""
+    good = accounting.candidate_set_bytes(V7_CANDIDATES)
+    out = {f"accounting/{V7_SET_PATH}": good}
+    inv = sorted([accounting.FILE, V7_SET_PATH])
+
+    def neg(name, data, *, repin=True, inventory=None, register=None, extra=None):
+        d = copy.deepcopy(register or declared)
+        files = {} if data is None else {V7_SET_PATH: data}
+        files.update(extra or {})
+        if repin and data is not None:
+            next(s for s in d["sources"] if s["path"] == "V7_REFERENCE")["provenance"]["candidate_set_sha256"] = canonical_hash(data)
+        case = {"expected_code": "C16_SOURCE_ACCOUNTING", "declared": d, "files_hex": {k: v.hex() for k, v in sorted(files.items())},
+                "admission_inventory": sorted(inventory if inventory is not None else inv)}
+        out[f"accounting/candidate_set_negative/{name}.json"] = json.dumps(case, indent=1, sort_keys=True).encode() + b"\n"
+    srt = sorted(V7_CANDIDATES)
+    neg("CS01_missing_file", None, inventory=[accounting.FILE])
+    neg("CS02_digest_mismatch", accounting.candidate_set_bytes(V7_CANDIDATES[:4] + [H("other")]), repin=False)
+    neg("CS03_final_lf", good + b"\n")
+    neg("CS04_crlf", good.replace(b"\n", b"\r\n"))
+    neg("CS05_upper_case_hex", good.upper())
+    neg("CS06_unsorted", "\n".join(reversed(srt)).encode())
+    neg("CS07_duplicate", "\n".join(srt[:1] + srt[:4]).encode())
+    neg("CS08_count_differs_from_input", accounting.candidate_set_bytes(V7_CANDIDATES[:4]))
+    neg("CS09_orphan_candidate_set", good, extra={"registers/candidate_sets/other.txt": good},
+        inventory=inv + ["registers/candidate_sets/other.txt"])
+    neg("CS10_not_in_admission_inventory", good, inventory=[accounting.FILE])
+    neg("CS11_bom", b"\xef\xbb\xbf" + good)
+    neg("CS12_short_hash", "\n".join(srt[:4] + [srt[4][:63]]).encode())
+    neg("CS13_blank_line", "\n".join(srt[:2] + [""] + srt[2:]).encode())
+    return out
 
 
 def _src(source, path, *, prov=None, n, held=0, rejected=0, quarantined=0, served=None, by_decision=None, reasons=None):
@@ -392,7 +468,7 @@ def accounting_declared():
                                            hf_revision="b" * 40),
              n=12, held=2, rejected=1, quarantined=1, served=7, by_decision={"ADMIT": 8, "HOLD": 2, "QUARANTINE": 1, "REJECT": 1}),
         _src(V1_HF, "V1", prov=P(hf_repo="hariomahlawat/mimamsa-corpus", hf_revision="a" * 40), n=20, held=1, served=19),
-        _src("v7:candidates-2026", "V7_REFERENCE", prov=P(candidate_set_sha256=H("v7-candidate-set")), n=5, held=5,
+        _src(V7_SOURCE, "V7_REFERENCE", prov=P(candidate_set_sha256=canonical_hash(accounting.candidate_set_bytes(V7_CANDIDATES))), n=5, held=5,
              reasons={"HELD": 5}),
     ]
     src.sort(key=lambda s: s["source"])
@@ -501,6 +577,7 @@ def outputs() -> dict[str, bytes]:
     for name, reg in accounting_fixtures().items():
         body = accounting.register_bytes(reg) if name in ("declared", "recomputed") else json.dumps(reg, indent=1, sort_keys=True).encode() + b"\n"
         files[f"accounting/{name}.json"] = body
+    files.update(candidate_set_fixtures(accounting_declared()))
     files["digests/golden.json"] = json.dumps(golden_digests(row_files), indent=1, sort_keys=True).encode() + b"\n"
     spec = build_spec()
     files["build/spec.json"] = json.dumps(spec, indent=1, sort_keys=True).encode() + b"\n"

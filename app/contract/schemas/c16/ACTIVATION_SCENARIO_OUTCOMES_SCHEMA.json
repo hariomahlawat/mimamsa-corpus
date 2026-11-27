@@ -17,7 +17,8 @@
         "required": ["step", "error", "knowledge", "models", "views", "state", "serving", "journal_steps", "publication_rows", "log_length", "active_exclusion_seq", "store_seq", "installed", "pins", "temp_empty", "exclusion_reader", "lock_epoch", "response"],
         "properties": {
           "step": {"type": "integer", "minimum": 0}, "error": {"type": ["string", "null"]},
-          "knowledge": {"type": "string"}, "models": {"type": "string"}, "views": {"type": "string"},
+          "knowledge": {"type": "string"}, "models": {"type": ["string", "null"]}, "views": {"type": "string"},
+          "semantic_search": {"description": "2.1, present only for scenarios that declare initial.lexical_only: serving and the active knowledge is not lexical-only and the active model is verified with verified vectors for it.", "type": "boolean"},
           "state": {"enum": ["OPEN", "SWITCHING", "RECOVERING", "FAILED_CLOSED"]}, "serving": {"type": "boolean"},
           "journal_steps": {"type": "array", "items": {"type": "string"}}, "publication_rows": {"type": "integer"}, "log_length": {"type": "integer"},
           "active_exclusion_seq": {"type": ["integer", "null"]}, "store_seq": {"type": ["integer", "null"]},

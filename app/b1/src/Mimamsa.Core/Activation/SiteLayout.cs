@@ -48,7 +48,13 @@ public sealed class SiteLayout
     }
     public void WriteMarker(SiteState s) { Directory.CreateDirectory(StateDir); DurableFile.WriteAtomic(StatePath, Encoding.ASCII.GetBytes(s.ToString())); }
 
-    public string? ReadPointer(string target) => DurableFile.ReadIfExists(Pointer(target)) is { } b ? Encoding.UTF8.GetString(b).Trim() : null;
+    /// The generation a pointer names, or null. 2.1: MODELS_ACTIVE may be EMPTY, meaning no model is installed (a
+    /// lexical-only site); a placeholder model is never synthesised.
+    public string? ReadPointer(string target) =>
+        DurableFile.ReadIfExists(Pointer(target)) is { } b && Encoding.UTF8.GetString(b).Trim() is { Length: > 0 } v ? v : null;
+
+    public void WritePointer(string target, string? value) =>
+        DurableFile.WriteAtomic(Pointer(target), Encoding.UTF8.GetBytes(value is null ? "" : CheckId(value)));
 
     public Dictionary<string, long> ReadApplied()
     {
@@ -64,22 +70,22 @@ public sealed class SiteLayout
         DurableFile.WriteAtomic(AppliedPath, CanonicalJson.Bytes(o));
     }
 
-    public (string knowledge, string models) ReadInit()
+    public (string knowledge, string? models) ReadInit()
     {
         var o = CanonicalJson.ParseStrict(DurableFile.ReadShared(InitPath));
-        return ((string)o["initial_knowledge"]!, (string)o["initial_models"]!);
+        return ((string)o["initial_knowledge"]!, (string?)o["initial_models"]);
     }
 
     /// Fresh-site initialisation (installer / tests): the first active generation and model, an OPEN marker and the
     /// applied exclusion sequence for the active generation. Refuses an already initialised site.
-    public void Initialise(string knowledge, string models, long exclusionSeq)
+    public void Initialise(string knowledge, string? models, long exclusionSeq)
     {
         if (File.Exists(InitPath) || File.Exists(JournalPath)) throw new InvalidOperationException("site already initialised");
         Directory.CreateDirectory(StateDir);
         Directory.CreateDirectory(JournalDir);
-        DurableFile.WriteAtomic(InitPath, CanonicalJson.Bytes(new JsonObject { ["initial_knowledge"] = CheckId(knowledge), ["initial_models"] = CheckId(models) }));
+        DurableFile.WriteAtomic(InitPath, CanonicalJson.Bytes(new JsonObject { ["initial_knowledge"] = CheckId(knowledge), ["initial_models"] = models is null ? null : CheckId(models) }));
         DurableFile.WriteAtomic(ActivePointer, Encoding.UTF8.GetBytes(knowledge));
-        DurableFile.WriteAtomic(ModelsPointer, Encoding.UTF8.GetBytes(models));
+        WritePointer("MODELS", models);
         WriteApplied(new Dictionary<string, long> { [knowledge] = exclusionSeq });
         WriteMarker(SiteState.OPEN);
     }

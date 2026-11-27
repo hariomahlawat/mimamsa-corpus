@@ -347,7 +347,7 @@ public static partial class Api
         {
             new { code = "NOT_PRODUCTION", text = "Not a production installation. The library release is signed with a development key." },
         },
-        capabilities = new { semantic_search = s.Search.Semantic is not null, generative_ai = false, legal_reasoning = false, notes = false },
+        capabilities = new { semantic_search = s.Search.ActiveSemantic is not null, generative_ai = false, legal_reasoning = false, notes = false },
         gate = GateText,
     };
 
@@ -412,7 +412,7 @@ public static partial class Api
             page = rp.Page, page_size = rp.PageSize, page_count = rp.PageCount, total_groups = rp.TotalGroups, sort,
             highlight_terms = r.HighlightTerms.Concat(r.HighlightPhrases.SelectMany(x => x)).Where(t => t.Length > 1 && !Text.Stopwords.Contains(t)).Distinct().Take(60),
             facets = r.Facets.ToDictionary(kv => kv.Key, kv => kv.Value.Select(v => new { value = v.Value, count = v.Count })),
-            run = new { mode_label = r.Mode == "identifier" ? "Identifier match first, then lexical" : r.Mode == "lexical" ? "Lexical (BM25)" : r.Mode == "hybrid" ? "Hybrid (BM25 + embedding similarity, PoC)" : "Not run",                         semantic = s.Search.Semantic is null ? "not part of B1" : "PoC on: " + s.Search.Semantic.Description, release_id = s.Generation.Release.ReleaseId, elapsed_ms = Math.Round(ms, 1),                         service = r.Service, service_label = r.Service is { } sv2 && Mimamsa.Core.Legal.LegalIdentifierResolver.ServiceLabels.TryGetValue(sv2, out var sl) ? sl : null },
+            run = new { mode_label = r.Mode == "identifier" ? "Identifier match first, then lexical" : r.Mode == "lexical" ? "Lexical (BM25)" : r.Mode == "hybrid" ? "Hybrid (BM25 + embedding similarity, PoC)" : "Not run",                         semantic = s.Search.ActiveSemantic is null ? "not part of B1" : "PoC on: " + s.Search.ActiveSemantic.Description, release_id = s.Generation.Release.ReleaseId, elapsed_ms = Math.Round(ms, 1),                         service = r.Service, service_label = r.Service is { } sv2 && Mimamsa.Core.Legal.LegalIdentifierResolver.ServiceLabels.TryGetValue(sv2, out var sl) ? sl : null },
             notes = r.Notes,
         };
     }

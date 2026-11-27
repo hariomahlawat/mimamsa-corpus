@@ -141,19 +141,41 @@ public sealed class GenerationCatalog
         return b is null ? 0 : (long?)CanonicalJson.ParseStrict(b)["measured_bytes"] ?? 0;
     }
 
-    public StagedModel? Model(string id)
+    /// 2.1 (B06 interface, lexical-only releases): the classification recorded when the generation was staged. A
+    /// missing or unreadable record counts as NOT lexical-only, the stricter case (K1: a model with vectors is required).
+    public bool IsLexicalOnly(string gen)
     {
+        var b = DurableFile.ReadIfExists(Path.Combine(_s.GenerationsDir, gen, Marker));
+        try { return b is not null && (bool?)CanonicalJson.ParseStrict(b)["lexical_only"] == true; }
+        catch (Exception) { return false; }
+    }
+
+    public StagedModel? Model(string? id)
+    {
+        if (id is null) return null;
         var b = DurableFile.ReadIfExists(Path.Combine(_s.ModelsDir, SiteLayout.CheckId(id), "MODEL_VERIFIED.json"));
         if (b is null) return null;
         var o = CanonicalJson.ParseStrict(b);
         return new StagedModel((bool)o["verified"]!, o["vectors_for"]!.AsArray().Select(x => (string)x!).ToHashSet(StringComparer.Ordinal));
     }
 
-    public void StageGeneration(string gen, long measuredBytes = 0)
+    public void StageGeneration(string gen, long measuredBytes = 0, bool lexicalOnly = false)
     {
         var d = Path.Combine(_s.GenerationsDir, SiteLayout.CheckId(gen));
         Directory.CreateDirectory(d);
-        DurableFile.WriteAtomic(Path.Combine(d, Marker), CanonicalJson.Bytes(new JsonObject { ["generation"] = gen, ["measured_bytes"] = measuredBytes }));
+        DurableFile.WriteAtomic(Path.Combine(d, Marker), CanonicalJson.Bytes(new JsonObject
+        {
+            ["generation"] = gen, ["measured_bytes"] = measuredBytes, ["lexical_only"] = lexicalOnly,
+        }));
+    }
+
+    /// Stage a verified generation, classifying it from its verified KNOWLEDGE_RELEASE.json (and, when given, the
+    /// B04 vector-pack outcome) and recording the classification.
+    public bool StageGeneration(string gen, byte[] knowledgeReleaseJson, long measuredBytes, string? vectorPackOutcome = null)
+    {
+        bool lex = LexicalOnly.Classify(knowledgeReleaseJson, vectorPackOutcome);
+        StageGeneration(gen, measuredBytes, lex);
+        return lex;
     }
 
     public void StageModel(string id, bool verified, IEnumerable<string> vectorsFor)
@@ -171,6 +193,33 @@ public sealed class GenerationCatalog
         var d = Path.Combine(_s.GenerationsDir, SiteLayout.CheckId(gen));
         File.Delete(Path.Combine(d, Marker));
         try { Directory.Delete(d, recursive: true); } catch (IOException) { } catch (UnauthorizedAccessException) { }
+    }
+}
+
+/// 2.1 lexical-only classification (B06 interface, "Model compatibility for lexical-only knowledge releases").
+/// A knowledge release is lexical-only when it declares no VECTOR_PACK component, accounts VECTOR_PACK as
+/// OMITTED_DEGRADED and declares DEGRADED_LEXICAL_ONLY; or when its vector pack failed verification and the release
+/// was activated ACTIVE_DEGRADED under B04 rule 2 (effective level lexical-only). Anything unreadable or partial is NOT
+/// lexical-only (fail towards the stricter rule K1).
+public static class LexicalOnly
+{
+    public const string DegradedVectorOutcome = "ACTIVE_DEGRADED";
+
+    public static bool Classify(byte[] knowledgeReleaseJson, string? vectorPackOutcome = null)
+    {
+        if (vectorPackOutcome == DegradedVectorOutcome) return true;
+        try
+        {
+            var r = CanonicalJson.ParseStrict(knowledgeReleaseJson).AsObject();
+            var comps = r["components"]?.AsArray();
+            var cap = r["capability"]?.AsObject();
+            if (comps is null || cap is null) return false;
+            if (comps.Any(c => (string?)c?["kind"] == "VECTOR_PACK")) return false;
+            var vp = cap["accounting"]?.AsArray().Where(a => (string?)a?["kind"] == "VECTOR_PACK").ToList() ?? [];
+            if (vp.Count != 1 || (string?)vp[0]!["status"] != "OMITTED_DEGRADED") return false;
+            return (string?)cap["declared_service_level"] == "DEGRADED_LEXICAL_ONLY";
+        }
+        catch (Exception) { return false; }
     }
 }
 

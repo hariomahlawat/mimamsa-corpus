@@ -39,11 +39,16 @@ class Refused(Exception):
 
 
 class Site:
-    def __init__(self, installed: list[str], active: str, models: str = "M1", keep_previous: int = 2,
+    def __init__(self, installed: list[str], active: str, models: str | None = "M1", keep_previous: int = 2,
                  staged_models: dict | None = None, sizes: dict | None = None, free_bytes: int = 10**12,
-                 headroom_fraction: float = 0.1, recovery_target: str | None = None):
+                 headroom_fraction: float = 0.1, recovery_target: str | None = None, lexical_only: set | None = None):
         self.installed = list(installed)          # verified, staged knowledge generations on disk
-        self.staged_models = {models: {"verified": True, "vectors_for": set(installed)}, **(staged_models or {})}
+        # contract 2.1 (additive): `models=None` means no model is installed (MODELS pointer null), and
+        # `lexical_only` names the knowledge generations whose effective service level is DEGRADED_LEXICAL_ONLY
+        # with no VECTOR_PACK (model_gate rule K2). With the defaults the behaviour is exactly the 2.0 model.
+        base = {models: {"verified": True, "vectors_for": set(installed)}} if models is not None else {}
+        self.staged_models = {**base, **(staged_models or {})}
+        self.lexical_only = frozenset(lexical_only or ())
         self.journal: list[dict] = []
         self.db = {"views": active, "publication": {}, "site_rows": {"users": 1}}
         self.pointers = {"KNOWLEDGE": active, "MODELS": models}
@@ -98,22 +103,44 @@ class Site:
         return {"measured_required_bytes": need, "free_bytes": self.free_bytes, "headroom_fraction": self.headroom_fraction,
                 "retained_releases": keep, "result": "PASS" if ok else "FAIL"}
 
+    # ------------------------------------------------------------------ model compatibility
+    def model_gate(self, target: str, to: str):
+        """Model compatibility gate.
+        M1 (2.0) a MODELS target must be staged and verified.
+        M2 (2.0) ...and have verified vectors for the active knowledge generation, UNLESS (2.1) that generation is
+           lexical-only, where vectors are not used.
+        K1 (2.0) a KNOWLEDGE target that is not lexical-only needs an active model with verified vectors for it
+           (no active model: refused).
+        K2 (2.1) a lexical-only KNOWLEDGE target may be activated with no model or with a model without vectors for
+           it; semantic search then stays disabled (semantic_search_enabled)."""
+        lex = self.lexical_only
+        if target == "MODELS":
+            m = self.staged_models.get(to)
+            if not m or not m.get("verified"):
+                raise Refused("target model is not staged and verified")
+            if self.pointers["KNOWLEDGE"] not in m.get("vectors_for", set()) and self.pointers["KNOWLEDGE"] not in lex:
+                raise Refused("target model has no verified vectors for the active knowledge generation")
+        if target == "KNOWLEDGE" and to not in lex:
+            model = self.staged_models.get(self.pointers["MODELS"]) if self.pointers["MODELS"] is not None else None
+            if model is None:
+                raise Refused("no active model: a release with vectors needs a verified model with verified vectors")
+            if to not in model.get("vectors_for", set()):
+                raise Refused("active model has no verified vectors for the target generation")
+
+    def semantic_search_enabled(self) -> bool:
+        """2.1: semantic search is served only when the active knowledge is not lexical-only and the active model is
+        verified with verified vectors for it."""
+        g, m = self.pointers["KNOWLEDGE"], self.pointers["MODELS"]
+        model = self.staged_models.get(m) if m is not None else None
+        return bool(g not in self.lexical_only and model and model.get("verified") and g in model.get("vectors_for", set()))
+
     # ------------------------------------------------------------------ transitions
     def transition(self, target: str, to: str, action: str = "ACTIVATE", crash_after: str | None = None, hook=None):
         if self.state != "OPEN":
             raise Refused("another transition or recovery is in progress")
         if target == "KNOWLEDGE" and to not in self.installed:
             raise Refused("target generation is not staged and verified")
-        if target == "MODELS":
-            m = self.staged_models.get(to)
-            if not m or not m.get("verified"):
-                raise Refused("target model is not staged and verified")
-            if self.pointers["KNOWLEDGE"] not in m.get("vectors_for", set()):
-                raise Refused("target model has no verified vectors for the active knowledge generation")
-        if target == "KNOWLEDGE":
-            model = self.staged_models[self.pointers["MODELS"]]
-            if to not in model.get("vectors_for", set()):
-                raise Refused("active model has no verified vectors for the target generation")
+        self.model_gate(target, to)
         if self.preflight(target, to)["result"] != "PASS":
             raise Refused("measured disk preflight failed")
         self._txn += 1

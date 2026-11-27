@@ -10,7 +10,7 @@
     "contract": {"const": "mimamsa-corpus-contract/2.1"},
     "record_kind": {"const": "activation_scenario"},
     "scenario_id": {"type": "string", "pattern": "^SC[0-9]{2}-[a-z0-9-]{3,60}$"},
-    "covers": {"type": "array", "minItems": 1, "items": {"enum": ["CRASH_BOUNDARY", "EXCLUSION_MID_SWITCH", "LOCK_CONTENTION", "STALE_PROCESS", "PARTICIPANT_LOSS", "TORN_JOURNAL", "JOURNAL_CORRUPTION", "RESPONSE_BOUNDARY_EXCLUSION", "EXCLUSION_READER_FAIL_CLOSED", "MODEL_SWITCH", "ROLLBACK", "RETENTION", "RESTORE", "DISK_PREFLIGHT"]}},
+    "covers": {"type": "array", "minItems": 1, "items": {"enum": ["CRASH_BOUNDARY", "EXCLUSION_MID_SWITCH", "LOCK_CONTENTION", "STALE_PROCESS", "PARTICIPANT_LOSS", "TORN_JOURNAL", "JOURNAL_CORRUPTION", "RESPONSE_BOUNDARY_EXCLUSION", "EXCLUSION_READER_FAIL_CLOSED", "MODEL_SWITCH", "ROLLBACK", "RETENTION", "RESTORE", "DISK_PREFLIGHT", "LEXICAL_ONLY_ACTIVATION"]}},
     "description": {"type": "string", "minLength": 10, "maxLength": 1000},
     "initial": {
       "type": "object", "additionalProperties": false,
@@ -18,7 +18,8 @@
       "properties": {
         "installed": {"type": "array", "items": {"type": "string"}},
         "active": {"type": "string"},
-        "models": {"type": "string"},
+        "models": {"description": "Active model generation; null (2.1) when no model is installed.", "type": ["string", "null"]},
+        "lexical_only": {"description": "2.1 (SC26+): knowledge generations whose effective service level is DEGRADED_LEXICAL_ONLY with no VECTOR_PACK (model_gate K2). Its presence also adds `semantic_search` to the observed trace.", "type": "array", "items": {"type": "string"}, "uniqueItems": true},
         "staged_models": {"type": "object", "additionalProperties": {"type": "object", "additionalProperties": false, "required": ["verified", "vectors_for"], "properties": {"verified": {"type": "boolean"}, "vectors_for": {"type": "array", "items": {"type": "string"}}}}},
         "keep_previous": {"type": "integer", "minimum": 0},
         "free_bytes": {"type": "integer", "minimum": 0},
@@ -44,7 +45,7 @@
     "assert_final": {
       "type": "object", "additionalProperties": false,
       "properties": {
-        "knowledge": {"type": "string"}, "models": {"type": "string"}, "serving": {"type": "boolean"},
+        "knowledge": {"type": "string"}, "models": {"type": ["string", "null"]}, "serving": {"type": "boolean"}, "semantic_search": {"type": "boolean"},
         "installed": {"type": "array", "items": {"type": "string"}}, "log_length": {"type": "integer"},
         "last_response": {"type": "array", "items": {"type": "string"}}, "temp_empty": {"type": "boolean"}
       }

@@ -102,6 +102,32 @@ The codes come from the contracts and reference code; no new meaning is introduc
 
 **Why B01's design.** B01's design is the stricter and more complete one: one kind, exact equality of everything but narrowing, and a site recomputation compared to a signed declaration. B02's richer fields (decision counts, not-served reasons, generation and HF pins) are kept as fields of the same record.
 
+### v7 candidate-set files (2.1 addition, CP-1 gap 1)
+
+The I-5 relabel check (section 5.3) needs the candidate copy **hashes**, not only their digest. Each declared `V7_REFERENCE` source therefore ships its hash set. This was adopted from B01's CP-1 implementation (`claude/c16-cp1`, `mimamsa_importer.c16.candidate_sets`), unchanged in bytes. Reference: `accounting.candidate_set_path`, `candidate_set_bytes` and `candidate_set_issues`. Fixtures: `v2_1/accounting/registers/candidate_sets/candidates-2026.txt` and `candidate_set_negative/CS01–CS13`.
+
+| Item | Rule |
+| --- | --- |
+| Path | `registers/candidate_sets/<name>.txt` for source `v7:<name>` (name as the source-id pattern: `[a-z0-9][a-z0-9._-]{0,63}`) |
+| Bytes | the unique candidate copy sha256 values as **lower-case 64-hex**, sorted (ordinal, which for hex is byte order), joined by a single LF, **no final LF**, ASCII. No CR, BOM, blank line or whitespace. An empty set is the empty file |
+| Binding | `provenance.candidate_set_sha256` = sha256 of the **file bytes**. The file is exactly the preimage, so it also equals `digests.hashset_digest(hashes)`. The number of hashes equals the source's `input` |
+| Inventory | ADMISSION_REGISTER component (namespace `registers/`), beside `registers/source_accounting.json`. Listed with sha256 and size in its signed `files`, hence in `SHA256SUMS` and the signature. Shipped by the build (B02 S7); never written by the site |
+
+**Fail-closed rules (`candidate_set_issues`, code `C16_SOURCE_ACCOUNTING`).** Any issue refuses the bundle, and no candidate hashes are released to the relabel check.
+- **CS1:** the file for each declared V7 source exists and is in the ADMISSION_REGISTER inventory.
+- **CS2:** its sha256 equals `candidate_set_sha256`.
+- **CS3:** it is canonical, i.e. re-serialising the parsed hashes gives the identical bytes. This rejects a final LF, CRLF, upper case, unsorted lines, duplicates, short hashes, a BOM and blank lines.
+- **CS4:** the hash count equals `input`.
+- **CS5:** there is no file under `registers/candidate_sets/` without a declared V7 source, and none outside the ADMISSION_REGISTER inventory.
+
+**Use.** The union of the verified sets is `candidate_shas` for `legacy.legacy_issues`: a v1 record whose copy hash is a v7 candidate is refused (`C16_LEGACY_NOT_ESTABLISHED`). The set never makes anything eligible or servable.
+
+**B01 alignment.** B01's CP-1 bytes and path already match. B01 should:
+- call the reference `candidate_set_issues` rather than its private copy;
+- make sure CS5 (orphan files and inventory membership) is enforced; B01's private `candidate_sets` covers CS1–CS4 only.
+
+B02 must write the file for every V7_REFERENCE source it declares.
+
 **Mapping the streams must adopt:**
 
 | Stream | Was | Now |

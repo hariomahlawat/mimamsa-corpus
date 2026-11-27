@@ -24,7 +24,11 @@ class Harness:
         sm = {m: {"verified": v["verified"], "vectors_for": set(v["vectors_for"])} for m, v in initial["staged_models"].items()}
         self.site = activation.Site(installed=list(initial["installed"]), active=initial["active"], models=initial["models"],
                                     keep_previous=initial["keep_previous"], staged_models=sm, sizes=dict(initial["sizes"]),
-                                    free_bytes=initial["free_bytes"], recovery_target=initial["recovery_target"])
+                                    free_bytes=initial["free_bytes"], recovery_target=initial["recovery_target"],
+                                    lexical_only=set(initial.get("lexical_only", ())))
+        # 2.1 (SC26+): scenarios that declare `lexical_only` also observe `semantic_search`; traces of scenarios
+        # without it (SC01-SC25) are byte-identical to before.
+        self.observe_semantic = "lexical_only" in initial
         self.stale_after = initial["lock_stale_after_seconds"]
         self.clock = 0
         self.lock = None
@@ -187,7 +191,8 @@ class Harness:
     def observe(self, step: int, error) -> dict:
         s = self.site
         rs = self.reader_state()
-        return {"step": step, "error": error, "knowledge": s.pointers["KNOWLEDGE"], "models": s.pointers["MODELS"],
+        extra = {"semantic_search": self.serving() and s.semantic_search_enabled()} if self.observe_semantic else {}
+        return {**extra, "step": step, "error": error, "knowledge": s.pointers["KNOWLEDGE"], "models": s.pointers["MODELS"],
                 "views": s.db["views"], "state": self.state(), "serving": self.serving(),
                 "journal_steps": [j["step"] for j in s.journal], "publication_rows": len(s.db["publication"]),
                 "log_length": len(s.log), "active_exclusion_seq": s.applied.get(s.pointers["KNOWLEDGE"]),
@@ -218,7 +223,7 @@ def final_assertion_failures(scn: dict, outcomes: dict) -> list[str]:
     last = outcomes["trace"][-1]
     want = scn["assert_final"]
     names = {"knowledge": "knowledge", "models": "models", "serving": "serving", "installed": "installed",
-             "log_length": "log_length", "last_response": "response", "temp_empty": "temp_empty"}
+             "log_length": "log_length", "last_response": "response", "temp_empty": "temp_empty", "semantic_search": "semantic_search"}
     return [f"{k}: expected {v}, got {last[names[k]]}" for k, v in want.items()
             if (sorted(v) if k == "installed" else v) != last[names[k]]]
 

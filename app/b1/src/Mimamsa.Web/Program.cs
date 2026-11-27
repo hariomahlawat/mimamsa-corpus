@@ -336,7 +336,7 @@ if (conf.GetValue("Mimamsa:Activation:Enabled", false))
     }, participant) { Log = m => log.LogWarning("{Message}", m) };
     channel.Start();
     app.Lifetime.ApplicationStopping.Register(() => channel.DisposeAsync().AsTask().Wait(2000));
-    log.LogInformation("activation participant enabled (serving: {Serving})", participant.IsServing());
+    log.LogInformation("activation participant enabled (serving: {Serving}, semantic search: {Semantic})", participant.IsServing(), participant.SemanticSearchAvailable());
     // Response boundary (CP-1 surfaces: search, document, document text, citation, permalink): filter by the CURRENT
     // exclusion state for the request's pin; an unreadable store withholds (fail closed).
     app0.ActivationExcluded = (ctx, docId, sha) =>
@@ -345,6 +345,10 @@ if (conf.GetValue("Mimamsa:Activation:Enabled", false))
         try { return participant.Respond(pin, new[] { (docId, sha) }, x => x.docId, x => x.sha).Count == 0; }
         catch (Mimamsa.Core.Activation.ActivationRefused) { return true; }
     };
+    // 2.1 lexical-only releases: the semantic path (query embedding, dense candidates) runs only when this request's
+    // pin allows it; otherwise search is lexical only.
+    var semanticForRequest = new AsyncLocal<bool?>();
+    search.SemanticAllowed = () => semanticForRequest.Value ?? false;
     app.Use(async (ctx, next) =>
     {
         if (!ctx.Request.Path.StartsWithSegments("/api")) { await next(); return; }
@@ -358,12 +362,13 @@ if (conf.GetValue("Mimamsa:Activation:Enabled", false))
             return;
         }
         ctx.Items["mimamsa.activation.pin"] = pin;
+        semanticForRequest.Value = pin.SemanticSearch;
         try { await next(); } finally { participant.Unpin(pin); }
     });
 }
 
 app.UseDefaultFiles();
-var types =new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
+var types = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
 types.Mappings[".mjs"] = "text/javascript"; types.Mappings[".bcmap"] = "application/octet-stream";
 types.Mappings[".pfb"] = "application/octet-stream"; types.Mappings[".icc"] = "application/vnd.iccprofile"; types.Mappings[".wasm"] = "application/wasm";
 app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = false, ContentTypeProvider = types });
