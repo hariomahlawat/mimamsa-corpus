@@ -361,3 +361,63 @@ jobs:
           path: |
             out/b1
             app/b1/e2e/out
+
+  # ---------------- C16 Tranche B CP-1 vertical slice on windows-latest (FIXTURE acceptance; development keys only) ----------------
+  # Same driver as the Linux app-ci cp1-slice job. Here the app role mimamsa is NOT a superuser, so the c16cp1_*
+  # databases and the restricted loader role are created by the runner's preinstalled superuser (MIMAMSA_TEST_PG_ADMIN),
+  # as for the B03 tests in b1-windows. The B06 control channel runs as a Windows named pipe with its ACL and the
+  # lock-holder pid check.
+  cp1-slice-windows:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      DOTNET_NOLOGO: "1"
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Start PostgreSQL (preinstalled) and create the app role and databases
+        run: |
+          $svc = Get-Service -Name "postgresql*" | Select-Object -First 1
+          if (-not $svc) { throw "No preinstalled PostgreSQL service found on runner" }
+          Set-Service $svc.Name -StartupType Manual
+          Start-Service $svc.Name
+          $psql = Join-Path $env:PGBIN "psql.exe"; $env:PGPASSWORD = "root"
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE ROLE mimamsa LOGIN PASSWORD 'mimamsa';"
+          foreach ($db in @("c16cp1_base", "c16cp1_oracle")) {
+            & $psql -U postgres -h 127.0.0.1 -c "CREATE DATABASE $db OWNER mimamsa;"
+            if ($LASTEXITCODE) { throw "create $db failed" }
+          }
+      - name: Importer dependencies, Release build, SYN site
+        run: |
+          python -m pip install --disable-pip-version-check -r app/importer/requirements.txt
+          dotnet build -c Release app/b1/Mimamsa.B1.slnx
+          if ($LASTEXITCODE) { throw "build failed" }
+          python -I app/b1/build/build_fixture_site.py --out "$env:RUNNER_TEMP\syn"
+          if ($LASTEXITCODE) { throw "fixture site build failed" }
+      - name: CP-1 vertical slice (Windows)
+        run: |
+          $env:MIMAMSA_TEST_DB = "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=c16cp1_base;Maximum Pool Size=10"
+          $env:MIMAMSA_TEST_PG_ADMIN = "Host=127.0.0.1;Port=5432;Username=postgres;Password=root;Database=postgres;Maximum Pool Size=4"
+          python -I app/b1/build/c16_cp1_slice.py run --work "$env:RUNNER_TEMP\cp1" --configuration Release `
+            --evidence out\cp1\slice-evidence-windows.json `
+            --oracle-site "$env:RUNNER_TEMP\syn\site" --oracle-map "$env:RUNNER_TEMP\syn\fixture_map.json" `
+            --oracle-db "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=c16cp1_oracle;Maximum Pool Size=10"
+          if ($LASTEXITCODE) { throw "CP-1 slice failed on Windows" }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cp1-slice-windows
+          path: |
+            out/cp1
+            ${{ runner.temp }}/cp1/journey.log
+            ${{ runner.temp }}/cp1/oracle.log
+            ${{ runner.temp }}/cp1/slice-evidence.json

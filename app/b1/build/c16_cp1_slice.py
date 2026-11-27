@@ -171,11 +171,12 @@ def outcome(journey: dict) -> dict:
     return o
 
 
-def oracle(site: str, fmap: str, db: str, work: Path) -> dict:
+def oracle(site: str, fmap: str, db: str, work: Path, configuration: str) -> dict:
     """PR #54 retrieval oracle, unmodified, against the real service in DEFAULT mode (activation off)."""
     out = work / "oracle"
+    dll = REPO / "app" / "b1" / "src" / "Mimamsa.Web" / "bin" / configuration / "net10.0" / "Mimamsa.Web.dll"
     cmd = [sys.executable, str(REPO / "app" / "b1" / "tests" / "b1server.py"), "--site", site, "--log", str(work / "oracle-service.log"),
-           "--db", db, "--", sys.executable, str(REPO / "app" / "b1" / "tests" / "oracles" / "run_retrieval_oracle.py"), "--map", fmap, "--out", str(out)]
+           "--db", db, "--dll", str(dll), "--", sys.executable, str(REPO / "app" / "b1" / "tests" / "oracles" / "run_retrieval_oracle.py"), "--map", fmap, "--out", str(out)]
     p = subprocess.run(cmd, capture_output=True, text=True, timeout=1800)
     (work / "oracle.log").write_text(p.stdout + p.stderr, encoding="utf-8")
     return {"exit_code": p.returncode, "out": str(out), "summary_tail": p.stdout.strip().splitlines()[-3:]}
@@ -206,7 +207,7 @@ def cmd_run(a) -> int:
                               "not full-corpus; closes no FG-* gate on real data",
           "builds": builds, "import": imported, "journey": journey, "activation_outcome": o}
     if a.oracle_site:
-        ev["oracle_default_mode"] = oracle(a.oracle_site, a.oracle_map, a.oracle_db, work)
+        ev["oracle_default_mode"] = oracle(a.oracle_site, a.oracle_map, a.oracle_db, work, a.configuration)
         if ev["oracle_default_mode"]["exit_code"] != 0:
             raise SystemExit("the PR #54 oracle failed in default mode; see " + str(work / "oracle.log"))
     text = json.dumps(ev, indent=1, sort_keys=True)
