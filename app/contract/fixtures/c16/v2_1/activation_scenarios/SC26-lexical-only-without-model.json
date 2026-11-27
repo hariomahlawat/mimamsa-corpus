@@ -1,0 +1,56 @@
+{
+ "assert_final": {
+  "knowledge": "L2",
+  "models": null,
+  "semantic_search": false,
+  "serving": true
+ },
+ "contract": "mimamsa-corpus-contract/2.1",
+ "covers": [
+  "LEXICAL_ONLY_ACTIVATION"
+ ],
+ "description": "With no model installed, a lexical-only release activates and serves; semantic search stays disabled.",
+ "initial": {
+  "active": "L1",
+  "free_bytes": 1000000000000,
+  "installed": [
+   "L1",
+   "L2"
+  ],
+  "keep_previous": 2,
+  "lexical_only": [
+   "L1",
+   "L2"
+  ],
+  "lock_stale_after_seconds": 30,
+  "models": null,
+  "recovery_target": null,
+  "sizes": {},
+  "staged_models": {}
+ },
+ "record_kind": "activation_scenario",
+ "scenario_id": "SC26-lexical-only-without-model",
+ "steps": [
+  {
+   "args": {
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "lock_acquire"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "L2",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "transition"
+  },
+  {
+   "args": {},
+   "expect_error": null,
+   "op": "pin"
+  }
+ ]
+}

@@ -1,0 +1,131 @@
+{
+ "contract": "mimamsa-corpus-contract/2.1",
+ "record_kind": "activation_scenario_outcomes",
+ "scenario_id": "SC30-model-install-over-lexical-knowledge",
+ "scenario_sha256": "4fd57f4ffa6de56f1b03fb6f4003b7d557b43b1e49644e352a8aa6196710f2c4",
+ "trace": [
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1"
+   ],
+   "journal_steps": [],
+   "knowledge": "L1",
+   "lock_epoch": 0,
+   "log_length": 0,
+   "models": null,
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 0,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1"
+   ],
+   "journal_steps": [],
+   "knowledge": "L1",
+   "lock_epoch": 1,
+   "log_length": 0,
+   "models": null,
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 1,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": "Refused",
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1"
+   ],
+   "journal_steps": [],
+   "knowledge": "L1",
+   "lock_epoch": 1,
+   "log_length": 0,
+   "models": null,
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 2,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1"
+   ],
+   "journal_steps": [
+    "BEGIN",
+    "DECIDED",
+    "OPEN"
+   ],
+   "knowledge": "L1",
+   "lock_epoch": 1,
+   "log_length": 1,
+   "models": "M2",
+   "pins": 0,
+   "publication_rows": 1,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 3,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "L1"
+   ],
+   "journal_steps": [
+    "BEGIN",
+    "DECIDED",
+    "OPEN"
+   ],
+   "knowledge": "L1",
+   "lock_epoch": 1,
+   "log_length": 1,
+   "models": "M2",
+   "pins": 1,
+   "publication_rows": 1,
+   "response": null,
+   "semantic_search": false,
+   "serving": true,
+   "state": "OPEN",
+   "step": 4,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "L1"
+  }
+ ]
+}

@@ -21,6 +21,7 @@ Every accelerator is verified before use. A matching source digest is necessary 
 1. **Authoritative failure.** The release is refused before this point.
 2. **Vectors.** Vectors that are missing or fail verification give **ACTIVE_DEGRADED, lexical-only**, with Admin acknowledgement. The site **never** embeds passages (`site_embedding: NEVER`, which is a schema constant). Query-time embedding of the user's query is not affected.
 3. **Cheap accelerators.** A failed KNOWLEDGE_ROWS, GRAPH, LEXICAL_INDEX or TEXT_STORE is rebuilt locally: **ACTIVE_AFTER_LOCAL_REBUILD**, which is not normal acceptance.
+2a. **Lexical-only releases (2.1, CP-1 gap 2).** A release that declares no VECTOR_PACK at `DEGRADED_LEXICAL_ONLY` needs **no model**: it activates with no model installed, or beside a model without vectors for it (B06 K2). Semantic search stays disabled. It never becomes ACTIVE_FULL. FULL still requires a verified model with verified vectors for the release (B06 K1).
 4. **Uncalibrated checks.** An activation relying on an **UNCALIBRATED** sampled check can never be ACTIVE_FULL in **production** mode; the result is REFUSED (fail closed). In development mode it may proceed, but the uncalibrated checks are recorded.
 
 ## 3. CP-1 fixture vertical slice
