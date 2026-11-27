@@ -41,14 +41,19 @@ public sealed class SearchService
         public bool Exact;
         public readonly HashSet<string> Highlight = new(StringComparer.Ordinal);
         public readonly List<IReadOnlyList<string>> Phrases = new();
-        // C15 WP1: match counts per display term (display -> passage -> count), in first-noted order. Replaces one
-        // dictionary per matched passage; Reasons() rebuilds the per-passage view on demand for displayed hits only.
-        public readonly List<(string display, Dictionary<int, int> counts)> Matched = new();
+        // C15 WP1: match counts per display term, in first-noted order; Reasons() builds the per-passage view on demand
+        // for displayed hits only. C16 WP05: each display keeps the passage-ordered (passage, count) arrays its clauses
+        // already produced (one segment per noting clause) instead of a dictionary entry per matched passage; a
+        // passage's count for a display is the sum over that display's segments, exactly as the dictionary summed it.
+        public readonly List<(string display, List<Seg> segs)> Matched = new();
         public readonly Dictionary<string, int> MatchedIndex = new(StringComparer.Ordinal);
         public readonly List<Chip> Chips = new();
         /// C15: passage -> reason for a provision-heading boost (shown with the match reasons).
         public readonly Dictionary<int, string> HeadingReasons = new();
     }
+
+    /// Passages (ascending) noted for one display by one clause, with their counts (null = 1 each).
+    readonly record struct Seg(int[] P, int[]? N, int Count);
 
     SpellingSuggester? _speller;
     SpellingSuggester Speller => _speller ??= new SpellingSuggester(_ix);
@@ -67,7 +72,10 @@ public sealed class SearchService
         }
         var ctx = new Ctx { Exact = q.Exact };
         var notes = new List<string> { "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1." };
-        var ordered = new List<Hit>();
+        // C16 WP05: hits are held as entries (passage, score, explicit hit or -1) until a hit is read. Explicit hits are
+        // the pinned, mention, case-name, title, heading-first, fused and reranked ones, created as before; a ranked
+        // lexical hit (-1) is created on read as new Hit(p, "lexical", score, Reasons(p, ctx)), as it was eagerly.
+        var ordered = new Entries(this, ctx);
         var seen = new HashSet<int>();
         string mode = "lexical";
         if (q.Exact) ctx.Chips.Add(new Chip("mode", "Exact: lexical only, no abbreviation expansion", null));
@@ -101,23 +109,26 @@ public sealed class SearchService
                 // that instrument's first passage first, labelled as a title match.
                 var words = rest.SelectMany(w => Text.Tokenize(w)).Select(t => t.Term).Where(t => !Text.Stopwords.Contains(t) && !t.All(char.IsDigit)).ToHashSet();
                 if (words.Count >= 2)
+                {
+                    var titleSets = StatuteTitleSets;
                     for (int d = 0; d < _ix.Docs.Count; d++)
-                        if (_ix.Docs[d].IsStatute && NormTitle(_ix.Docs[d].Title).Split(' ').ToHashSet().SetEquals(words) && seen.Add(_ix.DocPassages[d][0]))
+                        if (_ix.Docs[d].IsStatute && titleSets[d]!.SetEquals(words) && seen.Add(_ix.DocPassages[d][0]))
                             ordered.Add(new Hit(_ix.DocPassages[d][0], "title", 5e8, new[] { $"title match: {_ix.Docs[d].Title}" }));
+                }
                 var scores = PlainScores(rest, ctx);
                 // C15 WP2/WP7: provision-heading boost for procedural plain-language queries (see ProvisionHeadings).
                 if (!q.Exact && Headings is not null)
-                    scores = Headings.Boost(scores, rest, ctx.HeadingReasons);
+                    scores = Boost(scores, rest, ctx.HeadingReasons);
                 // In hybrid and rerank modes the matched provisions are placed before fused/reranked results (after the
                 // identifier, case-name and title tiers): rank fusion would otherwise dilute the boost. Added after the
                 // C14 walkthrough queries showed no effect in hybrid mode (development data; DECLARATIONS.md item 3).
                 if (ctx.HeadingReasons.Count > 0 && (Semantic is not null || Reranker is not null) && !q.Exact)
-                    foreach (var p in ctx.HeadingReasons.Keys.Where(scores.ContainsKey).OrderByDescending(p => scores[p]).ThenBy(p => p))
-                        if (!_docHidden(_ix.Passages[p].DocId) && seen.Add(p)) ordered.Add(new Hit(p, "lexical", scores[p], Reasons(p, ctx)));
+                    foreach (var p in ctx.HeadingReasons.Keys.Where(scores.Contains).OrderByDescending(scores.ScoreOf).ThenBy(p => p))
+                        if (!_docHidden(_ix.Passages[p].DocId) && seen.Add(p)) ordered.Add(new Hit(p, "lexical", scores.ScoreOf(p), Reasons(p, ctx)));
                 // ---- C15 WP2 rerank stage (begin). Only when a reranker is configured; pinned tiers above are untouched.
                 if (Reranker is not null && !q.Exact)
                 {
-                    var lex = scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key).Select(kv => kv.Key).ToList();
+                    var lex = scores.Ranked();
                     var query = string.Join(" ", rest);
                     var dense = Semantic is null ? new List<(int Passage, double Score)>()
                         : Semantic.TopK(query, Hybrid.RerankPool, p => !_docHidden(_ix.Passages[p].DocId)).ToList();
@@ -136,8 +147,7 @@ public sealed class SearchService
                         why.Add($"Reranked by textual relevance (cross-encoder logit {k.s:0.00}); textual relevance is not legal relevance");
                         ordered.Add(new Hit(k.p, k.lexical ? "lexical" : "semantic", k.s, why));
                     }
-                    foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))   // lexical tail beyond the pool
-                        if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx)));
+                    ordered.AddRanked(scores, seen);   // lexical tail beyond the pool
                     if (mode == "lexical" && pool.Count > 0) mode = "hybrid";
                     notes[0] = $"Hybrid search (BM25{(Semantic is null ? "" : $" with embedding candidates: {Semantic.Description}")}, reranked by {Reranker.Description}). Identifier matches are placed first and are never re-ranked.";
                 }
@@ -147,7 +157,7 @@ public sealed class SearchService
                 // already placed and are never re-ranked. With Semantic == null this block is skipped entirely.
                 if (Semantic is not null && !q.Exact)
                 {
-                    var lex = scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key).Select(kv => kv.Key).ToList();
+                    var lex = scores.Ranked();
                     // C15 WP2: eligibility is applied inside the dense scan (withdrawn passages never use up depth)
                     var dense = Semantic.TopK(string.Join(" ", rest), Hybrid.DenseDepth, p => !_docHidden(_ix.Passages[p].DocId))
                                         .Where(x => x.Score >= Hybrid.MinSimilarity).ToList();
@@ -159,38 +169,48 @@ public sealed class SearchService
                         if (f.DenseRank is { } dr) why.Add($"Similar wording (embedding similarity {sim[f.Passage]:0.00}, rank {dr}); similarity is not legal relevance");
                         ordered.Add(new Hit(f.Passage, f.LexRank is null ? "semantic" : "lexical", f.Fused, why));
                     }
-                    foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))   // lexical tail beyond fusion depth
-                        if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx)));
+                    ordered.AddRanked(scores, seen);   // lexical tail beyond fusion depth
                     if (mode == "lexical" && dense.Count > 0) mode = "hybrid";
                     notes[0] = $"Hybrid search (BM25 fused with embedding similarity: {Semantic.Description}). Identifier matches are placed first and are never re-ranked.";
                 }
                 else
                 // ---- C14 S4 hybrid hook (end)
-                foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))
-                    if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx)));
+                ordered.AddRanked(scores, seen);
             }
         }
         else
         {
             var scores = Eval(q.Root!, ctx);
-            foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))
-                if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx)));
+            ordered.AddRanked(scores, seen);
             DescribeChips(q.Root!, ctx);
         }
 
         // eligibility is decided once per document within this query (C15 WP1), not once per passage hit
-        var hiddenByDoc = new Dictionary<int, bool>();
-        bool Hidden(int p) { int d = _ix.DocOf(p); if (!hiddenByDoc.TryGetValue(d, out var h)) hiddenByDoc[d] = h = _docHidden(_ix.Docs[d].DocId); return h; }
-        ordered = ordered.Where(h => !Hidden(h.PassageIndex)).ToList();
+        var hiddenByDoc = new sbyte[_ix.Docs.Count];   // 0 not yet asked, 1 hidden, 2 shown
+        ordered.Keep(p =>
+        {
+            int d = _ix.DocOf(p);
+            if (hiddenByDoc[d] == 0) hiddenByDoc[d] = _docHidden(_ix.Docs[d].DocId) ? (sbyte)1 : (sbyte)2;
+            return hiddenByDoc[d] == 2;
+        });
         if (service is not null && Legal.LegalIdentifierResolver.ServiceLabels.TryGetValue(service, out var svcLabel))
         {
-            ordered = ServicePreference(ordered, service, hybrid: mode == "hybrid");
+            ServicePreference(ordered, service, hybrid: mode == "hybrid");
             notes.Add($"Service preference: {svcLabel}. Ranked results from {svcLabel} instruments and judgments are raised and those of other services lowered; identifier, case-name and mention tiers are unchanged and nothing is excluded.");
         }
         else service = null;
         var facets = Facets(ordered, filters);
-        var filtered = ordered.Where(h => Pass(_ix.Docs[_ix.DocOf(h.PassageIndex)], filters, null)).ToList();
-        int docs = filtered.Select(h => _ix.DocOf(h.PassageIndex)).Distinct().Count();
+        var passByDoc = new sbyte[_ix.Docs.Count];
+        ordered.Keep(p =>
+        {
+            int d = _ix.DocOf(p);
+            if (passByDoc[d] == 0) passByDoc[d] = Pass(_ix.Docs[d], filters, null) ? (sbyte)2 : (sbyte)1;
+            return passByDoc[d] == 2;
+        });
+        int docs = 0;
+        var counted = new bool[_ix.Docs.Count];
+        for (int i = 0; i < ordered.Count; i++) if (!counted[_ix.DocOf(ordered.P[i])]) { counted[_ix.DocOf(ordered.P[i])] = true; docs++; }
+        var filtered = ordered.ToHitList();
         var state = filtered.Count > 0 ? "results" : "empty";
         // All filtered hits are returned in relevance order; the HTTP layer pages them by document (C14 F10).
         return new SearchResult(state, mode, ctx.Chips, filtered, filtered.Count, docs, facets, null, null,
@@ -207,14 +227,18 @@ public sealed class SearchService
     /// 1/(RrfK + position) over the incoming hybrid order (fused hits, then the tail). Equal multipliers therefore keep
     /// that order exactly, and dense-only hits are ranked with the others instead of being treated as pinned.
     /// Lexical-only search keeps the original BM25 × multiplier behaviour.
-    List<Hit> ServicePreference(List<Hit> hits, string service, bool hybrid = false)
+    /// C16 WP05: applied to the entries in place (same order and scores as the former list version).
+    void ServicePreference(Entries hits, string service, bool hybrid = false)
     {
-        bool Ranked(Hit h) => h.Tier is "lexical" || (hybrid && h.Tier is "semantic");
-        var fixedPart = hits.Where(h => !Ranked(h)).ToList();
-        double F(Hit h) => _ix.Service[_ix.DocOf(h.PassageIndex)] is not { } s ? 1.0 : s == service ? SameServiceBoost : OtherServicePenalty;
-        var ranked = hits.Where(Ranked).Select((h, i) => (h, i, s: (hybrid ? 1.0 / (HybridRankK + i + 1) : h.Score) * F(h)))
-                         .OrderByDescending(x => x.s).ThenBy(x => x.i).Select(x => x.h with { Score = x.s });
-        return fixedPart.Concat(ranked).ToList();
+        bool Ranked(int i) => hits.Tier(i) is "lexical" || (hybrid && hits.Tier(i) is "semantic");
+        double F(int p) => _ix.Service[_ix.DocOf(p)] is not { } s ? 1.0 : s == service ? SameServiceBoost : OtherServicePenalty;
+        var fixedPart = new List<int>();
+        var ranked = new List<int>();
+        for (int i = 0; i < hits.Count; i++) (Ranked(i) ? ranked : fixedPart).Add(i);
+        var s = new double[ranked.Count];
+        for (int i = 0; i < ranked.Count; i++) s[i] = (hybrid ? 1.0 / (HybridRankK + i + 1) : hits.S[ranked[i]]) * F(hits.P[ranked[i]]);
+        var order = Ranking.Descending(s, ranked.Count);   // by s descending, then by i (stable)
+        hits.Reorder(fixedPart.Concat(order.Select(k => ranked[k])).ToArray(), fixedPart.Count, order.Select(k => s[k]).ToArray());
     }
 
     /// Same constant as the default RRF k (HybridOptions.RrfK), so a position weight matches the fusion's own scale.
@@ -236,10 +260,15 @@ public sealed class SearchService
         var order = new List<string>();
         var members = new Dictionary<string, List<int>>(StringComparer.Ordinal);
         var firstPassage = new Dictionary<int, int>();
-        foreach (var h in r.Hits)
+        // C16 WP05: passages are read from the hit list without creating Hit objects; only the page's hits are created.
+        var all = r.Hits;
+        var hl = all as HitList;
+        int n = all.Count;
+        int PassageAt(int i) => hl is not null ? hl.PassageAt(i) : all[i].PassageIndex;
+        for (int i = 0; i < n; i++)
         {
-            int d = _ix.DocOf(h.PassageIndex);
-            if (!firstPassage.TryAdd(d, h.PassageIndex)) continue;
+            int p = PassageAt(i), d = _ix.DocOf(p);
+            if (!firstPassage.TryAdd(d, p)) continue;
             var key = _ix.GroupKey[d];
             if (!members.TryGetValue(key, out var l)) { members[key] = l = new(); order.Add(key); }
             l.Add(d);
@@ -267,12 +296,12 @@ public sealed class SearchService
         var perDoc = new Dictionary<int, int>();
         var counts = new Dictionary<int, int>();
         var hits = new List<Hit>();
-        foreach (var h in r.Hits)
+        for (int i = 0; i < n; i++)
         {
-            int d = _ix.DocOf(h.PassageIndex);
+            int d = _ix.DocOf(PassageAt(i));
             if (!shown.Contains(d)) continue;
             counts[d] = counts.GetValueOrDefault(d) + 1;
-            if (hits.Count < LeadPassages || perDoc.GetValueOrDefault(d) < PassagesPerGroup) { hits.Add(h); perDoc[d] = perDoc.GetValueOrDefault(d) + 1; }
+            if (hits.Count < LeadPassages || perDoc.GetValueOrDefault(d) < PassagesPerGroup) { hits.Add(all[i]); perDoc[d] = perDoc.GetValueOrDefault(d) + 1; }
         }
         return new ResultPage(hits, slice, page, size, pages, groups.Count, counts);
     }
@@ -311,14 +340,14 @@ public sealed class SearchService
                 foreach (var d in set)
                 {
                     var ps = _ix.DocPassages[d];
-                    var withId = ps.Where(mentionHits.ContainsKey).ToList();
+                    var withId = ps.Where(mentionHits.Contains).ToList();
                     if (withId.Count > 0)
                         foreach (var p in withId.Take(3))
                             pinned.Add(new Hit(p, "identifier", 1e9, new[] { why, "the identifier appears in this passage" }));
                     else
                         pinned.Add(new Hit(ps[0], "document", 1e9, new[] { why + "; this passage is the document's first passage and does not itself contain the identifier" }));
                 }
-            foreach (var (p, n) in mentionHits.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))
+            foreach (var (p, n) in mentionHits.Pairs().OrderByDescending(kv => kv.n).ThenBy(kv => kv.p))
                 if (!docs.Contains(_ix.DocOf(p)) && !cover.Contains(_ix.DocOf(p)))
                     mentions.Add(new Hit(p, "mention", 1e6 + n, new[] { $"mentions {id.Raw.Trim()} ({n}); a mention is not the identified document" }));
         }
@@ -372,7 +401,7 @@ public sealed class SearchService
             if (actWords.Count > 0 && scoped.Count > 0 && scopeText != "")
             {
                 var actPhrase = actWords;
-                foreach (var (p, _) in PhraseOccurrences(actPhrase))
+                foreach (var (p, _) in PhraseOccurrences(actPhrase).Pairs())
                     if (!scoped.Contains(_ix.DocOf(p)) && Identifiers.PassageHasProvision(_ix.Passages[p].Text, id.Base!, id.Sub, false))
                         mentions.Add(new Hit(p, "mention", 1e6, new[] { $"refers to {label} of {string.Join(" ", actWords)}" }));
             }
@@ -383,17 +412,32 @@ public sealed class SearchService
 
     static string NormTitle(string? t) => Legal.LegalIdentifierResolver.NormTitle(t);
 
+    /// C16 WP05: the normalised title words of every statute (null for other documents), computed once per index
+    /// instead of once per document for every query of two or more words. Same words, same comparison.
+    HashSet<string>?[]? _titleSets;
+    HashSet<string>?[] StatuteTitleSets => _titleSets ??= _ix.Docs.Select(d => d.IsStatute ? NormTitle(d.Title).Split(' ').ToHashSet() : null).ToArray();
+
+    /// Phrase occurrences, ascending by passage (passage, count).
+    sealed class Occ(int[] p, int[] n, int count)
+    {
+        public static readonly Occ None = new(Array.Empty<int>(), Array.Empty<int>(), 0);
+        public readonly int[] P = p, N = n;
+        public readonly int Count = count;
+        public bool Contains(int passage) => Array.BinarySearch(P, 0, Count, passage) >= 0;
+        public IEnumerable<(int p, int n)> Pairs() { for (int i = 0; i < Count; i++) yield return (P[i], N[i]); }
+    }
 
     /// C15 WP1: merge join over the passage-ordered posting lists with binary search on the ascending positions (same
-    /// result and insertion order as the B1 dictionary/HashSet version, without materialising every posting).
-    Dictionary<int, int> PhraseOccurrences(IReadOnlyList<string> terms)
+    /// result and order as the B1 dictionary/HashSet version, without materialising every posting). C16 WP05: the
+    /// result is a pair of passage-ordered arrays instead of a dictionary (it was filled in passage order).
+    Occ PhraseOccurrences(IReadOnlyList<string> terms)
     {
-        var res = new Dictionary<int, int>();
-        if (terms.Count == 0 || terms.Any(t => !_ix.Postings.ContainsKey(t))) return res;
+        if (terms.Count == 0 || terms.Any(t => !_ix.Postings.ContainsKey(t))) return Occ.None;
         var first = _ix.Postings[terms[0]];
         var others = terms.Skip(1).Select(t => _ix.Postings[t]).ToArray();
         var at = new int[others.Length];
         var cur = new int[]?[others.Length];
+        var ps = new List<int>(); var ns = new List<int>();
         foreach (var post in first)
         {
             bool all = true;
@@ -412,9 +456,9 @@ public sealed class SearchService
                 for (int k = 0; k < others.Length && ok; k++) ok = Array.BinarySearch(cur[k]!, pos + k + 1) >= 0;
                 if (ok) n++;
             }
-            if (n > 0) res[post.P] = n;
+            if (n > 0) { ps.Add(post.P); ns.Add(n); }
         }
-        return res;
+        return ps.Count == 0 ? Occ.None : new Occ(ps.ToArray(), ns.ToArray(), ps.Count);
     }
 
     /// Positions of `term` in passage p (binary search on the passage-ordered list), or null.
@@ -431,7 +475,7 @@ public sealed class SearchService
     }
 
     // ------------------------------------------------------------------ plain words (ranked any-word match)
-    Dictionary<int, double> PlainScores(List<string> words, Ctx ctx)
+    Scored PlainScores(List<string> words, Ctx ctx)
     {
         var clauses = new List<(string display, QNode node, double weight)>();
         foreach (var w in words)
@@ -452,17 +496,35 @@ public sealed class SearchService
                     (ab.Preferred.Count > 1 ? "several meanings searched; " : "one listed meaning searched; context decides; ") + ab.Origin));
             }
         }
-        if (clauses.Count == 0) return new();
+        if (clauses.Count == 0) return Scored.Empty;
         var total = clauses.Count(c => c.weight >= 1.0);
-        var acc = new Dictionary<int, (double s, int hits)>();
-        foreach (var (display, node, weight) in clauses)
-            foreach (var (p, s) in Eval(node, ctx))
-            {
-                acc.TryGetValue(p, out var cur);
-                acc[p] = (cur.s + s * weight, cur.hits + (weight >= 1.0 ? 1 : 0));
-            }
+        // Every clause is evaluated first, in order (their notes and highlights are recorded in the same order as
+        // before); then the per-passage sums are formed in clause order, exactly as the dictionary accumulated them.
+        var evals = clauses.Select(c => Eval(c.node, ctx)).ToList();
+        var ps = new List<int>(); var s = new List<double>();
+        double sum = 0; int hits = 0, cur = -1;
+        void Close() { if (cur >= 0) { ps.Add(cur); s.Add(sum * (0.5 + 0.5 * Math.Min(1.0, (double)Math.Max(hits, 1) / Math.Max(total, 1)))); } }
         // coordination: passages matching more of the user's words rank higher (Lucene classic coord)
-        return acc.ToDictionary(kv => kv.Key, kv => kv.Value.s * (0.5 + 0.5 * Math.Min(1.0, (double)Math.Max(kv.Value.hits, 1) / Math.Max(total, 1))));
+        var walk = new KWay(evals.Select(r => (r.P, r.Count)).ToArray());
+        while (walk.Next(out int p, out int c, out int i))
+        {
+            if (p != cur) { Close(); cur = p; sum = 0; hits = 0; }
+            sum = sum + evals[c].S[i] * clauses[c].weight;
+            hits = hits + (clauses[c].weight >= 1.0 ? 1 : 0);
+        }
+        Close();
+        return new Scored(ps.ToArray(), s.ToArray(), ps.Count);
+    }
+
+    /// C15 WP2/WP7 provision-heading boost on the passage-ordered scores (ProvisionHeadings.Picks; same rule and
+    /// arithmetic as ProvisionHeadings.Boost on a dictionary: boosted passages get the new score, new ones are added).
+    Scored Boost(Scored scores, IReadOnlyList<string> words, Dictionary<int, string> reasons)
+    {
+        var picks = Headings!.Picks(scores.ScoreOf, () => scores.Count > 0 ? scores.Max() : 1.0, words);
+        if (picks.Count == 0) return scores;
+        var map = new SortedDictionary<int, double>();
+        foreach (var (p, s, why) in picks) { map[p] = s; reasons[p] = why; }
+        return scores.With(map);
     }
 
     // ------------------------------------------------------------------ Boolean evaluation
@@ -473,128 +535,199 @@ public sealed class SearchService
         return _ix.StemGroups.TryGetValue(Text.Stem(term), out var g) ? g.Append(term).Distinct() : new[] { term };
     }
 
-    void Note(Ctx ctx, int p, string display, int n)
+    /// Records that `display` matched passages `ps` (ascending) with counts `ns` (null = 1 each). The display takes
+    /// its place in first-noted order when it is first noted with at least one passage, as before.
+    static void Note(Ctx ctx, string display, int[] ps, int[]? ns, int count)
     {
-        if (!ctx.MatchedIndex.TryGetValue(display, out var i)) { i = ctx.Matched.Count; ctx.MatchedIndex[display] = i; ctx.Matched.Add((display, new Dictionary<int, int>())); }
-        var counts = ctx.Matched[i].counts;
-        counts[p] = counts.GetValueOrDefault(p) + n;
+        if (count == 0) return;
+        if (!ctx.MatchedIndex.TryGetValue(display, out var i)) { i = ctx.Matched.Count; ctx.MatchedIndex[display] = i; ctx.Matched.Add((display, new List<Seg>())); }
+        ctx.Matched[i].segs.Add(new Seg(ps, ns, count));
     }
 
-    Dictionary<int, double> Eval(QNode node, Ctx ctx)
+    Scored Eval(QNode node, Ctx ctx)
     {
         switch (node)
         {
             case QTerm t:
             {
-                var res = new Dictionary<int, double>();
-                var tf = new Dictionary<int, int>();
+                var lists = new List<List<SearchIndex.Posting>>();
                 foreach (var v in Variants(t.Term, t.Prefix, ctx))
                 {
                     if (!_ix.Postings.TryGetValue(v, out var post)) continue;
                     ctx.Highlight.Add(v);
-                    foreach (var x in post) tf[x.P] = tf.GetValueOrDefault(x.P) + x.Pos.Length;
+                    lists.Add(post);
                 }
-                double idf = _ix.Idf(tf.Count);
-                foreach (var (p, n) in tf) { res[p] = idf * _ix.TfNorm(n, p); Note(ctx, p, t.Term + (t.Prefix ? "*" : ""), n); }
-                return res;
+                int[] ps, tf;
+                if (lists.Count == 1)
+                {
+                    var l = lists[0];
+                    ps = new int[l.Count]; tf = new int[l.Count];
+                    for (int i = 0; i < l.Count; i++) { ps[i] = l[i].P; tf[i] = l[i].Pos.Length; }
+                }
+                else
+                {
+                    // union of the variants' passage-ordered lists; tf is the sum of their position counts
+                    var arrays = lists.Select(l => { var a = new int[l.Count]; for (int i = 0; i < a.Length; i++) a[i] = l[i].P; return a; }).ToArray();
+                    var pl = new List<int>(); var tl = new List<int>();
+                    var walk = new KWay(arrays.Select(a => (a, a.Length)).ToArray());
+                    while (walk.Next(out int p, out int li, out int ii))
+                    {
+                        int n = lists[li][ii].Pos.Length;
+                        if (pl.Count > 0 && pl[^1] == p) tl[^1] += n; else { pl.Add(p); tl.Add(n); }
+                    }
+                    ps = pl.ToArray(); tf = tl.ToArray();
+                }
+                double idf = _ix.Idf(ps.Length);
+                var s = new double[ps.Length];
+                for (int i = 0; i < ps.Length; i++) s[i] = idf * _ix.TfNorm(tf[i], ps[i]);
+                Note(ctx, t.Term + (t.Prefix ? "*" : ""), ps, tf, ps.Length);
+                return new Scored(ps, s, ps.Length);
             }
             case QPhrase ph:
             {
                 var occ = PhraseOccurrences(ph.Terms);
                 ctx.Phrases.Add(ph.Terms);
-                var res = new Dictionary<int, double>();
-                double idf = ph.Terms.Sum(t => _ix.Postings.TryGetValue(t, out var l) ? _ix.Idf(l.Count) : 0);
+                // Df is the posting-list length (TryGetValue(t).Count before), read without loading the list
+                double idf = ph.Terms.Sum(t => _ix.Postings.Df(t) is var df && df > 0 ? _ix.Idf(df) : 0);
                 // A phrase that is itself a provision identifier ("Rule 8(3)(a)"): the provision's own text in an Act or
                 // Rules document ranks before passages that merely mention it (exact-identifier rule, design 03 §2).
                 var ids = Identifiers.Recognise(ph.Display);
                 var prov = ids.Count == 1 && ids[0].Kind == IdKind.Section && ids[0].Start == 0 && ids[0].End >= ph.Display.TrimEnd().Length ? ids[0] : null;
-                foreach (var (p, n) in occ)
+                var s = new double[occ.Count];
+                var provText = new List<int>();
+                for (int i = 0; i < occ.Count; i++)
                 {
-                    res[p] = idf * _ix.TfNorm(n, p);
-                    Note(ctx, p, "\u201c" + ph.Display + "\u201d", n);
+                    int p = occ.P[i];
+                    s[i] = idf * _ix.TfNorm(occ.N[i], p);
                     if (prov is not null && _ix.Docs[_ix.DocOf(p)].IsStatute)
                     {
                         int st = Identifiers.ProvisionStrength(_ix.Passages[p].Text, prov.Base!, prov.Sub, true);
-                        if (st >= 2) { res[p] += 1000 * st; Note(ctx, p, $"{prov.ProvisionWord} {prov.Base}{prov.Sub} provision text", 1); }
+                        if (st >= 2) { s[i] += 1000 * st; provText.Add(p); }
                     }
                 }
-                return res;
+                Note(ctx, "“" + ph.Display + "”", occ.P, occ.N, occ.Count);
+                if (prov is not null) Note(ctx, $"{prov.ProvisionWord} {prov.Base}{prov.Sub} provision text", provText.ToArray(), null, provText.Count);
+                return new Scored(occ.P, s, occ.Count);
             }
             case QAnd a:
             {
                 var pos = a.Items.Where(i => i is not QNot).ToList();
                 var neg = a.Items.OfType<QNot>().ToList();
-                Dictionary<int, double>? acc = null;
+                Scored? acc = null;
                 foreach (var i in pos)
                 {
                     var r = Eval(i, ctx);
-                    acc = acc is null ? r : acc.Where(kv => r.ContainsKey(kv.Key)).ToDictionary(kv => kv.Key, kv => kv.Value + r[kv.Key]);
+                    acc = acc is null ? r : Scored.Intersect(acc, r);
                 }
-                acc ??= Enumerable.Range(0, _ix.N).ToDictionary(p => p, _ => 0.0);
+                acc ??= Scored.All(_ix.N);
                 foreach (var n in neg)
                 {
                     var r = Eval(n.Item, new Ctx { Exact = ctx.Exact });
-                    acc = acc.Where(kv => !r.ContainsKey(kv.Key)).ToDictionary(kv => kv.Key, kv => kv.Value);
+                    acc = Scored.Except(acc, r);
                 }
                 return acc;
             }
             case QOr o:
             {
-                var acc = new Dictionary<int, double>();
-                foreach (var i in o.Items) foreach (var (p, s) in Eval(i, ctx)) acc[p] = acc.GetValueOrDefault(p) + s;
-                return acc;
+                // items are evaluated in order first (notes and highlights as before); each passage's score is then
+                // 0.0 + s(item 0) + s(item 1) + ... over the items that matched it, in item order (GetValueOrDefault + s)
+                var rs = o.Items.Select(i => Eval(i, ctx)).ToList();
+                var ps = new List<int>(); var s = new List<double>();
+                var walk = new KWay(rs.Select(r => (r.P, r.Count)).ToArray());
+                while (walk.Next(out int p, out int li, out int ii))
+                {
+                    if (ps.Count > 0 && ps[^1] == p) s[^1] = s[^1] + rs[li].S[ii];
+                    else { ps.Add(p); s.Add(0.0 + rs[li].S[ii]); }
+                }
+                return new Scored(ps.ToArray(), s.ToArray(), ps.Count);
             }
             case QNot n:
             {
                 var r = Eval(n.Item, new Ctx { Exact = ctx.Exact });
-                return Enumerable.Range(0, _ix.N).Where(p => !r.ContainsKey(p)).ToDictionary(p => p, _ => 0.0);
+                return Scored.Except(Scored.All(_ix.N), r);
             }
             case QNear nr:
             {
                 var l = Eval(nr.Left, ctx); var r = Eval(nr.Right, ctx);
-                var res = new Dictionary<int, double>();
-                foreach (var p in l.Keys.Where(r.ContainsKey))
+                var spans = new SpanSource(this, ctx);
+                var ps = new List<int>(); var ss = new List<double>();
+                for (int i = 0, j = 0; i < l.Count && j < r.Count;)
                 {
-                    var ls = Spans(nr.Left, p, ctx); var rs = Spans(nr.Right, p, ctx);
-                    if (ls.Any(x => rs.Any(y => Math.Max(0, Math.Max(x.s, y.s) - Math.Min(x.e, y.e) - 1) <= nr.Distance)))
-                        res[p] = l[p] + r[p];
+                    int c = l.P[i].CompareTo(r.P[j]);
+                    if (c < 0) { i++; continue; }
+                    if (c > 0) { j++; continue; }
+                    int p = l.P[i];
+                    var ls = spans.Of(nr.Left, p); var rsp = spans.Of(nr.Right, p);
+                    if (ls.Any(x => rsp.Any(y => Math.Max(0, Math.Max(x.s, y.s) - Math.Min(x.e, y.e) - 1) <= nr.Distance)))
+                    { ps.Add(p); ss.Add(l.S[i] + r.S[j]); }
+                    i++; j++;
                 }
-                return res;
+                return new Scored(ps.ToArray(), ss.ToArray(), ps.Count);
             }
             case QField f: return EvalField(f, ctx);
-            default: return new();
+            default: return Scored.Empty;
         }
     }
 
-    List<(int s, int e)> Spans(QNode node, int p, Ctx ctx)
+    /// Word or phrase positions in one passage, for NEAR. C16 WP05: the posting lists of each operand are resolved
+    /// once per NEAR evaluation instead of once per candidate passage (same lists, same positions, same order).
+    sealed class SpanSource(SearchService svc, Ctx ctx)
     {
-        var res = new List<(int, int)>();
-        switch (node)
+        readonly Dictionary<QNode, List<List<SearchIndex.Posting>>?> _lists = new(ReferenceEqualityComparer.Instance);
+
+        List<List<SearchIndex.Posting>>? Lists(QNode node)
         {
-            case QTerm t:
-                foreach (var v in Variants(t.Term, t.Prefix, ctx))
-                    if (_ix.Postings.TryGetValue(v, out var post) && PositionsIn(post, p) is { } xs) res.AddRange(xs.Select(i => (i, i)));
-                break;
-            case QPhrase ph:
-                if (ph.Terms.All(_ix.Postings.ContainsKey))
-                {
-                    var sets = ph.Terms.Select(t => PositionsIn(_ix.Postings[t], p)?.ToHashSet() ?? new()).ToList();
-                    foreach (var st in sets[0])
-                        if (Enumerable.Range(1, sets.Count - 1).All(k => sets[k].Contains(st + k))) res.Add((st, st + sets.Count - 1));
-                }
-                break;
-            case QOr o: foreach (var i in o.Items) res.AddRange(Spans(i, p, ctx)); break;
-            default: throw new ParseException("NEAR works between words or phrases.", 0);
+            if (_lists.TryGetValue(node, out var l)) return l;
+            var ix = svc._ix;
+            switch (node)
+            {
+                case QTerm t:
+                    l = new();
+                    foreach (var v in svc.Variants(t.Term, t.Prefix, ctx))
+                        if (ix.Postings.TryGetValue(v, out var post)) l.Add(post);
+                    break;
+                case QPhrase ph:
+                    l = ph.Terms.All(ix.Postings.ContainsKey) ? ph.Terms.Select(t => ix.Postings[t]).ToList() : null;
+                    break;
+            }
+            return _lists[node] = l;
         }
-        return res;
+
+        public List<(int s, int e)> Of(QNode node, int p)
+        {
+            var res = new List<(int, int)>();
+            switch (node)
+            {
+                case QTerm t:
+                    foreach (var post in Lists(t)!)
+                        if (PositionsIn(post, p) is { } xs) res.AddRange(xs.Select(i => (i, i)));
+                    break;
+                case QPhrase ph:
+                    if (Lists(ph) is { } lists)
+                    {
+                        var sets = lists.Select(post => PositionsIn(post, p)?.ToHashSet() ?? new()).ToList();
+                        foreach (var st in sets[0])
+                            if (Enumerable.Range(1, sets.Count - 1).All(k => sets[k].Contains(st + k))) res.Add((st, st + sets.Count - 1));
+                    }
+                    break;
+                case QOr o: foreach (var i in o.Items) res.AddRange(Of(i, p)); break;
+                default: throw new ParseException("NEAR works between words or phrases.", 0);
+            }
+            return res;
+        }
     }
 
-    Dictionary<int, double> DocPassages(Func<DocumentRecord, bool> pred, double score = 0)
+    Scored DocPassages(Func<DocumentRecord, bool> pred, double score = 0)
     {
-        var res = new Dictionary<int, double>();
+        var ps = new List<int>();
         for (int d = 0; d < _ix.Docs.Count; d++)
-            if (pred(_ix.Docs[d])) foreach (var p in _ix.DocPassages[d]) res[p] = score;
-        return res;
+            if (pred(_ix.Docs[d])) ps.AddRange(_ix.DocPassages[d]);
+        var arr = ps.ToArray();
+        // passages are numbered document by document, so this is already ascending; kept exact if it ever is not
+        for (int i = 1; i < arr.Length; i++) if (arr[i] <= arr[i - 1]) { arr = arr.Distinct().Order().ToArray(); break; }
+        var s = new double[arr.Length];
+        Array.Fill(s, score);
+        return new Scored(arr, s, arr.Length);
     }
 
     static bool Contains(string? hay, IReadOnlyList<string> terms)
@@ -606,7 +739,7 @@ public sealed class SearchService
         return false;
     }
 
-    Dictionary<int, double> EvalField(QField f, Ctx ctx)
+    Scored EvalField(QField f, Ctx ctx)
     {
         switch (f.Field)
         {
@@ -645,24 +778,34 @@ public sealed class SearchService
                 var m = System.Text.RegularExpressions.Regex.Match(f.Value, @"^(?<n>\d{1,4}[A-Za-z]{0,2})(?<sub>(\([0-9a-zA-Z]{1,4}\))*)$");
                 if (!m.Success) throw new ParseException("section: needs a number such as 69 or 8(3)(a).", 0);
                 var baseNo = m.Groups["n"].Value.ToUpperInvariant(); var sub = m.Groups["sub"].Value;
-                var res = new Dictionary<int, double>();
-                if (!_ix.Postings.TryGetValue(baseNo.ToLowerInvariant(), out var post)) return res;
+                if (!_ix.Postings.TryGetValue(baseNo.ToLowerInvariant(), out var post)) return Scored.Empty;
+                var ps = new List<int>(); var ss = new List<double>();
+                var text = new List<int>(); var refs = new List<int>();
                 foreach (var x in post)
                 {
                     int st = Identifiers.ProvisionStrength(_ix.Passages[x.P].Text, baseNo, sub, _ix.Docs[_ix.DocOf(x.P)].IsStatute);
-                    if (st > 0) { res[x.P] = st >= 2 ? 1000.0 * st : 1.0; Note(ctx, x.P, st >= 2 ? $"provision {baseNo}{sub} (text)" : $"reference to {baseNo}{sub}", 1); }
+                    if (st > 0) { ps.Add(x.P); ss.Add(st >= 2 ? 1000.0 * st : 1.0); (st >= 2 ? text : refs).Add(x.P); }
                 }
+                // the two displays take their places in the order they were first noted (passage order)
+                string tDisp = $"provision {baseNo}{sub} (text)", rDisp = $"reference to {baseNo}{sub}";
+                if (text.Count > 0 && (refs.Count == 0 || text[0] < refs[0]))
+                { Note(ctx, tDisp, text.ToArray(), null, text.Count); Note(ctx, rDisp, refs.ToArray(), null, refs.Count); }
+                else
+                { Note(ctx, rDisp, refs.ToArray(), null, refs.Count); Note(ctx, tDisp, text.ToArray(), null, text.Count); }
                 ctx.Highlight.Add(baseNo.ToLowerInvariant());
-                return res;
+                return new Scored(ps.ToArray(), ss.ToArray(), ps.Count);
             }
             case "act":
             {
                 var res = DocPassages(d => d.IsStatute && Contains(d.Title, f.Terms), 0.5);
                 ctx.Phrases.Add(f.Terms);
-                foreach (var (p, n) in PhraseOccurrences(f.Terms)) { res[p] = res.GetValueOrDefault(p) + 1.0; Note(ctx, p, "“" + f.Value + "”", n); }
-                return res;
+                var occ = PhraseOccurrences(f.Terms);
+                Note(ctx, "“" + f.Value + "”", occ.P, occ.N, occ.Count);
+                var one = new double[occ.Count];
+                Array.Fill(one, 1.0);
+                return Scored.Union(res, new Scored(occ.P, one, occ.Count));   // res[p] = res.GetValueOrDefault(p) + 1.0
             }
-            default: return new();
+            default: return Scored.Empty;
         }
     }
 
@@ -686,9 +829,21 @@ public sealed class SearchService
 
     /// C15 WP1: built on first read (only displayed hits are ever read), from the same per-passage match counts.
     /// C15 WP2: a provision-heading match adds its reason after the matched terms.
+    /// C16 WP05: a display's count for p is the sum over its segments (binary search), as the dictionary summed it.
     IReadOnlyList<string> Reasons(int p, Ctx ctx) => new LazyReasons(() =>
     {
-        var r = ctx.Matched.Where(x => x.counts.ContainsKey(p)).Select(x => new KeyValuePair<string, int>(x.display, x.counts[p])).ToList() is { Count: > 0 } m
+        var m = new List<KeyValuePair<string, int>>();
+        foreach (var (display, segs) in ctx.Matched)
+        {
+            int n = 0; bool any = false;
+            foreach (var g in segs)
+            {
+                int i = Array.BinarySearch(g.P, 0, g.Count, p);
+                if (i >= 0) { any = true; n += g.N is null ? 1 : g.N[i]; }
+            }
+            if (any) m.Add(new KeyValuePair<string, int>(display, n));
+        }
+        var r = m.Count > 0
             ? new List<string> { "Matched: " + string.Join(", ", m.OrderByDescending(kv => kv.Value).Take(4).Select(kv => $"{(kv.Key.StartsWith('“') ? kv.Key : "'" + kv.Key + "'")} ({kv.Value})")) }
             : new List<string> { "Matched the query filters" };
         if (ctx.HeadingReasons.TryGetValue(p, out var h)) r.Add(h);
@@ -719,9 +874,15 @@ public sealed class SearchService
         return true;
     }
 
-    Dictionary<string, IReadOnlyList<FacetValue>> Facets(List<Hit> hits, SearchFilters f)
+    /// Facet counts over the distinct documents of the hits. C16 WP05: the documents are collected with one flag per
+    /// document (ascending) instead of Distinct() over every hit; each facet's values are fully ordered (count, then
+    /// value; or value), so the order in which documents are visited does not change the result.
+    Dictionary<string, IReadOnlyList<FacetValue>> Facets(Entries hits, SearchFilters f)
     {
-        var docs = hits.Select(h => _ix.DocOf(h.PassageIndex)).Distinct().Select(d => _ix.Docs[d]).ToList();
+        var present = new bool[_ix.Docs.Count];
+        for (int i = 0; i < hits.Count; i++) present[_ix.DocOf(hits.P[i])] = true;
+        var docs = new List<DocumentRecord>();
+        for (int d = 0; d < present.Length; d++) if (present[d]) docs.Add(_ix.Docs[d]);
         IReadOnlyList<FacetValue> Count(string name, Func<DocumentRecord, string?> key, bool byCountDesc = true)
         {
             var g = docs.Where(d => Pass(d, f, name)).GroupBy(d => key(d) ?? "Not recorded").Select(x => new FacetValue(x.Key, x.Count()));
@@ -734,5 +895,264 @@ public sealed class SearchService
             ["year"] = Count("year", d => d.Year?.ToString(), byCountDesc: false),
             ["status"] = Count("status", d => d.CorpusStatus),
         };
+    }
+
+    // ------------------------------------------------------------------ C16 WP05: evaluator data structures
+
+    /// Hits of one query before they are read: parallel arrays of passage, score and explicit-hit index (-1 = a ranked
+    /// lexical hit whose Hit is created on read with Reasons(p, ctx); otherwise an index into Explicit).
+    sealed class Entries(SearchService svc, Ctx ctx)
+    {
+        public int[] P = new int[16];
+        public double[] S = new double[16];
+        public int[] X = new int[16];
+        public int Count;
+        public readonly List<Hit> Explicit = new();
+
+        void Grow(int need)
+        {
+            if (need <= P.Length) return;
+            int n = Math.Max(need, P.Length * 2);
+            Array.Resize(ref P, n); Array.Resize(ref S, n); Array.Resize(ref X, n);
+        }
+
+        void Put(int p, double s, int x) { Grow(Count + 1); P[Count] = p; S[Count] = s; X[Count] = x; Count++; }
+
+        public void Add(Hit h) { Explicit.Add(h); Put(h.PassageIndex, h.Score, Explicit.Count - 1); }
+
+        /// The ranked lexical tier: passages by score descending, then passage ascending, skipping those already placed.
+        public void AddRanked(Scored scores, HashSet<int> seen)
+        {
+            var order = scores.Order;   // ties keep index order = passage order
+            Grow(Count + order.Length);
+            foreach (var k in order)
+            {
+                int p = scores.P[k];
+                if (seen.Contains(p)) continue;
+                P[Count] = p; S[Count] = scores.S[k]; X[Count] = -1; Count++;
+            }
+        }
+
+        public string Tier(int i) => X[i] < 0 ? "lexical" : Explicit[X[i]].Tier;
+
+        /// Keeps, in order, the entries whose passage passes.
+        public void Keep(Func<int, bool> pass)
+        {
+            int w = 0;
+            for (int i = 0; i < Count; i++)
+                if (pass(P[i])) { P[w] = P[i]; S[w] = S[i]; X[w] = X[i]; w++; }
+            Count = w;
+        }
+
+        /// New order (indexes into the current entries); entries from position `rescoredFrom` on take `scores`.
+        public void Reorder(int[] order, int rescoredFrom, double[] scores)
+        {
+            var p = new int[Count]; var s = new double[Count]; var x = new int[Count];
+            for (int i = 0; i < order.Length; i++)
+            {
+                int k = order[i];
+                p[i] = P[k]; x[i] = X[k];
+                if (i < rescoredFrom) s[i] = S[k];
+                else
+                {
+                    s[i] = scores[i - rescoredFrom];
+                    if (X[k] >= 0) { Explicit.Add(Explicit[X[k]] with { Score = s[i] }); x[i] = Explicit.Count - 1; }   // as `h with { Score }`
+                }
+            }
+            P = p; S = s; X = x;
+        }
+
+        public HitList ToHitList() => new(svc, ctx, P, S, X, Count, Explicit);
+    }
+
+    /// The returned hits. A ranked lexical hit is created on first read, exactly as it was created eagerly before
+    /// (new Hit(p, "lexical", score, Reasons(p, ctx))), and then kept, so each index always returns the same object.
+    sealed class HitList(SearchService svc, Ctx ctx, int[] p, double[] s, int[] x, int count, List<Hit> explicitHits) : IReadOnlyList<Hit>
+    {
+        readonly Dictionary<int, Hit> _made = new();
+        public int Count => count;
+        public int PassageAt(int i) => (uint)i < (uint)count ? p[i] : throw new ArgumentOutOfRangeException(nameof(i));
+        public Hit this[int i]
+        {
+            get
+            {
+                if ((uint)i >= (uint)count) throw new ArgumentOutOfRangeException(nameof(i));
+                if (x[i] >= 0) return explicitHits[x[i]];
+                lock (_made)
+                {
+                    if (!_made.TryGetValue(i, out var h)) _made[i] = h = new Hit(p[i], "lexical", s[i], svc.Reasons(p[i], ctx));
+                    return h;
+                }
+            }
+        }
+        public IEnumerator<Hit> GetEnumerator() { for (int i = 0; i < count; i++) yield return this[i]; }
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+}
+
+/// C16 WP05: matches of a query node as parallel arrays in ascending passage order (was Dictionary<int, double>).
+/// Every operation reproduces the dictionary arithmetic exactly, in the same operand order.
+internal sealed class Scored(int[] p, double[] s, int count)
+{
+    public static readonly Scored Empty = new(Array.Empty<int>(), Array.Empty<double>(), 0);
+    public readonly int[] P = p;
+    public readonly double[] S = s;
+    public readonly int Count = count;
+
+    public bool Contains(int passage) => Array.BinarySearch(P, 0, Count, passage) >= 0;
+    /// The passage's score, or 0 when it has none (GetValueOrDefault).
+    public double ScoreOf(int passage) => Array.BinarySearch(P, 0, Count, passage) is var i && i >= 0 ? S[i] : 0;
+
+    /// Enumerable.Max over the scores (NaN skipped unless every score is NaN).
+    public double Max()
+    {
+        int i = 0;
+        double v = S[i];
+        while (double.IsNaN(v)) { if (++i >= Count) return v; v = S[i]; }
+        for (i++; i < Count; i++) if (S[i] > v) v = S[i];
+        return v;
+    }
+
+    /// Indexes by score descending, then passage ascending (the former OrderByDescending(Value).ThenBy(Key)); sorted
+    /// once and shared by the hybrid, rerank and ranked-tier steps of one query.
+    public int[] Order => _order ??= Ranking.Descending(S, Count);
+    int[]? _order;
+
+    /// Passages in Order.
+    public int[] Ranked() { var o = Order; var r = new int[o.Length]; for (int i = 0; i < o.Length; i++) r[i] = P[o[i]]; return r; }
+
+    public static Scored All(int n)
+    {
+        var p = new int[n];
+        for (int i = 0; i < n; i++) p[i] = i;
+        return new Scored(p, new double[n], n);
+    }
+
+    /// a ∩ b with score a + b.
+    public static Scored Intersect(Scored a, Scored b)
+    {
+        var p = new List<int>(); var s = new List<double>();
+        for (int i = 0, j = 0; i < a.Count && j < b.Count;)
+        {
+            int c = a.P[i].CompareTo(b.P[j]);
+            if (c < 0) i++;
+            else if (c > 0) j++;
+            else { p.Add(a.P[i]); s.Add(a.S[i] + b.S[j]); i++; j++; }
+        }
+        return new Scored(p.ToArray(), s.ToArray(), p.Count);
+    }
+
+    /// a minus the passages of b, scores of a.
+    public static Scored Except(Scored a, Scored b)
+    {
+        var p = new List<int>(); var s = new List<double>();
+        for (int i = 0, j = 0; i < a.Count; i++)
+        {
+            while (j < b.Count && b.P[j] < a.P[i]) j++;
+            if (j < b.Count && b.P[j] == a.P[i]) continue;
+            p.Add(a.P[i]); s.Add(a.S[i]);
+        }
+        return new Scored(p.ToArray(), s.ToArray(), p.Count);
+    }
+
+    /// a ∪ b with score a.GetValueOrDefault(p) + b (b-only passages: 0.0 + b; a-only passages: a).
+    public static Scored Union(Scored a, Scored b)
+    {
+        var p = new List<int>(); var s = new List<double>();
+        int i = 0, j = 0;
+        while (i < a.Count || j < b.Count)
+        {
+            if (j >= b.Count || (i < a.Count && a.P[i] < b.P[j])) { p.Add(a.P[i]); s.Add(a.S[i]); i++; }
+            else if (i >= a.Count || b.P[j] < a.P[i]) { p.Add(b.P[j]); s.Add(0.0 + b.S[j]); j++; }
+            else { p.Add(a.P[i]); s.Add(a.S[i] + b.S[j]); i++; j++; }
+        }
+        return new Scored(p.ToArray(), s.ToArray(), p.Count);
+    }
+
+    /// A copy in which the given passages have the given scores (replaced, or added in passage order).
+    public Scored With(SortedDictionary<int, double> set)
+    {
+        var p = new List<int>(Count + set.Count); var s = new List<double>(Count + set.Count);
+        using var e = set.GetEnumerator();
+        bool more = e.MoveNext();
+        for (int i = 0; i < Count; i++)
+        {
+            while (more && e.Current.Key < P[i]) { p.Add(e.Current.Key); s.Add(e.Current.Value); more = e.MoveNext(); }
+            if (more && e.Current.Key == P[i]) { p.Add(P[i]); s.Add(e.Current.Value); more = e.MoveNext(); }
+            else { p.Add(P[i]); s.Add(S[i]); }
+        }
+        while (more) { p.Add(e.Current.Key); s.Add(e.Current.Value); more = e.MoveNext(); }
+        return new Scored(p.ToArray(), s.ToArray(), p.Count);
+    }
+}
+
+internal static class Ranking
+{
+    /// Indexes 0..n-1 ordered by key descending, ties by index ascending: the order of LINQ's stable
+    /// OrderByDescending(key) (Comparer<double>.Default) over items in index order, without its per-item overhead.
+    public static int[] Descending(double[] key, int n)
+    {
+        var neg = new double[n];
+        var idx = new int[n];
+        for (int i = 0; i < n; i++)
+        {
+            if (double.IsNaN(key[i])) return Enumerable.Range(0, n).OrderByDescending(k => key[k]).ToArray();   // never expected; exact fallback
+            neg[i] = -key[i]; idx[i] = i;
+        }
+        Array.Sort(neg, idx);   // ascending -key = descending key; equal keys (0.0 and -0.0 included) are adjacent
+        for (int a = 0, b = 1; b <= n; b++)
+            if (b == n || neg[b] != neg[a]) { if (b - a > 1) Array.Sort(idx, a, b - a); a = b; }
+        return idx;
+    }
+}
+
+/// C16 WP05: k-way merge of passage-ordered lists. Yields every (passage, list, index) in passage order and, for one
+/// passage, in list order, so per-passage sums can be formed in the same operand order as the former dictionary
+/// accumulation (list 0 first). Holds O(k) state: no per-thread or per-corpus arrays.
+internal sealed class KWay
+{
+    readonly (int[] P, int Count)[] _lists;
+    readonly int[] _pos;
+    readonly int[] _heap;   // list indexes, min-heap by (current passage, list index)
+    int _n;
+
+    public KWay((int[] P, int Count)[] lists)
+    {
+        _lists = lists;
+        _pos = new int[lists.Length];
+        _heap = new int[lists.Length];
+        for (int i = 0; i < lists.Length; i++) if (lists[i].Count > 0) { _heap[_n] = i; Up(_n++); }
+    }
+
+    bool Less(int a, int b)
+    {
+        int pa = _lists[a].P[_pos[a]], pb = _lists[b].P[_pos[b]];
+        return pa < pb || (pa == pb && a < b);
+    }
+
+    void Up(int i)
+    {
+        while (i > 0) { int parent = (i - 1) >> 1; if (!Less(_heap[i], _heap[parent])) break; (_heap[i], _heap[parent]) = (_heap[parent], _heap[i]); i = parent; }
+    }
+
+    void Down(int i)
+    {
+        while (true)
+        {
+            int l = 2 * i + 1, r = l + 1, m = i;
+            if (l < _n && Less(_heap[l], _heap[m])) m = l;
+            if (r < _n && Less(_heap[r], _heap[m])) m = r;
+            if (m == i) return;
+            (_heap[i], _heap[m]) = (_heap[m], _heap[i]); i = m;
+        }
+    }
+
+    public bool Next(out int passage, out int list, out int index)
+    {
+        if (_n == 0) { passage = list = index = -1; return false; }
+        list = _heap[0]; index = _pos[list]; passage = _lists[list].P[index];
+        if (++_pos[list] < _lists[list].Count) Down(0);
+        else { _heap[0] = _heap[--_n]; if (_n > 0) Down(0); }
+        return true;
     }
 }
