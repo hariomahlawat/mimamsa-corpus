@@ -47,11 +47,11 @@ Taxonomy output preserves 507 nodes, all 5,294 folder-classification relationshi
 
 ## Conversion evidence
 
-The 50-document Word pilot converted 50/50 documents with macros forced off and link updates disabled. Originals totalled 6,657,559 bytes; reconstructed PDFs totalled 16,254,553 bytes, a 2.441518 size ratio. This disproves blanket conversion as a storage strategy. Conversion remains targeted to application compatibility, searchable representation and image-evidence viewing.
+The 50-document Word pilot converted 50/50 documents with macros forced off and link updates disabled. Originals totalled 6,657,559 bytes; reconstructed PDFs totalled 16,254,553 bytes, a 2.441518 size ratio. All 50 PDFs contain extractable text. Eleven image-bearing documents produced 33 rendered review pages; one page per document was visually inspected with no obvious clipping, blank-image loss or page-geometry failure. The check is scoped and does not claim pixel identity for unreviewed pages. This disproves blanket conversion as a storage strategy. Conversion remains targeted to application compatibility, searchable representation and image-evidence viewing.
 
 ## Verification
 
-- Local focused suite: 37 tests plus 5 parameterized subtests passing at the latest documented checkpoint.
+- Local focused suite: 40 tests plus 5 parameterized subtests passing at the latest documented checkpoint.
 - Accepted contract 2.0 at `8052792186b822881508e0e4b95f586df6772a25`: 160 tests passing.
 - Generated corpus content remains outside Git.
 - Original documents remain read-only and preserved.

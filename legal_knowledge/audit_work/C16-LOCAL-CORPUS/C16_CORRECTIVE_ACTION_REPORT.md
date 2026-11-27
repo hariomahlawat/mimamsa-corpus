@@ -24,4 +24,4 @@
 
 ## Validation boundary
 
-The focused suite contains 37 tests plus 5 parameterized subtests. No source content, OCR output, searchable PDF, full inventory or access register is committed to Git. No item is admitted, approved, legally validated or promoted by this work.
+The focused suite contains 40 tests plus 5 parameterized subtests. No source content, OCR output, searchable PDF, full inventory or access register is committed to Git. No item is admitted, approved, legally validated or promoted by this work.
