@@ -16,6 +16,7 @@ param(
     [Parameter(Mandatory)] [string] $Out
 )
 $ErrorActionPreference = 'Stop'
+trap { Write-Host "ERROR: $_"; Write-Host $_.ScriptStackTrace; break }
 New-Item -ItemType Directory -Force $Out | Out-Null
 $cfg = Get-Content -Raw $Config | ConvertFrom-Json
 $R = $cfg.roots
