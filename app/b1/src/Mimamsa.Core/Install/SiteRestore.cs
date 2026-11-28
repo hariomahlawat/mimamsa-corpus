@@ -297,6 +297,7 @@ public static class SiteRestore
                 if (o.DbOwnerDsn is null || o.Pg is null) throw new BackupException("PG_TOOL_MISSING", "the backup holds a database part: a database and pg_bin are required");
                 var dbName = new NpgsqlConnectionStringBuilder(o.DbOwnerDsn).Database!;
                 if (cfg.DisposablePrefix is { } pre && !dbName.StartsWith(pre, StringComparison.Ordinal)) throw new BackupException("DATABASE_NOT_DISPOSABLE", dbName);
+                o.Pg.RequireSameMajor(o.DbOwnerDsn);
                 var (code, err) = o.Pg.Run("pg_restore", o.DbOwnerDsn, ["--exit-on-error", "--single-transaction", "--no-owner", "--no-privileges", "--dbname", dbName, dump]);
                 if (code != 0) throw new BackupException("PG_RESTORE_FAILED", err);
                 dbOut = new JsonObject { ["schemas"] = dbm["schemas"]?.DeepClone(), ["restored"] = true };

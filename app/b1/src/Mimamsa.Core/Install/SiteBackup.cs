@@ -41,6 +41,23 @@ public sealed class PgTools(string bin)
         return File.Exists(p) ? p : throw new BackupException("PG_TOOL_MISSING", $"{name} not found in the configured pg_bin");
     }
 
+    /// The client tools must be the server's MAJOR version: pg_restore emits version-specific settings (for example
+    /// transaction_timeout from 17), so a mismatched pair is refused up front instead of failing half way.
+    public void RequireSameMajor(string dsn)
+    {
+        var psi = new ProcessStartInfo(Exe("pg_restore")) { RedirectStandardOutput = true, UseShellExecute = false };
+        psi.ArgumentList.Add("--version");
+        using var p = Process.Start(psi)!;
+        var v = p.StandardOutput.ReadToEnd(); p.WaitForExit();
+        var m = System.Text.RegularExpressions.Regex.Match(v, @"\)\s+(\d+)");
+        using var c = new Npgsql.NpgsqlConnection(dsn);
+        c.Open();
+        using var q = new Npgsql.NpgsqlCommand("SHOW server_version_num", c);
+        int server = int.Parse((string)q.ExecuteScalar()!) / 10000;
+        if (!m.Success || int.Parse(m.Groups[1].Value) != server)
+            throw new BackupException("PG_TOOL_VERSION_MISMATCH", $"client tools {(m.Success ? m.Groups[1].Value : "?")} differ from server major {server}");
+    }
+
     public (int code, string stderr) Run(string tool, string dsn, IEnumerable<string> args, TimeSpan? timeout = null)
     {
         var b = new Npgsql.NpgsqlConnectionStringBuilder(dsn);
@@ -196,6 +213,7 @@ public static class SiteBackup
             if (o.DbDsn is not null)
             {
                 var pg = o.Pg ?? throw new BackupException("PG_TOOL_MISSING", "pg_bin is not configured");
+                pg.RequireSameMajor(o.DbDsn);
                 var dump = Path.Combine(scratch, "site.pgdump");
                 var args = new List<string> { "--format=custom", "--no-owner", "--no-privileges", "--file", dump, "--dbname", o.DbName ?? new Npgsql.NpgsqlConnectionStringBuilder(o.DbDsn).Database! };
                 foreach (var s in cfg.BackupSchemas) { args.Add("--schema"); args.Add(s); }

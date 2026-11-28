@@ -29,7 +29,7 @@ jobs:
     timeout-minutes: 50
     services:
       postgres:
-        image: postgres:16
+        image: postgres:18
         env:
           POSTGRES_USER: mimamsa
           POSTGRES_PASSWORD: mimamsa
@@ -58,14 +58,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: PostgreSQL 16 client tools (pg_dump/pg_restore matching the server)
+      - name: PostgreSQL client tools of the SAME major version as the server (pg_restore emits version-specific settings)
         run: |
-          # pg_dump must be at least the server's major version (16); a newer preinstalled client is fine
-          bin=$(ls -d /usr/lib/postgresql/*/bin 2>/dev/null | sort -V | tail -1 || true)
-          if [ -z "$bin" ] || [ "$(basename "$(dirname "$bin")")" -lt 16 ]; then
-            sudo apt-get update -q && sudo apt-get install -y -q postgresql-client
-            bin=$(ls -d /usr/lib/postgresql/*/bin | sort -V | tail -1)
-          fi
+          # the service container runs PostgreSQL 18, the runner's preinstalled client major (PGDG); refuse a mismatch
+          bin=/usr/lib/postgresql/18/bin
+          if [ ! -x "$bin/pg_restore" ]; then sudo apt-get update -q && sudo apt-get install -y -q postgresql-client-18; fi
           "$bin/pg_dump" --version
           echo "MIMAMSA_PG_BIN=$bin" >> "$GITHUB_ENV"
       - name: Importer dependencies, Release build, SYN site
