@@ -31,8 +31,14 @@ public sealed class DenseIndex : ISemanticScorer, IDisposable
     public static string StorePath(string cacheDir, E5Embedder emb) => Path.Combine(cacheDir, $"{emb.ModelSha256[..12]}.mvs");
 
     public static DenseIndex Build(SearchIndex ix, string generationId, E5Embedder emb, string? cacheDir, string modelLabel,
-                                   int maxPassageTokens = 256, int batch = 16, Action<string>? log = null, int checkpointEvery = 2000)
+                                   int maxPassageTokens = 256, int batch = 16, Action<string>? log = null, int checkpointEvery = 2000,
+                                   string passageContext = "none")
     {
+        // C16 S3-E: what is embedded for a passage. "none" (default, unchanged): prefix + text. "title": prefix + the
+        // document title + ". " + text (both verified site content, so a vector-pack key stays recomputable on site).
+        if (passageContext is not ("none" or "title")) throw new ArgumentException($"unknown passage context '{passageContext}'");
+        string Input(int i) => passageContext == "title" && ix.Docs[ix.DocOf(i)].Title is { Length: > 0 } t
+            ? emb.PassagePrefix + t + ". " + ix.Passages[i].Text : emb.PassagePrefix + ix.Passages[i].Text;
         var sw = Stopwatch.StartNew();
         int n = ix.Passages.Count, d = emb.Dim;
         string? path = cacheDir is null ? null : StorePath(cacheDir, emb);
@@ -44,7 +50,7 @@ public sealed class DenseIndex : ISemanticScorer, IDisposable
         var missing = new List<int>();
         for (int i = 0; i < n; i++)
         {
-            keys[i] = VectorStore.Key(emb.ModelSha256, maxPassageTokens, emb.PassagePrefix + ix.Passages[i].Text);
+            keys[i] = VectorStore.Key(emb.ModelSha256, maxPassageTokens, Input(i));
             if (!store.TryGet(keys[i], out _)) missing.Add(i);
         }
         int reused = n - missing.Count;
@@ -55,7 +61,7 @@ public sealed class DenseIndex : ISemanticScorer, IDisposable
         for (int s = 0; s < missing.Count; s += batch)
         {
             var idx = missing.Skip(s).Take(batch).ToList();
-            var e = emb.Embed(idx.Select(i => emb.PassagePrefix + ix.Passages[i].Text).ToList(), maxPassageTokens);
+            var e = emb.Embed(idx.Select(Input).ToList(), maxPassageTokens);
             for (int j = 0; j < idx.Count; j++) store.Put(keys[idx[j]], e[j]);
             sinceCheckpoint += idx.Count;
             if (path is not null && sinceCheckpoint >= checkpointEvery)

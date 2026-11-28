@@ -1,0 +1,20 @@
+{
+ "repo": "Snowflake/snowflake-arctic-embed-m-v2.0",
+ "revision": "95c2741480856aa9666782eb4afe11959938017f",
+ "license": "apache-2.0",
+ "role": "dense embedding model (768-d, multilingual, CLS pooling); owner's int8 ONNX",
+ "files": {
+  "onnx/model_int8.onnx": {
+   "sha256": "03d923bb1850ebdccb068e2f3abd8aa43fe81c50d07d037ef103fe3d0fb78e3b",
+   "bytes": 310916060
+  },
+  "tokenizer.json": {
+   "sha256": "f1cc44ad7faaeec47241864835473fd5403f2da94673f3f764a77ebcb0a803ec",
+   "bytes": 17083009
+  },
+  "config.json": {
+   "sha256": "2e0b386e7a826903b06c301f8d4dde2ac6279f7ccd3ea11f3911019a1ee0bc05",
+   "bytes": 971
+  }
+ }
+}

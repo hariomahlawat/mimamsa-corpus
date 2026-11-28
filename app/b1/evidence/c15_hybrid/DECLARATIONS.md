@@ -41,3 +41,33 @@ This file exists so that reviewers can check, from git history, what was fixed *
    - *Change:* matched provisions are placed before fused or reranked hits, after the identifier, case-name and title tiers.
    - *Oracle with hybrid on:* unchanged at 12/14 (R2b).
    - *Status:* a development-tuned rule, not independent evidence.
+
+## C16 S3-E (Tranche B Stage 3): declarations for RET-07 / RET-10 work
+
+Branch `claude/c16-s3e-hybrid` from `claude/c16-cp1` (`2541aec3`). Entries are appended in commit order; git history shows that each one precedes the oracle run it governs.
+
+### What the S3-E author had seen before these declarations
+
+- The C15 report (`HYBRID_EVAL.md`), which quotes RET-07 and RET-10 (query text, the required passage's wording, e5-small/e5-base dense ranks and cosines) and the C15 diagnosis.
+- The oracle's assertion types (`retrieval_oracle.py`: state, mode, forbidden, top1, must_at), read to understand what a hybrid run must not break. The fixture file itself was not opened.
+- The baseline re-run on this branch (`E:\Mimamsa-Data\c16s3e\oracle\b0-baseline`): hybrid off 10/14, C15 hybrid (e5-small, floor 0.8579) 12/14, identical to C15. Its printed lines show every case's mode and top-3 fixture ids.
+- **Not seen:** the blind holdout (never accessed).
+
+Consequence: nothing S3-E reports on RET-07/RET-10 is independent evidence. Only the holdout procedure can supply that.
+
+### D1. Development data (committed in `c4764e08`, before any development result)
+
+- `app/b1/evidence/c16_s3e/dev/dev_set.json`: 28 synthetic passages, 16 "semantic" queries (no shared content-word stem with the answer; paraphrase, contrary or conditional answers, one answer buried in a long paragraph), 5 lexical controls, 8 out-of-domain queries. Topics avoid the RET-07/RET-10 subject.
+- Distractors: 3,000 real-sample passages, seeded uniform (seed 16), from `HybridBench dump`.
+- The 43 C14 walkthrough queries, unlabelled, for gate firing rates only.
+
+### D2. Rules fixed before any development or oracle result of S3-E
+
+| Choice | Value |
+| --- | --- |
+| Gate / floor value for any model or representation | The C14 rule: median over the 43 walkthrough queries of each query's 99.9th-percentile cosine, over the 3,000 seeded real passages (C15 `calsub` variant). Computed by `dev_eval.py`; used as-is in the oracle run |
+| Admission rules evaluated | `floor` (C14/C15), `gate_rank` (the same value gates the query by its best candidate; then the top **K = 10** dense candidates by rank), a z-score variant against the real-passage background (dev only unless it wins) |
+| K for `gate_rank` | **10**, a round default fixed now; K = 20 is reported on dev only |
+| Model selection | Highest dev semantic@10, subject to out-of-domain gate opening 0/8 and lexical-control top-3 no worse than e5-small `floor`; ties to the smaller model. Candidates: multilingual-e5-small, -base, -large (owner's int8 ONNX), bge-m3 (int8 ONNX), snowflake-arctic-embed-m-v2.0 (owner's int8 ONNX) |
+| Representation | `plain` unless `title` (document title prefixed) gains on dev semantic@10 without losing the constraints above |
+| Oracle runs | Only configurations declared below, each with hybrid off too; each result is reported whatever it is and is not followed by retuning |

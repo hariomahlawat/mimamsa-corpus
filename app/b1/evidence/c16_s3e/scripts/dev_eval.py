@@ -34,8 +34,9 @@ THREADS = max(1, (os.cpu_count() or 2) // 2)
 SPECS = {
     "e5-small": ("multilingual-e5-small/614241f622f53c4eeff9890bdc4f31cfecc418b3", "onnx/model.onnx", "onnx/tokenizer.json", "mean", "query: ", "passage: "),
     "e5-base": ("multilingual-e5-base/d128750597153bb5987e10b1c3493a34e5a4502a", "onnx/model.onnx", "onnx/tokenizer.json", "mean", "query: ", "passage: "),
-    "e5-large": ("multilingual-e5-large/REV", "onnx/model.onnx", "onnx/tokenizer.json", "mean", "query: ", "passage: "),
-    "bge-m3": ("bge-m3/REV", "onnx/model.onnx", "onnx/tokenizer.json", "cls", "", ""),
+    "e5-large": ("multilingual-e5-large/3d7cfbdacd47fdda877c5cd8a79fbcc4f2a574f3", "onnx/model_qint8_avx512_vnni.onnx", "onnx/tokenizer.json", "mean", "query: ", "passage: "),
+    "bge-m3": ("bge-m3/4de13258303883538bd53b696b452bf8099f0858", "onnx/model_int8.onnx", "tokenizer.json", "cls", "", ""),
+    "arctic-m2": ("snowflake-arctic-embed-m-v2.0/95c2741480856aa9666782eb4afe11959938017f", "onnx/model_int8.onnx", "tokenizer.json", "cls", "query: ", ""),
 }
 
 
@@ -99,7 +100,9 @@ class Embedder:
             if "token_type_ids" in self.inputs:
                 feed["token_type_ids"] = np.zeros_like(ids)
             h = self.s.run(None, feed)[0]
-            if self.pool == "cls":
+            if h.ndim == 2:
+                v = h
+            elif self.pool == "cls":
                 v = h[:, 0, :]
             else:
                 m = mask[:, :, None].astype(np.float32)

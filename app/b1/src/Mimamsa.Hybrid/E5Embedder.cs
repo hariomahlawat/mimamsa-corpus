@@ -26,13 +26,20 @@ public sealed class E5Embedder : IDisposable
     // XLM-R (fairseq) vocabulary = SentencePiece ids shifted by one, with <s>=0, <pad>=1, </s>=2, <unk>=3.
     internal const long Bos = 0, Pad = 1, Eos = 2, Unk = 3;
 
-    public E5Embedder(string modelDir, int threads = 0, bool tryCuda = false, string? expectedModelSha256 = null, bool tryDirectMl = false)
+    /// C16 S3-E: "mean" (E5 family, default) or "cls" (first-token pooling: bge-m3). Same XLM-R vocabulary either way.
+    public string Pooling { get; init; } = "mean";
+
+    public E5Embedder(string modelDir, int threads = 0, bool tryCuda = false, string? expectedModelSha256 = null, bool tryDirectMl = false,
+                      string onnxFile = "onnx/model.onnx")
     {
-        var onnx = Path.Combine(modelDir, "onnx", "model.onnx");
+        var onnx = Path.Combine(modelDir, onnxFile);
         ModelSha256 = Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(onnx)));
         if (expectedModelSha256 is not null && !string.Equals(ModelSha256, expectedModelSha256, StringComparison.OrdinalIgnoreCase))
             throw new InvalidOperationException("Hybrid model file does not match the pinned SHA-256 (app/b1/hybrid/MODEL_MANIFEST.json).");
-        using (var spm = File.OpenRead(Path.Combine(modelDir, "onnx", "sentencepiece.bpe.model")))
+        // C16 S3-E: the SentencePiece model sits in onnx/ (intfloat repos) or at the repository root (Xenova conversions)
+        var spmPath = Path.Combine(modelDir, "onnx", "sentencepiece.bpe.model");
+        if (!File.Exists(spmPath)) spmPath = Path.Combine(modelDir, "sentencepiece.bpe.model");
+        using (var spm = File.OpenRead(spmPath))
             _tok = SentencePieceTokenizer.Create(spm, false, false, null);
         var so = new SessionOptions { GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL };
         if (threads > 0) so.IntraOpNumThreads = threads;
@@ -93,7 +100,7 @@ public sealed class E5Embedder : IDisposable
         for (int i = 0; i < b; i++)
         {
             var v = new float[Dim];
-            int n = enc[i].Length;
+            int n = Pooling == "cls" ? 1 : enc[i].Length;   // C16 S3-E: CLS pooling = the first token only
             for (int j = 0; j < n; j++)
                 for (int k = 0; k < Dim; k++) v[k] += h[i, j, k];
             double norm = 0;
