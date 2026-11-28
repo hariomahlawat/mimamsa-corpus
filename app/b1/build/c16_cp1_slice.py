@@ -164,13 +164,15 @@ def outcome(journey: dict) -> dict:
     from mimamsa_contract.c16 import components
     contracts = {k: json.loads((REPO / "app" / "contract" / "fixtures" / "c16" / "v2_1" / "component_contracts" / f"{k}.json").read_text(encoding="utf-8"))
                  for k in ("GRAPH", "KNOWLEDGE_ROWS", "LEXICAL_INDEX", "TEXT_STORE", "VECTOR_PACK")}
-    # site staging states (GenerationStaging, explicit) -> the reference rule's inputs: a lexical-only omission is a missing
-    # vector pack; a site-built text store is a local rebuild (never a shipped verification)
-    to_ref = {"VERIFIED": "VERIFIED", "OMITTED_DEGRADED": "MISSING", "REBUILT_VERIFIED": "FAILED"}
-    states = journey["component_results"]
-    if any(v not in to_ref for v in states.values()):
-        raise SystemExit(f"unexpected staging state in {states}")
-    o = components.activation_outcome({k: to_ref[v] for k, v in states.items()}, contracts, mode="development")
+    # the site's staging decision (.NET ActivationOutcome over the input states it verified, with any rebuild evidence)
+    # must equal the contract 2.1 reference on exactly the same inputs (PR #82 1e3060de)
+    inp = journey["outcome_inputs"]
+    o = components.activation_outcome(inp["results"], contracts, mode=inp["mode"], rebuilds=inp["rebuilds"] or None)
+    if json.loads(json.dumps(o)) != inp["dotnet_outcome"]:
+        raise SystemExit(f"the .NET staging decision differs from the reference:\n{o}\n{inp['dotnet_outcome']}")
+    prod = components.activation_outcome(inp["results"], contracts, mode="production", rebuilds=inp["rebuilds"] or None)
+    if prod["refusal"] != "UNCALIBRATED_IN_PRODUCTION":
+        raise SystemExit("production must refuse the uncalibrated CP-1 release")
     if o["result"] == "ACTIVE_FULL" or o["service_level"] == "FULL":
         raise SystemExit("CP-1 must never be ACTIVE_FULL")
     if o["result"] != "ACTIVE_DEGRADED" or o["service_level"] != "DEGRADED_LEXICAL_ONLY" or o["site_embedding"] != "NEVER":

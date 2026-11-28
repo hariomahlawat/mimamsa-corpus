@@ -593,8 +593,11 @@ def test_c16_bundle_without_accounting_refused(hn, tmp_path):
                                        "REJECTED_NOT_MILITARY_LAW": 1}),
     lambda s: s[0]["provenance"].update(generation_manifest_sha256="1" * 64),
     lambda s: next(x for x in s if x["path"] == "V7_REFERENCE")["provenance"].update(candidate_set_sha256="2" * 64),
+    # PR #82 1e3060de (NC05-NC07): same counts, different provenance - revision, candidate digest, generation manifest
+    lambda s: next(x for x in s if x["source"] == cc.V1_SRC)["provenance"].update(hf_revision="c" * 40),
+    lambda s: next(x for x in s if x["source"] == cc.V1_SRC)["provenance"].update(hf_repo="owner/other-repo"),
 ], ids=["input", "decision", "missing-source", "extra-source", "v7-served", "served-over-eligible", "site-widens-eligible",
-        "by-decision", "generation-pin", "v7-candidate-set-digest"])
+        "by-decision", "generation-pin", "v7-candidate-set-digest", "nc05-different-revision", "different-repo"])
 def test_accounting_that_does_not_reconcile_refuses(hn, seeded, edit):
     files, arts, _, _ = cc.exchange(CP)
     decl = json.loads(hn.default_accounting("x", hn.default_docs(), files))

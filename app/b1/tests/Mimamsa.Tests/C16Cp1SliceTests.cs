@@ -157,20 +157,34 @@ public class C16Cp1SliceTests
             var componentResults = new JsonObject();
             var layout = new SiteLayout(site);
             var cat = new GenerationCatalog(layout);
+            // B04 verification contracts the staging decision is taken against (the 2.1 fixtures until B04 ships its own)
+            var contracts = ActivationOutcome.Kinds.ToDictionary(k => k,
+                k => (JsonObject?)JsonNode.Parse(File.ReadAllText(Repo.V21("component_contracts", k + ".json")))!.AsObject(), StringComparer.Ordinal);
+            JsonObject? g2Inputs = null;
             // ---------------------------------------------------------------- staging (Core owner of C16_VERIFIED.json):
             // B03 rows + graph through the restricted loader, B04 text store adoption and lexical index file checks
             foreach (var gid in new[] { g1, g2 })
             {
                 Check($"not_installed_before_staging_{gid}", !cat.Installed().Contains(gid));
                 var tlog = new List<string>();
-                var rep = await GenerationStaging.VerifyAndStageAsync(layout, gid, loader, Path.Combine(work, $"verify-text-{r}-{gid}"), tlog.Add, production: false);   // development fixture (C16-CP1-04)
+                var rep = await GenerationStaging.VerifyAndStageAsync(layout, gid, loader, Path.Combine(work, $"verify-text-{r}-{gid}"), contracts, tlog.Add, production: false);   // development fixture (C16-CP1-04)
                 Check($"staging_verified_and_marked_{gid}", rep.Ok && cat.Installed().Contains(gid), string.Join("; ", rep.Issues));
                 Check($"b03_loader_rows_and_graph_{gid}", rep.Components["KNOWLEDGE_ROWS"] == "VERIFIED" && rep.Components["GRAPH"] == "VERIFIED");
                 Check($"b04_text_store_adopted_{gid}", rep.TextStoreOrigin == "adopted" && rep.Components["TEXT_STORE"] == "VERIFIED", string.Join(" | ", tlog));
                 Check($"b04_lexical_index_sha_and_quick_check_{gid}", rep.Components["LEXICAL_INDEX"] == "VERIFIED");
-                Check($"no_vector_pack_{gid}", rep.Components["VECTOR_PACK"] == "OMITTED_DEGRADED" && rep.DeclaredServiceLevel == "DEGRADED_LEXICAL_ONLY");
+                Check($"no_vector_pack_{gid}", rep.Inputs["VECTOR_PACK"] == "MISSING" && rep.Components["VECTOR_PACK"] == "NOT_USED"
+                      && rep.DeclaredServiceLevel == "DEGRADED_LEXICAL_ONLY" && (string?)rep.Outcome!["result"] == "ACTIVE_DEGRADED"
+                      && (string?)rep.Outcome["service_level"] == "DEGRADED_LEXICAL_ONLY");
+                Check($"outcome_refused_in_production_uncalibrated_{gid}",
+                      (string?)ActivationOutcome.Decide(rep.Inputs, contracts, "production", rep.Rebuilds)["refusal"] == "UNCALIBRATED_IN_PRODUCTION");
                 loads[gid] = new JsonObject { ["tables"] = new JsonArray(rep.LoadedTables.Select(t => (JsonNode)t).ToArray()) };
-                if (gid == g2) foreach (var (k, v) in rep.Components) componentResults[k] = v;
+                if (gid == g2)
+                {
+                    foreach (var (k, v) in rep.Components) componentResults[k] = v;
+                    g2Inputs = new JsonObject { ["results"] = new JsonObject(rep.Inputs.Select(kv => KeyValuePair.Create(kv.Key, (JsonNode?)kv.Value))),
+                        ["rebuilds"] = new JsonObject(rep.Rebuilds.Select(kv => KeyValuePair.Create(kv.Key, kv.Value?.DeepClone()))),
+                        ["mode"] = "development", ["dotnet_outcome"] = rep.Outcome!.DeepClone() };
+                }
             }
             // ---------------------------------------------------------------- C16-CP1-02/04: staging evidence negatives
             {
@@ -200,26 +214,28 @@ public class C16Cp1SliceTests
                 // missing lexical path: restaging fails, and the failed re-verification leaves NO marker
                 var lexPath = Path.Combine(g2dir, "accelerators", "search-index", "search.sqlite");
                 File.Move(lexPath, lexPath + ".moved");
-                var bad = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-x"), production: false);
-                Check("missing_lexical_index_fails_staging", !bad.Ok && bad.Components["LEXICAL_INDEX"] == "FAILED" && bad.Issues.Any(i => i.Contains("missing")), string.Join("; ", bad.Issues));
+                var bad = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-x"), contracts, production: false);
+                Check("missing_lexical_index_fails_staging", !bad.Ok && bad.Inputs["LEXICAL_INDEX"] == "FAILED" && bad.Components["LEXICAL_INDEX"] == "REBUILD_REQUIRED"
+                      && (string?)bad.Outcome!["refusal"] == "REBUILD_REQUIRED" && bad.Issues.Any(i => i.Contains("missing")), string.Join("; ", bad.Issues));
                 Check("failed_restaging_leaves_no_marker", !File.Exists(markerPath) && !cat.Installed().Contains(g2));
                 File.Move(lexPath + ".moved", lexPath);
                 // staging lease: one stager at a time
                 using (new FileStream(Path.Combine(layout.GenerationsDir, GenerationStaging.LeaseFile), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
                 {
-                    var leased = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-y"), production: false);
+                    var leased = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-y"), contracts, production: false);
                     Check("staging_lease_excludes_a_second_stager", !leased.Ok && leased.Issues.Single().StartsWith("STAGING_LEASE_HELD"));
                 }
                 // C16-CP1-04: production staging refuses this development-signed, uncalibrated fixture release
-                var prod = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-p"), production: true);
-                Check("production_staging_refuses_dev_signed_uncalibrated", !prod.Ok && prod.Issues.Any(i => i.StartsWith("DEVELOPMENT_RELEASE_IN_PRODUCTION"))
-                      && prod.Issues.Any(i => i.StartsWith("UNCALIBRATED_IN_PRODUCTION")) && !File.Exists(markerPath), string.Join("; ", prod.Issues));
+                var prod = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-p"), contracts, production: true);
+                Check("production_staging_refuses_dev_signed_release", !prod.Ok && prod.Issues.Any(i => i.StartsWith("DEVELOPMENT_RELEASE_IN_PRODUCTION"))
+                      && !File.Exists(markerPath), string.Join("; ", prod.Issues));
                 // restage for real (development fixture)
-                var again = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-z"), production: false);
+                var again = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-z"), contracts, production: false);
                 Check("restaged_after_negatives", again.Ok && cat.Installed().Contains(g2), string.Join("; ", again.Issues));
             }
             results["loads"] = loads;
             results["component_results"] = componentResults;
+            results["outcome_inputs"] = g2Inputs;
             results["component_checks_not_run"] = "GRAPH_STRUCTURAL_RECHECK, SAMPLED_REBUILD_PARITY, SAMPLED_POSTINGS_REDERIVE, SAMPLED_QUERY_PARITY (UNCALIBRATED sizes; B04 .NET verifiers not built); GRAPH and KNOWLEDGE_ROWS verified by the loader's full re-derivation instead";
 
             // ---------------------------------------------------------------- B06: initialise on G1 (lexical-only: NO model)
