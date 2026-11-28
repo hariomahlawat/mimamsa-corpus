@@ -1,4 +1,16 @@
-# Cycle 16 generation-v5 corrective action report
+# Cycle 16 generation-v5 corrective action and closure register
+
+Independent review: PR #76, review `6094955629`. Contract target:
+`mimamsa-corpus-contract/2.1` at `1e3060def474d8486d853b62bd5a25d9bc04372b`.
+
+## Finding-wise closure register
+
+| Finding | Corrective implementation | Adversarial regression evidence | Corrective commits | Status |
+| --- | --- | --- | --- | --- |
+| C16-PROD-01 | PDF bytes are read once, SHA-256 verified, and rendered from that verified in-memory snapshot. Each page record binds the source SHA-256 and size, physical page, render SHA-256 and dimensions, renderer/version, DPI, OCR configuration and content-addressed artifacts. | Changed source bytes are rejected; mutation after snapshot cannot affect the render; render/config changes alter the processing key. | `4f6a40cf` | Implemented; full 3,522-page v2 population is running restartably. |
+| C16-PROD-02 | Every OCR attempt is access-screened before selection. A marking in any attempt holds the result even if a different attempt supplies the selected transcription. | A low-scoring marked attempt plus a high-scoring clean attempt remains held. Cross-configuration positive markings survive a current clean record. | `4f6a40cf` | Closed in code and tests. |
+| C16-PROD-03 | Configuration/input keyed state uses immutable attempt records, atomically replaced effective heads, fsynced content-addressed artifacts and recorded hashes. Reuse verifies configuration, source/render evidence and every artifact hash; errors remain retryable; summaries intersect the current job population and report pending/error counts. | ERROR-to-COMPLETE retry, tampered artifact, orphan artifact, stale-inventory record, partial-limit, render/config key, and configuration-isolation tests. | `4f6a40cf` | Closed in code and tests; external batch is restartable without repeating verified records. |
+| C16-PROD-04 | Document access propagation groups all page/image attempts, preserves any positive marking, requires verified evidence from explicitly accepted configurations for clean screening, and withholds all derivatives on missing, unreadable, failed or marked evidence. | Wrong-configuration clean evidence is rejected; explicit CLI configuration sets reach the access decision; missing pages and unreadable images hold their containing documents and derivatives. | `4f6a40cf`, `82e00f88` | Closed in code and tests; final register awaits completion of the v2 PDF population. |
 
 ## Corrections implemented
 
@@ -11,7 +23,7 @@
 - Typed canonical identity separates original-source, derivative, LFS object, configuration and audit hashes. Untyped local audit hashes cannot establish document identity.
 - Checkpoint reuse requires both an unchanged source SHA-256 and the exact processing-configuration SHA-256.
 - Word conversion remains targeted, hash-verified and labelled as local reconstruction; originals are preserved.
-- Accepted contract 2.0 is pinned to `8052792186b822881508e0e4b95f586df6772a25`; its suite passes 160 tests. OCR state is independent of the additive 2.1 receipt adapter.
+- Accepted contract 2.0 remains recorded at `8052792186b822881508e0e4b95f586df6772a25`. The additive producer target is Contract 2.1 at `1e3060def474d8486d853b62bd5a25d9bc04372b`; OCR state remains independent of its receipt adapter.
 
 ## Verified external outcomes
 
@@ -24,4 +36,4 @@
 
 ## Validation boundary
 
-The focused suite contains 40 tests plus 5 parameterized subtests. No source content, OCR output, searchable PDF, full inventory or access register is committed to Git. No item is admitted, approved, legally validated or promoted by this work.
+The focused suite contains 56 tests plus 5 parameterized subtests, including configuration-bound access and Contract 2.1 relationship-preservation regressions. No source content, OCR output, searchable PDF, full inventory or access register is committed to Git. No item is admitted, approved, legally validated or promoted by this work.
