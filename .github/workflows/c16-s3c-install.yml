@@ -60,9 +60,14 @@ jobs:
           python-version: "3.12"
       - name: PostgreSQL 16 client tools (pg_dump/pg_restore matching the server)
         run: |
-          if [ ! -x /usr/lib/postgresql/16/bin/pg_dump ]; then sudo apt-get update -q && sudo apt-get install -y -q postgresql-client-16; fi
-          /usr/lib/postgresql/16/bin/pg_dump --version
-          echo "MIMAMSA_PG_BIN=/usr/lib/postgresql/16/bin" >> "$GITHUB_ENV"
+          # pg_dump must be at least the server's major version (16); a newer preinstalled client is fine
+          bin=$(ls -d /usr/lib/postgresql/*/bin 2>/dev/null | sort -V | tail -1 || true)
+          if [ -z "$bin" ] || [ "$(basename "$(dirname "$bin")")" -lt 16 ]; then
+            sudo apt-get update -q && sudo apt-get install -y -q postgresql-client
+            bin=$(ls -d /usr/lib/postgresql/*/bin | sort -V | tail -1)
+          fi
+          "$bin/pg_dump" --version
+          echo "MIMAMSA_PG_BIN=$bin" >> "$GITHUB_ENV"
       - name: Importer dependencies, Release build, SYN site
         run: |
           python -m pip install --disable-pip-version-check -r app/importer/requirements.txt

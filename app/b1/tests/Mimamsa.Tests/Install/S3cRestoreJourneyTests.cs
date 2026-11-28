@@ -260,9 +260,9 @@ public partial class S3cRestoreJourneyTests
             Check("late_state_differs_from_backup_state", sLate[$"/api/documents/{statute}"]!.ToString().StartsWith("404") && !JsonNode.DeepEquals(sLate, sBackup));
             await StopAll();
             // the append-only stores copied SEPARATELY to their own media (only that part is kept there)
-            (code, o) = Cli("backup", "--config", cfA, "--key", key, "--db-env", backupEnv);
-            Check("late_backup", code == 0, o.ToJsonString());
-            var lateDir = (string)o["path"]!;
+            (code, o) = Cli("backup", "--config", cfA, "--key", key, "--db-env", backupEnv, "--dest", Path.Combine(media, "late"));
+            Check("late_backup", code == 0 && o["copied_to_media"] is JsonObject, o.ToJsonString());
+            var lateDir = (string)o["copied_to_media"]!["path"]!;   // media copy: the site's own backup root is destroyed below
             var aoMedia = Path.Combine(media, "appendonly-late");
             Directory.CreateDirectory(aoMedia);
             File.Copy(Path.Combine(lateDir, "appendonly.mbk"), Path.Combine(aoMedia, "appendonly.mbk"));
