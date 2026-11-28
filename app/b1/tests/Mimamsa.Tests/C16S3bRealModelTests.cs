@@ -89,11 +89,32 @@ public class C16S3bRealModelTests
             p.Unpin(pin);
         }
 
+        // serving: semantic scorer from the verified pack, never embedding a passage (only the query)
+        {
+            var mdir = Path.Combine(site.Layout.ModelsDir, rep.ModelId!);
+            using var qe = new E5Embedder(Path.Combine(mdir, "embedder"), threads, expectedModelSha256: rep.ModelSha256);
+            var prmBytes = File.ReadAllBytes(Directory.GetFiles(Path.Combine(release, "accelerators", "vectors"), "*.params.json").Single());
+            var packFile = VectorPackFile.Open(Path.Combine(mdir, "vectors", gid + ".mimvec"), out _)!;
+            var ix = Mimamsa.Core.Search.SearchIndex.Build(g);
+            var dense = DenseIndex.FromVerifiedPack(ix, qe, packFile, VectorPackParams.Parse(prmBytes), "multilingual-e5-small@614241f6");
+            var top = dense.TopK("punishment for desertion under the Army Act", 5);
+            Assert.Equal(0, dense.Embedded);
+            Assert.Equal(5, top.Count);
+            ev["serving"] = new JsonObject { ["passages"] = dense.Count, ["embedded_on_site"] = dense.Embedded, ["load_ms"] = Math.Round(dense.BuildTime.TotalMilliseconds),
+                ["top1_doc"] = ix.Passages[top[0].Passage].DocId, ["top1_score"] = Math.Round(top[0].Score, 4) };
+        }
+
         // the B04 verifiers on the real sample's centrally built index and graph, then the outcome rule
-        var idxDir = Directory.GetDirectories(Path.Combine(central, "index")).Single(d => !Path.GetFileName(d).StartsWith('.'));
+        // the index as the central build publishes it (SearchIndex.Open with a pinned build time), unless provided
+        var idxRoot = Path.Combine(central, "index");
+        var idxDir = Directory.Exists(idxRoot) && Directory.GetDirectories(idxRoot).Any(d => !Path.GetFileName(d).StartsWith('.'))
+            ? Directory.GetDirectories(idxRoot).Single(d => !Path.GetFileName(d).StartsWith('.')) : S3b.BuildIndex(g, idxRoot);
         var lex = LexicalIndexVerifier.Verify(g, idxDir, "R-s3b-real", LexicalIndexVerifier.SiteSourceDigest(g),
             B04Sampling.Effective(contracts["LEXICAL_INDEX"], LexicalIndexVerifier.Postings, false), B04Sampling.Effective(contracts["LEXICAL_INDEX"], LexicalIndexVerifier.Queries, false));
-        var gn = File.ReadAllBytes(Path.Combine(central, "graph", "graph_nodes.jsonl")); var ge = File.ReadAllBytes(Path.Combine(central, "graph", "graph_edges.jsonl"));
+        // graph rows as the central build writes them (the same B03 derivation), unless the driver provides files
+        var (gn, ge) = File.Exists(Path.Combine(central, "graph", "graph_nodes.jsonl"))
+            ? (File.ReadAllBytes(Path.Combine(central, "graph", "graph_nodes.jsonl")), File.ReadAllBytes(Path.Combine(central, "graph", "graph_edges.jsonl")))
+            : S3b.GraphRows(g);
         var rows = GraphVerifier.Parse(gn, ge);
         var gev = GraphVerifier.Verify(g, gn, ge, GraphStore.Digest(GraphBuilder.Build(g)), GraphBuilder.Version, "R-s3b-real", B04Sampling.Effective(contracts["GRAPH"], GraphVerifier.Check, false));
         Assert.True(lex.Verified(LexicalIndexVerifier.Required), string.Join("; ", lex.Issues));

@@ -48,6 +48,8 @@ CODE_INPUTS = [   # code the stages execute: aggregate digests (LF-normalised), 
     ("code:contract_schemas", "app/contract/schemas", "*.json"),
     ("code:mimamsa_importer", "app/importer/mimamsa_importer", "*.py"),
     ("code:b1_core", "app/b1/src/Mimamsa.Core", "*.cs"),
+    ("code:kbuild_verify", "app/kbuild/verify", "*.cs*"),        # S3-B: S9 runs KBuildVerify (central B04 checks)
+    ("code:b1_hybrid", "app/b1/src/Mimamsa.Hybrid", "*.cs"),     # S3-B: KBuildVerify links Mimamsa.Hybrid
 ]
 ACCOUNTING_FILE = accounting.FILE    # registers/source_accounting.json (contract 2.1, DECLARED_BY_BUILD)
 CANDIDATE_SET_DIR = accounting.CANDIDATE_SET_PREFIX.rstrip("/")   # registers/candidate_sets (ADMISSION_REGISTER)

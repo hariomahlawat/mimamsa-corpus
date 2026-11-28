@@ -81,6 +81,26 @@ public sealed class DenseIndex : ISemanticScorer, IDisposable
         return new DenseIndex(emb, vec, n, sw.Elapsed, modelLabel, reused, missing.Count, issue);
     }
 
+    /// C16 S3-B (B10): a scorer over a centrally built vector pack that the site has VERIFIED (B04 VECTOR_PACK). It never
+    /// embeds a passage: if any indexed passage has no vector in the pack it throws and the caller serves lexical-only
+    /// (site_embedding NEVER). Only the user's query is embedded, at query time.
+    public static DenseIndex FromVerifiedPack(SearchIndex ix, E5Embedder emb, Mimamsa.Core.ComponentVerification.VectorPackFile pack,
+                                              Mimamsa.Core.ComponentVerification.VectorPackParams p, string modelLabel)
+    {
+        var sw = Stopwatch.StartNew();
+        if (emb.ModelSha256 != p.ModelSha256 || emb.Dim != pack.Dim || p.Dim != pack.Dim) throw new InvalidOperationException("the installed model is not the vector pack's model");
+        int n = ix.Passages.Count, d = emb.Dim;
+        var keys = new UInt128[n];
+        for (int i = 0; i < n; i++)
+        {
+            keys[i] = Mimamsa.Core.ComponentVerification.VectorPackVerifier.Key(p.ModelSha256, p.MaxTokens, p.PassagePrefix + ix.Passages[i].Text);
+            if (!pack.Contains(keys[i])) throw new InvalidOperationException("the verified pack has no vector for an indexed passage: lexical-only (the site never embeds passages)");
+        }
+        var vec = new float[(long)n * d <= int.MaxValue ? n * d : throw new InvalidOperationException("vector set too large for one array")];
+        pack.ReadInto(keys, vec);
+        return new DenseIndex(emb, vec, n, sw.Elapsed, modelLabel, n, 0, null);
+    }
+
     static IEnumerable<UInt128> StoreKeysNotIn(VectorStore s, HashSet<UInt128> keep) => s.Keys().Where(k => !keep.Contains(k));
 
     public IReadOnlyList<(int Passage, double Score)> TopK(string query, int k) => TopK(query, k, null);

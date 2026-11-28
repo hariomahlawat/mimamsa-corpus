@@ -80,7 +80,8 @@ def central_b04(ctx, site: Path, bundle: Path, sid: str) -> dict:
         raise BuildRefused("BUILD_B04_CENTRAL", "the B04 kind-specific checks fail on the signed bundle: " + "; ".join(bad), sid)
     for k in ("GRAPH", "LEXICAL_INDEX"):
         for s in (ev.get(k) or {}).get("samples", {}).values():
-            s["size_source"] = "CENTRAL_FULL_POPULATION (not a calibration; contracts stay UNCALIBRATED)"
+            s["size_source"] = "CENTRAL_OVERRIDE (documents: the full population; queries: 64; not a calibration; contracts stay UNCALIBRATED)"
+        (ev.get(k) or {}).pop("timings_ms", None)   # wall-clock times would make VERIFY.json (and S9) non-deterministic
     return ev
 
 
@@ -139,7 +140,9 @@ def build_model_release(*, release_id: str, release_sequence: int, model_dir: Pa
         "contract": "mimamsa-corpus-contract/2.0", "record_kind": "knowledge_release_manifest", "manifest_format": "MKR-1",
         "release_class": "INTELLIGENCE", "release_id": release_id, "release_sequence": release_sequence,
         "base": {"mode": "FULL", "base_release_id": None, "base_manifest_sha256": None},
-        "corpus_generations": [{"corpus_generation_id": summary["generation_id"], "manifest_sha256": summary["source_digest"]}],
+        # the pack's source_digest binds it to the passages of the generation it was built for; a v1 generation is not a
+        # C16 producer corpus generation, so none is named here
+        "corpus_generations": [],
         "compatibility": {"knowledge_format": "1.0", "min_app_version": "0.16.0", "max_app_version": None,
                           "contracts": {"v1": "1.0.0", "corpus": "mimamsa-corpus-contract/2.0"}, "knowledge_schema_version": 1,
                           "graph_builder_version": "c15-graph-1", "index_format": "mimamsa-index-sqlite-1",

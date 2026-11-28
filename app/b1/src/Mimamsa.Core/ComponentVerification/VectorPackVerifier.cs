@@ -101,6 +101,13 @@ public sealed class VectorPackFile
         return ReadAt(f, _offsets[key]);
     }
 
+    /// Vectors of the given keys, in order, into dest (keys.Count x Dim), through one stream.
+    public void ReadInto(IReadOnlyList<UInt128> keys, float[] dest)
+    {
+        using var f = new FileStream(Path, FileMode.Open, FileAccess.Read, FileShare.Read, 1 << 16);
+        for (int i = 0; i < keys.Count; i++) Array.Copy(ReadAt(f, _offsets[keys[i]]), 0, dest, (long)i * Dim, Dim);
+    }
+
     float[] ReadAt(FileStream f, long off)
     {
         var b = new byte[4 * Dim];
