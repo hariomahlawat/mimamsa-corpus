@@ -51,8 +51,9 @@ The 50-document Word pilot converted 50/50 documents with macros forced off and 
 
 ## Verification
 
-- Local focused suite: 40 tests plus 5 parameterized subtests passing at the latest documented checkpoint.
+- Local focused suite: 60 tests plus 5 parameterized subtests passing at the latest documented checkpoint.
 - Accepted contract 2.0 at `8052792186b822881508e0e4b95f586df6772a25`: 160 tests passing.
+- Contract 2.1 producer interface pinned at `1e3060def474d8486d853b62bd5a25d9bc04372b`; the current partial producer package passes its strict reference validator with zero issues. Final package counts are regenerated after the PDF batch and access register close.
 - Generated corpus content remains outside Git.
 - Original documents remain read-only and preserved.
 

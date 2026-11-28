@@ -60,6 +60,8 @@ def project_relationships(subject_rows: list[dict], provision_rows: list[dict], 
             category = "associated_with_provision" if raw["target_node_id"].startswith("PROV:") else "classified_under_subject"
             inv = inventory_by_id.get(raw.get("inventory_id"))
             ident = identities_by_sha.get(raw.get("source_copy_sha256"))
+            if inv is not None and ident is None and (inv.get("restricted") or inv.get("access_disposition") == "HELD_ACCESS_MARKING_REVIEW"):
+                continue
             if inv is None or ident is None:
                 raise ValueError(f"relationship lacks verified identity binding: {raw.get('relationship_id') or raw.get('inventory_id')}")
             label = raw.get("source_label") or "unlabelled"
@@ -250,7 +252,7 @@ def _sha(data: bytes) -> str:
 def build(args) -> dict:
     contract_python = Path(args.contract_root) / "app" / "contract"
     sys.path.insert(0, str(contract_python))
-    from mimamsa_contract.c16 import adapters, canonical, rules
+    from mimamsa_contract.c16 import accounting as contract_accounting, adapters, canonical, rules
     from mimamsa_contract.c16.schemas import schema_errors
 
     inventory = load_jsonl(Path(args.inventory))
@@ -263,7 +265,8 @@ def build(args) -> dict:
             decision = access.get(row["inventory_id"])
             if decision:
                 row["access_disposition"] = decision["document_access_disposition"]
-                if decision["document_access_disposition"] != "SCREENED_NO_MARKING_DETECTED":
+                row.pop("derivative_withheld_reason", None)
+                if decision["document_access_disposition"] == "HELD_ACCESS_MARKING_REVIEW":
                     row["derivative_withheld_reason"] = decision["document_access_disposition"]
     if args.primary_image_register:
         enrich_image_ocr(inventory, load_jsonl(Path(args.primary_image_register)),
@@ -334,7 +337,7 @@ def build(args) -> dict:
                      "provenance": {"generation_manifest_sha256": _sha(manifest_data),
                                     "hf_repo": args.hf_repo, "hf_revision": args.hf_revision,
                                     "candidate_set_sha256": None},
-                     "input": len(inventory), "identities": len(projected["identities"]),
+                     "input": len(projected["identities"]), "identities": len(projected["identities"]),
                      "effective_admissions": len(projected["admissions"]), "by_decision": decisions,
                      "held": held, "rejected": rejected, "quarantined": quarantined,
                      "eligible": 0, "served": 0, "not_served_reasons": decisions}]}
@@ -342,6 +345,8 @@ def build(args) -> dict:
     (registers / "source_accounting.json").write_bytes(accounting_data)
     candidates = b"".join((row["source_copy"]["sha256"] + "\n").encode("ascii") for row in sorted(projected["identities"], key=lambda r: r["source_copy"]["sha256"]))
     (registers / "exact_candidate_set.sha256").write_bytes(candidates)
+    source_candidates = b"".join((sha + "\n").encode("ascii") for sha in sorted({row["sha256"] for row in inventory}))
+    (registers / "source_candidate_set.sha256").write_bytes(source_candidates)
     receipt_register = {"contract": CONTRACT, "application_eligible_admissions": 0, "typed_gate_receipts": 0,
                         "reason": "All producer admissions are held or rejected; Contract 2.1 requires no gate receipt artefacts for ineligible admissions."}
     (registers / "TYPED_GATE_RECEIPT_REGISTER.json").write_text(json.dumps(receipt_register, indent=2), encoding="utf-8")
@@ -349,11 +354,16 @@ def build(args) -> dict:
         (registers / "DOCUMENT_ACCESS_REGISTER.jsonl").write_bytes(Path(args.access_register).read_bytes())
     report = {"contract_commit": args.contract_commit, "population_counts": {k: len(v) for k, v in populations.items()},
               "relationship_accounting": {"folder_and_provision_classifications": len(projected["relationships"]),
-                                           "provision_candidates": len(provision_rows)},
+                                           "provision_candidates": len(provision_rows),
+                                           "withheld_restricted_relationships": len(subject_rows) - len(projected["relationships"])},
               "candidate_set_sha256": _sha(candidates),
+              "source_candidate_set_sha256": _sha(source_candidates),
+              "physical_source_items": len(inventory),
+              "locally_withheld_restricted_items": len(inventory) - len(projected["identities"]),
               "source_accounting_schema_errors": [str(issue) for issue in schema_errors(accounting)],
+              "source_accounting_reconciliation_errors": [str(issue) for issue in contract_accounting.accounting_issues(accounting)],
               "validation_issues": [str(issue) for issue in issues],
-              "strict_valid": not issues and not schema_errors(accounting)}
+              "strict_valid": not issues and not schema_errors(accounting) and not contract_accounting.accounting_issues(accounting)}
     (output / "PRODUCER_VALIDATION_REPORT.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     return report
 

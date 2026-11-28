@@ -36,4 +36,4 @@ Independent review: PR #76, review `6094955629`. Contract target:
 
 ## Validation boundary
 
-The focused suite contains 56 tests plus 5 parameterized subtests, including configuration-bound access and Contract 2.1 relationship-preservation regressions. No source content, OCR output, searchable PDF, full inventory or access register is committed to Git. No item is admitted, approved, legally validated or promoted by this work.
+The focused suite contains 60 tests plus 5 parameterized subtests, including configuration-bound access, relationship-preservation, taxonomy, OCR-anchor and derivative-binding regressions. No source content, OCR output, searchable PDF, full inventory or access register is committed to Git. No item is admitted, approved, legally validated or promoted by this work.
