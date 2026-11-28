@@ -42,11 +42,13 @@ jobs:
       DOTNET_NOLOGO: "1"
       # the container's mimamsa user is a superuser: it creates/drops the disposable c16s3c_* databases and roles
       MIMAMSA_TEST_DB: Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_test;Maximum Pool Size=10
-      MIMAMSA_TEST_SITE: ${{ runner.temp }}/syn/site
-      MIMAMSA_TEST_MAP: ${{ runner.temp }}/syn/fixture_map.json
-      MIMAMSA_S3C_DIR: ${{ runner.temp }}/s3c
-      MIMAMSA_C16B06_DIR: ${{ runner.temp }}/s3c-b06
     steps:
+      - name: Paths under the runner temp directory
+        run: |
+          echo "MIMAMSA_TEST_SITE=$RUNNER_TEMP/syn/site" >> "$GITHUB_ENV"
+          echo "MIMAMSA_TEST_MAP=$RUNNER_TEMP/syn/fixture_map.json" >> "$GITHUB_ENV"
+          echo "MIMAMSA_S3C_DIR=$RUNNER_TEMP/s3c" >> "$GITHUB_ENV"
+          echo "MIMAMSA_C16B06_DIR=$RUNNER_TEMP/s3c-b06" >> "$GITHUB_ENV"
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
