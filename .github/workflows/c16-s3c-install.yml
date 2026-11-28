@@ -1,0 +1,183 @@
+name: C16 S3-C offline installation, backup and restore (dev)
+
+# C16 Tranche B Stage 3 stream S3-C (B07 + B08), DEVELOPMENT/TEST only: development keys, test data, disposable
+# c16s3c_* databases and roles. System-level installation (services, virtual accounts, ACLs, firewall, a filled VHD)
+# runs ONLY here, on the hosted Windows runner (Administrator). No production activation, no operational migration,
+# no trust or AUTH-LEDGER change, no HF access.
+
+on:
+  push:
+    paths:
+      - "app/**"
+      - ".github/workflows/c16-s3c-install.yml"
+  pull_request:
+    paths:
+      - "app/**"
+      - ".github/workflows/c16-s3c-install.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: c16-s3c-install-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  s3c-linux:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: mimamsa
+          POSTGRES_PASSWORD: mimamsa
+          POSTGRES_DB: mimamsa_b1_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U mimamsa" --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      DOTNET_NOLOGO: "1"
+      # the container's mimamsa user is a superuser: it creates/drops the disposable c16s3c_* databases and roles
+      MIMAMSA_TEST_DB: Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_test;Maximum Pool Size=10
+      MIMAMSA_TEST_SITE: ${{ runner.temp }}/syn/site
+      MIMAMSA_TEST_MAP: ${{ runner.temp }}/syn/fixture_map.json
+      MIMAMSA_S3C_DIR: ${{ runner.temp }}/s3c
+      MIMAMSA_C16B06_DIR: ${{ runner.temp }}/s3c-b06
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: PostgreSQL 16 client tools (pg_dump/pg_restore matching the server)
+        run: |
+          if [ ! -x /usr/lib/postgresql/16/bin/pg_dump ]; then sudo apt-get update -q && sudo apt-get install -y -q postgresql-client-16; fi
+          /usr/lib/postgresql/16/bin/pg_dump --version
+          echo "MIMAMSA_PG_BIN=/usr/lib/postgresql/16/bin" >> "$GITHUB_ENV"
+      - name: Importer dependencies, Release build, SYN site
+        run: |
+          python -m pip install --disable-pip-version-check -r app/importer/requirements.txt
+          dotnet build -c Release app/b1/Mimamsa.B1.slnx
+          python -I app/b1/build/build_fixture_site.py --out "$RUNNER_TEMP/syn"
+      - name: S3-C unit and integration tests (install, path negatives, crypto, backup/restore, DB setup, retention)
+        run: |
+          mkdir -p out/s3c
+          dotnet test -c Release --no-build app/b1/tests/Mimamsa.Tests --filter "FullyQualifiedName~Mimamsa.Tests.Install" \
+            --logger "trx;LogFileName=s3c-linux.trx" --logger "console;verbosity=normal" --results-directory out/s3c
+      - name: Real restore test (install, activate, back up, destroy, restore, verify)
+        run: |
+          python -I app/b1/build/c16_s3c_restore.py run --work "$RUNNER_TEMP/s3c-restore" --configuration Release \
+            --evidence out/s3c/restore-evidence-linux.json
+      - name: Filled-volume preflight (tmpfs)
+        run: bash app/installer/linux/test-filled-volume.sh app/b1/src/Mimamsa.Activation/bin/Release/net10.0/Mimamsa.Activation.dll "$RUNNER_TEMP/s3c-fill" out/s3c/filled-linux
+      - name: No disposable objects left behind
+        run: |
+          left=$(PGPASSWORD=mimamsa psql -h 127.0.0.1 -U mimamsa -d postgres -tAc "SELECT count(*) FROM pg_database WHERE datname LIKE 'c16s3c%'")
+          roles=$(PGPASSWORD=mimamsa psql -h 127.0.0.1 -U mimamsa -d postgres -tAc "SELECT count(*) FROM pg_roles WHERE rolname LIKE 'c16s3c%'")
+          echo "databases=$left roles=$roles"; test "$left" = "0" && test "$roles" = "0"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s3c-linux
+          path: |
+            out/s3c
+            ${{ runner.temp }}/s3c-restore/journey.log
+            ${{ runner.temp }}/s3c-restore/restore-evidence.json
+
+  s3c-windows:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      DOTNET_NOLOGO: "1"
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Start PostgreSQL (preinstalled) and create the application role
+        run: |
+          $svc = Get-Service -Name "postgresql*" | Select-Object -First 1
+          if (-not $svc) { throw "No preinstalled PostgreSQL service found on runner" }
+          Set-Service $svc.Name -StartupType Manual
+          Start-Service $svc.Name
+          $psql = Join-Path $env:PGBIN "psql.exe"; $env:PGPASSWORD = "root"
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE ROLE mimamsa LOGIN PASSWORD 'mimamsa';"
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE DATABASE mimamsa_b1_test OWNER mimamsa;"
+          "MIMAMSA_PG_BIN=$env:PGBIN" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          "MIMAMSA_TEST_DB=Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_test;Maximum Pool Size=10" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          # the application role is NOT a superuser here: disposable c16s3c_* databases and roles are created by the runner's superuser
+          "MIMAMSA_TEST_PG_ADMIN=Host=127.0.0.1;Port=5432;Username=postgres;Password=root;Database=postgres;Maximum Pool Size=4" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          "MIMAMSA_TEST_SITE=$env:RUNNER_TEMP\syn\site" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          "MIMAMSA_TEST_MAP=$env:RUNNER_TEMP\syn\fixture_map.json" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          "MIMAMSA_S3C_DIR=$env:RUNNER_TEMP\s3c" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          "MIMAMSA_C16B06_DIR=$env:RUNNER_TEMP\s3c-b06" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+      - name: Importer dependencies, Release build, SYN site
+        run: |
+          python -m pip install --disable-pip-version-check -r app/importer/requirements.txt
+          dotnet build -c Release app/b1/Mimamsa.B1.slnx
+          if ($LASTEXITCODE) { throw "build failed" }
+          python -I app/b1/build/build_fixture_site.py --out "$env:RUNNER_TEMP\syn"
+          if ($LASTEXITCODE) { throw "fixture site build failed" }
+      - name: S3-C unit and integration tests on Windows (real junctions, 8.3 names, path negatives, crypto, backup/restore, DB)
+        run: |
+          New-Item -ItemType Directory -Force out\s3c | Out-Null
+          dotnet test -c Release --no-build app/b1/tests/Mimamsa.Tests --filter "FullyQualifiedName~Mimamsa.Tests.Install" `
+            --logger "trx;LogFileName=s3c-windows.trx" --logger "console;verbosity=normal" --results-directory out\s3c
+          if ($LASTEXITCODE) { throw "S3-C tests failed on Windows" }
+      - name: Real restore test on Windows (install, activate, back up, destroy, restore, verify)
+        run: |
+          python -I app/b1/build/c16_s3c_restore.py run --work "$env:RUNNER_TEMP\s3c-restore" --configuration Release `
+            --evidence out\s3c\restore-evidence-windows.json
+          if ($LASTEXITCODE) { throw "S3-C restore journey failed on Windows" }
+      - name: Publish the application release (web + activation tool, win-x64)
+        run: |
+          dotnet publish app/b1/src/Mimamsa.Web/Mimamsa.Web.csproj -c Release -r win-x64 --self-contained false -o "$env:RUNNER_TEMP\pub\web"
+          if ($LASTEXITCODE) { throw "publish web failed" }
+          dotnet publish app/b1/src/Mimamsa.Activation/Mimamsa.Activation.csproj -c Release -r win-x64 --self-contained false -o "$env:RUNNER_TEMP\pub\activation"
+          if ($LASTEXITCODE) { throw "publish activation failed" }
+      - name: Development installer (virtual service accounts, store-root ownership and ACLs, firewall)
+        run: |
+          $base = "C:\MimamsaS3C"
+          $roots = [ordered]@{}
+          foreach ($k in @('application', 'site', 'text_store', 'search_index', 'vectors', 'uploads', 'config', 'backup', 'logs', 'import', 'scratch')) { $roots[$k] = "$base\$($k -replace '_','-')" }
+          @{ format = 'mimamsa-dev-install/1'; mode = 'test'; roots = $roots; headroom_fraction = 0.1; retention = @{ keep_previous = 2 }
+             identities = @{ web = 'MimamsaWeb'; activation = 'MimamsaActivation' } } | ConvertTo-Json -Depth 4 | Set-Content -Encoding UTF8 "$env:RUNNER_TEMP\install-ci.json"
+          app/installer/windows/Install-MimamsaDev.ps1 -Config "$env:RUNNER_TEMP\install-ci.json" -WebPublish "$env:RUNNER_TEMP\pub\web" `
+            -ActivationPublish "$env:RUNNER_TEMP\pub\activation" -Evidence out\s3c\install-windows
+      - name: Installer acceptance (ACL probe matrix as each virtual account, ownership, firewall, reinstall, uninstall)
+        run: |
+          app/installer/windows/Test-MimamsaDevInstall.ps1 -Config "$env:RUNNER_TEMP\install-ci.json" -WebPublish "$env:RUNNER_TEMP\pub\web" `
+            -ActivationPublish "$env:RUNNER_TEMP\pub\activation" -Out out\s3c\install-acceptance-windows
+      - name: Filled-volume preflight (diskpart VHDX)
+        run: app/installer/windows/Test-FilledVolumePreflight.ps1 -ActivationPublish "$env:RUNNER_TEMP\pub\activation" -Work "$env:RUNNER_TEMP\s3c-fill" -Out out\s3c\filled-windows
+      - name: No disposable objects left behind
+        run: |
+          $psql = Join-Path $env:PGBIN "psql.exe"; $env:PGPASSWORD = "root"
+          $d = & $psql -U postgres -h 127.0.0.1 -d postgres -tAc "SELECT count(*) FROM pg_database WHERE datname LIKE 'c16s3c%'"
+          $r = & $psql -U postgres -h 127.0.0.1 -d postgres -tAc "SELECT count(*) FROM pg_roles WHERE rolname LIKE 'c16s3c%'"
+          "databases=$d roles=$r"
+          if ($d.Trim() -ne '0' -or $r.Trim() -ne '0') { throw "disposable objects left behind" }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s3c-windows
+          path: |
+            out/s3c
+            ${{ runner.temp }}/s3c-restore/journey.log
+            ${{ runner.temp }}/s3c-restore/restore-evidence.json
