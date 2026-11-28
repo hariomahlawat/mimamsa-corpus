@@ -165,8 +165,7 @@ public sealed class SearchService
                 {
                     var lex = scores.Ranked();
                     // C15 WP2: eligibility is applied inside the dense scan (withdrawn passages never use up depth)
-                    var dense = semantic.TopK(string.Join(" ", rest), Hybrid.DenseDepth, p => !_docHidden(_ix.Passages[p].DocId))
-                                        .Where(x => x.Score >= Hybrid.MinSimilarity).ToList();
+                    var dense = HybridAdmission.Admit(semantic.TopK(string.Join(" ", rest), Hybrid.DenseDepth, p => !_docHidden(_ix.Passages[p].DocId)), Hybrid);
                     var sim = dense.ToDictionary(x => x.Passage, x => x.Score);
                     foreach (var f in HybridFusion.Rrf(lex, dense.Select(x => x.Passage).ToList(), Hybrid))
                     {

@@ -1,0 +1,121 @@
+  arctic-m2/plain: 32/248 (162 s)
+  arctic-m2/plain: 64/248 (181 s)
+  arctic-m2/plain: 96/248 (204 s)
+  arctic-m2/plain: 128/248 (269 s)
+  arctic-m2/plain: 160/248 (349 s)
+  arctic-m2/plain: 192/248 (390 s)
+  arctic-m2/plain: 224/248 (426 s)
+  arctic-m2/plain: 248/248 (459 s)
+  embedded 248 texts in 459 s
+arctic-m2/plain ready in 494 s
+arctic-m2:plain:3 embed s: 498
+arctic-m2/plain: floor 0.3994 z 3.29
+  floor_c14      sem@10 6/16 (gate 9)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 26/43 adm 9.0  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S11', 'S12', 'S13', 'S16']
+  gate_rank10    sem@10 7/16 (gate 9)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 26/43 adm 6.0  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S12', 'S13', 'S16']
+  gate_rank20    sem@10 4/16 (gate 9)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 26/43 adm 12.1  fails ['S02', 'S03', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S11', 'S12', 'S13', 'S16']
+  z_c14          sem@10 10/16 (gate 13)  lex top3 5/5 (gate 5)  ood gate 5/8  walk gate 34/43 adm 3.3  fails ['S02', 'S05', 'S06', 'S08', 'S09', 'S12']
+  gate_z_rank10  sem@10 10/16 (gate 13)  lex top3 5/5 (gate 5)  ood gate 5/8  walk gate 34/43 adm 7.9  fails ['S02', 'S05', 'S06', 'S08', 'S09', 'S12']
+  nofloor        sem@10 1/16 (gate 16)  lex top3 5/5 (gate 5)  ood gate 8/8  walk gate 43/43 adm 100.0  fails ['S01', 'S02', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S11', 'S12', 'S13', 'S14', 'S15', 'S16']
+  e5-large/plain: 32/523 (77 s)
+  e5-large/plain: 64/523 (301 s)
+  e5-large/plain: 96/523 (364 s)
+  e5-large/plain: 128/523 (654 s)
+  e5-large/plain: 160/523 (731 s)
+  e5-large/plain: 192/523 (776 s)
+  e5-large/plain: 224/523 (812 s)
+  e5-large/plain: 256/523 (890 s)
+  e5-large/plain: 288/523 (930 s)
+  e5-large/plain: 320/523 (1007 s)
+  e5-large/plain: 352/523 (1062 s)
+  e5-large/plain: 384/523 (1087 s)
+  e5-large/plain: 416/523 (1156 s)
+  e5-large/plain: 448/523 (1186 s)
+  e5-large/plain: 480/523 (1246 s)
+  e5-large/plain: 512/523 (1306 s)
+  e5-large/plain: 523/523 (1321 s)
+  embedded 523 texts in 1321 s
+e5-large/plain ready in 1354 s
+e5-large:plain:6 embed s: 1355
+e5-large/plain: floor 0.8234 z 3.12
+  floor_c14      sem@10 7/16 (gate 14)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 24/43 adm 3.5  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S11', 'S12', 'S13']
+  gate_rank10    sem@10 8/16 (gate 14)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 24/43 adm 5.6  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S12', 'S13']
+  gate_rank20    sem@10 6/16 (gate 14)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 24/43 adm 11.2  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S11', 'S12', 'S13', 'S16']
+  z_c14          sem@10 7/16 (gate 9)  lex top3 5/5 (gate 5)  ood gate 8/8  walk gate 28/43 adm 2.0  fails ['S01', 'S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S12', 'S13']
+  gate_z_rank10  sem@10 8/16 (gate 9)  lex top3 5/5 (gate 5)  ood gate 8/8  walk gate 28/43 adm 6.5  fails ['S01', 'S02', 'S05', 'S06', 'S08', 'S09', 'S12', 'S13']
+  nofloor        sem@10 1/16 (gate 16)  lex top3 5/5 (gate 5)  ood gate 8/8  walk gate 43/43 adm 100.0  fails ['S01', 'S02', 'S03', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S11', 'S12', 'S13', 'S14', 'S15', 'S16']
+  bge-m3/plain: 32/523 (21 s)
+  bge-m3/plain: 64/523 (68 s)
+  bge-m3/plain: 96/523 (106 s)
+  bge-m3/plain: 128/523 (166 s)
+  bge-m3/plain: 160/523 (400 s)
+  bge-m3/plain: 192/523 (1027 s)
+  bge-m3/plain: 224/523 (1174 s)
+  bge-m3/plain: 256/523 (1199 s)
+  bge-m3/plain: 288/523 (1230 s)
+  bge-m3/plain: 320/523 (1272 s)
+  bge-m3/plain: 352/523 (1302 s)
+  bge-m3/plain: 384/523 (1314 s)
+  bge-m3/plain: 416/523 (1341 s)
+  bge-m3/plain: 448/523 (1368 s)
+  bge-m3/plain: 480/523 (1398 s)
+  bge-m3/plain: 512/523 (1420 s)
+  bge-m3/plain: 523/523 (1425 s)
+  embedded 523 texts in 1425 s
+bge-m3/plain ready in 1433 s
+bge-m3:plain:6 embed s: 1433
+bge-m3/plain: floor 0.5197 z 3.32
+  floor_c14      sem@10 10/16 (gate 15)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 26/43 adm 4.3  fails ['S02', 'S03', 'S05', 'S08', 'S09', 'S11']
+  gate_rank10    sem@10 11/16 (gate 15)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 26/43 adm 6.0  fails ['S02', 'S03', 'S05', 'S08', 'S09']
+  gate_rank20    sem@10 8/16 (gate 15)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 26/43 adm 12.1  fails ['S02', 'S03', 'S05', 'S07', 'S08', 'S09', 'S11', 'S16']
+  z_c14          sem@10 11/16 (gate 15)  lex top3 5/5 (gate 5)  ood gate 6/8  walk gate 31/43 adm 2.0  fails ['S02', 'S05', 'S06', 'S08', 'S09']
+  gate_z_rank10  sem@10 11/16 (gate 15)  lex top3 5/5 (gate 5)  ood gate 6/8  walk gate 31/43 adm 7.2  fails ['S02', 'S05', 'S06', 'S08', 'S09']
+  nofloor        sem@10 2/16 (gate 16)  lex top3 5/5 (gate 5)  ood gate 8/8  walk gate 43/43 adm 100.0  fails ['S01', 'S02', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S11', 'S12', 'S13', 'S14', 'S15', 'S16']
+  e5-small/title: 32/526 (1 s)
+  e5-small/title: 64/526 (4 s)
+  e5-small/title: 96/526 (7 s)
+  e5-small/title: 128/526 (20 s)
+  e5-small/title: 160/526 (27 s)
+  e5-small/title: 192/526 (42 s)
+  e5-small/title: 224/526 (48 s)
+  e5-small/title: 256/526 (52 s)
+  e5-small/title: 288/526 (56 s)
+  e5-small/title: 320/526 (66 s)
+  e5-small/title: 352/526 (76 s)
+  e5-small/title: 384/526 (80 s)
+  e5-small/title: 416/526 (83 s)
+  e5-small/title: 448/526 (87 s)
+  e5-small/title: 480/526 (99 s)
+  e5-small/title: 512/526 (103 s)
+  e5-small/title: 526/526 (106 s)
+  embedded 526 texts in 106 s
+e5-small/title ready in 109 s
+e5-small:title:6 embed s: 109
+e5-small/title: floor 0.8529 z 3.29
+  floor_c14      sem@10 0/16 (gate 7)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 28/43 adm 3.0  fails ['S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S11', 'S12', 'S13', 'S14', 'S15', 'S16']
+  gate_rank10    sem@10 3/16 (gate 7)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 28/43 adm 6.5  fails ['S02', 'S03', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S12', 'S13', 'S14', 'S15', 'S16']
+  gate_rank20    sem@10 2/16 (gate 7)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 28/43 adm 13.0  fails ['S02', 'S03', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S11', 'S12', 'S13', 'S14', 'S15', 'S16']
+  z_c14          sem@10 1/16 (gate 7)  lex top3 5/5 (gate 5)  ood gate 3/8  walk gate 29/43 adm 1.3  fails ['S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S11', 'S12', 'S13', 'S14', 'S16']
+  gate_z_rank10  sem@10 4/16 (gate 7)  lex top3 5/5 (gate 5)  ood gate 3/8  walk gate 29/43 adm 6.7  fails ['S02', 'S03', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S12', 'S13', 'S14', 'S16']
+  nofloor        sem@10 1/16 (gate 16)  lex top3 5/5 (gate 5)  ood gate 8/8  walk gate 43/43 adm 100.0  fails ['S01', 'S02', 'S03', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S11', 'S12', 'S13', 'S14', 'S15', 'S16']
+e5-small/plain: floor 0.8490 z 2.95
+  floor_c14      sem@10 4/16 (gate 9)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 27/43 adm 2.7  fails ['S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S12', 'S13', 'S14', 'S16']
+  gate_rank10    sem@10 6/16 (gate 9)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 27/43 adm 6.3  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S12', 'S13', 'S14', 'S16']
+  gate_rank20    sem@10 4/16 (gate 9)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 27/43 adm 12.6  fails ['S02', 'S03', 'S05', 'S06', 'S07', 'S08', 'S09', 'S11', 'S12', 'S13', 'S14', 'S16']
+  z_c14          sem@10 6/16 (gate 9)  lex top3 5/5 (gate 5)  ood gate 7/8  walk gate 29/43 adm 1.8  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S10', 'S12', 'S13', 'S14']
+  gate_z_rank10  sem@10 6/16 (gate 9)  lex top3 5/5 (gate 5)  ood gate 7/8  walk gate 29/43 adm 6.7  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S10', 'S12', 'S13', 'S14']
+  nofloor        sem@10 1/16 (gate 16)  lex top3 5/5 (gate 5)  ood gate 8/8  walk gate 43/43 adm 100.0  fails ['S01', 'S02', 'S03', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S11', 'S12', 'S13', 'S14', 'S15', 'S16']
+e5-base/plain: floor 0.8271 z 2.97
+  floor_c14      sem@10 8/16 (gate 13)  lex top3 5/5 (gate 5)  ood gate 3/8  walk gate 27/43 adm 3.9  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S12', 'S13']
+  gate_rank10    sem@10 8/16 (gate 13)  lex top3 5/5 (gate 5)  ood gate 3/8  walk gate 27/43 adm 6.3  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S12', 'S13']
+  gate_rank20    sem@10 6/16 (gate 13)  lex top3 5/5 (gate 5)  ood gate 3/8  walk gate 27/43 adm 12.6  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S11', 'S12', 'S13', 'S16']
+  z_c14          sem@10 8/16 (gate 12)  lex top3 5/5 (gate 5)  ood gate 8/8  walk gate 32/43 adm 2.4  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S12', 'S13']
+  gate_z_rank10  sem@10 9/16 (gate 12)  lex top3 5/5 (gate 5)  ood gate 8/8  walk gate 32/43 adm 7.4  fails ['S02', 'S05', 'S06', 'S08', 'S09', 'S12', 'S13']
+  nofloor        sem@10 2/16 (gate 16)  lex top3 5/5 (gate 5)  ood gate 8/8  walk gate 43/43 adm 100.0  fails ['S01', 'S02', 'S03', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S11', 'S12', 'S13', 'S15', 'S16']
+arctic-m2/plain: floor 0.3884 z 3.22
+  floor_c14      sem@10 7/16 (gate 10)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 27/43 adm 5.8  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S12', 'S13', 'S16']
+  gate_rank10    sem@10 8/16 (gate 10)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 27/43 adm 6.3  fails ['S02', 'S03', 'S05', 'S06', 'S08', 'S09', 'S12', 'S13']
+  gate_rank20    sem@10 4/16 (gate 10)  lex top3 5/5 (gate 5)  ood gate 0/8  walk gate 27/43 adm 12.6  fails ['S02', 'S03', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S11', 'S12', 'S13', 'S16']
+  z_c14          sem@10 10/16 (gate 12)  lex top3 5/5 (gate 5)  ood gate 4/8  walk gate 29/43 adm 1.8  fails ['S02', 'S05', 'S06', 'S08', 'S09', 'S12']
+  gate_z_rank10  sem@10 10/16 (gate 12)  lex top3 5/5 (gate 5)  ood gate 4/8  walk gate 29/43 adm 6.7  fails ['S02', 'S05', 'S06', 'S08', 'S09', 'S12']
+  nofloor        sem@10 2/16 (gate 16)  lex top3 5/5 (gate 5)  ood gate 8/8  walk gate 43/43 adm 100.0  fails ['S01', 'S02', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'S11', 'S12', 'S13', 'S14', 'S15', 'S16']
+QUEUE DONE

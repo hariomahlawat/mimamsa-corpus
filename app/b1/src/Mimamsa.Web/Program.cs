@@ -112,9 +112,17 @@ if (conf.GetValue("Mimamsa:Hybrid:Enabled", false))
     phase.Restart();
     var emb = new Mimamsa.Hybrid.E5Embedder(conf["Mimamsa:Hybrid:ModelDir"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelDir is required when hybrid is enabled"),
         conf.GetValue("Mimamsa:Hybrid:Threads", 0), conf.GetValue("Mimamsa:Hybrid:Cuda", false),
-        conf["Mimamsa:Hybrid:ModelSha256"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelSha256 is required when hybrid is enabled"));
+        conf["Mimamsa:Hybrid:ModelSha256"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelSha256 is required when hybrid is enabled"),
+        onnxFile: conf["Mimamsa:Hybrid:OnnxFile"] ?? "onnx/model.onnx", sentencePieceModel: conf["Mimamsa:Hybrid:SentencePieceModel"])
+    {
+        // C16 S3-E: model-family settings (defaults = multilingual-e5, unchanged)
+        Pooling = conf["Mimamsa:Hybrid:Pooling"] ?? "mean",
+        // "none" = no prefix (an empty environment variable cannot be set on Windows)
+        QueryPrefix = conf["Mimamsa:Hybrid:QueryPrefix"] is { } qp ? (qp == "none" ? "" : qp) : "query: ",
+        PassagePrefix = conf["Mimamsa:Hybrid:PassagePrefix"] is { } pp ? (pp == "none" ? "" : pp) : "passage: ",
+    };
     semantic = Mimamsa.Hybrid.DenseIndex.Build(index, generation.GenerationId, emb, conf["Mimamsa:Hybrid:CacheDir"], conf["Mimamsa:Hybrid:ModelLabel"] ?? "multilingual-e5-small@614241f6",
-        conf.GetValue("Mimamsa:Hybrid:PassageTokens", 256), log: Console.WriteLine);
+        conf.GetValue("Mimamsa:Hybrid:PassageTokens", 256), batch: conf.GetValue("Mimamsa:Hybrid:Batch", 16), log: Console.WriteLine, passageContext: conf["Mimamsa:Hybrid:PassageContext"] ?? "none");
     hybridMs = phase.ElapsedMilliseconds;
 }
 // C15 WP2: optional cross-encoder rerank stage (off unless Mimamsa:Hybrid:Reranker:Enabled=true; pinned SHA-256 required).
@@ -134,7 +142,11 @@ var search = new SearchService(index, docId => appRef!.VisibleDocument(docId) is
     // MinSimilarity: a passage enters through the dense layer only at or above this cosine similarity. The value is
     // calibrated on the C14 walkthrough queries over the real sample (HybridBench calibrate), never on oracle data.
     Hybrid = new HybridOptions(conf.GetValue("Mimamsa:Hybrid:LexicalDepth", 200), conf.GetValue("Mimamsa:Hybrid:DenseDepth", 100), conf.GetValue("Mimamsa:Hybrid:RrfK", 60),
-                               conf.GetValue("Mimamsa:Hybrid:MinSimilarity", 0.0), conf.GetValue("Mimamsa:Hybrid:Reranker:Pool", 30), conf.GetValue("Mimamsa:Hybrid:Reranker:Admit", 0.0)),
+                               conf.GetValue("Mimamsa:Hybrid:MinSimilarity", 0.0), conf.GetValue("Mimamsa:Hybrid:Reranker:Pool", 30), conf.GetValue("Mimamsa:Hybrid:Reranker:Admit", 0.0))
+    {
+        // C16 S3-E: dense admission rule ("floor" = unchanged default) and the rank depth used by "gate_rank".
+        Admission = conf["Mimamsa:Hybrid:Admission"] ?? "floor", AdmitK = conf.GetValue("Mimamsa:Hybrid:AdmitK", 10),
+    },
 };
 var app0 = new AppServices
 {

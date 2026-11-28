@@ -1,0 +1,392 @@
+{
+ "oracle_exit": 1,
+ "passed": 12,
+ "total": 14,
+ "aggregate": {
+  "MRR@20": {
+   "macro": 1.0,
+   "n": 12
+  },
+  "exact_MRR@20": {
+   "macro": 1.0,
+   "n": 3
+  },
+  "exact_precision@5": {
+   "macro": 0.26666666666666666,
+   "n": 3
+  },
+  "nDCG@10": {
+   "macro": 0.8627280991605565,
+   "n": 12
+  },
+  "precision@5": {
+   "macro": 0.35,
+   "n": 12
+  },
+  "recall@10": {
+   "macro": 0.8472222222222222,
+   "n": 12
+  },
+  "recall@20": {
+   "macro": 0.8472222222222222,
+   "n": 12
+  }
+ },
+ "oracle_blob": "ef822772fc63b63c1949815c1e996340698382e3",
+ "fixture_blob": "7c0a9f28b5627b93d0a6245b6797959bf032dfe2",
+ "withdrawal": {
+  "status": "withdrawn",
+  "changed": true,
+  "epoch": 2,
+  "reset_streams": 0,
+  "results": [
+   {
+    "doc_id": "syn-v-withdrawn",
+    "status": "withdrawn",
+    "scope": "document",
+    "copies_withdrawn": 1
+   }
+  ],
+  "copies_withdrawn": 1,
+  "distinct_editions_not_affected": [],
+  "effect": "Every copy of this document (current and earlier editions) is refused for every user from now on: search, document views, citations and original delivery. Transfers of the original in progress are cut off. Pages already on a reader's screen are cleared at their next action or within about 10 seconds. Distinct editions under other document ids are not affected."
+ },
+ "cases": [
+  {
+   "id": "RET-01",
+   "input": "s.17 Bracken Service Act",
+   "expected_mode": "identifier",
+   "expected_state": "results",
+   "observed_mode": "identifier",
+   "observed_state": "results",
+   "observed_top5": [
+    "A-17"
+   ],
+   "chips": [
+    "Section 17 · Bracken Service Act (synthetic)"
+   ],
+   "oracle_errors": [],
+   "status": "Passed",
+   "metrics": {
+    "recall@10": 1.0,
+    "recall@20": 1.0,
+    "precision@5": 0.2,
+    "MRR@20": 1.0,
+    "nDCG@10": 1.0,
+    "exact_precision@5": 0.2,
+    "exact_MRR@20": 1.0
+   }
+  },
+  {
+   "id": "RET-02",
+   "input": "exact:\"Rule 8(3)(a)\"",
+   "expected_mode": "lexical",
+   "expected_state": "results",
+   "observed_mode": "lexical",
+   "observed_state": "results",
+   "observed_top5": [
+    "R-3A",
+    "N-20"
+   ],
+   "chips": [
+    "Exact: lexical only, no abbreviation expansion",
+    "“Rule 8(3)(a)”"
+   ],
+   "oracle_errors": [],
+   "status": "Passed",
+   "metrics": {
+    "recall@10": 1.0,
+    "recall@20": 1.0,
+    "precision@5": 0.4,
+    "MRR@20": 1.0,
+    "nDCG@10": 1.0
+   }
+  },
+  {
+   "id": "RET-03",
+   "input": "2021 BRSYN 12",
+   "expected_mode": "identifier",
+   "expected_state": "results",
+   "observed_mode": "identifier",
+   "observed_state": "results",
+   "observed_top5": [
+    "J1-SUB",
+    "J1-SHORT",
+    "J2-QUOTE"
+   ],
+   "chips": [
+    "Neutral citation · 2021 BRSYN 12"
+   ],
+   "oracle_errors": [],
+   "status": "Passed",
+   "metrics": {
+    "recall@10": 0.6,
+    "recall@20": 0.6,
+    "precision@5": 0.6,
+    "MRR@20": 1.0,
+    "nDCG@10": 0.44673093966564165,
+    "exact_precision@5": 0.4,
+    "exact_MRR@20": 1.0
+   }
+  },
+  {
+   "id": "RET-04",
+   "input": "OA 411/2021",
+   "expected_mode": "identifier",
+   "expected_state": "results",
+   "observed_mode": "identifier",
+   "observed_state": "results",
+   "observed_top5": [
+    "J2-MAJ"
+   ],
+   "chips": [
+    "Case number · OA 411/2021"
+   ],
+   "oracle_errors": [],
+   "status": "Passed",
+   "metrics": {
+    "recall@10": 0.5,
+    "recall@20": 0.5,
+    "precision@5": 0.2,
+    "MRR@20": 1.0,
+    "nDCG@10": 0.7871546029909718,
+    "exact_precision@5": 0.2,
+    "exact_MRR@20": 1.0
+   }
+  },
+  {
+   "id": "RET-05",
+   "input": "exact:\"summary of evidence\" AND NOT pension",
+   "expected_mode": "lexical",
+   "expected_state": "results",
+   "observed_mode": "lexical",
+   "observed_state": "results",
+   "observed_top5": [
+    "M-SYN"
+   ],
+   "chips": [
+    "Exact: lexical only, no abbreviation expansion",
+    "“summary of evidence”",
+    "NOT pension"
+   ],
+   "oracle_errors": [],
+   "status": "Passed",
+   "metrics": {
+    "recall@10": 1.0,
+    "recall@20": 1.0,
+    "precision@5": 0.2,
+    "MRR@20": 1.0,
+    "nDCG@10": 1.0
+   }
+  },
+  {
+   "id": "RET-06",
+   "input": "BHT hearing tribunal",
+   "expected_mode": "hybrid",
+   "expected_state": "results",
+   "observed_mode": "hybrid",
+   "observed_state": "results",
+   "observed_top5": [
+    "M-SYN",
+    "M-NEAR",
+    "L-EN",
+    "J1-SUB",
+    "J1-SHORT"
+   ],
+   "chips": [],
+   "oracle_errors": [],
+   "status": "Passed",
+   "metrics": {
+    "recall@10": 1.0,
+    "recall@20": 1.0,
+    "precision@5": 0.2,
+    "MRR@20": 1.0,
+    "nDCG@10": 1.0
+   }
+  },
+  {
+   "id": "RET-07",
+   "input": "Can someone challenge a hearing when nobody told them the allegation beforehand?",
+   "expected_mode": "hybrid",
+   "expected_state": "results",
+   "observed_mode": "hybrid",
+   "observed_state": "results",
+   "observed_top5": [
+    "J2-MAJ",
+    "L-EN",
+    "M-SYN",
+    "J1-SUB",
+    "J1-SHORT"
+   ],
+   "chips": [
+    "Did you mean: Can someone challenge a hearing wren nobody told the the allegation beforehand?"
+   ],
+   "oracle_errors": [
+    "missing at rank 10: ['J1-MAJ']"
+   ],
+   "status": "Failed",
+   "metrics": {
+    "recall@10": 0.4,
+    "recall@20": 0.4,
+    "precision@5": 0.4,
+    "MRR@20": 1.0,
+    "nDCG@10": 0.7366659275243411
+   }
+  },
+  {
+   "id": "RET-08",
+   "input": "sick-call deferment medical attendant year:1948..1950",
+   "expected_mode": "lexical",
+   "expected_state": "results",
+   "observed_mode": "lexical",
+   "observed_state": "results",
+   "observed_top5": [
+    "H-ILL"
+   ],
+   "chips": [
+    "“sick-call”",
+    "Year = 1948..1950"
+   ],
+   "oracle_errors": [],
+   "status": "Passed",
+   "metrics": {
+    "recall@10": 1.0,
+    "recall@20": 1.0,
+    "precision@5": 0.2,
+    "MRR@20": 1.0,
+    "nDCG@10": 1.0
+   }
+  },
+  {
+   "id": "RET-09",
+   "input": "सुनवाई से पहले लिखित सूचना",
+   "expected_mode": "hybrid",
+   "expected_state": "results",
+   "observed_mode": "hybrid",
+   "observed_state": "results",
+   "observed_top5": [
+    "L-HI",
+    "L-EN",
+    "R-3A",
+    "R-3B"
+   ],
+   "chips": [],
+   "oracle_errors": [],
+   "status": "Passed",
+   "metrics": {
+    "recall@10": 1.0,
+    "recall@20": 1.0,
+    "precision@5": 0.6,
+    "MRR@20": 1.0,
+    "nDCG@10": 1.0
+   }
+  },
+  {
+   "id": "RET-10",
+   "input": "late warning invalidates hearing without notice",
+   "expected_mode": "hybrid",
+   "expected_state": "results",
+   "observed_mode": "hybrid",
+   "observed_state": "results",
+   "observed_top5": [
+    "J1-SUB",
+    "J1-SHORT",
+    "R-3A",
+    "J1-MAJ",
+    "L-EN"
+   ],
+   "chips": [],
+   "oracle_errors": [
+    "missing at rank 10: ['J2-MAJ']"
+   ],
+   "status": "Failed",
+   "metrics": {
+    "recall@10": 0.6666666666666666,
+    "recall@20": 0.6666666666666666,
+    "precision@5": 0.6,
+    "MRR@20": 1.0,
+    "nDCG@10": 0.3821857197457229
+   }
+  },
+  {
+   "id": "RET-11",
+   "input": "exact:violet-plume-canary",
+   "expected_mode": "lexical",
+   "expected_state": "empty",
+   "observed_mode": "lexical",
+   "observed_state": "empty",
+   "observed_top5": [],
+   "chips": [
+    "Exact: lexical only, no abbreviation expansion",
+    "“violet-plume-canary”"
+   ],
+   "oracle_errors": [],
+   "status": "Passed",
+   "metrics": {}
+  },
+  {
+   "id": "RET-12",
+   "input": "section:8 act:\"Bracken Hearing Rules\"",
+   "expected_mode": "lexical",
+   "expected_state": "results",
+   "observed_mode": "lexical",
+   "observed_state": "results",
+   "observed_top5": [
+    "R-3A",
+    "R-3B",
+    "N-20"
+   ],
+   "chips": [
+    "Section = 8",
+    "Act = Bracken Hearing Rules"
+   ],
+   "oracle_errors": [],
+   "status": "Passed",
+   "metrics": {
+    "recall@10": 1.0,
+    "recall@20": 1.0,
+    "precision@5": 0.4,
+    "MRR@20": 1.0,
+    "nDCG@10": 1.0
+   }
+  },
+  {
+   "id": "RET-13",
+   "input": "exact:(\"summary of evidence\" AND (BHT OR tribunal)",
+   "expected_mode": "parser_error",
+   "expected_state": "parser_error",
+   "observed_mode": "parser_error",
+   "observed_state": "parser_error",
+   "observed_top5": [],
+   "chips": [],
+   "oracle_errors": [],
+   "status": "Passed",
+   "metrics": {}
+  },
+  {
+   "id": "RET-14",
+   "input": "exact:\"summary of evidence\" NEAR/5 tribunal",
+   "expected_mode": "lexical",
+   "expected_state": "results",
+   "observed_mode": "lexical",
+   "observed_state": "results",
+   "observed_top5": [
+    "M-SYN"
+   ],
+   "chips": [
+    "Exact: lexical only, no abbreviation expansion",
+    "NEAR/5",
+    "“summary of evidence”"
+   ],
+   "oracle_errors": [],
+   "status": "Passed",
+   "metrics": {
+    "recall@10": 1.0,
+    "recall@20": 1.0,
+    "precision@5": 0.2,
+    "MRR@20": 1.0,
+    "nDCG@10": 1.0
+   }
+  }
+ ]
+}

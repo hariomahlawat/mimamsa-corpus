@@ -19,7 +19,26 @@ public interface ISemanticScorer
 }
 
 public sealed record HybridOptions(int LexicalDepth = 200, int DenseDepth = 100, int RrfK = 60, double MinSimilarity = 0.0,
-    int RerankPool = 30, double RerankAdmit = 0.0);
+    int RerankPool = 30, double RerankAdmit = 0.0)
+{
+    /// C16 S3-E: how dense candidates are admitted to fusion.
+    ///   "floor" (default, unchanged): every dense candidate at or above MinSimilarity.
+    ///   "gate_rank": MinSimilarity gates the QUERY (its best dense candidate must reach it); once open, the top AdmitK
+    ///   dense candidates are admitted by rank, whatever their own similarity. Same mode decision as "floor" for every query.
+    public string Admission { get; init; } = "floor";
+    public int AdmitK { get; init; } = 10;
+}
+
+/// C16 S3-E: the dense admission rules (HybridOptions.Admission). Input is best first; output is a prefix of it.
+public static class HybridAdmission
+{
+    public static List<(int Passage, double Score)> Admit(IReadOnlyList<(int Passage, double Score)> dense, HybridOptions o) => o.Admission switch
+    {
+        "floor" => dense.Where(x => x.Score >= o.MinSimilarity).ToList(),
+        "gate_rank" => dense.Count > 0 && dense[0].Score >= o.MinSimilarity ? dense.Take(o.AdmitK).ToList() : new List<(int, double)>(),
+        _ => throw new InvalidOperationException($"unknown hybrid admission rule '{o.Admission}'"),
+    };
+}
 
 /// C15 WP2: scores (query, passage) pairs jointly (a cross-encoder). Higher is more relevant; the score describes text,
 /// never legal relevance. `Admit` semantics belong to the caller (HybridOptions.RerankAdmit).

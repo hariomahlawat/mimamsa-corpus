@@ -1,0 +1,24 @@
+{
+ "repo": "intfloat/multilingual-e5-large",
+ "revision": "3d7cfbdacd47fdda877c5cd8a79fbcc4f2a574f3",
+ "license": "mit",
+ "role": "dense embedding model (1024-d, XLM-R vocabulary, mean pooling); owner's int8 ONNX",
+ "files": {
+  "onnx/model_qint8_avx512_vnni.onnx": {
+   "sha256": "46f5d13dba7ade0160c67d346087d870162950882be17ff9319f873cf6fedff1",
+   "bytes": 561845741
+  },
+  "onnx/sentencepiece.bpe.model": {
+   "sha256": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+   "bytes": 5069051
+  },
+  "onnx/tokenizer.json": {
+   "sha256": "62c24cdc13d4c9952d63718d6c9fa4c287974249e16b7ade6d5a85e7bbb75626",
+   "bytes": 17082660
+  },
+  "onnx/config.json": {
+   "sha256": "513fe5e3d0e6d2fa441b6bd2145b20ae82158e9fdd08df9d5405db283afa7710",
+   "bytes": 688
+  }
+ }
+}

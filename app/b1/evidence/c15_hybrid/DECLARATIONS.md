@@ -41,3 +41,83 @@ This file exists so that reviewers can check, from git history, what was fixed *
    - *Change:* matched provisions are placed before fused or reranked hits, after the identifier, case-name and title tiers.
    - *Oracle with hybrid on:* unchanged at 12/14 (R2b).
    - *Status:* a development-tuned rule, not independent evidence.
+
+## C16 S3-E (Tranche B Stage 3): declarations for RET-07 / RET-10 work
+
+Branch `claude/c16-s3e-hybrid` from `claude/c16-cp1` (`2541aec3`). Entries are appended in commit order; git history shows that each one precedes the oracle run it governs.
+
+### What the S3-E author had seen before these declarations
+
+- The C15 report (`HYBRID_EVAL.md`), which quotes RET-07 and RET-10 (query text, the required passage's wording, e5-small/e5-base dense ranks and cosines) and the C15 diagnosis.
+- The oracle's assertion types (`retrieval_oracle.py`: state, mode, forbidden, top1, must_at), read to understand what a hybrid run must not break. The fixture file itself was not opened.
+- The baseline re-run on this branch (`E:\Mimamsa-Data\c16s3e\oracle\b0-baseline`): hybrid off 10/14, C15 hybrid (e5-small, floor 0.8579) 12/14, identical to C15. Its printed lines show every case's mode and top-3 fixture ids.
+- **Not seen:** the blind holdout (never accessed).
+
+Consequence: nothing S3-E reports on RET-07/RET-10 is independent evidence. Only the holdout procedure can supply that.
+
+### D1. Development data (committed in `c4764e08`, before any development result)
+
+- `app/b1/evidence/c16_s3e/dev/dev_set.json`: 28 synthetic passages, 16 "semantic" queries (no shared content-word stem with the answer; paraphrase, contrary or conditional answers, one answer buried in a long paragraph), 5 lexical controls, 8 out-of-domain queries. Topics avoid the RET-07/RET-10 subject.
+- Distractors: 3,000 real-sample passages, seeded uniform (seed 16), from `HybridBench dump`.
+- The 43 C14 walkthrough queries, unlabelled, for gate firing rates only.
+
+### D2. Rules fixed before any development or oracle result of S3-E
+
+| Choice | Value |
+| --- | --- |
+| Gate / floor value for any model or representation | The C14 rule: median over the 43 walkthrough queries of each query's 99.9th-percentile cosine, over the 3,000 seeded real passages (C15 `calsub` variant). Computed by `dev_eval.py`; used as-is in the oracle run |
+| Admission rules evaluated | `floor` (C14/C15), `gate_rank` (the same value gates the query by its best candidate; then the top **K = 10** dense candidates by rank), a z-score variant against the real-passage background (dev only unless it wins) |
+| K for `gate_rank` | **10**, a round default fixed now; K = 20 is reported on dev only |
+| Model selection | Highest dev semantic@10, subject to out-of-domain gate opening 0/8 and lexical-control top-3 no worse than e5-small `floor`; ties to the smaller model. Candidates: multilingual-e5-small, -base, -large (owner's int8 ONNX), bge-m3 (int8 ONNX), snowflake-arctic-embed-m-v2.0 (owner's int8 ONNX) |
+| Representation | `plain` unless `title` (document title prefixed) gains on dev semantic@10 without losing the constraints above |
+| Oracle runs | Only configurations declared below, each with hybrid off too; each result is reported whatever it is and is not followed by retuning |
+
+### D3. First oracle runs (declared after e5-small, e5-base and a first arctic dev result; before any S3-E hybrid-on oracle run)
+
+Dev results so far (1,000-distractor stride, `dev/out/*_s3.json`): e5-small `floor` 4/16, `gate_rank` K=10 5/16, both with out-of-domain gate 0/8; e5-base `floor` 7/16, `gate_rank` 8/16 but out-of-domain gate 2/8 (fails the D2 constraint); z-score rules open the gate on 7-8/8 out-of-domain queries and are **dropped**. The int8 models are being re-embedded one text per call (see D4 note below), so their earlier batched numbers are void.
+
+| Run | Model | Admission | Gate / floor | Other |
+| --- | --- | --- | --- | --- |
+| O1a | multilingual-e5-small `614241f6` | `floor` | **0.8548** (D2 rule over the 3,000-passage seeded sample, `dev/out/e5-small_plain_s1.json`) | plain passages, batch 16 |
+| O1b | same | `gate_rank`, K = 10 | 0.8548 | same |
+
+Both are run once, hybrid off as well, and reported whatever the outcome.
+
+### D4. int8 batching note, and the arctic oracle runs (declared after its dev result, before running them)
+
+- **int8 note.** Dynamically quantised ONNX models compute activation scales per call, so padding in a batch changes every vector (arctic int8: cosine 0.96-0.99 batched vs single). All int8 models are therefore embedded one text per call (`dev_eval.py`; `Mimamsa:Hybrid:Batch=1` in the app). C# (ORT 1.31.1) and Python (ORT 1.32) vectors of the same int8 model still differ slightly (cosine 0.985-0.995), whereas e5-small fp32 matches exactly (1.000000). A gate calibrated in Python therefore transfers to the app only approximately; this is disclosed, not corrected.
+- **Dev result (1,000 distractors, one text per call):** snowflake-arctic-embed-m-v2.0 int8, `floor` 6/16, `gate_rank` K=10 7/16, out-of-domain gate 0/8, lexical controls 5/5. Best of the models meeting the D2 constraints so far (e5-large and bge-m3 still embedding).
+- **Deviation from D2:** the gate is computed over the 1,000-passage stride sample, not 3,000 (the host is saturated by OCR; this embedder runs starved at below-normal priority). Value **0.3994** (`dev/out/arctic-m2_plain_s3.json`).
+
+| Run | Model | Admission | Gate | Other |
+| --- | --- | --- | --- | --- |
+| O2a | Snowflake/snowflake-arctic-embed-m-v2.0 `95c27414`, `onnx/model_int8.onnx` sha256 `03d923bb…`, CLS pooling, query prefix `query: `, no passage prefix, XLM-R SentencePiece of e5-small (ids verified identical) | `floor` | 0.3994 | batch 1, plain passages |
+| O2b | same | `gate_rank`, K = 10 | 0.3994 | same |
+
+### D5. e5-large oracle runs (declared after its dev result, before running them)
+
+- **Dev, 500 distractors (stride 6; all models re-evaluated at this stride, `dev/out/*_s6.json`):** e5-small 4 / 6 of 16 (`floor` / `gate_rank`), e5-base 8 / 8 but out-of-domain gate 3/8 (excluded by D2), arctic-embed-m-v2.0 7 / 8, multilingual-e5-large int8 7 / 8, all others 0/8 out-of-domain and 5/5 lexical controls.
+- Under D2, arctic and e5-large tie, so arctic (smaller) remains the selection (O2). e5-large is run as well because the brief asks for stronger models to be evaluated; this is **not** a selection made from oracle results, and whichever result it gives does not change the D2 selection.
+- **Deviation from D2:** gate computed over the 500-passage stride-6 sample (host saturated): **0.8234**.
+
+| Run | Model | Admission | Gate | Other |
+| --- | --- | --- | --- | --- |
+| O3a | intfloat/multilingual-e5-large `3d7cfbda`, `onnx/model_qint8_avx512_vnni.onnx` sha256 `46f5d13d…`, mean pooling, `query: ` / `passage: ` | `floor` | 0.8234 | batch 1 |
+| O3b | same | `gate_rank`, K = 10 | 0.8234 | batch 1 |
+
+### D6. bge-m3 oracle runs (declared after its dev result, before running them)
+
+- **Dev, stride 6:** bge-m3 int8 (Xenova conversion of BAAI/bge-m3, MIT) `floor` **10/16**, `gate_rank` K=10 **11/16**, out-of-domain gate 0/8, lexical controls 5/5. Under D2 this is now the **selected model** (highest dev semantic@10 meeting the constraints), replacing arctic.
+- Gate (D2 rule over the stride-6 sample, same deviation as D5): **0.5197** (`dev/out/bge-m3_plain_s6.json`).
+
+| Run | Model | Admission | Gate | Other |
+| --- | --- | --- | --- | --- |
+| O4a | Xenova/bge-m3 `4de13258`, `onnx/model_int8.onnx` sha256 `a206e10e…`, CLS pooling, no prefixes | `floor` | 0.5197 | batch 1 |
+| O4b | same | `gate_rank`, K = 10 | 0.5197 | batch 1 |
+
+### D7. Results and post-hoc steps (after every declared run)
+
+- Oracle, hybrid on: O1a 12, O1b 12, O2a 12, O2b 12, O3a 12, O3b 12 (RET-10 passes, RET-06 fails on an uncatalogued passage), O4a 12, **O4b 13/14** (RET-07 passes at rank 10, RET-10 fails). Hybrid off: 10/14 in every run. No value was changed after any run.
+- Post-hoc diagnosis only (`c16_s3e/scripts/posthoc_probe.py`): dense ranks of J1-MAJ/J2-MAJ per model, run after O4b. Nothing was chosen from it.
+- Dev-only after the declarations: e5-small title context and windowing (both no gain), not run on the oracle.
+- Full report: `app/b1/evidence/c16_s3e/HYBRID_EVAL_C16.md`.

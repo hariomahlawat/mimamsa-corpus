@@ -1,0 +1,10 @@
+e5-small  RET-07 J1-MAJ: rank 11/21 (catalogued 11/20) cos 0.8230; best 0.8573; uncatalogued above it: 0
+e5-small  RET-10 J2-MAJ: rank 8/21 (catalogued 8/20) cos 0.8223; best 0.8637; uncatalogued above it: 0
+e5-base   RET-07 J1-MAJ: rank 7/21 (catalogued 7/20) cos 0.8066; best 0.8403; uncatalogued above it: 0
+e5-base   RET-10 J2-MAJ: rank 5/21 (catalogued 5/20) cos 0.8222; best 0.8751; uncatalogued above it: 0
+arctic-m2 RET-07 J1-MAJ: rank 11/21 (catalogued 11/20) cos 0.2111; best 0.4463; uncatalogued above it: 0
+arctic-m2 RET-10 J2-MAJ: rank 9/21 (catalogued 9/20) cos 0.2905; best 0.7242; uncatalogued above it: 0
+e5-large  RET-07 J1-MAJ: rank 9/21 (catalogued 9/20) cos 0.7949; best 0.8270; uncatalogued above it: 0
+e5-large  RET-10 J2-MAJ: rank 5/21 (catalogued 5/20) cos 0.8228; best 0.8549; uncatalogued above it: 0
+bge-m3    RET-07 J1-MAJ: rank 8/21 (catalogued 8/20) cos 0.4817; best 0.6167; uncatalogued above it: 0
+bge-m3    RET-10 J2-MAJ: rank 9/21 (catalogued 9/20) cos 0.4847; best 0.7892; uncatalogued above it: 0

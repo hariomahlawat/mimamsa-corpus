@@ -1,0 +1,123 @@
+{
+ "RET-01": {
+  "mode": "identifier",
+  "state": "results",
+  "ranking": [
+   "A-17"
+  ]
+ },
+ "RET-02": {
+  "mode": "lexical",
+  "state": "results",
+  "ranking": [
+   "R-3A",
+   "N-20"
+  ]
+ },
+ "RET-03": {
+  "mode": "identifier",
+  "state": "results",
+  "ranking": [
+   "J1-SUB",
+   "J1-SHORT",
+   "J2-QUOTE"
+  ]
+ },
+ "RET-04": {
+  "mode": "identifier",
+  "state": "results",
+  "ranking": [
+   "J2-MAJ"
+  ]
+ },
+ "RET-05": {
+  "mode": "lexical",
+  "state": "results",
+  "ranking": [
+   "M-SYN"
+  ]
+ },
+ "RET-06": {
+  "mode": "hybrid",
+  "state": "results",
+  "ranking": [
+   "M-SYN",
+   "M-NEAR",
+   "L-EN",
+   "J1-SUB",
+   "J1-SHORT",
+   "A-17",
+   "N-20"
+  ]
+ },
+ "RET-07": {
+  "mode": "hybrid",
+  "state": "results",
+  "ranking": [
+   "J1-SUB",
+   "J1-SHORT",
+   "J2-MAJ",
+   "M-SYN",
+   "L-EN",
+   "A-17",
+   "N-20"
+  ]
+ },
+ "RET-08": {
+  "mode": "lexical",
+  "state": "results",
+  "ranking": [
+   "H-ILL"
+  ]
+ },
+ "RET-09": {
+  "mode": "hybrid",
+  "state": "results",
+  "ranking": [
+   "L-HI",
+   "L-EN"
+  ]
+ },
+ "RET-10": {
+  "mode": "hybrid",
+  "state": "results",
+  "ranking": [
+   "J1-SUB",
+   "J1-SHORT",
+   "L-EN",
+   "J1-DISS",
+   "R-3A",
+   "M-SYN",
+   "R-3B",
+   "A-17",
+   "J1-MAJ",
+   "N-20"
+  ]
+ },
+ "RET-11": {
+  "mode": "lexical",
+  "state": "empty",
+  "ranking": []
+ },
+ "RET-12": {
+  "mode": "lexical",
+  "state": "results",
+  "ranking": [
+   "R-3A",
+   "R-3B",
+   "N-20"
+  ]
+ },
+ "RET-13": {
+  "mode": "parser_error",
+  "state": "parser_error",
+  "ranking": []
+ },
+ "RET-14": {
+  "mode": "lexical",
+  "state": "results",
+  "ranking": [
+   "M-SYN"
+  ]
+ }
+}

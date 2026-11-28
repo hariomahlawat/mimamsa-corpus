@@ -6,6 +6,7 @@
 //   rrprobe    <site> <reranker> <onnxFile> <query> [n=15]        C15 diagnosis: cross-encoder logit of every passage for one query
 //   rrbench    <site> <reranker> <onnxFile> [pairs=60]            C15: reranker latency per pair (CPU)
 //   calsub     <site> <model> <queries.json> <n> <seed> <out.json>   C15: the C14 floor rule over a seeded random passage sample
+//   dump       <site> <n> <seed> <out.jsonl>                      C16 S3-E: seeded passage sample (distractors for the dev set)
 // calibrate never reads the retrieval oracle or its fixture: it uses the C14 walkthrough query set on the real sample.
 using System.Diagnostics;
 using System.Text.Json;
@@ -111,6 +112,53 @@ switch (a[0])
         { sw.Restart(); ce.Score(q, texts); lat.Add(sw.Elapsed.TotalMilliseconds); }
         Console.WriteLine(JsonSerializer.Serialize(new { model = ce.Label, pairs = texts.Count, ms_per_query = lat.Select(x => Math.Round(x)), ms_per_pair = Math.Round(lat.Average() / texts.Count, 2),
             working_set_mb = Process.GetCurrentProcess().WorkingSet64 / 1048576 }));
+        break;
+    }
+    case "dump":
+    {
+        // C16 S3-E development data: a seeded uniform sample of passages (text + document title/type) as JSONL, used as
+        // realistic distractors around the synthetic development set. Never run on the SYN (oracle) site.
+        int n = int.Parse(a[2]), seed = int.Parse(a[3]);
+        var rng = new Random(seed);
+        var idx = Enumerable.Range(0, ix.N).OrderBy(_ => rng.Next()).Take(n).OrderBy(i => i).ToList();
+        using var w = new StreamWriter(a[4], false, new System.Text.UTF8Encoding(false));
+        foreach (var i in idx)
+        {
+            var p = ix.Passages[i]; var d = ix.Docs[ix.DocOf(i)];
+            w.WriteLine(new JsonObject { ["i"] = i, ["doc_id"] = p.DocId, ["passage_id"] = p.PassageId, ["doc_type"] = d.DocType, ["title"] = d.Title,
+                ["language"] = d.Language, ["text"] = p.Text }.ToJsonString());
+        }
+        Console.WriteLine($"{idx.Count} passages written (seed {seed})");
+        break;
+    }
+    case "vecs":
+    {
+        // C16 S3-E: C# embeddings of a few texts (JSON list in a[6]) to check equivalence with the Python dev harness.
+        //   vecs <site> <modelDir> <onnxFile> <pooling> <spm|-> <texts.json> <out.json>
+        using var e = new E5Embedder(a[2], threads: Math.Max(1, Environment.ProcessorCount / 2), onnxFile: a[3], sentencePieceModel: a[5] == "-" ? null : a[5]) { Pooling = a[4] };
+        var texts = JsonNode.Parse(File.ReadAllText(a[6]))!.AsArray().Select(x => x!.GetValue<string>()).ToList();
+        var v = texts.Select(t => e.Embed(new[] { t }, 256)[0]).ToArray();   // one text per call (int8 models: see dev_eval.py)
+        File.WriteAllText(a[7], JsonSerializer.Serialize(v));
+        Console.WriteLine($"{v.Length} vectors of {e.Dim}");
+        break;
+    }
+    case "qlat":
+    {
+        // C16 S3-E: query-embedding latency, passage embedding cost (one text per call) and working set for a model.
+        //   qlat <site> <modelDir> <onnxFile> <pooling> <spm|-> <queryPrefix|none> <passagePrefix|none>
+        var before = Process.GetCurrentProcess().WorkingSet64;
+        using var e = new E5Embedder(a[2], threads: Math.Max(1, Environment.ProcessorCount / 2), onnxFile: a[3], sentencePieceModel: a[5] == "-" ? null : a[5])
+            { Pooling = a[4], QueryPrefix = a[6] == "none" ? "" : a[6], PassagePrefix = a[7] == "none" ? "" : a[7] };
+        e.EmbedQuery("warm up");
+        var ql = new List<double>();
+        foreach (var q in new[] { "written notice before hearing", "disability pension attributable to service", "summary court martial", "सेना अधिनियम धारा", "absence without leave",
+                                  "can soldiers form a union or join strikes?", "how to hold a summary court martial", "AFT jurisdiction" })
+        { sw.Restart(); e.EmbedQuery(q); ql.Add(sw.Elapsed.TotalMilliseconds); }
+        var texts = ix.Passages.Where(p => p.Text.Length > 600).Take(24).Select(p => e.PassagePrefix + p.Text).ToList();
+        sw.Restart(); foreach (var t in texts) e.Embed(new[] { t }, 256);
+        double perPassage = sw.Elapsed.TotalMilliseconds / Math.Max(1, texts.Count);
+        Console.WriteLine(JsonSerializer.Serialize(new { model = a[2], file = a[3], dim = e.Dim, query_embed_ms = ql.Select(x => Math.Round(x, 1)), query_p50_ms = Math.Round(ql.OrderBy(x => x).ElementAt(ql.Count / 2), 1),
+            ms_per_256tok_passage = Math.Round(perPassage, 1), working_set_mb = Process.GetCurrentProcess().WorkingSet64 / 1048576, working_set_before_model_mb = before / 1048576 }));
         break;
     }
     case "calsub":
