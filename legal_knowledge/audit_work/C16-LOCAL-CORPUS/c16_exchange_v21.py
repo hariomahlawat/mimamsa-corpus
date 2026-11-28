@@ -40,6 +40,14 @@ def _component(relative_path: str, label: str, basis: str) -> int:
     return max(0, len(parts) - 2)
 
 
+def contract_provision_id(node_id: str) -> str:
+    if not node_id.startswith("PROV:"):
+        return node_id
+    head, unit = node_id.rsplit(":", 1)
+    prefix, number = unit.split(".", 1)
+    return f"{head}:{prefix}.{number.split('(', 1)[0]}"
+
+
 def project_relationships(subject_rows: list[dict], provision_rows: list[dict], inventory_by_id: dict[str, dict],
                           identities_by_sha: dict[str, dict], classification) -> list[dict]:
     """Project every v5 relationship; never infer legal effect from a folder."""
@@ -61,7 +69,7 @@ def project_relationships(subject_rows: list[dict], provision_rows: list[dict], 
                 uncertainty = "Owner folder classification is a navigation aid, not an established legal finding."
                 rule = "C16-FOLDER-SUBJECT"
             else:
-                node_id = raw["target_node_id"]
+                node_id = contract_provision_id(raw["target_node_id"])
                 target = ({"resolved": True, "node_id": node_id} if node_id.startswith(("PROV:AA-1950:", "PROV:AR-1954:"))
                           else {"resolved": False, "node_id": None, "raw_reference": label,
                                 "unresolved": {"unresolved": "AMBIGUOUS_REFERENCE",
@@ -84,6 +92,25 @@ def project_relationships(subject_rows: list[dict], provision_rows: list[dict], 
     return sorted(out, key=lambda row: row["relationship_id"])
 
 
+def v5_subject_taxonomy(nodes: list[dict], subject_rows: list[dict]) -> list[dict]:
+    paths = {}
+    for row in subject_rows:
+        if row["target_node_id"].startswith("SUBJ:"):
+            paths.setdefault(row["target_node_id"], row["relative_path"].replace("\\", "/").rsplit("/", 1)[0])
+    out = []
+    for node in nodes:
+        if not node["node_id"].startswith("SUBJ:"):
+            continue
+        out.append({"contract": "mimamsa-corpus-contract/2.0", "record_kind": "taxonomy_node",
+                    "node_id": node["node_id"], "level": "SUBJECT", "label": node["label"],
+                    "parent_ids": node.get("parent_ids") or [], "instrument_code": None, "provision": None,
+                    "maps_to_subject": None, "aliases": [], "taxonomy_version": "c16-taxonomy-1.1",
+                    "source": {"basis": "OWNER_FOLDER", "collection": "local:owner-corpus-c16",
+                               "relative_path": paths.get(node["node_id"], node.get("original_label") or node["label"])},
+                    "verification": "CURATED_NAVIGATION"})
+    return out
+
+
 def augment_taxonomy(taxonomy: list[dict], provision_rows: list[dict]) -> list[dict]:
     """Add only registry-valid statute/provision nodes referenced by preserved candidates."""
     nodes = {row["node_id"]: row for row in taxonomy}
@@ -91,16 +118,16 @@ def augment_taxonomy(taxonomy: list[dict], provision_rows: list[dict]) -> list[d
              "AR-1954": ("Army Rules, 1954", "SUBJ:local:army-rules")}
     aliases: dict[str, set[str]] = {}
     for raw in provision_rows:
-        node_id = raw["target_node_id"]
+        node_id = contract_provision_id(raw["target_node_id"])
         if node_id.startswith(("PROV:AA-1950:", "PROV:AR-1954:")):
             aliases.setdefault(node_id, set()).add(raw.get("source_label") or node_id)
     for code, (label, parent) in roots.items():
         if any(node.startswith(f"PROV:{code}:") for node in aliases):
             if parent not in nodes:
                 raise ValueError(f"missing owner-folder taxonomy parent for {code}: {parent}")
-            nodes[f"INST:{code}"] = {
+            nodes[f"INSTCODE:{code}"] = {
                 "contract": "mimamsa-corpus-contract/2.0", "record_kind": "taxonomy_node",
-                "node_id": f"INST:{code}", "level": "STATUTE", "label": label, "parent_ids": [parent],
+                "node_id": f"INSTCODE:{code}", "level": "STATUTE", "label": label, "parent_ids": [parent],
                 "instrument_code": code, "provision": None, "maps_to_subject": None, "aliases": [],
                 "taxonomy_version": "c16-taxonomy-1.1", "source": {"basis": "GRAPH_INSTRUMENT"},
                 "verification": "CANDIDATE",
@@ -110,7 +137,7 @@ def augment_taxonomy(taxonomy: list[dict], provision_rows: list[dict]) -> list[d
         prefix, number = unit.split(".", 1)
         nodes[node_id] = {
             "contract": "mimamsa-corpus-contract/2.0", "record_kind": "taxonomy_node", "node_id": node_id,
-            "level": "PROVISION", "label": f"{prefix}. {number}", "parent_ids": [f"INST:{code}"],
+            "level": "PROVISION", "label": f"{prefix}. {number}", "parent_ids": [f"INSTCODE:{code}"],
             "instrument_code": code, "provision": {"prefix": prefix, "number": number, "sub_provision": None},
             "maps_to_subject": None, "aliases": sorted(found_aliases), "taxonomy_version": "c16-taxonomy-1.1",
             "source": {"basis": "GRAPH_PROVISION"}, "verification": "CANDIDATE",
@@ -123,9 +150,34 @@ def load_state_tree(root: Path) -> list[dict]:
     return [json.loads(path.read_text(encoding="utf-8")) for path in sorted(state.rglob("*.json"))]
 
 
-def pdf_anchors(records: list[dict], root: Path, config: dict, identities_by_sha: dict[str, dict], canonical) -> list[dict]:
-    """Export only clean, readable and cryptographically verified PDF OCR evidence."""
-    out = []
+def enrich_image_ocr(inventory: list[dict], primary: list[dict], secondary: list[dict]) -> None:
+    """Bind embedded-image status to verified v2 evidence, preferring a readable targeted retry."""
+    by_image = {row["image_sha256"]: row for row in primary
+                if row.get("state") == "COMPLETE" and row.get("evidence_verified") is True}
+    for row in secondary:
+        if (row.get("state") == "COMPLETE" and row.get("evidence_verified") is True
+                and not row.get("unreadable")):
+            by_image[row["image_sha256"]] = row
+    for document in inventory:
+        for image in document.get("embedded_images") or []:
+            evidence = by_image.get(image["image_sha256"])
+            if evidence is None:
+                image["ocr_state"] = "QUEUED"
+                image.pop("ocr_derivative_sha256", None)
+            elif (not evidence.get("unreadable")
+                  and evidence.get("access_disposition") == "SCREENED_NO_MARKING_DETECTED"
+                  and (evidence.get("artifact_sha256") or {}).get("raw_text")):
+                image["ocr_state"] = "DONE"
+                image["ocr_derivative_sha256"] = evidence["artifact_sha256"]["raw_text"]
+            else:
+                image["ocr_state"] = "FAILED"
+                image.pop("ocr_derivative_sha256", None)
+
+
+def pdf_anchors(records: list[dict], root: Path, config: dict, identities_by_sha: dict[str, dict], canonical,
+                derivative_root: Path | None = None) -> list[dict]:
+    """Export clean verified pages, grouped into one deterministic OCR derivative per source PDF."""
+    verified: dict[str, list[tuple[dict, bytes]]] = {}
     for record in records:
         if not (record.get("state") == "COMPLETE" and record.get("evidence_verified") is True
                 and not record.get("unreadable")
@@ -139,35 +191,55 @@ def pdf_anchors(records: list[dict], root: Path, config: dict, identities_by_sha
         if not rel or not expected:
             continue
         payload = (root / rel).read_bytes()
-        if _sha(payload) != expected:
-            continue
-        text = payload.decode("utf-8")
-        mean = record.get("mean_confidence")
-        anchor = {
-            "contract": "mimamsa-corpus-contract/2.0", "record_kind": "evidence_anchor", "anchor_id": "",
-            "doc_id": identities_by_sha[sha]["doc_id"], "original_sha256": sha,
-            "representation_sha256": sha, "derivative_text_sha256": expected,
-            "image_sha256": record["render_sha256"],
-            "locator": {"kind": "SOURCE_PHYSICAL_PAGE", "physical_page": record["physical_page"],
-                        "printed_page_label": None, "citable_as_source_page": False},
-            "text_span": {"passage_id": None, "char_start": 0, "char_end": len(text),
-                          "text_sha256": _sha(payload)},
-            "bbox": None,
-            "extraction": {"method": "OCR_PAGE_IMAGE", "pipeline_name": "c16-local-ocr",
-                           "pipeline_version": "2.1.0",
-                           "ocr_config": {"engine": config["engine"], "engine_version": config["engine_version"],
-                                          "languages": config["languages"],
-                                          "page_segmentation_mode": str(config["psm"][0]),
-                                          "preprocessing": config["preprocessing"],
-                                          "dpi": config["render_dpi"],
-                                          "config_sha256": record["configuration_sha256"]}},
-            "quality": {"text_reliability": "not_assessed", "ocr_mean_confidence": mean,
-                        "low_confidence": bool(mean is None or mean < 60)},
-            "verification": {"state": "AUTOMATED_CANDIDATE_NOT_VERIFIED", "review_ref": None},
-            "quoting_permitted": False, "quote": None,
-        }
-        anchor["anchor_id"] = canonical.anchor_id(anchor)
-        out.append(anchor)
+        if _sha(payload) == expected:
+            verified.setdefault(sha, []).append((record, payload))
+    out = []
+    for sha, pages in verified.items():
+        pages.sort(key=lambda item: item[0]["physical_page"])
+        chunks, spans, offset = [], [], 0
+        for record, payload in pages:
+            header = f"[[page {record['physical_page']}]]\n".encode("utf-8")
+            chunk = header + payload + b"\n"
+            chunks.append(chunk)
+            spans.append((record, payload, offset + len(header), offset + len(header) + len(payload.decode("utf-8"))))
+            offset += len(chunk.decode("utf-8"))
+        combined = b"".join(chunks)
+        derivative_sha = _sha(combined)
+        if derivative_root is not None:
+            derivative_root.mkdir(parents=True, exist_ok=True)
+            (derivative_root / f"{derivative_sha}.txt").write_bytes(combined)
+        identity = identities_by_sha[sha]
+        first = pages[0][0]
+        ocr_config = {"engine": config["engine"], "engine_version": config["engine_version"],
+                      "languages": config["languages"], "page_segmentation_mode": str(config["psm"][0]),
+                      "preprocessing": config["preprocessing"], "dpi": config["render_dpi"],
+                      "config_sha256": first["configuration_sha256"]}
+        derivative_id = f"{identity['doc_id']}@c16-pdf-page-ocr/2.1.0"
+        identity.setdefault("text_derivatives", []).append({
+            "derivative_id": derivative_id, "pipeline_name": "c16-pdf-page-ocr", "pipeline_version": "2.1.0",
+            "derivative_text_sha256": derivative_sha, "pagination_basis": "GENERATED_SEGMENT",
+            "methods": ["OCR_PAGE_IMAGE"], "ocr_config": ocr_config, "text_reliability": "not_assessed",
+            "quoting_permitted": False,
+            "coverage": {"units_total": len(pages), "units_with_text": len(pages),
+                         "images_total": 0, "images_text_extracted": 0}})
+        for record, payload, start, end in spans:
+            mean = record.get("mean_confidence")
+            anchor = {
+                "contract": "mimamsa-corpus-contract/2.0", "record_kind": "evidence_anchor", "anchor_id": "",
+                "doc_id": identity["doc_id"], "original_sha256": sha, "representation_sha256": sha,
+                "derivative_text_sha256": derivative_sha, "image_sha256": record["render_sha256"],
+                "locator": {"kind": "SOURCE_PHYSICAL_PAGE", "physical_page": record["physical_page"],
+                            "printed_page_label": None, "citable_as_source_page": True},
+                "text_span": {"passage_id": None, "char_start": start, "char_end": end,
+                              "text_sha256": _sha(payload)}, "bbox": None,
+                "extraction": {"method": "OCR_PAGE_IMAGE", "pipeline_name": "c16-pdf-page-ocr",
+                               "pipeline_version": "2.1.0", "ocr_config": ocr_config},
+                "quality": {"text_reliability": "not_assessed", "ocr_mean_confidence": mean,
+                            "low_confidence": bool(mean is None or mean < 60)},
+                "verification": {"state": "AUTOMATED_CANDIDATE_NOT_VERIFIED", "review_ref": None},
+                "quoting_permitted": False, "quote": None}
+            anchor["anchor_id"] = canonical.anchor_id(anchor)
+            out.append(anchor)
     return out
 
 
@@ -181,6 +253,9 @@ def build(args) -> dict:
     from mimamsa_contract.c16 import adapters, canonical, rules
 
     inventory = load_jsonl(Path(args.inventory))
+    if args.primary_image_register:
+        enrich_image_ocr(inventory, load_jsonl(Path(args.primary_image_register)),
+                         load_jsonl(Path(args.secondary_image_register)) if args.secondary_image_register else [])
     projected = adapters.from_pr76_inventory(
         inventory, collection="local:owner-corpus-c16", corpus_generation_id=args.generation_id)
     identities_by_sha = {row["source_copy"]["sha256"]: row for row in projected["identities"]}
@@ -190,15 +265,17 @@ def build(args) -> dict:
     projected["relationships"] = project_relationships(
         subject_rows, provision_rows,
         inventory_by_id, identities_by_sha, adapters._classification)
-    projected["taxonomy"] = augment_taxonomy(projected["taxonomy"], provision_rows)
+    taxonomy_nodes = json.loads(Path(args.legal_taxonomy).read_text(encoding="utf-8"))["nodes"]
+    projected["taxonomy"] = augment_taxonomy(v5_subject_taxonomy(taxonomy_nodes, subject_rows), provision_rows)
     projected["anchors"] = []
+    output = Path(args.output)
     if args.pdf_ocr_root:
         pdf_root = Path(args.pdf_ocr_root)
         config = json.loads((pdf_root / "OCR_CONFIGURATION.json").read_text(encoding="utf-8"))
-        projected["anchors"] += pdf_anchors(load_state_tree(pdf_root), pdf_root, config, identities_by_sha, canonical)
+        projected["anchors"] += pdf_anchors(load_state_tree(pdf_root), pdf_root, config, identities_by_sha, canonical,
+                                            output / "derivatives")
     projected["reviewed_records"] = []
 
-    output = Path(args.output)
     exchange = output / "exchange"
     exchange.mkdir(parents=True, exist_ok=True)
     populations = {
@@ -241,9 +318,11 @@ def parse_args(argv=None):
     p.add_argument("--contract-root", required=True); p.add_argument("--contract-commit", required=True)
     p.add_argument("--inventory", required=True); p.add_argument("--subject-relationships", required=True)
     p.add_argument("--provision-relationships", required=True); p.add_argument("--output", required=True)
+    p.add_argument("--legal-taxonomy", required=True)
     p.add_argument("--generation-id", required=True); p.add_argument("--producer-commit", required=True)
     p.add_argument("--restricted-register-sha256", required=True)
     p.add_argument("--pdf-ocr-root")
+    p.add_argument("--primary-image-register"); p.add_argument("--secondary-image-register")
     return p.parse_args(argv)
 
 

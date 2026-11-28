@@ -66,7 +66,8 @@ def test_pdf_anchor_binds_verified_source_render_config_and_text(tmp_path):
     class Canonical:
         @staticmethod
         def anchor_id(row): return "ANC-" + "1" * 24
-    rows = x.pdf_anchors([record], tmp_path, config, {"a" * 64: {"doc_id": "local-a"}}, Canonical)
+    identities = {"a" * 64: {"doc_id": "local-a", "text_derivatives": []}}
+    rows = x.pdf_anchors([record], tmp_path, config, identities, Canonical)
     assert len(rows) == 1
     anchor = rows[0]
     assert anchor["original_sha256"] == "a" * 64
@@ -74,6 +75,7 @@ def test_pdf_anchor_binds_verified_source_render_config_and_text(tmp_path):
     assert anchor["extraction"]["ocr_config"]["config_sha256"] == "c" * 64
     assert anchor["locator"]["physical_page"] == 3
     assert anchor["text_span"]["text_sha256"] == x.hashlib.sha256(text.encode()).hexdigest()
+    assert identities["a" * 64]["text_derivatives"][0]["derivative_text_sha256"] == anchor["derivative_text_sha256"]
 
 
 def test_pdf_anchor_rejects_unverified_or_held_evidence(tmp_path):
@@ -81,3 +83,24 @@ def test_pdf_anchor_rejects_unverified_or_held_evidence(tmp_path):
             {"state": "COMPLETE", "evidence_verified": True, "unreadable": False,
              "access_disposition": "HELD_ACCESS_MARKING_REVIEW"}]
     assert x.pdf_anchors(rows, tmp_path, {}, {}, object()) == []
+
+
+def test_image_ocr_enrichment_prefers_verified_readable_second_pass():
+    inventory = [{"embedded_images": [{"image_sha256": "a" * 64, "ocr_state": "REQUIRED"}]}]
+    primary = [{"image_sha256": "a" * 64, "state": "COMPLETE", "evidence_verified": True,
+                "unreadable": True, "artifact_sha256": {}}]
+    secondary = [{"image_sha256": "a" * 64, "state": "COMPLETE", "evidence_verified": True,
+                  "unreadable": False, "access_disposition": "SCREENED_NO_MARKING_DETECTED",
+                  "artifact_sha256": {"raw_text": "b" * 64}}]
+    x.enrich_image_ocr(inventory, primary, secondary)
+    assert inventory[0]["embedded_images"][0]["ocr_state"] == "DONE"
+    assert inventory[0]["embedded_images"][0]["ocr_derivative_sha256"] == "b" * 64
+
+
+def test_image_ocr_enrichment_keeps_unreadable_fail_closed():
+    inventory = [{"embedded_images": [{"image_sha256": "a" * 64, "ocr_state": "REQUIRED"}]}]
+    primary = [{"image_sha256": "a" * 64, "state": "COMPLETE", "evidence_verified": True,
+                "unreadable": True, "artifact_sha256": {}}]
+    x.enrich_image_ocr(inventory, primary, [])
+    assert inventory[0]["embedded_images"][0]["ocr_state"] == "FAILED"
+    assert "ocr_derivative_sha256" not in inventory[0]["embedded_images"][0]
