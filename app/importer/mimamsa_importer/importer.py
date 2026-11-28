@@ -440,7 +440,9 @@ def _import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public
 
     # C16 Stage 3 (S3-A): originals and derivative texts are held as verified PATHS and read one at a time (streaming
     # hash, re-verified on every later read or copy), so memory no longer grows with the corpus (streaming.py)
-    originals = BlobIndex([bundle / f["path"] for f in manifest.get("files", []) if f.get("kind") == "original"])
+    # (validate_bundle above checked every listed sha256 against the signed SHA256SUMS and the bytes; not re-hashed here)
+    originals = BlobIndex(entries=[(bundle / f["path"], f["sha256"], f["bytes"]) for f in manifest.get("files", [])
+                                   if f.get("kind") == "original"])
     texts = PathFiles(bundle, [f["path"] for f in manifest.get("files", []) if f.get("kind") == "text"])
     docs = _records(bundle, manifest, "documents_jsonl")
     derived = _records(bundle, manifest, "derived_text_jsonl")

@@ -557,7 +557,9 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
     eff = _effective(adms)
     eligible_ids = {a["admission_id"] for a in eff.values() if a["application_eligible"]}
     # derivative texts by sha256, read on demand (streaming index; C16 Stage 3)
-    texts = BlobIndex([bundle / p for p, f in listed.items() if f.get("kind") == "text" and (bundle / p).is_file()])
+    # (listed sha256 values were checked against SHA256SUMS and the bytes by the v1 validation; every read re-verifies)
+    texts = BlobIndex(entries=[(bundle / p, f["sha256"], f.get("bytes", 0)) for p, f in listed.items()
+                               if f.get("kind") == "text" and (bundle / p).is_file() and isinstance(f.get("sha256"), str)])
 
     def original_of(sha):
         if sha in originals:

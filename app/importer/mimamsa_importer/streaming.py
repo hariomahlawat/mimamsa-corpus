@@ -88,8 +88,12 @@ class VerifiedFile:
 class BlobIndex(Mapping):
     """sha256 -> bytes, backed by bundle paths; the first path seen for a hash wins (like dict.setdefault)."""
 
-    def __init__(self, paths):
+    def __init__(self, paths=(), *, entries=()):
+        """paths: hashed here (streaming). entries: (path, sha256, size) whose sha256 the signed-bundle validation has
+        already checked against SHA256SUMS; not re-hashed now, but every later read or copy re-verifies the bytes."""
         self._by_sha: dict[str, tuple[Path, int]] = {}
+        for p, sha, n in entries:
+            self._by_sha.setdefault(sha, (Path(p), int(n)))
         for p in paths:
             sha, n = sha256_path(p)
             self._by_sha.setdefault(sha, (Path(p), n))

@@ -270,8 +270,8 @@ def convert_canonical(plan: dict, read, local_path, *, register, v7_shas: set[st
         # already in the S1 cache: referenced by sha256 (not held in memory for the whole selection)
         out[f"v1/{text_path}"] = d["text_sha256"]
         out[f"v1/originals/{h}.pdf"] = h
-        data = None
         s = {"doc_id": did, "sha256": h, "bytes": len(data), "pages": phys, "doc_type": doc["doc_type"]}
+        data = None
         sample.append(s)
         derived_by_doc[did] = dict(d, _pages=pages_txt, _blob=bs.git_blob_sha(text))
     # candidates and research (build_sample logic; committed inputs read from the S1 cache, not the working tree)
