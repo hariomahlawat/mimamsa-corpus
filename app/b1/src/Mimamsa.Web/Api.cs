@@ -124,7 +124,7 @@ public static partial class Api
             var p = await User(ctx, s);
             if (p is null) return Json(new { error = "auth" }, 401);
             var d = s.VisibleDocument(docId);
-            if (d is null) return Json(new { state = "unavailable", notice = NotAvailable }, 404);
+            if (d is null || s.BoundaryExcluded(ctx, d.DocId, d.CopySha)) return Json(new { state = "unavailable", notice = NotAvailable }, 404);
             return Json(new { doc_id = d.DocId, note = "Headings as printed in the held copy. Amendment notes are compilation text, not a verified amendment history.",
                               sections = d.IsStatute ? Toc.Build(d).Select(e => new { number = e.Number, heading = e.Heading, page = e.Page, passage_id = e.PassageId, omitted_as_printed = e.Omitted }) : null });
         });
