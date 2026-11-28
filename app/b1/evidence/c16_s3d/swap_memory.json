@@ -1,0 +1,14 @@
+{
+  "note": "GC.GetTotalMemory(true) after full collections, in the shared xunit test process (other tests run in parallel, so absolute values carry noise; the weak-reference result is the assertion)",
+  "text_store": "memory (heaviest case: page text resident)",
+  "index": "memory",
+  "baseline_mb": 4.56,
+  "one_resident_mb": 4.85,
+  "two_resident_mb": 5.12,
+  "after_switch_old_still_pinned_mb": 5.12,
+  "after_last_pin_released_mb": 4.84,
+  "one_generation_cost_mb": 0.29,
+  "second_generation_cost_mb": 0.27,
+  "released_mb": 0.27,
+  "old_generation_collected": true
+}

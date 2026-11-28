@@ -1,0 +1,420 @@
+{
+  "acceptance_level": "FIXTURE (SG-5): SYN site copy, simulation-unbound staging markers, development keys; no gate closed on real data",
+  "swap": {
+    "requests_during_failed_load": 3,
+    "concurrent_responses": 84,
+    "ok": 53,
+    "ok_g1": 32,
+    "ok_g2": 21,
+    "not_serving_503_during_switch": 31,
+    "mixed": 0,
+    "memory_mb": {
+      "engines": "disk text store \u002B disk index (required in activation mode)",
+      "one_resident_before_swap": {
+        "working_set_mb": 90.3,
+        "private_mb": 36.6,
+        "managed_heap_mb": 0.2,
+        "gc_heap_size_mb": 6.6,
+        "gc_committed_mb": 11.7,
+        "gc_fragmented_mb": 4.1,
+        "gc_server": true,
+        "gc_count_gen2": 3,
+        "cpu_s": 3.95,
+        "threads": 32,
+        "text_store": {
+          "kind": "disk",
+          "cacheHits": 26,
+          "cacheMisses": 21,
+          "cachedChars": 1787,
+          "cacheBudgetChars": 33554432,
+          "documentsVerified": 13,
+          "pageReads": 21,
+          "bytesRead": 2818,
+          "fileBytes": 65536
+        }
+      },
+      "two_resident_inflight_pinned": {
+        "working_set_mb": 94.7,
+        "private_mb": 38.7,
+        "managed_heap_mb": 3.3,
+        "gc_heap_size_mb": 5.9,
+        "gc_committed_mb": 12.4,
+        "gc_fragmented_mb": 2.7,
+        "gc_server": true,
+        "gc_count_gen2": 5,
+        "cpu_s": 6.17,
+        "threads": 36,
+        "text_store": {
+          "kind": "disk",
+          "cacheHits": 37,
+          "cacheMisses": 10,
+          "cachedChars": 929,
+          "cacheBudgetChars": 33554432,
+          "documentsVerified": 7,
+          "pageReads": 10,
+          "bytesRead": 1600,
+          "fileBytes": 65536
+        }
+      },
+      "one_resident_after_release": {
+        "working_set_mb": 95.5,
+        "private_mb": 39.5,
+        "managed_heap_mb": 1.4,
+        "gc_heap_size_mb": 5.9,
+        "gc_committed_mb": 12.4,
+        "gc_fragmented_mb": 2.7,
+        "gc_server": true,
+        "gc_count_gen2": 7,
+        "cpu_s": 6.25,
+        "threads": 36,
+        "text_store": {
+          "kind": "disk",
+          "cacheHits": 37,
+          "cacheMisses": 10,
+          "cachedChars": 929,
+          "cacheBudgetChars": 33554432,
+          "documentsVerified": 7,
+          "pageReads": 10,
+          "bytesRead": 1600,
+          "fileBytes": 65536
+        }
+      }
+    }
+  },
+  "boundary": {
+    "doc_id_exclusion": "syn-j-allow",
+    "copy_hash_exclusion": "syn-s-act current copy",
+    "paused_routes": 23,
+    "range_bytes_after_acceptance": 256,
+    "range_requested": 3354,
+    "slice": 256,
+    "library_documents": "13 -\u003E 11",
+    "search_total_documents": "2 -\u003E 0"
+  },
+  "checks": {
+    "serves_g1_at_start": true,
+    "load_failure_refused_before_begin": {
+      "ok": true,
+      "detail": "PARTICIPANT_NOT_PREPARED"
+    },
+    "load_failure_old_generation_kept_serving": {
+      "ok": true,
+      "detail": "3 requests during the failed load: OK"
+    },
+    "inflight_request_paused_on_g1": true,
+    "swapped_in_process_to_g2": {
+      "ok": true,
+      "detail": "TX-00000001-1ff25529b34a"
+    },
+    "old_generation_kept_while_inflight_request_runs": true,
+    "inflight_request_answered_wholly_from_g1": {
+      "ok": true,
+      "detail": "200 R13-syn-fixture-20261125-00000001"
+    },
+    "old_generation_released_after_last_pin": true,
+    "concurrent_readers_never_mixed": {
+      "ok": true,
+      "detail": "84 responses, 53 ok, 0 mixed, 503 31"
+    },
+    "baseline_statutes_list_the_statute": true,
+    "baseline_studio_document_saved": {
+      "ok": true,
+      "detail": "200"
+    },
+    "baseline_studio_note_saved": true,
+    "baseline_studio_citations_available": true,
+    "baseline_range_has_several_slices": {
+      "ok": true,
+      "detail": "copy length 3354"
+    },
+    "baseline_range_206_complete": {
+      "ok": true,
+      "detail": "PartialContent 3354/3354"
+    },
+    "before_exclusion_200 graph-stats": {
+      "ok": true,
+      "detail": "200 /api/graph/stats"
+    },
+    "before_exclusion_200 graph-resolve": {
+      "ok": true,
+      "detail": "200 /api/graph/resolve?doc=syn-j-allow"
+    },
+    "before_exclusion_200 graph-node": {
+      "ok": true,
+      "detail": "200 /api/graph/node?id=JUD%3Asyn-j-allow"
+    },
+    "before_exclusion_200 graph-path": {
+      "ok": true,
+      "detail": "200 /api/graph/path?from=JUD%3Asyn-j-reject\u0026to=JUD%3Asyn-j-allow"
+    },
+    "before_exclusion_200 reasoning-assess": {
+      "ok": true,
+      "detail": "200 /api/reasoning/assess?kind=temporal\u0026doc=syn-s-act\u0026section=17"
+    },
+    "before_exclusion_200 reasoning-rule-gate": {
+      "ok": true,
+      "detail": "200 /api/reasoning/rule-gate"
+    },
+    "before_exclusion_200 commander-domains": {
+      "ok": true,
+      "detail": "200 /api/commander/domains"
+    },
+    "before_exclusion_200 commander-domain": {
+      "ok": true,
+      "detail": "200 /api/commander/domains/disciplinary"
+    },
+    "before_exclusion_200 statutes": {
+      "ok": true,
+      "detail": "200 /api/statutes"
+    },
+    "before_exclusion_200 library": {
+      "ok": true,
+      "detail": "200 /api/library"
+    },
+    "before_exclusion_200 relations": {
+      "ok": true,
+      "detail": "200 /api/documents/syn-s-act/relations"
+    },
+    "before_exclusion_200 studio-document": {
+      "ok": true,
+      "detail": "200 /api/studio/documents/sd-335a880e6fd633648e1b3854"
+    },
+    "before_exclusion_200 studio-versions": {
+      "ok": true,
+      "detail": "200 /api/studio/documents/sd-335a880e6fd633648e1b3854/versions"
+    },
+    "before_exclusion_200 studio-export": {
+      "ok": true,
+      "detail": "200 /api/studio/documents/sd-335a880e6fd633648e1b3854/export?format=md"
+    },
+    "before_exclusion_200 studio-documents": {
+      "ok": true,
+      "detail": "200 /api/studio/documents"
+    },
+    "before_exclusion_200 studio-notes": {
+      "ok": true,
+      "detail": "200 /api/studio/notes"
+    },
+    "before_exclusion_200 studio-templates": {
+      "ok": true,
+      "detail": "200 /api/studio/templates"
+    },
+    "before_exclusion_200 pdf-meta": {
+      "ok": true,
+      "detail": "200 /api/v2/documents/syn-j-allow/pdf-meta"
+    },
+    "before_exclusion_200 admin-overview": {
+      "ok": true,
+      "detail": "200 /api/admin/overview"
+    },
+    "before_exclusion_200 admin-withdraw-scope": {
+      "ok": true,
+      "detail": "200 /api/admin/withdraw-scope?doc_id=syn-j-allow"
+    },
+    "before_exclusion_200 admin-audit": {
+      "ok": true,
+      "detail": "200 /api/admin/audit"
+    },
+    "before_exclusion_200 search": {
+      "ok": true,
+      "detail": "200 /api/search?q=decision"
+    },
+    "requests_paused_after_their_handler_or_first_slice": {
+      "ok": true,
+      "detail": ""
+    },
+    "exclusion_accepted_and_applied": true,
+    "linearised_after_acceptance graph-stats": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance graph-resolve": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance graph-node": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance graph-path": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance reasoning-assess": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance reasoning-rule-gate": {
+      "ok": true,
+      "detail": "200 {\u0022evaluation_admitted\u0022:false,\u0022delivery_authorized\u0022:false,\u0022blockers\u0022:[\u0022AUTH-LEDGER is at version 0: n"
+    },
+    "linearised_after_acceptance commander-domains": {
+      "ok": true,
+      "detail": "200 {\u0022label\u0022:\u0022Candidate / research aid \u2014 not legal advice\u0022,\u0022disclaimer\u0022:\u0022This page groups provisions hel"
+    },
+    "linearised_after_acceptance commander-domain": {
+      "ok": true,
+      "detail": "200 {\u0022id\u0022:\u0022disciplinary\u0022,\u0022title\u0022:\u0022Disciplinary matters\u0022,\u0022purpose\u0022:\u0022Offences, investigation and hearing o"
+    },
+    "linearised_after_acceptance statutes": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance library": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance relations": {
+      "ok": true,
+      "detail": "404 {\u0022state\u0022:\u0022unavailable\u0022,\u0022notice\u0022:\u0022This document is not available in this installation.\u0022}"
+    },
+    "linearised_after_acceptance studio-document": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance studio-versions": {
+      "ok": true,
+      "detail": "200 {\u0022versions\u0022:[{\u0022version\u0022:2,\u0022state\u0022:\u0022draft\u0022,\u0022createdAt\u0022:\u00222026-11-28T03:51:12.499683Z\u0022,\u0022bytes\u0022:239},{\u0022v"
+    },
+    "linearised_after_acceptance studio-export": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance studio-documents": {
+      "ok": true,
+      "detail": "200 {\u0022documents\u0022:[{\u0022id\u0022:\u0022sd-335a880e6fd633648e1b3854\u0022,\u0022title\u0022:\u0022S3-D brief\u0022,\u0022template\u0022:\u0022blank\u0022,\u0022state\u0022:\u0022d"
+    },
+    "linearised_after_acceptance studio-notes": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance studio-templates": {
+      "ok": true,
+      "detail": "200 {\u0022templates\u0022:[{\u0022id\u0022:\u0022blank\u0022,\u0022label\u0022:\u0022Blank document\u0022,\u0022headings\u0022:[]},{\u0022id\u0022:\u0022research-note\u0022,\u0022label\u0022:\u0022R"
+    },
+    "linearised_after_acceptance pdf-meta": {
+      "ok": true,
+      "detail": "404 {\u0022state\u0022:\u0022unavailable\u0022,\u0022notice\u0022:\u0022This document is not available in this installation.\u0022}"
+    },
+    "linearised_after_acceptance admin-overview": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance admin-withdraw-scope": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance admin-audit": {
+      "ok": true,
+      "detail": "200 {\u0022rows\u0022:[{\u0022id\u0022:6,\u0022at\u0022:\u00222026-11-28T03:51:14.048526Z\u0022,\u0022actor\u0022:\u0022reader\u0022,\u0022action\u0022:\u0022studio_export\u0022,\u0022objec"
+    },
+    "linearised_after_acceptance search": {
+      "ok": true,
+      "detail": "503 {\u0022state\u0022:\u0022results_changed\u0022,\u0022notice\u0022:\u0022Results changed while the request ran; try again.\u0022}"
+    },
+    "linearised_after_acceptance range (bounded drain)": {
+      "ok": true,
+      "detail": "256 of 3354 bytes before the reset; slice 256"
+    },
+    "after_acceptance doc_id graph-resolve": {
+      "ok": true,
+      "detail": "404 {\u0022state\u0022:\u0022unavailable\u0022,\u0022notice\u0022:\u0022This document is not available in this installation.\u0022}"
+    },
+    "after_acceptance doc_id graph-node": {
+      "ok": true,
+      "detail": "404 {\u0022state\u0022:\u0022unavailable\u0022,\u0022notice\u0022:\u0022This item is not available in this installation.\u0022}"
+    },
+    "after_acceptance copy_hash reasoning-assess": {
+      "ok": true,
+      "detail": "404 {\u0022state\u0022:\u0022unavailable\u0022,\u0022notice\u0022:\u0022This document is not available in this installation.\u0022}"
+    },
+    "after_acceptance copy_hash relations": {
+      "ok": true,
+      "detail": "404 {\u0022state\u0022:\u0022unavailable\u0022,\u0022notice\u0022:\u0022This document is not available in this installation.\u0022}"
+    },
+    "after_acceptance doc_id pdf-meta": {
+      "ok": true,
+      "detail": "404 "
+    },
+    "after_acceptance copy_hash pdf-meta": {
+      "ok": true,
+      "detail": "404 "
+    },
+    "after_acceptance doc_id range": {
+      "ok": true,
+      "detail": "404 "
+    },
+    "after_acceptance graph-stats": {
+      "ok": true,
+      "detail": "200 {\u0022generation\u0022:\u0022R13-syn-fixture-20261125-00000002\u0022,\u0022builder\u0022:\u0022c15-graph-1\u0022,\u0022nodes\u0022:12,\u0022edges\u0022:1,\u0022node"
+    },
+    "after_acceptance graph-path": {
+      "ok": true,
+      "detail": "200 {\u0022found\u0022:false,\u0022max_depth\u0022:3,\u0022nodes\u0022:[],\u0022edges\u0022:[],\u0022notice\u0022:\u0022No connection of that length through av"
+    },
+    "after_acceptance statutes": {
+      "ok": true,
+      "detail": "200 {\u0022statutes\u0022:[{\u0022doc_id\u0022:\u0022syn-s-notice\u0022,\u0022title\u0022:\u0022Notice F-20 (synthetic)\u0022,\u0022type\u0022:\u0022notification\u0022,\u0022numbe"
+    },
+    "after_acceptance library": {
+      "ok": true,
+      "detail": "200 {\u0022release\u0022:{\u0022release_id\u0022:\u0022R13-syn-fixture-20261125-00000002\u0022,\u0022created_at\u0022:\u00222026-11-25T00:00:00Z\u0022,\u0022hf"
+    },
+    "after_acceptance commander-domain": {
+      "ok": true,
+      "detail": "200 {\u0022id\u0022:\u0022disciplinary\u0022,\u0022title\u0022:\u0022Disciplinary matters\u0022,\u0022purpose\u0022:\u0022Offences, investigation and hearing o"
+    },
+    "after_acceptance rule-gate": {
+      "ok": true,
+      "detail": "200 {\u0022evaluation_admitted\u0022:false,\u0022delivery_authorized\u0022:false,\u0022blockers\u0022:[\u0022AUTH-LEDGER is at version 0: n"
+    },
+    "after_acceptance studio-export": {
+      "ok": true,
+      "detail": "200 # S3-D brief\r\n\r\n\u003E Not legally approved. Prepared in Mimamsa Document Studio as a research and drafti"
+    },
+    "after_acceptance studio-notes": {
+      "ok": true,
+      "detail": "200 {\u0022notes\u0022:[{\u0022id\u0022:\u0022sn-432e4a9e360675da9e458d7e\u0022,\u0022text\u0022:\u0022see the judgment\u0022,\u0022created_at\u0022:\u00222026-11-28T03:"
+    },
+    "library_count_excludes_both": {
+      "ok": true,
+      "detail": "13 -\u003E 11"
+    },
+    "admin_overview_counts_exclude_both": true,
+    "graph_stats_do_not_count_excluded": {
+      "ok": true,
+      "detail": "18 -\u003E 12"
+    },
+    "studio_citations_show_source_no_longer_available": true,
+    "studio_export_content_free": true,
+    "studio_note_reference_unavailable": true,
+    "admin_withdraw_scope_excluded": true,
+    "admin_local_withdrawal_still_possible": {
+      "ok": true,
+      "detail": "200"
+    },
+    "admin_audit_row_of_excluded_copy_redacted": true,
+    "admin_reinstate_cannot_override_signed_exclusion": {
+      "ok": true,
+      "detail": "404"
+    },
+    "search_totals_recounted": {
+      "ok": true,
+      "detail": "2 -\u003E 0 (removed 2)"
+    },
+    "search_facets_recounted_exactly": {
+      "ok": true,
+      "detail": "act:1-\u003E0;judgment:1-\u003E0"
+    },
+    "rollback_swapped_in_process_to_g1": {
+      "ok": true,
+      "detail": "TX-00000002-2f9f6423c747"
+    },
+    "rollback_doc_id_exclusion_holds_on_g1": true,
+    "rollback_copy_hash_exclusion_applies_to_that_copy_only": {
+      "ok": true,
+      "detail": "G1 statute copy is the excluded copy; 404"
+    },
+    "route_inventory_startup_self_check": true
+  }
+}

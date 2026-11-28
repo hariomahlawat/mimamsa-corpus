@@ -355,7 +355,9 @@ public class C16Cp1SliceTests
                                         "/api/studio/notes", $"/api/v2/documents/{legacy}/pdf-meta" })
             {
                 var resp = await c2.GetAsync(url);
-                Check("served_behind_boundary " + url.Split('?')[0], resp.StatusCode == HttpStatusCode.OK, $"{(int)resp.StatusCode}");
+                var body = await resp.Content.ReadAsStringAsync();   // served (a 404 such as not_in_graph is an answer), never refused
+                Check("served_behind_boundary " + url.Split('?')[0], resp.StatusCode is HttpStatusCode.OK or HttpStatusCode.NotFound
+                      && !body.Contains("not_available_under_activation"), $"{(int)resp.StatusCode}");
             }
             var a2 = await w2.LoginAsync("admin");
             Check("served_behind_boundary /api/admin/overview", await St(a2, "/api/admin/overview") == HttpStatusCode.OK);
