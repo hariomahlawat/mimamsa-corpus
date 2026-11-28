@@ -6,6 +6,7 @@
 //   rrprobe    <site> <reranker> <onnxFile> <query> [n=15]        C15 diagnosis: cross-encoder logit of every passage for one query
 //   rrbench    <site> <reranker> <onnxFile> [pairs=60]            C15: reranker latency per pair (CPU)
 //   calsub     <site> <model> <queries.json> <n> <seed> <out.json>   C15: the C14 floor rule over a seeded random passage sample
+//   dump       <site> <n> <seed> <out.jsonl>                      C16 S3-E: seeded passage sample (distractors for the dev set)
 // calibrate never reads the retrieval oracle or its fixture: it uses the C14 walkthrough query set on the real sample.
 using System.Diagnostics;
 using System.Text.Json;
@@ -111,6 +112,23 @@ switch (a[0])
         { sw.Restart(); ce.Score(q, texts); lat.Add(sw.Elapsed.TotalMilliseconds); }
         Console.WriteLine(JsonSerializer.Serialize(new { model = ce.Label, pairs = texts.Count, ms_per_query = lat.Select(x => Math.Round(x)), ms_per_pair = Math.Round(lat.Average() / texts.Count, 2),
             working_set_mb = Process.GetCurrentProcess().WorkingSet64 / 1048576 }));
+        break;
+    }
+    case "dump":
+    {
+        // C16 S3-E development data: a seeded uniform sample of passages (text + document title/type) as JSONL, used as
+        // realistic distractors around the synthetic development set. Never run on the SYN (oracle) site.
+        int n = int.Parse(a[2]), seed = int.Parse(a[3]);
+        var rng = new Random(seed);
+        var idx = Enumerable.Range(0, ix.N).OrderBy(_ => rng.Next()).Take(n).OrderBy(i => i).ToList();
+        using var w = new StreamWriter(a[4], false, new System.Text.UTF8Encoding(false));
+        foreach (var i in idx)
+        {
+            var p = ix.Passages[i]; var d = ix.Docs[ix.DocOf(i)];
+            w.WriteLine(new JsonObject { ["i"] = i, ["doc_id"] = p.DocId, ["passage_id"] = p.PassageId, ["doc_type"] = d.DocType, ["title"] = d.Title,
+                ["language"] = d.Language, ["text"] = p.Text }.ToJsonString());
+        }
+        Console.WriteLine($"{idx.Count} passages written (seed {seed})");
         break;
     }
     case "calsub":
