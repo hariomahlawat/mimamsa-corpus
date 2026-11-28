@@ -214,8 +214,8 @@ def get_vectors(model, repr_name, corpus, queries, emb=None, compute=False):
         if miss_p:
             emb = emb or Embedder(model)
             t = time.time()
-            for s in range(0, len(miss_p), 128):
-                chunk = miss_p[s:s + 128]
+            for s in range(0, len(miss_p), 32):
+                chunk = miss_p[s:s + 32]
                 tc.add(chunk, emb.embed(chunk, 256))
                 print(f"  {model}/{repr_name}: {s + len(chunk)}/{len(miss_p)} ({time.time() - t:.0f} s)", file=sys.stderr, flush=True)
             print(f"  embedded {len(miss_p)} texts in {time.time() - t:.0f} s", file=sys.stderr)

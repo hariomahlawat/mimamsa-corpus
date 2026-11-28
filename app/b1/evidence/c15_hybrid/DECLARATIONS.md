@@ -71,3 +71,14 @@ Consequence: nothing S3-E reports on RET-07/RET-10 is independent evidence. Only
 | Model selection | Highest dev semantic@10, subject to out-of-domain gate opening 0/8 and lexical-control top-3 no worse than e5-small `floor`; ties to the smaller model. Candidates: multilingual-e5-small, -base, -large (owner's int8 ONNX), bge-m3 (int8 ONNX), snowflake-arctic-embed-m-v2.0 (owner's int8 ONNX) |
 | Representation | `plain` unless `title` (document title prefixed) gains on dev semantic@10 without losing the constraints above |
 | Oracle runs | Only configurations declared below, each with hybrid off too; each result is reported whatever it is and is not followed by retuning |
+
+### D3. First oracle runs (declared after e5-small, e5-base and a first arctic dev result; before any S3-E hybrid-on oracle run)
+
+Dev results so far (1,000-distractor stride, `dev/out/*_s3.json`): e5-small `floor` 4/16, `gate_rank` K=10 5/16, both with out-of-domain gate 0/8; e5-base `floor` 7/16, `gate_rank` 8/16 but out-of-domain gate 2/8 (fails the D2 constraint); z-score rules open the gate on 7-8/8 out-of-domain queries and are **dropped**. The int8 models are being re-embedded one text per call (see D4 note below), so their earlier batched numbers are void.
+
+| Run | Model | Admission | Gate / floor | Other |
+| --- | --- | --- | --- | --- |
+| O1a | multilingual-e5-small `614241f6` | `floor` | **0.8548** (D2 rule over the 3,000-passage seeded sample, `dev/out/e5-small_plain_s1.json`) | plain passages, batch 16 |
+| O1b | same | `gate_rank`, K = 10 | 0.8548 | same |
+
+Both are run once, hybrid off as well, and reported whatever the outcome.
