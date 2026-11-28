@@ -164,7 +164,13 @@ def outcome(journey: dict) -> dict:
     from mimamsa_contract.c16 import components
     contracts = {k: json.loads((REPO / "app" / "contract" / "fixtures" / "c16" / "v2_1" / "component_contracts" / f"{k}.json").read_text(encoding="utf-8"))
                  for k in ("GRAPH", "KNOWLEDGE_ROWS", "LEXICAL_INDEX", "TEXT_STORE", "VECTOR_PACK")}
-    o = components.activation_outcome(journey["component_results"], contracts, mode="development")
+    # site staging states (GenerationStaging, explicit) -> the reference rule's inputs: a lexical-only omission is a missing
+    # vector pack; a site-built text store is a local rebuild (never a shipped verification)
+    to_ref = {"VERIFIED": "VERIFIED", "OMITTED_DEGRADED": "MISSING", "REBUILT_VERIFIED": "FAILED"}
+    states = journey["component_results"]
+    if any(v not in to_ref for v in states.values()):
+        raise SystemExit(f"unexpected staging state in {states}")
+    o = components.activation_outcome({k: to_ref[v] for k, v in states.items()}, contracts, mode="development")
     if o["result"] == "ACTIVE_FULL" or o["service_level"] == "FULL":
         raise SystemExit("CP-1 must never be ACTIVE_FULL")
     if o["result"] != "ACTIVE_DEGRADED" or o["service_level"] != "DEGRADED_LEXICAL_ONLY" or o["site_embedding"] != "NEVER":

@@ -59,6 +59,8 @@ public sealed class ActivationEngineOptions
     public string? RecoveryTarget { get; init; }
     public IDiskProbe Disk { get; init; } = new DriveDiskProbe();
     public IExternalWriterLock? ExternalLock { get; init; }
+    /// C16-CP1-04: a production engine (the default) refuses releases staged in development mode.
+    public bool Production { get; init; } = true;
     public Action<string>? StepHook { get; set; }
     public Action<string>? Log { get; init; }
 }
@@ -202,6 +204,21 @@ public sealed class ActivationEngine : IDisposable
         }
     }
 
+    // ------------------------------------------------------------------ staging evidence (C16-CP1-02/04)
+    /// Null when the generation's staging evidence may be relied on now: the bound marker validates fully against the
+    /// files, a production engine never accepts a development-staged release, and the database still holds exactly the
+    /// staged rows. An unbound marker is accepted only on a simulation site (B06 harness).
+    public string? EvidenceProblem(string gen)
+    {
+        var why = _cat.MarkerProblem(gen, full: true, out var m);
+        if (why is not null) return why;
+        if (m is null) return null;
+        if (_o.Production && m["production"]?.GetValue<bool>() != true)
+            return "a development-staged (development-signed or uncalibrated) release is refused in production (C16-CP1-04)";
+        if (_o.Database is IStagedKnowledgeEvidence db && db.StagedEvidenceProblem(gen, m["db"]!.AsObject()) is { } dbWhy) return dbWhy;
+        return null;
+    }
+
     // ------------------------------------------------------------------ transitions
     public string Transition(string target, string to, string action = "ACTIVATE")
     {
@@ -248,6 +265,19 @@ public sealed class ActivationEngine : IDisposable
                 throw;
             }
             Step("BEGIN");
+            // C16-CP1-02: the staging evidence is re-validated (every bound file re-hashed, staged rows re-digested in the
+            // database, production mode) immediately before DECIDED; a failure aborts the transaction, nothing changes.
+            if (target == "KNOWLEDGE" && EvidenceProblem(to) is { } why)
+            {
+                Lease.Authorised(() =>
+                {
+                    ActivationJournal.Append(_s.JournalPath, ActivationJournal.Read(_s.JournalPath), txn, "ABORTED", Lease.WriterId, Lease.Epoch);
+                    CleanupScratch(txn);
+                    _s.WriteMarker(SiteState.OPEN);
+                });
+                TryOpenParticipant(txn);
+                throw new ActivationRefused("STAGING_EVIDENCE_INVALID", why);
+            }
             Lease.Authorised(() => ActivationJournal.Append(_s.JournalPath, ActivationJournal.Read(_s.JournalPath), txn, "DECIDED", Lease.WriterId, Lease.Epoch));
             Step("DECIDED");
             RollForward(txn, "");
@@ -383,6 +413,10 @@ public sealed class ActivationEngine : IDisposable
             _s.WriteApplied(ap);
             CleanupScratch(null);
             Step("recover:reconciled");
+            // C16-CP1-02: recovery never reopens onto knowledge whose staging evidence no longer validates (fail closed:
+            // the site stays RECOVERING and serves nothing).
+            if (EvidenceProblem(_s.ReadPointer("KNOWLEDGE")!) is { } evWhy)
+                throw new ActivationRefused("STAGING_EVIDENCE_INVALID", "recovery: " + evWhy);
             _s.WriteMarker(SiteState.OPEN);
         });
         TryOpenParticipant("RECOVERY");

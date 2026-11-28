@@ -11,6 +11,13 @@ public sealed record PublicationRow(string TxnId, string Release, string Channel
 
 /// Database commit domain. ApplyAsync runs in ONE database transaction: (KNOWLEDGE) repoint the views, and insert the
 /// publication row keyed by txn (no-op when present).
+/// C16-CP1-02: a database commit domain that can prove the staged knowledge rows still equal the staging evidence.
+public interface IStagedKnowledgeEvidence
+{
+    /// Null when the generation's staged (or promoted) rows equal the marker's DB evidence; else why.
+    string? StagedEvidenceProblem(string generation, JsonObject dbEvidence);
+}
+
 public interface IActivationDatabase
 {
     void Apply(string txnId, string target, string to);
@@ -130,10 +137,36 @@ public sealed class GenerationCatalog
     public GenerationCatalog(SiteLayout s) { _s = s; }
     public const string Marker = "C16_VERIFIED.json";
 
+    /// C16-CP1-02: a generation is installed only if its marker is bound staging evidence that still matches the files
+    /// (StagingMarker.Validate, cheap form). An unbound legacy marker counts only on a simulation site (B06 harness).
     public List<string> Installed() =>
         Directory.Exists(_s.GenerationsDir)
-            ? Directory.GetDirectories(_s.GenerationsDir).Where(d => File.Exists(Path.Combine(d, Marker))).Select(Path.GetFileName).Select(x => x!).Order(StringComparer.Ordinal).ToList()
+            ? Directory.GetDirectories(_s.GenerationsDir).Where(d => File.Exists(Path.Combine(d, Marker)))
+                .Select(Path.GetFileName).Select(x => x!).Where(g => MarkerProblem(g, full: false) is null).Order(StringComparer.Ordinal).ToList()
             : [];
+
+    public bool SimulationSite => File.Exists(Path.Combine(_s.StateDir, StagingMarker.SimulationFlag));
+
+    /// Null when the generation's marker may be relied on (bound and matching; or unbound on a simulation site); else why.
+    public string? MarkerProblem(string gen, bool full) => MarkerProblem(gen, full, out _);
+
+    public string? MarkerProblem(string gen, bool full, out JsonObject? marker)
+    {
+        var why = StagingMarker.Validate(_s, SiteLayout.CheckId(gen), full, out marker);
+        if (why == "marker is not bound staging evidence" && SimulationSite) { marker = null; return null; }
+        return why;
+    }
+
+    /// Remove a marker before (re-)verification, so a failed verification leaves the generation not installed.
+    public void Invalidate(string gen)
+    {
+        var p = Path.Combine(_s.GenerationsDir, SiteLayout.CheckId(gen), Marker);
+        if (File.Exists(p)) { File.SetAttributes(p, FileAttributes.Normal); File.Delete(p); DurableFile.SyncDirectory(Path.GetDirectoryName(p)!); }
+    }
+
+    /// Write bound staging evidence (StagingMarker) as the generation's marker.
+    public void StageBound(string gen, byte[] markerBytes) =>
+        StagingMarker.Write(Path.Combine(_s.GenerationsDir, SiteLayout.CheckId(gen), Marker), markerBytes);
 
     public long MeasuredBytes(string gen)
     {

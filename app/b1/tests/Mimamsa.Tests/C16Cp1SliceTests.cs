@@ -163,14 +163,60 @@ public class C16Cp1SliceTests
             {
                 Check($"not_installed_before_staging_{gid}", !cat.Installed().Contains(gid));
                 var tlog = new List<string>();
-                var rep = await GenerationStaging.VerifyAndStageAsync(layout, gid, loader, Path.Combine(work, $"verify-text-{r}-{gid}"), tlog.Add);
+                var rep = await GenerationStaging.VerifyAndStageAsync(layout, gid, loader, Path.Combine(work, $"verify-text-{r}-{gid}"), tlog.Add, production: false);   // development fixture (C16-CP1-04)
                 Check($"staging_verified_and_marked_{gid}", rep.Ok && cat.Installed().Contains(gid), string.Join("; ", rep.Issues));
                 Check($"b03_loader_rows_and_graph_{gid}", rep.Components["KNOWLEDGE_ROWS"] == "VERIFIED" && rep.Components["GRAPH"] == "VERIFIED");
                 Check($"b04_text_store_adopted_{gid}", rep.TextStoreOrigin == "adopted" && rep.Components["TEXT_STORE"] == "VERIFIED", string.Join(" | ", tlog));
                 Check($"b04_lexical_index_sha_and_quick_check_{gid}", rep.Components["LEXICAL_INDEX"] == "VERIFIED");
-                Check($"no_vector_pack_{gid}", rep.Components["VECTOR_PACK"] == "MISSING" && rep.DeclaredServiceLevel == "DEGRADED_LEXICAL_ONLY");
+                Check($"no_vector_pack_{gid}", rep.Components["VECTOR_PACK"] == "OMITTED_DEGRADED" && rep.DeclaredServiceLevel == "DEGRADED_LEXICAL_ONLY");
                 loads[gid] = new JsonObject { ["tables"] = new JsonArray(rep.LoadedTables.Select(t => (JsonNode)t).ToArray()) };
                 if (gid == g2) foreach (var (k, v) in rep.Components) componentResults[k] = v;
+            }
+            // ---------------------------------------------------------------- C16-CP1-02/04: staging evidence negatives
+            {
+                var g2dir = Path.Combine(site, "generations", g2);
+                var markerPath = Path.Combine(g2dir, GenerationCatalog.Marker);
+                var good = File.ReadAllBytes(markerPath);
+                var mk = JsonNode.Parse(good)!.AsObject();
+                Check("marker_binds_release_files_components_and_db",
+                      (string?)mk["format"] == StagingMarker.Format && mk["files"]!.AsObject().ContainsKey("generation.json")
+                      && mk["files"]!.AsObject().ContainsKey("accelerators/search-index/search.sqlite") && mk["component_digests"]!.AsObject().Count >= 8
+                      && (string?)mk["db"]!["staging_schema"] == KnowledgeAllowlist.StagingSchema(seq[g2]) && mk["db"]!["tables"]!.AsObject().Count == 7
+                      && mk["production"]!.GetValue<bool>() == false);
+                // corrupted marker: any edit breaks the self-digest; the generation is not installed
+                var corrupt = mk.DeepClone().AsObject(); corrupt["measured_bytes"] = 1;
+                StagingMarker.Write(markerPath, Mimamsa.Core.Activation.CanonicalJson.Bytes(corrupt));
+                Check("corrupted_marker_not_installed", !cat.Installed().Contains(g2), cat.MarkerProblem(g2, false));
+                // stale marker: a marker for another release, even with a valid self-digest
+                var stale = mk.DeepClone().AsObject(); stale.Remove("marker_sha256"); stale["release_id"] = g1;
+                stale["marker_sha256"] = Convert.ToHexString(SHA256.HashData(Mimamsa.Core.Activation.CanonicalJson.Bytes(stale))).ToLowerInvariant();
+                StagingMarker.Write(markerPath, Mimamsa.Core.Activation.CanonicalJson.Bytes(stale));
+                Check("stale_marker_from_another_release_not_installed", !cat.Installed().Contains(g2) && cat.MarkerProblem(g2, false)!.Contains("another release"), cat.MarkerProblem(g2, false));
+                // another generation's marker copied in
+                File.Copy(Path.Combine(site, "generations", g1, GenerationCatalog.Marker), markerPath, true);
+                Check("foreign_marker_not_installed", !cat.Installed().Contains(g2), cat.MarkerProblem(g2, false));
+                StagingMarker.Write(markerPath, good);
+                Check("restored_marker_installed", cat.Installed().Contains(g2));
+                // missing lexical path: restaging fails, and the failed re-verification leaves NO marker
+                var lexPath = Path.Combine(g2dir, "accelerators", "search-index", "search.sqlite");
+                File.Move(lexPath, lexPath + ".moved");
+                var bad = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-x"), production: false);
+                Check("missing_lexical_index_fails_staging", !bad.Ok && bad.Components["LEXICAL_INDEX"] == "FAILED" && bad.Issues.Any(i => i.Contains("missing")), string.Join("; ", bad.Issues));
+                Check("failed_restaging_leaves_no_marker", !File.Exists(markerPath) && !cat.Installed().Contains(g2));
+                File.Move(lexPath + ".moved", lexPath);
+                // staging lease: one stager at a time
+                using (new FileStream(Path.Combine(layout.GenerationsDir, GenerationStaging.LeaseFile), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
+                {
+                    var leased = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-y"), production: false);
+                    Check("staging_lease_excludes_a_second_stager", !leased.Ok && leased.Issues.Single().StartsWith("STAGING_LEASE_HELD"));
+                }
+                // C16-CP1-04: production staging refuses this development-signed, uncalibrated fixture release
+                var prod = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-p"), production: true);
+                Check("production_staging_refuses_dev_signed_uncalibrated", !prod.Ok && prod.Issues.Any(i => i.StartsWith("DEVELOPMENT_RELEASE_IN_PRODUCTION"))
+                      && prod.Issues.Any(i => i.StartsWith("UNCALIBRATED_IN_PRODUCTION")) && !File.Exists(markerPath), string.Join("; ", prod.Issues));
+                // restage for real (development fixture)
+                var again = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-z"), production: false);
+                Check("restaged_after_negatives", again.Ok && cat.Installed().Contains(g2), string.Join("; ", again.Issues));
             }
             results["loads"] = loads;
             results["component_results"] = componentResults;
@@ -190,6 +236,7 @@ public class C16Cp1SliceTests
             eng = new ActivationEngine(new ActivationEngineOptions
             {
                 Site = layout, WriterId = "cp1-activator", Database = kdb, Exclusions = reader, ExternalLock = pg, Log = _ => { },
+                Production = false,   // development fixture site (dev-signed, uncalibrated): explicitly not production
             });
             eng.AcquireLock();
             kdb.EnsureSchema(g1);
@@ -215,6 +262,38 @@ public class C16Cp1SliceTests
 
             // ---------------------------------------------------------------- B06: ACTIVATE G2 (journal, channel, DB_APPLIED)
             eng.Options.Participant = new PipeParticipantLink(new ControlChannelOptions { PipeName = pipe, Secret = ControlChannelOptions.LoadSecret(layout.ChannelKeyPath) });
+
+            // ---------------------------------------------------------------- C16-CP1-02: evidence re-validated at DECIDED
+            int Aborted() => eng.Inspector.Journal().Entries.Count(e => e.Step == "ABORTED");
+            // (a) a component file mutated after staging, same size (the cheap Installed check still passes)
+            var edges = Path.Combine(site, "generations", g2, "accelerators", "graph", "graph_edges.jsonl");
+            var edgesGood = File.ReadAllBytes(edges);
+            var edgesBad = (byte[])edgesGood.Clone(); edgesBad[^2] = (byte)(edgesBad[^2] == (byte)'}' ? ']' : '}');
+            File.WriteAllBytes(edges, edgesBad);
+            Check("mutated_file_still_passes_cheap_installed_check", cat.Installed().Contains(g2));
+            var ex1 = Assert.Throws<ActivationRefused>(() => eng.Transition("KNOWLEDGE", g2));
+            Check("mutation_after_staging_refused_at_decided", ex1.Code == "STAGING_EVIDENCE_INVALID" && Aborted() == 1
+                  && layout.ReadPointer("KNOWLEDGE") == g1 && layout.ReadMarker() == SiteState.OPEN && kdb.Views() == g1, ex1.Message);
+            File.WriteAllBytes(edges, edgesGood);
+            Check("web_still_serves_g1_after_aborted_switch", await St(c1, $"/api/documents/{legacy}") == HttpStatusCode.OK);
+            // (b) the staged rows tampered in the database after staging
+            var tax = KnowledgeAllowlist.Find("taxonomy_nodes")!;
+            var where = string.Join(" AND ", tax.PrimaryKey.Select(k => $"t.\"{k}\" = x.\"{k}\""));
+            string stg = KnowledgeAllowlist.StagingSchema(seq[g2]);
+            await using (var c = await owner.OpenConnectionAsync())
+            await using (var q = new NpgsqlCommand($"CREATE TABLE public.c16cp1_tamper AS SELECT * FROM {stg}.taxonomy_nodes LIMIT 1; DELETE FROM {stg}.taxonomy_nodes t USING public.c16cp1_tamper x WHERE {where};", c))
+                await q.ExecuteNonQueryAsync();
+            var ex2 = Assert.Throws<ActivationRefused>(() => eng.Transition("KNOWLEDGE", g2));
+            Check("staged_rows_tampered_refused_at_decided", ex2.Code == "STAGING_EVIDENCE_INVALID" && ex2.Message.Contains("taxonomy_nodes") && Aborted() == 2
+                  && layout.ReadPointer("KNOWLEDGE") == g1, ex2.Message);
+            await using (var c = await owner.OpenConnectionAsync())
+            await using (var q = new NpgsqlCommand($"INSERT INTO {stg}.taxonomy_nodes SELECT * FROM public.c16cp1_tamper; DROP TABLE public.c16cp1_tamper;", c))
+                await q.ExecuteNonQueryAsync();
+            // (c) C16-CP1-04: a production engine refuses the development-staged release
+            using (var prodEng = new ActivationEngine(new ActivationEngineOptions { Site = layout, WriterId = "cp1-prod-probe", Database = kdb, Exclusions = reader, Production = true }))
+                Check("production_engine_refuses_development_staged_release", prodEng.EvidenceProblem(g2)?.Contains("refused in production") == true, prodEng.EvidenceProblem(g2));
+            Check("development_engine_accepts_restored_evidence", eng.EvidenceProblem(g2) is null, eng.EvidenceProblem(g2));
+
             var txn = eng.Transition("KNOWLEDGE", g2);
             Check("b06_activated_g2", layout.ReadPointer("KNOWLEDGE") == g2 && layout.ReadMarker() == SiteState.OPEN, txn);
             Check("b06_db_applied_views_on_kr_g2", kdb.KnowledgeSchema() == KnowledgeAllowlist.ActiveSchema(seq[g2]) && kdb.Views() == g2, kdb.KnowledgeSchema());
