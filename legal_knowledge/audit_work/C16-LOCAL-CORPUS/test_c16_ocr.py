@@ -108,6 +108,29 @@ class Tests(unittest.TestCase):
          "configuration_sha256":"current","access_disposition":"SCREENED_NO_MARKING_DETECTED"}]
   row=o.propagate_access_holds(inventory,rows,[],expected_image_configurations={"current"})[0]
   self.assertEqual(row["document_access_disposition"],"HELD_ACCESS_MARKING_REVIEW")
+ def test_access_configuration_arguments_are_required_for_clean_release(self):
+  args=o.parse_args(["--mode","access-register","--inventory","inventory.jsonl","--output","out",
+                     "--primary-register","primary.jsonl","--pdf-register","pdf.jsonl",
+                     "--image-config","image-current","--pdf-config","pdf-current"])
+  self.assertEqual(args.image_config,["image-current"])
+  self.assertEqual(args.pdf_config,["pdf-current"])
+ def test_access_register_passes_explicit_configuration_sets(self):
+  class Args:
+   inventory="inventory";primary_register="primary";secondary_register=None;pdf_register="pdf";output="out"
+   image_config=["image-current"];pdf_config=["pdf-current"]
+  calls=[]
+  old_load,old_propagate,old_write=o.load_jsonl,o.write_jsonl_atomic,o.propagate_access_holds
+  try:
+   o.load_jsonl=lambda p: ([] if str(p)=="inventory" else [{"configuration_sha256":"x"}])
+   o.write_jsonl_atomic=lambda p,rows: None
+   def capture(inventory,images,pdfs,expected_image_configurations=None,expected_pdf_configurations=None):
+    calls.append((expected_image_configurations,expected_pdf_configurations));return []
+   o.propagate_access_holds=capture
+   with tempfile.TemporaryDirectory() as td:
+    Args.output=td;o.run_access_register(Args())
+   self.assertEqual(calls,[({"image-current"},{"pdf-current"})])
+  finally:
+   o.load_jsonl,o.write_jsonl_atomic,o.propagate_access_holds=old_load,old_propagate,old_write
  def test_pdf_cache_key_changes_with_render_or_configuration(self):
   base=o.pdf_processing_key("a"*64,1,"b"*64,"c"*64)
   self.assertNotEqual(base,o.pdf_processing_key("a"*64,1,"d"*64,"c"*64))

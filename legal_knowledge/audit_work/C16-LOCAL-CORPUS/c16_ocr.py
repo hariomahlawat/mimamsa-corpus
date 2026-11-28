@@ -344,21 +344,31 @@ def run_access_register(args):
     image_rows=load_jsonl(args.primary_register)
     if args.secondary_register:image_rows+=load_jsonl(args.secondary_register)
     pdf_rows=load_jsonl(args.pdf_register) if args.pdf_register else []
-    rows=propagate_access_holds(load_jsonl(args.inventory),image_rows,pdf_rows)
+    rows=propagate_access_holds(
+        load_jsonl(args.inventory), image_rows, pdf_rows,
+        expected_image_configurations=set(args.image_config or []),
+        expected_pdf_configurations=set(args.pdf_config or []),
+    )
     output=Path(args.output);output.mkdir(parents=True,exist_ok=True)
     write_jsonl_atomic(output/"DOCUMENT_ACCESS_REGISTER.jsonl",rows)
     summary={"documents":len(rows),"screened":sum(r["document_access_disposition"]=="SCREENED_NO_MARKING_DETECTED" for r in rows),
              "access_marking_holds":sum(r["document_access_disposition"]=="HELD_ACCESS_MARKING_REVIEW" for r in rows),
              "unreadable_or_incomplete_holds":sum(r["document_access_disposition"]=="HELD_UNREADABLE_OR_PROCESSING_ERROR" for r in rows),
              "derivatives_withheld":sum(r["derivative_access_disposition"]=="WITHHOLD_ALL_DERIVATIVES" for r in rows)}
-    (output/"DOCUMENT_ACCESS_SUMMARY.json").write_text(json.dumps(summary,indent=2),encoding="utf-8")
+    atomic_write(output/"DOCUMENT_ACCESS_SUMMARY.json",json.dumps(summary,indent=2).encode("utf-8"))
     return 0
 
+def parse_args(argv=None):
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument("--mode",choices=("primary","second-pass","pdf-pages","access-register"),default="primary");p.add_argument("--source");p.add_argument("--inventory",required=True);p.add_argument("--output",required=True);p.add_argument("--tesseract",default=r"C:\Program Files\Tesseract-OCR\tesseract.exe");p.add_argument("--tessdata");p.add_argument("--primary-register");p.add_argument("--secondary-register");p.add_argument("--pdf-register");p.add_argument("--workers",type=int,default=2);p.add_argument("--limit",type=int)
+    p.add_argument("--image-config",action="append",default=[],help="Accepted image OCR configuration SHA-256; repeat for each required configuration")
+    p.add_argument("--pdf-config",action="append",default=[],help="Accepted PDF OCR configuration SHA-256; repeat for each required configuration")
+    return p.parse_args(argv)
+
 def main(argv=None):
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument("--mode",choices=("primary","second-pass","pdf-pages","access-register"),default="primary");p.add_argument("--source");p.add_argument("--inventory",required=True);p.add_argument("--output",required=True);p.add_argument("--tesseract",default=r"C:\Program Files\Tesseract-OCR\tesseract.exe");p.add_argument("--tessdata");p.add_argument("--primary-register");p.add_argument("--secondary-register");p.add_argument("--pdf-register");p.add_argument("--workers",type=int,default=2);p.add_argument("--limit",type=int);args=p.parse_args(argv)
+    args=parse_args(argv)
     if args.mode=="access-register":return run_access_register(args)
     if args.mode=="second-pass":
-        if not args.primary_register:p.error("--primary-register is required for second-pass")
+        if not args.primary_register:raise SystemExit("--primary-register is required for second-pass")
         return run_second_pass(args)
     if args.mode=="pdf-pages":return run_pdf_pages(args)
     return run_primary(args)
