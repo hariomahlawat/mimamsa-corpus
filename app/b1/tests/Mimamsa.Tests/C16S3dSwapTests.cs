@@ -87,7 +87,8 @@ public class C16S3dSwapTests
         var stop = new CancellationTokenSource();
         long served = 0, refused = 0, mixed = 0, usedReleased = 0, overBudget = 0;
         var seen = new ConcurrentDictionary<string, int>();
-        var readers = Enumerable.Range(0, 6).Select(_ => Task.Run(() =>
+        // dedicated threads: the shared test process's thread pool may be saturated by other test classes
+        var readers = Enumerable.Range(0, 6).Select(_ => Task.Factory.StartNew(() =>
         {
             while (!stop.IsCancellationRequested)
             {
@@ -117,14 +118,15 @@ public class C16S3dSwapTests
                 }
                 finally { rig.Participant.Unpin(pin); }
             }
-        })).ToList();
-        Thread.Sleep(200);
+        }, TaskCreationOptions.LongRunning)).ToList();
+        void AwaitServed(long atLeast) { for (int w = 0; w < 600 && Interlocked.Read(ref served) < atLeast; w++) Thread.Sleep(50); }
+        AwaitServed(20);
         var txns = new List<string>();
         for (int i = 0; i < 6; i++)
         {
             txns.Add(rig.Engine.Transition("KNOWLEDGE", i % 2 == 0 ? G2 : G1, i % 2 == 0 ? "ACTIVATE" : "ROLLBACK"));
             Assert.Equal(i % 2 == 0 ? G2 : G1, rig.Host.Current!.Id);
-            Thread.Sleep(100);
+            AwaitServed(Interlocked.Read(ref served) + 10);   // readers ran on this generation before the next swap
         }
         stop.Cancel();
         Task.WaitAll(readers.ToArray());
