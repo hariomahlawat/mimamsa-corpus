@@ -298,7 +298,14 @@ public static class SiteRestore
                 var dbName = new NpgsqlConnectionStringBuilder(o.DbOwnerDsn).Database!;
                 if (cfg.DisposablePrefix is { } pre && !dbName.StartsWith(pre, StringComparison.Ordinal)) throw new BackupException("DATABASE_NOT_DISPOSABLE", dbName);
                 o.Pg.RequireSameMajor(o.DbOwnerDsn);
-                var (code, err) = o.Pg.Run("pg_restore", o.DbOwnerDsn, ["--exit-on-error", "--single-transaction", "--no-owner", "--no-privileges", "--dbname", dbName, dump]);
+                // the target's `public` schema already exists (created with the database): drop its CREATE/COMMENT entries
+                // from the restore list; every other entry of the site's own dump is restored in one transaction
+                var list = Path.Combine(work, "restore.list");
+                var (lc, lerr) = o.Pg.Run("pg_restore", o.DbOwnerDsn, ["--list", "--file", list, dump]);
+                if (lc != 0) throw new BackupException("PG_RESTORE_FAILED", lerr);
+                var kept = File.ReadAllLines(list).Where(l => !System.Text.RegularExpressions.Regex.IsMatch(l, @"^\d+;\s+\d+\s+\d+\s+(SCHEMA|COMMENT)\s+-\s+(SCHEMA\s+)?public\s")).ToList();
+                File.WriteAllLines(list, kept);
+                var (code, err) = o.Pg.Run("pg_restore", o.DbOwnerDsn, ["--exit-on-error", "--single-transaction", "--no-owner", "--no-privileges", "--use-list", list, "--dbname", dbName, dump]);
                 if (code != 0) throw new BackupException("PG_RESTORE_FAILED", err);
                 dbOut = new JsonObject { ["schemas"] = dbm["schemas"]?.DeepClone(), ["restored"] = true };
             }
