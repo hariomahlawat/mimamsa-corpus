@@ -200,8 +200,8 @@ def _build_sample():
     return build_sample
 
 
-def convert_canonical(plan: dict, read, local_path, *, register, v7_shas: set[str]) -> tuple[dict[str, bytes], dict]:
-    """Canonical HF layout -> v1 layout files {v1 path: bytes}, plus a report. `read(path)` returns the cached bytes
+def convert_canonical(plan: dict, read, local_path, *, register, v7_shas: set[str]) -> tuple[dict[str, bytes | str], dict]:
+    """Canonical HF layout -> v1 layout files {v1 path: bytes, or the sha256 of bytes already in the S1 cache}, plus a report. `read(path)` returns the cached bytes
     of a canonical path (None when it was not fetched); `local_path(name)` the S1-cached path of a committed input.
 
     Drops (reported, never silently): restricted (by register, again), a printed access marking, non-PDF media, an
@@ -267,8 +267,10 @@ def convert_canonical(plan: dict, read, local_path, *, register, v7_shas: set[st
             d = bs.derived_record(meta, h, text, pages_txt, phys, text_path, scale)
         docs.append(doc)
         derived.append(d)
-        out[f"v1/{text_path}"] = text
-        out[f"v1/originals/{h}.pdf"] = data
+        # already in the S1 cache: referenced by sha256 (not held in memory for the whole selection)
+        out[f"v1/{text_path}"] = d["text_sha256"]
+        out[f"v1/originals/{h}.pdf"] = h
+        data = None
         s = {"doc_id": did, "sha256": h, "bytes": len(data), "pages": phys, "doc_type": doc["doc_type"]}
         sample.append(s)
         derived_by_doc[did] = dict(d, _pages=pages_txt, _blob=bs.git_blob_sha(text))

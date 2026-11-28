@@ -27,7 +27,7 @@ import json
 from pathlib import Path
 
 from .errors import BuildRefused
-from .fsutil import files_under, link_or_copy, rmtree
+from .fsutil import files_under, link_or_copy, rmtree, sha256_file
 
 KR = "KNOWLEDGE_RELEASE.json"
 MANIFEST_FILES = ("RELEASE.json", "CHANGES.json", KR, "SHA256SUMS", "SHA256SUMS.sig")
@@ -63,9 +63,8 @@ def base_inventory(base_bundle, spec: dict) -> tuple[dict, dict[str, Path]]:
     root = Path(base_bundle)
     files, blobs = [], {}
     for p in files_under(root):
-        b = p.read_bytes()
-        h = _sha(b)
-        files.append({"path": p.relative_to(root).as_posix(), "sha256": h, "bytes": len(b)})
+        h = sha256_file(p)
+        files.append({"path": p.relative_to(root).as_posix(), "sha256": h, "bytes": p.stat().st_size})
         blobs.setdefault(h, p)
     kr = next(f for f in files if f["path"] == KR)
     return {"release_id": spec["release"]["base_release_id"], "manifest_sha256": kr["sha256"], "files": files}, blobs
@@ -157,4 +156,4 @@ def apply(base_dir: Path, base_manifest: dict, delta_dir: Path, delta_manifest: 
             if target.exists():
                 target.unlink()
             link_or_copy(delta_dir / f["path"], target)
-    return {p.relative_to(dst).as_posix(): _sha(p.read_bytes()) for p in files_under(dst)}
+    return {p.relative_to(dst).as_posix(): sha256_file(p) for p in files_under(dst)}

@@ -422,6 +422,78 @@ def test_generation_pin_must_name_its_manifest_generation():
     assert [i["code"] for i in issues] == ["BUILD_PIN_MISMATCH"]
 
 
+# ===================================================================================== streaming import (B01)
+
+def test_streaming_blobs_reverify_on_every_read_and_copy(tmp_path):
+    from mimamsa_importer import streaming as st
+    p = tmp_path / "a.pdf"
+    p.write_bytes(b"%PDF original")
+    idx = st.BlobIndex([p])
+    h = _sha(b"%PDF original")
+    assert h in idx and idx[h] == b"%PDF original" and idx.size(h) == 13
+    idx.copy_to(h, tmp_path / "out" / "x")
+    assert (tmp_path / "out" / "x").read_bytes() == b"%PDF original"
+    p.write_bytes(b"%PDF changed!")
+    with pytest.raises(st.BlobChanged):
+        idx[h]
+    with pytest.raises(st.BlobChanged):
+        idx.copy_to(h, tmp_path / "out" / "y")
+    assert not (tmp_path / "out" / "y").exists() and not (tmp_path / "out" / "y.tmp").exists()
+    cache = st.PageCache(lambda k: {"k": k}, capacity=2)
+    for k in (1, 2, 3, 1):
+        assert cache.get(k) == {"k": k}
+
+
+def test_import_fails_closed_when_bundle_bytes_change_mid_import(built, tmp_path, monkeypatch):
+    """A derivative text altered after the importer verified it (here: right after the first vault write) is caught
+    by the re-hashing copy; nothing is renamed into place and nothing is activated."""
+    from mimamsa_contract.restricted import load_register
+    from mimamsa_contract.trust import parse_trust_list
+    from mimamsa_importer import configure_site, import_release
+    from mimamsa_importer import importer as imp
+    bundle = tmp_path / "bundle"
+    shutil.copytree(built["root"] / "S8" / "bundle", bundle)
+    trust = parse_trust_list(json.loads((built["root"] / "S8" / "dev-trust" / "trust_list.json").read_text(encoding="utf-8")))
+    site = tmp_path / "site"
+    configure_site(site, exclusion_channel="none")
+    text = sorted((bundle / "text").iterdir())[0]
+    done = []
+
+    def tamper(name):
+        if name == "after_vault_object" and not done:
+            text.write_bytes(text.read_bytes() + b"tampered")
+            done.append(1)
+    monkeypatch.setattr(imp, "_crashpoint", tamper)
+    with pytest.raises(imp.ImporterError) as e:
+        import_release(bundle, site, trust_list=trust, mode="development", register=load_register())
+    assert "changed" in str(e.value)
+    assert not (site / "ACTIVE").exists()
+    gens = site / "generations"
+    assert not gens.exists() or not any(p.name.startswith("R") for p in gens.iterdir())
+
+
+def test_streaming_import_equals_the_in_memory_reference(built, tmp_path):
+    """The streamed import materialises byte-identical generation files to what the bundle verified (records, texts,
+    accelerators): every materialised accelerator hashes to the signed component inventory."""
+    from mimamsa_contract.restricted import load_register
+    from mimamsa_contract.trust import parse_trust_list
+    from mimamsa_importer import configure_site, import_release
+    bundle = built["root"] / "S8" / "bundle"
+    trust = parse_trust_list(json.loads((built["root"] / "S8" / "dev-trust" / "trust_list.json").read_text(encoding="utf-8")))
+    site = tmp_path / "site"
+    configure_site(site, exclusion_channel="none")
+    res = import_release(bundle, site, trust_list=trust, mode="development", register=load_register(), stage_only=True)
+    assert res.staged
+    gdir = site / "generations" / res.release_id
+    km = json.loads((bundle / "KNOWLEDGE_RELEASE.json").read_text(encoding="utf-8"))
+    for c in km["components"]:
+        if c["authority"] == "ACCELERATOR":
+            for f in c["files"]:
+                assert _sha((gdir / f["path"]).read_bytes()) == f["sha256"]
+    for p in (gdir / "derived").iterdir():
+        assert p.name == _sha(p.read_bytes()) + ".txt"
+
+
 # ===================================================================================== DELTA
 
 @pytest.fixture(scope="module")

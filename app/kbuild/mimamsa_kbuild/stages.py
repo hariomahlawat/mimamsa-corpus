@@ -399,11 +399,12 @@ class Inputs:
             out[name] = hs
         return out
 
-    def originals(self) -> dict[str, bytes]:
-        out = {}
-        for p, data in self.v1_group("originals/").items():
-            out[sha256_bytes(data)] = data
-        return out
+    def originals(self) -> dict[str, Path]:
+        """{sha256: path in the S1 cache} (content-addressed and verified at S1; never read into memory here)."""
+        return {sha: self.blob_path(sha) for p, sha in sorted(self.v1_files.items()) if p.startswith("originals/")}
+
+    def v1_paths(self, prefix: str) -> dict[str, Path]:
+        return {p: self.blob_path(s) for p, s in sorted(self.v1_files.items()) if p.startswith(prefix)}
 
     def population(self) -> dict[str, list[dict]]:
         pop = {}
@@ -486,7 +487,7 @@ def convert_real(ctx: BuildContext, inp: "Inputs", work: Path) -> dict:
     c = plan["canonical"]
     files, rep = real_corpus.convert_canonical(plan, reader(c["repo"], c["revision"]), lambda n: str(inp.local_path(n)),
                                                register=inp.register, v7_shas=v7_shas)
-    v1_files = {p[3:]: _put_blob(work, inp, data) for p, data in sorted(files.items())}
+    v1_files = {p[3:]: (data if isinstance(data, str) else _put_blob(work, inp, data)) for p, data in sorted(files.items())}
     report = {"canonical": rep, "v7": v7_reports,
               "restricted_skipped_before_download": inp.inv["layout"]["restricted_skipped_before_download"],
               "dropped_before_download": inp.inv["layout"]["canonical"]["dropped_before_download"]}
@@ -520,7 +521,7 @@ def s2_validate(ctx: BuildContext, work: Path) -> None:
     try:
         write_release_tree(scratch, release_manifest_template=inp.template, spec=ctx.spec, defaults=inp.defaults, register=inp.register,
                            key_id=inp.inv["dev_signing"]["key_id"], v1_source=inp.v1_source, records=recs, originals=inp.originals(),
-                           texts={"text/" + p[5:]: b for p, b in inp.v1_group("text/").items()}, research=inp.v1_group("research/"), c16_files={})
+                           texts={"text/" + p[5:]: b for p, b in inp.v1_paths("text/").items()}, research=inp.v1_group("research/"), c16_files={})
         write_bytes(scratch / SUMS, sums_bytes(scratch))
         rep = validate_bundle(scratch, mode="development", allow_unsigned_dev=True, register=inp.register)
     finally:
@@ -702,7 +703,7 @@ def s4_bundle(ctx: BuildContext, work: Path) -> None:
     recs = inp.v1_records()
     pop = inp.population()
     originals = inp.originals()
-    texts = {p.relative_to(ctx.stage_dir("S3")).as_posix(): p.read_bytes() for p in files_under(ctx.stage_dir("S3") / "text")}
+    texts = {p.relative_to(ctx.stage_dir("S3")).as_posix(): p for p in files_under(ctx.stage_dir("S3") / "text")}
     c16 = {f"corpus-v2/{name}": data for name, data in inp.exchange.items()}
     c16.update({f"registers/receipts/{k.split('/')[-1]}": v for k, v in inp.receipts.items()})
     src = f"hf:{inp.v1_source['hf_repo']}@{inp.v1_source['hf_revision']}"
@@ -846,7 +847,7 @@ def build_accelerators(ctx: BuildContext, site: Path, out: Path, sid: str, pop: 
                 copy_file(gdir / n, out / dst / n)
             manifests[kind] = json.loads((gdir / "MANIFEST.json").read_text(encoding="utf-8"))
             db = out / dst / ("text.sqlite" if kind == "TEXT_STORE" else "search.sqlite")
-            if digests.file_digest(db.read_bytes()) != manifests[kind]["file_sha256"]:
+            if sha256_file(db) != manifests[kind]["file_sha256"]:   # = digests.file_digest, streamed
                 _refuse("BUILD_ACCEL_DIGEST", f"{kind} file does not hash to its MANIFEST.json", sid)
         ts_digest = text_store_source_digest(site)
         if manifests["TEXT_STORE"]["source_digest"] != ts_digest:
