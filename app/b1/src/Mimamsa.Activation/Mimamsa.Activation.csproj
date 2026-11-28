@@ -10,4 +10,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Mimamsa.Core\Mimamsa.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- C16 S3-C (B07): `service-job` runs as a Windows service under its virtual account (installer acceptance tests). -->
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.15" />
+  </ItemGroup>
 </Project>
