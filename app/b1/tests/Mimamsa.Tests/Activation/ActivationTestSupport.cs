@@ -186,6 +186,10 @@ public sealed class FixtureSite : IDisposable
         var lex = (lexicalOnly ?? []).ToHashSet(StringComparer.Ordinal);
         Root = TestDirs.NewSite(label);
         Layout = new SiteLayout(Root);
+        // B06 scenario harness: generations are simulated (no files), so their markers are unbound; only a site that
+        // says so accepts them (C16-CP1-02). Real staging (GenerationStaging) always writes bound evidence.
+        Directory.CreateDirectory(Layout.StateDir);
+        File.WriteAllText(Path.Combine(Layout.StateDir, StagingMarker.SimulationFlag), "B06 simulation harness");
         var cat = new GenerationCatalog(Layout);
         foreach (var g in installed) cat.StageGeneration(g, sizes is not null && sizes.TryGetValue(g, out var sz) ? sz : 0, lex.Contains(g));
         foreach (var (m, v) in stagedModels) cat.StageModel(m, v.verified, v.vectorsFor);

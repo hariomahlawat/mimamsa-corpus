@@ -614,6 +614,8 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
                   "page_counts": copy_pages, "exclusion_channel": exclusion_mode,
                   "materialized": {"format": MATERIALIZED_FORMAT, "records": "records/",
                                    "derived": "derived/<text_sha256>.txt", "research": sorted(research)}}
+    # C16-CP1-04: the verification mode is recorded so staging can refuse a development-signed release in production
+    generation["import_mode"] = "production" if mode == "production" else "development"
     if stage_only:
         generation["activation"] = ACTIVATION_JOURNAL
     c16files = None

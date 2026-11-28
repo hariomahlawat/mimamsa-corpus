@@ -13,8 +13,32 @@ using Npgsql;
 
 namespace Mimamsa.Core.Knowledge;
 
-public sealed partial class KnowledgeActivationDatabase : IActivationDatabase
+public sealed partial class KnowledgeActivationDatabase : IActivationDatabase, IStagedKnowledgeEvidence
 {
+    /// C16-CP1-02: the generation's kr_<n> (or kr_<n>_staging) holds exactly the rows the marker records: the schema
+    /// names match, every allowlisted table not in the evidence is empty, and every recorded table's ordered canonical
+    /// export has the recorded row count and rows_sha256 (B03 ExportAsync, the loader's own verification form).
+    public string? StagedEvidenceProblem(string generation, System.Text.Json.Nodes.JsonObject db)
+    {
+        var n = _sequenceOf(generation);
+        string staging = KnowledgeAllowlist.StagingSchema(n), active = KnowledgeAllowlist.ActiveSchema(n);
+        if ((string?)db["staging_schema"] != staging || (string?)db["active_schema"] != active) return "staged DB evidence names other kr_ schemas";
+        var c = _conn();
+        using var tx = c.BeginTransaction(System.Data.IsolationLevel.RepeatableRead);
+        string? schema = SchemaExists(c, tx, active) ? active : SchemaExists(c, tx, staging) ? staging : null;
+        if (schema is null) return $"no staged knowledge rows for {generation} ({staging} / {active} absent)";
+        var want = db["tables"]!.AsObject();
+        foreach (var t in KnowledgeAllowlist.Tables)
+        {
+            var (bytes, count) = KnowledgeRowLoader.ExportAsync(c, tx, schema, t).GetAwaiter().GetResult();
+            var sha = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(bytes)).ToLowerInvariant();
+            if (want[t.Table] is not System.Text.Json.Nodes.JsonObject w) { if (count != 0) return $"{schema}.{t.Table} holds rows the staging evidence does not record"; continue; }
+            if (count != (long)w["rows"]! || sha != (string?)w["rows_sha256"]) return $"{schema}.{t.Table} differs from the staging evidence";
+        }
+        tx.Commit();
+        return null;
+    }
+
     readonly Func<NpgsqlConnection> _conn;
     readonly Func<string, long> _sequenceOf;
     readonly string _schema;

@@ -101,6 +101,7 @@ public static class ActivationCli
             KeepPrevious = int.Parse(a["keep-previous"] ?? "2", System.Globalization.CultureInfo.InvariantCulture),
             HeadroomFraction = double.Parse(a["headroom"] ?? "0.1", System.Globalization.CultureInfo.InvariantCulture),
             RecoveryTarget = a["recovery-target"],
+            Production = production,   // C16-CP1-04: development-staged releases are refused unless --development
         };
         using var eng = new ActivationEngine(opts);
         bool mustRecover = eng.AcquireLock();

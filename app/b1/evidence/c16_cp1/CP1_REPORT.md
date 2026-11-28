@@ -193,6 +193,14 @@ modes, Playwright 81, slice pass.
 
 ## 7. Remaining gaps and flags for review
 
+**Stage 3 blockers (explicit; review C16-CP1-04).** None of these is closed by CP-1, and each blocks real-data activation:
+B04 structural and sampled verifiers and lexical-index adoption (and calibration: OD-C16-UNCALIBRATED-PRODUCTION, so
+production refuses every current release); the graph, reasoning, Commander, Studio and PDF/Range surfaces behind the
+response boundary (refused under activation today); the real v7 adapter; streaming at scale; restart, hot swap and
+restore; search facet recount; the load-dependent flaky tests; the Windows path and symlink negatives; a production
+`stage` command and installer wiring (B07). Default-mode parity (the PR #54 oracle) and the AUTH-LEDGER gates are
+unchanged.
+
 1. ~~v7 candidate hashes~~ **Resolved (§8):** PR #82 `9af665e7` specified CS1–CS5; B01 and B02 use the reference check.
 2. ~~B06 needed a model "with vectors for" a lexical-only target~~ **Resolved (§8):** M1/M2/K1/K2 with null MODELS; the
    slice activates with NO model; the placeholder model is gone.
@@ -258,3 +266,33 @@ modes, Playwright 81, slice pass.
   checks, and writes `C16_VERIFIED.json` last and only when all pass. The journey calls it and asserts the generation is
   not installed before it. Wiring it into the `Mimamsa.Activation` CLI (a `stage` command with the loader's credentials)
   is B07 installer work.
+
+## 9. Review 6094953279 (C16-CP1-01..04) and PR #82 I21 rules
+
+Per-finding commits, tests and CI runs: [`REVIEW_CLOSURE_REGISTER.md`](REVIEW_CLOSURE_REGISTER.md). In short:
+
+- **Route inventory (CP1-01).** `Mimamsa.Web/ActivationRouteInventory.cs` classifies all 45 mapped routes and the SPA
+  fallback. With activation enabled:
+  - **Boundary** (enforced): search, document, text, sections, citation, permalink (`/api/cite`).
+  - **ContentFree**: health, login, logout, session, policy, diag/memory, admin accounts and unlock, the SPA shell.
+  - **ProtectiveAction**: admin withdraw.
+  - **Refused** (content-free 503): graph (4), reasoning (2), Commander (2), Studio (13, including exports), statutes,
+    library, relations, PDF meta and Range delivery, admin overview, withdraw-scope, reinstate and audit.
+  - Unknown routes are refused, and the service refuses to start if any endpoint is unclassified. A unit test compares the
+    routes mapped in source with the inventory.
+- **Final buffered check (CP1-03).** Every boundary response is buffered and re-checked against the current signed
+  exclusion state immediately before commit (copies touched by the handler plus every doc id or held-copy hash named in
+  the JSON). Linearisation rule in `ActivationBoundary.cs`.
+- **Staging evidence (CP1-02).** `StagingMarker` (bound, self-digested, owner-only marker), `GenerationCatalog.Installed`
+  re-validation, staging lease, invalidate-first, full re-validation (files and staged DB rows) before DECIDED and in
+  recovery.
+- **Outcome rule (I21; CP1-04).** `ActivationOutcome` is the .NET mirror of the 2.1 `activation_outcome`;
+  `GenerationStaging` decides with it. The CP-1 release is ACTIVE_DEGRADED in development and REFUSED
+  (UNCALIBRATED_IN_PRODUCTION) in production. Production staging also refuses development-imported releases, and a
+  production engine refuses development-staged markers.
+
+**CI for the review fixes** (code head `64011dce`; every job green, including `cp1-slice` and `cp1-slice-windows`):
+Linux 46097593181 (push) and 46097595739 (pull_request); Windows 46097593160 (push) and 46097595658 (pull_request).
+Local (Windows host): contract 523 passed and 8 failed (the pre-existing Windows `test_bundle` cases); importer 240; kbuild
+40 (unchanged since §8); B1 C# 415 in default and in disk mode (including 24 outcome-parity vectors, the inventory and
+boundary unit tests, and B06's 75 activation tests); Playwright default 81 passed; CP-1 slice pass (100 journey checks, .NET outcome equals the reference).

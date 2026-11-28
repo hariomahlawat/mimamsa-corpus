@@ -157,23 +157,85 @@ public class C16Cp1SliceTests
             var componentResults = new JsonObject();
             var layout = new SiteLayout(site);
             var cat = new GenerationCatalog(layout);
+            // B04 verification contracts the staging decision is taken against (the 2.1 fixtures until B04 ships its own)
+            var contracts = ActivationOutcome.Kinds.ToDictionary(k => k,
+                k => (JsonObject?)JsonNode.Parse(File.ReadAllText(Repo.V21("component_contracts", k + ".json")))!.AsObject(), StringComparer.Ordinal);
+            JsonObject? g2Inputs = null;
             // ---------------------------------------------------------------- staging (Core owner of C16_VERIFIED.json):
             // B03 rows + graph through the restricted loader, B04 text store adoption and lexical index file checks
             foreach (var gid in new[] { g1, g2 })
             {
                 Check($"not_installed_before_staging_{gid}", !cat.Installed().Contains(gid));
                 var tlog = new List<string>();
-                var rep = await GenerationStaging.VerifyAndStageAsync(layout, gid, loader, Path.Combine(work, $"verify-text-{r}-{gid}"), tlog.Add);
+                var rep = await GenerationStaging.VerifyAndStageAsync(layout, gid, loader, Path.Combine(work, $"verify-text-{r}-{gid}"), contracts, tlog.Add, production: false);   // development fixture (C16-CP1-04)
                 Check($"staging_verified_and_marked_{gid}", rep.Ok && cat.Installed().Contains(gid), string.Join("; ", rep.Issues));
                 Check($"b03_loader_rows_and_graph_{gid}", rep.Components["KNOWLEDGE_ROWS"] == "VERIFIED" && rep.Components["GRAPH"] == "VERIFIED");
                 Check($"b04_text_store_adopted_{gid}", rep.TextStoreOrigin == "adopted" && rep.Components["TEXT_STORE"] == "VERIFIED", string.Join(" | ", tlog));
                 Check($"b04_lexical_index_sha_and_quick_check_{gid}", rep.Components["LEXICAL_INDEX"] == "VERIFIED");
-                Check($"no_vector_pack_{gid}", rep.Components["VECTOR_PACK"] == "MISSING" && rep.DeclaredServiceLevel == "DEGRADED_LEXICAL_ONLY");
+                Check($"no_vector_pack_{gid}", rep.Inputs["VECTOR_PACK"] == "MISSING" && rep.Components["VECTOR_PACK"] == "NOT_USED"
+                      && rep.DeclaredServiceLevel == "DEGRADED_LEXICAL_ONLY" && (string?)rep.Outcome!["result"] == "ACTIVE_DEGRADED"
+                      && (string?)rep.Outcome["service_level"] == "DEGRADED_LEXICAL_ONLY");
+                Check($"outcome_refused_in_production_uncalibrated_{gid}",
+                      (string?)ActivationOutcome.Decide(rep.Inputs, contracts, "production", rep.Rebuilds)["refusal"] == "UNCALIBRATED_IN_PRODUCTION");
                 loads[gid] = new JsonObject { ["tables"] = new JsonArray(rep.LoadedTables.Select(t => (JsonNode)t).ToArray()) };
-                if (gid == g2) foreach (var (k, v) in rep.Components) componentResults[k] = v;
+                if (gid == g2)
+                {
+                    foreach (var (k, v) in rep.Components) componentResults[k] = v;
+                    g2Inputs = new JsonObject { ["results"] = new JsonObject(rep.Inputs.Select(kv => KeyValuePair.Create(kv.Key, (JsonNode?)kv.Value))),
+                        ["rebuilds"] = new JsonObject(rep.Rebuilds.Select(kv => KeyValuePair.Create(kv.Key, kv.Value?.DeepClone()))),
+                        ["mode"] = "development", ["dotnet_outcome"] = rep.Outcome!.DeepClone() };
+                }
+            }
+            // ---------------------------------------------------------------- C16-CP1-02/04: staging evidence negatives
+            {
+                var g2dir = Path.Combine(site, "generations", g2);
+                var markerPath = Path.Combine(g2dir, GenerationCatalog.Marker);
+                var good = File.ReadAllBytes(markerPath);
+                var mk = JsonNode.Parse(good)!.AsObject();
+                Check("marker_binds_release_files_components_and_db",
+                      (string?)mk["format"] == StagingMarker.Format && mk["files"]!.AsObject().ContainsKey("generation.json")
+                      && mk["files"]!.AsObject().ContainsKey("accelerators/search-index/search.sqlite") && mk["component_digests"]!.AsObject().Count >= 8
+                      && (string?)mk["db"]!["staging_schema"] == KnowledgeAllowlist.StagingSchema(seq[g2]) && mk["db"]!["tables"]!.AsObject().Count == 7
+                      && mk["production"]!.GetValue<bool>() == false);
+                // corrupted marker: any edit breaks the self-digest; the generation is not installed
+                var corrupt = mk.DeepClone().AsObject(); corrupt["measured_bytes"] = 1;
+                StagingMarker.Write(markerPath, Mimamsa.Core.Activation.CanonicalJson.Bytes(corrupt));
+                Check("corrupted_marker_not_installed", !cat.Installed().Contains(g2), cat.MarkerProblem(g2, false));
+                // stale marker: a marker for another release, even with a valid self-digest
+                var stale = mk.DeepClone().AsObject(); stale.Remove("marker_sha256"); stale["release_id"] = g1;
+                stale["marker_sha256"] = Convert.ToHexString(SHA256.HashData(Mimamsa.Core.Activation.CanonicalJson.Bytes(stale))).ToLowerInvariant();
+                StagingMarker.Write(markerPath, Mimamsa.Core.Activation.CanonicalJson.Bytes(stale));
+                Check("stale_marker_from_another_release_not_installed", !cat.Installed().Contains(g2) && cat.MarkerProblem(g2, false)!.Contains("another release"), cat.MarkerProblem(g2, false));
+                // another generation's marker copied in
+                File.Copy(Path.Combine(site, "generations", g1, GenerationCatalog.Marker), markerPath, true);
+                Check("foreign_marker_not_installed", !cat.Installed().Contains(g2), cat.MarkerProblem(g2, false));
+                StagingMarker.Write(markerPath, good);
+                Check("restored_marker_installed", cat.Installed().Contains(g2));
+                // missing lexical path: restaging fails, and the failed re-verification leaves NO marker
+                var lexPath = Path.Combine(g2dir, "accelerators", "search-index", "search.sqlite");
+                File.Move(lexPath, lexPath + ".moved");
+                var bad = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-x"), contracts, production: false);
+                Check("missing_lexical_index_fails_staging", !bad.Ok && bad.Inputs["LEXICAL_INDEX"] == "FAILED" && bad.Components["LEXICAL_INDEX"] == "REBUILD_REQUIRED"
+                      && (string?)bad.Outcome!["refusal"] == "REBUILD_REQUIRED" && bad.Issues.Any(i => i.Contains("missing")), string.Join("; ", bad.Issues));
+                Check("failed_restaging_leaves_no_marker", !File.Exists(markerPath) && !cat.Installed().Contains(g2));
+                File.Move(lexPath + ".moved", lexPath);
+                // staging lease: one stager at a time
+                using (new FileStream(Path.Combine(layout.GenerationsDir, GenerationStaging.LeaseFile), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
+                {
+                    var leased = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-y"), contracts, production: false);
+                    Check("staging_lease_excludes_a_second_stager", !leased.Ok && leased.Issues.Single().StartsWith("STAGING_LEASE_HELD"));
+                }
+                // C16-CP1-04: production staging refuses this development-signed, uncalibrated fixture release
+                var prod = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-p"), contracts, production: true);
+                Check("production_staging_refuses_dev_signed_release", !prod.Ok && prod.Issues.Any(i => i.StartsWith("DEVELOPMENT_RELEASE_IN_PRODUCTION"))
+                      && !File.Exists(markerPath), string.Join("; ", prod.Issues));
+                // restage for real (development fixture)
+                var again = await GenerationStaging.VerifyAndStageAsync(layout, g2, loader, Path.Combine(work, $"verify-text-{r}-{g2}-z"), contracts, production: false);
+                Check("restaged_after_negatives", again.Ok && cat.Installed().Contains(g2), string.Join("; ", again.Issues));
             }
             results["loads"] = loads;
             results["component_results"] = componentResults;
+            results["outcome_inputs"] = g2Inputs;
             results["component_checks_not_run"] = "GRAPH_STRUCTURAL_RECHECK, SAMPLED_REBUILD_PARITY, SAMPLED_POSTINGS_REDERIVE, SAMPLED_QUERY_PARITY (UNCALIBRATED sizes; B04 .NET verifiers not built); GRAPH and KNOWLEDGE_ROWS verified by the loader's full re-derivation instead";
 
             // ---------------------------------------------------------------- B06: initialise on G1 (lexical-only: NO model)
@@ -190,6 +252,7 @@ public class C16Cp1SliceTests
             eng = new ActivationEngine(new ActivationEngineOptions
             {
                 Site = layout, WriterId = "cp1-activator", Database = kdb, Exclusions = reader, ExternalLock = pg, Log = _ => { },
+                Production = false,   // development fixture site (dev-signed, uncalibrated): explicitly not production
             });
             eng.AcquireLock();
             kdb.EnsureSchema(g1);
@@ -203,6 +266,7 @@ public class C16Cp1SliceTests
                 ["Mimamsa__Activation__Enabled"] = "true", ["Mimamsa__Activation__DevelopmentTrust"] = "true",
                 ["Mimamsa__Activation__Pipe"] = pipe, ["Mimamsa__Activation__KeyFile"] = layout.ChannelKeyPath,
                 ["Mimamsa__Text__Store"] = "disk", ["Mimamsa__Text__Dir"] = textDir, ["Mimamsa__Search__Engine"] = "memory",
+                ["Mimamsa__Test__PauseDir"] = Path.Combine(work, "pause-" + r),   // test-only pause hook (C16-CP1-03)
             };
             async Task<Cp1Web> Web(string name) { var w = await Cp1Web.StartAsync(WebEnv(Path.Combine(work, $"web-text-{r}-{name}"))); webs.Add(w); return w; }
             static async Task<HttpStatusCode> St(HttpClient c, string url) => (await c.GetAsync(url)).StatusCode;
@@ -214,6 +278,38 @@ public class C16Cp1SliceTests
 
             // ---------------------------------------------------------------- B06: ACTIVATE G2 (journal, channel, DB_APPLIED)
             eng.Options.Participant = new PipeParticipantLink(new ControlChannelOptions { PipeName = pipe, Secret = ControlChannelOptions.LoadSecret(layout.ChannelKeyPath) });
+
+            // ---------------------------------------------------------------- C16-CP1-02: evidence re-validated at DECIDED
+            int Aborted() => eng.Inspector.Journal().Entries.Count(e => e.Step == "ABORTED");
+            // (a) a component file mutated after staging, same size (the cheap Installed check still passes)
+            var edges = Path.Combine(site, "generations", g2, "accelerators", "graph", "graph_edges.jsonl");
+            var edgesGood = File.ReadAllBytes(edges);
+            var edgesBad = (byte[])edgesGood.Clone(); edgesBad[^2] = (byte)(edgesBad[^2] == (byte)'}' ? ']' : '}');
+            File.WriteAllBytes(edges, edgesBad);
+            Check("mutated_file_still_passes_cheap_installed_check", cat.Installed().Contains(g2));
+            var ex1 = Assert.Throws<ActivationRefused>(() => eng.Transition("KNOWLEDGE", g2));
+            Check("mutation_after_staging_refused_at_decided", ex1.Code == "STAGING_EVIDENCE_INVALID" && Aborted() == 1
+                  && layout.ReadPointer("KNOWLEDGE") == g1 && layout.ReadMarker() == SiteState.OPEN && kdb.Views() == g1, ex1.Message);
+            File.WriteAllBytes(edges, edgesGood);
+            Check("web_still_serves_g1_after_aborted_switch", await St(c1, $"/api/documents/{legacy}") == HttpStatusCode.OK);
+            // (b) the staged rows tampered in the database after staging
+            var tax = KnowledgeAllowlist.Find("taxonomy_nodes")!;
+            var where = string.Join(" AND ", tax.PrimaryKey.Select(k => $"t.\"{k}\" = x.\"{k}\""));
+            string stg = KnowledgeAllowlist.StagingSchema(seq[g2]);
+            await using (var c = await owner.OpenConnectionAsync())
+            await using (var q = new NpgsqlCommand($"CREATE TABLE public.c16cp1_tamper AS SELECT * FROM {stg}.taxonomy_nodes LIMIT 1; DELETE FROM {stg}.taxonomy_nodes t USING public.c16cp1_tamper x WHERE {where};", c))
+                await q.ExecuteNonQueryAsync();
+            var ex2 = Assert.Throws<ActivationRefused>(() => eng.Transition("KNOWLEDGE", g2));
+            Check("staged_rows_tampered_refused_at_decided", ex2.Code == "STAGING_EVIDENCE_INVALID" && ex2.Message.Contains("taxonomy_nodes") && Aborted() == 2
+                  && layout.ReadPointer("KNOWLEDGE") == g1, ex2.Message);
+            await using (var c = await owner.OpenConnectionAsync())
+            await using (var q = new NpgsqlCommand($"INSERT INTO {stg}.taxonomy_nodes SELECT * FROM public.c16cp1_tamper; DROP TABLE public.c16cp1_tamper;", c))
+                await q.ExecuteNonQueryAsync();
+            // (c) C16-CP1-04: a production engine refuses the development-staged release
+            using (var prodEng = new ActivationEngine(new ActivationEngineOptions { Site = layout, WriterId = "cp1-prod-probe", Database = kdb, Exclusions = reader, Production = true }))
+                Check("production_engine_refuses_development_staged_release", prodEng.EvidenceProblem(g2)?.Contains("refused in production") == true, prodEng.EvidenceProblem(g2));
+            Check("development_engine_accepts_restored_evidence", eng.EvidenceProblem(g2) is null, eng.EvidenceProblem(g2));
+
             var txn = eng.Transition("KNOWLEDGE", g2);
             Check("b06_activated_g2", layout.ReadPointer("KNOWLEDGE") == g2 && layout.ReadMarker() == SiteState.OPEN, txn);
             Check("b06_db_applied_views_on_kr_g2", kdb.KnowledgeSchema() == KnowledgeAllowlist.ActiveSchema(seq[g2]) && kdb.Views() == g2, kdb.KnowledgeSchema());
@@ -243,24 +339,92 @@ public class C16Cp1SliceTests
             var heldSearch = JsonNode.Parse(await c2.GetStringAsync("/api/search?q=" + Uri.EscapeDataString("Synthetic held writ petition")))!;
             Check("web_g2_search_never_returns_held_copy", heldSearch["passages"]!.AsArray().All(p => (string)p!["doc_id"]! != docB));
 
-            // ---------------------------------------------------------------- exclusion AFTER activation, response boundary
+            // ---------------------------------------------------------------- C16-CP1-01: surfaces not behind the boundary are refused
+            foreach (var url in new[] { "/api/graph/stats", "/api/graph/resolve?doc=" + legacy, "/api/reasoning/rule-gate", "/api/commander/domains",
+                                        "/api/statutes", "/api/library", $"/api/documents/{legacy}/relations", "/api/studio/documents", "/api/studio/templates",
+                                        "/api/studio/notes", $"/api/v2/documents/{legacy}/pdf-meta", "/api/admin/overview" })
+            {
+                var resp = await c2.GetAsync(url);
+                var body = await resp.Content.ReadAsStringAsync();
+                Check("refused_under_activation " + url.Split('?')[0], resp.StatusCode == HttpStatusCode.ServiceUnavailable
+                      && body.Contains("not_available_under_activation") && !body.Contains(legacy) && !body.Contains(docA), $"{(int)resp.StatusCode} {body[..Math.Min(body.Length, 80)]}");
+            }
+            Check("route_inventory_startup_self_check", w2.Logged("route inventory complete"));
+
+            // a statute with printed headings (sections surface) and its copy hash
+            string statute = S("statute_doc");
+            var secBefore = JsonNode.Parse(await c2.GetStringAsync($"/api/documents/{statute}/sections"))!;
+            Check("statute_has_headings_before_withdrawal", secBefore["sections"] is JsonArray sa && sa.Count > 0);
+            var statuteSha = (string)JsonNode.Parse(await c2.GetStringAsync($"/api/documents/{statute}/text"))!["copy_sha256"]!;
+            var statutePage1 = (string)JsonNode.Parse(await c2.GetStringAsync($"/api/documents/{statute}/text"))!["pages"]![0]!["text"]!;
+            var aPage1 = (string)JsonNode.Parse(await c2.GetStringAsync($"/api/documents/{docA}/text"))!["pages"]![0]!["text"]!;
+            var statuteQuery = string.Join(" ", statutePage1.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Where(w => w.All(char.IsLetter) && w.Length > 3).Take(3));
+            var statuteHits = JsonNode.Parse(await c2.GetStringAsync("/api/search?q=" + Uri.EscapeDataString(statuteQuery)))!["passages"]!.AsArray();
+            Check("statute_found_by_search_before_withdrawal", statuteHits.Any(p => (string)p!["doc_id"]! == statute), statuteQuery);
+
+            // ---------------------------------------------------------------- C16-CP1-03: requests PAUSED after their handler ran
+            // (initial eligibility passed, page text enumerated, JSON serialised), then the withdrawal is accepted, then released
+            var paused = new Dictionary<string, string>
+            {
+                ["p-text"] = $"/api/documents/{docA}/text", ["p-citation"] = $"/api/documents/{docA}/citation?page=1",
+                ["p-cite"] = $"/api/cite?doc={docA}&sha={shaA}&page=1", ["p-doc"] = $"/api/documents/{docA}",
+                ["p-search"] = "/api/search?q=" + Uri.EscapeDataString(S("admitted_query")),
+                ["p-sections"] = $"/api/documents/{statute}/sections", ["p-statute-text"] = $"/api/documents/{statute}/text",
+                ["p-statute-search"] = "/api/search?q=" + Uri.EscapeDataString(statuteQuery),
+            };
+            foreach (var (_, url) in paused) Check("before_withdrawal_200 " + url.Split('?')[0], await St(c2, url) == HttpStatusCode.OK);
+            var pending = paused.ToDictionary(kv => kv.Key, kv =>
+            {
+                var m = new HttpRequestMessage(HttpMethod.Get, kv.Value);
+                m.Headers.Add("X-Mimamsa-Test-Pause", kv.Key + "-" + r);
+                return c2.SendAsync(m);
+            });
+            var pdir = Path.Combine(work, "pause-" + r);
+            for (int i = 0; i < 600 && !paused.Keys.All(k => File.Exists(Path.Combine(pdir, $"{k}-{r}.paused"))); i++) await Task.Delay(100);
+            Check("requests_paused_after_their_handler", paused.Keys.All(k => File.Exists(Path.Combine(pdir, $"{k}-{r}.paused"))));
+
+            // ---------------------------------------------------------------- exclusion AFTER activation: A by doc id, the statute by copy hash
             var insp = new SiteInspector(layout, reader);
             ActivationEngine.AcceptExclusion(layout, insp, () =>
             {
                 var psi = new ProcessStartInfo(S("python")) { RedirectStandardOutput = true, RedirectStandardError = true, UseShellExecute = false };
-                foreach (var a in new[] { "-I", S("driver"), "exclude", "--site", site, "--sequence", (snap.Sequence!.Value + 1).ToString(), "--doc", docA }) psi.ArgumentList.Add(a);
+                foreach (var a in new[] { "-I", S("driver"), "exclude", "--site", site, "--sequence", (snap.Sequence!.Value + 1).ToString(), "--doc", docA, "--sha", statuteSha })
+                    psi.ArgumentList.Add(a);
                 using var p = Process.Start(psi)!;
                 var o = p.StandardOutput.ReadToEnd() + p.StandardError.ReadToEnd();
                 p.WaitForExit();
                 if (p.ExitCode != 0) throw new InvalidOperationException("exclusion append failed: " + o);
             });
             Check("b06_exclusion_accepted_and_applied", reader.Read().Sequence == snap.Sequence + 1 && layout.ReadApplied()[g2] == snap.Sequence + 1);
-            Check("boundary_document_withheld", await St(c2, $"/api/documents/{docA}") == HttpStatusCode.NotFound);
-            Check("boundary_text_withheld", await St(c2, $"/api/documents/{docA}/text") == HttpStatusCode.NotFound);
-            Check("boundary_citation_withheld", await St(c2, $"/api/documents/{docA}/citation?page=1") == HttpStatusCode.NotFound);
-            Check("boundary_permalink_withheld", await St(c2, $"/api/cite?doc={docA}&sha={shaA}&page=1") == HttpStatusCode.NotFound);
-            var after = JsonNode.Parse(await c2.GetStringAsync("/api/search?q=" + Uri.EscapeDataString(S("admitted_query"))))!;
-            Check("boundary_search_filtered", after["passages"]!.AsArray().All(p => (string)p!["doc_id"]! != docA));
+            foreach (var k in paused.Keys) File.WriteAllText(Path.Combine(pdir, $"{k}-{r}.release"), "go");
+            bool ContentFree(string body) => !body.Contains(docA) && !body.Contains(statute) && !body.Contains(aPage1[..Math.Min(30, aPage1.Length)])
+                                             && !body.Contains(statutePage1[..Math.Min(30, statutePage1.Length)]) && !body.Contains(shaA) && !body.Contains(statuteSha);
+            foreach (var (k, t) in pending)
+            {
+                var resp = await t;
+                var body = await resp.Content.ReadAsStringAsync();
+                Check("linearised_after_acceptance " + k, resp.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.ServiceUnavailable && ContentFree(body),
+                      $"{(int)resp.StatusCode} {body[..Math.Min(body.Length, 120)]}");
+            }
+
+            // ---------------------------------------------------------------- every boundary surface after acceptance, both exclusion kinds
+            foreach (var (name, url) in new[] {
+                ("doc_id document", $"/api/documents/{docA}"), ("doc_id text", $"/api/documents/{docA}/text"), ("doc_id sections", $"/api/documents/{docA}/sections"),
+                ("doc_id citation", $"/api/documents/{docA}/citation?page=1"), ("doc_id permalink", $"/api/cite?doc={docA}&sha={shaA}&page=1"),
+                ("copy_hash document", $"/api/documents/{statute}"), ("copy_hash text", $"/api/documents/{statute}/text"),
+                ("copy_hash sections", $"/api/documents/{statute}/sections"), ("copy_hash citation", $"/api/documents/{statute}/citation?page=1"),
+                ("copy_hash permalink", $"/api/cite?doc={statute}&sha={statuteSha}&page=1") })
+            {
+                var resp = await c2.GetAsync(url);
+                var body = await resp.Content.ReadAsStringAsync();
+                Check("boundary_withheld " + name, resp.StatusCode == HttpStatusCode.NotFound && ContentFree(body), $"{(int)resp.StatusCode}");
+            }
+            foreach (var q in new[] { S("admitted_query"), statuteQuery })
+            {
+                var resp = await c2.GetAsync("/api/search?q=" + Uri.EscapeDataString(q));
+                var body = await resp.Content.ReadAsStringAsync();
+                Check("boundary_search_filtered " + q, resp.StatusCode == HttpStatusCode.OK && ContentFree(body), $"{(int)resp.StatusCode}");
+            }
             Check("boundary_leaves_other_copies", await St(c2, $"/api/documents/{legacy}") == HttpStatusCode.OK);
 
             // ---------------------------------------------------------------- ROLLBACK to G1

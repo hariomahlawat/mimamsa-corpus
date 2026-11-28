@@ -82,6 +82,7 @@
  },
  "candidate_evidence": {},
  "exclusion_channel": "none",
+ "import_mode": "development",
  "item_document": {
   "candidates": {},
   "derived_text": {
