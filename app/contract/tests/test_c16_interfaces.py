@@ -284,7 +284,94 @@ def test_activation_outcome_rules():
     no_vec = dict(allv, VECTOR_PACK="MISSING")
     o = components.activation_outcome(no_vec, cs, mode="development")
     assert o["result"] == "ACTIVE_DEGRADED" and o["service_level"] == "DEGRADED_LEXICAL_ONLY" and o["site_embedding"] == "NEVER"
-    assert components.activation_outcome(dict(allv, GRAPH="FAILED"), cs, mode="development")["result"] == "ACTIVE_AFTER_LOCAL_REBUILD"
+    # 2.1 (review C16-I21-02): FAILED cheap component without rebuild evidence does not serve (was ACTIVE_AFTER_LOCAL_REBUILD)
+    o = components.activation_outcome(dict(allv, GRAPH="FAILED"), cs, mode="development")
+    assert (o["result"], o["refusal"], o["service_level"]) == ("REFUSED", "REBUILD_REQUIRED", "NOT_SERVING")
+    o = components.activation_outcome(dict(allv, GRAPH="FAILED"), cs, mode="development", rebuilds={"GRAPH": _rebuild("GRAPH")})
+    assert o["result"] == "ACTIVE_AFTER_LOCAL_REBUILD" and o["components"]["GRAPH"]["state"] == "REBUILT_VERIFIED"
+
+
+def _rebuild(kind, **kw):
+    r = {"status": "VERIFIED", "builder": {"name": f"{kind.lower()}-site-builder", "version": "1.0.0", "commit": "c8fa5290"},
+         "source_digest": "a" * 64, "result_digest": "b" * 64, "checks": {c: "PASS" for c in components.REQUIRED_CHECKS[kind]}}
+    r.update(kw)
+    return r
+
+
+# review C16-I21-01: calibration cannot be bypassed by a rebuild (gate on components in use, not the result label)
+@pytest.mark.parametrize("graph_state", ["FAILED", "MISSING", None])        # None: key omitted (treated as MISSING)
+def test_production_rebuild_cannot_bypass_calibration(graph_state):
+    cs = _contracts()
+    res = {k: "VERIFIED" for k in cs}
+    if graph_state is None:
+        del res["GRAPH"]
+    else:
+        res["GRAPH"] = graph_state
+    o = components.activation_outcome(res, cs, mode="production", rebuilds={"GRAPH": _rebuild("GRAPH")})
+    assert (o["result"], o["refusal"], o["service_level"]) == ("REFUSED", "UNCALIBRATED_IN_PRODUCTION", "NOT_SERVING")
+    assert {"LEXICAL_INDEX", "VECTOR_PACK", "GRAPH"} <= set(o["uncalibrated_in_use"])
+    o = components.activation_outcome(res, cs, mode="production")                # and without evidence: no service at all
+    assert o["refusal"] in ("REBUILD_REQUIRED", "UNCALIBRATED_IN_PRODUCTION") and o["result"] == "REFUSED"
+
+
+def test_production_lexical_only_with_uncalibrated_checks_fails_closed():
+    cs = _contracts()
+    res = {k: "VERIFIED" for k in cs if k != "VECTOR_PACK"}                      # vectors absent: lexical-only
+    o = components.activation_outcome(res, cs, mode="production")
+    assert o["refusal"] == "UNCALIBRATED_IN_PRODUCTION" and "VECTOR_PACK" not in o["uncalibrated_in_use"]
+    assert components.activation_outcome(res, cs, mode="development")["result"] == "ACTIVE_DEGRADED"
+
+
+# review C16-I21-02: explicit complete inputs, evidence for rebuilds, validated contracts
+def test_absent_cheap_key_is_missing_and_needs_a_verified_rebuild():
+    cs = _contracts()
+    res = {k: "VERIFIED" for k in cs if k != "TEXT_STORE"}
+    o = components.activation_outcome(res, cs, mode="development")
+    assert o["refusal"] == "REBUILD_REQUIRED" and o["components"]["TEXT_STORE"]["input_state"] == "MISSING"
+    o = components.activation_outcome(res, cs, mode="development", rebuilds={"TEXT_STORE": _rebuild("TEXT_STORE")})
+    assert o["result"] == "ACTIVE_AFTER_LOCAL_REBUILD"
+    c = o["components"]["TEXT_STORE"]
+    assert c["state"] == "REBUILT_VERIFIED" and c["builder"]["commit"] and c["checks"]["TEXT_STORE_BIND_EXACT"] == "PASS"
+
+
+@pytest.mark.parametrize("bad", [
+    lambda k: dict(_rebuild(k), status="FAILED"),
+    lambda k: dict(_rebuild(k), builder={"name": "x", "version": "", "commit": "c"}),
+    lambda k: dict(_rebuild(k), result_digest="short"),
+    lambda k: dict(_rebuild(k), checks={}),
+    lambda k: dict(_rebuild(k), checks=dict(_rebuild(k)["checks"], GRAPH_DIGEST="FAIL")),
+    lambda k: dict(_rebuild(k), checks=dict(_rebuild(k)["checks"], EXTRA="MAYBE")),
+    lambda k: "rebuilt",
+])
+def test_failed_or_unevidenced_rebuild_does_not_serve(bad):
+    cs = _contracts()
+    o = components.activation_outcome(dict({k: "VERIFIED" for k in cs}, GRAPH="FAILED"), cs, mode="development",
+                                      rebuilds={"GRAPH": bad("GRAPH")})
+    assert (o["result"], o["refusal"]) == ("REFUSED", "REBUILD_REQUIRED")
+
+
+@pytest.mark.parametrize("mutate", [
+    lambda cs: cs.pop("LEXICAL_INDEX"),                                              # missing contract
+    lambda cs: cs["GRAPH"].update(checks=[x for x in cs["GRAPH"]["checks"] if x["check_id"] != "GRAPH_DIGEST"]),  # required check removed
+    lambda cs: cs["KNOWLEDGE_ROWS"].update(kind="GRAPH"),                            # contract of another kind
+    lambda cs: cs["TEXT_STORE"].update(site_embedding="ALLOWED"),                    # schema-invalid
+])
+def test_missing_or_malformed_contract_refuses(mutate):
+    cs = copy.deepcopy(_contracts())
+    mutate(cs)
+    o = components.activation_outcome({k: "VERIFIED" for k in components.ACCELERATOR_KINDS}, cs, mode="development")
+    assert (o["result"], o["refusal"]) == ("REFUSED", "CONTRACT_INVALID")
+
+
+@pytest.mark.parametrize("call", [
+    lambda cs: components.activation_outcome({k: "VERIFIED" for k in cs}, cs, mode="staging"),
+    lambda cs: components.activation_outcome(dict({k: "VERIFIED" for k in cs}, GRAPH="PARTIAL"), cs, mode="development"),
+    lambda cs: components.activation_outcome(dict({k: "VERIFIED" for k in cs}, PG_ARCHIVE="VERIFIED"), cs, mode="development"),
+    lambda cs: components.activation_outcome({k: "VERIFIED" for k in cs}, cs, mode="development", rebuilds={"VECTOR_PACK": {}}),
+])
+def test_unknown_mode_state_kind_or_rebuild_refuses(call):
+    o = call(_contracts())
+    assert (o["result"], o["refusal"]) == ("REFUSED", "INVALID_INPUT")
 
 
 @pytest.mark.parametrize("mutate", [

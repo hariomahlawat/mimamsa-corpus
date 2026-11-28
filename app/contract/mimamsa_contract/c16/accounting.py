@@ -104,9 +104,13 @@ def candidate_set_issues(declared: dict, files: dict[str, bytes], admission_inve
 
 
 def compare_declared(declared: dict, recomputed: dict) -> list[Issue]:
-    """The site's recomputation against the signed declaration: the same sources; input, identities, held, rejected,
-    effective admissions and decisions equal; eligible and served may only be lower at the site (narrowing);
-    quarantined may only be higher."""
+    """The site's recomputation against the signed declaration: the same sources bound to the same `path` and the same
+    immutable `provenance` (generation manifest sha256, HF repo and revision, candidate-set digest; the site
+    recomputes the C16 generation digest from the bundled GENERATION.json and the candidate digest from the shipped
+    set, review C16-I21-03); input, identities, held, rejected, effective admissions and decisions equal; eligible and
+    served may only be lower at the site (narrowing); quarantined may only be higher.
+    Aggregate counts are a reconciliation cross-check, never the authority: serving is decided per copy by the
+    effective admission, receipts, I-5 establishment and the exclusion channel (B01 section 7)."""
     issues = []
     if declared.get("scope") != "DECLARED_BY_BUILD" or recomputed.get("scope") != "RECOMPUTED_BY_SITE":
         issues.append(_e("C16_SOURCE_ACCOUNTING", "declared and recomputed registers have the wrong scopes"))
@@ -118,7 +122,7 @@ def compare_declared(declared: dict, recomputed: dict) -> list[Issue]:
         issues.append(_e("C16_SOURCE_ACCOUNTING", "the site sees different sources than the build declared"))
     for k in sorted(set(d) & set(r)):
         a, b = d[k], r[k]
-        for f in ("input", "identities", "held", "rejected", "effective_admissions", "by_decision"):
+        for f in ("path", "provenance", "input", "identities", "held", "rejected", "effective_admissions", "by_decision"):
             if a[f] != b[f]:
                 issues.append(_e("C16_SOURCE_ACCOUNTING", f"site {f} differs from the declaration", k))
         if b["eligible"] > a["eligible"] or b["served"] > a["served"]:
