@@ -1,0 +1,15 @@
+{
+ "restricted_tombstone_doc_ids": [
+  "doc-restricted-1"
+ ],
+ "restricted_tombstone_shas": [
+  "abababababababababababababababababababababababababababababababab"
+ ],
+ "sequence": 3,
+ "tombstone_doc_ids": [
+  "doc-b"
+ ],
+ "tombstone_shas": [
+  "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+ ]
+}

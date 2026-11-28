@@ -1,0 +1,15 @@
+{
+ "description": "Committed future-gate status read by B02 S7 (B05): KNOWLEDGE_RELEASE.json capability.pending_future_gates lists exactly the gates below that are OPEN and apply to the release class. It is never hand-typed into a manifest. A gate moves to CLOSED only with an evidence reference at the acceptance level its definition requires (SG-5); fixture runs close nothing.",
+ "record_kind": "kbuild_gate_status",
+ "as_of": "2026-11-27",
+ "gates": [
+  {"gate": "FG-SITE-IMPORTER", "status": "OPEN", "applies_to": ["KNOWLEDGE", "INTELLIGENCE"], "evidence": null},
+  {"gate": "FG-RECEIPTS", "status": "OPEN", "applies_to": ["KNOWLEDGE", "INTELLIGENCE"], "evidence": null},
+  {"gate": "FG-ROW-LOADER", "status": "OPEN", "applies_to": ["KNOWLEDGE"], "evidence": null},
+  {"gate": "FG-JOURNAL-DURABILITY", "status": "OPEN", "applies_to": ["KNOWLEDGE", "INTELLIGENCE"], "evidence": null},
+  {"gate": "FG-CALIBRATED-SAMPLES", "status": "OPEN", "applies_to": ["KNOWLEDGE", "INTELLIGENCE"], "evidence": null},
+  {"gate": "FG-REAL-RESTORE-TEST", "status": "OPEN", "applies_to": ["KNOWLEDGE", "INTELLIGENCE"], "evidence": null},
+  {"gate": "FG-MODEL-TRUST-PURPOSE", "status": "OPEN", "applies_to": ["INTELLIGENCE"], "evidence": null},
+  {"gate": "FG-DISK-PREFLIGHT", "status": "OPEN", "applies_to": ["KNOWLEDGE", "INTELLIGENCE"], "evidence": null}
+ ]
+}

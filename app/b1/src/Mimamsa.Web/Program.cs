@@ -23,7 +23,7 @@ if (args.Length >= 3 && args[0] == "--add-user")
     await id0.EnsureSchemaAsync();
     var pw = Environment.GetEnvironmentVariable("MIMAMSA_NEW_PASSWORD") ?? Console.ReadLine() ?? "";
     Console.WriteLine(await id0.CreateUserAsync(args[1], args[2], pw) ? "created" : "exists");
-    return;
+    return 0;
 }
 
 builder.Host.UseWindowsService(o => o.ServiceName = "MimamsaB1");
@@ -316,6 +316,91 @@ app.Use(async (ctx, next) =>
     if (!isStatic) log.LogInformation("request {Method} {Route} {Status} {Ms}ms", ctx.Request.Method, route, ctx.Response.StatusCode, sw.ElapsedMilliseconds);
 });
 
+// ---- C16 B06 (CP-1 slice; OFF unless Mimamsa:Activation:Enabled=true): the service as an activation PARTICIPANT.
+// It serves the authenticated local control channel, refuses /api requests (503) while a transition or recovery is in
+// progress, while the signed exclusion store is unhealthy, or while this process is not on the journal head, and pins
+// {knowledge, model, exclusion sequence} per request. In this slice there is no in-process generation swap: OPEN onto
+// a generation other than the one this process loaded leaves it not serving until it is restarted (fail closed).
+// Response-boundary exclusion filtering of every API surface is B06-integrated work (Core: ActivationParticipant.Respond).
+bool activationEnabled = false;
+if (conf.GetValue("Mimamsa:Activation:Enabled", false))
+{
+    var actSite = new Mimamsa.Core.Activation.SiteLayout(site);
+    var actInsp = new Mimamsa.Core.Activation.SiteInspector(actSite,
+        Mimamsa.Core.Activation.ActivationCli.Reader(actSite, production: !conf.GetValue("Mimamsa:Activation:DevelopmentTrust", false)));
+    var participant = new Mimamsa.Core.Activation.ActivationParticipant(actInsp) { OnSwap = (k, _) => k == generation.GenerationId };
+    participant.LoadHead();
+    var channel = new Mimamsa.Core.Activation.ControlChannelServer(new Mimamsa.Core.Activation.ControlChannelOptions
+    {
+        PipeName = conf["Mimamsa:Activation:Pipe"] is { Length: > 0 } pn ? pn : "mimamsa-activation",
+        Secret = Mimamsa.Core.Activation.ControlChannelOptions.LoadSecret(conf["Mimamsa:Activation:KeyFile"] is { Length: > 0 } kf ? kf : actSite.ChannelKeyPath),
+    }, participant) { Log = m => log.LogWarning("{Message}", m) };
+    channel.Start();
+    app.Lifetime.ApplicationStopping.Register(() => channel.DisposeAsync().AsTask().Wait(2000));
+    log.LogInformation("activation participant enabled (serving: {Serving}, semantic search: {Semantic})", participant.IsServing(), participant.SemanticSearchAvailable());
+    // 2.1 lexical-only releases: the semantic path (query embedding, dense candidates) runs only when this request's
+    // pin allows it; otherwise search is lexical only.
+    var semanticForRequest = new AsyncLocal<bool?>();
+    search.SemanticAllowed = () => semanticForRequest.Value ?? false;
+    // Response boundary (C16-CP1-01/03; see ActivationBoundary for the linearisation rule): Boundary routes filter by the
+    // CURRENT exclusion state at handler time AND are buffered and re-checked immediately before commit; Refused routes
+    // get a content-free 503; unknown routes are refused (fail closed).
+    var testPause = conf.GetValue("Mimamsa:Test:Enabled", false) && conf["Mimamsa:Test:PauseDir"] is { Length: > 0 } pd ? pd : null;
+    var boundary = new ActivationBoundary(participant, generation, testPause);
+    app0.ActivationExcluded = boundary.Excluded;
+    activationEnabled = true;
+    app.Use(async (ctx, next) =>
+    {
+        // non-API paths are the static UI (wwwroot assets, SPA shell, /health): no document-derived content
+        if (!ctx.Request.Path.StartsWithSegments("/api")) { await next(); return; }
+        var cls = ActivationRouteInventory.Classify(ctx.GetEndpoint());
+        Mimamsa.Core.Activation.ReaderPin pin;
+        try { pin = participant.Pin(); }
+        catch (Mimamsa.Core.Activation.ActivationRefused)
+        {
+            ctx.Response.StatusCode = 503;
+            ctx.Response.Headers.RetryAfter = "5";
+            await ctx.Response.WriteAsJsonAsync(new { state = "activation_not_serving" });
+            return;
+        }
+        ctx.Items[ActivationBoundary.PinKey] = pin;
+        semanticForRequest.Value = pin.SemanticSearch;
+        try
+        {
+            if (cls == RouteClass.Refused)
+            {
+                ctx.Response.StatusCode = 503;
+                ctx.Response.Headers.CacheControl = "no-store";
+                await ctx.Response.WriteAsJsonAsync(new { state = "not_available_under_activation" });
+                return;
+            }
+            if (cls != RouteClass.Boundary) { await next(); return; }
+            var original = ctx.Response.Body;
+            using var buffer = new MemoryStream();
+            ctx.Response.Body = buffer;
+            try { await next(); }
+            finally { ctx.Response.Body = original; }
+            await boundary.TestPauseAsync(ctx);
+            if (boundary.MayCommit(ctx, buffer.GetBuffer().AsSpan(0, (int)buffer.Length)))
+            {
+                ctx.Response.ContentLength = buffer.Length;
+                buffer.Position = 0;
+                await buffer.CopyToAsync(original);
+                return;
+            }
+            // linearised after an exclusion acceptance: nothing of the buffered response is sent
+            ctx.Response.Clear();
+            ctx.Response.Headers.CacheControl = "no-store";
+            bool search = ctx.Request.Path.StartsWithSegments("/api/search");
+            if (search) ctx.Response.Headers.RetryAfter = "1";
+            ctx.Response.StatusCode = search ? 503 : 404;
+            await ctx.Response.WriteAsJsonAsync(search ? new { state = "results_changed", notice = "Results changed while the request ran; try again." }
+                                                       : (object)new { state = "unavailable", notice = Api.NotAvailable });
+        }
+        finally { participant.Unpin(pin); }
+    });
+}
+
 app.UseDefaultFiles();
 var types = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
 types.Mappings[".mjs"] = "text/javascript"; types.Mappings[".bcmap"] = "application/octet-stream";
@@ -329,6 +414,18 @@ app.MapFallback(async ctx =>
     ctx.Response.ContentType = "text/html; charset=utf-8";
     await ctx.Response.SendFileAsync(Path.Combine(app.Environment.WebRootPath, "index.html"));
 });
+if (activationEnabled)
+{
+    // C16-CP1-01: every mapped endpoint must be classified before the activation-managed service may start.
+    var unclassified = ActivationRouteInventory.Unclassified(((IEndpointRouteBuilder)app).DataSources.SelectMany(d => d.Endpoints));
+    if (unclassified.Count > 0)
+    {
+        log.LogCritical("activation: unclassified routes {Routes}; refusing to start", string.Join(", ", unclassified));
+        return 3;
+    }
+    log.LogInformation("activation: route inventory complete ({Count} classified routes)", ActivationRouteInventory.Routes.Count);
+}
 app.Run();
+return 0;
 
 public partial class Program;

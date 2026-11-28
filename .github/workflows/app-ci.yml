@@ -84,6 +84,87 @@ jobs:
         working-directory: app/importer
         run: python -m pytest -q -p no:cacheprovider tests
 
+  kbuild:
+    # C16 B02 central build skeleton: fixture builds only (offline mirror, development key generated in the test
+    # temp directory, no HF, no secrets). Needs the .NET SDK for the S6 accelerator helper.
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned importer dependencies
+        run: python -m pip install --disable-pip-version-check -r app/importer/requirements.txt
+      - name: Build pipeline tests (chaining, resume, determinism, refusals, degraded release)
+        working-directory: app/kbuild
+        run: python -m pytest -q -p no:cacheprovider tests --basetemp "$RUNNER_TEMP/kbuild"
+
+  # C16 Tranche B CP-1: the integrated, explicitly DEGRADED vertical slice (B02 build -> B01 import -> B03 cloned-DB
+  # migration and restricted loader -> B04 text-store adoption -> B06 journal activation with the flag ON in a real
+  # Kestrel process -> serving, post-activation exclusion and rollback checks), then the PR #54 oracle in DEFAULT mode.
+  # FIXTURE acceptance only: development keys, disposable c16cp1_* databases, no HF, no secrets.
+  cp1-slice:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: mimamsa
+          POSTGRES_PASSWORD: mimamsa
+          POSTGRES_DB: mimamsa_b1_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U mimamsa" --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      DOTNET_NOLOGO: "1"
+      PGPASSWORD: mimamsa
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned importer dependencies
+        run: python -m pip install --disable-pip-version-check -r app/importer/requirements.txt
+      - name: Build (Release)
+        run: dotnet build -c Release app/b1/Mimamsa.B1.slnx
+      - name: SYN site and oracle database (default-mode oracle check)
+        run: |
+          python -I app/b1/build/build_fixture_site.py --out "$RUNNER_TEMP/syn"
+          psql -h 127.0.0.1 -U mimamsa -d mimamsa_b1_test -c "CREATE DATABASE c16cp1_oracle"
+      - name: CP-1 vertical slice (Linux)
+        env:
+          # the container's mimamsa user is a superuser: it also creates/drops the c16cp1_* databases and loader role
+          MIMAMSA_TEST_DB: Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_test;Maximum Pool Size=10
+          # the journey seeds its source database through the app's stores, as the B03 migration tests do (SYN graph)
+          MIMAMSA_TEST_SITE: ${{ runner.temp }}/syn/site
+        run: |
+          python -I app/b1/build/c16_cp1_slice.py run --work "$RUNNER_TEMP/cp1" --configuration Release \
+            --evidence out/cp1/slice-evidence-linux.json \
+            --oracle-site "$RUNNER_TEMP/syn/site" --oracle-map "$RUNNER_TEMP/syn/fixture_map.json" \
+            --oracle-db "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=c16cp1_oracle;Maximum Pool Size=10"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cp1-slice-linux
+          path: |
+            out/cp1
+            ${{ runner.temp }}/cp1/journey.log
+            ${{ runner.temp }}/cp1/oracle.log
+            ${{ runner.temp }}/cp1/slice-evidence.json
+
   design-tokens:
     runs-on: ubuntu-latest
     timeout-minutes: 5

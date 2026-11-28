@@ -1,0 +1,73 @@
+{
+ "built_at": null,
+ "contract": "mimamsa-corpus-contract/2.1",
+ "corpus_generation_id": "CG-20261128-b01site-0a1b2c3d",
+ "files": [
+  {
+   "path": "admissions.jsonl",
+   "record_kind": "corpus_admission",
+   "records": 4,
+   "sha256": "c102132d570ce6274361121dcff981d4ec52e01307d443676c0f0cfdd334a79c"
+  },
+  {
+   "path": "anchors.jsonl",
+   "record_kind": "evidence_anchor",
+   "records": 1,
+   "sha256": "896ce5ea49586ccf6b9194a06c4b692051596e6414ff67a8b6e8a2f985d46a33"
+  },
+  {
+   "path": "identities.jsonl",
+   "record_kind": "document_identity",
+   "records": 4,
+   "sha256": "bb2a3618b4314218cb3ed3e49a41884d0e50008daf603b670cb27cd735bcb42a"
+  },
+  {
+   "path": "relationships.jsonl",
+   "record_kind": "corpus_relationship",
+   "records": 3,
+   "sha256": "17d03e8726aee5ac3900708050620e31129cf709f7da694dbb8f3c1cf178130e"
+  },
+  {
+   "path": "taxonomy.jsonl",
+   "record_kind": "taxonomy_node",
+   "records": 7,
+   "sha256": "c5dbedea492fa16aa399c48b43d927334771766a82e2026683074ca1f1673fc9"
+  }
+ ],
+ "pinned_inputs": {
+  "git": [
+   {
+    "commit": "c8fa5290a7f03ed47f57ba82cc57503005e11d48",
+    "purpose": "contract, tools and fixtures"
+   }
+  ],
+  "hf": [],
+  "restricted_register_sha256": "b6558d739673c568a5d7252f239847bb1f27f0b849cbe88efc1c88806515583a",
+  "tools": [
+   {
+    "commit": "c8fa5290",
+    "config_sha256": null,
+    "name": "c16-fixture-producer",
+    "version": "1.0.0"
+   }
+  ]
+ },
+ "record_kind": "corpus_generation_manifest",
+ "registries": {
+  "external_judgments": [],
+  "instrument_codes": [
+   "AA-1950",
+   "AFA-1950",
+   "AFT-2007",
+   "AFT-PR-2008",
+   "AR-1954",
+   "BNS-2023",
+   "BNSS-2023",
+   "BSA-2023",
+   "CRPC-1973",
+   "IEA-1872",
+   "IPC-1860",
+   "NA-1957"
+  ]
+ }
+}

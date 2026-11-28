@@ -37,6 +37,31 @@ On the next import:
 
 Crash points tested: after a vault write, before the generation rename, and before the ACTIVE switch. **Citations:** `cite()` implements `app/design/policies/citation_resolution.json`.
 
+## C16 signed import (Tranche B B01, contract 2.0 with 2.1 receipts)
+
+`mimamsa_importer/c16.py` runs after steps 1–4 and before anything is written. It is **active** when the bundle carries `corpus-v2/` or `registers/` files or a `KNOWLEDGE_RELEASE.json`, or when the site is already C16-aware (one-way latch: `C16_DECISION_INDEX.json` or any generation with a `c16` section). A pure v1 bundle on a site that never saw C16 is imported exactly as before.
+
+| Level | Check | On failure |
+| --- | --- | --- |
+| Bundle | `corpus-v2/` and `registers/` files are RELEASE.json files of kind `other` (`C16_TRANSPORT`; an unlisted receipt is `C16_RECEIPT_NOT_IN_INVENTORY`) | Whole bundle refused; site byte-identical |
+| Bundle | `rules.exchange_issues(mode="strict")` with the site register and the bundle's ledger version. Partial exchanges are refused by construction (no `GENERATION.json`, a missing population). Contract 2.0 and 2.1 only (`C16_CONTRACT_UNSUPPORTED`) | Refused |
+| Bundle | Any C16 record naming a copy the site holds as restricted (register or exclusion-state restriction) (`C16_RESTRICTED_IN_EXCHANGE`) | Refused |
+| Bundle | Label readings: every folder and file-name classification recomputed with `adapters.classify_path` and compared byte for byte (`C16_CLASSIFICATION_MISMATCH`); explicit D1/D2 checks (`C16_READING_AR`, `C16_READING_AFT`), including taxonomy aliases | Refused |
+| Bundle | Malformed receipt artefact anywhere under `registers/` (path, inventory, hash, parse, schema, payload semantics, canonical form, revision chain) | Refused |
+| Bundle | `KNOWLEDGE_RELEASE.json`, when present: release-manifest rules and component inventory against `SHA256SUMS` | Refused |
+| Bundle | Per-source accounting: the signed declaration `registers/source_accounting.json` is required on every C16-aware import; it must pass `accounting.accounting_issues` (schema, R1-R7) with scope `DECLARED_BY_BUILD` for this release, and the importer's own recomputation must pass R1-R7 and `accounting.compare_declared` (`C16_SOURCE_ACCOUNTING`, `C16_SOURCE_ACCOUNTING_MISSING`) | Refused |
+| Item | Typed receipt resolution for every eligible effective admission (`receipts.resolve_receipts`) with facts the site recomputes from the bundled bytes: hash and size, format, register scan, identity and copy-record validation, derivative units, DOCX image inventory (safe archive reader). G04, G08 and G09 are recorded `ASSERTED_BOUND`, never site-verified | Copy `QUARANTINED`, not served |
+| Item | Byte checks (I4): size, format, PDF page count, DOCX images in the container, derivative units and coverage, reconstructed-page mapping origin | Copy not served |
+| Item | Anchors (I8): `evidence.verify_anchor_bytes` against the verified derivative bytes; the verdict is recorded per anchor | Span not verified |
+
+**Serving (I7, I-5, SG-1).** A v1 document stays servable only if it has a C16 identity whose effective admission is eligible **and** resolves at the site, or it has no sidecar and is an independently established legacy copy (`legacy.legacy_issues`: published, eligible for all users, pinned HF revision or acquisition record, not governed by C16 in this or any earlier import, not a declared v7 candidate or a hash seen in a C16 exchange, not excluded). Everything else is removed from `servable` and `item_document`, with its derivatives and candidates; NAVIGATION_ONLY admissions keep the document but not its text. `held_copies()` and the B1 `GenerationStore` skip copies the active generation lists in `c16.denied`, so an earlier generation never resurrects a held copy. Restricted copies are never written to the vault and never named in anything the import writes.
+
+**Written into the generation** (inside the temporary directory, before the atomic rename): `corpus-v2/*` verbatim (`materialized.corpus_v2` lists each hash), `c16/verdicts.json` (per copy, per anchor, legacy), `c16/resolved_receipts.json` plus the resolved artefacts under `registers/receipts/`, `registers/source_accounting.json` (the signed declaration, verbatim) beside `registers/source_accounting.site.json` (the importer's recomputation, scope `RECOMPUTED_BY_SITE`, never shipped or signed; both digests are in `generation.json` `c16.accounting` and the import report), and a `c16` section in `generation.json`. The site-level `C16_DECISION_INDEX.json` is rewritten atomically before the generation is built, so a crash can only leave the site stricter.
+
+**Accounting register (contract 2.1, PR #82 clarification 1).** Format: `SOURCE_ADMISSION_ACCOUNTING_SCHEMA.json`, reference `mimamsa_contract.c16.accounting` (no private copy here). The site recomputes the C16 `generation_manifest_sha256` from the bundled `GENERATION.json` and refuses a declaration that differs; HF pins are the producer's and are carried over. Input, identities, held, rejected, effective admissions and decisions must match exactly; the site may only lower eligibility and service and only raise quarantine. **Proposed 2.1 addition (flagged, needs review):** a declared `V7_REFERENCE` source must ship its candidate hashes as `registers/candidate_sets/<name>.txt` (the exact preimage of `provenance.candidate_set_sha256`: sorted, unique, LF-joined, no final LF), because the relabel check needs the hashes, not only their digest.
+
+Tests: `tests/test_c16_importer.py` (contract fixtures NR01–NR18, N01–N54, X01–X35; real-bytes bundles from `c16_cases.py`). The B1 end-to-end fixture site is rebuilt and checked with `python -I c16_cases.py ../b1/tests/Mimamsa.Tests/fixtures/c16_b01 --check`.
+
 **Not covered yet:** page-image comparison for OCR (see DA-04), database and index loading, the UI and the Windows service wrapper (P5/P6).
 
 ```

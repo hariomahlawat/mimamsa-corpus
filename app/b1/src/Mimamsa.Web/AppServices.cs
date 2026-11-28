@@ -29,6 +29,12 @@ public sealed class AppServices
     /// C15 WP5: the only way the Commander workspace reads the corpus (switchable to the C15 graph API at integration).
     public Mimamsa.Core.Commander.ICommanderSource Commander { get; init; } = null!;
 
+    /// C16 B06 response boundary (CP-1): set ONLY when Mimamsa:Activation:Enabled is on. True when the CURRENT signed
+    /// exclusion state (re-read per call, never the state at pin time) excludes the copy, or cannot be read (fail
+    /// closed). Null by default, so default behaviour is unchanged.
+    public Func<HttpContext, string, string?, bool>? ActivationExcluded { get; set; }
+    public bool BoundaryExcluded(HttpContext ctx, string docId, string? sha) => ActivationExcluded?.Invoke(ctx, docId, sha) ?? false;
+
     public Task<Principal?> AuthenticateAsync(HttpContext ctx)
     {
         if (ctx.Items.TryGetValue("principal", out var p)) return Task.FromResult(p as Principal);

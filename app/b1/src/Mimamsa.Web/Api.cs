@@ -88,6 +88,7 @@ public static partial class Api
             var sw = System.Diagnostics.Stopwatch.StartNew();
             var service = q["service"].ToString() is { Length: > 0 } sv && sv != "all" ? sv : null;
             var res = s.Search.Search(raw, filters, q["plain"] == "1", service);
+            if (s.ActivationExcluded is not null) res = BoundaryFilter(ctx, res, s);
             var pg = s.Search.Page(res, Int(q["page"]) ?? 1, Int(q["page_size"]) ?? SearchService.DefaultPageSize, q["sort"].ToString());
             var ms = sw.Elapsed.TotalMilliseconds;
             return Json(SearchDto(res, pg, q["sort"].ToString() is { Length: > 0 } so ? so : "relevance", s, ms));
@@ -98,6 +99,7 @@ public static partial class Api
             var p = await User(ctx, s);
             if (p is null) return Json(new { error = "auth" }, 401);
             var d = s.VisibleDocument(docId);
+            if (d is not null && s.BoundaryExcluded(ctx, d.DocId, d.CopySha)) d = null;
             return d is null ? Json(new { state = "unavailable", notice = NotAvailable }, 404) : Json(DocumentDto(d, s, p));
         });
 
@@ -106,7 +108,7 @@ public static partial class Api
             var p = await User(ctx, s);
             if (p is null) return Json(new { error = "auth" }, 401);
             var d = s.VisibleDocument(docId);
-            if (d is null) return Json(new { state = "unavailable", notice = NotAvailable }, 404);
+            if (d is null || s.BoundaryExcluded(ctx, d.DocId, d.CopySha)) return Json(new { state = "unavailable", notice = NotAvailable }, 404);
             int a = Math.Max(1, from ?? 1), b = Math.Min(d.PageCount, to ?? (a + 39));
             if (b - a > 79) b = a + 79;
             var pages = d.Pages.Values.Where(x => x.Page >= a && x.Page <= b).OrderBy(x => x.Page)
@@ -122,7 +124,7 @@ public static partial class Api
             var p = await User(ctx, s);
             if (p is null) return Json(new { error = "auth" }, 401);
             var d = s.VisibleDocument(docId);
-            if (d is null) return Json(new { state = "unavailable", notice = NotAvailable }, 404);
+            if (d is null || s.BoundaryExcluded(ctx, d.DocId, d.CopySha)) return Json(new { state = "unavailable", notice = NotAvailable }, 404);
             return Json(new { doc_id = d.DocId, note = "Headings as printed in the held copy. Amendment notes are compilation text, not a verified amendment history.",
                               sections = d.IsStatute ? Toc.Build(d).Select(e => new { number = e.Number, heading = e.Heading, page = e.Page, passage_id = e.PassageId, omitted_as_printed = e.Omitted }) : null });
         });
@@ -132,7 +134,7 @@ public static partial class Api
             var p = await User(ctx, s);
             if (p is null) return Json(new { error = "auth" }, 401);
             var d = s.VisibleDocument(docId);
-            if (d is null || page < 1 || page > d.PageCount) return Json(new { state = "unavailable", notice = NotAvailable }, 404);
+            if (d is null || page < 1 || page > d.PageCount || s.BoundaryExcluded(ctx, d.DocId, d.CopySha)) return Json(new { state = "unavailable", notice = NotAvailable }, 404);
             var label = d.DocType is "judgment" or "order" ? para : null;
             var rel = s.Generation.Release.ReleaseId;
             var permalink = LegalCitation.Permalink(rel, d.DocId, d.CopySha, page, label);
@@ -146,6 +148,11 @@ public static partial class Api
             var p = await User(ctx, s);
             if (p is null) return Json(new { error = "auth" }, 401);
             var r = CitationResolver.Resolve(s.Generation, sha, doc, page, s.Eligible.HeldEligible, s.Eligible.CurrentVisibleCopy);
+            // C16 B06 boundary (activation on only): a permalink to an excluded copy, or whose current copy is excluded,
+            // resolves to nothing (the same generic notice as an unknown copy)
+            if (s.ActivationExcluded is not null && (s.BoundaryExcluded(ctx, doc, sha) || (r.Copy is { } rc && s.BoundaryExcluded(ctx, doc, rc))
+                                                     || (r.CurrentCopy is { } cc && s.BoundaryExcluded(ctx, doc, cc))))
+                return Json(new { state = "unavailable", notice = NotAvailable }, 404);
             var held = r.Copy is null ? null : s.Generation.HeldCopies.GetValueOrDefault(r.Copy + "|" + doc);
             return Json(new { state = r.State, notice = r.Notice, copy = r.Copy, page = r.Page, doc_id = r.Copy is null ? null : doc,
                               current_copy = r.State == "CITED_COPY_ELIGIBLE_NOT_CURRENT" ? r.CurrentCopy : null,
@@ -340,9 +347,31 @@ public static partial class Api
         {
             new { code = "NOT_PRODUCTION", text = "Not a production installation. The library release is signed with a development key." },
         },
-        capabilities = new { semantic_search = s.Search.Semantic is not null, generative_ai = false, legal_reasoning = false, notes = false },
+        capabilities = new { semantic_search = s.Search.ActiveSemantic is not null, generative_ai = false, legal_reasoning = false, notes = false },
         gate = GateText,
     };
+
+    /// C16 B06 response boundary for search (activation on only): hits of excluded copies are removed before paging,
+    /// totals are reduced accordingly, and facet counts are withheld when anything was removed (they would count
+    /// excluded copies; recomputing them is B06-integrated work).
+    static SearchResult BoundaryFilter(HttpContext ctx, SearchResult r, AppServices s)
+    {
+        var ix = s.Search.Index;
+        var gone = new HashSet<string>(StringComparer.Ordinal);
+        var kept = new List<Hit>(r.Hits.Count);
+        foreach (var h in r.Hits)
+        {
+            var d = ix.Docs[ix.DocOf(h.PassageIndex)];
+            if (gone.Contains(d.DocId) || s.BoundaryExcluded(ctx, d.DocId, d.CopySha)) { gone.Add(d.DocId); continue; }
+            kept.Add(h);
+        }
+        if (gone.Count == 0) return r;
+        return r with
+        {
+            Hits = kept, TotalPassages = Math.Max(0, r.TotalPassages - (r.Hits.Count - kept.Count)), TotalDocuments = Math.Max(0, r.TotalDocuments - gone.Count),
+            Facets = new Dictionary<string, IReadOnlyList<FacetValue>>(), Notes = [.. r.Notes, "Some results are not available in this installation."],
+        };
+    }
 
     static object SearchDto(SearchResult r, SearchService.ResultPage rp, string sort, AppServices s, double ms)
     {
@@ -383,7 +412,7 @@ public static partial class Api
             page = rp.Page, page_size = rp.PageSize, page_count = rp.PageCount, total_groups = rp.TotalGroups, sort,
             highlight_terms = r.HighlightTerms.Concat(r.HighlightPhrases.SelectMany(x => x)).Where(t => t.Length > 1 && !Text.Stopwords.Contains(t)).Distinct().Take(60),
             facets = r.Facets.ToDictionary(kv => kv.Key, kv => kv.Value.Select(v => new { value = v.Value, count = v.Count })),
-            run = new { mode_label = r.Mode == "identifier" ? "Identifier match first, then lexical" : r.Mode == "lexical" ? "Lexical (BM25)" : r.Mode == "hybrid" ? "Hybrid (BM25 + embedding similarity, PoC)" : "Not run",                         semantic = s.Search.Semantic is null ? "not part of B1" : "PoC on: " + s.Search.Semantic.Description, release_id = s.Generation.Release.ReleaseId, elapsed_ms = Math.Round(ms, 1),                         service = r.Service, service_label = r.Service is { } sv2 && Mimamsa.Core.Legal.LegalIdentifierResolver.ServiceLabels.TryGetValue(sv2, out var sl) ? sl : null },
+            run = new { mode_label = r.Mode == "identifier" ? "Identifier match first, then lexical" : r.Mode == "lexical" ? "Lexical (BM25)" : r.Mode == "hybrid" ? "Hybrid (BM25 + embedding similarity, PoC)" : "Not run",                         semantic = s.Search.ActiveSemantic is null ? "not part of B1" : "PoC on: " + s.Search.ActiveSemantic.Description, release_id = s.Generation.Release.ReleaseId, elapsed_ms = Math.Round(ms, 1),                         service = r.Service, service_label = r.Service is { } sv2 && Mimamsa.Core.Legal.LegalIdentifierResolver.ServiceLabels.TryGetValue(sv2, out var sl) ? sl : null },
             notes = r.Notes,
         };
     }

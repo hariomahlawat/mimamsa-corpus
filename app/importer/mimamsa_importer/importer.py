@@ -56,6 +56,14 @@ SITE_CONFIG = "SITE_CONFIG.json"
 LATCH = "EXCLUSION_LATCH"
 
 
+JOURNAL_MARKERS = ("journal/journal.jsonl", "activation-state/SITE_INIT.json")   # B06 SiteLayout paths
+
+
+def journal_managed(site: Path) -> bool:
+    """True once the B06 activation journal manages the site (initialised or any journal entry). One-way."""
+    return any((Path(site) / p).exists() for p in JOURNAL_MARKERS)
+
+
 def _latched(site: Path) -> bool:
     """True once the site has ever been in exclusion-store mode: the store's latch exists (any exclusion accepted),
     or any generation recorded mode "signed". One-way: nothing clears it."""
@@ -108,6 +116,8 @@ class ImportResult:
     verified: dict = field(default_factory=lambda: {"documents": [], "derived_text": [], "candidates": []})
     unresolved: list = field(default_factory=list)   # [{kind, id, reasons}]
     contract_errors: list = field(default_factory=list)
+    c16: dict = field(default_factory=dict)          # C16 stage report: codes, per-copy outcomes, accounting
+    staged: bool = False                             # stage_only: generation written, ACTIVE left to the journal (B06)
 
 
 def _sha(data: bytes) -> str:
@@ -222,10 +232,14 @@ def held_copies(site: Path) -> dict:
     if not active:
         return {}
     held = {}
+    # SG-1: a copy the ACTIVE generation governs and does not serve is not held from an earlier generation either.
+    denied = {tuple(k) for k in (active.get("c16") or {}).get("denied", [])}
     for g in sorted(_generations(site), key=lambda x: x.get("release_sequence") or 0):
         if (g.get("release_sequence") or 0) > (active.get("release_sequence") or 0):
             continue
         for did, h in g.get("item_document", {}).get("documents", {}).values():
+            if (did, h) in denied:
+                continue
             held.setdefault(h, {"doc_id": did, "page_count": g.get("page_counts", {}).get(h), "first_release": g["release_id"]})
     return held
 
@@ -265,6 +279,9 @@ def servable(site: Path, kind: str, item_id: str, *, exclusions) -> bool:
 
 
 MATERIALIZED_FORMAT = 1
+# C16 CP-1: a generation imported with stage_only=True is written completely but ACTIVE is not switched; the B06
+# activation journal switches it. Recovery neither resumes nor quarantines such a generation.
+ACTIVATION_JOURNAL = "JOURNAL"
 RESEARCH_PREFIX = "research/"
 
 
@@ -293,7 +310,7 @@ def _research_files(bundle: Path, manifest: dict, register) -> tuple[dict[str, b
     return keep, rejected
 
 
-def _materialize(gdir: Path, manifest: dict, docs, derived, cands, texts: dict, verified: dict, research: dict):
+def _materialize(gdir: Path, manifest: dict, docs, derived, cands, texts: dict, verified: dict, research: dict, extra=None):
     """Write the verified records and verified derivative text into the (temporary) generation directory, so that a
     serving process reads only importer-verified evidence from the ACTIVE generation (plus vault originals). Items
     that are UNRESOLVED are never written. Same fsync discipline as generation.json; the directory is renamed into
@@ -319,6 +336,8 @@ def _materialize(gdir: Path, manifest: dict, docs, derived, cands, texts: dict, 
         "restricted_material", "schema_versions")}, indent=1, sort_keys=True).encode()
     for rel, data in research.items():
         files[rel] = data
+    for rel, data in (extra or {}).items():  # C16: corpus-v2/, c16/, registers/ (verified, see c16.materialize)
+        files[rel] = data
     for rel, data in files.items():
         p = gdir / rel
         p.parent.mkdir(parents=True, exist_ok=True)
@@ -331,7 +350,9 @@ def _materialize(gdir: Path, manifest: dict, docs, derived, cands, texts: dict, 
 
 
 def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_key=None, mode="production",
-                   register=None, rollback=False, today=None) -> ImportResult:
+                   register=None, rollback=False, today=None, exclusions=None, stage_only=False) -> ImportResult:
+    """exclusions: the site's current ExclusionState (optional). The C16 stage uses it for I-5 legacy establishment
+    and to keep withdrawn or restricted copies out of service; serving still applies the current state per request."""
     bundle, site = Path(bundle), Path(site)
     try:
         manifest = json.loads((bundle / "RELEASE.json").read_text(encoding="utf-8"))
@@ -339,6 +360,12 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
     except (OSError, ValueError):
         manifest, sums_digest = {}, None
     res = ImportResult(release_id=manifest.get("release_id"), activated=False)
+
+    # C16 CP-1: on a site managed by the activation journal (B06), only the journal switches ACTIVE. A direct
+    # activation is refused before anything is written; the import must be stage_only (rollbacks go through the journal).
+    if journal_managed(site) and not stage_only:
+        res.refused_reasons.append("ACTIVATION_JOURNAL_MANAGED: this site is activated through the journal; import with stage_only")
+        return res
 
     # 0a exclusion-mode latch and store integrity (review N4)
     exclusion_mode = _site_mode(site)
@@ -359,6 +386,8 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
                 pending = g.name.startswith(".tmp-")
                 if not pending and (g / "generation.json").is_file():
                     meta = json.loads((g / "generation.json").read_text(encoding="utf-8"))
+                    if meta.get("activation") == ACTIVATION_JOURNAL:
+                        continue   # staged for the activation journal (B06): neither residue nor resumable here
                     if (meta.get("release_sequence") or 0) > ((active or {}).get("release_sequence") or 0):
                         if meta["release_id"] == res.release_id and meta.get("sums_sha256") == sums_digest:
                             # crash after the rename, before ACTIVE: resume activation of the identical bundle
@@ -530,6 +559,36 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
             item_document["candidates"][c["candidate_id"]] = [c["source_doc_id"], doc["source_copy"]["sha256"]]
             evidence[c["candidate_id"]] = {"artefact_commit": c["extractor"]["artefact_commit"], "anchors": served_anchors}
 
+    # C16 (Tranche B B01): strict exchange, typed receipts, byte checks, label readings, I-5 legacy, accounting.
+    # Runs before anything is written: a refusal leaves the site untouched.
+    from mimamsa_contract.bundle import parse_sums
+    from mimamsa_contract.restricted import load_register
+    from . import c16 as c16mod
+    try:
+        sums, _ = parse_sums((bundle / "SHA256SUMS").read_text(encoding="utf-8"))
+        c16res = c16mod.run(bundle=bundle, manifest=manifest, sums=sums, site=site, docs=docs, verified_docs=doc_by_id,
+                            originals=originals, copy_pages=copy_pages, register=register or load_register(),
+                            exclusions=exclusions)
+    except c16mod.C16SiteError as exc:
+        raise ImporterError(str(exc)) from exc
+    res.c16 = c16res.report()
+    if c16res.refusals:
+        res.contract_errors = sorted({i.code for i in c16res.refusals})
+        res.refused_reasons.append("C16 exchange refused: " + ", ".join(res.contract_errors))
+        return res
+    if c16res.active:
+        allowed, search = c16res.allowed_docs, c16res.search_docs
+        res.verified["documents"] = [d for d in res.verified["documents"] if d in allowed]
+        item_document["documents"] = {k: v for k, v in item_document["documents"].items() if k in allowed}
+        keep_der = {k for k, v in item_document["derived_text"].items() if v[0] in search}
+        res.verified["derived_text"] = [d for d in res.verified["derived_text"] if d in keep_der]
+        item_document["derived_text"] = {k: v for k, v in item_document["derived_text"].items() if k in keep_der}
+        item_document["candidates"] = {k: v for k, v in item_document["candidates"].items() if v[0] in allowed}
+        res.verified["candidates"] = [x for x in res.verified["candidates"] if x in item_document["candidates"]]
+        evidence = {k: v for k, v in evidence.items() if k in item_document["candidates"]}
+        # restricted copies are not written to the vault and not named in the generation (page counts by hash)
+        copy_pages = {h: n for h, n in copy_pages.items() if h not in c16res.restricted_shas}
+
     # 5 vault (retained across generations), held-copies index, generation, atomic activation
     vault = site / "vault" / "sha256"
     for h in copy_pages:
@@ -555,12 +614,27 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
                   "page_counts": copy_pages, "exclusion_channel": exclusion_mode,
                   "materialized": {"format": MATERIALIZED_FORMAT, "records": "records/",
                                    "derived": "derived/<text_sha256>.txt", "research": sorted(research)}}
+    # C16-CP1-04: the verification mode is recorded so staging can refuse a development-signed release in production
+    generation["import_mode"] = "production" if mode == "production" else "development"
+    if stage_only:
+        generation["activation"] = ACTIVATION_JOURNAL
+    c16files = None
+    if c16res.active:
+        c16out = c16mod.materialize(c16res)
+        c16files = c16out["files"]
+        generation["c16"] = c16out["section"]
+        generation["materialized"]["corpus_v2"] = c16out["materialized"]
+        try:  # governance is recorded before the generation exists: a crash can only leave the site stricter
+            _write_atomic(site / c16mod.DECISION_INDEX, c16mod.merged_index(site, c16res.index_entries))
+        except (OSError, c16mod.C16SiteError) as exc:
+            raise ImporterError(f"C16 decision index write failed: {type(exc).__name__}") from exc
+        _crashpoint("after_c16_index")
     try:
         gens = site / "generations"
         gens.mkdir(parents=True, exist_ok=True)
         tmpdir = gens / f".tmp-{res.release_id}"
         tmpdir.mkdir()
-        _materialize(tmpdir, manifest, docs, derived, cands, texts, res.verified, research)
+        _materialize(tmpdir, manifest, docs, derived, cands, texts, res.verified, research, extra=c16files)
         with open(tmpdir / "generation.json", "wb") as fh:
             fh.write(json.dumps(generation, indent=1, sort_keys=True).encode())
             fh.flush()
@@ -569,6 +643,9 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
         _crashpoint("before_rename")
         os.replace(tmpdir, gdir)
         _fsync_dir(gens)
+        if stage_only:   # C16 CP-1: the activation journal (B06), not the importer, switches ACTIVE
+            res.staged = True
+            return res
         _crashpoint("before_active")
         _write_atomic(site / "ACTIVE", str(res.release_id).encode())
     except OSError as exc:

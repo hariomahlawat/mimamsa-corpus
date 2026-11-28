@@ -93,12 +93,15 @@ public sealed partial class GenerationStore
 
     /// Loads the ACTIVE generation. `text` selects the text store (default memory, the reference); `log` receives
     /// text-store build, open and verification lines (no text).
-    public static GenerationStore Load(string siteRoot, Vault? vault = null, TextStoreOptions? text = null, Action<string>? log = null)
+    /// `generationId` (C16 CP-1, verification only): load that staged generation instead of the ACTIVE one, so the
+    /// site can verify a generation (rows, graph, text store) before the activation journal switches to it.
+    public static GenerationStore Load(string siteRoot, Vault? vault = null, TextStoreOptions? text = null, Action<string>? log = null,
+                                       string? generationId = null)
     {
         siteRoot = Path.GetFullPath(siteRoot);
         var activePath = Path.Combine(siteRoot, "ACTIVE");
-        if (!File.Exists(activePath)) throw new GenerationLoadException("NO_ACTIVE_GENERATION");
-        var gid = File.ReadAllText(activePath).Trim();
+        if (generationId is null && !File.Exists(activePath)) throw new GenerationLoadException("NO_ACTIVE_GENERATION");
+        var gid = generationId ?? File.ReadAllText(activePath).Trim();
         if (gid.Length == 0 || gid.Contains('/') || gid.Contains('\\') || gid.Contains("..")) throw new GenerationLoadException("ACTIVE_INVALID");
         var gdir = Path.Combine(siteRoot, "generations", gid);
         var gen = JsonNode.Parse(File.ReadAllText(Path.Combine(gdir, "generation.json")))!.AsObject();
@@ -170,8 +173,15 @@ public sealed partial class GenerationStore
                 break;
             case "disk":
                 var root = text.Dir is { Length: > 0 } tdir ? Path.GetFullPath(tdir) : Path.Combine(siteRoot, "text-store");
-                textStore = DiskTextStore.OpenOrBuild(root, text, gid, DiskTextStore.SourceDigest(gid, gdir, docs.Values), docs,
-                    issue => ReadDerived(gdir, okDer, docs, issue), (code, n) => issues[code] = issues.GetValueOrDefault(code) + n, log);
+                var tsDigest = DiskTextStore.SourceDigest(gid, gdir, docs, okDer);
+                string? shipped = null;
+                if (text.AdoptShipped)
+                {
+                    shipped = DiskTextStore.ShippedStore(gdir, gid, tsDigest, out var shippedWhy);
+                    if (shipped is null && File.Exists(Path.Combine(gdir, "KNOWLEDGE_RELEASE.json"))) log?.Invoke($"text store: no shipped store adopted ({shippedWhy})");
+                }
+                textStore = DiskTextStore.OpenOrBuild(root, text, gid, tsDigest, docs,
+                    issue => ReadDerived(gdir, okDer, docs, issue), (code, n) => issues[code] = issues.GetValueOrDefault(code) + n, log, shipped);
                 break;
             default:
                 throw new ArgumentException("text store must be 'memory' or 'disk'");
@@ -334,6 +344,11 @@ public sealed partial class GenerationStore
     {
         var held = new Dictionary<string, HeldCopy>();
         long activeSeq = active["release_sequence"]?.GetValue<long>() ?? 0;
+        // C16 (SG-1, consumer I7): a copy the ACTIVE generation governs and does not serve (held, withdrawn, quarantined,
+        // or a v1 copy not independently established) is never held from an earlier generation either.
+        var denied = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var k in active["c16"]?["denied"] as JsonArray ?? new JsonArray())
+            if (k is JsonArray pair && pair.Count == 2) denied.Add(S(pair[1]) + "|" + S(pair[0]));
         var gens = new List<(long seq, string id, JsonObject g)>();
         foreach (var dir in Directory.EnumerateDirectories(Path.Combine(siteRoot, "generations")))
         {
@@ -355,7 +370,7 @@ public sealed partial class GenerationStore
             {
                 var docId = S(v![0])!; var sha = S(v[1])!;
                 var key = sha + "|" + docId;
-                if (held.ContainsKey(key)) continue;
+                if (held.ContainsKey(key) || denied.Contains(key)) continue;
                 int pc = g["page_counts"]?[sha]?.GetValue<int>() ?? 0;
                 long len = File.Exists(vault.PathFor(sha)) ? new FileInfo(vault.PathFor(sha)).Length : 0;
                 held[key] = new HeldCopy(sha, docId, pc, S(g["release_id"]) ?? id, id, len, published.Contains(key));
