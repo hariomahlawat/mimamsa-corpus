@@ -119,4 +119,48 @@ excluded"). Results: see section 7.
 
 ## 7. Results
 
-Filled in below with the run ids.
+**Local (Windows dev host shared with the OCR job; `dotnet build -m:2`, Release):**
+
+| Suite | Result |
+| --- | --- |
+| B1 C#, default mode (425 tests incl. 11 new S3-D) | 422 passed in the full run; 2 environmental failures re-run and passed: `MidTransferWithdrawalTests` needed its `<db>_xfer` database (created as `c16s3d_base_xfer`), `TextStoreTests…(corrupt, False)` is the known load-dependent Windows file-access flake (CP-1 §7 item 8), 3/3 in isolation |
+| B1 C#, disk mode (`MIMAMSA_TEST_TEXT_STORE=disk`, text and search disk) | 424 passed; the one failure was the swap-concurrency test's readers never being scheduled under the shared thread pool (fixed in `da508b3a`: dedicated reader threads, swaps only after readers served); passes since |
+| PR #54 retrieval oracle, default mode | **identical** line for line to the CP-1 hybrid-off baseline (10/14; `oracle-default-mode-local-windows.txt`) |
+| Playwright, default config, `--workers=1` (syn + sample) | **81 passed**; regenerated screenshots restored. Run with the repo's pinned `playwright@1.63.0`; the host has only the Chromium 1248 build installed, so the scratch `PLAYWRIGHT_BROWSERS_PATH` maps 1243 to it (no download, no install) |
+| CP-1 slice (driver + journey + default-mode oracle) | pass, 119 journey checks (`slice-evidence-local-windows.json`) |
+| S3-D web journey | pass (`web_journey.json`) |
+
+IndexBench parity: not re-run. The index engine's build, query and on-disk format are unchanged; the only index change
+is the new `SearchIndex.Release` called when a swapped-out generation is released.
+
+**CI** (head `1d4eaa7f`): see the PR. Linux `app-ci.yml` push 46105545585 and pull_request 46105569116; Windows
+`app-windows-poc.yml` push 46105545578 and pull_request 46105569109. All jobs green, including `b1`, `b1-windows`,
+`cp1-slice` and `cp1-slice-windows`, except one `windows-services` attempt in the push run: the PR #54 PoC transport
+oracle rejected its trace with "site credit cap exceeded". That job runs the separate `app/poc` PoC service, which this
+PR does not touch. The same head passed it in the pull_request run, and the failed job was re-run.
+
+## 8. Open items
+
+1. **Search vocabulary-level metadata is not recomputed under the boundary.** The "Did you mean" speller and the
+   instrument alias/scope chips draw on index metadata of every indexed document, so a suggestion or an instrument title
+   could come only from an excluded document. Case-name chips and identifier counts are fixed (activation only). The same
+   applies in default mode to local withdrawals (pre-existing).
+2. **`/api/graph/path` with `from == to`** returns `found: true` and echoes the requested node id even for a hidden node.
+   This is pre-existing and also happens in default mode. It echoes the request and carries no corpus content. A
+   one-line Core graph fix (check visibility when `from == to`) is recommended. The journey uses a real path.
+3. **Switching window.** The 503s during ENTER_SWITCHING→OPEN are the B06 protocol's journaled-effects window, not the
+   swap. In the journey's tight loops they were 195 of 231 responses, dominated by the fsyncs on this busy host. A real
+   host measurement belongs to B07/B09.
+4. **Memory is measured at fixture scale only** (SYN). The resident cost per generation and the PREPARE peak with disk
+   engines on the real corpus remain for B09. With `Mimamsa:Hybrid:Enabled` under activation, PREPARE builds the
+   target's dense index with the shared embedder. That path is untested here (S3-E's area).
+5. **Graph rows of released generations** stay in the PostgreSQL `graph_*` tables (keyed by generation; same as before).
+   Pruning them alongside B06 retention is not implemented.
+6. Studio routes (BoundaryPrivate) re-check the touched set, not the body, by design (the author's own references stay in
+   the C15 form). Admin overview `quarantine` entries (load-time quarantine of non-servable items) are not filtered.
+7. Range bounded drain: after an acceptance becomes visible, at most the slice already handed over
+   (`Mimamsa:Delivery:Slice`, default 63 KB) plus what the transport queued can still reach the client. Nothing is
+   recalled.
+8. CP-1 report miscount (45 routes, Studio 13, 30 refused): the inventory has 44 mapped routes, Studio 12, 29 refused.
+9. The CP-1 slice still creates its own guarded `c16cp1_*` databases; only the S3-D tests use `c16s3d_*`. All of them were
+   dropped.
