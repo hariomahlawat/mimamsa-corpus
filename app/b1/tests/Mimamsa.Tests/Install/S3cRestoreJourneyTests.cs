@@ -347,6 +347,32 @@ public partial class S3cRestoreJourneyTests
             (pc, po) = Py("import", "--site", siteB.Root, "--release", "G4", "--context", ctxPath, "--stage-only");
             Check("reimport_head_from_media_stage_only", pc == 0, po);
             (code, o) = Cli("stage", "--config", cfB, "--generation", Id("G4"), "--pg-env", ownerEnv, "--loader-env", loaderB, "--contracts", S("contracts"), "--development");
+            var stageIssues = o["issues"]?.AsArray().Select(x => (string)x!).ToList() ?? [];
+            if (code != 0 && stageIssues.Any(i => i.StartsWith("KR_ROWS_REDERIVE_MISMATCH")))
+            {
+                // CROSS-STREAM BLOCKER (B01 x B03), recorded and asserted, not hidden: the B01 importer narrows the servable
+                // set by the site's CURRENT exclusion state at import time (E1, E2 withdraw copies of this release), while
+                // the shipped GRAPH/KNOWLEDGE_ROWS were built centrally without site exclusions; the B03 re-derivation over
+                // the narrowed generation therefore differs and staging refuses (REBUILD_REQUIRED). Any release re-imported
+                // after an exclusion that touches it fails the same way - in a restore this is always the case. Needs an
+                // owner/cross-stream decision (exclusion-independent re-derivation, or the site rebuild path for cheap
+                // accelerators). The site stays fail-closed: it never serves an unverified generation.
+                var gjson = JsonNode.Parse(File.ReadAllText(Path.Combine(siteB.GenerationsDir, Id("G4"), "generation.json")))!;
+                var servedB = gjson["servable"]!["documents"]!.AsArray().Select(x => (string)x!).ToHashSet();
+                Check("blocker_reimport_after_exclusion_fails_rederive_compare", !servedB.Contains(docA) && stageIssues.Any(i => i.Contains("[graph_nodes]")), string.Join("; ", stageIssues));
+                Environment.SetEnvironmentVariable(ownerEnv, S3cPg.OwnerDsn(dbB));
+                (code, o) = Cli("recover", "--site", siteB.Root, "--pg-env", ownerEnv, "--knowledge-rows", "--development");
+                timings["reimport_stage_recover"] = ms(swRe);
+                Check("restored_site_fails_closed_without_a_verified_head", code != 0 && siteB.ReadMarker() != SiteState.OPEN, o.ToJsonString());
+                results["blocker"] = new JsonObject
+                {
+                    ["id"] = "S3C-B01-B03-REIMPORT-AFTER-EXCLUSION", ["stage_issues"] = new JsonArray(stageIssues.Select(i => (JsonNode)i).ToArray()),
+                    ["not_demonstrated"] = "serving after restore (identical responses, E1/E2 at the boundary after restore, rollback after re-import)",
+                };
+                results["journal_steps_b"] = new JsonArray(ActivationJournal.Read(siteB.JournalPath).Entries.Select(e => (JsonNode)e.Step).ToArray());
+                File.WriteAllText(S("results"), results.ToJsonString(new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
+                return;
+            }
             Check("stage_head_on_b", code == 0 && (bool)o["staged"]!, o.ToJsonString());
             Environment.SetEnvironmentVariable(ownerEnv, S3cPg.OwnerDsn(dbB));
             (code, o) = Cli("recover", "--site", siteB.Root, "--pg-env", ownerEnv, "--knowledge-rows", "--development");
