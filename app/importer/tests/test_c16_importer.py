@@ -563,7 +563,26 @@ def test_withdrawn_c16_copy_is_not_served(hn, tmp_path):
     site = tmp_path / "s"
     r = hn.run(hn.bundle(), site, exclusions=_exclusions(withdrawn_doc_ids={cc.DOC_A}))
     a = next(c for c in r.c16["copies"] if c["doc_id"] == cc.DOC_A)
-    assert r.activated and not a["served"] and "C16_EXCLUDED" in a["codes"] and not sv(site, "documents", cc.DOC_A)
+    # S3-C (coordinator decision on S3C-B01-B03-REIMPORT-AFTER-EXCLUSION): a SITE withdrawal is a runtime layer, not an
+    # import decision. The release verdict is unchanged (served per the signed release) and the copy is materialised as
+    # shipped, but it is MARKED locally excluded and never served: not in `servable`, enforced again at serving time.
+    assert r.activated and a["served"] and "C16_LOCALLY_EXCLUDED_AT_SERVING" in a["codes"] and not sv(site, "documents", cc.DOC_A)
+    gen = json.loads((site / "generations" / r.release_id / "generation.json").read_text(encoding="utf-8"))
+    assert cc.DOC_A in gen["locally_excluded"]["documents"] and cc.DOC_A not in gen["servable"]["documents"]
+    assert [cc.DOC_A, a["sha256"]] in gen["c16"]["locally_excluded"]
+    recs = (site / "generations" / r.release_id / "records" / "documents.jsonl").read_text(encoding="utf-8")
+    assert f'"doc_id": "{cc.DOC_A}"' in recs                       # materialised as shipped (B03 re-derivation input)
+
+
+def test_withdrawn_copy_not_served_even_without_a_current_state(hn, tmp_path):
+    """Fail-closed: a copy withdrawn BEFORE import is never served, even when a later serving call is given a state
+    that no longer names it (the import-time mark keeps it out of `servable`)."""
+    site = tmp_path / "s"
+    r = hn.run(hn.bundle(), site, exclusions=_exclusions(withdrawn_doc_ids={cc.DOC_A}))
+    assert r.activated
+    assert not servable(site, "documents", cc.DOC_A, exclusions=_exclusions())
+    other = next(d for d in json.loads((site / "generations" / r.release_id / "generation.json").read_text(encoding="utf-8"))["servable"]["documents"])
+    assert servable(site, "documents", other, exclusions=_exclusions())
 
 
 # ------------------------------------------------------------ per-source accounting (signed register)

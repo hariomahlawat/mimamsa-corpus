@@ -96,7 +96,7 @@ public sealed partial class GenerationStore
     /// `generationId` (C16 CP-1, verification only): load that staged generation instead of the ACTIVE one, so the
     /// site can verify a generation (rows, graph, text store) before the activation journal switches to it.
     public static GenerationStore Load(string siteRoot, Vault? vault = null, TextStoreOptions? text = null, Action<string>? log = null,
-                                       string? generationId = null)
+                                       string? generationId = null, bool includeLocallyExcluded = false)
     {
         siteRoot = Path.GetFullPath(siteRoot);
         var activePath = Path.Combine(siteRoot, "ACTIVE");
@@ -113,6 +113,14 @@ public sealed partial class GenerationStore
         var okDocs = L(servable["documents"]).ToHashSet();
         var okDer = L(servable["derived_text"]).ToHashSet();
         var okCand = L(servable["candidates"]).ToHashSet();
+        // C16 S3-C: copies withdrawn by the SITE at import are materialised but marked `locally_excluded` (not servable).
+        // Default (false): they are not loaded - fail-closed where no response boundary applies the ExclusionStore.
+        // true: the generation exactly as shipped - for staging re-derivation (B03/B04) and for a journal-managed web
+        // process whose response boundary enforces the CURRENT exclusion state on every surface.
+        if (includeLocallyExcluded && gen["locally_excluded"] is JsonObject lx)
+        {
+            okDocs.UnionWith(L(lx["documents"])); okDer.UnionWith(L(lx["derived_text"])); okCand.UnionWith(L(lx["candidates"]));
+        }
         var itemDoc = gen["item_document"]!.AsObject();
         var evidence = gen["candidate_evidence"]?.AsObject() ?? new JsonObject();
 

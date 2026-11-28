@@ -576,6 +576,7 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
         res.contract_errors = sorted({i.code for i in c16res.refusals})
         res.refused_reasons.append("C16 exchange refused: " + ", ".join(res.contract_errors))
         return res
+    locally_excluded = None
     if c16res.active:
         allowed, search = c16res.allowed_docs, c16res.search_docs
         res.verified["documents"] = [d for d in res.verified["documents"] if d in allowed]
@@ -588,6 +589,18 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
         evidence = {k: v for k, v in evidence.items() if k in item_document["candidates"]}
         # restricted copies are not written to the vault and not named in the generation (page counts by hash)
         copy_pages = {h: n for h, n in copy_pages.items() if h not in c16res.restricted_shas}
+        # S3-C: copies withdrawn/tombstoned by the SITE's exclusion state are materialised as shipped (records,
+        # derivatives, candidates, vault) but MARKED not servable: moved from `servable` to `locally_excluded`.
+        # Serving enforces the current state anyway (response boundary); B03 re-derivation reads the whole release.
+        lx_docs = {d for d, _ in c16res.locally_excluded} & set(res.verified["documents"])
+        if lx_docs:
+            locally_excluded = {
+                "documents": sorted(lx_docs),
+                "derived_text": sorted(d for d in res.verified["derived_text"] if item_document["derived_text"][d][0] in lx_docs),
+                "candidates": sorted(x for x in res.verified["candidates"] if item_document["candidates"][x][0] in lx_docs),
+            }
+            for k, ids in locally_excluded.items():
+                res.verified[k] = [x for x in res.verified[k] if x not in set(ids)]
 
     # 5 vault (retained across generations), held-copies index, generation, atomic activation
     vault = site / "vault" / "sha256"
@@ -610,6 +623,7 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
         res.unresolved.append({"kind": "research_file", "id": rel, "reasons": [why]})
     generation = {"release_id": res.release_id, "release_sequence": manifest.get("release_sequence"),
                   "sums_sha256": sums_digest, "servable": res.verified, "quarantine": res.unresolved,
+                  **({"locally_excluded": locally_excluded} if locally_excluded else {}),
                   "item_document": item_document, "candidate_evidence": evidence,
                   "page_counts": copy_pages, "exclusion_channel": exclusion_mode,
                   "materialized": {"format": MATERIALIZED_FORMAT, "records": "records/",
@@ -634,7 +648,8 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
         gens.mkdir(parents=True, exist_ok=True)
         tmpdir = gens / f".tmp-{res.release_id}"
         tmpdir.mkdir()
-        _materialize(tmpdir, manifest, docs, derived, cands, texts, res.verified, research, extra=c16files)
+        _materialize(tmpdir, manifest, docs, derived, cands, texts,   # S3-C: locally excluded items are materialised as shipped
+                     {k: list(v) + list((locally_excluded or {}).get(k, [])) for k, v in res.verified.items()}, research, extra=c16files)
         with open(tmpdir / "generation.json", "wb") as fh:
             fh.write(json.dumps(generation, indent=1, sort_keys=True).encode())
             fh.flush()

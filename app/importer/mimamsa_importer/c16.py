@@ -89,6 +89,7 @@ class C16Result:
     search_docs: set = field(default_factory=set)           # allowed docs whose text may be indexed
     denied: list = field(default_factory=list)              # (doc_id, sha256) governed or checked and not served
     restricted_shas: set = field(default_factory=set)       # never written anywhere (vault, page counts, reports)
+    locally_excluded: set = field(default_factory=set)      # (doc_id, sha256) withdrawn/tombstoned by the SITE: materialised, not servable
     accounting: list = field(default_factory=list)          # the site's recomputed sources (RECOMPUTED_BY_SITE)
     declared_accounting: bytes | None = None                # the signed declaration, verbatim
     site_accounting: bytes | None = None                    # register_bytes of the site's recomputation
@@ -413,6 +414,26 @@ def _excluded(exclusions, doc_id, sha) -> bool:
                 or doc_id in exclusions.restricted_tombstone_doc_ids or sha in exclusions.restricted_tombstone_shas)
 
 
+def _restricted_exclusion(exclusions, doc_id, sha) -> bool:
+    """The RESTRICTED part of the site's exclusion state (the store's register and restricted tombstones): restricted
+    material stays an import-time refusal (never materialised, never in the vault)."""
+    if exclusions is None:
+        return False
+    return bool(exclusions.register.is_restricted(sha256=sha, doc_id=doc_id)
+                or doc_id in exclusions.restricted_tombstone_doc_ids or sha in exclusions.restricted_tombstone_shas)
+
+
+def _locally_withdrawn(exclusions, doc_id, sha) -> bool:
+    """S3-C (coordinator decision on S3C-B01-B03-REIMPORT-AFTER-EXCLUSION): site-local withdrawals and tombstones are a
+    SITE-RUNTIME layer, not an import decision. The release is materialised exactly as shipped; such copies are only
+    MARKED (generation `locally_excluded`) and enforced at serving time (response boundary / Eligibility; the default-mode
+    loader still leaves them out, fail-closed)."""
+    if exclusions is None:
+        return False
+    return bool(doc_id in exclusions.withdrawn_doc_ids or sha in exclusions.withdrawn_shas
+                or doc_id in exclusions.tombstone_doc_ids or sha in exclusions.tombstone_shas)
+
+
 def _restricted(exclusions, register, doc_id, sha) -> bool:
     if register is not None and register.is_restricted(sha256=sha, doc_id=doc_id):
         return True
@@ -630,7 +651,10 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
             gates = verification.get(a["admission_id"], {})
             outcome = "QUARANTINED" if codes else "ELIGIBLE"
         has_v1 = key in v1_by_key
-        excluded = _excluded(exclusions, *key)
+        excluded = _restricted_exclusion(exclusions, *key)          # restricted: still an import-time refusal
+        if _locally_withdrawn(exclusions, *key):                      # withdrawal/tombstone: marked, enforced at serving
+            res.locally_excluded.add(key)
+            codes.append("C16_LOCALLY_EXCLUDED_AT_SERVING")
         served = outcome == "ELIGIBLE" and has_v1 and not excluded
         if outcome == "ELIGIBLE" and not has_v1:
             codes.append("C16_ONLY_NOT_SERVABLE")
@@ -661,8 +685,9 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
     candidate_shas = v7_shas | {k[1] for k in governed}
     excl = set()
     if exclusions is not None:
-        excl = set(exclusions.withdrawn_doc_ids | exclusions.withdrawn_shas | exclusions.tombstone_doc_ids | exclusions.tombstone_shas
-                   | exclusions.restricted_tombstone_doc_ids | exclusions.restricted_tombstone_shas)
+        # withdrawals/tombstones are a site-runtime layer (marked below, enforced at serving); only restricted
+        # tombstones still decide I-5 establishment at import
+        excl = set(exclusions.restricted_tombstone_doc_ids | exclusions.restricted_tombstone_shas)
     comp_restricted: dict[str, int] = {}
     for doc_id in sorted(verified_docs):
         doc = verified_docs[doc_id]
@@ -675,6 +700,8 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
             res.codes["C16_RESTRICTED_OMITTED"] += 1
             comp_restricted[_v1_source(doc)] = comp_restricted.get(_v1_source(doc), 0) + 1
             continue
+        if _locally_withdrawn(exclusions, *key):
+            res.locally_excluded.add(key)
         li = legacy.legacy_issues(doc, c16_governed=governed, eligible_c16=eligible_c16, candidate_shas=candidate_shas, excluded=excl)
         ok = not li
         if ok:
@@ -785,5 +812,7 @@ def materialize(res: C16Result) -> dict:
                               "site_sha256": _sha(res.site_accounting) if res.site_accounting is not None else None},
                "knowledge_release": knowledge,
                "files": {p: _sha(b) for p, b in sorted(files.items())}}
+    if res.locally_excluded:   # S3-C: only when the site had withdrawn copies of this release (keeps other generations byte-identical)
+        section["locally_excluded"] = sorted([k[0], k[1]] for k in res.locally_excluded)
     return {"files": files, "section": section,
             "materialized": {"dir": C16_PREFIX, "files": {n: _sha(b) for n, b in sorted(res.exchange_files.items())}}}

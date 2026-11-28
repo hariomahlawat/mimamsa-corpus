@@ -60,7 +60,9 @@ var textOptions = new TextStoreOptions
 };
 if (textOptions.Store is not ("memory" or "disk")) throw new InvalidOperationException("Mimamsa:Text:Store must be 'memory' or 'disk'");
 var loadSw = System.Diagnostics.Stopwatch.StartNew();
-var generation = GenerationStore.Load(site, vault, textOptions, Console.WriteLine);
+// C16 S3-C: under activation the response boundary enforces the CURRENT exclusion state on every surface, so the
+// generation is loaded exactly as shipped (locally excluded copies included, never served); default mode leaves them out.
+var generation = GenerationStore.Load(site, vault, textOptions, Console.WriteLine, includeLocallyExcluded: conf.GetValue("Mimamsa:Activation:Enabled", false));
 var generationLoadMs = loadSw.ElapsedMilliseconds;
 var state = new ServingState();
 var policy = new PolicyStore(dataSource);
