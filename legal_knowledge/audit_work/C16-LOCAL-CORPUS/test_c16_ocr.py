@@ -86,11 +86,14 @@ class Tests(unittest.TestCase):
    self.assertEqual(len(list((root/"attempts").rglob("*.json"))),2)
  def test_tampered_artifact_invalidates_cached_complete_record(self):
   with tempfile.TemporaryDirectory() as td:
-   root=Path(td);artifact=root/"artifact.txt";artifact.write_text("valid",encoding="utf-8")
-   record={"state":"COMPLETE","artifact_paths":{"raw_text":artifact.relative_to(root).as_posix()},
-           "artifact_sha256":{"raw_text":hashlib.sha256(b"valid").hexdigest()}}
+   root=Path(td);paths={}
+   for key in ("raw_text","normalised_text","word_boxes"):
+    artifact=root/f"{key}.txt";artifact.write_text("valid",encoding="utf-8");paths[key]=artifact.relative_to(root).as_posix()
+   record={"state":"COMPLETE","unreadable":False,"access_disposition":"SCREENED_NO_MARKING_DETECTED",
+           "artifact_paths":paths,"artifact_sha256":{key:hashlib.sha256(b"valid").hexdigest() for key in paths},
+           **{f"{key}_path":value for key,value in paths.items()}}
    self.assertTrue(o.validate_record_artifacts(root,record))
-   artifact.write_text("tampered",encoding="utf-8")
+   (root/paths["raw_text"]).write_text("tampered",encoding="utf-8")
    self.assertFalse(o.validate_record_artifacts(root,record))
  def test_access_rejects_clean_record_from_wrong_configuration(self):
   inventory=[{"inventory_id":"d1","sha256":"a"*64,"relative_path":"x.docx","restricted":False,
@@ -116,13 +119,19 @@ class Tests(unittest.TestCase):
   self.assertEqual(args.pdf_config,["pdf-current"])
  def test_access_register_passes_explicit_configuration_sets(self):
   class Args:
-   inventory="inventory";primary_register="primary";secondary_register=None;pdf_register="pdf";output="out"
+   inventory="inventory";source="source";primary_register="primary";secondary_register=None;pdf_register="pdf";output="out"
+   primary_root="primary-root";secondary_root=None;pdf_root="pdf-root"
+   workers=2
    image_config=["image-current"];pdf_config=["pdf-current"]
   calls=[]
   old_load,old_propagate,old_write=o.load_jsonl,o.write_jsonl_atomic,o.propagate_access_holds
+  old_jobs,old_pdf,old_cfg,old_validate=o.image_jobs,o.pdf_page_jobs,o.load_verified_configuration,o.validate_evidence_population
   try:
    o.load_jsonl=lambda p: ([] if str(p)=="inventory" else [{"configuration_sha256":"x"}])
    o.write_jsonl_atomic=lambda p,rows: None
+   o.image_jobs=lambda inventory,source: ({},[]);o.pdf_page_jobs=lambda inventory,source: []
+   o.load_verified_configuration=lambda root:{"configuration_sha256":"current","mode":"primary"}
+   o.validate_evidence_population=lambda root,records,jobs,cfg,identifier,workers=1: records
    def capture(inventory,images,pdfs,expected_image_configurations=None,expected_pdf_configurations=None):
     calls.append((expected_image_configurations,expected_pdf_configurations));return []
    o.propagate_access_holds=capture
@@ -131,6 +140,7 @@ class Tests(unittest.TestCase):
    self.assertEqual(calls,[({"image-current"},{"pdf-current"})])
   finally:
    o.load_jsonl,o.write_jsonl_atomic,o.propagate_access_holds=old_load,old_propagate,old_write
+   o.image_jobs,o.pdf_page_jobs,o.load_verified_configuration,o.validate_evidence_population=old_jobs,old_pdf,old_cfg,old_validate
  def test_pdf_cache_key_changes_with_render_or_configuration(self):
   base=o.pdf_processing_key("a"*64,1,"b"*64,"c"*64)
   self.assertNotEqual(base,o.pdf_processing_key("a"*64,1,"d"*64,"c"*64))
@@ -145,4 +155,30 @@ class Tests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as td:
    root=Path(td);artifact=root/"artifacts"/"orphan.txt";o.atomic_write(artifact,b"orphan")
    self.assertEqual(o.load_state_records(root),[])
+ def test_empty_clean_complete_record_is_not_valid_evidence(self):
+  with tempfile.TemporaryDirectory() as td:
+   record={"state":"COMPLETE","unreadable":False,"access_disposition":"SCREENED_NO_MARKING_DETECTED",
+           "artifact_paths":{},"artifact_sha256":{}}
+   self.assertFalse(o.validate_record_artifacts(td,record))
+ def test_invalid_artifact_path_cannot_escape_root(self):
+  with tempfile.TemporaryDirectory() as td:
+   record={"state":"COMPLETE","unreadable":False,"access_disposition":"SCREENED_NO_MARKING_DETECTED",
+           "artifact_paths":{"raw_text":"../escape.txt","normalised_text":"../escape.txt","word_boxes":"../escape.txt"},
+           "artifact_sha256":{"raw_text":"a"*64,"normalised_text":"a"*64,"word_boxes":"a"*64},
+           "raw_text_path":"../escape.txt","normalised_text_path":"../escape.txt","word_boxes_path":"../escape.txt"}
+   self.assertFalse(o.validate_record_artifacts(td,record))
+ def test_persist_repairs_corrupt_content_addressed_artifact(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td);result={"raw_text":"clean text","normalised_text":"clean text","words":[{"text":"clean"}]}
+   first=o.persist_result(root,"a"*64,result,configuration_sha256="c"*64)
+   artifact=root/first["artifact_paths"]["raw_text"];artifact.write_text("corrupt",encoding="utf-8")
+   second=o.persist_result(root,"a"*64,result,configuration_sha256="c"*64)
+   self.assertTrue(o.validate_record_artifacts(root,{**second,"state":"COMPLETE"}))
+ def test_same_configuration_marked_attempt_survives_clean_effective_head(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td);base={"image_sha256":"a"*64,"configuration_sha256":"c"*64,"state":"COMPLETE","unreadable":True,"artifact_paths":{},"artifact_sha256":{}}
+   o.write_state_record(root,{**base,"access_disposition":"HELD_ACCESS_MARKING_REVIEW"})
+   o.write_state_record(root,{**base,"access_disposition":"SCREENED_NO_MARKING_DETECTED"})
+   attempts=o.load_attempt_records(root)
+   self.assertEqual(o._effective_access(attempts,{"c"*64}),"HELD_ACCESS_MARKING_REVIEW")
 if __name__=="__main__":unittest.main()

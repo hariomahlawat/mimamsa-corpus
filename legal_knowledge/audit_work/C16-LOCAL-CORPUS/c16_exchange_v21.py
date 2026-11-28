@@ -8,8 +8,10 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import subprocess
 import sys
 from pathlib import Path
+import c16_ocr
 
 CONTRACT = "mimamsa-corpus-contract/2.1"
 RECORD_FILES = {
@@ -28,6 +30,34 @@ def load_jsonl(path: Path) -> list[dict]:
 
 def jsonl_bytes(rows: list[dict]) -> bytes:
     return b"".join((json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8") for row in rows)
+
+
+def join_access_decisions(inventory: list[dict], access_rows: list[dict]) -> list[dict]:
+    by_id = {}
+    for decision in access_rows:
+        key = decision.get("inventory_id")
+        if not key or key in by_id:
+            raise ValueError(f"duplicate or missing access inventory id: {key}")
+        by_id[key] = decision
+    if set(by_id) != {row.get("inventory_id") for row in inventory}:
+        raise ValueError("access register is not a one-to-one inventory join")
+    joined = []
+    for row in inventory:
+        decision = by_id[row["inventory_id"]]
+        if decision.get("source_sha256") != row.get("sha256"):
+            raise ValueError(f"access source hash mismatch: {row['inventory_id']}")
+        joined.append({**row, **decision})
+    return joined
+
+
+def partition_transferable(inventory: list[dict]) -> tuple[list[dict], list[dict]]:
+    held_sha = {row["sha256"] for row in inventory
+                if row.get("document_access_disposition") != "SCREENED_NO_MARKING_DETECTED"}
+    quarantine = [row for row in inventory if row["sha256"] in held_sha]
+    transferable = [row for row in inventory if row["sha256"] not in held_sha]
+    for row in transferable:
+        row.pop("derivative_withheld_reason", None)
+    return transferable, quarantine
 
 
 def _component(relative_path: str, label: str, basis: str) -> int:
@@ -60,7 +90,7 @@ def project_relationships(subject_rows: list[dict], provision_rows: list[dict], 
             category = "associated_with_provision" if raw["target_node_id"].startswith("PROV:") else "classified_under_subject"
             inv = inventory_by_id.get(raw.get("inventory_id"))
             ident = identities_by_sha.get(raw.get("source_copy_sha256"))
-            if inv is not None and ident is None and (inv.get("restricted") or inv.get("access_disposition") == "HELD_ACCESS_MARKING_REVIEW"):
+            if inv is not None and ident is None and (inv.get("restricted") or inv.get("document_access_disposition") != "SCREENED_NO_MARKING_DETECTED"):
                 continue
             if inv is None or ident is None:
                 raise ValueError(f"relationship lacks verified identity binding: {raw.get('relationship_id') or raw.get('inventory_id')}")
@@ -147,24 +177,36 @@ def augment_taxonomy(taxonomy: list[dict], provision_rows: list[dict]) -> list[d
     return list(nodes.values())
 
 
+def prune_taxonomy(taxonomy: list[dict], relationships: list[dict]) -> list[dict]:
+    nodes={row["node_id"]:row for row in taxonomy}
+    keep={row["target"]["node_id"] for row in relationships if row.get("target",{}).get("resolved") and row["target"].get("node_id") in nodes}
+    pending=list(keep)
+    while pending:
+        node=pending.pop()
+        for parent in nodes[node].get("parent_ids") or []:
+            if parent in nodes and parent not in keep:keep.add(parent);pending.append(parent)
+    return [nodes[key] for key in sorted(keep)]
+
+
 def load_state_tree(root: Path) -> list[dict]:
     state = root / "state"
     return [json.loads(path.read_text(encoding="utf-8")) for path in sorted(state.rglob("*.json"))]
 
 
-def enrich_image_ocr(inventory: list[dict], primary: list[dict], secondary: list[dict]) -> None:
+def enrich_image_ocr(inventory: list[dict], primary: list[dict], secondary: list[dict], accepted_configs: set[str] | None = None) -> None:
     """Bind embedded-image status to verified v2 evidence, preferring a readable targeted retry."""
-    by_image = {row["image_sha256"]: row for row in primary
-                if row.get("state") == "COMPLETE" and row.get("evidence_verified") is True}
-    for row in secondary:
-        if (row.get("state") == "COMPLETE" and row.get("evidence_verified") is True
-                and not row.get("unreadable")):
-            by_image[row["image_sha256"]] = row
+    grouped={}
+    for row in primary+secondary:
+        if accepted_configs is None or row.get("configuration_sha256") in accepted_configs:
+            grouped.setdefault(row["image_sha256"],[]).append(row)
     for document in inventory:
         for image in document.get("embedded_images") or []:
-            evidence = by_image.get(image["image_sha256"])
+            candidates=grouped.get(image["image_sha256"],[])
+            if any(row.get("access_disposition")=="HELD_ACCESS_MARKING_REVIEW" for row in candidates):
+                image["ocr_state"]="FAILED";image.pop("ocr_derivative_sha256",None);continue
+            evidence = next((row for row in reversed(candidates) if row.get("state")=="COMPLETE" and row.get("evidence_verified") is True and not row.get("unreadable")),None)
             if evidence is None:
-                image["ocr_state"] = "QUEUED"
+                image["ocr_state"] = "FAILED" if candidates else "QUEUED"
                 image.pop("ocr_derivative_sha256", None)
             elif (not evidence.get("unreadable")
                   and evidence.get("access_disposition") == "SCREENED_NO_MARKING_DETECTED"
@@ -180,14 +222,22 @@ def pdf_anchors(records: list[dict], root: Path, config: dict, identities_by_sha
                 derivative_root: Path | None = None) -> list[dict]:
     """Export clean verified pages, grouped into one deterministic OCR derivative per source PDF."""
     verified: dict[str, list[tuple[dict, bytes]]] = {}
+    expected_config=config.get("configuration_sha256")
+    seen=set()
     for record in records:
+        key=(record.get("source_sha256"),record.get("physical_page"))
+        if None not in key:
+            if key in seen:raise ValueError(f"duplicate PDF page evidence: {key}")
+            seen.add(key)
         if not (record.get("state") == "COMPLETE" and record.get("evidence_verified") is True
                 and not record.get("unreadable")
-                and record.get("access_disposition") == "SCREENED_NO_MARKING_DETECTED"):
+                and record.get("access_disposition") == "SCREENED_NO_MARKING_DETECTED"
+                and record.get("configuration_sha256")==expected_config):
             continue
         sha = record.get("source_sha256")
         if sha != record.get("verified_source_sha256") or sha not in identities_by_sha:
             continue
+        if not c16_ocr.validate_record_artifacts(root,record):continue
         rel = (record.get("artifact_paths") or {}).get("raw_text")
         expected = (record.get("artifact_sha256") or {}).get("raw_text")
         if not rel or not expected:
@@ -249,45 +299,75 @@ def _sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def checked_revision(root: Path, expected: str) -> str:
+    actual=subprocess.run(["git","-C",str(root),"rev-parse","HEAD"],check=True,capture_output=True,text=True).stdout.strip()
+    if actual!=expected:raise ValueError(f"revision mismatch at {root}: {actual} != {expected}")
+    return actual
+
+
+def consumer_dry_run(exchange: Path, rules, accounting, contract_accounting) -> dict:
+    files={path.name:path.read_bytes() for path in exchange.iterdir() if path.is_file()}
+    issues=[str(x) for x in rules.exchange_issues(files,mode="strict")]
+    accounting_bytes=(exchange.parent/"registers"/"source_accounting.json").read_bytes()
+    canonical=contract_accounting.register_bytes(accounting)
+    if accounting_bytes!=canonical:issues.append("source accounting bytes are not normative canonical bytes")
+    issues += [str(x) for x in contract_accounting.accounting_issues(accounting)]
+    admissions=[json.loads(line) for line in files["admissions.jsonl"].decode("utf-8").splitlines() if line]
+    if any(row.get("application_eligible") for row in admissions):issues.append("dry run refuses eligible admission")
+    return {"mode":"CONSUMER_HELD_ONLY_DRY_RUN","files_read":len(files),"admissions":len(admissions),
+            "eligible":sum(bool(row.get("application_eligible")) for row in admissions),"issues":issues,"accepted":not issues}
+
+
 def build(args) -> dict:
     contract_python = Path(args.contract_root) / "app" / "contract"
     sys.path.insert(0, str(contract_python))
     from mimamsa_contract.c16 import accounting as contract_accounting, adapters, canonical, rules
     from mimamsa_contract.c16.schemas import schema_errors
 
-    inventory = load_jsonl(Path(args.inventory))
+    checked_revision(Path(args.contract_root),args.contract_commit)
+    checked_revision(Path(args.producer_root),args.producer_commit)
+
+    physical_inventory = load_jsonl(Path(args.inventory))
     if args.identity_assessment:
         assessed = {row["inventory_id"]: row for row in load_jsonl(Path(args.identity_assessment))}
-        inventory = [{**row, **assessed.get(row["inventory_id"], {})} for row in inventory]
-    if args.access_register:
-        access = {row["inventory_id"]: row for row in load_jsonl(Path(args.access_register))}
-        for row in inventory:
-            decision = access.get(row["inventory_id"])
-            if decision:
-                row["access_disposition"] = decision["document_access_disposition"]
-                row.pop("derivative_withheld_reason", None)
-                if decision["document_access_disposition"] == "HELD_ACCESS_MARKING_REVIEW":
-                    row["derivative_withheld_reason"] = decision["document_access_disposition"]
+        physical_inventory = [{**row, **assessed.get(row["inventory_id"], {})} for row in physical_inventory]
+    if not args.access_register:
+        raise ValueError("--access-register is required for a transferable package")
+    joined = join_access_decisions(physical_inventory, load_jsonl(Path(args.access_register)))
+    inventory, quarantine = partition_transferable(joined)
+    source=Path(args.source)
+    primary_valid=[];secondary_valid=[]
     if args.primary_image_register:
-        enrich_image_ocr(inventory, load_jsonl(Path(args.primary_image_register)),
-                         load_jsonl(Path(args.secondary_image_register)) if args.secondary_image_register else [])
+        jobs_by_hash,_=c16_ocr.image_jobs(physical_inventory,source);jobs=list(jobs_by_hash.values())
+        primary_cfg=c16_ocr.load_verified_configuration(args.primary_image_root)
+        primary_valid=c16_ocr.validate_evidence_population(args.primary_image_root,load_jsonl(Path(args.primary_image_register)),jobs,primary_cfg,"image_sha256",args.verification_workers)
+        if args.secondary_image_register:
+            secondary_cfg=c16_ocr.load_verified_configuration(args.secondary_image_root)
+            secondary_jobs=c16_ocr.second_pass_candidates(jobs_by_hash,primary_valid)
+            secondary_valid=c16_ocr.validate_evidence_population(args.secondary_image_root,load_jsonl(Path(args.secondary_image_register)),secondary_jobs,secondary_cfg,"image_sha256",args.verification_workers)
+        enrich_image_ocr(inventory,primary_valid,secondary_valid,{primary_cfg["configuration_sha256"],*( [secondary_cfg["configuration_sha256"]] if args.secondary_image_register else [])})
     projected = adapters.from_pr76_inventory(
         inventory, collection="local:owner-corpus-c16", corpus_generation_id=args.generation_id)
     identities_by_sha = {row["source_copy"]["sha256"]: row for row in projected["identities"]}
-    inventory_by_id = {row["inventory_id"]: row for row in inventory}
+    inventory_by_id = {row["inventory_id"]: row for row in joined}
     subject_rows = load_jsonl(Path(args.subject_relationships))
     provision_rows = load_jsonl(Path(args.provision_relationships))
     projected["relationships"] = project_relationships(
         subject_rows, provision_rows,
         inventory_by_id, identities_by_sha, adapters._classification)
     taxonomy_nodes = json.loads(Path(args.legal_taxonomy).read_text(encoding="utf-8"))["nodes"]
-    projected["taxonomy"] = augment_taxonomy(v5_subject_taxonomy(taxonomy_nodes, subject_rows), provision_rows)
+    projected["taxonomy"] = prune_taxonomy(
+        augment_taxonomy(v5_subject_taxonomy(taxonomy_nodes, subject_rows), provision_rows),
+        projected["relationships"])
     projected["anchors"] = []
     output = Path(args.output)
     if args.pdf_ocr_root:
         pdf_root = Path(args.pdf_ocr_root)
-        config = json.loads((pdf_root / "OCR_CONFIGURATION.json").read_text(encoding="utf-8"))
-        projected["anchors"] += pdf_anchors(load_state_tree(pdf_root), pdf_root, config, identities_by_sha, canonical,
+        config = c16_ocr.load_verified_configuration(pdf_root)
+        jobs=c16_ocr.pdf_page_jobs(physical_inventory,source)
+        pdf_records=c16_ocr.validate_evidence_population(pdf_root,load_jsonl(Path(args.pdf_register)),jobs,config,"page_key",args.verification_workers)
+        pdf_records=[row for row in pdf_records if row.get("source_sha256") in identities_by_sha]
+        projected["anchors"] += pdf_anchors(pdf_records, pdf_root, config, identities_by_sha, canonical,
                                             output / "derivatives")
     projected["reviewed_records"] = []
 
@@ -341,29 +421,49 @@ def build(args) -> dict:
                      "effective_admissions": len(projected["admissions"]), "by_decision": decisions,
                      "held": held, "rejected": rejected, "quarantined": quarantined,
                      "eligible": 0, "served": 0, "not_served_reasons": decisions}]}
-    accounting_data = (json.dumps(accounting, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode("utf-8")
+    accounting_data = contract_accounting.register_bytes(accounting)
     (registers / "source_accounting.json").write_bytes(accounting_data)
     candidates = b"".join((row["source_copy"]["sha256"] + "\n").encode("ascii") for row in sorted(projected["identities"], key=lambda r: r["source_copy"]["sha256"]))
     (registers / "exact_candidate_set.sha256").write_bytes(candidates)
-    source_candidates = b"".join((sha + "\n").encode("ascii") for sha in sorted({row["sha256"] for row in inventory}))
-    (registers / "source_candidate_set.sha256").write_bytes(source_candidates)
+    source_candidates = b"".join((sha + "\n").encode("ascii") for sha in sorted({row["sha256"] for row in physical_inventory}))
     receipt_register = {"contract": CONTRACT, "application_eligible_admissions": 0, "typed_gate_receipts": 0,
                         "reason": "All producer admissions are held or rejected; Contract 2.1 requires no gate receipt artefacts for ineligible admissions."}
     (registers / "TYPED_GATE_RECEIPT_REGISTER.json").write_text(json.dumps(receipt_register, indent=2), encoding="utf-8")
-    if args.access_register:
-        (registers / "DOCUMENT_ACCESS_REGISTER.jsonl").write_bytes(Path(args.access_register).read_bytes())
+    input_files={"inventory":Path(args.inventory),"access_register":Path(args.access_register),
+                 "primary_image_register":Path(args.primary_image_register),"secondary_image_register":Path(args.secondary_image_register),
+                 "pdf_register":Path(args.pdf_register),"taxonomy":Path(args.legal_taxonomy)}
+    safe_inputs={name:{"sha256":hashlib.sha256(path.read_bytes()).hexdigest(),"bytes":path.stat().st_size}
+                 for name,path in input_files.items()}
+    safe_manifest={"contract_commit":args.contract_commit,"producer_commit":args.producer_commit,"inputs":safe_inputs}
+    (output/"SAFE_INPUT_MANIFEST.json").write_text(json.dumps(safe_manifest,sort_keys=True,indent=2),encoding="utf-8")
+    quarantine_output=Path(args.quarantine_output)
+    quarantine_output.mkdir(parents=True,exist_ok=True)
+    quarantine_summary={"physical_sources":len(physical_inventory),"transferable_sources":len(inventory),
+                        "quarantined_sources":len(quarantine),
+                        "by_disposition":{d:sum(r.get("document_access_disposition")==d for r in quarantine)
+                                          for d in sorted({r.get("document_access_disposition") for r in quarantine})}}
+    (quarantine_output/"LOCAL_QUARANTINE_SUMMARY.json").write_text(json.dumps(quarantine_summary,indent=2),encoding="utf-8")
+    dry_run=consumer_dry_run(exchange,rules,accounting,contract_accounting)
+    (output/"CONSUMER_DRY_RUN.json").write_text(json.dumps(dry_run,indent=2),encoding="utf-8")
+    inventory_files=[]
+    for path in sorted(p for p in output.rglob("*") if p.is_file() and p.name not in ("TRANSFER_SHA256SUMS","PRODUCER_VALIDATION_REPORT.json")):
+        inventory_files.append({"path":path.relative_to(output).as_posix(),"sha256":hashlib.sha256(path.read_bytes()).hexdigest(),"bytes":path.stat().st_size})
+    sums="".join(f"{row['sha256']}  {row['path']}\n" for row in inventory_files).encode("utf-8")
+    (output/"TRANSFER_SHA256SUMS").write_bytes(sums)
     report = {"contract_commit": args.contract_commit, "population_counts": {k: len(v) for k, v in populations.items()},
               "relationship_accounting": {"folder_and_provision_classifications": len(projected["relationships"]),
                                            "provision_candidates": len(provision_rows),
                                            "withheld_restricted_relationships": len(subject_rows) - len(projected["relationships"])},
               "candidate_set_sha256": _sha(candidates),
               "source_candidate_set_sha256": _sha(source_candidates),
-              "physical_source_items": len(inventory),
-              "locally_withheld_restricted_items": len(inventory) - len(projected["identities"]),
+              "physical_source_items": len(physical_inventory),
+              "transferable_source_items":len(inventory),
+              "local_quarantine_items":len(quarantine),
               "source_accounting_schema_errors": [str(issue) for issue in schema_errors(accounting)],
               "source_accounting_reconciliation_errors": [str(issue) for issue in contract_accounting.accounting_issues(accounting)],
+              "consumer_dry_run":dry_run,"transfer_file_count":len(inventory_files),"transfer_inventory_sha256":_sha(sums),
               "validation_issues": [str(issue) for issue in issues],
-              "strict_valid": not issues and not schema_errors(accounting) and not contract_accounting.accounting_issues(accounting)}
+              "strict_valid": not issues and not schema_errors(accounting) and not contract_accounting.accounting_issues(accounting) and dry_run["accepted"]}
     (output / "PRODUCER_VALIDATION_REPORT.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     return report
 
@@ -371,16 +471,20 @@ def build(args) -> dict:
 def parse_args(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--contract-root", required=True); p.add_argument("--contract-commit", required=True)
-    p.add_argument("--inventory", required=True); p.add_argument("--subject-relationships", required=True)
+    p.add_argument("--producer-root", required=True)
+    p.add_argument("--inventory", required=True); p.add_argument("--source", required=True);p.add_argument("--subject-relationships", required=True)
     p.add_argument("--provision-relationships", required=True); p.add_argument("--output", required=True)
+    p.add_argument("--quarantine-output", required=True)
     p.add_argument("--legal-taxonomy", required=True)
     p.add_argument("--generation-id", required=True); p.add_argument("--producer-commit", required=True)
     p.add_argument("--restricted-register-sha256", required=True)
-    p.add_argument("--pdf-ocr-root")
+    p.add_argument("--pdf-ocr-root");p.add_argument("--pdf-register")
     p.add_argument("--primary-image-register"); p.add_argument("--secondary-image-register")
+    p.add_argument("--primary-image-root");p.add_argument("--secondary-image-root")
     p.add_argument("--identity-assessment"); p.add_argument("--access-register")
     p.add_argument("--hf-repo", default="hariomahlawat/mimamsa-corpus")
     p.add_argument("--hf-revision", required=True)
+    p.add_argument("--verification-workers",type=int,default=12)
     return p.parse_args(argv)
 
 

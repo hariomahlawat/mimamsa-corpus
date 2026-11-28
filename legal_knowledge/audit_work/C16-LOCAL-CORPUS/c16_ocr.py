@@ -27,18 +27,33 @@ def write_state_record(root, record):
     attempt_id=hashlib.sha256(payload+str(time.time_ns()).encode()).hexdigest()
     attempt=root/"attempts"/cfg[:12]/digest[:2]/digest/f"{attempt_id}.json"
     atomic_write(attempt,payload)
+    if record.get("access_disposition")=="HELD_ACCESS_MARKING_REVIEW":
+        atomic_write(root/"holds"/cfg/digest[:2]/digest/f"{attempt_id}.json",payload)
     dst=root/"state"/cfg[:12]/digest[:2]/f"{digest}.json";atomic_write(dst,payload);return dst
 
 def load_state_records(root):
     state=Path(root)/"state"
     return [] if not state.exists() else [json.loads(p.read_text(encoding="utf-8")) for p in sorted(state.rglob("*.json"))]
 
+def load_attempt_records(root):
+    attempts=Path(root)/"attempts"
+    return [] if not attempts.exists() else [json.loads(p.read_text(encoding="utf-8")) for p in sorted(attempts.rglob("*.json"))]
+
 def validate_record_artifacts(root,record):
     if record.get("state")!="COMPLETE":return False
     paths=record.get("artifact_paths",{});hashes=record.get("artifact_sha256",{})
     if set(paths)!=set(hashes):return False
+    held=record.get("unreadable") is True or record.get("access_disposition") in ("HELD_ACCESS_MARKING_REVIEW","HELD_UNREADABLE_OR_PROCESSING_ERROR")
+    if held:
+        return not paths and all(record.get(f"{key}_path") is None for key in ("raw_text","normalised_text","word_boxes"))
+    required={"raw_text","normalised_text","word_boxes"}
+    if set(paths)!=required:return False
+    root=Path(root).resolve()
     for key,relative in paths.items():
-        path=Path(root)/relative
+        if not isinstance(relative,str) or Path(relative).is_absolute() or record.get(f"{key}_path")!=relative:return False
+        path=(root/relative).resolve()
+        try:path.relative_to(root)
+        except ValueError:return False
         if not path.is_file() or core.file_sha256(path)!=hashes[key]:return False
     return True
 
@@ -83,7 +98,7 @@ def persist_result(output,digest,result,restricted=False,namespace="",configurat
     paths={}
     for key,payload in payloads.items():
         artifact_sha=hashlib.sha256(payload).hexdigest();path=base/f"{key}-{artifact_sha}.{extensions[key]}"
-        if not path.exists():atomic_write(path,payload)
+        if not path.exists() or core.file_sha256(path)!=artifact_sha:atomic_write(path,payload)
         paths[key]=path;record["artifact_paths"][key]=path.relative_to(output).as_posix();record["artifact_sha256"][key]=artifact_sha
     record.update(raw_text_path=record["artifact_paths"]["raw_text"],normalised_text_path=record["artifact_paths"]["normalised_text"],word_boxes_path=record["artifact_paths"]["word_boxes"])
     if not validate_record_artifacts(output,{**record,"state":"COMPLETE"}):raise ValueError("persisted OCR artifact validation failed")
@@ -98,6 +113,13 @@ def ocr_configuration(tesseract,tessdata,mode="primary"):
     if mode=="second-pass": preprocessing += ["upscale_2x","threshold_180"]
     cfg={"engine":"tesseract","engine_version":version,"languages":["eng","hin"],"language_model_sha256":model_hashes(tessdata,["eng","hin"]),"tsv_config_sha256":core.file_sha256(Path(tessdata)/"configs"/"tsv"),"mode":mode,"psm":psm,"preprocessing":preprocessing,"preprocessing_implementation":"c16-ocr/2.1","pillow_version":PILLOW_VERSION,"renderer":"PyMuPDF","renderer_version":core.pymupdf.VersionBind,"render_dpi":300 if mode=="pdf-pages" else None,"output":"tsv-word-boxes"}
     cfg["configuration_sha256"]=hashlib.sha256(json.dumps(cfg,sort_keys=True,separators=(",",":")).encode()).hexdigest(); return cfg
+
+def load_verified_configuration(root):
+    path=Path(root)/"OCR_CONFIGURATION.json";cfg=json.loads(path.read_text(encoding="utf-8"))
+    declared=cfg.get("configuration_sha256");body={k:v for k,v in cfg.items() if k!="configuration_sha256"}
+    actual=hashlib.sha256(json.dumps(body,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+    if declared!=actual:raise ValueError(f"OCR configuration digest mismatch: {path}")
+    return cfg
 
 def _tesseract(image,tesseract,tessdata,psm):
     with tempfile.TemporaryDirectory() as td:
@@ -265,6 +287,31 @@ def validate_cached_job(output,record,job,cfg):
     except Exception:
         return False
 
+def validate_evidence_population(root,records,jobs,cfg,identifier,workers=1):
+    expected={j[identifier] if identifier in j else j["image_sha256"]:j for j in jobs}
+    supplied={}
+    for record in records:
+        key=record.get(identifier) or record.get("image_sha256")
+        if key in supplied:raise ValueError(f"duplicate evidence record: {key}")
+        supplied[key]=record
+    if set(supplied)!=set(expected):raise ValueError("evidence population does not equal the current job set")
+    keys=sorted(expected)
+    def check(key):return key,validate_cached_job(Path(root),supplied[key],expected[key],cfg)
+    results={}
+    with ThreadPoolExecutor(max_workers=max(1,workers)) as executor:
+        futures=[executor.submit(check,key) for key in keys]
+        for number,future in enumerate(as_completed(futures),1):
+            key,valid=future.result();results[key]=valid
+            if number%500==0:print(f"validated {number}/{len(keys)} {cfg['mode']} records",flush=True)
+    invalid=[key for key in keys if not results[key]]
+    if invalid:raise ValueError(f"unverifiable evidence records ({len(invalid)}): {invalid[:5]}")
+    valid=[supplied[key] for key in keys]
+    positives=[]
+    for record in load_attempt_records(root):
+        key=record.get(identifier) or record.get("image_sha256")
+        if key in expected and record.get("access_disposition")=="HELD_ACCESS_MARKING_REVIEW":positives.append(record)
+    return valid+positives
+
 def image_jobs(inventory,source):
     jobs={};occ=[]
     for doc in inventory:
@@ -341,11 +388,21 @@ def run_pdf_pages(args):
     return run_restartable_batch(jobs,output,cfg,worker,args.workers,args.limit)
 
 def run_access_register(args):
-    image_rows=load_jsonl(args.primary_register)
-    if args.secondary_register:image_rows+=load_jsonl(args.secondary_register)
-    pdf_rows=load_jsonl(args.pdf_register) if args.pdf_register else []
+    inventory=load_jsonl(args.inventory);source=Path(args.source)
+    image_jobs_by_hash,_=image_jobs(inventory,source);all_image_jobs=list(image_jobs_by_hash.values())
+    primary_cfg=load_verified_configuration(args.primary_root)
+    primary=validate_evidence_population(args.primary_root,load_jsonl(args.primary_register),all_image_jobs,primary_cfg,"image_sha256",args.workers)
+    image_rows=list(primary)
+    if args.secondary_register:
+        secondary_cfg=load_verified_configuration(args.secondary_root)
+        secondary_jobs=second_pass_candidates(image_jobs_by_hash,primary)
+        image_rows+=validate_evidence_population(args.secondary_root,load_jsonl(args.secondary_register),secondary_jobs,secondary_cfg,"image_sha256",args.workers)
+    pdf_rows=[]
+    if args.pdf_register:
+        pdf_cfg=load_verified_configuration(args.pdf_root);jobs=pdf_page_jobs(inventory,source)
+        pdf_rows=validate_evidence_population(args.pdf_root,load_jsonl(args.pdf_register),jobs,pdf_cfg,"page_key",args.workers)
     rows=propagate_access_holds(
-        load_jsonl(args.inventory), image_rows, pdf_rows,
+        inventory, image_rows, pdf_rows,
         expected_image_configurations=set(args.image_config or []),
         expected_pdf_configurations=set(args.pdf_config or []),
     )
@@ -359,7 +416,7 @@ def run_access_register(args):
     return 0
 
 def parse_args(argv=None):
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument("--mode",choices=("primary","second-pass","pdf-pages","access-register"),default="primary");p.add_argument("--source");p.add_argument("--inventory",required=True);p.add_argument("--output",required=True);p.add_argument("--tesseract",default=r"C:\Program Files\Tesseract-OCR\tesseract.exe");p.add_argument("--tessdata");p.add_argument("--primary-register");p.add_argument("--secondary-register");p.add_argument("--pdf-register");p.add_argument("--workers",type=int,default=2);p.add_argument("--limit",type=int)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument("--mode",choices=("primary","second-pass","pdf-pages","access-register"),default="primary");p.add_argument("--source");p.add_argument("--inventory",required=True);p.add_argument("--output",required=True);p.add_argument("--tesseract",default=r"C:\Program Files\Tesseract-OCR\tesseract.exe");p.add_argument("--tessdata");p.add_argument("--primary-register");p.add_argument("--secondary-register");p.add_argument("--pdf-register");p.add_argument("--primary-root");p.add_argument("--secondary-root");p.add_argument("--pdf-root");p.add_argument("--workers",type=int,default=2);p.add_argument("--limit",type=int)
     p.add_argument("--image-config",action="append",default=[],help="Accepted image OCR configuration SHA-256; repeat for each required configuration")
     p.add_argument("--pdf-config",action="append",default=[],help="Accepted PDF OCR configuration SHA-256; repeat for each required configuration")
     return p.parse_args(argv)
