@@ -113,7 +113,7 @@ if (conf.GetValue("Mimamsa:Hybrid:Enabled", false))
     var emb = new Mimamsa.Hybrid.E5Embedder(conf["Mimamsa:Hybrid:ModelDir"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelDir is required when hybrid is enabled"),
         conf.GetValue("Mimamsa:Hybrid:Threads", 0), conf.GetValue("Mimamsa:Hybrid:Cuda", false),
         conf["Mimamsa:Hybrid:ModelSha256"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelSha256 is required when hybrid is enabled"),
-        onnxFile: conf["Mimamsa:Hybrid:OnnxFile"] ?? "onnx/model.onnx")
+        onnxFile: conf["Mimamsa:Hybrid:OnnxFile"] ?? "onnx/model.onnx", sentencePieceModel: conf["Mimamsa:Hybrid:SentencePieceModel"])
     {
         // C16 S3-E: model-family settings (defaults = multilingual-e5, unchanged)
         Pooling = conf["Mimamsa:Hybrid:Pooling"] ?? "mean",

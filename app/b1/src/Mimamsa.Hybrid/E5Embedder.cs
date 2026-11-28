@@ -30,7 +30,7 @@ public sealed class E5Embedder : IDisposable
     public string Pooling { get; init; } = "mean";
 
     public E5Embedder(string modelDir, int threads = 0, bool tryCuda = false, string? expectedModelSha256 = null, bool tryDirectMl = false,
-                      string onnxFile = "onnx/model.onnx")
+                      string onnxFile = "onnx/model.onnx", string? sentencePieceModel = null)
     {
         var onnx = Path.Combine(modelDir, onnxFile);
         ModelSha256 = Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(onnx)));
@@ -39,6 +39,9 @@ public sealed class E5Embedder : IDisposable
         // C16 S3-E: the SentencePiece model sits in onnx/ (intfloat repos) or at the repository root (Xenova conversions)
         var spmPath = Path.Combine(modelDir, "onnx", "sentencepiece.bpe.model");
         if (!File.Exists(spmPath)) spmPath = Path.Combine(modelDir, "sentencepiece.bpe.model");
+        // snowflake-arctic-embed-m-v2.0 ships only tokenizer.json; its vocabulary is XLM-R's (ids verified identical on
+        // 3,000 real passages, app/b1/evidence/c16_s3e), so the pinned XLM-R SentencePiece model may be named explicitly.
+        if (sentencePieceModel is not null) spmPath = sentencePieceModel;
         using (var spm = File.OpenRead(spmPath))
             _tok = SentencePieceTokenizer.Create(spm, false, false, null);
         var so = new SessionOptions { GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL };
