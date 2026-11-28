@@ -283,20 +283,26 @@ public static class SiteBackup
     /// Integrity of a backup directory: SHA256SUMS matches both parts; both authenticate end to end under the key.
     public static JsonObject Verify(string dir, byte[] key)
     {
-        var sumsPath = Path.Combine(dir, SumsFile);
-        if (!File.Exists(sumsPath)) throw new BackupException("BACKUP_PARTIAL", "SHA256SUMS missing");
-        var want = File.ReadAllLines(sumsPath).Where(l => l.Length > 0).Select(l => l.Split("  ", 2)).ToDictionary(x => x[1], x => x[0], StringComparer.Ordinal);
         var o = new JsonObject();
-        foreach (var p in new[] { SitePart, AppendOnlyPart })
-        {
-            var f = Path.Combine(dir, PartFile(p));
-            if (!File.Exists(f) || !want.ContainsKey(PartFile(p))) throw new BackupException("BACKUP_PARTIAL", PartFile(p) + " missing");
-            if (Sha(f) != want[PartFile(p)]) throw new BackupException("BACKUP_CHECKSUM_MISMATCH", PartFile(p));
-            using var fs = File.OpenRead(f);
-            using var dec = new BackupCrypto.DecryptStream(fs, key, p);
-            o[p] = dec.Drain();
-        }
+        foreach (var p in new[] { SitePart, AppendOnlyPart }) o[p] = VerifyPart(dir, key, p);
         o["sha256sums"] = "match";
         return o;
+    }
+
+    public static bool HasPart(string dir, string part) => File.Exists(Path.Combine(dir, PartFile(part)));
+
+    /// One part: listed in SHA256SUMS, present, matching, and authenticated end to end. Returns the plaintext bytes.
+    public static long VerifyPart(string dir, byte[] key, string part)
+    {
+        var sumsPath = Path.Combine(dir, SumsFile);
+        if (!File.Exists(sumsPath)) throw new BackupException("BACKUP_PARTIAL", "SHA256SUMS missing in " + dir);
+        var want = File.ReadAllLines(sumsPath).Where(l => l.Length > 0).Select(l => l.Split("  ", 2)).Where(x => x.Length == 2)
+                       .ToDictionary(x => x[1], x => x[0], StringComparer.Ordinal);
+        var f = Path.Combine(dir, PartFile(part));
+        if (!File.Exists(f) || !want.ContainsKey(PartFile(part))) throw new BackupException("BACKUP_PARTIAL", PartFile(part) + " missing in " + dir);
+        if (Sha(f) != want[PartFile(part)]) throw new BackupException("BACKUP_CHECKSUM_MISMATCH", PartFile(part));
+        using var fs = File.OpenRead(f);
+        using var dec = new BackupCrypto.DecryptStream(fs, key, part);
+        return dec.Drain();
     }
 }

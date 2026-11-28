@@ -121,7 +121,8 @@ public static class SiteRestore
             if (journal) ActivationJournal.Read(p);
             else new ActivationLog(p).Read();
         }
-        catch (JournalCorruptException e) { return new(c, [], "corrupt: " + e.Message); }
+        catch (Exception e) when (e is JournalCorruptException or System.Text.Json.JsonException or InvalidOperationException or FormatException or KeyNotFoundException or NullReferenceException or InvalidCastException)
+        { return new(c, [], "corrupt: " + e.Message); }
         return new(c, AppendOnlyHeads.CompleteLines(p), null);
     }
 
@@ -146,7 +147,8 @@ public static class SiteRestore
         if (valid.Count == 0 && !anyPresent && minBytes == 0) return (new StoreView(cands[^1], [], null), notes);
         if (valid.Count == 0)
         {
-            throw new BackupException(anyPresent ? "APPENDONLY_OLDER_THAN_DATABASE" : "APPENDONLY_MISSING",
+            bool allCorrupt = anyPresent && notes.All(n => ((string?)n)!.Contains(" corrupt: ") || ((string?)n)!.EndsWith(" missing"));
+            throw new BackupException(!anyPresent ? "APPENDONLY_MISSING" : allCorrupt ? "APPENDONLY_CORRUPT" : "APPENDONLY_OLDER_THAN_DATABASE",
                 $"no {what} at least as new as the database backup: {string.Join("; ", notes.Select(n => (string?)n))}");
         }
         var best = valid.OrderByDescending(v => v.Lines.Length).ThenByDescending(v => v.C.IsTarget).First();
@@ -234,16 +236,25 @@ public static class SiteRestore
         var cfg = o.Config;
         var site = cfg.Site;
         var key = o.Key;
-        var verify = SiteBackup.Verify(o.BackupDir, key);   // checksums + authentication of both parts
+        // checksums + end-to-end authentication of every part used, before anything is extracted
+        var verify = new JsonObject { ["site"] = SiteBackup.VerifyPart(o.BackupDir, key, SiteBackup.SitePart) };
+        bool ownAo = SiteBackup.HasPart(o.BackupDir, SiteBackup.AppendOnlyPart);
+        if (ownAo) verify["appendonly"] = SiteBackup.VerifyPart(o.BackupDir, key, SiteBackup.AppendOnlyPart);
+        var extraVerified = new JsonArray();
+        foreach (var extra in o.AppendOnlyFrom) extraVerified.Add(SiteBackup.VerifyPart(extra, key, SiteBackup.AppendOnlyPart));
+        verify["appendonly_from"] = extraVerified;
         var work = Path.Combine(cfg.Root("scratch"), "restore-" + Convert.ToHexString(RandomNumberGenerator.GetBytes(5)).ToLowerInvariant());
         NpgsqlDataSource? db = o.DbOwnerDsn is null ? null : NpgsqlDataSource.Create(o.DbOwnerDsn);
         try
         {
             // ---- 2: authenticate and extract everything first
             var sitePart = Extract(Path.Combine(o.BackupDir, SiteBackup.PartFile(SiteBackup.SitePart)), SiteBackup.SitePart, key, Path.Combine(work, "site"), o.MaxEntries);
-            var aoPart = Extract(Path.Combine(o.BackupDir, SiteBackup.PartFile(SiteBackup.AppendOnlyPart)), SiteBackup.AppendOnlyPart, key, Path.Combine(work, "ao0"), o.MaxEntries);
-            if ((string?)sitePart.Manifest["backup_id"] != (string?)aoPart.Manifest["backup_id"]) throw new BackupException("BACKUP_MANIFEST_MISMATCH", "the two parts belong to different backups");
-            var cands = new List<Candidate> { new("backup " + (string?)aoPart.Manifest["backup_id"], Path.Combine(aoPart.Dir, "appendonly"), false) };
+            var cands = new List<Candidate>();
+            if (ownAo)
+            {
+                var aoPart = Extract(Path.Combine(o.BackupDir, SiteBackup.PartFile(SiteBackup.AppendOnlyPart)), SiteBackup.AppendOnlyPart, key, Path.Combine(work, "ao0"), o.MaxEntries);
+                cands.Add(new("backup " + (string?)aoPart.Manifest["backup_id"], Path.Combine(aoPart.Dir, "appendonly"), false));
+            }
             int k = 1;
             foreach (var extra in o.AppendOnlyFrom)
             {
@@ -262,6 +273,17 @@ public static class SiteRestore
             var inits = cands.Where(c => File.Exists(Path.Combine(c.Root, "activation-state", "SITE_INIT.json")))
                              .Select(c => Sha(Path.Combine(c.Root, "activation-state", "SITE_INIT.json"))).Distinct().ToList();
             if (inits.Count != 1) throw new BackupException("APPENDONLY_DIVERGED", "SITE_INIT.json differs between candidates");
+
+            // ---- every entry classified and every vault object verified against its name BEFORE the target is touched
+            foreach (var f in sitePart.Files)
+            {
+                if (f == "db/site.pgdump") continue;
+                if (!new[] { "files/vault/", "files/uploads/", "files/config/", "files/site/" }.Any(p => f.StartsWith(p, StringComparison.Ordinal)))
+                    throw new BackupException("BACKUP_ENTRY_UNKNOWN", f);
+                if (f.StartsWith("files/vault/", StringComparison.Ordinal) && f.Split('/')[^1] is { Length: 64 } name && name.All(Uri.IsHexDigit)
+                    && Sha(Path.Combine(sitePart.Dir, f.Replace('/', Path.DirectorySeparatorChar))) != name.ToLowerInvariant())
+                    throw new BackupException("VAULT_OBJECT_CORRUPT", f);
+            }
 
             // ---- 1: the target must be a clean installation
             var probs = TargetProblems(cfg, db, cfg.BackupSchemas);

@@ -158,7 +158,7 @@ public static partial class PathSafety
                 else files.Add(r);
             }
         }
-        o.AddRange(CaseCollisions(all));
+        o.AddRange(CaseCollisions(files));   // directories are the prefixes of the files
         files.Sort(StringComparer.Ordinal);
         return o;
     }
