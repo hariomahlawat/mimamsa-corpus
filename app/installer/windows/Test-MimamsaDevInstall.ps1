@@ -61,21 +61,21 @@ $probes = foreach ($k in $targets.Keys) { @{ kind = 'write'; path = $targets[$k]
 $matrix = @()
 foreach ($svc in @($web, $act)) {
     $cmd = if ($svc -eq $act) { @('install-preflight', '--config', $Config) } else { $null }
-    $r = Invoke-AsService $svc $probes $cmd
-    $r | ConvertTo-Json -Depth 6 | Out-File -Encoding utf8 (Join-Path $Out "probe-$svc.json")
-    Assert-That ($r.identity -eq "NT SERVICE\$svc") "$svc job ran under its virtual account (got $($r.identity))"
+    $pr = Invoke-AsService $svc $probes $cmd   # NB: not $r - PowerShell names are case-insensitive and $R holds the roots
+    $pr | ConvertTo-Json -Depth 6 | Out-File -Encoding utf8 (Join-Path $Out "probe-$svc.json")
+    Assert-That ($pr.identity -eq "NT SERVICE\$svc") "$svc job ran under its virtual account (got $($pr.identity))"
     $sid = (New-Object Security.Principal.NTAccount("NT SERVICE\$svc")).Translate([Security.Principal.SecurityIdentifier]).Value
-    Assert-That ($r.sid -eq $sid) "$svc token SID is the service SID $sid"
+    Assert-That ($pr.sid -eq $sid) "$svc token SID is the service SID $sid"
     foreach ($k in $targets.Keys) {
-        $w = $r.probes | Where-Object { $_.kind -eq 'write' -and $_.path -eq $targets[$k] }
-        $rd = $r.probes | Where-Object { $_.kind -eq 'read' -and $_.path -eq $targets[$k] }
+        $w = $pr.probes | Where-Object { $_.kind -eq 'write' -and $_.path -eq $targets[$k] }
+        $rd = $pr.probes | Where-Object { $_.kind -eq 'read' -and $_.path -eq $targets[$k] }
         $expectWrite = if ($svc -eq $web) { $webWrites -contains $k } else { -not ($actDenied -contains $k) }
         $expectRead = if ($svc -eq $web) { $k -notin @('backup', 'scratch') } else { $true }
         Assert-That ($w.allowed -eq $expectWrite) "$svc write $k expected=$expectWrite actual=$($w.allowed)"
         Assert-That ($rd.allowed -eq $expectRead) "$svc read $k expected=$expectRead actual=$($rd.allowed)"
         $matrix += [pscustomobject]@{ identity = $svc; target = $k; write_expected = $expectWrite; write_actual = $w.allowed; read_expected = $expectRead; read_actual = $rd.allowed }
     }
-    if ($svc -eq $act) { Assert-That ($r.command_exit -eq 0) "activation identity ran install-preflight as itself: $($r.command_stdout)" }
+    if ($svc -eq $act) { Assert-That ($pr.command_exit -eq 0) "activation identity ran install-preflight as itself: $($pr.command_stdout)" }
 }
 $matrix | ConvertTo-Json -Depth 3 | Out-File -Encoding utf8 (Join-Path $Out 'acl-probe-matrix.json')
 
