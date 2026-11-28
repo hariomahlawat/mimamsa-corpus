@@ -77,7 +77,7 @@ The codes come from the contracts and reference code; no new meaning is introduc
 
 ## 5a. Per-source admission accounting register (2.1 clarification, PR #82)
 
-**One format for B01 and B02.** Schema `SOURCE_ADMISSION_ACCOUNTING_SCHEMA.json`; reference `accounting.py`; fixtures `v2_1/accounting/` (declared, recomputed, `negative/NA01–NA10`, `NC01–NC04`).
+**One format for B01 and B02.** Schema `SOURCE_ADMISSION_ACCOUNTING_SCHEMA.json`; reference `accounting.py`; fixtures `v2_1/accounting/` (declared, recomputed, `negative/NA01–NA10`, `NC01–NC07`).
 
 | Item | Rule |
 | --- | --- |
@@ -98,7 +98,15 @@ The codes come from the contracts and reference code; no new meaning is introduc
 - R6 sources unique and sorted;
 - R7 no SITE_ONLY source in a declared register (schema).
 
-**Declared vs site (`compare_declared`).** Same sources (SITE_ONLY ignored). `input`, `identities`, `held`, `rejected`, `effective_admissions` and `by_decision` must be equal. The site may only **narrow**: `eligible` and `served` may be lower, never higher; `quarantined` may be higher, never lower. Any difference beyond that refuses the bundle. A missing declared register refuses it (`C16_SOURCE_ACCOUNTING_MISSING`, B01's code).
+**Declared vs site (`compare_declared`).** Same sources (SITE_ONLY ignored), each bound to the **same `path` and the same immutable `provenance`**: `generation_manifest_sha256` (the site recomputes it from the bundled `GENERATION.json`), `hf_repo`, `hf_revision`, and `candidate_set_sha256` (recomputed from the shipped candidate set). A source with the same counts but a different revision, generation digest or candidate digest is refused (review C16-I21-03; NC05–NC07).
+
+**Aggregate counts are never the authority.** Whether a copy is served is decided **per copy**, by:
+- its effective admission;
+- its receipts;
+- I-5 establishment;
+- the exclusion channel (withdrawals and restrictions).
+
+The register is a reconciliation cross-check that can only refuse. It never makes a copy servable. `input`, `identities`, `held`, `rejected`, `effective_admissions` and `by_decision` must be equal. The site may only **narrow**: `eligible` and `served` may be lower, never higher; `quarantined` may be higher, never lower. Any difference beyond that refuses the bundle. A missing declared register refuses it (`C16_SOURCE_ACCOUNTING_MISSING`, B01's code).
 
 **Why B01's design.** B01's design is the stricter and more complete one: one kind, exact equality of everything but narrowing, and a site recomputation compared to a signed declaration. B02's richer fields (decision counts, not-served reasons, generation and HF pins) are kept as fields of the same record.
 

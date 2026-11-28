@@ -520,6 +520,13 @@ def accounting_fixtures() -> dict[str, dict]:
     neg("NC04_site_unquarantines", "C16_SOURCE_ACCOUNTING",
         lambda x: s_of(x, "C16").update(quarantined=0, eligible=9, not_served_reasons={"HELD": 2, "REJECTED": 1, "ELIGIBLE_NOT_SERVED": 2, "SITE_EXCLUDED": 1}),
         compare=True)
+    # review C16-I21-03: the comparator binds path and immutable provenance, not only ids and counts
+    neg("NC05_same_counts_different_revision", "C16_SOURCE_ACCOUNTING",
+        lambda x: s_of(x, "C16")["provenance"].update(hf_revision="c" * 40), compare=True)
+    neg("NC06_same_counts_different_candidate_digest", "C16_SOURCE_ACCOUNTING",
+        lambda x: s_of(x, "V7_REFERENCE")["provenance"].update(candidate_set_sha256=H("other-candidate-set")), compare=True)
+    neg("NC07_same_counts_different_generation_manifest", "C16_SOURCE_ACCOUNTING",
+        lambda x: s_of(x, "C16")["provenance"].update(generation_manifest_sha256=H("other-generation")), compare=True)
     return out
 
 

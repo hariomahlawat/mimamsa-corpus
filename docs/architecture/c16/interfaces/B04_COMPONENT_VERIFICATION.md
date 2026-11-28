@@ -20,9 +20,30 @@ Every accelerator is verified before use. A matching source digest is necessary 
 
 1. **Authoritative failure.** The release is refused before this point.
 2. **Vectors.** Vectors that are missing or fail verification give **ACTIVE_DEGRADED, lexical-only**, with Admin acknowledgement. The site **never** embeds passages (`site_embedding: NEVER`, which is a schema constant). Query-time embedding of the user's query is not affected.
-3. **Cheap accelerators.** A failed KNOWLEDGE_ROWS, GRAPH, LEXICAL_INDEX or TEXT_STORE is rebuilt locally: **ACTIVE_AFTER_LOCAL_REBUILD**, which is not normal acceptance.
+3. **Cheap accelerators (2.1, review C16-I21-02).** A failed or missing KNOWLEDGE_ROWS, GRAPH, LEXICAL_INDEX or TEXT_STORE must be rebuilt locally **and independently verified** before it is used. All four are essential.
+   - **No evidence:** without rebuild evidence passing `rebuild_issues`, the result is **REFUSED, `refusal: REBUILD_REQUIRED`, NOT_SERVING**.
+   - **What the evidence must hold:** `status: VERIFIED`; builder `name`, `version` and `commit`; `source_digest` and `result_digest`; and every required check of the kind as `PASS`, with no `FAIL`.
+   - **Successful rebuild:** **ACTIVE_AFTER_LOCAL_REBUILD**, with the evidence recorded per component (`components[kind]`: `REBUILT_VERIFIED`). This is not normal acceptance.
+   - **What this replaces:** the earlier reference labelled any FAILED or MISSING cheap component as "rebuilt" without evidence. That is the corrected bug.
 2a. **Lexical-only releases (2.1, CP-1 gap 2).** A release that declares no VECTOR_PACK at `DEGRADED_LEXICAL_ONLY` needs **no model**: it activates with no model installed, or beside a model without vectors for it (B06 K2). Semantic search stays disabled. It never becomes ACTIVE_FULL. FULL still requires a verified model with verified vectors for the release (B06 K1).
-4. **Uncalibrated checks.** An activation relying on an **UNCALIBRATED** sampled check can never be ACTIVE_FULL in **production** mode; the result is REFUSED (fail closed). In development mode it may proceed, but the uncalibrated checks are recorded.
+4. **Uncalibrated checks (2.1, review C16-I21-01).** The calibration gate applies to the **components in use** (verified, or rebuilt and verified), at **every service level**, and **independently of the result label**.
+   - **Production:** any in-use component whose contract has an `UNCALIBRATED` sample size or tolerance gives **REFUSED, `refusal: UNCALIBRATED_IN_PRODUCTION`**. This holds after a local rebuild and for lexical-only service too.
+   - **Development:** activation may proceed, and the uncalibrated checks are recorded in `uncalibrated_in_use`.
+   - **What this replaces:** the earlier reference tested only `result == ACTIVE_FULL`, so a rebuild relabel bypassed the check.
+5. **Explicit, complete inputs (2.1).** Any of the following gives **REFUSED, `refusal: INVALID_INPUT`**:
+   - `mode` is not `production` or `development`;
+   - an unknown kind or state is given;
+   - rebuild evidence is supplied for VECTOR_PACK (the site never embeds).
+
+   A kind omitted from `results` is **MISSING**. Every component in use needs a **validated contract of its own kind** (`contract_issues == []`); a missing, malformed or wrong-kind contract gives **REFUSED, `refusal: CONTRACT_INVALID`**.
+
+**Owner gate OD-C16-UNCALIBRATED-PRODUCTION (OPEN, fails closed).** The open question: may production serve lexical-only service whose LEXICAL_INDEX, GRAPH or rebuilt components were verified with **uncalibrated** sampled checks? The candidates are SAMPLED_POSTINGS_REDERIVE, SAMPLED_QUERY_PARITY and SAMPLED_REBUILD_PARITY. Policy until the owner records a decision (with named checks, the approving authority and the scope) **and** FG-CALIBRATED-SAMPLES supplies calibrated values:
+- **No.** Production refuses at every service level.
+- No downgrade path serves an accelerator whose correctness rests on an uncalibrated sample.
+- Development mode only records the condition.
+- The reference code has no approval input, so an approval cannot be injected by a caller.
+
+**Mirror required.** The .NET activation (B06 and the CP-1 `GenerationStaging` outcome) must reproduce these refusal codes and the per-component states `VERIFIED`, `REBUILT_VERIFIED`, `REBUILD_REQUIRED` and `NOT_USED`.
 
 ## 3. CP-1 fixture vertical slice
 
