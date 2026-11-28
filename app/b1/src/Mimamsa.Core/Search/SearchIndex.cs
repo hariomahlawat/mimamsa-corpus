@@ -23,6 +23,8 @@ public sealed class SearchIndex
     public string Engine { get; private set; } = "memory";
     /// Disk engine only: the published index directory in use (null for memory).
     public string? IndexPath { get; private set; }
+    /// Disk engine only: "opened", "adopted" (C16 B04 shipped index, S3-B) or "built".
+    public string? Origin { get; private set; }
     /// Distinct indexed terms.
     public int VocabularySize => Postings.Count;
     internal readonly Dictionary<string, HashSet<string>> StemGroups = new(StringComparer.Ordinal);
@@ -161,6 +163,7 @@ public sealed class SearchIndex
         var store = new IndexStore(root, options, log);
         var ix = new SearchIndex { Engine = "disk" };
         var path = store.OpenOrBuild(g, ix);
+        ix.Origin = store.Origin;
         ix.IndexPath = path;
         ix.Postings = SqlitePostingTable.Open(Path.Combine(path, IndexStore.DbFile), options.CacheBytes);
         ix.Finish();

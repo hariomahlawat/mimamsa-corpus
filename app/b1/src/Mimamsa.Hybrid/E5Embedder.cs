@@ -8,7 +8,7 @@ using Microsoft.ML.Tokenizers;
 
 namespace Mimamsa.Hybrid;
 
-public sealed class E5Embedder : IDisposable
+public sealed class E5Embedder : IDisposable, Mimamsa.Core.ComponentVerification.IPassageEmbedder
 {
     /// Output width read from the model (384 for multilingual-e5-small, 768 for -base). C15: no longer fixed.
     public int Dim { get; }
@@ -70,6 +70,10 @@ public sealed class E5Embedder : IDisposable
     }
 
     public float[] EmbedQuery(string q) => Embed(new[] { QueryPrefix + q }, 128)[0];
+
+    /// C16 S3-B (B04 VECTOR_SPOT_REEMBED, B10 self-test): exactly ONE input (prefix included) per call; the verifier never
+    /// embeds the corpus.
+    public float[] EmbedOne(string input, int maxTokens) => Embed(new[] { input }, maxTokens)[0];
 
     public float[][] Embed(IReadOnlyList<string> texts, int maxTokens)
     {

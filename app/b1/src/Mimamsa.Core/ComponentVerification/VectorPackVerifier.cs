@@ -190,7 +190,7 @@ public static class VectorPackVerifier
     /// `expectedModelSha256` is the release's model_sha256 for the pack (required_models); a different installed model or
     /// params model refuses (mismatched model and pack).
     public static ComponentEvidence Verify(GenerationStore g, string packPath, byte[] paramsJson, string expectedModelSha256, string declaredResultDigest,
-                                           string declaredSourceDigest, string releaseId, IPassageEmbedder? embedder, EffectiveSample spot)
+                                           string declaredSourceDigest, string releaseId, IPassageEmbedder? embedder, EffectiveSample? spot)
     {
         var ev = new ComponentEvidence("VECTOR_PACK");
         var sw = Stopwatch.StartNew();
@@ -223,6 +223,7 @@ public static class VectorPackVerifier
         ev.Facts["source_digest"] = src;
         if (embedder is null) { ev.NotRun(Spot, "no installed, verified model to re-embed with (lexical-only)"); return ev; }
         if (ev.Checks.GetValueOrDefault(Spot) == "FAIL") return ev;
+        if (spot is null) { ev.NotRun(Spot, GraphVerifier.NotRunInProduction); return ev; }
         sw.Restart();
         var strata = new Dictionary<string, List<string>>(StringComparer.Ordinal);
         var byHex = new Dictionary<string, UInt128>(StringComparer.Ordinal);

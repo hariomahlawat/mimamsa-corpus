@@ -35,7 +35,7 @@ public static class LexicalIndexVerifier
     /// `dir` holds search.sqlite and MANIFEST.json as shipped. `declaredSourceDigest`: the release component's value (or
     /// null to skip that comparison). `postings` and `queries` from B04Sampling.Effective (or a study override).
     public static ComponentEvidence Verify(GenerationStore g, string dir, string releaseId, string? declaredSourceDigest,
-                                           EffectiveSample postings, EffectiveSample queries, int? termSample = null)
+                                           EffectiveSample? postings, EffectiveSample? queries, int? termSample = null)
     {
         var ev = new ComponentEvidence("LEXICAL_INDEX");
         var sw = Stopwatch.StartNew();
@@ -53,6 +53,11 @@ public static class LexicalIndexVerifier
         }
         ev.Pass("SQLITE_QUICK_CHECK"); ev.Pass("SOURCE_DIGEST_EQUALS_SITE");
         ev.TimingsMs["manifest_and_quick_check"] = sw.ElapsedMilliseconds;
+        if (postings is null || queries is null)
+        {
+            ev.NotRun(Postings, GraphVerifier.NotRunInProduction); ev.NotRun(Queries, GraphVerifier.NotRunInProduction);
+            return ev;
+        }
         var db = Path.Combine(dir, IndexStore.DbFile);
         SearchIndex ix;
         try { ix = SearchIndex.OpenForVerification(g, db); }

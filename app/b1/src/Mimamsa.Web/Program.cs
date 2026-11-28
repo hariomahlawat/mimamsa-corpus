@@ -98,6 +98,7 @@ var index = searchEngine switch
             VerifyOnOpen = conf.GetValue("Mimamsa:Search:VerifyOnOpen", true),
             RebuildOnFailure = conf.GetValue("Mimamsa:Search:RebuildOnFailure", true),
             KeepPrevious = conf.GetValue("Mimamsa:Search:KeepPrevious", 2),
+            AdoptShipped = conf["Mimamsa:Search:AdoptShipped"],   // C16 S3-B: null (never) | development (after the B04 checks)
         }, Console.WriteLine),
     _ => throw new InvalidOperationException("Mimamsa:Search:Engine must be 'memory' or 'disk'"),
 };

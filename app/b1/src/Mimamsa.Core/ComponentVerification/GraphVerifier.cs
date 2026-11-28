@@ -23,6 +23,7 @@ public static class GraphVerifier
 {
     public static readonly string[] Required = ["GRAPH_DIGEST", "GRAPH_STRUCTURAL_RECHECK", "SAMPLED_REBUILD_PARITY"];
     public const string Check = "SAMPLED_REBUILD_PARITY";
+    public const string NotRunInProduction = "UNCALIBRATED_IN_PRODUCTION: the contract sample is uncalibrated, so production never runs it (the outcome refuses)";
     static readonly HashSet<string> Kinds = [.. NodeKind.All];
     static readonly HashSet<string> Types = typeof(EdgeType).GetFields().Where(f => f.IsLiteral).Select(f => (string)f.GetRawConstantValue()!).ToHashSet(StringComparer.Ordinal);
 
@@ -156,7 +157,7 @@ public static class GraphVerifier
 
     /// The three GRAPH checks. `sample` comes from B04Sampling.Effective (or an explicit study override).
     public static ComponentEvidence Verify(GenerationStore g, byte[] nodesFile, byte[] edgesFile, string declaredDigest, string builderVersion,
-                                           string releaseId, EffectiveSample sample)
+                                           string releaseId, EffectiveSample? sample)
     {
         var ev = new ComponentEvidence("GRAPH");
         var sw = Stopwatch.StartNew();
@@ -169,6 +170,7 @@ public static class GraphVerifier
         else foreach (var i in structural.Take(20)) ev.Fail("GRAPH_STRUCTURAL_RECHECK", i);
         ev.Facts["structural_issues"] = structural.Count;
         ev.TimingsMs["structural"] = sw.ElapsedMilliseconds;
+        if (sample is null) { ev.NotRun(Check, NotRunInProduction); return ev; }
         sw.Restart();
         var strata = Strata(g);
         var docs = B04Sampling.Stratified(releaseId, Check, strata, sample.Size);
