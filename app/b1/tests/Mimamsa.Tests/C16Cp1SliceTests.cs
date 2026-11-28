@@ -203,6 +203,7 @@ public class C16Cp1SliceTests
                 ["Mimamsa__Activation__Enabled"] = "true", ["Mimamsa__Activation__DevelopmentTrust"] = "true",
                 ["Mimamsa__Activation__Pipe"] = pipe, ["Mimamsa__Activation__KeyFile"] = layout.ChannelKeyPath,
                 ["Mimamsa__Text__Store"] = "disk", ["Mimamsa__Text__Dir"] = textDir, ["Mimamsa__Search__Engine"] = "memory",
+                ["Mimamsa__Test__PauseDir"] = Path.Combine(work, "pause-" + r),   // test-only pause hook (C16-CP1-03)
             };
             async Task<Cp1Web> Web(string name) { var w = await Cp1Web.StartAsync(WebEnv(Path.Combine(work, $"web-text-{r}-{name}"))); webs.Add(w); return w; }
             static async Task<HttpStatusCode> St(HttpClient c, string url) => (await c.GetAsync(url)).StatusCode;
@@ -243,24 +244,92 @@ public class C16Cp1SliceTests
             var heldSearch = JsonNode.Parse(await c2.GetStringAsync("/api/search?q=" + Uri.EscapeDataString("Synthetic held writ petition")))!;
             Check("web_g2_search_never_returns_held_copy", heldSearch["passages"]!.AsArray().All(p => (string)p!["doc_id"]! != docB));
 
-            // ---------------------------------------------------------------- exclusion AFTER activation, response boundary
+            // ---------------------------------------------------------------- C16-CP1-01: surfaces not behind the boundary are refused
+            foreach (var url in new[] { "/api/graph/stats", "/api/graph/resolve?doc=" + legacy, "/api/reasoning/rule-gate", "/api/commander/domains",
+                                        "/api/statutes", "/api/library", $"/api/documents/{legacy}/relations", "/api/studio/documents", "/api/studio/templates",
+                                        "/api/studio/notes", $"/api/v2/documents/{legacy}/pdf-meta", "/api/admin/overview" })
+            {
+                var resp = await c2.GetAsync(url);
+                var body = await resp.Content.ReadAsStringAsync();
+                Check("refused_under_activation " + url.Split('?')[0], resp.StatusCode == HttpStatusCode.ServiceUnavailable
+                      && body.Contains("not_available_under_activation") && !body.Contains(legacy) && !body.Contains(docA), $"{(int)resp.StatusCode} {body[..Math.Min(body.Length, 80)]}");
+            }
+            Check("route_inventory_startup_self_check", w2.Logged("route inventory complete"));
+
+            // a statute with printed headings (sections surface) and its copy hash
+            string statute = S("statute_doc");
+            var secBefore = JsonNode.Parse(await c2.GetStringAsync($"/api/documents/{statute}/sections"))!;
+            Check("statute_has_headings_before_withdrawal", secBefore["sections"] is JsonArray sa && sa.Count > 0);
+            var statuteSha = (string)JsonNode.Parse(await c2.GetStringAsync($"/api/documents/{statute}/text"))!["copy_sha256"]!;
+            var statutePage1 = (string)JsonNode.Parse(await c2.GetStringAsync($"/api/documents/{statute}/text"))!["pages"]![0]!["text"]!;
+            var aPage1 = (string)JsonNode.Parse(await c2.GetStringAsync($"/api/documents/{docA}/text"))!["pages"]![0]!["text"]!;
+            var statuteQuery = string.Join(" ", statutePage1.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Where(w => w.All(char.IsLetter) && w.Length > 3).Take(3));
+            var statuteHits = JsonNode.Parse(await c2.GetStringAsync("/api/search?q=" + Uri.EscapeDataString(statuteQuery)))!["passages"]!.AsArray();
+            Check("statute_found_by_search_before_withdrawal", statuteHits.Any(p => (string)p!["doc_id"]! == statute), statuteQuery);
+
+            // ---------------------------------------------------------------- C16-CP1-03: requests PAUSED after their handler ran
+            // (initial eligibility passed, page text enumerated, JSON serialised), then the withdrawal is accepted, then released
+            var paused = new Dictionary<string, string>
+            {
+                ["p-text"] = $"/api/documents/{docA}/text", ["p-citation"] = $"/api/documents/{docA}/citation?page=1",
+                ["p-cite"] = $"/api/cite?doc={docA}&sha={shaA}&page=1", ["p-doc"] = $"/api/documents/{docA}",
+                ["p-search"] = "/api/search?q=" + Uri.EscapeDataString(S("admitted_query")),
+                ["p-sections"] = $"/api/documents/{statute}/sections", ["p-statute-text"] = $"/api/documents/{statute}/text",
+                ["p-statute-search"] = "/api/search?q=" + Uri.EscapeDataString(statuteQuery),
+            };
+            foreach (var (_, url) in paused) Check("before_withdrawal_200 " + url.Split('?')[0], await St(c2, url) == HttpStatusCode.OK);
+            var pending = paused.ToDictionary(kv => kv.Key, kv =>
+            {
+                var m = new HttpRequestMessage(HttpMethod.Get, kv.Value);
+                m.Headers.Add("X-Mimamsa-Test-Pause", kv.Key + "-" + r);
+                return c2.SendAsync(m);
+            });
+            var pdir = Path.Combine(work, "pause-" + r);
+            for (int i = 0; i < 600 && !paused.Keys.All(k => File.Exists(Path.Combine(pdir, $"{k}-{r}.paused"))); i++) await Task.Delay(100);
+            Check("requests_paused_after_their_handler", paused.Keys.All(k => File.Exists(Path.Combine(pdir, $"{k}-{r}.paused"))));
+
+            // ---------------------------------------------------------------- exclusion AFTER activation: A by doc id, the statute by copy hash
             var insp = new SiteInspector(layout, reader);
             ActivationEngine.AcceptExclusion(layout, insp, () =>
             {
                 var psi = new ProcessStartInfo(S("python")) { RedirectStandardOutput = true, RedirectStandardError = true, UseShellExecute = false };
-                foreach (var a in new[] { "-I", S("driver"), "exclude", "--site", site, "--sequence", (snap.Sequence!.Value + 1).ToString(), "--doc", docA }) psi.ArgumentList.Add(a);
+                foreach (var a in new[] { "-I", S("driver"), "exclude", "--site", site, "--sequence", (snap.Sequence!.Value + 1).ToString(), "--doc", docA, "--sha", statuteSha })
+                    psi.ArgumentList.Add(a);
                 using var p = Process.Start(psi)!;
                 var o = p.StandardOutput.ReadToEnd() + p.StandardError.ReadToEnd();
                 p.WaitForExit();
                 if (p.ExitCode != 0) throw new InvalidOperationException("exclusion append failed: " + o);
             });
             Check("b06_exclusion_accepted_and_applied", reader.Read().Sequence == snap.Sequence + 1 && layout.ReadApplied()[g2] == snap.Sequence + 1);
-            Check("boundary_document_withheld", await St(c2, $"/api/documents/{docA}") == HttpStatusCode.NotFound);
-            Check("boundary_text_withheld", await St(c2, $"/api/documents/{docA}/text") == HttpStatusCode.NotFound);
-            Check("boundary_citation_withheld", await St(c2, $"/api/documents/{docA}/citation?page=1") == HttpStatusCode.NotFound);
-            Check("boundary_permalink_withheld", await St(c2, $"/api/cite?doc={docA}&sha={shaA}&page=1") == HttpStatusCode.NotFound);
-            var after = JsonNode.Parse(await c2.GetStringAsync("/api/search?q=" + Uri.EscapeDataString(S("admitted_query"))))!;
-            Check("boundary_search_filtered", after["passages"]!.AsArray().All(p => (string)p!["doc_id"]! != docA));
+            foreach (var k in paused.Keys) File.WriteAllText(Path.Combine(pdir, $"{k}-{r}.release"), "go");
+            bool ContentFree(string body) => !body.Contains(docA) && !body.Contains(statute) && !body.Contains(aPage1[..Math.Min(30, aPage1.Length)])
+                                             && !body.Contains(statutePage1[..Math.Min(30, statutePage1.Length)]) && !body.Contains(shaA) && !body.Contains(statuteSha);
+            foreach (var (k, t) in pending)
+            {
+                var resp = await t;
+                var body = await resp.Content.ReadAsStringAsync();
+                Check("linearised_after_acceptance " + k, resp.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.ServiceUnavailable && ContentFree(body),
+                      $"{(int)resp.StatusCode} {body[..Math.Min(body.Length, 120)]}");
+            }
+
+            // ---------------------------------------------------------------- every boundary surface after acceptance, both exclusion kinds
+            foreach (var (name, url) in new[] {
+                ("doc_id document", $"/api/documents/{docA}"), ("doc_id text", $"/api/documents/{docA}/text"), ("doc_id sections", $"/api/documents/{docA}/sections"),
+                ("doc_id citation", $"/api/documents/{docA}/citation?page=1"), ("doc_id permalink", $"/api/cite?doc={docA}&sha={shaA}&page=1"),
+                ("copy_hash document", $"/api/documents/{statute}"), ("copy_hash text", $"/api/documents/{statute}/text"),
+                ("copy_hash sections", $"/api/documents/{statute}/sections"), ("copy_hash citation", $"/api/documents/{statute}/citation?page=1"),
+                ("copy_hash permalink", $"/api/cite?doc={statute}&sha={statuteSha}&page=1") })
+            {
+                var resp = await c2.GetAsync(url);
+                var body = await resp.Content.ReadAsStringAsync();
+                Check("boundary_withheld " + name, resp.StatusCode == HttpStatusCode.NotFound && ContentFree(body), $"{(int)resp.StatusCode}");
+            }
+            foreach (var q in new[] { S("admitted_query"), statuteQuery })
+            {
+                var resp = await c2.GetAsync("/api/search?q=" + Uri.EscapeDataString(q));
+                var body = await resp.Content.ReadAsStringAsync();
+                Check("boundary_search_filtered " + q, resp.StatusCode == HttpStatusCode.OK && ContentFree(body), $"{(int)resp.StatusCode}");
+            }
             Check("boundary_leaves_other_copies", await St(c2, $"/api/documents/{legacy}") == HttpStatusCode.OK);
 
             // ---------------------------------------------------------------- ROLLBACK to G1

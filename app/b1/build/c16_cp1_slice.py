@@ -61,7 +61,7 @@ def register_trust_list() -> dict:
                       "purposes": ["register"], "revoked": False}]}
 
 
-def append_exclusion(site: Path, sequence: int, withdraw_doc_ids: list[str]) -> dict:
+def append_exclusion(site: Path, sequence: int, withdraw_doc_ids: list[str], withdraw_shas: list[str] = ()) -> dict:
     """One signed exclusion update appended with the REAL Python ExclusionStore (development mode)."""
     from mimamsa_contract.exclusions import ExclusionStore
     from mimamsa_contract.trust import parse_trust_list
@@ -70,7 +70,8 @@ def append_exclusion(site: Path, sequence: int, withdraw_doc_ids: list[str]) -> 
     reg = REGISTER_PATH.read_text(encoding="utf-8")
     u = {"contract_version": "1.0.0", "record_kind": "exclusion_update", "sequence": sequence, "issued_at": "2026-11-28T00:00:00Z",
          "register_sha256": hashlib.sha256(reg.encode("utf-8")).hexdigest(), "register_json": reg,
-         "withdrawals": [{"doc_id": d, "reason": "CP-1 slice: withdrawn after activation (fixture)"} for d in withdraw_doc_ids]}
+         "withdrawals": [{"doc_id": d, "reason": "CP-1 slice: withdrawn after activation (fixture)"} for d in withdraw_doc_ids]
+                        + [{"source_copy_sha256": s, "reason": "CP-1 slice: copy withdrawn after activation (fixture)"} for s in withdraw_shas]}
     b = json.dumps(u, sort_keys=True).encode("utf-8")
     return ExclusionStore(site / "exclusions").append(b, sk.sign(b), trust, mode="development")
 
@@ -195,6 +196,12 @@ def cmd_run(a) -> int:
     from mimamsa_contract.c16 import adapters
     g2 = imported["G2"]
     legacy = next(d for d in g2["served_documents"] if d != cc.DOC_A)
+    # a statute with printed headings (the sections surface), withdrawn later by its copy hash (C16-CP1-01)
+    g2dir = work / "site" / "generations" / g2["release_id"]
+    acts = [json.loads(x) for x in (g2dir / "records" / "documents.jsonl").read_text(encoding="utf-8").splitlines() if x.strip()]
+    statute = next(d for d in sorted(acts, key=lambda d: d["doc_id"]) if d.get("doc_type") == "act" and d["doc_id"] in g2["served_documents"])
+    if statute["doc_id"] == legacy:
+        legacy = next(d for d in g2["served_documents"] if d not in (cc.DOC_A, statute["doc_id"]))
     context = {
         "site": str(work / "site"), "work": str(work), "results": str(work / "journey-results.json"),
         "python": sys.executable, "driver": str(Path(__file__).resolve()), "register": str(REGISTER_PATH),
@@ -202,6 +209,7 @@ def cmd_run(a) -> int:
         "release_sequence": {builds[k]["release_id"]: builds[k]["release_sequence"] for k in ("G1", "G2")},
         "admitted_doc": cc.DOC_A, "held_doc": cc.DOC_B, "c16_only_doc": adapters.local_doc_id(cc.h(cc.Corpus().e)),
         "legacy_doc": legacy, "admitted_query": "appellant relied on section 69",
+        "statute_doc": statute["doc_id"], "statute_query": statute.get("title") or statute["doc_id"],
     }
     journey = run_journey(work, context, a.configuration)
     o = outcome(journey)
@@ -235,10 +243,11 @@ def main(argv=None) -> int:
     e.add_argument("--site", required=True)
     e.add_argument("--sequence", type=int, required=True)
     e.add_argument("--doc", action="append", default=[])
+    e.add_argument("--sha", action="append", default=[], help="withdraw a copy by its source_copy_sha256")
     a = ap.parse_args(argv)
     if a.cmd == "run":
         return cmd_run(a)
-    ack = append_exclusion(Path(a.site), a.sequence, a.doc)
+    ack = append_exclusion(Path(a.site), a.sequence, a.doc, a.sha)
     print(json.dumps({"ok": True, "sequence": ack.get("sequence")}))
     return 0
 

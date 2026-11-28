@@ -37,8 +37,9 @@ public sealed class ActivationBoundary(ActivationParticipant participant, Genera
     /// Handler-time check (and record) against the CURRENT state; fail closed without a pin or a readable store.
     public bool Excluded(HttpContext ctx, string docId, string? sha)
     {
-        Touched(ctx).Add((docId, sha));
-        return AnyExcluded(ctx, [(docId, sha)]);
+        bool excluded = AnyExcluded(ctx, [(docId, sha)]);
+        if (!excluded) Touched(ctx).Add((docId, sha));   // only what the handler let into the response is re-checked at commit
+        return excluded;
     }
 
     bool AnyExcluded(HttpContext ctx, IReadOnlyCollection<(string doc, string? sha)> items)
