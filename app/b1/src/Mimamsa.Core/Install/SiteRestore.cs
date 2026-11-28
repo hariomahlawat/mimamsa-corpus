@@ -367,10 +367,14 @@ public static class SiteRestore
             string headK = journal.HeadBegin("KNOWLEDGE")?.To ?? initK;
             var headMBegin = journal.HeadBegin("MODELS");
             string? headM = headMBegin is null ? initM : headMBegin.To;
-            DurableFile.WriteAtomic(site.ActivePointer, Encoding.UTF8.GetBytes(headK));
+            // ACTIVE is a DERIVED pointer: it is written here only when the head generation is already installed; otherwise
+            // it stays absent (the importer must not see a pointer to a generation that is not there) and `recover`
+            // derives it from the journal head after the release is re-imported and staged
+            var installed = new GenerationCatalog(site).Installed();
+            if (installed.Contains(headK)) DurableFile.WriteAtomic(site.ActivePointer, Encoding.UTF8.GetBytes(headK));
+            else if (File.Exists(site.ActivePointer)) File.Delete(site.ActivePointer);
             site.WritePointer("MODELS", headM);
             site.WriteMarker(SiteState.RECOVERING);
-            var installed = new GenerationCatalog(site).Installed();
             sw.Stop();
             return new JsonObject
             {

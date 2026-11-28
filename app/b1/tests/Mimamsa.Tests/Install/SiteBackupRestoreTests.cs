@@ -137,7 +137,8 @@ public class SiteBackupRestoreTests : IClassFixture<BackupFixture>
         Assert.Equal(ao["appendonly/activation-log/activation-log.jsonl"], Bytes(ts.ActivationLogPath));
         Assert.Equal(ao["appendonly/exclusions/ACCEPTED.json"], Bytes(Path.Combine(ts.ExclusionsDir, "ACCEPTED.json")));
         long b2Seq = (long)JsonNode.Parse(ao["appendonly/exclusions/ACCEPTED.json"])!["sequence"]!;
-        Assert.Equal("G3", ts.ReadPointer("KNOWLEDGE"));
+        Assert.Null(ts.ReadPointer("KNOWLEDGE"));                       // derived pointer: absent until recovery (head not installed)
+        Assert.Equal("G3", (string?)r["journal_head"]!["knowledge"]);
         Assert.Equal(SiteState.RECOVERING, ts.ReadMarker());
         Assert.Equal(["G3"], r["reimport_required"]!.AsArray().Select(x => (string)x!));
         Assert.Equal("a local Admin upload", File.ReadAllText(Path.Combine(t.Root("uploads"), "admin", "local-upload.txt")));
@@ -157,6 +158,7 @@ public class SiteBackupRestoreTests : IClassFixture<BackupFixture>
         eng.Recover();
         Assert.Equal(SiteState.OPEN, ts.ReadMarker());
         Assert.Equal("G3", db.Views());
+        Assert.Equal("G3", ts.ReadPointer("KNOWLEDGE"));                // recovery derived ACTIVE from the journal head
         Assert.Equal(2, db.PublicationCount());                         // both committed transactions reconciled
         Assert.Equal(b2Seq, ts.ReadApplied()["G3"]);                      // latest exclusion state applied
         // a rollback to a release that is not retained on the restored site is refused until it is re-imported
@@ -241,8 +243,7 @@ public class SiteBackupRestoreTests : IClassFixture<BackupFixture>
         BackupRepack.Rewrite(torn, "appendonly", F.Key, es => es.Select(e => e.Name != "appendonly/journal/journal.jsonl" ? e
             : e with { Data = e.Data.Concat(Encoding.UTF8.GetBytes("{\"partial")).ToArray() }).ToList());
         var t3 = F.Target("t-torn");
-        F.Restore(t3, torn);
-        Assert.Equal("G3", t3.Site.ReadPointer("KNOWLEDGE"));
+        Assert.Equal("G3", (string?)F.Restore(t3, torn)["journal_head"]!["knowledge"]);
         Assert.False(ActivationJournal.Read(t3.Site.JournalPath).TornTail);
     }
 

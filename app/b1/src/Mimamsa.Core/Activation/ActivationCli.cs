@@ -115,7 +115,12 @@ public static class ActivationCli
         {
             if (pg is not null)
             {
-                var head = site.ReadPointer("KNOWLEDGE") ?? throw new ArgumentException("site not initialised");
+                // C16 S3-C (additive): after a restore ACTIVE may be absent (a derived pointer); the journal head, else
+                // the initial generation, names what the views must point at, and recover() rewrites ACTIVE from it
+                var head = site.ReadPointer("KNOWLEDGE")
+                           ?? (File.Exists(site.JournalPath) ? ActivationJournal.Read(site.JournalPath).HeadBegin("KNOWLEDGE")?.To : null)
+                           ?? (File.Exists(site.InitPath) ? site.ReadInit().knowledge : null)
+                           ?? throw new ArgumentException("site not initialised");
                 if (db is Mimamsa.Core.Knowledge.KnowledgeActivationDatabase kdb) kdb.EnsureSchema(head);
                 else ((PgActivationDatabase)db).EnsureSchema(head);
             }
