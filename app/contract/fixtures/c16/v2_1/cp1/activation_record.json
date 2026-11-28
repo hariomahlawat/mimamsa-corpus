@@ -1,0 +1,96 @@
+{
+ "action": "ACTIVATE",
+ "active_models_release_id": null,
+ "actor": {
+  "id": "admin-fixture",
+  "role": "ADMIN"
+ },
+ "app_version": "0.16.0",
+ "at": "2026-12-15T09:30:00Z",
+ "components": [
+  {
+   "component_id": "originals",
+   "failed_checks": [],
+   "result": "VERIFIED_USED"
+  },
+  {
+   "component_id": "text",
+   "failed_checks": [],
+   "result": "VERIFIED_USED"
+  },
+  {
+   "component_id": "records",
+   "failed_checks": [],
+   "result": "VERIFIED_USED"
+  },
+  {
+   "component_id": "research",
+   "failed_checks": [],
+   "result": "VERIFIED_USED"
+  },
+  {
+   "component_id": "integrity",
+   "failed_checks": [],
+   "result": "VERIFIED_USED"
+  },
+  {
+   "component_id": "admission",
+   "failed_checks": [],
+   "result": "VERIFIED_USED"
+  },
+  {
+   "component_id": "knowledge-rows",
+   "failed_checks": [],
+   "result": "VERIFIED_USED"
+  },
+  {
+   "component_id": "graph",
+   "failed_checks": [],
+   "result": "VERIFIED_USED"
+  },
+  {
+   "component_id": "lexical-index",
+   "failed_checks": [],
+   "result": "VERIFIED_USED"
+  },
+  {
+   "component_id": "text-store",
+   "failed_checks": [],
+   "result": "VERIFIED_USED"
+  },
+  {
+   "component_id": "vectors-e5",
+   "failed_checks": [],
+   "result": "ACCELERATOR_DEGRADED"
+  }
+ ],
+ "contract": "mimamsa-corpus-contract/2.0",
+ "degradation_acknowledged_by": "admin-fixture",
+ "exclusion_state": {
+  "digest": "e1c4d1b5594342fc688afa196d94fde33a922a0d22e7ffca3f661d76f767f04f",
+  "items_suppressed": 2,
+  "sequence": 4
+ },
+ "preflight": {
+  "free_bytes": 90000000000,
+  "headroom_fraction": 0.1,
+  "measured_required_bytes": 30000000000,
+  "result": "PASS",
+  "retained_releases": [
+   "R17-knowledge-20261215-1a1b1c1d",
+   "R16-knowledge-20261201-0a0b0c0d"
+  ]
+ },
+ "previous_active_release_id": null,
+ "previous_record_sha256": null,
+ "reason": "CP-1 fixture slice: no vector pack; lexical-only service; no site embedding",
+ "record_kind": "knowledge_activation_record",
+ "release_class": "KNOWLEDGE",
+ "release_id": "R16-knowledge-20261201-0a0b0c0d",
+ "release_sequence": 16,
+ "result": "ACTIVE_DEGRADED",
+ "seq": 1,
+ "service_level": "DEGRADED_LEXICAL_ONLY",
+ "target": "KNOWLEDGE",
+ "txn_id": "TX-00000002-66652b2468cc"
+}

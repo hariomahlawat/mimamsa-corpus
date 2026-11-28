@@ -1,0 +1,59 @@
+{
+ "checks": [
+  {
+   "check_id": "SHA256_EACH_FILE",
+   "method": "sha256 per file",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "store files are the signed bytes"
+  },
+  {
+   "check_id": "SQLITE_QUICK_CHECK",
+   "method": "PRAGMA quick_check",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "the SQLite file is structurally sound"
+  },
+  {
+   "check_id": "TEXT_STORE_BIND_EXACT",
+   "method": "DiskTextStore.Bind on every open (ADR-0008)",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "store metadata equals the generation's records exactly"
+  },
+  {
+   "check_id": "PAGE_HASH_ON_READ",
+   "method": "per-page hash check on read",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "every page read equals the verified derivative bytes"
+  },
+  {
+   "check_id": "SOURCE_DIGEST_EQUALS_SITE",
+   "method": "digests.text_store_source_digest recomputed (bundle-independent, 2.1); Bind still re-derives on every open",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "built from the same generation's derivative records"
+  }
+ ],
+ "contract": "mimamsa-corpus-contract/2.1",
+ "kind": "TEXT_STORE",
+ "on_failure": "REBUILD_LOCALLY_CHEAP",
+ "record_kind": "component_verification_contract",
+ "site_embedding": "NEVER"
+}

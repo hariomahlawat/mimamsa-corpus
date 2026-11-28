@@ -1,0 +1,87 @@
+{
+ "assert_final": {
+  "knowledge": "R1",
+  "models": "M1",
+  "semantic_search": true,
+  "serving": true
+ },
+ "contract": "mimamsa-corpus-contract/2.1",
+ "covers": [
+  "LEXICAL_ONLY_ACTIVATION"
+ ],
+ "description": "A verified model without vectors for a lexical-only release does not block it; semantic search is off until a release with vectors returns.",
+ "initial": {
+  "active": "R1",
+  "free_bytes": 1000000000000,
+  "installed": [
+   "R1",
+   "L4"
+  ],
+  "keep_previous": 2,
+  "lexical_only": [
+   "L4"
+  ],
+  "lock_stale_after_seconds": 30,
+  "models": "M1",
+  "recovery_target": null,
+  "sizes": {},
+  "staged_models": {
+   "M1": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   },
+   "M2": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   }
+  }
+ },
+ "record_kind": "activation_scenario",
+ "scenario_id": "SC27-lexical-only-with-model-without-vectors",
+ "steps": [
+  {
+   "args": {
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "lock_acquire"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "L4",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "transition"
+  },
+  {
+   "args": {},
+   "expect_error": null,
+   "op": "pin"
+  },
+  {
+   "args": {},
+   "expect_error": null,
+   "op": "unpin"
+  },
+  {
+   "args": {
+    "action": "ROLLBACK",
+    "target": "KNOWLEDGE",
+    "to": "R1",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "transition"
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/GATE_RECEIPT_ARTEFACT_SCHEMA.json",
+  "title": "Typed gate-receipt artefact (mimamsa-corpus-contract/2.1, additive)",
+  "description": "The artefact a gate receipt (CORPUS_ADMISSION_SCHEMA $defs/receipt, contract 2.0, unchanged) points to by receipt_sha256. It travels at registers/receipts/<sha256 of its canonical bytes>.json inside the ADMISSION_REGISTER component of a signed release. It names the exact gate, copy, derivative, rule and configuration, register revision and outcome, and carries a kind-specific PAYLOAD that the signed importer re-verifies: SITE_RECOMPUTABLE kinds (hash, format, register, identity and exchange schema, derivative, image inventory) are recomputed on site from the verified bytes and compared; ASSERTED_BOUND kinds (marking screen, relevance, duplicate resolution) are checked for typed consistency and binding only and recorded as asserted-and-bound, never as site-verified. The existence of a file with the right hash is never proof. Revisions are append-only: a re-run is a new artefact (revision n+1) that supersedes the previous one for the same (generation, copy, gate); the admission must reference the chain head. Contract 2.0 exchanges carry no artefacts and are never importable with eligible admissions (fail closed).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "record_kind", "gate_id", "receipt_kind", "verification_class", "subject", "corpus_generation_id", "derivative_sha256", "rule", "config_sha256", "register_sha256", "outcome", "revision", "supersedes_receipt_sha256", "producer", "payload"],
+  "properties": {
+    "contract": {"const": "mimamsa-corpus-contract/2.1"},
+    "record_kind": {"const": "gate_receipt_artefact"},
+    "gate_id": {"$ref": "CORPUS_ADMISSION_SCHEMA.json#/$defs/gate_id"},
+    "receipt_kind": {"enum": ["HASH_REDOWNLOAD", "FORMAT_DETECTION", "REGISTER_CHECK", "MARKING_SCREEN", "IDENTITY_VALIDATION", "DERIVATIVE_VERIFICATION", "IMAGE_ACCOUNTING", "RELEVANCE_DECISION", "DUPLICATE_RESOLUTION", "SCHEMA_VALIDATION"]},
+    "verification_class": {"description": "SITE_RECOMPUTABLE: the importer recomputes the fact and compares. ASSERTED_BOUND: the importer checks typed consistency and binding only.", "enum": ["SITE_RECOMPUTABLE", "ASSERTED_BOUND"]},
+    "subject": {
+      "type": "object", "additionalProperties": false, "required": ["doc_id", "source_copy_sha256"],
+      "properties": {"doc_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/doc_id"}, "source_copy_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}}
+    },
+    "corpus_generation_id": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/corpus_generation_id"},
+    "derivative_sha256": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
+    "rule": {"type": "object", "additionalProperties": false, "required": ["id", "version"], "properties": {"id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{2,63}$"}, "version": {"type": "string", "maxLength": 32}}},
+    "config_sha256": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
+    "register_sha256": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
+    "outcome": {"enum": ["PASS", "FAIL"]},
+    "revision": {"type": "integer", "minimum": 1},
+    "supersedes_receipt_sha256": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
+    "producer": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/tool"},
+    "payload": {"type": "object"}
+  },
+  "allOf": [
+    {"if": {"properties": {"revision": {"const": 1}}}, "then": {"properties": {"supersedes_receipt_sha256": {"type": "null"}}}, "else": {"properties": {"supersedes_receipt_sha256": {"type": "string"}}}},
+    {"if": {"properties": {"receipt_kind": {"enum": ["MARKING_SCREEN", "RELEVANCE_DECISION", "DUPLICATE_RESOLUTION"]}}}, "then": {"properties": {"verification_class": {"const": "ASSERTED_BOUND"}}}, "else": {"properties": {"verification_class": {"const": "SITE_RECOMPUTABLE"}}}},
+    {"if": {"properties": {"receipt_kind": {"const": "HASH_REDOWNLOAD"}}}, "then": {"properties": {"gate_id": {"const": "G01_HASH_VERIFIED"}, "payload": {"$ref": "#/$defs/hash_redownload"}}}},
+    {"if": {"properties": {"receipt_kind": {"const": "FORMAT_DETECTION"}}}, "then": {"properties": {"gate_id": {"const": "G02_FORMAT_DETECTED"}, "payload": {"$ref": "#/$defs/format_detection"}}}},
+    {"if": {"properties": {"receipt_kind": {"const": "REGISTER_CHECK"}}}, "then": {"properties": {"gate_id": {"const": "G03_RESTRICTED_REGISTER"}, "register_sha256": {"type": "string"}, "payload": {"$ref": "#/$defs/register_check"}}}},
+    {"if": {"properties": {"receipt_kind": {"const": "MARKING_SCREEN"}}}, "then": {"properties": {"gate_id": {"const": "G04_ACCESS_MARKING_REVIEWED"}, "payload": {"$ref": "#/$defs/marking_screen"}}}},
+    {"if": {"properties": {"receipt_kind": {"const": "IDENTITY_VALIDATION"}}}, "then": {"properties": {"gate_id": {"const": "G05_IDENTITY_RECORD_VALID"}, "payload": {"$ref": "#/$defs/identity_validation"}}}},
+    {"if": {"properties": {"receipt_kind": {"const": "DERIVATIVE_VERIFICATION"}}}, "then": {"properties": {"gate_id": {"const": "G06_TEXT_DERIVATIVE_VERIFIED"}, "derivative_sha256": {"type": "string"}, "payload": {"$ref": "#/$defs/derivative_verification"}}}},
+    {"if": {"properties": {"receipt_kind": {"const": "IMAGE_ACCOUNTING"}}}, "then": {"properties": {"gate_id": {"const": "G07_EMBEDDED_IMAGES_ACCOUNTED"}, "payload": {"$ref": "#/$defs/image_accounting"}}}},
+    {"if": {"properties": {"receipt_kind": {"const": "RELEVANCE_DECISION"}}}, "then": {"properties": {"gate_id": {"const": "G08_RELEVANCE_ASSESSED"}, "payload": {"$ref": "#/$defs/relevance_decision"}}}},
+    {"if": {"properties": {"receipt_kind": {"const": "DUPLICATE_RESOLUTION"}}}, "then": {"properties": {"gate_id": {"const": "G09_DUPLICATE_RESOLVED"}, "payload": {"$ref": "#/$defs/duplicate_resolution"}}}},
+    {"if": {"properties": {"receipt_kind": {"const": "SCHEMA_VALIDATION"}}}, "then": {"properties": {"gate_id": {"const": "G10_SCHEMA_VALID"}, "payload": {"$ref": "#/$defs/schema_validation"}}}}
+  ],
+  "$defs": {
+    "hash_redownload": {
+      "description": "G01. The copy was re-downloaded at a pinned revision and re-hashed. Site: re-hashes the vault bytes; measured_sha256 and measured_bytes must equal them and the subject.",
+      "type": "object", "additionalProperties": false, "required": ["source", "measured_sha256", "measured_bytes"],
+      "properties": {
+        "source": {"type": "object", "additionalProperties": false, "required": ["hf_repo", "hf_revision", "path"],
+                   "properties": {"hf_repo": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"}, "hf_revision": {"$ref": "../v1/common.schema.json#/$defs/hf_revision"}, "path": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/relative_path"}}},
+        "measured_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"},
+        "measured_bytes": {"type": "integer", "minimum": 0}
+      }
+    },
+    "format_detection": {
+      "description": "G02. Site: reads the first bytes of the verified copy and re-detects.",
+      "type": "object", "additionalProperties": false, "required": ["magic_hex", "detected_format", "mime_type"],
+      "properties": {"magic_hex": {"type": "string", "pattern": "^[0-9a-f]{2,32}$"}, "detected_format": {"$ref": "DOCUMENT_IDENTITY_SCHEMA.json#/properties/source_copy/properties/detected_format"}, "mime_type": {"$ref": "DOCUMENT_IDENTITY_SCHEMA.json#/properties/source_copy/properties/mime_type"}}
+    },
+    "register_check": {
+      "description": "G03. Site: re-runs the pinned register over hash, doc_id, observation paths and every record string; matches must equal its own count (PASS means zero).",
+      "type": "object", "additionalProperties": false, "required": ["fields_checked", "matches"],
+      "properties": {"fields_checked": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["sha256", "doc_id", "paths", "record_strings"]}}, "matches": {"type": "integer", "minimum": 0}}
+    },
+    "marking_screen": {
+      "description": "G04 (asserted, bound). What was screened, with the OCR configuration for image screening.",
+      "type": "object", "additionalProperties": false, "required": ["pages_screened", "images_screened", "markings_found", "method", "ocr_config_sha256"],
+      "properties": {"pages_screened": {"type": "integer", "minimum": 0}, "images_screened": {"type": "integer", "minimum": 0}, "markings_found": {"type": "array", "items": {"type": "string", "maxLength": 200}}, "method": {"type": "string", "minLength": 3, "maxLength": 200}, "ocr_config_sha256": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]}}
+    },
+    "identity_validation": {
+      "description": "G05. Site: re-validates the identity record; identity_record_sha256 must equal the canonical hash of the record in the exchange.",
+      "type": "object", "additionalProperties": false, "required": ["identity_record_sha256", "issues"],
+      "properties": {"identity_record_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, "issues": {"type": "integer", "minimum": 0}}
+    },
+    "derivative_verification": {
+      "description": "G06. Site: re-hashes the derivative bytes, re-splits the [[page N]] units and recomputes coverage and per-unit hashes.",
+      "type": "object", "additionalProperties": false, "required": ["units_total", "units_with_text", "unit_text_sha256"],
+      "properties": {"units_total": {"type": "integer", "minimum": 0}, "units_with_text": {"type": "integer", "minimum": 0}, "unit_text_sha256": {"type": "array", "items": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}}}
+    },
+    "image_accounting": {
+      "description": "G07. Site: re-reads the container (safe zip) and compares the occurrence list with the identity's inventory exactly.",
+      "type": "object", "additionalProperties": false, "required": ["occurrences"],
+      "properties": {"occurrences": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["image_sequence_id", "image_sha256", "ocr_state", "ocr_derivative_sha256"],
+        "properties": {"image_sequence_id": {"type": "string", "pattern": "^IMG:[0-9a-f]{64}:[1-9][0-9]{0,4}$"}, "image_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, "ocr_state": {"enum": ["NOT_RUN", "QUEUED", "DONE", "FAILED", "NOT_REQUIRED_DECORATIVE"]}, "ocr_derivative_sha256": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]}}}}}
+    },
+    "relevance_decision": {
+      "description": "G08 (asserted, bound). Who decided and on what basis; an automated signal alone is never PASS.",
+      "type": "object", "additionalProperties": false, "required": ["decided_by_kind", "decided_by", "basis"],
+      "properties": {"decided_by_kind": {"enum": ["OWNER", "PRODUCER_OPERATOR"]}, "decided_by": {"type": "string", "minLength": 3, "maxLength": 120}, "basis": {"type": "string", "minLength": 3, "maxLength": 500}}
+    },
+    "duplicate_resolution": {
+      "description": "G09 (asserted, bound). The hashes compared and the result.",
+      "type": "object", "additionalProperties": false, "required": ["compared_scope", "method", "result"],
+      "properties": {"compared_scope": {"type": "string", "minLength": 3, "maxLength": 300}, "method": {"enum": ["BYTE_HASH", "NORMALIZED_TEXT_REVIEW", "BYTE_HASH_AND_TEXT_REVIEW"]}, "result": {"enum": ["UNIQUE", "PRIMARY_OF_GROUP", "ALTERNATE_OF", "DUPLICATE_OF"]}}
+    },
+    "schema_validation": {
+      "description": "G10. Scoped to the copy's own non-admission records (binding to GENERATION.json would be circular: the manifest hashes the admissions file, which holds this receipt's hash). Site: recomputes copy_records_sha256 (receipts.copy_records_digest: canonical, sorted identity, anchors and relationships of the copy) and re-runs strict validation; issues must equal its own count.",
+      "type": "object", "additionalProperties": false, "required": ["copy_records_sha256", "issues"],
+      "properties": {"copy_records_sha256": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, "issues": {"type": "integer", "minimum": 0}}
+    }
+  }
+}

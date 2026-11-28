@@ -1,0 +1,98 @@
+{
+ "assert_final": {
+  "installed": [
+   "R0",
+   "R1",
+   "R2",
+   "R3"
+  ],
+  "knowledge": "R3"
+ },
+ "contract": "mimamsa-corpus-contract/2.1",
+ "covers": [
+  "ROLLBACK",
+  "RETENTION"
+ ],
+ "description": "Rollback history repeats ids; retention keeps active plus two previous distinct releases and the recovery target.",
+ "initial": {
+  "active": "R1",
+  "free_bytes": 1000000000000,
+  "installed": [
+   "R0",
+   "R1",
+   "R2",
+   "R3",
+   "R4"
+  ],
+  "keep_previous": 2,
+  "lock_stale_after_seconds": 30,
+  "models": "M1",
+  "recovery_target": "R0",
+  "sizes": {},
+  "staged_models": {
+   "M1": {
+    "vectors_for": [
+     "R0",
+     "R1",
+     "R2",
+     "R3",
+     "R4"
+    ],
+    "verified": true
+   }
+  }
+ },
+ "record_kind": "activation_scenario",
+ "scenario_id": "SC23-rollback-distinct-retention",
+ "steps": [
+  {
+   "args": {
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "lock_acquire"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "R2",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "transition"
+  },
+  {
+   "args": {
+    "action": "ROLLBACK",
+    "target": "KNOWLEDGE",
+    "to": "R1",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "transition"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "R2",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "transition"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "R3",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "transition"
+  },
+  {
+   "args": {},
+   "expect_error": null,
+   "op": "prune"
+  }
+ ]
+}

@@ -1,0 +1,59 @@
+{
+ "checks": [
+  {
+   "check_id": "SHA256_EACH_FILE",
+   "method": "sha256 per file",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "index files are the signed bytes"
+  },
+  {
+   "check_id": "SQLITE_QUICK_CHECK",
+   "method": "PRAGMA quick_check",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "the SQLite file is structurally sound"
+  },
+  {
+   "check_id": "SAMPLED_POSTINGS_REDERIVE",
+   "method": "re-tokenise a seeded document sample and compare postings",
+   "sample": {
+    "selection": "DETERMINISTIC_SEEDED_BY_RELEASE_ID",
+    "size": "UNCALIBRATED",
+    "tolerance": "EXACT"
+   },
+   "verifies": "postings of sampled documents equal a fresh tokenisation"
+  },
+  {
+   "check_id": "SAMPLED_QUERY_PARITY",
+   "method": "run a seeded query sample against both engines",
+   "sample": {
+    "selection": "DETERMINISTIC_SEEDED_BY_RELEASE_ID",
+    "size": "UNCALIBRATED",
+    "tolerance": "EXACT"
+   },
+   "verifies": "sampled queries rank identically to the memory evaluator"
+  },
+  {
+   "check_id": "SOURCE_DIGEST_EQUALS_SITE",
+   "method": "ADR-0007 source digest recomputed",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "built from the same generation"
+  }
+ ],
+ "contract": "mimamsa-corpus-contract/2.1",
+ "kind": "LEXICAL_INDEX",
+ "on_failure": "REBUILD_LOCALLY_CHEAP",
+ "record_kind": "component_verification_contract",
+ "site_embedding": "NEVER"
+}

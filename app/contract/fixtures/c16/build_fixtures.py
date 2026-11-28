@@ -1190,7 +1190,8 @@ def main(argv):
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_bytes(data)
     stale = sorted(str(p.relative_to(HERE)).replace("\\", "/") for p in HERE.rglob("*")
-                   if p.is_file() and p.suffix in (".json", ".jsonl") and str(p.relative_to(HERE)).replace("\\", "/") not in out)
+                   if p.is_file() and p.suffix in (".json", ".jsonl") and str(p.relative_to(HERE)).replace("\\", "/") not in out
+                   and not str(p.relative_to(HERE)).replace("\\", "/").startswith("v2_1/"))   # 2.1 fixtures: build_fixtures_2_1.py
     if check and (diff or stale):
         print("fixtures differ from builder output:", ", ".join(diff + [f"stale {s}" for s in stale]))
         return 1

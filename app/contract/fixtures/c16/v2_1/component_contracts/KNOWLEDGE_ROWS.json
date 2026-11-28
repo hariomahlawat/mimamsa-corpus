@@ -1,0 +1,59 @@
+{
+ "checks": [
+  {
+   "check_id": "SHA256_EACH_FILE",
+   "method": "sha256 of each file against the component inventory",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "every row file is the signed byte sequence"
+  },
+  {
+   "check_id": "ROW_COUNTS",
+   "method": "count rows in the staging schema after COPY",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "row counts per table equal the manifest"
+  },
+  {
+   "check_id": "ROWS_ALLOWLIST_AND_TYPES",
+   "method": "knowledge_rows.row_file_issues before COPY",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "only allowlisted tables and typed columns are loaded"
+  },
+  {
+   "check_id": "ROWS_REDERIVE_COMPARE",
+   "method": "re-derive all rows and compare canonical bytes",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "every row equals the row re-derived from authoritative records"
+  },
+  {
+   "check_id": "SOURCE_DIGEST_EQUALS_SITE",
+   "method": "recompute the source digest from the verified generation",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "built from the same authoritative inputs"
+  }
+ ],
+ "contract": "mimamsa-corpus-contract/2.1",
+ "kind": "KNOWLEDGE_ROWS",
+ "on_failure": "REBUILD_LOCALLY_CHEAP",
+ "record_kind": "component_verification_contract",
+ "site_embedding": "NEVER"
+}

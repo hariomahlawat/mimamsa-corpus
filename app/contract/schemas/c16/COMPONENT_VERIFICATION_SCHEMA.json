@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/COMPONENT_VERIFICATION_SCHEMA.json",
+  "title": "Accelerator component verification contract (B04; contract 2.1 interface)",
+  "description": "Per accelerator kind: every check the site runs before it uses a prebuilt component, what is compared, how, on what sample, and what happens on failure. Sample sizes and tolerances are CALIBRATION PLACEHOLDERS (UNCALIBRATED) until FG-CALIBRATED-SAMPLES supplies measured values accepted by the owner (OD-12); an activation that relies on an UNCALIBRATED sampled check can never be ACTIVE_FULL in production mode (fail closed). Missing or failed vectors degrade to lexical-only service and never trigger site embedding.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "record_kind", "kind", "checks", "on_failure", "site_embedding"],
+  "properties": {
+    "contract": {"const": "mimamsa-corpus-contract/2.1"},
+    "record_kind": {"const": "component_verification_contract"},
+    "kind": {"enum": ["KNOWLEDGE_ROWS", "TEXT_STORE", "LEXICAL_INDEX", "VECTOR_PACK", "GRAPH"]},
+    "checks": {
+      "type": "array", "minItems": 1,
+      "items": {"type": "object", "additionalProperties": false, "required": ["check_id", "verifies", "method", "sample"],
+        "properties": {
+          "check_id": {"$ref": "KNOWLEDGE_RELEASE_MANIFEST_SCHEMA.json#/$defs/component/properties/verify/items"},
+          "verifies": {"type": "string", "minLength": 10, "maxLength": 500},
+          "method": {"type": "string", "minLength": 10, "maxLength": 500},
+          "sample": {
+            "type": "object", "additionalProperties": false, "required": ["selection", "size", "tolerance"],
+            "properties": {
+              "selection": {"enum": ["FULL", "DETERMINISTIC_SEEDED_BY_RELEASE_ID", "DETERMINISTIC_STRATIFIED_SEEDED_BY_RELEASE_ID"]},
+              "size": {"description": "ALL for FULL checks; UNCALIBRATED until measured; or a measured value with its calibration report.", "anyOf": [{"const": "ALL"}, {"const": "UNCALIBRATED"}, {"type": "object", "additionalProperties": false, "required": ["value", "calibration_ref"], "properties": {"value": {"type": "integer", "minimum": 1}, "calibration_ref": {"type": "string", "minLength": 3}}}]},
+              "tolerance": {"anyOf": [{"const": "EXACT"}, {"const": "UNCALIBRATED"}, {"type": "object", "additionalProperties": false, "required": ["value", "calibration_ref"], "properties": {"value": {"type": "number", "minimum": 0}, "calibration_ref": {"type": "string", "minLength": 3}}}]}
+            },
+            "allOf": [{"if": {"properties": {"selection": {"const": "FULL"}}}, "then": {"properties": {"size": {"const": "ALL"}}}, "else": {"properties": {"size": {"not": {"const": "ALL"}}}}}]
+          }
+        }}
+    },
+    "on_failure": {"enum": ["REBUILD_LOCALLY_CHEAP", "SERVE_LEXICAL_ONLY", "REFUSE_RELEASE"]},
+    "site_embedding": {"description": "Whether failure may embed passages on site. Always NEVER for an ordinary deployment.", "const": "NEVER"}
+  },
+  "allOf": [
+    {"if": {"properties": {"kind": {"const": "VECTOR_PACK"}}}, "then": {"properties": {"on_failure": {"const": "SERVE_LEXICAL_ONLY"}}}, "else": {"properties": {"on_failure": {"const": "REBUILD_LOCALLY_CHEAP"}}}}
+  ]
+}

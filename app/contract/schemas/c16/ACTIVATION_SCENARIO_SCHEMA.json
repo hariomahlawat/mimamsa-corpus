@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/ACTIVATION_SCENARIO_SCHEMA.json",
+  "title": "Activation conformance scenario (B06; contract 2.1 interface)",
+  "description": "A language-neutral scenario that BOTH the reference model (mimamsa_contract.c16.scenarios, driving activation.py) and the .NET activation implementation execute. Each step is one operation; expect_error names the refusal or crash the step must raise (or null). After every step the runner records the observable state defined in ACTIVATION_SCENARIO_OUTCOMES_SCHEMA; the expected-outcomes file holds that trace and both implementations must reproduce it exactly. `assert_final` holds hand-written invariants that do not depend on the reference implementation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "record_kind", "scenario_id", "covers", "description", "initial", "steps", "assert_final"],
+  "properties": {
+    "contract": {"const": "mimamsa-corpus-contract/2.1"},
+    "record_kind": {"const": "activation_scenario"},
+    "scenario_id": {"type": "string", "pattern": "^SC[0-9]{2}-[a-z0-9-]{3,60}$"},
+    "covers": {"type": "array", "minItems": 1, "items": {"enum": ["CRASH_BOUNDARY", "EXCLUSION_MID_SWITCH", "LOCK_CONTENTION", "STALE_PROCESS", "PARTICIPANT_LOSS", "TORN_JOURNAL", "JOURNAL_CORRUPTION", "RESPONSE_BOUNDARY_EXCLUSION", "EXCLUSION_READER_FAIL_CLOSED", "MODEL_SWITCH", "ROLLBACK", "RETENTION", "RESTORE", "DISK_PREFLIGHT", "LEXICAL_ONLY_ACTIVATION"]}},
+    "description": {"type": "string", "minLength": 10, "maxLength": 1000},
+    "initial": {
+      "type": "object", "additionalProperties": false,
+      "required": ["installed", "active", "models", "staged_models", "keep_previous", "free_bytes", "sizes", "recovery_target", "lock_stale_after_seconds"],
+      "properties": {
+        "installed": {"type": "array", "items": {"type": "string"}},
+        "active": {"type": "string"},
+        "models": {"description": "Active model generation; null (2.1) when no model is installed.", "type": ["string", "null"]},
+        "lexical_only": {"description": "2.1 (SC26+): knowledge generations whose effective service level is DEGRADED_LEXICAL_ONLY with no VECTOR_PACK (model_gate K2). Its presence also adds `semantic_search` to the observed trace.", "type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "staged_models": {"type": "object", "additionalProperties": {"type": "object", "additionalProperties": false, "required": ["verified", "vectors_for"], "properties": {"verified": {"type": "boolean"}, "vectors_for": {"type": "array", "items": {"type": "string"}}}}},
+        "keep_previous": {"type": "integer", "minimum": 0},
+        "free_bytes": {"type": "integer", "minimum": 0},
+        "sizes": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+        "recovery_target": {"type": ["string", "null"]},
+        "lock_stale_after_seconds": {"type": "integer", "minimum": 1}
+      }
+    },
+    "steps": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["op", "args", "expect_error"],
+        "properties": {
+          "op": {"enum": ["lock_acquire", "lock_release", "process_die", "clock_advance", "participant_lose", "participant_restore",
+                          "transition", "recover", "pin", "unpin", "respond", "accept_exclusion", "prune", "backup", "restore",
+                          "tear_journal_tail", "corrupt_journal_middle", "exclusion_store_remove", "exclusion_store_restore",
+                          "exclusion_store_regress", "exclusion_signature_invalidate"]},
+          "args": {"type": "object"},
+          "expect_error": {"type": ["string", "null"], "enum": ["Refused", "Crash", null]}
+        }
+      }
+    },
+    "assert_final": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "knowledge": {"type": "string"}, "models": {"type": ["string", "null"]}, "serving": {"type": "boolean"}, "semantic_search": {"type": "boolean"},
+        "installed": {"type": "array", "items": {"type": "string"}}, "log_length": {"type": "integer"},
+        "last_response": {"type": "array", "items": {"type": "string"}}, "temp_empty": {"type": "boolean"}
+      }
+    }
+  }
+}

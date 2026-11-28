@@ -1,0 +1,182 @@
+{
+ "check": "compare_declared",
+ "declared": {
+  "contract": "mimamsa-corpus-contract/2.1",
+  "record_kind": "source_admission_accounting",
+  "release_id": "R16-knowledge-20261201-0a0b0c0d",
+  "scope": "DECLARED_BY_BUILD",
+  "sources": [
+   {
+    "by_decision": {
+     "ADMIT": 8,
+     "HOLD": 2,
+     "QUARANTINE": 1,
+     "REJECT": 1
+    },
+    "effective_admissions": 12,
+    "eligible": 8,
+    "held": 2,
+    "identities": 12,
+    "input": 12,
+    "not_served_reasons": {
+     "ELIGIBLE_NOT_SERVED": 1,
+     "HELD": 2,
+     "QUARANTINED": 1,
+     "REJECTED": 1
+    },
+    "path": "C16",
+    "provenance": {
+     "candidate_set_sha256": null,
+     "generation_manifest_sha256": "d56fe6b1b7207fcbade9b0db3471555f48511b27078f77d9e3779f047bb016fc",
+     "hf_repo": "hariomahlawat/mimamsa-corpus",
+     "hf_revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "quarantined": 1,
+    "rejected": 1,
+    "served": 7,
+    "source": "c16:CG-20261127-fixtures-0a1b2c3d"
+   },
+   {
+    "by_decision": {},
+    "effective_admissions": 0,
+    "eligible": 19,
+    "held": 1,
+    "identities": 20,
+    "input": 20,
+    "not_served_reasons": {
+     "HELD": 1
+    },
+    "path": "V1",
+    "provenance": {
+     "candidate_set_sha256": null,
+     "generation_manifest_sha256": null,
+     "hf_repo": "hariomahlawat/mimamsa-corpus",
+     "hf_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "quarantined": 0,
+    "rejected": 0,
+    "served": 19,
+    "source": "v1:hf:hariomahlawat/mimamsa-corpus@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+   },
+   {
+    "by_decision": {},
+    "effective_admissions": 0,
+    "eligible": 0,
+    "held": 5,
+    "identities": 5,
+    "input": 5,
+    "not_served_reasons": {
+     "HELD": 5
+    },
+    "path": "V7_REFERENCE",
+    "provenance": {
+     "candidate_set_sha256": "7e1ed9177eea0692e4dd00cc1def836a158b01d86cb0e1ce01a91d86a53bcbda",
+     "generation_manifest_sha256": null,
+     "hf_repo": null,
+     "hf_revision": null
+    },
+    "quarantined": 0,
+    "rejected": 0,
+    "served": 0,
+    "source": "v7:candidates-2026"
+   }
+  ]
+ },
+ "expected_code": "C16_SOURCE_ACCOUNTING",
+ "register": {
+  "contract": "mimamsa-corpus-contract/2.1",
+  "record_kind": "source_admission_accounting",
+  "release_id": "R16-knowledge-20261201-0a0b0c0d",
+  "scope": "RECOMPUTED_BY_SITE",
+  "sources": [
+   {
+    "by_decision": {
+     "ADMIT": 8,
+     "HOLD": 2,
+     "QUARANTINE": 1,
+     "REJECT": 1
+    },
+    "effective_admissions": 12,
+    "eligible": 8,
+    "held": 2,
+    "identities": 12,
+    "input": 12,
+    "not_served_reasons": {
+     "ELIGIBLE_NOT_SERVED": 1,
+     "HELD": 2,
+     "QUARANTINED": 1,
+     "REJECTED": 1,
+     "SITE_EXCLUDED": 1
+    },
+    "path": "C16",
+    "provenance": {
+     "candidate_set_sha256": null,
+     "generation_manifest_sha256": "d56fe6b1b7207fcbade9b0db3471555f48511b27078f77d9e3779f047bb016fc",
+     "hf_repo": "hariomahlawat/mimamsa-corpus",
+     "hf_revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "quarantined": 1,
+    "rejected": 1,
+    "served": 6,
+    "source": "c16:CG-20261127-fixtures-0a1b2c3d"
+   },
+   {
+    "by_decision": {},
+    "effective_admissions": 0,
+    "eligible": 3,
+    "held": 0,
+    "identities": 3,
+    "input": 3,
+    "not_served_reasons": {},
+    "path": "SITE_ONLY",
+    "provenance": null,
+    "quarantined": 0,
+    "rejected": 0,
+    "served": 3,
+    "source": "site:local-uploads"
+   },
+   {
+    "by_decision": {},
+    "effective_admissions": 0,
+    "eligible": 20,
+    "held": 0,
+    "identities": 20,
+    "input": 20,
+    "not_served_reasons": {},
+    "path": "V1",
+    "provenance": {
+     "candidate_set_sha256": null,
+     "generation_manifest_sha256": null,
+     "hf_repo": "hariomahlawat/mimamsa-corpus",
+     "hf_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "quarantined": 0,
+    "rejected": 0,
+    "served": 20,
+    "source": "v1:hf:hariomahlawat/mimamsa-corpus@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+   },
+   {
+    "by_decision": {},
+    "effective_admissions": 0,
+    "eligible": 0,
+    "held": 5,
+    "identities": 5,
+    "input": 5,
+    "not_served_reasons": {
+     "HELD": 5
+    },
+    "path": "V7_REFERENCE",
+    "provenance": {
+     "candidate_set_sha256": "7e1ed9177eea0692e4dd00cc1def836a158b01d86cb0e1ce01a91d86a53bcbda",
+     "generation_manifest_sha256": null,
+     "hf_repo": null,
+     "hf_revision": null
+    },
+    "quarantined": 0,
+    "rejected": 0,
+    "served": 0,
+    "source": "v7:candidates-2026"
+   }
+  ]
+ }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/ACTIVATION_JOURNAL_RECORD_SCHEMA.json",
+  "title": "Activation journal record (B06; contract 2.1 interface)",
+  "description": "One line of the append-only activation journal (journal\\journal.jsonl): canonical JSON, LF-terminated, flushed (FlushFileBuffers / fsync) before the next effect. Steps match the reference model mimamsa_contract/c16/activation.py: BEGIN, DECIDED (the one commit decision), OPEN, ABORTED; the effects between DECIDED and OPEN (views, publication rows, pointers, exclusions, log) are idempotent and reconstructed by recovery, so they are not journal steps. Each record chains to the previous line's sha256 and carries the writer's lock epoch; a record from a lower epoch than one already seen is refused (a stale writer cannot append after a takeover). Torn tail: an unterminated or unparseable LAST line is treated as absent and truncated by the next writer during recovery; any other damage is corruption and recovery fails closed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "record_kind", "seq", "previous_record_sha256", "txn_id", "step", "writer", "at"],
+  "properties": {
+    "contract": {"const": "mimamsa-corpus-contract/2.1"},
+    "record_kind": {"const": "activation_journal_record"},
+    "seq": {"type": "integer", "minimum": 1},
+    "previous_record_sha256": {"anyOf": [{"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/sha256"}, {"type": "null"}]},
+    "txn_id": {"type": "string", "pattern": "^TX-[0-9]{8}-[0-9a-f]{12}$"},
+    "step": {"enum": ["BEGIN", "DECIDED", "OPEN", "ABORTED"]},
+    "target": {"enum": ["KNOWLEDGE", "MODELS"]},
+    "from": {"type": ["string", "null"], "maxLength": 80},
+    "to": {"type": "string", "maxLength": 80},
+    "action": {"enum": ["ACTIVATE", "ROLLBACK", "RESTORE"]},
+    "exclusion_seq": {"type": "integer", "minimum": 0},
+    "writer": {"type": "object", "additionalProperties": false, "required": ["writer_id", "lock_epoch"], "properties": {"writer_id": {"type": "string", "minLength": 3, "maxLength": 120}, "lock_epoch": {"type": "integer", "minimum": 1}}},
+    "at": {"$ref": "C16_SHARED_DEFINITIONS_SCHEMA.json#/$defs/datetime"}
+  },
+  "allOf": [
+    {"if": {"properties": {"seq": {"const": 1}}}, "then": {"properties": {"previous_record_sha256": {"type": "null"}}}, "else": {"properties": {"previous_record_sha256": {"type": "string"}}}},
+    {"if": {"properties": {"step": {"const": "BEGIN"}}}, "then": {"required": ["target", "from", "to", "action"]}},
+    {"if": {"properties": {"step": {"const": "OPEN"}}}, "then": {"required": ["exclusion_seq"]}}
+  ]
+}

@@ -1,0 +1,59 @@
+{
+ "checks": [
+  {
+   "check_id": "SHA256_EACH_FILE",
+   "method": "sha256 per file",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "graph row files are the signed bytes"
+  },
+  {
+   "check_id": "GRAPH_DIGEST",
+   "method": "GraphStore.VerifyAsync",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "the GraphStore digest equals the manifest"
+  },
+  {
+   "check_id": "GRAPH_STRUCTURAL_RECHECK",
+   "method": "check every node and edge",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "endpoints exist, evidence anchors resolve, verification values are builder-only"
+  },
+  {
+   "check_id": "SAMPLED_REBUILD_PARITY",
+   "method": "GraphBuilder on a seeded sample of source records",
+   "sample": {
+    "selection": "DETERMINISTIC_SEEDED_BY_RELEASE_ID",
+    "size": "UNCALIBRATED",
+    "tolerance": "EXACT"
+   },
+   "verifies": "sampled source records rebuild to identical edges"
+  },
+  {
+   "check_id": "SOURCE_DIGEST_EQUALS_SITE",
+   "method": "recompute the source digest",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "built from the same records and builder version"
+  }
+ ],
+ "contract": "mimamsa-corpus-contract/2.1",
+ "kind": "GRAPH",
+ "on_failure": "REBUILD_LOCALLY_CHEAP",
+ "record_kind": "component_verification_contract",
+ "site_embedding": "NEVER"
+}

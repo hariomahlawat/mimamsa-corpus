@@ -1,0 +1,167 @@
+{
+ "contract": "mimamsa-corpus-contract/2.1",
+ "record_kind": "activation_scenario_outcomes",
+ "scenario_id": "SC15-torn-open",
+ "scenario_sha256": "325f39fadac8f5f8871239999dc323b2c97b73d66be85631880ff526cc9a8681",
+ "trace": [
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [],
+   "knowledge": "R1",
+   "lock_epoch": 0,
+   "log_length": 0,
+   "models": "M1",
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "serving": true,
+   "state": "OPEN",
+   "step": 0,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [],
+   "knowledge": "R1",
+   "lock_epoch": 1,
+   "log_length": 0,
+   "models": "M1",
+   "pins": 0,
+   "publication_rows": 0,
+   "response": null,
+   "serving": true,
+   "state": "OPEN",
+   "step": 1,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R1"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": "Crash",
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [
+    "BEGIN",
+    "DECIDED",
+    "OPEN"
+   ],
+   "knowledge": "R2",
+   "lock_epoch": 1,
+   "log_length": 1,
+   "models": "M1",
+   "pins": 0,
+   "publication_rows": 1,
+   "response": null,
+   "serving": false,
+   "state": "RECOVERING",
+   "step": 2,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R2"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [
+    "BEGIN",
+    "DECIDED"
+   ],
+   "knowledge": "R2",
+   "lock_epoch": 1,
+   "log_length": 1,
+   "models": "M1",
+   "pins": 0,
+   "publication_rows": 1,
+   "response": null,
+   "serving": false,
+   "state": "RECOVERING",
+   "step": 3,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R2"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [
+    "BEGIN",
+    "DECIDED",
+    "OPEN"
+   ],
+   "knowledge": "R2",
+   "lock_epoch": 1,
+   "log_length": 1,
+   "models": "M1",
+   "pins": 0,
+   "publication_rows": 1,
+   "response": null,
+   "serving": true,
+   "state": "OPEN",
+   "step": 4,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R2"
+  },
+  {
+   "active_exclusion_seq": 0,
+   "error": null,
+   "exclusion_reader": "HEALTHY",
+   "installed": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "journal_steps": [
+    "BEGIN",
+    "DECIDED",
+    "OPEN"
+   ],
+   "knowledge": "R2",
+   "lock_epoch": 1,
+   "log_length": 1,
+   "models": "M1",
+   "pins": 1,
+   "publication_rows": 1,
+   "response": null,
+   "serving": true,
+   "state": "OPEN",
+   "step": 5,
+   "store_seq": 0,
+   "temp_empty": true,
+   "views": "R2"
+  }
+ ]
+}

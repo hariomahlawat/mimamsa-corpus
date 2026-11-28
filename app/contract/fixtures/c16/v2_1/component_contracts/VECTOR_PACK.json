@@ -1,0 +1,59 @@
+{
+ "checks": [
+  {
+   "check_id": "SHA256_EACH_FILE",
+   "method": "sha256 per file",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "vector files are the signed bytes"
+  },
+  {
+   "check_id": "VECTOR_TRAILER",
+   "method": "SHA-256 trailer check",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "the MIMVEC01 trailer verifies"
+  },
+  {
+   "check_id": "VECTOR_KEYS_RECOMPUTED",
+   "method": "recompute every key from verified passage text and model sha256",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "every vector key belongs to a verified passage and the pinned model"
+  },
+  {
+   "check_id": "VECTOR_SPOT_REEMBED",
+   "method": "re-embed a stratified seeded sample on site",
+   "sample": {
+    "selection": "DETERMINISTIC_STRATIFIED_SEEDED_BY_RELEASE_ID",
+    "size": "UNCALIBRATED",
+    "tolerance": "UNCALIBRATED"
+   },
+   "verifies": "sampled vectors equal a fresh embedding within tolerance"
+  },
+  {
+   "check_id": "SOURCE_DIGEST_EQUALS_SITE",
+   "method": "recompute the sorted key set",
+   "sample": {
+    "selection": "FULL",
+    "size": "ALL",
+    "tolerance": "EXACT"
+   },
+   "verifies": "built for the same passages"
+  }
+ ],
+ "contract": "mimamsa-corpus-contract/2.1",
+ "kind": "VECTOR_PACK",
+ "on_failure": "SERVE_LEXICAL_ONLY",
+ "record_kind": "component_verification_contract",
+ "site_embedding": "NEVER"
+}

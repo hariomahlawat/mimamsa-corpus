@@ -1,0 +1,66 @@
+{
+ "assert_final": {
+  "knowledge": "R1",
+  "log_length": 0
+ },
+ "contract": "mimamsa-corpus-contract/2.1",
+ "covers": [
+  "DISK_PREFLIGHT"
+ ],
+ "description": "Measured bytes still to materialise plus headroom exceed free space: refused.",
+ "initial": {
+  "active": "R1",
+  "free_bytes": 10,
+  "installed": [
+   "R1",
+   "R2",
+   "R3"
+  ],
+  "keep_previous": 2,
+  "lock_stale_after_seconds": 30,
+  "models": "M1",
+  "recovery_target": null,
+  "sizes": {
+   "R1": 40,
+   "R2": 60
+  },
+  "staged_models": {
+   "M1": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   },
+   "M2": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   }
+  }
+ },
+ "record_kind": "activation_scenario",
+ "scenario_id": "SC25-disk-preflight-refusal",
+ "steps": [
+  {
+   "args": {
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "lock_acquire"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "R2",
+    "writer": "activator-1"
+   },
+   "expect_error": "Refused",
+   "op": "transition"
+  }
+ ]
+}

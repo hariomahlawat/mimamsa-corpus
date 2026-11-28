@@ -30,6 +30,16 @@ KIND_TO_SCHEMA = {
     # WP06 knowledge release architecture
     "knowledge_release_manifest": "KNOWLEDGE_RELEASE_MANIFEST_SCHEMA.json",
     "knowledge_activation_record": "KNOWLEDGE_ACTIVATION_RECORD_SCHEMA.json",
+    # contract 2.1 (additive, Tranche B interfaces)
+    "gate_receipt_artefact": "GATE_RECEIPT_ARTEFACT_SCHEMA.json",
+    "mkr_build_spec": "BUILD_SPEC_SCHEMA.json",
+    "build_stage_manifest": "BUILD_STAGE_MANIFEST_SCHEMA.json",
+    "knowledge_rows_allowlist": "KNOWLEDGE_ROWS_SCHEMA.json",
+    "activation_journal_record": "ACTIVATION_JOURNAL_RECORD_SCHEMA.json",
+    "activation_scenario": "ACTIVATION_SCENARIO_SCHEMA.json",
+    "activation_scenario_outcomes": "ACTIVATION_SCENARIO_OUTCOMES_SCHEMA.json",
+    "component_verification_contract": "COMPONENT_VERIFICATION_SCHEMA.json",
+    "source_admission_accounting": "SOURCE_ADMISSION_ACCOUNTING_SCHEMA.json",
 }
 SHARED = "C16_SHARED_DEFINITIONS_SCHEMA.json"
 

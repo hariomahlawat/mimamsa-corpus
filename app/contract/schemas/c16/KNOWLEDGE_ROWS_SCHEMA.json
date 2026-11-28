@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/c16/KNOWLEDGE_ROWS_SCHEMA.json",
+  "title": "Knowledge-row allowlist and row formats (B03; contract 2.1 interface)",
+  "description": "The allowlist document that ships WITH THE APPLICATION (never in a release): knowledge_schema_version, the allowlisted tables, their columns with types and primary keys, which component owns each table (I-2: GRAPH owns graph_nodes and graph_edges; KNOWLEDGE_ROWS owns the rest), how each is derived, and the loader contract. Rows travel as canonical JSONL (one object per row with exactly the allowlisted columns, sorted by primary key, LF, final LF), never as SQL. The $defs give one row schema per table; knowledge_rows.row_issues applies them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "record_kind", "knowledge_schema_version", "tables", "loader"],
+  "properties": {
+    "contract": {"const": "mimamsa-corpus-contract/2.1"},
+    "record_kind": {"const": "knowledge_rows_allowlist"},
+    "knowledge_schema_version": {"type": "integer", "minimum": 1},
+    "tables": {
+      "type": "array", "minItems": 1,
+      "items": {"type": "object", "additionalProperties": false, "required": ["table", "owner_component", "primary_key", "row_schema", "derivation"],
+        "properties": {
+          "table": {"enum": ["graph_nodes", "graph_edges", "taxonomy_nodes", "corpus_relationships", "evidence_anchors", "document_identities", "corpus_admissions", "candidates", "provision_versions"]},
+          "owner_component": {"enum": ["KNOWLEDGE_ROWS", "GRAPH"]},
+          "primary_key": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]{0,62}$"}},
+          "row_schema": {"type": "string", "pattern": "^#/\\$defs/[a-z_]+_row$"},
+          "derivation": {"description": "PYTHON_REFERENCE: derivable by mimamsa_contract.c16.knowledge_rows from the C16 exchange (the .NET writer must match byte for byte). DOTNET_B03: derived by Mimamsa.Knowledge from v1 records, A4 aids or GraphBuilder (same code centrally and on site).", "enum": ["PYTHON_REFERENCE", "DOTNET_B03"]}
+        }}
+    },
+    "loader": {
+      "description": "Restricted loader contract (arch §7). Fixed by this schema so that no allowlist can widen it.",
+      "type": "object", "additionalProperties": false, "required": ["role", "role_attributes", "grants", "staging_schema_pattern", "load_method", "forbidden"],
+      "properties": {
+        "role": {"const": "mimamsa_kr_loader"},
+        "role_attributes": {"const": ["NOSUPERUSER", "NOCREATEROLE", "NOCREATEDB", "NOREPLICATION", "NOBYPASSRLS", "NOINHERIT"]},
+        "grants": {"const": ["USAGE ON SCHEMA kr_<n>_staging", "INSERT ON ALL TABLES IN SCHEMA kr_<n>_staging"]},
+        "staging_schema_pattern": {"const": "^kr_[0-9]{1,9}_staging$"},
+        "load_method": {"const": "PARAMETERISED_COPY_FROM_STDIN"},
+        "forbidden": {"const": ["site schema access", "knowledge schema access", "other kr_ schemas", "CREATE FUNCTION", "CREATE TRIGGER", "CREATE RULE", "CREATE EXTENSION", "SET ROLE", "DDL of any kind"]}
+      }
+    }
+  },
+  "$defs": {
+    "sha": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sha_null": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "text": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "text_null": {"type": ["string", "null"], "maxLength": 2000},
+    "document_identities_row": {
+      "type": "object", "additionalProperties": false,
+      "required": ["doc_id", "source_copy_sha256", "corpus_generation_id", "representation_kind", "work_kind", "graph_node_ref", "research_state", "quoting_permitted", "record_sha256"],
+      "properties": {"doc_id": {"$ref": "#/$defs/text"}, "source_copy_sha256": {"$ref": "#/$defs/sha"}, "corpus_generation_id": {"$ref": "#/$defs/text"}, "representation_kind": {"$ref": "#/$defs/text"}, "work_kind": {"$ref": "#/$defs/text"}, "graph_node_ref": {"$ref": "#/$defs/text_null"}, "research_state": {"$ref": "#/$defs/text"}, "quoting_permitted": {"type": "boolean"}, "record_sha256": {"$ref": "#/$defs/sha"}}
+    },
+    "evidence_anchors_row": {
+      "type": "object", "additionalProperties": false,
+      "required": ["anchor_id", "doc_id", "original_sha256", "representation_sha256", "derivative_text_sha256", "locator_kind", "physical_page", "image_sequence_id", "verification_state", "quoting_permitted", "record_sha256"],
+      "properties": {"anchor_id": {"$ref": "#/$defs/text"}, "doc_id": {"$ref": "#/$defs/text"}, "original_sha256": {"$ref": "#/$defs/sha"}, "representation_sha256": {"$ref": "#/$defs/sha"}, "derivative_text_sha256": {"$ref": "#/$defs/sha_null"}, "locator_kind": {"$ref": "#/$defs/text"}, "physical_page": {"type": ["integer", "null"], "minimum": 1}, "image_sequence_id": {"$ref": "#/$defs/text_null"}, "verification_state": {"$ref": "#/$defs/text"}, "quoting_permitted": {"type": "boolean"}, "record_sha256": {"$ref": "#/$defs/sha"}}
+    },
+    "corpus_relationships_row": {
+      "type": "object", "additionalProperties": false,
+      "required": ["relationship_id", "category", "subject_doc_id", "subject_sha256", "target_node_id", "target_raw_reference", "evidentiary_basis", "verification", "has_legal_effect", "record_sha256"],
+      "properties": {"relationship_id": {"$ref": "#/$defs/text"}, "category": {"$ref": "#/$defs/text"}, "subject_doc_id": {"$ref": "#/$defs/text"}, "subject_sha256": {"$ref": "#/$defs/sha"}, "target_node_id": {"$ref": "#/$defs/text_null"}, "target_raw_reference": {"$ref": "#/$defs/text_null"}, "evidentiary_basis": {"$ref": "#/$defs/text"}, "verification": {"$ref": "#/$defs/text"}, "has_legal_effect": {"type": "boolean"}, "record_sha256": {"$ref": "#/$defs/sha"}}
+    },
+    "taxonomy_nodes_row": {
+      "type": "object", "additionalProperties": false,
+      "required": ["node_id", "level", "label", "parent_ids_json", "instrument_code", "verification", "record_sha256"],
+      "properties": {"node_id": {"$ref": "#/$defs/text"}, "level": {"$ref": "#/$defs/text"}, "label": {"$ref": "#/$defs/text"}, "parent_ids_json": {"$ref": "#/$defs/text"}, "instrument_code": {"$ref": "#/$defs/text_null"}, "verification": {"$ref": "#/$defs/text"}, "record_sha256": {"$ref": "#/$defs/sha"}}
+    },
+    "corpus_admissions_row": {
+      "type": "object", "additionalProperties": false,
+      "required": ["admission_id", "doc_id", "source_copy_sha256", "revision", "decision", "application_eligible", "service_scope", "is_effective", "record_sha256"],
+      "properties": {"admission_id": {"$ref": "#/$defs/text"}, "doc_id": {"$ref": "#/$defs/text"}, "source_copy_sha256": {"$ref": "#/$defs/sha"}, "revision": {"type": "integer", "minimum": 1}, "decision": {"$ref": "#/$defs/text"}, "application_eligible": {"type": "boolean"}, "service_scope": {"$ref": "#/$defs/text"}, "is_effective": {"type": "boolean"}, "record_sha256": {"$ref": "#/$defs/sha"}}
+    },
+    "candidates_row": {
+      "type": "object", "additionalProperties": false,
+      "required": ["candidate_id", "candidate_type", "source_doc_id", "status", "capability_restriction", "record_sha256"],
+      "properties": {"candidate_id": {"$ref": "#/$defs/text"}, "candidate_type": {"$ref": "#/$defs/text"}, "source_doc_id": {"$ref": "#/$defs/text"}, "status": {"$ref": "#/$defs/text"}, "capability_restriction": {"$ref": "#/$defs/text"}, "record_sha256": {"$ref": "#/$defs/sha"}}
+    },
+    "provision_versions_row": {
+      "type": "object", "additionalProperties": false,
+      "required": ["version_id", "family", "provision", "version_kind", "determination_state", "record_sha256"],
+      "properties": {"version_id": {"$ref": "#/$defs/text"}, "family": {"$ref": "#/$defs/text"}, "provision": {"$ref": "#/$defs/text"}, "version_kind": {"$ref": "#/$defs/text"}, "determination_state": {"$ref": "#/$defs/text"}, "record_sha256": {"$ref": "#/$defs/sha"}}
+    },
+    "graph_nodes_row": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "label", "doc_id", "held", "page", "family", "code"],
+      "properties": {"id": {"$ref": "#/$defs/text"}, "kind": {"$ref": "#/$defs/text"}, "label": {"$ref": "#/$defs/text"}, "doc_id": {"$ref": "#/$defs/text_null"}, "held": {"type": "boolean"}, "page": {"type": ["integer", "null"]}, "family": {"$ref": "#/$defs/text_null"}, "code": {"$ref": "#/$defs/text_null"}}
+    },
+    "graph_edges_row": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "type", "from_id", "to_id", "origin", "source_doc_id", "page", "temporal_from", "temporal_from_status", "temporal_to", "temporal_to_status", "verification", "review_state", "uncertainty", "has_legal_effect"],
+      "properties": {"id": {"$ref": "#/$defs/text"}, "type": {"$ref": "#/$defs/text"}, "from_id": {"$ref": "#/$defs/text"}, "to_id": {"$ref": "#/$defs/text"}, "origin": {"$ref": "#/$defs/text"}, "source_doc_id": {"$ref": "#/$defs/text_null"}, "page": {"type": ["integer", "null"]}, "temporal_from": {"$ref": "#/$defs/text_null"}, "temporal_from_status": {"$ref": "#/$defs/text"}, "temporal_to": {"$ref": "#/$defs/text_null"}, "temporal_to_status": {"$ref": "#/$defs/text"}, "verification": {"enum": ["CANDIDATE", "EXTRACTED_STRUCTURE", "CURATED_NAVIGATION"]}, "review_state": {"const": "UNREVIEWED"}, "uncertainty": {"$ref": "#/$defs/text"}, "has_legal_effect": {"type": "boolean"}}
+    }
+  }
+}

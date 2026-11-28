@@ -1,0 +1,79 @@
+{
+ "assert_final": {
+  "knowledge": "R2",
+  "serving": true
+ },
+ "contract": "mimamsa-corpus-contract/2.1",
+ "covers": [
+  "LOCK_CONTENTION"
+ ],
+ "description": "A second writer cannot take a live lock or transition.",
+ "initial": {
+  "active": "R1",
+  "free_bytes": 1000000000000,
+  "installed": [
+   "R1",
+   "R2",
+   "R3"
+  ],
+  "keep_previous": 2,
+  "lock_stale_after_seconds": 30,
+  "models": "M1",
+  "recovery_target": null,
+  "sizes": {},
+  "staged_models": {
+   "M1": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   },
+   "M2": {
+    "vectors_for": [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    "verified": true
+   }
+  }
+ },
+ "record_kind": "activation_scenario",
+ "scenario_id": "SC09-lock-contention",
+ "steps": [
+  {
+   "args": {
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "lock_acquire"
+  },
+  {
+   "args": {
+    "writer": "activator-2"
+   },
+   "expect_error": "Refused",
+   "op": "lock_acquire"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "R2",
+    "writer": "activator-2"
+   },
+   "expect_error": "Refused",
+   "op": "transition"
+  },
+  {
+   "args": {
+    "target": "KNOWLEDGE",
+    "to": "R2",
+    "writer": "activator-1"
+   },
+   "expect_error": null,
+   "op": "transition"
+  }
+ ]
+}
