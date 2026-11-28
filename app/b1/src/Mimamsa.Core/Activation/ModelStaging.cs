@@ -134,7 +134,10 @@ public static class ModelStaging
             string? target = null;
             foreach (var gen in cat.Installed())
             {
-                var g = GenerationStore.Load(site.Root, null, TextStoreOptions.Memory, null, gen);
+                GenerationStore g;
+                try { g = GenerationStore.Load(site.Root, null, TextStoreOptions.Memory, null, gen); }
+                catch (Exception e) when (e is GenerationLoadException or IOException or UnauthorizedAccessException or System.Text.Json.JsonException or InvalidOperationException or NullReferenceException)
+                { continue; }   // not a loadable generation (simulated or damaged): no pack can be verified for it
                 var keys = VectorPackVerifier.Inputs(g, p).Select(x => VectorPackVerifier.Key(modelSha, p.MaxTokens, x.Input));
                 if (VectorPackVerifier.SourceDigest(modelSha, p.MaxTokens, keys) != (string?)vp["source_digest"]) continue;
                 target = gen;
@@ -156,7 +159,8 @@ public static class ModelStaging
         ev["vector_packs"] = packs;
         ev["vectors_for"] = new JsonArray(vectorsFor.Select(v => (JsonNode)v).ToArray());
         // 7. evidence, then the verified record the activation engine consults (M1/M2/K1)
-        DurableFile.WriteAtomic(Path.Combine(mdir, EvidenceFile), CanonicalJson.Bytes(ev));
+        // evidence (not a hashed record: it carries measured doubles); the verified record below is canonical as before
+        DurableFile.WriteAtomic(Path.Combine(mdir, EvidenceFile), Encoding.UTF8.GetBytes(ev.ToJsonString(new System.Text.Json.JsonSerializerOptions { WriteIndented = true })));
         var prior = cat.Model(id)?.VectorsFor ?? new HashSet<string>();
         cat.StageModel(id, true, vectorsFor.Concat(prior).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal));
         log?.Invoke($"model staging: {id} staged (development; model {modelSha[..12]}; vectors for {string.Join(",", vectorsFor)})");

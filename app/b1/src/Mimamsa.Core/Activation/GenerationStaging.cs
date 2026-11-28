@@ -84,6 +84,33 @@ public static class GenerationStaging
         catch (ComponentVerification.UncalibratedInProductionException) { return null; }
     }
 
+    /// VECTOR_PACK input state for a generation (B04, B10): (MISSING | FAILED | VERIFIED, evidence, the model verified with).
+    /// A shipped pack is verified against the INSTALLED, verified model it names; no installed model, a mismatched model or
+    /// any failed check is FAILED (lexical-only service under the outcome rule). Nothing here embeds the corpus.
+    public static (string State, JsonObject? Evidence, InstalledModel? Model) VerifyVectorPack(GenerationStore g, string gdir, JsonObject? vp, string releaseId,
+        IReadOnlyDictionary<string, JsonObject?> contracts, bool production, Func<string, InstalledModel?>? models)
+    {
+        if (vp is null) return ("MISSING", null, null);
+        var vfiles = vp["files"]?.AsArray().Select(f => f!.AsObject()).ToList() ?? [];
+        var pack = vfiles.FirstOrDefault(f => ((string?)f["path"])?.EndsWith(".mimvec", StringComparison.Ordinal) == true);
+        var prm = vfiles.FirstOrDefault(f => ((string?)f["path"])?.EndsWith(".params.json", StringComparison.Ordinal) == true);
+        var modelSha = (string?)vp["model_sha256"];
+        var installed = modelSha is null ? null : models?.Invoke(modelSha);
+        var ev = new ComponentEvidence("VECTOR_PACK");
+        if (pack is null || prm is null || modelSha is null) ev.Fail("VECTOR_TRAILER", "the release declares no vector file, params file or model");
+        else if (vfiles.Any(f => !File.Exists(Local(gdir, (string)f["path"]!)) || Sha(Local(gdir, (string)f["path"]!)) != (string?)f["sha256"]))
+            ev.Fail("VECTOR_TRAILER", "a vector pack file differs from the signed inventory");
+        else if (installed is null) ev.NotRun(VectorPackVerifier.Spot, $"no installed, verified model {modelSha[..Math.Min(12, modelSha.Length)]}: lexical-only service");
+        else
+        {
+            ev = VectorPackVerifier.Verify(g, Local(gdir, (string)pack["path"]!), File.ReadAllBytes(Local(gdir, (string)prm["path"]!)), modelSha,
+                (string)vp["result_digest"]!, (string)vp["source_digest"]!, releaseId, installed.Embedder, SampleFor(contracts, "VECTOR_PACK", VectorPackVerifier.Spot, production));
+            bool ok = ev.Verified(VectorPackVerifier.Required.Where(r => !(r == VectorPackVerifier.Spot && production && ev.Checks.GetValueOrDefault(r) == "NOT_RUN")));
+            if (ok) return ("VERIFIED", ev.ToJson(VectorPackVerifier.Required), installed);
+        }
+        return ("FAILED", ev.ToJson(VectorPackVerifier.Required), null);
+    }
+
     static async Task<StagingReport> StageLockedAsync(SiteLayout site, GenerationCatalog cat, string generation, KnowledgeRowLoader loader, string textRoot,
                                                       IReadOnlyDictionary<string, JsonObject?> contracts, Action<string>? log, bool production,
                                                       Func<string, InstalledModel?>? models, CancellationToken ct)
@@ -139,29 +166,9 @@ public static class GenerationStaging
         // model it names (VectorPackVerifier: trailer, every key recomputed, source and result digests, spot re-embed of a
         // seeded sample, one query-sized embed each). No installed model, a mismatched model or any failed check = FAILED,
         // which the outcome rule turns into lexical-only service (never site embedding of the corpus).
-        var vp = Comp("VECTOR_PACK");
-        inputs["VECTOR_PACK"] = vp is null ? "MISSING" : "FAILED";
-        InstalledModel? vectorModel = null;
-        if (vp is not null)
-        {
-            var vfiles = vp["files"]?.AsArray().Select(f => f!.AsObject()).ToList() ?? [];
-            var pack = vfiles.FirstOrDefault(f => ((string?)f["path"])?.EndsWith(".mimvec", StringComparison.Ordinal) == true);
-            var prm = vfiles.FirstOrDefault(f => ((string?)f["path"])?.EndsWith(".params.json", StringComparison.Ordinal) == true);
-            var modelSha = (string?)vp["model_sha256"];
-            var installed = modelSha is null ? null : models?.Invoke(modelSha);
-            var ev = new ComponentEvidence("VECTOR_PACK");
-            if (pack is null || prm is null || modelSha is null) ev.Fail("VECTOR_TRAILER", "the release declares no vector file, params file or model");
-            else if (vfiles.Any(f => !File.Exists(Local(gdir, (string)f["path"]!)) || Sha(Local(gdir, (string)f["path"]!)) != (string?)f["sha256"]))
-                ev.Fail("VECTOR_TRAILER", "a vector pack file differs from the signed inventory");
-            else if (installed is null) ev.NotRun(VectorPackVerifier.Spot, $"no installed, verified model {modelSha[..12]}: lexical-only service");
-            else
-            {
-                ev = VectorPackVerifier.Verify(g, Local(gdir, (string)pack["path"]!), File.ReadAllBytes(Local(gdir, (string)prm["path"]!)), modelSha,
-                    (string)vp["result_digest"]!, (string)vp["source_digest"]!, releaseId, installed.Embedder, SampleFor(contracts, "VECTOR_PACK", VectorPackVerifier.Spot, production));
-                if (Accept(ev, VectorPackVerifier.Required, VectorPackVerifier.Spot)) { inputs["VECTOR_PACK"] = "VERIFIED"; vectorModel = installed; }
-            }
-            verification["VECTOR_PACK"] = ev.ToJson(VectorPackVerifier.Required);
-        }
+        var (vpState, vpEvidence, vectorModel) = VerifyVectorPack(g, gdir, Comp("VECTOR_PACK"), releaseId, contracts, production, models);
+        inputs["VECTOR_PACK"] = vpState;
+        if (vpEvidence is not null) verification["VECTOR_PACK"] = vpEvidence;
 
         // KNOWLEDGE_ROWS + GRAPH through the one typed restricted loader (B03: typed rows, counts, digests, full re-derivation)
         var files = new Dictionary<string, byte[]>(StringComparer.Ordinal);
