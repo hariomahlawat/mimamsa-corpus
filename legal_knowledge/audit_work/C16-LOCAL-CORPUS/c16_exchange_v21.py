@@ -44,8 +44,12 @@ def project_relationships(subject_rows: list[dict], provision_rows: list[dict], 
                           identities_by_sha: dict[str, dict], classification) -> list[dict]:
     """Project every v5 relationship; never infer legal effect from a folder."""
     out = []
-    for category, rows in (("classified_under_subject", subject_rows), ("associated_with_provision", provision_rows)):
-        for raw in rows:
+    combined = {}
+    for raw in subject_rows + provision_rows:
+        key = (raw.get("inventory_id"), raw.get("target_node_id"), raw.get("relative_path"))
+        combined[key] = raw
+    for raw in combined.values():
+            category = "associated_with_provision" if raw["target_node_id"].startswith("PROV:") else "classified_under_subject"
             inv = inventory_by_id.get(raw.get("inventory_id"))
             ident = identities_by_sha.get(raw.get("source_copy_sha256"))
             if inv is None or ident is None:
@@ -114,6 +118,59 @@ def augment_taxonomy(taxonomy: list[dict], provision_rows: list[dict]) -> list[d
     return list(nodes.values())
 
 
+def load_state_tree(root: Path) -> list[dict]:
+    state = root / "state"
+    return [json.loads(path.read_text(encoding="utf-8")) for path in sorted(state.rglob("*.json"))]
+
+
+def pdf_anchors(records: list[dict], root: Path, config: dict, identities_by_sha: dict[str, dict], canonical) -> list[dict]:
+    """Export only clean, readable and cryptographically verified PDF OCR evidence."""
+    out = []
+    for record in records:
+        if not (record.get("state") == "COMPLETE" and record.get("evidence_verified") is True
+                and not record.get("unreadable")
+                and record.get("access_disposition") == "SCREENED_NO_MARKING_DETECTED"):
+            continue
+        sha = record.get("source_sha256")
+        if sha != record.get("verified_source_sha256") or sha not in identities_by_sha:
+            continue
+        rel = (record.get("artifact_paths") or {}).get("raw_text")
+        expected = (record.get("artifact_sha256") or {}).get("raw_text")
+        if not rel or not expected:
+            continue
+        payload = (root / rel).read_bytes()
+        if _sha(payload) != expected:
+            continue
+        text = payload.decode("utf-8")
+        mean = record.get("mean_confidence")
+        anchor = {
+            "contract": "mimamsa-corpus-contract/2.0", "record_kind": "evidence_anchor", "anchor_id": "",
+            "doc_id": identities_by_sha[sha]["doc_id"], "original_sha256": sha,
+            "representation_sha256": sha, "derivative_text_sha256": expected,
+            "image_sha256": record["render_sha256"],
+            "locator": {"kind": "SOURCE_PHYSICAL_PAGE", "physical_page": record["physical_page"],
+                        "printed_page_label": None, "citable_as_source_page": False},
+            "text_span": {"passage_id": None, "char_start": 0, "char_end": len(text),
+                          "text_sha256": _sha(payload)},
+            "bbox": None,
+            "extraction": {"method": "OCR_PAGE_IMAGE", "pipeline_name": "c16-local-ocr",
+                           "pipeline_version": "2.1.0",
+                           "ocr_config": {"engine": config["engine"], "engine_version": config["engine_version"],
+                                          "languages": config["languages"],
+                                          "page_segmentation_mode": str(config["psm"][0]),
+                                          "preprocessing": config["preprocessing"],
+                                          "dpi": config["render_dpi"],
+                                          "config_sha256": record["configuration_sha256"]}},
+            "quality": {"text_reliability": "not_assessed", "ocr_mean_confidence": mean,
+                        "low_confidence": bool(mean is None or mean < 60)},
+            "verification": {"state": "AUTOMATED_CANDIDATE_NOT_VERIFIED", "review_ref": None},
+            "quoting_permitted": False, "quote": None,
+        }
+        anchor["anchor_id"] = canonical.anchor_id(anchor)
+        out.append(anchor)
+    return out
+
+
 def _sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
@@ -135,6 +192,10 @@ def build(args) -> dict:
         inventory_by_id, identities_by_sha, adapters._classification)
     projected["taxonomy"] = augment_taxonomy(projected["taxonomy"], provision_rows)
     projected["anchors"] = []
+    if args.pdf_ocr_root:
+        pdf_root = Path(args.pdf_ocr_root)
+        config = json.loads((pdf_root / "OCR_CONFIGURATION.json").read_text(encoding="utf-8"))
+        projected["anchors"] += pdf_anchors(load_state_tree(pdf_root), pdf_root, config, identities_by_sha, canonical)
     projected["reviewed_records"] = []
 
     output = Path(args.output)
@@ -182,6 +243,7 @@ def parse_args(argv=None):
     p.add_argument("--provision-relationships", required=True); p.add_argument("--output", required=True)
     p.add_argument("--generation-id", required=True); p.add_argument("--producer-commit", required=True)
     p.add_argument("--restricted-register-sha256", required=True)
+    p.add_argument("--pdf-ocr-root")
     return p.parse_args(argv)
 
 

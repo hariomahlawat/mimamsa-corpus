@@ -49,3 +49,35 @@ def test_relationship_projection_fails_on_missing_identity_binding():
 def test_jsonl_is_canonical_lf_with_no_terminal_blank_record():
     data = x.jsonl_bytes([{"b": 2, "a": 1}])
     assert data == b'{"a":1,"b":2}\n'
+
+
+def test_pdf_anchor_binds_verified_source_render_config_and_text(tmp_path):
+    text = "verified page text"
+    artifact = tmp_path / "artifacts" / "raw.txt"
+    artifact.parent.mkdir(); artifact.write_text(text, encoding="utf-8")
+    record = {"state": "COMPLETE", "evidence_verified": True, "unreadable": False,
+              "access_disposition": "SCREENED_NO_MARKING_DETECTED", "source_sha256": "a" * 64,
+              "verified_source_sha256": "a" * 64, "render_sha256": "b" * 64, "physical_page": 3,
+              "configuration_sha256": "c" * 64, "mean_confidence": 88.5,
+              "artifact_paths": {"raw_text": "artifacts/raw.txt"},
+              "artifact_sha256": {"raw_text": x.hashlib.sha256(text.encode()).hexdigest()}}
+    config = {"engine": "tesseract", "engine_version": "5.3", "languages": ["eng", "hin"],
+              "psm": [1], "preprocessing": ["grayscale"], "render_dpi": 300}
+    class Canonical:
+        @staticmethod
+        def anchor_id(row): return "ANC-" + "1" * 24
+    rows = x.pdf_anchors([record], tmp_path, config, {"a" * 64: {"doc_id": "local-a"}}, Canonical)
+    assert len(rows) == 1
+    anchor = rows[0]
+    assert anchor["original_sha256"] == "a" * 64
+    assert anchor["image_sha256"] == "b" * 64
+    assert anchor["extraction"]["ocr_config"]["config_sha256"] == "c" * 64
+    assert anchor["locator"]["physical_page"] == 3
+    assert anchor["text_span"]["text_sha256"] == x.hashlib.sha256(text.encode()).hexdigest()
+
+
+def test_pdf_anchor_rejects_unverified_or_held_evidence(tmp_path):
+    rows = [{"state": "COMPLETE", "evidence_verified": False},
+            {"state": "COMPLETE", "evidence_verified": True, "unreadable": False,
+             "access_disposition": "HELD_ACCESS_MARKING_REVIEW"}]
+    assert x.pdf_anchors(rows, tmp_path, {}, {}, object()) == []
