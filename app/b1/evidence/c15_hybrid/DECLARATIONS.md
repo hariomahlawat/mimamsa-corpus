@@ -82,3 +82,14 @@ Dev results so far (1,000-distractor stride, `dev/out/*_s3.json`): e5-small `flo
 | O1b | same | `gate_rank`, K = 10 | 0.8548 | same |
 
 Both are run once, hybrid off as well, and reported whatever the outcome.
+
+### D4. int8 batching note, and the arctic oracle runs (declared after its dev result, before running them)
+
+- **int8 note.** Dynamically quantised ONNX models compute activation scales per call, so padding in a batch changes every vector (arctic int8: cosine 0.96-0.99 batched vs single). All int8 models are therefore embedded one text per call (`dev_eval.py`; `Mimamsa:Hybrid:Batch=1` in the app). C# (ORT 1.31.1) and Python (ORT 1.32) vectors of the same int8 model still differ slightly (cosine 0.985-0.995), whereas e5-small fp32 matches exactly (1.000000). A gate calibrated in Python therefore transfers to the app only approximately; this is disclosed, not corrected.
+- **Dev result (1,000 distractors, one text per call):** snowflake-arctic-embed-m-v2.0 int8, `floor` 6/16, `gate_rank` K=10 7/16, out-of-domain gate 0/8, lexical controls 5/5. Best of the models meeting the D2 constraints so far (e5-large and bge-m3 still embedding).
+- **Deviation from D2:** the gate is computed over the 1,000-passage stride sample, not 3,000 (the host is saturated by OCR; this embedder runs starved at below-normal priority). Value **0.3994** (`dev/out/arctic-m2_plain_s3.json`).
+
+| Run | Model | Admission | Gate | Other |
+| --- | --- | --- | --- | --- |
+| O2a | Snowflake/snowflake-arctic-embed-m-v2.0 `95c27414`, `onnx/model_int8.onnx` sha256 `03d923bb…`, CLS pooling, query prefix `query: `, no passage prefix, XLM-R SentencePiece of e5-small (ids verified identical) | `floor` | 0.3994 | batch 1, plain passages |
+| O2b | same | `gate_rank`, K = 10 | 0.3994 | same |
