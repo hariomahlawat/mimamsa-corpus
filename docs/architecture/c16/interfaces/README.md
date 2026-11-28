@@ -29,6 +29,7 @@ Every interface here is an **additive contract 2.1** item:
 | 8. Exact component digests and the text-store source digest (PR #82 clarifications 2, 5) | [B04 §4–5](B04_COMPONENT_VERIFICATION.md) | none | `digests.py` | `digests/golden.json` |
 | 9. v7 candidate-set files (CP-1 gap 1) | [B01 §5a](B01_PRODUCER_CONSUMER_INTERFACE.md) | none (plain-text file; bound by `candidate_set_sha256`) | `accounting.candidate_set_issues` | `accounting/registers/candidate_sets/`, `accounting/candidate_set_negative/CS01–CS13` |
 | 10. Lexical-only releases and model compatibility (CP-1 gap 2) | [B06](B06_ACTIVATION_JOURNAL.md), [B04 §2](B04_COMPONENT_VERIFICATION.md) | `ACTIVATION_SCENARIO_SCHEMA.json`, `ACTIVATION_SCENARIO_OUTCOMES_SCHEMA.json` (both widened additively) | `activation.Site.model_gate`, `semantic_search_enabled`; `scenarios.py` | `activation_scenarios/SC26–SC31` |
+| 11. Kind-specific verifier reference (Stage 3 S3-B; flagged additive) | [B04 §6](B04_COMPONENT_VERIFICATION.md) | none (no schema changes; contracts unchanged and UNCALIBRATED) | `verification.py` (seeded samples, vector key and source digest, MIMVEC01, params sidecar, graph structural recheck, effective sample) | `component_verification/golden.json` |
 
 ## Where 2.1 governs over frozen 2.0 prose (PR #82)
 

@@ -41,8 +41,9 @@ public static class ModelStaging
     /// `load(modelDir)` opens the installed model (Mimamsa.Hybrid.E5Embedder in the service; a test embedder in tests).
     public static ModelStagingReport VerifyAndStage(SiteLayout site, string releaseDir, TrustList trust, bool production, DateOnly today,
                                                     Func<string, IPassageEmbedder> load, IReadOnlyDictionary<string, JsonObject?> contracts,
-                                                    Action<string>? log = null)
+                                                    Action<string>? log = null, Func<string, GenerationStore>? loadGeneration = null)
     {
+        loadGeneration ??= gen => GenerationStore.Load(site.Root, null, TextStoreOptions.Memory, null, gen);
         if (production)
             return Refuse("MODEL_TRUST_PURPOSE_NOT_AUTHORISED",
                 "intelligence releases are refused in production until the owner authorises the `model` signing purpose and its keys (FG-MODEL-TRUST-PURPOSE open) and the spot re-embed is calibrated (FG-CALIBRATED-SAMPLES open)");
@@ -135,7 +136,7 @@ public static class ModelStaging
             foreach (var gen in cat.Installed())
             {
                 GenerationStore g;
-                try { g = GenerationStore.Load(site.Root, null, TextStoreOptions.Memory, null, gen); }
+                try { g = loadGeneration(gen); }
                 catch (Exception e) when (e is GenerationLoadException or IOException or UnauthorizedAccessException or System.Text.Json.JsonException or InvalidOperationException or NullReferenceException)
                 { continue; }   // not a loadable generation (simulated or damaged): no pack can be verified for it
                 var keys = VectorPackVerifier.Inputs(g, p).Select(x => VectorPackVerifier.Key(modelSha, p.MaxTokens, x.Input));

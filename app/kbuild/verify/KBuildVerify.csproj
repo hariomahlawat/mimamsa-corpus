@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- C16 Stage 3 S3-B central helper (not part of the service or the B1 solution): builds vector packs centrally with
+       the kbuild budget (the site never embeds the corpus) and runs the B04 kind-specific checks (GRAPH, LEXICAL_INDEX,
+       VECTOR_PACK) centrally with the same .NET verifiers the site uses. Called by `python -m mimamsa_kbuild`; it never
+       uses the network. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\b1\src\Mimamsa.Core\Mimamsa.Core.csproj" />
+    <ProjectReference Include="..\..\b1\src\Mimamsa.Hybrid\Mimamsa.Hybrid.csproj" />
+  </ItemGroup>
+</Project>
