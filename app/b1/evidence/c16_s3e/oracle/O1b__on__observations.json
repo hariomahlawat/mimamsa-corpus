@@ -1,0 +1,145 @@
+{
+ "RET-01": {
+  "mode": "identifier",
+  "state": "results",
+  "ranking": [
+   "A-17"
+  ]
+ },
+ "RET-02": {
+  "mode": "lexical",
+  "state": "results",
+  "ranking": [
+   "R-3A",
+   "N-20"
+  ]
+ },
+ "RET-03": {
+  "mode": "identifier",
+  "state": "results",
+  "ranking": [
+   "J1-SUB",
+   "J1-SHORT",
+   "J2-QUOTE"
+  ]
+ },
+ "RET-04": {
+  "mode": "identifier",
+  "state": "results",
+  "ranking": [
+   "J2-MAJ"
+  ]
+ },
+ "RET-05": {
+  "mode": "lexical",
+  "state": "results",
+  "ranking": [
+   "M-SYN"
+  ]
+ },
+ "RET-06": {
+  "mode": "hybrid",
+  "state": "results",
+  "ranking": [
+   "M-SYN",
+   "M-NEAR",
+   "L-EN",
+   "A-17",
+   "L-HI",
+   "H-ILL",
+   "J1-SUB",
+   "J2-MAJ",
+   "J1-SHORT",
+   "N-20",
+   "J2-QUOTE",
+   "J1-MAJ",
+   "R-3B"
+  ]
+ },
+ "RET-07": {
+  "mode": "hybrid",
+  "state": "results",
+  "ranking": [
+   "L-EN",
+   "J2-MAJ",
+   "A-17",
+   "J1-SUB",
+   "J1-SHORT",
+   "L-HI",
+   "M-SYN",
+   "H-ILL",
+   "R-3B",
+   "J2-QUOTE",
+   "N-20",
+   "J1-DISS"
+  ]
+ },
+ "RET-08": {
+  "mode": "lexical",
+  "state": "results",
+  "ranking": [
+   "H-ILL"
+  ]
+ },
+ "RET-09": {
+  "mode": "hybrid",
+  "state": "results",
+  "ranking": [
+   "L-HI",
+   "L-EN",
+   "V-OTHER",
+   "H-ILL",
+   "R-3B",
+   "J1-SUB",
+   "J1-SHORT",
+   "A-17",
+   "J1-DISS",
+   "R-3A"
+  ]
+ },
+ "RET-10": {
+  "mode": "hybrid",
+  "state": "results",
+  "ranking": [
+   "J1-SUB",
+   "J1-SHORT",
+   "L-EN",
+   "J1-MAJ",
+   "A-17",
+   "J1-DISS",
+   "N-20",
+   "R-3A",
+   "M-SYN",
+   "L-HI",
+   "R-3B",
+   "J2-MAJ",
+   "H-ILL"
+  ]
+ },
+ "RET-11": {
+  "mode": "lexical",
+  "state": "empty",
+  "ranking": []
+ },
+ "RET-12": {
+  "mode": "lexical",
+  "state": "results",
+  "ranking": [
+   "R-3A",
+   "R-3B",
+   "N-20"
+  ]
+ },
+ "RET-13": {
+  "mode": "parser_error",
+  "state": "parser_error",
+  "ranking": []
+ },
+ "RET-14": {
+  "mode": "lexical",
+  "state": "results",
+  "ranking": [
+   "M-SYN"
+  ]
+ }
+}
