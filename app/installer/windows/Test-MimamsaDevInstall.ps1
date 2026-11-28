@@ -55,7 +55,7 @@ $targets = [ordered]@{
 }
 # expected write permission per identity (true = may write)
 $webWrites = @('activation-state', 'uploads', 'logs', 'scratch-web')
-$actDenied = @('application')
+$actDenied = @('application', 'uploads')   # uploads: written by the web (Admin uploads), only read by the activation/backup identity
 $probes = foreach ($k in $targets.Keys) { @{ kind = 'write'; path = $targets[$k] }; @{ kind = 'read'; path = $targets[$k] } }
 
 $matrix = @()
