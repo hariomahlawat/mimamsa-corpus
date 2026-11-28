@@ -208,6 +208,10 @@ public class GraphStoreTests
             var target = edges.First(e => e.Edge.From == jud).Edge.To;
             Assert.Null(await store.PathAsync(gen, jud, target, 2, hidden));
             Assert.NotNull(await store.PathAsync(gen, jud, target, 2, none));
+            // C16 S3-D: a one-node path (from == to) of a hidden or unknown node is the not-found result, never an echo of its id
+            Assert.Null(await store.PathAsync(gen, jud, jud, 2, hidden));
+            Assert.Null(await store.PathAsync(gen, "JUD:no-such-node", "JUD:no-such-node", 2, none));
+            Assert.Equal(new[] { jud }, (await store.PathAsync(gen, jud, jud, 2, none))!.Nodes);
             Assert.Equal(stats.Edges, (await store.StatsAsync(gen, none)).Edges);
 
             // C15 security review L3: a node without its own document (an unresolved reference labelled with text from

@@ -221,7 +221,14 @@ public sealed class GraphStore(NpgsqlDataSource db)
         maxDepth = Math.Clamp(maxDepth, 1, MaxDepth);
         await using var c = await db.OpenConnectionAsync();
         await RequirePublished(c, gen);
-        if (from == to) return new GraphPath(new[] { from }, Array.Empty<EdgeView>());
+        if (from == to)
+        {
+            // C16 Stage 3 (S3-D): a one-node path exists only for a node that is published and visible now; a hidden
+            // (withdrawn, excluded) or unknown node gives the not-found result instead of an echo of the requested id.
+            await using var q = new NpgsqlCommand($"SELECT 1 FROM graph_nodes n WHERE n.generation_id=$1 AND {Hidden} AND n.node_id=$3", c);
+            q.Parameters.AddWithValue(gen); q.Parameters.AddWithValue(hidden); q.Parameters.AddWithValue(from);
+            return await q.ExecuteScalarAsync() is null ? null : new GraphPath(new[] { from }, Array.Empty<EdgeView>());
+        }
         var parent = new Dictionary<string, EdgeView?> { [from] = null };
         var frontier = new[] { from };
         for (int d = 0; d < maxDepth && frontier.Length > 0; d++)

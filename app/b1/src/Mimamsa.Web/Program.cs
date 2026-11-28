@@ -138,7 +138,6 @@ if (conf.GetValue("Mimamsa:Hybrid:Reranker:Enabled", false))
         conf.GetValue("Mimamsa:Hybrid:Threads", 0)) { MaxTokens = conf.GetValue("Mimamsa:Hybrid:Reranker:MaxTokens", 256) };
 var search = new SearchService(index, HiddenVia(appBox))
 {
-    HideChipsOfHiddenDocuments = activationConf,   // C16 Stage 3: false (unchanged) unless activation is enabled
     Semantic = semantic,
     Reranker = reranker,
     // C15 WP2/WP7: provision-heading boost for procedural plain-language queries (see ProvisionHeadings).
@@ -390,7 +389,7 @@ if (activationConf)
             var box = new System.Runtime.CompilerServices.StrongBox<AppServices?>();
             var ss = new SearchService(ix, HiddenVia(box))
             {
-                Semantic = sem, Reranker = reranker, HideChipsOfHiddenDocuments = true,
+                Semantic = sem, Reranker = reranker,
                 Headings = conf.GetValue("Mimamsa:Search:ProvisionHeadings", true) ? ProvisionHeadings.Build(ix) : null,
                 Hybrid = new HybridOptions(conf.GetValue("Mimamsa:Hybrid:LexicalDepth", 200), conf.GetValue("Mimamsa:Hybrid:DenseDepth", 100), conf.GetValue("Mimamsa:Hybrid:RrfK", 60),
                                            conf.GetValue("Mimamsa:Hybrid:MinSimilarity", 0.0), conf.GetValue("Mimamsa:Hybrid:Reranker:Pool", 30), conf.GetValue("Mimamsa:Hybrid:Reranker:Admit", 0.0)),

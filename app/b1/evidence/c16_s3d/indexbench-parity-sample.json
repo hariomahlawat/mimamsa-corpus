@@ -1,0 +1,35 @@
+{
+ "site": "sample site (290 documents), memory engine",
+ "base": "claude/c16-cp1 4ba059fa",
+ "head": "working tree after S3-D follow-up",
+ "cases": 1376,
+ "cases_nothing_withdrawn": 774,
+ "differ_nothing_withdrawn": 0,
+ "cases_with_withdrawal": 602,
+ "differ_with_withdrawal": 14,
+ "differing_cases": [
+  "B:section 302 Indian Penal Code|hide=True|lex|none",
+  "B:section 302 Indian Penal Code|hide=True|head",
+  "B:section 302 Indian Penal Code|hide=True|hybrid",
+  "B:section 302 Indian Penal Code|hide=True|rerank",
+  "B:section 302 Indian Penal Code|hide=True|lex|svc=army",
+  "B:section 302 Indian Penal Code|hide=True|hybrid|svc=navy",
+  "B:section 302 Indian Penal Code|hide=True|lex|plainconfirm",
+  "B:section 302 IPC|hide=True|lex|none",
+  "B:section 302 IPC|hide=True|head",
+  "B:section 302 IPC|hide=True|hybrid",
+  "B:section 302 IPC|hide=True|rerank",
+  "B:section 302 IPC|hide=True|lex|svc=army",
+  "B:section 302 IPC|hide=True|hybrid|svc=navy",
+  "B:section 302 IPC|hide=True|lex|plainconfirm"
+ ],
+ "difference": {
+  "base_chips": [
+   "identifier|Section 302 \u00b7 The Indian Penal Code|"
+  ],
+  "head_chips": [
+   "not_held|No instrument titled \u201cIndian Penal Code\u201d in this library|Section 302 was not looked up in any other instrument. The words are searched as plain text. Absence here is not evidence that the instrument or provision does not exist."
+  ]
+ },
+ "explanation": "Only cases with the withdrawal set differ: the Indian Penal Code instrument is withdrawn in that set; before, the instrument-scope chip still named it and scoped the provision to it; now it is not held (the user's words are searched as plain text)."
+}

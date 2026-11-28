@@ -78,6 +78,42 @@ public class C16S3dWebTests
         return await c.SendAsync(m);
     }
 
+    // ---------------------------------------------------------------- "Did you mean" probes (S3-D follow-up)
+    static string Typo(string w) => w[..^2] + (w[^2] == 'q' ? 'z' : 'q') + w[^1];
+    static string? Suggestion(JsonNode s) =>
+        s["chips"]?.AsArray().Where(c => (string?)c!["kind"] == "suggestion").Select(c => (string?)c!["source"]).FirstOrDefault();
+
+    /// A word of `doc` that no other visible document contains and that the speller offers for a one-letter typo: the
+    /// probe for "a term found only in an excluded or withdrawn document is never suggested".
+    internal static async Task<string?> UniqueSuggestedTerm(HttpClient c, string doc, params string[] alsoHidden)
+    {
+        var allowed = alsoHidden.Append(doc).ToHashSet();
+        var pages = JsonNode.Parse(await c.GetStringAsync($"/api/documents/{doc}/text"))!["pages"]!.AsArray();
+        var text = string.Join(" ", pages.Select(p => (string?)p!["text"] ?? "")).ToLowerInvariant();
+        foreach (var w in System.Text.RegularExpressions.Regex.Matches(text, "[a-z]{5,12}").Select(m => m.Value).Distinct().Take(150))
+        {
+            var s = JsonNode.Parse(await c.GetStringAsync("/api/search?q=" + Uri.EscapeDataString(w)))!;
+            var docs = s["documents"]?.AsObject().Select(kv => kv.Key).ToList() ?? [];
+            if (docs.Count == 0 || !docs.All(allowed.Contains) || !docs.Contains(doc)) continue;   // only in copies that will be hidden
+            var t = JsonNode.Parse(await c.GetStringAsync("/api/search?q=" + Uri.EscapeDataString(Typo(w))))!;
+            if (Suggestion(t) == w) return w;
+        }
+        return null;
+    }
+
+    /// After the copy is hidden: neither the typo nor the word itself makes the speller offer it.
+    internal static async Task<bool> NeverSuggested(HttpClient c, string w)
+    {
+        foreach (var q in new[] { Typo(w), w, Typo(w) + " " + Typo(w) })
+        {
+            var body = await c.GetStringAsync("/api/search?q=" + Uri.EscapeDataString(q));
+            var s = JsonNode.Parse(body)!;
+            if (Suggestion(s) is { } sg && sg.Split(' ').Contains(w)) return false;
+            if ((s["chips"]?.AsArray() ?? []).Any(ch => ((string?)ch!["text"] ?? "").Contains(w) && (string?)ch["kind"] == "suggestion")) return false;
+        }
+        return true;
+    }
+
     static string Gen(HttpResponseMessage r) => r.Headers.TryGetValues("X-Mimamsa-Generation", out var v) ? v.Single() : "";
 
     [Fact]
@@ -287,6 +323,10 @@ public class C16S3dWebTests
             }
             var range0 = await Range(rc, null);
             Check("baseline_range_206_complete", range0.status == HttpStatusCode.PartialContent && range0.got == want, $"{range0.status} {range0.got}/{want}");
+            // speller probes: a word only the judgment holds (doc-id exclusion) and one only the statute holds (copy hash)
+            var probeA = await UniqueSuggestedTerm(rc, DocA, Statute);
+            var probeS = await UniqueSuggestedTerm(rc, Statute, DocA);
+            Check("baseline_speller_offers_a_term_unique_to_each_excluded_copy", probeA is not null && probeS is not null, $"{probeA} / {probeS}");
             var search0 = JsonNode.Parse(await rc.GetStringAsync("/api/search?q=" + Uri.EscapeDataString("decision") + "&page_size=50"))!;
 
             // ------------------------------------------------------------ paused requests on every newly enabled route
@@ -371,6 +411,13 @@ public class C16S3dWebTests
                 var body = await resp.Content.ReadAsStringAsync();
                 Check("after_acceptance " + name, resp.StatusCode == status && ContentFree(body), $"{(int)resp.StatusCode} {body[..Math.Min(body.Length, 100)]}");
             }
+            // "Did you mean" never draws on the excluded copies' vocabulary (both exclusion kinds)
+            Check("speller_never_suggests_doc_id_excluded_term", await NeverSuggested(rc, probeA!), probeA);
+            Check("speller_never_suggests_copy_hash_excluded_term", await NeverSuggested(rc, probeS!), probeS);
+            // a one-node graph path of an excluded document is the not-found result, not an echo of its id
+            var selfPath = await rc.GetAsync($"/api/graph/path?from={Uri.EscapeDataString(nodeA)}&to={Uri.EscapeDataString(nodeA)}");
+            var selfBody = await selfPath.Content.ReadAsStringAsync();
+            Check("graph_path_self_of_excluded_node_not_found", selfPath.StatusCode == HttpStatusCode.OK && (bool?)JsonNode.Parse(selfBody)!["found"] == false && ContentFree(selfBody), selfBody[..Math.Min(selfBody.Length, 100)]);
             // counts never include the excluded copies (library, admin overview, graph statistics)
             var library1 = JsonNode.Parse(await rc.GetStringAsync("/api/library"))!;
             Check("library_count_excludes_both", (int)library1["documents"]! == (int)library0["documents"]! - 2, $"{library0["documents"]} -> {library1["documents"]}");
@@ -443,6 +490,44 @@ public class C16S3dWebTests
             try { await S3dPg.DropAsync(db); } catch (Exception e) { Console.Error.WriteLine("s3d cleanup: " + e.GetType().Name); }
             TestDirs.Delete(site);
             TestDirs.Delete(work);
+        }
+    }
+
+    /// Default mode (activation off): a serving-policy withdrawal hides the document's vocabulary from "Did you mean"
+    /// exactly as the response boundary does under activation.
+    [Fact]
+    public async Task DefaultModeWithdrawalNeverLeaksATermToTheSpeller()
+    {
+        var r = Convert.ToHexString(RandomNumberGenerator.GetBytes(4)).ToLowerInvariant();
+        var db = "c16s3d_def_" + r;
+        Cp1Web? web = null;
+        try
+        {
+            await S3dPg.CreateAsync(db);
+            web = await Cp1Web.StartAsync(new Dictionary<string, string>
+            {
+                ["Mimamsa__Site"] = Syn.Site, ["Mimamsa__Db"] = S3dPg.OwnerDsn(db), ["Mimamsa__Test__Enabled"] = "true",
+                ["Mimamsa__Test__Users__0"] = "reader:User:reader-password-1", ["Mimamsa__Test__Users__1"] = "admin:Admin:admin-password-1",
+                ["Mimamsa__RestrictedRegister"] = ServiceFixture.RegisterPath, ["Mimamsa__Login__ThrottlePerSource"] = "1000",
+                ["Mimamsa__Text__Store"] = "memory", ["Mimamsa__Search__Engine"] = "memory",
+            });
+            var (rc, _) = await Login(web, "reader");
+            var (ac, acsrf) = await Login(web, "admin");
+            var probe = await UniqueSuggestedTerm(rc, DocA, Statute);
+            Assert.True(probe is not null, "no probe term found only in " + DocA + " and " + Statute);
+            foreach (var d in new[] { DocA, Statute })
+            {
+                var wd = await Post(ac, acsrf, "/api/admin/withdraw", new { doc_id = d, reason = "S3-D default-mode speller probe" });
+                Assert.Equal(HttpStatusCode.OK, wd.StatusCode);
+            }
+            Assert.True(await NeverSuggested(rc, probe!), "withdrawn-only term suggested: " + probe);
+            S3dEvidence.Write("speller_default_mode.json", new JsonObject { ["withdrawn"] = DocA + ", " + Statute, ["probe_term"] = probe, ["probe_term_offered_before"] = true, ["offered_after_withdrawal"] = false });
+        }
+        finally
+        {
+            if (web is not null) await web.DisposeAsync();
+            NpgsqlConnection.ClearAllPools();
+            try { await S3dPg.DropAsync(db); } catch (Exception e) { Console.Error.WriteLine("s3d cleanup: " + e.GetType().Name); }
         }
     }
 }

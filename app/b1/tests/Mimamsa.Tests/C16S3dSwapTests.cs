@@ -251,7 +251,7 @@ public class C16S3dSwapTests
             docsAll.First(d => d.DocType == "judgment").DocId, docsAll.First(d => d.DocType != "judgment").DocId,
         };
         var allF = new SearchService(ix, _ => false).Search(query, filters);
-        var hid = new SearchService(ix, hidden.Contains) { HideChipsOfHiddenDocuments = true }.Search(query, filters);
+        var hid = new SearchService(ix, hidden.Contains).Search(query, filters);
         Assert.DoesNotContain(hid.Hits, h => hidden.Contains(ix.Docs[ix.DocOf(h.PassageIndex)].DocId));
         var allFDocs = allF.Hits.Select(h => ix.Docs[ix.DocOf(h.PassageIndex)].DocId).ToHashSet();
         Assert.Equal(allF.TotalDocuments - hidden.Count(allFDocs.Contains), hid.TotalDocuments);
@@ -272,6 +272,67 @@ public class C16S3dSwapTests
         // the hidden documents are not named by any chip, and the counts in the response are consistent with its hits
         Assert.All(hid.Chips, c => Assert.True(hidden.All(h => !(c.Text + c.Source).Contains(h, StringComparison.Ordinal))));
         Assert.Equal(hid.TotalDocuments, hid.Hits.Select(h => ix.DocOf(h.PassageIndex)).Distinct().Count());
+    }
+
+    /// S3-D follow-up: "Did you mean" draws only on visible vocabulary. Every term found in exactly one document and
+    /// offered for a one-letter typo while that document is visible is never offered once it is hidden (the engine's
+    /// hidden predicate is the boundary under activation and the serving policy in default mode), and with nothing hidden
+    /// the suggestion is unchanged.
+    [Fact]
+    public void ATermFoundOnlyInAHiddenDocumentIsNeverSuggested()
+    {
+        var ix = SearchIndex.Build(Syn.Gen);
+        static string Typo(string w) => w[..^2] + (w[^2] == 'q' ? 'z' : 'q') + w[^1];
+        string? Suggest(SearchService s, string q) => s.Search(q, new SearchFilters()).Chips.FirstOrDefault(c => c.Kind == "suggestion")?.Source;
+        var open = new SearchService(ix, _ => false);
+        int probes = 0;
+        var terms = ix.Passages.SelectMany(p => Text.Tokenize(p.Text)).Select(t => t.Term)
+            .Where(t => t.Length is >= 6 and <= 12 && t.All(c => c is >= 'a' and <= 'z')).Distinct().ToList();
+        foreach (var w in terms)
+        {
+            // every document holding the term is hidden (the term is then found only in hidden documents)
+            var docs = open.Search(w, new SearchFilters()).Hits.Select(h => ix.Docs[ix.DocOf(h.PassageIndex)].DocId).ToHashSet();
+            if (docs.Count == 0 || docs.Count > 3 || Suggest(open, Typo(w)) != w) continue;
+            probes++;
+            var hiddenDoc = string.Join(",", docs);
+            var hid = new SearchService(ix, docs.Contains);
+            var s1 = Suggest(hid, Typo(w)); var s2 = Suggest(hid, w);
+            Assert.True(s1 != w && s2 != w, $"'{w}' (only in {hiddenDoc}) suggested while hidden: {s1} / {s2}");
+            Assert.Equal(w, Suggest(new SearchService(ix, d => d == "not-a-document"), Typo(w)));   // nothing hidden: unchanged
+        }
+        Assert.True(probes >= 2, $"only {probes} probe terms in the SYN index");
+        S3dEvidence.Write("speller_unit.json", new JsonObject { ["probe_terms"] = probes, ["suggested_while_hidden"] = 0 });
+    }
+
+    /// S3-D follow-up: instrument scope, alias and candidate chips never name a hidden instrument; with nothing hidden the
+    /// resolution is unchanged.
+    [Fact]
+    public void InstrumentScopeAndAliasesNeverNameAHiddenInstrument()
+    {
+        var ix = SearchIndex.Build(Syn.Gen);
+        var r = ix.Resolver;
+        int checkedTitles = 0;
+        for (int d = 0; d < ix.Docs.Count; d++)
+        {
+            var doc = ix.Docs[d];
+            if (!doc.IsStatute || doc.Title is null) continue;
+            var words = doc.Title.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var open = r.ResolveInstrument(words);
+            Assert.Equal(System.Text.Json.JsonSerializer.Serialize(open), System.Text.Json.JsonSerializer.Serialize(r.ResolveInstrument(words, _ => false)));
+            if (open.Kind != Mimamsa.Core.Legal.ScopeKind.Scoped || !open.Docs.Contains(d)) continue;
+            var norm = Mimamsa.Core.Legal.LegalIdentifierResolver.NormTitle(doc.Title);
+            var hidden = Enumerable.Range(0, ix.Docs.Count).Where(x => ix.Docs[x].IsStatute && Mimamsa.Core.Legal.LegalIdentifierResolver.NormTitle(ix.Docs[x].Title) == norm).ToHashSet();
+            var s = r.ResolveInstrument(words, hidden.Contains);
+            Assert.DoesNotContain(s.Docs, hidden.Contains);
+            // NotHeld echoes only the words the user typed; any other outcome must not name the hidden instrument
+            if (s.Kind == Mimamsa.Core.Legal.ScopeKind.NotHeld) Assert.Equal(string.Join(" ", words), s.Text);
+            else Assert.DoesNotContain(doc.Title, s.Text);
+            Assert.All(s.Aliases, a => Assert.DoesNotContain(doc.Title, a.HeldTitle));
+            var any = r.ResolveInstrument(Array.Empty<string>(), hidden.Contains);
+            Assert.DoesNotContain(any.Docs, hidden.Contains);
+            checkedTitles++;
+        }
+        Assert.True(checkedTitles >= 1, "no statute title resolves to its own instrument in the SYN index");
     }
 
     [Fact]
