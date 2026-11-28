@@ -59,6 +59,12 @@ var textOptions = new TextStoreOptions
     KeepPrevious = conf.GetValue("Mimamsa:Text:KeepPrevious", 2),
 };
 if (textOptions.Store is not ("memory" or "disk")) throw new InvalidOperationException("Mimamsa:Text:Store must be 'memory' or 'disk'");
+// C16 Stage 3 (S3-D): with the activation journal the process swaps generations in process and keeps at most two
+// resident (GenerationHost). That bound only holds memory when page text and postings stay on disk, so activation mode
+// REQUIRES the disk text store and the disk index; it refuses to start otherwise.
+bool activationConf = conf.GetValue("Mimamsa:Activation:Enabled", false);
+if (activationConf && (textOptions.Store != "disk" || (conf["Mimamsa:Search:Engine"] ?? "memory") != "disk"))
+    throw new InvalidOperationException("Mimamsa:Activation:Enabled requires Mimamsa:Text:Store=disk and Mimamsa:Search:Engine=disk (in-process generation swap with at most two generations resident)");
 var loadSw = System.Diagnostics.Stopwatch.StartNew();
 var generation = GenerationStore.Load(site, vault, textOptions, Console.WriteLine);
 var generationLoadMs = loadSw.ElapsedMilliseconds;
@@ -88,10 +94,10 @@ var phase = System.Diagnostics.Stopwatch.StartNew();
 // Mimamsa:Search:IndexDir, default <site>/search-index: built, verified and published atomically on first start of a
 // generation, verified and reopened afterwards). Results are identical; only memory, start-up and persistence differ.
 var searchEngine = conf["Mimamsa:Search:Engine"] ?? "memory";
-var index = searchEngine switch
+SearchIndex OpenIndex(GenerationStore g) => searchEngine switch
 {
-    "memory" => SearchIndex.Build(generation),
-    "disk" => SearchIndex.Open(generation, conf["Mimamsa:Search:IndexDir"] is { Length: > 0 } idir ? idir : Path.Combine(site, "search-index"),
+    "memory" => SearchIndex.Build(g),
+    "disk" => SearchIndex.Open(g, conf["Mimamsa:Search:IndexDir"] is { Length: > 0 } idir ? idir : Path.Combine(site, "search-index"),
         new SearchIndexOptions
         {
             CacheBytes = conf.GetValue("Mimamsa:Search:CacheMb", 128L) << 20,
@@ -101,16 +107,21 @@ var index = searchEngine switch
         }, Console.WriteLine),
     _ => throw new InvalidOperationException("Mimamsa:Search:Engine must be 'memory' or 'disk'"),
 };
+var index = OpenIndex(generation);
 var indexBuildMs = phase.ElapsedMilliseconds;
-AppServices? appRef = null;
+// The search engine reaches eligibility through a box (not a captured top-level local), so a generation released after an
+// in-process swap (C16 Stage 3) is not kept alive by this lambda. Behaviour is unchanged.
+var appBox = new System.Runtime.CompilerServices.StrongBox<AppServices?>();
+static Func<string, bool> HiddenVia(System.Runtime.CompilerServices.StrongBox<AppServices?> box) => docId => box.Value!.VisibleDocument(docId) is null;
 // C14 S4 hybrid-retrieval PoC: off unless Mimamsa:Hybrid:Enabled=true. The model directory and its pinned SHA-256
 // are required when enabled; a mismatch stops start-up. No network access at run time.
 ISemanticScorer? semantic = null;
+Mimamsa.Hybrid.E5Embedder? embedder = null;   // C16 Stage 3: shared by the generations of an in-process swap
 long hybridMs = 0;
 if (conf.GetValue("Mimamsa:Hybrid:Enabled", false))
 {
     phase.Restart();
-    var emb = new Mimamsa.Hybrid.E5Embedder(conf["Mimamsa:Hybrid:ModelDir"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelDir is required when hybrid is enabled"),
+    var emb = embedder = new Mimamsa.Hybrid.E5Embedder(conf["Mimamsa:Hybrid:ModelDir"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelDir is required when hybrid is enabled"),
         conf.GetValue("Mimamsa:Hybrid:Threads", 0), conf.GetValue("Mimamsa:Hybrid:Cuda", false),
         conf["Mimamsa:Hybrid:ModelSha256"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:ModelSha256 is required when hybrid is enabled"));
     semantic = Mimamsa.Hybrid.DenseIndex.Build(index, generation.GenerationId, emb, conf["Mimamsa:Hybrid:CacheDir"], conf["Mimamsa:Hybrid:ModelLabel"] ?? "multilingual-e5-small@614241f6",
@@ -125,8 +136,9 @@ if (conf.GetValue("Mimamsa:Hybrid:Reranker:Enabled", false))
         conf["Mimamsa:Hybrid:Reranker:OnnxFile"] ?? "onnx/model.onnx",
         conf["Mimamsa:Hybrid:Reranker:Sha256"] ?? throw new InvalidOperationException("Mimamsa:Hybrid:Reranker:Sha256 is required when the reranker is enabled"),
         conf.GetValue("Mimamsa:Hybrid:Threads", 0)) { MaxTokens = conf.GetValue("Mimamsa:Hybrid:Reranker:MaxTokens", 256) };
-var search = new SearchService(index, docId => appRef!.VisibleDocument(docId) is null)
+var search = new SearchService(index, HiddenVia(appBox))
 {
+    HideChipsOfHiddenDocuments = activationConf,   // C16 Stage 3: false (unchanged) unless activation is enabled
     Semantic = semantic,
     Reranker = reranker,
     // C15 WP2/WP7: provision-heading boost for procedural plain-language queries (see ProvisionHeadings).
@@ -142,12 +154,20 @@ var app0 = new AppServices
     Eligible = eligibility, TestMode = testMode, SecureCookies = conf.GetValue("Mimamsa:SecureCookies", false),
     Studio = new Mimamsa.Core.Studio.StudioStore(dataSource), Commander = new Mimamsa.Core.Commander.TocCommanderSource(generation),
 };
-appRef = app0;
+appBox.Value = app0;
 var active = new ActiveStreams();
 var pendingDrains = new ConcurrentDictionary<string, DateTime>();
 long maxResponseWire = delivery.MaxRange + (long)Math.Ceiling(delivery.MaxRange / (double)delivery.Slice) * credit.HeaderAllowance;
 var slots = new ResponseSlots((int)Math.Max(1, credit.SiteCap / maxResponseWire));
-builder.Services.AddSingleton(app0).AddSingleton(delivery).AddSingleton(slots).AddSingleton(active);
+// C16 Stage 3: under activation each request gets the AppServices of the generation its pin names (GenerationHost);
+// default mode keeps the one process-wide AppServices.
+GenerationHost? host = null;
+if (activationConf)
+    builder.Services.AddHttpContextAccessor().AddScoped(sp =>
+        sp.GetRequiredService<IHttpContextAccessor>().HttpContext?.Items[GenerationHost.SlotKey] is GenerationSlot gs ? gs.Services!
+        : host?.Current?.Services ?? throw new InvalidOperationException("no generation is being served"))
+        .AddSingleton(delivery).AddSingleton(slots).AddSingleton(active);
+else builder.Services.AddSingleton(app0).AddSingleton(delivery).AddSingleton(slots).AddSingleton(active);
 
 builder.WebHost.UseSockets(o =>
 {
@@ -246,6 +266,7 @@ log.LogInformation("start-up phases: generation load and re-hash {LoadMs} ms, in
 // content, ids or queries. ?gc=1 forces a full blocking compacting GC first (to separate retention from leaks).
 // Integration hardening: unauthenticated, so answered only to loopback callers (a LAN caller could otherwise force
 // blocking full GCs with ?gc=1); a warning is logged whenever it is enabled.
+Func<object?> textStats = () => generation.Text.Stats();   // C16 Stage 3: the current generation's under activation
 if (conf.GetValue("Mimamsa:Diagnostics:Enabled", false))
 {
     app.Logger.LogWarning("diagnostics endpoint /api/diag/memory is enabled (loopback callers only; benchmarks only)");
@@ -267,7 +288,7 @@ if (conf.GetValue("Mimamsa:Diagnostics:Enabled", false))
             managed_heap_mb = Math.Round(GC.GetTotalMemory(false) / 1048576.0, 1), gc_heap_size_mb = Math.Round(gi.HeapSizeBytes / 1048576.0, 1),
             gc_committed_mb = Math.Round(gi.TotalCommittedBytes / 1048576.0, 1), gc_fragmented_mb = Math.Round(gi.FragmentedBytes / 1048576.0, 1),
             gc_server = System.Runtime.GCSettings.IsServerGC, gc_count_gen2 = GC.CollectionCount(2), cpu_s = Math.Round(p.TotalProcessorTime.TotalSeconds, 2),
-            threads = p.Threads.Count, text_store = generation.Text.Stats(),
+            threads = p.Threads.Count, text_store = textStats(),
         });
     });
 }
@@ -316,19 +337,103 @@ app.Use(async (ctx, next) =>
     if (!isStatic) log.LogInformation("request {Method} {Route} {Status} {Ms}ms", ctx.Request.Method, route, ctx.Response.StatusCode, sw.ElapsedMilliseconds);
 });
 
-// ---- C16 B06 (CP-1 slice; OFF unless Mimamsa:Activation:Enabled=true): the service as an activation PARTICIPANT.
+// ---- C16 B06 (OFF unless Mimamsa:Activation:Enabled=true): the service as an activation PARTICIPANT.
 // It serves the authenticated local control channel, refuses /api requests (503) while a transition or recovery is in
 // progress, while the signed exclusion store is unhealthy, or while this process is not on the journal head, and pins
-// {knowledge, model, exclusion sequence} per request. In this slice there is no in-process generation swap: OPEN onto
-// a generation other than the one this process loaded leaves it not serving until it is restarted (fail closed).
-// Response-boundary exclusion filtering of every API surface is B06-integrated work (Core: ActivationParticipant.Respond).
+// {knowledge, model, exclusion sequence} per request.
+// C16 Stage 3 (S3-D): IN-PROCESS GENERATION SWAP. Each served knowledge generation lives in a GenerationSlot; PREPARE
+// loads and verifies the target's slot beside the serving one (old generation keeps serving), OPEN switches atomically,
+// every request is pinned to the slot of its pin, and a previous slot is released when its last request goes. At most
+// two slots are resident (disk text store and disk index required; see GenerationHost). The response boundary covers
+// every surface (ActivationRouteInventory, ActivationBoundary); facets and totals are counted over surviving results.
 bool activationEnabled = false;
-if (conf.GetValue("Mimamsa:Activation:Enabled", false))
+if (activationConf)
 {
     var actSite = new Mimamsa.Core.Activation.SiteLayout(site);
     var actInsp = new Mimamsa.Core.Activation.SiteInspector(actSite,
         Mimamsa.Core.Activation.ActivationCli.Reader(actSite, production: !conf.GetValue("Mimamsa:Activation:DevelopmentTrust", false)));
-    var participant = new Mimamsa.Core.Activation.ActivationParticipant(actInsp) { OnSwap = (k, _) => k == generation.GenerationId };
+    var participant = new Mimamsa.Core.Activation.ActivationParticipant(actInsp);
+    // 2.1 lexical-only releases: the semantic path (query embedding, dense candidates) runs only when this request's
+    // pin allows it; otherwise search is lexical only.
+    var semanticForRequest = new AsyncLocal<bool?>();
+    var testPause = conf.GetValue("Mimamsa:Test:Enabled", false) && conf["Mimamsa:Test:PauseDir"] is { Length: > 0 } pd ? pd : null;
+    var studio = app0.Studio;
+    var secureCookies = conf.GetValue("Mimamsa:SecureCookies", false);
+    var allowNoRegister = testMode && conf.GetValue("Mimamsa:Test:AllowNoRegister", false);
+
+    // Boundary wiring of one generation's services: the single eligibility decision asks the boundary (so every surface
+    // and the search engine's hidden-document predicate filter excluded copies), and the handlers' explicit checks.
+    static void Wire(AppServices s, ActivationBoundary b, AsyncLocal<bool?> semantic)
+    {
+        s.Eligible.Boundary = b.ExcludedForCurrentRequest;
+        s.ActivationExcluded = b.Excluded;
+        s.ActivationExcludedNow = b.ExcludedNow;
+        s.ActivationStreamPause = b.TestPauseAsync;
+        s.Search.SemanticAllowed = () => semantic.Value ?? false;
+    }
+    static Action ReleaseOf(SearchIndex ix, GenerationStore g) => () => { ix.Release(); (g.Text as IDisposable)?.Dispose(); };
+
+    // Load and verify one generation's services beside the serving ones (PREPARE / OPEN of a non-resident target). Any
+    // failure throws: the host keeps no slot and the participant refuses (fail closed).
+    GenerationSlot LoadSlot(string genId)
+    {
+        var g = GenerationStore.Load(site, vault, textOptions, Console.WriteLine, generationId: genId);
+        SearchIndex? ix = null;
+        try
+        {
+            if (g.GenerationId != genId) throw new InvalidOperationException("loaded another generation");
+            var reg = allowNoRegister ? RestrictedRegister.Empty : RestrictedRegister.LoadRequired(conf["Mimamsa:RestrictedRegister"], g.Release.RegisterSha256);
+            var elig = new Eligibility(g, state, reg, vault);
+            ix = OpenIndex(g);
+            ISemanticScorer? sem = embedder is null ? null : Mimamsa.Hybrid.DenseIndex.Build(ix, g.GenerationId, embedder, conf["Mimamsa:Hybrid:CacheDir"],
+                conf["Mimamsa:Hybrid:ModelLabel"] ?? "multilingual-e5-small@614241f6", conf.GetValue("Mimamsa:Hybrid:PassageTokens", 256), log: Console.WriteLine);
+            var box = new System.Runtime.CompilerServices.StrongBox<AppServices?>();
+            var ss = new SearchService(ix, HiddenVia(box))
+            {
+                Semantic = sem, Reranker = reranker, HideChipsOfHiddenDocuments = true,
+                Headings = conf.GetValue("Mimamsa:Search:ProvisionHeadings", true) ? ProvisionHeadings.Build(ix) : null,
+                Hybrid = new HybridOptions(conf.GetValue("Mimamsa:Hybrid:LexicalDepth", 200), conf.GetValue("Mimamsa:Hybrid:DenseDepth", 100), conf.GetValue("Mimamsa:Hybrid:RrfK", 60),
+                                           conf.GetValue("Mimamsa:Hybrid:MinSimilarity", 0.0), conf.GetValue("Mimamsa:Hybrid:Reranker:Pool", 30), conf.GetValue("Mimamsa:Hybrid:Reranker:Admit", 0.0)),
+            };
+            var svc = box.Value = new AppServices
+            {
+                Generation = g, Search = ss, State = state, Policy = policy, Identity = identity, Ledger = ledger, Vault = vault,
+                Eligible = elig, TestMode = testMode, SecureCookies = secureCookies, Studio = studio, Commander = new Mimamsa.Core.Commander.TocCommanderSource(g),
+            };
+            policy.SyncCopiesAsync(g.Documents.Values.Select(d => (d.DocId, d.CopySha, d.CopyBytes))
+                .Concat(g.HeldCopies.Values.Where(h => !g.Documents.ContainsKey(h.DocId) || g.Documents[h.DocId].CopySha != h.Sha).Select(h => (h.DocId, h.Sha, h.Bytes))))
+                .GetAwaiter().GetResult();
+            // the graph is part of the verified services: a target whose graph does not publish and verify is refused
+            var graph = Mimamsa.Core.Graph.GraphBuilder.Build(g);
+            var graphDb = new Mimamsa.Core.Graph.GraphStore(dataSource);
+            graphDb.EnsureSchemaAsync().GetAwaiter().GetResult();
+            graphDb.PublishAsync(graph).GetAwaiter().GetResult();
+            var (ok, _) = graphDb.VerifyAsync(graph).GetAwaiter().GetResult();
+            if (!ok) throw new InvalidOperationException("graph failed verification");
+            svc.Graph = graph; svc.GraphDb = graphDb;
+            var b = new ActivationBoundary(participant, g, testPause);
+            Wire(svc, b, semanticForRequest);
+            return new GenerationSlot { Id = genId, Services = svc, Boundary = b, OnRelease = ReleaseOf(ix, g), Payload = g };
+        }
+        catch
+        {
+            ix?.Release();
+            (g.Text as IDisposable)?.Dispose();
+            throw;
+        }
+    }
+
+    host = new GenerationHost(LoadSlot)
+    {
+        MaxResident = 2,
+        BudgetWait = TimeSpan.FromSeconds(Math.Max(0, conf.GetValue("Mimamsa:Activation:SwapBudgetWaitSec", 30))),
+        Log = m => log.LogInformation("{Message}", m),
+    };
+    // The generation loaded at start-up is the first slot (the journal head when the site is OPEN).
+    var initialBoundary = new ActivationBoundary(participant, generation, testPause);
+    Wire(app0, initialBoundary, semanticForRequest);
+    host.Install(new GenerationSlot { Id = generation.GenerationId, Services = app0, Boundary = initialBoundary, OnRelease = ReleaseOf(index, generation), Payload = generation });
+    host.AttachTo(participant);
     participant.LoadHead();
     var channel = new Mimamsa.Core.Activation.ControlChannelServer(new Mimamsa.Core.Activation.ControlChannelOptions
     {
@@ -337,17 +442,10 @@ if (conf.GetValue("Mimamsa:Activation:Enabled", false))
     }, participant) { Log = m => log.LogWarning("{Message}", m) };
     channel.Start();
     app.Lifetime.ApplicationStopping.Register(() => channel.DisposeAsync().AsTask().Wait(2000));
-    log.LogInformation("activation participant enabled (serving: {Serving}, semantic search: {Semantic})", participant.IsServing(), participant.SemanticSearchAvailable());
-    // 2.1 lexical-only releases: the semantic path (query embedding, dense candidates) runs only when this request's
-    // pin allows it; otherwise search is lexical only.
-    var semanticForRequest = new AsyncLocal<bool?>();
-    search.SemanticAllowed = () => semanticForRequest.Value ?? false;
-    // Response boundary (C16-CP1-01/03; see ActivationBoundary for the linearisation rule): Boundary routes filter by the
-    // CURRENT exclusion state at handler time AND are buffered and re-checked immediately before commit; Refused routes
-    // get a content-free 503; unknown routes are refused (fail closed).
-    var testPause = conf.GetValue("Mimamsa:Test:Enabled", false) && conf["Mimamsa:Test:PauseDir"] is { Length: > 0 } pd ? pd : null;
-    var boundary = new ActivationBoundary(participant, generation, testPause);
-    app0.ActivationExcluded = boundary.Excluded;
+    log.LogInformation("activation participant enabled (serving: {Serving}, semantic search: {Semantic}, in-process swap: on, resident limit {Limit})",
+        participant.IsServing(), participant.SemanticSearchAvailable(), host.MaxResident);
+    var h = host;
+    textStats = () => h.Current?.Services?.Generation.Text.Stats();
     activationEnabled = true;
     app.Use(async (ctx, next) =>
     {
@@ -363,8 +461,21 @@ if (conf.GetValue("Mimamsa:Activation:Enabled", false))
             await ctx.Response.WriteAsJsonAsync(new { state = "activation_not_serving" });
             return;
         }
+        // the request is pinned to exactly the slot of its pin: no request mixes generations
+        var slot = h.Acquire(pin.Knowledge);
+        if (slot is null)
+        {
+            participant.Unpin(pin);
+            ctx.Response.StatusCode = 503;
+            ctx.Response.Headers.RetryAfter = "1";
+            await ctx.Response.WriteAsJsonAsync(new { state = "activation_not_serving" });
+            return;
+        }
         ctx.Items[ActivationBoundary.PinKey] = pin;
+        ctx.Items[GenerationHost.SlotKey] = slot;
+        ActivationBoundary.Request.Value = ctx;
         semanticForRequest.Value = pin.SemanticSearch;
+        ctx.Response.Headers["X-Mimamsa-Generation"] = slot.Id;   // content-free: which generation answered
         try
         {
             if (cls == RouteClass.Refused)
@@ -374,14 +485,14 @@ if (conf.GetValue("Mimamsa:Activation:Enabled", false))
                 await ctx.Response.WriteAsJsonAsync(new { state = "not_available_under_activation" });
                 return;
             }
-            if (cls != RouteClass.Boundary) { await next(); return; }
+            if (cls is not (RouteClass.Boundary or RouteClass.BoundaryPrivate)) { await next(); return; }   // ContentFree, ProtectiveAction, BoundaryStreaming
             var original = ctx.Response.Body;
             using var buffer = new MemoryStream();
             ctx.Response.Body = buffer;
             try { await next(); }
             finally { ctx.Response.Body = original; }
-            await boundary.TestPauseAsync(ctx);
-            if (boundary.MayCommit(ctx, buffer.GetBuffer().AsSpan(0, (int)buffer.Length)))
+            await slot.Boundary!.TestPauseAsync(ctx);
+            if (slot.Boundary.MayCommit(ctx, buffer.GetBuffer().AsSpan(0, (int)buffer.Length), scanBody: cls == RouteClass.Boundary))
             {
                 ctx.Response.ContentLength = buffer.Length;
                 buffer.Position = 0;
@@ -389,15 +500,22 @@ if (conf.GetValue("Mimamsa:Activation:Enabled", false))
                 return;
             }
             // linearised after an exclusion acceptance: nothing of the buffered response is sent
+            var path = ctx.Request.Path;
+            bool document = path.StartsWithSegments("/api/documents") || path.StartsWithSegments("/api/cite") || path.StartsWithSegments("/api/v2");
             ctx.Response.Clear();
             ctx.Response.Headers.CacheControl = "no-store";
-            bool search = ctx.Request.Path.StartsWithSegments("/api/search");
-            if (search) ctx.Response.Headers.RetryAfter = "1";
-            ctx.Response.StatusCode = search ? 503 : 404;
-            await ctx.Response.WriteAsJsonAsync(search ? new { state = "results_changed", notice = "Results changed while the request ran; try again." }
-                                                       : (object)new { state = "unavailable", notice = Api.NotAvailable });
+            ctx.Response.Headers["X-Mimamsa-Generation"] = slot.Id;
+            if (!document) ctx.Response.Headers.RetryAfter = "1";
+            ctx.Response.StatusCode = document ? 404 : 503;
+            await ctx.Response.WriteAsJsonAsync(document ? new { state = "unavailable", notice = Api.NotAvailable }
+                                                         : (object)new { state = "results_changed", notice = "Results changed while the request ran; try again." });
         }
-        finally { participant.Unpin(pin); }
+        finally
+        {
+            ActivationBoundary.Request.Value = null;
+            h.ReleaseLease(slot);
+            participant.Unpin(pin);
+        }
     });
 }
 
@@ -424,6 +542,9 @@ if (activationEnabled)
         return 3;
     }
     log.LogInformation("activation: route inventory complete ({Count} classified routes)", ActivationRouteInventory.Routes.Count);
+    // C16 Stage 3: drop every start-up reference to the first generation, so that once it is swapped out and its last
+    // request is gone, the GenerationHost's release frees it (the host's slot is then its only owner).
+    generation = null!; index = null!; app0 = null!; search = null!; eligibility = null!; appBox = null!; semantic = null;
 }
 app.Run();
 return 0;

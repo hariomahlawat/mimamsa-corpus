@@ -6,8 +6,9 @@ using Mimamsa.Core.Search;
 namespace Mimamsa.Web;
 
 /// Composition root for one serving process: the ACTIVE generation (verified evidence only), its search index, the
-/// durable serving policy mirror and the identity store. The generation is immutable for the process lifetime; a new
-/// generation is served after a service restart (B1 has no hot switch).
+/// durable serving policy mirror and the identity store. The generation is immutable for the lifetime of this object.
+/// Default mode: one AppServices for the process (a new generation is served after a restart). Activation mode (C16
+/// Stage 3): one AppServices per resident generation (GenerationSlot); each request gets the one of its pin.
 public sealed class AppServices
 {
     public const string SessionCookie = "mimamsa_session";
@@ -34,6 +35,12 @@ public sealed class AppServices
     /// closed). Null by default, so default behaviour is unchanged.
     public Func<HttpContext, string, string?, bool>? ActivationExcluded { get; set; }
     public bool BoundaryExcluded(HttpContext ctx, string docId, string? sha) => ActivationExcluded?.Invoke(ctx, docId, sha) ?? false;
+    /// C16 Stage 3 streaming boundary (activation only; null by default): re-reads the CURRENT signed state now, for
+    /// the check immediately before each Range slice is handed to the transport.
+    public Func<HttpContext, string, string?, bool>? ActivationExcludedNow { get; set; }
+    public bool BoundaryExcludedNow(HttpContext ctx, string docId, string? sha) => ActivationExcludedNow?.Invoke(ctx, docId, sha) ?? false;
+    /// C16 Stage 3 test-only pause after the first streamed slice (Mimamsa:Test:PauseDir; activation only).
+    public Func<HttpContext, Task>? ActivationStreamPause { get; set; }
 
     public Task<Principal?> AuthenticateAsync(HttpContext ctx)
     {

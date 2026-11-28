@@ -168,6 +168,13 @@ public sealed class SearchIndex
     }
 
 
+    /// C16 Stage 3 (in-process generation swap): drop the disk engine's posting cache and its pooled read-only SQLite
+    /// connections once no request uses this generation any more. The memory engine has nothing to release.
+    public void Release()
+    {
+        if (Postings is SqlitePostingTable t) t.Release();
+    }
+
     public double Idf(int df) => Math.Log(1 + (N - df + 0.5) / (df + 0.5));
 
     public double TfNorm(int tf, int p) => tf * (K1 + 1) / (tf + K1 * (1 - B + B * LenOf(p) / AvgLen));

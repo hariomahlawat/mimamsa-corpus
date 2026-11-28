@@ -58,16 +58,25 @@ public sealed class Eligibility(GenerationStore g, ServingState state, Restricte
 {
     readonly ConcurrentDictionary<string, bool> _rehash = new();
 
+    /// C16 Stage 3 (activation only; null by default, so default behaviour is unchanged): the response boundary of the
+    /// activation journal. True when the signed exclusion state excludes (docId, copy sha) for the CURRENT request, or
+    /// when it cannot be decided (fail closed). Because every surface asks this class, every surface (graph,
+    /// reasoning, Commander, statutes, library, relations, Studio, PDF, admin and the search engine's hidden-document
+    /// predicate, hence facets and totals) filters by the boundary at handler time.
+    public Func<string, string?, bool>? Boundary { get; set; }
+
+    bool BoundaryExcludes(string docId, string? sha) => Boundary is { } b && b(docId, sha);
+
     public DocumentRecord? Visible(string docId) =>
         g.Documents.TryGetValue(docId, out var d) && SearchIndex.Indexable(d) && !state.IsDocWithdrawn(docId)
-        && !state.IsWithdrawn(docId, d.CopySha) && !register.IsRestricted(docId, d.CopySha) ? d : null;
+        && !state.IsWithdrawn(docId, d.CopySha) && !register.IsRestricted(docId, d.CopySha) && !BoundaryExcludes(docId, d.CopySha) ? d : null;
 
     public bool HeldEligible(HeldCopy h)
     {
         var cur = Visible(h.DocId);
         if (cur is null) return false;
         if (cur.CopySha == h.Sha) return true;
-        return h.Published && !state.IsWithdrawn(h.DocId, h.Sha) && !register.IsRestricted(h.DocId, h.Sha)
+        return h.Published && !state.IsWithdrawn(h.DocId, h.Sha) && !register.IsRestricted(h.DocId, h.Sha) && !BoundaryExcludes(h.DocId, h.Sha)
                && _rehash.GetOrAdd(h.Sha, s => vault.Verify(s, out _));
     }
 

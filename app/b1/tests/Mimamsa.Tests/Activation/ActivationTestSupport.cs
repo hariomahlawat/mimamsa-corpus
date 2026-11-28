@@ -63,13 +63,16 @@ public sealed class DevExclusionStore
     public long Sequence => File.Exists(Path.Combine(_dir, "ACCEPTED.json"))
         ? (long)CanonicalJson.ParseStrict(File.ReadAllBytes(Path.Combine(_dir, "ACCEPTED.json")))["sequence"]! : 0;
 
-    public long Append(IEnumerable<string> withdrawnDocIds, IEnumerable<string>? readmitDocIds = null, Func<byte[], byte[]>? signOverride = null)
+    public long Append(IEnumerable<string> withdrawnDocIds, IEnumerable<string>? readmitDocIds = null, Func<byte[], byte[]>? signOverride = null,
+                       IEnumerable<string>? withdrawnCopyShas = null)
     {
         var acc = File.Exists(Path.Combine(_dir, "ACCEPTED.json")) ? CanonicalJson.ParseStrict(File.ReadAllBytes(Path.Combine(_dir, "ACCEPTED.json"))).AsObject() : null;
         long seq = ((long?)acc?["sequence"] ?? 0) + 1;
         var reg = RegisterJson();
         var w = new JsonArray();
         foreach (var d in withdrawnDocIds) w.Add(new JsonObject { ["doc_id"] = d, ["reason"] = "B06 fixture withdrawal" });
+        // C16 Stage 3 tests: copy-hash withdrawals (source_copy_sha256), as the Python ExclusionStore writes them
+        foreach (var s in withdrawnCopyShas ?? []) w.Add(new JsonObject { ["source_copy_sha256"] = s, ["reason"] = "S3-D fixture copy withdrawal" });
         var upd = new JsonObject
         {
             ["contract_version"] = "1.0.0", ["record_kind"] = "exclusion_update", ["sequence"] = seq, ["issued_at"] = "2026-11-27T00:00:00Z",

@@ -32,9 +32,16 @@ public sealed class ParticipantUnavailableException(string message) : Exception(
 
 public sealed record SwitchAck(string TxnId, bool AdmittedStopped, int Pinned);
 
+/// PREPARED reply (C16 Stage 3, 2.1 additive): the participant has (or has not) loaded and verified the target's
+/// services beside the serving ones. Reason is a code only (no content).
+public sealed record PrepareAck(string TxnId, bool Prepared, string? Reason);
+
 /// The activation tool's view of the web service participant (control channel, interface B06 section 3).
 public interface IParticipantLink
 {
+    /// PREPARE -> PREPARED (C16 Stage 3, 2.1 additive; sent before ENTER_SWITCHING, nothing journaled). A participant
+    /// without an in-process swap has nothing to prepare (default). Throws ParticipantUnavailableException when lost.
+    PrepareAck Prepare(string txnId, string target, string to, long lockEpoch) => new(txnId, true, null);
     /// ENTER_SWITCHING -> ACK_SWITCHING. Throws ParticipantUnavailableException when there is no acknowledgement.
     SwitchAck EnterSwitching(string txnId, long lockEpoch);
     /// OPEN -> ACK_OPEN. Throws ParticipantUnavailableException when lost (the decision stands regardless).
@@ -238,6 +245,14 @@ public sealed class ActivationEngine : IDisposable
         if (!Preflight(target, to).Pass) throw new ActivationRefused("PREFLIGHT_FAILED", "measured disk preflight failed");
         var txn = TxnId(j.Transactions.Count() + 1, target, to);
         var from = _s.ReadPointer(target);
+
+        // C16 Stage 3: the participant loads and verifies the target's services beside the serving ones first. A failure
+        // (or an exceeded residency budget) refuses the transition here: nothing is journaled, admission never stopped,
+        // and the old generation keeps serving.
+        PrepareAck prep;
+        try { prep = _o.Participant.Prepare(txn, target, to, Lease.Epoch); }
+        catch (ParticipantUnavailableException e) { throw new ActivationRefused("PARTICIPANT_UNAVAILABLE", "no PREPARED: " + e.Message); }
+        if (!prep.Prepared || prep.TxnId != txn) throw new ActivationRefused("PARTICIPANT_NOT_PREPARED", "participant could not load the target: " + (prep.Reason ?? "unknown"));
 
         SwitchAck ack;
         try { ack = _o.Participant.EnterSwitching(txn, Lease.Epoch); }
