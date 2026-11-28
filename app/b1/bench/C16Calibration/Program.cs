@@ -55,16 +55,31 @@ JsonObject Inclusion(Dictionary<string, List<string>> strata, int k, int nSeeds,
     var o = new JsonObject { ["population"] = all.Count, ["corrupted"] = k, ["seeds"] = nSeeds };
     var rows = new JsonArray();
     var rnd = new Random(12345);
-    foreach (var s in sizes.Where(s => s <= all.Count))
+    // A stratified sample of size s is the first s members of the seed's round-robin order (B04Sampling.Stratified), so the
+    // order is computed once per seed and a corruption is included at size s iff its best rank is < s. Cross-checked
+    // against B04Sampling.Stratified itself on the first seed.
+    var hits = new int[sizes.Length];
+    var names = strata.Keys.Order(StringComparer.Ordinal).ToList();
+    for (int r = 0; r < nSeeds; r++)
     {
-        int hit = 0;
-        for (int r = 0; r < nSeeds; r++)
-        {
-            var bad = new HashSet<string>(Enumerable.Range(0, k).Select(_ => all[rnd.Next(all.Count)]));
-            if (B04Sampling.Stratified($"study-{r}", check, strata, s).Any(bad.Contains)) hit++;
-        }
-        rows.Add(new JsonObject { ["sample"] = s, ["measured"] = Math.Round((double)hit / nSeeds, 4), ["hypergeometric"] = Math.Round(Hyper(all.Count, k, s), 4) });
+        var rid = $"study-{r}";
+        var queues = names.Select(nm => strata[nm].Select(m => (m, sc: B04Sampling.Score(rid, check, m))).ToList()).ToList();
+        foreach (var q in queues) q.Sort((x, y) => x.sc.AsSpan().SequenceCompareTo(y.sc) is var c and not 0 ? c : string.CompareOrdinal(x.m, y.m));
+        var rank = new Dictionary<string, int>(all.Count, StringComparer.Ordinal);
+        int pos = 0;
+        for (int depth = 0; queues.Any(q => depth < q.Count); depth++)
+            foreach (var q in queues) if (depth < q.Count) rank[q[depth].m] = pos++;
+        if (r == 0)
+            foreach (var s in new[] { 4, 16 }.Where(s => s <= all.Count))
+                if (!B04Sampling.Stratified(rid, check, strata, s).ToHashSet().SetEquals(rank.Where(kv => kv.Value < s).Select(kv => kv.Key)))
+                    throw new InvalidOperationException("prefix property does not hold");
+        var bad = Enumerable.Range(0, k).Select(_ => all[rnd.Next(all.Count)]).Distinct().ToList();
+        int best = bad.Min(b => rank[b]);
+        for (int i = 0; i < sizes.Length; i++) if (best < sizes[i]) hits[i]++;
     }
+    for (int i = 0; i < sizes.Length; i++)
+        if (sizes[i] <= all.Count)
+            rows.Add(new JsonObject { ["sample"] = sizes[i], ["measured"] = Math.Round((double)hits[i] / nSeeds, 4), ["hypergeometric"] = Math.Round(Hyper(all.Count, k, sizes[i]), 4) });
     o["by_sample_size"] = rows;
     return o;
 }
