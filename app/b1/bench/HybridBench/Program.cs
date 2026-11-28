@@ -131,6 +131,17 @@ switch (a[0])
         Console.WriteLine($"{idx.Count} passages written (seed {seed})");
         break;
     }
+    case "vecs":
+    {
+        // C16 S3-E: C# embeddings of a few texts (JSON list in a[6]) to check equivalence with the Python dev harness.
+        //   vecs <site> <modelDir> <onnxFile> <pooling> <spm|-> <texts.json> <out.json>
+        using var e = new E5Embedder(a[2], threads: Math.Max(1, Environment.ProcessorCount / 2), onnxFile: a[3], sentencePieceModel: a[5] == "-" ? null : a[5]) { Pooling = a[4] };
+        var texts = JsonNode.Parse(File.ReadAllText(a[6]))!.AsArray().Select(x => x!.GetValue<string>()).ToList();
+        var v = texts.Select(t => e.Embed(new[] { t }, 256)[0]).ToArray();   // one text per call (int8 models: see dev_eval.py)
+        File.WriteAllText(a[7], JsonSerializer.Serialize(v));
+        Console.WriteLine($"{v.Length} vectors of {e.Dim}");
+        break;
+    }
     case "calsub":
     {
         // C15 declared variant of the C14 floor rule (DECLARATIONS.md item 2): median over the walkthrough queries of

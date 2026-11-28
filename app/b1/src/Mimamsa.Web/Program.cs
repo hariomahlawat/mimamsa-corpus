@@ -122,7 +122,7 @@ if (conf.GetValue("Mimamsa:Hybrid:Enabled", false))
         PassagePrefix = conf["Mimamsa:Hybrid:PassagePrefix"] is { } pp ? (pp == "none" ? "" : pp) : "passage: ",
     };
     semantic = Mimamsa.Hybrid.DenseIndex.Build(index, generation.GenerationId, emb, conf["Mimamsa:Hybrid:CacheDir"], conf["Mimamsa:Hybrid:ModelLabel"] ?? "multilingual-e5-small@614241f6",
-        conf.GetValue("Mimamsa:Hybrid:PassageTokens", 256), log: Console.WriteLine, passageContext: conf["Mimamsa:Hybrid:PassageContext"] ?? "none");
+        conf.GetValue("Mimamsa:Hybrid:PassageTokens", 256), batch: conf.GetValue("Mimamsa:Hybrid:Batch", 16), log: Console.WriteLine, passageContext: conf["Mimamsa:Hybrid:PassageContext"] ?? "none");
     hybridMs = phase.ElapsedMilliseconds;
 }
 // C15 WP2: optional cross-encoder rerank stage (off unless Mimamsa:Hybrid:Reranker:Enabled=true; pinned SHA-256 required).

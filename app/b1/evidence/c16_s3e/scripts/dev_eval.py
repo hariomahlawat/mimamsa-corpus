@@ -72,6 +72,7 @@ class Embedder:
         so.inter_op_num_threads = 1
         self.s = ort.InferenceSession(str(onnx), so, providers=["CPUExecutionProvider"])
         self.inputs = {i.name for i in self.s.get_inputs()}
+        self.int8 = "int8" in onnx.name
         self.tok = Tokenizer.from_file(str(tok))
         self.tok.no_padding()
         self.tok.no_truncation()
@@ -85,6 +86,11 @@ class Embedder:
         return ids
 
     def embed(self, texts, max_tokens, batch=8):
+        # Dynamically quantised (int8) ONNX models compute activation scales per call, so padding in a batch changes
+        # every vector in it (measured: cosine 0.96-0.99 between batched and single for arctic-embed int8). They are
+        # embedded one text per call, which makes each vector a function of its own text only (as at query time).
+        if self.int8:
+            batch = 1
         out = []
         for s in range(0, len(texts), batch):
             enc = [self.ids(t, max_tokens) for t in texts[s:s + batch]]
