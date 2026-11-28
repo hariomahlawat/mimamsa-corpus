@@ -45,6 +45,14 @@ The successful revision-pinned metadata retry examined 41,720 Hugging Face paths
 
 Taxonomy output preserves 507 nodes, all 5,294 folder-classification relationships, 669 candidate provision associations and 235 unresolved ranges or labels. Candidate associations are not legal findings.
 
+## PDF OCR and access closure
+
+The configuration-bound v2 PDF batch completed all 3,522 required pages with zero processing errors and zero pending jobs. It produced 3,519 clean OCR page records, two unreadable page holds and one access-marking hold. Every reusable record was revalidated against its source snapshot, rendered-page hash, OCR configuration and content-addressed artifacts during the restartable run.
+
+Final document propagation accounts for all 1,965 source documents: 1,822 are screened with no marking detected, two are held for access markings, and 141 are held for unreadable or incomplete evidence. All 143 affected documents have every derivative withheld.
+
+The final Contract 2.1 producer package passes strict validation with zero issues and contains 1,964 exportable document identities/admissions, 3,519 verified PDF OCR anchors, 5,289 exportable classification/provision relationships and 505 taxonomy nodes. One restricted document and its five relationships remain exclusively in the external hold evidence. Both per-source accounting schema validation and reconciliation report zero issues; no admission is application-eligible.
+
 ## Conversion evidence
 
 The 50-document Word pilot converted 50/50 documents with macros forced off and link updates disabled. Originals totalled 6,657,559 bytes; reconstructed PDFs totalled 16,254,553 bytes, a 2.441518 size ratio. All 50 PDFs contain extractable text. Eleven image-bearing documents produced 33 rendered review pages; one page per document was visually inspected with no obvious clipping, blank-image loss or page-geometry failure. The check is scoped and does not claim pixel identity for unreviewed pages. This disproves blanket conversion as a storage strategy. Conversion remains targeted to application compatibility, searchable representation and image-evidence viewing.
@@ -53,8 +61,8 @@ The 50-document Word pilot converted 50/50 documents with macros forced off and 
 
 - Local focused suite: 60 tests plus 5 parameterized subtests passing at the latest documented checkpoint.
 - Accepted contract 2.0 at `8052792186b822881508e0e4b95f586df6772a25`: 160 tests passing.
-- Contract 2.1 producer interface pinned at `1e3060def474d8486d853b62bd5a25d9bc04372b`; the current partial producer package passes its strict reference validator with zero issues. Final package counts are regenerated after the PDF batch and access register close.
+- Contract 2.1 producer interface pinned at `1e3060def474d8486d853b62bd5a25d9bc04372b`; the final producer package passes its strict reference validator with zero issues.
 - Generated corpus content remains outside Git.
 - Original documents remain read-only and preserved.
 
-PDF page OCR and final document-level access propagation are restartable external batches. Their final counts must be taken from the configuration-bound registers; incomplete or missing page results remain held.
+The final configuration-bound registers and package remain external under generation-v5; incomplete or unverifiable evidence remains fail-closed.

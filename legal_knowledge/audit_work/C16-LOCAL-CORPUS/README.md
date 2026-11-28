@@ -39,6 +39,8 @@ After all three registers exist, generate the document/derivative access registe
 
 Run `c16_exchange_v21.py` only after access propagation. It consumes the inventory, legal-identity assessment, v2 OCR evidence, access holds and taxonomy registers; emits canonical Contract 2.1 exchange populations, grouped OCR derivatives, per-source accounting, exact source/export candidate sets and the local hold register; and invokes the pinned strict validator. All admissions remain ineligible unless independent gate receipts and legal validation establish otherwise.
 
+Final v5 closure: PDF OCR is 3,522/3,522 with zero errors or pending pages; document access accounting is 1,822 clean, two access holds and 141 unreadable/incomplete holds across 1,965 documents. The final producer package passes strict Contract 2.1 validation and both source-accounting validations with zero issues.
+
 The Word conversion script is intentionally targeted. It verifies source hashes, disables macros and link updates, requires every embedded image to be cleared, preserves originals, and labels PDFs as locally reconstructed reference copies.
 
 ## Governance boundaries
