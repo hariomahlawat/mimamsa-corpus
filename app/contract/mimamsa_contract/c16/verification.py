@@ -277,3 +277,36 @@ def graph_structural_issues(nodes: list[dict], edges: list[dict], documents: dic
 
 def graph_digest_of_rows(builder_version: str, nodes: list[dict], edges: list[dict]) -> str:
     return digests.graph_digest(builder_version, [n["id"] for n in nodes], [e["id"] for e in edges])
+
+
+# ----------------------------------------------------------------------------------------------- golden vectors
+
+def golden_vectors() -> dict:
+    """Cross-language golden values (fixtures/c16/v2_1/component_verification/golden.json): the .NET B04Sampling,
+    VectorPackVerifier.Key/SourceDigest and VectorPackFile must reproduce every value."""
+    docs = [f"doc-{i:03d}" for i in range(40)] + ["act-army-1950", "jud-अधि-1", "z"]
+    samples = []
+    for rid, check, size in (("R1-fixture", "SAMPLED_REBUILD_PARITY", 5), ("R1-fixture", "SAMPLED_POSTINGS_REDERIVE", 5),
+                             ("R2-other", "SAMPLED_REBUILD_PARITY", 5), ("R1-fixture", "SAMPLED_QUERY_PARITY", 100)):
+        samples.append({"release_id": rid, "check_id": check, "members": docs, "size": size,
+                        "seeded": seeded_sample(rid, check, docs, size)})
+    strata = {"act": docs[:3] + ["act-army-1950"], "judgment": docs[3:30] + ["jud-अधि-1"], "rules": docs[30:40], "z": ["z"]}
+    stratified = [{"release_id": "R1-fixture", "check_id": "VECTOR_SPOT_REEMBED", "strata": strata, "size": n,
+                   "stratified": stratified_sample("R1-fixture", "VECTOR_SPOT_REEMBED", strata, n)} for n in (1, 4, 9, 100)]
+    scores = [{"release_id": "R1-fixture", "check_id": "SAMPLED_REBUILD_PARITY", "member": m,
+               "score": sample_score("R1-fixture", "SAMPLED_REBUILD_PARITY", m).hex()} for m in ("doc-000", "jud-अधि-1")]
+    model = "ca456c06b3a9505ddfd9131408916dd79290368331e7d76bb621f1cba6bc8665"
+    inputs = ["passage: Section 69 of the Army Act", "passage: सेना अधिनियम", "passage: "]
+    keys = [{"model_sha256": model, "max_tokens": 256, "input": s, "key": vector_key(model, 256, s).hex()} for s in inputs]
+    kb = [vector_key(model, 256, s) for s in inputs]
+    vecs = [struct.pack("<4f", 0.5, -0.5, 0.5, -0.5), struct.pack("<4f", 1.0, 0.0, 0.0, 0.0), struct.pack("<4f", 0.0, 0.0, 0.6, 0.8)]
+    pack = write_mimvec(4, list(zip(kb, vecs)))
+    return {
+        "format": SAMPLE_FORMAT, "seeded": samples, "stratified": stratified, "scores": scores, "vector_keys": keys,
+        "vector_source_digest": {"model_sha256": model, "max_tokens": 256, "keys": [k.hex() for k in kb],
+                                 "digest": vector_pack_source_digest(model, 256, kb)},
+        "mimvec": {"dim": 4, "entries": [{"key": k.hex(), "vector": v.hex()} for k, v in zip(kb, vecs)],
+                   "file_sha256": hashlib.sha256(pack).hexdigest(), "result_digest": digests.vector_pack_digest(list(zip(kb, vecs)))},
+        "params": vector_params(model, 384, 256),
+        "development_defaults": DEVELOPMENT_DEFAULTS,
+    }
