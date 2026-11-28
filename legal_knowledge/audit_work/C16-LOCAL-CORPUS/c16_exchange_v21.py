@@ -251,8 +251,20 @@ def build(args) -> dict:
     contract_python = Path(args.contract_root) / "app" / "contract"
     sys.path.insert(0, str(contract_python))
     from mimamsa_contract.c16 import adapters, canonical, rules
+    from mimamsa_contract.c16.schemas import schema_errors
 
     inventory = load_jsonl(Path(args.inventory))
+    if args.identity_assessment:
+        assessed = {row["inventory_id"]: row for row in load_jsonl(Path(args.identity_assessment))}
+        inventory = [{**row, **assessed.get(row["inventory_id"], {})} for row in inventory]
+    if args.access_register:
+        access = {row["inventory_id"]: row for row in load_jsonl(Path(args.access_register))}
+        for row in inventory:
+            decision = access.get(row["inventory_id"])
+            if decision:
+                row["access_disposition"] = decision["document_access_disposition"]
+                if decision["document_access_disposition"] != "SCREENED_NO_MARKING_DETECTED":
+                    row["derivative_withheld_reason"] = decision["document_access_disposition"]
     if args.primary_image_register:
         enrich_image_ocr(inventory, load_jsonl(Path(args.primary_image_register)),
                          load_jsonl(Path(args.secondary_image_register)) if args.secondary_image_register else [])
@@ -307,8 +319,41 @@ def build(args) -> dict:
     (exchange / "GENERATION.json").write_bytes(manifest_data)
     files["GENERATION.json"] = manifest_data
     issues = rules.exchange_issues(files, mode="strict")
+    registers = output / "registers"
+    (registers / "receipts").mkdir(parents=True, exist_ok=True)
+    decisions = {}
+    for admission in projected["admissions"]:
+        decisions[admission["decision"]] = decisions.get(admission["decision"], 0) + 1
+    rejected = sum(count for decision, count in decisions.items() if decision.startswith(("REJECTED_", "EXCLUDED_")))
+    quarantined = sum(count for decision, count in decisions.items() if decision.startswith("QUARANTINED_"))
+    held = len(projected["admissions"]) - rejected - quarantined
+    accounting = {
+        "contract": CONTRACT, "record_kind": "source_admission_accounting",
+        "release_id": f"R16-c16-v5-20261128-{args.producer_commit[:8]}", "scope": "DECLARED_BY_BUILD",
+        "sources": [{"source": f"c16:{args.generation_id}", "path": "C16",
+                     "provenance": {"generation_manifest_sha256": _sha(manifest_data),
+                                    "hf_repo": args.hf_repo, "hf_revision": args.hf_revision,
+                                    "candidate_set_sha256": None},
+                     "input": len(inventory), "identities": len(projected["identities"]),
+                     "effective_admissions": len(projected["admissions"]), "by_decision": decisions,
+                     "held": held, "rejected": rejected, "quarantined": quarantined,
+                     "eligible": 0, "served": 0, "not_served_reasons": decisions}]}
+    accounting_data = (json.dumps(accounting, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode("utf-8")
+    (registers / "source_accounting.json").write_bytes(accounting_data)
+    candidates = b"".join((row["source_copy"]["sha256"] + "\n").encode("ascii") for row in sorted(projected["identities"], key=lambda r: r["source_copy"]["sha256"]))
+    (registers / "exact_candidate_set.sha256").write_bytes(candidates)
+    receipt_register = {"contract": CONTRACT, "application_eligible_admissions": 0, "typed_gate_receipts": 0,
+                        "reason": "All producer admissions are held or rejected; Contract 2.1 requires no gate receipt artefacts for ineligible admissions."}
+    (registers / "TYPED_GATE_RECEIPT_REGISTER.json").write_text(json.dumps(receipt_register, indent=2), encoding="utf-8")
+    if args.access_register:
+        (registers / "DOCUMENT_ACCESS_REGISTER.jsonl").write_bytes(Path(args.access_register).read_bytes())
     report = {"contract_commit": args.contract_commit, "population_counts": {k: len(v) for k, v in populations.items()},
-              "validation_issues": [str(issue) for issue in issues], "strict_valid": not issues}
+              "relationship_accounting": {"folder_and_provision_classifications": len(projected["relationships"]),
+                                           "provision_candidates": len(provision_rows)},
+              "candidate_set_sha256": _sha(candidates),
+              "source_accounting_schema_errors": [str(issue) for issue in schema_errors(accounting)],
+              "validation_issues": [str(issue) for issue in issues],
+              "strict_valid": not issues and not schema_errors(accounting)}
     (output / "PRODUCER_VALIDATION_REPORT.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     return report
 
@@ -323,6 +368,9 @@ def parse_args(argv=None):
     p.add_argument("--restricted-register-sha256", required=True)
     p.add_argument("--pdf-ocr-root")
     p.add_argument("--primary-image-register"); p.add_argument("--secondary-image-register")
+    p.add_argument("--identity-assessment"); p.add_argument("--access-register")
+    p.add_argument("--hf-repo", default="hariomahlawat/mimamsa-corpus")
+    p.add_argument("--hf-revision", required=True)
     return p.parse_args(argv)
 
 
