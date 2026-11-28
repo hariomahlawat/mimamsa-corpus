@@ -115,6 +115,9 @@ class Embedder:
 def load_corpus():
     dev = json.loads(DEV.read_text(encoding="utf-8"))
     rows = [json.loads(l) for l in DISTRACTORS.read_text(encoding="utf-8").splitlines() if l.strip()]
+    # Every STRIDE-th row (still a uniform sample): stride 3 = 1,000 distractors, used for the large models on the
+    # contended host. All models are compared at the same stride.
+    rows = rows[::int(os.environ.get("C16_DISTRACTOR_STRIDE", "1"))]
     corpus = [{"id": p["id"], "title": p["title"], "doc_type": p["doc_type"], "text": p["text"], "dev": True} for p in dev["passages"]]
     corpus += [{"id": f"R{r['i']}", "title": r.get("title") or "", "doc_type": r.get("doc_type") or "", "text": r["text"], "dev": False} for r in rows]
     walk = json.loads(WALK.read_text(encoding="utf-8"))
@@ -156,8 +159,61 @@ def cache_path(model, repr_name, texts, kind):
     return p / f"{kind}-{h}.npy"
 
 
+class TextCache:
+    """Per-text vector cache for one model (sha256 of the exact model input -> vector), so strides and runs reuse work."""
+    def __init__(self, model):
+        self.dir = DATA / "vec" / model
+        self.dir.mkdir(parents=True, exist_ok=True)
+        self.keys_f, self.vec_f = self.dir / "textcache.keys.json", self.dir / "textcache.npy"
+        self.keys = json.loads(self.keys_f.read_text()) if self.keys_f.exists() else []
+        self.vec = np.load(self.vec_f) if self.vec_f.exists() else None
+        self.pos = {k: i for i, k in enumerate(self.keys)}
+
+    @staticmethod
+    def key(t):
+        return hashlib.sha256(t.encode("utf-8")).hexdigest()
+
+    def add(self, texts, vs):
+        for t in texts:
+            self.pos[self.key(t)] = len(self.keys)
+            self.keys.append(self.key(t))
+        self.vec = vs if self.vec is None else np.concatenate([self.vec, vs])
+        np.save(self.vec_f, self.vec)
+        self.keys_f.write_text(json.dumps(self.keys))
+
+    def get(self, texts):
+        return np.stack([self.vec[self.pos[self.key(t)]] for t in texts])
+
+    def missing(self, texts):
+        seen, out = set(), []
+        for t in texts:
+            k = self.key(t)
+            if k not in self.pos and k not in seen:
+                seen.add(k); out.append(t)
+        return out
+
+
 def get_vectors(model, repr_name, corpus, queries, emb=None, compute=False):
     texts, owner = representations(corpus, repr_name, emb)
+    if True:
+        tc = TextCache(model)
+        _, _, _, _, qpre, ppre = resolve(model)
+        ptexts, qtexts = [ppre + x for x in texts], [qpre + q for q in queries]
+        miss_p, miss_q = tc.missing(ptexts), tc.missing(qtexts)
+        if (miss_p or miss_q) and not compute:
+            raise SystemExit(f"vectors missing for {model}/{repr_name}; run embed first")
+        if miss_q:
+            emb = emb or Embedder(model)
+            tc.add(miss_q, emb.embed(miss_q, 128))
+        if miss_p:
+            emb = emb or Embedder(model)
+            t = time.time()
+            for s in range(0, len(miss_p), 128):
+                chunk = miss_p[s:s + 128]
+                tc.add(chunk, emb.embed(chunk, 256))
+                print(f"  {model}/{repr_name}: {s + len(chunk)}/{len(miss_p)} ({time.time() - t:.0f} s)", file=sys.stderr, flush=True)
+            print(f"  embedded {len(miss_p)} texts in {time.time() - t:.0f} s", file=sys.stderr)
+        return tc.get(ptexts), np.array(owner), tc.get(qtexts)
     pp = cache_path(model, repr_name, texts, "passages")
     qtexts = [q for q in queries]
     qp = cache_path(model, "queries", qtexts, "queries")

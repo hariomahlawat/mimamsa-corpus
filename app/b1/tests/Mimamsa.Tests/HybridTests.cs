@@ -164,4 +164,30 @@ public class HybridTests
         double Cos(float[] x, float[] y) => x.Zip(y, (p, q) => (double)p * q).Sum();
         Assert.True(Cos(a, related) > Cos(a, unrelated));
     }
+    /// C16 S3-E: the default admission rule is the C14/C15 floor filter, exactly.
+    [Fact]
+    public void FloorAdmissionIsTheUnchangedDefault()
+    {
+        var dense = new List<(int, double)> { (4, 0.90), (2, 0.86), (7, 0.85), (1, 0.80) };
+        var o = new HybridOptions(MinSimilarity: 0.85);
+        Assert.Equal("floor", o.Admission);
+        Assert.Equal(dense.Where(x => x.Item2 >= 0.85).ToList(), HybridAdmission.Admit(dense, o));
+    }
+
+    /// C16 S3-E: gate_rank opens on the best candidate only (same mode decision as floor), then admits the top K by rank.
+    [Fact]
+    public void GateRankAdmitsTopKOnlyWhenTheBestCandidateReachesTheGate()
+    {
+        var dense = new List<(int, double)> { (4, 0.90), (2, 0.86), (7, 0.85), (1, 0.80), (9, 0.70) };
+        var open = new HybridOptions(MinSimilarity: 0.88) { Admission = "gate_rank", AdmitK = 3 };
+        Assert.Equal(dense.Take(3).ToList(), HybridAdmission.Admit(dense, open));
+        var closed = open with { MinSimilarity = 0.95 };
+        Assert.Empty(HybridAdmission.Admit(dense, closed));
+        Assert.Empty(HybridAdmission.Admit(new List<(int, double)>(), open));
+        // mode decision equals floor's for every gate value: admitted non-empty iff some candidate reaches the gate
+        foreach (var g in new[] { 0.5, 0.85, 0.9, 0.91 })
+            Assert.Equal(HybridAdmission.Admit(dense, new HybridOptions(MinSimilarity: g)).Count > 0,
+                         HybridAdmission.Admit(dense, open with { MinSimilarity = g }).Count > 0);
+        Assert.Throws<InvalidOperationException>(() => HybridAdmission.Admit(dense, open with { Admission = "nope" }));
+    }
 }

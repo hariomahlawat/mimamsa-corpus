@@ -117,7 +117,9 @@ if (conf.GetValue("Mimamsa:Hybrid:Enabled", false))
     {
         // C16 S3-E: model-family settings (defaults = multilingual-e5, unchanged)
         Pooling = conf["Mimamsa:Hybrid:Pooling"] ?? "mean",
-        QueryPrefix = conf["Mimamsa:Hybrid:QueryPrefix"] ?? "query: ", PassagePrefix = conf["Mimamsa:Hybrid:PassagePrefix"] ?? "passage: ",
+        // "none" = no prefix (an empty environment variable cannot be set on Windows)
+        QueryPrefix = conf["Mimamsa:Hybrid:QueryPrefix"] is { } qp ? (qp == "none" ? "" : qp) : "query: ",
+        PassagePrefix = conf["Mimamsa:Hybrid:PassagePrefix"] is { } pp ? (pp == "none" ? "" : pp) : "passage: ",
     };
     semantic = Mimamsa.Hybrid.DenseIndex.Build(index, generation.GenerationId, emb, conf["Mimamsa:Hybrid:CacheDir"], conf["Mimamsa:Hybrid:ModelLabel"] ?? "multilingual-e5-small@614241f6",
         conf.GetValue("Mimamsa:Hybrid:PassageTokens", 256), log: Console.WriteLine, passageContext: conf["Mimamsa:Hybrid:PassageContext"] ?? "none");
