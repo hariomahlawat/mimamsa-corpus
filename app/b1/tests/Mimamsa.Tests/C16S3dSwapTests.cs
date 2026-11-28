@@ -215,6 +215,20 @@ public class C16S3dSwapTests
         Assert.True(rig.Host.ResidentCount <= 2);
     }
 
+    [Fact]
+    public void AnAbandonedPreparedTargetDoesNotBlockTheNextTransition()
+    {
+        GenerationSlot Light(string id) => new() { Id = id, Payload = new byte[1024] };
+        using var rig = new Rig("s3d-abandoned", Light, TimeSpan.FromMilliseconds(300), "G3-light");
+        // a PREPARE whose transition never reached OPEN (the participant was not told of the abort)
+        Assert.True(rig.Participant.Prepare("TX-abandoned", "KNOWLEDGE", G2, WriterLease.CurrentEpoch(rig.Site.Layout)).Prepared);
+        Assert.Equal(2, rig.Host.ResidentCount);
+        rig.Engine.Transition("KNOWLEDGE", "G3-light");      // supersedes it: the stale target is released, not counted
+        Assert.Equal("G3-light", rig.Host.Current!.Id);
+        Assert.Equal(new[] { "G3-light" }, rig.Host.Resident);
+        Assert.Equal(0, rig.Host.BudgetRefusals);
+    }
+
     /// Facet recount (S3-D goal 3): with the response boundary as the engine's hidden-document predicate, totals and every
     /// facet value are counted over the surviving results only - exactly the unfiltered counts minus the excluded
     /// documents that matched - with and without a filter, and no hit, chip or count names an excluded document.

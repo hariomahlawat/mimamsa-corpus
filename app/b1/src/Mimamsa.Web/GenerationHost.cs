@@ -88,6 +88,9 @@ public sealed class GenerationHost
         {
             lock (_gate)
             {
+                // one writer, one transition at a time: a new PREPARE supersedes a target prepared for a transition that
+                // never reached OPEN (for example an abort the participant was not told about), so it may be trimmed
+                if (_prepared != id) _prepared = null;
                 if (_resident.ContainsKey(id)) { _prepared = id; return true; }
                 if (!_loading.Contains(id))
                 {
