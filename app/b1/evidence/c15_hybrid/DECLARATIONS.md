@@ -104,3 +104,13 @@ Both are run once, hybrid off as well, and reported whatever the outcome.
 | --- | --- | --- | --- | --- |
 | O3a | intfloat/multilingual-e5-large `3d7cfbda`, `onnx/model_qint8_avx512_vnni.onnx` sha256 `46f5d13d…`, mean pooling, `query: ` / `passage: ` | `floor` | 0.8234 | batch 1 |
 | O3b | same | `gate_rank`, K = 10 | 0.8234 | batch 1 |
+
+### D6. bge-m3 oracle runs (declared after its dev result, before running them)
+
+- **Dev, stride 6:** bge-m3 int8 (Xenova conversion of BAAI/bge-m3, MIT) `floor` **10/16**, `gate_rank` K=10 **11/16**, out-of-domain gate 0/8, lexical controls 5/5. Under D2 this is now the **selected model** (highest dev semantic@10 meeting the constraints), replacing arctic.
+- Gate (D2 rule over the stride-6 sample, same deviation as D5): **0.5197** (`dev/out/bge-m3_plain_s6.json`).
+
+| Run | Model | Admission | Gate | Other |
+| --- | --- | --- | --- | --- |
+| O4a | Xenova/bge-m3 `4de13258`, `onnx/model_int8.onnx` sha256 `a206e10e…`, CLS pooling, no prefixes | `floor` | 0.5197 | batch 1 |
+| O4b | same | `gate_rank`, K = 10 | 0.5197 | batch 1 |
