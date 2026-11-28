@@ -142,6 +142,25 @@ switch (a[0])
         Console.WriteLine($"{v.Length} vectors of {e.Dim}");
         break;
     }
+    case "qlat":
+    {
+        // C16 S3-E: query-embedding latency, passage embedding cost (one text per call) and working set for a model.
+        //   qlat <site> <modelDir> <onnxFile> <pooling> <spm|-> <queryPrefix|none> <passagePrefix|none>
+        var before = Process.GetCurrentProcess().WorkingSet64;
+        using var e = new E5Embedder(a[2], threads: Math.Max(1, Environment.ProcessorCount / 2), onnxFile: a[3], sentencePieceModel: a[5] == "-" ? null : a[5])
+            { Pooling = a[4], QueryPrefix = a[6] == "none" ? "" : a[6], PassagePrefix = a[7] == "none" ? "" : a[7] };
+        e.EmbedQuery("warm up");
+        var ql = new List<double>();
+        foreach (var q in new[] { "written notice before hearing", "disability pension attributable to service", "summary court martial", "सेना अधिनियम धारा", "absence without leave",
+                                  "can soldiers form a union or join strikes?", "how to hold a summary court martial", "AFT jurisdiction" })
+        { sw.Restart(); e.EmbedQuery(q); ql.Add(sw.Elapsed.TotalMilliseconds); }
+        var texts = ix.Passages.Where(p => p.Text.Length > 600).Take(24).Select(p => e.PassagePrefix + p.Text).ToList();
+        sw.Restart(); foreach (var t in texts) e.Embed(new[] { t }, 256);
+        double perPassage = sw.Elapsed.TotalMilliseconds / Math.Max(1, texts.Count);
+        Console.WriteLine(JsonSerializer.Serialize(new { model = a[2], file = a[3], dim = e.Dim, query_embed_ms = ql.Select(x => Math.Round(x, 1)), query_p50_ms = Math.Round(ql.OrderBy(x => x).ElementAt(ql.Count / 2), 1),
+            ms_per_256tok_passage = Math.Round(perPassage, 1), working_set_mb = Process.GetCurrentProcess().WorkingSet64 / 1048576, working_set_before_model_mb = before / 1048576 }));
+        break;
+    }
     case "calsub":
     {
         // C15 declared variant of the C14 floor rule (DECLARATIONS.md item 2): median over the walkthrough queries of

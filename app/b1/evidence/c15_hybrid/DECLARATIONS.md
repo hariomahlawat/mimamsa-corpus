@@ -93,3 +93,14 @@ Both are run once, hybrid off as well, and reported whatever the outcome.
 | --- | --- | --- | --- | --- |
 | O2a | Snowflake/snowflake-arctic-embed-m-v2.0 `95c27414`, `onnx/model_int8.onnx` sha256 `03d923bb…`, CLS pooling, query prefix `query: `, no passage prefix, XLM-R SentencePiece of e5-small (ids verified identical) | `floor` | 0.3994 | batch 1, plain passages |
 | O2b | same | `gate_rank`, K = 10 | 0.3994 | same |
+
+### D5. e5-large oracle runs (declared after its dev result, before running them)
+
+- **Dev, 500 distractors (stride 6; all models re-evaluated at this stride, `dev/out/*_s6.json`):** e5-small 4 / 6 of 16 (`floor` / `gate_rank`), e5-base 8 / 8 but out-of-domain gate 3/8 (excluded by D2), arctic-embed-m-v2.0 7 / 8, multilingual-e5-large int8 7 / 8, all others 0/8 out-of-domain and 5/5 lexical controls.
+- Under D2, arctic and e5-large tie, so arctic (smaller) remains the selection (O2). e5-large is run as well because the brief asks for stronger models to be evaluated; this is **not** a selection made from oracle results, and whichever result it gives does not change the D2 selection.
+- **Deviation from D2:** gate computed over the 500-passage stride-6 sample (host saturated): **0.8234**.
+
+| Run | Model | Admission | Gate | Other |
+| --- | --- | --- | --- | --- |
+| O3a | intfloat/multilingual-e5-large `3d7cfbda`, `onnx/model_qint8_avx512_vnni.onnx` sha256 `46f5d13d…`, mean pooling, `query: ` / `passage: ` | `floor` | 0.8234 | batch 1 |
+| O3b | same | `gate_rank`, K = 10 | 0.8234 | batch 1 |
