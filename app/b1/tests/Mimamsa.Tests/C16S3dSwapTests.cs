@@ -215,6 +215,49 @@ public class C16S3dSwapTests
         Assert.True(rig.Host.ResidentCount <= 2);
     }
 
+    /// Facet recount (S3-D goal 3): with the response boundary as the engine's hidden-document predicate, totals and every
+    /// facet value are counted over the surviving results only - exactly the unfiltered counts minus the excluded
+    /// documents that matched - with and without a filter, and no hit, chip or count names an excluded document.
+    [Theory]
+    [InlineData("hearing", null)]
+    [InlineData("written", null)]
+    [InlineData("hearing", "judgment")]
+    public void FacetsAndTotalsAreCountedExactlyOverTheSurvivingResults(string query, string? type)
+    {
+        var ix = SearchIndex.Build(Syn.Gen);
+        var filters = new SearchFilters(Types: type is null ? null : new HashSet<string> { type });
+        var all = new SearchService(ix, _ => false).Search(query, new SearchFilters());
+        var docsAll = all.Hits.Select(h => ix.Docs[ix.DocOf(h.PassageIndex)]).DistinctBy(d => d.DocId).ToList();
+        Assert.True(docsAll.Count >= 3, $"query '{query}' matches {docsAll.Count} documents");
+        // exclude one judgment (doc id) and one other document (as a copy-hash exclusion would)
+        var hidden = new HashSet<string>(StringComparer.Ordinal)
+        {
+            docsAll.First(d => d.DocType == "judgment").DocId, docsAll.First(d => d.DocType != "judgment").DocId,
+        };
+        var allF = new SearchService(ix, _ => false).Search(query, filters);
+        var hid = new SearchService(ix, hidden.Contains) { HideChipsOfHiddenDocuments = true }.Search(query, filters);
+        Assert.DoesNotContain(hid.Hits, h => hidden.Contains(ix.Docs[ix.DocOf(h.PassageIndex)].DocId));
+        var allFDocs = allF.Hits.Select(h => ix.Docs[ix.DocOf(h.PassageIndex)].DocId).ToHashSet();
+        Assert.Equal(allF.TotalDocuments - hidden.Count(allFDocs.Contains), hid.TotalDocuments);
+        Assert.Equal(allF.Hits.Count(h => !hidden.Contains(ix.Docs[ix.DocOf(h.PassageIndex)].DocId)), hid.TotalPassages);
+        // facets are computed BEFORE the filter (each facet ignores its own filter), over every matching document
+        foreach (var (facet, values) in allF.Facets)
+        {
+            Func<Mimamsa.Core.Generation.DocumentRecord, string?> key = facet switch
+            {
+                "type" => d => d.DocType, "court" => d => d.CourtOrIssuer, "year" => d => d.Year?.ToString(), _ => d => d.CorpusStatus,
+            };
+            bool passOthers(Mimamsa.Core.Generation.DocumentRecord d) => facet == "type" || type is null || d.DocType == type;
+            var expected = values.Select(v => (v.Value, Count: v.Count - docsAll.Count(d => hidden.Contains(d.DocId) && passOthers(d) && (key(d) ?? "Not recorded") == v.Value)))
+                                 .Where(x => x.Count > 0).OrderBy(x => x.Value, StringComparer.Ordinal).ToList();
+            var actual = hid.Facets[facet].Select(v => (v.Value, v.Count)).OrderBy(x => x.Value, StringComparer.Ordinal).ToList();
+            Assert.Equal(expected, actual);
+        }
+        // the hidden documents are not named by any chip, and the counts in the response are consistent with its hits
+        Assert.All(hid.Chips, c => Assert.True(hidden.All(h => !(c.Text + c.Source).Contains(h, StringComparison.Ordinal))));
+        Assert.Equal(hid.TotalDocuments, hid.Hits.Select(h => ix.DocOf(h.PassageIndex)).Distinct().Count());
+    }
+
     [Fact]
     public void TheSwappedOutGenerationIsReleasedAndItsMemoryIsMeasured()
     {

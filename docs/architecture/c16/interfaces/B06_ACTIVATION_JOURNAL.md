@@ -134,4 +134,24 @@ The reference `model_gate` checks K1's "verified" explicitly from 2.1 (fix to ma
 4. Derive semantic-search availability per pin from `semantic_search_enabled`, and disable the semantic path, including query embedding, when it is false.
 5. Run SC26–SC31 with the extended runner: read `initial.lexical_only`, accept `models: null`, and emit `semantic_search` in the trace only when `lexical_only` is declared.
 
+## In-process generation swap: PREPARE (2.1 addition, C16 Stage 3 S3-D)
+
+**Flag.** Additive to the section 3 channel; 2.0 is unchanged. The reference model and SC01–SC31 are unaffected: a
+participant without an in-process swap has nothing to prepare and answers PREPARED at once (the .NET default), so every
+scenario trace is byte-identical.
+
+| Message | From → to | Meaning |
+| --- | --- | --- |
+| `PREPARE {txn_id, target, to}` | tool → web | **before ENTER_SWITCHING**: load and verify the target's services (generation store, disk text store, disk index, graph, eligibility, search) beside the serving ones; admission continues on the old generation meanwhile |
+| `PREPARED {txn_id, prepared, reason}` | web → tool | `prepared: false` (load or verification failed, or the residency budget is exhausted) means the transition is refused (`PARTICIPANT_NOT_PREPARED`) and **nothing is journaled**; the old generation keeps serving |
+
+**Rules (web participant).**
+- OPEN re-reads the journal head from disk as before and then switches to the prepared services in one step under the
+  participant lock; a head that is not resident (restart, recovery roll-forward) is loaded outside the lock while nothing
+  is admitted (fail closed).
+- Every request is served wholly by the generation of its pin; the previous generation's services are released when its
+  last pin is released.
+- At most two generations are resident (serving plus one more); a third waits for the old one to drain, up to a bounded
+  time, and is then refused. This bound requires the disk text store and the disk index in activation mode.
+
 **What the model does not prove.** It proves the protocol. Real fsync, PostgreSQL transactions, process kills and concurrent requests remain FG-JOURNAL-DURABILITY for the .NET implementation (B06), which runs these same files.

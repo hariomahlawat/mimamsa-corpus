@@ -2,7 +2,9 @@
 // app/contract/mimamsa_contract/c16/activation.py (architecture section 8.2) plus the protocol parts of scenarios.py
 // (single writer with epoch, participant on the control channel, torn-tail reader, I-6 exclusion reader).
 //
-// Transaction:  validate -> participant ENTER_SWITCHING/ACK -> marker SWITCHING -> BEGIN -> DECIDED (the ONE commit
+// Transaction:  validate -> participant PREPARE/PREPARED (C16 Stage 3, 2.1 additive: target loaded beside the serving
+//               generation; a refusal stops here, nothing journaled) -> participant ENTER_SWITCHING/ACK -> marker
+//               SWITCHING -> BEGIN -> DECIDED (the ONE commit
 //               decision) -> DB_APPLIED -> POINTER_WRITTEN -> EXCLUSIONS_APPLIED -> LOGGED -> OPEN -> marker OPEN ->
 //               participant OPEN/ACK.
 // Every journal record is flushed to the device before the next effect; every effect runs under the writer guard
