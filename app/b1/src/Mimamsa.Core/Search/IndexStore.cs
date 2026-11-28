@@ -191,10 +191,12 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
     }
 
     // ------------------------------------------------------------------ load (no tokenisation)
-    void Load(string dir, GenerationStore g, List<DocumentRecord> docs, SearchIndex ix)
+    void Load(string dir, GenerationStore g, List<DocumentRecord> docs, SearchIndex ix) => LoadFile(Path.Combine(dir, DbFile), g, docs, ix);
+
+    internal static void LoadFile(string dbPath, GenerationStore g, List<DocumentRecord> docs, SearchIndex ix)
     {
         foreach (var a in g.Abbreviations) ix.Abbrev.TryAdd(a.Code, a);
-        using var c = new SqliteConnection(SqlitePostingTable.ReadOnlyConnectionString(Path.Combine(dir, DbFile)));
+        using var c = new SqliteConnection(SqlitePostingTable.ReadOnlyConnectionString(dbPath));
         c.Open();
         using var r = new SqliteCommand("SELECT di, doc_id, service, lens FROM docs ORDER BY di", c).ExecuteReader();
         int di = 0;

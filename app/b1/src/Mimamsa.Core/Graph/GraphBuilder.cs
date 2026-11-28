@@ -24,8 +24,16 @@ public static partial class GraphBuilder
 
     static string Trunc(string? s, int n) => s is null ? "" : s.Length > n ? s[..n] + "…" : s;
 
-    public static LegalGraph Build(GenerationStore g)
+    public static LegalGraph Build(GenerationStore g) => Build(g, null);
+
+    /// C16 B04 SAMPLED_REBUILD_PARITY (S3-B): `includeSource` restricts the per-source derivations to a sample of source
+    /// documents (null source = records without a source document, always included). Every edge emitted is exactly the
+    /// edge the full build emits for that source (the cross-document context - instruments, families, copy-hash lookup -
+    /// is still built in full); edges of other sources are not derived, and the tables of contents of unsampled primary
+    /// documents are not parsed. Null keeps the full build (byte-identical to before).
+    public static LegalGraph Build(GenerationStore g, Func<string?, bool>? includeSource)
     {
+        bool Inc(string? docId) => includeSource is null || includeSource(docId);
         var rel = g.Relations;
         var nodes = new Dictionary<string, GraphNode>(StringComparer.Ordinal);
         var edges = new Dictionary<string, GraphEdge>(StringComparer.Ordinal);
@@ -35,6 +43,7 @@ public static partial class GraphBuilder
         void Edge(string type, string from, string to, string origin, DocumentRecord? src, string? sha, int? page, string? quote,
                   string? tFrom, string tFromStatus, string? tTo, string tToStatus, string verification, string uncertainty, bool legalEffect)
         {
+            if (!Inc(src?.DocId)) return;
             var q = quote is null ? null : Trunc(Regex.Replace(quote, @"\s+", " ").Trim(), 400);
             var id = GraphIds.EdgeId(type, from, to, origin, src?.DocId, page, q);
             edges.TryAdd(id, new GraphEdge(id, type, from, to, origin, src?.DocId, sha ?? src?.CopySha, page, q, tFrom, tFromStatus, tTo, tToStatus,
@@ -65,6 +74,7 @@ public static partial class GraphBuilder
         foreach (var inst in rel.Instruments)
         {
             if (!g.Documents.TryGetValue(inst.PrimaryDocId, out var primary) || primary.DocType is not ("act" or "rules" or "regulations")) continue;
+            if (!Inc(primary.DocId)) continue;
             var code = GraphIds.InstrumentCode(inst.PrimaryDocId); var prefix = GraphIds.Prefix(primary.DocType);
             foreach (var e in Toc.Build(primary))
             {
@@ -81,6 +91,11 @@ public static partial class GraphBuilder
         foreach (var v in g.ProvisionVersions)
         {
             var code = GraphIds.CodeFromA4Family(v.Family);
+            var ev = v.Evidence.FirstOrDefault(x => x.DocId is not null && g.Documents.ContainsKey(x.DocId));
+            var evDoc = ev?.DocId is { } did ? g.Documents[did] : null;
+            var instDoc = familyOfCode.GetValueOrDefault(code) is { } fi ? g.Documents.GetValueOrDefault(fi.PrimaryDocId) : null;
+            var verDoc = evDoc ?? instDoc;
+            if (!Inc(verDoc?.DocId)) continue;
             var m = ProvRef().Match(v.Provision.Trim());
             string provId;
             if (m.Success)
@@ -89,10 +104,6 @@ public static partial class GraphBuilder
                 provId = EnsureProvision(code, p is "r" or "rr" or "rule" ? "r" : p is "reg" or "regulation" ? "reg" : "s", m.Groups["n"].Value);
             }
             else provId = EnsureProvision(code, "part", Regex.Replace(v.Provision.Trim(), @"\s+", "-"));
-            var ev = v.Evidence.FirstOrDefault(x => x.DocId is not null && g.Documents.ContainsKey(x.DocId));
-            var evDoc = ev?.DocId is { } did ? g.Documents[did] : null;
-            var instDoc = familyOfCode.GetValueOrDefault(code) is { } fi ? g.Documents.GetValueOrDefault(fi.PrimaryDocId) : null;
-            var verDoc = evDoc ?? instDoc;
             var verId = GraphIds.Version(v.VersionId);
             Node(new GraphNode(verId, NodeKind.ProvisionVersion, $"{v.VersionId} ({v.VersionKind.Replace('_', ' ')})", verDoc?.DocId, verDoc?.CopySha, evDoc is not null, ev?.Page, familyOfCode.GetValueOrDefault(code)?.Key, code));
             var type = v.VersionKind switch
@@ -110,7 +121,7 @@ public static partial class GraphBuilder
         var docBySha12 = g.Documents.Values.GroupBy(d => d.CopySha[..12]).ToDictionary(x => x.Key, x => x.First().DocId);
         foreach (var d in g.Documents.Values.Where(d => d.DocType == "judgment"))
             Node(new GraphNode(GraphIds.Judgment(d.DocId), NodeKind.Judgment, d.Title ?? d.DocId, d.DocId, d.CopySha, true, null, null, null));
-        foreach (var d in g.Documents.Values)
+        foreach (var d in g.Documents.Values.Where(d => Inc(d.DocId)))
             foreach (var c in d.Candidates.Where(c => c.Type == "graph_edge"))
             {
                 var relation = c.Payload["relation"]?.GetValue<string>();
