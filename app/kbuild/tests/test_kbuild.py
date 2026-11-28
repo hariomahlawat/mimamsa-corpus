@@ -65,11 +65,14 @@ def test_invalid_spec_refused_before_anything_is_written(tmp_path, mutate, code)
 
 
 def test_skeleton_refuses_what_it_does_not_build():
+    """Stage 3 builds DELTA releases and several generations; PRODUCTION signing stays refused (Stage 4, OG-2)."""
     spec = load_spec()
     spec["release"].update(base_mode="DELTA", base_release_id="R15-cp1-fixture-20261126-00000001")
     spec["release"]["signing_mode"] = "PRODUCTION"
-    codes = {i["code"] for i in stages.spec_support_issues(spec)}
-    assert codes == {"BUILD_UNSUPPORTED"} and len(stages.spec_support_issues(spec)) == 2
+    codes = [i["code"] for i in stages.spec_support_issues(spec)]
+    assert codes == ["BUILD_UNSUPPORTED"]
+    spec["inputs"]["producer_generations"].append(dict(spec["inputs"]["producer_generations"][0]))
+    assert "BUILD_GENERATIONS_INCOMPATIBLE" in {i["code"] for i in stages.spec_support_issues(spec)}
 
 
 def test_dry_run_writes_nothing(tmp_path, mirror):

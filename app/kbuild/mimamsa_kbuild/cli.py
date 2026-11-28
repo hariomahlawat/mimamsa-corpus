@@ -41,23 +41,27 @@ def build_accel(artifacts: Path) -> Path:
     return default_accel_dll(artifacts)
 
 
-def make_context(spec: dict, out_root: Path, mirror, dev_key, accel, *, apply: bool = True):
+def make_context(spec: dict, out_root: Path, mirror, dev_key, accel, *, apply: bool = True, fetch_plan=None, hf_cache=None,
+                 base_bundle=None, hf_transport=None):
     from .engine import BuildContext
     from .resources import apply_budget, effective_budget, measure_host
     budget = effective_budget(spec, measure_host(out_root))
     if apply:
         apply_budget(budget)
-    return BuildContext(spec=spec, out_root=Path(out_root).resolve(), mirror=Path(mirror).resolve() if mirror else None,
-                        dev_key_path=Path(dev_key).resolve() if dev_key else None, accel_tool=Path(accel).resolve() if accel else None,
-                        budget=budget)
+    res = lambda p: Path(p).resolve() if p else None  # noqa: E731
+    return BuildContext(spec=spec, out_root=Path(out_root).resolve(), mirror=res(mirror), dev_key_path=res(dev_key),
+                        accel_tool=res(accel), budget=budget, fetch_plan=res(fetch_plan), hf_cache=res(hf_cache),
+                        base_bundle=res(base_bundle), hf_transport=hf_transport)
 
 
-def run_build(spec: dict, out_root: Path, *, mirror=None, dev_key=None, accel=None, from_stage=None, apply_budget: bool = True) -> dict:
+def run_build(spec: dict, out_root: Path, *, mirror=None, dev_key=None, accel=None, from_stage=None, apply_budget: bool = True,
+              fetch_plan=None, hf_cache=None, base_bundle=None, hf_transport=None) -> dict:
     """Run (or resume) a build. Raises BuildRefused. Returns the engine result plus the build record path."""
     from mimamsa_contract.c16 import build_spec as bs
 
     from . import engine, stages
-    ctx = make_context(spec, out_root, mirror, dev_key, accel, apply=apply_budget)
+    ctx = make_context(spec, out_root, mirror, dev_key, accel, apply=apply_budget, fetch_plan=fetch_plan, hf_cache=hf_cache,
+                       base_bundle=base_bundle, hf_transport=hf_transport)
     issues = bs.spec_issues(spec)   # fail before anything is written (S0 re-checks and records)
     if issues:
         raise BuildRefused(issues[0].code, issues[0].message, "S0", [{"code": i.code, "message": i.message} for i in issues])
@@ -73,19 +77,72 @@ def run_build(spec: dict, out_root: Path, *, mirror=None, dev_key=None, accel=No
         ctx.record.update(outcome="REFUSED", refusal=exc.as_dict(), seconds=round(time.perf_counter() - t0, 3))
         raise
     finally:
+        stats = ctx.record.pop("_fetch_stats", None)
+        if stats is not None:
+            ctx.record["fetch"] = stats.as_dict()
+        ctx.record["resources_observed"] = _observed(ctx)
         ctx.build_root.mkdir(parents=True, exist_ok=True)
         write_atomic(ctx.build_root / "BUILD_RECORD.json", json_pretty(ctx.record))
 
 
-def dry_run(spec: dict, out_root: Path, *, mirror=None, dev_key=None, accel=None) -> dict:
-    """What would be fetched (counts per source) and which stages would run. Writes nothing."""
+def _observed(ctx) -> dict:
+    """Resource use observed for this process (shared-host record, SG-6): peak working set and CPU seconds."""
+    out = {}
+    try:
+        import psutil   # optional
+        p = psutil.Process()
+        mi = p.memory_info()
+        out.update(peak_working_set_bytes=getattr(mi, "peak_wset", None) or mi.rss, cpu_seconds=round(sum(p.cpu_times()[:2]), 1))
+    except Exception:
+        try:
+            import ctypes
+            from ctypes import wintypes
+
+            class PMC(ctypes.Structure):
+                _fields_ = [("cb", wintypes.DWORD), ("PageFaultCount", wintypes.DWORD), ("PeakWorkingSetSize", ctypes.c_size_t),
+                            ("WorkingSetSize", ctypes.c_size_t), ("QuotaPeakPagedPoolUsage", ctypes.c_size_t),
+                            ("QuotaPagedPoolUsage", ctypes.c_size_t), ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t),
+                            ("QuotaNonPagedPoolUsage", ctypes.c_size_t), ("PagefileUsage", ctypes.c_size_t), ("PeakPagefileUsage", ctypes.c_size_t)]
+            pmc = PMC()
+            pmc.cb = ctypes.sizeof(PMC)
+            h = ctypes.windll.kernel32.GetCurrentProcess()
+            if ctypes.windll.psapi.GetProcessMemoryInfo(h, ctypes.byref(pmc), pmc.cb):
+                out["peak_working_set_bytes"] = int(pmc.PeakWorkingSetSize)
+        except Exception:
+            pass
+    try:
+        import time as _t
+        out.setdefault("cpu_seconds", round(_t.process_time(), 1))
+    except Exception:
+        pass
+    try:
+        from .fsutil import files_under
+        out["build_root_bytes"] = sum(p.stat().st_size for p in files_under(ctx.build_root)) if ctx.build_root.exists() else 0
+    except Exception:
+        pass
+    return out
+
+
+def dry_run(spec: dict, out_root: Path, *, mirror=None, dev_key=None, accel=None, fetch_plan=None, hf_cache=None, base_bundle=None) -> dict:
+    """What would be fetched (counts per source) and which stages would run. Writes nothing and, for a real-corpus
+    build, uses no network (counts come from the pinned plan)."""
     from mimamsa_contract.c16 import build_spec as bs
 
-    from . import engine, stages
-    ctx = make_context(spec, out_root, mirror, dev_key, accel, apply=False)
+    from . import engine, real_corpus, stages
+    ctx = make_context(spec, out_root, mirror, dev_key, accel, apply=False, fetch_plan=fetch_plan, hf_cache=hf_cache, base_bundle=base_bundle)
     issues = [{"code": i.code, "message": i.message} for i in bs.spec_issues(spec)] + stages.spec_support_issues(spec)
     out = {"build_id": spec["build_id"], "spec_sha256": bs.spec_sha256(spec), "spec_issues": issues, "writes": "nothing (dry run)"}
     if issues:
+        return out
+    plan, _ = real_corpus.load_plan(ctx.fetch_plan, spec)
+    if plan is not None:
+        out["sources"] = real_corpus.plan_counts(plan)
+        out["producer_generations"] = [{"corpus_generation_id": g["corpus_generation_id"], "hf_revision": g["hf_revision"]}
+                                       for g in spec["inputs"]["producer_generations"]]
+        out["network"] = "none in a dry run; S1 fetches only the pinned revisions above"
+        manifests = engine.load_manifests(ctx) if ctx.build_root.exists() else {}
+        out["stages_to_run"] = engine.plan(ctx, manifests, stages.FRESH, set())
+        out["budget"] = ctx.budget.as_dict()
         return out
     try:
         inv, _ = stages.collect_inventory(ctx, dry_run=True)
@@ -100,6 +157,29 @@ def dry_run(spec: dict, out_root: Path, *, mirror=None, dev_key=None, accel=None
     out["stages_to_run"] = engine.plan(ctx, manifests, stages.FRESH, set()) if not out.get("sources_refused") else [s for s, _ in bs.STAGES]
     out["budget"] = ctx.budget.as_dict()
     return out
+
+
+def stage_import(bundle: Path, trust: Path, site: Path) -> dict:
+    """B01 stage_only import of a signed development bundle into an isolated site: the generation is written and
+    verified but ACTIVE is not switched (activation is the journal's job, B06). Refuses an existing site directory."""
+    from mimamsa_contract.restricted import load_register
+    from mimamsa_contract.trust import parse_trust_list
+    from mimamsa_importer import configure_site, import_release
+    site = Path(site).resolve()
+    if site.exists() and any(site.iterdir()):
+        raise SystemExit("stage-import needs a new, empty, isolated site directory")
+    t0 = time.perf_counter()
+    configure_site(site, exclusion_channel="none")
+    res = import_release(Path(bundle).resolve(), site, trust_list=parse_trust_list(json.loads(Path(trust).read_text(encoding="utf-8"))),
+                         mode="development", register=load_register(), stage_only=True)
+    c16 = res.c16 or {}
+    gens = sorted(p.name for p in (site / "generations").iterdir()) if (site / "generations").is_dir() else []
+    return {"stage_only": True, "staged": getattr(res, "staged", None), "activated": res.activated, "active_file_present": (site / "ACTIVE").exists(),
+            "refused_reasons": res.refused_reasons, "release_id": res.release_id, "generations": gens,
+            "verified": {k: len(v) for k, v in sorted(res.verified.items())},
+            "unresolved_by_kind": {k: sum(1 for u in res.unresolved if u["kind"] == k) for k in sorted({u["kind"] for u in res.unresolved})},
+            "c16_active": c16.get("active"), "c16_codes": c16.get("codes"), "accounting_digests": c16.get("accounting_digests"),
+            "seconds": round(time.perf_counter() - t0, 1)}
 
 
 def _areas(files):
@@ -122,6 +202,9 @@ def main(argv=None) -> int:
     b.add_argument("--accel-tool", type=Path, help="KBuildAccel.dll; default <out-root>/tools/dotnet build (built on first use)")
     b.add_argument("--from", dest="from_stage", choices=[f"S{i}" for i in range(10)])
     b.add_argument("--dry-run", action="store_true")
+    b.add_argument("--fetch-plan", type=Path, help="real corpus: the fetch plan the spec pins (tool mimamsa_kbuild.fetch_plan)")
+    b.add_argument("--hf-cache", type=Path, help="real corpus: content-addressed HF fetch cache, e.g. E:/Mimamsa-Data/c16s3a/cache")
+    b.add_argument("--base-bundle", type=Path, help="DELTA: the signed FULL base release (its S8/bundle)")
     m = sub.add_parser("prepare-fixture-mirror")
     m.add_argument("--out", type=Path, required=True)
     m.add_argument("--exchange", choices=["positive", "v2_1", "cp1"], default="positive",
@@ -131,7 +214,14 @@ def main(argv=None) -> int:
     g = sub.add_parser("budget")
     g.add_argument("--spec", type=Path, required=True)
     sub.add_parser("measure-host")
+    si = sub.add_parser("stage-import", help="import a signed bundle into an ISOLATED site with B01 stage_only (ACTIVE untouched)")
+    si.add_argument("--bundle", type=Path, required=True)
+    si.add_argument("--trust", type=Path, required=True, help="the build's development trust list (S8/dev-trust/trust_list.json)")
+    si.add_argument("--site", type=Path, required=True, help="a NEW, isolated site directory (never an operational site)")
     a = ap.parse_args(argv)
+    if a.cmd == "stage-import":
+        print(json.dumps(stage_import(a.bundle, a.trust, a.site), indent=1, sort_keys=True))
+        return 0
     try:
         if a.cmd == "prepare-fixture-mirror":
             from .fixture_mirror import prepare
@@ -157,7 +247,8 @@ def main(argv=None) -> int:
         dev_key = a.dev_key or out_root / "dev-keys" / "release-dev.key"
         accel = a.accel_tool
         if a.dry_run:
-            print(json.dumps(dry_run(spec, out_root, mirror=a.source_mirror, dev_key=dev_key, accel=accel), indent=1, sort_keys=True))
+            print(json.dumps(dry_run(spec, out_root, mirror=a.source_mirror, dev_key=dev_key, accel=accel, fetch_plan=a.fetch_plan,
+                                    hf_cache=a.hf_cache, base_bundle=a.base_bundle), indent=1, sort_keys=True))
             return 0
         from .devkeys import ensure_dev_key
         ensure_dev_key(dev_key)
@@ -165,7 +256,8 @@ def main(argv=None) -> int:
             accel = default_accel_dll(out_root / "tools" / "dotnet")
             if not accel.is_file():
                 build_accel(out_root / "tools" / "dotnet")
-        res = run_build(spec, out_root, mirror=a.source_mirror, dev_key=dev_key, accel=accel, from_stage=a.from_stage)
+        res = run_build(spec, out_root, mirror=a.source_mirror, dev_key=dev_key, accel=accel, from_stage=a.from_stage,
+                        fetch_plan=a.fetch_plan, hf_cache=a.hf_cache, base_bundle=a.base_bundle)
         print(json.dumps({"outcome": "BUILT", "ran": res["ran"], "reused": res["reused"], "record": res["record"],
                           "bundle": str(res["context"].stage_dir("S8") / "bundle")}, indent=1))
         return 0

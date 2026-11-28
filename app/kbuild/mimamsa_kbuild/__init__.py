@@ -11,7 +11,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 PACKAGE_DIR = Path(__file__).resolve().parent
 KBUILD_DIR = PACKAGE_DIR.parent
 REPO = KBUILD_DIR.parents[1]

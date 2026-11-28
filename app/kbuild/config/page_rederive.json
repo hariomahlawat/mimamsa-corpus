@@ -1,0 +1,10 @@
+{
+ "record_kind": "kbuild_page_rederive_config",
+ "format": "mimamsa-kbuild-page-rederive/1",
+ "ocr": "NONE",
+ "ocr_note": "No OCR is run by the central build. Re-derivation only re-serialises EXISTING page text into the importer's [[page N]] format; OCR of the local collection stays with the producer (R3, R4).",
+ "page_marker": "[[page N]]",
+ "normalisation": "NONE",
+ "sources": ["PAGE_LIST", "FORM_FEED"],
+ "tools": {"python_unicode": "str (code points; no normalisation)", "renderer": "mimamsa_kbuild.page_format.render (inverse of the importer's _split_pages)"}
+}

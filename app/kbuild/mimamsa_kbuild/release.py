@@ -18,7 +18,7 @@ from pathlib import Path
 
 from mimamsa_contract.c16 import canonical, digests
 
-from .fsutil import files_under, sha256_bytes, write_bytes
+from .fsutil import files_under, link_or_copy, sha256_bytes, sha256_file, write_bytes
 
 INTEGRITY_FORMAT = "mimamsa-kbuild-integrity-register/0 (proposed contract 2.1 addition; not yet in the contract)"
 V1_PAYLOADS = [("data/documents.jsonl", "documents_jsonl", "documents"), ("data/derived_text.jsonl", "derived_text_jsonl", "derived_text"),
@@ -185,7 +185,8 @@ def source_accounting(*, release_id: str, v1_docs: list[dict], generations: list
     return reg
 
 
-def integrity_rows(v1_docs: list[dict], originals: dict[str, bytes], source: str) -> bytes:
+def integrity_rows(v1_docs: list[dict], originals: dict, source: str) -> bytes:
+    """originals: {sha256: bytes or Path} (a Path is hashed by streaming: bounded memory, C16 Stage 3)."""
     by_sha: dict[str, list[str]] = {}
     for d in v1_docs:
         by_sha.setdefault(d["source_copy"]["sha256"], []).append(d["doc_id"])
@@ -194,9 +195,11 @@ def integrity_rows(v1_docs: list[dict], originals: dict[str, bytes], source: str
         h = d["source_copy"]["sha256"]
         if h not in originals or any(r["sha256"] == h for r in rows):
             continue
-        rows.append({"record_kind": "integrity_entry", "format": INTEGRITY_FORMAT, "sha256": h, "bytes": len(originals[h]),
+        o = originals[h]
+        size, got = (o.stat().st_size, sha256_file(o)) if isinstance(o, Path) else (len(o), sha256_bytes(o))
+        rows.append({"record_kind": "integrity_entry", "format": INTEGRITY_FORMAT, "sha256": h, "bytes": size,
                      "media_type": d["source_copy"]["mime_type"], "page_count": d["source_copy"]["page_count"],
-                     "doc_ids": sorted(by_sha[h]), "source": source, "verified_sha256": sha256_bytes(originals[h]) == h})
+                     "doc_ids": sorted(by_sha[h]), "source": source, "verified_sha256": got == h})
     return b"".join(canonical.canonical_bytes(r) + b"\n" for r in rows)
 
 
@@ -206,7 +209,8 @@ def write_release_tree(root: Path, *, release_manifest_template: dict, spec: dic
                        v1_source: dict, records: dict[str, list[dict]], originals: dict[str, bytes], texts: dict[str, bytes],
                        research: dict[str, bytes], c16_files: dict[str, bytes]) -> dict:
     """Write the unsigned bundle tree (no SHA256SUMS). Returns the v1 RELEASE.json written.
-    originals: {sha256: bytes}; texts: {text_path: bytes}; research: {research/...: bytes};
+    originals: {sha256: bytes or Path}; texts: {text_path: bytes or Path}; research: {research/...: bytes};
+    a Path is hard-linked (or copied) and hashed by streaming, never read into memory (C16 Stage 3);
     c16_files: {corpus-v2/... or registers/...: bytes} (verbatim)."""
     files = []
     payloads: dict[str, tuple[bytes, str | None]] = {}
@@ -222,6 +226,10 @@ def write_release_tree(root: Path, *, release_manifest_template: dict, spec: dic
     for p in sorted(research):
         payloads[p] = (research[p], "report")
     for rel, (data, kind) in payloads.items():
+        if isinstance(data, Path):
+            link_or_copy(data, root / rel)
+            files.append({"path": rel, "sha256": sha256_file(root / rel), "bytes": (root / rel).stat().st_size, "kind": kind})
+            continue
         write_bytes(root / rel, data)
         files.append({"path": rel, "sha256": sha256_bytes(data), "bytes": len(data), "kind": kind})
     for rel in sorted(c16_files):
@@ -248,7 +256,7 @@ def sums_bytes(root: Path) -> bytes:
         rel = p.relative_to(root).as_posix()
         if rel in (SUMS, SIG):
             continue
-        lines.append(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {rel}\n")
+        lines.append(f"{sha256_file(p)}  {rel}\n")
     return "".join(lines).encode("utf-8")
 
 
@@ -274,5 +282,5 @@ def file_entries(root: Path, prefix: str) -> list[dict]:
     out = []
     for p in files_under(base) if base.is_dir() else ([base] if base.is_file() else []):
         rel = p.relative_to(root).as_posix()
-        out.append({"path": rel, "sha256": hashlib.sha256(p.read_bytes()).hexdigest(), "bytes": p.stat().st_size})
+        out.append({"path": rel, "sha256": sha256_file(p), "bytes": p.stat().st_size})
     return out

@@ -46,6 +46,7 @@ from mimamsa_contract.c16.rules import component_inventory_issues, exchange_issu
 from mimamsa_contract.issues import Issue
 
 from . import safe_archive
+from .streaming import BlobIndex, VerifiedFile, read_verified, sha256_path
 
 C16_PREFIX = "corpus-v2/"
 REGISTERS_PREFIX = "registers/"
@@ -71,6 +72,11 @@ def _sha(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
 
 
+def _digest(v) -> str:
+    """sha256 of materialised content: bytes, or a streamed VerifiedFile (its verified hash)."""
+    return v.sha256 if isinstance(v, VerifiedFile) else _sha(v)
+
+
 def _e(code: str, msg: str, where: str = "") -> Issue:
     return Issue(code, msg, where)
 
@@ -93,7 +99,7 @@ class C16Result:
     declared_accounting: bytes | None = None                # the signed declaration, verbatim
     site_accounting: bytes | None = None                    # register_bytes of the site's recomputation
     knowledge_manifest: bytes | None = None                 # KNOWLEDGE_RELEASE.json (validated, in SHA256SUMS)
-    accelerator_files: dict = field(default_factory=dict)  # ACCELERATOR component files: path -> verified bytes
+    accelerator_files: dict = field(default_factory=dict)  # ACCELERATOR component files: path -> VerifiedFile (streamed)
     resolved_receipts: list = field(default_factory=list)
     receipt_files: dict = field(default_factory=dict)       # path -> bytes of artefacts resolved for served copies
     index_entries: list = field(default_factory=list)
@@ -473,11 +479,15 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
             if c["authority"] != "ACCELERATOR":
                 continue
             for f in c["files"]:
-                b = (bundle / f["path"]).read_bytes()
-                if _sha(b) != f["sha256"]:
+                # streamed (C16 Stage 3): hashed in chunks and copied later by a re-hashing copy, never held in memory
+                try:
+                    vf = VerifiedFile.of(bundle / f["path"])
+                except OSError:
+                    vf = None
+                if vf is None or vf.sha256 != f["sha256"]:
                     refuse(_e("KR_INVENTORY", "accelerator file does not hash to the signed component inventory", f["path"]))
                     return res
-                res.accelerator_files[f["path"]] = b
+                res.accelerator_files[f["path"]] = vf
 
     # per-source accounting register: required on a C16-aware import
     decl = None
@@ -546,20 +556,17 @@ def run(*, bundle: Path, manifest: dict, sums: dict[str, str], site: Path, docs:
                  and not p.startswith(CANDIDATE_SET_PREFIX) and p not in integrity_files}
     eff = _effective(adms)
     eligible_ids = {a["admission_id"] for a in eff.values() if a["application_eligible"]}
-    texts = {}
-    for p, f in listed.items():
-        if f.get("kind") == "text" and (bundle / p).is_file():
-            b = (bundle / p).read_bytes()
-            texts[_sha(b)] = b
+    # derivative texts by sha256, read on demand (streaming index; C16 Stage 3)
+    # (listed sha256 values were checked against SHA256SUMS and the bytes by the v1 validation; every read re-verifies)
+    texts = BlobIndex(entries=[(bundle / p, f["sha256"], f.get("bytes", 0)) for p, f in listed.items()
+                               if f.get("kind") == "text" and (bundle / p).is_file() and isinstance(f.get("sha256"), str)])
 
     def original_of(sha):
         if sha in originals:
             return originals[sha]
         v = Path(site) / "vault" / "sha256" / sha[:2] / sha
-        if v.is_file():
-            b = v.read_bytes()
-            if _sha(b) == sha:
-                return b
+        if v.is_file() and sha256_path(v)[0] == sha:
+            return read_verified(v, sha)
         return None
 
     by_key = {(d["doc_id"], d["source_copy"]["sha256"]): d for d in idents}
@@ -776,7 +783,7 @@ def materialize(res: C16Result) -> dict:
         files[KNOWLEDGE_MANIFEST] = res.knowledge_manifest
         files.update(res.accelerator_files)
         knowledge = {"manifest_sha256": _sha(res.knowledge_manifest),
-                     "accelerators": {p: _sha(b) for p, b in sorted(res.accelerator_files.items())}}
+                     "accelerators": {p: _digest(b) for p, b in sorted(res.accelerator_files.items())}}
     section = {"contract": res.contract, "corpus_generation_id": res.corpus_generation_id,
                "served_copies": sorted([c["doc_id"], c["sha256"]] for c in res.copies if c["served"]),
                "governed": sorted([c["doc_id"], c["sha256"]] for c in res.copies),
@@ -784,6 +791,6 @@ def materialize(res: C16Result) -> dict:
                "accounting": {"declared_sha256": _sha(res.declared_accounting) if res.declared_accounting is not None else None,
                               "site_sha256": _sha(res.site_accounting) if res.site_accounting is not None else None},
                "knowledge_release": knowledge,
-               "files": {p: _sha(b) for p, b in sorted(files.items())}}
+               "files": {p: _digest(b) for p, b in sorted(files.items())}}
     return {"files": files, "section": section,
             "materialized": {"dir": C16_PREFIX, "files": {n: _sha(b) for n, b in sorted(res.exchange_files.items())}}}

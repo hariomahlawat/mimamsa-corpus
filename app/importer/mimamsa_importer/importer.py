@@ -39,6 +39,8 @@ from pathlib import Path
 
 from mimamsa_contract.bundle import validate_bundle
 
+from .streaming import BlobChanged, BlobIndex, PageCache, PathFiles, VerifiedFile, sha256_path
+
 _MARKER = re.compile(r"^\[\[page (\d+)\]\]\n", re.M)
 
 
@@ -329,8 +331,12 @@ def _materialize(gdir: Path, manifest: dict, docs, derived, cands, texts: dict, 
     }
     files = {rel: "".join(json.dumps(r, sort_keys=True, ensure_ascii=False) + "\n" for r in recs).encode("utf-8")
              for rel, recs in out.items()}
-    for t in out["records/derived_text.jsonl"]:
-        files[f"derived/{t['text_sha256']}.txt"] = texts[t["text_path"]]
+    for t in out["records/derived_text.jsonl"]:   # streamed: re-hashed against the verified text_sha256 while copying
+        dst = gdir / f"derived/{t['text_sha256']}.txt"
+        if isinstance(texts, PathFiles):
+            texts.copy_to(t["text_path"], dst, t["text_sha256"])
+        else:
+            files[f"derived/{t['text_sha256']}.txt"] = texts[t["text_path"]]
     files["release/RELEASE.json"] = json.dumps({k: manifest.get(k) for k in (
         "release_id", "release_sequence", "created_at", "pinned", "candidate_banner", "auth_ledger_version",
         "restricted_material", "schema_versions")}, indent=1, sort_keys=True).encode()
@@ -341,6 +347,9 @@ def _materialize(gdir: Path, manifest: dict, docs, derived, cands, texts: dict, 
     for rel, data in files.items():
         p = gdir / rel
         p.parent.mkdir(parents=True, exist_ok=True)
+        if isinstance(data, VerifiedFile):   # accelerator files: streaming, re-hashing copy (never held in memory)
+            data.write_to(p)
+            continue
         with open(p, "wb") as fh:
             fh.write(data)
             fh.flush()
@@ -351,6 +360,17 @@ def _materialize(gdir: Path, manifest: dict, docs, derived, cands, texts: dict, 
 
 def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_key=None, mode="production",
                    register=None, rollback=False, today=None, exclusions=None, stage_only=False) -> ImportResult:
+    """See `_import_release`. Bundle bytes that change after this import verified them (streaming re-checks) fail
+    closed as an ImporterError; nothing is activated and an unrenamed generation is quarantined by the next import."""
+    try:
+        return _import_release(bundle, site, trust_list=trust_list, trusted_public_key=trusted_public_key, mode=mode,
+                               register=register, rollback=rollback, today=today, exclusions=exclusions, stage_only=stage_only)
+    except BlobChanged as exc:
+        raise ImporterError(f"bundle bytes changed during import: {exc}") from exc
+
+
+def _import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_key=None, mode="production",
+                    register=None, rollback=False, today=None, exclusions=None, stage_only=False) -> ImportResult:
     """exclusions: the site's current ExclusionState (optional). The C16 stage uses it for I-5 legacy establishment
     and to keep withdrawn or restricted copies out of service; serving still applies the current state per request."""
     bundle, site = Path(bundle), Path(site)
@@ -418,13 +438,12 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
         res.refused_reasons.append("contract validation failed: " + ", ".join(res.contract_errors))
         return res
 
-    originals, texts = {}, {}
-    for f in manifest.get("files", []):
-        if f.get("kind") == "original":
-            data = (bundle / f["path"]).read_bytes()
-            originals.setdefault(_sha(data), data)
-        elif f.get("kind") == "text":
-            texts[f["path"]] = (bundle / f["path"]).read_bytes()
+    # C16 Stage 3 (S3-A): originals and derivative texts are held as verified PATHS and read one at a time (streaming
+    # hash, re-verified on every later read or copy), so memory no longer grows with the corpus (streaming.py)
+    # (validate_bundle above checked every listed sha256 against the signed SHA256SUMS and the bytes; not re-hashed here)
+    originals = BlobIndex(entries=[(bundle / f["path"], f["sha256"], f["bytes"]) for f in manifest.get("files", [])
+                                   if f.get("kind") == "original"])
+    texts = PathFiles(bundle, [f["path"] for f in manifest.get("files", []) if f.get("kind") == "text"])
     docs = _records(bundle, manifest, "documents_jsonl")
     derived = _records(bundle, manifest, "derived_text_jsonl")
     cands = _records(bundle, manifest, "candidates_jsonl")
@@ -505,7 +524,15 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
         else:
             res.verified["derived_text"].append(did)
             item_document["derived_text"][did] = [t["doc_id"], t["source_copy_sha256"]]
-            verified_derivs[key] = {"passages": {p["passage_id"]: p for p in t["passages"]}, "pages": pages_txt}
+            # pages are not kept for the whole corpus: an anchor check re-reads (and re-verifies) them through a small LRU
+            verified_derivs[key] = {"passages": {p["passage_id"]: p for p in t["passages"]}, "text_path": t["text_path"]}
+
+    def _load_pages(k):
+        raw = texts[verified_derivs[k]["text_path"]]
+        if _sha(raw) != k[3]:
+            raise BlobChanged("derivative text changed after verification")
+        return _split_pages(raw.decode("utf-8"))
+    page_cache = PageCache(_load_pages)
 
     # 4 candidate anchors
     evidence = {}
@@ -525,8 +552,9 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
             bound = all(a.get(k) for k in ("pipeline_name", "pipeline_version", "derivative_text_sha256"))
             served = {"source_copy_sha256": h, "page": a["page"], "page_only": True, "text_sha256": None}
             if bound:
-                dv = verified_derivs.get((h, a["pipeline_name"], a["pipeline_version"], a["derivative_text_sha256"]))
-                body = (dv or {}).get("pages", {}).get(a["page"]) if dv else None
+                dkey = (h, a["pipeline_name"], a["pipeline_version"], a["derivative_text_sha256"])
+                dv = verified_derivs.get(dkey)
+                body = page_cache.get(dkey).get(a["page"]) if dv else None
                 if dv is None:
                     reasons.append("span bound to an unverified or absent derivative")
                 elif body is None:
@@ -594,13 +622,14 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
     for h in copy_pages:
         target = vault / h[:2] / h
         if target.exists():
-            if _sha(target.read_bytes()) != h:
+            if sha256_path(target)[0] != h:
                 res.refused_reasons.append(f"vault object {h[:12]} exists with different bytes; halt")
                 return res
             continue
         try:
             target.parent.mkdir(parents=True, exist_ok=True)
-            _write_atomic(target, originals[h])
+            originals.copy_to(h, target)   # streaming, re-hashing, atomic (temporary file, fsync, rename)
+            _fsync_dir(target.parent)
             os.chmod(target, 0o444)
         except OSError as exc:
             raise ImporterError(f"vault write failed: {type(exc).__name__}") from exc

@@ -42,6 +42,10 @@ class BuildContext:
     dev_key_path: Path | None
     accel_tool: Path | None
     budget: Budget
+    fetch_plan: Path | None = None    # real corpus: the fetch plan the spec pins (tool mimamsa_kbuild.fetch_plan)
+    hf_cache: Path | None = None      # real corpus: content-addressed HF fetch cache (outside the repository)
+    base_bundle: Path | None = None   # DELTA: the signed FULL base release the spec names
+    hf_transport: tuple | None = None  # tests only: (lister, opener) standing in for the HF API (no network)
     record: dict = field(default_factory=dict)
     _cache: dict = field(default_factory=dict)
 

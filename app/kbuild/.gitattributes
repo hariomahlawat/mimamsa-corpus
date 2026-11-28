@@ -1,0 +1,3 @@
+# Hash-pinned by build specs (tool config_sha256): bytes must not change with the checkout platform.
+config/page_rederive.json -text
+specs/*.fetch.json -text
