@@ -1,26 +1,26 @@
 {
   "acceptance_level": "FIXTURE (SG-5): SYN site copy, simulation-unbound staging markers, development keys; no gate closed on real data",
   "swap": {
-    "requests_during_failed_load": 3,
-    "concurrent_responses": 84,
-    "ok": 53,
-    "ok_g1": 32,
-    "ok_g2": 21,
-    "not_serving_503_during_switch": 31,
+    "requests_during_failed_load": 1,
+    "concurrent_responses": 239,
+    "ok": 51,
+    "ok_g1": 31,
+    "ok_g2": 20,
+    "not_serving_503_during_switch": 188,
     "mixed": 0,
     "memory_mb": {
       "engines": "disk text store \u002B disk index (required in activation mode)",
       "one_resident_before_swap": {
-        "working_set_mb": 90.3,
-        "private_mb": 36.6,
-        "managed_heap_mb": 0.2,
+        "working_set_mb": 87.3,
+        "private_mb": 35.5,
+        "managed_heap_mb": 0.3,
         "gc_heap_size_mb": 6.6,
-        "gc_committed_mb": 11.7,
+        "gc_committed_mb": 11.5,
         "gc_fragmented_mb": 4.1,
         "gc_server": true,
         "gc_count_gen2": 3,
-        "cpu_s": 3.95,
-        "threads": 32,
+        "cpu_s": 3.11,
+        "threads": 31,
         "text_store": {
           "kind": "disk",
           "cacheHits": 26,
@@ -34,19 +34,19 @@
         }
       },
       "two_resident_inflight_pinned": {
-        "working_set_mb": 94.7,
-        "private_mb": 38.7,
-        "managed_heap_mb": 3.3,
-        "gc_heap_size_mb": 5.9,
-        "gc_committed_mb": 12.4,
+        "working_set_mb": 92.9,
+        "private_mb": 38.4,
+        "managed_heap_mb": 1.8,
+        "gc_heap_size_mb": 6.3,
+        "gc_committed_mb": 12.6,
         "gc_fragmented_mb": 2.7,
         "gc_server": true,
-        "gc_count_gen2": 5,
-        "cpu_s": 6.17,
-        "threads": 36,
+        "gc_count_gen2": 6,
+        "cpu_s": 4.77,
+        "threads": 38,
         "text_store": {
           "kind": "disk",
-          "cacheHits": 37,
+          "cacheHits": 31,
           "cacheMisses": 10,
           "cachedChars": 929,
           "cacheBudgetChars": 33554432,
@@ -57,19 +57,19 @@
         }
       },
       "one_resident_after_release": {
-        "working_set_mb": 95.5,
-        "private_mb": 39.5,
-        "managed_heap_mb": 1.4,
-        "gc_heap_size_mb": 5.9,
-        "gc_committed_mb": 12.4,
-        "gc_fragmented_mb": 2.7,
+        "working_set_mb": 91.8,
+        "private_mb": 37.5,
+        "managed_heap_mb": 1.8,
+        "gc_heap_size_mb": 6.3,
+        "gc_committed_mb": 12.3,
+        "gc_fragmented_mb": 2.8,
         "gc_server": true,
-        "gc_count_gen2": 7,
-        "cpu_s": 6.25,
-        "threads": 36,
+        "gc_count_gen2": 8,
+        "cpu_s": 4.84,
+        "threads": 38,
         "text_store": {
           "kind": "disk",
-          "cacheHits": 37,
+          "cacheHits": 31,
           "cacheMisses": 10,
           "cachedChars": 929,
           "cacheBudgetChars": 33554432,
@@ -99,7 +99,7 @@
     },
     "load_failure_old_generation_kept_serving": {
       "ok": true,
-      "detail": "3 requests during the failed load: OK"
+      "detail": "1 requests during the failed load: OK"
     },
     "inflight_request_paused_on_g1": true,
     "swapped_in_process_to_g2": {
@@ -114,7 +114,7 @@
     "old_generation_released_after_last_pin": true,
     "concurrent_readers_never_mixed": {
       "ok": true,
-      "detail": "84 responses, 53 ok, 0 mixed, 503 31"
+      "detail": "239 responses, 51 ok, 0 mixed, 503 188"
     },
     "baseline_statutes_list_the_statute": true,
     "baseline_studio_document_saved": {
@@ -130,6 +130,10 @@
     "baseline_range_206_complete": {
       "ok": true,
       "detail": "PartialContent 3354/3354"
+    },
+    "baseline_speller_offers_a_term_unique_to_each_excluded_copy": {
+      "ok": true,
+      "detail": "decision / decision"
     },
     "before_exclusion_200 graph-stats": {
       "ok": true,
@@ -177,15 +181,15 @@
     },
     "before_exclusion_200 studio-document": {
       "ok": true,
-      "detail": "200 /api/studio/documents/sd-335a880e6fd633648e1b3854"
+      "detail": "200 /api/studio/documents/sd-7bb7d753f58661ec0ab91662"
     },
     "before_exclusion_200 studio-versions": {
       "ok": true,
-      "detail": "200 /api/studio/documents/sd-335a880e6fd633648e1b3854/versions"
+      "detail": "200 /api/studio/documents/sd-7bb7d753f58661ec0ab91662/versions"
     },
     "before_exclusion_200 studio-export": {
       "ok": true,
-      "detail": "200 /api/studio/documents/sd-335a880e6fd633648e1b3854/export?format=md"
+      "detail": "200 /api/studio/documents/sd-7bb7d753f58661ec0ab91662/export?format=md"
     },
     "before_exclusion_200 studio-documents": {
       "ok": true,
@@ -274,7 +278,7 @@
     },
     "linearised_after_acceptance studio-versions": {
       "ok": true,
-      "detail": "200 {\u0022versions\u0022:[{\u0022version\u0022:2,\u0022state\u0022:\u0022draft\u0022,\u0022createdAt\u0022:\u00222026-11-28T03:51:12.499683Z\u0022,\u0022bytes\u0022:239},{\u0022v"
+      "detail": "200 {\u0022versions\u0022:[{\u0022version\u0022:2,\u0022state\u0022:\u0022draft\u0022,\u0022createdAt\u0022:\u00222026-11-28T04:39:24.218979Z\u0022,\u0022bytes\u0022:239},{\u0022v"
     },
     "linearised_after_acceptance studio-export": {
       "ok": true,
@@ -282,7 +286,7 @@
     },
     "linearised_after_acceptance studio-documents": {
       "ok": true,
-      "detail": "200 {\u0022documents\u0022:[{\u0022id\u0022:\u0022sd-335a880e6fd633648e1b3854\u0022,\u0022title\u0022:\u0022S3-D brief\u0022,\u0022template\u0022:\u0022blank\u0022,\u0022state\u0022:\u0022d"
+      "detail": "200 {\u0022documents\u0022:[{\u0022id\u0022:\u0022sd-7bb7d753f58661ec0ab91662\u0022,\u0022title\u0022:\u0022S3-D brief\u0022,\u0022template\u0022:\u0022blank\u0022,\u0022state\u0022:\u0022d"
     },
     "linearised_after_acceptance studio-notes": {
       "ok": true,
@@ -306,7 +310,7 @@
     },
     "linearised_after_acceptance admin-audit": {
       "ok": true,
-      "detail": "200 {\u0022rows\u0022:[{\u0022id\u0022:6,\u0022at\u0022:\u00222026-11-28T03:51:14.048526Z\u0022,\u0022actor\u0022:\u0022reader\u0022,\u0022action\u0022:\u0022studio_export\u0022,\u0022objec"
+      "detail": "200 {\u0022rows\u0022:[{\u0022id\u0022:7,\u0022at\u0022:\u00222026-11-28T04:39:33.453009Z\u0022,\u0022actor\u0022:\u0022reader\u0022,\u0022action\u0022:\u0022studio_export\u0022,\u0022objec"
     },
     "linearised_after_acceptance search": {
       "ok": true,
@@ -374,7 +378,19 @@
     },
     "after_acceptance studio-notes": {
       "ok": true,
-      "detail": "200 {\u0022notes\u0022:[{\u0022id\u0022:\u0022sn-432e4a9e360675da9e458d7e\u0022,\u0022text\u0022:\u0022see the judgment\u0022,\u0022created_at\u0022:\u00222026-11-28T03:"
+      "detail": "200 {\u0022notes\u0022:[{\u0022id\u0022:\u0022sn-56c44aff2cec655c4b6ff65f\u0022,\u0022text\u0022:\u0022see the judgment\u0022,\u0022created_at\u0022:\u00222026-11-28T04:"
+    },
+    "speller_never_suggests_doc_id_excluded_term": {
+      "ok": true,
+      "detail": "decision"
+    },
+    "speller_never_suggests_copy_hash_excluded_term": {
+      "ok": true,
+      "detail": "decision"
+    },
+    "graph_path_self_of_excluded_node_not_found": {
+      "ok": true,
+      "detail": "{\u0022found\u0022:false,\u0022max_depth\u0022:3,\u0022nodes\u0022:[],\u0022edges\u0022:[],\u0022notice\u0022:\u0022No connection of that length through av"
     },
     "library_count_excludes_both": {
       "ok": true,

@@ -86,6 +86,44 @@ documents had disappear; no chip names an excluded document. Web journey: `searc
 `search_facets_recounted_exactly`, plus library and admin overview counts reduced by exactly the two excluded documents
 and graph statistics reduced.
 
+## 3a. Suggestions, instrument chips and the graph self-path (review follow-up)
+
+Two leaks from the first draft's open items are fixed in Core (`390084aa`), in **every mode**:
+- **"Did you mean"** (`SpellingSuggester`) and **instrument alias, scope and candidate chips** and **case-name matches**
+  (`LegalIdentifierResolver`) now use visible vocabulary only. `SearchService` takes one hidden decision per document
+  per query and passes it to every rule. Under activation that decision is the response boundary; in default mode it is
+  the serving-policy withdrawal and the restricted register. A word counts as held, a spelling candidate is offered and a
+  word pair is counted only when a document that is not hidden contains it. A term found only in hidden documents is
+  therefore never suggested. A hidden instrument is never named in a scope, alias or candidate chip, and identifier chips
+  never count hidden documents. With nothing hidden every decision is unchanged.
+  - The activation-only `HideChipsOfHiddenDocuments` flag is removed, because the rule now holds in every mode.
+  - Candidate ordering still uses the index-wide document frequency; only visible terms can be chosen.
+- **`/api/graph/path` with `from == to`** (`GraphStore.PathAsync`) answers not found for a hidden or unknown node,
+  instead of echoing the requested id.
+
+Proofs:
+- **IndexBench parity, sample site (290 documents, memory engine), against `claude/c16-cp1` `4ba059fa`:**
+  `indexbench-parity-sample.json`.
+  - All 762 cases with nothing withdrawn are identical, on every field of the full output signature (state, mode, chips,
+    notes, facets, totals, every hit and every page).
+  - The 14 differing cases are the withdrawal set, and the difference is the leak itself. Before, `section 302 Indian
+    Penal Code` with the IPC withdrawn still produced the chip "Section 302 · The Indian Penal Code" and scoped to the
+    withdrawn instrument. Now the instrument is not held and the words are searched as plain text.
+- **Default-mode oracle with hybrid off:** identical to the CP-1 baseline (10/14).
+- **Adversarial tests:**
+
+| Test | Scenario | Result |
+| --- | --- | --- |
+| `ATermFoundOnlyInAHiddenDocumentIsNeverSuggested` (unit, SYN) | every term the speller offers for a one-letter typo and that is held only by documents that are then hidden (4 probe terms) | never offered for the typo or for the word itself while hidden; unchanged when nothing is hidden |
+| `InstrumentScopeAndAliasesNeverNameAHiddenInstrument` (unit) | each statute title that resolves to its own instrument, with that instrument hidden | hidden documents are never in the scope; scope, candidate and alias texts never name the hidden title (a "not held" result echoes only the user's own words); the unhidden resolution is byte-identical |
+| `C16S3dWebTests.InProcessSwap…` (activation) | after the doc-id exclusion (judgment) and the copy-hash exclusion (statute copy) | the probe term held only by the two excluded copies ("decision"), offered before, is never offered after (`speller_never_suggests_doc_id_excluded_term`, `…copy_hash…`); `graph_path_self_of_excluded_node_not_found` |
+| `C16S3dWebTests.DefaultModeWithdrawalNeverLeaksATermToTheSpeller` (default mode, real process) | both documents withdrawn through the Admin route | the same probe term is never offered after the withdrawal (`speller_default_mode.json`) |
+| `GraphReasoningTests` | one-node path | a hidden or unknown node gives null; a visible node gives itself |
+
+SYN caveat: no SYN term reaches the speller's vocabulary threshold while held by the judgment alone. The web probes
+therefore use a term held only by the two excluded copies, so the doc-id and copy-hash cases share one probe term. The
+unit test covers single-document and multi-document probes.
+
 ## 4. Tests
 
 | Test | What it proves |
@@ -104,15 +142,19 @@ and graph statistics reduced.
 ## 5. Default-mode parity (activation off)
 
 By construction every new path is gated: `Eligibility.Boundary`, `AppServices.ActivationExcluded*` and
-`ActivationStreamPause` are null, `HideChipsOfHiddenDocuments` is false, `AppServices` stays a singleton, and the CP-1
-post-filter it replaces only ran under activation. Admin views compute the same values (the boundary answers "not
-excluded"). Results: see section 7.
+`ActivationStreamPause` are null, `AppServices` stays a singleton, and the CP-1 post-filter it replaces only ran under
+activation. Admin views compute the same values (the boundary answers "not excluded"). The suggestion and instrument
+rules of section 3a apply in default mode too, but they are byte-identical whenever nothing is hidden (IndexBench
+parity). Results: see section 7.
 
 ## 6. Edits outside `Mimamsa.Web` boundary/inventory and the participant swap path
 
 - `Mimamsa.Core/Delivery/Eligibility.cs`: `Boundary` hook (null default).
-- `Mimamsa.Core/Search/SearchService.cs`: `HideChipsOfHiddenDocuments` (false default); `SearchIndex.Release`,
-  `SqlitePostingTable.Release` (new methods, only called on swap release).
+- `Mimamsa.Core/Search/SearchService.cs`, `SpellingSuggester.cs`, `Identifiers/LegalIdentifierResolver.cs`:
+  visible-only suggestions and chips (section 3a). `SearchIndex.Release` and `SqlitePostingTable.Release` are new
+  methods, called only when a swapped-out generation is released.
+- `Mimamsa.Core/Graph/GraphStore.cs`: the one-node path visibility check.
+- Tests: `GraphReasoningTests.cs` (self-path).
 - `Mimamsa.Web/Api.cs`, `ProtectedDelivery.cs`, `AppServices.cs`, `Program.cs` (handlers and composition, gated).
 - Tests: `Activation/ActivationTestSupport.cs` (copy-hash withdrawals in the development store), `C16Cp1SliceTests.cs`.
 - Docs: `docs/architecture/c16/interfaces/B06_ACTIVATION_JOURNAL.md` (flagged 2.1 PREPARE section).
@@ -130,24 +172,31 @@ excluded"). Results: see section 7.
 | CP-1 slice (driver + journey + default-mode oracle) | pass, 119 journey checks (`slice-evidence-local-windows.json`) |
 | S3-D web journey | pass (`web_journey.json`) |
 
-IndexBench parity: not re-run. The index engine's build, query and on-disk format are unchanged; the only index change
-is the new `SearchIndex.Release` called when a swapped-out generation is released.
+**After the review follow-up (code head `390084aa`):**
 
-**CI** (head `1d4eaa7f`): see the PR. Linux `app-ci.yml` push 46105545585 and pull_request 46105569116; Windows
-`app-windows-poc.yml` push 46105545578 and pull_request 46105569109. All jobs green, including `b1`, `b1-windows`,
-`cp1-slice` and `cp1-slice-windows`, except one `windows-services` attempt in the push run: the PR #54 PoC transport
-oracle rejected its trace with "site credit cap exceeded". That job runs the separate `app/poc` PoC service, which this
-PR does not touch. The same head passed it in the pull_request run, and the failed job was re-run.
+| Suite | Result |
+| --- | --- |
+| B1 C#, default mode | **428/428 passed** (clean full run). An earlier full run hit transient failures in the PostgreSQL-backed B03/B06 classes while other streams loaded the shared server; those 39 tests passed 39/39 when re-run alone |
+| IndexBench parity, sample site (290 documents) | 762/762 cases with nothing withdrawn identical to `claude/c16-cp1`; the 14 differing cases are the withdrawal set (section 3a) |
+| PR #54 retrieval oracle, default mode, hybrid off | identical to the baseline (10/14) |
+| S3-D tests (unit and both web journeys) | pass |
+
+**CI.**
+
+| Head | Linux `app-ci.yml` (push / pull_request) | Windows `app-windows-poc.yml` (push / pull_request) | Result |
+| --- | --- | --- | --- |
+| `1d4eaa7f` (first code head) | 46105545585 / 46105569116 | 46105545578 / 46105569109 | green, except the first `windows-services` attempt in the push run: the PoC transport oracle reported "site credit cap exceeded". That job exercises the separate `app/poc` PoC service; the same head passed it in the pull_request run |
+| `c3f8184d` (report) | 46106733169 / 46106737448 | 46106733144 / 46106737399 | all green, including `windows-services` |
+| `390084aa` (follow-up code) | 46107727839 / 46107729781 | 46107727873 / 46107729835 | all green, including `b1` (default and disk legs), `b1-windows`, `cp1-slice`, `cp1-slice-windows` and `windows-services` |
+
+The final head (this report) re-runs both workflows; its run ids are in the PR description.
 
 ## 8. Open items
 
-1. **Search vocabulary-level metadata is not recomputed under the boundary.** The "Did you mean" speller and the
-   instrument alias/scope chips draw on index metadata of every indexed document, so a suggestion or an instrument title
-   could come only from an excluded document. Case-name chips and identifier counts are fixed (activation only). The same
-   applies in default mode to local withdrawals (pre-existing).
-2. **`/api/graph/path` with `from == to`** returns `found: true` and echoes the requested node id even for a hidden node.
-   This is pre-existing and also happens in default mode. It echoes the request and carries no corpus content. A
-   one-line Core graph fix (check visibility when `from == to`) is recommended. The journey uses a real path.
+1. ~~Search vocabulary-level metadata~~ **Fixed (section 3a).** One residual: the speller orders visible candidates
+   by their index-wide frequency, so hidden documents can influence which visible word is offered, but they can never
+   supply it.
+2. ~~`/api/graph/path` with `from == to`~~ **Fixed (section 3a).**
 3. **Switching window.** The 503s during ENTER_SWITCHING→OPEN are the B06 protocol's journaled-effects window, not the
    swap. In the journey's tight loops they were 195 of 231 responses, dominated by the fsyncs on this busy host. A real
    host measurement belongs to B07/B09.
