@@ -61,6 +61,7 @@ public sealed partial class LegalIdentifierResolver
     readonly IReadOnlyList<HashSet<string>> _titleTerms;
     readonly Dictionary<int, HashSet<string>> _petitioner = new(), _respondent = new();
     readonly Dictionary<string, int> _partyDf = new(StringComparer.Ordinal);
+    readonly Dictionary<string, List<int>> _partyDocs = new(StringComparer.Ordinal);
 
     public LegalIdentifierResolver(IReadOnlyList<DocumentRecord> docs, IReadOnlyList<HashSet<string>> titleTerms)
     {
@@ -71,7 +72,11 @@ public sealed partial class LegalIdentifierResolver
             var pet = Terms(j.Petitioner); var res = Terms(j.Respondent);
             if (pet.Count == 0 && res.Count == 0) continue;
             _petitioner[d] = pet; _respondent[d] = res;
-            foreach (var t in pet.Union(res)) _partyDf[t] = _partyDf.GetValueOrDefault(t) + 1;
+            foreach (var t in pet.Union(res))
+            {
+                _partyDf[t] = _partyDf.GetValueOrDefault(t) + 1;
+                (_partyDocs.TryGetValue(t, out var l) ? l : _partyDocs[t] = new()).Add(d);
+            }
         }
     }
 
@@ -79,6 +84,10 @@ public sealed partial class LegalIdentifierResolver
 
     /// Party-name vocabulary (term -> number of judgments), for spelling suggestions.
     public IReadOnlyDictionary<string, int> PartyTerms => _partyDf;
+
+    /// C16 S3-D: true when a judgment that is not hidden carries the party term (suggestions use only visible names).
+    public bool PartyTermVisible(string term, Func<int, bool> hidden) =>
+        _partyDocs.TryGetValue(term, out var l) && l.Any(d => !hidden(d));
 
     // ------------------------------------------------------------------ dotted abbreviations
     [GeneratedRegex(@"^(?:[A-Za-z]{1,2}\.){2,}[A-Za-z]{0,2}\.?$")] private static partial Regex DottedRx();
@@ -108,8 +117,12 @@ public sealed partial class LegalIdentifierResolver
     ///  - only generic words ("Rules", "Act"): ambiguous; candidates offered; nothing pinned;
     ///  - words matching no held title (after alias expansion): not held; nothing pinned;
     ///  - otherwise the closest titles (fewest extra words); distinct closest titles are ambiguous.
-    public InstrumentScope ResolveInstrument(IReadOnlyList<string> rawWords)
+    /// C16 S3-D: `hidden` (index document -> hidden now: withdrawn, restricted, excluded by the response boundary)
+    /// removes those instruments from every rule, so no alias, scope or candidate list names one. With nothing hidden
+    /// (or null) the result is exactly as before.
+    public InstrumentScope ResolveInstrument(IReadOnlyList<string> rawWords, Func<int, bool>? hidden = null)
     {
+        bool Statute(int d) => _docs[d].IsStatute && (hidden is null || !hidden(d));
         var words = rawWords.Select(CollapseDotted).ToList();
         var terms = words.SelectMany(w => Text.Tokenize(w)).Select(t => t.Term).Where(t => !Text.Stopwords.Contains(t)).ToList();
         var aliases = new List<AliasUse>();
@@ -119,7 +132,7 @@ public sealed partial class LegalIdentifierResolver
             if (Aliases.TryGetValue(t, out var exp))
             {
                 var e = exp.Split(' ');
-                var held = Enumerable.Range(0, _docs.Count).Where(d => _docs[d].IsStatute && e.All(_titleTerms[d].Contains)).ToList();
+                var held = Enumerable.Range(0, _docs.Count).Where(d => Statute(d) && e.All(_titleTerms[d].Contains)).ToList();
                 if (held.Count > 0)
                 {
                     expanded.AddRange(e);
@@ -131,7 +144,7 @@ public sealed partial class LegalIdentifierResolver
         }
         expanded = expanded.Distinct().ToList();
         if (expanded.Count == 0)
-            return new InstrumentScope(ScopeKind.Any, Enumerable.Range(0, _docs.Count).Where(d => _docs[d].IsStatute).ToList(),
+            return new InstrumentScope(ScopeKind.Any, Enumerable.Range(0, _docs.Count).Where(Statute).ToList(),
                 "any Act, Rules or Regulations in the library", aliases, expanded);
 
         var specific = expanded.Where(w => !GenericInstrumentWords.Contains(w) && !w.All(char.IsDigit)).ToList();
@@ -139,7 +152,7 @@ public sealed partial class LegalIdentifierResolver
         {
             var kinds = expanded.Where(GenericInstrumentWords.Contains).ToHashSet();
             var all = Enumerable.Range(0, _docs.Count)
-                .Where(d => _docs[d].IsStatute && kinds.All(k => _titleTerms[d].Contains(k) || _titleTerms[d].Contains(k + "s") || _titleTerms[d].Contains(k.TrimEnd('s'))))
+                .Where(d => Statute(d) && kinds.All(k => _titleTerms[d].Contains(k) || _titleTerms[d].Contains(k + "s") || _titleTerms[d].Contains(k.TrimEnd('s'))))
                 .OrderBy(d => _titleTerms[d].Count(t => !kinds.Contains(t) && !Text.Stopwords.Contains(t) && !t.All(char.IsDigit)))
                 .ThenBy(d => _docs[d].Title, StringComparer.OrdinalIgnoreCase)
                 .Select(d => _docs[d].Title).Distinct().ToList();
@@ -149,7 +162,7 @@ public sealed partial class LegalIdentifierResolver
         }
         var cands = new List<(int d, int extra)>();
         for (int d = 0; d < _docs.Count; d++)
-            if (_docs[d].IsStatute && expanded.All(w => _titleTerms[d].Contains(w)))
+            if (Statute(d) && expanded.All(w => _titleTerms[d].Contains(w)))
                 cands.Add((d, _titleTerms[d].Count(t => !expanded.Contains(t) && !Text.Stopwords.Contains(t) && !t.All(char.IsDigit))));
         if (cands.Count == 0)
             return new InstrumentScope(ScopeKind.NotHeld, Array.Empty<int>(), string.Join(" ", rawWords), aliases, expanded);
@@ -169,7 +182,8 @@ public sealed partial class LegalIdentifierResolver
     /// India"). Requires at least one name-like word that is uncommon among parties (≤ 50 judgments), so generic
     /// words ("court martial", "union of india") never pin; more than 5 matching judgments are reported, not pinned.
     /// "X v Y" constrains X to one side and Y to the other.
-    public CaseNameMatch? ResolveCaseName(IReadOnlyList<string> words)
+    /// C16 S3-D: `hidden` judgments never match (nor count), so the chip neither names nor counts them.
+    public CaseNameMatch? ResolveCaseName(IReadOnlyList<string> words, Func<int, bool>? hidden = null)
     {
         var toks = words.SelectMany(w => Text.Tokenize(w)).Select(t => t.Term).ToList();
         if (toks.Count == 0 || toks.Count > 10 || toks.Any(t => t.Any(char.IsDigit))) return null;
@@ -189,7 +203,7 @@ public sealed partial class LegalIdentifierResolver
             bool ok = vs >= 0
                 ? (left!.All(pet.Contains) && right!.All(res.Contains)) || (left!.All(res.Contains) && right!.All(pet.Contains))
                 : all.All(t => pet.Contains(t) || res.Contains(t)) && (all.All(pet.Contains) || all.All(res.Contains) || all.Count > 2);
-            if (ok) hits.Add(d);
+            if (ok && (hidden is null || !hidden(d))) hits.Add(d);
         }
         if (hits.Count == 0) return null;
         hits.Sort((a, b) => string.CompareOrdinal(_docs[b].IssueDate ?? "", _docs[a].IssueDate ?? "") is var c && c != 0 ? c : string.CompareOrdinal(_docs[a].DocId, _docs[b].DocId));

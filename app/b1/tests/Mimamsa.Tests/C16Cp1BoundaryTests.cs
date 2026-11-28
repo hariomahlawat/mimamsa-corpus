@@ -34,16 +34,34 @@ public class C16Cp1BoundaryTests
         Assert.DoesNotContain("MapGroup(", src);
     }
 
+    /// C16 Stage 3 (S3-D): every surface CP-1 refused is now behind the response boundary; only unknown routes are
+    /// refused. Document-derived surfaces are Boundary (buffered, body scanned), the user's own Studio documents and notes
+    /// BoundaryPrivate (buffered, touched sources re-checked), protected Range delivery BoundaryStreaming.
     [Fact]
-    public void DocumentSurfacesAreBehindTheBoundaryAndEverythingElseDerivedIsRefused()
+    public void EverySurfaceIsBehindTheBoundaryAndOnlyUnknownRoutesAreRefused()
     {
         foreach (var r in new[] { "GET /api/search", "GET /api/documents/{docId}", "GET /api/documents/{docId}/text", "GET /api/documents/{docId}/sections",
-                                  "GET /api/documents/{docId}/citation", "GET /api/cite" })
+                                  "GET /api/documents/{docId}/citation", "GET /api/cite", "GET /api/documents/{docId}/relations", "GET /api/statutes", "GET /api/library",
+                                  "GET /api/admin/overview", "GET /api/admin/withdraw-scope", "POST /api/admin/reinstate", "GET /api/admin/audit",
+                                  "GET /api/v2/documents/{docId}/pdf-meta" })
             Assert.Equal(RouteClass.Boundary, ActivationRouteInventory.Routes[r]);
-        foreach (var prefix in new[] { "/api/graph/", "/api/reasoning/", "/api/commander/", "/api/studio/", "/api/v2/", "/api/statutes", "/api/library" })
-            Assert.All(ActivationRouteInventory.Routes.Where(kv => kv.Key.Contains(' ') && kv.Key.Split(' ')[1].StartsWith(prefix, StringComparison.Ordinal)),
-                       kv => Assert.Equal(RouteClass.Refused, kv.Value));
+        var byPrefix = new Dictionary<string, (RouteClass cls, int count)>
+        {
+            ["/api/graph/"] = (RouteClass.Boundary, 4), ["/api/reasoning/"] = (RouteClass.Boundary, 2), ["/api/commander/"] = (RouteClass.Boundary, 2),
+            ["/api/studio/"] = (RouteClass.BoundaryPrivate, 12), ["/api/v2/documents/{docId}/copies/"] = (RouteClass.BoundaryStreaming, 1),
+        };
+        foreach (var (prefix, (cls, count)) in byPrefix)
+        {
+            var routes = ActivationRouteInventory.Routes.Where(kv => kv.Key.Contains(' ') && kv.Key.Split(' ')[1].StartsWith(prefix, StringComparison.Ordinal)).ToList();
+            Assert.Equal(count, routes.Count);
+            Assert.All(routes, kv => Assert.Equal(cls, kv.Value));
+        }
+        Assert.DoesNotContain(RouteClass.Refused, ActivationRouteInventory.Routes.Values);
         Assert.Equal(RouteClass.Refused, ActivationRouteInventory.Classify(null));
+        // 44 mapped routes and the SPA fallback; CP-1 refused 29 of them (its report said 45 routes, Studio 13 and 30 refused;
+        // the inventory itself has 44 mapped routes, 12 of them Studio)
+        Assert.Equal(45, ActivationRouteInventory.Routes.Count);
+        Assert.Equal(RouteClass.ProtectiveAction, ActivationRouteInventory.Routes["POST /api/admin/withdraw"]);
     }
 
     [Fact]

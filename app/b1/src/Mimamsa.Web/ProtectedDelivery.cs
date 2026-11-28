@@ -36,7 +36,7 @@ public sealed class ActiveStreams
     }
     public void Served(string key, string connectionId) => _servedBy.GetOrAdd(key, _ => new())[connectionId] = 0;
 
-    static void Rst(Microsoft.AspNetCore.Http.Features.IFeatureCollection f)
+    internal static void Rst(Microsoft.AspNetCore.Http.Features.IFeatureCollection f)
     {
         try
         {
@@ -178,6 +178,16 @@ public static class ProtectedDelivery
             }
             if (hook == "before-enter" && off == 0)
             { try { await Task.Delay(cfg.TestPauseMs, ctx.RequestAborted); } catch (OperationCanceledException) { } }
+            // C16 Stage 3 (activation only): the streaming response boundary. The CURRENT signed exclusion state is
+            // re-read immediately before each slice is handed to the transport; an excluded copy stops here (bounded
+            // drain: what was handed over before this check is not recalled) and the connection is reset.
+            if (s.BoundaryExcludedNow(ctx, docId, sha))
+            {
+                if (await ledger.SettleAsync(r, Settlement.ReleasedZeroTransfer, 0, "excluded at the response boundary before handoff"))
+                    DeliveryTrace.Emit("settle", "ledger", new { attempt = r.Id.ToString(), outcome = "zero" });
+                if (!headersSet) { res.StatusCode = 404; return; }
+                ActiveStreams.Rst(ctx.Features); ctx.Abort(); return;
+            }
             long acceptedWire = 0;
             bool ok = state.UnderReadGuard(eligible =>
             {
@@ -228,6 +238,7 @@ public static class ProtectedDelivery
                 DeliveryTrace.Emit("settle", "ledger", new { attempt = r.Id.ToString(), outcome = "accepted", size = acceptedWire });
             if (hook == "after-first-slice" && off == n && off < len)
             { try { await Task.Delay(cfg.TestPauseMs, ctx.RequestAborted); } catch (OperationCanceledException) { } }
+            if (off == n && off < len && s.ActivationStreamPause is { } pause) await pause(ctx);   // C16 Stage 3 test-only
         }
     }
 }

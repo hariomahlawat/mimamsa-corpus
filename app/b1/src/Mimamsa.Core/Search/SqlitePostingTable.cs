@@ -43,6 +43,14 @@ internal sealed class SqlitePostingTable : PostingTable
         return new SqlitePostingTable(cs, keys, vocab, cacheBytes);
     }
 
+    /// C16 Stage 3: release the cache and the pooled connections of this file (the generation is no longer served).
+    public void Release()
+    {
+        lock (_lock) { _lru.Clear(); _cached.Clear(); _used = 0; }
+        using var c = new SqliteConnection(_cs);
+        SqliteConnection.ClearPool(c);
+    }
+
     public override IEnumerable<string> Keys => _keys;
     public override int Count => _keys.Length;
     public override int Df(string term) => _vocab.TryGetValue(term, out var v) ? v.df : 0;

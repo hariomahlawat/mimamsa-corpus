@@ -1,14 +1,22 @@
 // C16 CP-1 review C16-CP1-01: the complete inventory of HTTP surfaces and how each behaves when the activation journal
 // manages the site (Mimamsa:Activation:Enabled). Default mode (activation off) is unaffected by this file.
+// C16 Stage 3 (S3-D): every surface that CP-1 refused is now behind the response boundary; nothing is Refused except
+// unknown routes.
 //
-//   Boundary          emits document-derived content and enforces the response boundary: the handler filters by the
-//                     current signed exclusion state, and the final buffered check (ActivationBoundary) withholds the
-//                     whole response if it names any copy excluded by the time it would be committed.
-//   ContentFree       emits no document-derived content (session, health, accounts, SPA shell).
-//   ProtectiveAction  a protective Admin action whose response names only what the Admin asked about (withdraw).
-//   Refused           emits document-derived content but is not yet behind the boundary: refused with a content-free
-//                     503 while activation is enabled (graph, reasoning, Commander, Studio incl. exports, statutes,
-//                     library, relations, protected PDF/Range delivery, admin overview/scope/audit/reinstate).
+//   Boundary           emits document-derived content and enforces the response boundary: handlers filter through the
+//                      single eligibility decision (Eligibility.Boundary), and the final buffered check
+//                      (ActivationBoundary.MayCommit) withholds the whole response if it touched or names any copy
+//                      excluded by the time it would be committed.
+//   BoundaryPrivate    the user's own Studio documents and notes: handlers render sources through the same eligibility
+//                      decision (an unavailable source shows only the content-free "source no longer available" form);
+//                      the final buffered check re-checks every source the handler rendered (the touched set). The
+//                      body is not scanned for ids, because the author's own stored reference fields stay in the
+//                      unavailable form (C15) and are not corpus content.
+//   BoundaryStreaming  protected PDF Range delivery: checked before the first byte and again immediately before each
+//                      slice is handed to the transport (bounded drain); bytes already sent are not recalled.
+//   ContentFree        emits no document-derived content (session, health, accounts, SPA shell).
+//   ProtectiveAction   a protective Admin action whose response names only what the Admin asked about (withdraw).
+//   Refused            not classified: refused with a content-free 503 while activation is enabled (fail closed).
 //
 // Every endpoint the app maps must be classified: with activation enabled the app refuses to start if one is not
 // (ActivationRouteInventory.Unclassified), and a unit test compares the mapped routes in the source with this table.
@@ -16,7 +24,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Mimamsa.Web;
 
-public enum RouteClass { Boundary, ContentFree, ProtectiveAction, Refused }
+public enum RouteClass { Boundary, BoundaryPrivate, BoundaryStreaming, ContentFree, ProtectiveAction, Refused }
 
 public static class ActivationRouteInventory
 {
@@ -24,13 +32,43 @@ public static class ActivationRouteInventory
 
     public static readonly IReadOnlyDictionary<string, RouteClass> Routes = new Dictionary<string, RouteClass>(StringComparer.Ordinal)
     {
-        // document surfaces behind the response boundary
+        // document surfaces behind the response boundary (CP-1)
         ["GET /api/search"] = RouteClass.Boundary,
         ["GET /api/documents/{docId}"] = RouteClass.Boundary,
         ["GET /api/documents/{docId}/text"] = RouteClass.Boundary,
         ["GET /api/documents/{docId}/sections"] = RouteClass.Boundary,
         ["GET /api/documents/{docId}/citation"] = RouteClass.Boundary,
         ["GET /api/cite"] = RouteClass.Boundary,
+        // brought behind the boundary in Stage 3 (S3-D); refused under activation in CP-1
+        ["GET /api/admin/overview"] = RouteClass.Boundary,
+        ["GET /api/admin/withdraw-scope"] = RouteClass.Boundary,
+        ["POST /api/admin/reinstate"] = RouteClass.Boundary,
+        ["GET /api/admin/audit"] = RouteClass.Boundary,
+        ["GET /api/documents/{docId}/relations"] = RouteClass.Boundary,
+        ["GET /api/statutes"] = RouteClass.Boundary,
+        ["GET /api/library"] = RouteClass.Boundary,
+        ["GET /api/graph/stats"] = RouteClass.Boundary,
+        ["GET /api/graph/resolve"] = RouteClass.Boundary,
+        ["GET /api/graph/node"] = RouteClass.Boundary,
+        ["GET /api/graph/path"] = RouteClass.Boundary,
+        ["GET /api/reasoning/assess"] = RouteClass.Boundary,
+        ["GET /api/reasoning/rule-gate"] = RouteClass.Boundary,
+        ["GET /api/commander/domains"] = RouteClass.Boundary,
+        ["GET /api/commander/domains/{id}"] = RouteClass.Boundary,
+        ["GET /api/v2/documents/{docId}/pdf-meta"] = RouteClass.Boundary,
+        ["GET /api/v2/documents/{docId}/copies/{sha}/range"] = RouteClass.BoundaryStreaming,
+        ["GET /api/studio/templates"] = RouteClass.BoundaryPrivate,
+        ["GET /api/studio/documents"] = RouteClass.BoundaryPrivate,
+        ["POST /api/studio/documents"] = RouteClass.BoundaryPrivate,
+        ["GET /api/studio/documents/{id}"] = RouteClass.BoundaryPrivate,
+        ["GET /api/studio/documents/{id}/versions"] = RouteClass.BoundaryPrivate,
+        ["POST /api/studio/documents/{id}/save"] = RouteClass.BoundaryPrivate,
+        ["POST /api/studio/documents/{id}/append"] = RouteClass.BoundaryPrivate,
+        ["POST /api/studio/documents/{id}/delete"] = RouteClass.BoundaryPrivate,
+        ["GET /api/studio/documents/{id}/export"] = RouteClass.BoundaryPrivate,
+        ["GET /api/studio/notes"] = RouteClass.BoundaryPrivate,
+        ["POST /api/studio/notes"] = RouteClass.BoundaryPrivate,
+        ["POST /api/studio/notes/{id}/delete"] = RouteClass.BoundaryPrivate,
         // no document-derived content
         ["GET /health"] = RouteClass.ContentFree,
         ["POST /api/login"] = RouteClass.ContentFree,
@@ -43,36 +81,6 @@ public static class ActivationRouteInventory
         [Fallback] = RouteClass.ContentFree,
         // protective action
         ["POST /api/admin/withdraw"] = RouteClass.ProtectiveAction,
-        // document-derived, not yet behind the boundary: refused while activation is enabled
-        ["GET /api/admin/overview"] = RouteClass.Refused,
-        ["GET /api/admin/withdraw-scope"] = RouteClass.Refused,
-        ["POST /api/admin/reinstate"] = RouteClass.Refused,
-        ["GET /api/admin/audit"] = RouteClass.Refused,
-        ["GET /api/documents/{docId}/relations"] = RouteClass.Refused,
-        ["GET /api/statutes"] = RouteClass.Refused,
-        ["GET /api/library"] = RouteClass.Refused,
-        ["GET /api/graph/stats"] = RouteClass.Refused,
-        ["GET /api/graph/resolve"] = RouteClass.Refused,
-        ["GET /api/graph/node"] = RouteClass.Refused,
-        ["GET /api/graph/path"] = RouteClass.Refused,
-        ["GET /api/reasoning/assess"] = RouteClass.Refused,
-        ["GET /api/reasoning/rule-gate"] = RouteClass.Refused,
-        ["GET /api/commander/domains"] = RouteClass.Refused,
-        ["GET /api/commander/domains/{id}"] = RouteClass.Refused,
-        ["GET /api/studio/templates"] = RouteClass.Refused,
-        ["GET /api/studio/documents"] = RouteClass.Refused,
-        ["POST /api/studio/documents"] = RouteClass.Refused,
-        ["GET /api/studio/documents/{id}"] = RouteClass.Refused,
-        ["GET /api/studio/documents/{id}/versions"] = RouteClass.Refused,
-        ["POST /api/studio/documents/{id}/save"] = RouteClass.Refused,
-        ["POST /api/studio/documents/{id}/append"] = RouteClass.Refused,
-        ["POST /api/studio/documents/{id}/delete"] = RouteClass.Refused,
-        ["GET /api/studio/documents/{id}/export"] = RouteClass.Refused,
-        ["GET /api/studio/notes"] = RouteClass.Refused,
-        ["POST /api/studio/notes"] = RouteClass.Refused,
-        ["POST /api/studio/notes/{id}/delete"] = RouteClass.Refused,
-        ["GET /api/v2/documents/{docId}/pdf-meta"] = RouteClass.Refused,
-        ["GET /api/v2/documents/{docId}/copies/{sha}/range"] = RouteClass.Refused,
     };
 
     /// "METHOD /pattern" for a mapped route endpoint, FALLBACK for the SPA fallback, null for anything else.

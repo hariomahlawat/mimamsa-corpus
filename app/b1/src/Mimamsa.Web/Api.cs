@@ -87,8 +87,10 @@ public static partial class Api
             var filters = new SearchFilters(Set(q["type"]), Set(q["court"]), Int(q["year_from"]), Int(q["year_to"]), Set(q["status"]));
             var sw = System.Diagnostics.Stopwatch.StartNew();
             var service = q["service"].ToString() is { Length: > 0 } sv && sv != "all" ? sv : null;
+            // C16 Stage 3: under activation the engine's hidden-document predicate is the response boundary
+            // (Eligibility.Boundary), so excluded copies never enter hits, totals or facets: facets are counted exactly
+            // over the surviving results (no withholding, no post-filter).
             var res = s.Search.Search(raw, filters, q["plain"] == "1", service);
-            if (s.ActivationExcluded is not null) res = BoundaryFilter(ctx, res, s);
             var pg = s.Search.Page(res, Int(q["page"]) ?? 1, Int(q["page_size"]) ?? SearchService.DefaultPageSize, q["sort"].ToString());
             var ms = sw.Elapsed.TotalMilliseconds;
             return Json(SearchDto(res, pg, q["sort"].ToString() is { Length: > 0 } so ? so : "relevance", s, ms));
@@ -169,13 +171,17 @@ public static partial class Api
             var g = s.Generation;
             var quarantine = g.Quarantine.Select(q => new { kind = q?["kind"]?.GetValue<string>(), id = q?["id"]?.GetValue<string>(),
                                                             reasons = (q?["reasons"] as JsonArray)?.Select(x => x?.GetValue<string>()) });
+            // C16 Stage 3: under activation counts are taken over the documents the boundary leaves (never counting an
+            // excluded copy) and withdrawal rows of excluded copies are left out; with activation off nothing changes.
+            var docs = s.ActivationExcluded is null ? g.Documents.Values : g.Documents.Values.Where(d => !s.BoundaryExcluded(ctx, d.DocId, d.CopySha)).ToList();
             return Json(new
             {
                 release = ReleaseDto(s), generation = g.GenerationId,
-                verified = new { documents = g.Documents.Count, derivatives = g.Documents.Values.Count(d => d.DerivativeId is not null),
-                                 candidates = g.Documents.Values.Sum(d => d.Candidates.Count), originals_rehashed_ok = g.Documents.Values.Count(d => d.OriginalVerified) },
+                verified = new { documents = docs.Count(), derivatives = docs.Count(d => d.DerivativeId is not null),
+                                 candidates = docs.Sum(d => d.Candidates.Count), originals_rehashed_ok = docs.Count(d => d.OriginalVerified) },
                 load_issues = g.LoadIssues, quarantine,
-                withdrawals = (await s.Policy.WithdrawalsAsync()).Select(w => new { doc_id = w.DocId, copy = w.Sha, reason = w.Reason, actor = w.Actor, at = w.At, epoch = w.Epoch,
+                withdrawals = (await s.Policy.WithdrawalsAsync()).Where(w => !NamesExcluded(ctx, s, w.DocId) && !NamesExcluded(ctx, s, w.Sha))
+                                                                .Select(w => new { doc_id = w.DocId, copy = w.Sha, reason = w.Reason, actor = w.Actor, at = w.At, epoch = w.Epoch,
                                                                                     action = w.Action, scope = w.Scope, verification = w.Verification,
                                                                                     currently_withdrawn = s.State.IsDocWithdrawn(w.DocId) }),
                 policy = new { epoch = s.State.Epoch, digest = s.State.Digest },
@@ -188,8 +194,12 @@ public static partial class Api
             var (p, err) = await Admin(ctx, s, post: false);
             if (err is not null) return err;
             var docId = doc_id ?? "";
-            if (!s.Generation.Documents.ContainsKey(docId)) return Json(new { error = "unknown_document" }, 404);
+            if (!s.Generation.Documents.ContainsKey(docId) || NamesExcluded(ctx, s, docId)) return Json(new { error = "unknown_document" }, 404);
             var sc = WithdrawalScope.Compute(s.Generation.Documents, s.Generation.HeldCopies.Values, docId);
+            if (s.ActivationExcluded is not null)   // C16 Stage 3: excluded copies are never listed (activation only)
+                sc = sc with { VerifiedDuplicates = sc.VerifiedDuplicates.Where(e => !s.BoundaryExcluded(ctx, e.DocId, e.Sha)).ToList(),
+                               DistinctEditions = sc.DistinctEditions.Where(e => !s.BoundaryExcluded(ctx, e.DocId, e.Sha)).ToList(),
+                               OwnCopies = sc.OwnCopies.Where(x => !s.BoundaryExcluded(ctx, docId, x)).ToList() };
             object E(ScopeEntry e) => new { doc_id = e.DocId, title = e.Title, copy = e.Sha[..12], language = e.Language, verified = e.Verified,
                                             withdrawn = s.State.IsDocWithdrawn(e.DocId) };
             return Json(new
@@ -227,7 +237,7 @@ public static partial class Api
                 results.Add(new { doc_id = id, status = "withdrawn", scope = sc, copies_withdrawn = n });
             }
             return Json(new { status = "withdrawn", changed = anyChanged, epoch, reset_streams = reset, results,
-                              copies_withdrawn = scope.OwnCopies.Count, distinct_editions_not_affected = scope.DistinctEditions.Select(x => x.DocId),
+                              copies_withdrawn = scope.OwnCopies.Count, distinct_editions_not_affected = scope.DistinctEditions.Where(x => !NamesExcluded(ctx, s, x.DocId)).Select(x => x.DocId),
                               effect = "Every copy of this document (current and earlier editions) is refused for every user from now on: search, document views, citations and original delivery. Transfers of the original in progress are cut off. Pages already on a reader's screen are cleared at their next action or within about 10 seconds. Distinct editions under other document ids are not affected." });
         });
 
@@ -240,6 +250,9 @@ public static partial class Api
             try { body = (await JsonNode.ParseAsync(ctx.Request.Body))?.AsObject(); } catch { body = null; }
             var docId = body?["doc_id"]?.GetValue<string>() ?? ""; var reason = (body?["reason"]?.GetValue<string>() ?? "").Trim();
             if (reason.Length < 3 || reason.Length > 500) return Json(new { error = "A reason of 3 to 500 characters is required." }, 400);
+            // C16 Stage 3 (activation only): a local reinstatement never overrides the signed exclusion channel, and the
+            // answer names nothing about an excluded document.
+            if (NamesExcluded(ctx, s, docId)) return Json(new { state = "unavailable", notice = NotAvailable }, 404);
             if (!s.State.IsDocWithdrawn(docId)) return Json(new { error = "This document is not withdrawn." }, 409);
             var copies = await s.Policy.CopiesOfAsync(docId);
             var problems = s.Eligible.ReinstatementProblems(docId, copies);
@@ -281,7 +294,10 @@ public static partial class Api
             var (_, err) = await Admin(ctx, s, post: false);
             if (err is not null) return err;
             var rows = await s.Identity.AuditPageAsync(before, limit ?? 50);
-            return Json(new { rows = rows.Select(r => new { id = r.Id, at = r.At, actor = r.Actor, action = r.Action, @object = r.Object, detail = r.Detail }),
+            // C16 Stage 3 (activation only): a row naming an excluded copy keeps its action and time, not the object.
+            return Json(new { rows = rows.Select(r => NamesExcluded(ctx, s, r.Object)
+                                  ? new { id = r.Id, at = r.At, actor = r.Actor, action = r.Action, @object = (string?)null, detail = (string?)null }
+                                  : new { id = r.Id, at = r.At, actor = r.Actor, action = r.Action, @object = r.Object, detail = r.Detail }),
                               next_before = rows.Count > 0 ? rows[^1].Id : (long?)null });
         });
     }
@@ -351,27 +367,11 @@ public static partial class Api
         gate = GateText,
     };
 
-    /// C16 B06 response boundary for search (activation on only): hits of excluded copies are removed before paging,
-    /// totals are reduced accordingly, and facet counts are withheld when anything was removed (they would count
-    /// excluded copies; recomputing them is B06-integrated work).
-    static SearchResult BoundaryFilter(HttpContext ctx, SearchResult r, AppServices s)
-    {
-        var ix = s.Search.Index;
-        var gone = new HashSet<string>(StringComparer.Ordinal);
-        var kept = new List<Hit>(r.Hits.Count);
-        foreach (var h in r.Hits)
-        {
-            var d = ix.Docs[ix.DocOf(h.PassageIndex)];
-            if (gone.Contains(d.DocId) || s.BoundaryExcluded(ctx, d.DocId, d.CopySha)) { gone.Add(d.DocId); continue; }
-            kept.Add(h);
-        }
-        if (gone.Count == 0) return r;
-        return r with
-        {
-            Hits = kept, TotalPassages = Math.Max(0, r.TotalPassages - (r.Hits.Count - kept.Count)), TotalDocuments = Math.Max(0, r.TotalDocuments - gone.Count),
-            Facets = new Dictionary<string, IReadOnlyList<FacetValue>>(), Notes = [.. r.Notes, "Some results are not available in this installation."],
-        };
-    }
+    /// C16 Stage 3 (activation only; false otherwise): an id an admin view would show (a doc id, or a copy hash) that
+    /// the signed exclusion state excludes for this request. Such rows are shown without the id.
+    static bool NamesExcluded(HttpContext ctx, AppServices s, string? id) =>
+        s.ActivationExcluded is not null && id is { Length: > 0 }
+        && s.BoundaryExcluded(ctx, id, s.Generation.Documents.TryGetValue(id, out var d) ? d.CopySha : id);
 
     static object SearchDto(SearchResult r, SearchService.ResultPage rp, string sort, AppServices s, double ms)
     {
@@ -429,14 +429,16 @@ public static partial class Api
 
     [GeneratedRegex(@"^JUD:JG-([0-9a-f]{12})")] private static partial Regex JudNode();
 
-    static Dictionary<string, List<(DocumentRecord from, Candidate c)>>? _incoming;
+    // C16 Stage 3: one cache per generation (a process may serve several generations in turn after in-process swaps);
+    // weakly keyed, so a released generation's cache goes with it.
+    static readonly System.Runtime.CompilerServices.ConditionalWeakTable<GenerationStore, Dictionary<string, List<(DocumentRecord from, Candidate c)>>> _incoming = new();
     static readonly object _inLock = new();
 
     static Dictionary<string, List<(DocumentRecord from, Candidate c)>> Incoming(AppServices s)
     {
         lock (_inLock)
         {
-            if (_incoming is not null) return _incoming;
+            if (_incoming.TryGetValue(s.Generation, out var cached)) return cached;
             var byPrefix = s.Generation.Documents.Values.GroupBy(d => d.CopySha[..12]).ToDictionary(g => g.Key, g => g.First().DocId);
             var map = new Dictionary<string, List<(DocumentRecord from, Candidate c)>>();
             foreach (var d in s.Generation.Documents.Values)
@@ -444,7 +446,8 @@ public static partial class Api
                     if (c.Payload["target"]?["node_id"]?.GetValue<string>() is { } node && JudNode().Match(node) is { Success: true } m
                         && byPrefix.TryGetValue(m.Groups[1].Value, out var target) && target != d.DocId)
                         (map.TryGetValue(target, out var l) ? l : map[target] = new()).Add((d, c));
-            return _incoming = map;
+            _incoming.AddOrUpdate(s.Generation, map);
+            return map;
         }
     }
 

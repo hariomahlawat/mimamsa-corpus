@@ -1,0 +1,15 @@
+{
+  "readers": 6,
+  "swaps": 6,
+  "requests_served": 296,
+  "requests_refused_during_switch": 69694,
+  "mixed_generation": 0,
+  "used_released_generation": 0,
+  "over_two_resident": 0,
+  "served_by_generation": {
+    "R13-syn-fixture-20261125-00000002": 118,
+    "R13-syn-fixture-20261125-00000001": 178
+  },
+  "loads": 6,
+  "releases": 6
+}

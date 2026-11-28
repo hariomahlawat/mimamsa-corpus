@@ -259,13 +259,17 @@ public class C16Cp1SliceTests
             if (eng.NeedsRecovery()) eng.Recover();
             Check("b06_initialised_on_g1", layout.ReadPointer("KNOWLEDGE") == g1 && kdb.KnowledgeSchema() == KnowledgeAllowlist.ActiveSchema(seq[g1]), kdb.KnowledgeSchema());
 
+            // C16 Stage 3 (S3-D): activation mode requires the disk text store AND the disk index (bounded memory across
+            // the in-process generation swap).
             Dictionary<string, string> WebEnv(string textDir) => new()
             {
                 ["Mimamsa__Site"] = site, ["Mimamsa__Db"] = Cp1Pg.OwnerDsn(app, 8), ["Mimamsa__Test__Enabled"] = "true",
-                ["Mimamsa__Test__Users__0"] = "reader:User:reader-password-1", ["Mimamsa__RestrictedRegister"] = S("register"),
+                ["Mimamsa__Test__Users__0"] = "reader:User:reader-password-1", ["Mimamsa__Test__Users__1"] = "admin:Admin:admin-password-1",
+                ["Mimamsa__RestrictedRegister"] = S("register"),
                 ["Mimamsa__Activation__Enabled"] = "true", ["Mimamsa__Activation__DevelopmentTrust"] = "true",
                 ["Mimamsa__Activation__Pipe"] = pipe, ["Mimamsa__Activation__KeyFile"] = layout.ChannelKeyPath,
-                ["Mimamsa__Text__Store"] = "disk", ["Mimamsa__Text__Dir"] = textDir, ["Mimamsa__Search__Engine"] = "memory",
+                ["Mimamsa__Text__Store"] = "disk", ["Mimamsa__Text__Dir"] = textDir, ["Mimamsa__Search__Engine"] = "disk",
+                ["Mimamsa__Search__IndexDir"] = textDir + "-index",
                 ["Mimamsa__Test__PauseDir"] = Path.Combine(work, "pause-" + r),   // test-only pause hook (C16-CP1-03)
             };
             async Task<Cp1Web> Web(string name) { var w = await Cp1Web.StartAsync(WebEnv(Path.Combine(work, $"web-text-{r}-{name}"))); webs.Add(w); return w; }
@@ -316,12 +320,18 @@ public class C16Cp1SliceTests
             await using (var c = await owner.OpenConnectionAsync())
             await using (var q = new NpgsqlCommand("SELECT count(*) FROM knowledge.document_identities", c))
                 Check("b03_rows_visible_through_knowledge_views", (long)(await q.ExecuteScalarAsync())! == 3);
-            // no in-process swap in this slice: the old process stops serving (fail closed) until it is restarted
-            Check("web_old_process_fails_closed_after_switch", await St(c1, $"/api/documents/{legacy}") == HttpStatusCode.ServiceUnavailable);
+            // C16 Stage 3 (S3-D): in-process generation swap. The running process loaded G2 beside G1 at PREPARE and
+            // switched at OPEN: it serves G2 without a restart, on the same session.
+            {
+                var r1 = await c1.GetAsync($"/api/documents/{docA}");
+                Check("web_old_process_swapped_in_process_to_g2", r1.StatusCode == HttpStatusCode.OK && r1.Headers.GetValues("X-Mimamsa-Generation").Single() == g2
+                      && w1.Logged("target loaded and verified beside the serving generation"), $"{(int)r1.StatusCode}");
+                Check("web_old_process_released_g1_after_swap", w1.Logged("previous generation released"));
+            }
             await w1.DisposeAsync();
 
             var w2 = await Web("2");
-            Check("b04_web_process_adopted_shipped_text_store", w2.Logged("adopted shipped store") && !w2.Logged("built and published"));
+            Check("b04_web_process_adopted_shipped_text_store", w2.Logged("adopted shipped store") && !w2.Logged("text store: built and published"));
             var c2 = await w2.LoginAsync("reader");
             var search = JsonNode.Parse(await c2.GetStringAsync("/api/search?q=" + Uri.EscapeDataString(S("admitted_query"))))!;
             var hits = search["passages"]!.AsArray().Select(p => (string)p!["doc_id"]!).ToHashSet();
@@ -339,16 +349,18 @@ public class C16Cp1SliceTests
             var heldSearch = JsonNode.Parse(await c2.GetStringAsync("/api/search?q=" + Uri.EscapeDataString("Synthetic held writ petition")))!;
             Check("web_g2_search_never_returns_held_copy", heldSearch["passages"]!.AsArray().All(p => (string)p!["doc_id"]! != docB));
 
-            // ---------------------------------------------------------------- C16-CP1-01: surfaces not behind the boundary are refused
+            // ---------------------------------------------------------------- C16 Stage 3: the surfaces CP-1 refused now serve behind the boundary
             foreach (var url in new[] { "/api/graph/stats", "/api/graph/resolve?doc=" + legacy, "/api/reasoning/rule-gate", "/api/commander/domains",
                                         "/api/statutes", "/api/library", $"/api/documents/{legacy}/relations", "/api/studio/documents", "/api/studio/templates",
-                                        "/api/studio/notes", $"/api/v2/documents/{legacy}/pdf-meta", "/api/admin/overview" })
+                                        "/api/studio/notes", $"/api/v2/documents/{legacy}/pdf-meta" })
             {
                 var resp = await c2.GetAsync(url);
-                var body = await resp.Content.ReadAsStringAsync();
-                Check("refused_under_activation " + url.Split('?')[0], resp.StatusCode == HttpStatusCode.ServiceUnavailable
-                      && body.Contains("not_available_under_activation") && !body.Contains(legacy) && !body.Contains(docA), $"{(int)resp.StatusCode} {body[..Math.Min(body.Length, 80)]}");
+                var body = await resp.Content.ReadAsStringAsync();   // served (a 404 such as not_in_graph is an answer), never refused
+                Check("served_behind_boundary " + url.Split('?')[0], resp.StatusCode is HttpStatusCode.OK or HttpStatusCode.NotFound
+                      && !body.Contains("not_available_under_activation"), $"{(int)resp.StatusCode}");
             }
+            var a2 = await w2.LoginAsync("admin");
+            Check("served_behind_boundary /api/admin/overview", await St(a2, "/api/admin/overview") == HttpStatusCode.OK);
             Check("route_inventory_startup_self_check", w2.Logged("route inventory complete"));
 
             // a statute with printed headings (sections surface) and its copy hash
@@ -371,6 +383,10 @@ public class C16Cp1SliceTests
                 ["p-search"] = "/api/search?q=" + Uri.EscapeDataString(S("admitted_query")),
                 ["p-sections"] = $"/api/documents/{statute}/sections", ["p-statute-text"] = $"/api/documents/{statute}/text",
                 ["p-statute-search"] = "/api/search?q=" + Uri.EscapeDataString(statuteQuery),
+                // C16 Stage 3: the surfaces brought behind the boundary
+                ["p-statutes"] = "/api/statutes", ["p-library"] = "/api/library", ["p-relations"] = $"/api/documents/{statute}/relations",
+                ["p-graph-stats"] = "/api/graph/stats",
+                ["p-pdf-meta"] = $"/api/v2/documents/{docA}/pdf-meta",
             };
             foreach (var (_, url) in paused) Check("before_withdrawal_200 " + url.Split('?')[0], await St(c2, url) == HttpStatusCode.OK);
             var pending = paused.ToDictionary(kv => kv.Key, kv =>
@@ -426,11 +442,35 @@ public class C16Cp1SliceTests
                 Check("boundary_search_filtered " + q, resp.StatusCode == HttpStatusCode.OK && ContentFree(body), $"{(int)resp.StatusCode}");
             }
             Check("boundary_leaves_other_copies", await St(c2, $"/api/documents/{legacy}") == HttpStatusCode.OK);
+            // C16 Stage 3: the newly enabled surfaces after acceptance - content-free for both exclusion kinds, others served
+            foreach (var url in new[] { "/api/statutes", "/api/library", "/api/graph/stats", "/api/commander/domains", "/api/studio/templates" })
+            {
+                var resp = await c2.GetAsync(url);
+                var body = await resp.Content.ReadAsStringAsync();
+                Check("boundary_filtered_surface " + url, resp.StatusCode == HttpStatusCode.OK && ContentFree(body), $"{(int)resp.StatusCode}");
+            }
+            foreach (var (name, url) in new[] { ("doc_id pdf-meta", $"/api/v2/documents/{docA}/pdf-meta"), ("copy_hash pdf-meta", $"/api/v2/documents/{statute}/pdf-meta"),
+                                                ("copy_hash relations", $"/api/documents/{statute}/relations") })
+            {
+                var resp = await c2.GetAsync(url);
+                var body = await resp.Content.ReadAsStringAsync();
+                Check("boundary_withheld " + name, resp.StatusCode == HttpStatusCode.NotFound && ContentFree(body), $"{(int)resp.StatusCode}");
+            }
+            {
+                var resp = await a2.GetAsync("/api/admin/overview");
+                var body = await resp.Content.ReadAsStringAsync();
+                Check("boundary_filtered_surface /api/admin/overview", resp.StatusCode == HttpStatusCode.OK && ContentFree(body), $"{(int)resp.StatusCode}");
+            }
 
             // ---------------------------------------------------------------- ROLLBACK to G1
             var rtxn = eng.Transition("KNOWLEDGE", g1, "ROLLBACK");
             Check("b06_rollback_to_g1", layout.ReadPointer("KNOWLEDGE") == g1 && kdb.KnowledgeSchema() == KnowledgeAllowlist.ActiveSchema(seq[g1]) && kdb.Views() == g1, rtxn);
-            Check("web_g2_process_fails_closed_after_rollback", await St(c2, $"/api/documents/{legacy}") == HttpStatusCode.ServiceUnavailable);
+            // C16 Stage 3: the rollback is also an in-process swap (G1 loaded beside G2, then switched)
+            {
+                var rr = await c2.GetAsync($"/api/documents/{legacy}");
+                Check("web_g2_process_swapped_back_in_process_to_g1", rr.StatusCode == HttpStatusCode.OK && rr.Headers.GetValues("X-Mimamsa-Generation").Single() == g1
+                      && await St(c2, $"/api/documents/{docA}") == HttpStatusCode.NotFound, $"{(int)rr.StatusCode}");
+            }
             await w2.DisposeAsync();
             var w3 = await Web("3");
             var c3 = await w3.LoginAsync("reader");

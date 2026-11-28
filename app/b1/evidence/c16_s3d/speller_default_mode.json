@@ -1,0 +1,6 @@
+{
+  "withdrawn": "syn-j-allow, syn-s-act",
+  "probe_term": "decision",
+  "probe_term_offered_before": true,
+  "offered_after_withdrawal": false
+}

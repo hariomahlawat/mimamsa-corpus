@@ -23,6 +23,9 @@ public sealed class ControlChannelOptions
     public required string PipeName { get; init; }
     public required byte[] Secret { get; init; }
     public TimeSpan Timeout { get; init; } = TimeSpan.FromSeconds(5);
+    /// C16 Stage 3: PREPARE loads and verifies a whole generation beside the serving one, so its reply may take far
+    /// longer than a control message; the tool waits up to this long for PREPARED.
+    public TimeSpan PrepareTimeout { get; init; } = TimeSpan.FromMinutes(30);
     /// Windows: SIDs allowed to connect (default: the current user only).
     public IReadOnlyList<string>? AllowedSids { get; init; }
     /// Windows: require the connecting process to be the lock holder recorded in LOCK.json.
@@ -182,6 +185,11 @@ public sealed class ControlChannelServer : IAsyncDisposable
                             type = "ACK_OPEN";
                             reply = new JsonObject { ["txn_id"] = (string)body["txn_id"]!, ["serving"] = serving };
                             break;
+                        case "PREPARE":
+                            var prep = _p.Prepare((string)body["txn_id"]!, (string)body["target"]!, (string)body["to"]!, epoch);
+                            type = "PREPARED";
+                            reply = new JsonObject { ["txn_id"] = prep.TxnId, ["prepared"] = prep.Prepared, ["reason"] = prep.Reason };
+                            break;
                         case "PING":
                             type = "PONG"; reply = new JsonObject(); break;
                         case "QUERY_PINS":
@@ -245,15 +253,15 @@ public sealed class PipeParticipantLink : IParticipantLink, IDisposable
         _session = s; _out = 0; _in = 0;
     }
 
-    string? ReadLine()
+    string? ReadLine(TimeSpan? timeout = null)
     {
-        using var cts = new CancellationTokenSource(_o.Timeout);
+        using var cts = new CancellationTokenSource(timeout ?? _o.Timeout);
         try { return _r!.ReadLineAsync(cts.Token).AsTask().GetAwaiter().GetResult(); }
         catch (OperationCanceledException) { throw new ParticipantUnavailableException("timeout"); }
         catch (IOException e) { throw new ParticipantUnavailableException("pipe: " + e.Message); }
     }
 
-    JsonObject Call(string type, JsonObject body, long epoch, string expect)
+    JsonObject Call(string type, JsonObject body, long epoch, string expect, TimeSpan? replyTimeout = null)
     {
         for (int attempt = 0; ; attempt++)
         {
@@ -261,7 +269,7 @@ public sealed class PipeParticipantLink : IParticipantLink, IDisposable
             {
                 if (_pipe is null || !_pipe.IsConnected) Connect();
                 _w!.WriteLine(ControlEnvelope.Seal(_o.Secret, type, body.DeepClone().AsObject(), epoch, _session!, ++_out, "tool"));
-                var line = ReadLine() ?? throw new ParticipantUnavailableException("participant closed the channel");
+                var line = ReadLine(replyTimeout) ?? throw new ParticipantUnavailableException("participant closed the channel");
                 var m = ControlEnvelope.Open(_o.Secret, line, "web", _session!, _in, out var why) ?? throw new ParticipantUnavailableException("reply not authentic: " + why);
                 _in++;
                 if ((string?)m["type"] == "REJECT") throw new ParticipantUnavailableException("participant rejected: " + (string?)m["body"]!["reason"]);
@@ -280,6 +288,12 @@ public sealed class PipeParticipantLink : IParticipantLink, IDisposable
     {
         var b = Call("ENTER_SWITCHING", new JsonObject { ["txn_id"] = txnId }, lockEpoch, "ACK_SWITCHING");
         return new SwitchAck((string)b["txn_id"]!, (bool)b["admitted_stopped"]!, (int)(long)b["pinned"]!);
+    }
+
+    public PrepareAck Prepare(string txnId, string target, string to, long lockEpoch)
+    {
+        var b = Call("PREPARE", new JsonObject { ["txn_id"] = txnId, ["target"] = target, ["to"] = to }, lockEpoch, "PREPARED", _o.PrepareTimeout);
+        return new PrepareAck((string)b["txn_id"]!, (bool)b["prepared"]!, (string?)b["reason"]);
     }
 
     public void Open(string txnId, string knowledge, string? models, long exclusionSeq, long lockEpoch) =>

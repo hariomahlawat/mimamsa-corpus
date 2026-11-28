@@ -44,6 +44,7 @@ public sealed class SearchService
     sealed class Ctx
     {
         public bool Exact;
+        public Func<int, bool> Hidden = _ => false;
         public readonly HashSet<string> Highlight = new(StringComparer.Ordinal);
         public readonly List<IReadOnlyList<string>> Phrases = new();
         // C15 WP1: match counts per display term, in first-noted order; Reasons() builds the per-passage view on demand
@@ -77,6 +78,16 @@ public sealed class SearchService
                 new Dictionary<string, IReadOnlyList<FacetValue>>(), e.Message, e.Position, Array.Empty<string>(), Array.Empty<IReadOnlyList<string>>(), Array.Empty<string>());
         }
         var ctx = new Ctx { Exact = q.Exact };
+        // C16 S3-D: one hidden decision per document for this query, shared by the case-name, identifier, instrument
+        // scope and spelling rules, so no chip or suggestion names, counts or draws vocabulary from a hidden document
+        // (withdrawn, restricted, or excluded at the response boundary). With nothing hidden nothing changes.
+        var hidMemo = new sbyte[_ix.Docs.Count];
+        bool HiddenDoc(int d)
+        {
+            if (hidMemo[d] == 0) hidMemo[d] = _docHidden(_ix.Docs[d].DocId) ? (sbyte)1 : (sbyte)2;
+            return hidMemo[d] == 1;
+        }
+        ctx.Hidden = HiddenDoc;
         var notes = new List<string> { "Lexical search (BM25 word and phrase matching). Semantic search is not part of B1." };
         // C16 WP05: hits are held as entries (passage, score, explicit hit or -1) until a hit is read. Explicit hits are
         // the pinned, mention, case-name, title, heading-first, fused and reranked ones, created as before; a ranked
@@ -91,7 +102,7 @@ public sealed class SearchService
             var (pinned, mentions, rest) = IdentifierTiers(q.Raw, ctx);
             foreach (var h in pinned) if (seen.Add(h.PassageIndex)) ordered.Add(h);
             // Case-name tier (C14 F02): a query naming the parties pins those judgments above judgments that cite them.
-            if (rest.Count > 0 && Identifiers.Recognise(q.Raw).Count == 0 && _ix.Resolver.ResolveCaseName(rest) is { } cn)
+            if (rest.Count > 0 && Identifiers.Recognise(q.Raw).Count == 0 && _ix.Resolver.ResolveCaseName(rest, HiddenDoc) is { } cn)
             {
                 if (cn.TooMany)
                     ctx.Chips.Add(new Chip("case_name", $"Party name matches {cn.Count} judgments",
@@ -107,7 +118,7 @@ public sealed class SearchService
             }
             if (ordered.Count > 0) mode = "identifier";
             foreach (var h in mentions) if (seen.Add(h.PassageIndex)) ordered.Add(h);
-            if (!q.Exact && mode == "lexical" && rest.Count > 0 && Speller.Suggest(rest) is { } suggestion)
+            if (!q.Exact && mode == "lexical" && rest.Count > 0 && Speller.Suggest(rest, HiddenDoc) is { } suggestion)
                 ctx.Chips.Add(new Chip("suggestion", $"Did you mean: {suggestion}", suggestion));
             if (rest.Count > 0)
             {
@@ -333,6 +344,7 @@ public sealed class SearchService
             if (_ix.MetaIds.TryGetValue(id.Normalized, out var m)) docs.UnionWith(m);
             var cover = new SortedSet<int>();
             if (_ix.CoverIds.TryGetValue(id.Normalized, out var c)) cover.UnionWith(c.Where(d => !docs.Contains(d)));
+            docs.RemoveWhere(d => ctx.Hidden(d)); cover.RemoveWhere(d => ctx.Hidden(d));   // C16 S3-D: never counted or pinned
             ctx.Chips.Add(new Chip("identifier", $"{label} · {id.Raw.Trim()}", docs.Count + cover.Count > 0 ? $"{docs.Count + cover.Count} matching document(s)" : "no document carries this identifier"));
             if (docs.Count + cover.Count == 0 && id.Kind is IdKind.ReportedCitation or IdKind.NeutralCitation)
                 ctx.Chips.Add(new Chip("not_held", $"Citation not recorded in this library: {id.Raw.Trim()}",
@@ -361,7 +373,7 @@ public sealed class SearchService
         foreach (var id in ids.Where(i => i.Kind == IdKind.Section))
         {
             // Instrument scoping (review F05, F14) and short names/abbreviations (C14 F01): Legal.LegalIdentifierResolver.
-            var scope = _ix.Resolver.ResolveInstrument(restWords);
+            var scope = _ix.Resolver.ResolveInstrument(restWords, ctx.Hidden);
             var actWords = scope.Terms.ToList();
             void AliasChips()
             {

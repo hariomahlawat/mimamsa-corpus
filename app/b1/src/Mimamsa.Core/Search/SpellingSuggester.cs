@@ -4,6 +4,10 @@
 //     ≤ 2 for 7+; same first letter; most frequent wins, then alphabetical);
 //  2. a pair of adjacent words that rarely occurs together ("court marshal") is replaced when a near spelling of one
 //     word forms a pair at least ten times more frequent and seen at least five times ("court martial").
+// C16 S3-D: with a `hidden` predicate (index document -> hidden now: withdrawn, restricted or excluded at the response
+// boundary) only VISIBLE vocabulary is used: a word counts as held, a candidate is offered and a pair is counted only
+// when a document that is not hidden contains it. A term found only in hidden documents is never suggested and never
+// treated as held. With nothing hidden every decision is exactly the one made without the predicate.
 namespace Mimamsa.Core.Search;
 
 public sealed class SpellingSuggester
@@ -44,7 +48,7 @@ public sealed class SpellingSuggester
 
     /// Passages in which a is immediately followed by b, counted up to `limit`. Postings are ordered by passage and
     /// positions ascend, so this is a merge join with no allocation.
-    int PairCount(string a, string b, int limit = int.MaxValue)
+    int PairCount(string a, string b, int limit = int.MaxValue, Func<int, bool>? hidden = null)
     {
         if (!_ix.Postings.TryGetValue(a, out var pa) || !_ix.Postings.TryGetValue(b, out var pb)) return 0;
         int n = 0, i = 0, j = 0;
@@ -53,6 +57,7 @@ public sealed class SpellingSuggester
             int c = pa[i].P.CompareTo(pb[j].P);
             if (c < 0) { i++; continue; }
             if (c > 0) { j++; continue; }
+            if (hidden is not null && hidden(_ix.DocOf(pa[i].P))) { i++; j++; continue; }
             int[] x = pa[i].Pos, y = pb[j].Pos;
             for (int u = 0, v = 0; u < x.Length && v < y.Length;)
             {
@@ -66,8 +71,21 @@ public sealed class SpellingSuggester
     }
 
     /// Suggested query for the plain words, or null. Words with digits or fewer than four letters are kept.
-    public string? Suggest(IReadOnlyList<string> words)
+    public string? Suggest(IReadOnlyList<string> words, Func<int, bool>? hidden = null)
     {
+        var seen = new Dictionary<string, bool>(StringComparer.Ordinal);
+        // a term is visible when a posting of it lies in a document that is not hidden, or a visible judgment names it
+        bool Visible(string t)
+        {
+            if (hidden is null) return true;
+            if (seen.TryGetValue(t, out var v)) return v;
+            v = false;
+            if (_ix.Postings.TryGetValue(t, out var l)) foreach (var p in l) if (!hidden(_ix.DocOf(p.P))) { v = true; break; }
+            if (!v) v = _ix.Resolver.PartyTermVisible(t, hidden);
+            return seen[t] = v;
+        }
+        bool Held(string t) => hidden is null ? Df(t) > 0 || _ix.Resolver.PartyTerms.ContainsKey(t) : Visible(t);
+        IEnumerable<(string term, int df)> NearVisible(string t) => Near(t).Where(x => Visible(x.term));
         var terms = words.Select(w => { var t = Text.Tokenize(w); return t.Count == 1 ? t[0].Term : null; }).ToList();
         var outp = terms.ToList();
         bool changed = false;
@@ -75,21 +93,21 @@ public sealed class SpellingSuggester
         for (int i = 0; i < outp.Count; i++)
         {
             var t = outp[i];
-            if (!Word(t) || Df(t!) > 0 || _ix.Resolver.PartyTerms.ContainsKey(t!)) continue;
-            var best = Near(t!).OrderByDescending(x => x.df).ThenBy(x => x.term, StringComparer.Ordinal).Select(x => x.term).FirstOrDefault();
+            if (!Word(t) || Held(t!)) continue;
+            var best = NearVisible(t!).OrderByDescending(x => x.df).ThenBy(x => x.term, StringComparer.Ordinal).Select(x => x.term).FirstOrDefault();
             if (best is not null) { outp[i] = best; changed = true; }
         }
         for (int i = 0; i + 1 < outp.Count; i++)
         {
             string? a = outp[i], b = outp[i + 1];
             if (!Word(a) || !Word(b) || Text.Stopwords.Contains(a!) || Text.Stopwords.Contains(b!)) continue;
-            int cur = PairCount(a!, b!, 5);
+            int cur = PairCount(a!, b!, 5, hidden);
             if (cur >= 5) continue;               // an established pair is not questioned
             (int n, int idx, string term) best = (0, -1, "");
-            foreach (var (cand, _) in Near(b!).OrderByDescending(x => x.df).Take(20))
-                if (PairCount(a!, cand) is var n && n > best.n) best = (n, i + 1, cand);
-            foreach (var (cand, _) in Near(a!).OrderByDescending(x => x.df).Take(20))
-                if (PairCount(cand, b!) is var n && n > best.n) best = (n, i, cand);
+            foreach (var (cand, _) in NearVisible(b!).OrderByDescending(x => x.df).Take(20))
+                if (PairCount(a!, cand, int.MaxValue, hidden) is var n && n > best.n) best = (n, i + 1, cand);
+            foreach (var (cand, _) in NearVisible(a!).OrderByDescending(x => x.df).Take(20))
+                if (PairCount(cand, b!, int.MaxValue, hidden) is var n && n > best.n) best = (n, i, cand);
             if (best.idx >= 0 && best.n >= Math.Max(5, 10 * cur)) { outp[best.idx] = best.term; changed = true; }
         }
         if (!changed) return null;
