@@ -212,10 +212,11 @@ def _form_feed_mirror(tmp_path) -> tuple[Path, str]:
     prepare(m)
     root = revision_root(m, "owner/fixture-corpus", "008d447011808d3d3f9095b0dbf14125002d1642") / "v1"
     ders = [json.loads(x) for x in (root / "data" / "derived_text.jsonl").read_text(encoding="utf-8").splitlines() if x]
-    t = ders[0]
+    # a derivative whose pages run 1..n (form feeds cannot express a gap or a first page other than 1)
+    t = next(d for d in ders if sorted(p["page"] for p in d["pages"]) == list(range(1, len(d["pages"]) + 1)))
     pages = page_format.split((root / t["text_path"]).read_text(encoding="utf-8"))
     ff = "\f".join(pages[n] for n in sorted(pages)).encode("utf-8")
-    assert sorted(pages) == list(range(1, len(pages) + 1))
+    assert sorted(pages) == list(range(1, len(pages) + 1)) and not any("\f" in b for b in pages.values())
     (root / t["text_path"]).write_bytes(ff)
     t["text_sha256"] = _sha(ff)
     (root / "data" / "derived_text.jsonl").write_bytes("".join(json.dumps(r, sort_keys=True, ensure_ascii=False) + "\n" for r in ders).encode())
