@@ -1,0 +1,17 @@
+
+RET-01: Passed  mode identifier (exp identifier) state results top ['A-17'] 
+RET-02: Passed  mode lexical (exp lexical) state results top ['R-3A', 'N-20'] 
+RET-03: Passed  mode identifier (exp identifier) state results top ['J1-SUB', 'J1-SHORT', 'J2-QUOTE'] 
+RET-04: Passed  mode identifier (exp identifier) state results top ['J2-MAJ'] 
+RET-05: Passed  mode lexical (exp lexical) state results top ['M-SYN'] 
+RET-06: Failed  mode hybrid (exp hybrid) state results top ['M-SYN', 'M-NEAR', 'L-EN'] unknown or unpublished passages: ['UNMAPPED:syn-x-stagedearly#p1-1']
+RET-07: Failed  mode hybrid (exp hybrid) state results top ['J2-MAJ', 'L-EN', 'N-20'] missing at rank 10: ['J1-MAJ']
+RET-08: Passed  mode lexical (exp lexical) state results top ['H-ILL'] 
+RET-09: Passed  mode hybrid (exp hybrid) state results top ['L-HI', 'L-EN', 'R-3A'] 
+RET-10: Passed  mode hybrid (exp hybrid) state results top ['J1-SUB', 'J1-SHORT', 'L-EN'] 
+RET-11: Passed  mode lexical (exp lexical) state empty top [] 
+RET-12: Passed  mode lexical (exp lexical) state results top ['R-3A', 'R-3B', 'N-20'] 
+RET-13: Passed  mode parser_error (exp parser_error) state parser_error top [] 
+RET-14: Passed  mode lexical (exp lexical) state results top ['M-SYN'] 
+oracle: 12/14 cases without hard-assertion errors (exit 1)
+
