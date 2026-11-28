@@ -613,6 +613,9 @@ def outputs() -> dict[str, bytes]:
                reason="CP-1 fixture slice: no vector pack; lexical-only service; no site embedding", release_id=cp1["release_id"],
                release_sequence=cp1["release_sequence"], previous_active_release_id=None, seq=1, previous_record_sha256=None)
     files["cp1/activation_record.json"] = json.dumps(rec, indent=1, sort_keys=True).encode() + b"\n"
+    # S3-B (2.1 additive item 11): B04 verifier reference golden values (samples, vector keys, source digest, MIMVEC01)
+    from mimamsa_contract.c16 import verification
+    files["component_verification/golden.json"] = json.dumps(verification.golden_vectors(), indent=1, sort_keys=True, ensure_ascii=False).encode() + b"\n"
     return files
 
 

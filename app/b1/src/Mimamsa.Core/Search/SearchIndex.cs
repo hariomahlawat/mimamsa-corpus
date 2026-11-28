@@ -23,6 +23,8 @@ public sealed class SearchIndex
     public string Engine { get; private set; } = "memory";
     /// Disk engine only: the published index directory in use (null for memory).
     public string? IndexPath { get; private set; }
+    /// Disk engine only: "opened", "adopted" (C16 B04 shipped index, S3-B) or "built".
+    public string? Origin { get; private set; }
     /// Distinct indexed terms.
     public int VocabularySize => Postings.Count;
     internal readonly Dictionary<string, HashSet<string>> StemGroups = new(StringComparer.Ordinal);
@@ -161,12 +163,39 @@ public sealed class SearchIndex
         var store = new IndexStore(root, options, log);
         var ix = new SearchIndex { Engine = "disk" };
         var path = store.OpenOrBuild(g, ix);
+        ix.Origin = store.Origin;
         ix.IndexPath = path;
         ix.Postings = SqlitePostingTable.Open(Path.Combine(path, IndexStore.DbFile), options.CacheBytes);
         ix.Finish();
         return ix;
     }
 
+    /// C16 B04 (S3-B): a prebuilt index file opened read-only for verification, without copying or publishing it
+    /// (IndexStore.Load: document order and passage lengths from the file; postings on demand).
+    internal static SearchIndex OpenForVerification(GenerationStore g, string dbPath, long cacheBytes = 32L << 20)
+    {
+        var ix = new SearchIndex { Engine = "disk", IndexPath = Path.GetDirectoryName(dbPath) };
+        IndexStore.LoadFile(dbPath, g, IndexedDocuments(g), ix);
+        ix.Postings = SqlitePostingTable.Open(dbPath, cacheBytes);
+        ix.Finish();
+        return ix;
+    }
+
+    /// C16 B04 SAMPLED_QUERY_PARITY (S3-B): the same index (documents, vocabulary, global statistics, identifier tables)
+    /// with `postings` in place of its posting table and `lens` overriding passage lengths. Used to evaluate queries
+    /// against a site rebuild of sampled documents under the shipped index's global statistics.
+    internal SearchIndex WithPostings(PostingTable postings, IReadOnlyDictionary<int, int> lens)
+    {
+        var x = new SearchIndex { Engine = Engine + "+rebuilt-sample", IndexPath = IndexPath, Postings = postings, Resolver = Resolver, AvgLen = AvgLen };
+        x._passages.AddRange(_passages); x._docs.AddRange(_docs); x._passageDoc.AddRange(_passageDoc);
+        for (int i = 0; i < _passageLen.Count; i++) x._passageLen.Add(lens.TryGetValue(i, out var l) ? l : _passageLen[i]);
+        foreach (var (k, v) in StemGroups) x.StemGroups[k] = v;
+        foreach (var (k, v) in MetaIds) x.MetaIds[k] = v;
+        foreach (var (k, v) in CoverIds) x.CoverIds[k] = v;
+        foreach (var (k, v) in Abbrev) x.Abbrev[k] = v;
+        x.TitleTerms.AddRange(TitleTerms); x.DocPassages.AddRange(DocPassages); x.GroupKey.AddRange(GroupKey); x.Service.AddRange(Service);
+        return x;
+    }
 
     public double Idf(int df) => Math.Log(1 + (N - df + 0.5) / (df + 0.5));
 

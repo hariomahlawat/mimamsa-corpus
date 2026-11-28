@@ -39,6 +39,13 @@ public sealed record SearchIndexOptions
     /// C16 B02: a pinned build time written as built_utc instead of the wall clock, so that a central build produces
     /// byte-identical indexes from the same inputs. Null (the default) keeps the existing behaviour.
     public DateTimeOffset? BuildTimeUtc { get; init; }
+    /// C16 B04 (S3-B): adopt the lexical index shipped prebuilt with a C16 knowledge release
+    /// (generations/<id>/accelerators/search-index) instead of rebuilding it. Null (the default) never adopts (unchanged
+    /// behaviour). "development" adopts only after the B04 LEXICAL_INDEX checks pass (LexicalIndexVerifier: manifest,
+    /// quick_check, source digest, sampled postings re-derivation, sampled query parity) with the UNCALIBRATED development
+    /// sample defaults. There is no production value: while OD-C16-UNCALIBRATED-PRODUCTION is open a production site builds
+    /// its own index (exact, no sample) rather than serve one verified by an uncalibrated sample.
+    public string? AdoptShipped { get; init; }
 }
 
 public sealed class IndexIntegrityException(string message) : Exception(message);
@@ -50,6 +57,51 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
     public const string FormatVersion = "mimamsa-search-index/1";
 
     void Log(string m) => log?.Invoke(m);
+
+    /// How this process got the index: "opened" (existing), "adopted" (shipped prebuilt, B04 checks passed) or "built".
+    public string Origin { get; private set; } = "opened";
+
+    /// C16 B04 (S3-B): verify the shipped index in place (read-only) with the B04 LEXICAL_INDEX checks, then copy it into
+    /// the root (temporary directory, full Verify, atomic rename). Null when adopted, else why (the index is then built).
+    string? AdoptShipped(GenerationStore g, string digest, string target, string mode)
+    {
+        if (mode != "development") return $"adoption mode '{mode}' is not supported (only development; production builds its own index)";
+        var gdir = Path.Combine(g.SiteRoot, "generations", g.GenerationId);
+        var shipped = Path.Combine(gdir, "accelerators", "search-index");
+        var km = Path.Combine(gdir, "KNOWLEDGE_RELEASE.json");
+        if (!File.Exists(km) || !File.Exists(Path.Combine(shipped, DbFile))) return "the generation ships no lexical index";
+        string releaseId; string? declared; string? inventorySha;
+        try
+        {
+            var m = JsonNode.Parse(File.ReadAllBytes(km))!.AsObject();
+            releaseId = (string)m["release_id"]!;
+            var comp = m["components"]!.AsArray().Select(c => c!.AsObject()).FirstOrDefault(c => (string?)c["kind"] == "LEXICAL_INDEX");
+            if (comp is null) return "the release declares no LEXICAL_INDEX";
+            declared = (string?)comp["source_digest"];
+            inventorySha = comp["files"]?.AsArray().Select(f => f!.AsObject()).FirstOrDefault(f => (string?)f["path"] == "accelerators/search-index/" + DbFile)?["sha256"]?.GetValue<string>();
+        }
+        catch (Exception e) when (e is JsonException or InvalidOperationException or NullReferenceException) { return "knowledge release manifest unreadable: " + e.GetType().Name; }
+        if (inventorySha is null || inventorySha != FileSha(Path.Combine(shipped, DbFile))) return "the shipped index is not the file the signed inventory names";
+        var ev = ComponentVerification.LexicalIndexVerifier.Verify(g, shipped, releaseId, declared,
+            ComponentVerification.B04Sampling.Effective(null, ComponentVerification.LexicalIndexVerifier.Postings, production: false),
+            ComponentVerification.B04Sampling.Effective(null, ComponentVerification.LexicalIndexVerifier.Queries, production: false));
+        if (!ev.Verified(ComponentVerification.LexicalIndexVerifier.Required)) return "B04 checks failed: " + string.Join("; ", ev.Issues.Take(3));
+        var tmp = Path.Combine(root, $".building-{Safe(g.GenerationId)}-adopt-{Guid.NewGuid():N}");
+        Directory.CreateDirectory(tmp);
+        try
+        {
+            foreach (var f in new[] { DbFile, ManifestFile })
+            {
+                File.Copy(Path.Combine(shipped, f), Path.Combine(tmp, f));
+                using var s = new FileStream(Path.Combine(tmp, f), FileMode.Open, FileAccess.ReadWrite); s.Flush(true);
+            }
+            var why = Verify(tmp, g.GenerationId, digest, full: true);
+            if (why is not null) { SqliteConnection.ClearAllPools(); Directory.Delete(tmp, true); return why; }
+            Directory.Move(tmp, target);
+            return null;
+        }
+        catch (IOException e) { SqliteConnection.ClearAllPools(); try { Directory.Delete(tmp, true); } catch (IOException) { } return "copy failed: " + e.GetType().Name; }
+    }
 
     string BuiltUtc => options.BuildTimeUtc is { } t ? t.UtcDateTime.ToString("O") : DateTime.UtcNow.ToString("O");
 
@@ -93,6 +145,12 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
         var docs = SearchIndex.IndexedDocuments(g);
         var digest = SourceDigest(docs);
         var dir = Path.Combine(root, Safe(g.GenerationId));
+        if (!Directory.Exists(dir) && options.AdoptShipped is { } adoptMode)
+        {
+            var why = AdoptShipped(g, digest, dir, adoptMode);
+            Log(why is null ? $"search index: adopted the shipped index for {g.GenerationId} (B04 checks passed; no rebuild)" : $"search index: shipped index not adopted: {why}");
+            if (why is null) Origin = "adopted";
+        }
         if (Directory.Exists(dir))
         {
             var why = Verify(dir, g.GenerationId, digest, options.VerifyOnOpen);
@@ -108,6 +166,7 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
             Quarantine(dir, g.GenerationId);
         }
         Build(g, docs, digest, ix, dir);
+        Origin = "built";
         Retain(dir);
         return dir;
     }
@@ -191,10 +250,12 @@ internal sealed class IndexStore(string root, SearchIndexOptions options, Action
     }
 
     // ------------------------------------------------------------------ load (no tokenisation)
-    void Load(string dir, GenerationStore g, List<DocumentRecord> docs, SearchIndex ix)
+    void Load(string dir, GenerationStore g, List<DocumentRecord> docs, SearchIndex ix) => LoadFile(Path.Combine(dir, DbFile), g, docs, ix);
+
+    internal static void LoadFile(string dbPath, GenerationStore g, List<DocumentRecord> docs, SearchIndex ix)
     {
         foreach (var a in g.Abbreviations) ix.Abbrev.TryAdd(a.Code, a);
-        using var c = new SqliteConnection(SqlitePostingTable.ReadOnlyConnectionString(Path.Combine(dir, DbFile)));
+        using var c = new SqliteConnection(SqlitePostingTable.ReadOnlyConnectionString(dbPath));
         c.Open();
         using var r = new SqliteCommand("SELECT di, doc_id, service, lens FROM docs ORDER BY di", c).ExecuteReader();
         int di = 0;

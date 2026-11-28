@@ -172,6 +172,13 @@ public class C16Cp1SliceTests
                 Check($"b03_loader_rows_and_graph_{gid}", rep.Components["KNOWLEDGE_ROWS"] == "VERIFIED" && rep.Components["GRAPH"] == "VERIFIED");
                 Check($"b04_text_store_adopted_{gid}", rep.TextStoreOrigin == "adopted" && rep.Components["TEXT_STORE"] == "VERIFIED", string.Join(" | ", tlog));
                 Check($"b04_lexical_index_sha_and_quick_check_{gid}", rep.Components["LEXICAL_INDEX"] == "VERIFIED");
+                // S3-B: the B04 kind-specific verifiers ran on the shipped components (development samples, recorded as such)
+                bool B04(string kind, params string[] checks) => rep.Verification.TryGetValue(kind, out var ev) && (string?)ev["status"] == "VERIFIED"
+                    && checks.All(c => (string?)ev["checks"]?[c] == "PASS");
+                Check($"s3b_b04_graph_structural_and_sampled_rebuild_{gid}", B04("GRAPH", "GRAPH_DIGEST", "GRAPH_STRUCTURAL_RECHECK", "SAMPLED_REBUILD_PARITY")
+                      && (string?)rep.Verification["GRAPH"]["samples"]!["SAMPLED_REBUILD_PARITY"]!["size_source"] == "UNCALIBRATED_DEVELOPMENT_DEFAULT");
+                Check($"s3b_b04_lexical_postings_and_query_parity_{gid}", B04("LEXICAL_INDEX", "SQLITE_QUICK_CHECK", "SAMPLED_POSTINGS_REDERIVE", "SAMPLED_QUERY_PARITY", "SOURCE_DIGEST_EQUALS_SITE"),
+                      rep.Verification.TryGetValue("LEXICAL_INDEX", out var lev) ? lev.ToJsonString() : "no evidence");
                 Check($"no_vector_pack_{gid}", rep.Inputs["VECTOR_PACK"] == "MISSING" && rep.Components["VECTOR_PACK"] == "NOT_USED"
                       && rep.DeclaredServiceLevel == "DEGRADED_LEXICAL_ONLY" && (string?)rep.Outcome!["result"] == "ACTIVE_DEGRADED"
                       && (string?)rep.Outcome["service_level"] == "DEGRADED_LEXICAL_ONLY");
@@ -236,7 +243,7 @@ public class C16Cp1SliceTests
             results["loads"] = loads;
             results["component_results"] = componentResults;
             results["outcome_inputs"] = g2Inputs;
-            results["component_checks_not_run"] = "GRAPH_STRUCTURAL_RECHECK, SAMPLED_REBUILD_PARITY, SAMPLED_POSTINGS_REDERIVE, SAMPLED_QUERY_PARITY (UNCALIBRATED sizes; B04 .NET verifiers not built); GRAPH and KNOWLEDGE_ROWS verified by the loader's full re-derivation instead";
+            results["component_checks_not_run"] = "none in development (S3-B: GRAPH_STRUCTURAL_RECHECK, SAMPLED_REBUILD_PARITY, SAMPLED_POSTINGS_REDERIVE and SAMPLED_QUERY_PARITY run with UNCALIBRATED development defaults, recorded as such; GRAPH is additionally re-derived in full by the loader); production runs no uncalibrated sample and refuses (UNCALIBRATED_IN_PRODUCTION)";
 
             // ---------------------------------------------------------------- B06: initialise on G1 (lexical-only: NO model)
             var reader = ActivationCli.Reader(layout, production: false);

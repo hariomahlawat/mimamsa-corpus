@@ -6,6 +6,12 @@
     python -m mimamsa_kbuild build-accel --artifacts <dir>           build the .NET S6 helper (local NuGet cache)
     python -m mimamsa_kbuild budget --spec <spec.json>               apply the resource budget and print what the OS reports
     python -m mimamsa_kbuild measure-host                            measured CPUs/memory for the spec's resources block
+    python -m mimamsa_kbuild build-vectors --site <site> --model-dir <dir> --model-sha <sha> --out <dir> [--cache <file>]
+                                   [--generation <id>] [--threads N] [--tool <KBuildVerify.dll>]
+                                   central vector pack (C16 S3-B; the site never embeds the corpus)
+    python -m mimamsa_kbuild build-model-release --pack <dir> --model-dir <dir> --release-id <id> --release-sequence <n>
+                                   --out <dir> --dev-key <file> [--model-manifest <json>] [--model-id <label>]
+                                   DEVELOPMENT intelligence release signed under purpose "model" (B10; production refuses it)
 
 Outputs go under --out-root (never into the repository). Exit codes: 0 built, 2 refused, 1 usage or internal error.
 """
@@ -38,6 +44,8 @@ def build_accel(artifacts: Path) -> Path:
                        capture_output=True, text=True)
     if p.returncode != 0:
         raise BuildRefused("BUILD_TOOL_BUILD_FAILED", (p.stdout + p.stderr)[-800:])
+    from .verify import build_verify_tool   # C16 S3-B: KBuildVerify (central B04 checks, central vector packs) beside it
+    build_verify_tool(artifacts)
     return default_accel_dll(artifacts)
 
 
@@ -131,6 +139,21 @@ def main(argv=None) -> int:
     g = sub.add_parser("budget")
     g.add_argument("--spec", type=Path, required=True)
     sub.add_parser("measure-host")
+    v = sub.add_parser("build-vectors")
+    for n in ("--site", "--model-dir", "--out"):
+        v.add_argument(n, type=Path, required=True)
+    v.add_argument("--model-sha", required=True)
+    v.add_argument("--cache", type=Path)
+    v.add_argument("--generation")
+    v.add_argument("--threads", type=int)
+    v.add_argument("--tool", type=Path)
+    r = sub.add_parser("build-model-release")
+    for n in ("--pack", "--model-dir", "--out", "--dev-key"):
+        r.add_argument(n, type=Path, required=True)
+    r.add_argument("--model-manifest", type=Path, default=KBUILD_DIR.parent / "b1" / "hybrid" / "MODEL_MANIFEST.json")
+    r.add_argument("--release-id", required=True)
+    r.add_argument("--release-sequence", type=int, required=True)
+    r.add_argument("--model-id", default="intfloat/multilingual-e5-small@614241f6")
     a = ap.parse_args(argv)
     try:
         if a.cmd == "prepare-fixture-mirror":
@@ -139,6 +162,22 @@ def main(argv=None) -> int:
             return 0
         if a.cmd == "build-accel":
             print(build_accel(a.artifacts.resolve()))
+            return 0
+        if a.cmd == "build-vectors":
+            from .verify import build_vector_pack, build_verify_tool, default_verify_dll
+            tool = a.tool or default_verify_dll(a.out.resolve().parent / "tools" / "dotnet")
+            if not Path(tool).is_file():
+                tool = build_verify_tool(a.out.resolve().parent / "tools" / "dotnet")
+            print(json.dumps(build_vector_pack(Path(tool), a.site.resolve(), a.model_dir.resolve(), a.model_sha, a.out.resolve(),
+                                               generation=a.generation, cache=a.cache, threads=a.threads), indent=1))
+            return 0
+        if a.cmd == "build-model-release":
+            from .devkeys import ensure_dev_key
+            from .verify import build_model_release
+            ensure_dev_key(a.dev_key)
+            print(json.dumps(build_model_release(release_id=a.release_id, release_sequence=a.release_sequence, model_dir=a.model_dir.resolve(),
+                                                 model_manifest=a.model_manifest, pack_dir=a.pack.resolve(), out=a.out.resolve(),
+                                                 dev_key=a.dev_key, model_id=a.model_id), indent=1))
             return 0
         if a.cmd == "measure-host":
             from .resources import measure_host

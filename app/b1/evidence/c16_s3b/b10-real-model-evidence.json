@@ -1,0 +1,254 @@
+{
+  "model_release": "E:\\Mimamsa-Data\\c16s3b\\model-release\\bundle",
+  "threads": 6,
+  "production": {
+    "ok": false,
+    "issue": "MODEL_TRUST_PURPOSE_NOT_AUTHORISED: intelligence releases are refused in production until the owner authorises the \u0060model\u0060 signing purpose and its keys (FG-MODEL-TRUST-PURPOSE open) and the spot re-embed is calibrated (FG-CALIBRATED-SAMPLES open)"
+  },
+  "development": {
+    "ok": true,
+    "issues": [],
+    "seconds": 40.5,
+    "model_id": "R01-c16s3b-dev-e5small-20261128-0a5b3b10",
+    "model_sha256": "ca456c06b3a9505ddfd9131408916dd79290368331e7d76bb621f1cba6bc8665",
+    "vectors_for": [
+      "R13-b1-sample-20261126-4b31855f"
+    ],
+    "evidence": {
+      "mode": "development",
+      "purpose": "model",
+      "key_id": "dev-fad623dce21df68a5c7e81ac8083e9d0d921998af570d3ec6d6da029b1f18ab8",
+      "key_holder": "DEVELOPMENT",
+      "release_id": "R01-c16s3b-dev-e5small-20261128-0a5b3b10",
+      "model_sha256": "ca456c06b3a9505ddfd9131408916dd79290368331e7d76bb621f1cba6bc8665",
+      "files": {
+        "onnx/model.onnx": "ca456c06b3a9505ddfd9131408916dd79290368331e7d76bb621f1cba6bc8665",
+        "onnx/sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+        "onnx/tokenizer.json": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39",
+        "onnx/config.json": "bbb7c1333fc4b3e27fbc9cd5d2070aabcc1d4dfb99917c3633e772f97545a6b6",
+        "onnx/special_tokens_map.json": "d05497f1da52c5e09554c0cd874037a083e1dc1b9cfd48034d1c717f1afc07a7",
+        "onnx/tokenizer_config.json": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"
+      },
+      "self_test": {
+        "dim": 384,
+        "norm": 1.0000000001174891
+      },
+      "vector_packs": [
+        {
+          "generation": "R13-b1-sample-20261126-4b31855f",
+          "evidence": {
+            "kind": "VECTOR_PACK",
+            "status": "VERIFIED",
+            "checks": {
+              "RESULT_DIGEST": "PASS",
+              "SOURCE_DIGEST_EQUALS_SITE": "PASS",
+              "VECTOR_KEYS_RECOMPUTED": "PASS",
+              "VECTOR_SPOT_REEMBED": "PASS",
+              "VECTOR_TRAILER": "PASS"
+            },
+            "samples": {
+              "VECTOR_SPOT_REEMBED": {
+                "size": 32,
+                "tolerance": 0.0001,
+                "size_source": "UNCALIBRATED_DEVELOPMENT_DEFAULT",
+                "selection": "DETERMINISTIC_STRATIFIED_SEEDED_BY_RELEASE_ID",
+                "unit": "passage (one query-sized embed each)",
+                "population": 34918,
+                "selected": 32,
+                "max_abs_difference": 0,
+                "seed": "R01-c16s3b-dev-e5small-20261128-0a5b3b10"
+              }
+            },
+            "issues": [],
+            "timings_ms": {
+              "keys_and_digests": 1997,
+              "spot_reembed": 11176,
+              "trailer": 453
+            },
+            "facts": {
+              "keys": 34918,
+              "entries": 34918,
+              "passages": 37558,
+              "dim": 384,
+              "source_digest": "e3bc27c439558fab4096fab08664dc3ed52fc1757cf8a71ef5af6e387ebca3e6"
+            }
+          }
+        }
+      ],
+      "vectors_for": [
+        "R13-b1-sample-20261126-4b31855f"
+      ]
+    },
+    "embed_calls": 33
+  },
+  "journal": {
+    "models": "R01-c16s3b-dev-e5small-20261128-0a5b3b10",
+    "knowledge": "R13-b1-sample-20261126-4b31855f",
+    "semantic_search": true,
+    "steps": [
+      "BEGIN",
+      "DECIDED",
+      "OPEN",
+      "BEGIN",
+      "DECIDED",
+      "OPEN"
+    ]
+  },
+  "serving": {
+    "passages": 37558,
+    "embedded_on_site": 0,
+    "load_ms": 2486,
+    "top1_doc": "act-air-force-1950",
+    "top1_score": 0.8942
+  },
+  "lexical_index": {
+    "kind": "LEXICAL_INDEX",
+    "status": "VERIFIED",
+    "checks": {
+      "SAMPLED_POSTINGS_REDERIVE": "PASS",
+      "SAMPLED_QUERY_PARITY": "PASS",
+      "SOURCE_DIGEST_EQUALS_SITE": "PASS",
+      "SQLITE_QUICK_CHECK": "PASS"
+    },
+    "samples": {
+      "SAMPLED_POSTINGS_REDERIVE": {
+        "size": 64,
+        "tolerance": "EXACT",
+        "size_source": "UNCALIBRATED_DEVELOPMENT_DEFAULT",
+        "selection": "DETERMINISTIC_STRATIFIED_SEEDED_BY_RELEASE_ID",
+        "unit": "document",
+        "population": 285,
+        "selected": 64,
+        "passages": 11675,
+        "terms_rederived": 33934,
+        "vocabulary_terms_decoded": 64,
+        "seed": "R-s3b-real"
+      },
+      "SAMPLED_QUERY_PARITY": {
+        "size": 32,
+        "tolerance": "EXACT",
+        "size_source": "UNCALIBRATED_DEVELOPMENT_DEFAULT",
+        "selection": "DETERMINISTIC_SEEDED_BY_RELEASE_ID",
+        "unit": "query over the sampled documents",
+        "selected": 32,
+        "seed": "R-s3b-real"
+      }
+    },
+    "issues": [],
+    "timings_ms": {
+      "manifest_and_quick_check": 250,
+      "postings": 9508,
+      "queries": 3288
+    },
+    "facts": {
+      "documents": 285,
+      "passages": 37558,
+      "terms": 66908
+    }
+  },
+  "graph": {
+    "kind": "GRAPH",
+    "status": "VERIFIED",
+    "checks": {
+      "GRAPH_DIGEST": "PASS",
+      "GRAPH_STRUCTURAL_RECHECK": "PASS",
+      "SAMPLED_REBUILD_PARITY": "PASS"
+    },
+    "samples": {
+      "SAMPLED_REBUILD_PARITY": {
+        "size": 64,
+        "tolerance": "EXACT",
+        "size_source": "UNCALIBRATED_DEVELOPMENT_DEFAULT",
+        "selection": "DETERMINISTIC_STRATIFIED_SEEDED_BY_RELEASE_ID",
+        "unit": "source document",
+        "population": 290,
+        "selected": 64,
+        "compared_edges": 4656,
+        "compared_nodes": 3720,
+        "seed": "R-s3b-real"
+      }
+    },
+    "issues": [],
+    "timings_ms": {
+      "sampled_rebuild": 1783,
+      "structural": 655
+    },
+    "facts": {
+      "structural_issues": 0,
+      "nodes": 7529,
+      "edges": 9161
+    }
+  },
+  "outcome": {
+    "development": {
+      "result": "ACTIVE_FULL",
+      "service_level": "FULL",
+      "site_embedding": "NEVER",
+      "refusal": null,
+      "reasons": [
+        "uncalibrated sampled checks (development only): GRAPH, LEXICAL_INDEX, VECTOR_PACK"
+      ],
+      "components": {
+        "GRAPH": {
+          "state": "VERIFIED"
+        },
+        "KNOWLEDGE_ROWS": {
+          "state": "VERIFIED"
+        },
+        "LEXICAL_INDEX": {
+          "state": "VERIFIED"
+        },
+        "TEXT_STORE": {
+          "state": "VERIFIED"
+        },
+        "VECTOR_PACK": {
+          "state": "VERIFIED"
+        }
+      },
+      "uncalibrated_in_use": [
+        "GRAPH",
+        "LEXICAL_INDEX",
+        "VECTOR_PACK"
+      ]
+    },
+    "production": {
+      "result": "REFUSED",
+      "service_level": "NOT_SERVING",
+      "site_embedding": "NEVER",
+      "refusal": "UNCALIBRATED_IN_PRODUCTION",
+      "reasons": [
+        "uncalibrated sampled checks in use in production (OD-C16-UNCALIBRATED-PRODUCTION open): GRAPH, LEXICAL_INDEX, VECTOR_PACK"
+      ],
+      "components": {
+        "GRAPH": {
+          "state": "VERIFIED"
+        },
+        "KNOWLEDGE_ROWS": {
+          "state": "VERIFIED"
+        },
+        "LEXICAL_INDEX": {
+          "state": "VERIFIED"
+        },
+        "TEXT_STORE": {
+          "state": "VERIFIED"
+        },
+        "VECTOR_PACK": {
+          "state": "VERIFIED"
+        }
+      },
+      "uncalibrated_in_use": [
+        "GRAPH",
+        "LEXICAL_INDEX",
+        "VECTOR_PACK"
+      ]
+    },
+    "inputs_note": "GRAPH, LEXICAL_INDEX and VECTOR_PACK verified here on the real sample; KNOWLEDGE_ROWS and TEXT_STORE are verified by the B03 loader and DiskTextStore.Bind in the CP-1 slice (a real-corpus knowledge release is S3-A)"
+  },
+  "mismatched_model": {
+    "other_model_sha256": "84a4d426f7e87a6bf5bf195f0bae2c4a7d15f675b23ca96f42fab8326d7a77aa",
+    "status": "FAILED",
+    "issues": [
+      "VECTOR_SPOT_REEMBED: the installed model is not the pack\u0027s model (model and pack mismatch)"
+    ]
+  }
+}

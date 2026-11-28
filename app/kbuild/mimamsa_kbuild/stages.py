@@ -26,6 +26,7 @@ from .fsutil import copy_file, files_under, json_pretty, link_or_copy, rmtree, s
 from .release import (SIG, SUMS, concat_digest, file_entries, hashset_digest, integrity_rows, legacy_issues, parse_jsonl,
                       rows_component_digest, source_accounting, sums_bytes, write_release_tree)
 from .resources import child_creationflags, child_env, stage_workers
+from . import verify   # C16 S3-B: central B04 checks (S9)
 
 KB = REPO / "app" / "kbuild"
 V2_1 = REPO / "app" / "contract" / "fixtures" / "c16" / "v2_1"
@@ -47,6 +48,8 @@ CODE_INPUTS = [   # code the stages execute: aggregate digests (LF-normalised), 
     ("code:contract_schemas", "app/contract/schemas", "*.json"),
     ("code:mimamsa_importer", "app/importer/mimamsa_importer", "*.py"),
     ("code:b1_core", "app/b1/src/Mimamsa.Core", "*.cs"),
+    ("code:kbuild_verify", "app/kbuild/verify", "*.cs*"),        # S3-B: S9 runs KBuildVerify (central B04 checks)
+    ("code:b1_hybrid", "app/b1/src/Mimamsa.Hybrid", "*.cs"),     # S3-B: KBuildVerify links Mimamsa.Hybrid
 ]
 ACCOUNTING_FILE = accounting.FILE    # registers/source_accounting.json (contract 2.1, DECLARED_BY_BUILD)
 CANDIDATE_SET_DIR = accounting.CANDIDATE_SET_PREFIX.rstrip("/")   # registers/candidate_sets (ADMISSION_REGISTER)
@@ -778,6 +781,7 @@ def s9_verify(ctx: BuildContext, work: Path) -> None:
         if not site_c16.get("accounting_digests", {}).get("site_sha256"):
             _refuse("BUILD_VERIFY_IMPORT_REFUSED", "the site importer did not recompute the source accounting", "S9")
         ts_site_digest = text_store_source_digest(scratch / "site")
+        b04 = verify.central_b04(ctx, scratch / "site", bundle, "S9")   # S3-B: the site's B04 verifiers, run centrally
         acc = build_accelerators(ctx, scratch / "site", scratch / "rebuilt", "S9", pop, inp.allowlist)
         mismatched = []
         for p in files_under(scratch / "rebuilt" / "accelerators"):
@@ -808,11 +812,13 @@ def s9_verify(ctx: BuildContext, work: Path) -> None:
                             "site_build_passages": site_ts["passages"],
                             "note": "bundle-independent 2.1 source digest (digests.text_store_source_digest, B04 section 5)"}
     checks["site_importer"] = {"c16_active": site_c16.get("active"), "accounting_digests": site_c16.get("accounting_digests")}
+    checks["b04_central"] = b04
     write_bytes(work / "VERIFY.json", json_pretty({
         "release_id": m["release_id"], "declared_service_level": m["capability"]["declared_service_level"],
         "expected_activation": outcome, "embedder_calls": 0, "checks": checks,
         "acceptance_level": "FIXTURE (SG-5): proves the wiring only; closes no FG gate on real data",
-        "not_run_here": ["B03 .NET restricted-role row loader (CP-1 slice)", "B04 .NET kind-specific verifiers (sampled checks UNCALIBRATED)",
+        "not_run_here": ["B03 .NET restricted-role row loader (CP-1 slice)",
+                         "B04 sampled checks at a CALIBRATED size (contracts stay UNCALIBRATED; b04_central runs them at the full population)",
                          "B06 activation journal (CP-1 slice)"]}))
 
 

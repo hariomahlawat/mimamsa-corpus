@@ -1,0 +1,10 @@
+{
+ "contract_issues": [],
+ "holder": "DEVELOPMENT",
+ "key_id": "dev-fad623dce21df68a5c7e81ac8083e9d0d921998af570d3ec6d6da029b1f18ab8",
+ "note": "development key under the separate `model` purpose (D3). The development trust list naming it is NOT a v1-schema trust list (the v1 schema has no `model` purpose): it can never be installed as an operational trust list. FG-MODEL-TRUST-PURPOSE stays OPEN; production sites refuse intelligence releases.",
+ "purpose": "model",
+ "signed_file": "SHA256SUMS",
+ "signed_file_sha256": "2461b6e98206f58dbbc34c0b0bd16fb5c0d1d179afabb9eed2636d5cfd9ee376",
+ "signing_mode": "DEVELOPMENT"
+}

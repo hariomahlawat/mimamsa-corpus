@@ -14,5 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Mimamsa.Tests" />
+    <InternalsVisibleTo Include="C16Calibration" />
   </ItemGroup>
 </Project>

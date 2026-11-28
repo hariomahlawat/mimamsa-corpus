@@ -22,6 +22,7 @@
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text.Json.Nodes;
+using Mimamsa.Core.ComponentVerification;
 using Mimamsa.Core.Generation;
 using Mimamsa.Core.Knowledge;
 
@@ -36,7 +37,13 @@ public sealed record StagingReport(string Generation, long ReleaseSequence, bool
     public IReadOnlyDictionary<string, string> Inputs { get; init; } = new Dictionary<string, string>();
     public IReadOnlyDictionary<string, JsonObject?> Rebuilds { get; init; } = new Dictionary<string, JsonObject?>();
     public JsonObject? Outcome { get; init; }
+    /// C16 S3-B: the B04 kind-specific evidence per component (checks, samples used, issues, timings).
+    public IReadOnlyDictionary<string, JsonObject> Verification { get; init; } = new Dictionary<string, JsonObject>();
 }
+
+/// C16 S3-B (B10, development path): a model installed on the site and verified (ModelStaging), as GenerationStaging
+/// needs it to verify a release's vector pack (one query-sized embed per sampled passage; never the corpus).
+public sealed record InstalledModel(string ModelId, ComponentVerification.IPassageEmbedder Embedder);
 
 public static class GenerationStaging
 {
@@ -51,7 +58,8 @@ public static class GenerationStaging
     /// contracts: the B04 component verification contracts (kind -> contract) the decision is taken against.
     public static async Task<StagingReport> VerifyAndStageAsync(SiteLayout site, string generation, KnowledgeRowLoader loader, string textRoot,
                                                                 IReadOnlyDictionary<string, JsonObject?> contracts, Action<string>? log = null,
-                                                                bool production = true, CancellationToken ct = default)
+                                                                bool production = true, CancellationToken ct = default,
+                                                                Func<string, InstalledModel?>? models = null)
     {
         SiteLayout.CheckId(generation);
         Directory.CreateDirectory(site.GenerationsDir);
@@ -62,13 +70,52 @@ public static class GenerationStaging
         {
             var cat = new GenerationCatalog(site);
             cat.Invalidate(generation);   // a failed (re-)verification must leave no marker
-            return await StageLockedAsync(site, cat, generation, loader, textRoot, contracts, log, production, ct);
+            return await StageLockedAsync(site, cat, generation, loader, textRoot, contracts, log, production, models, ct);
         }
     }
 
-    static async Task<StagingReport> StageLockedAsync(SiteLayout site, GenerationCatalog cat, string generation, KnowledgeRowLoader loader, string textRoot,
-                                                      IReadOnlyDictionary<string, JsonObject?> contracts, Action<string>? log, bool production, CancellationToken ct)
+    /// The sample a B04 sampled check runs with. In production an UNCALIBRATED contract check is never run: null is
+    /// returned and the caller records the check NOT_RUN. That never lets an unverified component serve: the contract is
+    /// then uncalibrated by construction, so ActivationOutcome refuses the release (UNCALIBRATED_IN_PRODUCTION) whatever
+    /// the input state (OD-C16-UNCALIBRATED-PRODUCTION open).
+    static ComponentVerification.EffectiveSample? SampleFor(IReadOnlyDictionary<string, JsonObject?> contracts, string kind, string check, bool production)
     {
+        try { return ComponentVerification.B04Sampling.Effective(contracts.GetValueOrDefault(kind), check, production); }
+        catch (ComponentVerification.UncalibratedInProductionException) { return null; }
+    }
+
+    /// VECTOR_PACK input state for a generation (B04, B10): (MISSING | FAILED | VERIFIED, evidence, the model verified with).
+    /// A shipped pack is verified against the INSTALLED, verified model it names; no installed model, a mismatched model or
+    /// any failed check is FAILED (lexical-only service under the outcome rule). Nothing here embeds the corpus.
+    public static (string State, JsonObject? Evidence, InstalledModel? Model) VerifyVectorPack(GenerationStore g, string gdir, JsonObject? vp, string releaseId,
+        IReadOnlyDictionary<string, JsonObject?> contracts, bool production, Func<string, InstalledModel?>? models)
+    {
+        if (vp is null) return ("MISSING", null, null);
+        var vfiles = vp["files"]?.AsArray().Select(f => f!.AsObject()).ToList() ?? [];
+        var pack = vfiles.FirstOrDefault(f => ((string?)f["path"])?.EndsWith(".mimvec", StringComparison.Ordinal) == true);
+        var prm = vfiles.FirstOrDefault(f => ((string?)f["path"])?.EndsWith(".params.json", StringComparison.Ordinal) == true);
+        var modelSha = (string?)vp["model_sha256"];
+        var installed = modelSha is null ? null : models?.Invoke(modelSha);
+        var ev = new ComponentEvidence("VECTOR_PACK");
+        if (pack is null || prm is null || modelSha is null) ev.Fail("VECTOR_TRAILER", "the release declares no vector file, params file or model");
+        else if (vfiles.Any(f => !File.Exists(Local(gdir, (string)f["path"]!)) || Sha(Local(gdir, (string)f["path"]!)) != (string?)f["sha256"]))
+            ev.Fail("VECTOR_TRAILER", "a vector pack file differs from the signed inventory");
+        else if (installed is null) ev.NotRun(VectorPackVerifier.Spot, $"no installed, verified model {modelSha[..Math.Min(12, modelSha.Length)]}: lexical-only service");
+        else
+        {
+            ev = VectorPackVerifier.Verify(g, Local(gdir, (string)pack["path"]!), File.ReadAllBytes(Local(gdir, (string)prm["path"]!)), modelSha,
+                (string)vp["result_digest"]!, (string)vp["source_digest"]!, releaseId, installed.Embedder, SampleFor(contracts, "VECTOR_PACK", VectorPackVerifier.Spot, production));
+            bool ok = ev.Verified(VectorPackVerifier.Required.Where(r => !(r == VectorPackVerifier.Spot && production && ev.Checks.GetValueOrDefault(r) == "NOT_RUN")));
+            if (ok) return ("VERIFIED", ev.ToJson(VectorPackVerifier.Required), installed);
+        }
+        return ("FAILED", ev.ToJson(VectorPackVerifier.Required), null);
+    }
+
+    static async Task<StagingReport> StageLockedAsync(SiteLayout site, GenerationCatalog cat, string generation, KnowledgeRowLoader loader, string textRoot,
+                                                      IReadOnlyDictionary<string, JsonObject?> contracts, Action<string>? log, bool production,
+                                                      Func<string, InstalledModel?>? models, CancellationToken ct)
+    {
+        var verification = new Dictionary<string, JsonObject>(StringComparer.Ordinal);
         var gdir = Path.Combine(site.GenerationsDir, generation);
         var issues = new List<string>();
         var inputs = new Dictionary<string, string>(StringComparer.Ordinal);
@@ -83,7 +130,7 @@ public static class GenerationStaging
         var km = JsonNode.Parse(kmBytes)!.AsObject();
         var components = km["components"]!.AsArray().Select(c => c!.AsObject()).ToList();
         var level = (string?)km["capability"]?["declared_service_level"];
-        bool lexicalOnly = LexicalOnly.Classify(kmBytes);
+        var lexicalOnly = LexicalOnly.Classify(kmBytes);
         JsonObject? Comp(string kind) => components.FirstOrDefault(c => (string)c["kind"]! == kind);
 
         // C16-CP1-04: production staging never accepts a release imported in development mode (development-signed)
@@ -91,7 +138,14 @@ public static class GenerationStaging
             return new(generation, seq, false, ["DEVELOPMENT_RELEASE_IN_PRODUCTION: the generation was imported in development mode (development-signed)"],
                        inputs, tables, null, level) { LexicalOnly = lexicalOnly };
 
-        // LEXICAL_INDEX: the expected file must be in the inventory, present, hashed and quick_checked
+        // C16 S3-B: the verified generation (memory text) that every B04 check compares against
+        var g = GenerationStore.Load(site.Root, null, TextStoreOptions.Memory, null, generation);
+        var releaseId = (string)km["release_id"]!;
+        bool Accept(ComponentEvidence ev, string[] required, params string[] sampledChecks) =>
+            ev.Verified(required.Where(r => !(sampledChecks.Contains(r) && ev.Checks.GetValueOrDefault(r) == "NOT_RUN" && production)));
+
+        // LEXICAL_INDEX: inventory, presence, hash and quick_check (CP-1), then the B04 checks on the shipped file itself:
+        // manifest and source digest, SAMPLED_POSTINGS_REDERIVE and SAMPLED_QUERY_PARITY (LexicalIndexVerifier)
         var lex = Comp("LEXICAL_INDEX");
         var lexEntry = lex?["files"]?.AsArray().Select(f => f!.AsObject()).FirstOrDefault(f => (string?)f["path"] == LexicalDb);
         inputs["LEXICAL_INDEX"] = "FAILED";
@@ -101,17 +155,22 @@ public static class GenerationStaging
         else if (Sha(Local(gdir, LexicalDb)) != (string?)lexEntry["sha256"]) issues.Add("LEXICAL_INDEX: file differs from the signed inventory");
         else
         {
-            using var sc = new Microsoft.Data.Sqlite.SqliteConnection($"Data Source={Local(gdir, LexicalDb)};Mode=ReadOnly;Pooling=False");
-            sc.Open();
-            using var q = sc.CreateCommand(); q.CommandText = "PRAGMA quick_check";
-            if ((string?)q.ExecuteScalar() == "ok") inputs["LEXICAL_INDEX"] = "VERIFIED"; else issues.Add("LEXICAL_INDEX: quick_check failed");
+            var ev = LexicalIndexVerifier.Verify(g, Path.GetDirectoryName(Local(gdir, LexicalDb))!, releaseId, (string?)lex["source_digest"],
+                SampleFor(contracts, "LEXICAL_INDEX", LexicalIndexVerifier.Postings, production), SampleFor(contracts, "LEXICAL_INDEX", LexicalIndexVerifier.Queries, production));
+            verification["LEXICAL_INDEX"] = ev.ToJson(LexicalIndexVerifier.Required);
+            if (Accept(ev, LexicalIndexVerifier.Required, LexicalIndexVerifier.Postings, LexicalIndexVerifier.Queries)) inputs["LEXICAL_INDEX"] = "VERIFIED";
+            else issues.AddRange(ev.Issues.Take(5).Select(i => "LEXICAL_INDEX: " + i));
         }
 
-        // VECTOR_PACK: absent = MISSING (lexical-only service); a shipped pack cannot be verified here yet
-        inputs["VECTOR_PACK"] = Comp("VECTOR_PACK") is null ? "MISSING" : "FAILED";
+        // VECTOR_PACK (B04, B10): absent = MISSING (lexical-only). A shipped pack is verified against the INSTALLED, verified
+        // model it names (VectorPackVerifier: trailer, every key recomputed, source and result digests, spot re-embed of a
+        // seeded sample, one query-sized embed each). No installed model, a mismatched model or any failed check = FAILED,
+        // which the outcome rule turns into lexical-only service (never site embedding of the corpus).
+        var (vpState, vpEvidence, vectorModel) = VerifyVectorPack(g, gdir, Comp("VECTOR_PACK"), releaseId, contracts, production, models);
+        inputs["VECTOR_PACK"] = vpState;
+        if (vpEvidence is not null) verification["VECTOR_PACK"] = vpEvidence;
 
-        // KNOWLEDGE_ROWS + GRAPH through the one typed restricted loader (B03)
-        var g = GenerationStore.Load(site.Root, null, TextStoreOptions.Memory, null, generation);
+        // KNOWLEDGE_ROWS + GRAPH through the one typed restricted loader (B03: typed rows, counts, digests, full re-derivation)
         var files = new Dictionary<string, byte[]>(StringComparer.Ordinal);
         var declared = new List<DeclaredTable>();
         foreach (var comp in components.Where(c => (string)c["kind"]! is "KNOWLEDGE_ROWS" or "GRAPH"))
@@ -123,6 +182,17 @@ public static class GenerationStaging
         var staged = new List<StagedTable>();
         inputs["KNOWLEDGE_ROWS"] = Comp("KNOWLEDGE_ROWS") is null ? "MISSING" : "FAILED";
         inputs["GRAPH"] = Comp("GRAPH") is null ? "MISSING" : "FAILED";
+        bool graphB04 = false;
+        if (Comp("GRAPH") is { } gc && files.TryGetValue("graph_nodes", out var gn) && files.TryGetValue("graph_edges", out var ge))
+        {
+            // GRAPH (B04, S3-B): GRAPH_DIGEST, GRAPH_STRUCTURAL_RECHECK and SAMPLED_REBUILD_PARITY on the shipped rows, in
+            // addition to the loader's full re-derivation below (kept: see app/b1/evidence/c16_s3b/S3B_REPORT.md)
+            var gev = GraphVerifier.Verify(g, gn, ge, (string)gc["result_digest"]!, (string?)km["compatibility"]?["graph_builder_version"] ?? "", releaseId,
+                SampleFor(contracts, "GRAPH", GraphVerifier.Check, production));
+            verification["GRAPH"] = gev.ToJson(GraphVerifier.Required);
+            graphB04 = Accept(gev, GraphVerifier.Required, GraphVerifier.Check);
+            if (!graphB04) issues.AddRange(gev.Issues.Take(5).Select(i => "GRAPH: " + i));
+        }
         if (declared.Count > 0)
         {
             var load = await loader.LoadAsync(new KnowledgeLoadRequest { ReleaseSequence = seq, Files = files, Declared = declared, Sources = KnowledgeSources.FromGeneration(g) }, ct);
@@ -130,7 +200,7 @@ public static class GenerationStaging
             tables.AddRange(load.Verified.Select(t => $"{t.Spec.Table}:{t.RowCount}"));
             staged.AddRange(load.Verified.Select(t => new StagedTable(t.Spec.Table, t.RowCount, t.RowsSha256)));
             if (load.Ok && Comp("KNOWLEDGE_ROWS") is not null) inputs["KNOWLEDGE_ROWS"] = "VERIFIED";
-            if (load.Ok && Comp("GRAPH") is not null && load.Verified.Any(t => t.Spec.Table == "graph_nodes") && load.Verified.Any(t => t.Spec.Table == "graph_edges"))
+            if (load.Ok && graphB04 && load.Verified.Any(t => t.Spec.Table == "graph_nodes") && load.Verified.Any(t => t.Spec.Table == "graph_edges"))
                 inputs["GRAPH"] = "VERIFIED";
         }
 
@@ -167,6 +237,8 @@ public static class GenerationStaging
         var states = ActivationOutcome.Kinds.ToDictionary(k => k, k => (string?)outcome["components"]?[k]?["state"] ?? "NOT_DECIDED", StringComparer.Ordinal);
         if ((string?)outcome["result"] == "REFUSED")
             issues.Add($"OUTCOME_REFUSED {(string?)outcome["refusal"]}: {string.Join("; ", outcome["reasons"]!.AsArray().Select(x => (string?)x))}");
+        // B06 2.1: a release whose vector pack is not in use (missing or failed) is served lexical-only (K2)
+        lexicalOnly = LexicalOnly.Classify(kmBytes, (string?)outcome["service_level"] == "DEGRADED_LEXICAL_ONLY" ? LexicalOnly.DegradedVectorOutcome : null);
         bool pass = issues.Count == 0;
         if (pass)
         {
@@ -179,9 +251,15 @@ public static class GenerationStaging
                 KnowledgeAllowlist.StagingSchema(seq), KnowledgeAllowlist.ActiveSchema(seq), staged);
             cat.StageBound(generation, StagingMarker.Build(site, generation, evidence));
             if (cat.MarkerProblem(generation, full: true) is { } why) { cat.Invalidate(generation); issues.Add("MARKER: " + why); pass = false; }
-            else log?.Invoke($"staging: {generation} staged ({(string)outcome["result"]!}, lexical_only={lexicalOnly}, production={production})");
+            else
+            {
+                log?.Invoke($"staging: {generation} staged ({(string)outcome["result"]!}, lexical_only={lexicalOnly}, production={production})");
+                // B10 (S3-B): the installed model now has verified vectors for this generation (K1 for its activation)
+                if (vectorModel is not null && cat.Model(vectorModel.ModelId) is { Verified: true } sm)
+                    cat.StageModel(vectorModel.ModelId, true, sm.VectorsFor.Append(generation).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal));
+            }
         }
         return new(generation, seq, pass, issues, states, tables, origin, level)
-        { LexicalOnly = lexicalOnly, Inputs = inputs, Rebuilds = rebuilds, Outcome = outcome };
+        { LexicalOnly = lexicalOnly, Inputs = inputs, Rebuilds = rebuilds, Outcome = outcome, Verification = verification };
     }
 }
