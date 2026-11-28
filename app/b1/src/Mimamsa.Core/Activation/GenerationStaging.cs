@@ -111,7 +111,7 @@ public static class GenerationStaging
         inputs["VECTOR_PACK"] = Comp("VECTOR_PACK") is null ? "MISSING" : "FAILED";
 
         // KNOWLEDGE_ROWS + GRAPH through the one typed restricted loader (B03)
-        var g = GenerationStore.Load(site.Root, null, TextStoreOptions.Memory, null, generation);
+        var g = GenerationStore.Load(site.Root, null, TextStoreOptions.Memory, null, generation, includeLocallyExcluded: true);   // S3-C: the release as shipped
         var files = new Dictionary<string, byte[]>(StringComparer.Ordinal);
         var declared = new List<DeclaredTable>();
         foreach (var comp in components.Where(c => (string)c["kind"]! is "KNOWLEDGE_ROWS" or "GRAPH"))
@@ -139,7 +139,7 @@ public static class GenerationStaging
         inputs["TEXT_STORE"] = Comp("TEXT_STORE") is null ? "MISSING" : "FAILED";
         try
         {
-            var tg = GenerationStore.Load(site.Root, null, new TextStoreOptions { Store = "disk", Dir = textRoot }, log, generation);
+            var tg = GenerationStore.Load(site.Root, null, new TextStoreOptions { Store = "disk", Dir = textRoot }, log, generation, includeLocallyExcluded: true);
             var store = tg.Text as DiskTextStore;
             origin = store?.Origin;
             bool same = tg.Documents.Count == g.Documents.Count

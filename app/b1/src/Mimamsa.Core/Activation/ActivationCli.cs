@@ -81,7 +81,13 @@ public static class ActivationCli
         {
             var cs = Environment.GetEnvironmentVariable(envName) ?? throw new ArgumentException("environment variable " + envName + " is not set");
             pg = new PgAdvisoryLock(cs);
-            db = new PgActivationDatabase(() => pg.Connection, a["pg-schema"] ?? "site_activation");
+            // C16 S3-C (B07, additive): --knowledge-rows drives the B03 knowledge schemas (kr_<n> promotion and the
+            // `knowledge` views) from each staged generation's release sequence, as on an installed site
+            db = a.Flag("knowledge-rows")
+                ? new Mimamsa.Core.Knowledge.KnowledgeActivationDatabase(() => pg.Connection, gid =>
+                    (long)System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(Path.Combine(site.GenerationsDir, SiteLayout.CheckId(gid), "generation.json")))!["release_sequence"]!,
+                    a["pg-schema"] ?? "site_activation")
+                : new PgActivationDatabase(() => pg.Connection, a["pg-schema"] ?? "site_activation");
         }
         else db = new FileActivationDatabase(site.FileDbPath);
 
@@ -107,7 +113,17 @@ public static class ActivationCli
         bool mustRecover = eng.AcquireLock();
         try
         {
-            if (pg is not null) ((PgActivationDatabase)db).EnsureSchema(site.ReadPointer("KNOWLEDGE") ?? throw new ArgumentException("site not initialised"));
+            if (pg is not null)
+            {
+                // C16 S3-C (additive): after a restore ACTIVE may be absent (a derived pointer); the journal head, else
+                // the initial generation, names what the views must point at, and recover() rewrites ACTIVE from it
+                var head = site.ReadPointer("KNOWLEDGE")
+                           ?? (File.Exists(site.JournalPath) ? ActivationJournal.Read(site.JournalPath).HeadBegin("KNOWLEDGE")?.To : null)
+                           ?? (File.Exists(site.InitPath) ? site.ReadInit().knowledge : null)
+                           ?? throw new ArgumentException("site not initialised");
+                if (db is Mimamsa.Core.Knowledge.KnowledgeActivationDatabase kdb) kdb.EnsureSchema(head);
+                else ((PgActivationDatabase)db).EnsureSchema(head);
+            }
             // I-4: every start of the tool recovers first whenever anything is unfinished (a takeover, a non-OPEN
             // marker, an in-flight transaction, a torn tail or pointers off the journal head).
             if (mustRecover || eng.NeedsRecovery()) eng.Recover();
