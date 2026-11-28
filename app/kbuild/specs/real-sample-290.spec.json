@@ -1,0 +1,87 @@
+{
+ "build_id": "B-20261128-real-sample-290",
+ "contract": "mimamsa-corpus-contract/2.1",
+ "inputs": {
+  "contracts": {
+   "corpus": "mimamsa-corpus-contract/2.1",
+   "v1": "1.0.0"
+  },
+  "git": [
+   {
+    "commit": "2541aec304b9504542d0c6f5626cc596932b84f3",
+    "purpose": "CP-1 integrated stack (PR #87 on the 2.1 interfaces of PR #82) that the S3-A real-corpus build extends"
+   },
+   {
+    "commit": "ba1f4c16c3a2acae8d68b0ddc0859294e5091ec8",
+    "purpose": "Cycle 15 candidate v7 HF receipt (legal_knowledge/audit_work/C15-CORPUS-ENGINEERING/candidate-v7-hf-receipt.json)"
+   }
+  ],
+  "hf": [
+   {
+    "purpose": "canonical corpus master (data/manifest.csv, meta, raw originals, [[page N]] text) at the B1 sample revision; 290-document selection by the pinned fetch plan",
+    "repo": "hariomahlawat/mimamsa-corpus",
+    "revision": "3864faf3bb24edef4bfb18fa0916cc788eb68d79"
+   },
+   {
+    "purpose": "Cycle 15 candidate package v7 (branch cycle15-candidates at the receipt revision): V7_REFERENCE candidate sets only, never served",
+    "repo": "hariomahlawat/mimamsa-corpus",
+    "revision": "217020dbd969e14c2373697f4094fa00557962a6"
+   }
+  ],
+  "models": [],
+  "producer_generations": [],
+  "restricted_register_sha256": "fc7ea07e62e7e41f348639973f19187540593e7b3237933758f64e865b95b2b6",
+  "tools": [
+   {
+    "commit": null,
+    "config_sha256": null,
+    "name": "mimamsa_kbuild",
+    "version": "0.2.0"
+   },
+   {
+    "commit": null,
+    "config_sha256": "291c8de34fdcff6b5f58efaea9767e9d1a8f670d0e460670e965e9138f1552c0",
+    "name": "mimamsa_kbuild.fetch_plan",
+    "version": "1"
+   },
+   {
+    "commit": null,
+    "config_sha256": "b596db980e70fcfd45d063da323a54798bde07e18babeae40b5bb1a932baf209",
+    "name": "mimamsa_kbuild.page_rederive",
+    "version": "1"
+   }
+  ]
+ },
+ "output_dir": "build/B-20261128-real-sample-290",
+ "pinned_build_time": "2026-11-28T00:00:00Z",
+ "record_kind": "mkr_build_spec",
+ "release": {
+  "base_mode": "FULL",
+  "base_release_id": null,
+  "release_id": "R16-real-sample-290-20261128-291c8de3",
+  "release_sequence": 1,
+  "signing_mode": "DEVELOPMENT"
+ },
+ "resources": {
+  "cpu_priority": "BELOW_NORMAL",
+  "io_priority": "LOW",
+  "max_disk_bytes": 8589934592,
+  "max_memory_bytes": 4294967296,
+  "max_workers": 2,
+  "measured_logical_cpus": 12,
+  "measured_memory_bytes": 16929980416,
+  "shared_host": true
+ },
+ "stages": [
+  {"max_workers": 1, "name": "spec", "network": false, "stage_id": "S0"},
+  {"max_workers": 2, "name": "fetch", "network": true, "stage_id": "S1"},
+  {"max_workers": 1, "name": "validate", "network": false, "stage_id": "S2"},
+  {"max_workers": 1, "name": "text", "network": false, "stage_id": "S3"},
+  {"max_workers": 1, "name": "bundle", "network": false, "stage_id": "S4"},
+  {"max_workers": 1, "name": "ref-import", "network": false, "stage_id": "S5"},
+  {"max_workers": 2, "name": "accelerate", "network": false, "stage_id": "S6"},
+  {"max_workers": 1, "name": "assemble", "network": false, "stage_id": "S7"},
+  {"max_workers": 1, "name": "sign", "network": false, "stage_id": "S8"},
+  {"max_workers": 1, "name": "verify", "network": false, "stage_id": "S9"}
+ ]
+}
