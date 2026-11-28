@@ -114,3 +114,10 @@ Both are run once, hybrid off as well, and reported whatever the outcome.
 | --- | --- | --- | --- | --- |
 | O4a | Xenova/bge-m3 `4de13258`, `onnx/model_int8.onnx` sha256 `a206e10e…`, CLS pooling, no prefixes | `floor` | 0.5197 | batch 1 |
 | O4b | same | `gate_rank`, K = 10 | 0.5197 | batch 1 |
+
+### D7. Results and post-hoc steps (after every declared run)
+
+- Oracle, hybrid on: O1a 12, O1b 12, O2a 12, O2b 12, O3a 12, O3b 12 (RET-10 passes, RET-06 fails on an uncatalogued passage), O4a 12, **O4b 13/14** (RET-07 passes at rank 10, RET-10 fails). Hybrid off: 10/14 in every run. No value was changed after any run.
+- Post-hoc diagnosis only (`c16_s3e/scripts/posthoc_probe.py`): dense ranks of J1-MAJ/J2-MAJ per model, run after O4b. Nothing was chosen from it.
+- Dev-only after the declarations: e5-small title context and windowing (both no gain), not run on the oracle.
+- Full report: `app/b1/evidence/c16_s3e/HYBRID_EVAL_C16.md`.

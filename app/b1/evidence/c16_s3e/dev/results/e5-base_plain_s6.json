@@ -1,0 +1,513 @@
+{
+ "model": "e5-base",
+ "repr": "plain",
+ "corpus": 527,
+ "real": 500,
+ "floor_c14": 0.8271,
+ "z_c14": 2.97,
+ "rules": {
+  "floor_c14": {
+   "semantic_at10": 8,
+   "semantic_n": 16,
+   "semantic_gate_open": 13,
+   "lexical_top3": 5,
+   "lexical_n": 5,
+   "lexical_gate_open": 5,
+   "ood_gate_open": 3,
+   "ood_n": 8,
+   "walk_gate_open": 27,
+   "walk_n": 43,
+   "walk_mean_admitted": 3.9,
+   "fails": [
+    "S02",
+    "S03",
+    "S05",
+    "S06",
+    "S08",
+    "S09",
+    "S12",
+    "S13"
+   ],
+   "rule": {
+    "kind": "floor",
+    "floor": 0.8271
+   }
+  },
+  "gate_rank10": {
+   "semantic_at10": 8,
+   "semantic_n": 16,
+   "semantic_gate_open": 13,
+   "lexical_top3": 5,
+   "lexical_n": 5,
+   "lexical_gate_open": 5,
+   "ood_gate_open": 3,
+   "ood_n": 8,
+   "walk_gate_open": 27,
+   "walk_n": 43,
+   "walk_mean_admitted": 6.3,
+   "fails": [
+    "S02",
+    "S03",
+    "S05",
+    "S06",
+    "S08",
+    "S09",
+    "S12",
+    "S13"
+   ],
+   "rule": {
+    "kind": "gate_rank",
+    "floor": 0.8271,
+    "k": 10
+   }
+  },
+  "gate_rank20": {
+   "semantic_at10": 6,
+   "semantic_n": 16,
+   "semantic_gate_open": 13,
+   "lexical_top3": 5,
+   "lexical_n": 5,
+   "lexical_gate_open": 5,
+   "ood_gate_open": 3,
+   "ood_n": 8,
+   "walk_gate_open": 27,
+   "walk_n": 43,
+   "walk_mean_admitted": 12.6,
+   "fails": [
+    "S02",
+    "S03",
+    "S05",
+    "S06",
+    "S08",
+    "S09",
+    "S11",
+    "S12",
+    "S13",
+    "S16"
+   ],
+   "rule": {
+    "kind": "gate_rank",
+    "floor": 0.8271,
+    "k": 20
+   }
+  },
+  "z_c14": {
+   "semantic_at10": 8,
+   "semantic_n": 16,
+   "semantic_gate_open": 12,
+   "lexical_top3": 5,
+   "lexical_n": 5,
+   "lexical_gate_open": 5,
+   "ood_gate_open": 8,
+   "ood_n": 8,
+   "walk_gate_open": 32,
+   "walk_n": 43,
+   "walk_mean_admitted": 2.4,
+   "fails": [
+    "S02",
+    "S03",
+    "S05",
+    "S06",
+    "S08",
+    "S09",
+    "S12",
+    "S13"
+   ],
+   "rule": {
+    "kind": "z",
+    "z": 2.9697
+   }
+  },
+  "gate_z_rank10": {
+   "semantic_at10": 9,
+   "semantic_n": 16,
+   "semantic_gate_open": 12,
+   "lexical_top3": 5,
+   "lexical_n": 5,
+   "lexical_gate_open": 5,
+   "ood_gate_open": 8,
+   "ood_n": 8,
+   "walk_gate_open": 32,
+   "walk_n": 43,
+   "walk_mean_admitted": 7.4,
+   "fails": [
+    "S02",
+    "S05",
+    "S06",
+    "S08",
+    "S09",
+    "S12",
+    "S13"
+   ],
+   "rule": {
+    "kind": "gate_z_rank",
+    "z": 2.9697,
+    "k": 10
+   }
+  },
+  "nofloor": {
+   "semantic_at10": 2,
+   "semantic_n": 16,
+   "semantic_gate_open": 16,
+   "lexical_top3": 5,
+   "lexical_n": 5,
+   "lexical_gate_open": 5,
+   "ood_gate_open": 8,
+   "ood_n": 8,
+   "walk_gate_open": 43,
+   "walk_n": 43,
+   "walk_mean_admitted": 100.0,
+   "fails": [
+    "S01",
+    "S02",
+    "S03",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S11",
+    "S12",
+    "S13",
+    "S15",
+    "S16"
+   ],
+   "rule": {
+    "kind": "floor",
+    "floor": -1.0
+   }
+  }
+ },
+ "dense": {
+  "S01": {
+   "kind": "semantic",
+   "best": 0.8417,
+   "mu": 0.7742,
+   "sd": 0.0202,
+   "relevant": {
+    "D01": {
+     "dense_rank": 1,
+     "cos": 0.8417,
+     "z": 3.34
+    }
+   }
+  },
+  "S02": {
+   "kind": "semantic",
+   "best": 0.8342,
+   "mu": 0.7759,
+   "sd": 0.0187,
+   "relevant": {
+    "D02": {
+     "dense_rank": 19,
+     "cos": 0.8092,
+     "z": 1.78
+    }
+   }
+  },
+  "S03": {
+   "kind": "semantic",
+   "best": 0.8228,
+   "mu": 0.7557,
+   "sd": 0.0195,
+   "relevant": {
+    "D03": {
+     "dense_rank": 3,
+     "cos": 0.808,
+     "z": 2.69
+    }
+   }
+  },
+  "S04": {
+   "kind": "semantic",
+   "best": 0.8539,
+   "mu": 0.7554,
+   "sd": 0.0217,
+   "relevant": {
+    "D04": {
+     "dense_rank": 1,
+     "cos": 0.8539,
+     "z": 4.55
+    }
+   }
+  },
+  "S05": {
+   "kind": "semantic",
+   "best": 0.8482,
+   "mu": 0.7766,
+   "sd": 0.0226,
+   "relevant": {
+    "D05": {
+     "dense_rank": 44,
+     "cos": 0.8098,
+     "z": 1.47
+    }
+   }
+  },
+  "S06": {
+   "kind": "semantic",
+   "best": 0.8238,
+   "mu": 0.7734,
+   "sd": 0.0193,
+   "relevant": {
+    "D06": {
+     "dense_rank": 25,
+     "cos": 0.8046,
+     "z": 1.61
+    }
+   }
+  },
+  "S07": {
+   "kind": "semantic",
+   "best": 0.8696,
+   "mu": 0.7652,
+   "sd": 0.0202,
+   "relevant": {
+    "D07": {
+     "dense_rank": 2,
+     "cos": 0.8491,
+     "z": 4.16
+    }
+   }
+  },
+  "S08": {
+   "kind": "semantic",
+   "best": 0.8206,
+   "mu": 0.7656,
+   "sd": 0.0225,
+   "relevant": {
+    "D08": {
+     "dense_rank": 189,
+     "cos": 0.7739,
+     "z": 0.37
+    }
+   }
+  },
+  "S09": {
+   "kind": "semantic",
+   "best": 0.8415,
+   "mu": 0.7731,
+   "sd": 0.0246,
+   "relevant": {
+    "D09": {
+     "dense_rank": 143,
+     "cos": 0.7894,
+     "z": 0.67
+    }
+   }
+  },
+  "S10": {
+   "kind": "semantic",
+   "best": 0.8434,
+   "mu": 0.7724,
+   "sd": 0.019,
+   "relevant": {
+    "D10": {
+     "dense_rank": 1,
+     "cos": 0.8434,
+     "z": 3.73
+    }
+   }
+  },
+  "S11": {
+   "kind": "semantic",
+   "best": 0.8476,
+   "mu": 0.7807,
+   "sd": 0.0205,
+   "relevant": {
+    "D11": {
+     "dense_rank": 2,
+     "cos": 0.8454,
+     "z": 3.16
+    }
+   }
+  },
+  "S12": {
+   "kind": "semantic",
+   "best": 0.8353,
+   "mu": 0.7657,
+   "sd": 0.019,
+   "relevant": {
+    "D12": {
+     "dense_rank": 20,
+     "cos": 0.8002,
+     "z": 1.81
+    }
+   }
+  },
+  "S13": {
+   "kind": "semantic",
+   "best": 0.835,
+   "mu": 0.7836,
+   "sd": 0.0182,
+   "relevant": {
+    "D13": {
+     "dense_rank": 157,
+     "cos": 0.7925,
+     "z": 0.49
+    }
+   }
+  },
+  "S14": {
+   "kind": "semantic",
+   "best": 0.8424,
+   "mu": 0.7597,
+   "sd": 0.0235,
+   "relevant": {
+    "D14": {
+     "dense_rank": 1,
+     "cos": 0.8424,
+     "z": 3.51
+    }
+   }
+  },
+  "S15": {
+   "kind": "semantic",
+   "best": 0.8364,
+   "mu": 0.7567,
+   "sd": 0.0226,
+   "relevant": {
+    "D15": {
+     "dense_rank": 1,
+     "cos": 0.8364,
+     "z": 3.53
+    }
+   }
+  },
+  "S16": {
+   "kind": "semantic",
+   "best": 0.8386,
+   "mu": 0.7672,
+   "sd": 0.021,
+   "relevant": {
+    "D16": {
+     "dense_rank": 1,
+     "cos": 0.8386,
+     "z": 3.41
+    }
+   }
+  },
+  "K01": {
+   "kind": "lexical",
+   "best": 0.9178,
+   "mu": 0.7876,
+   "sd": 0.025,
+   "relevant": {
+    "X01": {
+     "dense_rank": 1,
+     "cos": 0.9178,
+     "z": 5.2
+    }
+   }
+  },
+  "K02": {
+   "kind": "lexical",
+   "best": 0.8994,
+   "mu": 0.7657,
+   "sd": 0.0222,
+   "relevant": {
+    "X02": {
+     "dense_rank": 1,
+     "cos": 0.8994,
+     "z": 6.03
+    }
+   }
+  },
+  "K03": {
+   "kind": "lexical",
+   "best": 0.8812,
+   "mu": 0.7662,
+   "sd": 0.0208,
+   "relevant": {
+    "X03": {
+     "dense_rank": 1,
+     "cos": 0.8812,
+     "z": 5.53
+    }
+   }
+  },
+  "K04": {
+   "kind": "lexical",
+   "best": 0.9132,
+   "mu": 0.757,
+   "sd": 0.028,
+   "relevant": {
+    "X04": {
+     "dense_rank": 1,
+     "cos": 0.9132,
+     "z": 5.59
+    }
+   }
+  },
+  "K05": {
+   "kind": "lexical",
+   "best": 0.9029,
+   "mu": 0.7749,
+   "sd": 0.025,
+   "relevant": {
+    "X05": {
+     "dense_rank": 1,
+     "cos": 0.9029,
+     "z": 5.12
+    }
+   }
+  },
+  "O01": {
+   "kind": "ood",
+   "best": 0.816,
+   "mu": 0.7227,
+   "sd": 0.0218,
+   "relevant": {}
+  },
+  "O02": {
+   "kind": "ood",
+   "best": 0.8169,
+   "mu": 0.7266,
+   "sd": 0.0249,
+   "relevant": {}
+  },
+  "O03": {
+   "kind": "ood",
+   "best": 0.8429,
+   "mu": 0.7459,
+   "sd": 0.0232,
+   "relevant": {}
+  },
+  "O04": {
+   "kind": "ood",
+   "best": 0.8157,
+   "mu": 0.711,
+   "sd": 0.023,
+   "relevant": {}
+  },
+  "O05": {
+   "kind": "ood",
+   "best": 0.8035,
+   "mu": 0.7428,
+   "sd": 0.0182,
+   "relevant": {}
+  },
+  "O06": {
+   "kind": "ood",
+   "best": 0.834,
+   "mu": 0.7455,
+   "sd": 0.0223,
+   "relevant": {}
+  },
+  "O07": {
+   "kind": "ood",
+   "best": 0.8296,
+   "mu": 0.7382,
+   "sd": 0.0223,
+   "relevant": {}
+  },
+  "O08": {
+   "kind": "ood",
+   "best": 0.8076,
+   "mu": 0.7253,
+   "sd": 0.0232,
+   "relevant": {}
+  }
+ }
+}

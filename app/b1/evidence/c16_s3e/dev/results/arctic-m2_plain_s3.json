@@ -1,0 +1,516 @@
+{
+ "model": "arctic-m2",
+ "repr": "plain",
+ "corpus": 1027,
+ "real": 1000,
+ "floor_c14": 0.3994,
+ "z_c14": 3.29,
+ "rules": {
+  "floor_c14": {
+   "semantic_at10": 6,
+   "semantic_n": 16,
+   "semantic_gate_open": 9,
+   "lexical_top3": 5,
+   "lexical_n": 5,
+   "lexical_gate_open": 5,
+   "ood_gate_open": 0,
+   "ood_n": 8,
+   "walk_gate_open": 26,
+   "walk_n": 43,
+   "walk_mean_admitted": 9.0,
+   "fails": [
+    "S02",
+    "S03",
+    "S05",
+    "S06",
+    "S08",
+    "S09",
+    "S11",
+    "S12",
+    "S13",
+    "S16"
+   ],
+   "rule": {
+    "kind": "floor",
+    "floor": 0.3994
+   }
+  },
+  "gate_rank10": {
+   "semantic_at10": 7,
+   "semantic_n": 16,
+   "semantic_gate_open": 9,
+   "lexical_top3": 5,
+   "lexical_n": 5,
+   "lexical_gate_open": 5,
+   "ood_gate_open": 0,
+   "ood_n": 8,
+   "walk_gate_open": 26,
+   "walk_n": 43,
+   "walk_mean_admitted": 6.0,
+   "fails": [
+    "S02",
+    "S03",
+    "S05",
+    "S06",
+    "S08",
+    "S09",
+    "S12",
+    "S13",
+    "S16"
+   ],
+   "rule": {
+    "kind": "gate_rank",
+    "floor": 0.3994,
+    "k": 10
+   }
+  },
+  "gate_rank20": {
+   "semantic_at10": 4,
+   "semantic_n": 16,
+   "semantic_gate_open": 9,
+   "lexical_top3": 5,
+   "lexical_n": 5,
+   "lexical_gate_open": 5,
+   "ood_gate_open": 0,
+   "ood_n": 8,
+   "walk_gate_open": 26,
+   "walk_n": 43,
+   "walk_mean_admitted": 12.1,
+   "fails": [
+    "S02",
+    "S03",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S11",
+    "S12",
+    "S13",
+    "S16"
+   ],
+   "rule": {
+    "kind": "gate_rank",
+    "floor": 0.3994,
+    "k": 20
+   }
+  },
+  "z_c14": {
+   "semantic_at10": 10,
+   "semantic_n": 16,
+   "semantic_gate_open": 13,
+   "lexical_top3": 5,
+   "lexical_n": 5,
+   "lexical_gate_open": 5,
+   "ood_gate_open": 5,
+   "ood_n": 8,
+   "walk_gate_open": 34,
+   "walk_n": 43,
+   "walk_mean_admitted": 3.3,
+   "fails": [
+    "S02",
+    "S05",
+    "S06",
+    "S08",
+    "S09",
+    "S12"
+   ],
+   "rule": {
+    "kind": "z",
+    "z": 3.2901
+   }
+  },
+  "gate_z_rank10": {
+   "semantic_at10": 10,
+   "semantic_n": 16,
+   "semantic_gate_open": 13,
+   "lexical_top3": 5,
+   "lexical_n": 5,
+   "lexical_gate_open": 5,
+   "ood_gate_open": 5,
+   "ood_n": 8,
+   "walk_gate_open": 34,
+   "walk_n": 43,
+   "walk_mean_admitted": 7.9,
+   "fails": [
+    "S02",
+    "S05",
+    "S06",
+    "S08",
+    "S09",
+    "S12"
+   ],
+   "rule": {
+    "kind": "gate_z_rank",
+    "z": 3.2901,
+    "k": 10
+   }
+  },
+  "nofloor": {
+   "semantic_at10": 1,
+   "semantic_n": 16,
+   "semantic_gate_open": 16,
+   "lexical_top3": 5,
+   "lexical_n": 5,
+   "lexical_gate_open": 5,
+   "ood_gate_open": 8,
+   "ood_n": 8,
+   "walk_gate_open": 43,
+   "walk_n": 43,
+   "walk_mean_admitted": 100.0,
+   "fails": [
+    "S01",
+    "S02",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S11",
+    "S12",
+    "S13",
+    "S14",
+    "S15",
+    "S16"
+   ],
+   "rule": {
+    "kind": "floor",
+    "floor": -1.0
+   }
+  }
+ },
+ "dense": {
+  "S01": {
+   "kind": "semantic",
+   "best": 0.4559,
+   "mu": 0.0948,
+   "sd": 0.0816,
+   "relevant": {
+    "D01": {
+     "dense_rank": 1,
+     "cos": 0.4559,
+     "z": 4.43
+    }
+   }
+  },
+  "S02": {
+   "kind": "semantic",
+   "best": 0.3872,
+   "mu": 0.1098,
+   "sd": 0.0651,
+   "relevant": {
+    "D02": {
+     "dense_rank": 87,
+     "cos": 0.197,
+     "z": 1.34
+    }
+   }
+  },
+  "S03": {
+   "kind": "semantic",
+   "best": 0.3072,
+   "mu": 0.0744,
+   "sd": 0.0512,
+   "relevant": {
+    "D03": {
+     "dense_rank": 2,
+     "cos": 0.2902,
+     "z": 4.21
+    }
+   }
+  },
+  "S04": {
+   "kind": "semantic",
+   "best": 0.4853,
+   "mu": 0.0942,
+   "sd": 0.0736,
+   "relevant": {
+    "D04": {
+     "dense_rank": 2,
+     "cos": 0.4403,
+     "z": 4.7
+    }
+   }
+  },
+  "S05": {
+   "kind": "semantic",
+   "best": 0.5189,
+   "mu": 0.1911,
+   "sd": 0.0899,
+   "relevant": {
+    "D05": {
+     "dense_rank": 13,
+     "cos": 0.416,
+     "z": 2.5
+    }
+   }
+  },
+  "S06": {
+   "kind": "semantic",
+   "best": 0.3721,
+   "mu": 0.157,
+   "sd": 0.0709,
+   "relevant": {
+    "D06": {
+     "dense_rank": 27,
+     "cos": 0.3049,
+     "z": 2.08
+    }
+   }
+  },
+  "S07": {
+   "kind": "semantic",
+   "best": 0.5117,
+   "mu": 0.1076,
+   "sd": 0.0628,
+   "relevant": {
+    "D07": {
+     "dense_rank": 2,
+     "cos": 0.4121,
+     "z": 4.85
+    }
+   }
+  },
+  "S08": {
+   "kind": "semantic",
+   "best": 0.336,
+   "mu": 0.1048,
+   "sd": 0.0694,
+   "relevant": {
+    "D08": {
+     "dense_rank": 77,
+     "cos": 0.2109,
+     "z": 1.53
+    }
+   }
+  },
+  "S09": {
+   "kind": "semantic",
+   "best": 0.4464,
+   "mu": 0.1853,
+   "sd": 0.0871,
+   "relevant": {
+    "D09": {
+     "dense_rank": 108,
+     "cos": 0.3028,
+     "z": 1.35
+    }
+   }
+  },
+  "S10": {
+   "kind": "semantic",
+   "best": 0.4792,
+   "mu": 0.1319,
+   "sd": 0.0634,
+   "relevant": {
+    "D10": {
+     "dense_rank": 1,
+     "cos": 0.4792,
+     "z": 5.48
+    }
+   }
+  },
+  "S11": {
+   "kind": "semantic",
+   "best": 0.5735,
+   "mu": 0.1597,
+   "sd": 0.0757,
+   "relevant": {
+    "D11": {
+     "dense_rank": 6,
+     "cos": 0.4183,
+     "z": 3.42
+    }
+   }
+  },
+  "S12": {
+   "kind": "semantic",
+   "best": 0.3735,
+   "mu": 0.1567,
+   "sd": 0.0677,
+   "relevant": {
+    "D12": {
+     "dense_rank": 31,
+     "cos": 0.2866,
+     "z": 1.92
+    }
+   }
+  },
+  "S13": {
+   "kind": "semantic",
+   "best": 0.3793,
+   "mu": 0.1431,
+   "sd": 0.0633,
+   "relevant": {
+    "D13": {
+     "dense_rank": 2,
+     "cos": 0.3782,
+     "z": 3.72
+    }
+   }
+  },
+  "S14": {
+   "kind": "semantic",
+   "best": 0.4539,
+   "mu": 0.0909,
+   "sd": 0.0643,
+   "relevant": {
+    "D14": {
+     "dense_rank": 1,
+     "cos": 0.4539,
+     "z": 5.64
+    }
+   }
+  },
+  "S15": {
+   "kind": "semantic",
+   "best": 0.4714,
+   "mu": 0.1171,
+   "sd": 0.0674,
+   "relevant": {
+    "D15": {
+     "dense_rank": 1,
+     "cos": 0.4714,
+     "z": 5.26
+    }
+   }
+  },
+  "S16": {
+   "kind": "semantic",
+   "best": 0.3944,
+   "mu": 0.0746,
+   "sd": 0.0618,
+   "relevant": {
+    "D16": {
+     "dense_rank": 2,
+     "cos": 0.3731,
+     "z": 4.83
+    }
+   }
+  },
+  "K01": {
+   "kind": "lexical",
+   "best": 0.7338,
+   "mu": 0.192,
+   "sd": 0.0824,
+   "relevant": {
+    "X01": {
+     "dense_rank": 1,
+     "cos": 0.7338,
+     "z": 6.58
+    }
+   }
+  },
+  "K02": {
+   "kind": "lexical",
+   "best": 0.6836,
+   "mu": 0.1793,
+   "sd": 0.0868,
+   "relevant": {
+    "X02": {
+     "dense_rank": 1,
+     "cos": 0.6836,
+     "z": 5.81
+    }
+   }
+  },
+  "K03": {
+   "kind": "lexical",
+   "best": 0.6289,
+   "mu": 0.1528,
+   "sd": 0.0621,
+   "relevant": {
+    "X03": {
+     "dense_rank": 1,
+     "cos": 0.6289,
+     "z": 7.67
+    }
+   }
+  },
+  "K04": {
+   "kind": "lexical",
+   "best": 0.7769,
+   "mu": 0.1454,
+   "sd": 0.1063,
+   "relevant": {
+    "X04": {
+     "dense_rank": 1,
+     "cos": 0.7769,
+     "z": 5.94
+    }
+   }
+  },
+  "K05": {
+   "kind": "lexical",
+   "best": 0.7085,
+   "mu": 0.1866,
+   "sd": 0.095,
+   "relevant": {
+    "X05": {
+     "dense_rank": 1,
+     "cos": 0.7085,
+     "z": 5.49
+    }
+   }
+  },
+  "O01": {
+   "kind": "ood",
+   "best": 0.2292,
+   "mu": 0.0471,
+   "sd": 0.0629,
+   "relevant": {}
+  },
+  "O02": {
+   "kind": "ood",
+   "best": 0.2569,
+   "mu": 0.0692,
+   "sd": 0.0587,
+   "relevant": {}
+  },
+  "O03": {
+   "kind": "ood",
+   "best": 0.2609,
+   "mu": 0.0448,
+   "sd": 0.0534,
+   "relevant": {}
+  },
+  "O04": {
+   "kind": "ood",
+   "best": 0.2714,
+   "mu": 0.0743,
+   "sd": 0.0581,
+   "relevant": {}
+  },
+  "O05": {
+   "kind": "ood",
+   "best": 0.2613,
+   "mu": 0.0559,
+   "sd": 0.051,
+   "relevant": {}
+  },
+  "O06": {
+   "kind": "ood",
+   "best": 0.2189,
+   "mu": -0.0081,
+   "sd": 0.0522,
+   "relevant": {}
+  },
+  "O07": {
+   "kind": "ood",
+   "best": 0.1743,
+   "mu": 0.0176,
+   "sd": 0.0463,
+   "relevant": {}
+  },
+  "O08": {
+   "kind": "ood",
+   "best": 0.2605,
+   "mu": 0.0651,
+   "sd": 0.0779,
+   "relevant": {}
+  }
+ }
+}
